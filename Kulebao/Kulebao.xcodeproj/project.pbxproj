@@ -7,13 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		093904CF18BDD9F2006E8F82 /* CSKuleGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 093904CE18BDD9F2006E8F82 /* CSKuleGuideViewController.m */; };
+		093904DD18BDDA90006E8F82 /* CSKuleRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 093904DC18BDDA90006E8F82 /* CSKuleRootViewController.m */; };
+		093904E018BDDA9D006E8F82 /* CSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 093904DF18BDDA9D006E8F82 /* CSViewController.m */; };
 		09BA1B9118BB2AB300760182 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09BA1B9018BB2AB300760182 /* Foundation.framework */; };
 		09BA1B9318BB2AB300760182 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09BA1B9218BB2AB300760182 /* CoreGraphics.framework */; };
 		09BA1B9518BB2AB300760182 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09BA1B9418BB2AB300760182 /* UIKit.framework */; };
 		09BA1B9B18BB2AB300760182 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 09BA1B9918BB2AB300760182 /* InfoPlist.strings */; };
 		09BA1B9D18BB2AB300760182 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 09BA1B9C18BB2AB300760182 /* main.m */; };
 		09BA1BA118BB2AB400760182 /* CSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 09BA1BA018BB2AB400760182 /* CSAppDelegate.m */; };
-		09BA1BA718BB2AB400760182 /* CSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09BA1BA618BB2AB400760182 /* CSViewController.m */; };
 		09BA1BA918BB2AB400760182 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09BA1BA818BB2AB400760182 /* Images.xcassets */; };
 		09BA1BB018BB2AB600760182 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09BA1BAF18BB2AB600760182 /* XCTest.framework */; };
 		09BA1BB118BB2AB600760182 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09BA1B9018BB2AB300760182 /* Foundation.framework */; };
@@ -56,6 +58,9 @@
 		09BA1C2B18BB3F8400760182 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 09BA1C2218BB3F8400760182 /* UIImageView+AFNetworking.m */; };
 		09BA1C2E18BB412600760182 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09BA1C2D18BB412600760182 /* MobileCoreServices.framework */; };
 		09BA1C3318BB429100760182 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09BA1C3218BB429100760182 /* Main.storyboard */; };
+		09C1C75F18BD92990040B06D /* AFJSONRequestOperation+CSExtends.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C1C75C18BD92990040B06D /* AFJSONRequestOperation+CSExtends.m */; };
+		09C1C76018BD92990040B06D /* CSHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C1C75E18BD92990040B06D /* CSHttpClient.m */; };
+		09C1C76618BD973B0040B06D /* NSDictionary+CSExtends.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C1C76518BD973B0040B06D /* NSDictionary+CSExtends.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +74,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		093904CD18BDD9F2006E8F82 /* CSKuleGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleGuideViewController.h; sourceTree = "<group>"; };
+		093904CE18BDD9F2006E8F82 /* CSKuleGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleGuideViewController.m; sourceTree = "<group>"; };
+		093904D618BDDA40006E8F82 /* CSAppErrorCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSAppErrorCode.h; sourceTree = "<group>"; };
+		093904D718BDDA40006E8F82 /* CSKulebaoEventType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKulebaoEventType.h; sourceTree = "<group>"; };
+		093904D818BDDA40006E8F82 /* CSKulebaoServerUrls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKulebaoServerUrls.h; sourceTree = "<group>"; };
+		093904DB18BDDA90006E8F82 /* CSKuleRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleRootViewController.h; sourceTree = "<group>"; };
+		093904DC18BDDA90006E8F82 /* CSKuleRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleRootViewController.m; sourceTree = "<group>"; };
+		093904DE18BDDA9D006E8F82 /* CSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSViewController.h; sourceTree = "<group>"; };
+		093904DF18BDDA9D006E8F82 /* CSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSViewController.m; sourceTree = "<group>"; };
 		09BA1B8D18BB2AB300760182 /* Kulebao.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kulebao.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09BA1B9018BB2AB300760182 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		09BA1B9218BB2AB300760182 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -79,8 +93,6 @@
 		09BA1B9E18BB2AB300760182 /* Kulebao-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Kulebao-Prefix.pch"; sourceTree = "<group>"; };
 		09BA1B9F18BB2AB400760182 /* CSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSAppDelegate.h; sourceTree = "<group>"; };
 		09BA1BA018BB2AB400760182 /* CSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CSAppDelegate.m; sourceTree = "<group>"; };
-		09BA1BA518BB2AB400760182 /* CSViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSViewController.h; sourceTree = "<group>"; };
-		09BA1BA618BB2AB400760182 /* CSViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CSViewController.m; sourceTree = "<group>"; };
 		09BA1BA818BB2AB400760182 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		09BA1BAE18BB2AB600760182 /* KulebaoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KulebaoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		09BA1BAF18BB2AB600760182 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -148,6 +160,13 @@
 		09BA1C3218BB429100760182 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		09BA1C3418BB43EC00760182 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		09BA1C3518BB43EC00760182 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		09C1C75B18BD92990040B06D /* AFJSONRequestOperation+CSExtends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AFJSONRequestOperation+CSExtends.h"; sourceTree = "<group>"; };
+		09C1C75C18BD92990040B06D /* AFJSONRequestOperation+CSExtends.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AFJSONRequestOperation+CSExtends.m"; sourceTree = "<group>"; };
+		09C1C75D18BD92990040B06D /* CSHttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSHttpClient.h; sourceTree = "<group>"; };
+		09C1C75E18BD92990040B06D /* CSHttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSHttpClient.m; sourceTree = "<group>"; };
+		09C1C76418BD973B0040B06D /* NSDictionary+CSExtends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+CSExtends.h"; sourceTree = "<group>"; };
+		09C1C76518BD973B0040B06D /* NSDictionary+CSExtends.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+CSExtends.m"; sourceTree = "<group>"; };
+		09C1C76718BDC3630040B06D /* CSLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSLog.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +199,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		093904CC18BDD9F2006E8F82 /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				093904CD18BDD9F2006E8F82 /* CSKuleGuideViewController.h */,
+				093904CE18BDD9F2006E8F82 /* CSKuleGuideViewController.m */,
+				093904DB18BDDA90006E8F82 /* CSKuleRootViewController.h */,
+				093904DC18BDDA90006E8F82 /* CSKuleRootViewController.m */,
+				093904DE18BDDA9D006E8F82 /* CSViewController.h */,
+				093904DF18BDDA9D006E8F82 /* CSViewController.m */,
+			);
+			path = controllers;
+			sourceTree = "<group>";
+		};
+		093904D518BDDA40006E8F82 /* core */ = {
+			isa = PBXGroup;
+			children = (
+				093904D618BDDA40006E8F82 /* CSAppErrorCode.h */,
+				093904D718BDDA40006E8F82 /* CSKulebaoEventType.h */,
+				093904D818BDDA40006E8F82 /* CSKulebaoServerUrls.h */,
+			);
+			path = core;
+			sourceTree = "<group>";
+		};
 		09BA1B8418BB2AB300760182 = {
 			isa = PBXGroup;
 			children = (
@@ -219,11 +261,10 @@
 		09BA1B9618BB2AB300760182 /* Kulebao */ = {
 			isa = PBXGroup;
 			children = (
-				09BA1B9F18BB2AB400760182 /* CSAppDelegate.h */,
-				09BA1BA018BB2AB400760182 /* CSAppDelegate.m */,
-				09BA1BA518BB2AB400760182 /* CSViewController.h */,
-				09BA1BA618BB2AB400760182 /* CSViewController.m */,
-				09BA1BA818BB2AB400760182 /* Images.xcassets */,
+				093904CC18BDD9F2006E8F82 /* controllers */,
+				093904D518BDDA40006E8F82 /* core */,
+				09C1C76318BD973B0040B06D /* extends */,
+				09C1C75A18BD92020040B06D /* net */,
 				09BA1B9718BB2AB300760182 /* Supporting Files */,
 			);
 			path = Kulebao;
@@ -232,11 +273,14 @@
 		09BA1B9718BB2AB300760182 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				09BA1BA818BB2AB400760182 /* Images.xcassets */,
 				09BA1C3218BB429100760182 /* Main.storyboard */,
 				09BA1B9818BB2AB300760182 /* Kulebao-Info.plist */,
 				09BA1B9918BB2AB300760182 /* InfoPlist.strings */,
 				09BA1BC718BB2D2000760182 /* Localizable.strings */,
 				09BA1B9C18BB2AB300760182 /* main.m */,
+				09BA1B9F18BB2AB400760182 /* CSAppDelegate.h */,
+				09BA1BA018BB2AB400760182 /* CSAppDelegate.m */,
 				09BA1B9E18BB2AB300760182 /* Kulebao-Prefix.pch */,
 			);
 			name = "Supporting Files";
@@ -367,6 +411,27 @@
 			path = AFNetworking;
 			sourceTree = "<group>";
 		};
+		09C1C75A18BD92020040B06D /* net */ = {
+			isa = PBXGroup;
+			children = (
+				09C1C75B18BD92990040B06D /* AFJSONRequestOperation+CSExtends.h */,
+				09C1C75C18BD92990040B06D /* AFJSONRequestOperation+CSExtends.m */,
+				09C1C75D18BD92990040B06D /* CSHttpClient.h */,
+				09C1C75E18BD92990040B06D /* CSHttpClient.m */,
+			);
+			path = net;
+			sourceTree = "<group>";
+		};
+		09C1C76318BD973B0040B06D /* extends */ = {
+			isa = PBXGroup;
+			children = (
+				09C1C76718BDC3630040B06D /* CSLog.h */,
+				09C1C76418BD973B0040B06D /* NSDictionary+CSExtends.h */,
+				09C1C76518BD973B0040B06D /* NSDictionary+CSExtends.m */,
+			);
+			path = extends;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -411,7 +476,7 @@
 		09BA1B8518BB2AB300760182 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				CLASSPREFIX = CS;
+				CLASSPREFIX = CSKule;
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = Cocobabys;
 				TargetAttributes = {
@@ -481,9 +546,11 @@
 				09BA1BE018BB2FC700760182 /* PullTableView.m in Sources */,
 				09BA1C2818BB3F8400760182 /* AFPropertyListRequestOperation.m in Sources */,
 				09BA1C0018BB334900760182 /* OpenUDID.m in Sources */,
+				093904DD18BDDA90006E8F82 /* CSKuleRootViewController.m in Sources */,
 				09BA1C2918BB3F8400760182 /* AFURLConnectionOperation.m in Sources */,
 				09BA1BDD18BB2FC700760182 /* EGORefreshTableHeaderView.m in Sources */,
 				09BA1C2318BB3F8400760182 /* AFHTTPClient.m in Sources */,
+				093904E018BDDA9D006E8F82 /* CSViewController.m in Sources */,
 				09BA1BA118BB2AB400760182 /* CSAppDelegate.m in Sources */,
 				09BA1C2518BB3F8400760182 /* AFImageRequestOperation.m in Sources */,
 				09BA1C2718BB3F8400760182 /* AFNetworkActivityIndicatorManager.m in Sources */,
@@ -492,11 +559,14 @@
 				09BA1B9D18BB2AB300760182 /* main.m in Sources */,
 				09BA1BDF18BB2FC700760182 /* MessageInterceptor.m in Sources */,
 				09BA1BDE18BB2FC700760182 /* LoadMoreTableFooterView.m in Sources */,
-				09BA1BA718BB2AB400760182 /* CSViewController.m in Sources */,
+				093904CF18BDD9F2006E8F82 /* CSKuleGuideViewController.m in Sources */,
 				09BA1C2A18BB3F8400760182 /* AFXMLRequestOperation.m in Sources */,
 				09BA1C0118BB334900760182 /* Reachability.m in Sources */,
+				09C1C76018BD92990040B06D /* CSHttpClient.m in Sources */,
 				09BA1C2618BB3F8400760182 /* AFJSONRequestOperation.m in Sources */,
 				09BA1C2B18BB3F8400760182 /* UIImageView+AFNetworking.m in Sources */,
+				09C1C75F18BD92990040B06D /* AFJSONRequestOperation+CSExtends.m in Sources */,
+				09C1C76618BD973B0040B06D /* NSDictionary+CSExtends.m in Sources */,
 				09BA1BFE18BB334900760182 /* GzipCompressor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

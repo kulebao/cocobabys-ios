@@ -8,16 +8,42 @@
         <!--View Controller-->
         <scene sceneID="3Ra-SW-h9P">
             <objects>
-                <viewController id="9i6-xz-Tfi" sceneMemberID="viewController">
+                <viewController id="9i6-xz-Tfi" customClass="CSViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="djv-Kw-iWm">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="JOv-BQ-TY2">
+                                <rect key="frame" x="116" y="412" width="100" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onBtnTestClicked:" destination="9i6-xz-Tfi" eventType="touchUpInside" id="wZq-Ev-avj"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4z3-gj-7M5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="17" y="39"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="6B5-gp-xQi">
+            <objects>
+                <viewController id="fRN-qj-HzV" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PGH-9w-yGs">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eGp-E1-Iqj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="397" y="39"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

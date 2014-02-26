@@ -9,6 +9,7 @@
 #import "CSViewController.h"
 
 @interface CSViewController ()
+- (IBAction)onBtnTestClicked:(id)sender;
 
 @end
 
@@ -24,6 +25,10 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)onBtnTestClicked:(id)sender {
+    
 }
 
 @end

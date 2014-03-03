@@ -21,7 +21,7 @@
     return self;
 }
 
-+ (id)emsgHttpClient {
++ (id)httpClient {
     NSURL* baseUrl = [NSURL URLWithString:kServerHost];
     
     CSHttpClient* client = [[CSHttpClient alloc] initWithBaseURL:baseUrl];

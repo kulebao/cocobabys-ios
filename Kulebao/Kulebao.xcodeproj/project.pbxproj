@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		09219A3418C42AF800166228 /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 09219A2F18C42AF800166228 /* 37x-Checkmark.png */; };
+		09219A3518C42AF800166228 /* 37x-Checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09219A3018C42AF800166228 /* 37x-Checkmark@2x.png */; };
+		09219A3618C42AF800166228 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 09219A3218C42AF800166228 /* MBProgressHUD.m */; };
+		09219A3918C470DF00166228 /* Default-568h.png in Resources */ = {isa = PBXBuildFile; fileRef = 09219A3818C470DF00166228 /* Default-568h.png */; };
+		09219A3D18C4722E00166228 /* CSKuleUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 09219A3C18C4722E00166228 /* CSKuleUser.m */; };
+		09219A4018C4723F00166228 /* CSKuleBaby.m in Sources */ = {isa = PBXBuildFile; fileRef = 09219A3F18C4723F00166228 /* CSKuleBaby.m */; };
+		09219A5118C4878600166228 /* TPKeyboardAvoidingCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09219A4818C4878600166228 /* TPKeyboardAvoidingCollectionView.m */; };
+		09219A5218C4878600166228 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09219A4A18C4878600166228 /* TPKeyboardAvoidingScrollView.m */; };
+		09219A5318C4878600166228 /* TPKeyboardAvoidingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09219A4C18C4878600166228 /* TPKeyboardAvoidingTableView.m */; };
+		09219A5418C4878600166228 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 09219A4E18C4878600166228 /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
+		09219A5718C48A2100166228 /* CSKuleEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 09219A5618C48A2100166228 /* CSKuleEngine.m */; };
 		0934EFC318BF3AF700E30ECA /* EAIntroPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0934EFC018BF3AF700E30ECA /* EAIntroPage.m */; };
 		0934EFC418BF3AF700E30ECA /* EAIntroView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0934EFC218BF3AF700E30ECA /* EAIntroView.m */; };
 		0934EFCC18BF3D0600E30ECA /* SMPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0934EFC918BF3D0600E30ECA /* SMPageControl.m */; };
@@ -186,6 +197,28 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		09219A2F18C42AF800166228 /* 37x-Checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark.png"; sourceTree = "<group>"; };
+		09219A3018C42AF800166228 /* 37x-Checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark@2x.png"; sourceTree = "<group>"; };
+		09219A3118C42AF800166228 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		09219A3218C42AF800166228 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		09219A3318C42AF800166228 /* README.mdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.mdown; sourceTree = "<group>"; };
+		09219A3818C470DF00166228 /* Default-568h.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h.png"; sourceTree = "<group>"; };
+		09219A3B18C4722E00166228 /* CSKuleUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleUser.h; sourceTree = "<group>"; };
+		09219A3C18C4722E00166228 /* CSKuleUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleUser.m; sourceTree = "<group>"; };
+		09219A3E18C4723F00166228 /* CSKuleBaby.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleBaby.h; sourceTree = "<group>"; };
+		09219A3F18C4723F00166228 /* CSKuleBaby.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleBaby.m; sourceTree = "<group>"; };
+		09219A4518C4878600166228 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		09219A4618C4878600166228 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		09219A4718C4878600166228 /* TPKeyboardAvoidingCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingCollectionView.h; sourceTree = "<group>"; };
+		09219A4818C4878600166228 /* TPKeyboardAvoidingCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingCollectionView.m; sourceTree = "<group>"; };
+		09219A4918C4878600166228 /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
+		09219A4A18C4878600166228 /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
+		09219A4B18C4878600166228 /* TPKeyboardAvoidingTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingTableView.h; sourceTree = "<group>"; };
+		09219A4C18C4878600166228 /* TPKeyboardAvoidingTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingTableView.m; sourceTree = "<group>"; };
+		09219A4D18C4878600166228 /* UIScrollView+TPKeyboardAvoidingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TPKeyboardAvoidingAdditions.h"; sourceTree = "<group>"; };
+		09219A4E18C4878600166228 /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
+		09219A5518C48A2100166228 /* CSKuleEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleEngine.h; sourceTree = "<group>"; };
+		09219A5618C48A2100166228 /* CSKuleEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleEngine.m; sourceTree = "<group>"; };
 		0934EFBF18BF3AF700E30ECA /* EAIntroPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAIntroPage.h; sourceTree = "<group>"; };
 		0934EFC018BF3AF700E30ECA /* EAIntroPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAIntroPage.m; sourceTree = "<group>"; };
 		0934EFC118BF3AF700E30ECA /* EAIntroView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAIntroView.h; sourceTree = "<group>"; };
@@ -301,8 +334,8 @@
 		093904DB18BDDA90006E8F82 /* CSKuleRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleRootViewController.h; sourceTree = "<group>"; };
 		093904DC18BDDA90006E8F82 /* CSKuleRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleRootViewController.m; sourceTree = "<group>"; };
 		09A9EBB418C07E8800D83119 /* CSKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSKit.h; sourceTree = "<group>"; };
-		09A9EBB618C07F6F00D83119 /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		09A9EBB818C07F8400D83119 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		09A9EBB618C07F6F00D83119 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		09A9EBB818C07F8400D83119 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		09A9EBB918C0830900D83119 /* CSKuleLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleLoginViewController.h; sourceTree = "<group>"; };
 		09A9EBBA18C0830900D83119 /* CSKuleLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleLoginViewController.m; sourceTree = "<group>"; };
 		09A9EBBC18C08C7D00D83119 /* app-bg-type3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "app-bg-type3.png"; sourceTree = "<group>"; };
@@ -435,6 +468,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		09219A2E18C42AF800166228 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				09219A2F18C42AF800166228 /* 37x-Checkmark.png */,
+				09219A3018C42AF800166228 /* 37x-Checkmark@2x.png */,
+				09219A3118C42AF800166228 /* MBProgressHUD.h */,
+				09219A3218C42AF800166228 /* MBProgressHUD.m */,
+				09219A3318C42AF800166228 /* README.mdown */,
+			);
+			path = MBProgressHUD;
+			sourceTree = "<group>";
+		};
+		09219A3A18C4721F00166228 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				09219A3B18C4722E00166228 /* CSKuleUser.h */,
+				09219A3C18C4722E00166228 /* CSKuleUser.m */,
+				09219A3E18C4723F00166228 /* CSKuleBaby.h */,
+				09219A3F18C4723F00166228 /* CSKuleBaby.m */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		09219A4418C4878600166228 /* TPKeyboardAvoiding */ = {
+			isa = PBXGroup;
+			children = (
+				09219A4518C4878600166228 /* LICENSE.txt */,
+				09219A4618C4878600166228 /* README.md */,
+				09219A4718C4878600166228 /* TPKeyboardAvoidingCollectionView.h */,
+				09219A4818C4878600166228 /* TPKeyboardAvoidingCollectionView.m */,
+				09219A4918C4878600166228 /* TPKeyboardAvoidingScrollView.h */,
+				09219A4A18C4878600166228 /* TPKeyboardAvoidingScrollView.m */,
+				09219A4B18C4878600166228 /* TPKeyboardAvoidingTableView.h */,
+				09219A4C18C4878600166228 /* TPKeyboardAvoidingTableView.m */,
+				09219A4D18C4878600166228 /* UIScrollView+TPKeyboardAvoidingAdditions.h */,
+				09219A4E18C4878600166228 /* UIScrollView+TPKeyboardAvoidingAdditions.m */,
+			);
+			path = TPKeyboardAvoiding;
+			sourceTree = "<group>";
+		};
 		0934EFBE18BF3AF700E30ECA /* EAIntroView */ = {
 			isa = PBXGroup;
 			children = (
@@ -514,6 +587,7 @@
 				0934F02718BF5B0800E30ECA /* btn-type2@2x.png */,
 				0934F02818BF5B0800E30ECA /* class-input-bg.png */,
 				0934F02918BF5B0800E30ECA /* class-input-bg@2x.png */,
+				09219A3818C470DF00166228 /* Default-568h.png */,
 				0934F02A18BF5B0800E30ECA /* Default-568h@2x.png */,
 				0934EFDB18BF559900E30ECA /* Default.png */,
 				0934F02B18BF5B0800E30ECA /* Default@2x.png */,
@@ -605,6 +679,8 @@
 				093904D618BDDA40006E8F82 /* CSAppErrorCode.h */,
 				093904D718BDDA40006E8F82 /* CSKulebaoEventType.h */,
 				093904D818BDDA40006E8F82 /* CSKulebaoServerUrls.h */,
+				09219A5518C48A2100166228 /* CSKuleEngine.h */,
+				09219A5618C48A2100166228 /* CSKuleEngine.m */,
 			);
 			path = core;
 			sourceTree = "<group>";
@@ -648,6 +724,7 @@
 		09BA1B9618BB2AB300760182 /* Kulebao */ = {
 			isa = PBXGroup;
 			children = (
+				09219A3A18C4721F00166228 /* models */,
 				093904CC18BDD9F2006E8F82 /* controllers */,
 				093904D518BDDA40006E8F82 /* core */,
 				09C1C76318BD973B0040B06D /* extends */,
@@ -695,6 +772,8 @@
 		09BA1BC918BB2FC700760182 /* Venders */ = {
 			isa = PBXGroup;
 			children = (
+				09219A4418C4878600166228 /* TPKeyboardAvoiding */,
+				09219A2E18C42AF800166228 /* MBProgressHUD */,
 				0934EFC518BF3D0600E30ECA /* SMPageControl */,
 				0934EFBE18BF3AF700E30ECA /* EAIntroView */,
 				09BA1C0F18BB3F8400760182 /* AFNetworking */,
@@ -935,6 +1014,7 @@
 				0934F05F18BF5B0800E30ECA /* btn-func-4@2x.png in Resources */,
 				0934EFF918BF559900E30ECA /* guide-3-568h@2x.png in Resources */,
 				0934F08418BF5B0800E30ECA /* schedule-bg.png in Resources */,
+				09219A3918C470DF00166228 /* Default-568h.png in Resources */,
 				09BA1BE818BB2FC700760182 /* whiteArrow@2x.png in Resources */,
 				09BA1BE518BB2FC700760182 /* grayArrow.png in Resources */,
 				0934EFD518BF531800E30ECA /* icon-57.png in Resources */,
@@ -990,9 +1070,11 @@
 				09BA1BA918BB2AB400760182 /* Images.xcassets in Resources */,
 				0934F06118BF5B0800E30ECA /* btn-func-5@2x.png in Resources */,
 				0934EFF218BF559900E30ECA /* guide-1.png in Resources */,
+				09219A3418C42AF800166228 /* 37x-Checkmark.png in Resources */,
 				09A9EBCC18C08C7D00D83119 /* titlebar-bg.png in Resources */,
 				09BA1BE418BB2FC700760182 /* blueArrow@2x.png in Resources */,
 				0934F08918BF5B0800E30ECA /* settings-change-baby@2x.png in Resources */,
+				09219A3518C42AF800166228 /* 37x-Checkmark@2x.png in Resources */,
 				0934F05218BF5B0800E30ECA /* avatar-bg.png in Resources */,
 				0934F08D18BF5B0800E30ECA /* settings-icon-check-update@2x.png in Resources */,
 				0934F06418BF5B0800E30ECA /* btn-func-7.png in Resources */,
@@ -1042,16 +1124,23 @@
 				09A9EBD518C0A01B00D83119 /* CSKuleMainViewController.m in Sources */,
 				09BA1BFD18BB334900760182 /* Base64.m in Sources */,
 				09BA1BE018BB2FC700760182 /* PullTableView.m in Sources */,
+				09219A3D18C4722E00166228 /* CSKuleUser.m in Sources */,
 				09BA1C2818BB3F8400760182 /* AFPropertyListRequestOperation.m in Sources */,
+				09219A4018C4723F00166228 /* CSKuleBaby.m in Sources */,
+				09219A5718C48A2100166228 /* CSKuleEngine.m in Sources */,
+				09219A3618C42AF800166228 /* MBProgressHUD.m in Sources */,
 				09BA1C0018BB334900760182 /* OpenUDID.m in Sources */,
+				09219A5118C4878600166228 /* TPKeyboardAvoidingCollectionView.m in Sources */,
 				093904DD18BDDA90006E8F82 /* CSKuleRootViewController.m in Sources */,
 				09BA1C2918BB3F8400760182 /* AFURLConnectionOperation.m in Sources */,
 				09BA1BDD18BB2FC700760182 /* EGORefreshTableHeaderView.m in Sources */,
 				09BA1C2318BB3F8400760182 /* AFHTTPClient.m in Sources */,
 				09BA1BA118BB2AB400760182 /* CSAppDelegate.m in Sources */,
 				09BA1C2518BB3F8400760182 /* AFImageRequestOperation.m in Sources */,
+				09219A5218C4878600166228 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				09BA1C2718BB3F8400760182 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				09BA1C2418BB3F8400760182 /* AFHTTPRequestOperation.m in Sources */,
+				09219A5318C4878600166228 /* TPKeyboardAvoidingTableView.m in Sources */,
 				0934EFC418BF3AF700E30ECA /* EAIntroView.m in Sources */,
 				09BA1BFF18BB334900760182 /* JSONKit.m in Sources */,
 				0934EFCC18BF3D0600E30ECA /* SMPageControl.m in Sources */,
@@ -1061,6 +1150,7 @@
 				09BA1BDE18BB2FC700760182 /* LoadMoreTableFooterView.m in Sources */,
 				093904CF18BDD9F2006E8F82 /* CSKuleGuideViewController.m in Sources */,
 				09BA1C2A18BB3F8400760182 /* AFXMLRequestOperation.m in Sources */,
+				09219A5418C4878600166228 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				09A9EBBB18C0830900D83119 /* CSKuleLoginViewController.m in Sources */,
 				09BA1C0118BB334900760182 /* Reachability.m in Sources */,
 				09C1C76018BD92990040B06D /* CSHttpClient.m in Sources */,

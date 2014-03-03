@@ -38,6 +38,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - UI Actions
 - (IBAction)onBtnLoginClicked:(id)sender {
     [self.navigationController popToRootViewControllerAnimated:YES];
 }

@@ -15,7 +15,7 @@
 
 @interface CSHttpClient : AFHTTPClient
 
-+ (id)emsgHttpClient;
++ (id)httpClient;
 
 - (void)httpRequestWithMethod:(NSString *)method
                          path:(NSString *)path

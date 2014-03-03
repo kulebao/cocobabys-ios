@@ -7,6 +7,7 @@
 //
 
 #import "CSKuleLoginViewController.h"
+#import "CSAppDelegate.h"
 
 @interface CSKuleLoginViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *labNotice;
@@ -16,6 +17,7 @@
 @end
 
 @implementation CSKuleLoginViewController
+@synthesize mobile = _mobile;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -30,6 +32,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    self.labNotice.text = [NSString stringWithFormat:@"尊敬的%@用户，您好！您的手机已经激活过，请输入密码进行登录，谢谢。", self.mobile];
+    
+    self.fieldPassword.text = @"1q2w3e";
 }
 
 - (void)didReceiveMemoryWarning
@@ -40,7 +45,53 @@
 
 #pragma mark - UI Actions
 - (IBAction)onBtnLoginClicked:(id)sender {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.fieldPassword resignFirstResponder];
+    
+    [self doLogin];
+}
+
+- (void)doLogin {
+    NSString* pswd = self.fieldPassword.text;
+    if (pswd.length > 0 && self.mobile.length > 0) {
+        
+        NSDictionary* params = @{@"account_name":self.mobile,
+                                 @"password":pswd};
+
+        SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
+            CSLog(@"success:%@", dataJson);
+            
+            NSString* access_token = [dataJson valueForKeyNotNull:@"access_token"];
+            NSString* account_name = [dataJson valueForKeyNotNull:@"account_name"];
+            NSInteger error_code = [[dataJson valueForKeyNotNull:@"error_code"] integerValue];
+            NSString* school_name = [dataJson valueForKeyNotNull:@"school_name"];
+            NSString* username = [dataJson valueForKeyNotNull:@"username"];
+            
+            if (error_code == 0) {
+                CSKuleLoginInfo* loginInfo = [CSKuleLoginInfo new];
+                loginInfo.accessToken = access_token;
+                loginInfo.accountName = account_name;
+                loginInfo.schoolName = school_name;
+                loginInfo.username = username;
+                
+                gApp.engine.loginInfo = loginInfo;
+                
+                [gApp gotoMainProcess];
+            }
+        };
+        
+        FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
+            NSLog(@"failure:%@", error);
+        };
+        
+        [gApp.engine.httpClient httpRequestWithMethod:@"POST"
+                                                 path:kLoginPath
+                                           parameters:params
+                                              success:sucessHandler
+                                              failure:failureHandler];
+    }
+    else {
+        
+    }
 }
 
 @end

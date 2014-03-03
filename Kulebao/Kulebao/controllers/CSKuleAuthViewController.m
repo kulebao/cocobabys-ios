@@ -9,6 +9,8 @@
 #import "CSKuleAuthViewController.h"
 #import "EAIntroPage.h"
 #import "EAIntroView.h"
+#import "CSKuleLoginViewController.h"
+#import "CSAppDelegate.h"
 
 @interface CSKuleAuthViewController () <EAIntroDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *labNotice;
@@ -32,6 +34,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    self.fieldMobile.text = @"13402815317";
     
     [self showIntroViewsIfNeeded];
 }
@@ -44,7 +47,46 @@
 
 #pragma mark - UI Actions
 - (IBAction)onBtnSendClicked:(id)sender {
-    [self performSegueWithIdentifier:@"segue.login" sender:nil];
+    [self.fieldMobile resignFirstResponder];
+    //[self performSegueWithIdentifier:@"segue.login" sender:nil];
+    [self doAuth];
+}
+
+- (void)doAuth {
+    NSString* mobile = self.fieldMobile.text;
+    if (mobile.length > 0) {
+        NSDictionary* params = @{@"phonenum":mobile};
+        
+        SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
+            CSLog(@"success:%@", dataJson);
+            
+            NSInteger check_phone_result = [[dataJson valueForKeyNotNull:@"check_phone_result"] integerValue];
+            if (check_phone_result == 1102) {
+                [self performSegueWithIdentifier:@"segue.login" sender:nil];
+            }
+        };
+        
+        FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
+            NSLog(@"failure:%@", error);
+        };
+        
+        [gApp.engine.httpClient httpRequestWithMethod:@"POST"
+                                                 path:kCheckPhoneNumPath
+                                           parameters:params
+                                              success:sucessHandler
+                                              failure:failureHandler];
+    }
+    else {
+        
+    }
+}
+
+#pragma mark - Segues
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"segue.login"]) {
+        CSKuleLoginViewController* loginCtrl = segue.destinationViewController;
+        loginCtrl.mobile = self.fieldMobile.text;
+    }
 }
 
 #pragma mark - Private

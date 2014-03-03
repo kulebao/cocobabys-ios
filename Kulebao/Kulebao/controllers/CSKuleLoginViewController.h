@@ -10,4 +10,6 @@
 
 @interface CSKuleLoginViewController : UIViewController
 
+@property (nonatomic, strong) NSString* mobile;
+
 @end

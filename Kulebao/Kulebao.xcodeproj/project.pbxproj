@@ -18,6 +18,7 @@
 		09219A5318C4878600166228 /* TPKeyboardAvoidingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09219A4C18C4878600166228 /* TPKeyboardAvoidingTableView.m */; };
 		09219A5418C4878600166228 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 09219A4E18C4878600166228 /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
 		09219A5718C48A2100166228 /* CSKuleEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 09219A5618C48A2100166228 /* CSKuleEngine.m */; };
+		09219A5A18C4999C00166228 /* CSKuleLoginInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09219A5918C4999B00166228 /* CSKuleLoginInfo.m */; };
 		0934EFC318BF3AF700E30ECA /* EAIntroPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0934EFC018BF3AF700E30ECA /* EAIntroPage.m */; };
 		0934EFC418BF3AF700E30ECA /* EAIntroView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0934EFC218BF3AF700E30ECA /* EAIntroView.m */; };
 		0934EFCC18BF3D0600E30ECA /* SMPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0934EFC918BF3D0600E30ECA /* SMPageControl.m */; };
@@ -219,6 +220,8 @@
 		09219A4E18C4878600166228 /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
 		09219A5518C48A2100166228 /* CSKuleEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleEngine.h; sourceTree = "<group>"; };
 		09219A5618C48A2100166228 /* CSKuleEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleEngine.m; sourceTree = "<group>"; };
+		09219A5818C4999B00166228 /* CSKuleLoginInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleLoginInfo.h; sourceTree = "<group>"; };
+		09219A5918C4999B00166228 /* CSKuleLoginInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleLoginInfo.m; sourceTree = "<group>"; };
 		0934EFBF18BF3AF700E30ECA /* EAIntroPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAIntroPage.h; sourceTree = "<group>"; };
 		0934EFC018BF3AF700E30ECA /* EAIntroPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAIntroPage.m; sourceTree = "<group>"; };
 		0934EFC118BF3AF700E30ECA /* EAIntroView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAIntroView.h; sourceTree = "<group>"; };
@@ -487,6 +490,8 @@
 				09219A3C18C4722E00166228 /* CSKuleUser.m */,
 				09219A3E18C4723F00166228 /* CSKuleBaby.h */,
 				09219A3F18C4723F00166228 /* CSKuleBaby.m */,
+				09219A5818C4999B00166228 /* CSKuleLoginInfo.h */,
+				09219A5918C4999B00166228 /* CSKuleLoginInfo.m */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -1153,6 +1158,7 @@
 				09219A5418C4878600166228 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				09A9EBBB18C0830900D83119 /* CSKuleLoginViewController.m in Sources */,
 				09BA1C0118BB334900760182 /* Reachability.m in Sources */,
+				09219A5A18C4999C00166228 /* CSKuleLoginInfo.m in Sources */,
 				09C1C76018BD92990040B06D /* CSHttpClient.m in Sources */,
 				09A9EBD218C090E200D83119 /* CSKuleAuthViewController.m in Sources */,
 				09BA1C2618BB3F8400760182 /* AFJSONRequestOperation.m in Sources */,

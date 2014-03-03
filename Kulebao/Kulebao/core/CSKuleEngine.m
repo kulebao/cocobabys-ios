@@ -11,12 +11,11 @@
 
 @interface CSKuleEngine()
 
-@property UIApplication* app;
-
 @end
 
 @implementation CSKuleEngine
-@synthesize app = _app;
+@synthesize httpClient = _httpClient;
+@synthesize loginInfo = _loginInfo;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -52,7 +51,11 @@
 }
 
 #pragma mark - Private
-- (void)setup {
+- (void)setupHttpClient {
+    _httpClient = [CSHttpClient httpClient];
+}
+
+- (void)setupLocalData {
     if (YES) {
         [gApp gotoLoginProcess];
     }

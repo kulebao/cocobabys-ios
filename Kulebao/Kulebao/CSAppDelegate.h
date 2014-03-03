@@ -10,7 +10,6 @@
 #import "CSKuleEngine.h"
 
 @interface CSAppDelegate : UIResponder <UIApplicationDelegate>
-
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) CSKuleEngine* engine;
 

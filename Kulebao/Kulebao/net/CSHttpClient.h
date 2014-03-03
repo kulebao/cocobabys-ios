@@ -9,9 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
 #import "AFJSONRequestOperation+CSExtends.h"
-
-#define kServerHost         @"https://www.cocobabys.com"
-#define kCheckPhoneNumUrl   @"/checkphonenum.do"
+#import "CSKulebaoServerUrls.h"
+#import "NSDictionary+CSExtends.h"
 
 @interface CSHttpClient : AFHTTPClient
 

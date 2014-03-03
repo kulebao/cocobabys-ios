@@ -16,6 +16,9 @@
 // PATH: 检查电话号码
 #define kCheckPhoneNumPath          @"/checkphonenum.do"
 
+// PATH: 登录
+#define kLoginPath                  @"/login.do"
+
 // PATH: 检查电话号码
 #define kCheckRegAuthCodePath       @"/check_reg_authcode.do"
 

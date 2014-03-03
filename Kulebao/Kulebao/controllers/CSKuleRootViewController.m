@@ -36,7 +36,7 @@
         self.imgBg.image = [UIImage imageNamed:@"Default.png"];
     }
     
-    [gApp.engine setup];
+    [gApp.engine setupLocalData];
 }
 
 - (void)didReceiveMemoryWarning

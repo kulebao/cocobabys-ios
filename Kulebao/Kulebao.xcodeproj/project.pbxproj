@@ -185,6 +185,10 @@
 		09C1C75F18BD92990040B06D /* AFJSONRequestOperation+CSExtends.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C1C75C18BD92990040B06D /* AFJSONRequestOperation+CSExtends.m */; };
 		09C1C76018BD92990040B06D /* CSHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C1C75E18BD92990040B06D /* CSHttpClient.m */; };
 		09C1C76618BD973B0040B06D /* NSDictionary+CSExtends.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C1C76518BD973B0040B06D /* NSDictionary+CSExtends.m */; };
+		09FE6AEE18C5729500A840BE /* CSKuleNoticeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE6AED18C5729500A840BE /* CSKuleNoticeCell.m */; };
+		09FE6AF018C572A500A840BE /* CSKuleNoticeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09FE6AEF18C572A500A840BE /* CSKuleNoticeCell.xib */; };
+		09FE6AF318C5762600A840BE /* CSKuleNoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE6AF218C5762600A840BE /* CSKuleNoticeViewController.m */; };
+		09FE6AF618C5A53200A840BE /* CSTextFieldDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE6AF518C5A53200A840BE /* CSTextFieldDelegate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -439,6 +443,13 @@
 		09C1C75E18BD92990040B06D /* CSHttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSHttpClient.m; sourceTree = "<group>"; };
 		09C1C76418BD973B0040B06D /* NSDictionary+CSExtends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+CSExtends.h"; sourceTree = "<group>"; };
 		09C1C76518BD973B0040B06D /* NSDictionary+CSExtends.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+CSExtends.m"; sourceTree = "<group>"; };
+		09FE6AEC18C5729500A840BE /* CSKuleNoticeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleNoticeCell.h; sourceTree = "<group>"; };
+		09FE6AED18C5729500A840BE /* CSKuleNoticeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleNoticeCell.m; sourceTree = "<group>"; };
+		09FE6AEF18C572A500A840BE /* CSKuleNoticeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSKuleNoticeCell.xib; sourceTree = "<group>"; };
+		09FE6AF118C5762600A840BE /* CSKuleNoticeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleNoticeViewController.h; sourceTree = "<group>"; };
+		09FE6AF218C5762600A840BE /* CSKuleNoticeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleNoticeViewController.m; sourceTree = "<group>"; };
+		09FE6AF418C5A53200A840BE /* CSTextFieldDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSTextFieldDelegate.h; sourceTree = "<group>"; };
+		09FE6AF518C5A53200A840BE /* CSTextFieldDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSTextFieldDelegate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -662,6 +673,7 @@
 		093904CC18BDD9F2006E8F82 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				09FE6AEB18C5722500A840BE /* views */,
 				093904CD18BDD9F2006E8F82 /* CSKuleGuideViewController.h */,
 				093904CE18BDD9F2006E8F82 /* CSKuleGuideViewController.m */,
 				093904DB18BDDA90006E8F82 /* CSKuleRootViewController.h */,
@@ -674,6 +686,8 @@
 				09A9EBD418C0A01B00D83119 /* CSKuleMainViewController.m */,
 				09A9EBD618C0A02800D83119 /* CSKuleSettingsViewController.h */,
 				09A9EBD718C0A02800D83119 /* CSKuleSettingsViewController.m */,
+				09FE6AF118C5762600A840BE /* CSKuleNoticeViewController.h */,
+				09FE6AF218C5762600A840BE /* CSKuleNoticeViewController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -901,10 +915,22 @@
 			isa = PBXGroup;
 			children = (
 				09A9EBB418C07E8800D83119 /* CSKit.h */,
+				09FE6AF418C5A53200A840BE /* CSTextFieldDelegate.h */,
+				09FE6AF518C5A53200A840BE /* CSTextFieldDelegate.m */,
 				09C1C76418BD973B0040B06D /* NSDictionary+CSExtends.h */,
 				09C1C76518BD973B0040B06D /* NSDictionary+CSExtends.m */,
 			);
 			path = extends;
+			sourceTree = "<group>";
+		};
+		09FE6AEB18C5722500A840BE /* views */ = {
+			isa = PBXGroup;
+			children = (
+				09FE6AEC18C5729500A840BE /* CSKuleNoticeCell.h */,
+				09FE6AED18C5729500A840BE /* CSKuleNoticeCell.m */,
+				09FE6AEF18C572A500A840BE /* CSKuleNoticeCell.xib */,
+			);
+			path = views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1083,6 +1109,7 @@
 				0934F05218BF5B0800E30ECA /* avatar-bg.png in Resources */,
 				0934F08D18BF5B0800E30ECA /* settings-icon-check-update@2x.png in Resources */,
 				0934F06418BF5B0800E30ECA /* btn-func-7.png in Resources */,
+				09FE6AF018C572A500A840BE /* CSKuleNoticeCell.xib in Resources */,
 				09A9EBCF18C08C7D00D83119 /* toolbar-bg@2x.png in Resources */,
 				0934F06F18BF5B0800E30ECA /* btn-type1@2x.png in Resources */,
 				0934F04C18BF5B0800E30ECA /* alert-bg.png in Resources */,
@@ -1144,6 +1171,7 @@
 				09BA1C2518BB3F8400760182 /* AFImageRequestOperation.m in Sources */,
 				09219A5218C4878600166228 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				09BA1C2718BB3F8400760182 /* AFNetworkActivityIndicatorManager.m in Sources */,
+				09FE6AF618C5A53200A840BE /* CSTextFieldDelegate.m in Sources */,
 				09BA1C2418BB3F8400760182 /* AFHTTPRequestOperation.m in Sources */,
 				09219A5318C4878600166228 /* TPKeyboardAvoidingTableView.m in Sources */,
 				0934EFC418BF3AF700E30ECA /* EAIntroView.m in Sources */,
@@ -1156,6 +1184,7 @@
 				093904CF18BDD9F2006E8F82 /* CSKuleGuideViewController.m in Sources */,
 				09BA1C2A18BB3F8400760182 /* AFXMLRequestOperation.m in Sources */,
 				09219A5418C4878600166228 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
+				09FE6AEE18C5729500A840BE /* CSKuleNoticeCell.m in Sources */,
 				09A9EBBB18C0830900D83119 /* CSKuleLoginViewController.m in Sources */,
 				09BA1C0118BB334900760182 /* Reachability.m in Sources */,
 				09219A5A18C4999C00166228 /* CSKuleLoginInfo.m in Sources */,
@@ -1167,6 +1196,7 @@
 				09C1C76618BD973B0040B06D /* NSDictionary+CSExtends.m in Sources */,
 				09BA1BFE18BB334900760182 /* GzipCompressor.m in Sources */,
 				0934EFC318BF3AF700E30ECA /* EAIntroPage.m in Sources */,
+				09FE6AF318C5762600A840BE /* CSKuleNoticeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

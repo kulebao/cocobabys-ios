@@ -61,15 +61,36 @@
             CSLog(@"success:%@", dataJson);
             
             NSInteger check_phone_result = [[dataJson valueForKeyNotNull:@"check_phone_result"] integerValue];
-            if (check_phone_result == 1102) {
-                [self performSegueWithIdentifier:@"segue.login" sender:nil];
+            
+            switch (check_phone_result) {
+                case PHONE_NUM_IS_ALREADY_BIND:
+                case PHONE_NUM_IS_FIRST_USE:
+                {
+                    [gApp hideAlert];
+                    [self performSegueWithIdentifier:@"segue.login" sender:nil];
+                }
+                    break;
+                case PHONE_NUM_IS_INVALID:
+                {
+                    [gApp alert:@"手机号码没有注册，请确认输入是否正确或联系幼儿园处理，谢谢！"
+                      withTitle:@"提示"];
+                    
+                }
+                    break;
+                default:
+                {
+                    [gApp hideAlert];
+                }
+                    break;
             }
         };
         
         FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
             NSLog(@"failure:%@", error);
+            [gApp alert:[error localizedDescription]];
         };
         
+        [gApp waitingAlert:@"正在校验手机号码，请稍候..."];
         [gApp.engine.httpClient httpRequestWithMethod:@"POST"
                                                  path:kCheckPhoneNumPath
                                            parameters:params

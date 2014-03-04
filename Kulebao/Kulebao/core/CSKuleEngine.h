@@ -8,11 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "CSHttpClient.h"
+#import "CSAppErrorCode.h"
+#import "CSKulebaoEventType.h"
+
 #import "CSKuleLoginInfo.h"
 
 @interface CSKuleEngine : NSObject
 @property (strong, nonatomic) CSHttpClient* httpClient;
-
 @property (strong, nonatomic) CSKuleLoginInfo* loginInfo;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;

@@ -13,6 +13,7 @@ CSAppDelegate* gApp = nil;
 
 @implementation CSAppDelegate
 @synthesize engine = _engine;
+@synthesize hud = _hud;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -127,4 +128,59 @@ CSAppDelegate* gApp = nil;
     gApp.window.rootViewController = ctrl;
 }
 
+#pragma mark - Alert
+- (BOOL)createHudIfNeeded {
+    BOOL ok = NO;
+    
+    if (self.window) {
+        if (_hud == nil) {
+            _hud = [[MBProgressHUD alloc] initWithWindow:self.window];
+            _hud.color = [[UIColor blackColor] colorWithAlphaComponent:0.7];
+            [self.window addSubview:_hud];
+        }
+        ok = YES;
+    }
+
+    return ok;
+}
+- (void)alert:(NSString*)text {
+    [self alert:text withTitle:nil];
+}
+
+- (void)alert:(NSString*)text withTitle:(NSString*)title {
+    if ([self createHudIfNeeded]) {
+        [NSObject cancelPreviousPerformRequestsWithTarget:self.hud];
+        self.hud.mode = MBProgressHUDModeText;
+        self.hud.labelText = title;
+        self.hud.detailsLabelText = text;
+        [_window bringSubviewToFront:self.hud];
+        [self.hud show:YES];
+        [self hideAlertAfterDelay:1.5];
+    }
+}
+
+- (void)waitingAlert:(NSString*)text {
+    [self waitingAlert:text withTitle:nil];
+}
+
+- (void)waitingAlert:(NSString*)text withTitle:(NSString*)title {
+    if ([self createHudIfNeeded]) {
+        [NSObject cancelPreviousPerformRequestsWithTarget:self.hud];
+        self.hud.mode = MBProgressHUDModeIndeterminate;
+        self.hud.labelText = title;
+        self.hud.detailsLabelText = text;
+        [_window bringSubviewToFront:self.hud];
+        [self.hud show:YES];
+        [self hideAlertAfterDelay:60];
+    }
+}
+
+- (void)hideAlert {
+    [self hideAlertAfterDelay:0.3];
+}
+
+- (void)hideAlertAfterDelay:(NSTimeInterval)delay {
+    [NSObject cancelPreviousPerformRequestsWithTarget:self.hud];
+    [self.hud hide:YES afterDelay:delay];
+}
 @end

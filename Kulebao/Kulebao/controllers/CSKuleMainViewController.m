@@ -9,7 +9,14 @@
 #import "CSKuleMainViewController.h"
 
 @interface CSKuleMainViewController ()
+
 - (IBAction)onBtnSettingsClicked:(id)sender;
+- (IBAction)onBtnNoticeClicked:(id)sender;
+- (IBAction)onBtnRecipeClicked:(id)sender;
+- (IBAction)onBtnCheckinInfoClicked:(id)sender;
+- (IBAction)onBtnScheduleInfoClicked:(id)sender;
+- (IBAction)onBtnHomeworkClicked:(id)sender;
+- (IBAction)onBtnChatingClicked:(id)sender;
 
 @end
 
@@ -39,4 +46,29 @@
 - (IBAction)onBtnSettingsClicked:(id)sender {
     [self performSegueWithIdentifier:@"segue.settings" sender:nil];
 }
+
+- (IBAction)onBtnNoticeClicked:(id)sender {
+    [self performSegueWithIdentifier:@"segue.notice" sender:nil];
+}
+
+- (IBAction)onBtnRecipeClicked:(id)sender {
+    
+}
+
+- (IBAction)onBtnCheckinInfoClicked:(id)sender {
+    
+}
+
+- (IBAction)onBtnScheduleInfoClicked:(id)sender {
+    
+}
+
+- (IBAction)onBtnHomeworkClicked:(id)sender {
+    
+}
+
+- (IBAction)onBtnChatingClicked:(id)sender {
+    
+}
+
 @end

@@ -8,14 +8,26 @@
 
 #import <UIKit/UIKit.h>
 #import "CSKuleEngine.h"
+#import "MBProgressHUD.h"
 
 @interface CSAppDelegate : UIResponder <UIApplicationDelegate>
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) CSKuleEngine* engine;
+@property (strong, nonatomic) MBProgressHUD* hud;
 
 // -
 - (void)gotoLoginProcess;
 - (void)gotoMainProcess;
+
+
+// - Alert
+- (void)alert:(NSString*)text;
+- (void)alert:(NSString*)text withTitle:(NSString*)title;
+- (void)waitingAlert:(NSString*)text;
+- (void)waitingAlert:(NSString*)text withTitle:(NSString*)title;
+
+- (void)hideAlert;
+- (void)hideAlertAfterDelay:(NSTimeInterval)delay;
 
 @end
 

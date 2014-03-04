@@ -74,14 +74,20 @@
                 loginInfo.username = username;
                 
                 gApp.engine.loginInfo = loginInfo;
-                
+
                 [gApp gotoMainProcess];
+                [gApp alert:@"登录成功"];
+            }
+            else {
+                [gApp alert:@"密码错误，请重新输入,谢谢！" withTitle:@"提示"];
             }
         };
         
         FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
             NSLog(@"failure:%@", error);
         };
+        
+        [gApp waitingAlert:@"正在登录..."];
         
         [gApp.engine.httpClient httpRequestWithMethod:@"POST"
                                                  path:kLoginPath

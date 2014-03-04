@@ -52,23 +52,23 @@
 }
 
 - (IBAction)onBtnRecipeClicked:(id)sender {
-    
+    [self performSegueWithIdentifier:@"segue.recipe" sender:nil];
 }
 
 - (IBAction)onBtnCheckinInfoClicked:(id)sender {
-    
+    [self performSegueWithIdentifier:@"segue.checkin" sender:nil];
 }
 
 - (IBAction)onBtnScheduleInfoClicked:(id)sender {
-    
+    [self performSegueWithIdentifier:@"segue.schedule" sender:nil];
 }
 
 - (IBAction)onBtnHomeworkClicked:(id)sender {
-    
+    [self performSegueWithIdentifier:@"segue.homework" sender:nil];
 }
 
 - (IBAction)onBtnChatingClicked:(id)sender {
-    
+    [self performSegueWithIdentifier:@"segue.chating" sender:nil];
 }
 
 @end

@@ -26,6 +26,7 @@
     
     CSHttpClient* client = [[CSHttpClient alloc] initWithBaseURL:baseUrl];
     client.parameterEncoding = AFJSONParameterEncoding;
+    
     [client setDefaultHeader:@"Accept" value:@"application/json"];
     [client registerHTTPOperationClass:[AFHTTPRequestOperation class]];
     [client registerHTTPOperationClass:[AFJSONRequestOperation class]];

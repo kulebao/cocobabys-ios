@@ -1,22 +1,22 @@
 //
-//  CSKuleNoticeViewController.m
+//  CSKuleHomeworkViewController.m
 //  Kulebao
 //
 //  Created by xin.c.wang on 14-3-4.
 //  Copyright (c) 2014年 Cocobabys. All rights reserved.
 //
 
-#import "CSKuleNoticeViewController.h"
+#import "CSKuleHomeworkViewController.h"
 #import "CSKuleNoticeCell.h"
 #import "PullTableView.h"
 
-@interface CSKuleNoticeViewController () <UITableViewDataSource, UITableViewDelegate, PullTableViewDelegate>
+@interface CSKuleHomeworkViewController () <UITableViewDataSource, UITableViewDelegate, PullTableViewDelegate>
 @property (weak, nonatomic) IBOutlet PullTableView *tableview;
 - (IBAction)onBtnBackClicked:(id)sender;
 
 @end
 
-@implementation CSKuleNoticeViewController
+@implementation CSKuleHomeworkViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -40,10 +40,10 @@
     self.tableview.pullArrowImage = [UIImage imageNamed:@"grayArrow.png"];
     
     /* manually triggering
-    if(!self.pullTableView.pullTableIsRefreshing) {
-        self.pullTableView.pullTableIsRefreshing = YES;
-        [self performSelector:@selector(refreshTable) withObject:nil afterDelay:3];
-    }
+     if(!self.pullTableView.pullTableIsRefreshing) {
+     self.pullTableView.pullTableIsRefreshing = YES;
+     [self performSelector:@selector(refreshTable) withObject:nil afterDelay:3];
+     }
      */
 }
 

@@ -189,6 +189,13 @@
 		09FE6AF018C572A500A840BE /* CSKuleNoticeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09FE6AEF18C572A500A840BE /* CSKuleNoticeCell.xib */; };
 		09FE6AF318C5762600A840BE /* CSKuleNoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE6AF218C5762600A840BE /* CSKuleNoticeViewController.m */; };
 		09FE6AF618C5A53200A840BE /* CSTextFieldDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE6AF518C5A53200A840BE /* CSTextFieldDelegate.m */; };
+		09FE6AF918C5B97100A840BE /* CSKuleRecipeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE6AF818C5B97000A840BE /* CSKuleRecipeCell.m */; };
+		09FE6AFB18C5B97D00A840BE /* CSKuleRecipeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09FE6AFA18C5B97D00A840BE /* CSKuleRecipeCell.xib */; };
+		09FE6AFE18C5BB5600A840BE /* CSKuleRecipeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE6AFD18C5BB5600A840BE /* CSKuleRecipeViewController.m */; };
+		09FE6B0118C5BCFD00A840BE /* CSKuleHomeworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE6B0018C5BCFD00A840BE /* CSKuleHomeworkViewController.m */; };
+		09FE6B0418C5C00F00A840BE /* CSKuleScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE6B0318C5C00F00A840BE /* CSKuleScheduleViewController.m */; };
+		09FE6B0718C5C23300A840BE /* CSKuleCheckinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE6B0618C5C23300A840BE /* CSKuleCheckinViewController.m */; };
+		09FE6B0A18C5C34F00A840BE /* CSKuleChatingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE6B0918C5C34F00A840BE /* CSKuleChatingViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -450,6 +457,19 @@
 		09FE6AF218C5762600A840BE /* CSKuleNoticeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleNoticeViewController.m; sourceTree = "<group>"; };
 		09FE6AF418C5A53200A840BE /* CSTextFieldDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSTextFieldDelegate.h; sourceTree = "<group>"; };
 		09FE6AF518C5A53200A840BE /* CSTextFieldDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSTextFieldDelegate.m; sourceTree = "<group>"; };
+		09FE6AF718C5B97000A840BE /* CSKuleRecipeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleRecipeCell.h; sourceTree = "<group>"; };
+		09FE6AF818C5B97000A840BE /* CSKuleRecipeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleRecipeCell.m; sourceTree = "<group>"; };
+		09FE6AFA18C5B97D00A840BE /* CSKuleRecipeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSKuleRecipeCell.xib; sourceTree = "<group>"; };
+		09FE6AFC18C5BB5600A840BE /* CSKuleRecipeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleRecipeViewController.h; sourceTree = "<group>"; };
+		09FE6AFD18C5BB5600A840BE /* CSKuleRecipeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleRecipeViewController.m; sourceTree = "<group>"; };
+		09FE6AFF18C5BCFD00A840BE /* CSKuleHomeworkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleHomeworkViewController.h; sourceTree = "<group>"; };
+		09FE6B0018C5BCFD00A840BE /* CSKuleHomeworkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleHomeworkViewController.m; sourceTree = "<group>"; };
+		09FE6B0218C5C00F00A840BE /* CSKuleScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleScheduleViewController.h; sourceTree = "<group>"; };
+		09FE6B0318C5C00F00A840BE /* CSKuleScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleScheduleViewController.m; sourceTree = "<group>"; };
+		09FE6B0518C5C23300A840BE /* CSKuleCheckinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleCheckinViewController.h; sourceTree = "<group>"; };
+		09FE6B0618C5C23300A840BE /* CSKuleCheckinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleCheckinViewController.m; sourceTree = "<group>"; };
+		09FE6B0818C5C34F00A840BE /* CSKuleChatingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleChatingViewController.h; sourceTree = "<group>"; };
+		09FE6B0918C5C34F00A840BE /* CSKuleChatingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleChatingViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -688,6 +708,16 @@
 				09A9EBD718C0A02800D83119 /* CSKuleSettingsViewController.m */,
 				09FE6AF118C5762600A840BE /* CSKuleNoticeViewController.h */,
 				09FE6AF218C5762600A840BE /* CSKuleNoticeViewController.m */,
+				09FE6AFC18C5BB5600A840BE /* CSKuleRecipeViewController.h */,
+				09FE6AFD18C5BB5600A840BE /* CSKuleRecipeViewController.m */,
+				09FE6AFF18C5BCFD00A840BE /* CSKuleHomeworkViewController.h */,
+				09FE6B0018C5BCFD00A840BE /* CSKuleHomeworkViewController.m */,
+				09FE6B0218C5C00F00A840BE /* CSKuleScheduleViewController.h */,
+				09FE6B0318C5C00F00A840BE /* CSKuleScheduleViewController.m */,
+				09FE6B0518C5C23300A840BE /* CSKuleCheckinViewController.h */,
+				09FE6B0618C5C23300A840BE /* CSKuleCheckinViewController.m */,
+				09FE6B0818C5C34F00A840BE /* CSKuleChatingViewController.h */,
+				09FE6B0918C5C34F00A840BE /* CSKuleChatingViewController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -929,6 +959,9 @@
 				09FE6AEC18C5729500A840BE /* CSKuleNoticeCell.h */,
 				09FE6AED18C5729500A840BE /* CSKuleNoticeCell.m */,
 				09FE6AEF18C572A500A840BE /* CSKuleNoticeCell.xib */,
+				09FE6AF718C5B97000A840BE /* CSKuleRecipeCell.h */,
+				09FE6AF818C5B97000A840BE /* CSKuleRecipeCell.m */,
+				09FE6AFA18C5B97D00A840BE /* CSKuleRecipeCell.xib */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -1055,6 +1088,7 @@
 				0934F07718BF5B0800E30ECA /* Default@2x.png in Resources */,
 				0934F07418BF5B0800E30ECA /* class-input-bg.png in Resources */,
 				09A9EBCD18C08C7D00D83119 /* titlebar-bg@2x.png in Resources */,
+				09FE6AFB18C5B97D00A840BE /* CSKuleRecipeCell.xib in Resources */,
 				0934F06A18BF5B0800E30ECA /* btn-settings.png in Resources */,
 				0934F05118BF5B0800E30ECA /* app-bg-type2@2x.png in Resources */,
 				0934F05518BF5B0800E30ECA /* btn-back-pressed@2x.png in Resources */,
@@ -1155,17 +1189,21 @@
 			files = (
 				09A9EBD518C0A01B00D83119 /* CSKuleMainViewController.m in Sources */,
 				09BA1BFD18BB334900760182 /* Base64.m in Sources */,
+				09FE6AF918C5B97100A840BE /* CSKuleRecipeCell.m in Sources */,
 				09BA1BE018BB2FC700760182 /* PullTableView.m in Sources */,
 				09219A3D18C4722E00166228 /* CSKuleUser.m in Sources */,
 				09BA1C2818BB3F8400760182 /* AFPropertyListRequestOperation.m in Sources */,
 				09219A4018C4723F00166228 /* CSKuleBaby.m in Sources */,
+				09FE6AFE18C5BB5600A840BE /* CSKuleRecipeViewController.m in Sources */,
 				09219A5718C48A2100166228 /* CSKuleEngine.m in Sources */,
 				09219A3618C42AF800166228 /* MBProgressHUD.m in Sources */,
 				09BA1C0018BB334900760182 /* OpenUDID.m in Sources */,
 				09219A5118C4878600166228 /* TPKeyboardAvoidingCollectionView.m in Sources */,
+				09FE6B0418C5C00F00A840BE /* CSKuleScheduleViewController.m in Sources */,
 				093904DD18BDDA90006E8F82 /* CSKuleRootViewController.m in Sources */,
 				09BA1C2918BB3F8400760182 /* AFURLConnectionOperation.m in Sources */,
 				09BA1BDD18BB2FC700760182 /* EGORefreshTableHeaderView.m in Sources */,
+				09FE6B0A18C5C34F00A840BE /* CSKuleChatingViewController.m in Sources */,
 				09BA1C2318BB3F8400760182 /* AFHTTPClient.m in Sources */,
 				09BA1BA118BB2AB400760182 /* CSAppDelegate.m in Sources */,
 				09BA1C2518BB3F8400760182 /* AFImageRequestOperation.m in Sources */,
@@ -1183,6 +1221,7 @@
 				09BA1BDE18BB2FC700760182 /* LoadMoreTableFooterView.m in Sources */,
 				093904CF18BDD9F2006E8F82 /* CSKuleGuideViewController.m in Sources */,
 				09BA1C2A18BB3F8400760182 /* AFXMLRequestOperation.m in Sources */,
+				09FE6B0718C5C23300A840BE /* CSKuleCheckinViewController.m in Sources */,
 				09219A5418C4878600166228 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				09FE6AEE18C5729500A840BE /* CSKuleNoticeCell.m in Sources */,
 				09A9EBBB18C0830900D83119 /* CSKuleLoginViewController.m in Sources */,
@@ -1191,6 +1230,7 @@
 				09C1C76018BD92990040B06D /* CSHttpClient.m in Sources */,
 				09A9EBD218C090E200D83119 /* CSKuleAuthViewController.m in Sources */,
 				09BA1C2618BB3F8400760182 /* AFJSONRequestOperation.m in Sources */,
+				09FE6B0118C5BCFD00A840BE /* CSKuleHomeworkViewController.m in Sources */,
 				09BA1C2B18BB3F8400760182 /* UIImageView+AFNetworking.m in Sources */,
 				09C1C75F18BD92990040B06D /* AFJSONRequestOperation+CSExtends.m in Sources */,
 				09C1C76618BD973B0040B06D /* NSDictionary+CSExtends.m in Sources */,

@@ -17,3 +17,5 @@
     #import <MobileCoreServices/MobileCoreServices.h>
     #import "CSKit.h"
 #endif
+
+#define _AFNETWORKING_ALLOW_INVALID_SSL_CERTIFICATES_

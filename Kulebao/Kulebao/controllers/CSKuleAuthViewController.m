@@ -34,7 +34,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.fieldMobile.text = @"13402815317";
+    self.fieldMobile.text = @"18782242007";
     
     [self showIntroViewsIfNeeded];
 }
@@ -55,10 +55,12 @@
 - (void)doAuth {
     NSString* mobile = self.fieldMobile.text;
     if (mobile.length > 0) {
-        NSDictionary* params = @{@"phonenum":mobile};
-        
         SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
-            CSLog(@"success:%@", dataJson);
+            /*
+             {
+             "check_phone_result" : "1102"
+             }
+             */
             
             NSInteger check_phone_result = [[dataJson valueForKeyNotNull:@"check_phone_result"] integerValue];
             
@@ -86,19 +88,17 @@
         };
         
         FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
-            NSLog(@"failure:%@", error);
+            CSLog(@"failure:%@", error);
             [gApp alert:[error localizedDescription]];
         };
         
         [gApp waitingAlert:@"正在校验手机号码，请稍候..."];
-        [gApp.engine.httpClient httpRequestWithMethod:@"POST"
-                                                 path:kCheckPhoneNumPath
-                                           parameters:params
-                                              success:sucessHandler
-                                              failure:failureHandler];
+        [gApp.engine reqCheckPhoneNum:mobile
+                              success:sucessHandler
+                              failure:failureHandler];
     }
     else {
-        
+        [gApp alert:@"请输入手机号码"];
     }
 }
 

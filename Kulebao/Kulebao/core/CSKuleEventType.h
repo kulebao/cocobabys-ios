@@ -1,13 +1,13 @@
 //
-//  CSKulebaoEventType.h
+//  CSKuleEventType.h
 //  Kulebao
 //
 //  Created by xin.c.wang on 14-2-26.
 //  Copyright (c) 2014年 Cocobabys. All rights reserved.
 //
 
-#ifndef Kulebao_CSKulebaoEventType_h
-#define Kulebao_CSKulebaoEventType_h
+#ifndef Kulebao_CSKuleEventType_h
+#define Kulebao_CSKuleEventType_h
 
 typedef enum {
     PHONE_NUM_IS_INVALID = 1100,

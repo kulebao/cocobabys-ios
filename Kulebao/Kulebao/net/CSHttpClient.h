@@ -9,12 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
 #import "AFJSONRequestOperation+CSExtends.h"
-#import "CSKulebaoServerUrls.h"
-#import "NSDictionary+CSExtends.h"
 
 @interface CSHttpClient : AFHTTPClient
 
-+ (id)httpClient;
++ (id)httpClientWithHost:(NSURL*)hostUrl;
 
 - (void)httpRequestWithMethod:(NSString *)method
                          path:(NSString *)path

@@ -34,7 +34,7 @@
 	// Do any additional setup after loading the view.
     self.labNotice.text = [NSString stringWithFormat:@"尊敬的%@用户，您好！您的手机已经激活过，请输入密码进行登录，谢谢。", self.mobile];
     
-    self.fieldPassword.text = @"1q2w3e";
+    self.fieldPassword.text = @"82242007";
 }
 
 - (void)didReceiveMemoryWarning
@@ -53,20 +53,25 @@
 - (void)doLogin {
     NSString* pswd = self.fieldPassword.text;
     if (pswd.length > 0 && self.mobile.length > 0) {
-        
-        NSDictionary* params = @{@"account_name":self.mobile,
-                                 @"password":pswd};
-
         SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
-            CSLog(@"success:%@", dataJson);
+            /*
+             {
+             "error_code" : 0,
+             "access_token" : "1390314328393",
+             "username" : "袋鼠",
+             "account_name" : "13408654680",
+             "school_name" : "天之骄子幼儿园"
+             }
+             */
             
-            NSString* access_token = [dataJson valueForKeyNotNull:@"access_token"];
-            NSString* account_name = [dataJson valueForKeyNotNull:@"account_name"];
             NSInteger error_code = [[dataJson valueForKeyNotNull:@"error_code"] integerValue];
-            NSString* school_name = [dataJson valueForKeyNotNull:@"school_name"];
-            NSString* username = [dataJson valueForKeyNotNull:@"username"];
             
             if (error_code == 0) {
+                NSString* access_token = [dataJson valueForKeyNotNull:@"access_token"];
+                NSString* account_name = [dataJson valueForKeyNotNull:@"account_name"];
+                NSString* school_name = [dataJson valueForKeyNotNull:@"school_name"];
+                NSString* username = [dataJson valueForKeyNotNull:@"username"];
+                
                 CSKuleLoginInfo* loginInfo = [CSKuleLoginInfo new];
                 loginInfo.accessToken = access_token;
                 loginInfo.accountName = account_name;
@@ -74,9 +79,9 @@
                 loginInfo.username = username;
                 
                 gApp.engine.loginInfo = loginInfo;
-
-                [gApp gotoMainProcess];
-                [gApp alert:@"登录成功"];
+                
+                [self performSelector:@selector(doReceiveBindInfo)
+                           withObject:nil afterDelay:0];
             }
             else {
                 [gApp alert:@"密码错误，请重新输入,谢谢！" withTitle:@"提示"];
@@ -84,20 +89,68 @@
         };
         
         FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
-            NSLog(@"failure:%@", error);
+            CSLog(@"failure:%@", error);
         };
         
         [gApp waitingAlert:@"正在登录..."];
-        
-        [gApp.engine.httpClient httpRequestWithMethod:@"POST"
-                                                 path:kLoginPath
-                                           parameters:params
-                                              success:sucessHandler
-                                              failure:failureHandler];
+        [gApp.engine reqLogin:self.mobile
+                     withPswd:pswd
+                      success:sucessHandler
+                      failure:failureHandler];
     }
     else {
-        
+        [gApp alert:@"请输入密码"];
     }
+}
+
+- (void)doReceiveBindInfo {
+    SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
+        /*
+         {
+         "error_code" : 0,
+         "access_token" : "1390314328393",
+         "username" : "袋鼠",
+         "account_name" : "13408654680",
+         "school_id" : 93740362,
+         "school_name" : "天之骄子幼儿园"
+         }
+         */
+        NSInteger error_code = [[dataJson valueForKeyNotNull:@"error_code"] integerValue];
+        
+        if (error_code == 0) {
+            NSString* access_token = [dataJson valueForKeyNotNull:@"access_token"];
+            NSString* username = [dataJson valueForKeyNotNull:@"username"];
+            NSString* account_name = [dataJson valueForKeyNotNull:@"account_name"];
+            NSInteger school_id = [[dataJson valueForKeyNotNull:@"school_id"] integerValue];
+            NSString* school_name = [dataJson valueForKeyNotNull:@"school_name"];
+            
+            CSKuleBindInfo* bindInfo = [CSKuleBindInfo new];
+            bindInfo.accessToken = access_token;
+            bindInfo.accountName = account_name;
+            bindInfo.schoolName = school_name;
+            bindInfo.username = username;
+            bindInfo.schoolId = school_id;
+            
+            gApp.engine.bindInfo = bindInfo;
+            
+            [gApp gotoMainProcess];
+            //[gApp alert:@"登录成功"];
+            [gApp hideAlert];
+        }
+        else {
+            CSLog(@"doReceiveBindInfo error_code=%d", error_code);
+            [gApp hideAlert];
+        }
+    };
+    
+    FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
+        CSLog(@"failure:%@", error);
+    };
+    
+    [gApp waitingAlert:@"获取绑定信息..."];
+    [gApp.engine reqReceiveBindInfo:gApp.engine.loginInfo.accountName
+                  success:sucessHandler
+                  failure:failureHandler];
 }
 
 @end

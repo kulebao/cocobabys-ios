@@ -8,15 +8,22 @@
 
 #import "CSKuleEngine.h"
 #import "CSAppDelegate.h"
+#import "BPush.h"
 
 @interface CSKuleEngine()
+
+@property (strong, nonatomic) CSHttpClient* httpClient;
 
 @end
 
 @implementation CSKuleEngine
 @synthesize httpClient = _httpClient;
 @synthesize loginInfo = _loginInfo;
+@synthesize bindInfo = _bindInfo;
+@synthesize relationships = _relationships;
+@synthesize currentChild = _currentChild;
 
+#pragma mark - application
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
@@ -50,9 +57,25 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-#pragma mark - Private
+#pragma mark - Getter & Setter
+- (void)setLoginInfo:(CSKuleLoginInfo *)loginInfo {
+    _loginInfo = loginInfo;
+    
+    CSLog(@"%s\n%@", __FUNCTION__, loginInfo);
+}
+
+- (void)setBindInfo:(CSKuleBindInfo *)bindInfo {
+    _bindInfo = bindInfo;
+    
+    CSLog(@"%s\n%@", __FUNCTION__, _bindInfo);
+}
+
+#pragma mark - Setup
 - (void)setupHttpClient {
-    _httpClient = [CSHttpClient httpClient];
+    if (_httpClient == nil) {
+        NSURL* baseUrl = [NSURL URLWithString:kServerHost];
+        _httpClient = [CSHttpClient httpClientWithHost:baseUrl];
+    }
 }
 
 - (void)setupLocalData {
@@ -63,5 +86,87 @@
         [gApp gotoMainProcess];
     }
 }
+
+#pragma mark - HTTP Request
+- (void)reqCheckPhoneNum:(NSString*)mobile
+                 success:(SuccessResponseHandler)success
+                 failure:(FailureResponseHandler)failure {
+    
+    [self setupHttpClient];
+    
+    NSString* path = kCheckPhoneNumPath;
+    
+    NSString* method = @"POST";
+    
+    NSDictionary* parameters = @{@"phonenum":mobile};
+    
+    [_httpClient httpRequestWithMethod:method
+                                  path:path
+                            parameters:parameters
+                               success:success
+                               failure:failure];
+}
+
+- (void)reqLogin:(NSString*)mobile
+        withPswd:(NSString*)password
+         success:(SuccessResponseHandler)success
+         failure:(FailureResponseHandler)failure {
+    
+    [self setupHttpClient];
+    
+    NSString* path = kLoginPath;
+
+    NSString* method = @"POST";
+    
+    NSDictionary* parameters = @{@"account_name":mobile,
+                                 @"password":password};
+    
+    [_httpClient httpRequestWithMethod:method
+                                  path:path
+                            parameters:parameters
+                               success:success
+                               failure:failure];
+}
+
+- (void)reqReceiveBindInfo:(NSString*)mobile
+                   success:(SuccessResponseHandler)success
+                   failure:(FailureResponseHandler)failure {
+    [self setupHttpClient];
+    
+    NSString* path = kReceiveBindInfoPath;
+    
+    NSString* method = @"POST";
+    
+    NSDictionary* parameters = @{@"phonenum": mobile,
+                                 @"user_id": [BPush getUserId],
+                                 @"channel_id": [BPush getChannelId]};
+    
+    [_httpClient httpRequestWithMethod:method
+                                  path:path
+                            parameters:parameters
+                               success:success
+                               failure:failure];
+}
+
+- (void)reqGetFamilyRelationship:(NSString*)mobile
+                  inKindergarten:(NSInteger)kindergarten
+                         success:(SuccessResponseHandler)success
+                         failure:(FailureResponseHandler)failure {
+    
+    [self setupHttpClient];
+    
+    NSString* path = [NSString stringWithFormat:kGetFamilyRelationship, @(kindergarten)];
+
+    NSString* method = @"GET";
+
+    NSDictionary* parameters = @{@"parent": mobile};
+    
+    [_httpClient httpRequestWithMethod:method
+                                  path:path
+                            parameters:parameters
+                               success:success
+                               failure:failure];
+}
+
 
 @end

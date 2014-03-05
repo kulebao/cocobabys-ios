@@ -21,9 +21,7 @@
     return self;
 }
 
-+ (id)httpClient {
-    NSURL* baseUrl = [NSURL URLWithString:kServerHost];
-    
++ (id)httpClientWithHost:(NSURL*)baseUrl {
     CSHttpClient* client = [[CSHttpClient alloc] initWithBaseURL:baseUrl];
     client.parameterEncoding = AFJSONParameterEncoding;
     
@@ -49,10 +47,19 @@
     NSMutableURLRequest* req = [self requestWithMethod:method
                                                   path:path
                                             parameters:parameters];
-    req.timeoutInterval = 30;
+    
+    [self httpRequest:req success:success failure:failure];
+}
+
+
+- (void)httpRequest:(NSMutableURLRequest *)request
+            success:(SuccessResponseHandler)success
+            failure:(FailureResponseHandler)failure {
+    
+    request.timeoutInterval = 30;
     
     AFJSONRequestOperation* jsonOperation =
-    [AFJSONRequestOperation CSJSONRequestOperationWithRequest:req
+    [AFJSONRequestOperation CSJSONRequestOperationWithRequest:request
                                                       success:success
                                                       failure:failure];
     

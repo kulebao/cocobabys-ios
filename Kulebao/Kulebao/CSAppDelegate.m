@@ -79,8 +79,8 @@ CSAppDelegate* gApp = nil;
 
 // 必须,如果正确调用了 setDelegate,在 bindChannel 之后,结果在这个回调中返回。 若绑定失败,请进行重新绑定,确保至少绑定成功一次
 - (void) onMethod:(NSString*)method response:(NSDictionary*)data {
-    NSLog(@"On method:%@", method);
-    NSLog(@"data:%@", [data description]);
+    CSLog(@"On method:%@", method);
+    CSLog(@"data:%@", [data description]);
     NSDictionary* res = [[NSDictionary alloc] initWithDictionary:data];
     if ([BPushRequestMethod_Bind isEqualToString:method]) {
         NSString *appid = [res valueForKey:BPushRequestAppIdKey];

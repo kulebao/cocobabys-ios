@@ -18,6 +18,7 @@
 
 @implementation CSKuleEngine
 @synthesize httpClient = _httpClient;
+@synthesize preferences = _preferences;
 @synthesize loginInfo = _loginInfo;
 @synthesize bindInfo = _bindInfo;
 @synthesize relationships = _relationships;
@@ -71,19 +72,19 @@
 }
 
 #pragma mark - Setup
+- (void)setupEngine {
+    [self setupHttpClient];
+    [self setupPreferences];
+}
+
+- (void)setupPreferences {
+    _preferences = [CSKulePreferences defaultPreferences];
+}
+
 - (void)setupHttpClient {
     if (_httpClient == nil) {
         NSURL* baseUrl = [NSURL URLWithString:kServerHost];
         _httpClient = [CSHttpClient httpClientWithHost:baseUrl];
-    }
-}
-
-- (void)setupLocalData {
-    if (YES) {
-        [gApp gotoLoginProcess];
-    }
-    else {
-        [gApp gotoMainProcess];
     }
 }
 
@@ -137,9 +138,20 @@
     
     NSString* method = @"POST";
     
-    NSDictionary* parameters = @{@"phonenum": mobile,
-                                 @"user_id": [BPush getUserId],
-                                 @"channel_id": [BPush getChannelId]};
+    NSDictionary* parameters = nil;
+    
+    if ([BPush getChannelId] && [BPush getUserId]) {
+        parameters = @{@"phonenum": mobile,
+                       @"user_id": [BPush getUserId],
+                       @"channel_id": [BPush getChannelId],
+                       @"device_type": @"ios"};
+    }
+    else {
+        parameters = @{@"phonenum": mobile,
+                       @"user_id": @"",
+                       @"channel_id": @"",
+                       @"device_type": @"ios"};
+    }
     
     [_httpClient httpRequestWithMethod:method
                                   path:path

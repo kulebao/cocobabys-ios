@@ -36,7 +36,13 @@
         self.imgBg.image = [UIImage imageNamed:@"Default.png"];
     }
     
-    [gApp.engine setupLocalData];
+    
+    if (gApp.engine.preferences.loginUsername.length == 0) {
+        [gApp gotoLoginProcess];
+    }
+    else {
+        [gApp gotoMainProcess];
+    }
 }
 
 - (void)didReceiveMemoryWarning

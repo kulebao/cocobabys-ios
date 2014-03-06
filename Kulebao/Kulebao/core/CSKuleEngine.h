@@ -13,12 +13,13 @@
 #import "CSKuleCommon.h"
 #import "CSKuleEventType.h"
 #import "CSKuleServerUrls.h"
-
+#import "CSKulePreferences.h"
 #import "CSKuleLoginInfo.h"
 #import "CSKuleBindInfo.h"
 #import "CSKuleRelationshipInfo.h"
 
 @interface CSKuleEngine : NSObject
+@property (strong, nonatomic) CSKulePreferences* preferences;
 @property (strong, nonatomic) CSKuleLoginInfo* loginInfo;
 @property (strong, nonatomic) CSKuleBindInfo* bindInfo;
 @property (strong, nonatomic) CSKuleRelationshipInfo* relationships;
@@ -33,9 +34,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application;
 
 #pragma mark - Setup
-- (void)setupHttpClient;
-- (void)setupLocalData;
-
+- (void)setupEngine;
 
 #pragma mark - HTTP Request
 - (void)reqCheckPhoneNum:(NSString*)mobile

@@ -34,7 +34,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.fieldMobile.text = @"18782242007";
+    self.fieldMobile.text = gApp.engine.preferences.defaultUsername;
     
     [self showIntroViewsIfNeeded];
 }
@@ -55,13 +55,13 @@
 - (void)doAuth {
     NSString* mobile = self.fieldMobile.text;
     if (mobile.length > 0) {
+        gApp.engine.preferences.defaultUsername = mobile;
         SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
             /*
              {
              "check_phone_result" : "1102"
              }
              */
-            
             NSInteger check_phone_result = [[dataJson valueForKeyNotNull:@"check_phone_result"] integerValue];
             
             switch (check_phone_result) {
@@ -112,20 +112,11 @@
 
 #pragma mark - Private
 - (void)showIntroViewsIfNeeded {
-    NSUserDefaults* config = [NSUserDefaults standardUserDefaults];
-    [config removeObjectForKey:@"com.cocobabys.Kulebao.runTime"];
-    
-    NSNumber* runTime = [config objectForKey:@"com.cocobabys.Kulebao.runTime"];
-    NSInteger runTimeInt = [runTime integerValue];
-    if (runTimeInt == 0) {
+    if (!gApp.engine.preferences.guideShown) {
         [self showIntroViews];
-        //[self performSegueWithIdentifier:@"segue.auth" sender:nil];
     }
     else {
-        //[self performSegueWithIdentifier:@"segue.main" sender:nil];
     }
-    [config setObject:@(runTimeInt+1) forKey:@"com.cocobabys.Kulebao.runTime"];
-    [config synchronize];
 }
 
 -(void)showIntroViews {
@@ -157,7 +148,7 @@
 
 #pragma mark - EAIntroDelegate
 - (void)introDidFinish:(EAIntroView *)introView {
-    
+    gApp.engine.preferences.guideShown = YES;
 }
 
 - (void)intro:(EAIntroView *)introView pageAppeared:(EAIntroPage *)page withIndex:(NSInteger)pageIndex {

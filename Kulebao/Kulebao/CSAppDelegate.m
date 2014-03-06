@@ -20,7 +20,7 @@ CSAppDelegate* gApp = nil;
     // Override point for customization after application launch.
     gApp = self;
     _engine = [[CSKuleEngine alloc] init];
-    [_engine setupHttpClient];
+    [_engine setupEngine];
     
     // 添加Baidu Push
     [BPush setupChannel:launchOptions];

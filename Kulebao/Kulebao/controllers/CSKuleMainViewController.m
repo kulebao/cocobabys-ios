@@ -99,8 +99,8 @@
          "parent" : {
          "id" : "2_1394011814045",
          "school_id" : 93740362,
-         "name" : "鑫哥",
-         "phone" : "18782242007",
+         "name" : "飞哥",
+         "phone" : "13800138001",
          "portrait" : "/assets/images/portrait_placeholder.png",
          "gender" : 0,
          "birthday" : "1980-01-01"
@@ -121,8 +121,8 @@
          "parent" : {
          "id" : "2_1394011814045",
          "school_id" : 93740362,
-         "name" : "鑫哥",
-         "phone" : "18782242007",
+         "name" : "飞哥",
+         "phone" : "13800138001",
          "portrait" : "/assets/images/portrait_placeholder.png",
          "gender" : 0,
          "birthday" : "1980-01-01"

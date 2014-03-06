@@ -8,6 +8,7 @@
 
 #import "CSKuleLoginViewController.h"
 #import "CSAppDelegate.h"
+#import "BPush.h"
 
 @interface CSKuleLoginViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *labNotice;
@@ -34,7 +35,7 @@
 	// Do any additional setup after loading the view.
     self.labNotice.text = [NSString stringWithFormat:@"尊敬的%@用户，您好！您的手机已经激活过，请输入密码进行登录，谢谢。", self.mobile];
     
-    self.fieldPassword.text = @"82242007";
+    self.fieldPassword.text = nil;
 }
 
 - (void)didReceiveMemoryWarning

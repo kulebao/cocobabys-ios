@@ -13,6 +13,7 @@
 		0904690218C7117D00D0846E /* CSKuleChildInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0904690118C7117D00D0846E /* CSKuleChildInfo.m */; };
 		0904690518C72E5000D0846E /* CSKuleParentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0904690418C72E5000D0846E /* CSKuleParentInfo.m */; };
 		0904690818C72E6C00D0846E /* CSKuleRelationshipInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0904690718C72E6C00D0846E /* CSKuleRelationshipInfo.m */; };
+		090C9EB018C813BD00883DE0 /* CSKulePreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 090C9EAF18C813BD00883DE0 /* CSKulePreferences.m */; };
 		09219A3418C42AF800166228 /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 09219A2F18C42AF800166228 /* 37x-Checkmark.png */; };
 		09219A3518C42AF800166228 /* 37x-Checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09219A3018C42AF800166228 /* 37x-Checkmark@2x.png */; };
 		09219A3618C42AF800166228 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 09219A3218C42AF800166228 /* MBProgressHUD.m */; };
@@ -224,6 +225,8 @@
 		0904690418C72E5000D0846E /* CSKuleParentInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleParentInfo.m; sourceTree = "<group>"; };
 		0904690618C72E6C00D0846E /* CSKuleRelationshipInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleRelationshipInfo.h; sourceTree = "<group>"; };
 		0904690718C72E6C00D0846E /* CSKuleRelationshipInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleRelationshipInfo.m; sourceTree = "<group>"; };
+		090C9EAE18C813BD00883DE0 /* CSKulePreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKulePreferences.h; sourceTree = "<group>"; };
+		090C9EAF18C813BD00883DE0 /* CSKulePreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKulePreferences.m; sourceTree = "<group>"; };
 		09219A2F18C42AF800166228 /* 37x-Checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark.png"; sourceTree = "<group>"; };
 		09219A3018C42AF800166228 /* 37x-Checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark@2x.png"; sourceTree = "<group>"; };
 		09219A3118C42AF800166228 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -746,6 +749,8 @@
 				090468FC18C701B700D0846E /* CSKuleCommon.h */,
 				09219A5518C48A2100166228 /* CSKuleEngine.h */,
 				09219A5618C48A2100166228 /* CSKuleEngine.m */,
+				090C9EAE18C813BD00883DE0 /* CSKulePreferences.h */,
+				090C9EAF18C813BD00883DE0 /* CSKulePreferences.m */,
 			);
 			path = core;
 			sourceTree = "<group>";
@@ -1215,6 +1220,7 @@
 				09BA1C2818BB3F8400760182 /* AFPropertyListRequestOperation.m in Sources */,
 				09FE6AFE18C5BB5600A840BE /* CSKuleRecipeViewController.m in Sources */,
 				09219A5718C48A2100166228 /* CSKuleEngine.m in Sources */,
+				090C9EB018C813BD00883DE0 /* CSKulePreferences.m in Sources */,
 				09219A3618C42AF800166228 /* MBProgressHUD.m in Sources */,
 				09BA1C0018BB334900760182 /* OpenUDID.m in Sources */,
 				09219A5118C4878600166228 /* TPKeyboardAvoidingCollectionView.m in Sources */,

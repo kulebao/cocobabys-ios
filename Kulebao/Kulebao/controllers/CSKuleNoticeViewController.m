@@ -33,8 +33,9 @@
 	// Do any additional setup after loading the view.
     self.tableview.delegate = self;
     self.tableview.dataSource = self;
-    self.tableview.pullDelegate = self;
     self.tableview.backgroundColor = [UIColor clearColor];
+    
+    self.tableview.pullDelegate = self;
     self.tableview.pullBackgroundColor = [UIColor clearColor];
     self.tableview.pullTextColor = UIColorRGB(0xCC, 0x66, 0x33);
     self.tableview.pullArrowImage = [UIImage imageNamed:@"grayArrow.png"];
@@ -110,7 +111,6 @@
      */
     self.tableview.pullTableIsLoadingMore = NO;
 }
-
 
 #pragma mark - UI Actions
 - (IBAction)onBtnBackClicked:(id)sender {

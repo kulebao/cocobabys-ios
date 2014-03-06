@@ -36,7 +36,6 @@
         self.imgBg.image = [UIImage imageNamed:@"Default.png"];
     }
     
-    
     if (gApp.engine.preferences.loginInfo) {
         gApp.engine.loginInfo = gApp.engine.preferences.loginInfo;
         [gApp gotoMainProcess];

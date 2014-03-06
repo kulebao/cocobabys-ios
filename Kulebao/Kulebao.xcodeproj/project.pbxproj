@@ -20,6 +20,12 @@
 		090C9EBA18C83D2C00883DE0 /* msg-bg-to.png in Resources */ = {isa = PBXBuildFile; fileRef = 090C9EB618C83D2C00883DE0 /* msg-bg-to.png */; };
 		090C9EBB18C83D2C00883DE0 /* msg-bg-to@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 090C9EB718C83D2C00883DE0 /* msg-bg-to@2x.png */; };
 		090C9EC018C846B200883DE0 /* AHAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 090C9EBE18C846B200883DE0 /* AHAlertView.m */; };
+		090C9EC418C84E9F00883DE0 /* CSKuleSelectChildViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 090C9EC318C84E9F00883DE0 /* CSKuleSelectChildViewController.m */; };
+		090C9EC718C84FB000883DE0 /* CSKuleChildCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 090C9EC618C84FB000883DE0 /* CSKuleChildCell.m */; };
+		090C9EC918C84FC000883DE0 /* CSKuleChildCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 090C9EC818C84FC000883DE0 /* CSKuleChildCell.xib */; };
+		090C9ECC18C853B700883DE0 /* CSKuleAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 090C9ECB18C853B700883DE0 /* CSKuleAboutViewController.m */; };
+		090C9ECF18C8550500883DE0 /* img-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 090C9ECD18C8550500883DE0 /* img-icon.png */; };
+		090C9ED018C8550500883DE0 /* img-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 090C9ECE18C8550500883DE0 /* img-icon@2x.png */; };
 		09219A3418C42AF800166228 /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 09219A2F18C42AF800166228 /* 37x-Checkmark.png */; };
 		09219A3518C42AF800166228 /* 37x-Checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09219A3018C42AF800166228 /* 37x-Checkmark@2x.png */; };
 		09219A3618C42AF800166228 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 09219A3218C42AF800166228 /* MBProgressHUD.m */; };
@@ -242,6 +248,15 @@
 		090C9EBD18C846B200883DE0 /* AHAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHAlertView.h; sourceTree = "<group>"; };
 		090C9EBE18C846B200883DE0 /* AHAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHAlertView.m; sourceTree = "<group>"; };
 		090C9EBF18C846B200883DE0 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		090C9EC218C84E9F00883DE0 /* CSKuleSelectChildViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleSelectChildViewController.h; sourceTree = "<group>"; };
+		090C9EC318C84E9F00883DE0 /* CSKuleSelectChildViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleSelectChildViewController.m; sourceTree = "<group>"; };
+		090C9EC518C84FB000883DE0 /* CSKuleChildCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleChildCell.h; sourceTree = "<group>"; };
+		090C9EC618C84FB000883DE0 /* CSKuleChildCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleChildCell.m; sourceTree = "<group>"; };
+		090C9EC818C84FC000883DE0 /* CSKuleChildCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSKuleChildCell.xib; sourceTree = "<group>"; };
+		090C9ECA18C853B700883DE0 /* CSKuleAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleAboutViewController.h; sourceTree = "<group>"; };
+		090C9ECB18C853B700883DE0 /* CSKuleAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleAboutViewController.m; sourceTree = "<group>"; };
+		090C9ECD18C8550500883DE0 /* img-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img-icon.png"; sourceTree = "<group>"; };
+		090C9ECE18C8550500883DE0 /* img-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img-icon@2x.png"; sourceTree = "<group>"; };
 		09219A2F18C42AF800166228 /* 37x-Checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark.png"; sourceTree = "<group>"; };
 		09219A3018C42AF800166228 /* 37x-Checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark@2x.png"; sourceTree = "<group>"; };
 		09219A3118C42AF800166228 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -623,10 +638,6 @@
 		0934EFD118BF499900E30ECA /* images */ = {
 			isa = PBXGroup;
 			children = (
-				090C9EB418C83D2C00883DE0 /* msg-bg-from.png */,
-				090C9EB518C83D2C00883DE0 /* msg-bg-from@2x.png */,
-				090C9EB618C83D2C00883DE0 /* msg-bg-to.png */,
-				090C9EB718C83D2C00883DE0 /* msg-bg-to@2x.png */,
 				0934F00018BF5B0800E30ECA /* alert-bg.png */,
 				0934F00118BF5B0800E30ECA /* alert-bg@2x.png */,
 				0934F00218BF5B0800E30ECA /* app-bg-type1.png */,
@@ -696,6 +707,8 @@
 				0934EFD318BF531800E30ECA /* icon-114.png */,
 				0934EFD418BF531800E30ECA /* icon-120.png */,
 				0934EFD218BF531800E30ECA /* icon-57.png */,
+				090C9ECD18C8550500883DE0 /* img-icon.png */,
+				090C9ECE18C8550500883DE0 /* img-icon@2x.png */,
 				09A9EBBE18C08C7D00D83119 /* img-tree-type1.png */,
 				09A9EBBF18C08C7D00D83119 /* img-tree-type1@2x.png */,
 				09A9EBC018C08C7D00D83119 /* img-tree-type2.png */,
@@ -708,6 +721,10 @@
 				0934F03118BF5B0800E30ECA /* input-bg-2@2x.png */,
 				0934F03218BF5B0800E30ECA /* logo-1.png */,
 				0934F03318BF5B0800E30ECA /* logo-1@2x.png */,
+				090C9EB418C83D2C00883DE0 /* msg-bg-from.png */,
+				090C9EB518C83D2C00883DE0 /* msg-bg-from@2x.png */,
+				090C9EB618C83D2C00883DE0 /* msg-bg-to.png */,
+				090C9EB718C83D2C00883DE0 /* msg-bg-to@2x.png */,
 				0934F03418BF5B0800E30ECA /* notice-cell-bg.png */,
 				0934F03518BF5B0800E30ECA /* notice-cell-bg@2x.png */,
 				0934F03618BF5B0800E30ECA /* recipe-cell-bg.png */,
@@ -768,6 +785,10 @@
 				09FE6B0918C5C34F00A840BE /* CSKuleChatingViewController.m */,
 				09A9EBD618C0A02800D83119 /* CSKuleSettingsViewController.h */,
 				09A9EBD718C0A02800D83119 /* CSKuleSettingsViewController.m */,
+				090C9EC218C84E9F00883DE0 /* CSKuleSelectChildViewController.h */,
+				090C9EC318C84E9F00883DE0 /* CSKuleSelectChildViewController.m */,
+				090C9ECA18C853B700883DE0 /* CSKuleAboutViewController.h */,
+				090C9ECB18C853B700883DE0 /* CSKuleAboutViewController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -1015,6 +1036,9 @@
 				09FE6AF718C5B97000A840BE /* CSKuleRecipeCell.h */,
 				09FE6AF818C5B97000A840BE /* CSKuleRecipeCell.m */,
 				09FE6AFA18C5B97D00A840BE /* CSKuleRecipeCell.xib */,
+				090C9EC518C84FB000883DE0 /* CSKuleChildCell.h */,
+				090C9EC618C84FB000883DE0 /* CSKuleChildCell.m */,
+				090C9EC818C84FC000883DE0 /* CSKuleChildCell.xib */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -1111,10 +1135,12 @@
 				0934F07118BF5B0800E30ECA /* btn-type2-pressed@2x.png in Resources */,
 				09BA1C0A18BB34F400760182 /* BPushConfig.plist in Resources */,
 				0934F06B18BF5B0800E30ECA /* btn-settings@2x.png in Resources */,
+				090C9EC918C84FC000883DE0 /* CSKuleChildCell.xib in Resources */,
 				0934F06518BF5B0800E30ECA /* btn-func-7@2x.png in Resources */,
 				0934F05018BF5B0800E30ECA /* app-bg-type2.png in Resources */,
 				09A9EBB518C07F6F00D83119 /* Localizable.strings in Resources */,
 				0934F07618BF5B0800E30ECA /* Default-568h@2x.png in Resources */,
+				090C9ECF18C8550500883DE0 /* img-icon.png in Resources */,
 				0934EFF618BF559900E30ECA /* guide-2.png in Resources */,
 				0934F08E18BF5B0800E30ECA /* settings-icon-feedback.png in Resources */,
 				0934EFFB18BF559900E30ECA /* guide-3@2x.png in Resources */,
@@ -1165,6 +1191,7 @@
 				09A9EBC718C08C7D00D83119 /* app-bg-type3@2x.png in Resources */,
 				0934F05B18BF5B0800E30ECA /* btn-func-2@2x.png in Resources */,
 				09A9EBCA18C08C7D00D83119 /* img-tree-type2.png in Resources */,
+				090C9ED018C8550500883DE0 /* img-icon@2x.png in Resources */,
 				0934F06618BF5B0800E30ECA /* btn-func-8.png in Resources */,
 				0934F07918BF5B0800E30ECA /* feedback-input-bg@2x.png in Resources */,
 				0934F08518BF5B0800E30ECA /* schedule-bg@2x.png in Resources */,
@@ -1267,6 +1294,7 @@
 				09FE6B0A18C5C34F00A840BE /* CSKuleChatingViewController.m in Sources */,
 				09BA1C2318BB3F8400760182 /* AFHTTPClient.m in Sources */,
 				09BA1BA118BB2AB400760182 /* CSAppDelegate.m in Sources */,
+				090C9EC418C84E9F00883DE0 /* CSKuleSelectChildViewController.m in Sources */,
 				09BA1C2518BB3F8400760182 /* AFImageRequestOperation.m in Sources */,
 				09219A5218C4878600166228 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				09BA1C2718BB3F8400760182 /* AFNetworkActivityIndicatorManager.m in Sources */,
@@ -1275,6 +1303,7 @@
 				09BA1C2418BB3F8400760182 /* AFHTTPRequestOperation.m in Sources */,
 				09219A5318C4878600166228 /* TPKeyboardAvoidingTableView.m in Sources */,
 				0934EFC418BF3AF700E30ECA /* EAIntroView.m in Sources */,
+				090C9ECC18C853B700883DE0 /* CSKuleAboutViewController.m in Sources */,
 				09BA1BFF18BB334900760182 /* JSONKit.m in Sources */,
 				0904690218C7117D00D0846E /* CSKuleChildInfo.m in Sources */,
 				0934EFCC18BF3D0600E30ECA /* SMPageControl.m in Sources */,
@@ -1295,6 +1324,7 @@
 				09219A5A18C4999C00166228 /* CSKuleLoginInfo.m in Sources */,
 				09C1C76018BD92990040B06D /* CSHttpClient.m in Sources */,
 				09A9EBD218C090E200D83119 /* CSKuleAuthViewController.m in Sources */,
+				090C9EC718C84FB000883DE0 /* CSKuleChildCell.m in Sources */,
 				09BA1C2618BB3F8400760182 /* AFJSONRequestOperation.m in Sources */,
 				0904690818C72E6C00D0846E /* CSKuleRelationshipInfo.m in Sources */,
 				09FE6B0118C5BCFD00A840BE /* CSKuleHomeworkViewController.m in Sources */,
@@ -1450,7 +1480,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Kulebao/Kulebao-Prefix.pch";
 				INFOPLIST_FILE = "Kulebao/Kulebao-Info.plist";

@@ -140,7 +140,7 @@
         CSLog(@"failure:%@", error);
     };
     
-    [gApp waitingAlert:@"更新小朋友信息"];
+    [gApp waitingAlert:@"获取宝宝信息"];
     [gApp.engine reqGetFamilyRelationship:gApp.engine.loginInfo.accountName
                            inKindergarten:gApp.engine.loginInfo.schoolId
                                   success:sucessHandler

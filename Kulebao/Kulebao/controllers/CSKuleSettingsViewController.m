@@ -58,9 +58,11 @@
 }
 
 - (IBAction)onBtnSelectChildClicked:(id)sender {
+    [self performSegueWithIdentifier:@"segue.selectChild" sender:nil];
 }
 
 - (IBAction)onBtnAboutUsClicked:(id)sender {
+     [self performSegueWithIdentifier:@"segue.about" sender:nil];
 }
 
 - (IBAction)onBtnLogoutClicked:(id)sender {

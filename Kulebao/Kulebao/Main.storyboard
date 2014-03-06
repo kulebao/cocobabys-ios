@@ -298,6 +298,7 @@
                         <outlet property="labChildAge" destination="PrA-3R-D0Z" id="LX8-XY-Wcp"/>
                         <outlet property="labClassName" destination="sZI-PR-dYC" id="YCV-pU-ziZ"/>
                         <outlet property="labSchoolName" destination="xxK-7w-GpT" id="d95-9t-ni9"/>
+                        <outlet property="viewChildContainer" destination="UZY-LS-vXO" id="JtQ-bF-dcL"/>
                         <segue destination="Ot5-TZ-qvn" kind="push" identifier="segue.settings" id="LKg-r7-Frc"/>
                         <segue destination="hSh-cH-xBP" kind="push" identifier="segue.notice" id="cnu-L4-AqF"/>
                         <segue destination="p7o-xu-qXK" kind="push" identifier="segue.recipe" id="fjS-GT-9cA"/>

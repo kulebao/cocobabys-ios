@@ -10,12 +10,16 @@
 #import "CSAppDelegate.h"
 #import "UIImageView+AFNetworking.h"
 #import <QuartzCore/QuartzCore.h>
+#import "KxMenu.h"
+#import "AHAlertView.h"
 
 @interface CSKuleMainViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *labSchoolName;
 @property (weak, nonatomic) IBOutlet UILabel *labClassName;
 @property (weak, nonatomic) IBOutlet UILabel *labChildAge;
 @property (weak, nonatomic) IBOutlet UIImageView *imgChildPortrait;
+@property (weak, nonatomic) IBOutlet UIView *viewChildContainer;
+
 - (IBAction)onBtnShowChildMenuListClicked:(id)sender;
 
 - (IBAction)onBtnSettingsClicked:(id)sender;
@@ -86,8 +90,55 @@
     }
 }
 
+- (void)doChangeChildName {
+    NSString *title = @"设置宝宝昵称";
+	NSString *message = @"";
+	
+	AHAlertView *alert = [[AHAlertView alloc] initWithTitle:title message:message];
+    alert.alertViewStyle = AHAlertViewStylePlainTextInput;
+    
+    UITextField* field = [alert textFieldAtIndex:0];
+    field.placeholder = @"请输入宝宝的昵称";
+    field.text = gApp.engine.currentRelationship.child.name;
+    field.keyboardAppearance = UIKeyboardAppearanceDefault;
+    
+    [alert setCancelButtonTitle:@"取消" block:^{
+
+	}];
+    
+	[alert addButtonWithTitle:@"确定" block:^{
+       
+	}];
+    
+    [alert show];
+}
+
 #pragma mark - Segues
 - (IBAction)onBtnShowChildMenuListClicked:(id)sender {
+    KxMenuItem* item1 = [KxMenuItem menuItem:@"设置宝贝昵称"
+                                       image:nil
+                                      target:self
+                                      action:@selector(doChangeChildName)];
+    
+    KxMenuItem* item2 = [KxMenuItem menuItem:@"设置宝贝生日"
+                                       image:nil
+                                      target:nil
+                                      action:nil];
+    
+    KxMenuItem* item3 = [KxMenuItem menuItem:@"从相机拍摄头像"
+                                       image:nil
+                                      target:nil
+                                      action:nil];
+    
+    KxMenuItem* item4 = [KxMenuItem menuItem:@"从相册选择头像"
+                                       image:nil
+                                      target:nil
+                                      action:nil];
+    
+    [KxMenu setTintColor:UIColorRGB(0xCC, 0x66, 0x33)];
+    [KxMenu showMenuInView:self.view
+                  fromRect:self.viewChildContainer.frame
+                 menuItems:@[item1, item2, item3, item4]];
 }
 
 - (IBAction)onBtnSettingsClicked:(id)sender {

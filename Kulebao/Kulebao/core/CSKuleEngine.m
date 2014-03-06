@@ -9,6 +9,7 @@
 #import "CSKuleEngine.h"
 #import "CSAppDelegate.h"
 #import "BPush.h"
+#import "AHAlertView.h"
 
 @interface CSKuleEngine()
 
@@ -75,6 +76,7 @@
 - (void)setupEngine {
     [self setupHttpClient];
     [self setupPreferences];
+    [self setupAppearance];
 }
 
 - (void)setupPreferences {
@@ -86,6 +88,24 @@
         NSURL* baseUrl = [NSURL URLWithString:kServerHost];
         _httpClient = [CSHttpClient httpClientWithHost:baseUrl];
     }
+}
+
+- (void)setupAppearance {
+    UIImage* imgAlertBg = [UIImage imageNamed:@"alert-bg.png"];
+    UIImage* imgBtnBg = [UIImage imageNamed:@"btn-type1.png"];
+    UIImage* imgBtnPressedBg = [UIImage imageNamed:@"btn-type1-pressed.png"];
+    
+    imgAlertBg = [imgAlertBg resizableImageWithCapInsets:UIEdgeInsetsMake(100, 50, 10, 50)];
+    
+    id alertAppearance = [AHAlertView appearance];
+    [alertAppearance setBackgroundImage:imgAlertBg];
+    [alertAppearance setTitleTextAttributes:@{UITextAttributeTextColor:[UIColor blackColor],}];
+    [alertAppearance setMessageTextAttributes:@{UITextAttributeTextColor:[UIColor blackColor],}];
+    [alertAppearance setButtonBackgroundImage:imgBtnBg forState:UIControlStateNormal];
+    [alertAppearance setCancelButtonBackgroundImage:imgBtnBg forState:UIControlStateNormal];
+    [alertAppearance setButtonBackgroundImage:imgBtnPressedBg forState:UIControlStateHighlighted];
+    [alertAppearance setCancelButtonBackgroundImage:imgBtnPressedBg forState:UIControlStateHighlighted];
+    [alertAppearance setContentInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
 }
 
 #pragma mark - URL

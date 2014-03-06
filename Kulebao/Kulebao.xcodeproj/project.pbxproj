@@ -26,6 +26,7 @@
 		090C9ECC18C853B700883DE0 /* CSKuleAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 090C9ECB18C853B700883DE0 /* CSKuleAboutViewController.m */; };
 		090C9ECF18C8550500883DE0 /* img-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 090C9ECD18C8550500883DE0 /* img-icon.png */; };
 		090C9ED018C8550500883DE0 /* img-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 090C9ECE18C8550500883DE0 /* img-icon@2x.png */; };
+		090C9EDC18C87AEA00883DE0 /* KxMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 090C9EDA18C87AEA00883DE0 /* KxMenu.m */; };
 		09219A3418C42AF800166228 /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 09219A2F18C42AF800166228 /* 37x-Checkmark.png */; };
 		09219A3518C42AF800166228 /* 37x-Checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09219A3018C42AF800166228 /* 37x-Checkmark@2x.png */; };
 		09219A3618C42AF800166228 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 09219A3218C42AF800166228 /* MBProgressHUD.m */; };
@@ -257,6 +258,9 @@
 		090C9ECB18C853B700883DE0 /* CSKuleAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleAboutViewController.m; sourceTree = "<group>"; };
 		090C9ECD18C8550500883DE0 /* img-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img-icon.png"; sourceTree = "<group>"; };
 		090C9ECE18C8550500883DE0 /* img-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img-icon@2x.png"; sourceTree = "<group>"; };
+		090C9ED918C87AEA00883DE0 /* KxMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KxMenu.h; sourceTree = "<group>"; };
+		090C9EDA18C87AEA00883DE0 /* KxMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KxMenu.m; sourceTree = "<group>"; };
+		090C9EDB18C87AEA00883DE0 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		09219A2F18C42AF800166228 /* 37x-Checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark.png"; sourceTree = "<group>"; };
 		09219A3018C42AF800166228 /* 37x-Checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark@2x.png"; sourceTree = "<group>"; };
 		09219A3118C42AF800166228 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -553,6 +557,16 @@
 				090C9EBF18C846B200883DE0 /* README.md */,
 			);
 			path = AHAlertView;
+			sourceTree = "<group>";
+		};
+		090C9ED818C87AEA00883DE0 /* KxMenu */ = {
+			isa = PBXGroup;
+			children = (
+				090C9ED918C87AEA00883DE0 /* KxMenu.h */,
+				090C9EDA18C87AEA00883DE0 /* KxMenu.m */,
+				090C9EDB18C87AEA00883DE0 /* README.md */,
+			);
+			path = KxMenu;
 			sourceTree = "<group>";
 		};
 		09219A2E18C42AF800166228 /* MBProgressHUD */ = {
@@ -894,14 +908,15 @@
 		09BA1BC918BB2FC700760182 /* Venders */ = {
 			isa = PBXGroup;
 			children = (
+				090C9ED818C87AEA00883DE0 /* KxMenu */,
+				09BA1C0F18BB3F8400760182 /* AFNetworking */,
 				090C9EBC18C846B200883DE0 /* AHAlertView */,
-				09219A4418C4878600166228 /* TPKeyboardAvoiding */,
+				0934EFBE18BF3AF700E30ECA /* EAIntroView */,
+				09BA1BCA18BB2FC700760182 /* EGOTableViewPullRefresh */,
+				09BA1BED18BB334900760182 /* libBPush */,
 				09219A2E18C42AF800166228 /* MBProgressHUD */,
 				0934EFC518BF3D0600E30ECA /* SMPageControl */,
-				0934EFBE18BF3AF700E30ECA /* EAIntroView */,
-				09BA1C0F18BB3F8400760182 /* AFNetworking */,
-				09BA1BED18BB334900760182 /* libBPush */,
-				09BA1BCA18BB2FC700760182 /* EGOTableViewPullRefresh */,
+				09219A4418C4878600166228 /* TPKeyboardAvoiding */,
 			);
 			path = Venders;
 			sourceTree = "<group>";
@@ -1322,6 +1337,7 @@
 				09A9EBBB18C0830900D83119 /* CSKuleLoginViewController.m in Sources */,
 				09BA1C0118BB334900760182 /* Reachability.m in Sources */,
 				09219A5A18C4999C00166228 /* CSKuleLoginInfo.m in Sources */,
+				090C9EDC18C87AEA00883DE0 /* KxMenu.m in Sources */,
 				09C1C76018BD92990040B06D /* CSHttpClient.m in Sources */,
 				09A9EBD218C090E200D83119 /* CSKuleAuthViewController.m in Sources */,
 				090C9EC718C84FB000883DE0 /* CSKuleChildCell.m in Sources */,
@@ -1462,7 +1478,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Xinus Wang (46XA3MUP9B)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Kulebao/Kulebao-Prefix.pch";
 				INFOPLIST_FILE = "Kulebao/Kulebao-Info.plist";
@@ -1472,6 +1488,7 @@
 					"/Users/xinus/xin.github/Kulebao-iPhone/Kulebao/Venders/libBPush",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "8A1A3F27-6F78-4816-BC14-D7ED698C71C1";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1480,7 +1497,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Xinus Wang (46XA3MUP9B)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Kulebao/Kulebao-Prefix.pch";
 				INFOPLIST_FILE = "Kulebao/Kulebao-Info.plist";
@@ -1490,6 +1507,7 @@
 					"/Users/xinus/xin.github/Kulebao-iPhone/Kulebao/Venders/libBPush",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "8A1A3F27-6F78-4816-BC14-D7ED698C71C1";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

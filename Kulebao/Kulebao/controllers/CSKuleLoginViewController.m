@@ -55,34 +55,13 @@
     NSString* pswd = self.fieldPassword.text;
     if (pswd.length > 0 && self.mobile.length > 0) {
         SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
-            /*
-             {
-             "error_code" : 0,
-             "access_token" : "1390314328393",
-             "username" : "袋鼠",
-             "account_name" : "13408654680",
-             "school_name" : "天之骄子幼儿园"
-             }
-             */
-            
-            NSInteger error_code = [[dataJson valueForKeyNotNull:@"error_code"] integerValue];
-            
-            if (error_code == 0) {
-                NSString* access_token = [dataJson valueForKeyNotNull:@"access_token"];
-                NSString* account_name = [dataJson valueForKeyNotNull:@"account_name"];
-                NSString* school_name = [dataJson valueForKeyNotNull:@"school_name"];
-                NSString* username = [dataJson valueForKeyNotNull:@"username"];
-                
-                CSKuleLoginInfo* loginInfo = [CSKuleLoginInfo new];
-                loginInfo.accessToken = access_token;
-                loginInfo.accountName = account_name;
-                loginInfo.schoolName = school_name;
-                loginInfo.username = username;
-                
+            CSKuleLoginInfo* loginInfo = [CSKuleInterpreter decodeLoginInfo:dataJson];
+            if (loginInfo.errorCode == 0) {
                 gApp.engine.loginInfo = loginInfo;
-                
+                gApp.engine.preferences.loginInfo = loginInfo;
                 [self performSelector:@selector(doReceiveBindInfo)
-                           withObject:nil afterDelay:0];
+                           withObject:nil
+                           afterDelay:0];
             }
             else {
                 [gApp alert:@"密码错误，请重新输入,谢谢！" withTitle:@"提示"];
@@ -106,40 +85,20 @@
 
 - (void)doReceiveBindInfo {
     SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
-        /*
-         {
-         "error_code" : 0,
-         "access_token" : "1390314328393",
-         "username" : "袋鼠",
-         "account_name" : "13408654680",
-         "school_id" : 93740362,
-         "school_name" : "天之骄子幼儿园"
-         }
-         */
-        NSInteger error_code = [[dataJson valueForKeyNotNull:@"error_code"] integerValue];
+
+        CSKuleBindInfo* bindInfo = [CSKuleInterpreter decodeBindInfo:dataJson];
         
-        if (error_code == 0) {
-            NSString* access_token = [dataJson valueForKeyNotNull:@"access_token"];
-            NSString* username = [dataJson valueForKeyNotNull:@"username"];
-            NSString* account_name = [dataJson valueForKeyNotNull:@"account_name"];
-            NSInteger school_id = [[dataJson valueForKeyNotNull:@"school_id"] integerValue];
-            NSString* school_name = [dataJson valueForKeyNotNull:@"school_name"];
-            
-            CSKuleBindInfo* bindInfo = [CSKuleBindInfo new];
-            bindInfo.accessToken = access_token;
-            bindInfo.accountName = account_name;
-            bindInfo.schoolName = school_name;
-            bindInfo.username = username;
-            bindInfo.schoolId = school_id;
-            
+        if (bindInfo.errorCode == 0) {
             gApp.engine.bindInfo = bindInfo;
+            gApp.engine.loginInfo.schoolId = bindInfo.schoolId;
+            gApp.engine.preferences.loginInfo = gApp.engine.loginInfo;
             
             [gApp gotoMainProcess];
             //[gApp alert:@"登录成功"];
             [gApp hideAlert];
         }
         else {
-            CSLog(@"doReceiveBindInfo error_code=%d", error_code);
+            CSLog(@"doReceiveBindInfo error_code=%d", bindInfo.errorCode);
             [gApp hideAlert];
         }
     };

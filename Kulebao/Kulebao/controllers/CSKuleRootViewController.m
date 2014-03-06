@@ -37,11 +37,12 @@
     }
     
     
-    if (gApp.engine.preferences.loginUsername.length == 0) {
-        [gApp gotoLoginProcess];
+    if (gApp.engine.preferences.loginInfo) {
+        gApp.engine.loginInfo = gApp.engine.preferences.loginInfo;
+        [gApp gotoMainProcess];
     }
     else {
-        [gApp gotoMainProcess];
+        [gApp gotoLoginProcess];
     }
 }
 

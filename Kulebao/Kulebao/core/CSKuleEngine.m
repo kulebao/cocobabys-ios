@@ -22,7 +22,7 @@
 @synthesize loginInfo = _loginInfo;
 @synthesize bindInfo = _bindInfo;
 @synthesize relationships = _relationships;
-@synthesize currentChild = _currentChild;
+@synthesize currentRelationship = _currentRelationship;
 
 #pragma mark - application
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -86,6 +86,22 @@
         NSURL* baseUrl = [NSURL URLWithString:kServerHost];
         _httpClient = [CSHttpClient httpClientWithHost:baseUrl];
     }
+}
+
+#pragma mark - URL
+- (NSURL*)urlFromPath:(NSString*)path {
+    NSURL* url = nil;
+    if (path.length > 0) {
+        if ([path hasPrefix:@"http"]) {
+            url = [NSURL URLWithString:path];
+        }
+        else {
+            url = [NSURL URLWithString:path
+                         relativeToURL:[NSURL URLWithString:kServerHost]];
+        }
+    }
+    
+    return url;
 }
 
 #pragma mark - HTTP Request

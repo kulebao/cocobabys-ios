@@ -15,13 +15,15 @@
 @synthesize schoolName = _schoolName;
 @synthesize username = _username;
 @synthesize schoolId = _schoolId;
+@synthesize errorCode = _errorCode;
 
 - (NSString*)description {
     NSDictionary* meta = @{@"accessToken": _accessToken,
                            @"accountName": _accountName,
                            @"schoolName": _schoolName,
                            @"username": _username,
-                           @"schoolId": @(_schoolId)};
+                           @"schoolId": @(_schoolId),
+                           @"errorCode": @(_errorCode)};
     
     NSString* desc = [NSString stringWithFormat:@"%@", meta];
     return desc;

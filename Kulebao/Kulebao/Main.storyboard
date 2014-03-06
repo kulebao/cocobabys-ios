@@ -65,19 +65,43 @@
                                 <rect key="frame" x="0.0" y="250" width="320" height="230"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar-bg.png" id="0ru-rP-DZe">
+                            <view contentMode="scaleToFill" id="UZY-LS-vXO" userLabel="View - Photo">
                                 <rect key="frame" x="185" y="52" width="115" height="115"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="dKp-7o-31t">
+                                        <rect key="frame" x="4" y="4" width="107" height="107"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar-bg.png" id="0ru-rP-DZe">
+                                        <rect key="frame" x="0.0" y="0.0" width="115" height="115"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="yR2-GX-Mvf">
+                                        <rect key="frame" x="0.0" y="0.0" width="115" height="115"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <state key="normal">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onBtnShowChildMenuListClicked:" destination="nb4-8s-InE" eventType="touchUpInside" id="La5-g1-cLd"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btn-type1.png" id="N0i-4I-gyc">
+                                <rect key="frame" x="179" y="175" width="130" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="5qx-Fi-vTn">
-                                <rect key="frame" x="177" y="175" width="130" height="26"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" backgroundImage="btn-type1.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted" backgroundImage="btn-type1-pressed.png"/>
-                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2岁零6个月" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PrA-3R-D0Z">
+                                <rect key="frame" x="179" y="177" width="130" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view contentMode="scaleToFill" id="Bg4-Db-29J" userLabel="Toolbar">
                                 <rect key="frame" x="0.0" y="436" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -270,6 +294,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="7M2-K4-LE7"/>
                     <connections>
+                        <outlet property="imgChildPortrait" destination="dKp-7o-31t" id="ffn-Mu-JgF"/>
+                        <outlet property="labChildAge" destination="PrA-3R-D0Z" id="LX8-XY-Wcp"/>
+                        <outlet property="labClassName" destination="sZI-PR-dYC" id="YCV-pU-ziZ"/>
+                        <outlet property="labSchoolName" destination="xxK-7w-GpT" id="d95-9t-ni9"/>
                         <segue destination="Ot5-TZ-qvn" kind="push" identifier="segue.settings" id="LKg-r7-Frc"/>
                         <segue destination="hSh-cH-xBP" kind="push" identifier="segue.notice" id="cnu-L4-AqF"/>
                         <segue destination="p7o-xu-qXK" kind="push" identifier="segue.recipe" id="fjS-GT-9cA"/>

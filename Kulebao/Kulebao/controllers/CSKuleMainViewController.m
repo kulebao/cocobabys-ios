@@ -8,8 +8,15 @@
 
 #import "CSKuleMainViewController.h"
 #import "CSAppDelegate.h"
+#import "UIImageView+AFNetworking.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface CSKuleMainViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *labSchoolName;
+@property (weak, nonatomic) IBOutlet UILabel *labClassName;
+@property (weak, nonatomic) IBOutlet UILabel *labChildAge;
+@property (weak, nonatomic) IBOutlet UIImageView *imgChildPortrait;
+- (IBAction)onBtnShowChildMenuListClicked:(id)sender;
 
 - (IBAction)onBtnSettingsClicked:(id)sender;
 - (IBAction)onBtnNoticeClicked:(id)sender;
@@ -36,9 +43,14 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    self.labClassName.text = nil;
+    self.labSchoolName.text = gApp.engine.loginInfo.schoolName;
+    self.labChildAge.text = nil;
+    self.imgChildPortrait.layer.cornerRadius = 6.0;
+    self.imgChildPortrait.clipsToBounds = YES;
     
     [gApp.engine addObserver:self
-                  forKeyPath:@"currentChild"
+                  forKeyPath:@"currentRelationship"
                      options:NSKeyValueObservingOptionNew
                      context:nil];
     
@@ -53,16 +65,31 @@
 }
 
 - (void)dealloc {
-    [gApp.engine removeObserver:self forKeyPath:@"currentChild"];
+    [gApp.engine removeObserver:self forKeyPath:@"currentRelationship"];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if ((object == gApp.engine) && [keyPath isEqualToString:@"currentChild"]) {
-        CSLog(@"currentChild changed.");
+    if ((object == gApp.engine) && [keyPath isEqualToString:@"currentRelationship"]) {
+        CSLog(@"currentRelationship changed.");
+        [self updateUI];
+    }
+}
+
+#pragma mark - UI
+- (void)updateUI {
+    CSKuleChildInfo* childInfo = gApp.engine.currentRelationship.child;
+    if (childInfo) {
+        [self.imgChildPortrait setImageWithURL:[gApp.engine urlFromPath:childInfo.portrait]];
+        self.labClassName.text = childInfo.className;
+        self.labSchoolName.text = gApp.engine.loginInfo.schoolName;
+        self.labChildAge.text = childInfo.name;
     }
 }
 
 #pragma mark - Segues
+- (IBAction)onBtnShowChildMenuListClicked:(id)sender {
+}
+
 - (IBAction)onBtnSettingsClicked:(id)sender {
     [self performSegueWithIdentifier:@"segue.settings" sender:nil];
 }
@@ -94,57 +121,17 @@
 #pragma mark - Private
 - (void)getRelationshipInfos {
     SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
-        /*
-         [ {
-         "parent" : {
-         "id" : "2_1394011814045",
-         "school_id" : 93740362,
-         "name" : "飞哥",
-         "phone" : "13800138001",
-         "portrait" : "/assets/images/portrait_placeholder.png",
-         "gender" : 0,
-         "birthday" : "1980-01-01"
-         },
-         "child" : {
-         "child_id" : "1_1393768956259",
-         "name" : "袋鼠小朋友",
-         "nick" : "袋鼠小朋",
-         "birthday" : "2009-01-01",
-         "gender" : 1,
-         "portrait" : "/assets/images/portrait_placeholder.png",
-         "class_id" : 777888,
-         "className" : "苹果班"
-         },
-         "card" : "2133123232",
-         "relationship" : "爸爸"
-         }, {
-         "parent" : {
-         "id" : "2_1394011814045",
-         "school_id" : 93740362,
-         "name" : "飞哥",
-         "phone" : "13800138001",
-         "portrait" : "/assets/images/portrait_placeholder.png",
-         "gender" : 0,
-         "birthday" : "1980-01-01"
-         },
-         "child" : {
-         "child_id" : "1_1390359054366",
-         "name" : "烦烦烦",
-         "nick" : "烦烦烦",
-         "birthday" : "2009-01-01",
-         "gender" : 1,
-         "portrait" : "http://cocobabys.oss.aliyuncs.com/child_photo/93740362/1_1390359054366/1_1390359054366.jpg",
-         "class_id" : 777999,
-         "className" : "香蕉班"
-         },
-         "card" : "3333222323",
-         "relationship" : "奶奶"
-         } ]
-         */
+        NSMutableArray* relationships = [NSMutableArray array];
         
-        CSLog(@"%@", dataJson);
+        for (id relationshipJson in dataJson) {
+            CSKuleRelationshipInfo* relationshipInfo = [CSKuleInterpreter decodeRelationshipInfo:relationshipJson];
+            [relationships addObject:relationshipInfo];
+        }
         
-        gApp.engine.currentChild = [CSKuleChildInfo new];
+        gApp.engine.relationships = [NSArray arrayWithArray:relationships];
+        
+        CSKuleRelationshipInfo* relationshipInfo = [gApp.engine.relationships firstObject];
+        gApp.engine.currentRelationship = relationshipInfo;
         
         [gApp hideAlert];
     };
@@ -154,8 +141,8 @@
     };
     
     [gApp waitingAlert:@"更新小朋友信息"];
-    [gApp.engine reqGetFamilyRelationship:gApp.engine.bindInfo.accountName
-                           inKindergarten:gApp.engine.bindInfo.schoolId
+    [gApp.engine reqGetFamilyRelationship:gApp.engine.loginInfo.accountName
+                           inKindergarten:gApp.engine.loginInfo.schoolId
                                   success:sucessHandler
                                   failure:failureHandler];
 }

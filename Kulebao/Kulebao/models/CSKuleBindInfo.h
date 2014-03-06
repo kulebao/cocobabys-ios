@@ -14,5 +14,6 @@
 @property (nonatomic, strong) NSString* schoolName;
 @property (nonatomic, strong) NSString* username;
 @property (nonatomic, assign) NSInteger schoolId;
+@property (nonatomic, assign) NSInteger errorCode;
 
 @end

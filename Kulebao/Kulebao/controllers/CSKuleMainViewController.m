@@ -79,10 +79,10 @@
 - (void)updateUI {
     CSKuleChildInfo* childInfo = gApp.engine.currentRelationship.child;
     if (childInfo) {
-        [self.imgChildPortrait setImageWithURL:[gApp.engine urlFromPath:childInfo.portrait]];
         self.labClassName.text = childInfo.className;
         self.labSchoolName.text = gApp.engine.loginInfo.schoolName;
         self.labChildAge.text = childInfo.name;
+        [self.imgChildPortrait setImageWithURL:[gApp.engine urlFromPath:childInfo.portrait]];
     }
 }
 

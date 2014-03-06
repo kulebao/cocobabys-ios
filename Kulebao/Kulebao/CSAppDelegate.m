@@ -90,7 +90,7 @@ CSAppDelegate* gApp = nil;
         int returnCode = [[res valueForKey:BPushRequestErrorCodeKey] intValue];
         
         if (returnCode == BPushErrorCode_Success) {
-
+            CSLog(@"BPushErrorCode_Success");
         }
     } else if ([BPushRequestMethod_Unbind isEqualToString:method]) {
         int returnCode = [[res valueForKey:BPushRequestErrorCodeKey] intValue];

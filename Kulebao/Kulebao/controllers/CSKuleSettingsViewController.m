@@ -7,9 +7,17 @@
 //
 
 #import "CSKuleSettingsViewController.h"
+#import "AHAlertView.h"
+#import "CSAppDelegate.h"
 
 @interface CSKuleSettingsViewController ()
 - (IBAction)onBtnBackClicked:(id)sender;
+- (IBAction)onBtnCheckUpdatesClicked:(id)sender;
+- (IBAction)onBtnFeedbackClicked:(id)sender;
+- (IBAction)onBtnChangePswdClicked:(id)sender;
+- (IBAction)onBtnSelectChildClicked:(id)sender;
+- (IBAction)onBtnAboutUsClicked:(id)sender;
+- (IBAction)onBtnLogoutClicked:(id)sender;
 
 @end
 
@@ -38,6 +46,47 @@
 
 - (IBAction)onBtnBackClicked:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)onBtnCheckUpdatesClicked:(id)sender {
+}
+
+- (IBAction)onBtnFeedbackClicked:(id)sender {
+}
+
+- (IBAction)onBtnChangePswdClicked:(id)sender {
+}
+
+- (IBAction)onBtnSelectChildClicked:(id)sender {
+}
+
+- (IBAction)onBtnAboutUsClicked:(id)sender {
+}
+
+- (IBAction)onBtnLogoutClicked:(id)sender {
+    NSString *title = @"提示";
+	NSString *message = @"确定要退出登录？退出后无法接收任何消息！";
+	
+	AHAlertView *alert = [[AHAlertView alloc] initWithTitle:title message:message];
+    
+    [alert setCancelButtonTitle:@"取消" block:^{
+	}];
+    
+	[alert addButtonWithTitle:@"确定" block:^{
+        [self performSelector:@selector(doLogout) withObject:nil];
+	}];
+    
+	[alert show];
+}
+
+#pragma mark - Private
+- (void)doLogout {
+    gApp.engine.loginInfo = nil;
+    gApp.engine.bindInfo = nil;
+    gApp.engine.relationships = nil;
+    gApp.engine.currentRelationship = nil;
+    
+    [gApp gotoLoginProcess];
 }
 
 @end

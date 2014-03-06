@@ -95,7 +95,7 @@
                                 <rect key="frame" x="179" y="175" width="130" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2岁零6个月" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PrA-3R-D0Z">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="松鼠宝宝" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PrA-3R-D0Z">
                                 <rect key="frame" x="179" y="177" width="130" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -625,6 +625,9 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted" backgroundImage="btn-type1-pressed.png"/>
+                                <connections>
+                                    <action selector="onBtnCheckUpdatesClicked:" destination="Ot5-TZ-qvn" eventType="touchUpInside" id="Mf5-uN-RSW"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="qCV-bB-WDo">
                                 <rect key="frame" x="61" y="125" width="199" height="38"/>
@@ -634,6 +637,9 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted" backgroundImage="btn-type1-pressed.png"/>
+                                <connections>
+                                    <action selector="onBtnFeedbackClicked:" destination="Ot5-TZ-qvn" eventType="touchUpInside" id="BUh-w0-yje"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="7av-24-GNw">
                                 <rect key="frame" x="61" y="171" width="199" height="38"/>
@@ -643,6 +649,9 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted" backgroundImage="btn-type1-pressed.png"/>
+                                <connections>
+                                    <action selector="onBtnChangePswdClicked:" destination="Ot5-TZ-qvn" eventType="touchUpInside" id="hg2-5s-ctI"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="afG-xz-IJY">
                                 <rect key="frame" x="61" y="217" width="199" height="38"/>
@@ -652,6 +661,9 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted" backgroundImage="btn-type1-pressed.png"/>
+                                <connections>
+                                    <action selector="onBtnSelectChildClicked:" destination="Ot5-TZ-qvn" eventType="touchUpInside" id="rXc-3H-ocB"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="44e-Am-3iE">
                                 <rect key="frame" x="61" y="263" width="199" height="38"/>
@@ -661,6 +673,9 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted" backgroundImage="btn-type1-pressed.png"/>
+                                <connections>
+                                    <action selector="onBtnAboutUsClicked:" destination="Ot5-TZ-qvn" eventType="touchUpInside" id="FJI-x9-nNM"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0mg-N8-nkY">
                                 <rect key="frame" x="61" y="309" width="199" height="38"/>
@@ -670,6 +685,9 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted" backgroundImage="btn-type1-pressed.png"/>
+                                <connections>
+                                    <action selector="onBtnLogoutClicked:" destination="Ot5-TZ-qvn" eventType="touchUpInside" id="RY1-ai-3mS"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -1127,8 +1145,75 @@
             </objects>
             <point key="canvasLocation" x="174" y="3341"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="goE-CN-vKL">
+            <objects>
+                <viewController id="kzl-MN-4X1" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Kyp-g7-6Tm">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="LlV-0W-IWP">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <view contentMode="scaleToFill" id="3mb-cP-bdU" userLabel="View - Alert">
+                                <rect key="frame" x="43" y="188" width="234" height="104"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="alert-bg.png" id="Gv2-oi-sCM">
+                                        <rect key="frame" x="0.0" y="0.0" width="234" height="104"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="QCG-iH-YlX">
+                                        <rect key="frame" x="128" y="75" width="100" height="24"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <state key="normal" title="取消" backgroundImage="btn-type1.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted" backgroundImage="btn-type1-pressed.png"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="Ch3-M5-oBO">
+                                        <rect key="frame" x="5" y="75" width="100" height="24"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <state key="normal" title="确认" backgroundImage="btn-type1.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted" backgroundImage="btn-type1-pressed.png"/>
+                                    </button>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="提示" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="B9i-ps-S7A">
+                                        <rect key="frame" x="31" y="6" width="189" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="确定要退出登录？确定要退出登录？确定要退出登录？" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vfd-0u-Ozs">
+                                        <rect key="frame" x="5" y="32" width="224" height="42"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="0.5" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Y6X-5y-tWC"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="orD-3g-DmG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="970" y="4554"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="alert-bg.png" width="234" height="104"/>
         <image name="app-bg-type3.png" width="320" height="568"/>
         <image name="avatar-bg.png" width="115" height="115"/>
         <image name="btn-back-pressed.png" width="52" height="30"/>

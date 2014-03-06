@@ -19,6 +19,7 @@
 		090C9EB918C83D2C00883DE0 /* msg-bg-from@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 090C9EB518C83D2C00883DE0 /* msg-bg-from@2x.png */; };
 		090C9EBA18C83D2C00883DE0 /* msg-bg-to.png in Resources */ = {isa = PBXBuildFile; fileRef = 090C9EB618C83D2C00883DE0 /* msg-bg-to.png */; };
 		090C9EBB18C83D2C00883DE0 /* msg-bg-to@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 090C9EB718C83D2C00883DE0 /* msg-bg-to@2x.png */; };
+		090C9EC018C846B200883DE0 /* AHAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 090C9EBE18C846B200883DE0 /* AHAlertView.m */; };
 		09219A3418C42AF800166228 /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 09219A2F18C42AF800166228 /* 37x-Checkmark.png */; };
 		09219A3518C42AF800166228 /* 37x-Checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09219A3018C42AF800166228 /* 37x-Checkmark@2x.png */; };
 		09219A3618C42AF800166228 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 09219A3218C42AF800166228 /* MBProgressHUD.m */; };
@@ -238,6 +239,9 @@
 		090C9EB518C83D2C00883DE0 /* msg-bg-from@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "msg-bg-from@2x.png"; sourceTree = "<group>"; };
 		090C9EB618C83D2C00883DE0 /* msg-bg-to.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "msg-bg-to.png"; sourceTree = "<group>"; };
 		090C9EB718C83D2C00883DE0 /* msg-bg-to@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "msg-bg-to@2x.png"; sourceTree = "<group>"; };
+		090C9EBD18C846B200883DE0 /* AHAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHAlertView.h; sourceTree = "<group>"; };
+		090C9EBE18C846B200883DE0 /* AHAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHAlertView.m; sourceTree = "<group>"; };
+		090C9EBF18C846B200883DE0 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		09219A2F18C42AF800166228 /* 37x-Checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark.png"; sourceTree = "<group>"; };
 		09219A3018C42AF800166228 /* 37x-Checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark@2x.png"; sourceTree = "<group>"; };
 		09219A3118C42AF800166228 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -526,6 +530,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		090C9EBC18C846B200883DE0 /* AHAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				090C9EBD18C846B200883DE0 /* AHAlertView.h */,
+				090C9EBE18C846B200883DE0 /* AHAlertView.m */,
+				090C9EBF18C846B200883DE0 /* README.md */,
+			);
+			path = AHAlertView;
+			sourceTree = "<group>";
+		};
 		09219A2E18C42AF800166228 /* MBProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
@@ -740,8 +754,6 @@
 				09A9EBBA18C0830900D83119 /* CSKuleLoginViewController.m */,
 				09A9EBD318C0A01B00D83119 /* CSKuleMainViewController.h */,
 				09A9EBD418C0A01B00D83119 /* CSKuleMainViewController.m */,
-				09A9EBD618C0A02800D83119 /* CSKuleSettingsViewController.h */,
-				09A9EBD718C0A02800D83119 /* CSKuleSettingsViewController.m */,
 				09FE6AF118C5762600A840BE /* CSKuleNoticeViewController.h */,
 				09FE6AF218C5762600A840BE /* CSKuleNoticeViewController.m */,
 				09FE6AFC18C5BB5600A840BE /* CSKuleRecipeViewController.h */,
@@ -754,6 +766,8 @@
 				09FE6B0618C5C23300A840BE /* CSKuleCheckinViewController.m */,
 				09FE6B0818C5C34F00A840BE /* CSKuleChatingViewController.h */,
 				09FE6B0918C5C34F00A840BE /* CSKuleChatingViewController.m */,
+				09A9EBD618C0A02800D83119 /* CSKuleSettingsViewController.h */,
+				09A9EBD718C0A02800D83119 /* CSKuleSettingsViewController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -859,6 +873,7 @@
 		09BA1BC918BB2FC700760182 /* Venders */ = {
 			isa = PBXGroup;
 			children = (
+				090C9EBC18C846B200883DE0 /* AHAlertView */,
 				09219A4418C4878600166228 /* TPKeyboardAvoiding */,
 				09219A2E18C42AF800166228 /* MBProgressHUD */,
 				0934EFC518BF3D0600E30ECA /* SMPageControl */,
@@ -1264,6 +1279,7 @@
 				0904690218C7117D00D0846E /* CSKuleChildInfo.m in Sources */,
 				0934EFCC18BF3D0600E30ECA /* SMPageControl.m in Sources */,
 				09A9EBD818C0A02800D83119 /* CSKuleSettingsViewController.m in Sources */,
+				090C9EC018C846B200883DE0 /* AHAlertView.m in Sources */,
 				09BA1B9D18BB2AB300760182 /* main.m in Sources */,
 				09BA1BDF18BB2FC700760182 /* MessageInterceptor.m in Sources */,
 				09BA1BDE18BB2FC700760182 /* LoadMoreTableFooterView.m in Sources */,

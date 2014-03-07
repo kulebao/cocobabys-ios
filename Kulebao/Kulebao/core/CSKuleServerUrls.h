@@ -28,5 +28,8 @@
 // PATH: 获取家庭关系
 #define kGetFamilyRelationship      @"/kindergarten/%@/relationship"
 
+// PATH: 小孩信息
+#define kChildInfoPath              @"/kindergarten/%@/child/%@"
+
 
 #endif

@@ -74,7 +74,7 @@
     }
     
     CSKuleRelationshipInfo* relationship = [self.relationships objectAtIndex:indexPath.row];
-    cell.labChildName.text = relationship.child.name;
+    cell.labChildName.text = relationship.child.nick;
     [cell.imgChildPortrait setImageWithURL:[gApp.engine urlFromPath:relationship.child.portrait]];
     
     return cell;

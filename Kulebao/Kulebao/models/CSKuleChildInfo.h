@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CSKuleChildInfo : NSObject
+@interface CSKuleChildInfo : NSObject <NSCopying>
 
 @property (nonatomic, strong) NSString* childId;
 @property (nonatomic, strong) NSString* name;

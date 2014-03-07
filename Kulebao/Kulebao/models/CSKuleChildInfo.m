@@ -19,6 +19,20 @@
 @synthesize classId = _classId;
 @synthesize className = _className;
 
+- (id)copyWithZone:(NSZone *)zone {
+    CSKuleChildInfo* newChild =  [[[self class] allocWithZone:zone] init];
+    
+    newChild.childId = self.childId;
+    newChild.name = self.name;
+    newChild.nick = self.nick;
+    newChild.birthday = self.birthday;
+    newChild.gender = self.gender;
+    newChild.portrait = self.portrait;
+    newChild.className = self.className;
+
+    return newChild;
+}
+
 - (NSString*)description {
     NSDictionary* meta = @{@"childId": _childId,
                            @"name": _name,

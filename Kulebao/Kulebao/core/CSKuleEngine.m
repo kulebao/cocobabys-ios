@@ -148,6 +148,8 @@
         withPswd:(NSString*)password
          success:(SuccessResponseHandler)success
          failure:(FailureResponseHandler)failure {
+    NSParameterAssert(mobile);
+    NSParameterAssert(password);
     
     [self setupHttpClient];
     
@@ -168,6 +170,8 @@
 - (void)reqReceiveBindInfo:(NSString*)mobile
                    success:(SuccessResponseHandler)success
                    failure:(FailureResponseHandler)failure {
+    NSParameterAssert(mobile);
+    
     [self setupHttpClient];
     
     NSString* path = kReceiveBindInfoPath;
@@ -200,7 +204,7 @@
                   inKindergarten:(NSInteger)kindergarten
                          success:(SuccessResponseHandler)success
                          failure:(FailureResponseHandler)failure {
-    
+    NSParameterAssert(mobile);
     [self setupHttpClient];
     
     NSString* path = [NSString stringWithFormat:kGetFamilyRelationship, @(kindergarten)];
@@ -216,5 +220,31 @@
                                failure:failure];
 }
 
+
+- (void)reqUpdateChildInfo:(CSKuleChildInfo*)childInfo
+            inKindergarten:(NSInteger)kindergarten
+                   success:(SuccessResponseHandler)success
+                   failure:(FailureResponseHandler)failure {
+    NSParameterAssert(childInfo);
+    
+    [self setupHttpClient];
+    
+    NSString* path = [NSString stringWithFormat:kChildInfoPath, @(kindergarten), childInfo.childId];
+    
+    NSString* method = @"POST";
+    
+    NSDictionary* parameters = @{@"name": childInfo.name,
+                                 @"nick": childInfo.nick,
+                                 @"birthday": childInfo.birthday,
+                                 @"gender": @(childInfo.gender),
+                                 @"portrait": childInfo.portrait,
+                                 @"class_id": @(childInfo.classId)};
+    
+    [_httpClient httpRequestWithMethod:method
+                                  path:path
+                            parameters:parameters
+                               success:success
+                               failure:failure];
+}
 
 @end

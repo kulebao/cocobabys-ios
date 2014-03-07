@@ -13,7 +13,9 @@
 #import "KxMenu.h"
 #import "AHAlertView.h"
 
-@interface CSKuleMainViewController ()
+@interface CSKuleMainViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
+    UIImagePickerController* _imgPicker;
+}
 @property (weak, nonatomic) IBOutlet UILabel *labSchoolName;
 @property (weak, nonatomic) IBOutlet UILabel *labClassName;
 @property (weak, nonatomic) IBOutlet UILabel *labChildAge;
@@ -85,12 +87,12 @@
     if (childInfo) {
         self.labClassName.text = childInfo.className;
         self.labSchoolName.text = gApp.engine.loginInfo.schoolName;
-        self.labChildAge.text = childInfo.name;
+        self.labChildAge.text = childInfo.nick;
         [self.imgChildPortrait setImageWithURL:[gApp.engine urlFromPath:childInfo.portrait]];
     }
 }
 
-- (void)doChangeChildName {
+- (void)doChangeChildNick {
     NSString *title = @"设置宝宝昵称";
 	NSString *message = @"";
 	
@@ -99,18 +101,98 @@
     
     UITextField* field = [alert textFieldAtIndex:0];
     field.placeholder = @"请输入宝宝的昵称";
-    field.text = gApp.engine.currentRelationship.child.name;
+    field.text = gApp.engine.currentRelationship.child.nick;
     field.keyboardAppearance = UIKeyboardAppearanceDefault;
-    
+    field.background = [[UIImage imageNamed:@"input-bg-0.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 50, 10, 10)];
+    field.borderStyle = UITextBorderStyleBezel;
+    field.backgroundColor = [UIColor clearColor];
+    field.font = [UIFont systemFontOfSize:14];
+
     [alert setCancelButtonTitle:@"取消" block:^{
 
 	}];
     
 	[alert addButtonWithTitle:@"确定" block:^{
-       
+        [self doUpdateChildNick:field.text];
 	}];
     
     [alert show];
+}
+
+- (void)doUpdateChildNick:(NSString*)nick {
+    if (nick.length > 0) {
+        CSKuleChildInfo* childInfo = gApp.engine.currentRelationship.child;
+        CSKuleChildInfo* cp = [childInfo copy];
+        cp.nick = nick;
+        
+        SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
+            CSLog(@"success.");
+            [gApp alert:@"修改成功"];
+            
+            CSKuleChildInfo* cc = [CSKuleInterpreter decodeChildInfo:dataJson];
+            childInfo.nick = cc.nick;
+            
+            [self updateUI];
+        };
+        
+        FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
+            CSLog(@"failure:%@", error);
+        };
+        
+        [gApp waitingAlert:@"修改宝宝昵称中，请稍后"];
+        [gApp.engine reqUpdateChildInfo:cp
+                         inKindergarten:gApp.engine.loginInfo.schoolId
+                                success:sucessHandler
+                                failure:failureHandler];
+    }
+    else {
+        [gApp alert:@"昵称不能为空"];
+    }
+}
+
+- (void)doChangePortraitFromPhoto {
+    _imgPicker = [[UIImagePickerController alloc] init];
+    _imgPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    _imgPicker.allowsEditing = YES;
+    _imgPicker.delegate = self;
+    [self presentViewController:_imgPicker animated:YES completion:^{
+        
+    }];
+}
+
+- (void)doChangePortraitFromCamera {
+#if TARGET_IPHONE_SIMULATOR 
+#else
+    _imgPicker = [[UIImagePickerController alloc] init];
+    _imgPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    _imgPicker.allowsEditing = YES;
+    _imgPicker.delegate = self;
+    [self presentViewController:_imgPicker animated:YES completion:^{
+        
+    }];
+#endif
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    [picker dismissViewControllerAnimated:YES
+                               completion:^{
+                                   
+                               }];
+    
+    if (picker == _imgPicker) {
+        _imgPicker = nil;
+    }
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [picker dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+    
+    if (picker == _imgPicker) {
+        _imgPicker = nil;
+    }
 }
 
 #pragma mark - Segues
@@ -118,7 +200,7 @@
     KxMenuItem* item1 = [KxMenuItem menuItem:@"设置宝贝昵称"
                                        image:nil
                                       target:self
-                                      action:@selector(doChangeChildName)];
+                                      action:@selector(doChangeChildNick)];
     
     KxMenuItem* item2 = [KxMenuItem menuItem:@"设置宝贝生日"
                                        image:nil
@@ -127,13 +209,13 @@
     
     KxMenuItem* item3 = [KxMenuItem menuItem:@"从相机拍摄头像"
                                        image:nil
-                                      target:nil
-                                      action:nil];
+                                      target:self
+                                      action:@selector(doChangePortraitFromCamera)];
     
     KxMenuItem* item4 = [KxMenuItem menuItem:@"从相册选择头像"
                                        image:nil
-                                      target:nil
-                                      action:nil];
+                                      target:self
+                                      action:@selector(doChangePortraitFromPhoto)];
     
     [KxMenu setTintColor:UIColorRGB(0xCC, 0x66, 0x33)];
     [KxMenu showMenuInView:self.view

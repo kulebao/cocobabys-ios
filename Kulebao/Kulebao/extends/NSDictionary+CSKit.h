@@ -1,5 +1,5 @@
 //
-//  NSDictionary+CSExtends.h
+//  NSDictionary+CSKit.h
 //  CSKit
 //
 //  Created by xin.c.wang on 13-4-27.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSDictionary (CSExtends)
+@interface NSDictionary (CSKit)
 
 - (id)valueForKeyNotNull:(NSString *)key;
 

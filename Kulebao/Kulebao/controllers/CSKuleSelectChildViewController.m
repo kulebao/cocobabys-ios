@@ -34,6 +34,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    [self customizeBackBarItem];
+    
     self.relationships = gApp.engine.relationships;
     
     self.tableview.delegate = self;

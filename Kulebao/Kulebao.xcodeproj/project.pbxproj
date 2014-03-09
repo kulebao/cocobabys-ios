@@ -65,8 +65,6 @@
 		0934F04D18BF5B0800E30ECA /* alert-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0934F00118BF5B0800E30ECA /* alert-bg@2x.png */; };
 		0934F04E18BF5B0800E30ECA /* app-bg-type1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0934F00218BF5B0800E30ECA /* app-bg-type1.png */; };
 		0934F04F18BF5B0800E30ECA /* app-bg-type1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0934F00318BF5B0800E30ECA /* app-bg-type1@2x.png */; };
-		0934F05018BF5B0800E30ECA /* app-bg-type2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0934F00418BF5B0800E30ECA /* app-bg-type2.png */; };
-		0934F05118BF5B0800E30ECA /* app-bg-type2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0934F00518BF5B0800E30ECA /* app-bg-type2@2x.png */; };
 		0934F05218BF5B0800E30ECA /* avatar-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 0934F00618BF5B0800E30ECA /* avatar-bg.png */; };
 		0934F05318BF5B0800E30ECA /* avatar-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0934F00718BF5B0800E30ECA /* avatar-bg@2x.png */; };
 		0934F05418BF5B0800E30ECA /* btn-back-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 0934F00818BF5B0800E30ECA /* btn-back-pressed.png */; };
@@ -137,7 +135,6 @@
 		0934F09518BF5B0800E30ECA /* settings-row-bg-mid@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0934F04918BF5B0800E30ECA /* settings-row-bg-mid@2x.png */; };
 		0934F09618BF5B0800E30ECA /* settings-row-bg-top.png in Resources */ = {isa = PBXBuildFile; fileRef = 0934F04A18BF5B0800E30ECA /* settings-row-bg-top.png */; };
 		0934F09718BF5B0800E30ECA /* settings-row-bg-top@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0934F04B18BF5B0800E30ECA /* settings-row-bg-top@2x.png */; };
-		093904CF18BDD9F2006E8F82 /* CSKuleGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 093904CE18BDD9F2006E8F82 /* CSKuleGuideViewController.m */; };
 		093904DD18BDDA90006E8F82 /* CSKuleRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 093904DC18BDDA90006E8F82 /* CSKuleRootViewController.m */; };
 		09A9EBB518C07F6F00D83119 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 09A9EBB718C07F6F00D83119 /* Localizable.strings */; };
 		09A9EBBB18C0830900D83119 /* CSKuleLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A9EBBA18C0830900D83119 /* CSKuleLoginViewController.m */; };
@@ -203,7 +200,10 @@
 		09BA1C3318BB429100760182 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09BA1C3218BB429100760182 /* Main.storyboard */; };
 		09C1C75F18BD92990040B06D /* AFJSONRequestOperation+CSExtends.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C1C75C18BD92990040B06D /* AFJSONRequestOperation+CSExtends.m */; };
 		09C1C76018BD92990040B06D /* CSHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C1C75E18BD92990040B06D /* CSHttpClient.m */; };
-		09C1C76618BD973B0040B06D /* NSDictionary+CSExtends.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C1C76518BD973B0040B06D /* NSDictionary+CSExtends.m */; };
+		09C1C76618BD973B0040B06D /* NSDictionary+CSKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C1C76518BD973B0040B06D /* NSDictionary+CSKit.m */; };
+		09ED59A518CC8F5200187585 /* UIViewController+CSKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 09ED59A418CC8F5200187585 /* UIViewController+CSKit.m */; };
+		09ED59A818CCA22700187585 /* titlebar-1-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 09ED59A618CCA22700187585 /* titlebar-1-bg.png */; };
+		09ED59A918CCA22700187585 /* titlebar-1-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09ED59A718CCA22700187585 /* titlebar-1-bg@2x.png */; };
 		09FE6AEE18C5729500A840BE /* CSKuleNoticeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE6AED18C5729500A840BE /* CSKuleNoticeCell.m */; };
 		09FE6AF018C572A500A840BE /* CSKuleNoticeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09FE6AEF18C572A500A840BE /* CSKuleNoticeCell.xib */; };
 		09FE6AF318C5762600A840BE /* CSKuleNoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE6AF218C5762600A840BE /* CSKuleNoticeViewController.m */; };
@@ -318,8 +318,6 @@
 		0934F00118BF5B0800E30ECA /* alert-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alert-bg@2x.png"; sourceTree = "<group>"; };
 		0934F00218BF5B0800E30ECA /* app-bg-type1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "app-bg-type1.png"; sourceTree = "<group>"; };
 		0934F00318BF5B0800E30ECA /* app-bg-type1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "app-bg-type1@2x.png"; sourceTree = "<group>"; };
-		0934F00418BF5B0800E30ECA /* app-bg-type2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "app-bg-type2.png"; sourceTree = "<group>"; };
-		0934F00518BF5B0800E30ECA /* app-bg-type2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "app-bg-type2@2x.png"; sourceTree = "<group>"; };
 		0934F00618BF5B0800E30ECA /* avatar-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "avatar-bg.png"; sourceTree = "<group>"; };
 		0934F00718BF5B0800E30ECA /* avatar-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "avatar-bg@2x.png"; sourceTree = "<group>"; };
 		0934F00818BF5B0800E30ECA /* btn-back-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-back-pressed.png"; sourceTree = "<group>"; };
@@ -390,8 +388,6 @@
 		0934F04918BF5B0800E30ECA /* settings-row-bg-mid@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings-row-bg-mid@2x.png"; sourceTree = "<group>"; };
 		0934F04A18BF5B0800E30ECA /* settings-row-bg-top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings-row-bg-top.png"; sourceTree = "<group>"; };
 		0934F04B18BF5B0800E30ECA /* settings-row-bg-top@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings-row-bg-top@2x.png"; sourceTree = "<group>"; };
-		093904CD18BDD9F2006E8F82 /* CSKuleGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleGuideViewController.h; sourceTree = "<group>"; };
-		093904CE18BDD9F2006E8F82 /* CSKuleGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleGuideViewController.m; sourceTree = "<group>"; };
 		093904D718BDDA40006E8F82 /* CSKuleEventType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleEventType.h; sourceTree = "<group>"; };
 		093904D818BDDA40006E8F82 /* CSKuleServerUrls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleServerUrls.h; sourceTree = "<group>"; };
 		093904DB18BDDA90006E8F82 /* CSKuleRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleRootViewController.h; sourceTree = "<group>"; };
@@ -497,8 +493,12 @@
 		09C1C75C18BD92990040B06D /* AFJSONRequestOperation+CSExtends.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AFJSONRequestOperation+CSExtends.m"; sourceTree = "<group>"; };
 		09C1C75D18BD92990040B06D /* CSHttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSHttpClient.h; sourceTree = "<group>"; };
 		09C1C75E18BD92990040B06D /* CSHttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSHttpClient.m; sourceTree = "<group>"; };
-		09C1C76418BD973B0040B06D /* NSDictionary+CSExtends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+CSExtends.h"; sourceTree = "<group>"; };
-		09C1C76518BD973B0040B06D /* NSDictionary+CSExtends.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+CSExtends.m"; sourceTree = "<group>"; };
+		09C1C76418BD973B0040B06D /* NSDictionary+CSKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+CSKit.h"; sourceTree = "<group>"; };
+		09C1C76518BD973B0040B06D /* NSDictionary+CSKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+CSKit.m"; sourceTree = "<group>"; };
+		09ED59A318CC8F5200187585 /* UIViewController+CSKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+CSKit.h"; sourceTree = "<group>"; };
+		09ED59A418CC8F5200187585 /* UIViewController+CSKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CSKit.m"; sourceTree = "<group>"; };
+		09ED59A618CCA22700187585 /* titlebar-1-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "titlebar-1-bg.png"; sourceTree = "<group>"; };
+		09ED59A718CCA22700187585 /* titlebar-1-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "titlebar-1-bg@2x.png"; sourceTree = "<group>"; };
 		09FE6AEC18C5729500A840BE /* CSKuleNoticeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleNoticeCell.h; sourceTree = "<group>"; };
 		09FE6AED18C5729500A840BE /* CSKuleNoticeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleNoticeCell.m; sourceTree = "<group>"; };
 		09FE6AEF18C572A500A840BE /* CSKuleNoticeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSKuleNoticeCell.xib; sourceTree = "<group>"; };
@@ -659,8 +659,6 @@
 				0934F00118BF5B0800E30ECA /* alert-bg@2x.png */,
 				0934F00218BF5B0800E30ECA /* app-bg-type1.png */,
 				0934F00318BF5B0800E30ECA /* app-bg-type1@2x.png */,
-				0934F00418BF5B0800E30ECA /* app-bg-type2.png */,
-				0934F00518BF5B0800E30ECA /* app-bg-type2@2x.png */,
 				09A9EBBC18C08C7D00D83119 /* app-bg-type3.png */,
 				09A9EBBD18C08C7D00D83119 /* app-bg-type3@2x.png */,
 				0934F00618BF5B0800E30ECA /* avatar-bg.png */,
@@ -766,6 +764,8 @@
 				0934F04918BF5B0800E30ECA /* settings-row-bg-mid@2x.png */,
 				0934F04A18BF5B0800E30ECA /* settings-row-bg-top.png */,
 				0934F04B18BF5B0800E30ECA /* settings-row-bg-top@2x.png */,
+				09ED59A618CCA22700187585 /* titlebar-1-bg.png */,
+				09ED59A718CCA22700187585 /* titlebar-1-bg@2x.png */,
 				09A9EBC218C08C7D00D83119 /* titlebar-bg.png */,
 				09A9EBC318C08C7D00D83119 /* titlebar-bg@2x.png */,
 				09A9EBC418C08C7D00D83119 /* toolbar-bg.png */,
@@ -778,8 +778,6 @@
 			isa = PBXGroup;
 			children = (
 				09FE6AEB18C5722500A840BE /* views */,
-				093904CD18BDD9F2006E8F82 /* CSKuleGuideViewController.h */,
-				093904CE18BDD9F2006E8F82 /* CSKuleGuideViewController.m */,
 				093904DB18BDDA90006E8F82 /* CSKuleRootViewController.h */,
 				093904DC18BDDA90006E8F82 /* CSKuleRootViewController.m */,
 				09A9EBD018C090E100D83119 /* CSKuleAuthViewController.h */,
@@ -1040,8 +1038,10 @@
 				09A9EBB418C07E8800D83119 /* CSKit.h */,
 				09FE6AF418C5A53200A840BE /* CSTextFieldDelegate.h */,
 				09FE6AF518C5A53200A840BE /* CSTextFieldDelegate.m */,
-				09C1C76418BD973B0040B06D /* NSDictionary+CSExtends.h */,
-				09C1C76518BD973B0040B06D /* NSDictionary+CSExtends.m */,
+				09C1C76418BD973B0040B06D /* NSDictionary+CSKit.h */,
+				09C1C76518BD973B0040B06D /* NSDictionary+CSKit.m */,
+				09ED59A318CC8F5200187585 /* UIViewController+CSKit.h */,
+				09ED59A418CC8F5200187585 /* UIViewController+CSKit.m */,
 			);
 			path = extends;
 			sourceTree = "<group>";
@@ -1156,7 +1156,6 @@
 				0934F06B18BF5B0800E30ECA /* btn-settings@2x.png in Resources */,
 				090C9EC918C84FC000883DE0 /* CSKuleChildCell.xib in Resources */,
 				0934F06518BF5B0800E30ECA /* btn-func-7@2x.png in Resources */,
-				0934F05018BF5B0800E30ECA /* app-bg-type2.png in Resources */,
 				09A9EBB518C07F6F00D83119 /* Localizable.strings in Resources */,
 				0934F07618BF5B0800E30ECA /* Default-568h@2x.png in Resources */,
 				090C9ECF18C8550500883DE0 /* img-icon.png in Resources */,
@@ -1192,7 +1191,6 @@
 				09A9EBCD18C08C7D00D83119 /* titlebar-bg@2x.png in Resources */,
 				09FE6AFB18C5B97D00A840BE /* CSKuleRecipeCell.xib in Resources */,
 				0934F06A18BF5B0800E30ECA /* btn-settings.png in Resources */,
-				0934F05118BF5B0800E30ECA /* app-bg-type2@2x.png in Resources */,
 				0934F05518BF5B0800E30ECA /* btn-back-pressed@2x.png in Resources */,
 				0934F08A18BF5B0800E30ECA /* settings-icon-change-pswd.png in Resources */,
 				0934F06718BF5B0800E30ECA /* btn-func-8@2x.png in Resources */,
@@ -1238,10 +1236,12 @@
 				0934EFFD18BF559900E30ECA /* guide-4-568h@2x.png in Resources */,
 				09BA1BA918BB2AB400760182 /* Images.xcassets in Resources */,
 				0934F06118BF5B0800E30ECA /* btn-func-5@2x.png in Resources */,
+				09ED59A818CCA22700187585 /* titlebar-1-bg.png in Resources */,
 				0934EFF218BF559900E30ECA /* guide-1.png in Resources */,
 				090C9EB918C83D2C00883DE0 /* msg-bg-from@2x.png in Resources */,
 				09219A3418C42AF800166228 /* 37x-Checkmark.png in Resources */,
 				09A9EBCC18C08C7D00D83119 /* titlebar-bg.png in Resources */,
+				09ED59A918CCA22700187585 /* titlebar-1-bg@2x.png in Resources */,
 				090C9EBA18C83D2C00883DE0 /* msg-bg-to.png in Resources */,
 				09BA1BE418BB2FC700760182 /* blueArrow@2x.png in Resources */,
 				0934F08918BF5B0800E30ECA /* settings-change-baby@2x.png in Resources */,
@@ -1312,6 +1312,7 @@
 				09BA1BDD18BB2FC700760182 /* EGORefreshTableHeaderView.m in Sources */,
 				09FE6B0A18C5C34F00A840BE /* CSKuleChatingViewController.m in Sources */,
 				09BA1C2318BB3F8400760182 /* AFHTTPClient.m in Sources */,
+				09ED59A518CC8F5200187585 /* UIViewController+CSKit.m in Sources */,
 				09BA1BA118BB2AB400760182 /* CSAppDelegate.m in Sources */,
 				090C9EC418C84E9F00883DE0 /* CSKuleSelectChildViewController.m in Sources */,
 				09BA1C2518BB3F8400760182 /* AFImageRequestOperation.m in Sources */,
@@ -1331,7 +1332,6 @@
 				09BA1B9D18BB2AB300760182 /* main.m in Sources */,
 				09BA1BDF18BB2FC700760182 /* MessageInterceptor.m in Sources */,
 				09BA1BDE18BB2FC700760182 /* LoadMoreTableFooterView.m in Sources */,
-				093904CF18BDD9F2006E8F82 /* CSKuleGuideViewController.m in Sources */,
 				09BA1C2A18BB3F8400760182 /* AFXMLRequestOperation.m in Sources */,
 				090468F518C6FE1000D0846E /* CSKuleBindInfo.m in Sources */,
 				09FE6B0718C5C23300A840BE /* CSKuleCheckinViewController.m in Sources */,
@@ -1350,7 +1350,7 @@
 				09FE6B0118C5BCFD00A840BE /* CSKuleHomeworkViewController.m in Sources */,
 				09BA1C2B18BB3F8400760182 /* UIImageView+AFNetworking.m in Sources */,
 				09C1C75F18BD92990040B06D /* AFJSONRequestOperation+CSExtends.m in Sources */,
-				09C1C76618BD973B0040B06D /* NSDictionary+CSExtends.m in Sources */,
+				09C1C76618BD973B0040B06D /* NSDictionary+CSKit.m in Sources */,
 				09BA1BFE18BB334900760182 /* GzipCompressor.m in Sources */,
 				0934EFC318BF3AF700E30ECA /* EAIntroPage.m in Sources */,
 				09FE6AF318C5762600A840BE /* CSKuleNoticeViewController.m in Sources */,

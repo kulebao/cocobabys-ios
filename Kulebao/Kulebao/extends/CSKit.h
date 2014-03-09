@@ -6,11 +6,12 @@
 //  Copyright (c) 2014年 Codingsoft. All rights reserved.
 //
 
-#ifndef Kulebao_CSKit_h
-#define Kulebao_CSKit_h
+#ifndef CSKit_CSKit_h
+#define CSKit_CSKit_h
 
 #import "CSTextFieldDelegate.h"
-#import "NSDictionary+CSExtends.h"
+#import "NSDictionary+CSKit.h"
+#import "UIViewController+CSKit.h"
 
 #define IS_IPHONE5 (([[UIScreen mainScreen] bounds].size.height-568)?NO:YES)
 

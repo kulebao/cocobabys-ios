@@ -34,6 +34,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    self.navigationController.navigationBarHidden = YES;
+    
     self.fieldMobile.text = gApp.engine.preferences.defaultUsername;
     
     [self showIntroViewsIfNeeded];

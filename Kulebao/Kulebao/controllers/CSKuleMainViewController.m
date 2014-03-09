@@ -49,6 +49,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    self.navigationController.navigationBarHidden = NO;
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"titlebar-1-bg.png"] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{UITextAttributeFont: [UIFont systemFontOfSize:20], UITextAttributeTextColor:[UIColor whiteColor]}];
+    
     self.labClassName.text = nil;
     self.labSchoolName.text = gApp.engine.loginInfo.schoolName;
     self.labChildAge.text = nil;

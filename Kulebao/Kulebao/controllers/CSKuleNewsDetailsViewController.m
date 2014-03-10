@@ -1,18 +1,20 @@
 //
-//  CSKuleScheduleViewController.m
+//  CSKuleNewsDetailsViewController.m
 //  Kulebao
 //
-//  Created by xin.c.wang on 14-3-4.
+//  Created by xin.c.wang on 14-3-10.
 //  Copyright (c) 2014年 Cocobabys. All rights reserved.
 //
 
-#import "CSKuleScheduleViewController.h"
+#import "CSKuleNewsDetailsViewController.h"
+#import "CSAppDelegate.h"
 
-@interface CSKuleScheduleViewController ()
+@interface CSKuleNewsDetailsViewController ()
 
 @end
 
-@implementation CSKuleScheduleViewController
+@implementation CSKuleNewsDetailsViewController
+@synthesize newsInfo = _newsInfo;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,7 +30,6 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     [self customizeBackBarItem];
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -36,7 +37,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-#pragma mark - UI Actions
 
 @end

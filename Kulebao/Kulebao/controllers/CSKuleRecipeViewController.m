@@ -11,7 +11,6 @@
 
 @interface CSKuleRecipeViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
-- (IBAction)onBtnBackClicked:(id)sender;
 
 @end
 
@@ -83,8 +82,5 @@
 }
 
 #pragma mark - UI Actions
-- (IBAction)onBtnBackClicked:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
-}
 
 @end

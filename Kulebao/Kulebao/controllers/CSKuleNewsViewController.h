@@ -1,5 +1,5 @@
 //
-//  CSKuleNoticeViewController.h
+//  CSKuleNewsViewController.h
 //  Kulebao
 //
 //  Created by xin.c.wang on 14-3-4.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CSKuleNoticeViewController : UIViewController
+@interface CSKuleNewsViewController : UIViewController
 
 @end

@@ -9,7 +9,6 @@
 #import "CSKuleCheckinViewController.h"
 
 @interface CSKuleCheckinViewController ()
-- (IBAction)onBtnBackClicked:(id)sender;
 
 @end
 
@@ -36,11 +35,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - UI Actions
-- (IBAction)onBtnBackClicked:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

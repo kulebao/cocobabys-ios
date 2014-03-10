@@ -18,14 +18,14 @@
 }
 @property (weak, nonatomic) IBOutlet UILabel *labSchoolName;
 @property (weak, nonatomic) IBOutlet UILabel *labClassName;
-@property (weak, nonatomic) IBOutlet UILabel *labChildAge;
+@property (weak, nonatomic) IBOutlet UILabel *labChildNick;
 @property (weak, nonatomic) IBOutlet UIImageView *imgChildPortrait;
 @property (weak, nonatomic) IBOutlet UIView *viewChildContainer;
 
 - (IBAction)onBtnShowChildMenuListClicked:(id)sender;
 
 - (IBAction)onBtnSettingsClicked:(id)sender;
-- (IBAction)onBtnNoticeClicked:(id)sender;
+- (IBAction)onBtnNewsListClicked:(id)sender;
 - (IBAction)onBtnRecipeClicked:(id)sender;
 - (IBAction)onBtnCheckinInfoClicked:(id)sender;
 - (IBAction)onBtnScheduleInfoClicked:(id)sender;
@@ -55,7 +55,7 @@
     
     self.labClassName.text = nil;
     self.labSchoolName.text = gApp.engine.loginInfo.schoolName;
-    self.labChildAge.text = nil;
+    self.labChildNick.text = nil;
     self.imgChildPortrait.layer.cornerRadius = 6.0;
     self.imgChildPortrait.clipsToBounds = YES;
     
@@ -91,7 +91,8 @@
     if (childInfo) {
         self.labClassName.text = childInfo.className;
         self.labSchoolName.text = gApp.engine.loginInfo.schoolName;
-        self.labChildAge.text = childInfo.nick;
+        self.labChildNick.text = childInfo.nick;
+        self.imgChildPortrait.image = nil;
         [self.imgChildPortrait setImageWithURL:[gApp.engine urlFromPath:childInfo.portrait]];
     }
 }
@@ -141,6 +142,7 @@
         
         FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
             CSLog(@"failure:%@", error);
+            [gApp alert:[error localizedDescription]];
         };
         
         [gApp waitingAlert:@"修改宝宝昵称中，请稍后"];
@@ -231,8 +233,8 @@
     [self performSegueWithIdentifier:@"segue.settings" sender:nil];
 }
 
-- (IBAction)onBtnNoticeClicked:(id)sender {
-    [self performSegueWithIdentifier:@"segue.notice" sender:nil];
+- (IBAction)onBtnNewsListClicked:(id)sender {
+    [self performSegueWithIdentifier:@"segue.newslist" sender:nil];
 }
 
 - (IBAction)onBtnRecipeClicked:(id)sender {

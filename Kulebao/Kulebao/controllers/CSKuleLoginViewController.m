@@ -70,6 +70,7 @@
         
         FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
             CSLog(@"failure:%@", error);
+            [gApp alert:[error localizedDescription]];
         };
         
         [gApp waitingAlert:@"正在登录..."];

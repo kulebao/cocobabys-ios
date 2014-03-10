@@ -14,7 +14,6 @@
 @interface CSKuleSelectChildViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
 @property (nonatomic, strong) NSArray* relationships;
-- (IBAction)onBtnBackClicked:(id)sender;
 
 @end
 
@@ -95,8 +94,5 @@
 }
 
 #pragma mark - UI Actions
-- (IBAction)onBtnBackClicked:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
-}
 
 @end

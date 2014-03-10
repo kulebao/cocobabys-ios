@@ -204,9 +204,11 @@
 		09ED59A518CC8F5200187585 /* UIViewController+CSKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 09ED59A418CC8F5200187585 /* UIViewController+CSKit.m */; };
 		09ED59A818CCA22700187585 /* titlebar-1-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 09ED59A618CCA22700187585 /* titlebar-1-bg.png */; };
 		09ED59A918CCA22700187585 /* titlebar-1-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09ED59A718CCA22700187585 /* titlebar-1-bg@2x.png */; };
+		09ED59AC18CD67FD00187585 /* CSKuleNewsInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09ED59AB18CD67FD00187585 /* CSKuleNewsInfo.m */; };
+		09ED59AF18CD8ED100187585 /* CSKuleNewsDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09ED59AE18CD8ED100187585 /* CSKuleNewsDetailsViewController.m */; };
 		09FE6AEE18C5729500A840BE /* CSKuleNoticeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE6AED18C5729500A840BE /* CSKuleNoticeCell.m */; };
 		09FE6AF018C572A500A840BE /* CSKuleNoticeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09FE6AEF18C572A500A840BE /* CSKuleNoticeCell.xib */; };
-		09FE6AF318C5762600A840BE /* CSKuleNoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE6AF218C5762600A840BE /* CSKuleNoticeViewController.m */; };
+		09FE6AF318C5762600A840BE /* CSKuleNewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE6AF218C5762600A840BE /* CSKuleNewsViewController.m */; };
 		09FE6AF618C5A53200A840BE /* CSTextFieldDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE6AF518C5A53200A840BE /* CSTextFieldDelegate.m */; };
 		09FE6AF918C5B97100A840BE /* CSKuleRecipeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE6AF818C5B97000A840BE /* CSKuleRecipeCell.m */; };
 		09FE6AFB18C5B97D00A840BE /* CSKuleRecipeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09FE6AFA18C5B97D00A840BE /* CSKuleRecipeCell.xib */; };
@@ -499,11 +501,15 @@
 		09ED59A418CC8F5200187585 /* UIViewController+CSKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CSKit.m"; sourceTree = "<group>"; };
 		09ED59A618CCA22700187585 /* titlebar-1-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "titlebar-1-bg.png"; sourceTree = "<group>"; };
 		09ED59A718CCA22700187585 /* titlebar-1-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "titlebar-1-bg@2x.png"; sourceTree = "<group>"; };
+		09ED59AA18CD67FD00187585 /* CSKuleNewsInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleNewsInfo.h; sourceTree = "<group>"; };
+		09ED59AB18CD67FD00187585 /* CSKuleNewsInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleNewsInfo.m; sourceTree = "<group>"; };
+		09ED59AD18CD8ED100187585 /* CSKuleNewsDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleNewsDetailsViewController.h; sourceTree = "<group>"; };
+		09ED59AE18CD8ED100187585 /* CSKuleNewsDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleNewsDetailsViewController.m; sourceTree = "<group>"; };
 		09FE6AEC18C5729500A840BE /* CSKuleNoticeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleNoticeCell.h; sourceTree = "<group>"; };
 		09FE6AED18C5729500A840BE /* CSKuleNoticeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleNoticeCell.m; sourceTree = "<group>"; };
 		09FE6AEF18C572A500A840BE /* CSKuleNoticeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSKuleNoticeCell.xib; sourceTree = "<group>"; };
-		09FE6AF118C5762600A840BE /* CSKuleNoticeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleNoticeViewController.h; sourceTree = "<group>"; };
-		09FE6AF218C5762600A840BE /* CSKuleNoticeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleNoticeViewController.m; sourceTree = "<group>"; };
+		09FE6AF118C5762600A840BE /* CSKuleNewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleNewsViewController.h; sourceTree = "<group>"; };
+		09FE6AF218C5762600A840BE /* CSKuleNewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleNewsViewController.m; sourceTree = "<group>"; };
 		09FE6AF418C5A53200A840BE /* CSTextFieldDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSTextFieldDelegate.h; sourceTree = "<group>"; };
 		09FE6AF518C5A53200A840BE /* CSTextFieldDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSTextFieldDelegate.m; sourceTree = "<group>"; };
 		09FE6AF718C5B97000A840BE /* CSKuleRecipeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleRecipeCell.h; sourceTree = "<group>"; };
@@ -587,18 +593,20 @@
 		09219A3A18C4721F00166228 /* models */ = {
 			isa = PBXGroup;
 			children = (
-				09219A5818C4999B00166228 /* CSKuleLoginInfo.h */,
-				09219A5918C4999B00166228 /* CSKuleLoginInfo.m */,
 				090468F318C6FE1000D0846E /* CSKuleBindInfo.h */,
 				090468F418C6FE1000D0846E /* CSKuleBindInfo.m */,
 				0904690018C7117D00D0846E /* CSKuleChildInfo.h */,
 				0904690118C7117D00D0846E /* CSKuleChildInfo.m */,
+				090C9EB118C81D7500883DE0 /* CSKuleInterpreter.h */,
+				090C9EB218C81D7500883DE0 /* CSKuleInterpreter.m */,
+				09219A5818C4999B00166228 /* CSKuleLoginInfo.h */,
+				09219A5918C4999B00166228 /* CSKuleLoginInfo.m */,
+				09ED59AA18CD67FD00187585 /* CSKuleNewsInfo.h */,
+				09ED59AB18CD67FD00187585 /* CSKuleNewsInfo.m */,
 				0904690318C72E5000D0846E /* CSKuleParentInfo.h */,
 				0904690418C72E5000D0846E /* CSKuleParentInfo.m */,
 				0904690618C72E6C00D0846E /* CSKuleRelationshipInfo.h */,
 				0904690718C72E6C00D0846E /* CSKuleRelationshipInfo.m */,
-				090C9EB118C81D7500883DE0 /* CSKuleInterpreter.h */,
-				090C9EB218C81D7500883DE0 /* CSKuleInterpreter.m */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -786,8 +794,10 @@
 				09A9EBBA18C0830900D83119 /* CSKuleLoginViewController.m */,
 				09A9EBD318C0A01B00D83119 /* CSKuleMainViewController.h */,
 				09A9EBD418C0A01B00D83119 /* CSKuleMainViewController.m */,
-				09FE6AF118C5762600A840BE /* CSKuleNoticeViewController.h */,
-				09FE6AF218C5762600A840BE /* CSKuleNoticeViewController.m */,
+				09FE6AF118C5762600A840BE /* CSKuleNewsViewController.h */,
+				09FE6AF218C5762600A840BE /* CSKuleNewsViewController.m */,
+				09ED59AD18CD8ED100187585 /* CSKuleNewsDetailsViewController.h */,
+				09ED59AE18CD8ED100187585 /* CSKuleNewsDetailsViewController.m */,
 				09FE6AFC18C5BB5600A840BE /* CSKuleRecipeViewController.h */,
 				09FE6AFD18C5BB5600A840BE /* CSKuleRecipeViewController.m */,
 				09FE6AFF18C5BCFD00A840BE /* CSKuleHomeworkViewController.h */,
@@ -1306,6 +1316,7 @@
 				09219A3618C42AF800166228 /* MBProgressHUD.m in Sources */,
 				09BA1C0018BB334900760182 /* OpenUDID.m in Sources */,
 				09219A5118C4878600166228 /* TPKeyboardAvoidingCollectionView.m in Sources */,
+				09ED59AC18CD67FD00187585 /* CSKuleNewsInfo.m in Sources */,
 				09FE6B0418C5C00F00A840BE /* CSKuleScheduleViewController.m in Sources */,
 				093904DD18BDDA90006E8F82 /* CSKuleRootViewController.m in Sources */,
 				09BA1C2918BB3F8400760182 /* AFURLConnectionOperation.m in Sources */,
@@ -1353,7 +1364,8 @@
 				09C1C76618BD973B0040B06D /* NSDictionary+CSKit.m in Sources */,
 				09BA1BFE18BB334900760182 /* GzipCompressor.m in Sources */,
 				0934EFC318BF3AF700E30ECA /* EAIntroPage.m in Sources */,
-				09FE6AF318C5762600A840BE /* CSKuleNoticeViewController.m in Sources */,
+				09FE6AF318C5762600A840BE /* CSKuleNewsViewController.m in Sources */,
+				09ED59AF18CD8ED100187585 /* CSKuleNewsDetailsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -119,7 +119,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="onBtnNoticeClicked:" destination="nb4-8s-InE" eventType="touchUpInside" id="fEo-br-D4G"/>
+                                    <action selector="onBtnNewsListClicked:" destination="nb4-8s-InE" eventType="touchUpInside" id="dOp-7h-tt1"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RjH-3B-A4z">
@@ -286,12 +286,12 @@
                     <navigationItem key="navigationItem" title="幼乐宝" id="7M2-K4-LE7"/>
                     <connections>
                         <outlet property="imgChildPortrait" destination="dKp-7o-31t" id="ffn-Mu-JgF"/>
-                        <outlet property="labChildAge" destination="PrA-3R-D0Z" id="LX8-XY-Wcp"/>
+                        <outlet property="labChildNick" destination="PrA-3R-D0Z" id="Q2L-xw-5O0"/>
                         <outlet property="labClassName" destination="sZI-PR-dYC" id="YCV-pU-ziZ"/>
                         <outlet property="labSchoolName" destination="xxK-7w-GpT" id="d95-9t-ni9"/>
                         <outlet property="viewChildContainer" destination="UZY-LS-vXO" id="JtQ-bF-dcL"/>
                         <segue destination="Ot5-TZ-qvn" kind="push" identifier="segue.settings" id="LKg-r7-Frc"/>
-                        <segue destination="hSh-cH-xBP" kind="push" identifier="segue.notice" id="cnu-L4-AqF"/>
+                        <segue destination="hSh-cH-xBP" kind="push" identifier="segue.newslist" id="cnu-L4-AqF"/>
                         <segue destination="p7o-xu-qXK" kind="push" identifier="segue.recipe" id="fjS-GT-9cA"/>
                         <segue destination="iCB-cn-3Ye" kind="push" identifier="segue.homework" id="sUy-LL-kbD"/>
                         <segue destination="Vta-Cg-yNO" kind="push" identifier="segue.schedule" id="gpQ-i9-RXP"/>
@@ -665,10 +665,10 @@
             </objects>
             <point key="canvasLocation" x="182" y="4657"/>
         </scene>
-        <!--Kule Notice View Controller - 幼儿园公告-->
+        <!--Kule News View Controller - 幼儿园公告-->
         <scene sceneID="jEC-2w-Oh7">
             <objects>
-                <viewController restorationIdentifier="CSKuleNoticeViewController" storyboardIdentifier="CSKuleNoticeViewController" id="hSh-cH-xBP" customClass="CSKuleNoticeViewController" sceneMemberID="viewController">
+                <viewController restorationIdentifier="CSKuleNoticeViewController" storyboardIdentifier="CSKuleNoticeViewController" id="hSh-cH-xBP" customClass="CSKuleNewsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OkE-KT-rj8">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -693,11 +693,38 @@
                     <navigationItem key="navigationItem" title="幼儿园公告" id="AsG-R7-F49"/>
                     <connections>
                         <outlet property="tableview" destination="cXC-Tw-KRl" id="mFe-ak-ztl"/>
+                        <segue destination="gZu-Ur-sSP" kind="push" identifier="segue.newsdetails" id="qNJ-JJ-pfw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U0l-Qo-O89" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="182" y="125"/>
+        </scene>
+        <!--Kule News Details View Controller - 通知消息-->
+        <scene sceneID="FYj-G1-JYp">
+            <objects>
+                <viewController restorationIdentifier="CSKuleNewsDetailsViewController" storyboardIdentifier="CSKuleNewsDetailsViewController" id="gZu-Ur-sSP" customClass="CSKuleNewsDetailsViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hj8-QJ-hwQ">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app-bg-type3.png" id="YWR-Zn-gXT">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" alpha="0.30000001192092896" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img-tree-type2.png" id="1e1-VN-eCD">
+                                <rect key="frame" x="0.0" y="186" width="320" height="230"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <navigationItem key="navigationItem" title="通知消息" id="DO1-n8-oX2"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nR5-qp-BvI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="951" y="125"/>
         </scene>
         <!--Kule Recipe View Controller - 宝宝食谱-->
         <scene sceneID="9KS-iG-ZHj">

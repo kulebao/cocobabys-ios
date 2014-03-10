@@ -21,6 +21,8 @@
      }
      */
     
+    NSParameterAssert(dataJson);
+    
     NSString* access_token = [dataJson valueForKeyNotNull:@"access_token"];
     NSString* account_name = [dataJson valueForKeyNotNull:@"account_name"];
     NSString* school_name = [dataJson valueForKeyNotNull:@"school_name"];
@@ -51,6 +53,8 @@
      }
      */
     
+    NSParameterAssert(dataJson);
+    
     NSString* access_token = [dataJson valueForKeyNotNull:@"access_token"];
     NSString* username = [dataJson valueForKeyNotNull:@"username"];
     NSString* account_name = [dataJson valueForKeyNotNull:@"account_name"];
@@ -78,6 +82,8 @@
      "relationship" : "爸爸"
      }
      */
+    
+    NSParameterAssert(dataJson);
     
     NSString* relationship = [dataJson valueForKeyNotNull:@"relationship"];
     NSString* card = [dataJson valueForKeyNotNull:@"card"];
@@ -108,6 +114,8 @@
      "className" : "苹果班"
      }
      */
+    
+    NSParameterAssert(dataJson);
     
     NSString* child_id = [dataJson valueForKeyNotNull:@"child_id"];
     NSString* name = [dataJson valueForKeyNotNull:@"name"];
@@ -144,6 +152,8 @@
      }
      */
     
+    NSParameterAssert(dataJson);
+    
     NSString* parent_id = [dataJson valueForKeyNotNull:@"id"];
     NSInteger school_id = [[dataJson valueForKeyNotNull:@"school_id"] integerValue];
     NSString* name = [dataJson valueForKeyNotNull:@"name"];
@@ -160,6 +170,41 @@
     obj.portrait = portrait;
     obj.gender = gender;
     obj.birthday = birthday;
+    
+    return obj;
+}
+
++ (CSKuleNewsInfo*)decodeNewsInfo:(NSDictionary*)dataJson {
+    /*
+     {
+     "news_id" : 292,
+     "school_id" : 93740362,
+     "title" : "新标题",
+     "content" : "新内容",
+     "timestamp" : 1393511644614,
+     "published" : true,
+     "notice_type" : 2
+     }
+     */
+    
+    NSParameterAssert(dataJson);
+    
+    NSInteger news_id = [[dataJson valueForKeyNotNull:@"news_id"] integerValue];
+    NSInteger school_id = [[dataJson valueForKeyNotNull:@"school_id"] integerValue];
+    NSString* title = [dataJson valueForKeyNotNull:@"title"];
+    NSString* content = [dataJson valueForKeyNotNull:@"content"];
+    NSTimeInterval timestamp = [[dataJson valueForKeyNotNull:@"timestamp"] doubleValue];
+    BOOL published = [[dataJson valueForKeyNotNull:@"published"] boolValue];
+    NSInteger notice_type = [[dataJson valueForKeyNotNull:@"notice_type"] integerValue];
+    
+    CSKuleNewsInfo* obj = [CSKuleNewsInfo new];
+    obj.newsId = news_id;
+    obj.schoolId = school_id;
+    obj.title = title;
+    obj.content = content;
+    obj.timestamp = timestamp/1000.0;
+    obj.published = published;
+    obj.noticeType = notice_type;
     
     return obj;
 }

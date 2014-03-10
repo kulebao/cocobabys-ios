@@ -12,7 +12,6 @@
 
 @interface CSKuleChatingViewController () <UITableViewDataSource, UITableViewDelegate, PullTableViewDelegate>
 @property (weak, nonatomic) IBOutlet PullTableView *tableview;
-- (IBAction)onBtnBackClicked:(id)sender;
 
 @end
 
@@ -116,8 +115,5 @@
 
 
 #pragma mark - UI Actions
-- (IBAction)onBtnBackClicked:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
-}
 
 @end

@@ -11,7 +11,6 @@
 #import "CSAppDelegate.h"
 
 @interface CSKuleSettingsViewController ()
-- (IBAction)onBtnBackClicked:(id)sender;
 - (IBAction)onBtnCheckUpdatesClicked:(id)sender;
 - (IBAction)onBtnFeedbackClicked:(id)sender;
 - (IBAction)onBtnChangePswdClicked:(id)sender;
@@ -46,10 +45,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)onBtnBackClicked:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
+#pragma mark - UI Actions
 - (IBAction)onBtnCheckUpdatesClicked:(id)sender {
 }
 

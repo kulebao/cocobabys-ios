@@ -10,8 +10,6 @@
 
 @interface CSKuleAboutViewController ()
 
-- (IBAction)onBtnBackClicked:(id)sender;
-
 @end
 
 @implementation CSKuleAboutViewController
@@ -40,8 +38,5 @@
 }
 
 #pragma mark - UI Actions
-- (IBAction)onBtnBackClicked:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
-}
 
 @end

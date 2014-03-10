@@ -193,7 +193,7 @@
     NSInteger school_id = [[dataJson valueForKeyNotNull:@"school_id"] integerValue];
     NSString* title = [dataJson valueForKeyNotNull:@"title"];
     NSString* content = [dataJson valueForKeyNotNull:@"content"];
-    NSTimeInterval timestamp = [[dataJson valueForKeyNotNull:@"timestamp"] doubleValue];
+    double timestamp = [[dataJson valueForKeyNotNull:@"timestamp"] doubleValue];
     BOOL published = [[dataJson valueForKeyNotNull:@"published"] boolValue];
     NSInteger notice_type = [[dataJson valueForKeyNotNull:@"notice_type"] integerValue];
     

@@ -74,18 +74,14 @@
     
     NSDate* d = [NSDate dateWithTimeIntervalSince1970:newsInfo.timestamp];
     
-    NSString* dateString = [NSDateFormatter localizedStringFromDate:d
-                                                          dateStyle:NSDateFormatterLongStyle
-                                                          timeStyle:NSDateFormatterLongStyle];
-    
-    cell.labDate.text = dateString;
+    cell.labDate.text = [d isoDateTimeString];
     
     return cell;
 }
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 110.0;
+    return 110.0+5.0;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -187,11 +183,8 @@
             }
             
             if (newsInfos.count > 0) {
-                NSInteger row = self.newsInfoList.count;
                 [self.newsInfoList addObjectsFromArray:newsInfos];
                 [gApp hideAlert];
-                
-                [self.tableview scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
             }
             else {
                 [gApp alert:@"没有更多消息"];

@@ -80,6 +80,13 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="labBreakfast" destination="b7y-8E-Awo" id="HVH-zY-Voo"/>
+                <outlet property="labDate" destination="U2G-F8-LGp" id="my6-vI-123"/>
+                <outlet property="labDinner" destination="hDY-JX-kSx" id="Kzf-Mx-3AV"/>
+                <outlet property="labExtra" destination="6rF-tD-R9X" id="DSn-9h-yzK"/>
+                <outlet property="labLunch" destination="PuP-5a-ASb" id="7Mb-2l-vD3"/>
+            </connections>
         </tableViewCell>
     </objects>
     <resources>

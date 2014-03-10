@@ -145,7 +145,7 @@
             [gApp alert:[error localizedDescription]];
         };
         
-        [gApp waitingAlert:@"修改宝宝昵称中，请稍后"];
+        [gApp waitingAlert:@"修改宝宝昵称中，请稍候"];
         [gApp.engine reqUpdateChildInfo:cp
                          inKindergarten:gApp.engine.loginInfo.schoolId
                                 success:sucessHandler

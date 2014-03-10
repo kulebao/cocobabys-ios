@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface CSKuleRecipeCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *labBreakfast;
+@property (weak, nonatomic) IBOutlet UILabel *labLunch;
+@property (weak, nonatomic) IBOutlet UILabel *labExtra;
+@property (weak, nonatomic) IBOutlet UILabel *labDinner;
+@property (weak, nonatomic) IBOutlet UILabel *labDate;
 
 @end

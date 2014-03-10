@@ -209,4 +209,109 @@
     return obj;
 }
 
++ (CSKuleCookbookInfo*)decodeCookbookInfo:(NSDictionary*)dataJson {
+    /*
+     {
+     "error_code" : 0,
+     "school_id" : 93740362,
+     "cookbook_id" : 179,
+     "timestamp" : 1394356587696,
+     "extra_tip" : "xxx",
+     "week" : {
+        "mon" : {...},
+        "tue" : {...},
+        "wed" : {...},
+        "thu" : {...},
+        "fri" : {...}
+        }
+     }
+     */
+    
+    NSParameterAssert(dataJson);
+    
+    
+    NSInteger error_code = [[dataJson valueForKeyNotNull:@"error_code"] integerValue];
+    NSInteger school_id = [[dataJson valueForKeyNotNull:@"school_id"] integerValue];
+    NSInteger cookbook_id = [[dataJson valueForKeyNotNull:@"cookbook_id"] integerValue];
+    double timestamp = [[dataJson valueForKeyNotNull:@"timestamp"] doubleValue];
+    NSString* extra_tip = [dataJson valueForKeyNotNull:@"extra_tip"];
+    
+    NSDictionary* week = [dataJson valueForKeyNotNull:@"week"];
+    
+    CSKuleRecipeInfo* mon = nil;
+    CSKuleRecipeInfo* tue = nil;
+    CSKuleRecipeInfo* wed = nil;
+    CSKuleRecipeInfo* thu = nil;
+    CSKuleRecipeInfo* fri = nil;
+    
+    if (week) {
+        id monJson = [week valueForKeyNotNull:@"mon"];
+        if (monJson) {
+            mon = [CSKuleInterpreter decodeRecipeInfo:monJson];
+        }
+        
+        id tueJson = [week valueForKeyNotNull:@"tue"];
+        if (tueJson) {
+            tue = [CSKuleInterpreter decodeRecipeInfo:tueJson];
+        }
+        
+        id wedJson = [week valueForKeyNotNull:@"wed"];
+        if (wedJson) {
+            wed = [CSKuleInterpreter decodeRecipeInfo:wedJson];
+        }
+        
+        id thuJson = [week valueForKeyNotNull:@"thu"];
+        if (thuJson) {
+            thu = [CSKuleInterpreter decodeRecipeInfo:thuJson];
+        }
+        
+        id friJson = [week valueForKeyNotNull:@"fri"];
+        if (friJson) {
+            fri = [CSKuleInterpreter decodeRecipeInfo:friJson];
+        }
+    }
+    
+    CSKuleCookbookInfo* obj = [CSKuleCookbookInfo new];
+    obj.errorCode = error_code;
+    obj.schoolId = school_id;
+    obj.cookbookId = cookbook_id;
+    obj.timestamp = timestamp/1000.0;
+    obj.extraTip = extra_tip;
+    
+    obj.mon = mon;
+    obj.tue = tue;
+    obj.wed = wed;
+    obj.thu = thu;
+    obj.fri = fri;
+    
+    return obj;
+}
+
++ (CSKuleRecipeInfo*)decodeRecipeInfo:(NSDictionary*)dataJson {
+    /*
+     {
+     "breakfast" : "牛大爷、鸡蛋、蛋糕,包子",
+     "lunch" : "番茄鸡蛋面",
+     "dinner" : "小鸡烧蘑菇，猪肉炖粉条",
+     "extra" : "包子"
+     }
+     */
+    
+    NSParameterAssert(dataJson);
+    
+    NSString* breakfast = [dataJson valueForKeyNotNull:@"breakfast"];
+    NSString* lunch = [dataJson valueForKeyNotNull:@"lunch"];
+    NSString* dinner = [dataJson valueForKeyNotNull:@"dinner"];
+    NSString* extra = [dataJson valueForKeyNotNull:@"extra"];
+    
+    CSKuleRecipeInfo* obj = [CSKuleRecipeInfo new];
+    obj.breakfast = breakfast;
+    obj.lunch = lunch;
+    obj.dinner = dinner;
+    obj.extra = extra;
+    
+    return obj;
+}
+
+
 @end

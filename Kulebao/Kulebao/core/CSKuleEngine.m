@@ -279,4 +279,22 @@
                                failure:failure];
 }
 
+- (void)reqGetCookbooksOfKindergarten:(NSInteger)kindergarten
+                              success:(SuccessResponseHandler)success
+                              failure:(FailureResponseHandler)failure {
+    [self setupHttpClient];
+    
+    NSString* path = [NSString stringWithFormat:kKindergartenCookbooksPath, @(kindergarten)];
+    
+    NSString* method = @"GET";
+    
+    NSDictionary* parameters = nil;
+    
+    [_httpClient httpRequestWithMethod:method
+                                  path:path
+                            parameters:parameters
+                               success:success
+                               failure:failure];
+}
+
 @end

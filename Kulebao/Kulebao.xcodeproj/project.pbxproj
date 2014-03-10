@@ -208,6 +208,8 @@
 		09ED59AF18CD8ED100187585 /* CSKuleNewsDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09ED59AE18CD8ED100187585 /* CSKuleNewsDetailsViewController.m */; };
 		09ED59B218CDB01600187585 /* NSDate+CSKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 09ED59B118CDB01600187585 /* NSDate+CSKit.m */; };
 		09ED59B618CDBF3900187585 /* UIWebView+CSKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 09ED59B518CDBF3900187585 /* UIWebView+CSKit.m */; };
+		09ED59B918CDC5D800187585 /* CSKuleRecipeInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09ED59B818CDC5D800187585 /* CSKuleRecipeInfo.m */; };
+		09ED59BC18CDC5E800187585 /* CSKuleCookbookInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09ED59BB18CDC5E800187585 /* CSKuleCookbookInfo.m */; };
 		09FE6AEE18C5729500A840BE /* CSKuleNoticeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE6AED18C5729500A840BE /* CSKuleNoticeCell.m */; };
 		09FE6AF018C572A500A840BE /* CSKuleNoticeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09FE6AEF18C572A500A840BE /* CSKuleNoticeCell.xib */; };
 		09FE6AF318C5762600A840BE /* CSKuleNewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE6AF218C5762600A840BE /* CSKuleNewsViewController.m */; };
@@ -511,6 +513,10 @@
 		09ED59B118CDB01600187585 /* NSDate+CSKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+CSKit.m"; sourceTree = "<group>"; };
 		09ED59B418CDBF3900187585 /* UIWebView+CSKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+CSKit.h"; sourceTree = "<group>"; };
 		09ED59B518CDBF3900187585 /* UIWebView+CSKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+CSKit.m"; sourceTree = "<group>"; };
+		09ED59B718CDC5D800187585 /* CSKuleRecipeInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleRecipeInfo.h; sourceTree = "<group>"; };
+		09ED59B818CDC5D800187585 /* CSKuleRecipeInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleRecipeInfo.m; sourceTree = "<group>"; };
+		09ED59BA18CDC5E800187585 /* CSKuleCookbookInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleCookbookInfo.h; sourceTree = "<group>"; };
+		09ED59BB18CDC5E800187585 /* CSKuleCookbookInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleCookbookInfo.m; sourceTree = "<group>"; };
 		09FE6AEC18C5729500A840BE /* CSKuleNoticeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleNoticeCell.h; sourceTree = "<group>"; };
 		09FE6AED18C5729500A840BE /* CSKuleNoticeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleNoticeCell.m; sourceTree = "<group>"; };
 		09FE6AEF18C572A500A840BE /* CSKuleNoticeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSKuleNoticeCell.xib; sourceTree = "<group>"; };
@@ -603,6 +609,8 @@
 				090468F418C6FE1000D0846E /* CSKuleBindInfo.m */,
 				0904690018C7117D00D0846E /* CSKuleChildInfo.h */,
 				0904690118C7117D00D0846E /* CSKuleChildInfo.m */,
+				09ED59BA18CDC5E800187585 /* CSKuleCookbookInfo.h */,
+				09ED59BB18CDC5E800187585 /* CSKuleCookbookInfo.m */,
 				090C9EB118C81D7500883DE0 /* CSKuleInterpreter.h */,
 				090C9EB218C81D7500883DE0 /* CSKuleInterpreter.m */,
 				09219A5818C4999B00166228 /* CSKuleLoginInfo.h */,
@@ -611,6 +619,8 @@
 				09ED59AB18CD67FD00187585 /* CSKuleNewsInfo.m */,
 				0904690318C72E5000D0846E /* CSKuleParentInfo.h */,
 				0904690418C72E5000D0846E /* CSKuleParentInfo.m */,
+				09ED59B718CDC5D800187585 /* CSKuleRecipeInfo.h */,
+				09ED59B818CDC5D800187585 /* CSKuleRecipeInfo.m */,
 				0904690618C72E6C00D0846E /* CSKuleRelationshipInfo.h */,
 				0904690718C72E6C00D0846E /* CSKuleRelationshipInfo.m */,
 			);
@@ -1316,6 +1326,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				09A9EBD518C0A01B00D83119 /* CSKuleMainViewController.m in Sources */,
+				09ED59BC18CDC5E800187585 /* CSKuleCookbookInfo.m in Sources */,
 				09BA1BFD18BB334900760182 /* Base64.m in Sources */,
 				09FE6AF918C5B97100A840BE /* CSKuleRecipeCell.m in Sources */,
 				09BA1BE018BB2FC700760182 /* PullTableView.m in Sources */,
@@ -1371,6 +1382,7 @@
 				09BA1C2618BB3F8400760182 /* AFJSONRequestOperation.m in Sources */,
 				0904690818C72E6C00D0846E /* CSKuleRelationshipInfo.m in Sources */,
 				09FE6B0118C5BCFD00A840BE /* CSKuleHomeworkViewController.m in Sources */,
+				09ED59B918CDC5D800187585 /* CSKuleRecipeInfo.m in Sources */,
 				09BA1C2B18BB3F8400760182 /* UIImageView+AFNetworking.m in Sources */,
 				09C1C75F18BD92990040B06D /* AFJSONRequestOperation+CSExtends.m in Sources */,
 				09C1C76618BD973B0040B06D /* NSDictionary+CSKit.m in Sources */,

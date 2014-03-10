@@ -34,4 +34,7 @@
 // PATH: 幼儿园公告
 #define kKindergartenNewsListPath   @"/kindergarten/%@/news"
 
+// PATH: 食谱
+#define kKindergartenCookbooksPath  @"/kindergarten/%@/cookbook"
+
 #endif

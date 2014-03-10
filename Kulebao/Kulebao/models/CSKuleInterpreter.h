@@ -12,6 +12,7 @@
 #import "CSKuleLoginInfo.h"
 #import "CSKuleBindInfo.h"
 #import "CSKuleNewsInfo.h"
+#import "CSKuleCookbookInfo.h"
 
 @interface CSKuleInterpreter : NSObject
 
@@ -26,5 +27,9 @@
 + (CSKuleParentInfo*)decodeParentInfo:(NSDictionary*)dataJson;
 
 + (CSKuleNewsInfo*)decodeNewsInfo:(NSDictionary*)dataJson;
+
++ (CSKuleCookbookInfo*)decodeCookbookInfo:(NSDictionary*)dataJson;
+
++ (CSKuleRecipeInfo*)decodeRecipeInfo:(NSDictionary*)dataJson;
 
 @end

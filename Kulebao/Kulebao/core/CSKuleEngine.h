@@ -69,5 +69,9 @@
                          success:(SuccessResponseHandler)success
                          failure:(FailureResponseHandler)failure;
 
+- (void)reqGetCookbooksOfKindergarten:(NSInteger)kindergarten
+                              success:(SuccessResponseHandler)success
+                              failure:(FailureResponseHandler)failure;
+
 
 @end

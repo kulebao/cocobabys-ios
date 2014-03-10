@@ -290,6 +290,7 @@
     NSString *outputString = [outputFormatter stringFromDate:self];
     return outputString;
 }
+
 //返回周日的的开始时间
 - (NSDate *)beginningOfWeek {
     // largely borrowed from "Date and Time Programming Guide for Cocoa"

@@ -19,6 +19,9 @@
 - (NSString*)isoDateTimeString;
 - (NSString*)shortDateTimeString;
 
+//返回周日的的开始时间
+- (NSDate *)beginningOfWeek;
+
 //返回该月的第一天
 - (NSDate *)beginningOfMonth;
 

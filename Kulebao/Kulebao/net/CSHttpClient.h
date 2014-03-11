@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
-#import "AFJSONRequestOperation+CSExtends.h"
+#import "AFJSONRequestOperation+CSKit.h"
 
 @interface CSHttpClient : AFHTTPClient
 

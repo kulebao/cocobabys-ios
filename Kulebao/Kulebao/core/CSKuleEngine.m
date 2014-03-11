@@ -14,11 +14,13 @@
 @interface CSKuleEngine()
 
 @property (strong, nonatomic) CSHttpClient* httpClient;
+@property (strong, nonatomic) CSHttpClient* qiniuHttpClient;
 
 @end
 
 @implementation CSKuleEngine
 @synthesize httpClient = _httpClient;
+@synthesize qiniuHttpClient = _qiniuHttpClient;
 @synthesize preferences = _preferences;
 @synthesize loginInfo = _loginInfo;
 @synthesize bindInfo = _bindInfo;
@@ -88,6 +90,11 @@
         NSURL* baseUrl = [NSURL URLWithString:kServerHost];
         _httpClient = [CSHttpClient httpClientWithHost:baseUrl];
     }
+    
+    if (_qiniuHttpClient == nil) {
+        NSURL* baseUrl = [NSURL URLWithString:kQiniuUploadServerHost];
+        _qiniuHttpClient = [CSHttpClient httpClientWithHost:baseUrl];
+    }
 }
 
 - (void)setupAppearance {
@@ -124,13 +131,82 @@
     return url;
 }
 
+#pragma mark - Uploader
+- (void)reqUploadToQiniu:(NSData*)data
+                 withKey:(NSString*)key
+                withMime:(NSString*)mime
+                 success:(SuccessResponseHandler)success
+                 failure:(FailureResponseHandler)failure {
+    NSParameterAssert(data);
+    NSParameterAssert(key);
+    NSParameterAssert(mime);
+    
+    [self reqGetUploadTokenWithKey:key success:^(NSURLRequest *request, id dataJson) {
+        NSString* token = [dataJson valueForKeyNotNull:@"token"];
+        
+        if (token) {
+            [self reqUploadQiniuWithData:data
+                               withToken:token
+                                  andKey:key
+                                 andMime:mime
+                                 success:success
+                                 failure:failure];
+        }
+        else {
+            NSError* error = [NSError errorWithDomain:@"CSKit"
+                                                 code:-8888
+                                             userInfo: @{NSLocalizedDescriptionKey:@"Invalid Token."}];
+            
+            failure(request, error);
+        }
+        
+    } failure:^(NSURLRequest *request, NSError *error) {
+        failure(request, error);
+    }];
+}
+
+- (void)reqGetUploadTokenWithKey:(NSString*)key
+                         success:(SuccessResponseHandler)success
+                         failure:(FailureResponseHandler)failure {
+    NSParameterAssert(key);
+    
+    NSString* path = kUploadFileTokenPath;
+    
+    NSString* method = @"GET";
+    
+    NSDictionary* parameters = @{@"bucket": kQiniuBucket,
+                                 @"key": key};
+    
+    [_httpClient httpRequestWithMethod:method
+                                  path:path
+                            parameters:parameters
+                               success:success
+                               failure:failure];
+}
+
+- (void)reqUploadQiniuWithData:(NSData*)data
+                     withToken:(NSString*)token
+                        andKey:(NSString*)key
+                       andMime:(NSString*)mime
+                       success:(SuccessResponseHandler)success
+                       failure:(FailureResponseHandler)failure {
+    
+    NSMutableURLRequest* req = [_qiniuHttpClient multipartFormRequestWithMethod:@"POST" path:@"/" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        [formData appendPartWithFileData:data name:@"file" fileName:key mimeType:mime];
+        [formData appendPartWithFormData:[key dataUsingEncoding:NSUTF8StringEncoding] name:@"key"];
+        [formData appendPartWithFormData:[token dataUsingEncoding:NSUTF8StringEncoding] name:@"token"];
+    }];
+    
+    AFJSONRequestOperation* oper = [AFJSONRequestOperation CSJSONRequestOperationWithRequest:req
+                                                                                     success:success
+                                                                                     failure:failure];
+    [_qiniuHttpClient enqueueHTTPRequestOperation:oper];
+}
+
 #pragma mark - HTTP Request
 - (void)reqCheckPhoneNum:(NSString*)mobile
                  success:(SuccessResponseHandler)success
                  failure:(FailureResponseHandler)failure {
-    
-    [self setupHttpClient];
-    
     NSString* path = kCheckPhoneNumPath;
     
     NSString* method = @"POST";
@@ -151,8 +227,6 @@
     NSParameterAssert(mobile);
     NSParameterAssert(password);
     
-    [self setupHttpClient];
-    
     NSString* path = kLoginPath;
 
     NSString* method = @"POST";
@@ -171,8 +245,6 @@
                    success:(SuccessResponseHandler)success
                    failure:(FailureResponseHandler)failure {
     NSParameterAssert(mobile);
-    
-    [self setupHttpClient];
     
     NSString* path = kReceiveBindInfoPath;
     
@@ -205,7 +277,6 @@
                          success:(SuccessResponseHandler)success
                          failure:(FailureResponseHandler)failure {
     NSParameterAssert(mobile);
-    [self setupHttpClient];
     
     NSString* path = [NSString stringWithFormat:kGetFamilyRelationship, @(kindergarten)];
 
@@ -226,8 +297,6 @@
                    success:(SuccessResponseHandler)success
                    failure:(FailureResponseHandler)failure {
     NSParameterAssert(childInfo);
-    
-    [self setupHttpClient];
     
     NSString* path = [NSString stringWithFormat:kChildInfoPath, @(kindergarten), childInfo.childId];
     
@@ -253,8 +322,6 @@
                             most:(NSInteger)most
                          success:(SuccessResponseHandler)success
                          failure:(FailureResponseHandler)failure {
-    [self setupHttpClient];
-    
     NSString* path = [NSString stringWithFormat:kKindergartenNewsListPath, @(kindergarten)];
     
     NSString* method = @"GET";
@@ -282,8 +349,6 @@
 - (void)reqGetCookbooksOfKindergarten:(NSInteger)kindergarten
                               success:(SuccessResponseHandler)success
                               failure:(FailureResponseHandler)failure {
-    [self setupHttpClient];
-    
     NSString* path = [NSString stringWithFormat:kKindergartenCookbooksPath, @(kindergarten)];
     
     NSString* method = @"GET";

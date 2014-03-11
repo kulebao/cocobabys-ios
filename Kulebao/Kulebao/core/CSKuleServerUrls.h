@@ -10,6 +10,24 @@
 #define Kulebao_CSKuleServerUrls_h
 
 
+/************************************************************/
+/*   七牛存储相关
+ ************************************************************/
+ 
+// HOST: 七牛上传服务器Host地址
+#define kQiniuUploadServerHost      @"http://up.qiniu.com"
+
+// PATH: 获取上传Token
+#define kUploadFileTokenPath        @"/ws/fileToken"
+
+// Bucket:
+#define kQiniuBucket                @"cocobabys"
+
+// 七牛资源下载服务器Host地址
+#define kQiniuDownloadServerHost    @"http://cocobabys.qiniudn.com"
+
+/************************************************************/
+
 // HOST: 服务器接口Host地址
 #define kServerHost                 @"https://www.cocobabys.com"
 

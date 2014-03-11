@@ -50,6 +50,26 @@
 }
 
 - (IBAction)onBtnFeedbackClicked:(id)sender {
+    
+    CSHttpClient* httpClient = [CSHttpClient clientWithBaseURL:[NSURL URLWithString:@"http://up.qiniu.com"]];
+    
+    UIImage* img = [UIImage imageNamed:@"icon-120.png"];
+    NSData* da = UIImageJPEGRepresentation(img, 0.8);
+    
+    NSMutableURLRequest* req = [httpClient multipartFormRequestWithMethod:@"POST" path:@"/" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        [formData appendPartWithFileData:da name:@"file" fileName:@"xxaaa.jpeg" mimeType:@"image/jpeg"];
+        [formData appendPartWithFormData:[@"child_photo/93740362/1_1391836223533/1_1391836223533.jpg" dataUsingEncoding:NSUTF8StringEncoding] name:@"key"];
+        
+        [formData appendPartWithFormData:[@"vML8y91UgErLsWX2Lzk6dkD6tZqgGGyw5-Fyv17_:gpOIO6JtFC8wGqwjJo7tfccc_qI=:eyJzY29wZSI6ImNvY29iYWJ5czpjaGlsZF9waG90by85Mzc0MDM2Mi8xXzEzOTE4MzYyMjM1MzMvMV8xMzkxODM2MjIzNTMzLmpwZyIsInJldHVybkJvZHkiOiJ7XCJuYW1lXCI6ICQoZm5hbWUpLCBcInNpemVcIjogJChmc2l6ZSksXCJoYXNoXCI6ICQoZXRhZyl9IiwiZGVhZGxpbmUiOjEzOTQ1MjU1Nzl9" dataUsingEncoding:NSUTF8StringEncoding] name:@"token"];
+    }];
+    
+    AFJSONRequestOperation* oper = [AFJSONRequestOperation CSJSONRequestOperationWithRequest:req success:^(NSURLRequest *request, id dataJson) {
+        CSLog(@"success");
+    } failure:^(NSURLRequest *request, NSError *error) {
+        CSLog(@"failure");
+    }];
+    
+    [httpClient enqueueHTTPRequestOperation:oper];
 }
 
 - (IBAction)onBtnChangePswdClicked:(id)sender {

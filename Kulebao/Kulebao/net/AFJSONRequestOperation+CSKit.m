@@ -1,15 +1,15 @@
 //
-//  AFJSONRequestOperation+CSExtends.m
+//  AFJSONRequestOperation+CSKit.m
 //  CSKit
 //
 //  Created by xin.c.wang on 13-4-23.
 //  Copyright (c) 2013年 Codingsoft. All rights reserved.
 //
 
-#import "AFJSONRequestOperation+CSExtends.h"
+#import "AFJSONRequestOperation+CSKit.h"
 #import "CSAppDelegate.h"
 
-@implementation AFJSONRequestOperation (CSExtends)
+@implementation AFJSONRequestOperation (CSKit)
 
 + (instancetype)CSJSONRequestOperationWithRequest:(NSMutableURLRequest *)urlRequest
                                           success:(SuccessResponseHandler)success
@@ -23,7 +23,7 @@
         else if(failure) {
             NSError* error = [NSError errorWithDomain:@"CSKit"
                                                  code:-9999
-                                             userInfo:[NSDictionary dictionaryWithObject:@"服务异常" forKey:NSLocalizedDescriptionKey]];
+                                             userInfo: @{NSLocalizedDescriptionKey:@"服务异常"}];
             failure(operation.request, error);
         }
         

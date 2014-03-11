@@ -156,6 +156,38 @@
     }
 }
 
+- (void)doUpdateChildPortrait:(NSString*)portrait {
+    if (portrait.length > 0) {
+        CSKuleChildInfo* childInfo = gApp.engine.currentRelationship.child;
+        CSKuleChildInfo* cp = [childInfo copy];
+        cp.portrait = portrait;
+        
+        SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
+            CSLog(@"success.");
+            [gApp alert:@"更新成功"];
+            
+            CSKuleChildInfo* cc = [CSKuleInterpreter decodeChildInfo:dataJson];
+            childInfo.portrait = cc.portrait;
+            
+            [self updateUI];
+        };
+        
+        FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
+            CSLog(@"failure:%@", error);
+            [gApp alert:[error localizedDescription]];
+        };
+        
+        [gApp waitingAlert:@"更新宝宝头像中"];
+        [gApp.engine reqUpdateChildInfo:cp
+                         inKindergarten:gApp.engine.loginInfo.schoolId
+                                success:sucessHandler
+                                failure:failureHandler];
+    }
+    else {
+        [gApp alert:@"头像不存在"];
+    }
+}
+
 - (void)doChangePortraitFromPhoto {
     _imgPicker = [[UIImagePickerController alloc] init];
     _imgPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
@@ -181,14 +213,42 @@
 
 #pragma mark - UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    UIImage* img = info[UIImagePickerControllerEditedImage];
+    NSData* imgData = UIImageJPEGRepresentation(img, 0.8);
+    NSString* imgFileName = [NSString stringWithFormat:@"child_photo/%@/%@/%@.jpg",
+                             @(gApp.engine.loginInfo.schoolId),
+                             gApp.engine.currentRelationship.child.childId,
+                             gApp.engine.currentRelationship.child.childId];
+    
+    
+    SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
+        NSString* portrait = [NSString stringWithFormat:@"%@/%@", kQiniuDownloadServerHost, imgFileName];
+        //self.imgChildPortrait.image = img;
+        
+        [self doUpdateChildPortrait:portrait];
+    };
+    
+    FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
+        CSLog(@"failure:%@", error);
+        [gApp alert:[error localizedDescription]];
+    };
+    
+    [gApp waitingAlert:@"上传宝宝头像中"];
+    [gApp.engine reqUploadToQiniu:imgData
+                          withKey:imgFileName
+                         withMime:@"image/jpeg"
+                          success:sucessHandler
+                          failure:failureHandler];
+    
     [picker dismissViewControllerAnimated:YES
                                completion:^{
-                                   
+                                   if (picker == _imgPicker) {
+                                       _imgPicker = nil;
+                                   }
                                }];
     
-    if (picker == _imgPicker) {
-        _imgPicker = nil;
-    }
+    
+    
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
@@ -277,6 +337,7 @@
     
     FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
         CSLog(@"failure:%@", error);
+        [gApp alert:[error localizedDescription]];
     };
     
     [gApp waitingAlert:@"获取宝宝信息"];

@@ -1,5 +1,5 @@
 //
-//  AFJSONRequestOperation+CSExtends.h
+//  AFJSONRequestOperation+CSKit.h
 //  CSKit
 //
 //  Created by xin.c.wang on 13-4-23.
@@ -11,7 +11,7 @@
 typedef void (^SuccessResponseHandler) (NSURLRequest *request,id dataJson);
 typedef void (^FailureResponseHandler) (NSURLRequest *request, NSError *error);
 
-@interface AFJSONRequestOperation (CSExtends)
+@interface AFJSONRequestOperation (CSKit)
 
 + (instancetype)CSJSONRequestOperationWithRequest:(NSMutableURLRequest *)urlRequest
                                         success:(SuccessResponseHandler)success

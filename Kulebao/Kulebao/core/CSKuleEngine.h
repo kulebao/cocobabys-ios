@@ -38,6 +38,13 @@
 #pragma mark - URL
 - (NSURL*)urlFromPath:(NSString*)path;
 
+#pragma mark - Uploader
+- (void)reqUploadToQiniu:(NSData*)data
+                 withKey:(NSString*)key
+                withMime:(NSString*)mime
+                 success:(SuccessResponseHandler)success
+                 failure:(FailureResponseHandler)failure;
+
 #pragma mark - HTTP Request
 - (void)reqCheckPhoneNum:(NSString*)mobile
                  success:(SuccessResponseHandler)success

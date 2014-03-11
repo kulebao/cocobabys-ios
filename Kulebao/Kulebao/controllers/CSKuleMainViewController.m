@@ -324,15 +324,21 @@
         
         for (id relationshipJson in dataJson) {
             CSKuleRelationshipInfo* relationshipInfo = [CSKuleInterpreter decodeRelationshipInfo:relationshipJson];
-            [relationships addObject:relationshipInfo];
+            if (relationshipInfo.parent && relationshipInfo.child) {
+                [relationships addObject:relationshipInfo];
+            }
         }
         
         gApp.engine.relationships = [NSArray arrayWithArray:relationships];
         
         CSKuleRelationshipInfo* relationshipInfo = [gApp.engine.relationships firstObject];
-        gApp.engine.currentRelationship = relationshipInfo;
-        
-        [gApp hideAlert];
+        if(relationshipInfo) {
+            gApp.engine.currentRelationship = relationshipInfo;
+            [gApp hideAlert];
+        }
+        else {
+            [gApp alert:@"没有关联宝宝信息"];
+        }
     };
     
     FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {

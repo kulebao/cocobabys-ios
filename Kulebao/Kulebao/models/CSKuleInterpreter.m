@@ -88,9 +88,17 @@
     NSString* relationship = [dataJson valueForKeyNotNull:@"relationship"];
     NSString* card = [dataJson valueForKeyNotNull:@"card"];
     
-    CSKuleChildInfo* child = [CSKuleInterpreter decodeChildInfo:[dataJson valueForKeyNotNull:@"child"]];
-    
-    CSKuleParentInfo* parent = [CSKuleInterpreter decodeParentInfo:[dataJson valueForKeyNotNull:@"parent"]];
+    CSKuleChildInfo* child = nil;
+    id childJson = [dataJson valueForKeyNotNull:@"child"];
+    if (childJson) {
+        child = [CSKuleInterpreter decodeChildInfo:[dataJson valueForKeyNotNull:@"child"]];
+    }
+
+    CSKuleParentInfo* parent = nil;
+    id parentJson = [dataJson valueForKeyNotNull:@"parent"];
+    if (parentJson) {
+        parent = [CSKuleInterpreter decodeParentInfo:parentJson];
+    }
     
     CSKuleRelationshipInfo* obj = [CSKuleRelationshipInfo new];
     obj.relationship = relationship;

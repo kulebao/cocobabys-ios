@@ -307,7 +307,8 @@
                                  @"birthday": childInfo.birthday,
                                  @"gender": @(childInfo.gender),
                                  @"portrait": childInfo.portrait,
-                                 @"class_id": @(childInfo.classId)};
+                                 @"class_id": @(childInfo.classId),
+                                 @"child_id": childInfo.childId};
     
     [_httpClient httpRequestWithMethod:method
                                   path:path

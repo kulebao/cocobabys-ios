@@ -11,7 +11,7 @@
 
 
 /************************************************************/
-/*   七牛存储相关
+/*   七牛存储相关API
  ************************************************************/
  
 // HOST: 七牛上传服务器Host地址
@@ -26,7 +26,10 @@
 // 七牛资源下载服务器Host地址
 #define kQiniuDownloadServerHost    @"http://cocobabys.qiniudn.com"
 
+
 /************************************************************/
+/*   Kule API
+ ************************************************************/
 
 // HOST: 服务器接口Host地址
 #define kServerHost                 @"https://www.cocobabys.com"
@@ -54,5 +57,8 @@
 
 // PATH: 食谱
 #define kKindergartenCookbooksPath  @"/kindergarten/%@/cookbook"
+
+// PATH: 亲子作业列表
+#define kAssignmentListPath         @"/kindergarten/%@/assignment"
 
 #endif

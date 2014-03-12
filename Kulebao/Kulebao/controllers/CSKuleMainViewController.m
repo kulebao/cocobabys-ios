@@ -29,7 +29,7 @@
 - (IBAction)onBtnRecipeClicked:(id)sender;
 - (IBAction)onBtnCheckinInfoClicked:(id)sender;
 - (IBAction)onBtnScheduleInfoClicked:(id)sender;
-- (IBAction)onBtnHomeworkClicked:(id)sender;
+- (IBAction)onBtnAssignmentClicked:(id)sender;
 - (IBAction)onBtnChatingClicked:(id)sender;
 
 @end
@@ -309,8 +309,8 @@
     [self performSegueWithIdentifier:@"segue.schedule" sender:nil];
 }
 
-- (IBAction)onBtnHomeworkClicked:(id)sender {
-    [self performSegueWithIdentifier:@"segue.homework" sender:nil];
+- (IBAction)onBtnAssignmentClicked:(id)sender {
+    [self performSegueWithIdentifier:@"segue.assignment" sender:nil];
 }
 
 - (IBAction)onBtnChatingClicked:(id)sender {

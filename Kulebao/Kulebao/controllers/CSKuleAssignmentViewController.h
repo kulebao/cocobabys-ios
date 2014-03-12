@@ -1,5 +1,5 @@
 //
-//  CSKuleHomeworkViewController.h
+//  CSKuleAssignmentViewController.h
 //  Kulebao
 //
 //  Created by xin.c.wang on 14-3-4.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CSKuleHomeworkViewController : UIViewController
+@interface CSKuleAssignmentViewController : UIViewController
 
 @end

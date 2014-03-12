@@ -80,5 +80,12 @@
                               success:(SuccessResponseHandler)success
                               failure:(FailureResponseHandler)failure;
 
+- (void)reqGetAssignmentsOfKindergarten:(NSInteger)kindergarten
+                                   from:(NSInteger)fromId
+                                     to:(NSInteger)toId
+                                   most:(NSInteger)most
+                                success:(SuccessResponseHandler)success
+                                failure:(FailureResponseHandler)failure;
+
 
 @end

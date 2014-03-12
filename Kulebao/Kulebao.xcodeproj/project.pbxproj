@@ -30,6 +30,7 @@
 		090C9EDC18C87AEA00883DE0 /* KxMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 090C9EDA18C87AEA00883DE0 /* KxMenu.m */; };
 		0913745C18CEE48800ED7CD7 /* CSKuleQiniuUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0913745B18CEE48800ED7CD7 /* CSKuleQiniuUploader.m */; };
 		0913745D18CEED0500ED7CD7 /* icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 0934EFD418BF531800E30ECA /* icon-120.png */; };
+		0917764718D0574D00D24F53 /* CSKuleAssignmentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0917764618D0574D00D24F53 /* CSKuleAssignmentInfo.m */; };
 		09219A3418C42AF800166228 /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 09219A2F18C42AF800166228 /* 37x-Checkmark.png */; };
 		09219A3518C42AF800166228 /* 37x-Checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09219A3018C42AF800166228 /* 37x-Checkmark@2x.png */; };
 		09219A3618C42AF800166228 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 09219A3218C42AF800166228 /* MBProgressHUD.m */; };
@@ -219,7 +220,7 @@
 		09FE6AF918C5B97100A840BE /* CSKuleRecipeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE6AF818C5B97000A840BE /* CSKuleRecipeCell.m */; };
 		09FE6AFB18C5B97D00A840BE /* CSKuleRecipeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09FE6AFA18C5B97D00A840BE /* CSKuleRecipeCell.xib */; };
 		09FE6AFE18C5BB5600A840BE /* CSKuleRecipeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE6AFD18C5BB5600A840BE /* CSKuleRecipeViewController.m */; };
-		09FE6B0118C5BCFD00A840BE /* CSKuleHomeworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE6B0018C5BCFD00A840BE /* CSKuleHomeworkViewController.m */; };
+		09FE6B0118C5BCFD00A840BE /* CSKuleAssignmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE6B0018C5BCFD00A840BE /* CSKuleAssignmentViewController.m */; };
 		09FE6B0418C5C00F00A840BE /* CSKuleScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE6B0318C5C00F00A840BE /* CSKuleScheduleViewController.m */; };
 		09FE6B0718C5C23300A840BE /* CSKuleCheckinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE6B0618C5C23300A840BE /* CSKuleCheckinViewController.m */; };
 		09FE6B0A18C5C34F00A840BE /* CSKuleChatingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE6B0918C5C34F00A840BE /* CSKuleChatingViewController.m */; };
@@ -273,6 +274,8 @@
 		090C9EDB18C87AEA00883DE0 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		0913745A18CEE48800ED7CD7 /* CSKuleQiniuUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleQiniuUploader.h; sourceTree = "<group>"; };
 		0913745B18CEE48800ED7CD7 /* CSKuleQiniuUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleQiniuUploader.m; sourceTree = "<group>"; };
+		0917764518D0574D00D24F53 /* CSKuleAssignmentInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleAssignmentInfo.h; sourceTree = "<group>"; };
+		0917764618D0574D00D24F53 /* CSKuleAssignmentInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleAssignmentInfo.m; sourceTree = "<group>"; };
 		09219A2F18C42AF800166228 /* 37x-Checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark.png"; sourceTree = "<group>"; };
 		09219A3018C42AF800166228 /* 37x-Checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark@2x.png"; sourceTree = "<group>"; };
 		09219A3118C42AF800166228 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -533,8 +536,8 @@
 		09FE6AFA18C5B97D00A840BE /* CSKuleRecipeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSKuleRecipeCell.xib; sourceTree = "<group>"; };
 		09FE6AFC18C5BB5600A840BE /* CSKuleRecipeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleRecipeViewController.h; sourceTree = "<group>"; };
 		09FE6AFD18C5BB5600A840BE /* CSKuleRecipeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleRecipeViewController.m; sourceTree = "<group>"; };
-		09FE6AFF18C5BCFD00A840BE /* CSKuleHomeworkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleHomeworkViewController.h; sourceTree = "<group>"; };
-		09FE6B0018C5BCFD00A840BE /* CSKuleHomeworkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleHomeworkViewController.m; sourceTree = "<group>"; };
+		09FE6AFF18C5BCFD00A840BE /* CSKuleAssignmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleAssignmentViewController.h; sourceTree = "<group>"; };
+		09FE6B0018C5BCFD00A840BE /* CSKuleAssignmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleAssignmentViewController.m; sourceTree = "<group>"; };
 		09FE6B0218C5C00F00A840BE /* CSKuleScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleScheduleViewController.h; sourceTree = "<group>"; };
 		09FE6B0318C5C00F00A840BE /* CSKuleScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleScheduleViewController.m; sourceTree = "<group>"; };
 		09FE6B0518C5C23300A840BE /* CSKuleCheckinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleCheckinViewController.h; sourceTree = "<group>"; };
@@ -627,6 +630,8 @@
 				09ED59B818CDC5D800187585 /* CSKuleRecipeInfo.m */,
 				0904690618C72E6C00D0846E /* CSKuleRelationshipInfo.h */,
 				0904690718C72E6C00D0846E /* CSKuleRelationshipInfo.m */,
+				0917764518D0574D00D24F53 /* CSKuleAssignmentInfo.h */,
+				0917764618D0574D00D24F53 /* CSKuleAssignmentInfo.m */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -805,17 +810,16 @@
 		093904CC18BDD9F2006E8F82 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
-				09FE6AEB18C5722500A840BE /* views */,
 				090C9ECA18C853B700883DE0 /* CSKuleAboutViewController.h */,
 				090C9ECB18C853B700883DE0 /* CSKuleAboutViewController.m */,
+				09FE6AFF18C5BCFD00A840BE /* CSKuleAssignmentViewController.h */,
+				09FE6B0018C5BCFD00A840BE /* CSKuleAssignmentViewController.m */,
 				09A9EBD018C090E100D83119 /* CSKuleAuthViewController.h */,
 				09A9EBD118C090E200D83119 /* CSKuleAuthViewController.m */,
 				09FE6B0818C5C34F00A840BE /* CSKuleChatingViewController.h */,
 				09FE6B0918C5C34F00A840BE /* CSKuleChatingViewController.m */,
 				09FE6B0518C5C23300A840BE /* CSKuleCheckinViewController.h */,
 				09FE6B0618C5C23300A840BE /* CSKuleCheckinViewController.m */,
-				09FE6AFF18C5BCFD00A840BE /* CSKuleHomeworkViewController.h */,
-				09FE6B0018C5BCFD00A840BE /* CSKuleHomeworkViewController.m */,
 				09A9EBB918C0830900D83119 /* CSKuleLoginViewController.h */,
 				09A9EBBA18C0830900D83119 /* CSKuleLoginViewController.m */,
 				09A9EBD318C0A01B00D83119 /* CSKuleMainViewController.h */,
@@ -834,6 +838,7 @@
 				090C9EC318C84E9F00883DE0 /* CSKuleSelectChildViewController.m */,
 				09A9EBD618C0A02800D83119 /* CSKuleSettingsViewController.h */,
 				09A9EBD718C0A02800D83119 /* CSKuleSettingsViewController.m */,
+				09FE6AEB18C5722500A840BE /* views */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -1358,6 +1363,7 @@
 				090C9EC418C84E9F00883DE0 /* CSKuleSelectChildViewController.m in Sources */,
 				09BA1C2518BB3F8400760182 /* AFImageRequestOperation.m in Sources */,
 				09219A5218C4878600166228 /* TPKeyboardAvoidingScrollView.m in Sources */,
+				0917764718D0574D00D24F53 /* CSKuleAssignmentInfo.m in Sources */,
 				09BA1C2718BB3F8400760182 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				0904690518C72E5000D0846E /* CSKuleParentInfo.m in Sources */,
 				09FE6AF618C5A53200A840BE /* CSTextFieldDelegate.m in Sources */,
@@ -1389,7 +1395,7 @@
 				090C9EC718C84FB000883DE0 /* CSKuleChildCell.m in Sources */,
 				09BA1C2618BB3F8400760182 /* AFJSONRequestOperation.m in Sources */,
 				0904690818C72E6C00D0846E /* CSKuleRelationshipInfo.m in Sources */,
-				09FE6B0118C5BCFD00A840BE /* CSKuleHomeworkViewController.m in Sources */,
+				09FE6B0118C5BCFD00A840BE /* CSKuleAssignmentViewController.m in Sources */,
 				09ED59B918CDC5D800187585 /* CSKuleRecipeInfo.m in Sources */,
 				09BA1C2B18BB3F8400760182 /* UIImageView+AFNetworking.m in Sources */,
 				09C1C75F18BD92990040B06D /* AFJSONRequestOperation+CSKit.m in Sources */,

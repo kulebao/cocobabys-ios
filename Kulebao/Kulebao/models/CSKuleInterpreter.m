@@ -321,5 +321,39 @@
     return obj;
 }
 
++ (CSKuleAssignmentInfo*)decodeAssignmentInfo:(NSDictionary*)dataJson {
+    /*
+     {
+     "id" : 4,
+     "timestamp" : 1393344722731,
+     "title" : "老师再见。",
+     "content" : "今天请带一只小兔子回家。1",
+     "publisher" : "杨老师",
+     "icon_url" : "http://suoqin-test.u.qiniudn.com/FgPmIcRG6BGocpV1B9QMCaaBQ9LK",
+     "class_id" : 777666
+     },
+     */
+    
+    NSParameterAssert(dataJson);
+    
+    NSInteger assignment_id = [[dataJson valueForKeyNotNull:@"id"] integerValue];
+    double timestamp = [[dataJson valueForKeyNotNull:@"timestamp"] doubleValue];
+    NSString* title = [dataJson valueForKeyNotNull:@"title"];
+    NSString* content = [dataJson valueForKeyNotNull:@"content"];
+    NSString* publisher = [dataJson valueForKeyNotNull:@"publisher"];
+    NSString* icon_url = [dataJson valueForKeyNotNull:@"icon_url"];
+    NSInteger class_id = [[dataJson valueForKeyNotNull:@"class_id"] integerValue];
+    
+    CSKuleAssignmentInfo* obj = [CSKuleAssignmentInfo new];
+    obj.assignmentId = assignment_id;
+    obj.timestamp = timestamp / 1000.0;
+    obj.title = title;
+    obj.content = content;
+    obj.publisher = publisher;
+    obj.iconUrl = icon_url;
+    obj.classId = class_id;
+    
+    return obj;
+}
 
 @end

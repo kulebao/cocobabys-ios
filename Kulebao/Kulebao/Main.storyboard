@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="YlV-Z1-aZX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="YlV-Z1-aZX">
     <dependencies>
         <deployment version="1280" defaultVersion="1280" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
         <!--Kule Root View Controller-->
@@ -167,7 +167,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="onBtnHomeworkClicked:" destination="nb4-8s-InE" eventType="touchUpInside" id="DuJ-vG-5zO"/>
+                                    <action selector="onBtnAssignmentClicked:" destination="nb4-8s-InE" eventType="touchUpInside" id="ToW-w3-TEf"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="JX5-zQ-0cd">
@@ -293,7 +293,7 @@
                         <segue destination="Ot5-TZ-qvn" kind="push" identifier="segue.settings" id="LKg-r7-Frc"/>
                         <segue destination="hSh-cH-xBP" kind="push" identifier="segue.newslist" id="cnu-L4-AqF"/>
                         <segue destination="p7o-xu-qXK" kind="push" identifier="segue.recipe" id="fjS-GT-9cA"/>
-                        <segue destination="iCB-cn-3Ye" kind="push" identifier="segue.homework" id="sUy-LL-kbD"/>
+                        <segue destination="iCB-cn-3Ye" kind="push" identifier="segue.assignment" id="sUy-LL-kbD"/>
                         <segue destination="Vta-Cg-yNO" kind="push" identifier="segue.schedule" id="gpQ-i9-RXP"/>
                         <segue destination="1UC-eH-jjs" kind="push" identifier="segue.checkin" id="RuD-l7-P3j"/>
                         <segue destination="Oe0-Pk-5G3" kind="push" identifier="segue.chating" id="cmA-aq-eJf"/>
@@ -733,7 +733,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nR5-qp-BvI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="736" y="125"/>
+            <point key="canvasLocation" x="1256" y="741"/>
         </scene>
         <!--Kule Recipe View Controller - 宝宝食谱-->
         <scene sceneID="9KS-iG-ZHj">
@@ -769,10 +769,10 @@
             </objects>
             <point key="canvasLocation" x="182" y="777"/>
         </scene>
-        <!--Kule Homework View Controller - 亲子作业-->
+        <!--Kule Assignment View Controller - 亲子作业-->
         <scene sceneID="5NA-PF-QhV">
             <objects>
-                <viewController restorationIdentifier="CSKuleHomeworkViewController" storyboardIdentifier="CSKuleHomeworkViewController" id="iCB-cn-3Ye" customClass="CSKuleHomeworkViewController" sceneMemberID="viewController">
+                <viewController restorationIdentifier="CSKuleHomeworkViewController" storyboardIdentifier="CSKuleHomeworkViewController" id="iCB-cn-3Ye" customClass="CSKuleAssignmentViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Aop-xO-EvG">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -797,6 +797,7 @@
                     <navigationItem key="navigationItem" title="亲子作业" id="OXV-nM-eTM"/>
                     <connections>
                         <outlet property="tableview" destination="XvN-YD-HPD" id="YXp-vc-LFK"/>
+                        <segue destination="gZu-Ur-sSP" kind="push" identifier="segue.assignmentdetails" id="8DM-yn-6yq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GHk-2q-ns4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1091,4 +1092,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="8DM-yn-6yq"/>
+    </inferredMetricsTieBreakers>
 </document>

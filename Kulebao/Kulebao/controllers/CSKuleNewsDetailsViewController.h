@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "CSKuleNewsInfo.h"
+#import "CSKuleAssignmentInfo.h"
 
 @interface CSKuleNewsDetailsViewController : UIViewController
 
 @property (nonatomic, strong) CSKuleNewsInfo* newsInfo;
+@property (nonatomic, strong) CSKuleAssignmentInfo* assignmentInfo;
 
 @end

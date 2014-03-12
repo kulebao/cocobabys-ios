@@ -364,4 +364,35 @@
                                failure:failure];
 }
 
+- (void)reqGetAssignmentsOfKindergarten:(NSInteger)kindergarten
+                                   from:(NSInteger)fromId
+                                     to:(NSInteger)toId
+                                   most:(NSInteger)most
+                                success:(SuccessResponseHandler)success
+                                failure:(FailureResponseHandler)failure {
+    
+    NSString* path = [NSString stringWithFormat:kAssignmentListPath, @(kindergarten)];
+    
+    NSString* method = @"GET";
+    
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    if (fromId >= 0) {
+        [parameters setObject:@(fromId) forKey:@"from"];
+    }
+    
+    if (toId >= 0) {
+        [parameters setObject:@(toId) forKey:@"to"];
+    }
+    
+    if (most >= 0) {
+        [parameters setObject:@(most) forKey:@"most"];
+    }
+    
+    [_httpClient httpRequestWithMethod:method
+                                  path:path
+                            parameters:parameters
+                               success:success
+                               failure:failure];
+}
+
 @end

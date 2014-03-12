@@ -1,24 +1,25 @@
 //
-//  CSKuleNewsViewController.m
+//  CSKuleAssignmentViewController.m
 //  Kulebao
 //
 //  Created by xin.c.wang on 14-3-4.
 //  Copyright (c) 2014年 Cocobabys. All rights reserved.
 //
 
-#import "CSKuleNewsViewController.h"
+#import "CSKuleAssignmentViewController.h"
 #import "CSKuleNoticeCell.h"
 #import "PullTableView.h"
-#import "CSKuleNewsDetailsViewController.h"
 #import "CSAppDelegate.h"
+#import "CSKuleNewsDetailsViewController.h"
 
-@interface CSKuleNewsViewController () <UITableViewDataSource, UITableViewDelegate, PullTableViewDelegate>
+@interface CSKuleAssignmentViewController () <UITableViewDataSource, UITableViewDelegate, PullTableViewDelegate>
 @property (weak, nonatomic) IBOutlet PullTableView *tableview;
-@property (nonatomic, strong) NSMutableArray* newsInfoList;
+@property (nonatomic, strong) NSMutableArray* assignmentInfoList;
 
 @end
 
-@implementation CSKuleNewsViewController
+@implementation CSKuleAssignmentViewController
+@synthesize assignmentInfoList = _assignmentInfoList;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,17 +38,16 @@
     
     self.tableview.delegate = self;
     self.tableview.dataSource = self;
-    self.tableview.backgroundColor = [UIColor clearColor];
-    
     self.tableview.pullDelegate = self;
+    self.tableview.backgroundColor = [UIColor clearColor];
     self.tableview.pullBackgroundColor = [UIColor clearColor];
     self.tableview.pullTextColor = UIColorRGB(0xCC, 0x66, 0x33);
     self.tableview.pullArrowImage = [UIImage imageNamed:@"grayArrow.png"];
     
-    _newsInfoList = [NSMutableArray array];
-
+    _assignmentInfoList = [NSMutableArray array];
+    
     [gApp waitingAlert:@"正在获取数据"];
-    [self reloadNewsList];
+    [self reloadAssignmentList];
 }
 
 - (void)didReceiveMemoryWarning
@@ -58,7 +58,7 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.newsInfoList.count;
+    return _assignmentInfoList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -68,11 +68,11 @@
         cell = [nibs firstObject];
     }
     
-    CSKuleNewsInfo* newsInfo = [self.newsInfoList objectAtIndex:indexPath.row];
-    cell.labTitle.text = newsInfo.title;
-    cell.labContent.text = newsInfo.content;
+    CSKuleAssignmentInfo* assignmentInfo = [self.assignmentInfoList objectAtIndex:indexPath.row];
+    cell.labTitle.text = assignmentInfo.title;
+    cell.labContent.text = assignmentInfo.content;
     
-    NSDate* d = [NSDate dateWithTimeIntervalSince1970:newsInfo.timestamp];
+    NSDate* d = [NSDate dateWithTimeIntervalSince1970:assignmentInfo.timestamp];
     
     cell.labDate.text = [d isoDateTimeString];
     
@@ -81,14 +81,12 @@
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 110.0+5.0;
+    return 110.0+5;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    CSKuleNewsInfo* newsInfo = [self.newsInfoList objectAtIndex:indexPath.row];
-    [self performSelector:@selector(showNewsDetails:) withObject:newsInfo];
+    CSKuleAssignmentInfo* assignmentInfo = [self.assignmentInfoList objectAtIndex:indexPath.row];
+    [self performSelector:@selector(showAssignmentDetails:) withObject:assignmentInfo];
 }
 
 #pragma mark - PullTableViewDelegate
@@ -106,48 +104,37 @@
 
 - (void) refreshTable
 {
-    /*
-     
-     Code to actually refresh goes here.
-     
-     */
-    
-    [self reloadNewsList];
+    [self reloadAssignmentList];
 }
 
 - (void) loadMoreDataToTable
 {
-    /*
-     
-     Code to actually load more data goes here.
-     
-     */
-    [self loadMoreNewsList];
+    [self loadMoreAssignmentList];
 }
 
 #pragma mark - Segues
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"segue.newsdetails"]) {
+    if ([segue.identifier isEqualToString:@"segue.assignmentdetails"]) {
         CSKuleNewsDetailsViewController* destCtrl = segue.destinationViewController;
-        destCtrl.newsInfo = sender;
+        destCtrl.assignmentInfo = sender;
     }
 }
 
 #pragma mark - Private
-- (void)showNewsDetails:(CSKuleNewsInfo*)newsInfo {
-    [self performSegueWithIdentifier:@"segue.newsdetails" sender:newsInfo];
+- (void)showAssignmentDetails:(CSKuleAssignmentInfo*)assignmentInfo {
+    [self performSegueWithIdentifier:@"segue.assignmentdetails" sender:assignmentInfo];
 }
 
-- (void)reloadNewsList {
+- (void)reloadAssignmentList {
     SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
-        NSMutableArray* newsInfos = [NSMutableArray array];
+        NSMutableArray* assignmentInfos = [NSMutableArray array];
         
-        for (id newsInfoJson in dataJson) {
-            CSKuleNewsInfo* newsInfo = [CSKuleInterpreter decodeNewsInfo:newsInfoJson];
-            [newsInfos addObject:newsInfo];
+        for (id assignmentInfoJson in dataJson) {
+            CSKuleAssignmentInfo* assignmentInfo = [CSKuleInterpreter decodeAssignmentInfo:assignmentInfoJson];
+            [assignmentInfos addObject:assignmentInfo];
         }
         
-        self.newsInfoList = newsInfos;
+        self.assignmentInfoList = assignmentInfos;
         [gApp hideAlert];
         
         self.tableview.pullLastRefreshDate = [NSDate date];
@@ -162,7 +149,7 @@
         [gApp alert:[error localizedDescription]];
     };
     
-    [gApp.engine reqGetNewsOfKindergarten:gApp.engine.loginInfo.schoolId
+    [gApp.engine reqGetAssignmentsOfKindergarten:gApp.engine.loginInfo.schoolId
                                      from:-1
                                        to:-1
                                      most:-1
@@ -170,20 +157,19 @@
                                   failure:failureHandler];
 }
 
-- (void)loadMoreNewsList {
-    
-    CSKuleNewsInfo* lastNewsInfo = self.newsInfoList.lastObject;
-    if (lastNewsInfo) {
+- (void)loadMoreAssignmentList {
+    CSKuleAssignmentInfo* lastAssignmentInfo = self.assignmentInfoList.lastObject;
+    if (lastAssignmentInfo) {
         SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
-            NSMutableArray* newsInfos = [NSMutableArray array];
+            NSMutableArray* assignmentInfos = [NSMutableArray array];
             
-            for (id newsInfoJson in dataJson) {
-                CSKuleNewsInfo* newsInfo = [CSKuleInterpreter decodeNewsInfo:newsInfoJson];
-                [newsInfos addObject:newsInfo];
+            for (id assignmentInfoJson in dataJson) {
+                CSKuleAssignmentInfo* assignmentInfo = [CSKuleInterpreter decodeAssignmentInfo:assignmentInfoJson];
+                [assignmentInfos addObject:assignmentInfo];
             }
             
-            if (newsInfos.count > 0) {
-                [self.newsInfoList addObjectsFromArray:newsInfos];
+            if (assignmentInfos.count > 0) {
+                [self.assignmentInfoList addObjectsFromArray:assignmentInfos];
                 [gApp hideAlert];
             }
             else {
@@ -200,15 +186,15 @@
             [gApp alert:[error localizedDescription]];
         };
         
-        [gApp.engine reqGetNewsOfKindergarten:gApp.engine.loginInfo.schoolId
+        [gApp.engine reqGetAssignmentsOfKindergarten:gApp.engine.loginInfo.schoolId
                                          from:1
-                                           to:lastNewsInfo.newsId
+                                           to:lastAssignmentInfo.assignmentId
                                          most:25
                                       success:sucessHandler
                                       failure:failureHandler];
     }
     else {
-        [self reloadNewsList];
+        [self reloadAssignmentList];
     }
 }
 

@@ -29,6 +29,7 @@
     newChild.gender = self.gender;
     newChild.portrait = self.portrait;
     newChild.className = self.className;
+    newChild.classId = self.classId;
 
     return newChild;
 }

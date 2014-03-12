@@ -119,7 +119,7 @@
      "gender" : 1,
      "portrait" : "/assets/images/portrait_placeholder.png",
      "class_id" : 777888,
-     "className" : "苹果班"
+     "class_name" : "苹果班"
      }
      */
     
@@ -132,7 +132,7 @@
     NSInteger gender = [[dataJson valueForKeyNotNull:@"gender"] integerValue];
     NSString* portrait = [dataJson valueForKeyNotNull:@"portrait"];
     NSInteger class_id = [[dataJson valueForKeyNotNull:@"class_id"] integerValue];
-    NSString* className = [dataJson valueForKeyNotNull:@"className"];
+    NSString* className = [dataJson valueForKeyNotNull:@"class_name"];
     
     CSKuleChildInfo* obj = [CSKuleChildInfo new];
     obj.childId = child_id;

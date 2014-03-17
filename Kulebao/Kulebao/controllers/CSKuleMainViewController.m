@@ -97,31 +97,10 @@
         
         // 计算宝宝年龄
         NSDate* dayOfBirth = [NSDate dateFromString:childInfo.birthday withFormat:[NSDate dateFormatString]];
-        NSInteger aYear = [dayOfBirth getYear];
-        NSInteger aMonth = [dayOfBirth getMonth];
-        NSInteger aDay = [dayOfBirth getDay];
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        NSDateComponents* ageComponents = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:dayOfBirth toDate:[NSDate date] options:0];
         
-        
-        NSDate* now = [NSDate date];
-        NSInteger nYear = [now getYear];
-        NSInteger nMonth = [now getMonth];
-        NSInteger nDay = [now getDay];
-        
-        NSInteger deltaYear = nYear - aYear;
-        
-        NSInteger deltaMonth = nMonth - aMonth;
-        if (deltaMonth < 0) {
-            --deltaYear;
-            deltaMonth += 12;
-        }
-        else if (deltaMonth == 0) {
-            if (nDay < aDay) {
-                --deltaYear;
-                deltaMonth += 12;
-            }
-        }
-        
-        self.labChildNick.text = [NSString stringWithFormat:@"%@ %@岁%@个月", childInfo.nick, @(deltaYear), @(deltaMonth)];
+        self.labChildNick.text = [NSString stringWithFormat:@"%@ %@岁%@个月", childInfo.nick, @([ageComponents year]), @([ageComponents month])];
     }
 }
 

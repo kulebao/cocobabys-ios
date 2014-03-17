@@ -38,7 +38,7 @@
     
     if (gApp.engine.preferences.loginInfo) {
         gApp.engine.loginInfo = gApp.engine.preferences.loginInfo;
-        [gApp gotoMainProcess];
+        [self doReceiveBindInfo];
     }
     else {
         [gApp gotoLoginProcess];
@@ -49,6 +49,36 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)doReceiveBindInfo {
+    SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
+        
+        CSKuleBindInfo* bindInfo = [CSKuleInterpreter decodeBindInfo:dataJson];
+        
+        if (bindInfo.errorCode == 0) {
+            gApp.engine.bindInfo = bindInfo;
+            gApp.engine.loginInfo.schoolId = bindInfo.schoolId;
+            gApp.engine.preferences.loginInfo = gApp.engine.loginInfo;
+            
+            [gApp gotoMainProcess];
+            //[gApp alert:@"登录成功"];
+            [gApp hideAlert];
+        }
+        else {
+            CSLog(@"doReceiveBindInfo error_code=%d", bindInfo.errorCode);
+            [gApp hideAlert];
+        }
+    };
+    
+    FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
+        CSLog(@"failure:%@", error);
+    };
+    
+    [gApp waitingAlert:@"获取绑定信息..."];
+    [gApp.engine reqReceiveBindInfo:gApp.engine.loginInfo.accountName
+                            success:sucessHandler
+                            failure:failureHandler];
 }
 
 @end

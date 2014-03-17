@@ -106,6 +106,8 @@
     gApp.engine.relationships = nil;
     gApp.engine.currentRelationship = nil;
     
+    gApp.engine.preferences.loginInfo = nil;
+    
     [gApp gotoLoginProcess];
 }
 

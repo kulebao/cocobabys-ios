@@ -61,4 +61,7 @@
 // PATH: 亲子作业列表
 #define kAssignmentListPath         @"/kindergarten/%@/assignment"
 
+// PATH: 课程表
+#define kSchedulesPath              @"/kindergarten/%@/class/%@/schedule"
+
 #endif

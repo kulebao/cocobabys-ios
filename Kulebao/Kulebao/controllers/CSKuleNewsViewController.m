@@ -162,7 +162,9 @@
         [gApp alert:[error localizedDescription]];
     };
     
+    CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
     [gApp.engine reqGetNewsOfKindergarten:gApp.engine.loginInfo.schoolId
+                              withClassId:currentChild.classId
                                      from:-1
                                        to:-1
                                      most:-1
@@ -200,7 +202,9 @@
             [gApp alert:[error localizedDescription]];
         };
         
+        CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
         [gApp.engine reqGetNewsOfKindergarten:gApp.engine.loginInfo.schoolId
+                                  withClassId:currentChild.classId
                                          from:1
                                            to:lastNewsInfo.newsId
                                          most:25

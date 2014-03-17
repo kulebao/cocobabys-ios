@@ -356,4 +356,116 @@
     return obj;
 }
 
++ (CSKuleScheduleInfo*)decodeScheduleInfo:(NSDictionary*)dataJson {
+    /*
+     [ {
+     "error_code" : 0,
+     "school_id" : 93740362,
+     "class_id" : 777666,
+     "schedule_id" : 124,
+     "timestamp" : 1394642036374,
+     "week" : {...}
+     } ]
+     */
+    
+    NSParameterAssert(dataJson);
+    
+    NSInteger error_code = [[dataJson valueForKeyNotNull:@"error_code"] integerValue];
+    NSInteger school_id = [[dataJson valueForKeyNotNull:@"school_id"] integerValue];
+    NSInteger class_id = [[dataJson valueForKeyNotNull:@"class_id"] integerValue];
+    NSInteger schedule_id = [[dataJson valueForKeyNotNull:@"schedule_id"] integerValue];
+    double timestamp = [[dataJson valueForKeyNotNull:@"timestamp"] doubleValue];
+    
+    CSKuleWeekScheduleInfo* weekInfo = nil;
+    id weekJson = [dataJson valueForKeyNotNull:@"week"];
+    if (weekJson) {
+        weekInfo = [CSKuleInterpreter decodeWeekScheduleInfo:weekJson];
+    }
+
+    CSKuleScheduleInfo* obj = [CSKuleScheduleInfo new];
+    obj.errorCode = error_code;
+    obj.schoolId = school_id;
+    obj.classId = class_id;
+    obj.scheduleId = schedule_id;
+    obj.timestamp = timestamp / 1000.0;
+    obj.week = weekInfo;
+    
+    return obj;
+}
+
++ (CSKuleWeekScheduleInfo*)decodeWeekScheduleInfo:(NSDictionary*)dataJson {
+    /*
+     {
+     "mon" : {...},
+     "tue" : {...},
+     "wed" : {...},
+     "thu" : {...},
+     "fri" : {...}
+     }
+     */
+    
+    NSParameterAssert(dataJson);
+    
+    CSKuleDailyScheduleInfo* mon = nil;
+    CSKuleDailyScheduleInfo* tue = nil;
+    CSKuleDailyScheduleInfo* wed = nil;
+    CSKuleDailyScheduleInfo* thu = nil;
+    CSKuleDailyScheduleInfo* fri = nil;
+    
+    id monJson = [dataJson valueForKeyNotNull:@"mon"];
+    if (monJson) {
+        mon = [CSKuleInterpreter decodeDailyScheduleInfo:monJson];
+    }
+    
+    id tueJson = [dataJson valueForKeyNotNull:@"tue"];
+    if (tueJson) {
+        tue = [CSKuleInterpreter decodeDailyScheduleInfo:tueJson];
+    }
+    
+    id wedJson = [dataJson valueForKeyNotNull:@"wed"];
+    if (wedJson) {
+        wed = [CSKuleInterpreter decodeDailyScheduleInfo:wedJson];
+    }
+    
+    id thuJson = [dataJson valueForKeyNotNull:@"thu"];
+    if (thuJson) {
+        thu = [CSKuleInterpreter decodeDailyScheduleInfo:thuJson];
+    }
+    
+    id friJson = [dataJson valueForKeyNotNull:@"fri"];
+    if (friJson) {
+        fri = [CSKuleInterpreter decodeDailyScheduleInfo:friJson];
+    }
+    
+    CSKuleWeekScheduleInfo* obj = [CSKuleWeekScheduleInfo new];
+    obj.mon = mon;
+    obj.tue = tue;
+    obj.wed = wed;
+    obj.thu = thu;
+    obj.fri = fri;
+    
+    return obj;
+}
+
++ (CSKuleDailyScheduleInfo*)decodeDailyScheduleInfo:(NSDictionary*)dataJson {
+    /*
+     {
+     "am" : "钳工",
+     "pm" : "政治"
+     }
+     */
+
+    NSParameterAssert(dataJson);
+    
+    NSString* am = [dataJson valueForKeyNotNull:@"am"];
+    NSString* pm = [dataJson valueForKeyNotNull:@"pm"];
+    
+    CSKuleDailyScheduleInfo* obj = [CSKuleDailyScheduleInfo new];
+    obj.am = am;
+    obj.pm = pm;
+    
+    return obj;
+}
+
+
 @end

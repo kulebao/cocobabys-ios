@@ -7,8 +7,19 @@
 //
 
 #import "CSKuleScheduleViewController.h"
+#import "CSAppdelegate.h"
 
 @interface CSKuleScheduleViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *labMonAm;
+@property (weak, nonatomic) IBOutlet UILabel *labMonPm;
+@property (weak, nonatomic) IBOutlet UILabel *labTueAm;
+@property (weak, nonatomic) IBOutlet UILabel *labTuePm;
+@property (weak, nonatomic) IBOutlet UILabel *labWedAm;
+@property (weak, nonatomic) IBOutlet UILabel *labWedPm;
+@property (weak, nonatomic) IBOutlet UILabel *labThuAm;
+@property (weak, nonatomic) IBOutlet UILabel *labThuPm;
+@property (weak, nonatomic) IBOutlet UILabel *labFriAm;
+@property (weak, nonatomic) IBOutlet UILabel *labFriPm;
 
 @end
 
@@ -29,6 +40,8 @@
 	// Do any additional setup after loading the view.
     [self customizeBackBarItem];
     
+    [self updateScheduleInfo:nil];
+    [self reloadSchedules];
 }
 
 - (void)didReceiveMemoryWarning
@@ -37,6 +50,64 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - UI Actions
+#pragma mark - Private
+- (void)reloadSchedules {
+    SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
+        NSMutableArray* scheduleInfos = [NSMutableArray array];
+        
+        for (id scheduleInfoJson in dataJson) {
+            CSKuleScheduleInfo* scheduleInfo = [CSKuleInterpreter decodeScheduleInfo:scheduleInfoJson];
+            [scheduleInfos addObject:scheduleInfo];
+        }
+        
+        CSKuleScheduleInfo* schduleInfo = [scheduleInfos firstObject];
+        if (schduleInfo) {
+            [self updateScheduleInfo:schduleInfo];
+            [gApp hideAlert];
+        }
+        else {
+            [gApp alert:@"没有课程表信息"];
+        }
+    };
+    
+    FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
+        CSLog(@"failure:%@", error);
+        [gApp alert:[error localizedDescription]];
+    };
+    
+    [gApp waitingAlert:@"获取信息中..."];
+    CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
+    [gApp.engine reqGetSchedulesOfKindergarten:gApp.engine.loginInfo.schoolId
+                              withClassId:currentChild.classId
+                                  success:sucessHandler
+                                  failure:failureHandler];
+}
+
+- (void)updateScheduleInfo:(CSKuleScheduleInfo*)schduleInfo {
+    if (schduleInfo) {
+        self.labMonAm.text = schduleInfo.week.mon.am;
+        self.labMonPm.text = schduleInfo.week.mon.pm;
+        self.labTueAm.text = schduleInfo.week.tue.am;
+        self.labTuePm.text = schduleInfo.week.tue.pm;
+        self.labWedAm.text = schduleInfo.week.wed.am;
+        self.labWedPm.text = schduleInfo.week.wed.pm;
+        self.labThuAm.text = schduleInfo.week.thu.am;
+        self.labThuPm.text = schduleInfo.week.thu.pm;
+        self.labFriAm.text = schduleInfo.week.fri.am;
+        self.labFriPm.text = schduleInfo.week.fri.pm;
+    }
+    else {
+        self.labMonAm.text = nil;
+        self.labMonPm.text = nil;
+        self.labTueAm.text = nil;
+        self.labTuePm.text = nil;
+        self.labWedAm.text = nil;
+        self.labWedPm.text = nil;
+        self.labThuAm.text = nil;
+        self.labThuPm.text = nil;
+        self.labFriAm.text = nil;
+        self.labFriPm.text = nil;
+    }
+}
 
 @end

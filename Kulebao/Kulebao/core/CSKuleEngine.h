@@ -70,6 +70,7 @@
                    failure:(FailureResponseHandler)failure;
 
 - (void)reqGetNewsOfKindergarten:(NSInteger)kindergarten
+                     withClassId:(NSInteger)classId
                             from:(NSInteger)fromId
                               to:(NSInteger)toId
                             most:(NSInteger)most
@@ -86,6 +87,11 @@
                                    most:(NSInteger)most
                                 success:(SuccessResponseHandler)success
                                 failure:(FailureResponseHandler)failure;
+
+- (void)reqGetSchedulesOfKindergarten:(NSInteger)kindergarten
+                          withClassId:(NSInteger)classId
+                              success:(SuccessResponseHandler)success
+                              failure:(FailureResponseHandler)failure;
 
 
 @end

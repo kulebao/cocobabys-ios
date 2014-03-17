@@ -224,6 +224,9 @@
 		09FE6B0418C5C00F00A840BE /* CSKuleScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE6B0318C5C00F00A840BE /* CSKuleScheduleViewController.m */; };
 		09FE6B0718C5C23300A840BE /* CSKuleCheckinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE6B0618C5C23300A840BE /* CSKuleCheckinViewController.m */; };
 		09FE6B0A18C5C34F00A840BE /* CSKuleChatingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE6B0918C5C34F00A840BE /* CSKuleChatingViewController.m */; };
+		09FFB5F118D6B2E100F07B0A /* CSKuleWeekScheduleInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FFB5F018D6B2E100F07B0A /* CSKuleWeekScheduleInfo.m */; };
+		09FFB5F418D6B2FA00F07B0A /* CSKuleDailyScheduleInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FFB5F318D6B2FA00F07B0A /* CSKuleDailyScheduleInfo.m */; };
+		09FFB5F718D6B46300F07B0A /* CSKuleScheduleInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FFB5F618D6B46300F07B0A /* CSKuleScheduleInfo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -544,6 +547,12 @@
 		09FE6B0618C5C23300A840BE /* CSKuleCheckinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleCheckinViewController.m; sourceTree = "<group>"; };
 		09FE6B0818C5C34F00A840BE /* CSKuleChatingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleChatingViewController.h; sourceTree = "<group>"; };
 		09FE6B0918C5C34F00A840BE /* CSKuleChatingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleChatingViewController.m; sourceTree = "<group>"; };
+		09FFB5EF18D6B2E100F07B0A /* CSKuleWeekScheduleInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleWeekScheduleInfo.h; sourceTree = "<group>"; };
+		09FFB5F018D6B2E100F07B0A /* CSKuleWeekScheduleInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleWeekScheduleInfo.m; sourceTree = "<group>"; };
+		09FFB5F218D6B2FA00F07B0A /* CSKuleDailyScheduleInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleDailyScheduleInfo.h; sourceTree = "<group>"; };
+		09FFB5F318D6B2FA00F07B0A /* CSKuleDailyScheduleInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleDailyScheduleInfo.m; sourceTree = "<group>"; };
+		09FFB5F518D6B46300F07B0A /* CSKuleScheduleInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleScheduleInfo.h; sourceTree = "<group>"; };
+		09FFB5F618D6B46300F07B0A /* CSKuleScheduleInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleScheduleInfo.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -632,6 +641,12 @@
 				0904690718C72E6C00D0846E /* CSKuleRelationshipInfo.m */,
 				0917764518D0574D00D24F53 /* CSKuleAssignmentInfo.h */,
 				0917764618D0574D00D24F53 /* CSKuleAssignmentInfo.m */,
+				09FFB5EF18D6B2E100F07B0A /* CSKuleWeekScheduleInfo.h */,
+				09FFB5F018D6B2E100F07B0A /* CSKuleWeekScheduleInfo.m */,
+				09FFB5F218D6B2FA00F07B0A /* CSKuleDailyScheduleInfo.h */,
+				09FFB5F318D6B2FA00F07B0A /* CSKuleDailyScheduleInfo.m */,
+				09FFB5F518D6B46300F07B0A /* CSKuleScheduleInfo.h */,
+				09FFB5F618D6B46300F07B0A /* CSKuleScheduleInfo.m */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -1338,8 +1353,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				09A9EBD518C0A01B00D83119 /* CSKuleMainViewController.m in Sources */,
+				09FFB5F718D6B46300F07B0A /* CSKuleScheduleInfo.m in Sources */,
 				09ED59BC18CDC5E800187585 /* CSKuleCookbookInfo.m in Sources */,
 				09BA1BFD18BB334900760182 /* Base64.m in Sources */,
+				09FFB5F118D6B2E100F07B0A /* CSKuleWeekScheduleInfo.m in Sources */,
 				09FE6AF918C5B97100A840BE /* CSKuleRecipeCell.m in Sources */,
 				09BA1BE018BB2FC700760182 /* PullTableView.m in Sources */,
 				09ED59B618CDBF3900187585 /* UIWebView+CSKit.m in Sources */,
@@ -1400,6 +1417,7 @@
 				09BA1C2B18BB3F8400760182 /* UIImageView+AFNetworking.m in Sources */,
 				09C1C75F18BD92990040B06D /* AFJSONRequestOperation+CSKit.m in Sources */,
 				09C1C76618BD973B0040B06D /* NSDictionary+CSKit.m in Sources */,
+				09FFB5F418D6B2FA00F07B0A /* CSKuleDailyScheduleInfo.m in Sources */,
 				09BA1BFE18BB334900760182 /* GzipCompressor.m in Sources */,
 				0934EFC318BF3AF700E30ECA /* EAIntroPage.m in Sources */,
 				09FE6AF318C5762600A840BE /* CSKuleNewsViewController.m in Sources */,

@@ -91,9 +91,37 @@
     if (childInfo) {
         self.labClassName.text = childInfo.className;
         self.labSchoolName.text = gApp.engine.loginInfo.schoolName;
-        self.labChildNick.text = childInfo.nick;
+        //self.labChildNick.text = childInfo.nick;
         self.imgChildPortrait.image = nil;
         [self.imgChildPortrait setImageWithURL:[gApp.engine urlFromPath:childInfo.portrait]];
+        
+        // 计算宝宝年龄
+        NSDate* dayOfBirth = [NSDate dateFromString:childInfo.birthday withFormat:[NSDate dateFormatString]];
+        NSInteger aYear = [dayOfBirth getYear];
+        NSInteger aMonth = [dayOfBirth getMonth];
+        NSInteger aDay = [dayOfBirth getDay];
+        
+        
+        NSDate* now = [NSDate date];
+        NSInteger nYear = [now getYear];
+        NSInteger nMonth = [now getMonth];
+        NSInteger nDay = [now getDay];
+        
+        NSInteger deltaYear = nYear - aYear;
+        
+        NSInteger deltaMonth = nMonth - aMonth;
+        if (deltaMonth < 0) {
+            --deltaYear;
+            deltaMonth += 12;
+        }
+        else if (deltaMonth == 0) {
+            if (nDay < aDay) {
+                --deltaYear;
+                deltaMonth += 12;
+            }
+        }
+        
+        self.labChildNick.text = [NSString stringWithFormat:@"%@ %@岁%@个月", childInfo.nick, @(deltaYear), @(deltaMonth)];
     }
 }
 

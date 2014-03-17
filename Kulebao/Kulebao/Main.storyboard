@@ -906,6 +906,18 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="课程表" id="5HW-pY-e7x"/>
+                    <connections>
+                        <outlet property="labFriAm" destination="ciU-JS-b98" id="Pcx-w8-vxf"/>
+                        <outlet property="labFriPm" destination="AJ2-Ta-mS1" id="IwG-9d-S80"/>
+                        <outlet property="labMonAm" destination="ytx-cM-YFi" id="GpL-PG-kym"/>
+                        <outlet property="labMonPm" destination="clu-IR-lAi" id="rAO-xg-d6P"/>
+                        <outlet property="labThuAm" destination="Aae-Ot-yIF" id="h84-CQ-nOq"/>
+                        <outlet property="labThuPm" destination="RSP-Ew-EDB" id="igJ-qS-cce"/>
+                        <outlet property="labTueAm" destination="qZa-rs-Q1U" id="9dO-GN-TRk"/>
+                        <outlet property="labTuePm" destination="Wyw-tS-ylh" id="7HP-gw-xEi"/>
+                        <outlet property="labWedAm" destination="uEr-qf-1wi" id="asy-fW-k64"/>
+                        <outlet property="labWedPm" destination="1rE-m9-UpD" id="Rob-x9-i8p"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tji-YP-YSu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

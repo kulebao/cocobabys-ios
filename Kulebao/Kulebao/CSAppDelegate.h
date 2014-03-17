@@ -19,7 +19,6 @@
 - (void)gotoLoginProcess;
 - (void)gotoMainProcess;
 
-
 // - Alert
 - (void)alert:(NSString*)text;
 - (void)alert:(NSString*)text withTitle:(NSString*)title;

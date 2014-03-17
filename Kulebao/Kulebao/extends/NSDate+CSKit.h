@@ -15,6 +15,8 @@
 + (NSString *)timestampFormatString;
 + (NSString *)dbFormatString;
 
++ (NSDate *)dateFromString:(NSString *)string withFormat:(NSString *)format;
+
 - (NSString*)isoDateString;
 - (NSString*)isoDateTimeString;
 - (NSString*)shortDateTimeString;
@@ -27,5 +29,14 @@
 
 //该月的最后一天
 - (NSDate *)endOfMonth;
+
+//获取日
+- (NSUInteger)getDay;
+
+//获取月
+- (NSUInteger)getMonth;
+
+//获取年
+- (NSUInteger)getYear;
 
 @end

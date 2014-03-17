@@ -54,20 +54,46 @@
 }
 
 - (void)savePreferences {
-    [_config setObject:_defaultUsername forKey:@"com.cocobabys.Kulebao.Preferences.defaultUsername"];
-    [_config setObject:_loginUsername forKey:@"com.cocobabys.Kulebao.Preferences.loginUsername"];
-    [_config setObject:@(_guideShown) forKey:@"com.cocobabys.Kulebao.Preferences.guideShown"];
+    if (_defaultUsername) {
+        [_config setObject:_defaultUsername forKey:@"com.cocobabys.Kulebao.Preferences.defaultUsername"];
+    }
+    else {
+        [_config removeObjectForKey:@"com.cocobabys.Kulebao.Preferences.defaultUsername"];
+    }
     
-    [_config setObject:_loginInfo.accessToken
-                forKey:@"com.cocobabys.Kulebao.Preferences.loginInfo.accessToken"];
-    [_config setObject:_loginInfo.accountName
-                forKey:@"com.cocobabys.Kulebao.Preferences.loginInfo.accountName"];
-    [_config setObject:_loginInfo.schoolName
-                forKey:@"com.cocobabys.Kulebao.Preferences.loginInfo.schoolName"];
-    [_config setObject:_loginInfo.username
-                forKey:@"com.cocobabys.Kulebao.Preferences.loginInfo.username"];
-    [_config setObject:@(_loginInfo.schoolId)
-                 forKey:@"com.cocobabys.Kulebao.Preferences.loginInfo.schoolId"];
+    if (_loginUsername) {
+        [_config setObject:_loginUsername forKey:@"com.cocobabys.Kulebao.Preferences.loginUsername"];
+    }
+    else {
+         [_config removeObjectForKey:@"com.cocobabys.Kulebao.Preferences.loginUsername"];
+    }
+    
+    if (_guideShown) {
+        [_config setObject:@(_guideShown) forKey:@"com.cocobabys.Kulebao.Preferences.guideShown"];
+    }
+    else {
+        [_config removeObjectForKey:@"com.cocobabys.Kulebao.Preferences.guideShown"];
+    }
+    
+    if (_loginInfo) {
+        [_config setObject:_loginInfo.accessToken
+                    forKey:@"com.cocobabys.Kulebao.Preferences.loginInfo.accessToken"];
+        [_config setObject:_loginInfo.accountName
+                    forKey:@"com.cocobabys.Kulebao.Preferences.loginInfo.accountName"];
+        [_config setObject:_loginInfo.schoolName
+                    forKey:@"com.cocobabys.Kulebao.Preferences.loginInfo.schoolName"];
+        [_config setObject:_loginInfo.username
+                    forKey:@"com.cocobabys.Kulebao.Preferences.loginInfo.username"];
+        [_config setObject:@(_loginInfo.schoolId)
+                    forKey:@"com.cocobabys.Kulebao.Preferences.loginInfo.schoolId"];
+    }
+    else {
+        [_config removeObjectForKey:@"com.cocobabys.Kulebao.Preferences.loginInfo.accessToken"];
+        [_config removeObjectForKey:@"com.cocobabys.Kulebao.Preferences.loginInfo.accountName"];
+        [_config removeObjectForKey:@"com.cocobabys.Kulebao.Preferences.loginInfo.schoolName"];
+        [_config removeObjectForKey:@"com.cocobabys.Kulebao.Preferences.loginInfo.username"];
+        [_config removeObjectForKey:@"com.cocobabys.Kulebao.Preferences.loginInfo.schoolId"];
+    }
     
     [_config synchronize];
 }

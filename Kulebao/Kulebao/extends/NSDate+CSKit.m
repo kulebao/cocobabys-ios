@@ -161,7 +161,7 @@
     [mdf setDateFormat:@"yyyy-MM-dd"];
     NSDate *midnight = [mdf dateFromString:[mdf stringFromDate:self]];
     
-    return (int)[midnight timeIntervalSinceNow] / (60*60*24) *-1;
+    return (int)[midnight timeIntervalSinceNow] / (60*60*24) * -1;
 }
 
 - (NSString *)stringDaysAgo {
@@ -322,6 +322,7 @@
                                                fromDate:beginningOfWeek];
     return [calendar dateFromComponents:components];
 }
+
 //返回当前天的年月日.
 - (NSDate *)beginningOfDay {
     NSCalendar *calendar = [NSCalendar currentCalendar];

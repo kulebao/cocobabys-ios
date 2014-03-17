@@ -319,6 +319,7 @@
 }
 
 - (void)reqGetNewsOfKindergarten:(NSInteger)kindergarten
+                     withClassId:(NSInteger)classId
                             from:(NSInteger)fromId
                               to:(NSInteger)toId
                             most:(NSInteger)most
@@ -329,6 +330,11 @@
     NSString* method = @"GET";
     
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    
+    if (classId > 0) {
+        [parameters setObject:@(classId) forKey:@"class_id"];
+    }
+    
     if (fromId >= 0) {
         [parameters setObject:@(fromId) forKey:@"from"];
     }
@@ -393,6 +399,25 @@
                             parameters:parameters
                                success:success
                                failure:failure];
+}
+
+- (void)reqGetSchedulesOfKindergarten:(NSInteger)kindergarten
+                          withClassId:(NSInteger)classId
+                              success:(SuccessResponseHandler)success
+                              failure:(FailureResponseHandler)failure {
+    
+    NSString* path = [NSString stringWithFormat:kSchedulesPath, @(kindergarten), @(classId)];
+    
+    NSString* method = @"GET";
+    
+    NSDictionary* parameters = nil;
+    
+    [_httpClient httpRequestWithMethod:method
+                                  path:path
+                            parameters:parameters
+                               success:success
+                               failure:failure];
+    
 }
 
 @end

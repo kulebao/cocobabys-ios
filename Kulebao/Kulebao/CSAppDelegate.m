@@ -130,6 +130,16 @@ CSAppDelegate* gApp = nil;
     gApp.window.rootViewController = ctrl;
 }
 
+- (void)logout {
+    gApp.engine.loginInfo = nil;
+    gApp.engine.bindInfo = nil;
+    gApp.engine.relationships = nil;
+    gApp.engine.currentRelationship = nil;
+    gApp.engine.preferences.loginInfo = nil;
+    
+    [self gotoLoginProcess];
+}
+
 #pragma mark - Alert
 - (BOOL)createHudIfNeeded {
     BOOL ok = NO;

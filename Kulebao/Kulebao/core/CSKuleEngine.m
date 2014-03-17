@@ -256,6 +256,7 @@
         parameters = @{@"phonenum": mobile,
                        @"user_id": [BPush getUserId],
                        @"channel_id": [BPush getChannelId],
+                       @"access_token": gApp.engine.loginInfo.accessToken ? gApp.engine.loginInfo.accessToken : @"",
                        @"device_type": @"ios"};
     }
     else {

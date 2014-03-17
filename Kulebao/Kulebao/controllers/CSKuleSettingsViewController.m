@@ -101,14 +101,7 @@
 
 #pragma mark - Private
 - (void)doLogout {
-    gApp.engine.loginInfo = nil;
-    gApp.engine.bindInfo = nil;
-    gApp.engine.relationships = nil;
-    gApp.engine.currentRelationship = nil;
-    
-    gApp.engine.preferences.loginInfo = nil;
-    
-    [gApp gotoLoginProcess];
+    [gApp logout];
 }
 
 @end

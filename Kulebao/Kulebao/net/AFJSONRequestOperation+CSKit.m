@@ -28,7 +28,11 @@
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if (failure) {
+        if(operation.response.statusCode == 401) {
+            [gApp logout];
+            [gApp alert:@"请重新登录"];
+        }
+        else if (failure) {
             failure(operation.request, error);
         }
     }];

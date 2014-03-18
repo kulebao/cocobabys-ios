@@ -263,6 +263,7 @@
         parameters = @{@"phonenum": mobile,
                        @"user_id": @"",
                        @"channel_id": @"",
+                       @"access_token": gApp.engine.loginInfo.accessToken ? gApp.engine.loginInfo.accessToken : @"",
                        @"device_type": @"ios"};
     }
     
@@ -279,7 +280,7 @@
                          failure:(FailureResponseHandler)failure {
     NSParameterAssert(mobile);
     
-    NSString* path = [NSString stringWithFormat:kGetFamilyRelationship, @(kindergarten)];
+    NSString* path = [NSString stringWithFormat:kGetFamilyRelationshipPath, @(kindergarten)];
 
     NSString* method = @"GET";
 
@@ -421,4 +422,21 @@
     
 }
 
+- (void)reqGetSchoolInfoOfKindergarten:(NSInteger)kindergarten
+                               success:(SuccessResponseHandler)success
+                               failure:(FailureResponseHandler)failure {
+    
+    NSString* path = [NSString stringWithFormat:kGetSchoolInfoPath, @(kindergarten)];
+    
+    NSString* method = @"GET";
+    
+    NSDictionary* parameters = nil;
+    
+    [_httpClient httpRequestWithMethod:method
+                                  path:path
+                            parameters:parameters
+                               success:success
+                               failure:failure];
+    
+}
 @end

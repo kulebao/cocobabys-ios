@@ -94,6 +94,7 @@
                                         </state>
                                         <connections>
                                             <action selector="onBtnShowChildMenuListClicked:" destination="nb4-8s-InE" eventType="touchUpInside" id="La5-g1-cLd"/>
+                                            <segue destination="5Eq-sp-dh6" kind="push" identifier="segue.aboutschool" id="SuN-Wn-wGq"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -240,6 +241,9 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <state key="highlighted" backgroundImage="btn-type1-pressed.png"/>
+                                        <connections>
+                                            <action selector="onBtnSchoolInfoClicked:" destination="nb4-8s-InE" eventType="touchUpInside" id="1ah-gg-5uo"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="775-xL-AE5">
                                         <rect key="frame" x="184" y="9" width="130" height="32"/>
@@ -249,6 +253,9 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <state key="highlighted" backgroundImage="btn-type1-pressed.png"/>
+                                        <connections>
+                                            <action selector="onBtnClassInfoClicked:" destination="nb4-8s-InE" eventType="touchUpInside" id="a2B-4C-KH4"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="55Y-Wo-lEk">
                                         <rect key="frame" x="144" y="8" width="32" height="32"/>
@@ -285,6 +292,8 @@
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="幼乐宝" id="7M2-K4-LE7"/>
                     <connections>
+                        <outlet property="btnClassInfo" destination="775-xL-AE5" id="K95-yA-eLb"/>
+                        <outlet property="btnSchoolInfo" destination="Lol-8h-dB4" id="Vbd-8f-epy"/>
                         <outlet property="imgChildPortrait" destination="dKp-7o-31t" id="ffn-Mu-JgF"/>
                         <outlet property="labChildNick" destination="PrA-3R-D0Z" id="Q2L-xw-5O0"/>
                         <outlet property="labClassName" destination="sZI-PR-dYC" id="YCV-pU-ziZ"/>
@@ -302,6 +311,42 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H1k-cV-9AB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-690" y="1950"/>
+        </scene>
+        <!--Kule About School View Controller - 关于我园-->
+        <scene sceneID="UeY-Eb-Xg9">
+            <objects>
+                <viewController id="5Eq-sp-dh6" customClass="CSKuleAboutSchoolViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Oj4-Zo-yS4">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app-bg-type3.png" id="lVe-WM-bYc">
+                                <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" id="VcU-JJ-ahE">
+                                <rect key="frame" x="10" y="76" width="300" height="392"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="fmk-mm-1qU">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="392"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </scrollView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="关于我园" id="Lka-LK-gJO"/>
+                    <connections>
+                        <outlet property="scrollView" destination="fmk-mm-1qU" id="CWl-9w-hUA"/>
+                        <outlet property="viewContainer" destination="VcU-JJ-ahE" id="3Wu-dC-MdH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fE4-Sm-qpU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-831" y="2888"/>
         </scene>
         <!--Kule Auth View Controller-->
         <scene sceneID="z62-Qe-zBE">

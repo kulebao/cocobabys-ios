@@ -9,21 +9,27 @@
 #import "CSKuleMainViewController.h"
 #import "CSAppDelegate.h"
 #import "UIImageView+AFNetworking.h"
-#import <QuartzCore/QuartzCore.h>
 #import "KxMenu.h"
 #import "AHAlertView.h"
+#import "CSKuleAboutSchoolViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface CSKuleMainViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
     UIImagePickerController* _imgPicker;
 }
+
 @property (weak, nonatomic) IBOutlet UILabel *labSchoolName;
 @property (weak, nonatomic) IBOutlet UILabel *labClassName;
 @property (weak, nonatomic) IBOutlet UILabel *labChildNick;
 @property (weak, nonatomic) IBOutlet UIImageView *imgChildPortrait;
 @property (weak, nonatomic) IBOutlet UIView *viewChildContainer;
 
-- (IBAction)onBtnShowChildMenuListClicked:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *btnClassInfo;
+@property (weak, nonatomic) IBOutlet UIButton *btnSchoolInfo;
 
+@property (nonatomic, strong) CSKuleSchoolInfo* schoolInfo;
+
+- (IBAction)onBtnShowChildMenuListClicked:(id)sender;
 - (IBAction)onBtnSettingsClicked:(id)sender;
 - (IBAction)onBtnNewsListClicked:(id)sender;
 - (IBAction)onBtnRecipeClicked:(id)sender;
@@ -32,9 +38,13 @@
 - (IBAction)onBtnAssignmentClicked:(id)sender;
 - (IBAction)onBtnChatingClicked:(id)sender;
 
+- (IBAction)onBtnSchoolInfoClicked:(id)sender;
+- (IBAction)onBtnClassInfoClicked:(id)sender;
+
 @end
 
 @implementation CSKuleMainViewController
+@synthesize schoolInfo = _schoolInfo;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -64,7 +74,6 @@
                      options:NSKeyValueObservingOptionNew
                      context:nil];
     
-    
     [self performSelector:@selector(getRelationshipInfos) withObject:nil afterDelay:0];
 }
 
@@ -82,6 +91,14 @@
     if ((object == gApp.engine) && [keyPath isEqualToString:@"currentRelationship"]) {
         CSLog(@"currentRelationship changed.");
         [self updateUI];
+    }
+}
+
+#pragma mark - Segues
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"segue.aboutschool"]) {
+        CSKuleAboutSchoolViewController* destCtrl = segue.destinationViewController;
+        destCtrl.schoolInfo = _schoolInfo;
     }
 }
 
@@ -218,6 +235,36 @@
 #endif
 }
 
+- (void)doGetSchoolInfo {
+    SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
+        id schoolInfoJson = [dataJson valueForKeyNotNull:@"school_info"];
+        
+        CSKuleSchoolInfo* schoolInfo = nil;
+        if (schoolInfoJson) {
+            schoolInfo = [CSKuleInterpreter decodeSchoolInfo:schoolInfoJson];
+        }
+        
+        if(schoolInfo) {
+            _schoolInfo = schoolInfo;
+            [self performSegueWithIdentifier:@"segue.aboutschool" sender:nil];
+            [gApp hideAlert];
+        }
+        else {
+            [gApp alert:@"无学校信息"];
+        }
+    };
+    
+    FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
+        CSLog(@"failure:%@", error);
+        [gApp alert:[error localizedDescription]];
+    };
+    
+    [gApp waitingAlert:@"获取信息中..."];
+    [gApp.engine reqGetSchoolInfoOfKindergarten:gApp.engine.loginInfo.schoolId
+                                        success:sucessHandler
+                                        failure:failureHandler];
+}
+
 #pragma mark - UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     UIImage* img = info[UIImagePickerControllerEditedImage];
@@ -253,9 +300,6 @@
                                        _imgPicker = nil;
                                    }
                                }];
-    
-    
-    
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
@@ -322,6 +366,18 @@
 
 - (IBAction)onBtnChatingClicked:(id)sender {
     [self performSegueWithIdentifier:@"segue.chating" sender:nil];
+}
+
+- (IBAction)onBtnSchoolInfoClicked:(id)sender {
+    if (_schoolInfo) {
+        [self performSegueWithIdentifier:@"segue.aboutschool" sender:nil];
+    }
+    else {
+        [self doGetSchoolInfo];
+    }
+}
+
+- (IBAction)onBtnClassInfoClicked:(id)sender {
 }
 
 #pragma mark - Private

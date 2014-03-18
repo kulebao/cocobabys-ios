@@ -47,7 +47,7 @@
 #define kCheckRegAuthCodePath       @"/check_reg_authcode.do"
 
 // PATH: 获取家庭关系
-#define kGetFamilyRelationship      @"/kindergarten/%@/relationship"
+#define kGetFamilyRelationshipPath  @"/kindergarten/%@/relationship"
 
 // PATH: 小孩信息
 #define kChildInfoPath              @"/kindergarten/%@/child/%@"
@@ -63,5 +63,8 @@
 
 // PATH: 课程表
 #define kSchedulesPath              @"/kindergarten/%@/class/%@/schedule"
+
+// PATH: 学校介绍
+#define kGetSchoolInfoPath          @"/kindergarten/%@"
 
 #endif

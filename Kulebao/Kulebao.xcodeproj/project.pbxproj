@@ -31,6 +31,8 @@
 		0913745C18CEE48800ED7CD7 /* CSKuleQiniuUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0913745B18CEE48800ED7CD7 /* CSKuleQiniuUploader.m */; };
 		0913745D18CEED0500ED7CD7 /* icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 0934EFD418BF531800E30ECA /* icon-120.png */; };
 		0917764718D0574D00D24F53 /* CSKuleAssignmentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0917764618D0574D00D24F53 /* CSKuleAssignmentInfo.m */; };
+		091AE81E18D7DC6A00EBC927 /* CSKuleSchoolInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 091AE81D18D7DC6A00EBC927 /* CSKuleSchoolInfo.m */; };
+		091AE82118D7E4E700EBC927 /* CSKuleAboutSchoolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 091AE82018D7E4E700EBC927 /* CSKuleAboutSchoolViewController.m */; };
 		09219A3418C42AF800166228 /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 09219A2F18C42AF800166228 /* 37x-Checkmark.png */; };
 		09219A3518C42AF800166228 /* 37x-Checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09219A3018C42AF800166228 /* 37x-Checkmark@2x.png */; };
 		09219A3618C42AF800166228 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 09219A3218C42AF800166228 /* MBProgressHUD.m */; };
@@ -279,6 +281,10 @@
 		0913745B18CEE48800ED7CD7 /* CSKuleQiniuUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleQiniuUploader.m; sourceTree = "<group>"; };
 		0917764518D0574D00D24F53 /* CSKuleAssignmentInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleAssignmentInfo.h; sourceTree = "<group>"; };
 		0917764618D0574D00D24F53 /* CSKuleAssignmentInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleAssignmentInfo.m; sourceTree = "<group>"; };
+		091AE81C18D7DC6A00EBC927 /* CSKuleSchoolInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleSchoolInfo.h; sourceTree = "<group>"; };
+		091AE81D18D7DC6A00EBC927 /* CSKuleSchoolInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleSchoolInfo.m; sourceTree = "<group>"; };
+		091AE81F18D7E4E700EBC927 /* CSKuleAboutSchoolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleAboutSchoolViewController.h; sourceTree = "<group>"; };
+		091AE82018D7E4E700EBC927 /* CSKuleAboutSchoolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleAboutSchoolViewController.m; sourceTree = "<group>"; };
 		09219A2F18C42AF800166228 /* 37x-Checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark.png"; sourceTree = "<group>"; };
 		09219A3018C42AF800166228 /* 37x-Checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark@2x.png"; sourceTree = "<group>"; };
 		09219A3118C42AF800166228 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -647,6 +653,8 @@
 				09FFB5F318D6B2FA00F07B0A /* CSKuleDailyScheduleInfo.m */,
 				09FFB5F518D6B46300F07B0A /* CSKuleScheduleInfo.h */,
 				09FFB5F618D6B46300F07B0A /* CSKuleScheduleInfo.m */,
+				091AE81C18D7DC6A00EBC927 /* CSKuleSchoolInfo.h */,
+				091AE81D18D7DC6A00EBC927 /* CSKuleSchoolInfo.m */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -825,6 +833,8 @@
 		093904CC18BDD9F2006E8F82 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				091AE81F18D7E4E700EBC927 /* CSKuleAboutSchoolViewController.h */,
+				091AE82018D7E4E700EBC927 /* CSKuleAboutSchoolViewController.m */,
 				090C9ECA18C853B700883DE0 /* CSKuleAboutViewController.h */,
 				090C9ECB18C853B700883DE0 /* CSKuleAboutViewController.m */,
 				09FE6AFF18C5BCFD00A840BE /* CSKuleAssignmentViewController.h */,
@@ -1375,6 +1385,7 @@
 				09FE6B0A18C5C34F00A840BE /* CSKuleChatingViewController.m in Sources */,
 				0913745C18CEE48800ED7CD7 /* CSKuleQiniuUploader.m in Sources */,
 				09BA1C2318BB3F8400760182 /* AFHTTPClient.m in Sources */,
+				091AE82118D7E4E700EBC927 /* CSKuleAboutSchoolViewController.m in Sources */,
 				09ED59A518CC8F5200187585 /* UIViewController+CSKit.m in Sources */,
 				09BA1BA118BB2AB400760182 /* CSAppDelegate.m in Sources */,
 				090C9EC418C84E9F00883DE0 /* CSKuleSelectChildViewController.m in Sources */,
@@ -1382,6 +1393,7 @@
 				09219A5218C4878600166228 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				0917764718D0574D00D24F53 /* CSKuleAssignmentInfo.m in Sources */,
 				09BA1C2718BB3F8400760182 /* AFNetworkActivityIndicatorManager.m in Sources */,
+				091AE81E18D7DC6A00EBC927 /* CSKuleSchoolInfo.m in Sources */,
 				0904690518C72E5000D0846E /* CSKuleParentInfo.m in Sources */,
 				09FE6AF618C5A53200A840BE /* CSTextFieldDelegate.m in Sources */,
 				09BA1C2418BB3F8400760182 /* AFHTTPRequestOperation.m in Sources */,
@@ -1558,6 +1570,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "7684FF84-DF45-42EE-9F45-8B818827B183";
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1576,6 +1589,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "7684FF84-DF45-42EE-9F45-8B818827B183";
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

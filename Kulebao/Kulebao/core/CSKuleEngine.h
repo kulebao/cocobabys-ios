@@ -93,5 +93,9 @@
                               success:(SuccessResponseHandler)success
                               failure:(FailureResponseHandler)failure;
 
+- (void)reqGetSchoolInfoOfKindergarten:(NSInteger)kindergarten
+                               success:(SuccessResponseHandler)success
+                               failure:(FailureResponseHandler)failure;
+
 
 @end

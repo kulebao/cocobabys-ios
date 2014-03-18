@@ -467,5 +467,36 @@
     return obj;
 }
 
++ (CSKuleSchoolInfo*)decodeSchoolInfo:(NSDictionary*)dataJson {
+    /*
+     {"school_id":93740362,
+     "phone":"13991855476",
+     "timestamp":1387649057933,
+     "desc":"...",
+     "school_logo_url":"http://www.jslfgz.com.cn/UploadFiles/xxgl/2013/4/201342395834.jpg", 
+     "name":"成都市第三军区幼儿园"
+     }
+     */
+    
+    NSParameterAssert(dataJson);
+    
+    NSInteger school_id = [[dataJson valueForKeyNotNull:@"school_id"] integerValue];
+    double timestamp = [[dataJson valueForKeyNotNull:@"timestamp"] doubleValue];
+    NSString* phone = [dataJson valueForKeyNotNull:@"phone"];
+    NSString* desc = [dataJson valueForKeyNotNull:@"desc"];
+    NSString* school_logo_url = [dataJson valueForKeyNotNull:@"school_logo_url"];
+    NSString* name = [dataJson valueForKeyNotNull:@"name"];
+    
+    CSKuleSchoolInfo* obj = [CSKuleSchoolInfo new];
+    obj.schoolId = school_id;
+    obj.phone = phone;
+    obj.desc = desc;
+    obj.timestamp = timestamp / 1000.0;
+    obj.schoolLogoUrl = school_logo_url;
+    obj.name = name;
+    
+    return obj;
+}
+
 
 @end

@@ -94,7 +94,6 @@
                                         </state>
                                         <connections>
                                             <action selector="onBtnShowChildMenuListClicked:" destination="nb4-8s-InE" eventType="touchUpInside" id="La5-g1-cLd"/>
-                                            <segue destination="5Eq-sp-dh6" kind="push" identifier="segue.aboutschool" id="SuN-Wn-wGq"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -306,6 +305,7 @@
                         <segue destination="Vta-Cg-yNO" kind="push" identifier="segue.schedule" id="gpQ-i9-RXP"/>
                         <segue destination="1UC-eH-jjs" kind="push" identifier="segue.checkin" id="RuD-l7-P3j"/>
                         <segue destination="Oe0-Pk-5G3" kind="push" identifier="segue.chating" id="cmA-aq-eJf"/>
+                        <segue destination="5Eq-sp-dh6" kind="push" identifier="segue.aboutschool" id="ybz-8o-Uy1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H1k-cV-9AB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -346,7 +346,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fE4-Sm-qpU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-831" y="2888"/>
+            <point key="canvasLocation" x="-698" y="2664"/>
         </scene>
         <!--Kule Auth View Controller-->
         <scene sceneID="z62-Qe-zBE">

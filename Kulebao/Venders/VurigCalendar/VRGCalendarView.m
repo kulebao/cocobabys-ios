@@ -547,7 +547,7 @@
         isAnimating=NO;
         self.labelCurrentMonth = [[UILabel alloc] initWithFrame:CGRectMake(34, 0, kVRGCalendarViewWidth-68, 40)];
         [self addSubview:labelCurrentMonth];
-        labelCurrentMonth.backgroundColor=[UIColor whiteColor];
+        labelCurrentMonth.backgroundColor=[UIColor clearColor];
         labelCurrentMonth.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:17];
         labelCurrentMonth.textColor = [UIColor colorWithHexString:@"0x383838"];
         labelCurrentMonth.textAlignment = UITextAlignmentCenter;

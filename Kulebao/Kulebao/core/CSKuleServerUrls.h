@@ -67,4 +67,7 @@
 // PATH: 学校介绍
 #define kGetSchoolInfoPath          @"/kindergarten/%@"
 
+// PATH: 签到签出记录
+#define kGetCheckInOutLogPath       @"/kindergarten/%@/child/%@/dailylog"
+
 #endif

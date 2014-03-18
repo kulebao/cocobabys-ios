@@ -12,7 +12,7 @@
 
 - (NSString*)isoDateString {
     NSDateFormatter* fmt = [[NSDateFormatter alloc] init];
-    //fmt.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
+    fmt.locale = [NSLocale currentLocale];
     fmt.dateFormat = @"yyyy-MM-dd";
     NSString* dateString = [fmt stringFromDate:self];
     return dateString;

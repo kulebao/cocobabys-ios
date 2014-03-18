@@ -38,6 +38,7 @@
 		091AE82F18D820C800EBC927 /* UIColor+expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = 091AE82818D820C800EBC927 /* UIColor+expanded.m */; };
 		091AE83018D820C800EBC927 /* UIView+convenience.m in Sources */ = {isa = PBXBuildFile; fileRef = 091AE82A18D820C800EBC927 /* UIView+convenience.m */; };
 		091AE83118D820C800EBC927 /* VRGCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 091AE82C18D820C800EBC927 /* VRGCalendarView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		091AE83518D8300A00EBC927 /* CSKuleCheckInOutLogInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 091AE83418D8300A00EBC927 /* CSKuleCheckInOutLogInfo.m */; };
 		09219A3418C42AF800166228 /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 09219A2F18C42AF800166228 /* 37x-Checkmark.png */; };
 		09219A3518C42AF800166228 /* 37x-Checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09219A3018C42AF800166228 /* 37x-Checkmark@2x.png */; };
 		09219A3618C42AF800166228 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 09219A3218C42AF800166228 /* MBProgressHUD.m */; };
@@ -301,6 +302,8 @@
 		091AE82B18D820C800EBC927 /* VRGCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VRGCalendarView.h; sourceTree = "<group>"; };
 		091AE82C18D820C800EBC927 /* VRGCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VRGCalendarView.m; sourceTree = "<group>"; };
 		091AE83218D8281700EBC927 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		091AE83318D8300A00EBC927 /* CSKuleCheckInOutLogInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleCheckInOutLogInfo.h; sourceTree = "<group>"; };
+		091AE83418D8300A00EBC927 /* CSKuleCheckInOutLogInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleCheckInOutLogInfo.m; sourceTree = "<group>"; };
 		09219A2F18C42AF800166228 /* 37x-Checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark.png"; sourceTree = "<group>"; };
 		09219A3018C42AF800166228 /* 37x-Checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark@2x.png"; sourceTree = "<group>"; };
 		09219A3118C42AF800166228 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -689,6 +692,8 @@
 				09FFB5F618D6B46300F07B0A /* CSKuleScheduleInfo.m */,
 				091AE81C18D7DC6A00EBC927 /* CSKuleSchoolInfo.h */,
 				091AE81D18D7DC6A00EBC927 /* CSKuleSchoolInfo.m */,
+				091AE83318D8300A00EBC927 /* CSKuleCheckInOutLogInfo.h */,
+				091AE83418D8300A00EBC927 /* CSKuleCheckInOutLogInfo.m */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -1439,6 +1444,7 @@
 				09219A5318C4878600166228 /* TPKeyboardAvoidingTableView.m in Sources */,
 				0934EFC418BF3AF700E30ECA /* EAIntroView.m in Sources */,
 				091AE83018D820C800EBC927 /* UIView+convenience.m in Sources */,
+				091AE83518D8300A00EBC927 /* CSKuleCheckInOutLogInfo.m in Sources */,
 				090C9ECC18C853B700883DE0 /* CSKuleAboutViewController.m in Sources */,
 				09BA1BFF18BB334900760182 /* JSONKit.m in Sources */,
 				0904690218C7117D00D0846E /* CSKuleChildInfo.m in Sources */,

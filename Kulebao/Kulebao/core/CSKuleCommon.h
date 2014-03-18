@@ -15,4 +15,16 @@ enum KuleGender {
     kKuleGenderMale = 1,
 };
 
+// 设备类型
+enum KuleDeviceType{
+    kKuleDeviceTypeAndroid = 3,
+    kKuleDeviceTypeiPhone = 4,
+};
+
+// 通知类型
+enum KuleNoticeType {
+    kKuleNoticeTypeCheckOut = 0,
+    kKuleNoticeTypeCheckIn = 1,
+};
+
 #endif

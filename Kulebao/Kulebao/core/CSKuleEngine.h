@@ -97,5 +97,13 @@
                                success:(SuccessResponseHandler)success
                                failure:(FailureResponseHandler)failure;
 
+- (void)reqGetCheckInOutLogOfChild:(CSKuleChildInfo*)childInfo
+                    inKindergarten:(NSInteger)kindergarten
+                              from:(NSInteger)fromId
+                                to:(NSInteger)toId
+                              most:(NSInteger)most
+                           success:(SuccessResponseHandler)success
+                           failure:(FailureResponseHandler)failure;
+
 
 @end

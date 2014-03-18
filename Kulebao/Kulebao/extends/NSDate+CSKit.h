@@ -39,4 +39,6 @@
 //获取年
 - (NSUInteger)getYear;
 
+- (NSString*)string;
+
 @end

@@ -498,5 +498,39 @@
     return obj;
 }
 
++ (CSKuleCheckInOutLogInfo*)decodeCheckInOutLogInfo:(NSDictionary*)dataJson {
+    /*
+     {
+     "timestamp":1393766772899,
+     "notice_type":1,
+     "child_id":"1_93740362_374",
+     "pushid":"815206836867002199",
+     "record_url":"http://suoqin-test.u.qiniudn.com/FoUJaV4r5L0bM0414mGWEIuCLEdL",
+     "parent_name":"林玄",
+     "device":3},
+     */
+    
+    NSParameterAssert(dataJson);
+        
+    double timestamp = [[dataJson valueForKeyNotNull:@"timestamp"] doubleValue];
+    NSInteger notice_type = [[dataJson valueForKeyNotNull:@"notice_type"] integerValue];
+    NSString* child_id = [dataJson valueForKeyNotNull:@"child_id"];
+    NSString* pushid = [dataJson valueForKeyNotNull:@"pushid"];
+    NSString* record_url = [dataJson valueForKeyNotNull:@"record_url"];
+    NSString* parent_name = [dataJson valueForKeyNotNull:@"parent_name"];
+    NSInteger device = [[dataJson valueForKeyNotNull:@"device"] integerValue];
+    
+    CSKuleCheckInOutLogInfo* obj = [CSKuleCheckInOutLogInfo new];
+    obj.timestamp = timestamp / 1000.0;
+    obj.noticeType = notice_type;
+    obj.childId = child_id;
+    obj.pushId = pushid;
+    obj.recordUrl = record_url;
+    obj.parentName = parent_name;
+    obj.deviceType = device;
+    
+    return obj;
+}
+
 
 @end

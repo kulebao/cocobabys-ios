@@ -105,12 +105,15 @@
 #pragma mark - UI
 - (void)updateUI {
     CSKuleChildInfo* childInfo = gApp.engine.currentRelationship.child;
+    CSLog(@"childInfo:%@", childInfo);
     if (childInfo) {
         self.labClassName.text = childInfo.className;
         self.labSchoolName.text = gApp.engine.loginInfo.schoolName;
-        //self.labChildNick.text = childInfo.nick;
-        self.imgChildPortrait.image = nil;
-        [self.imgChildPortrait setImageWithURL:[gApp.engine urlFromPath:childInfo.portrait]];
+        
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[gApp.engine urlFromPath:childInfo.portrait]];
+        [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
+        request.cachePolicy = NSURLRequestReloadIgnoringLocalAndRemoteCacheData;
+        [self.imgChildPortrait setImageWithURLRequest:request placeholderImage:nil success:nil failure:nil];
         
         // 计算宝宝年龄
         NSDate* dayOfBirth = [NSDate dateFromString:childInfo.birthday withFormat:[NSDate dateFormatString]];
@@ -278,6 +281,7 @@
     SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
         NSString* portrait = [NSString stringWithFormat:@"%@/%@", kQiniuDownloadServerHost, imgFileName];
         //self.imgChildPortrait.image = img;
+        CSLog(@"upload portrait:%@", portrait);
         
         [self doUpdateChildPortrait:portrait];
     };

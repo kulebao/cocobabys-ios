@@ -317,19 +317,19 @@
             <objects>
                 <viewController id="5Eq-sp-dh6" customClass="CSKuleAboutSchoolViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Oj4-Zo-yS4">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app-bg-type3.png" id="lVe-WM-bYc">
-                                <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <view contentMode="scaleToFill" id="VcU-JJ-ahE">
-                                <rect key="frame" x="10" y="76" width="300" height="392"/>
+                                <rect key="frame" x="10" y="12" width="300" height="392"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="fmk-mm-1qU">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="392"/>
+                                        <rect key="frame" x="0.0" y="5" width="300" height="381"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </scrollView>
                                 </subviews>
@@ -338,6 +338,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="关于我园" id="Lka-LK-gJO"/>
                     <connections>
                         <outlet property="scrollView" destination="fmk-mm-1qU" id="CWl-9w-hUA"/>

@@ -110,9 +110,11 @@
         self.labClassName.text = childInfo.className;
         self.labSchoolName.text = gApp.engine.loginInfo.schoolName;
         
+//        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[gApp.engine urlFromPath:[childInfo.portrait stringByAppendingFormat:@"?timestamp=%f", [[NSDate date] timeIntervalSince1970]]]];
+        
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[gApp.engine urlFromPath:childInfo.portrait]];
         [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
-        request.cachePolicy = NSURLRequestReloadIgnoringLocalAndRemoteCacheData;
+        request.cachePolicy = NSURLRequestReloadIgnoringCacheData;
         [self.imgChildPortrait setImageWithURLRequest:request placeholderImage:nil success:nil failure:nil];
         
         // 计算宝宝年龄

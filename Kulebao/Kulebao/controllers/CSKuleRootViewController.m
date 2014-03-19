@@ -57,8 +57,8 @@
         CSKuleBindInfo* bindInfo = [CSKuleInterpreter decodeBindInfo:dataJson];
         
         if (bindInfo.errorCode == 0) {
-            gApp.engine.bindInfo = bindInfo;
             gApp.engine.loginInfo.schoolId = bindInfo.schoolId;
+            gApp.engine.loginInfo.accessToken = bindInfo.accessToken;
             gApp.engine.preferences.loginInfo = gApp.engine.loginInfo;
             
             [gApp gotoMainProcess];
@@ -67,7 +67,8 @@
         }
         else {
             CSLog(@"doReceiveBindInfo error_code=%d", bindInfo.errorCode);
-            [gApp hideAlert];
+            [gApp gotoLoginProcess];
+            [gApp alert:@"登录已过期，请重新登录。"];
         }
     };
     

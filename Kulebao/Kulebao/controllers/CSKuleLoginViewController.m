@@ -47,7 +47,7 @@
 #pragma mark - UI Actions
 - (IBAction)onBtnLoginClicked:(id)sender {
     [self.fieldPassword resignFirstResponder];
-    
+
     [self doLogin];
 }
 
@@ -90,8 +90,8 @@
         CSKuleBindInfo* bindInfo = [CSKuleInterpreter decodeBindInfo:dataJson];
         
         if (bindInfo.errorCode == 0) {
-            gApp.engine.bindInfo = bindInfo;
             gApp.engine.loginInfo.schoolId = bindInfo.schoolId;
+            gApp.engine.loginInfo.accessToken = bindInfo.accessToken;
             gApp.engine.preferences.loginInfo = gApp.engine.loginInfo;
             
             [gApp gotoMainProcess];
@@ -100,7 +100,8 @@
         }
         else {
             CSLog(@"doReceiveBindInfo error_code=%d", bindInfo.errorCode);
-            [gApp hideAlert];
+            [gApp gotoLoginProcess];
+            [gApp alert:@"绑定失败，请重新登录。"];
         }
     };
     

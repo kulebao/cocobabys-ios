@@ -7,8 +7,6 @@
 //
 
 #import "CSAppDelegate.h"
-#import "BPush.h"
-
 CSAppDelegate* gApp = nil;
 
 @implementation CSAppDelegate
@@ -21,16 +19,6 @@ CSAppDelegate* gApp = nil;
     gApp = self;
     _engine = [[CSKuleEngine alloc] init];
     [_engine setupEngine];
-    
-    // 添加Baidu Push
-    [BPush setupChannel:launchOptions];
-    // 必须。参数对象必须实现(void)onMethod:(NSString*)method response:(NSDictionary*)data 方法, 本示例中为 self
-    [BPush setDelegate:self];
-    
-    [application registerForRemoteNotificationTypes:
-     UIRemoteNotificationTypeAlert
-     | UIRemoteNotificationTypeBadge
-     | UIRemoteNotificationTypeSound];
     
     return [_engine application:application didFinishLaunchingWithOptions:launchOptions];
 }
@@ -70,51 +58,11 @@ CSAppDelegate* gApp = nil;
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-    // 必须
-    [BPush registerDeviceToken:deviceToken];
-    // 必须。可以在其它时机调用,只有在该方法返回(通过 onMethod:response:回调)绑定成功时,app 才能接收到 Push 消息。
-    // 一个 app 绑定成功至少一次即可(如果 access token 变更请重新绑定)。
-    [BPush bindChannel];
-}
-
-// 必须,如果正确调用了 setDelegate,在 bindChannel 之后,结果在这个回调中返回。 若绑定失败,请进行重新绑定,确保至少绑定成功一次
-- (void) onMethod:(NSString*)method response:(NSDictionary*)data {
-    CSLog(@"On method:%@", method);
-    CSLog(@"data:%@", [data description]);
-    NSDictionary* res = [[NSDictionary alloc] initWithDictionary:data];
-    if ([BPushRequestMethod_Bind isEqualToString:method]) {
-        NSString *appid = [res valueForKey:BPushRequestAppIdKey];
-        NSString *userid = [res valueForKey:BPushRequestUserIdKey];
-        NSString *channelid = [res valueForKey:BPushRequestChannelIdKey];
-        NSString *requestid = [res valueForKey:BPushRequestRequestIdKey];
-        int returnCode = [[res valueForKey:BPushRequestErrorCodeKey] intValue];
-        
-        if (returnCode == BPushErrorCode_Success) {
-            CSLog(@"BPushErrorCode_Success");
-        }
-    } else if ([BPushRequestMethod_Unbind isEqualToString:method]) {
-        int returnCode = [[res valueForKey:BPushRequestErrorCodeKey] intValue];
-        if (returnCode == BPushErrorCode_Success) {
-        }
-    }
+    [_engine application:application didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    NSString *alert = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
-    if (application.applicationState == UIApplicationStateActive) {
-        // Nothing to do if applicationState is Inactive, the iOS already displayed an alert view.
-//        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Did receive a Remote Notification"
-//                                                            message:[NSString stringWithFormat:@"The application received this remote notification while it was running:\n%@", alert]
-//                                                           delegate:self
-//                                                  cancelButtonTitle:@"OK"
-//                                                  otherButtonTitles:nil];
-//        [alertView show];
-        
-        CSLog(@"%@", @"Did receive a Remote Notification");
-    }
-    
-    [application setApplicationIconBadgeNumber:0];
-    [BPush handleNotification:userInfo];
+    [_engine application:application didReceiveRemoteNotification:userInfo];
 }
 
 #pragma mark - Private
@@ -132,7 +80,6 @@ CSAppDelegate* gApp = nil;
 
 - (void)logout {
     gApp.engine.loginInfo = nil;
-    gApp.engine.bindInfo = nil;
     gApp.engine.relationships = nil;
     gApp.engine.currentRelationship = nil;
     gApp.engine.preferences.loginInfo = nil;

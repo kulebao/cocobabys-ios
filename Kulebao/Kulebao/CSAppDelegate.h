@@ -15,9 +15,11 @@
 @property (strong, nonatomic) CSKuleEngine* engine;
 @property (strong, nonatomic) MBProgressHUD* hud;
 
-// -
+// - Process
 - (void)gotoLoginProcess;
 - (void)gotoMainProcess;
+
+// - Action
 - (void)logout;
 
 // - Alert
@@ -25,7 +27,6 @@
 - (void)alert:(NSString*)text withTitle:(NSString*)title;
 - (void)waitingAlert:(NSString*)text;
 - (void)waitingAlert:(NSString*)text withTitle:(NSString*)title;
-
 - (void)hideAlert;
 - (void)hideAlertAfterDelay:(NSTimeInterval)delay;
 

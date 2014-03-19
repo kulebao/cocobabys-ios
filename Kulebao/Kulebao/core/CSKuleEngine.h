@@ -14,13 +14,14 @@
 #import "CSKuleEventType.h"
 #import "CSKuleServerUrls.h"
 #import "CSKulePreferences.h"
-
 #import "CSKuleInterpreter.h"
 
 @interface CSKuleEngine : NSObject
 @property (strong, nonatomic) CSKulePreferences* preferences;
+
+@property (strong, nonatomic) CSKuleBPushInfo* baiduPushInfo;
 @property (strong, nonatomic) CSKuleLoginInfo* loginInfo;
-@property (strong, nonatomic) CSKuleBindInfo* bindInfo;
+
 @property (strong, nonatomic) NSArray* relationships;
 @property (strong, nonatomic) CSKuleRelationshipInfo* currentRelationship;
 
@@ -31,6 +32,8 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application;
 - (void)applicationDidBecomeActive:(UIApplication *)application;
 - (void)applicationWillTerminate:(UIApplication *)application;
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken;
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo;
 
 #pragma mark - Setup
 - (void)setupEngine;

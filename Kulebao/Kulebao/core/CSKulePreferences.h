@@ -9,12 +9,15 @@
 #import <Foundation/Foundation.h>
 
 #import "CSKuleLoginInfo.h"
+#import "CSKuleBPushInfo.h"
 
 @interface CSKulePreferences : NSObject
+@property (nonatomic, strong) NSData* deviceToken;
+
 @property (nonatomic, strong) NSString* defaultUsername;
 @property (nonatomic, assign) BOOL guideShown;
 
-@property (nonatomic, strong) NSString* loginUsername;
+@property (nonatomic, strong) CSKuleBPushInfo* baiduPushInfo;
 @property (nonatomic, strong) CSKuleLoginInfo* loginInfo;
 
 + (id)defaultPreferences;

@@ -8,102 +8,126 @@
 
 #import "CSKulePreferences.h"
 
+static NSString* kKeyDeviceToken = @"com.cocobabys.Kulebao.Preferences.deviceToken";
+static NSString* kKeyDefaultUsername = @"com.cocobabys.Kulebao.Preferences.defaultUsername";
+static NSString* kKeyGuideShown = @"com.cocobabys.Kulebao.Preferences.guideShown";
+static NSString* kKeyLoginInfo = @"com.cocobabys.Kulebao.Preferences.loginInfo";
+static NSString* kKeyBPushInfo = @"com.cocobabys.Kulebao.Preferences.baiduPushInfo";
+
 @implementation CSKulePreferences {
     NSUserDefaults* _config;
 }
 
 @synthesize defaultUsername = _defaultUsername;
 @synthesize guideShown = _guideShown;
-@synthesize loginUsername = _loginUsername;
 @synthesize loginInfo = _loginInfo;
+@synthesize deviceToken = _deviceToken;
 
 + (id)defaultPreferences {
-    CSKulePreferences* pre = [CSKulePreferences new];
-    [pre loadPreferences];
-    return pre;
+    static CSKulePreferences* s_preferences = nil;
+    if (s_preferences == nil) {
+        s_preferences = [CSKulePreferences new];
+        [s_preferences loadPreferences];
+    }
+    return s_preferences;
 }
 
 - (id)init {
     if (self = [super init]) {
         _config = [NSUserDefaults standardUserDefaults];
     }
-    
     return self;
 }
 
 - (void)loadPreferences {
-    _defaultUsername = [_config objectForKey:@"com.cocobabys.Kulebao.Preferences.defaultUsername"];
-    _loginUsername = [_config objectForKey:@"com.cocobabys.Kulebao.Preferences.loginUsername"];
-    _guideShown = [[_config objectForKey:@"com.cocobabys.Kulebao.Preferences.guideShown"] boolValue];
+    _deviceToken = [_config objectForKey:kKeyDeviceToken];
+    _defaultUsername = [_config objectForKey:kKeyDefaultUsername];
+    _guideShown = [[_config objectForKey:kKeyGuideShown] boolValue];
     
+    
+    NSDictionary* loginInfoDict = [_config objectForKey:kKeyLoginInfo];
     CSKuleLoginInfo* loginInfo = [CSKuleLoginInfo new];
-    loginInfo.accessToken = [_config objectForKey:@"com.cocobabys.Kulebao.Preferences.loginInfo.accessToken"];
-    loginInfo.accountName = [_config objectForKey:@"com.cocobabys.Kulebao.Preferences.loginInfo.accountName"];
-    loginInfo.schoolName = [_config objectForKey:@"com.cocobabys.Kulebao.Preferences.loginInfo.schoolName"];
-    loginInfo.username = [_config objectForKey:@"com.cocobabys.Kulebao.Preferences.loginInfo.username"];
-    loginInfo.schoolId = [[_config objectForKey:@"com.cocobabys.Kulebao.Preferences.loginInfo.schoolId"] integerValue];
-    loginInfo.errorCode = 0;
+    
+    loginInfo.accessToken = [loginInfoDict valueForKeyNotNull:@"accessToken"];
+    loginInfo.accountName = [loginInfoDict valueForKeyNotNull:@"accountName"];
+    loginInfo.schoolName = [loginInfoDict valueForKeyNotNull:@"schoolName"];
+    loginInfo.username = [loginInfoDict valueForKeyNotNull:@"username"];
+    loginInfo.schoolId = [[loginInfoDict valueForKeyNotNull:@"schoolId"] integerValue];
+    loginInfo.errorCode = [[loginInfoDict valueForKeyNotNull:@"errorCode"] integerValue];
     
     if (loginInfo.accessToken && loginInfo.accountName && loginInfo.schoolName
-        && loginInfo.username && loginInfo.schoolId!=0) {
+        && loginInfo.username && loginInfo.schoolId!=0 && loginInfo.errorCode == 0) {
         _loginInfo = loginInfo;
     }
     else {
         _loginInfo = nil;
     }
+    
+    NSDictionary* bpushInfoDict = [_config objectForKey:kKeyBPushInfo];
+    CSKuleBPushInfo* bpushInfo = [CSKuleBPushInfo new];
+    bpushInfo.userId = [bpushInfoDict valueForKeyNotNull:@"userId"];
+    bpushInfo.channelId = [bpushInfoDict valueForKeyNotNull:@"channelId"];
+    
+    if (bpushInfo.userId && bpushInfo.channelId) {
+        _baiduPushInfo = bpushInfo;
+    }
+    else {
+        _baiduPushInfo = nil;
+    }
 }
 
 - (void)savePreferences {
-    if (_defaultUsername) {
-        [_config setObject:_defaultUsername forKey:@"com.cocobabys.Kulebao.Preferences.defaultUsername"];
+    
+    if (_deviceToken) {
+        [_config setObject:_deviceToken forKey:kKeyDeviceToken];
     }
     else {
-        [_config removeObjectForKey:@"com.cocobabys.Kulebao.Preferences.defaultUsername"];
+        [_config removeObjectForKey:kKeyDeviceToken];
     }
     
-    if (_loginUsername) {
-        [_config setObject:_loginUsername forKey:@"com.cocobabys.Kulebao.Preferences.loginUsername"];
+    if (_defaultUsername) {
+        [_config setObject:_defaultUsername forKey:kKeyDefaultUsername];
     }
     else {
-         [_config removeObjectForKey:@"com.cocobabys.Kulebao.Preferences.loginUsername"];
+        [_config removeObjectForKey:kKeyDefaultUsername];
     }
     
     if (_guideShown) {
-        [_config setObject:@(_guideShown) forKey:@"com.cocobabys.Kulebao.Preferences.guideShown"];
+        [_config setObject:@(_guideShown) forKey:kKeyGuideShown];
     }
     else {
-        [_config removeObjectForKey:@"com.cocobabys.Kulebao.Preferences.guideShown"];
+        [_config removeObjectForKey:kKeyGuideShown];
     }
     
-    if (_loginInfo) {
-        [_config setObject:_loginInfo.accessToken
-                    forKey:@"com.cocobabys.Kulebao.Preferences.loginInfo.accessToken"];
-        [_config setObject:_loginInfo.accountName
-                    forKey:@"com.cocobabys.Kulebao.Preferences.loginInfo.accountName"];
-        [_config setObject:_loginInfo.schoolName
-                    forKey:@"com.cocobabys.Kulebao.Preferences.loginInfo.schoolName"];
-        [_config setObject:_loginInfo.username
-                    forKey:@"com.cocobabys.Kulebao.Preferences.loginInfo.username"];
-        [_config setObject:@(_loginInfo.schoolId)
-                    forKey:@"com.cocobabys.Kulebao.Preferences.loginInfo.schoolId"];
+    if (_loginInfo && _loginInfo.accessToken && _loginInfo.accountName && _loginInfo.schoolName
+        && _loginInfo.username && _loginInfo.schoolId!=0 && _loginInfo.errorCode == 0) {
+        NSDictionary* loginInfoDict = @{@"accessToken": _loginInfo.accessToken,
+                                        @"accountName": _loginInfo.accountName,
+                                        @"schoolName": _loginInfo.schoolName,
+                                        @"username": _loginInfo.username,
+                                        @"schoolId": @(_loginInfo.schoolId),
+                                        @"errorCode": @(_loginInfo.errorCode)};
+
+        [_config setObject:loginInfoDict forKey:kKeyLoginInfo];
     }
     else {
-        [_config removeObjectForKey:@"com.cocobabys.Kulebao.Preferences.loginInfo.accessToken"];
-        [_config removeObjectForKey:@"com.cocobabys.Kulebao.Preferences.loginInfo.accountName"];
-        [_config removeObjectForKey:@"com.cocobabys.Kulebao.Preferences.loginInfo.schoolName"];
-        [_config removeObjectForKey:@"com.cocobabys.Kulebao.Preferences.loginInfo.username"];
-        [_config removeObjectForKey:@"com.cocobabys.Kulebao.Preferences.loginInfo.schoolId"];
+        [_config removeObjectForKey:kKeyLoginInfo];
     }
     
+    if (_baiduPushInfo && _baiduPushInfo.userId && _baiduPushInfo.channelId) {
+        NSDictionary* bpushInfoDict = @{@"userId": _baiduPushInfo.userId,
+                                        @"channelId": _baiduPushInfo.channelId};
+        
+        [_config setObject:bpushInfoDict forKey:kKeyBPushInfo];
+    }
+    else {
+        [_config removeObjectForKey:kKeyBPushInfo];
+    }
+
     [_config synchronize];
 }
 
 #pragma mark - Setters
-- (void)setLoginUsername:(NSString *)loginUsername {
-    _loginUsername = loginUsername;
-    [self savePreferences];
-}
-
 - (void)setDefaultUsername:(NSString *)defaultUsername {
     _defaultUsername = defaultUsername;
     [self savePreferences];
@@ -116,6 +140,16 @@
 
 - (void)setLoginInfo:(CSKuleLoginInfo *)loginInfo {
     _loginInfo = loginInfo;
+    [self savePreferences];
+}
+
+- (void)setBaiduPushInfo:(CSKuleBPushInfo *)baiduPushInfo {
+    _baiduPushInfo = baiduPushInfo;
+    [self savePreferences];
+}
+
+- (void)setDeviceToken:(NSData *)deviceToken {
+    _deviceToken = deviceToken;
     [self savePreferences];
 }
 

@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *labChildNick;
 @property (weak, nonatomic) IBOutlet UIImageView *imgChildPortrait;
 @property (weak, nonatomic) IBOutlet UIView *viewChildContainer;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollContent;
 
 @property (weak, nonatomic) IBOutlet UIButton *btnClassInfo;
 @property (weak, nonatomic) IBOutlet UIButton *btnSchoolInfo;
@@ -38,6 +39,7 @@
 - (IBAction)onBtnScheduleInfoClicked:(id)sender;
 - (IBAction)onBtnAssignmentClicked:(id)sender;
 - (IBAction)onBtnChatingClicked:(id)sender;
+- (IBAction)onBtnAssessClicked:(id)sender;
 
 - (IBAction)onBtnSchoolInfoClicked:(id)sender;
 - (IBAction)onBtnClassInfoClicked:(id)sender;
@@ -70,6 +72,9 @@
     self.imgChildPortrait.layer.cornerRadius = 6.0;
     self.imgChildPortrait.clipsToBounds = YES;
     
+    self.scrollContent.contentSize = CGSizeMake(320, 303);
+    self.scrollContent.showsVerticalScrollIndicator = YES;
+    
     _nickFieldDelegate = [[CSTextFieldDelegate alloc] initWithType:kCSTextFieldDelegateNormal];
     _nickFieldDelegate.maxLength = kKuleNickMaxLength;
     
@@ -96,6 +101,12 @@
         CSLog(@"currentRelationship changed.");
         [self updateUI];
     }
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [_scrollContent flashScrollIndicators];
 }
 
 #pragma mark - Segues
@@ -372,6 +383,10 @@
 
 - (IBAction)onBtnChatingClicked:(id)sender {
     [self performSegueWithIdentifier:@"segue.chating" sender:nil];
+}
+
+- (IBAction)onBtnAssessClicked:(id)sender {
+    [self performSegueWithIdentifier:@"segue.assess" sender:nil];
 }
 
 - (IBAction)onBtnSchoolInfoClicked:(id)sender {

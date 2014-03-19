@@ -114,12 +114,8 @@
         self.labClassName.text = childInfo.className;
         self.labSchoolName.text = gApp.engine.loginInfo.schoolName;
         
-//        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[gApp.engine urlFromPath:[childInfo.portrait stringByAppendingFormat:@"?timestamp=%f", [[NSDate date] timeIntervalSince1970]]]];
-        
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[gApp.engine urlFromPath:childInfo.portrait]];
-        [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
-        request.cachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
-        [self.imgChildPortrait setImageWithURLRequest:request placeholderImage:nil success:nil failure:nil];
+        NSURL* url = [gApp.engine urlFromPath:[childInfo.portrait stringByAppendingFormat:@"?%f",[[NSDate date] timeIntervalSince1970]]];
+        [self.imgChildPortrait setImageWithURL:url];
         
         // 计算宝宝年龄
         NSDate* dayOfBirth = [NSDate dateFromString:childInfo.birthday withFormat:[NSDate dateFormatString]];
@@ -203,12 +199,13 @@
             CSKuleChildInfo* cc = [CSKuleInterpreter decodeChildInfo:dataJson];
             childInfo.portrait = cc.portrait;
             
-            [self updateUI];
+            //[self updateUI];
         };
         
         FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
             CSLog(@"failure:%@", error);
             [gApp alert:[error localizedDescription]];
+            [self updateUI];
         };
         
         [gApp waitingAlert:@"更新宝宝头像中"];
@@ -287,9 +284,7 @@
     
     SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
         NSString* portrait = [NSString stringWithFormat:@"%@/%@", kQiniuDownloadServerHost, imgFileName];
-        //self.imgChildPortrait.image = img;
-        CSLog(@"upload portrait:%@", portrait);
-        
+        self.imgChildPortrait.image = img;
         [self doUpdateChildPortrait:portrait];
     };
     

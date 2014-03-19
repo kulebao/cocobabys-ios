@@ -76,7 +76,9 @@
     
     CSKuleRelationshipInfo* relationship = [self.relationships objectAtIndex:indexPath.row];
     cell.labChildName.text = relationship.child.nick;
-    [cell.imgChildPortrait setImageWithURL:[gApp.engine urlFromPath:relationship.child.portrait]];
+    
+    NSURL* url = [gApp.engine urlFromPath:[relationship.child.portrait stringByAppendingFormat:@"?%f",[[NSDate date] timeIntervalSince1970]]];
+    [cell.imgChildPortrait setImageWithURL:url];
     
     return cell;
 }

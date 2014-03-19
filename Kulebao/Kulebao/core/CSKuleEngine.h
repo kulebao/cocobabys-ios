@@ -11,7 +11,6 @@
 #import "CSHttpClient.h"
 
 #import "CSKuleCommon.h"
-#import "CSKuleEventType.h"
 #import "CSKuleServerUrls.h"
 #import "CSKulePreferences.h"
 #import "CSKuleInterpreter.h"

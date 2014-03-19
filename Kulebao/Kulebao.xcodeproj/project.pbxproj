@@ -432,7 +432,6 @@
 		0934F04918BF5B0800E30ECA /* settings-row-bg-mid@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings-row-bg-mid@2x.png"; sourceTree = "<group>"; };
 		0934F04A18BF5B0800E30ECA /* settings-row-bg-top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings-row-bg-top.png"; sourceTree = "<group>"; };
 		0934F04B18BF5B0800E30ECA /* settings-row-bg-top@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings-row-bg-top@2x.png"; sourceTree = "<group>"; };
-		093904D718BDDA40006E8F82 /* CSKuleEventType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleEventType.h; sourceTree = "<group>"; };
 		093904D818BDDA40006E8F82 /* CSKuleServerUrls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleServerUrls.h; sourceTree = "<group>"; };
 		093904DB18BDDA90006E8F82 /* CSKuleRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleRootViewController.h; sourceTree = "<group>"; };
 		093904DC18BDDA90006E8F82 /* CSKuleRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleRootViewController.m; sourceTree = "<group>"; };
@@ -681,8 +680,6 @@
 				09ED59BB18CDC5E800187585 /* CSKuleCookbookInfo.m */,
 				09FFB5F218D6B2FA00F07B0A /* CSKuleDailyScheduleInfo.h */,
 				09FFB5F318D6B2FA00F07B0A /* CSKuleDailyScheduleInfo.m */,
-				090C9EB118C81D7500883DE0 /* CSKuleInterpreter.h */,
-				090C9EB218C81D7500883DE0 /* CSKuleInterpreter.m */,
 				09219A5818C4999B00166228 /* CSKuleLoginInfo.h */,
 				09219A5918C4999B00166228 /* CSKuleLoginInfo.m */,
 				09ED59AA18CD67FD00187585 /* CSKuleNewsInfo.h */,
@@ -699,6 +696,7 @@
 				091AE81D18D7DC6A00EBC927 /* CSKuleSchoolInfo.m */,
 				09FFB5EF18D6B2E100F07B0A /* CSKuleWeekScheduleInfo.h */,
 				09FFB5F018D6B2E100F07B0A /* CSKuleWeekScheduleInfo.m */,
+				093CD69518D974930025972C /* Interpreter */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -915,7 +913,6 @@
 		093904D518BDDA40006E8F82 /* core */ = {
 			isa = PBXGroup;
 			children = (
-				093904D718BDDA40006E8F82 /* CSKuleEventType.h */,
 				093904D818BDDA40006E8F82 /* CSKuleServerUrls.h */,
 				090468FC18C701B700D0846E /* CSKuleCommon.h */,
 				09219A5518C48A2100166228 /* CSKuleEngine.h */,
@@ -924,6 +921,15 @@
 				090C9EAF18C813BD00883DE0 /* CSKulePreferences.m */,
 			);
 			path = core;
+			sourceTree = "<group>";
+		};
+		093CD69518D974930025972C /* Interpreter */ = {
+			isa = PBXGroup;
+			children = (
+				090C9EB118C81D7500883DE0 /* CSKuleInterpreter.h */,
+				090C9EB218C81D7500883DE0 /* CSKuleInterpreter.m */,
+			);
+			name = Interpreter;
 			sourceTree = "<group>";
 		};
 		09BA1B8418BB2AB300760182 = {

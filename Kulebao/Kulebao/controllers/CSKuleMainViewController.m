@@ -16,6 +16,7 @@
 
 @interface CSKuleMainViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
     UIImagePickerController* _imgPicker;
+    CSTextFieldDelegate* _nickFieldDelegate;
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *labSchoolName;
@@ -69,6 +70,9 @@
     self.imgChildPortrait.layer.cornerRadius = 6.0;
     self.imgChildPortrait.clipsToBounds = YES;
     
+    _nickFieldDelegate = [[CSTextFieldDelegate alloc] initWithType:kCSTextFieldDelegateNormal];
+    _nickFieldDelegate.maxLength = kKuleNickMaxLength;
+    
     [gApp.engine addObserver:self
                   forKeyPath:@"currentRelationship"
                      options:NSKeyValueObservingOptionNew
@@ -114,7 +118,7 @@
         
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[gApp.engine urlFromPath:childInfo.portrait]];
         [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
-        request.cachePolicy = NSURLRequestReloadIgnoringCacheData;
+        request.cachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
         [self.imgChildPortrait setImageWithURLRequest:request placeholderImage:nil success:nil failure:nil];
         
         // 计算宝宝年龄
@@ -122,7 +126,7 @@
         NSCalendar *calendar = [NSCalendar currentCalendar];
         NSDateComponents* ageComponents = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:dayOfBirth toDate:[NSDate date] options:0];
         
-        self.labChildNick.text = [NSString stringWithFormat:@"%@ %@岁%@个月", childInfo.nick, @([ageComponents year]), @([ageComponents month])];
+        self.labChildNick.text = [NSString stringWithFormat:@"%@ %@岁%@个月", [childInfo.nick substringToIndex:kKuleNickMaxLength], @([ageComponents year]), @([ageComponents month])];
     }
 }
 
@@ -141,6 +145,7 @@
     field.borderStyle = UITextBorderStyleBezel;
     field.backgroundColor = [UIColor clearColor];
     field.font = [UIFont systemFontOfSize:14];
+    field.delegate = _nickFieldDelegate;
 
     [alert setCancelButtonTitle:@"取消" block:^{
 

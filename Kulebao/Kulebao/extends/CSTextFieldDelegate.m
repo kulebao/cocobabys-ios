@@ -12,9 +12,12 @@
     NSInteger _type;
 }
 
+@synthesize maxLength = _maxLength;
+
 - (id)initWithType:(NSInteger)type {
     if (self = [self init]) {
         _type = type;
+        _maxLength = -1;
     }
     return self;
 }
@@ -50,8 +53,14 @@
         case kCSTextFieldDelegateNationalID:
             ret = [self isNationalID:string];
             break;
+        case kCSTextFieldDelegateNormal:
+            break;
         default:
             break;
+    }
+    
+    if (self.maxLength >=0 && string.length>0) {
+        ret = (textField.text.length < self.maxLength);
     }
     
     return ret;

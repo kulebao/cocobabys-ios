@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 enum CSTextFieldDelegateType {
+    kCSTextFieldDelegateNormal = 0,
     kCSTextFieldDelegateNumberOnly = 1,
     kCSTextFieldDelegateNationalID = 2,
 };
@@ -16,5 +17,7 @@ enum CSTextFieldDelegateType {
 @interface CSTextFieldDelegate : NSObject <UITextFieldDelegate>
 
 - (id)initWithType:(NSInteger)type;
+
+@property (nonatomic, assign) NSInteger maxLength;
 
 @end

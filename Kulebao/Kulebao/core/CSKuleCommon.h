@@ -27,4 +27,10 @@ enum KuleNoticeType {
     kKuleNoticeTypeCheckIn = 1,
 };
 
+
+enum {
+    // 宝宝昵称长度
+    kKuleNickMaxLength = 4,
+};
+
 #endif

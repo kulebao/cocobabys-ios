@@ -12,6 +12,7 @@
 
 @synthesize newsId = _newsId;
 @synthesize schoolId = _schoolId;
+@synthesize classId = _classId;
 @synthesize title = _title;
 @synthesize content = _content;
 @synthesize timestamp = _timestamp;
@@ -22,6 +23,7 @@
 - (NSString*)description {
     NSDictionary* meta = @{@"newsId": @(_newsId),
                            @"schoolId": @(_schoolId),
+                           @"classId": @(_classId),
                            @"title": _title,
                            @"content": _content,
                            @"timestamp": @(_timestamp),

@@ -95,7 +95,12 @@
     
     NSString* timestampString = [[NSDate dateWithTimeIntervalSince1970:newsInfo.timestamp] isoDateTimeString];
     
-    NSString* ss = [NSString stringWithFormat:htmlTemp, newsInfo.title, gApp.engine.loginInfo.schoolName, timestampString,  newsInfo.title, newsInfo.content];
+    NSString* publiser = gApp.engine.loginInfo.schoolName;
+    if (newsInfo.classId > 0 && newsInfo.classId == gApp.engine.currentRelationship.child.classId) {
+        publiser = [publiser stringByAppendingString:gApp.engine.currentRelationship.child.className];
+    }
+    
+    NSString* ss = [NSString stringWithFormat:htmlTemp, newsInfo.title, publiser, timestampString,  newsInfo.title, newsInfo.content];
     
     return ss;
 }

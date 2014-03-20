@@ -71,6 +71,12 @@
     CSKuleNewsInfo* newsInfo = [self.newsInfoList objectAtIndex:indexPath.row];
     cell.labTitle.text = newsInfo.title;
     cell.labContent.text = newsInfo.content;
+    if (newsInfo.classId > 0 && newsInfo.classId == gApp.engine.currentRelationship.child.classId) {
+        cell.labPublisher.text = gApp.engine.currentRelationship.child.className;
+    }
+    else {
+        cell.labPublisher.text = nil;
+    }
     
     NSDate* d = [NSDate dateWithTimeIntervalSince1970:newsInfo.timestamp];
     

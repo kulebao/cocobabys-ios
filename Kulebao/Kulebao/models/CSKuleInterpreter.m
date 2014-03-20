@@ -199,6 +199,7 @@
     
     NSInteger news_id = [[dataJson valueForKeyNotNull:@"news_id"] integerValue];
     NSInteger school_id = [[dataJson valueForKeyNotNull:@"school_id"] integerValue];
+    NSInteger class_id = [[dataJson valueForKeyNotNull:@"class_id"] integerValue];
     NSString* title = [dataJson valueForKeyNotNull:@"title"];
     NSString* content = [dataJson valueForKeyNotNull:@"content"];
     double timestamp = [[dataJson valueForKeyNotNull:@"timestamp"] doubleValue];
@@ -208,6 +209,7 @@
     CSKuleNewsInfo* obj = [CSKuleNewsInfo new];
     obj.newsId = news_id;
     obj.schoolId = school_id;
+    obj.classId = class_id;
     obj.title = title;
     obj.content = content;
     obj.timestamp = timestamp/1000.0;

@@ -29,6 +29,10 @@
 		090C9ECF18C8550500883DE0 /* img-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 090C9ECD18C8550500883DE0 /* img-icon.png */; };
 		090C9ED018C8550500883DE0 /* img-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 090C9ECE18C8550500883DE0 /* img-icon@2x.png */; };
 		090C9EDC18C87AEA00883DE0 /* KxMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 090C9EDA18C87AEA00883DE0 /* KxMenu.m */; };
+		090CC92B18DA88AF007781CB /* FTCoreTextStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 090CC92818DA88AF007781CB /* FTCoreTextStyle.m */; };
+		090CC92C18DA88AF007781CB /* FTCoreTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 090CC92A18DA88AF007781CB /* FTCoreTextView.m */; };
+		090CC93018DA89FE007781CB /* about-us-text-giraffe.txt in Resources */ = {isa = PBXBuildFile; fileRef = 090CC92F18DA89FE007781CB /* about-us-text-giraffe.txt */; };
+		090CC93218DA8A96007781CB /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 090CC93118DA8A96007781CB /* CoreText.framework */; };
 		0913745C18CEE48800ED7CD7 /* CSKuleQiniuUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0913745B18CEE48800ED7CD7 /* CSKuleQiniuUploader.m */; };
 		0913745D18CEED0500ED7CD7 /* icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 0934EFD418BF531800E30ECA /* icon-120.png */; };
 		0917764718D0574D00D24F53 /* CSKuleAssignmentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0917764618D0574D00D24F53 /* CSKuleAssignmentInfo.m */; };
@@ -287,6 +291,14 @@
 		090C9ED918C87AEA00883DE0 /* KxMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KxMenu.h; sourceTree = "<group>"; };
 		090C9EDA18C87AEA00883DE0 /* KxMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KxMenu.m; sourceTree = "<group>"; };
 		090C9EDB18C87AEA00883DE0 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		090CC92718DA88AF007781CB /* FTCoreTextStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCoreTextStyle.h; sourceTree = "<group>"; };
+		090CC92818DA88AF007781CB /* FTCoreTextStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCoreTextStyle.m; sourceTree = "<group>"; };
+		090CC92918DA88AF007781CB /* FTCoreTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCoreTextView.h; sourceTree = "<group>"; };
+		090CC92A18DA88AF007781CB /* FTCoreTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCoreTextView.m; sourceTree = "<group>"; };
+		090CC92D18DA88CA007781CB /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		090CC92E18DA88CA007781CB /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		090CC92F18DA89FE007781CB /* about-us-text-giraffe.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "about-us-text-giraffe.txt"; sourceTree = "<group>"; };
+		090CC93118DA8A96007781CB /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		0913745A18CEE48800ED7CD7 /* CSKuleQiniuUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleQiniuUploader.h; sourceTree = "<group>"; };
 		0913745B18CEE48800ED7CD7 /* CSKuleQiniuUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleQiniuUploader.m; sourceTree = "<group>"; };
 		0917764518D0574D00D24F53 /* CSKuleAssignmentInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleAssignmentInfo.h; sourceTree = "<group>"; };
@@ -590,6 +602,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				090CC93218DA8A96007781CB /* CoreText.framework in Frameworks */,
 				0902782818C9C060002B9644 /* MessageUI.framework in Frameworks */,
 				09BA1C2E18BB412600760182 /* MobileCoreServices.framework in Frameworks */,
 				09BA1C0818BB34BD00760182 /* SystemConfiguration.framework in Frameworks */,
@@ -634,6 +647,27 @@
 				090C9EDB18C87AEA00883DE0 /* README.md */,
 			);
 			path = KxMenu;
+			sourceTree = "<group>";
+		};
+		090CC92518DA889F007781CB /* texts */ = {
+			isa = PBXGroup;
+			children = (
+				090CC92F18DA89FE007781CB /* about-us-text-giraffe.txt */,
+			);
+			path = texts;
+			sourceTree = "<group>";
+		};
+		090CC92618DA88AF007781CB /* FTCoreText */ = {
+			isa = PBXGroup;
+			children = (
+				090CC92718DA88AF007781CB /* FTCoreTextStyle.h */,
+				090CC92818DA88AF007781CB /* FTCoreTextStyle.m */,
+				090CC92918DA88AF007781CB /* FTCoreTextView.h */,
+				090CC92A18DA88AF007781CB /* FTCoreTextView.m */,
+				090CC92D18DA88CA007781CB /* LICENSE */,
+				090CC92E18DA88CA007781CB /* README.md */,
+			);
+			path = FTCoreText;
 			sourceTree = "<group>";
 		};
 		091AE82218D820C800EBC927 /* VurigCalendar */ = {
@@ -748,6 +782,7 @@
 		0934EFD018BF499900E30ECA /* res */ = {
 			isa = PBXGroup;
 			children = (
+				090CC92518DA889F007781CB /* texts */,
 				0934EFD118BF499900E30ECA /* images */,
 			);
 			path = res;
@@ -960,6 +995,7 @@
 		09BA1B8F18BB2AB300760182 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				090CC93118DA8A96007781CB /* CoreText.framework */,
 				0902782718C9C060002B9644 /* MessageUI.framework */,
 				09BA1C2D18BB412600760182 /* MobileCoreServices.framework */,
 				09BA1C0718BB34BD00760182 /* SystemConfiguration.framework */,
@@ -1025,6 +1061,7 @@
 		09BA1BC918BB2FC700760182 /* Venders */ = {
 			isa = PBXGroup;
 			children = (
+				090CC92618DA88AF007781CB /* FTCoreText */,
 				09BA1C0F18BB3F8400760182 /* AFNetworking */,
 				090C9EBC18C846B200883DE0 /* AHAlertView */,
 				0934EFBE18BF3AF700E30ECA /* EAIntroView */,
@@ -1278,6 +1315,7 @@
 				0934F06B18BF5B0800E30ECA /* btn-settings@2x.png in Resources */,
 				090C9EC918C84FC000883DE0 /* CSKuleChildCell.xib in Resources */,
 				0934F06518BF5B0800E30ECA /* btn-func-7@2x.png in Resources */,
+				090CC93018DA89FE007781CB /* about-us-text-giraffe.txt in Resources */,
 				09A9EBB518C07F6F00D83119 /* Localizable.strings in Resources */,
 				0934F07618BF5B0800E30ECA /* Default-568h@2x.png in Resources */,
 				090C9ECF18C8550500883DE0 /* img-icon.png in Resources */,
@@ -1460,6 +1498,7 @@
 				09FE6AF618C5A53200A840BE /* CSTextFieldDelegate.m in Sources */,
 				09BA1C2418BB3F8400760182 /* AFHTTPRequestOperation.m in Sources */,
 				09219A5318C4878600166228 /* TPKeyboardAvoidingTableView.m in Sources */,
+				090CC92C18DA88AF007781CB /* FTCoreTextView.m in Sources */,
 				0934EFC418BF3AF700E30ECA /* EAIntroView.m in Sources */,
 				091AE83018D820C800EBC927 /* UIView+convenience.m in Sources */,
 				091AE83518D8300A00EBC927 /* CSKuleCheckInOutLogInfo.m in Sources */,
@@ -1491,6 +1530,7 @@
 				0904690818C72E6C00D0846E /* CSKuleRelationshipInfo.m in Sources */,
 				09FE6B0118C5BCFD00A840BE /* CSKuleAssignmentViewController.m in Sources */,
 				09ED59B918CDC5D800187585 /* CSKuleRecipeInfo.m in Sources */,
+				090CC92B18DA88AF007781CB /* FTCoreTextStyle.m in Sources */,
 				09C1C75F18BD92990040B06D /* AFJSONRequestOperation+CSKit.m in Sources */,
 				09C1C76618BD973B0040B06D /* NSDictionary+CSKit.m in Sources */,
 				09FFB5F418D6B2FA00F07B0A /* CSKuleDailyScheduleInfo.m in Sources */,

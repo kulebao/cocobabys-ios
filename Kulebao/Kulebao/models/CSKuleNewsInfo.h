@@ -12,6 +12,7 @@
 
 @property (nonatomic, assign) NSInteger newsId;
 @property (nonatomic, assign) NSInteger schoolId;
+@property (nonatomic, assign) NSInteger classId;
 @property (nonatomic, strong) NSString* title;
 @property (nonatomic, strong) NSString* content;
 @property (nonatomic, assign) NSTimeInterval timestamp;

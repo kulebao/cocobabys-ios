@@ -11,6 +11,7 @@
 @interface CSKuleNoticeCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *labTitle;
 @property (weak, nonatomic) IBOutlet UILabel *labContent;
+@property (weak, nonatomic) IBOutlet UILabel *labPublisher;
 @property (weak, nonatomic) IBOutlet UILabel *labDate;
 
 

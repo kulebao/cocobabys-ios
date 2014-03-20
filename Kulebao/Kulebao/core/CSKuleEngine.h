@@ -61,6 +61,11 @@
                    success:(SuccessResponseHandler)success
                    failure:(FailureResponseHandler)failure;
 
+- (void)reqChangePassword:(NSString*)newPswd
+              withOldPswd:(NSString*)oldPswd
+                  success:(SuccessResponseHandler)success
+                  failure:(FailureResponseHandler)failure;
+
 - (void)reqGetFamilyRelationship:(NSString*)mobile
                       inKindergarten:(NSInteger)kindergarten
                              success:(SuccessResponseHandler)success

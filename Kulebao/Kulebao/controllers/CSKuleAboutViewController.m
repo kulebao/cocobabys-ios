@@ -117,7 +117,7 @@
 	
     // Version info will be centered
     FTCoreTextStyle *versionStyle = [FTCoreTextStyle styleWithName:@"version"];
-	versionStyle.font = [UIFont systemFontOfSize:18.f];
+	versionStyle.font = [UIFont systemFontOfSize:14.f];
 	versionStyle.textAlignment = FTCoreTextAlignementCenter;
     versionStyle.paragraphInset = UIEdgeInsetsMake(0, 0, 5.f, 0);
 	[result addObject:versionStyle];

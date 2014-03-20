@@ -92,10 +92,13 @@
         if (bindInfo.errorCode == 0) {
             gApp.engine.loginInfo.schoolId = bindInfo.schoolId;
             gApp.engine.loginInfo.accessToken = bindInfo.accessToken;
+            gApp.engine.loginInfo.accountName = bindInfo.accountName;
+            gApp.engine.loginInfo.username = bindInfo.username;
+            gApp.engine.loginInfo.schoolName = bindInfo.schoolName;
+            
             gApp.engine.preferences.loginInfo = gApp.engine.loginInfo;
             
             [gApp gotoMainProcess];
-            //[gApp alert:@"登录成功"];
             [gApp hideAlert];
         }
         else {

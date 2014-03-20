@@ -43,6 +43,9 @@
 // PATH: 获取绑定信息
 #define kReceiveBindInfoPath        @"/receiveBindInfo.do"
 
+// PATH: 修改密码
+#define kChangePasswordPath         @"/changepwd.do"
+
 // PATH: 检查电话号码
 #define kCheckRegAuthCodePath       @"/check_reg_authcode.do"
 

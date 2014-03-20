@@ -54,6 +54,7 @@
 }
 
 - (IBAction)onBtnChangePswdClicked:(id)sender {
+    [self performSegueWithIdentifier:@"segue.changepswd" sender:nil];
 }
 
 - (IBAction)onBtnSelectChildClicked:(id)sender {

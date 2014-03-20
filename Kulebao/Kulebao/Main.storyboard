@@ -733,11 +733,12 @@
                     <connections>
                         <segue destination="D7Z-M9-tG6" kind="push" identifier="segue.selectChild" id="SDD-Kf-gHh"/>
                         <segue destination="PYd-FB-IrR" kind="push" identifier="segue.about" id="Sgw-CB-atc"/>
+                        <segue destination="yZC-Oa-gVt" kind="push" identifier="segue.changepswd" id="fSQ-gh-Ltp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jte-4h-vNX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="182" y="4745"/>
+            <point key="canvasLocation" x="174" y="5425"/>
         </scene>
         <!--Kule News View Controller - 幼儿园公告-->
         <scene sceneID="jEC-2w-Oh7">
@@ -1126,7 +1127,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3MP-OV-LR6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="940" y="4989"/>
+            <point key="canvasLocation" x="964" y="6179"/>
         </scene>
         <!--Kule Assess View Controller - 在园表现-->
         <scene sceneID="j6h-vr-1d7">
@@ -1154,6 +1155,139 @@
             </objects>
             <point key="canvasLocation" x="174" y="4034"/>
         </scene>
+        <!--Kule Change Password View Controller - 修改密码-->
+        <scene sceneID="Shl-Jg-80q">
+            <objects>
+                <viewController restorationIdentifier="CSKuleChangePasswordViewController" storyboardIdentifier="CSKuleChangePasswordViewController" id="yZC-Oa-gVt" customClass="CSKuleChangePasswordViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="N4H-Qe-hcP">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app-bg-type3.png" id="ZHf-Jm-LDw">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" alpha="0.30000001192092896" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img-tree-type2.png" id="TOF-sz-A7F">
+                                <rect key="frame" x="0.0" y="274" width="320" height="230"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                            </imageView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="ygJ-ex-9MC" customClass="TPKeyboardAvoidingScrollView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" id="92f-kG-IWP" userLabel="View - Line">
+                                        <rect key="frame" x="0.0" y="20" width="320" height="36"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="input-bg-0.png" id="lE9-50-xyk">
+                                                <rect key="frame" x="108" y="0.0" width="198" height="36"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请输入旧密码:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VXM-BV-fuy">
+                                                <rect key="frame" x="13" y="7" width="97" height="22"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" red="0.85490202900000001" green="0.392156899" blue="0.23529413339999999" alpha="1" colorSpace="deviceRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="settings-icon-change-pswd.png" id="xRS-q5-yIF">
+                                                <rect key="frame" x="118" y="6" width="23" height="23"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入旧密码" minimumFontSize="17" id="ahY-7R-gwT">
+                                                <rect key="frame" x="149" y="3" width="158" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                            </textField>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" id="A1g-mK-PBT" userLabel="View - Line">
+                                        <rect key="frame" x="0.0" y="70" width="320" height="36"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="input-bg-0.png" id="Ue0-Ph-phs">
+                                                <rect key="frame" x="108" y="0.0" width="198" height="36"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请输入新密码:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LKR-Ii-98D">
+                                                <rect key="frame" x="13" y="7" width="97" height="22"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" red="0.85490202900000001" green="0.392156899" blue="0.23529413339999999" alpha="1" colorSpace="deviceRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="settings-icon-change-pswd.png" id="OBs-qS-ChW">
+                                                <rect key="frame" x="118" y="6" width="23" height="23"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入新密码" minimumFontSize="17" id="bRt-rd-4oZ">
+                                                <rect key="frame" x="149" y="3" width="158" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                            </textField>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" id="I4D-h3-jyS" userLabel="View - Line">
+                                        <rect key="frame" x="0.0" y="120" width="320" height="36"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="input-bg-0.png" id="RFX-oJ-ogl">
+                                                <rect key="frame" x="108" y="0.0" width="198" height="36"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请确认新密码:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gO5-JV-gzF">
+                                                <rect key="frame" x="13" y="7" width="97" height="22"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" red="0.85490202900000001" green="0.392156899" blue="0.23529413339999999" alpha="1" colorSpace="deviceRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="settings-icon-change-pswd.png" id="Kd9-Of-pYn">
+                                                <rect key="frame" x="118" y="6" width="23" height="23"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请再次输入新密码" minimumFontSize="17" id="Hjn-rQ-wL4">
+                                                <rect key="frame" x="149" y="3" width="158" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                            </textField>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="MkL-cf-Pv8">
+                                        <rect key="frame" x="61" y="179" width="199" height="38"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <state key="normal" title="重置密码" backgroundImage="btn-type1.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted" backgroundImage="btn-type1-pressed.png"/>
+                                        <connections>
+                                            <action selector="onBtnChangePswdClicked:" destination="yZC-Oa-gVt" eventType="touchUpInside" id="Cwn-co-NLc"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <navigationItem key="navigationItem" title="修改密码" id="atx-E4-deQ"/>
+                    <connections>
+                        <outlet property="fieldNewPswd" destination="bRt-rd-4oZ" id="KkC-52-x8L"/>
+                        <outlet property="fieldNewPswdAgain" destination="Hjn-rQ-wL4" id="ITY-wc-utl"/>
+                        <outlet property="fieldOldPswd" destination="ahY-7R-gwT" id="6jf-6N-CUe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9VN-gQ-u2c" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="964" y="5237"/>
+        </scene>
     </scenes>
     <resources>
         <image name="app-bg-type3.png" width="320" height="568"/>
@@ -1173,10 +1307,12 @@
         <image name="btn-type1.png" width="199" height="38"/>
         <image name="img-tree-type1.png" width="320" height="230"/>
         <image name="img-tree-type2.png" width="320" height="230"/>
+        <image name="input-bg-0.png" width="198" height="36"/>
         <image name="input-bg-1.png" width="234" height="227"/>
         <image name="input-bg-2.png" width="234" height="227"/>
         <image name="logo-1.png" width="135" height="94"/>
         <image name="schedule-bg.png" width="300" height="369"/>
+        <image name="settings-icon-change-pswd.png" width="23" height="23"/>
         <image name="titlebar-bg.png" width="320" height="44"/>
         <image name="toolbar-bg.png" width="320" height="44"/>
     </resources>

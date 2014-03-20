@@ -360,6 +360,28 @@
                                failure:failure];
 }
 
+- (void)reqChangePassword:(NSString*)newPswd
+              withOldPswd:(NSString*)oldPswd
+                  success:(SuccessResponseHandler)success
+                  failure:(FailureResponseHandler)failure {
+    NSParameterAssert(newPswd);
+    NSParameterAssert(oldPswd);
+    
+    NSString* path = kChangePasswordPath;
+    
+    NSString* method = @"POST";
+    
+    NSDictionary* parameters = @{@"account_name": _loginInfo.accountName,
+                                 @"old_password": oldPswd,
+                                 @"new_password": newPswd};
+    
+    [_httpClient httpRequestWithMethod:method
+                                  path:path
+                            parameters:parameters
+                               success:success
+                               failure:failure];
+}
+
 - (void)reqGetFamilyRelationship:(NSString*)mobile
                   inKindergarten:(NSInteger)kindergarten
                          success:(SuccessResponseHandler)success

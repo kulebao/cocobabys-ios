@@ -154,6 +154,7 @@
 		093904DD18BDDA90006E8F82 /* CSKuleRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 093904DC18BDDA90006E8F82 /* CSKuleRootViewController.m */; };
 		093CD6B618D9771D0025972C /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 093CD6B518D9771D0025972C /* UIImageView+AFNetworking.m */; };
 		093CD6B918D986A20025972C /* CSKuleAssessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 093CD6B818D986A20025972C /* CSKuleAssessViewController.m */; };
+		097ED0BB18DAB4AB0057ECA0 /* CSKuleChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 097ED0BA18DAB4AB0057ECA0 /* CSKuleChangePasswordViewController.m */; };
 		09A9EBB518C07F6F00D83119 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 09A9EBB718C07F6F00D83119 /* Localizable.strings */; };
 		09A9EBBB18C0830900D83119 /* CSKuleLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A9EBBA18C0830900D83119 /* CSKuleLoginViewController.m */; };
 		09A9EBC618C08C7D00D83119 /* app-bg-type3.png in Resources */ = {isa = PBXBuildFile; fileRef = 09A9EBBC18C08C7D00D83119 /* app-bg-type3.png */; };
@@ -452,6 +453,8 @@
 		093CD6B518D9771D0025972C /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
 		093CD6B718D986A20025972C /* CSKuleAssessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleAssessViewController.h; sourceTree = "<group>"; };
 		093CD6B818D986A20025972C /* CSKuleAssessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleAssessViewController.m; sourceTree = "<group>"; };
+		097ED0B918DAB4AB0057ECA0 /* CSKuleChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleChangePasswordViewController.h; sourceTree = "<group>"; };
+		097ED0BA18DAB4AB0057ECA0 /* CSKuleChangePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleChangePasswordViewController.m; sourceTree = "<group>"; };
 		09A9EBB418C07E8800D83119 /* CSKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSKit.h; sourceTree = "<group>"; };
 		09A9EBB618C07F6F00D83119 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		09A9EBB818C07F8400D83119 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -923,6 +926,8 @@
 				09FE6B0018C5BCFD00A840BE /* CSKuleAssignmentViewController.m */,
 				09A9EBD018C090E100D83119 /* CSKuleAuthViewController.h */,
 				09A9EBD118C090E200D83119 /* CSKuleAuthViewController.m */,
+				097ED0B918DAB4AB0057ECA0 /* CSKuleChangePasswordViewController.h */,
+				097ED0BA18DAB4AB0057ECA0 /* CSKuleChangePasswordViewController.m */,
 				09FE6B0818C5C34F00A840BE /* CSKuleChatingViewController.h */,
 				09FE6B0918C5C34F00A840BE /* CSKuleChatingViewController.m */,
 				09FE6B0518C5C23300A840BE /* CSKuleCheckinViewController.h */,
@@ -1480,6 +1485,7 @@
 				093904DD18BDDA90006E8F82 /* CSKuleRootViewController.m in Sources */,
 				09BA1C2918BB3F8400760182 /* AFURLConnectionOperation.m in Sources */,
 				09BA1BDD18BB2FC700760182 /* EGORefreshTableHeaderView.m in Sources */,
+				097ED0BB18DAB4AB0057ECA0 /* CSKuleChangePasswordViewController.m in Sources */,
 				09FE6B0A18C5C34F00A840BE /* CSKuleChatingViewController.m in Sources */,
 				0913745C18CEE48800ED7CD7 /* CSKuleQiniuUploader.m in Sources */,
 				09BA1C2318BB3F8400760182 /* AFHTTPClient.m in Sources */,

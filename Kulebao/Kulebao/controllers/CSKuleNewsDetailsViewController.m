@@ -85,7 +85,7 @@
     </head>\
     <body>\
         <div style='text-align:center;color:#cc6633'><h3>%@</h3></div>\
-        <div style='text-align:center;'>%@</div>\
+        <div style='text-align:center;width:300'>%@</div>\
         <div style='text-align:center;'><h4>%@</h4></div>\
         <div >%@</div>\
     </body>\
@@ -112,7 +112,7 @@
     </head>\
     <body>\
     <div style='text-align:center;color:#cc6633'><h3>%@</h3></div>\
-    <div style='text-align:center;'>%@</div>\
+    <div style='text-align:center;width:300'>%@</div>\
     <div style='text-align:center;'><h4>%@</h4></div>\
     <div>%@</div>\
     <div style='%@'><img src='%@' width='300' /></div>\

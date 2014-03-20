@@ -288,6 +288,41 @@
     [_qiniuHttpClient enqueueHTTPRequestOperation:oper];
 }
 
+#pragma mark - Retry
+- (void)retryRequestOperationAfterBind:(AFHTTPRequestOperation*)operation {
+    SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
+        
+        CSKuleBindInfo* bindInfo = [CSKuleInterpreter decodeBindInfo:dataJson];
+        
+        if (bindInfo.errorCode == 0) {
+            gApp.engine.loginInfo.schoolId = bindInfo.schoolId;
+            gApp.engine.loginInfo.accessToken = bindInfo.accessToken;
+            gApp.engine.loginInfo.accountName = bindInfo.accountName;
+            gApp.engine.loginInfo.username = bindInfo.username;
+            gApp.engine.loginInfo.schoolName = bindInfo.schoolName;
+            
+            gApp.engine.preferences.loginInfo = gApp.engine.loginInfo;
+            [gApp hideAlert];
+            
+            [_httpClient enqueueHTTPRequestOperation:operation];
+        }
+        else {
+            CSLog(@"doReceiveBindInfo error_code=%d", bindInfo.errorCode);
+            [gApp gotoLoginProcess];
+            [gApp alert:@"获取信息失败，请重新登录。"];
+        }
+    };
+    
+    FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
+        CSLog(@"failure:%@", error);
+    };
+    
+    [gApp waitingAlert:@"重新获取绑定信息..."];
+    [gApp.engine reqReceiveBindInfo:gApp.engine.loginInfo.accountName
+                            success:sucessHandler
+                            failure:failureHandler];
+}
+
 #pragma mark - HTTP Request
 - (void)reqCheckPhoneNum:(NSString*)mobile
                  success:(SuccessResponseHandler)success

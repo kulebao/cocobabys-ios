@@ -29,8 +29,7 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if(operation.response.statusCode == 401) {
-            [gApp logout];
-            [gApp alert:@"请重新登录"];
+            [gApp.engine retryRequestOperationAfterBind:operation];
         }
         else if (failure) {
             failure(operation.request, error);

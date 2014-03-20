@@ -87,6 +87,10 @@ CSAppDelegate* gApp = nil;
     [self gotoLoginProcess];
 }
 
+- (void)rebind {
+    
+}
+
 #pragma mark - Alert
 - (BOOL)createHudIfNeeded {
     BOOL ok = NO;

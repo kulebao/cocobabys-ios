@@ -47,6 +47,9 @@
                  success:(SuccessResponseHandler)success
                  failure:(FailureResponseHandler)failure;
 
+#pragma mark - Retry
+- (void)retryRequestOperationAfterBind:(AFHTTPRequestOperation*)operation;
+
 #pragma mark - HTTP Request
 - (void)reqCheckPhoneNum:(NSString*)mobile
                  success:(SuccessResponseHandler)success

@@ -72,10 +72,10 @@
     cell.labTitle.text = newsInfo.title;
     cell.labContent.text = newsInfo.content;
     if (newsInfo.classId > 0 && newsInfo.classId == gApp.engine.currentRelationship.child.classId) {
-        cell.labPublisher.text = gApp.engine.currentRelationship.child.className;
+        cell.labPublisher.text =  [NSString stringWithFormat:@"%@ %@", gApp.engine.loginInfo.schoolName, gApp.engine.currentRelationship.child.className];
     }
     else {
-        cell.labPublisher.text = nil;
+        cell.labPublisher.text = gApp.engine.loginInfo.schoolName;
     }
     
     NSDate* d = [NSDate dateWithTimeIntervalSince1970:newsInfo.timestamp];

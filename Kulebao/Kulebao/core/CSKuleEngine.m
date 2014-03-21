@@ -16,6 +16,13 @@
 @property (strong, nonatomic) CSHttpClient* httpClient;
 @property (strong, nonatomic) CSHttpClient* qiniuHttpClient;
 
+//数据模型对象
+@property(strong,nonatomic) NSManagedObjectModel* managedObjectModel;
+//上下文对象
+@property(strong,nonatomic) NSManagedObjectContext* managedObjectContext;
+//持久性存储区
+@property(strong,nonatomic) NSPersistentStoreCoordinator* persistentStoreCoordinator;
+
 @end
 
 @implementation CSKuleEngine
@@ -26,6 +33,10 @@
 @synthesize relationships = _relationships;
 @synthesize currentRelationship = _currentRelationship;
 @synthesize baiduPushInfo = _baiduPushInfo;
+
+@synthesize managedObjectModel = _managedObjectModel;
+@synthesize managedObjectContext = _managedObjectContext;
+@synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
 #pragma mark - application
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -70,6 +81,15 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    
+    NSError *error;
+    if (_managedObjectContext != nil) {
+        //hasChanges方法是检查是否有未保存的上下文更改，如果有，则执行save方法保存上下文
+        if ([_managedObjectContext hasChanges] && ![_managedObjectContext save:&error]) {
+            CSLog(@"Error: %@,%@", error, [error userInfo]);
+            abort();
+        }
+    }
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
@@ -89,7 +109,7 @@
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    NSString *alert = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
+    //NSString *alert = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
     if (application.applicationState == UIApplicationStateActive) {
         // Nothing to do if applicationState is Inactive, the iOS already displayed an alert view.
         //        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Did receive a Remote Notification"
@@ -182,7 +202,7 @@
 }
 
 #pragma mark - BPushDelegate
-// 必须,如果正确调用了 setDelegate,在 bindChannel 之后,结果在这个回调中返回。 若绑定失败,请进行重新绑定,确保至少绑定成功一次
+// 必须,如果正确调用了 setDelegate,在 bindChannel 之后,结果在这个回调中返回。若绑定失败,请进行重新绑定,确保至少绑定成功一次
 - (void) onMethod:(NSString*)method response:(NSDictionary*)data {
     NSDictionary* res = [[NSDictionary alloc] initWithDictionary:data];
     if ([BPushRequestMethod_Bind isEqualToString:method]) {
@@ -215,6 +235,49 @@
     }
 }
 
+#pragma mark - Core Data
+-(NSManagedObjectModel *)managedObjectModel {
+    if (_managedObjectModel != nil) {
+        return _managedObjectModel;
+    }
+    _managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
+    return _managedObjectModel;
+}
+
+-(NSPersistentStoreCoordinator *)persistentStoreCoordinator {
+    if (_persistentStoreCoordinator != nil) {
+        return _persistentStoreCoordinator;
+    }
+    
+    //得到数据库的路径
+    NSString *docs = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    
+    //CoreData是建立在SQLite之上的，数据库名称需与Xcdatamodel文件同名
+    NSURL *storeUrl = [NSURL fileURLWithPath:[docs stringByAppendingPathComponent:@"Kulebao.sqlite"]];
+    NSError *error = nil;
+    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc]initWithManagedObjectModel:[self managedObjectModel]];
+    
+    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:nil error:&error]) {
+        CSLog(@"Error: %@,%@",error,[error userInfo]);
+    }
+    
+    return _persistentStoreCoordinator;
+}
+
+-(NSManagedObjectContext *)managedObjectContext {
+    if (_managedObjectContext != nil) {
+        return _managedObjectContext;
+    }
+    
+    NSPersistentStoreCoordinator *coordinator =[self persistentStoreCoordinator];
+    
+    if (coordinator != nil) {
+        _managedObjectContext = [[NSManagedObjectContext alloc]init];
+        [_managedObjectContext setPersistentStoreCoordinator:coordinator];
+    }
+    
+    return _managedObjectContext;
+}
 
 #pragma mark - Uploader
 - (void)reqUploadToQiniu:(NSData*)data

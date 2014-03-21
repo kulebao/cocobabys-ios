@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
 #import "CSHttpClient.h"
-
 #import "CSKuleCommon.h"
 #import "CSKuleServerUrls.h"
 #import "CSKulePreferences.h"
@@ -39,6 +39,16 @@
 
 #pragma mark - URL
 - (NSURL*)urlFromPath:(NSString*)path;
+
+#pragma mark - Core Data
+// 初始化Core Data使用的数据库
+-(NSPersistentStoreCoordinator *)persistentStoreCoordinator;
+
+// managedObjectModel的初始化赋值函数
+-(NSManagedObjectModel *)managedObjectModel;
+
+// managedObjectContext的初始化赋值函数
+-(NSManagedObjectContext *)managedObjectContext;
 
 #pragma mark - Uploader
 - (void)reqUploadToQiniu:(NSData*)data

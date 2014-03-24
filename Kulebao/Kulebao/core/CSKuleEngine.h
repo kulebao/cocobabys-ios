@@ -119,11 +119,24 @@
 
 - (void)reqGetCheckInOutLogOfChild:(CSKuleChildInfo*)childInfo
                     inKindergarten:(NSInteger)kindergarten
-                              from:(long long)fromId
-                                to:(long long)toId
+                              from:(NSTimeInterval)fromTimestamp
+                                to:(NSTimeInterval)toTimestamp
                               most:(NSInteger)most
                            success:(SuccessResponseHandler)success
                            failure:(FailureResponseHandler)failure;
+
+- (void)reqGetChatingMsgsOfKindergarten:(NSInteger)kindergarten
+                                   from:(NSInteger)fromId
+                                     to:(NSInteger)toId
+                                   most:(NSInteger)most
+                                success:(SuccessResponseHandler)success
+                                failure:(FailureResponseHandler)failure;
+
+- (void)reqSendChatingMsgs:(NSString*)content
+                 withImage:(NSString*)imgUrl
+                  toKindergarten:(NSInteger)kindergarten
+                         success:(SuccessResponseHandler)success
+                         failure:(FailureResponseHandler)failure;
 
 
 @end

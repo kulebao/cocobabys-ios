@@ -648,8 +648,8 @@
 
 - (void)reqGetCheckInOutLogOfChild:(CSKuleChildInfo*)childInfo
                     inKindergarten:(NSInteger)kindergarten
-                              from:(long long)fromId
-                                to:(long long)toId
+                              from:(NSTimeInterval)fromTimestamp
+                                to:(NSTimeInterval)toTimestamp
                               most:(NSInteger)most
                            success:(SuccessResponseHandler)success
                            failure:(FailureResponseHandler)failure {
@@ -661,6 +661,38 @@
     
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
     
+    if (fromTimestamp >= 0) {
+        [parameters setObject:@((long long)(fromTimestamp*1000)) forKey:@"from"];
+    }
+    
+    if (toTimestamp >= 0) {
+        [parameters setObject:@((long long)(toTimestamp*1000)) forKey:@"to"];
+    }
+    
+    if (most >= 0) {
+        [parameters setObject:@(most) forKey:@"most"];
+    }
+    
+    [_httpClient httpRequestWithMethod:method
+                                  path:path
+                            parameters:parameters
+                               success:success
+                               failure:failure];
+}
+
+- (void)reqGetChatingMsgsOfKindergarten:(NSInteger)kindergarten
+                                   from:(NSInteger)fromId
+                                     to:(NSInteger)toId
+                                   most:(NSInteger)most
+                                success:(SuccessResponseHandler)success
+                                failure:(FailureResponseHandler)failure {
+    NSParameterAssert(_loginInfo.accountName);
+    
+    NSString* path = [NSString stringWithFormat:kChatingPath, @(kindergarten), _loginInfo.accountName];
+    
+    NSString* method = @"GET";
+    
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
     if (fromId >= 0) {
         [parameters setObject:@(fromId) forKey:@"from"];
     }
@@ -678,6 +710,15 @@
                             parameters:parameters
                                success:success
                                failure:failure];
+    
+}
+
+- (void)reqSendChatingMsgs:(NSString*)content
+                 withImage:(NSString*)imgUrl
+            toKindergarten:(NSInteger)kindergarten
+                   success:(SuccessResponseHandler)success
+                   failure:(FailureResponseHandler)failure {
+    
 }
 
 @end

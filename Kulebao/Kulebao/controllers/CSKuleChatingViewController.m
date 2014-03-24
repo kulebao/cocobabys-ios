@@ -12,6 +12,9 @@
 
 @interface CSKuleChatingViewController () <UITableViewDataSource, UITableViewDelegate, PullTableViewDelegate>
 @property (weak, nonatomic) IBOutlet PullTableView *tableview;
+- (IBAction)onBtnEditorClicked:(id)sender;
+- (IBAction)onBtnCameraClicked:(id)sender;
+- (IBAction)onBtnPhotosClicked:(id)sender;
 
 @end
 
@@ -115,5 +118,15 @@
 
 
 #pragma mark - UI Actions
+
+- (IBAction)onBtnEditorClicked:(id)sender {
+    [self performSegueWithIdentifier:@"segue.chatingEditor" sender:nil];
+}
+
+- (IBAction)onBtnCameraClicked:(id)sender {
+}
+
+- (IBAction)onBtnPhotosClicked:(id)sender {
+}
 
 @end

@@ -107,17 +107,16 @@
     
     //CSLog(@"beginning=%@, end=%@", [beginning isoDateTimeString], [end isoDateTimeString]);
     
-    long long beginTime = [beginning timeIntervalSince1970] * 1000;
-    long long endTime = [end timeIntervalSince1970] * 1000;
-    
+    NSTimeInterval beginTimestamp = [beginning timeIntervalSince1970];
+    NSTimeInterval endTimestamp = [end timeIntervalSince1970];
     
     [gApp waitingAlert:@"正在获取签到信息..."];
     CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
     [gApp.engine reqGetCheckInOutLogOfChild:currentChild
                              inKindergarten:gApp.engine.loginInfo.schoolId
-                                     from:beginTime
-                                       to:endTime
-                                     most:100
+                                     from:beginTimestamp
+                                       to:endTimestamp
+                                     most:999
                                   success:sucessHandler
                                   failure:failureHandler];
 }

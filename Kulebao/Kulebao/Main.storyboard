@@ -10,15 +10,15 @@
             <objects>
                 <viewController id="YlV-Z1-aZX" customClass="CSKuleRootViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XjR-5b-G13">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app-bg-type3.png" id="JaV-fq-RO6">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" id="BOz-V5-5Fp">
-                                <rect key="frame" x="150" y="408" width="20" height="20"/>
+                                <rect key="frame" x="150" y="496" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </activityIndicatorView>
                         </subviews>
@@ -50,22 +50,22 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UBd-oE-nsL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1204" y="1950"/>
+            <point key="canvasLocation" x="-2164" y="1910"/>
         </scene>
         <!--Kule Main View Controller - 幼乐宝-->
         <scene sceneID="cfE-ky-XQA">
             <objects>
                 <viewController restorationIdentifier="CSKuleMainViewController" storyboardIdentifier="CSKuleMainViewController" id="nb4-8s-InE" customClass="CSKuleMainViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="K2n-R8-5AY">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app-bg-type3.png" id="owY-A5-r0J">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" alpha="0.29999999999999966" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img-tree-type2.png" id="ZcB-ED-qkr">
-                                <rect key="frame" x="0.0" y="186" width="320" height="230"/>
+                                <rect key="frame" x="0.0" y="274" width="320" height="230"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             </imageView>
                             <view contentMode="scaleToFill" id="1Zc-QF-g6Q" userLabel="Titlebar">
@@ -111,7 +111,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" id="STu-Mz-Pf6">
-                                <rect key="frame" x="0.0" y="159" width="320" height="215"/>
+                                <rect key="frame" x="0.0" y="159" width="320" height="303"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="QMW-5i-FBl">
@@ -251,7 +251,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </scrollView>
                             <view contentMode="scaleToFill" id="Bg4-Db-29J" userLabel="Toolbar">
-                                <rect key="frame" x="0.0" y="372" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="460" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="toolbar-bg.png" id="DB2-gU-XcV">
@@ -338,26 +338,26 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H1k-cV-9AB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-690" y="1950"/>
+            <point key="canvasLocation" x="-1466" y="1910"/>
         </scene>
         <!--Kule About School View Controller - 关于我园-->
         <scene sceneID="UeY-Eb-Xg9">
             <objects>
                 <viewController id="5Eq-sp-dh6" customClass="CSKuleAboutSchoolViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Oj4-Zo-yS4">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app-bg-type3.png" id="lVe-WM-bYc">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <view contentMode="scaleToFill" id="VcU-JJ-ahE">
-                                <rect key="frame" x="10" y="12" width="300" height="392"/>
+                                <rect key="frame" x="10" y="12" width="300" height="480"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="fmk-mm-1qU">
-                                        <rect key="frame" x="0.0" y="5" width="300" height="381"/>
+                                        <rect key="frame" x="0.0" y="5" width="300" height="469"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     </scrollView>
                                 </subviews>
@@ -375,22 +375,22 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fE4-Sm-qpU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-698" y="2664"/>
+            <point key="canvasLocation" x="182" y="5816"/>
         </scene>
         <!--Kule Auth View Controller-->
         <scene sceneID="z62-Qe-zBE">
             <objects>
                 <viewController restorationIdentifier="CSKuleAuthViewController" storyboardIdentifier="CSKuleAuthViewController" id="oni-l6-Qxa" customClass="CSKuleAuthViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gor-0Z-RcQ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app-bg-type3.png" id="UxH-n5-42d">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img-tree-type1.png" id="XR9-8s-jRg">
-                                <rect key="frame" x="0.0" y="250" width="320" height="230"/>
+                                <rect key="frame" x="0.0" y="338" width="320" height="230"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-1.png" id="Vj5-WD-LGe">
@@ -398,11 +398,11 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="epB-qm-2W3" customClass="TPKeyboardAvoidingScrollView">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" id="JWa-iS-seR" userLabel="ContentView">
-                                        <rect key="frame" x="43" y="103" width="234" height="227"/>
+                                        <rect key="frame" x="43" y="139" width="234" height="227"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="input-bg-1.png" id="U4s-n2-XMq">
@@ -477,15 +477,15 @@
             <objects>
                 <viewController restorationIdentifier="CSKuleLoginViewController" storyboardIdentifier="CSKuleLoginViewController" id="0Td-Sl-NAB" customClass="CSKuleLoginViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="H3c-yb-huv">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app-bg-type3.png" id="M58-Xf-ZYN">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img-tree-type1.png" id="v62-jp-0Vx">
-                                <rect key="frame" x="0.0" y="250" width="320" height="230"/>
+                                <rect key="frame" x="0.0" y="338" width="320" height="230"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-1.png" id="NCR-MQ-xNr">
@@ -493,11 +493,11 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="pZV-gQ-i6D" customClass="TPKeyboardAvoidingScrollView">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" id="Iv3-Y3-VFf" userLabel="ContentView">
-                                        <rect key="frame" x="43" y="103" width="234" height="227"/>
+                                        <rect key="frame" x="43" y="139" width="234" height="227"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="input-bg-2.png" id="DZd-nU-E2l">
@@ -552,19 +552,19 @@
             <objects>
                 <viewController id="Ulx-hl-yWL" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dx4-Ky-dkM">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app-bg-type3.png" id="t7p-JZ-lc8">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" alpha="0.30000001192092896" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img-tree-type2.png" id="YdZ-sT-hKz">
-                                <rect key="frame" x="0.0" y="250" width="320" height="230"/>
+                                <rect key="frame" x="0.0" y="338" width="320" height="230"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             </imageView>
                             <view contentMode="scaleToFill" id="eDE-qC-Kam" userLabel="Toolbar">
-                                <rect key="frame" x="0.0" y="436" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="toolbar-bg.png" id="4JD-hr-7hO">
@@ -635,22 +635,22 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3fI-lU-IEM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-698" y="1008"/>
+            <point key="canvasLocation" x="-1466" y="602"/>
         </scene>
         <!--Kule Settings View Controller - 设置-->
         <scene sceneID="AzY-uz-JrF">
             <objects>
                 <viewController restorationIdentifier="CSKuleSettingsViewController" storyboardIdentifier="CSKuleSettingsViewController" id="Ot5-TZ-qvn" customClass="CSKuleSettingsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OhV-Hz-SJf">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app-bg-type3.png" id="cfQ-RG-gSx">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" alpha="0.30000001192092896" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img-tree-type2.png" id="KY7-TM-nB9">
-                                <rect key="frame" x="0.0" y="186" width="320" height="230"/>
+                                <rect key="frame" x="0.0" y="274" width="320" height="230"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="DI7-I2-1Ea">
@@ -738,26 +738,26 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jte-4h-vNX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="174" y="5425"/>
+            <point key="canvasLocation" x="182" y="4961"/>
         </scene>
         <!--Kule News View Controller - 幼儿园公告-->
         <scene sceneID="jEC-2w-Oh7">
             <objects>
                 <viewController restorationIdentifier="CSKuleNewsViewController" storyboardIdentifier="CSKuleNewsViewController" id="hSh-cH-xBP" customClass="CSKuleNewsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OkE-KT-rj8">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app-bg-type3.png" id="9e4-V8-uTW">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" alpha="0.30000001192092896" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img-tree-type2.png" id="oNq-Ec-gNN">
-                                <rect key="frame" x="0.0" y="186" width="320" height="230"/>
+                                <rect key="frame" x="0.0" y="274" width="320" height="230"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="cXC-Tw-KRl" customClass="PullTableView">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
@@ -773,26 +773,26 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U0l-Qo-O89" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="182" y="125"/>
+            <point key="canvasLocation" x="174" y="37"/>
         </scene>
         <!--Kule News Details View Controller - 通知消息-->
         <scene sceneID="FYj-G1-JYp">
             <objects>
                 <viewController restorationIdentifier="CSKuleNewsDetailsViewController" storyboardIdentifier="CSKuleNewsDetailsViewController" id="gZu-Ur-sSP" customClass="CSKuleNewsDetailsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hj8-QJ-hwQ">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app-bg-type3.png" id="YWR-Zn-gXT">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" alpha="0.30000001192092896" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img-tree-type2.png" id="1e1-VN-eCD">
-                                <rect key="frame" x="0.0" y="186" width="320" height="230"/>
+                                <rect key="frame" x="0.0" y="274" width="320" height="230"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             </imageView>
                             <webView contentMode="scaleToFill" id="g23-V3-IDd">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <dataDetectorType key="dataDetectorTypes"/>
@@ -808,26 +808,26 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nR5-qp-BvI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1592" y="1425"/>
+            <point key="canvasLocation" x="1404" y="1377"/>
         </scene>
         <!--Kule Recipe View Controller - 宝宝食谱-->
         <scene sceneID="9KS-iG-ZHj">
             <objects>
                 <viewController restorationIdentifier="CSKuleRecipeViewController" storyboardIdentifier="CSKuleRecipeViewController" id="p7o-xu-qXK" customClass="CSKuleRecipeViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="alE-Hw-MJl">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app-bg-type3.png" id="QC9-22-UGE">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" alpha="0.30000001192092896" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img-tree-type2.png" id="ZCJ-6o-7FT">
-                                <rect key="frame" x="0.0" y="186" width="320" height="230"/>
+                                <rect key="frame" x="0.0" y="274" width="320" height="230"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="8Vd-hb-aUf">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
@@ -842,26 +842,26 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3MO-du-slJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="182" y="777"/>
+            <point key="canvasLocation" x="174" y="705"/>
         </scene>
         <!--Kule Assignment View Controller - 亲子作业-->
         <scene sceneID="5NA-PF-QhV">
             <objects>
                 <viewController restorationIdentifier="CSKuleHomeworkViewController" storyboardIdentifier="CSKuleHomeworkViewController" id="iCB-cn-3Ye" customClass="CSKuleAssignmentViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Aop-xO-EvG">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app-bg-type3.png" id="efw-xX-dMm">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" alpha="0.30000001192092896" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img-tree-type2.png" id="lQC-xE-dq8">
-                                <rect key="frame" x="0.0" y="186" width="320" height="230"/>
+                                <rect key="frame" x="0.0" y="274" width="320" height="230"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="XvN-YD-HPD" customClass="PullTableView">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
@@ -877,22 +877,22 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GHk-2q-ns4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="174" y="2699"/>
+            <point key="canvasLocation" x="174" y="2723"/>
         </scene>
         <!--Kule Schedule View Controller - 课程表-->
         <scene sceneID="ElJ-U8-0p3">
             <objects>
                 <viewController restorationIdentifier="CSKuleScheduleViewController" storyboardIdentifier="CSKuleScheduleViewController" id="Vta-Cg-yNO" customClass="CSKuleScheduleViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7Wc-uk-Hjx">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app-bg-type3.png" id="gby-jS-myb">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" alpha="0.30000001192092896" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img-tree-type2.png" id="lvS-G6-Z16">
-                                <rect key="frame" x="0.0" y="186" width="320" height="230"/>
+                                <rect key="frame" x="0.0" y="274" width="320" height="230"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             </imageView>
                             <view contentMode="scaleToFill" id="md8-lJ-kDS" userLabel="View - Content">
@@ -996,22 +996,22 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tji-YP-YSu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="174" y="2069"/>
+            <point key="canvasLocation" x="174" y="2053"/>
         </scene>
         <!--Kule Checkin View Controller - 签到一览-->
         <scene sceneID="Fnv-1l-gqr">
             <objects>
                 <viewController restorationIdentifier="CSKuleCheckinViewController" storyboardIdentifier="CSKuleCheckinViewController" id="1UC-eH-jjs" customClass="CSKuleCheckinViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xkl-du-649">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app-bg-type3.png" id="fX6-2y-5ys">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" alpha="0.30000001192092896" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img-tree-type2.png" id="lUx-nu-LyS">
-                                <rect key="frame" x="0.0" y="186" width="320" height="230"/>
+                                <rect key="frame" x="0.0" y="274" width="320" height="230"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             </imageView>
                         </subviews>
@@ -1025,26 +1025,26 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="og9-XQ-aRa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="174" y="1425"/>
+            <point key="canvasLocation" x="174" y="1377"/>
         </scene>
         <!--Kule Chating View Controller - 留言板-->
         <scene sceneID="iHg-u8-ESX">
             <objects>
                 <viewController restorationIdentifier="CSKuleChatingViewController" storyboardIdentifier="CSKuleChatingViewController" id="Oe0-Pk-5G3" customClass="CSKuleChatingViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LgS-Gx-ocx">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app-bg-type3.png" id="c6J-R1-5sm">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" alpha="0.30000001192092896" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img-tree-type2.png" id="xdB-K3-Rnk">
-                                <rect key="frame" x="0.0" y="186" width="320" height="230"/>
+                                <rect key="frame" x="0.0" y="274" width="320" height="230"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             </imageView>
                             <view contentMode="scaleToFill" id="euk-ol-oW3" userLabel="Toolbar">
-                                <rect key="frame" x="0.0" y="372" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="460" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="toolbar-bg.png" id="ZVG-qM-Ni4">
@@ -1057,6 +1057,9 @@
                                         <state key="normal" backgroundImage="chating-photo.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="onBtnCameraClicked:" destination="Oe0-Pk-5G3" eventType="touchUpInside" id="O07-AF-BfE"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="UfI-fq-Irp">
                                         <rect key="frame" x="20" y="8" width="31" height="27"/>
@@ -1064,6 +1067,9 @@
                                         <state key="normal" backgroundImage="chating-text.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="onBtnEditorClicked:" destination="Oe0-Pk-5G3" eventType="touchUpInside" id="qza-Qz-bhK"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="zI8-pA-i77">
                                         <rect key="frame" x="269" y="8" width="31" height="27"/>
@@ -1071,12 +1077,15 @@
                                         <state key="normal" backgroundImage="chating-picture.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="onBtnPhotosClicked:" destination="Oe0-Pk-5G3" eventType="touchUpInside" id="8SA-DZ-X1f"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="0Hj-bz-6lH" customClass="PullTableView">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="373"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="461"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
@@ -1087,30 +1096,31 @@
                     <navigationItem key="navigationItem" title="留言板" id="jG4-FR-qt8"/>
                     <connections>
                         <outlet property="tableview" destination="0Hj-bz-6lH" id="DZD-9w-hGz"/>
+                        <segue destination="g0W-Gr-GbE" kind="push" identifier="segue.chatingEditor" id="DSk-vc-DTQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F8P-dj-nLx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="174" y="3341"/>
+            <point key="canvasLocation" x="174" y="3381"/>
         </scene>
         <!--Kule Select Child View Controller - 选择宝宝-->
         <scene sceneID="HI3-MM-NYt">
             <objects>
                 <viewController restorationIdentifier="CSKuleSelectChildViewController" storyboardIdentifier="CSKuleSelectChildViewController" id="D7Z-M9-tG6" customClass="CSKuleSelectChildViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="x9G-xn-5nz">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app-bg-type3.png" id="wa6-sf-EYW">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" alpha="0.30000001192092896" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img-tree-type2.png" id="XTG-YD-y6h">
-                                <rect key="frame" x="0.0" y="186" width="320" height="230"/>
+                                <rect key="frame" x="0.0" y="274" width="320" height="230"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Hi5-HV-IYJ">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
@@ -1125,22 +1135,22 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8UB-H2-uQN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="940" y="4325"/>
+            <point key="canvasLocation" x="964" y="4181"/>
         </scene>
         <!--Kule About View Controller - 关于我们-->
         <scene sceneID="DbE-lH-wXR">
             <objects>
                 <viewController restorationIdentifier="CSKuleAboutViewController" storyboardIdentifier="CSKuleAboutViewController" id="PYd-FB-IrR" customClass="CSKuleAboutViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FVh-Zm-daq">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app-bg-type3.png" id="h33-F9-ytv">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" alpha="0.30000001192092896" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img-tree-type2.png" id="Mfz-9P-nEn">
-                                <rect key="frame" x="0.0" y="186" width="320" height="230"/>
+                                <rect key="frame" x="0.0" y="274" width="320" height="230"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             </imageView>
                         </subviews>
@@ -1151,22 +1161,22 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3MP-OV-LR6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="964" y="6179"/>
+            <point key="canvasLocation" x="964" y="5723"/>
         </scene>
         <!--Kule Assess View Controller - 在园表现-->
         <scene sceneID="j6h-vr-1d7">
             <objects>
                 <viewController restorationIdentifier="CSKuleAssessViewController" storyboardIdentifier="CSKuleAssessViewController" id="9Fo-0X-dxb" customClass="CSKuleAssessViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Hxl-Gz-y7N">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app-bg-type3.png" id="g5v-ma-7Wd">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" alpha="0.30000001192092896" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img-tree-type2.png" id="d5E-H5-vcd">
-                                <rect key="frame" x="0.0" y="186" width="320" height="230"/>
+                                <rect key="frame" x="0.0" y="274" width="320" height="230"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             </imageView>
                         </subviews>
@@ -1177,26 +1187,26 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CG1-d7-kpe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="174" y="4034"/>
+            <point key="canvasLocation" x="174" y="4082"/>
         </scene>
         <!--Kule Change Password View Controller - 修改密码-->
         <scene sceneID="Shl-Jg-80q">
             <objects>
                 <viewController restorationIdentifier="CSKuleChangePasswordViewController" storyboardIdentifier="CSKuleChangePasswordViewController" id="yZC-Oa-gVt" customClass="CSKuleChangePasswordViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="N4H-Qe-hcP">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app-bg-type3.png" id="ZHf-Jm-LDw">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" alpha="0.30000001192092896" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img-tree-type2.png" id="TOF-sz-A7F">
-                                <rect key="frame" x="0.0" y="186" width="320" height="230"/>
+                                <rect key="frame" x="0.0" y="274" width="320" height="230"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="ygJ-ex-9MC" customClass="TPKeyboardAvoidingScrollView">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" id="92f-kG-IWP" userLabel="View - Line">
@@ -1310,26 +1320,26 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9VN-gQ-u2c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="964" y="5237"/>
+            <point key="canvasLocation" x="964" y="4961"/>
         </scene>
         <!--Kule Checkin Log List View Controller - 刷卡记录-->
         <scene sceneID="99u-Vz-cU0">
             <objects>
                 <viewController restorationIdentifier="CSKuleCheckinLogListViewController" storyboardIdentifier="CSKuleCheckinLogListViewController" id="Etr-Mb-xMG" customClass="CSKuleCheckinLogListViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="V4g-zS-KXD">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app-bg-type3.png" id="Ih5-2U-v7w">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" alpha="0.30000001192092896" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img-tree-type2.png" id="NN2-3r-4jO">
-                                <rect key="frame" x="0.0" y="186" width="320" height="230"/>
+                                <rect key="frame" x="0.0" y="274" width="320" height="230"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="JyQ-Sk-OAE">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
@@ -1345,7 +1355,33 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pon-u8-fv7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="632" y="1425"/>
+            <point key="canvasLocation" x="720" y="1377"/>
+        </scene>
+        <!--Kule Chating Editor View Controller - 编辑内容-->
+        <scene sceneID="Cqc-rK-mFX">
+            <objects>
+                <viewController restorationIdentifier="CSKuleChatingEditorViewController" storyboardIdentifier="CSKuleChatingEditorViewController" id="g0W-Gr-GbE" customClass="CSKuleChatingEditorViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="e8p-8i-tZn">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app-bg-type3.png" id="Weo-fg-cor">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" alpha="0.30000001192092896" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img-tree-type2.png" id="xhq-Mp-icm">
+                                <rect key="frame" x="0.0" y="274" width="320" height="230"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <navigationItem key="navigationItem" title="编辑内容" id="LfB-EJ-RnF"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ABR-s8-mKf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="664" y="3381"/>
         </scene>
     </scenes>
     <resources>
@@ -1381,7 +1417,7 @@
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="RdB-oD-7oe"/>

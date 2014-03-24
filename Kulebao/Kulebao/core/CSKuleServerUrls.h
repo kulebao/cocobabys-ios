@@ -73,4 +73,7 @@
 // PATH: 签到签出记录
 #define kGetCheckInOutLogPath       @"/kindergarten/%@/child/%@/dailylog"
 
+// PATH: 聊天
+#define kChatingPath                @"/kindergarten/%@/conversation/%@"
+
 #endif

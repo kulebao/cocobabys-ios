@@ -126,7 +126,7 @@
         self.labSchoolName.text = gApp.engine.loginInfo.schoolName;
         
         NSURL* url = [gApp.engine urlFromPath:[childInfo.portrait stringByAppendingFormat:@"?%f",[[NSDate date] timeIntervalSince1970]]];
-        [self.imgChildPortrait setImageWithURL:url];
+        [self.imgChildPortrait setImageWithURL:url placeholderImage:[UIImage imageNamed:@"default_child_head_icon.png"]];
         
         // 计算宝宝年龄
         NSDate* dayOfBirth = [NSDate dateFromString:childInfo.birthday withFormat:[NSDate dateFormatString]];

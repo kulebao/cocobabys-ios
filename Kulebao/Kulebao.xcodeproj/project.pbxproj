@@ -33,6 +33,15 @@
 		090CC92C18DA88AF007781CB /* FTCoreTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 090CC92A18DA88AF007781CB /* FTCoreTextView.m */; };
 		090CC93018DA89FE007781CB /* about-us-text-giraffe.txt in Resources */ = {isa = PBXBuildFile; fileRef = 090CC92F18DA89FE007781CB /* about-us-text-giraffe.txt */; };
 		090CC93218DA8A96007781CB /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 090CC93118DA8A96007781CB /* CoreText.framework */; };
+		0911B1D818E00F62006D0588 /* CSKuleChatingEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0911B1D718E00F62006D0588 /* CSKuleChatingEditorViewController.m */; };
+		0911B1E118E015E9006D0588 /* default_child_head_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0911B1D918E015E9006D0588 /* default_child_head_icon.png */; };
+		0911B1E218E015E9006D0588 /* default_child_head_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0911B1DA18E015E9006D0588 /* default_child_head_icon@2x.png */; };
+		0911B1E318E015E9006D0588 /* resend_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 0911B1DB18E015E9006D0588 /* resend_normal.png */; };
+		0911B1E418E015E9006D0588 /* resend_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0911B1DC18E015E9006D0588 /* resend_normal@2x.png */; };
+		0911B1E518E015E9006D0588 /* resend_press.png in Resources */ = {isa = PBXBuildFile; fileRef = 0911B1DD18E015E9006D0588 /* resend_press.png */; };
+		0911B1E618E015E9006D0588 /* resend_press@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0911B1DE18E015E9006D0588 /* resend_press@2x.png */; };
+		0911B1E718E015E9006D0588 /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = 0911B1DF18E015E9006D0588 /* star.png */; };
+		0911B1E818E015E9006D0588 /* star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0911B1E018E015E9006D0588 /* star@2x.png */; };
 		0913745C18CEE48800ED7CD7 /* CSKuleQiniuUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0913745B18CEE48800ED7CD7 /* CSKuleQiniuUploader.m */; };
 		0913745D18CEED0500ED7CD7 /* icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 0934EFD418BF531800E30ECA /* icon-120.png */; };
 		09148E5218DAEE8A00D08F63 /* Kulebao.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 09148E5018DAEE8A00D08F63 /* Kulebao.xcdatamodeld */; };
@@ -320,6 +329,16 @@
 		090CC92E18DA88CA007781CB /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		090CC92F18DA89FE007781CB /* about-us-text-giraffe.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "about-us-text-giraffe.txt"; sourceTree = "<group>"; };
 		090CC93118DA8A96007781CB /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		0911B1D618E00F62006D0588 /* CSKuleChatingEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleChatingEditorViewController.h; sourceTree = "<group>"; };
+		0911B1D718E00F62006D0588 /* CSKuleChatingEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleChatingEditorViewController.m; sourceTree = "<group>"; };
+		0911B1D918E015E9006D0588 /* default_child_head_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default_child_head_icon.png; sourceTree = "<group>"; };
+		0911B1DA18E015E9006D0588 /* default_child_head_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default_child_head_icon@2x.png"; sourceTree = "<group>"; };
+		0911B1DB18E015E9006D0588 /* resend_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = resend_normal.png; sourceTree = "<group>"; };
+		0911B1DC18E015E9006D0588 /* resend_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "resend_normal@2x.png"; sourceTree = "<group>"; };
+		0911B1DD18E015E9006D0588 /* resend_press.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = resend_press.png; sourceTree = "<group>"; };
+		0911B1DE18E015E9006D0588 /* resend_press@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "resend_press@2x.png"; sourceTree = "<group>"; };
+		0911B1DF18E015E9006D0588 /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star.png; sourceTree = "<group>"; };
+		0911B1E018E015E9006D0588 /* star@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star@2x.png"; sourceTree = "<group>"; };
 		0913745A18CEE48800ED7CD7 /* CSKuleQiniuUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleQiniuUploader.h; sourceTree = "<group>"; };
 		0913745B18CEE48800ED7CD7 /* CSKuleQiniuUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleQiniuUploader.m; sourceTree = "<group>"; };
 		09148E5118DAEE8A00D08F63 /* Kulebao.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Kulebao.xcdatamodel; sourceTree = "<group>"; };
@@ -847,6 +866,14 @@
 		0934EFD118BF499900E30ECA /* images */ = {
 			isa = PBXGroup;
 			children = (
+				0911B1D918E015E9006D0588 /* default_child_head_icon.png */,
+				0911B1DA18E015E9006D0588 /* default_child_head_icon@2x.png */,
+				0911B1DB18E015E9006D0588 /* resend_normal.png */,
+				0911B1DC18E015E9006D0588 /* resend_normal@2x.png */,
+				0911B1DD18E015E9006D0588 /* resend_press.png */,
+				0911B1DE18E015E9006D0588 /* resend_press@2x.png */,
+				0911B1DF18E015E9006D0588 /* star.png */,
+				0911B1E018E015E9006D0588 /* star@2x.png */,
 				09FEA70818DC9D9600513C87 /* btn-back1-pressed.png */,
 				09FEA70918DC9D9600513C87 /* btn-back1-pressed@2x.png */,
 				09FEA70A18DC9D9600513C87 /* btn-back1.png */,
@@ -1021,6 +1048,8 @@
 				090C9EC318C84E9F00883DE0 /* CSKuleSelectChildViewController.m */,
 				09A9EBD618C0A02800D83119 /* CSKuleSettingsViewController.h */,
 				09A9EBD718C0A02800D83119 /* CSKuleSettingsViewController.m */,
+				0911B1D618E00F62006D0588 /* CSKuleChatingEditorViewController.h */,
+				0911B1D718E00F62006D0588 /* CSKuleChatingEditorViewController.m */,
 				09FE6AEB18C5722500A840BE /* views */,
 			);
 			path = controllers;
@@ -1401,7 +1430,9 @@
 				0934F08E18BF5B0800E30ECA /* settings-icon-feedback.png in Resources */,
 				0934EFFB18BF559900E30ECA /* guide-3@2x.png in Resources */,
 				0934F06C18BF5B0800E30ECA /* btn-type1-pressed.png in Resources */,
+				0911B1E318E015E9006D0588 /* resend_normal.png in Resources */,
 				0934F05818BF5B0800E30ECA /* btn-func-1.png in Resources */,
+				0911B1E618E015E9006D0588 /* resend_press@2x.png in Resources */,
 				0934F08618BF5B0800E30ECA /* settings-about.png in Resources */,
 				09BA1BE718BB2FC700760182 /* whiteArrow.png in Resources */,
 				0934F09118BF5B0800E30ECA /* settings-icon-logout@2x.png in Resources */,
@@ -1411,16 +1442,19 @@
 				0934F08318BF5B0800E30ECA /* recipe-cell-bg@2x.png in Resources */,
 				0934F07218BF5B0800E30ECA /* btn-type2.png in Resources */,
 				0934F09218BF5B0800E30ECA /* settings-row-bg-bot.png in Resources */,
+				0911B1E518E015E9006D0588 /* resend_press.png in Resources */,
 				09FEA71C18DC9D9600513C87 /* chating-photo.png in Resources */,
 				09BA1BE218BB2FC700760182 /* blackArrow@2x.png in Resources */,
 				0934EFF118BF559900E30ECA /* guide-1-568h@2x.png in Resources */,
 				0934F04E18BF5B0800E30ECA /* app-bg-type1.png in Resources */,
 				0934F07F18BF5B0800E30ECA /* logo-1@2x.png in Resources */,
+				0911B1E218E015E9006D0588 /* default_child_head_icon@2x.png in Resources */,
 				0934F05F18BF5B0800E30ECA /* btn-func-4@2x.png in Resources */,
 				090C9EB818C83D2C00883DE0 /* msg-bg-from.png in Resources */,
 				0934EFF918BF559900E30ECA /* guide-3-568h@2x.png in Resources */,
 				0934F08418BF5B0800E30ECA /* schedule-bg.png in Resources */,
 				09219A3918C470DF00166228 /* Default-568h.png in Resources */,
+				0911B1E418E015E9006D0588 /* resend_normal@2x.png in Resources */,
 				09BA1BE818BB2FC700760182 /* whiteArrow@2x.png in Resources */,
 				09BA1BE518BB2FC700760182 /* grayArrow.png in Resources */,
 				0934EFD518BF531800E30ECA /* icon-57.png in Resources */,
@@ -1459,6 +1493,7 @@
 				09FEA72518DC9D9600513C87 /* icon-news@2x.png in Resources */,
 				0934F08518BF5B0800E30ECA /* schedule-bg@2x.png in Resources */,
 				0934F05C18BF5B0800E30ECA /* btn-func-3.png in Resources */,
+				0911B1E818E015E9006D0588 /* star@2x.png in Resources */,
 				0934F08B18BF5B0800E30ECA /* settings-icon-change-pswd@2x.png in Resources */,
 				0934F08218BF5B0800E30ECA /* recipe-cell-bg.png in Resources */,
 				0934F07D18BF5B0800E30ECA /* input-bg-2@2x.png in Resources */,
@@ -1470,6 +1505,7 @@
 				0934F09518BF5B0800E30ECA /* settings-row-bg-mid@2x.png in Resources */,
 				09FEA71818DC9D9600513C87 /* btn-back1-pressed.png in Resources */,
 				0934F06318BF5B0800E30ECA /* btn-func-6@2x.png in Resources */,
+				0911B1E718E015E9006D0588 /* star.png in Resources */,
 				0934F05918BF5B0800E30ECA /* btn-func-1@2x.png in Resources */,
 				0934EFFF18BF559900E30ECA /* guide-4@2x.png in Resources */,
 				09BA1BE318BB2FC700760182 /* blueArrow.png in Resources */,
@@ -1499,6 +1535,7 @@
 				0934F05218BF5B0800E30ECA /* avatar-bg.png in Resources */,
 				0934F08D18BF5B0800E30ECA /* settings-icon-check-update@2x.png in Resources */,
 				090468FB18C7007600D0846E /* input-bg-0@2x.png in Resources */,
+				0911B1E118E015E9006D0588 /* default_child_head_icon.png in Resources */,
 				0934F06418BF5B0800E30ECA /* btn-func-7.png in Resources */,
 				09FE6AF018C572A500A840BE /* CSKuleNoticeCell.xib in Resources */,
 				09FEA72018DC9D9600513C87 /* chating-text.png in Resources */,
@@ -1584,6 +1621,7 @@
 				09BA1BA118BB2AB400760182 /* CSAppDelegate.m in Sources */,
 				090C9EC418C84E9F00883DE0 /* CSKuleSelectChildViewController.m in Sources */,
 				093CD6B918D986A20025972C /* CSKuleAssessViewController.m in Sources */,
+				0911B1D818E00F62006D0588 /* CSKuleChatingEditorViewController.m in Sources */,
 				09BA1C2518BB3F8400760182 /* AFImageRequestOperation.m in Sources */,
 				09219A5218C4878600166228 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				0917764718D0574D00D24F53 /* CSKuleAssignmentInfo.m in Sources */,

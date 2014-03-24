@@ -78,7 +78,7 @@
     cell.labChildName.text = relationship.child.nick;
     
     NSURL* url = [gApp.engine urlFromPath:[relationship.child.portrait stringByAppendingFormat:@"?%f",[[NSDate date] timeIntervalSince1970]]];
-    [cell.imgChildPortrait setImageWithURL:url];
+    [cell.imgChildPortrait setImageWithURL:url placeholderImage:[UIImage imageNamed:@"default_child_head_icon.png"]];
     
     return cell;
 }

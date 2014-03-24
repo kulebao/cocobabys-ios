@@ -10,6 +10,7 @@
 #import "CSAppDelegate.h"
 
 @interface CSKuleChatingEditorViewController ()
+@property (weak, nonatomic) IBOutlet UITextView *textMsgBody;
 
 @end
 
@@ -30,11 +31,11 @@
     // Do any additional setup after loading the view.
     [self customizeBackBarItem];
     
-    [self customizeRightBarItemWithTarget:self
+    [self customizeOkBarItemWithTarget:self
                                    action:@selector(onBtnSendClicked:)
-                                   normal:[UIImage imageNamed:@""]
-                               hightlight:[UIImage imageNamed:@""]
                                      text:@"发送"];
+    
+    [self.textMsgBody becomeFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning

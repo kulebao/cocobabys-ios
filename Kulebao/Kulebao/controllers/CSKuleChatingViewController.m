@@ -9,8 +9,12 @@
 #import "CSKuleChatingViewController.h"
 #import "CSKuleNoticeCell.h"
 #import "PullTableView.h"
+#import "CSAppDelegate.h"
 
-@interface CSKuleChatingViewController () <UITableViewDataSource, UITableViewDelegate, PullTableViewDelegate>
+@interface CSKuleChatingViewController () <UITableViewDataSource, UITableViewDelegate, PullTableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
+    UIImagePickerController* _imgPicker;
+}
+
 @property (weak, nonatomic) IBOutlet PullTableView *tableview;
 - (IBAction)onBtnEditorClicked:(id)sender;
 - (IBAction)onBtnCameraClicked:(id)sender;
@@ -118,15 +122,93 @@
 
 
 #pragma mark - UI Actions
-
 - (IBAction)onBtnEditorClicked:(id)sender {
     [self performSegueWithIdentifier:@"segue.chatingEditor" sender:nil];
 }
 
 - (IBAction)onBtnCameraClicked:(id)sender {
+#if TARGET_IPHONE_SIMULATOR
+#else
+    _imgPicker = [[UIImagePickerController alloc] init];
+    _imgPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    _imgPicker.allowsEditing = NO;
+    _imgPicker.delegate = self;
+    [self presentViewController:_imgPicker animated:YES completion:^{
+        
+    }];
+#endif
 }
 
 - (IBAction)onBtnPhotosClicked:(id)sender {
+    _imgPicker = [[UIImagePickerController alloc] init];
+    _imgPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    _imgPicker.allowsEditing = NO;
+    _imgPicker.delegate = self;
+    [self presentViewController:_imgPicker animated:YES completion:^{
+        
+    }];
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    UIImage* img = info[UIImagePickerControllerOriginalImage];
+    NSData* imgData = UIImageJPEGRepresentation(img, 0.8);
+    /*
+     家园互动时，发布的图片
+     chat_icon/93740362/13408654680/1394455093918.jpg
+     93740362  学校id
+     13408654680 家长手机号
+     1394455093918  发布时间搓，1970年至今的毫秒数
+     */
+    NSString* imgFileName = [NSString stringWithFormat:@"chat_icon/%@/%@/%@.jpg",
+                             @(gApp.engine.loginInfo.schoolId),
+                             gApp.engine.loginInfo.accountName,
+                             @((long long)[[NSDate date] timeIntervalSince1970]*1000)];
+    
+    SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
+        NSString* imgUrl = [NSString stringWithFormat:@"%@/%@", kQiniuDownloadServerHost, imgFileName];
+        [self doSendPicture:imgUrl];
+    };
+    
+    FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
+        CSLog(@"failure:%@", error);
+        [gApp alert:[error localizedDescription]];
+    };
+    
+    [gApp waitingAlert:@"上传图片中"];
+    [gApp.engine reqUploadToQiniu:imgData
+                          withKey:imgFileName
+                         withMime:@"image/jpeg"
+                          success:sucessHandler
+                          failure:failureHandler];
+    
+    [picker dismissViewControllerAnimated:YES
+                               completion:^{
+                                   if (picker == _imgPicker) {
+                                       _imgPicker = nil;
+                                   }
+                               }];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [picker dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+    
+    if (picker == _imgPicker) {
+        _imgPicker = nil;
+    }
+}
+
+#pragma mark - Private
+- (void)doSendPicture:(NSString*)imgUrl {
+    CSLog(@"%@", imgUrl);
+    [gApp hideAlert];
+}
+
+- (CGSize)textSize:(NSString*)text {
+    CGSize sz = CGSizeZero;
+    return sz;
 }
 
 @end

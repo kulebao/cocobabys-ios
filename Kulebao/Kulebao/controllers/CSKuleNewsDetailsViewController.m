@@ -134,15 +134,18 @@
     <div style='text-align:center;word-break:break-all'>%@</div>\
     <div style='text-align:center;'><h4>%@</h4></div>\
     <div style='word-break:break-all;width:300px'>%@</div>\
-    <div style='%@'><img src='%@' width='300' /></div>\
+    %@\
     </body>\
     </html>";
     
     NSString* timestampString = [[NSDate dateWithTimeIntervalSince1970:assignmentInfo.timestamp] isoDateTimeString];
     
-    NSString* iconStyle = assignmentInfo.iconUrl ? @"" : @"visibility:hidden;";
+    NSString* divImage = @"";
+    if (assignmentInfo.iconUrl.length > 0) {
+        divImage = [NSString stringWithFormat:@"<div><img src='%@' width='300' /></div>", [gApp.engine urlFromPath:assignmentInfo.iconUrl]];
+    }
     
-    NSString* ss = [NSString stringWithFormat:htmlTemp, assignmentInfo.title, assignmentInfo.publisher, timestampString,  assignmentInfo.title, assignmentInfo.content, iconStyle, assignmentInfo.iconUrl];
+    NSString* ss = [NSString stringWithFormat:htmlTemp, assignmentInfo.title, assignmentInfo.publisher, timestampString,  assignmentInfo.title, assignmentInfo.content, divImage];
     
     return ss;
 }
@@ -159,15 +162,18 @@
     <div style='text-align:center;word-break:break-all'>%@</div>\
     <div style='text-align:left;'><h4>%@</h4></div>\
     <div style='word-break:break-all;width:300px'>%@</div>\
-    <div style='%@'><img src='%@' width='300' /></div>\
+    %@\
     </body>\
     </html>";
     
     NSString* timestampString = [[NSDate dateWithTimeIntervalSince1970:checkInOutLogInfo.timestamp] isoDateTimeString];
-    
-    NSString* iconStyle = checkInOutLogInfo.recordUrl ? @"" : @"visibility:hidden;";
-    
+
     NSString* title = [NSString stringWithFormat:@"尊敬的用户 %@ 你好:", gApp.engine.loginInfo.username];
+    
+    NSString* divImage = @"";
+    if (checkInOutLogInfo.recordUrl.length > 0) {
+        divImage = [NSString stringWithFormat:@"<div><img src='%@' width='300' /></div>", [gApp.engine urlFromPath:checkInOutLogInfo.recordUrl]];
+    }
     
     NSString* content = @"";
     CSKuleChildInfo* child = gApp.engine.currentRelationship.child;
@@ -178,7 +184,7 @@
         content = [NSString stringWithFormat:@"您的小孩 %@ 已于 %@ 刷卡离园。", child.name, timestampString];
     }
     
-    NSString* ss = [NSString stringWithFormat:htmlTemp, gApp.engine.loginInfo.schoolName, gApp.engine.loginInfo.schoolName, timestampString,  title, content, iconStyle, checkInOutLogInfo.recordUrl];
+    NSString* ss = [NSString stringWithFormat:htmlTemp, gApp.engine.loginInfo.schoolName, gApp.engine.loginInfo.schoolName, timestampString,  title, content, divImage];
     
     return ss;
 }

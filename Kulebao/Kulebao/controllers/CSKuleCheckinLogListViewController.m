@@ -74,7 +74,7 @@
         cell.labContent.text = @"";
     }
     
-    if (checkInOutLogInfo.recordUrl) {
+    if (checkInOutLogInfo.recordUrl.length > 0) {
         [cell.imgAttachment setImageWithURL:[gApp.engine urlFromPath:checkInOutLogInfo.recordUrl]];
     }
     else {

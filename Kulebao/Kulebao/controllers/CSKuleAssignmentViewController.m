@@ -73,7 +73,7 @@
     CSKuleAssignmentInfo* assignmentInfo = [self.assignmentInfoList objectAtIndex:indexPath.row];
     cell.labTitle.text = assignmentInfo.title;
     cell.labContent.text = assignmentInfo.content;
-    if (assignmentInfo.iconUrl) {
+    if (assignmentInfo.iconUrl.length > 0) {
         [cell.imgAttachment setImageWithURL:[gApp.engine urlFromPath:assignmentInfo.iconUrl]];
     }
     else {

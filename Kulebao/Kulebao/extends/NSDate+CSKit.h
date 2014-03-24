@@ -16,6 +16,7 @@
 + (NSString *)dbFormatString;
 
 + (NSDate *)dateFromString:(NSString *)string withFormat:(NSString *)format;
++ (NSString *)stringFromDate:(NSDate *)date withFormat:(NSString *)format;
 
 - (NSString*)isoDateString;
 - (NSString*)isoDateTimeString;
@@ -38,6 +39,9 @@
 
 //获取年
 - (NSUInteger)getYear;
+
+//month个月后的日期
+- (NSDate *)dateafterMonth:(int)month;
 
 - (NSString*)string;
 

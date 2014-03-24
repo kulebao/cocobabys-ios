@@ -221,6 +221,7 @@
 		09C1C75F18BD92990040B06D /* AFJSONRequestOperation+CSKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C1C75C18BD92990040B06D /* AFJSONRequestOperation+CSKit.m */; };
 		09C1C76018BD92990040B06D /* CSHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C1C75E18BD92990040B06D /* CSHttpClient.m */; };
 		09C1C76618BD973B0040B06D /* NSDictionary+CSKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C1C76518BD973B0040B06D /* NSDictionary+CSKit.m */; };
+		09D04E3918DFCB830093577D /* CSKuleCheckinLogListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09D04E3818DFCB830093577D /* CSKuleCheckinLogListViewController.m */; };
 		09ED59A518CC8F5200187585 /* UIViewController+CSKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 09ED59A418CC8F5200187585 /* UIViewController+CSKit.m */; };
 		09ED59A818CCA22700187585 /* titlebar-1-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 09ED59A618CCA22700187585 /* titlebar-1-bg.png */; };
 		09ED59A918CCA22700187585 /* titlebar-1-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09ED59A718CCA22700187585 /* titlebar-1-bg@2x.png */; };
@@ -257,6 +258,7 @@
 		09FEA72518DC9D9600513C87 /* icon-news@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09FEA71518DC9D9600513C87 /* icon-news@2x.png */; };
 		09FEA72618DC9D9600513C87 /* news-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 09FEA71618DC9D9600513C87 /* news-bg.png */; };
 		09FEA72718DC9D9600513C87 /* news-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09FEA71718DC9D9600513C87 /* news-bg@2x.png */; };
+		09FEA72A18DCAA4D00513C87 /* CSTipsInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FEA72918DCAA4D00513C87 /* CSTipsInfo.m */; };
 		09FFB5F118D6B2E100F07B0A /* CSKuleWeekScheduleInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FFB5F018D6B2E100F07B0A /* CSKuleWeekScheduleInfo.m */; };
 		09FFB5F418D6B2FA00F07B0A /* CSKuleDailyScheduleInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FFB5F318D6B2FA00F07B0A /* CSKuleDailyScheduleInfo.m */; };
 		09FFB5F718D6B46300F07B0A /* CSKuleScheduleInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FFB5F618D6B46300F07B0A /* CSKuleScheduleInfo.m */; };
@@ -576,6 +578,8 @@
 		09C1C75E18BD92990040B06D /* CSHttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSHttpClient.m; sourceTree = "<group>"; };
 		09C1C76418BD973B0040B06D /* NSDictionary+CSKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+CSKit.h"; sourceTree = "<group>"; };
 		09C1C76518BD973B0040B06D /* NSDictionary+CSKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+CSKit.m"; sourceTree = "<group>"; };
+		09D04E3718DFCB830093577D /* CSKuleCheckinLogListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleCheckinLogListViewController.h; sourceTree = "<group>"; };
+		09D04E3818DFCB830093577D /* CSKuleCheckinLogListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleCheckinLogListViewController.m; sourceTree = "<group>"; };
 		09ED59A318CC8F5200187585 /* UIViewController+CSKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+CSKit.h"; sourceTree = "<group>"; };
 		09ED59A418CC8F5200187585 /* UIViewController+CSKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CSKit.m"; sourceTree = "<group>"; };
 		09ED59A618CCA22700187585 /* titlebar-1-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "titlebar-1-bg.png"; sourceTree = "<group>"; };
@@ -628,6 +632,8 @@
 		09FEA71518DC9D9600513C87 /* icon-news@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-news@2x.png"; sourceTree = "<group>"; };
 		09FEA71618DC9D9600513C87 /* news-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "news-bg.png"; sourceTree = "<group>"; };
 		09FEA71718DC9D9600513C87 /* news-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "news-bg@2x.png"; sourceTree = "<group>"; };
+		09FEA72818DCAA4D00513C87 /* CSTipsInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSTipsInfo.h; sourceTree = "<group>"; };
+		09FEA72918DCAA4D00513C87 /* CSTipsInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSTipsInfo.m; sourceTree = "<group>"; };
 		09FFB5EF18D6B2E100F07B0A /* CSKuleWeekScheduleInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleWeekScheduleInfo.h; sourceTree = "<group>"; };
 		09FFB5F018D6B2E100F07B0A /* CSKuleWeekScheduleInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleWeekScheduleInfo.m; sourceTree = "<group>"; };
 		09FFB5F218D6B2FA00F07B0A /* CSKuleDailyScheduleInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleDailyScheduleInfo.h; sourceTree = "<group>"; };
@@ -732,6 +738,8 @@
 				091AE82A18D820C800EBC927 /* UIView+convenience.m */,
 				091AE82B18D820C800EBC927 /* VRGCalendarView.h */,
 				091AE82C18D820C800EBC927 /* VRGCalendarView.m */,
+				09FEA72818DCAA4D00513C87 /* CSTipsInfo.h */,
+				09FEA72918DCAA4D00513C87 /* CSTipsInfo.m */,
 			);
 			path = VurigCalendar;
 			sourceTree = "<group>";
@@ -993,6 +1001,8 @@
 				09FE6B0918C5C34F00A840BE /* CSKuleChatingViewController.m */,
 				09FE6B0518C5C23300A840BE /* CSKuleCheckinViewController.h */,
 				09FE6B0618C5C23300A840BE /* CSKuleCheckinViewController.m */,
+				09D04E3718DFCB830093577D /* CSKuleCheckinLogListViewController.h */,
+				09D04E3818DFCB830093577D /* CSKuleCheckinLogListViewController.m */,
 				09A9EBB918C0830900D83119 /* CSKuleLoginViewController.h */,
 				09A9EBBA18C0830900D83119 /* CSKuleLoginViewController.m */,
 				09A9EBD318C0A01B00D83119 /* CSKuleMainViewController.h */,
@@ -1559,6 +1569,7 @@
 				091AE82E18D820C800EBC927 /* NSMutableArray+convenience.m in Sources */,
 				091AE82D18D820C800EBC927 /* NSDate+convenience.m in Sources */,
 				09ED59AC18CD67FD00187585 /* CSKuleNewsInfo.m in Sources */,
+				09FEA72A18DCAA4D00513C87 /* CSTipsInfo.m in Sources */,
 				0901A96A18D95E38003BB152 /* CSKuleBPushInfo.m in Sources */,
 				09FE6B0418C5C00F00A840BE /* CSKuleScheduleViewController.m in Sources */,
 				093904DD18BDDA90006E8F82 /* CSKuleRootViewController.m in Sources */,
@@ -1611,6 +1622,7 @@
 				09C1C76018BD92990040B06D /* CSHttpClient.m in Sources */,
 				09A9EBD218C090E200D83119 /* CSKuleAuthViewController.m in Sources */,
 				090C9EC718C84FB000883DE0 /* CSKuleChildCell.m in Sources */,
+				09D04E3918DFCB830093577D /* CSKuleCheckinLogListViewController.m in Sources */,
 				09BA1C2618BB3F8400760182 /* AFJSONRequestOperation.m in Sources */,
 				0904690818C72E6C00D0846E /* CSKuleRelationshipInfo.m in Sources */,
 				09FE6B0118C5BCFD00A840BE /* CSKuleAssignmentViewController.m in Sources */,

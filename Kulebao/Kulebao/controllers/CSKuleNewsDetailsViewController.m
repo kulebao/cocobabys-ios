@@ -17,6 +17,7 @@
 @implementation CSKuleNewsDetailsViewController
 @synthesize newsInfo = _newsInfo;
 @synthesize assignmentInfo = _assignmentInfo;
+@synthesize checkInOutLogInfo = _checkInOutLogInfo;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,6 +34,7 @@
 	// Do any additional setup after loading the view.
     [self customizeBackBarItem];
     [self.webView hideGradientBackground];
+    self.webView.scalesPageToFit = YES;
     [self reloadWebView];
 }
 
@@ -45,6 +47,7 @@
 #pragma mark - Setters
 - (void)setNewsInfo:(CSKuleNewsInfo *)newsInfo{
     _newsInfo = newsInfo;
+    _checkInOutLogInfo = nil;
     _assignmentInfo = nil;
     
     if ([self isViewLoaded]) {
@@ -54,8 +57,19 @@
 
 - (void)setAssignmentInfo:(CSKuleAssignmentInfo *)assignmentInfo {
     _assignmentInfo = assignmentInfo;
+    _checkInOutLogInfo = nil;
     _newsInfo = nil;
     
+    if ([self isViewLoaded]) {
+        [self reloadWebView];
+    }
+}
+
+- (void)setCheckInOutLogInfo:(CSKuleCheckInOutLogInfo *)checkInOutLogInfo {
+    _checkInOutLogInfo = checkInOutLogInfo;
+    _assignmentInfo = nil;
+    _newsInfo = nil;
+
     if ([self isViewLoaded]) {
         [self reloadWebView];
     }
@@ -82,12 +96,13 @@
     @"<html>\
     <head>\
         <title>%@</title>\
+        <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;' name='viewport' >\
     </head>\
     <body>\
         <div style='text-align:center;color:#cc6633'><h3>%@</h3></div>\
-        <div style='text-align:center;width:300'>%@</div>\
+        <div style='text-align:center;'>%@</div>\
         <div style='text-align:center;'><h4>%@</h4></div>\
-        <div >%@</div>\
+        <div style='word-break:break-all;width:300px'>%@</div>\
     </body>\
     </html>";
     
@@ -112,9 +127,9 @@
     </head>\
     <body>\
     <div style='text-align:center;color:#cc6633'><h3>%@</h3></div>\
-    <div style='text-align:center;width:300'>%@</div>\
+    <div style='text-align:center;word-break:break-all'>%@</div>\
     <div style='text-align:center;'><h4>%@</h4></div>\
-    <div>%@</div>\
+    <div style='word-break:break-all;width:300px'>%@</div>\
     <div style='%@'><img src='%@' width='300' /></div>\
     </body>\
     </html>";

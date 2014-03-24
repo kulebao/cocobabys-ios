@@ -11,6 +11,7 @@
 #import "PullTableView.h"
 #import "CSAppDelegate.h"
 #import "CSKuleNewsDetailsViewController.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface CSKuleAssignmentViewController () <UITableViewDataSource, UITableViewDelegate, PullTableViewDelegate>
 @property (weak, nonatomic) IBOutlet PullTableView *tableview;
@@ -66,11 +67,19 @@
     if (cell == nil) {
         NSArray* nibs = [[NSBundle mainBundle] loadNibNamed:@"CSKuleNoticeCell" owner:nil options:nil];
         cell = [nibs firstObject];
+        cell.imgIcon.image = [UIImage imageNamed:@"icon-assignment.png"];
     }
     
     CSKuleAssignmentInfo* assignmentInfo = [self.assignmentInfoList objectAtIndex:indexPath.row];
     cell.labTitle.text = assignmentInfo.title;
     cell.labContent.text = assignmentInfo.content;
+    if (assignmentInfo.iconUrl) {
+        [cell.imgAttachment setImageWithURL:[gApp.engine urlFromPath:assignmentInfo.iconUrl]];
+    }
+    else {
+        [cell.imgAttachment cancelImageRequestOperation];
+        cell.imgAttachment.image = nil;
+    }
     
     NSDate* d = [NSDate dateWithTimeIntervalSince1970:assignmentInfo.timestamp];
     
@@ -81,7 +90,7 @@
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 110.0+5;
+    return 100.0+5;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

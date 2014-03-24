@@ -66,6 +66,7 @@
     if (cell == nil) {
         NSArray* nibs = [[NSBundle mainBundle] loadNibNamed:@"CSKuleNoticeCell" owner:nil options:nil];
         cell = [nibs firstObject];
+        cell.imgIcon.image = [UIImage imageNamed:@"icon-news.png"];
     }
     
     CSKuleNewsInfo* newsInfo = [self.newsInfoList objectAtIndex:indexPath.row];
@@ -87,7 +88,7 @@
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 110.0+5.0;
+    return 100.0+5.0;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -42,6 +42,7 @@
 @property (nonatomic, retain) UIImageView *animationView_B;
 @property (nonatomic, retain) NSArray *markedDates;
 @property (nonatomic, retain) NSArray *markedColors;
+@property (nonatomic, retain) NSArray *markedTips;
 @property (nonatomic, getter = calendarHeight) float calendarHeight;
 @property (nonatomic, retain, getter = selectedDate) NSDate *selectedDate;
 
@@ -50,6 +51,7 @@
 
 -(void)markDates:(NSArray *)dates;
 -(void)markDates:(NSArray *)dates withColors:(NSArray *)colors;
+- (void)markDates:(NSArray *)dates withTips:(NSArray*)tips;
 
 -(void)showNextMonth;
 -(void)showPreviousMonth;

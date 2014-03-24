@@ -7,10 +7,12 @@
 //
 
 #import "CSKuleCheckinViewController.h"
+#import "CSKuleCheckinLogListViewController.h"
 #import "VRGCalendarView.h"
 #import "NSDate+convenience.h"
 #import "CSAppDelegate.h"
 #import "NSDate+CSKit.h"
+#import "CSTipsInfo.h"
 
 @interface CSKuleCheckinViewController () <VRGCalendarViewDelegate>
 
@@ -72,9 +74,6 @@
     
     yy += 25;
     self.labCheckOut.frame = CGRectMake(xx, yy, self.view.bounds.size.width, 25);
-    
-    // 获取签到数据
-    [self reloadCheckInOutLogs];
 }
 
 - (void)didReceiveMemoryWarning
@@ -103,57 +102,102 @@
         [gApp alert:[error localizedDescription]];
     };
     
+    NSDate* beginning = [_calendarView.currentMonth beginningOfMonth];
+    NSDate* end = [beginning dateafterMonth:1];
+    
+    //CSLog(@"beginning=%@, end=%@", [beginning isoDateTimeString], [end isoDateTimeString]);
+    
+    long long beginTime = [beginning timeIntervalSince1970] * 1000;
+    long long endTime = [end timeIntervalSince1970] * 1000;
+    
+    
+    [gApp waitingAlert:@"正在获取签到信息..."];
     CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
     [gApp.engine reqGetCheckInOutLogOfChild:currentChild
                              inKindergarten:gApp.engine.loginInfo.schoolId
-                                     from:-1
-                                       to:-1
-                                     most:-1
+                                     from:beginTime
+                                       to:endTime
+                                     most:100
                                   success:sucessHandler
                                   failure:failureHandler];
 }
 
 - (void)doUpdate{
-    _checkInDates = [[NSMutableArray alloc] initWithCapacity:_checkInOutLogInfos.count];
-    _checkOutDates = [[NSMutableArray alloc] initWithCapacity:_checkInOutLogInfos.count];
+    CSTipsInfo* tipsList[31] = {0};
+    
     for (CSKuleCheckInOutLogInfo* checkInOutLogInfo in _checkInOutLogInfos) {
         NSDate* date = [NSDate dateWithTimeIntervalSince1970:checkInOutLogInfo.timestamp];
-        if (checkInOutLogInfo.noticeType == kKuleNoticeTypeCheckIn) {
-            [_checkInDates addObject:date];
-        }
-        else if (checkInOutLogInfo.noticeType == kKuleNoticeTypeCheckOut) {
-            [_checkOutDates addObject:date];
+        NSUInteger day = [date getDay];
+        if (day < 31) {
+            CSTipsInfo* tips = tipsList[day];
+            if (tips == 0) {
+                tips = [CSTipsInfo new];
+                tipsList[day] = tips;
+            }
+            
+            if (checkInOutLogInfo.noticeType == kKuleNoticeTypeCheckIn) {
+                tips.tips1 = [NSDate stringFromDate:date withFormat:@"HH:mm"];
+            }
+            else if (checkInOutLogInfo.noticeType == kKuleNoticeTypeCheckOut) {
+                tips.tips2 = [NSDate stringFromDate:date withFormat:@"HH:mm"];
+            }
+            else {
+                CSLog(@"Unknown checkInOutLog: %@", checkInOutLogInfo);
+            }
         }
         else {
-            CSLog(@"Unknown checkInOutLog: %@", checkInOutLogInfo);
+            CSLog(@"date get day error.");
         }
     }
     
     NSMutableArray* dates = [NSMutableArray array];
-    for (NSDate* d in _checkOutDates) {
-        if ([d month] == [_calendarView.currentMonth month]) {
-            [dates addObject:@([d day])];
+    NSMutableArray* tipInfos = [NSMutableArray array];
+    
+    for (NSInteger i=0; i<31; i++) {
+        CSTipsInfo* tips = tipsList[i];
+        if (tips) {
+            [dates addObject:@(i)];
+            [tipInfos addObject:tips];
+            
+            if (!tips.tips1) {
+                tips.tips1 = @"未签入";
+            }
+            
+            if (!tips.tips2) {
+                tips.tips2 = @"未签出";
+            }
         }
     }
-    [_calendarView markDates:_checkOutDates];
+    
+    [_calendarView markDates:dates withTips:tipInfos];
+    
+    if ([_calendarView.currentMonth  getMonth] == [[NSDate date] getMonth]) {
+        NSInteger curday = [[NSDate date] getDay];
+        if (curday < 31) {
+            CSTipsInfo* tips = tipsList[curday];
+            if (tips) {
+                _labCheckIn.text = [NSString stringWithFormat:@"签到入园时间: %@", tips.tips1];
+                _labCheckOut.text = [NSString stringWithFormat:@"签出离园时间: %@", tips.tips2];
+            }
+            else {
+                _labCheckIn.text = @"今天没有刷卡记录";
+                _labCheckOut.text = nil;
+            }
+        }
+    }
+    else {
+        _labCheckIn.text = nil;
+        _labCheckOut.text = nil;
+    }
 }
 
 #pragma mark - VRGCalendarViewDelegate
--(void)calendarView:(VRGCalendarView *)calendarView switchedToMonth:(int)month targetHeight:(float)targetHeight animated:(BOOL)animated {
-//    if (month==[[NSDate date] month]) {
-//        NSArray *dates = [NSArray arrayWithObjects:[NSNumber numberWithInt:1],[NSNumber numberWithInt:5], nil];
-//        [calendarView markDates:dates];
-//    }
-    
-    NSMutableArray* dates = [NSMutableArray array];
-    for (NSDate* d in _checkOutDates) {
-        if ([d month] == month) {
-            [dates addObject:@([d day])];
-        }
-    }
-    [calendarView markDates:dates];
-
-    //[calendarView markDates:_checkOutDates];
+-(void)calendarView:(VRGCalendarView *)calendarView
+    switchedToMonth:(int)month
+       targetHeight:(float)targetHeight
+           animated:(BOOL)animated {
+    // 获取签到数据
+    [self reloadCheckInOutLogs];
     
     NSTimeInterval animationInterval = animated ? 0.35 : 0;
     
@@ -172,8 +216,31 @@
 }
 
 -(void)calendarView:(VRGCalendarView *)calendarView dateSelected:(NSDate *)date {
-    self.labCheckIn.text = [date string];
-    self.labCheckOut.text = [date string];
+    NSUInteger selectedDay = [date getDay];
+    NSMutableArray* selectedInfos = [NSMutableArray array];
+    for (CSKuleCheckInOutLogInfo* checkInOutLogInfo in _checkInOutLogInfos) {
+        NSDate* timestamp = [NSDate dateWithTimeIntervalSince1970:checkInOutLogInfo.timestamp];
+        NSUInteger day = [timestamp getDay];
+        if (day == selectedDay) {
+            [selectedInfos addObject:checkInOutLogInfo];
+        }
+    }
+    
+    //CSLog(@"selectedInfos.count = %d", selectedInfos.count);
+    if (selectedInfos.count > 0) {
+        [self performSegueWithIdentifier:@"segue.checkinLogList" sender:selectedInfos];
+    }
+    else {
+    }
 }
+
+#pragma mark - Segues
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"segue.checkinLogList"]) {
+        CSKuleCheckinLogListViewController* destCtrl = segue.destinationViewController;
+        destCtrl.checkInOutLogInfoList = sender;
+    }
+}
+
 
 @end

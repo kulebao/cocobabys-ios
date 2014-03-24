@@ -648,8 +648,8 @@
 
 - (void)reqGetCheckInOutLogOfChild:(CSKuleChildInfo*)childInfo
                     inKindergarten:(NSInteger)kindergarten
-                              from:(NSInteger)fromId
-                                to:(NSInteger)toId
+                              from:(long long)fromId
+                                to:(long long)toId
                               most:(NSInteger)most
                            success:(SuccessResponseHandler)success
                            failure:(FailureResponseHandler)failure {

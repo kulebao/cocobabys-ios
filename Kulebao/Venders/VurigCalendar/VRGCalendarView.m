@@ -11,10 +11,11 @@
 #import "NSDate+convenience.h"
 #import "NSMutableArray+convenience.h"
 #import "UIView+convenience.h"
+#import "CSTipsInfo.h"
 
 @implementation VRGCalendarView
 @synthesize currentMonth,delegate,labelCurrentMonth, animationView_A,animationView_B;
-@synthesize markedDates,markedColors,calendarHeight,selectedDate;
+@synthesize markedDates,markedColors,markedTips,calendarHeight,selectedDate;
 
 #pragma mark - Select Date
 -(void)selectDate:(int)date {
@@ -55,6 +56,7 @@
     
     self.markedColors = [NSArray arrayWithArray:colors];
     [colors release];
+    self.markedTips = nil;
     
     [self setNeedsDisplay];
 }
@@ -63,6 +65,15 @@
 -(void)markDates:(NSArray *)dates withColors:(NSArray *)colors {
     self.markedDates = dates;
     self.markedColors = colors;
+    self.markedTips = nil;
+    
+    [self setNeedsDisplay];
+}
+
+- (void)markDates:(NSArray *)dates withTips:(NSArray*)tips {
+    self.markedDates = dates;
+    self.markedColors = nil;
+    self.markedTips = tips;
     
     [self setNeedsDisplay];
 }
@@ -248,7 +259,8 @@
     }
     
     self.markedDates=nil;
-    self.markedColors=nil;  
+    self.markedColors=nil;
+    self.markedTips = nil;
     
     CGRect rectArrowLeft = CGRectMake(0, 0, 50, 40);
     CGRect rectArrowRight = CGRectMake(self.frame.size.width-50, 0, 50, 40);
@@ -475,7 +487,7 @@
                                            [UIColor whiteColor].CGColor);
         }
         
-        [date drawInRect:CGRectMake(targetX+2, targetY+10, kVRGCalendarViewDayWidth, kVRGCalendarViewDayHeight) withFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:17] lineBreakMode:UILineBreakModeClip alignment:UITextAlignmentCenter];
+        [date drawInRect:CGRectMake(targetX+2, targetY+5, kVRGCalendarViewDayWidth, kVRGCalendarViewDayHeight-20) withFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:16] lineBreakMode:UILineBreakModeClip alignment:UITextAlignmentCenter];
     }
     
     //    CGContextClosePath(context);
@@ -497,8 +509,6 @@
             continue;
         }
         
-        
-        
         int targetBlock = firstWeekDay + (targetDate-1);
         int targetColumn = targetBlock%7;
         int targetRow = targetBlock/7;
@@ -507,7 +517,25 @@
         int targetY = kVRGCalendarViewTopBarHeight + targetRow * (kVRGCalendarViewDayHeight+2) + 38;
         
         CGRect rectangle = CGRectMake(targetX,targetY,32,2);
-        CGContextAddRect(context, rectangle);
+        if (markedTips) {
+            id tips = [markedTips objectAtIndex:i];
+            NSString* tipsLine1 = @"";
+            NSString* tipsLine2 = @"";
+            if ([tips isKindOfClass:[CSTipsInfo class]]) {
+                CSTipsInfo* tipsInfo = tips;
+                tipsLine1 = tipsInfo.tips1;
+                tipsLine2 = tipsInfo.tips2;
+            }
+            targetX += 3;
+            CGRect tipsLine1Rect = CGRectMake(targetX,targetY-15,32,10);
+            [tipsLine1 drawInRect:tipsLine1Rect withFont:[UIFont systemFontOfSize:10] lineBreakMode:UILineBreakModeClip alignment:UITextAlignmentCenter];
+            
+            CGRect tipsLine2Rect = CGRectMake(targetX,targetY-5,32,10);
+            [tipsLine2 drawInRect:tipsLine2Rect withFont:[UIFont systemFontOfSize:10] lineBreakMode:UILineBreakModeClip alignment:UITextAlignmentCenter];
+        }
+        else {
+            CGContextAddRect(context, rectangle);
+        }
         
         UIColor *color;
         if (selectedDate && selectedDateBlock==targetBlock) {
@@ -515,10 +543,14 @@
         }  else if (todayBlock==targetBlock) {
             color = [UIColor whiteColor];
         } else {
-            color  = (UIColor *)[markedColors objectAtIndex:i];
+            if (markedColors) {
+                color  = (UIColor *)[markedColors objectAtIndex:i];
+            }
+            else {
+                color = [UIColor redColor];
+            }
         }
-        
-        
+
         CGContextSetFillColorWithColor(context, color.CGColor);
         CGContextFillPath(context);
     }

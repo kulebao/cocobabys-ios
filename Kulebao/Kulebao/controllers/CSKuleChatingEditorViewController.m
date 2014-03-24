@@ -15,6 +15,7 @@
 @end
 
 @implementation CSKuleChatingEditorViewController
+@synthesize delegate = _delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,6 +36,7 @@
                                    action:@selector(onBtnSendClicked:)
                                      text:@"发送"];
     
+    self.textMsgBody.backgroundColor = [UIColor clearColor];
     [self.textMsgBody becomeFirstResponder];
 }
 
@@ -57,7 +59,21 @@
 
 #pragma mark - UI Actions
 - (void)onBtnSendClicked:(id)sender {
+    [self.textMsgBody resignFirstResponder];
     
+    NSString* msgBody = self.textMsgBody.text;
+    if (msgBody.length > 0) {
+        [self doSendText:msgBody];
+    }
+    else {
+        [gApp alert:@"不能发送空消息 ^_^"];
+    }
+}
+
+- (void)doSendText:(NSString*)msgBody {
+    if ([_delegate respondsToSelector:@selector(willSendMsgWithText:)]) {
+        [_delegate willSendMsgWithText:msgBody];
+    }
 }
 
 @end

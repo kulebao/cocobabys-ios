@@ -132,9 +132,10 @@
                                 success:(SuccessResponseHandler)success
                                 failure:(FailureResponseHandler)failure;
 
-- (void)reqSendChatingMsgs:(NSString*)content
+- (void)reqSendChatingMsgs:(NSString*)msgBody
                  withImage:(NSString*)imgUrl
                   toKindergarten:(NSInteger)kindergarten
+              retrieveFrom:(NSInteger)fromId
                          success:(SuccessResponseHandler)success
                          failure:(FailureResponseHandler)failure;
 

@@ -10,4 +10,12 @@
 
 @interface CSKuleChatingEditorViewController : UIViewController
 
+@property (nonatomic, weak) id delegate;
+
+@end
+
+@protocol CSKuleChatingEditorViewControllerDelegate <NSObject>
+@optional
+- (void)willSendMsgWithText:(NSString*)msgBody;
+
 @end

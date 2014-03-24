@@ -534,5 +534,37 @@
     return obj;
 }
 
++ (CSKuleChatMsg*)decodeChatMsg:(NSDictionary*)dataJson {
+    
+    /*
+     {
+     "phone":"123456789",
+     "timestamp":1392967799188,
+     "id":1392967799188,
+     "content":"谢谢你的鼓励", 
+     "image":"http://suoqin-test.u.qiniudn.com/Fget0Tx492DJofAy-ZeUg1SANJ4X",
+     "sender":"带班老师"
+     }
+     */
+    
+    NSParameterAssert(dataJson);
+    
+    double timestamp = [[dataJson valueForKeyNotNull:@"timestamp"] doubleValue];
+    long long msgId = [[dataJson valueForKeyNotNull:@"id"] longLongValue];
+    NSString* phone = [dataJson valueForKeyNotNull:@"phone"];
+    NSString* content = [dataJson valueForKeyNotNull:@"content"];
+    NSString* image = [dataJson valueForKeyNotNull:@"image"];
+    NSString* sender = [dataJson valueForKeyNotNull:@"sender"];
+    
+    CSKuleChatMsg* obj = [CSKuleChatMsg new];
+    obj.timestamp = timestamp / 1000.0;
+    obj.msgId = msgId;
+    obj.phone = phone;
+    obj.content = content;
+    obj.image = image;
+    obj.sender = sender;
+    
+    return obj;
+}
 
 @end

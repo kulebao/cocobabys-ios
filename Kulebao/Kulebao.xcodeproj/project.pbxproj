@@ -165,6 +165,10 @@
 		093904DD18BDDA90006E8F82 /* CSKuleRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 093904DC18BDDA90006E8F82 /* CSKuleRootViewController.m */; };
 		093CD6B618D9771D0025972C /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 093CD6B518D9771D0025972C /* UIImageView+AFNetworking.m */; };
 		093CD6B918D986A20025972C /* CSKuleAssessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 093CD6B818D986A20025972C /* CSKuleAssessViewController.m */; };
+		094F994D18E02A6100ACD196 /* btn-nav-right-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 094F994918E02A6100ACD196 /* btn-nav-right-pressed.png */; };
+		094F994E18E02A6100ACD196 /* btn-nav-right-pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 094F994A18E02A6100ACD196 /* btn-nav-right-pressed@2x.png */; };
+		094F994F18E02A6100ACD196 /* btn-nav-right.png in Resources */ = {isa = PBXBuildFile; fileRef = 094F994B18E02A6100ACD196 /* btn-nav-right.png */; };
+		094F995018E02A6100ACD196 /* btn-nav-right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 094F994C18E02A6100ACD196 /* btn-nav-right@2x.png */; };
 		097ED0BB18DAB4AB0057ECA0 /* CSKuleChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 097ED0BA18DAB4AB0057ECA0 /* CSKuleChangePasswordViewController.m */; };
 		09A9EBB518C07F6F00D83119 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 09A9EBB718C07F6F00D83119 /* Localizable.strings */; };
 		09A9EBBB18C0830900D83119 /* CSKuleLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A9EBBA18C0830900D83119 /* CSKuleLoginViewController.m */; };
@@ -231,6 +235,7 @@
 		09C1C76018BD92990040B06D /* CSHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C1C75E18BD92990040B06D /* CSHttpClient.m */; };
 		09C1C76618BD973B0040B06D /* NSDictionary+CSKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C1C76518BD973B0040B06D /* NSDictionary+CSKit.m */; };
 		09D04E3918DFCB830093577D /* CSKuleCheckinLogListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09D04E3818DFCB830093577D /* CSKuleCheckinLogListViewController.m */; };
+		09DB73E918E0280B00121716 /* CSKuleChatMsg.m in Sources */ = {isa = PBXBuildFile; fileRef = 09DB73E818E0280B00121716 /* CSKuleChatMsg.m */; };
 		09ED59A518CC8F5200187585 /* UIViewController+CSKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 09ED59A418CC8F5200187585 /* UIViewController+CSKit.m */; };
 		09ED59A818CCA22700187585 /* titlebar-1-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 09ED59A618CCA22700187585 /* titlebar-1-bg.png */; };
 		09ED59A918CCA22700187585 /* titlebar-1-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09ED59A718CCA22700187585 /* titlebar-1-bg@2x.png */; };
@@ -494,6 +499,10 @@
 		093CD6B518D9771D0025972C /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
 		093CD6B718D986A20025972C /* CSKuleAssessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleAssessViewController.h; sourceTree = "<group>"; };
 		093CD6B818D986A20025972C /* CSKuleAssessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleAssessViewController.m; sourceTree = "<group>"; };
+		094F994918E02A6100ACD196 /* btn-nav-right-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-nav-right-pressed.png"; sourceTree = "<group>"; };
+		094F994A18E02A6100ACD196 /* btn-nav-right-pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-nav-right-pressed@2x.png"; sourceTree = "<group>"; };
+		094F994B18E02A6100ACD196 /* btn-nav-right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-nav-right.png"; sourceTree = "<group>"; };
+		094F994C18E02A6100ACD196 /* btn-nav-right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-nav-right@2x.png"; sourceTree = "<group>"; };
 		097ED0B918DAB4AB0057ECA0 /* CSKuleChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleChangePasswordViewController.h; sourceTree = "<group>"; };
 		097ED0BA18DAB4AB0057ECA0 /* CSKuleChangePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleChangePasswordViewController.m; sourceTree = "<group>"; };
 		09A9EBB418C07E8800D83119 /* CSKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSKit.h; sourceTree = "<group>"; };
@@ -599,6 +608,8 @@
 		09C1C76518BD973B0040B06D /* NSDictionary+CSKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+CSKit.m"; sourceTree = "<group>"; };
 		09D04E3718DFCB830093577D /* CSKuleCheckinLogListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleCheckinLogListViewController.h; sourceTree = "<group>"; };
 		09D04E3818DFCB830093577D /* CSKuleCheckinLogListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleCheckinLogListViewController.m; sourceTree = "<group>"; };
+		09DB73E718E0280B00121716 /* CSKuleChatMsg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleChatMsg.h; sourceTree = "<group>"; };
+		09DB73E818E0280B00121716 /* CSKuleChatMsg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleChatMsg.m; sourceTree = "<group>"; };
 		09ED59A318CC8F5200187585 /* UIViewController+CSKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+CSKit.h"; sourceTree = "<group>"; };
 		09ED59A418CC8F5200187585 /* UIViewController+CSKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CSKit.m"; sourceTree = "<group>"; };
 		09ED59A618CCA22700187585 /* titlebar-1-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "titlebar-1-bg.png"; sourceTree = "<group>"; };
@@ -784,6 +795,8 @@
 				090468F418C6FE1000D0846E /* CSKuleBindInfo.m */,
 				0901A96818D95E38003BB152 /* CSKuleBPushInfo.h */,
 				0901A96918D95E38003BB152 /* CSKuleBPushInfo.m */,
+				09DB73E718E0280B00121716 /* CSKuleChatMsg.h */,
+				09DB73E818E0280B00121716 /* CSKuleChatMsg.m */,
 				091AE83318D8300A00EBC927 /* CSKuleCheckInOutLogInfo.h */,
 				091AE83418D8300A00EBC927 /* CSKuleCheckInOutLogInfo.m */,
 				0904690018C7117D00D0846E /* CSKuleChildInfo.h */,
@@ -866,6 +879,10 @@
 		0934EFD118BF499900E30ECA /* images */ = {
 			isa = PBXGroup;
 			children = (
+				094F994918E02A6100ACD196 /* btn-nav-right-pressed.png */,
+				094F994A18E02A6100ACD196 /* btn-nav-right-pressed@2x.png */,
+				094F994B18E02A6100ACD196 /* btn-nav-right.png */,
+				094F994C18E02A6100ACD196 /* btn-nav-right@2x.png */,
 				0911B1D918E015E9006D0588 /* default_child_head_icon.png */,
 				0911B1DA18E015E9006D0588 /* default_child_head_icon@2x.png */,
 				0911B1DB18E015E9006D0588 /* resend_normal.png */,
@@ -1462,6 +1479,7 @@
 				0934EFFA18BF559900E30ECA /* guide-3.png in Resources */,
 				09FEA71F18DC9D9600513C87 /* chating-picture@2x.png in Resources */,
 				0934F09318BF5B0800E30ECA /* settings-row-bg-bot@2x.png in Resources */,
+				094F995018E02A6100ACD196 /* btn-nav-right@2x.png in Resources */,
 				0934F07718BF5B0800E30ECA /* Default@2x.png in Resources */,
 				0934F07418BF5B0800E30ECA /* class-input-bg.png in Resources */,
 				09A9EBCD18C08C7D00D83119 /* titlebar-bg@2x.png in Resources */,
@@ -1491,6 +1509,7 @@
 				0934F06618BF5B0800E30ECA /* btn-func-8.png in Resources */,
 				0934F07918BF5B0800E30ECA /* feedback-input-bg@2x.png in Resources */,
 				09FEA72518DC9D9600513C87 /* icon-news@2x.png in Resources */,
+				094F994E18E02A6100ACD196 /* btn-nav-right-pressed@2x.png in Resources */,
 				0934F08518BF5B0800E30ECA /* schedule-bg@2x.png in Resources */,
 				0934F05C18BF5B0800E30ECA /* btn-func-3.png in Resources */,
 				0911B1E818E015E9006D0588 /* star@2x.png in Resources */,
@@ -1527,6 +1546,7 @@
 				09219A3418C42AF800166228 /* 37x-Checkmark.png in Resources */,
 				09A9EBCC18C08C7D00D83119 /* titlebar-bg.png in Resources */,
 				09ED59A918CCA22700187585 /* titlebar-1-bg@2x.png in Resources */,
+				094F994F18E02A6100ACD196 /* btn-nav-right.png in Resources */,
 				09FEA72318DC9D9600513C87 /* icon-assignment@2x.png in Resources */,
 				090C9EBA18C83D2C00883DE0 /* msg-bg-to.png in Resources */,
 				09BA1BE418BB2FC700760182 /* blueArrow@2x.png in Resources */,
@@ -1553,6 +1573,7 @@
 				09BA1B9B18BB2AB300760182 /* InfoPlist.strings in Resources */,
 				0934EFF818BF559900E30ECA /* guide-3-568h.png in Resources */,
 				09FEA71A18DC9D9600513C87 /* btn-back1.png in Resources */,
+				094F994D18E02A6100ACD196 /* btn-nav-right-pressed.png in Resources */,
 				0934F07C18BF5B0800E30ECA /* input-bg-2.png in Resources */,
 				0934EFF418BF559900E30ECA /* guide-2-568h.png in Resources */,
 				0934F08818BF5B0800E30ECA /* settings-change-baby.png in Resources */,
@@ -1595,6 +1616,7 @@
 				091AE82F18D820C800EBC927 /* UIColor+expanded.m in Sources */,
 				09FE6AF918C5B97100A840BE /* CSKuleRecipeCell.m in Sources */,
 				09BA1BE018BB2FC700760182 /* PullTableView.m in Sources */,
+				09DB73E918E0280B00121716 /* CSKuleChatMsg.m in Sources */,
 				09ED59B618CDBF3900187585 /* UIWebView+CSKit.m in Sources */,
 				09BA1C2818BB3F8400760182 /* AFPropertyListRequestOperation.m in Sources */,
 				09FE6AFE18C5BB5600A840BE /* CSKuleRecipeViewController.m in Sources */,

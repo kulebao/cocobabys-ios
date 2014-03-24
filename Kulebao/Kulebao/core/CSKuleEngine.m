@@ -713,11 +713,45 @@
     
 }
 
-- (void)reqSendChatingMsgs:(NSString*)content
+- (void)reqSendChatingMsgs:(NSString*)msgBody
                  withImage:(NSString*)imgUrl
             toKindergarten:(NSInteger)kindergarten
+              retrieveFrom:(NSInteger)fromId
                    success:(SuccessResponseHandler)success
                    failure:(FailureResponseHandler)failure {
+    NSParameterAssert(msgBody || imgUrl); // 不能同时为空
+    NSParameterAssert(_loginInfo);
+    
+    NSString* path = [NSString stringWithFormat:kChatingPath, @(kindergarten), _loginInfo.accountName];
+    
+    if (fromId >= 0) {
+        path = [path stringByAppendingFormat:@"?retrieve_recent_from=%d", fromId];
+    }
+    
+    NSString* method = @"POST";
+    
+    /*
+     {"phone":"123456789","timestamp":1392967799188,"content":"谢谢你的鼓励","image":"http://suoqin-test.u.qiniudn.com/Fget0Tx492DJofAy-ZeUg1SANJ4X","sender":"带班老师"}
+     */
+    
+    long long timestamp = [[NSDate date] timeIntervalSince1970]*1000;
+    
+    NSString* msgImage = @"";
+    if (imgUrl.length > 0) {
+        msgImage = [[self urlFromPath:imgUrl] absoluteString];
+    }
+    
+    NSDictionary* parameters = @{@"phone": _loginInfo.accountName,
+                                 @"timestamp": @(timestamp),
+                                 @"content": msgBody,
+                                 @"image": msgImage,
+                                 @"sender": _loginInfo.username};
+    
+    [_httpClient httpRequestWithMethod:method
+                                  path:path
+                            parameters:parameters
+                               success:success
+                               failure:failure];
     
 }
 

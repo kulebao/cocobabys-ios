@@ -10,8 +10,9 @@
 #import "CSKuleNoticeCell.h"
 #import "PullTableView.h"
 #import "CSAppDelegate.h"
+#import "CSKuleChatingEditorViewController.h"
 
-@interface CSKuleChatingViewController () <UITableViewDataSource, UITableViewDelegate, PullTableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
+@interface CSKuleChatingViewController () <UITableViewDataSource, UITableViewDelegate, PullTableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CSKuleChatingEditorViewControllerDelegate> {
     UIImagePickerController* _imgPicker;
 }
 
@@ -206,9 +207,57 @@
     [gApp hideAlert];
 }
 
+- (void)doSendText:(NSString*)msgBody {
+    SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
+        NSMutableArray* chatMsgs = [NSMutableArray array];
+        
+        if ([dataJson isMemberOfClass:[NSArray class]]) {
+            for (id chatMsgJson in dataJson) {
+                CSKuleChatMsg* chatMsg = [CSKuleInterpreter decodeChatMsg:chatMsgJson];
+                [chatMsgs addObject:chatMsg];
+            }
+        }
+        else if ([dataJson isMemberOfClass:[NSDictionary class]]) {
+            CSKuleChatMsg* chatMsg = [CSKuleInterpreter decodeChatMsg:dataJson];
+            [chatMsgs addObject:chatMsg];
+        }
+        
+        [gApp alert:@"发送成功 ^_^"];
+        
+        [self.navigationController popToViewController:self animated:YES];
+    };
+    
+    FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
+        CSLog(@"failure:%@", error);
+        [gApp alert:[error localizedDescription]];
+    };
+    
+    [gApp waitingAlert:@"发送中..."];
+    [gApp.engine reqSendChatingMsgs:msgBody
+                          withImage:nil
+                     toKindergarten:gApp.engine.loginInfo.schoolId
+                       retrieveFrom:-1
+                            success:sucessHandler
+                            failure:failureHandler];
+    
+}
+
 - (CGSize)textSize:(NSString*)text {
     CGSize sz = CGSizeZero;
     return sz;
+}
+
+#pragma mark - Segues
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"segue.chatingEditor"]) {
+        CSKuleChatingEditorViewController* destCtrl = segue.destinationViewController;
+        destCtrl.delegate = self;
+    }
+}
+
+#pragma mark - CSKuleChatingEditorViewControllerDelegate
+- (void)willSendMsgWithText:(NSString *)msgBody {
+    [self doSendText:msgBody];
 }
 
 @end

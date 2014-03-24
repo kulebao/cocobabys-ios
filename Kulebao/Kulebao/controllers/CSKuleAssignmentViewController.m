@@ -125,6 +125,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"segue.assignmentdetails"]) {
         CSKuleNewsDetailsViewController* destCtrl = segue.destinationViewController;
+        destCtrl.navigationItem.title = @"亲子作业详情";
         destCtrl.assignmentInfo = sender;
     }
 }

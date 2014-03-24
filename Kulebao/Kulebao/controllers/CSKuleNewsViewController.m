@@ -136,6 +136,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"segue.newsdetails"]) {
         CSKuleNewsDetailsViewController* destCtrl = segue.destinationViewController;
+        destCtrl.navigationItem.title = @"公告详情";
         destCtrl.newsInfo = sender;
     }
 }

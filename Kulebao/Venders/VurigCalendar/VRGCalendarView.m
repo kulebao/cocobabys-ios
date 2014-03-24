@@ -517,6 +517,23 @@
         int targetY = kVRGCalendarViewTopBarHeight + targetRow * (kVRGCalendarViewDayHeight+2) + 38;
         
         CGRect rectangle = CGRectMake(targetX,targetY,32,2);
+        
+        UIColor *color;
+        if (selectedDate && selectedDateBlock==targetBlock) {
+            color = [UIColor whiteColor];
+        }  else if (todayBlock==targetBlock) {
+            color = [UIColor whiteColor];
+        } else {
+            //            if (markedColors) {
+            //                color  = (UIColor *)[markedColors objectAtIndex:i];
+            //            }
+            //            else {
+            color = [UIColor redColor];
+            // }
+        }
+        
+        CGContextSetFillColorWithColor(context, color.CGColor);
+        
         if (markedTips) {
             id tips = [markedTips objectAtIndex:i];
             NSString* tipsLine1 = @"";
@@ -537,21 +554,7 @@
             CGContextAddRect(context, rectangle);
         }
         
-        UIColor *color;
-        if (selectedDate && selectedDateBlock==targetBlock) {
-            color = [UIColor whiteColor];
-        }  else if (todayBlock==targetBlock) {
-            color = [UIColor whiteColor];
-        } else {
-            if (markedColors) {
-                color  = (UIColor *)[markedColors objectAtIndex:i];
-            }
-            else {
-                color = [UIColor redColor];
-            }
-        }
-
-        CGContextSetFillColorWithColor(context, color.CGColor);
+        
         CGContextFillPath(context);
     }
 }

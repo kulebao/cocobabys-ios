@@ -808,7 +808,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nR5-qp-BvI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1256" y="741"/>
+            <point key="canvasLocation" x="1592" y="1425"/>
         </scene>
         <!--Kule Recipe View Controller - 宝宝食谱-->
         <scene sceneID="9KS-iG-ZHj">
@@ -1340,6 +1340,7 @@
                     <navigationItem key="navigationItem" title="刷卡记录" id="FGK-gK-e2o"/>
                     <connections>
                         <outlet property="tableview" destination="JyQ-Sk-OAE" id="MxY-i9-1Sn"/>
+                        <segue destination="gZu-Ur-sSP" kind="push" identifier="segue.checkInOutLogInfoDetails" id="RdB-oD-7oe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pon-u8-fv7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1383,6 +1384,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="qNJ-JJ-pfw"/>
+        <segue reference="RdB-oD-7oe"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -125,7 +125,20 @@
 - (void)doUpdate{
     CSTipsInfo* tipsList[31] = {0};
     
-    for (CSKuleCheckInOutLogInfo* checkInOutLogInfo in _checkInOutLogInfos) {
+    NSArray* sortedArray = [_checkInOutLogInfos sortedArrayWithOptions:NSSortStable usingComparator:^NSComparisonResult(CSKuleCheckInOutLogInfo* obj1, CSKuleCheckInOutLogInfo* obj2) {
+        
+        NSComparisonResult result = NSOrderedSame;
+        if (obj1.timestamp < obj2.timestamp) {
+            result = NSOrderedAscending;
+        }
+        else if (obj1.timestamp > obj2.timestamp) {
+            result = NSOrderedDescending;
+        }
+        
+        return result;
+    }];
+    
+    for (CSKuleCheckInOutLogInfo* checkInOutLogInfo in sortedArray) {
         NSDate* date = [NSDate dateWithTimeIntervalSince1970:checkInOutLogInfo.timestamp];
         NSUInteger day = [date getDay];
         if (day < 31) {
@@ -137,6 +150,7 @@
             
             if (checkInOutLogInfo.noticeType == kKuleNoticeTypeCheckIn) {
                 tips.tips1 = [NSDate stringFromDate:date withFormat:@"HH:mm"];
+                tips.tips2 = nil;
             }
             else if (checkInOutLogInfo.noticeType == kKuleNoticeTypeCheckOut) {
                 tips.tips2 = [NSDate stringFromDate:date withFormat:@"HH:mm"];
@@ -160,11 +174,11 @@
             [tipInfos addObject:tips];
             
             if (!tips.tips1) {
-                tips.tips1 = @"未签入";
+                tips.tips1 = @"未签到";
             }
             
             if (!tips.tips2) {
-                tips.tips2 = @"未签出";
+                tips.tips2 = @"未签退";
             }
         }
     }
@@ -177,7 +191,7 @@
             CSTipsInfo* tips = tipsList[curday];
             if (tips) {
                 _labCheckIn.text = [NSString stringWithFormat:@"签到入园时间: %@", tips.tips1];
-                _labCheckOut.text = [NSString stringWithFormat:@"签出离园时间: %@", tips.tips2];
+                _labCheckOut.text = [NSString stringWithFormat:@"签退离园时间: %@", tips.tips2];
             }
             else {
                 _labCheckIn.text = @"今天没有刷卡记录";

@@ -68,7 +68,7 @@
         cell.labContent.text = [NSString stringWithFormat:@"您的小孩 %@ 已刷卡入园。", child.name];
     }
     else if (checkInOutLogInfo.noticeType == kKuleNoticeTypeCheckOut) {
-        cell.labContent.text = [NSString stringWithFormat:@"您的小孩 %@ 已刷卡出园。", child.name];
+        cell.labContent.text = [NSString stringWithFormat:@"您的小孩 %@ 已刷卡离园。", child.name];
     }
     else {
         cell.labContent.text = @"";
@@ -83,6 +83,8 @@
     }
     
     cell.labDate.text = [date isoDateTimeString];
+    cell.labPublisher.text = gApp.engine.loginInfo.schoolName;
+    
     return cell;
 }
 
@@ -95,14 +97,15 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     CSKuleCheckInOutLogInfo* checkInOutLogInfo = [_checkInOutLogInfoList objectAtIndex:indexPath.row];
-    //[self performSelector:@selector(showNewsDetails:) withObject:newsInfo];
+    [self performSelector:@selector(showCheckInOutLogInfoDetails:) withObject:checkInOutLogInfo];
 }
 
 #pragma mark - Segues
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"segue.checkInOutLogInfoDetails"]) {
         CSKuleNewsDetailsViewController* destCtrl = segue.destinationViewController;
-        destCtrl.newsInfo = sender;
+        destCtrl.navigationItem.title = @"刷卡信息";
+        destCtrl.checkInOutLogInfo = sender;
     }
 }
 

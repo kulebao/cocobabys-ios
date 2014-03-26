@@ -82,6 +82,18 @@
 }
 */
 
+#pragma mark - View lifecycle
+-(void) viewDidAppear:(BOOL)animated
+{
+    NSString* cName = [NSString stringWithFormat:@"%@",  self.navigationItem.title, nil];
+    [[BaiduMobStat defaultStat] pageviewStartWithName:cName];
+}
+
+-(void) viewDidDisappear:(BOOL)animated
+{
+    NSString* cName = [NSString stringWithFormat:@"%@", self.navigationItem.title, nil];
+    [[BaiduMobStat defaultStat] pageviewEndWithName:cName];
+}
 
 #pragma mark - Private
 - (void) setupAssessModules {
@@ -111,7 +123,7 @@
         [[UIImageView alloc] initWithFrame:CGRectNull]],
         
       @[@"集体活动", @"assess-activity.png", @(kKuleAssessActivity),
-        @"集体：乐于参加各种集体活动、注意力集中、能积极发言。",
+        @"集体活动：乐于参加各种集体活动、注意力集中、能积极发言。",
         [[UIImageView alloc] initWithFrame:CGRectNull]],
       
       @[@"游戏", @"assess-game.png", @(kKuleAssessGame),

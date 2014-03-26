@@ -35,6 +35,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.navigationController.navigationBarHidden = YES;
+    self.navigationItem.title = @"登录账号";
     
     self.fieldMobile.text = gApp.engine.preferences.defaultUsername;
     
@@ -45,6 +46,19 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - View lifecycle
+-(void) viewDidAppear:(BOOL)animated
+{
+    NSString* cName = [NSString stringWithFormat:@"%@",  self.navigationItem.title, nil];
+    [[BaiduMobStat defaultStat] pageviewStartWithName:cName];
+}
+
+-(void) viewDidDisappear:(BOOL)animated
+{
+    NSString* cName = [NSString stringWithFormat:@"%@", self.navigationItem.title, nil];
+    [[BaiduMobStat defaultStat] pageviewEndWithName:cName];
 }
 
 #pragma mark - UI Actions

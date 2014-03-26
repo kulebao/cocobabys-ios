@@ -99,11 +99,19 @@
     }
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
+#pragma mark - View lifecycle
+-(void) viewDidAppear:(BOOL)animated
+{
     [_scrollContent flashScrollIndicators];
     [self performSelector:@selector(showBanner) withObject:nil afterDelay:2];
+    NSString* cName = [NSString stringWithFormat:@"%@",  self.navigationItem.title, nil];
+    [[BaiduMobStat defaultStat] pageviewStartWithName:cName];
+}
+
+-(void) viewDidDisappear:(BOOL)animated
+{
+    NSString* cName = [NSString stringWithFormat:@"%@", self.navigationItem.title, nil];
+    [[BaiduMobStat defaultStat] pageviewEndWithName:cName];
 }
 
 #pragma mark - Segues

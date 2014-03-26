@@ -12,6 +12,8 @@
 @interface CSKuleAssessViewController () {
     NSArray* _assessModules;
     NSMutableArray* _assesses;
+    
+    NSInteger _currentAssessIndex;
 }
 @property (weak, nonatomic) IBOutlet UIView *viewTipsContainer;
 @property (weak, nonatomic) IBOutlet UIView *viewCommentsContainer;
@@ -56,6 +58,8 @@
     
     self.labPublisher.text = nil;
     self.labComments.text = nil;
+    
+    self.labDate.text = @"没有评价";
     
     _assesses = [NSMutableArray array];
     [self doGetAssesses];
@@ -196,6 +200,7 @@
                 [_assesses addObjectsFromArray:assessInfos];
                 [gApp hideAlert];
                 
+                _currentAssessIndex = 0;
                 [self updateWithAssessInfo:[assessInfos firstObject]];
             }
             else {
@@ -259,6 +264,8 @@
         
         self.labComments.text = assessInfo.comments;
         self.labPublisher.text = [NSString stringWithFormat:@"来自 %@ 的评语:", assessInfo.publisher];
+        NSDate* date = [NSDate dateWithTimeIntervalSince1970:assessInfo.timestamp];
+        self.labDate.text = [date isoDateString];
     }
 }
 
@@ -295,9 +302,27 @@
 }
 
 - (IBAction)onBtnPreviousClicked:(id)sender {
+    NSInteger nextIndex = _currentAssessIndex + 1;
+    if (nextIndex < _assesses.count && nextIndex  >= 0) {
+        CSKuleAssessInfo* assessInfo = [_assesses objectAtIndex:nextIndex];
+        [self updateWithAssessInfo:assessInfo];
+        ++_currentAssessIndex;
+    }
+    else {
+        [gApp alert:@"没有评价了"];
+    }
 }
 
 - (IBAction)onBtnNextClicked:(id)sender {
+    NSInteger nextIndex = _currentAssessIndex - 1;
+    if (nextIndex < _assesses.count && nextIndex  >= 0) {
+        CSKuleAssessInfo* assessInfo = [_assesses objectAtIndex:nextIndex];
+        [self updateWithAssessInfo:assessInfo];
+        --_currentAssessIndex;
+    }
+    else {
+        [gApp alert:@"没有评价了"];
+    }
 }
 
 @end

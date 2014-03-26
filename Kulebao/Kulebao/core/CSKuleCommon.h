@@ -45,6 +45,19 @@ enum KuleModule {
     kKuleModuleSize,        // -模块数量-统计
 };
 
+// 评价类别
+enum KuleAssess {
+    kKuleAssessEmotion,     // 情绪
+    kKuleAssessDining,      // 进餐
+    kKuleAssessRest,        // 睡觉
+    kKuleAssessActivity,    // 集体活动
+    kKuleAssessGame,        // 游戏
+    kKuleAssessExercise,    // 锻炼
+    kKuleAssessSelfcare,    // 自我服务
+    kKuleAssessManner,      // 礼貌
+    kKuleAssessSize,
+};
+
 // From Android.
 typedef enum {
     PHONE_NUM_IS_INVALID = 1100,

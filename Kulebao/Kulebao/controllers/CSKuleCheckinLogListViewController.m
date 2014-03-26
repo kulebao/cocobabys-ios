@@ -75,7 +75,7 @@
     }
     
     if (checkInOutLogInfo.recordUrl.length > 0) {
-        [cell.imgAttachment setImageWithURL:[gApp.engine urlFromPath:checkInOutLogInfo.recordUrl]];
+        [cell.imgAttachment setImageWithURL:[gApp.engine urlFromPath:checkInOutLogInfo.recordUrl] placeholderImage:[UIImage imageNamed:@"chating-picture.png"]];
     }
     else {
         [cell.imgAttachment cancelImageRequestOperation];

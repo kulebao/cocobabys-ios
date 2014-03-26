@@ -76,4 +76,7 @@
 // PATH: 聊天
 #define kChatingPath                @"/kindergarten/%@/conversation/%@"
 
+// PATH: 聊天
+#define kAssessPath                 @"/kindergarten/%@/child/%@/assess"
+
 #endif

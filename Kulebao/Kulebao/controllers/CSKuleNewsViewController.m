@@ -80,7 +80,7 @@
     }
     
     if (newsInfo.image.length > 0) {
-        [cell.imgAttachment setImageWithURL:[gApp.engine urlFromPath:newsInfo.image]];
+        [cell.imgAttachment setImageWithURL:[gApp.engine urlFromPath:newsInfo.image] placeholderImage:[UIImage imageNamed:@"chating-picture.png"]];
     }
     else {
         [cell.imgAttachment cancelImageRequestOperation];
@@ -189,7 +189,6 @@
 }
 
 - (void)loadMoreNewsList {
-    
     CSKuleNewsInfo* lastNewsInfo = self.newsInfoList.lastObject;
     if (lastNewsInfo) {
         SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {

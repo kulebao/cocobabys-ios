@@ -21,6 +21,7 @@
     UIImagePickerController* _imgPicker;
     CSTextFieldDelegate* _nickFieldDelegate;
     NSMutableArray* _badges;
+    NSArray* _moduleInfos;
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *labSchoolName;
@@ -115,15 +116,16 @@
 
 #pragma mark - UI
 - (void)setupModules {
-    NSArray* moduleInfos = @[
-                             @[@"园内公告", @"btn-func-6.png", @(kKuleModuleNews)],
-                             @[@"每周食谱", @"btn-func-2.png", @(kKuleModuleRecipe)],
-                             @[@"接送信息", @"btn-func-3.png", @(kKuleModuleCheckin)],
-                             @[@"课程表",  @"btn-func-5.png", @(kKuleModuleSchedule)],
-                             @[@"亲子作业", @"btn-func-8.png", @(kKuleModuleAssignment)],
-                             @[@"家园互动", @"btn-func-7.png", @(kKuleModuleChating)],
-                             @[@"在园表现", @"btn-func-4.png", @(kKuleModuleAssess)],
-                             ];
+    _moduleInfos =
+    @[
+      @[@"园内公告", @"btn-func-6.png", @(kKuleModuleNews)],
+      @[@"每周食谱", @"btn-func-2.png", @(kKuleModuleRecipe)],
+      @[@"接送信息", @"btn-func-3.png", @(kKuleModuleCheckin)],
+      @[@"课程表",  @"btn-func-5.png", @(kKuleModuleSchedule)],
+      @[@"亲子作业", @"btn-func-8.png", @(kKuleModuleAssignment)],
+      @[@"家园互动", @"btn-func-7.png", @(kKuleModuleChating)],
+      @[@"在园表现", @"btn-func-4.png", @(kKuleModuleAssess)],
+      ];
     
     _badges = [NSMutableArray arrayWithCapacity:kKuleModuleSize];
     
@@ -151,9 +153,9 @@
         yy = kModuleTopMagin + row*(kModuleIconSize.height+kModuleTitleSize.height+kModuleRowSpace);
         
         UIButton* btnIcon = [UIButton buttonWithType:UIButtonTypeCustom];
-        NSString* moduleName = moduleInfos[i][0];
-        NSString* moduleIconName = moduleInfos[i][1];
-        NSInteger moduleType = [moduleInfos[i][2] integerValue];
+        NSString* moduleName = _moduleInfos[i][0];
+        NSString* moduleIconName = _moduleInfos[i][1];
+        NSInteger moduleType = [_moduleInfos[i][2] integerValue];
         [btnIcon setBackgroundImage:[UIImage imageNamed:moduleIconName] forState:UIControlStateNormal];
         btnIcon.tag = moduleType;
         btnIcon.frame = CGRectMake(xx, yy, kModuleIconSize.width, kModuleIconSize.height);

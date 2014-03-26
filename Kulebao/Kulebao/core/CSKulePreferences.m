@@ -13,6 +13,7 @@ static NSString* kKeyDefaultUsername = @"com.cocobabys.Kulebao.Preferences.defau
 static NSString* kKeyGuideShown = @"com.cocobabys.Kulebao.Preferences.guideShown";
 static NSString* kKeyLoginInfo = @"com.cocobabys.Kulebao.Preferences.loginInfo";
 static NSString* kKeyBPushInfo = @"com.cocobabys.Kulebao.Preferences.baiduPushInfo";
+static NSString* kKeyHistoryAccounts = @"com.cocobabys.Kulebao.Preferences.historyAccounts";
 
 @implementation CSKulePreferences {
     NSUserDefaults* _config;
@@ -22,6 +23,7 @@ static NSString* kKeyBPushInfo = @"com.cocobabys.Kulebao.Preferences.baiduPushIn
 @synthesize guideShown = _guideShown;
 @synthesize loginInfo = _loginInfo;
 @synthesize deviceToken = _deviceToken;
+@synthesize historyAccounts = _historyAccounts;
 
 + (id)defaultPreferences {
     static CSKulePreferences* s_preferences = nil;
@@ -74,6 +76,8 @@ static NSString* kKeyBPushInfo = @"com.cocobabys.Kulebao.Preferences.baiduPushIn
     else {
         _baiduPushInfo = nil;
     }
+    
+    _historyAccounts = [_config objectForKey:kKeyHistoryAccounts];
 }
 
 - (void)savePreferences {
@@ -123,6 +127,13 @@ static NSString* kKeyBPushInfo = @"com.cocobabys.Kulebao.Preferences.baiduPushIn
     else {
         [_config removeObjectForKey:kKeyBPushInfo];
     }
+    
+    if (_historyAccounts) {
+        [_config setObject:_historyAccounts forKey:kKeyHistoryAccounts];
+    }
+    else {
+        [_config removeObjectForKey:kKeyHistoryAccounts];
+    }
 
     [_config synchronize];
 }
@@ -151,6 +162,17 @@ static NSString* kKeyBPushInfo = @"com.cocobabys.Kulebao.Preferences.baiduPushIn
 - (void)setDeviceToken:(NSData *)deviceToken {
     _deviceToken = deviceToken;
     [self savePreferences];
+}
+
+- (void)addHistoryAccount:(NSString*)account {
+    if (account.length > 0) {
+        if (_historyAccounts == nil) {
+            _historyAccounts = [NSMutableDictionary dictionary];
+        }
+        
+        [_historyAccounts setObject:@(YES) forKey:account];
+        [self savePreferences];
+    }
 }
 
 @end

@@ -19,7 +19,10 @@
 
 @property (nonatomic, strong) CSKuleBPushInfo* baiduPushInfo;
 @property (nonatomic, strong) CSKuleLoginInfo* loginInfo;
+@property (nonatomic, strong, readonly) NSMutableDictionary* historyAccounts;
 
 + (id)defaultPreferences;
+
+- (void)addHistoryAccount:(NSString*)account;
 
 @end

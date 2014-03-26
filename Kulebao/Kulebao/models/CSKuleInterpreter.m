@@ -569,4 +569,62 @@
     return obj;
 }
 
++ (CSKuleAssessInfo*)decodeAssessInfo:(NSDictionary*)dataJson {
+    /*
+     {
+     "id":4,
+     "timestamp":12314313123,
+     "publisher":"杨老师",
+     "comments":"我这周请假了",
+     "emotion":3,
+     "dining":3,
+     "rest":3,
+     "activity":3,
+     "game":3,
+     "exercise":3,
+     "self_care":3,
+     "manner":3,
+     "child_id":"1_93740362_456",
+     "school_id":93740362
+     }
+     */
+    
+    NSParameterAssert(dataJson);
+    
+    NSInteger assessId = [[dataJson valueForKeyNotNull:@"id"] integerValue];
+    double timestamp = [[dataJson valueForKeyNotNull:@"timestamp"] doubleValue];
+    NSString* publisher = [dataJson valueForKeyNotNull:@"publisher"];
+    NSString* comments = [dataJson valueForKeyNotNull:@"comments"];
+    NSString* child_id = [dataJson valueForKeyNotNull:@"child_id"];
+    NSInteger school_id = [[dataJson valueForKeyNotNull:@"school_id"] integerValue];
+    
+    
+    NSInteger emotion = [[dataJson valueForKeyNotNull:@"emotion"] integerValue];
+    NSInteger dining = [[dataJson valueForKeyNotNull:@"dining"] integerValue];
+    NSInteger rest = [[dataJson valueForKeyNotNull:@"rest"] integerValue];
+    NSInteger activity = [[dataJson valueForKeyNotNull:@"activity"] integerValue];
+    NSInteger game = [[dataJson valueForKeyNotNull:@"game"] integerValue];
+    NSInteger exercise = [[dataJson valueForKeyNotNull:@"exercise"] integerValue];
+    NSInteger self_care = [[dataJson valueForKeyNotNull:@"self_care"] integerValue];
+    NSInteger manner = [[dataJson valueForKeyNotNull:@"manner"] integerValue];
+    
+    CSKuleAssessInfo* obj = [CSKuleAssessInfo new];
+    obj.timestamp = timestamp / 1000.0;
+    obj.assessId = assessId;
+    obj.publisher = publisher;
+    obj.comments = comments;
+    obj.childId = child_id;
+    obj.schoolId = school_id;
+    obj.emotion = emotion;
+    obj.dining = dining;
+    obj.rest = rest;
+    obj.activity = activity;
+    obj.game = game;
+    obj.exercise = exercise;
+    obj.selfcare = self_care;
+    obj.manner = manner;
+    
+    return obj;
+}
+
 @end

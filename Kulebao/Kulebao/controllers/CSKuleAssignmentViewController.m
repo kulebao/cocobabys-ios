@@ -74,7 +74,7 @@
     cell.labTitle.text = assignmentInfo.title;
     cell.labContent.text = assignmentInfo.content;
     if (assignmentInfo.iconUrl.length > 0) {
-        [cell.imgAttachment setImageWithURL:[gApp.engine urlFromPath:assignmentInfo.iconUrl]];
+        [cell.imgAttachment setImageWithURL:[gApp.engine urlFromPath:assignmentInfo.iconUrl] placeholderImage:[UIImage imageNamed:@"chating-picture.png"]];
     }
     else {
         [cell.imgAttachment cancelImageRequestOperation];

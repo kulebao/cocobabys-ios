@@ -13,10 +13,14 @@
 #import "AHAlertView.h"
 #import "CSKuleAboutSchoolViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "CSAppDelegate.h"
+#import "ALAlertBanner.h"
+#import "JSBadgeView.h"
 
 @interface CSKuleMainViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
     UIImagePickerController* _imgPicker;
     CSTextFieldDelegate* _nickFieldDelegate;
+    NSMutableArray* _badges;
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *labSchoolName;
@@ -33,14 +37,6 @@
 
 - (IBAction)onBtnShowChildMenuListClicked:(id)sender;
 - (IBAction)onBtnSettingsClicked:(id)sender;
-- (IBAction)onBtnNewsListClicked:(id)sender;
-- (IBAction)onBtnRecipeClicked:(id)sender;
-- (IBAction)onBtnCheckinInfoClicked:(id)sender;
-- (IBAction)onBtnScheduleInfoClicked:(id)sender;
-- (IBAction)onBtnAssignmentClicked:(id)sender;
-- (IBAction)onBtnChatingClicked:(id)sender;
-- (IBAction)onBtnAssessClicked:(id)sender;
-
 - (IBAction)onBtnSchoolInfoClicked:(id)sender;
 - (IBAction)onBtnClassInfoClicked:(id)sender;
 
@@ -72,11 +68,10 @@
     self.imgChildPortrait.layer.cornerRadius = 6.0;
     self.imgChildPortrait.clipsToBounds = YES;
     
-    self.scrollContent.contentSize = CGSizeMake(320, 303);
-    self.scrollContent.showsVerticalScrollIndicator = YES;
-    
     _nickFieldDelegate = [[CSTextFieldDelegate alloc] initWithType:kCSTextFieldDelegateNormal];
     _nickFieldDelegate.maxLength = kKuleNickMaxLength;
+    
+    [self setupModules];
     
     [gApp.engine addObserver:self
                   forKeyPath:@"currentRelationship"
@@ -107,6 +102,7 @@
     [super viewDidAppear:animated];
     
     [_scrollContent flashScrollIndicators];
+    [self performSelector:@selector(showBanner) withObject:nil afterDelay:2];
 }
 
 #pragma mark - Segues
@@ -118,6 +114,74 @@
 }
 
 #pragma mark - UI
+- (void)setupModules {
+    NSArray* moduleInfos = @[
+                             @[@"园内公告", @"btn-func-6.png", @(kKuleModuleNews)],
+                             @[@"每周食谱", @"btn-func-2.png", @(kKuleModuleRecipe)],
+                             @[@"接送信息", @"btn-func-3.png", @(kKuleModuleCheckin)],
+                             @[@"课程表",  @"btn-func-5.png", @(kKuleModuleSchedule)],
+                             @[@"亲子作业", @"btn-func-8.png", @(kKuleModuleAssignment)],
+                             @[@"家园互动", @"btn-func-7.png", @(kKuleModuleChating)],
+                             @[@"在园表现", @"btn-func-4.png", @(kKuleModuleAssess)],
+                             ];
+    
+    _badges = [NSMutableArray arrayWithCapacity:kKuleModuleSize];
+    
+    const CGSize kModuleIconSize = CGSizeMake(71, 71);
+    const CGSize kModuleTitleSize = CGSizeMake(71, 21);
+    const NSInteger kModuleColumns = 3;
+    //const NSInteger kModuleRows = (kKuleModuleSize + MAX((kKuleModuleSize -1), 0)) / kModuleColumns;
+    const CGFloat kModuleTopMagin = 5;
+    const CGFloat kModuleRowSpace = 5;
+    const CGFloat kModuleColumnSpace = (_scrollContent.bounds.size.width - kModuleIconSize.width*kModuleColumns)/(kModuleColumns*2.0);
+    
+    CGFloat xx = 0.0;
+    CGFloat yy = 0.0;
+    NSInteger row = 0;
+    NSInteger col = 0;
+    
+    for (UIView* v in _scrollContent.subviews) {
+        [v removeFromSuperview];
+    }
+    
+    for (NSInteger i=0; i<kKuleModuleSize; i++) {
+        row = i / kModuleColumns;
+        col = i % kModuleColumns;
+        xx = kModuleColumnSpace + col * (kModuleIconSize.width+2*kModuleColumnSpace);
+        yy = kModuleTopMagin + row*(kModuleIconSize.height+kModuleTitleSize.height+kModuleRowSpace);
+        
+        UIButton* btnIcon = [UIButton buttonWithType:UIButtonTypeCustom];
+        NSString* moduleName = moduleInfos[i][0];
+        NSString* moduleIconName = moduleInfos[i][1];
+        NSInteger moduleType = [moduleInfos[i][2] integerValue];
+        [btnIcon setBackgroundImage:[UIImage imageNamed:moduleIconName] forState:UIControlStateNormal];
+        btnIcon.tag = moduleType;
+        btnIcon.frame = CGRectMake(xx, yy, kModuleIconSize.width, kModuleIconSize.height);
+        [_scrollContent addSubview:btnIcon];
+        [btnIcon addTarget:self action:@selector(onBtnModulesClicked:) forControlEvents:UIControlEventTouchUpInside];
+        
+        yy += kModuleIconSize.height;
+        UILabel* labTitle = [[UILabel alloc] initWithFrame:CGRectMake(xx, yy, kModuleTitleSize.width, kModuleTitleSize.height)];
+        labTitle.textColor = UIColorRGB(0xCC, 0x66, 0x33);
+        labTitle.font = [UIFont boldSystemFontOfSize:14];
+        labTitle.text = moduleName;
+        labTitle.textAlignment = NSTextAlignmentCenter;
+        labTitle.backgroundColor = [UIColor clearColor];
+        [_scrollContent addSubview:labTitle];
+        
+        JSBadgeView *badgeView = [[JSBadgeView alloc] initWithParentView:btnIcon
+                                                               alignment:JSBadgeViewAlignmentTopRight];
+        badgeView.badgePositionAdjustment = CGPointMake(-5, 5);
+        badgeView.badgeText =[NSString stringWithFormat:@"%d", i];
+        [_badges addObject:badgeView];
+    }
+    
+    yy += kModuleTitleSize.height+kModuleRowSpace;
+    
+    self.scrollContent.contentSize = CGSizeMake(_scrollContent.bounds.size.width, yy);
+    self.scrollContent.showsVerticalScrollIndicator = YES;
+}
+
 - (void)updateUI {
     CSKuleChildInfo* childInfo = gApp.engine.currentRelationship.child;
     CSLog(@"childInfo:%@", childInfo);
@@ -357,36 +421,29 @@
                  menuItems:@[item1, item2, item3, item4]];
 }
 
+#pragma mark - UI Actions
+- (void)onBtnModulesClicked:(UIButton*)sender {
+    NSInteger moduleType = sender.tag;
+    
+    static NSString* segueNames[] = {
+        @"segue.newslist",
+        @"segue.recipe",
+        @"segue.checkin",
+        @"segue.schedule",
+        @"segue.assignment",
+        @"segue.chating",
+        @"segue.assess",
+    };
+    
+    if (moduleType < kKuleModuleSize) {
+        [self performSegueWithIdentifier:segueNames[moduleType] sender:nil];
+        JSBadgeView *badgeView = _badges[moduleType];
+        badgeView.badgeText = nil;
+    }
+}
+
 - (IBAction)onBtnSettingsClicked:(id)sender {
     [self performSegueWithIdentifier:@"segue.settings" sender:nil];
-}
-
-- (IBAction)onBtnNewsListClicked:(id)sender {
-    [self performSegueWithIdentifier:@"segue.newslist" sender:nil];
-}
-
-- (IBAction)onBtnRecipeClicked:(id)sender {
-    [self performSegueWithIdentifier:@"segue.recipe" sender:nil];
-}
-
-- (IBAction)onBtnCheckinInfoClicked:(id)sender {
-    [self performSegueWithIdentifier:@"segue.checkin" sender:nil];
-}
-
-- (IBAction)onBtnScheduleInfoClicked:(id)sender {
-    [self performSegueWithIdentifier:@"segue.schedule" sender:nil];
-}
-
-- (IBAction)onBtnAssignmentClicked:(id)sender {
-    [self performSegueWithIdentifier:@"segue.assignment" sender:nil];
-}
-
-- (IBAction)onBtnChatingClicked:(id)sender {
-    [self performSegueWithIdentifier:@"segue.chating" sender:nil];
-}
-
-- (IBAction)onBtnAssessClicked:(id)sender {
-    [self performSegueWithIdentifier:@"segue.assess" sender:nil];
 }
 
 - (IBAction)onBtnSchoolInfoClicked:(id)sender {
@@ -435,6 +492,26 @@
                            inKindergarten:gApp.engine.loginInfo.schoolId
                                   success:sucessHandler
                                   failure:failureHandler];
+}
+
+- (void)showBanner {
+    CSAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    ALAlertBannerStyle randomStyle = ALAlertBannerStyleNotify;
+    ALAlertBannerPosition position = ALAlertBannerPositionUnderNavBar;
+    ALAlertBanner *banner = [ALAlertBanner alertBannerForView:appDelegate.window
+                                                        style:randomStyle
+                                                     position:position
+                                                        title:@"您有新的通知"
+                                                     subtitle:@"你收到新的校园公告"
+                                                  tappedBlock:^(ALAlertBanner *alertBanner) {
+                                                      NSLog(@"tapped!");
+                                                      [alertBanner hide];
+                                                  }];
+    
+    banner.secondsToShow = 3;
+    banner.showAnimationDuration = 0.3;
+    banner.hideAnimationDuration = 0.3;
+    [banner show];
 }
 
 @end

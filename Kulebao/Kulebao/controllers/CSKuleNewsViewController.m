@@ -79,6 +79,14 @@
         cell.labPublisher.text = gApp.engine.loginInfo.schoolName;
     }
     
+    if (newsInfo.image.length > 0) {
+        [cell.imgAttachment setImageWithURL:[gApp.engine urlFromPath:newsInfo.image]];
+    }
+    else {
+        [cell.imgAttachment cancelImageRequestOperation];
+        cell.imgAttachment.image = nil;
+    }
+    
     NSDate* d = [NSDate dateWithTimeIntervalSince1970:newsInfo.timestamp];
     
     cell.labDate.text = [d isoDateTimeString];

@@ -191,7 +191,8 @@
      "content" : "新内容",
      "timestamp" : 1393511644614,
      "published" : true,
-     "notice_type" : 2
+     "notice_type" : 2,
+     "image" : "http://suoqin-test.u.qiniudn.com/Fmz0zi5Y7qZw1spdUidluOQ2PvXm",
      }
      */
     
@@ -202,6 +203,7 @@
     NSInteger class_id = [[dataJson valueForKeyNotNull:@"class_id"] integerValue];
     NSString* title = [dataJson valueForKeyNotNull:@"title"];
     NSString* content = [dataJson valueForKeyNotNull:@"content"];
+    NSString* image = [dataJson valueForKeyNotNull:@"image"];
     double timestamp = [[dataJson valueForKeyNotNull:@"timestamp"] doubleValue];
     BOOL published = [[dataJson valueForKeyNotNull:@"published"] boolValue];
     NSInteger notice_type = [[dataJson valueForKeyNotNull:@"notice_type"] integerValue];
@@ -212,6 +214,7 @@
     obj.classId = class_id;
     obj.title = title;
     obj.content = content;
+    obj.image = image;
     obj.timestamp = timestamp/1000.0;
     obj.published = published;
     obj.noticeType = notice_type;
@@ -238,7 +241,6 @@
      */
     
     NSParameterAssert(dataJson);
-    
     
     NSInteger error_code = [[dataJson valueForKeyNotNull:@"error_code"] integerValue];
     NSInteger school_id = [[dataJson valueForKeyNotNull:@"school_id"] integerValue];

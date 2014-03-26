@@ -15,6 +15,7 @@
 @property (nonatomic, assign) NSInteger classId;
 @property (nonatomic, strong) NSString* title;
 @property (nonatomic, strong) NSString* content;
+@property (nonatomic, strong) NSString* image;
 @property (nonatomic, assign) NSTimeInterval timestamp;
 @property (nonatomic, assign) BOOL published;
 @property (nonatomic, assign) NSInteger noticeType;

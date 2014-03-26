@@ -14,6 +14,7 @@
 
 @interface CSKuleChatingViewController () <UITableViewDataSource, UITableViewDelegate, PullTableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CSKuleChatingEditorViewControllerDelegate> {
     UIImagePickerController* _imgPicker;
+    NSMutableArray* _chatingMsgList;
 }
 
 @property (weak, nonatomic) IBOutlet PullTableView *tableview;
@@ -24,8 +25,6 @@
 @end
 
 @implementation CSKuleChatingViewController
-
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -49,12 +48,8 @@
     self.tableview.pullTextColor = UIColorRGB(0xCC, 0x66, 0x33);
     self.tableview.pullArrowImage = [UIImage imageNamed:@"grayArrow.png"];
     
-    /* manually triggering
-     if(!self.pullTableView.pullTableIsRefreshing) {
-     self.pullTableView.pullTableIsRefreshing = YES;
-     [self performSelector:@selector(refreshTable) withObject:nil afterDelay:3];
-     }
-     */
+    _chatingMsgList = [NSMutableArray array];
+    [self doReloadChatingMsgsFrom:-1 to:-1 most:-1];
 }
 
 - (void)didReceiveMemoryWarning
@@ -65,7 +60,7 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+    return _chatingMsgList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -75,11 +70,26 @@
         cell = [nibs firstObject];
     }
     
+    CSKuleChatMsg* msg = [_chatingMsgList objectAtIndex:indexPath.row];
+    cell.labDate.text = [[NSDate dateWithTimeIntervalSince1970:msg.timestamp] isoDateTimeString];
+    cell.labTitle.text = msg.sender;
+    cell.labContent.text = msg.content;
+    
     return cell;
 }
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    CSKuleChatMsg* msg = [_chatingMsgList objectAtIndex:indexPath.row];
+    CGFloat height = 0.0;
+    if (msg.image.length > 0) {
+        height = 80;
+    }
+    else {
+        CGSize sz = [self textSize:msg.content];
+        height = sz.height + 20;
+    }
+    
     return 110.0;
 }
 
@@ -203,27 +213,29 @@
 
 #pragma mark - Private
 - (void)doSendPicture:(NSString*)imgUrl {
-    CSLog(@"%@", imgUrl);
-    [gApp hideAlert];
+    [self doSendMsg:nil withImage:imgUrl];
 }
 
 - (void)doSendText:(NSString*)msgBody {
+    [self doSendMsg:msgBody withImage:nil];
+}
+
+- (void)doSendMsg:(NSString*)msgBody withImage:(NSString*)imgUrl {
     SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
         NSMutableArray* chatMsgs = [NSMutableArray array];
         
-        if ([dataJson isMemberOfClass:[NSArray class]]) {
+        if ([dataJson isKindOfClass:[NSArray class]]) {
             for (id chatMsgJson in dataJson) {
                 CSKuleChatMsg* chatMsg = [CSKuleInterpreter decodeChatMsg:chatMsgJson];
                 [chatMsgs addObject:chatMsg];
             }
         }
-        else if ([dataJson isMemberOfClass:[NSDictionary class]]) {
+        else if ([dataJson isKindOfClass:[NSDictionary class]]) {
             CSKuleChatMsg* chatMsg = [CSKuleInterpreter decodeChatMsg:dataJson];
             [chatMsgs addObject:chatMsg];
         }
         
         [gApp alert:@"发送成功 ^_^"];
-        
         [self.navigationController popToViewController:self animated:YES];
     };
     
@@ -234,12 +246,45 @@
     
     [gApp waitingAlert:@"发送中..."];
     [gApp.engine reqSendChatingMsgs:msgBody
-                          withImage:nil
+                          withImage:imgUrl
                      toKindergarten:gApp.engine.loginInfo.schoolId
                        retrieveFrom:-1
                             success:sucessHandler
                             failure:failureHandler];
+}
+
+- (void)doReloadChatingMsgsFrom:(NSInteger)fromId to:(NSInteger)toId most:(NSInteger)most {
+    SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
+        NSMutableArray* chatMsgs = [NSMutableArray array];
+        
+        if ([dataJson isKindOfClass:[NSArray class]]) {
+            for (id chatMsgJson in dataJson) {
+                CSKuleChatMsg* chatMsg = [CSKuleInterpreter decodeChatMsg:chatMsgJson];
+                [chatMsgs addObject:chatMsg];
+            }
+        }
+        else if ([dataJson isKindOfClass:[NSDictionary class]]) {
+            CSKuleChatMsg* chatMsg = [CSKuleInterpreter decodeChatMsg:dataJson];
+            [chatMsgs addObject:chatMsg];
+        }
+        
+        [_chatingMsgList addObjectsFromArray:chatMsgs];
+        [self.tableview reloadData];
+        [gApp hideAlert];
+    };
     
+    FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
+        CSLog(@"failure:%@", error);
+        [gApp alert:[error localizedDescription]];
+    };
+    
+    [gApp waitingAlert:@"获取信息中..."];
+    [gApp.engine reqGetChatingMsgsOfKindergarten:gApp.engine.loginInfo.schoolId
+                                            from:fromId
+                                              to:toId
+                                            most:most
+                                         success:sucessHandler
+                                         failure:failureHandler];
 }
 
 - (CGSize)textSize:(NSString*)text {

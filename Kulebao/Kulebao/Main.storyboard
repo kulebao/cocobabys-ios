@@ -8,7 +8,7 @@
         <!--Kule Root View Controller-->
         <scene sceneID="HL7-5O-nnc">
             <objects>
-                <viewController id="YlV-Z1-aZX" customClass="CSKuleRootViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CSKuleRootViewController" id="YlV-Z1-aZX" customClass="CSKuleRootViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XjR-5b-G13">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -37,7 +37,7 @@
         <!--Navigation Controller-->
         <scene sceneID="OdA-Fx-hej">
             <objects>
-                <navigationController restorationIdentifier="CSMainNavigationController" storyboardIdentifier="CSMainNavigationController" definesPresentationContext="YES" id="aqy-v1-VDN" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="CSMainNavigationController" definesPresentationContext="YES" id="aqy-v1-VDN" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="b6N-0J-JfA">
@@ -55,7 +55,7 @@
         <!--Kule Main View Controller - 幼乐宝-->
         <scene sceneID="cfE-ky-XQA">
             <objects>
-                <viewController restorationIdentifier="CSKuleMainViewController" storyboardIdentifier="CSKuleMainViewController" id="nb4-8s-InE" customClass="CSKuleMainViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CSKuleMainViewController" id="nb4-8s-InE" customClass="CSKuleMainViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="K2n-R8-5AY">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -113,141 +113,6 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" showsHorizontalScrollIndicator="NO" id="STu-Mz-Pf6">
                                 <rect key="frame" x="0.0" y="159" width="320" height="303"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="QMW-5i-FBl">
-                                        <rect key="frame" x="20" y="11" width="71" height="71"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" image="btn-func-6.png">
-                                            <color key="titleColor" red="1" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="onBtnNewsListClicked:" destination="nb4-8s-InE" eventType="touchUpInside" id="dOp-7h-tt1"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RjH-3B-A4z">
-                                        <rect key="frame" x="125" y="11" width="71" height="71"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" image="btn-func-2.png">
-                                            <color key="titleColor" red="1" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="onBtnRecipeClicked:" destination="nb4-8s-InE" eventType="touchUpInside" id="aQS-l6-8Ji"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="vNN-oM-YZt">
-                                        <rect key="frame" x="229" y="11" width="71" height="71"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" image="btn-func-3.png">
-                                            <color key="titleColor" red="1" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="onBtnCheckinInfoClicked:" destination="nb4-8s-InE" eventType="touchUpInside" id="QO8-C5-yKu"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RWC-tb-b3G">
-                                        <rect key="frame" x="20" y="110" width="71" height="71"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" image="btn-func-5.png">
-                                            <color key="titleColor" red="1" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="onBtnScheduleInfoClicked:" destination="nb4-8s-InE" eventType="touchUpInside" id="CbM-NB-iap"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="dsa-fA-vC2">
-                                        <rect key="frame" x="125" y="110" width="71" height="71"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" image="btn-func-8.png">
-                                            <color key="titleColor" red="1" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="onBtnAssignmentClicked:" destination="nb4-8s-InE" eventType="touchUpInside" id="ToW-w3-TEf"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="JX5-zQ-0cd">
-                                        <rect key="frame" x="229" y="110" width="71" height="71"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" image="btn-func-7.png">
-                                            <color key="titleColor" red="1" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="onBtnChatingClicked:" destination="nb4-8s-InE" eventType="touchUpInside" id="Mlz-WZ-NBP"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="园内公告" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="j5G-wb-C4p">
-                                        <rect key="frame" x="20" y="78" width="71" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                        <color key="textColor" red="0.85490202900000001" green="0.392156899" blue="0.23529413339999999" alpha="1" colorSpace="deviceRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="课程表" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sjw-44-ikY">
-                                        <rect key="frame" x="20" y="181" width="71" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                        <color key="textColor" red="0.85490202900000001" green="0.392156899" blue="0.23529413339999999" alpha="1" colorSpace="deviceRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="留言板" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gaj-BY-iKp">
-                                        <rect key="frame" x="229" y="181" width="71" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                        <color key="textColor" red="0.85490202900000001" green="0.392156899" blue="0.23529413339999999" alpha="1" colorSpace="deviceRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="亲子作业" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OP8-J0-GPH">
-                                        <rect key="frame" x="125" y="181" width="71" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                        <color key="textColor" red="0.85490202900000001" green="0.392156899" blue="0.23529413339999999" alpha="1" colorSpace="deviceRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="sVg-OX-Txs">
-                                        <rect key="frame" x="20" y="211" width="71" height="71"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" image="btn-func-4.png">
-                                            <color key="titleColor" red="1" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="onBtnAssessClicked:" destination="nb4-8s-InE" eventType="touchUpInside" id="oor-Yp-1Cx"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="在园表现" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="USw-D1-xwo">
-                                        <rect key="frame" x="20" y="282" width="71" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                        <color key="textColor" red="0.85490202900000001" green="0.392156899" blue="0.23529413339999999" alpha="1" colorSpace="deviceRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="每周食谱" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qvp-fS-qrY">
-                                        <rect key="frame" x="125" y="78" width="71" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                        <color key="textColor" red="0.85490202900000001" green="0.392156899" blue="0.23529413339999999" alpha="1" colorSpace="deviceRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="接送信息" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uIo-LL-ldQ">
-                                        <rect key="frame" x="229" y="78" width="71" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                        <color key="textColor" red="0.85490202900000001" green="0.392156899" blue="0.23529413339999999" alpha="1" colorSpace="deviceRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </scrollView>
                             <view contentMode="scaleToFill" id="Bg4-Db-29J" userLabel="Toolbar">
@@ -343,7 +208,7 @@
         <!--Kule About School View Controller - 关于我园-->
         <scene sceneID="UeY-Eb-Xg9">
             <objects>
-                <viewController id="5Eq-sp-dh6" customClass="CSKuleAboutSchoolViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CSKuleAboutSchoolViewController" id="5Eq-sp-dh6" customClass="CSKuleAboutSchoolViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Oj4-Zo-yS4">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -380,7 +245,7 @@
         <!--Kule Auth View Controller-->
         <scene sceneID="z62-Qe-zBE">
             <objects>
-                <viewController restorationIdentifier="CSKuleAuthViewController" storyboardIdentifier="CSKuleAuthViewController" id="oni-l6-Qxa" customClass="CSKuleAuthViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CSKuleAuthViewController" id="oni-l6-Qxa" customClass="CSKuleAuthViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gor-0Z-RcQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -456,7 +321,7 @@
         <!--Navigation Controller-->
         <scene sceneID="FoN-a3-reL">
             <objects>
-                <navigationController restorationIdentifier="CSLoginNavigationController" storyboardIdentifier="CSLoginNavigationController" definesPresentationContext="YES" navigationBarHidden="YES" id="CXB-9o-etF" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="CSLoginNavigationController" definesPresentationContext="YES" navigationBarHidden="YES" id="CXB-9o-etF" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="IPs-ck-Nqc">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -475,7 +340,7 @@
         <!--Kule Login View Controller-->
         <scene sceneID="uvG-ID-Kc4">
             <objects>
-                <viewController restorationIdentifier="CSKuleLoginViewController" storyboardIdentifier="CSKuleLoginViewController" id="0Td-Sl-NAB" customClass="CSKuleLoginViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CSKuleLoginViewController" id="0Td-Sl-NAB" customClass="CSKuleLoginViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="H3c-yb-huv">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -547,100 +412,10 @@
             </objects>
             <point key="canvasLocation" x="-518" y="-131"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="hgS-Vd-Kia">
-            <objects>
-                <viewController id="Ulx-hl-yWL" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="dx4-Ky-dkM">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app-bg-type3.png" id="t7p-JZ-lc8">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" alpha="0.30000001192092896" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img-tree-type2.png" id="YdZ-sT-hKz">
-                                <rect key="frame" x="0.0" y="338" width="320" height="230"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                            </imageView>
-                            <view contentMode="scaleToFill" id="eDE-qC-Kam" userLabel="Toolbar">
-                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="toolbar-bg.png" id="4JD-hr-7hO">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="Myz-4p-8qE">
-                                        <rect key="frame" x="6" y="9" width="130" height="32"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" backgroundImage="btn-type1.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted" backgroundImage="btn-type1-pressed.png"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="0ah-y5-JvU">
-                                        <rect key="frame" x="184" y="9" width="130" height="32"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" backgroundImage="btn-type1.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted" backgroundImage="btn-type1-pressed.png"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="iCe-bT-Wfm">
-                                        <rect key="frame" x="144" y="8" width="32" height="32"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <state key="normal" backgroundImage="btn-settings.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted" backgroundImage="btn-settings-pressed.png"/>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" id="4rZ-s5-avA" userLabel="Titlebar">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="titlebar-bg.png" id="PLB-kC-VcE">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="5We-Tz-HIi">
-                                        <rect key="frame" x="6" y="7" width="52" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" backgroundImage="btn-back.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted" backgroundImage="btn-back-pressed.png"/>
-                                    </button>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="幼乐宝" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VpW-F2-fP6">
-                                        <rect key="frame" x="81" y="11" width="159" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="kdK-G3-nti"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3fI-lU-IEM" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1466" y="602"/>
-        </scene>
         <!--Kule Settings View Controller - 设置-->
         <scene sceneID="AzY-uz-JrF">
             <objects>
-                <viewController restorationIdentifier="CSKuleSettingsViewController" storyboardIdentifier="CSKuleSettingsViewController" id="Ot5-TZ-qvn" customClass="CSKuleSettingsViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CSKuleSettingsViewController" id="Ot5-TZ-qvn" customClass="CSKuleSettingsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OhV-Hz-SJf">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -743,7 +518,7 @@
         <!--Kule News View Controller - 幼儿园公告-->
         <scene sceneID="jEC-2w-Oh7">
             <objects>
-                <viewController restorationIdentifier="CSKuleNewsViewController" storyboardIdentifier="CSKuleNewsViewController" id="hSh-cH-xBP" customClass="CSKuleNewsViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CSKuleNewsViewController" id="hSh-cH-xBP" customClass="CSKuleNewsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OkE-KT-rj8">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -778,7 +553,7 @@
         <!--Kule News Details View Controller - 通知消息-->
         <scene sceneID="FYj-G1-JYp">
             <objects>
-                <viewController restorationIdentifier="CSKuleNewsDetailsViewController" storyboardIdentifier="CSKuleNewsDetailsViewController" id="gZu-Ur-sSP" customClass="CSKuleNewsDetailsViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CSKuleNewsDetailsViewController" id="gZu-Ur-sSP" customClass="CSKuleNewsDetailsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hj8-QJ-hwQ">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -813,7 +588,7 @@
         <!--Kule Recipe View Controller - 宝宝食谱-->
         <scene sceneID="9KS-iG-ZHj">
             <objects>
-                <viewController restorationIdentifier="CSKuleRecipeViewController" storyboardIdentifier="CSKuleRecipeViewController" id="p7o-xu-qXK" customClass="CSKuleRecipeViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CSKuleRecipeViewController" id="p7o-xu-qXK" customClass="CSKuleRecipeViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="alE-Hw-MJl">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -847,7 +622,7 @@
         <!--Kule Assignment View Controller - 亲子作业-->
         <scene sceneID="5NA-PF-QhV">
             <objects>
-                <viewController restorationIdentifier="CSKuleHomeworkViewController" storyboardIdentifier="CSKuleHomeworkViewController" id="iCB-cn-3Ye" customClass="CSKuleAssignmentViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CSKuleHomeworkViewController" id="iCB-cn-3Ye" customClass="CSKuleAssignmentViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Aop-xO-EvG">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -882,7 +657,7 @@
         <!--Kule Schedule View Controller - 课程表-->
         <scene sceneID="ElJ-U8-0p3">
             <objects>
-                <viewController restorationIdentifier="CSKuleScheduleViewController" storyboardIdentifier="CSKuleScheduleViewController" id="Vta-Cg-yNO" customClass="CSKuleScheduleViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CSKuleScheduleViewController" id="Vta-Cg-yNO" customClass="CSKuleScheduleViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7Wc-uk-Hjx">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1001,7 +776,7 @@
         <!--Kule Checkin View Controller - 签到一览-->
         <scene sceneID="Fnv-1l-gqr">
             <objects>
-                <viewController restorationIdentifier="CSKuleCheckinViewController" storyboardIdentifier="CSKuleCheckinViewController" id="1UC-eH-jjs" customClass="CSKuleCheckinViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CSKuleCheckinViewController" id="1UC-eH-jjs" customClass="CSKuleCheckinViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xkl-du-649">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1027,10 +802,10 @@
             </objects>
             <point key="canvasLocation" x="174" y="1377"/>
         </scene>
-        <!--Kule Chating View Controller - 留言板-->
+        <!--Kule Chating View Controller - 家园互动-->
         <scene sceneID="iHg-u8-ESX">
             <objects>
-                <viewController restorationIdentifier="CSKuleChatingViewController" storyboardIdentifier="CSKuleChatingViewController" id="Oe0-Pk-5G3" customClass="CSKuleChatingViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CSKuleChatingViewController" id="Oe0-Pk-5G3" customClass="CSKuleChatingViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LgS-Gx-ocx">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1093,7 +868,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" title="留言板" id="jG4-FR-qt8"/>
+                    <navigationItem key="navigationItem" title="家园互动" id="jG4-FR-qt8"/>
                     <connections>
                         <outlet property="tableview" destination="0Hj-bz-6lH" id="DZD-9w-hGz"/>
                         <segue destination="g0W-Gr-GbE" kind="push" identifier="segue.chatingEditor" id="DSk-vc-DTQ"/>
@@ -1106,7 +881,7 @@
         <!--Kule Select Child View Controller - 选择宝宝-->
         <scene sceneID="HI3-MM-NYt">
             <objects>
-                <viewController restorationIdentifier="CSKuleSelectChildViewController" storyboardIdentifier="CSKuleSelectChildViewController" id="D7Z-M9-tG6" customClass="CSKuleSelectChildViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CSKuleSelectChildViewController" id="D7Z-M9-tG6" customClass="CSKuleSelectChildViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="x9G-xn-5nz">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1140,7 +915,7 @@
         <!--Kule About View Controller - 关于我们-->
         <scene sceneID="DbE-lH-wXR">
             <objects>
-                <viewController restorationIdentifier="CSKuleAboutViewController" storyboardIdentifier="CSKuleAboutViewController" id="PYd-FB-IrR" customClass="CSKuleAboutViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CSKuleAboutViewController" id="PYd-FB-IrR" customClass="CSKuleAboutViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FVh-Zm-daq">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1166,7 +941,7 @@
         <!--Kule Assess View Controller - 在园表现-->
         <scene sceneID="j6h-vr-1d7">
             <objects>
-                <viewController restorationIdentifier="CSKuleAssessViewController" storyboardIdentifier="CSKuleAssessViewController" id="9Fo-0X-dxb" customClass="CSKuleAssessViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CSKuleAssessViewController" id="9Fo-0X-dxb" customClass="CSKuleAssessViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Hxl-Gz-y7N">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1192,7 +967,7 @@
         <!--Kule Change Password View Controller - 修改密码-->
         <scene sceneID="Shl-Jg-80q">
             <objects>
-                <viewController restorationIdentifier="CSKuleChangePasswordViewController" storyboardIdentifier="CSKuleChangePasswordViewController" id="yZC-Oa-gVt" customClass="CSKuleChangePasswordViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CSKuleChangePasswordViewController" id="yZC-Oa-gVt" customClass="CSKuleChangePasswordViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="N4H-Qe-hcP">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1325,7 +1100,7 @@
         <!--Kule Checkin Log List View Controller - 刷卡记录-->
         <scene sceneID="99u-Vz-cU0">
             <objects>
-                <viewController restorationIdentifier="CSKuleCheckinLogListViewController" storyboardIdentifier="CSKuleCheckinLogListViewController" id="Etr-Mb-xMG" customClass="CSKuleCheckinLogListViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CSKuleCheckinLogListViewController" id="Etr-Mb-xMG" customClass="CSKuleCheckinLogListViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="V4g-zS-KXD">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1360,7 +1135,7 @@
         <!--Kule Chating Editor View Controller - 编辑内容-->
         <scene sceneID="Cqc-rK-mFX">
             <objects>
-                <viewController restorationIdentifier="CSKuleChatingEditorViewController" storyboardIdentifier="CSKuleChatingEditorViewController" id="g0W-Gr-GbE" customClass="CSKuleChatingEditorViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CSKuleChatingEditorViewController" id="g0W-Gr-GbE" customClass="CSKuleChatingEditorViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="e8p-8i-tZn">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1403,15 +1178,6 @@
     <resources>
         <image name="app-bg-type3.png" width="320" height="568"/>
         <image name="avatar-bg.png" width="115" height="115"/>
-        <image name="btn-back-pressed.png" width="52" height="30"/>
-        <image name="btn-back.png" width="52" height="30"/>
-        <image name="btn-func-2.png" width="71" height="71"/>
-        <image name="btn-func-3.png" width="71" height="71"/>
-        <image name="btn-func-4.png" width="71" height="71"/>
-        <image name="btn-func-5.png" width="71" height="71"/>
-        <image name="btn-func-6.png" width="71" height="71"/>
-        <image name="btn-func-7.png" width="71" height="71"/>
-        <image name="btn-func-8.png" width="71" height="71"/>
         <image name="btn-settings-pressed.png" width="36" height="36"/>
         <image name="btn-settings.png" width="36" height="36"/>
         <image name="btn-type1-pressed.png" width="199" height="38"/>
@@ -1427,7 +1193,6 @@
         <image name="logo-1.png" width="135" height="94"/>
         <image name="schedule-bg.png" width="300" height="369"/>
         <image name="settings-icon-change-pswd.png" width="23" height="23"/>
-        <image name="titlebar-bg.png" width="320" height="44"/>
         <image name="toolbar-bg.png" width="320" height="44"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -1436,6 +1201,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="RdB-oD-7oe"/>
+        <segue reference="qNJ-JJ-pfw"/>
     </inferredMetricsTieBreakers>
 </document>

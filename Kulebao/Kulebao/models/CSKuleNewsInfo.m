@@ -18,7 +18,7 @@
 @synthesize timestamp = _timestamp;
 @synthesize published = _published;
 @synthesize noticeType = _noticeType;
-
+@synthesize image = _image;
 
 - (NSString*)description {
     NSDictionary* meta = @{@"newsId": @(_newsId),
@@ -28,7 +28,8 @@
                            @"content": _content,
                            @"timestamp": @(_timestamp),
                            @"published": @(_published),
-                           @"noticeType": @(_noticeType)};
+                           @"noticeType": @(_noticeType),
+                           @"image": _image};
     
     NSString* desc = [NSString stringWithFormat:@"%@", meta];
     return desc;

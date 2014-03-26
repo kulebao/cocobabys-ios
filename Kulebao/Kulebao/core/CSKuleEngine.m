@@ -8,8 +8,9 @@
 
 #import "CSKuleEngine.h"
 #import "CSAppDelegate.h"
-#import "BPush.h"
 #import "AHAlertView.h"
+#import "BPush.h"
+#import "BaiduMobStat.h"
 
 @interface CSKuleEngine() <BPushDelegate>
 
@@ -42,6 +43,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
+    // 添加百度统计
+    [self setupBaiduMobStat];
     
     // 添加Baidu Push
     [BPush setupChannel:launchOptions];
@@ -138,6 +142,18 @@
 }
 
 #pragma mark - Setup
+- (void)setupBaiduMobStat {
+    BaiduMobStat* statTracker = [BaiduMobStat defaultStat];
+    statTracker.enableExceptionLog = YES; // 是否允许截获并发送崩溃信息，请设置YES或者NO
+    statTracker.channelId = @"ios-dev";//设置您的app的发布渠道
+    statTracker.logStrategy = BaiduMobStatLogStrategyAppLaunch;//根据开发者设定的时间间隔接口发送 也可以使用启动时发送策略
+    //statTracker.enableDebugOn = YES; //打开调试模式，发布时请去除此行代码或者设置为False即可。
+    statTracker.logSendInterval = 1; //为1时表示发送日志的时间间隔为1小时,只有statTracker.logStrategy = BaiduMobStatLogStrategyAppLaunch这时才生效。
+    statTracker.logSendWifiOnly = NO; //是否仅在WIfi情况下发送日志数据
+    statTracker.sessionResumeInterval = 15;//设置应用进入后台再回到前台为同一次session的间隔时间[0~600s],超过600s则设为600s，默认为30s
+    [statTracker startWithAppId:@"ddbd3b0417"];//设置您在mtj网站上添加的app的appkey
+}
+
 - (void)setupEngine {
     // 加载外观设置
     [self setupAppearance];
@@ -743,7 +759,7 @@
     
     NSDictionary* parameters = @{@"phone": _loginInfo.accountName,
                                  @"timestamp": @(timestamp),
-                                 @"content": msgBody,
+                                 @"content": msgBody ? msgBody : @"",
                                  @"image": msgImage,
                                  @"sender": _loginInfo.username};
     

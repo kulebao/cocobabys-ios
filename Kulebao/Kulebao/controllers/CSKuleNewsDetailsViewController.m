@@ -8,6 +8,7 @@
 
 #import "CSKuleNewsDetailsViewController.h"
 #import "CSAppDelegate.h"
+#import "BaiduMobStat.h"
 
 @interface CSKuleNewsDetailsViewController ()
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
@@ -42,6 +43,19 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - View lifecycle
+-(void) viewDidAppear:(BOOL)animated
+{
+    NSString* cName = [NSString stringWithFormat:@"%@",  self.navigationItem.title, nil];
+    [[BaiduMobStat defaultStat] pageviewStartWithName:cName];
+}
+
+-(void) viewDidDisappear:(BOOL)animated
+{
+    NSString* cName = [NSString stringWithFormat:@"%@", self.navigationItem.title, nil];
+    [[BaiduMobStat defaultStat] pageviewEndWithName:cName];
 }
 
 #pragma mark - Setters
@@ -107,6 +121,7 @@
         <div style='text-align:center;'>%@</div>\
         <div style='text-align:center;'><h4>%@</h4></div>\
         <div style='word-break:break-all;width:300px'>%@</div>\
+        %@\
     </body>\
     </html>";
     
@@ -117,7 +132,12 @@
         publiser = [publiser stringByAppendingString:gApp.engine.currentRelationship.child.className];
     }
     
-    NSString* ss = [NSString stringWithFormat:htmlTemp, newsInfo.title, publiser, timestampString,  newsInfo.title, newsInfo.content];
+    NSString* divImage = @"";
+    if (newsInfo.image.length > 0) {
+        divImage = [NSString stringWithFormat:@"<div><img src='%@' width='300' /></div>", [gApp.engine urlFromPath:newsInfo.image]];
+    }
+    
+    NSString* ss = [NSString stringWithFormat:htmlTemp, newsInfo.title, publiser, timestampString,  newsInfo.title, newsInfo.content, divImage];
     
     return ss;
 }

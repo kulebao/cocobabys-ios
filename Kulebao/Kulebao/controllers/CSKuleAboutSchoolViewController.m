@@ -84,12 +84,12 @@
     }
     
     if (_schoolInfo) {
-        CGFloat xx = 0.0;
+        //CGFloat xx = 0.0;
         CGFloat yy = 0.0;
         CGFloat spaceH = 10.0;
         
         const CGFloat kWidth = self.scrollView.bounds.size.width;
-        const CGFloat kHeight = self.scrollView.bounds.size.height;
+        //const CGFloat kHeight = self.scrollView.bounds.size.height;
         
         if (_schoolInfo.schoolLogoUrl) {
             const CGFloat kSchoolLogoWidth = kWidth - 20;

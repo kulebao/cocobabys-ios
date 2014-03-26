@@ -33,6 +33,18 @@ enum {
     kKuleNickMaxLength = 4,
 };
 
+// 模块类别
+enum KuleModule {
+    kKuleModuleNews,        // 校园公告
+    kKuleModuleRecipe,      // 每周食谱
+    kKuleModuleCheckin,     // 接送信息
+    kKuleModuleSchedule,    // 课程表
+    kKuleModuleAssignment,  // 亲子作业
+    kKuleModuleChating,     // 家园互动
+    kKuleModuleAssess,      // 在园表现
+    kKuleModuleSize,        // -模块数量-统计
+};
+
 // From Android.
 typedef enum {
     PHONE_NUM_IS_INVALID = 1100,

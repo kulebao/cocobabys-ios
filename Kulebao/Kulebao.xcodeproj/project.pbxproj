@@ -306,9 +306,6 @@
 		09ED59B618CDBF3900187585 /* UIWebView+CSKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 09ED59B518CDBF3900187585 /* UIWebView+CSKit.m */; };
 		09ED59B918CDC5D800187585 /* CSKuleRecipeInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09ED59B818CDC5D800187585 /* CSKuleRecipeInfo.m */; };
 		09ED59BC18CDC5E800187585 /* CSKuleCookbookInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09ED59BB18CDC5E800187585 /* CSKuleCookbookInfo.m */; };
-		09FE658D18E06D8B008A1ED6 /* CSKuleChatMsgFromTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE658C18E06D8B008A1ED6 /* CSKuleChatMsgFromTableViewCell.m */; };
-		09FE659018E06DA2008A1ED6 /* CSKuleChatMsgToTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE658F18E06DA2008A1ED6 /* CSKuleChatMsgToTableViewCell.m */; };
-		09FE659418E06E14008A1ED6 /* CSKuleChatMsgToTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09FE659318E06E14008A1ED6 /* CSKuleChatMsgToTableViewCell.xib */; };
 		09FE659718E06FF5008A1ED6 /* chat_head_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 09FE659518E06FF5008A1ED6 /* chat_head_icon.png */; };
 		09FE659818E06FF5008A1ED6 /* chat_head_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09FE659618E06FF5008A1ED6 /* chat_head_icon@2x.png */; };
 		09FE6AEE18C5729500A840BE /* CSKuleNoticeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE6AED18C5729500A840BE /* CSKuleNoticeCell.m */; };
@@ -775,11 +772,6 @@
 		09ED59B818CDC5D800187585 /* CSKuleRecipeInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleRecipeInfo.m; sourceTree = "<group>"; };
 		09ED59BA18CDC5E800187585 /* CSKuleCookbookInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleCookbookInfo.h; sourceTree = "<group>"; };
 		09ED59BB18CDC5E800187585 /* CSKuleCookbookInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleCookbookInfo.m; sourceTree = "<group>"; };
-		09FE658B18E06D8B008A1ED6 /* CSKuleChatMsgFromTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleChatMsgFromTableViewCell.h; sourceTree = "<group>"; };
-		09FE658C18E06D8B008A1ED6 /* CSKuleChatMsgFromTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleChatMsgFromTableViewCell.m; sourceTree = "<group>"; };
-		09FE658E18E06DA2008A1ED6 /* CSKuleChatMsgToTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleChatMsgToTableViewCell.h; sourceTree = "<group>"; };
-		09FE658F18E06DA2008A1ED6 /* CSKuleChatMsgToTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleChatMsgToTableViewCell.m; sourceTree = "<group>"; };
-		09FE659318E06E14008A1ED6 /* CSKuleChatMsgToTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSKuleChatMsgToTableViewCell.xib; sourceTree = "<group>"; };
 		09FE659518E06FF5008A1ED6 /* chat_head_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_head_icon.png; sourceTree = "<group>"; };
 		09FE659618E06FF5008A1ED6 /* chat_head_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chat_head_icon@2x.png"; sourceTree = "<group>"; };
 		09FE6AEC18C5729500A840BE /* CSKuleNoticeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleNoticeCell.h; sourceTree = "<group>"; };
@@ -1649,11 +1641,6 @@
 				090C9EC518C84FB000883DE0 /* CSKuleChildCell.h */,
 				090C9EC618C84FB000883DE0 /* CSKuleChildCell.m */,
 				090C9EC818C84FC000883DE0 /* CSKuleChildCell.xib */,
-				09FE658B18E06D8B008A1ED6 /* CSKuleChatMsgFromTableViewCell.h */,
-				09FE658C18E06D8B008A1ED6 /* CSKuleChatMsgFromTableViewCell.m */,
-				09FE658E18E06DA2008A1ED6 /* CSKuleChatMsgToTableViewCell.h */,
-				09FE658F18E06DA2008A1ED6 /* CSKuleChatMsgToTableViewCell.m */,
-				09FE659318E06E14008A1ED6 /* CSKuleChatMsgToTableViewCell.xib */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -1831,7 +1818,6 @@
 				0934EFF018BF559900E30ECA /* guide-1-568h.png in Resources */,
 				09FEA71918DC9D9600513C87 /* btn-back1-pressed@2x.png in Resources */,
 				0934F08C18BF5B0800E30ECA /* settings-icon-check-update.png in Resources */,
-				09FE659418E06E14008A1ED6 /* CSKuleChatMsgToTableViewCell.xib in Resources */,
 				09142E1618E2B9D800E5848F /* rating-2stars@2x.png in Resources */,
 				09BA1C3318BB429100760182 /* Main.storyboard in Resources */,
 				0934EFD618BF531800E30ECA /* icon-114.png in Resources */,
@@ -1989,7 +1975,6 @@
 				09BA1C0018BB334900760182 /* OpenUDID.m in Sources */,
 				09219A5118C4878600166228 /* TPKeyboardAvoidingCollectionView.m in Sources */,
 				091AE82E18D820C800EBC927 /* NSMutableArray+convenience.m in Sources */,
-				09FE658D18E06D8B008A1ED6 /* CSKuleChatMsgFromTableViewCell.m in Sources */,
 				091AE82D18D820C800EBC927 /* NSDate+convenience.m in Sources */,
 				09ED59AC18CD67FD00187585 /* CSKuleNewsInfo.m in Sources */,
 				09FEA72A18DCAA4D00513C87 /* CSTipsInfo.m in Sources */,
@@ -2071,7 +2056,6 @@
 				0934EFC318BF3AF700E30ECA /* EAIntroPage.m in Sources */,
 				09FE6AF318C5762600A840BE /* CSKuleNewsViewController.m in Sources */,
 				09ED59AF18CD8ED100187585 /* CSKuleNewsDetailsViewController.m in Sources */,
-				09FE659018E06DA2008A1ED6 /* CSKuleChatMsgToTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

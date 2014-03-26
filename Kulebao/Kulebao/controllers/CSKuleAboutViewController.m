@@ -101,7 +101,14 @@
 #pragma mark - Load Static Content
 - (NSString *)textForView
 {
-    return [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"about-us-text-giraffe" ofType:@"txt"] encoding:NSUTF8StringEncoding error:nil];
+    NSString* about = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"about-us-text-giraffe" ofType:@"txt"] encoding:NSUTF8StringEncoding error:nil];
+    
+    NSString* version = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    NSString* build = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
+    about = [about stringByReplacingOccurrencesOfString:@"%version%" withString:version];
+    about = [about stringByReplacingOccurrencesOfString:@"%build%" withString:build];
+    
+    return about;
 }
 
 #pragma mark - Styling

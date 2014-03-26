@@ -134,10 +134,10 @@
 
 - (void)reqSendChatingMsgs:(NSString*)msgBody
                  withImage:(NSString*)imgUrl
-                  toKindergarten:(NSInteger)kindergarten
-              retrieveFrom:(NSInteger)fromId
-                         success:(SuccessResponseHandler)success
-                         failure:(FailureResponseHandler)failure;
+            toKindergarten:(NSInteger)kindergarten
+              retrieveFrom:(long long)fromId
+                   success:(SuccessResponseHandler)success
+                   failure:(FailureResponseHandler)failure;
 
 - (void)reqGetAssessesOfChild:(CSKuleChildInfo*)childInfo
                inKindergarten:(NSInteger)kindergarten

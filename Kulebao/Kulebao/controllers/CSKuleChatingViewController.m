@@ -47,6 +47,7 @@
     self.tableview.pullBackgroundColor = [UIColor clearColor];
     self.tableview.pullTextColor = UIColorRGB(0xCC, 0x66, 0x33);
     self.tableview.pullArrowImage = [UIImage imageNamed:@"grayArrow.png"];
+    self.tableview.backgroundColor = [UIColor clearColor];
     
     _chatingMsgList = [NSMutableArray array];
     [self doReloadChatingMsgsFrom:-1 to:-1 most:-1];
@@ -77,16 +78,132 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CSKuleNoticeCell* cell = [tableView dequeueReusableCellWithIdentifier:@"CSKuleNoticeCell"];
+    
+    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"CSKuleChatingTableCell"];
+    
     if (cell == nil) {
-        NSArray* nibs = [[NSBundle mainBundle] loadNibNamed:@"CSKuleNoticeCell" owner:nil options:nil];
-        cell = [nibs firstObject];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"CSKuleChatingTableCell"];
+        cell.backgroundColor = [UIColor clearColor];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
+        UIImageView* imgBubbleBg = [[UIImageView alloc] initWithFrame:CGRectNull];
+        imgBubbleBg.tag = 100;
+        [cell.contentView addSubview:imgBubbleBg];
+        
+        UILabel* labMsgBody = [[UILabel alloc] initWithFrame:CGRectNull];
+        labMsgBody.tag = 101;
+        labMsgBody.numberOfLines = 0;
+        labMsgBody.font = [UIFont systemFontOfSize:14];
+        labMsgBody.backgroundColor = [UIColor clearColor];
+        [cell.contentView addSubview:labMsgBody];
+
+        UIImageView* imgMsgBody = [[UIImageView alloc] initWithFrame:CGRectNull];
+        imgMsgBody.tag = 102;
+        [cell.contentView addSubview:imgMsgBody];
+        
+        UIImageView* imgPortrait = [[UIImageView alloc] initWithFrame:CGRectNull];
+        imgPortrait.tag = 103;
+        [cell.contentView addSubview:imgPortrait];
+        
+        UILabel* labMsgTimestamp = [[UILabel alloc] initWithFrame:CGRectNull];
+        labMsgTimestamp.tag = 104;
+        labMsgTimestamp.numberOfLines = 1;
+        labMsgTimestamp.font = [UIFont systemFontOfSize:11];
+        labMsgTimestamp.backgroundColor = [UIColor clearColor];
+        labMsgTimestamp.textAlignment = NSTextAlignmentCenter;
+        labMsgTimestamp.textColor = [UIColor grayColor];
+        [cell.contentView addSubview:labMsgTimestamp];
+        
+        UILabel* labMsgSender = [[UILabel alloc] initWithFrame:CGRectNull];
+        labMsgSender.tag = 105;
+        labMsgSender.numberOfLines = 1;
+        labMsgSender.font = [UIFont systemFontOfSize:10];
+        labMsgSender.backgroundColor = [UIColor clearColor];
+        labMsgSender.textAlignment = NSTextAlignmentCenter;
+        labMsgSender.textColor = UIColorRGB(0xCC, 0x66, 0x33);;
+        [cell.contentView addSubview:labMsgSender];
     }
     
+    UIImageView* imgBubbleBg = (UIImageView*)[cell.contentView viewWithTag:100];
+    UILabel* labMsgBody = (UILabel*)[cell.contentView viewWithTag:101];
+    UIImageView* imgMsgBody = (UIImageView*)[cell.contentView viewWithTag:102];
+    UIImageView* imgPortrait = (UIImageView*)[cell.contentView viewWithTag:103];
+    UILabel* labMsgTimestamp = (UILabel*)[cell.contentView viewWithTag:104];
+    UILabel* labMsgSender = (UILabel*)[cell.contentView viewWithTag:105];
+    
     CSKuleChatMsg* msg = [_chatingMsgList objectAtIndex:indexPath.row];
-    cell.labDate.text = [[NSDate dateWithTimeIntervalSince1970:msg.timestamp] isoDateTimeString];
-    cell.labTitle.text = msg.sender;
-    cell.labContent.text = msg.content;
+    CGSize msgBodySize = [self textSize:msg.content];
+    NSString* timestampString = [[NSDate dateWithTimeIntervalSince1970:msg.timestamp] isoDateTimeString];
+    labMsgTimestamp.frame = CGRectMake(40, 0, 320-40-40, 12);
+//    if (indexPath.row % 3 == 0) {
+        labMsgTimestamp.text = timestampString;
+//    }
+//    else {
+//        labMsgTimestamp.text = nil;
+//    }
+    
+    
+    if (msg.sender.length > 0) {
+        // From
+        imgPortrait.image = [UIImage imageNamed:@"chat_head_icon.png"];
+        imgPortrait.frame = CGRectMake(2, 12, 32, 32);
+        
+        UIImage* bgImage = [UIImage imageNamed:@"msg-bg-from.png"];
+        imgBubbleBg.image = [bgImage resizableImageWithCapInsets:UIEdgeInsetsMake(35, 15, 5, 10)];
+
+        labMsgSender.text = msg.sender;
+        labMsgSender.frame = CGRectMake(0, 46, 36, 12);
+        
+        if (msg.image.length > 0) {
+            imgBubbleBg.frame = CGRectMake(36, 12, 90, 78);
+            
+            labMsgBody.frame = CGRectNull;
+            labMsgBody.text = nil;
+            
+            [imgMsgBody setImageWithURL:[gApp.engine urlFromPath:msg.image] placeholderImage:nil];
+            imgMsgBody.frame = CGRectMake(52, 18, 64, 64);
+        }
+        else {
+            imgBubbleBg.frame = CGRectMake(36, 12, msgBodySize.width + 30, msgBodySize.height+14);
+            
+            imgMsgBody.frame = CGRectNull;
+            imgMsgBody.image = nil;
+            
+            labMsgBody.text = msg.content;
+            labMsgBody.frame = CGRectMake(imgBubbleBg.frame.origin.x + 16, 18, msgBodySize.width, msgBodySize.height);
+        }
+    }
+    else {
+        // T0
+        NSURL* urlPortrait = [gApp.engine urlFromPath:gApp.engine.currentRelationship.child.portrait];
+        [imgPortrait setImageWithURL:urlPortrait placeholderImage:[UIImage imageNamed:@"chat_head_icon.png"]];
+        imgPortrait.frame = CGRectMake(320-2-32, 12, 32, 32);
+        
+        UIImage* bgImage = [UIImage imageNamed:@"msg-bg-to.png"];
+        imgBubbleBg.image = [bgImage resizableImageWithCapInsets:UIEdgeInsetsMake(35, 10, 5, 15)];
+        
+        labMsgSender.text = @"我";
+        labMsgSender.frame = CGRectMake(320-2-32-4, 46, 36, 12);
+        
+        if (msg.image.length > 0) {
+            imgBubbleBg.frame =  CGRectMake(320-36-90, 12, 90, 78);
+            
+            labMsgBody.frame = CGRectNull;
+            labMsgBody.text = nil;
+            
+            [imgMsgBody setImageWithURL:[gApp.engine urlFromPath:msg.image] placeholderImage:nil];
+            imgMsgBody.frame = CGRectMake(imgBubbleBg.frame.origin.x+10, 18, 64, 64);
+        }
+        else {
+            imgBubbleBg.frame = CGRectMake(320-36-msgBodySize.width-30, 12, msgBodySize.width + 30, msgBodySize.height+14);
+            
+            imgMsgBody.frame = CGRectNull;
+            imgMsgBody.image = nil;
+            
+            labMsgBody.text = msg.content;
+            labMsgBody.frame = CGRectMake(imgBubbleBg.frame.origin.x + 12, 18, msgBodySize.width, msgBodySize.height);
+        }
+    }
     
     return cell;
 }
@@ -96,14 +213,15 @@
     CSKuleChatMsg* msg = [_chatingMsgList objectAtIndex:indexPath.row];
     CGFloat height = 0.0;
     if (msg.image.length > 0) {
-        height = 80;
+        height = 95;
     }
     else {
         CGSize sz = [self textSize:msg.content];
-        height = sz.height + 20;
+        height = sz.height + 35;
+        height = MAX(height, 60);
     }
     
-    return 110.0;
+    return height;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -248,6 +366,17 @@
             [chatMsgs addObject:chatMsg];
         }
         
+        [_chatingMsgList addObjectsFromArray:chatMsgs];
+        [_tableview reloadData];
+        
+        if (_chatingMsgList.count > 0) {
+            NSIndexPath* indexPath = [NSIndexPath indexPathForRow:_chatingMsgList.count-1
+                                                        inSection:0];
+            [_tableview scrollToRowAtIndexPath:indexPath
+                              atScrollPosition:UITableViewScrollPositionBottom
+                                      animated:YES];
+        }
+        
         [gApp alert:@"发送成功 ^_^"];
         [self.navigationController popToViewController:self animated:YES];
     };
@@ -257,11 +386,18 @@
         [gApp alert:[error localizedDescription]];
     };
     
+    
+    long long retrieveFrom = -1;
+    CSKuleChatMsg* msg = [_chatingMsgList lastObject];
+    if (msg) {
+        retrieveFrom = msg.msgId;
+    }
+    
     [gApp waitingAlert:@"发送中..."];
     [gApp.engine reqSendChatingMsgs:msgBody
                           withImage:imgUrl
                      toKindergarten:gApp.engine.loginInfo.schoolId
-                       retrieveFrom:-1
+                       retrieveFrom:retrieveFrom
                             success:sucessHandler
                             failure:failureHandler];
 }
@@ -301,8 +437,14 @@
 }
 
 - (CGSize)textSize:(NSString*)text {
-    CGSize sz = CGSizeZero;
-    return sz;
+    CGSize sz = CGSizeMake(200.0, 999.0);
+    CGSize textSz = [text sizeWithFont:[UIFont systemFontOfSize:14.0]
+                     constrainedToSize:sz];
+    
+    textSz.width = MAX(textSz.width, 32);
+    textSz.height = MAX(textSz.height, 32);
+    
+    return textSz;
 }
 
 #pragma mark - Segues

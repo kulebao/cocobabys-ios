@@ -732,7 +732,7 @@
 - (void)reqSendChatingMsgs:(NSString*)msgBody
                  withImage:(NSString*)imgUrl
             toKindergarten:(NSInteger)kindergarten
-              retrieveFrom:(NSInteger)fromId
+              retrieveFrom:(long long)fromId
                    success:(SuccessResponseHandler)success
                    failure:(FailureResponseHandler)failure {
     NSParameterAssert(msgBody || imgUrl); // 不能同时为空
@@ -761,7 +761,7 @@
                                  @"timestamp": @(timestamp),
                                  @"content": msgBody ? msgBody : @"",
                                  @"image": msgImage,
-                                 @"sender": _loginInfo.username};
+                                 @"sender": @""};
     
     [_httpClient httpRequestWithMethod:method
                                   path:path

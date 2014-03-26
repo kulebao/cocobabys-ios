@@ -172,7 +172,7 @@
         JSBadgeView *badgeView = [[JSBadgeView alloc] initWithParentView:btnIcon
                                                                alignment:JSBadgeViewAlignmentTopRight];
         badgeView.badgePositionAdjustment = CGPointMake(-5, 5);
-        badgeView.badgeText =[NSString stringWithFormat:@"%d", i];
+        badgeView.badgeText =[NSString stringWithFormat:@"11%d", i];
         [_badges addObject:badgeView];
     }
     

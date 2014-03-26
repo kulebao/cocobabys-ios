@@ -8,6 +8,7 @@
 
 #import "CSKuleAboutViewController.h"
 #import "FTCoreTextView.h"
+#import "CSAppDelegate.h"
 
 @interface CSKuleAboutViewController () <FTCoreTextViewDelegate>
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -176,7 +177,6 @@
 }
 
 #pragma mark - FTCoreTextViewDelegate
-
 - (void)coreTextView:(FTCoreTextView *)acoreTextView receivedTouchOnData:(NSDictionary *)data
 {
     //  You can get detailed info about the touched links
@@ -194,13 +194,20 @@
     //  You can get detailed CoreText information
     NSDictionary *coreTextAttributes = [data objectForKey:FTCoreTextDataAttributes];
     
-    NSLog(@"Received touched on element:\n"
+    CSLog(@"Received touched on element:\n"
           @"Tag name: %@\n"
           @"URL: %@\n"
           @"Frame: %@\n"
           @"CoreText attributes: %@",
           tagName, url, NSStringFromCGRect(touchedFrame), coreTextAttributes
           );
+    
+    if (url) {
+        BOOL ok = [[UIApplication sharedApplication] openURL:url];
+        if (!ok) {
+            [gApp alert:@"操作失败"];
+        }
+    }
 }
 
 @end

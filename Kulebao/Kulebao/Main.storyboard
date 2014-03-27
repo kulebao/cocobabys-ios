@@ -515,7 +515,7 @@
             </objects>
             <point key="canvasLocation" x="182" y="4961"/>
         </scene>
-        <!--Kule News View Controller - 幼儿园公告-->
+        <!--Kule News View Controller - 园内公告-->
         <scene sceneID="jEC-2w-Oh7">
             <objects>
                 <viewController storyboardIdentifier="CSKuleNewsViewController" id="hSh-cH-xBP" customClass="CSKuleNewsViewController" sceneMemberID="viewController">
@@ -540,7 +540,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" title="幼儿园公告" id="AsG-R7-F49"/>
+                    <navigationItem key="navigationItem" title="园内公告" id="AsG-R7-F49"/>
                     <connections>
                         <outlet property="tableview" destination="cXC-Tw-KRl" id="mFe-ak-ztl"/>
                         <segue destination="gZu-Ur-sSP" kind="push" identifier="segue.newsdetails" id="qNJ-JJ-pfw"/>
@@ -562,7 +562,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" alpha="0.30000001192092896" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img-tree-type2.png" id="1e1-VN-eCD">
+                            <imageView hidden="YES" userInteractionEnabled="NO" alpha="0.30000001192092896" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img-tree-type2.png" id="1e1-VN-eCD">
                                 <rect key="frame" x="0.0" y="186" width="320" height="230"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             </imageView>
@@ -585,7 +585,7 @@
             </objects>
             <point key="canvasLocation" x="1404" y="1377"/>
         </scene>
-        <!--Kule Recipe View Controller - 宝宝食谱-->
+        <!--Kule Recipe View Controller - 每周食谱-->
         <scene sceneID="9KS-iG-ZHj">
             <objects>
                 <viewController storyboardIdentifier="CSKuleRecipeViewController" id="p7o-xu-qXK" customClass="CSKuleRecipeViewController" sceneMemberID="viewController">
@@ -610,7 +610,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" title="宝宝食谱" id="Vfb-jd-2Jh"/>
+                    <navigationItem key="navigationItem" title="每周食谱" id="Vfb-jd-2Jh"/>
                     <connections>
                         <outlet property="tableview" destination="8Vd-hb-aUf" id="6pN-qB-KWw"/>
                     </connections>
@@ -773,7 +773,7 @@
             </objects>
             <point key="canvasLocation" x="174" y="2053"/>
         </scene>
-        <!--Kule Checkin View Controller - 签到一览-->
+        <!--Kule Checkin View Controller - 接送信息-->
         <scene sceneID="Fnv-1l-gqr">
             <objects>
                 <viewController storyboardIdentifier="CSKuleCheckinViewController" id="1UC-eH-jjs" customClass="CSKuleCheckinViewController" sceneMemberID="viewController">
@@ -793,7 +793,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" title="签到一览" id="B65-t2-gjB"/>
+                    <navigationItem key="navigationItem" title="接送信息" id="B65-t2-gjB"/>
                     <connections>
                         <segue destination="Etr-Mb-xMG" kind="push" identifier="segue.checkinLogList" id="nhl-z0-1u0"/>
                     </connections>

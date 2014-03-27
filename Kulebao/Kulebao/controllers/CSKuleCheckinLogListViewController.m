@@ -74,7 +74,6 @@
     
     cell.labTitle.text = [NSString stringWithFormat:@"尊敬的用户 %@ 您好：", gApp.engine.loginInfo.username];
     
-    NSDate* date = [NSDate dateWithTimeIntervalSince1970:checkInOutLogInfo.timestamp];
     CSKuleChildInfo* child = gApp.engine.currentRelationship.child;
     
     if (checkInOutLogInfo.noticeType == kKuleNoticeTypeCheckIn) {
@@ -87,6 +86,8 @@
         cell.labContent.text = @"";
     }
     
+    NSString* publiser = gApp.engine.loginInfo.schoolName;
+    
     if (checkInOutLogInfo.recordUrl.length > 0) {
         [cell.imgAttachment setImageWithURL:[gApp.engine urlFromPath:checkInOutLogInfo.recordUrl] placeholderImage:[UIImage imageNamed:@"chating-picture.png"]];
     }
@@ -94,9 +95,13 @@
         [cell.imgAttachment cancelImageRequestOperation];
         cell.imgAttachment.image = nil;
     }
+    cell.imgAttachment.clipsToBounds = YES;
+    cell.imgAttachment.layer.cornerRadius = 4;
     
-    cell.labDate.text = [date isoDateTimeString];
-    cell.labPublisher.text = gApp.engine.loginInfo.schoolName;
+    NSDate* timestamp = [NSDate dateWithTimeIntervalSince1970:checkInOutLogInfo.timestamp];
+    
+    cell.labDate.text = [NSString stringWithFormat:@"%@ 来自:%@", [timestamp isoDateTimeString], publiser];
+    cell.labPublisher.text = nil;
     
     return cell;
 }

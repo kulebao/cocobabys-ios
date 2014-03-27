@@ -117,13 +117,15 @@
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;' name='viewport' >\
     </head>\
     <body>\
-        <div style='text-align:center;color:#cc6633'><h3>%@</h3></div>\
-        <div style='text-align:center;'>%@</div>\
-        <div style='text-align:center;'><h4>%@</h4></div>\
-        <div style='word-break:break-all;width:300px'>%@</div>\
+        <div style='text-align:center;font-size:18pt;font-weight:bold'>%@</div>\
+        <div style='text-align:center;font-size:10pt;'>%@ 来自:%@</div>\
+        <p>\
+        <div style='word-break:break-all;width:300;font-size:13pt'>%@</div>\
         %@\
     </body>\
     </html>";
+    
+    NSString* title = newsInfo.title;
     
     NSString* timestampString = [[NSDate dateWithTimeIntervalSince1970:newsInfo.timestamp] isoDateTimeString];
     
@@ -132,12 +134,14 @@
         publiser = [publiser stringByAppendingString:gApp.engine.currentRelationship.child.className];
     }
     
+    NSString* body = newsInfo.content;
+    
     NSString* divImage = @"";
     if (newsInfo.image.length > 0) {
         divImage = [NSString stringWithFormat:@"<div><img src='%@' width='300' /></div>", [gApp.engine urlFromPath:newsInfo.image]];
     }
     
-    NSString* ss = [NSString stringWithFormat:htmlTemp, newsInfo.title, publiser, timestampString,  newsInfo.title, newsInfo.content, divImage];
+    NSString* ss = [NSString stringWithFormat:htmlTemp, title, title, timestampString, publiser, body, divImage];
     
     return ss;
 }
@@ -150,22 +154,31 @@
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;' name='viewport' >\
     </head>\
     <body>\
-    <div style='text-align:center;color:#cc6633'><h3>%@</h3></div>\
-    <div style='text-align:center;word-break:break-all'>%@</div>\
-    <div style='text-align:center;'><h4>%@</h4></div>\
-    <div style='word-break:break-all;width:300px'>%@</div>\
+    <div style='text-align:center;font-size:18pt;font-weight:bold'>%@</div>\
+    <div style='text-align:center;font-size:10pt;'>%@ 来自:%@</div>\
+    <p>\
+    <div style='word-break:break-all;width:300;font-size:13pt'>%@</div>\
     %@\
     </body>\
     </html>";
     
+    NSString* title = assignmentInfo.title;
+    
     NSString* timestampString = [[NSDate dateWithTimeIntervalSince1970:assignmentInfo.timestamp] isoDateTimeString];
+    
+    NSString* publiser = gApp.engine.loginInfo.schoolName;
+    if (assignmentInfo.classId > 0 && assignmentInfo.classId == gApp.engine.currentRelationship.child.classId) {
+        publiser = [publiser stringByAppendingString:gApp.engine.currentRelationship.child.className];
+    }
+    
+    NSString* body = assignmentInfo.content;
     
     NSString* divImage = @"";
     if (assignmentInfo.iconUrl.length > 0) {
         divImage = [NSString stringWithFormat:@"<div><img src='%@' width='300' /></div>", [gApp.engine urlFromPath:assignmentInfo.iconUrl]];
     }
     
-    NSString* ss = [NSString stringWithFormat:htmlTemp, assignmentInfo.title, assignmentInfo.publisher, timestampString,  assignmentInfo.title, assignmentInfo.content, divImage];
+    NSString* ss = [NSString stringWithFormat:htmlTemp, title, title, timestampString, publiser, body, divImage];
     
     return ss;
 }
@@ -178,33 +191,36 @@
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;' name='viewport' >\
     </head>\
     <body>\
-    <div style='text-align:center;color:#cc6633'><h3>%@</h3></div>\
-    <div style='text-align:center;word-break:break-all'>%@</div>\
-    <div style='text-align:left;'><h4>%@</h4></div>\
-    <div style='word-break:break-all;width:300px'>%@</div>\
-    %@\
+    <div style='text-align:left;font-size:13pt;font-weight:bold'>%@</div>\
+    <p>\
+    <div style='word-break:break-all;width:300;font-size:13pt'>%@</div>\
+    <p>\
+    <div style='text-align:right;font-size:13pt;'>%@</div>\
+    <p>%@\
     </body>\
     </html>";
     
+    NSString* title = [NSString stringWithFormat:@"尊敬的用户 %@ 你好:", gApp.engine.loginInfo.username];;
+    
     NSString* timestampString = [[NSDate dateWithTimeIntervalSince1970:checkInOutLogInfo.timestamp] isoDateTimeString];
-
-    NSString* title = [NSString stringWithFormat:@"尊敬的用户 %@ 你好:", gApp.engine.loginInfo.username];
+    
+    NSString* publiser = gApp.engine.loginInfo.schoolName;
+    
+    NSString* body = @"";
+    CSKuleChildInfo* child = gApp.engine.currentRelationship.child;
+    if (checkInOutLogInfo.noticeType == kKuleNoticeTypeCheckIn) {
+        body = [NSString stringWithFormat:@"您的小孩 %@ 已于 %@ 刷卡入园。", child.name, timestampString];
+    }
+    else if (checkInOutLogInfo.noticeType == kKuleNoticeTypeCheckOut){
+        body = [NSString stringWithFormat:@"您的小孩 %@ 已于 %@ 刷卡离园。", child.name, timestampString];
+    }
     
     NSString* divImage = @"";
     if (checkInOutLogInfo.recordUrl.length > 0) {
         divImage = [NSString stringWithFormat:@"<div><img src='%@' width='300' /></div>", [gApp.engine urlFromPath:checkInOutLogInfo.recordUrl]];
     }
     
-    NSString* content = @"";
-    CSKuleChildInfo* child = gApp.engine.currentRelationship.child;
-    if (checkInOutLogInfo.noticeType == kKuleNoticeTypeCheckIn) {
-        content = [NSString stringWithFormat:@"您的小孩 %@ 已于 %@ 刷卡入园。", child.name, timestampString];
-    }
-    else if (checkInOutLogInfo.noticeType == kKuleNoticeTypeCheckOut){
-        content = [NSString stringWithFormat:@"您的小孩 %@ 已于 %@ 刷卡离园。", child.name, timestampString];
-    }
-    
-    NSString* ss = [NSString stringWithFormat:htmlTemp, gApp.engine.loginInfo.schoolName, gApp.engine.loginInfo.schoolName, timestampString,  title, content, divImage];
+    NSString* ss = [NSString stringWithFormat:htmlTemp, title, title, body, publiser, divImage];
     
     return ss;
 }

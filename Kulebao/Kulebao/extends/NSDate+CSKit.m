@@ -26,6 +26,23 @@
     return dateString;
 }
 
+
+- (NSString*)zhCnDateString {
+    NSDateFormatter* fmt = [[NSDateFormatter alloc] init];
+    fmt.locale = [NSLocale currentLocale];
+    fmt.dateFormat = @"yyyy年MM月dd日";
+    NSString* dateString = [fmt stringFromDate:self];
+    return dateString;
+}
+
+- (NSString*)zhCnDateTimeString {
+    NSDateFormatter* fmt = [[NSDateFormatter alloc] init];
+    //fmt.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
+    fmt.dateFormat = @"yyyy年MM月dd日 HH:mm:ss";
+    NSString* dateString = [fmt stringFromDate:self];
+    return dateString;
+}
+
 - (NSString*)shortDateTimeString {
     NSDateFormatter* fmt = [[NSDateFormatter alloc] init];
     //fmt.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];

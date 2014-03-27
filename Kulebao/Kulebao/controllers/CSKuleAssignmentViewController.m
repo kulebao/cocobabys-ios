@@ -86,6 +86,15 @@
     CSKuleAssignmentInfo* assignmentInfo = [self.assignmentInfoList objectAtIndex:indexPath.row];
     cell.labTitle.text = assignmentInfo.title;
     cell.labContent.text = assignmentInfo.content;
+    
+    NSString* publiser = nil;
+    if (assignmentInfo.classId > 0 && assignmentInfo.classId == gApp.engine.currentRelationship.child.classId) {
+        publiser =  [NSString stringWithFormat:@"%@ %@", gApp.engine.loginInfo.schoolName, gApp.engine.currentRelationship.child.className];
+    }
+    else {
+        publiser = gApp.engine.loginInfo.schoolName;
+    }
+    
     if (assignmentInfo.iconUrl.length > 0) {
         [cell.imgAttachment setImageWithURL:[gApp.engine urlFromPath:assignmentInfo.iconUrl] placeholderImage:[UIImage imageNamed:@"chating-picture.png"]];
     }
@@ -93,10 +102,13 @@
         [cell.imgAttachment cancelImageRequestOperation];
         cell.imgAttachment.image = nil;
     }
+    cell.imgAttachment.clipsToBounds = YES;
+    cell.imgAttachment.layer.cornerRadius = 4;
     
-    NSDate* d = [NSDate dateWithTimeIntervalSince1970:assignmentInfo.timestamp];
+    NSDate* timestamp = [NSDate dateWithTimeIntervalSince1970:assignmentInfo.timestamp];
     
-    cell.labDate.text = [d isoDateTimeString];
+    cell.labDate.text = [NSString stringWithFormat:@"%@ 来自:%@", [timestamp isoDateTimeString], publiser];
+    cell.labPublisher.text = nil;
     
     return cell;
 }
@@ -138,7 +150,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"segue.assignmentdetails"]) {
         CSKuleNewsDetailsViewController* destCtrl = segue.destinationViewController;
-        destCtrl.navigationItem.title = @"亲子作业详情";
+        destCtrl.navigationItem.title = @"作业内容";
         destCtrl.assignmentInfo = sender;
     }
 }

@@ -20,6 +20,10 @@
 
 - (NSString*)isoDateString;
 - (NSString*)isoDateTimeString;
+
+- (NSString*)zhCnDateString;
+- (NSString*)zhCnDateTimeString;
+
 - (NSString*)shortDateTimeString;
 
 //返回周日的的开始时间

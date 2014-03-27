@@ -14,6 +14,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *labNotice;
 @property (weak, nonatomic) IBOutlet UITextField *fieldPassword;
 - (IBAction)onBtnLoginClicked:(id)sender;
+- (IBAction)onBtnChangeAccountClicked:(id)sender;
+- (IBAction)onBtnForgotPswdClicked:(id)sender;
 
 @end
 
@@ -63,6 +65,13 @@
     [self.fieldPassword resignFirstResponder];
 
     [self doLogin];
+}
+
+- (IBAction)onBtnChangeAccountClicked:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)onBtnForgotPswdClicked:(id)sender {
 }
 
 - (void)doLogin {

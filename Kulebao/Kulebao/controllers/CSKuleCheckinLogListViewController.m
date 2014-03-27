@@ -68,6 +68,7 @@
     if (cell == nil) {
         NSArray* nibs = [[NSBundle mainBundle] loadNibNamed:@"CSKuleNoticeCell" owner:nil options:nil];
         cell = [nibs firstObject];
+        cell.imgIcon.image = [UIImage imageNamed:@"icon-checkin.png"];
     }
     
     CSKuleCheckInOutLogInfo* checkInOutLogInfo = [_checkInOutLogInfoList objectAtIndex:indexPath.row];

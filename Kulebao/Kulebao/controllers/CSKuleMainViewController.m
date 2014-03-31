@@ -209,7 +209,7 @@
         NSCalendar *calendar = [NSCalendar currentCalendar];
         NSDateComponents* ageComponents = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:dayOfBirth toDate:[NSDate date] options:0];
         
-        self.labChildNick.text = [NSString stringWithFormat:@"%@ %@岁%@个月", [childInfo.nick substringToIndex:kKuleNickMaxLength], @([ageComponents year]), @([ageComponents month])];
+        self.labChildNick.text = [NSString stringWithFormat:@"%@ %@岁%@个月", childInfo.nick, @([ageComponents year]), @([ageComponents month])];
     }
 }
 

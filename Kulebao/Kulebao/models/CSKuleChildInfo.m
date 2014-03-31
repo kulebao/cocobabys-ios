@@ -7,6 +7,7 @@
 //
 
 #import "CSKuleChildInfo.h"
+#import "CSKuleCommon.h"
 
 @implementation CSKuleChildInfo
 
@@ -46,6 +47,10 @@
     
     NSString* desc = [NSString stringWithFormat:@"%@", meta];
     return desc;
+}
+
+- (void) setNick:(NSString* )nick {
+    _nick = [nick length]> kKuleNickMaxLength ? [nick substringToIndex:kKuleNickMaxLength] : nick;
 }
 
 @end

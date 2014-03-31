@@ -75,11 +75,37 @@
                   forKeyPath:@"currentRelationship"
                      options:NSKeyValueObservingOptionNew
                      context:nil];
+
+    [gApp.engine addObserver:self
+                  forKeyPath:@"badgeOfNews"
+                     options:NSKeyValueObservingOptionNew
+                     context:nil];
+    [gApp.engine addObserver:self
+                  forKeyPath:@"badgeOfRecipe"
+                     options:NSKeyValueObservingOptionNew
+                     context:nil];
+    [gApp.engine addObserver:self
+                  forKeyPath:@"badgeOfCheckin"
+                     options:NSKeyValueObservingOptionNew
+                     context:nil];
+    [gApp.engine addObserver:self
+                  forKeyPath:@"badgeOfSchedule"
+                     options:NSKeyValueObservingOptionNew
+                     context:nil];
+    [gApp.engine addObserver:self
+                  forKeyPath:@"badgeOfAssignment"
+                     options:NSKeyValueObservingOptionNew
+                     context:nil];
+    [gApp.engine addObserver:self
+                  forKeyPath:@"badgeOfChating"
+                     options:NSKeyValueObservingOptionNew
+                     context:nil];
+    [gApp.engine addObserver:self
+                  forKeyPath:@"badgeOfAssess"
+                     options:NSKeyValueObservingOptionNew
+                     context:nil];
     
     [self performSelector:@selector(getRelationshipInfos) withObject:nil afterDelay:0];
-    
-    
-    [self performSelector:@selector(showBanner) withObject:nil afterDelay:2];
 }
 
 - (void)didReceiveMemoryWarning
@@ -90,12 +116,92 @@
 
 - (void)dealloc {
     [gApp.engine removeObserver:self forKeyPath:@"currentRelationship"];
+    [gApp.engine removeObserver:self forKeyPath:@"badgeOfNews"];
+    [gApp.engine removeObserver:self forKeyPath:@"badgeOfRecipe"];
+    [gApp.engine removeObserver:self forKeyPath:@"badgeOfCheckin"];
+    [gApp.engine removeObserver:self forKeyPath:@"badgeOfSchedule"];
+    [gApp.engine removeObserver:self forKeyPath:@"badgeOfAssignment"];
+    [gApp.engine removeObserver:self forKeyPath:@"badgeOfChating"];
+    [gApp.engine removeObserver:self forKeyPath:@"badgeOfAssess"];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    CSLog(@"%@ changed.", keyPath);
     if ((object == gApp.engine) && [keyPath isEqualToString:@"currentRelationship"]) {
-        CSLog(@"currentRelationship changed.");
         [self updateUI];
+    }
+    else if((object == gApp.engine) && [keyPath isEqualToString:@"badgeOfNews"]) {
+        JSBadgeView* badgeView = [_badges objectAtIndex:kKuleModuleNews];
+        if (gApp.engine.badgeOfNews > 0) {
+            badgeView.badgeText = @"新";
+            [self showBanner:@"您收到新的园内公告"];
+        }
+        else {
+            badgeView.badgeText = nil;
+        }
+    }
+    else if((object == gApp.engine) && [keyPath isEqualToString:@"badgeOfRecipe"]) {
+        JSBadgeView* badgeView = [_badges objectAtIndex:kKuleModuleRecipe];
+        if (gApp.engine.badgeOfRecipe > 0) {
+            badgeView.badgeText = @"新";
+            [self showBanner:@"您收到新的每周食谱"];
+        }
+        else {
+            badgeView.badgeText = nil;
+        }
+    }
+    else if((object == gApp.engine) && [keyPath isEqualToString:@"badgeOfCheckin"]) {
+        JSBadgeView* badgeView = [_badges objectAtIndex:kKuleModuleCheckin];
+        if (gApp.engine.badgeOfCheckin > 0) {
+            badgeView.badgeText = @"新";
+            [self showBanner:@"您收到新的接送消息"];
+        }
+        else {
+            badgeView.badgeText = nil;
+        }
+    }
+    else if((object == gApp.engine) && [keyPath isEqualToString:@"badgeOfSchedule"]) {
+        JSBadgeView* badgeView = [_badges objectAtIndex:kKuleModuleSchedule];
+        if (gApp.engine.badgeOfSchedule > 0) {
+            badgeView.badgeText = @"新";
+            [self showBanner:@"您收到新的课程表"];
+        }
+        else {
+            badgeView.badgeText = nil;
+        }
+    }
+    else if((object == gApp.engine) && [keyPath isEqualToString:@"badgeOfAssignment"]) {
+        JSBadgeView* badgeView = [_badges objectAtIndex:kKuleModuleAssignment];
+        if (gApp.engine.badgeOfAssignment > 0) {
+            badgeView.badgeText = @"新";
+            [self showBanner:@"您收到新的亲子作业"];
+        }
+        else {
+            badgeView.badgeText = nil;
+        }
+    }
+    else if((object == gApp.engine) && [keyPath isEqualToString:@"badgeOfChating"]) {
+        JSBadgeView* badgeView = [_badges objectAtIndex:kKuleModuleChating];
+        if (gApp.engine.badgeOfChating > 0) {
+            badgeView.badgeText = @"新";
+            [self showBanner:@"您收到新的家园互动"];
+        }
+        else {
+            badgeView.badgeText = nil;
+        }
+    }
+    else if((object == gApp.engine) && [keyPath isEqualToString:@"badgeOfAssess"]) {
+        JSBadgeView* badgeView = [_badges objectAtIndex:kKuleModuleAssess];
+        if (gApp.engine.badgeOfAssess > 0) {
+            badgeView.badgeText = @"新";
+            [self showBanner:@"您收到新的在园表现"];
+        }
+        else {
+            badgeView.badgeText = nil;
+        }
+    }
+    else {
+        CSLog(@"UNKNOWN.");
     }
 }
 
@@ -181,7 +287,7 @@
         JSBadgeView *badgeView = [[JSBadgeView alloc] initWithParentView:btnIcon
                                                                alignment:JSBadgeViewAlignmentTopRight];
         badgeView.badgePositionAdjustment = CGPointMake(-5, 5);
-        badgeView.badgeText =[NSString stringWithFormat:@"%d", i];
+        //badgeView.badgeText =[NSString stringWithFormat:@"%d", i];
         [_badges addObject:badgeView];
     }
     
@@ -441,8 +547,34 @@
     
     if (moduleType < kKuleModuleSize) {
         [self performSegueWithIdentifier:segueNames[moduleType] sender:nil];
-        JSBadgeView *badgeView = _badges[moduleType];
-        badgeView.badgeText = nil;
+        
+        switch (moduleType) {
+            case kKuleModuleNews:
+                gApp.engine.badgeOfNews = 0;
+                break;
+            case kKuleModuleRecipe:
+                gApp.engine.badgeOfRecipe = 0;
+                break;
+            case kKuleModuleCheckin:
+                gApp.engine.badgeOfCheckin = 0;
+                break;
+            case kKuleModuleSchedule:
+                gApp.engine.badgeOfSchedule = 0;
+                break;
+            case kKuleModuleAssignment:
+                gApp.engine.badgeOfAssignment = 0;
+                break;
+            case kKuleModuleChating:
+                gApp.engine.badgeOfChating = 0;
+                break;
+            case kKuleModuleAssess:
+                gApp.engine.badgeOfAssess = 0;
+                break;
+            default:
+                break;
+        }
+//        JSBadgeView *badgeView = _badges[moduleType];
+//        badgeView.badgeText = nil;
     }
 }
 
@@ -484,6 +616,14 @@
         else {
             [gApp alert:@"没有关联宝宝信息"];
         }
+        
+//        gApp.engine.badgeOfNews = 100;
+//        gApp.engine.badgeOfRecipe = 100;
+//        gApp.engine.badgeOfCheckin = 100;
+//        gApp.engine.badgeOfSchedule = 100;
+//        gApp.engine.badgeOfAssignment = 100;
+//        gApp.engine.badgeOfChating = 100;
+//        gApp.engine.badgeOfAssess = 100;
     };
     
     FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
@@ -498,7 +638,7 @@
                                   failure:failureHandler];
 }
 
-- (void)showBanner {
+- (void)showBanner:(NSString*)msg {
     CSAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     ALAlertBannerStyle randomStyle = ALAlertBannerStyleNotify;
     ALAlertBannerPosition position = ALAlertBannerPositionUnderNavBar;
@@ -506,9 +646,9 @@
                                                         style:randomStyle
                                                      position:position
                                                         title:@"您有新的通知"
-                                                     subtitle:@"你收到新的校园公告"
+                                                     subtitle:msg
                                                   tappedBlock:^(ALAlertBanner *alertBanner) {
-                                                      NSLog(@"tapped!");
+                                                      CSLog(@"tapped!");
                                                       [alertBanner hide];
                                                   }];
     

@@ -24,6 +24,16 @@
 @property (strong, nonatomic) NSArray* relationships;
 @property (strong, nonatomic) CSKuleRelationshipInfo* currentRelationship;
 
+@property (strong, nonatomic, readonly) UIApplication* application;
+
+@property (nonatomic, assign) NSInteger badgeOfNews;
+@property (nonatomic, assign) NSInteger badgeOfRecipe;
+@property (nonatomic, assign) NSInteger badgeOfCheckin;
+@property (nonatomic, assign) NSInteger badgeOfSchedule;
+@property (nonatomic, assign) NSInteger badgeOfAssignment;
+@property (nonatomic, assign) NSInteger badgeOfChating;
+@property (nonatomic, assign) NSInteger badgeOfAssess;
+
 #pragma mark - application
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
 - (void)applicationWillResignActive:(UIApplication *)application;

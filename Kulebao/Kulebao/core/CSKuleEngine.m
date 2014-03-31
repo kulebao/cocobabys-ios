@@ -39,6 +39,14 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
+@synthesize badgeOfNews = _badgeOfNews;
+@synthesize badgeOfRecipe = _badgeOfRecipe;
+@synthesize badgeOfCheckin = _badgeOfCheckin;
+@synthesize badgeOfSchedule = _badgeOfSchedule;
+@synthesize badgeOfAssignment = _badgeOfAssignment;
+@synthesize badgeOfChating = _badgeOfChating;
+@synthesize badgeOfAssess = _badgeOfAssess;
+
 #pragma mark - application
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -127,6 +135,9 @@
     }
     
     [application setApplicationIconBadgeNumber:0];
+    
+    self.badgeOfCheckin = self.badgeOfCheckin + 1;
+
     [BPush handleNotification:userInfo];
 }
 
@@ -139,6 +150,10 @@
 - (void)setBaiduPushInfo:(CSKuleBPushInfo *)baiduPushInfo {
     _baiduPushInfo = baiduPushInfo;
      CSLog(@"%s\n%@", __FUNCTION__, _baiduPushInfo);
+}
+
+- (UIApplication*)application {
+    return [UIApplication sharedApplication];
 }
 
 #pragma mark - Setup
@@ -741,7 +756,7 @@
     NSString* path = [NSString stringWithFormat:kChatingPath, @(kindergarten), _loginInfo.accountName];
     
     if (fromId >= 0) {
-        path = [path stringByAppendingFormat:@"?retrieve_recent_from=%d", fromId];
+        path = [path stringByAppendingFormat:@"?retrieve_recent_from=%lld", fromId];
     }
     
     NSString* method = @"POST";

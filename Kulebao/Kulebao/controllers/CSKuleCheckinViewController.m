@@ -74,12 +74,21 @@
     
     yy += 25;
     self.labCheckOut.frame = CGRectMake(xx, yy, self.view.bounds.size.width, 25);
+    
+    [gApp.engine addObserver:self
+                  forKeyPath:@"badgeOfCheckin"
+                     options:NSKeyValueObservingOptionNew
+                     context:nil];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc {
+    [gApp.engine removeObserver:self forKeyPath:@"badgeOfCheckin"];
 }
 
 #pragma mark - View lifecycle
@@ -93,6 +102,20 @@
 {
     NSString* cName = [NSString stringWithFormat:@"%@", self.navigationItem.title, nil];
     [[BaiduMobStat defaultStat] pageviewEndWithName:cName];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    CSLog(@"%@ changed.", keyPath);
+    if((object == gApp.engine) && [keyPath isEqualToString:@"badgeOfCheckin"]) {
+        if (gApp.engine.badgeOfCheckin > 0) {
+            [self reloadCheckInOutLogs];
+        }
+        else {
+        }
+    }
+    else {
+        CSLog(@"UNKNOWN.");
+    }
 }
 
 #pragma mark - Private

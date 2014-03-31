@@ -49,8 +49,12 @@
     return desc;
 }
 
-- (void) setNick:(NSString* )nick {
-    _nick = [nick length]> kKuleNickMaxLength ? [nick substringToIndex:kKuleNickMaxLength] : nick;
+- (NSString *)displayNick {
+    // 计算宝宝年龄
+    NSDate* dayOfBirth = [NSDate dateFromString:_birthday withFormat:[NSDate dateFormatString]];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents* ageComponents = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:dayOfBirth toDate:[NSDate date] options:0];
+    NSString* trimmedNick = [_nick length]> kKuleNickMaxLength ? [_nick substringToIndex:kKuleNickMaxLength] : _nick;  
+    return [NSString stringWithFormat:@"%@ %@岁%@个月", trimmedNick, @([ageComponents year]), @([ageComponents month])];
 }
-
 @end

@@ -8,12 +8,9 @@
 
 #import "CSKuleMainViewController.h"
 #import "CSAppDelegate.h"
-#import "UIImageView+AFNetworking.h"
 #import "KxMenu.h"
 #import "AHAlertView.h"
 #import "CSKuleAboutSchoolViewController.h"
-#import <QuartzCore/QuartzCore.h>
-#import "CSAppDelegate.h"
 #import "ALAlertBanner.h"
 #import "JSBadgeView.h"
 
@@ -204,12 +201,7 @@
         NSURL* url = [gApp.engine urlFromPath:[childInfo.portrait stringByAppendingFormat:@"?%f",[[NSDate date] timeIntervalSince1970]]];
         [self.imgChildPortrait setImageWithURL:url placeholderImage:[UIImage imageNamed:@"default_child_head_icon.png"]];
         
-        // 计算宝宝年龄
-        NSDate* dayOfBirth = [NSDate dateFromString:childInfo.birthday withFormat:[NSDate dateFormatString]];
-        NSCalendar *calendar = [NSCalendar currentCalendar];
-        NSDateComponents* ageComponents = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:dayOfBirth toDate:[NSDate date] options:0];
-        
-        self.labChildNick.text = [NSString stringWithFormat:@"%@ %@岁%@个月", childInfo.nick, @([ageComponents year]), @([ageComponents month])];
+        self.labChildNick.text = childInfo.displayNick;
     }
 }
 

@@ -152,7 +152,7 @@
     
     for (CSKuleCheckInOutLogInfo* checkInOutLogInfo in sortedArray) {
         NSDate* date = [NSDate dateWithTimeIntervalSince1970:checkInOutLogInfo.timestamp];
-        NSUInteger day = [date getDay];
+        NSUInteger day = [date getDay]-1;
         if (day < 31) {
             CSTipsInfo* tips = tipsList[day];
             if (tips == 0) {
@@ -172,7 +172,7 @@
             }
         }
         else {
-            CSLog(@"date get day error.");
+            CSLog(@"date %d get day error.", day);
         }
     }
     
@@ -182,7 +182,7 @@
     for (NSInteger i=0; i<31; i++) {
         CSTipsInfo* tips = tipsList[i];
         if (tips) {
-            [dates addObject:@(i)];
+            [dates addObject:@(i+1)];
             [tipInfos addObject:tips];
             
             if (!tips.tips1) {
@@ -198,7 +198,7 @@
     [_calendarView markDates:dates withTips:tipInfos];
     
     if ([_calendarView.currentMonth  getMonth] == [[NSDate date] getMonth]) {
-        NSInteger curday = [[NSDate date] getDay];
+        NSInteger curday = [[NSDate date] getDay]-1;
         if (curday < 31) {
             CSTipsInfo* tips = tipsList[curday];
             if (tips) {
@@ -209,6 +209,9 @@
                 _labCheckIn.text = @"今天没有刷卡记录";
                 _labCheckOut.text = nil;
             }
+        }
+        else {
+            CSLog(@"curday=%d error.", curday);
         }
     }
     else {

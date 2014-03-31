@@ -51,6 +51,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    CSLog(@"%f Launched.", [[NSDate date] timeIntervalSince1970]*1000);
     
     // 添加百度统计
     [self setupBaiduMobStat];

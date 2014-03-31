@@ -149,7 +149,7 @@
         imgPortrait.frame = CGRectMake(2, 12, 32, 32);
         
         UIImage* bgImage = [UIImage imageNamed:@"msg-bg-from.png"];
-        imgBubbleBg.image = [bgImage resizableImageWithCapInsets:UIEdgeInsetsMake(35, 15, 5, 10)];
+        imgBubbleBg.image = [bgImage resizableImageWithCapInsets:UIEdgeInsetsMake(35, 15, 10, 10)];
 
         labMsgSender.text = msg.sender;
         labMsgSender.frame = CGRectMake(0, 46, 36, 12);
@@ -180,7 +180,7 @@
         imgPortrait.frame = CGRectMake(320-2-32, 12, 32, 32);
         
         UIImage* bgImage = [UIImage imageNamed:@"msg-bg-to.png"];
-        imgBubbleBg.image = [bgImage resizableImageWithCapInsets:UIEdgeInsetsMake(35, 10, 5, 15)];
+        imgBubbleBg.image = [bgImage resizableImageWithCapInsets:UIEdgeInsetsMake(35, 10, 10, 15)];
         
         labMsgSender.text = @"我";
         labMsgSender.frame = CGRectMake(320-2-32-4, 46, 36, 12);

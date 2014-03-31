@@ -10,7 +10,6 @@
 
 @interface UIViewController (CSKit)
 
-
 - (void)customizeLeftBarItemWithTarget:(id)target action:(SEL)action normal:(UIImage*)imgNormal hightlight:(UIImage*)imgHighlight;
 
 - (void)customizeRightBarItemWithTarget:(id)target action:(SEL)action normal:(UIImage*)imgNormal hightlight:(UIImage*)imgHighlight text:(NSString*)text;

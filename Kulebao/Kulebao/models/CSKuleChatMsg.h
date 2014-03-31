@@ -16,5 +16,6 @@
 @property (nonatomic, strong) NSString* content;
 @property (nonatomic, strong) NSString* image;
 @property (nonatomic, strong) NSString* sender;
+@property (nonatomic, strong) NSString* senderId;
 
 @end

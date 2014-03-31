@@ -80,6 +80,9 @@
                      context:nil];
     
     [self performSelector:@selector(getRelationshipInfos) withObject:nil afterDelay:0];
+    
+    
+    [self performSelector:@selector(showBanner) withObject:nil afterDelay:2];
 }
 
 - (void)didReceiveMemoryWarning
@@ -103,7 +106,6 @@
 -(void) viewDidAppear:(BOOL)animated
 {
     [_scrollContent flashScrollIndicators];
-    [self performSelector:@selector(showBanner) withObject:nil afterDelay:2];
     NSString* cName = [NSString stringWithFormat:@"%@",  self.navigationItem.title, nil];
     [[BaiduMobStat defaultStat] pageviewStartWithName:cName];
 }
@@ -182,7 +184,7 @@
         JSBadgeView *badgeView = [[JSBadgeView alloc] initWithParentView:btnIcon
                                                                alignment:JSBadgeViewAlignmentTopRight];
         badgeView.badgePositionAdjustment = CGPointMake(-5, 5);
-        badgeView.badgeText =[NSString stringWithFormat:@"11%d", i];
+        badgeView.badgeText =[NSString stringWithFormat:@"%d", i];
         [_badges addObject:badgeView];
     }
     

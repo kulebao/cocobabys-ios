@@ -15,6 +15,7 @@
 @synthesize content = _content;
 @synthesize image = _image;
 @synthesize sender = _sender;
+@synthesize senderId = _senderId;
 
 - (NSString*)description {
     NSDictionary* meta = @{@"phone": _phone,
@@ -22,7 +23,8 @@
                            @"msgId": @(_msgId),
                            @"content": _content,
                            @"image": _image,
-                           @"sender": _sender};
+                           @"sender": _sender,
+                           @"senderId": _senderId};
     
     NSString* desc = [NSString stringWithFormat:@"%@", meta];
     return desc;

@@ -66,6 +66,8 @@
      | UIRemoteNotificationTypeBadge
      | UIRemoteNotificationTypeSound];
     
+    [application setApplicationIconBadgeNumber:0];
+    
     return YES;
 }
 

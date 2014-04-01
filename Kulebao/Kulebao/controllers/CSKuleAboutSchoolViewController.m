@@ -104,7 +104,7 @@
         const CGFloat kWidth = self.scrollView.bounds.size.width;
         //const CGFloat kHeight = self.scrollView.bounds.size.height;
         
-        if (_schoolInfo.schoolLogoUrl) {
+        if (_schoolInfo.schoolLogoUrl.length > 0) {
             const CGFloat kSchoolLogoWidth = kWidth - 20;
             const CGFloat kSchoolLogoHeight = kSchoolLogoWidth * 3 / 4;
             
@@ -117,7 +117,7 @@
             yy += kSchoolLogoHeight;
         }
         
-        if (_schoolInfo.desc) {
+        if (_schoolInfo.desc.length > 0) {
             const CGFloat kSchoolDescWidth = kWidth - 20;
             UITextView* descText = [[UITextView alloc] initWithFrame:CGRectMake((kWidth - kSchoolDescWidth)/2.0, yy, kSchoolDescWidth, 99999)];
             descText.backgroundColor = [UIColor clearColor];
@@ -130,7 +130,7 @@
             yy += sz.height;
         }
         
-        if (_schoolInfo.phone) {
+        if (_schoolInfo.phone.length > 0) {
             UIView* line = [[UIView alloc] initWithFrame:CGRectMake(10, yy, kWidth-10*2, 1)];
             line.backgroundColor = UIColorRGB(0xCC, 0x66, 0x33);
             [_scrollView addSubview:line];

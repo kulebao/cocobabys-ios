@@ -88,12 +88,18 @@
         [gApp alert:[error localizedDescription]];
     };
     
-    [gApp waitingAlert:@"获取信息中..."];
     CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
-    [gApp.engine reqGetSchedulesOfKindergarten:gApp.engine.loginInfo.schoolId
-                              withClassId:currentChild.classId
-                                  success:sucessHandler
-                                  failure:failureHandler];
+    if (currentChild) {
+        [gApp waitingAlert:@"获取信息中..."];
+        [gApp.engine reqGetSchedulesOfKindergarten:gApp.engine.loginInfo.schoolId
+                                       withClassId:currentChild.classId
+                                           success:sucessHandler
+                                           failure:failureHandler];
+    }
+    else {
+        [gApp alert:@"没有宝宝信息。"];
+    }
+   
 }
 
 - (void)updateScheduleInfo:(CSKuleScheduleInfo*)schduleInfo {

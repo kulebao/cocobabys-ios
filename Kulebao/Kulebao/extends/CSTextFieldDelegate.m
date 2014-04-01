@@ -3,7 +3,7 @@
 //  CSKit
 //
 //  Created by xin.c.wang on 13-9-25.
-//  Copyright (c) 2013年 Codingsoft. All rights reserved.
+//  Copyright (c) 2013年 CSKit. All rights reserved.
 //
 
 #import "CSTextFieldDelegate.h"

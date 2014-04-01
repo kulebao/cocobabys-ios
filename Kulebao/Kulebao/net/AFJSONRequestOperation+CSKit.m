@@ -3,7 +3,7 @@
 //  CSKit
 //
 //  Created by xin.c.wang on 13-4-23.
-//  Copyright (c) 2013年 Codingsoft. All rights reserved.
+//  Copyright (c) 2013年 CSKit. All rights reserved.
 //
 
 #import "AFJSONRequestOperation+CSKit.h"

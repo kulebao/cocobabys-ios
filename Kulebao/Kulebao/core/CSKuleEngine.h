@@ -84,6 +84,8 @@
                    success:(SuccessResponseHandler)success
                    failure:(FailureResponseHandler)failure;
 
+- (void)reqUnbind;
+
 - (void)reqChangePassword:(NSString*)newPswd
               withOldPswd:(NSString*)oldPswd
                   success:(SuccessResponseHandler)success

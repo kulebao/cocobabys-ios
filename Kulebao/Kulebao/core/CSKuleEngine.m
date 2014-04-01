@@ -490,6 +490,10 @@
                                failure:failure];
 }
 
+- (void)reqUnbind {
+    [BPush unbindChannel];
+}
+
 - (void)reqChangePassword:(NSString*)newPswd
               withOldPswd:(NSString*)oldPswd
                   success:(SuccessResponseHandler)success

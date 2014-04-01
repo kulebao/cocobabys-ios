@@ -96,7 +96,11 @@
     }
     
     if (assignmentInfo.iconUrl.length > 0) {
-        [cell.imgAttachment setImageWithURL:[gApp.engine urlFromPath:assignmentInfo.iconUrl] placeholderImage:[UIImage imageNamed:@"chating-picture.png"]];
+        NSURL* qiniuImgUrl = [gApp.engine urlFromPath:assignmentInfo.iconUrl];
+        qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/0/w/50/h/50"];
+        
+        [cell.imgAttachment setImageWithURL:qiniuImgUrl
+                           placeholderImage:[UIImage imageNamed:@"chating-picture.png"]];
     }
     else {
         [cell.imgAttachment cancelImageRequestOperation];
@@ -170,7 +174,13 @@
         }
         
         self.assignmentInfoList = assignmentInfos;
-        [gApp hideAlert];
+        
+        if (_assignmentInfoList.count > 0) {
+            [gApp hideAlert];
+        }
+        else {
+            [gApp alert:@"没有亲子作业信息"];
+        }
         
         self.tableview.pullLastRefreshDate = [NSDate date];
         self.tableview.pullTableIsRefreshing = NO;

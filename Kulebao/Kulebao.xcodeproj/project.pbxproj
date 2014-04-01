@@ -33,6 +33,7 @@
 		090CC92C18DA88AF007781CB /* FTCoreTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 090CC92A18DA88AF007781CB /* FTCoreTextView.m */; };
 		090CC93018DA89FE007781CB /* about-us-text-giraffe.txt in Resources */ = {isa = PBXBuildFile; fileRef = 090CC92F18DA89FE007781CB /* about-us-text-giraffe.txt */; };
 		090CC93218DA8A96007781CB /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 090CC93118DA8A96007781CB /* CoreText.framework */; };
+		090E6BDC18EAFDA900F21BA7 /* NSURL+CSKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 090E6BDB18EAFDA900F21BA7 /* NSURL+CSKit.m */; };
 		0911B1D818E00F62006D0588 /* CSKuleChatingEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0911B1D718E00F62006D0588 /* CSKuleChatingEditorViewController.m */; };
 		0911B1E118E015E9006D0588 /* default_child_head_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0911B1D918E015E9006D0588 /* default_child_head_icon.png */; };
 		0911B1E218E015E9006D0588 /* default_child_head_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0911B1DA18E015E9006D0588 /* default_child_head_icon@2x.png */; };
@@ -410,6 +411,8 @@
 		090CC92E18DA88CA007781CB /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		090CC92F18DA89FE007781CB /* about-us-text-giraffe.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "about-us-text-giraffe.txt"; sourceTree = "<group>"; };
 		090CC93118DA8A96007781CB /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		090E6BDA18EAFDA900F21BA7 /* NSURL+CSKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+CSKit.h"; sourceTree = "<group>"; };
+		090E6BDB18EAFDA900F21BA7 /* NSURL+CSKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+CSKit.m"; sourceTree = "<group>"; };
 		0911B1D618E00F62006D0588 /* CSKuleChatingEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleChatingEditorViewController.h; sourceTree = "<group>"; };
 		0911B1D718E00F62006D0588 /* CSKuleChatingEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleChatingEditorViewController.m; sourceTree = "<group>"; };
 		0911B1D918E015E9006D0588 /* default_child_head_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default_child_head_icon.png; sourceTree = "<group>"; };
@@ -1654,16 +1657,18 @@
 			isa = PBXGroup;
 			children = (
 				09A9EBB418C07E8800D83119 /* CSKit.h */,
-				09ED59B418CDBF3900187585 /* UIWebView+CSKit.h */,
-				09ED59B518CDBF3900187585 /* UIWebView+CSKit.m */,
 				09FE6AF418C5A53200A840BE /* CSTextFieldDelegate.h */,
 				09FE6AF518C5A53200A840BE /* CSTextFieldDelegate.m */,
 				09ED59B018CDB01600187585 /* NSDate+CSKit.h */,
 				09ED59B118CDB01600187585 /* NSDate+CSKit.m */,
 				09C1C76418BD973B0040B06D /* NSDictionary+CSKit.h */,
 				09C1C76518BD973B0040B06D /* NSDictionary+CSKit.m */,
+				090E6BDA18EAFDA900F21BA7 /* NSURL+CSKit.h */,
+				090E6BDB18EAFDA900F21BA7 /* NSURL+CSKit.m */,
 				09ED59A318CC8F5200187585 /* UIViewController+CSKit.h */,
 				09ED59A418CC8F5200187585 /* UIViewController+CSKit.m */,
+				09ED59B418CDBF3900187585 /* UIWebView+CSKit.h */,
+				09ED59B518CDBF3900187585 /* UIWebView+CSKit.m */,
 			);
 			path = extends;
 			sourceTree = "<group>";
@@ -2086,6 +2091,7 @@
 				09142DB918E2713C00E5848F /* CJSONSerializer.m in Sources */,
 				09ED59B218CDB01600187585 /* NSDate+CSKit.m in Sources */,
 				09BA1C2A18BB3F8400760182 /* AFXMLRequestOperation.m in Sources */,
+				090E6BDC18EAFDA900F21BA7 /* NSURL+CSKit.m in Sources */,
 				090468F518C6FE1000D0846E /* CSKuleBindInfo.m in Sources */,
 				09FE6B0718C5C23300A840BE /* CSKuleCheckinViewController.m in Sources */,
 				093CD6B618D9771D0025972C /* UIImageView+AFNetworking.m in Sources */,
@@ -2244,6 +2250,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Kulebao/Kulebao-Prefix.pch";
 				INFOPLIST_FILE = "Kulebao/Kulebao-Info.plist";
@@ -2254,7 +2261,7 @@
 					"$(PROJECT_DIR)/Venders/BaiduMobStat",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7684FF84-DF45-42EE-9F45-8B818827B183";
+				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2266,6 +2273,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Kulebao/Kulebao-Prefix.pch";
 				INFOPLIST_FILE = "Kulebao/Kulebao-Info.plist";
@@ -2276,7 +2284,7 @@
 					"$(PROJECT_DIR)/Venders/BaiduMobStat",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7684FF84-DF45-42EE-9F45-8B818827B183";
+				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};

@@ -45,8 +45,6 @@
     self.tableview.pullArrowImage = [UIImage imageNamed:@"grayArrow.png"];
     
     _newsInfoList = [NSMutableArray array];
-
-    [gApp waitingAlert:@"正在获取数据"];
     [self reloadNewsList];
 }
 
@@ -95,7 +93,10 @@
     }
     
     if (newsInfo.image.length > 0) {
-        [cell.imgAttachment setImageWithURL:[gApp.engine urlFromPath:newsInfo.image] placeholderImage:[UIImage imageNamed:@"chating-picture.png"]];
+        NSURL* qiniuImgUrl = [gApp.engine urlFromPath:newsInfo.image];
+        qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/0/w/50/h/50"];
+        [cell.imgAttachment setImageWithURL:qiniuImgUrl
+                           placeholderImage:[UIImage imageNamed:@"chating-picture.png"]];
     }
     else {
         [cell.imgAttachment cancelImageRequestOperation];
@@ -182,7 +183,12 @@
         }
         
         self.newsInfoList = newsInfos;
-        [gApp hideAlert];
+        if (_newsInfoList.count > 0) {
+            [gApp hideAlert];
+        }
+        else {
+            [gApp alert:@"没有公告信息"];
+        }
         
         self.tableview.pullLastRefreshDate = [NSDate date];
         self.tableview.pullTableIsRefreshing = NO;
@@ -197,13 +203,19 @@
     };
     
     CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
-    [gApp.engine reqGetNewsOfKindergarten:gApp.engine.loginInfo.schoolId
-                              withClassId:currentChild.classId
-                                     from:-1
-                                       to:-1
-                                     most:-1
-                                  success:sucessHandler
-                                  failure:failureHandler];
+    if (currentChild) {
+        [gApp waitingAlert:@"正在获取数据"];
+        [gApp.engine reqGetNewsOfKindergarten:gApp.engine.loginInfo.schoolId
+                                  withClassId:currentChild.classId
+                                         from:-1
+                                           to:-1
+                                         most:-1
+                                      success:sucessHandler
+                                      failure:failureHandler];
+    }
+    else {
+        [gApp alert:@"没有宝宝信息。"];
+    }
 }
 
 - (void)loadMoreNewsList {
@@ -236,13 +248,18 @@
         };
         
         CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
-        [gApp.engine reqGetNewsOfKindergarten:gApp.engine.loginInfo.schoolId
-                                  withClassId:currentChild.classId
-                                         from:1
-                                           to:lastNewsInfo.newsId
-                                         most:25
-                                      success:sucessHandler
-                                      failure:failureHandler];
+        if (currentChild) {
+            [gApp.engine reqGetNewsOfKindergarten:gApp.engine.loginInfo.schoolId
+                                      withClassId:currentChild.classId
+                                             from:1
+                                               to:lastNewsInfo.newsId
+                                             most:25
+                                          success:sucessHandler
+                                          failure:failureHandler];
+        }
+        else {
+            [gApp alert:@"没有宝宝信息。"];
+        }
     }
     else {
         [self reloadNewsList];

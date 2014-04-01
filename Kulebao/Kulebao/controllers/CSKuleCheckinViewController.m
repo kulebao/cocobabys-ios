@@ -146,15 +146,21 @@
     NSTimeInterval beginTimestamp = [beginning timeIntervalSince1970];
     NSTimeInterval endTimestamp = [end timeIntervalSince1970];
     
-    [gApp waitingAlert:@"正在获取签到信息..."];
+    
     CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
-    [gApp.engine reqGetCheckInOutLogOfChild:currentChild
-                             inKindergarten:gApp.engine.loginInfo.schoolId
-                                     from:beginTimestamp
-                                       to:endTimestamp
-                                     most:999
-                                  success:sucessHandler
-                                  failure:failureHandler];
+    if (currentChild) {
+        [gApp waitingAlert:@"正在获取签到信息..."];
+        [gApp.engine reqGetCheckInOutLogOfChild:currentChild
+                                 inKindergarten:gApp.engine.loginInfo.schoolId
+                                           from:beginTimestamp
+                                             to:endTimestamp
+                                           most:999
+                                        success:sucessHandler
+                                        failure:failureHandler];
+    }
+    else {
+        [gApp alert:@"没有宝宝信息。"];
+    }
 }
 
 - (void)doUpdate{

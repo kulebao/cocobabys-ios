@@ -79,16 +79,14 @@ CSAppDelegate* gApp = nil;
 }
 
 - (void)logout {
-    gApp.engine.loginInfo = nil;
-    gApp.engine.relationships = nil;
-    gApp.engine.currentRelationship = nil;
-    gApp.engine.preferences.loginInfo = nil;
+    self.engine.loginInfo = nil;
+    self.engine.relationships = nil;
+    self.engine.currentRelationship = nil;
+    self.engine.preferences.loginInfo = nil;
+    
+    [self.engine reqUnbind];
     
     [self gotoLoginProcess];
-}
-
-- (void)rebind {
-    
 }
 
 #pragma mark - Alert

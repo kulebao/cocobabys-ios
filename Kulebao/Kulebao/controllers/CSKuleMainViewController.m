@@ -128,7 +128,7 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     CSLog(@"%@ changed.", keyPath);
     if ((object == gApp.engine) && [keyPath isEqualToString:@"currentRelationship"]) {
-        [self updateUI];
+        [self updateUI:YES];
     }
     else if((object == gApp.engine) && [keyPath isEqualToString:@"badgeOfNews"]) {
         JSBadgeView* badgeView = [_badges objectAtIndex:kKuleModuleNews];
@@ -297,17 +297,37 @@
     self.scrollContent.showsVerticalScrollIndicator = YES;
 }
 
-- (void)updateUI {
+- (void)updateUI:(BOOL)reloadPortrait {
     CSKuleChildInfo* childInfo = gApp.engine.currentRelationship.child;
-    CSLog(@"childInfo:%@", childInfo);
     if (childInfo) {
+        CSLog(@"childInfo:%@", childInfo);
         self.labClassName.text = childInfo.className;
         self.labSchoolName.text = gApp.engine.loginInfo.schoolName;
-        
-        NSURL* url = [gApp.engine urlFromPath:[childInfo.portrait stringByAppendingFormat:@"?%f",[[NSDate date] timeIntervalSince1970]]];
-        [self.imgChildPortrait setImageWithURL:url placeholderImage:[UIImage imageNamed:@"default_child_head_icon.png"]];
-        
         self.labChildNick.text = childInfo.displayNick;
+        
+        if (reloadPortrait) {
+            NSURL* qiniuImgUrl = [gApp.engine urlFromPath:childInfo.portrait];
+            qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/256/h/256"];
+            
+            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:qiniuImgUrl];
+            [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
+            
+            NSURLCache* cache = [NSURLCache sharedURLCache];
+            [cache removeCachedResponseForRequest:request];
+            request.cachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
+            
+            UIImage* placeholderImage = [UIImage imageNamed:@"default_child_head_icon.png"];
+            if (self.imgChildPortrait.image) {
+                placeholderImage = self.imgChildPortrait.image;
+            }
+            [self.imgChildPortrait setImageWithURLRequest:request
+                                         placeholderImage:placeholderImage
+                                                  success:nil
+                                                  failure:nil];
+        }
+    }
+    else {
+        [gApp alert:@"没有宝宝信息。"];
     }
 }
 
@@ -342,62 +362,75 @@
 - (void)doUpdateChildNick:(NSString*)nick {
     if (nick.length > 0) {
         CSKuleChildInfo* childInfo = gApp.engine.currentRelationship.child;
-        CSKuleChildInfo* cp = [childInfo copy];
-        cp.nick = nick;
-        
-        SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
-            CSLog(@"success.");
-            [gApp alert:@"修改成功"];
+        if (childInfo) {
+            CSKuleChildInfo* cp = [childInfo copy];
+            cp.nick = nick;
             
-            CSKuleChildInfo* cc = [CSKuleInterpreter decodeChildInfo:dataJson];
-            childInfo.nick = cc.nick;
+            SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
+                CSLog(@"success.");
+                [gApp alert:@"修改成功"];
+                
+                CSKuleChildInfo* cc = [CSKuleInterpreter decodeChildInfo:dataJson];
+                childInfo.nick = cc.nick;
+                
+                [self updateUI:NO];
+            };
             
-            [self updateUI];
-        };
-        
-        FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
-            CSLog(@"failure:%@", error);
-            [gApp alert:[error localizedDescription]];
-        };
-        
-        [gApp waitingAlert:@"修改宝宝昵称中，请稍候"];
-        [gApp.engine reqUpdateChildInfo:cp
-                         inKindergarten:gApp.engine.loginInfo.schoolId
-                                success:sucessHandler
-                                failure:failureHandler];
+            FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
+                CSLog(@"failure:%@", error);
+                [gApp alert:[error localizedDescription]];
+            };
+            
+            [gApp waitingAlert:@"修改宝宝昵称中，请稍候"];
+            [gApp.engine reqUpdateChildInfo:cp
+                             inKindergarten:gApp.engine.loginInfo.schoolId
+                                    success:sucessHandler
+                                    failure:failureHandler];
+        }
+        else {
+            [gApp alert:@"没有宝宝信息。"];
+        }
     }
     else {
         [gApp alert:@"昵称不能为空"];
     }
 }
 
-- (void)doUpdateChildPortrait:(NSString*)portrait {
+- (void)doUpdateChildPortrait:(NSString*)portrait withImage:(UIImage*)img {
     if (portrait.length > 0) {
         CSKuleChildInfo* childInfo = gApp.engine.currentRelationship.child;
-        CSKuleChildInfo* cp = [childInfo copy];
-        cp.portrait = portrait;
-        
-        SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
-            CSLog(@"success.");
-            [gApp alert:@"更新成功"];
+        if (childInfo) {
+            CSKuleChildInfo* cp = [childInfo copy];
+            cp.portrait = portrait;
             
-            CSKuleChildInfo* cc = [CSKuleInterpreter decodeChildInfo:dataJson];
-            childInfo.portrait = cc.portrait;
+            SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
+                CSLog(@"success.");
+                [gApp alert:@"更新成功"];
+                
+                CSKuleChildInfo* cc = [CSKuleInterpreter decodeChildInfo:dataJson];
+                childInfo.portrait = cc.portrait;
+                
+                self.imgChildPortrait.image = img;
+                
+                [self updateUI:NO];
+            };
             
-            //[self updateUI];
-        };
-        
-        FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
-            CSLog(@"failure:%@", error);
-            [gApp alert:[error localizedDescription]];
-            [self updateUI];
-        };
-        
-        [gApp waitingAlert:@"更新宝宝头像中"];
-        [gApp.engine reqUpdateChildInfo:cp
-                         inKindergarten:gApp.engine.loginInfo.schoolId
-                                success:sucessHandler
-                                failure:failureHandler];
+            FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
+                CSLog(@"failure:%@", error);
+                [gApp alert:[error localizedDescription]];
+                //[self updateUI:NO];
+            };
+            
+            [gApp waitingAlert:@"更新宝宝头像中"];
+            [gApp.engine reqUpdateChildInfo:cp
+                             inKindergarten:gApp.engine.loginInfo.schoolId
+                                    success:sucessHandler
+                                    failure:failureHandler];
+
+        }
+        else {
+            [gApp alert:@"没有宝宝信息。"];
+        }
     }
     else {
         [gApp alert:@"头像不存在"];
@@ -468,9 +501,10 @@
     
     
     SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
-        NSString* portrait = [NSString stringWithFormat:@"%@/%@", kQiniuDownloadServerHost, imgFileName];
-        self.imgChildPortrait.image = img;
-        [self doUpdateChildPortrait:portrait];
+        NSString* name = [dataJson valueForKeyNotNull:@"name"];
+        NSString* portrait = [NSString stringWithFormat:@"%@/%@", kQiniuDownloadServerHost, name];
+        //self.imgChildPortrait.image = img;
+        [self doUpdateChildPortrait:portrait withImage:img];
     };
     
     FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {

@@ -138,7 +138,10 @@
     
     NSString* divImage = @"";
     if (newsInfo.image.length > 0) {
-        divImage = [NSString stringWithFormat:@"<div><img src='%@' width='300' /></div>", [gApp.engine urlFromPath:newsInfo.image]];
+        NSURL* qiniuImgUrl = [gApp.engine urlFromPath:newsInfo.image];
+        qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/2/w/640/h/960"];
+        
+        divImage = [NSString stringWithFormat:@"<div><img src='%@' width='300' /></div>", [qiniuImgUrl absoluteString]];
     }
     
     NSString* ss = [NSString stringWithFormat:htmlTemp, title, title, timestampString, publiser, body, divImage];
@@ -175,7 +178,10 @@
     
     NSString* divImage = @"";
     if (assignmentInfo.iconUrl.length > 0) {
-        divImage = [NSString stringWithFormat:@"<div><img src='%@' width='300' /></div>", [gApp.engine urlFromPath:assignmentInfo.iconUrl]];
+        NSURL* qiniuImgUrl = [gApp.engine urlFromPath:assignmentInfo.iconUrl];
+        qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/2/w/640/h/960"];
+        
+        divImage = [NSString stringWithFormat:@"<div><img src='%@' width='300' /></div>", [qiniuImgUrl absoluteString]];
     }
     
     NSString* ss = [NSString stringWithFormat:htmlTemp, title, title, timestampString, publiser, body, divImage];
@@ -217,7 +223,10 @@
     
     NSString* divImage = @"";
     if (checkInOutLogInfo.recordUrl.length > 0) {
-        divImage = [NSString stringWithFormat:@"<div><img src='%@' width='300' /></div>", [gApp.engine urlFromPath:checkInOutLogInfo.recordUrl]];
+        NSURL* qiniuImgUrl = [gApp.engine urlFromPath:checkInOutLogInfo.recordUrl];
+        qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/2/w/640/h/960"];
+        
+        divImage = [NSString stringWithFormat:@"<div><img src='%@' width='300' /></div>", [qiniuImgUrl absoluteString]];
     }
     
     NSString* ss = [NSString stringWithFormat:htmlTemp, title, title, body, publiser, divImage];

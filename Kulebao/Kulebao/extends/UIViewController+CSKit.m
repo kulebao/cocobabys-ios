@@ -3,7 +3,7 @@
 //  CSKit
 //
 //  Created by xin.c.wang on 14-3-9.
-//  Copyright (c) 2014年 Codingsoft. All rights reserved.
+//  Copyright (c) 2014年 CSKit. All rights reserved.
 //
 
 #import "UIViewController+CSKit.h"

@@ -90,7 +90,10 @@
     NSString* publiser = gApp.engine.loginInfo.schoolName;
     
     if (checkInOutLogInfo.recordUrl.length > 0) {
-        [cell.imgAttachment setImageWithURL:[gApp.engine urlFromPath:checkInOutLogInfo.recordUrl] placeholderImage:[UIImage imageNamed:@"chating-picture.png"]];
+        NSURL* qiniuImgUrl = [gApp.engine urlFromPath:checkInOutLogInfo.recordUrl];
+        qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/0/w/50/h/50"];
+        [cell.imgAttachment setImageWithURL:qiniuImgUrl
+                           placeholderImage:[UIImage imageNamed:@"chating-picture.png"]];
     }
     else {
         [cell.imgAttachment cancelImageRequestOperation];

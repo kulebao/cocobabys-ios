@@ -3,7 +3,7 @@
 //  CSKit
 //
 //  Created by xin.c.wang on 13-4-28.
-//  Copyright (c) 2013年 Codingsoft. All rights reserved.
+//  Copyright (c) 2013年 CSKit. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

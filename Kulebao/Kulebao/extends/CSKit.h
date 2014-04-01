@@ -3,7 +3,7 @@
 //  CSKit
 //
 //  Created by xin.c.wang on 14-2-28.
-//  Copyright (c) 2014年 Codingsoft. All rights reserved.
+//  Copyright (c) 2014年 CSKit. All rights reserved.
 //
 
 #ifndef CSKit_CSKit_h
@@ -26,5 +26,6 @@
 #import "UIViewController+CSKit.h"
 #import "NSDate+CSKit.h"
 #import "UIWebView+CSKit.h"
+#import "NSURL+CSKit.h"
 
 #endif

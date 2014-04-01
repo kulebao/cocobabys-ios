@@ -216,7 +216,12 @@
                 [self updateWithAssessInfo:[assessInfos firstObject]];
             }
             else {
-                [gApp alert:@"没有更多评价"];
+                if (_assesses.count > 0) {
+                    [gApp alert:@"没有更多评价"];
+                }
+                else {
+                    [gApp alert:@"没有评价信息"];
+                }
             }
         };
         
@@ -233,6 +238,9 @@
                                       most:-1
                                    success:sucessHandler
                                    failure:failureHandler];
+    }
+    else {
+        [gApp alert:@"没有宝宝信息。"];
     }
 }
 

@@ -22,7 +22,6 @@
 
 // - Action
 - (void)logout;
-- (void)rebind;
 
 // - Alert
 - (void)alert:(NSString*)text;

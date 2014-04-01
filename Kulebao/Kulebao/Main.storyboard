@@ -28,6 +28,7 @@
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="imgBg" destination="JaV-fq-RO6" id="ppe-Dk-0rR"/>
+                        <outlet property="indicatorLoading" destination="BOz-V5-5Fp" id="peV-qp-TfO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UkH-hi-K8a" userLabel="First Responder" sceneMemberID="firstResponder"/>

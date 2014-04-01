@@ -11,6 +11,7 @@
 
 @interface CSKuleRootViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *imgBg;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorLoading;
 
 @end
 
@@ -35,6 +36,8 @@
     else {
         self.imgBg.image = [UIImage imageNamed:@"Default.png"];
     }
+    
+    self.indicatorLoading.hidesWhenStopped = YES;
     
     if (gApp.engine.preferences.loginInfo) {
         gApp.engine.loginInfo = gApp.engine.preferences.loginInfo;
@@ -70,13 +73,15 @@
         }
         else {
             CSLog(@"doReceiveBindInfo error_code=%d", bindInfo.errorCode);
-            [gApp gotoLoginProcess];
+            [gApp logout];
             [gApp alert:@"登录已过期，请重新登录。"];
         }
     };
     
     FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
         CSLog(@"failure:%@", error);
+        [gApp logout];
+        [gApp alert:error.localizedDescription];
     };
     
     [gApp waitingAlert:@"获取绑定信息..."];

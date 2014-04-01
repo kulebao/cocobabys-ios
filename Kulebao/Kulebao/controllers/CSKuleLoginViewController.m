@@ -126,13 +126,15 @@
         }
         else {
             CSLog(@"doReceiveBindInfo error_code=%d", bindInfo.errorCode);
-            [gApp gotoLoginProcess];
+            [gApp logout];
             [gApp alert:@"绑定失败，请重新登录。"];
         }
     };
     
     FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
         CSLog(@"failure:%@", error);
+        [gApp logout];
+        [gApp alert:error.localizedDescription];
     };
     
     [gApp waitingAlert:@"获取绑定信息..."];

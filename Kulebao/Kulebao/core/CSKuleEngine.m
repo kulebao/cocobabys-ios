@@ -11,6 +11,7 @@
 #import "AHAlertView.h"
 #import "BPush.h"
 #import "BaiduMobStat.h"
+#import "CSKuleURLCache.h"
 
 @interface CSKuleEngine() <BPushDelegate>
 
@@ -190,6 +191,14 @@
 }
 
 - (void)setupHttpClient {
+    NSString* homeDir = NSHomeDirectory();
+    NSString* cachePath = [homeDir stringByAppendingPathComponent:@"Documents/Cache"];
+    
+    CSKuleURLCache* cache = [[CSKuleURLCache alloc] initWithMemoryCapacity:4*1024*1024
+                                                              diskCapacity:20*1024*1024
+                                                                  diskPath:cachePath];
+    [CSKuleURLCache setSharedURLCache:cache];
+    
     if (_httpClient == nil) {
         NSURL* baseUrl = [NSURL URLWithString:kServerHost];
         _httpClient = [CSHttpClient httpClientWithHost:baseUrl];

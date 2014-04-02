@@ -174,9 +174,13 @@
         }
     }
     else {
-        // T0
-        NSURL* urlPortrait = [gApp.engine urlFromPath:gApp.engine.currentRelationship.child.portrait];
-        [imgPortrait setImageWithURL:urlPortrait placeholderImage:[UIImage imageNamed:@"chat_head_icon.png"]];
+        // To
+        CSKuleChildInfo* childInfo = gApp.engine.currentRelationship.child;
+        NSURL* qiniuImgUrl = [gApp.engine urlFromPath:childInfo.portrait];
+        qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/64/h/64"];
+        [imgPortrait setImageWithURL:qiniuImgUrl placeholderImage:[UIImage imageNamed:@"chat_head_icon.png"]];
+        
+        
         imgPortrait.frame = CGRectMake(320-2-32, 12, 32, 32);
         
         UIImage* bgImage = [UIImage imageNamed:@"msg-bg-to.png"];

@@ -494,10 +494,14 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     UIImage* img = info[UIImagePickerControllerEditedImage];
     NSData* imgData = UIImageJPEGRepresentation(img, 0.8);
-    NSString* imgFileName = [NSString stringWithFormat:@"child_photo/%@/%@/%@.jpg",
+    
+    long long timestamp = [[NSDate date] timeIntervalSince1970] * 1000;
+    
+    NSString* imgFileName = [NSString stringWithFormat:@"child_photo/%@/%@/%@_%@.jpg",
                              @(gApp.engine.loginInfo.schoolId),
                              gApp.engine.currentRelationship.child.childId,
-                             gApp.engine.currentRelationship.child.childId];
+                             gApp.engine.currentRelationship.child.childId,
+                             @(timestamp)];
     
     
     SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {

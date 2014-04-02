@@ -90,8 +90,10 @@
     CSKuleRelationshipInfo* relationship = [self.relationships objectAtIndex:indexPath.row];
     cell.labChildName.text = relationship.child.nick;
     
-    NSURL* url = [gApp.engine urlFromPath:[relationship.child.portrait stringByAppendingFormat:@"?%f",[[NSDate date] timeIntervalSince1970]]];
-    [cell.imgChildPortrait setImageWithURL:url placeholderImage:[UIImage imageNamed:@"default_child_head_icon.png"]];
+    NSURL* qiniuImgUrl = [gApp.engine urlFromPath:relationship.child.portrait];
+    qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/128/h/128"];
+    
+    [cell.imgChildPortrait setImageWithURL:qiniuImgUrl placeholderImage:[UIImage imageNamed:@"default_child_head_icon.png"]];
     
     return cell;
 }

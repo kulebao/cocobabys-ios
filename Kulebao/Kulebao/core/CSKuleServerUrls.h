@@ -24,8 +24,12 @@
 #define kQiniuBucket                @"cocobabys"
 
 // 七牛资源下载服务器Host地址
-#define kQiniuDownloadServerHost    @"http://cocobabys.qiniudn.com"
+#define kQiniuDownloadServerHost        kQiniuDownloadHttpsServerHost
 
+#define kQiniuDownloadHttpServerHost    @"http://cocobabys.qiniudn.com"
+
+// 七牛资源下载服务器Host地址 (Https)
+#define kQiniuDownloadHttpsServerHost   @"https://dn-cocobabys.qbox.me"
 
 /************************************************************/
 /*   Kule API

@@ -165,7 +165,7 @@
 }
 
 - (void)reloadAssignmentList {
-    SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         NSMutableArray* assignmentInfos = [NSMutableArray array];
         
         for (id assignmentInfoJson in dataJson) {
@@ -188,7 +188,7 @@
         [self.tableview reloadData];
     };
     
-    FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
         CSLog(@"failure:%@", error);
         self.tableview.pullTableIsRefreshing = NO;
         [gApp alert:[error localizedDescription]];
@@ -205,7 +205,7 @@
 - (void)loadMoreAssignmentList {
     CSKuleAssignmentInfo* lastAssignmentInfo = self.assignmentInfoList.lastObject;
     if (lastAssignmentInfo) {
-        SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
+        SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
             NSMutableArray* assignmentInfos = [NSMutableArray array];
             
             for (id assignmentInfoJson in dataJson) {
@@ -225,7 +225,7 @@
             [self.tableview reloadData];
         };
         
-        FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
+        FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
             CSLog(@"failure:%@", error);
             self.tableview.pullTableIsRefreshing = NO;
             [gApp alert:[error localizedDescription]];

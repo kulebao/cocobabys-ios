@@ -9,6 +9,7 @@
 #import "CSKuleLoginViewController.h"
 #import "CSAppDelegate.h"
 #import "BPush.h"
+#import "CSKuleForgotPswdViewController.h"
 
 @interface CSKuleLoginViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *labNotice;
@@ -60,24 +61,41 @@
     [[BaiduMobStat defaultStat] pageviewEndWithName:cName];
 }
 
+#pragma mark - Segues
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"segue.forgotpswd"]) {
+        CSKuleForgotPswdViewController* ctrl = segue.destinationViewController;
+        ctrl.mobile = _mobile;
+    }
+}
+
 #pragma mark - UI Actions
 - (IBAction)onBtnLoginClicked:(id)sender {
     [self.fieldPassword resignFirstResponder];
-
     [self doLogin];
 }
 
 - (IBAction)onBtnChangeAccountClicked:(id)sender {
+    [self.fieldPassword resignFirstResponder];
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)onBtnForgotPswdClicked:(id)sender {
+    [self.fieldPassword resignFirstResponder];
+    
+    if (_mobile.length > 0) {
+        [self performSegueWithIdentifier:@"segue.forgotpswd" sender:nil];
+    }
+    else {
+        [gApp alert:@"无效的手机号码，请退出重试。"];
+    }
 }
 
 - (void)doLogin {
     NSString* pswd = self.fieldPassword.text;
     if (pswd.length > 0 && self.mobile.length > 0) {
-        SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
+        SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
             CSKuleLoginInfo* loginInfo = [CSKuleInterpreter decodeLoginInfo:dataJson];
             if (loginInfo.errorCode == 0) {
                 gApp.engine.loginInfo = loginInfo;
@@ -91,7 +109,7 @@
             }
         };
         
-        FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
+        FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
             CSLog(@"failure:%@", error);
             [gApp alert:[error localizedDescription]];
         };
@@ -108,7 +126,7 @@
 }
 
 - (void)doReceiveBindInfo {
-    SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
 
         CSKuleBindInfo* bindInfo = [CSKuleInterpreter decodeBindInfo:dataJson];
         
@@ -131,7 +149,7 @@
         }
     };
     
-    FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
         CSLog(@"failure:%@", error);
         [gApp logout];
         [gApp alert:error.localizedDescription];

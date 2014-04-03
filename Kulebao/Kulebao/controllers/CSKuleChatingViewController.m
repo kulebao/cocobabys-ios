@@ -327,12 +327,12 @@
                              gApp.engine.loginInfo.accountName,
                              @((long long)[[NSDate date] timeIntervalSince1970]*1000)];
     
-    SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         NSString* imgUrl = [NSString stringWithFormat:@"%@/%@", kQiniuDownloadServerHost, imgFileName];
         [self doSendPicture:imgUrl];
     };
     
-    FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
         CSLog(@"failure:%@", error);
         [gApp alert:[error localizedDescription]];
     };
@@ -372,7 +372,7 @@
 }
 
 - (void)doSendMsg:(NSString*)msgBody withImage:(NSString*)imgUrl {
-    SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         NSMutableArray* chatMsgs = [NSMutableArray array];
         
         if ([dataJson isKindOfClass:[NSArray class]]) {
@@ -401,7 +401,7 @@
         [self.navigationController popToViewController:self animated:YES];
     };
     
-    FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
         CSLog(@"failure:%@", error);
         [gApp alert:[error localizedDescription]];
     };
@@ -423,7 +423,7 @@
 }
 
 - (void)doReloadChatingMsgsFrom:(NSInteger)fromId to:(NSInteger)toId most:(NSInteger)most {
-    SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         NSMutableArray* chatMsgs = [NSMutableArray array];
         
         if ([dataJson isKindOfClass:[NSArray class]]) {
@@ -442,7 +442,7 @@
         [gApp hideAlert];
     };
     
-    FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
         CSLog(@"failure:%@", error);
         [gApp alert:[error localizedDescription]];
     };

@@ -76,7 +76,13 @@
 // PATH: 聊天
 #define kChatingPath                @"/kindergarten/%@/conversation/%@"
 
-// PATH: 聊天
+// PATH: 园内评价
 #define kAssessPath                 @"/kindergarten/%@/child/%@/assess"
+
+// PATH: 短信验证
+#define kGetSmsCodePath             @"/ws/verify/phone/%@"
+
+// PATH: 重置密码
+#define kResetPswdPath              @"/resetpwd.do"
 
 #endif

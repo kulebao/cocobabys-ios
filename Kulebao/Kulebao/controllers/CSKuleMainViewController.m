@@ -368,7 +368,7 @@
             CSKuleChildInfo* cp = [childInfo copy];
             cp.nick = nick;
             
-            SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
+            SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
                 CSLog(@"success.");
                 [gApp alert:@"修改成功"];
                 
@@ -378,7 +378,7 @@
                 [self updateUI:NO];
             };
             
-            FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
+            FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
                 CSLog(@"failure:%@", error);
                 [gApp alert:[error localizedDescription]];
             };
@@ -405,7 +405,7 @@
             CSKuleChildInfo* cp = [childInfo copy];
             cp.portrait = portrait;
             
-            SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
+            SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
                 CSLog(@"success.");
                 [gApp alert:@"更新成功"];
                 
@@ -417,7 +417,7 @@
                 [self updateUI:NO];
             };
             
-            FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
+            FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
                 CSLog(@"failure:%@", error);
                 [gApp alert:[error localizedDescription]];
                 //[self updateUI:NO];
@@ -463,7 +463,7 @@
 }
 
 - (void)doGetSchoolInfo {
-    SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         id schoolInfoJson = [dataJson valueForKeyNotNull:@"school_info"];
         
         CSKuleSchoolInfo* schoolInfo = nil;
@@ -481,7 +481,7 @@
         }
     };
     
-    FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
         CSLog(@"failure:%@", error);
         [gApp alert:[error localizedDescription]];
     };
@@ -506,14 +506,14 @@
                              @(timestamp)];
     
     
-    SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         NSString* name = [dataJson valueForKeyNotNull:@"name"];
         NSString* portrait = [NSString stringWithFormat:@"%@/%@", kQiniuDownloadServerHost, name];
         //self.imgChildPortrait.image = img;
         [self doUpdateChildPortrait:portrait withImage:img];
     };
     
-    FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
         CSLog(@"failure:%@", error);
         [gApp alert:[error localizedDescription]];
     };
@@ -636,7 +636,7 @@
 
 #pragma mark - Private
 - (void)getRelationshipInfos {
-    SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         NSMutableArray* relationships = [NSMutableArray array];
         
         for (id relationshipJson in dataJson) {
@@ -666,7 +666,7 @@
 //        gApp.engine.badgeOfAssess = 100;
     };
     
-    FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
         CSLog(@"failure:%@", error);
         [gApp alert:[error localizedDescription]];
     };

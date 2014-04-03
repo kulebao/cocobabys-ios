@@ -55,7 +55,7 @@
 }
 
 - (void)doReceiveBindInfo {
-    SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         
         CSKuleBindInfo* bindInfo = [CSKuleInterpreter decodeBindInfo:dataJson];
         
@@ -78,7 +78,7 @@
         }
     };
     
-    FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
         CSLog(@"failure:%@", error);
         [gApp logout];
         [gApp alert:error.localizedDescription];

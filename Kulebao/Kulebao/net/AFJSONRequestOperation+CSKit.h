@@ -8,8 +8,8 @@
 
 #import "AFJSONRequestOperation.h"
 
-typedef void (^SuccessResponseHandler) (NSURLRequest *request,id dataJson);
-typedef void (^FailureResponseHandler) (NSURLRequest *request, NSError *error);
+typedef void (^SuccessResponseHandler) (AFHTTPRequestOperation *operation, id dataJson);
+typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSError *error);
 
 @interface AFJSONRequestOperation (CSKit)
 

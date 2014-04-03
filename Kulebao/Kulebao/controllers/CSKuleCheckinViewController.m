@@ -120,7 +120,7 @@
 
 #pragma mark - Private
 - (void)reloadCheckInOutLogs {
-    SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         NSMutableArray* checkInOutLogInfos = [NSMutableArray array];
         
         for (id checkInOutLogInfoJson in dataJson) {
@@ -133,7 +133,7 @@
         [gApp hideAlert];
     };
     
-    FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
         CSLog(@"failure:%@", error);
         [gApp alert:[error localizedDescription]];
     };

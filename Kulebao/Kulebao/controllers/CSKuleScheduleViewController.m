@@ -65,7 +65,7 @@
 
 #pragma mark - Private
 - (void)reloadSchedules {
-    SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         NSMutableArray* scheduleInfos = [NSMutableArray array];
         
         for (id scheduleInfoJson in dataJson) {
@@ -83,7 +83,7 @@
         }
     };
     
-    FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
         CSLog(@"failure:%@", error);
         [gApp alert:[error localizedDescription]];
     };

@@ -117,11 +117,11 @@
         _preferences.deviceToken = deviceToken;
         _preferences.baiduPushInfo = nil;
         _baiduPushInfo = nil;
-    
-        // 必须。可以在其它时机调用,只有在该方法返回(通过 onMethod:response:回调)绑定成功时,app 才能接收到 Push 消息。
-        // 一个 app 绑定成功至少一次即可(如果 access token 变更请重新绑定)。
-        [BPush bindChannel];
     }
+    
+    // 必须。可以在其它时机调用,只有在该方法返回(通过 onMethod:response:回调)绑定成功时,app 才能接收到 Push 消息。
+    // 一个 app 绑定成功至少一次即可(如果 access token 变更请重新绑定)。
+    [BPush bindChannel];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
@@ -332,7 +332,7 @@
     NSParameterAssert(key);
     NSParameterAssert(mime);
     
-    [self reqGetUploadTokenWithKey:key success:^(NSURLRequest *request, id dataJson) {
+    [self reqGetUploadTokenWithKey:key success:^(AFHTTPRequestOperation *operation, id dataJson) {
         NSString* token = [dataJson valueForKeyNotNull:@"token"];
         
         if (token) {
@@ -348,11 +348,11 @@
                                                  code:-8888
                                              userInfo: @{NSLocalizedDescriptionKey:@"Invalid Token."}];
             
-            failure(request, error);
+            failure(operation, error);
         }
         
-    } failure:^(NSURLRequest *request, NSError *error) {
-        failure(request, error);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        failure(operation, error);
     }];
 }
 
@@ -396,7 +396,7 @@
 
 #pragma mark - Retry
 - (void)retryRequestOperationAfterBind:(AFHTTPRequestOperation*)operation {
-    SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         
         CSKuleBindInfo* bindInfo = [CSKuleInterpreter decodeBindInfo:dataJson];
         
@@ -419,7 +419,7 @@
         }
     };
     
-    FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
         CSLog(@"failure:%@", error);
     };
     
@@ -836,4 +836,49 @@
                                success:success
                                failure:failure];
 }
+
+- (void)reqGetSmsCode:(NSString*)phone
+              success:(SuccessResponseHandler)success
+              failure:(FailureResponseHandler)failure {
+    NSParameterAssert(phone);
+
+    NSString* path = [NSString stringWithFormat:kGetSmsCodePath, phone];
+    
+    NSString* method = @"GET";
+    
+    NSDictionary* parameters = nil;
+    
+    [_httpClient httpRequestWithMethod:method
+                                  path:path
+                            parameters:parameters
+                               success:success
+                               failure:failure];
+}
+
+- (void)reqResetPswd:(NSString*)account
+             smsCode:(NSString*)authcode
+         withNewPswd:(NSString*)newPswd
+             success:(SuccessResponseHandler)success
+             failure:(FailureResponseHandler)failure {
+    
+    NSParameterAssert(account);
+    NSParameterAssert(authcode);
+    NSParameterAssert(newPswd);
+    
+    NSString* path = kResetPswdPath;
+    
+    NSString* method = @"POST";
+    
+    NSDictionary* parameters = @{@"account_name": account,
+                                 @"authcode": authcode,
+                                 @"new_password": newPswd};
+    
+    [_httpClient httpRequestWithMethod:method
+                                  path:path
+                            parameters:parameters
+                               success:success
+                               failure:failure];
+    
+}
+
 @end

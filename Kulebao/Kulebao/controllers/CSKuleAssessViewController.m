@@ -200,7 +200,7 @@
 - (void)doGetAssesses {
     CSKuleChildInfo* childInfo = gApp.engine.currentRelationship.child;
     if (childInfo) {
-        SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
+        SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
             NSMutableArray* assessInfos = [NSMutableArray array];
 
             for (id assessInfoJson in dataJson) {
@@ -225,7 +225,7 @@
             }
         };
         
-        FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
+        FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
             CSLog(@"failure:%@", error);
             [gApp alert:[error localizedDescription]];
         };

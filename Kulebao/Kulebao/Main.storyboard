@@ -317,7 +317,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dhv-xm-cbE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1034" y="-131"/>
+            <point key="canvasLocation" x="-1650" y="-987"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="FoN-a3-reL">
@@ -336,7 +336,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oSW-U2-US3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1548" y="-131"/>
+            <point key="canvasLocation" x="-2164" y="-987"/>
         </scene>
         <!--Kule Login View Controller-->
         <scene sceneID="uvG-ID-Kc4">
@@ -437,11 +437,12 @@
                     <connections>
                         <outlet property="fieldPassword" destination="ajn-WE-hkg" id="Xts-KV-3bN"/>
                         <outlet property="labNotice" destination="cuW-nh-jtK" id="DXV-I7-e1P"/>
+                        <segue destination="8aC-t1-1g5" kind="push" identifier="segue.forgotpswd" id="Haz-Hj-mbt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ty5-Hr-rCS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-518" y="-131"/>
+            <point key="canvasLocation" x="-1134" y="-987"/>
         </scene>
         <!--Kule Settings View Controller - 设置-->
         <scene sceneID="AzY-uz-JrF">
@@ -1288,12 +1289,147 @@
             </objects>
             <point key="canvasLocation" x="664" y="3381"/>
         </scene>
+        <!--Kule Forgot Pswd View Controller-->
+        <scene sceneID="D1o-k1-sTd">
+            <objects>
+                <viewController storyboardIdentifier="CSKuleForgotPswdViewController" id="8aC-t1-1g5" customClass="CSKuleForgotPswdViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="v6Q-wT-DyR">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app-bg-type3.png" id="zV2-zw-tCk">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img-tree-type1.png" id="kd1-Ej-4lp">
+                                <rect key="frame" x="0.0" y="250" width="320" height="230"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-1.png" id="mOO-G2-qVh">
+                                <rect key="frame" x="93" y="10" width="135" height="94"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="eVb-MF-joO" customClass="TPKeyboardAvoidingScrollView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" id="mMW-GY-LLC" userLabel="ContentView">
+                                        <rect key="frame" x="43" y="103" width="234" height="311"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="OJ7-hB-hXU">
+                                                <rect key="frame" x="0.0" y="0.0" width="234" height="311"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ZBd-dN-soV">
+                                                <rect key="frame" x="15" y="241" width="199" height="38"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                <state key="normal" title="重置密码" backgroundImage="btn-type1.png">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="highlighted" backgroundImage="btn-type1-pressed.png"/>
+                                                <connections>
+                                                    <action selector="onBtnResetClicked:" destination="8aC-t1-1g5" eventType="touchUpInside" id="C4X-rV-Mb5"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="3YI-WI-IGI">
+                                                <rect key="frame" x="15" y="88" width="199" height="38"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                <state key="normal" title="获取验证码" backgroundImage="btn-type1.png">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="highlighted" backgroundImage="btn-type1-pressed.png"/>
+                                                <connections>
+                                                    <action selector="onBtnRetrySmsCodeClicked:" destination="8aC-t1-1g5" eventType="touchUpInside" id="rdl-OI-dT3"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="W6W-mc-Akf">
+                                                <rect key="frame" x="7" y="287" width="91" height="24"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <state key="normal" title="返回上一页">
+                                                    <color key="titleColor" red="1" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="highlighted">
+                                                    <color key="titleColor" red="0.85490202900000001" green="0.392156899" blue="0.23529413339999999" alpha="1" colorSpace="deviceRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="onBtnBackClicked:" destination="8aC-t1-1g5" eventType="touchUpInside" id="tpZ-hQ-sai"/>
+                                                </connections>
+                                            </button>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="1、点击下方按钮获取验证码，验证码会以短信的方式发送到该手机上； 2、按照提示，输入验证码和新密码，然后点击重置密码按钮。" selectable="NO" id="nPf-7P-hJB">
+                                                <rect key="frame" x="7" y="5" width="220" height="80"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <color key="textColor" red="1" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg-input-normal.png" id="rRS-Bv-HV3">
+                                                <rect key="frame" x="15" y="134" width="199" height="28"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg-input-normal.png" id="98X-2E-6el">
+                                                <rect key="frame" x="15" y="170" width="199" height="28"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg-input-normal.png" id="ffP-Ys-FgZ">
+                                                <rect key="frame" x="15" y="206" width="199" height="28"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入短信验证码" minimumFontSize="17" id="74e-Ty-CvE">
+                                                <rect key="frame" x="19" y="137" width="190" height="24"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numbersAndPunctuation"/>
+                                            </textField>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入新密码" minimumFontSize="17" id="5Wf-vO-Qid">
+                                                <rect key="frame" x="19" y="173" width="190" height="24"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                            </textField>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请再次输入新密码" minimumFontSize="17" id="Nab-tX-Ayv">
+                                                <rect key="frame" x="19" y="209" width="190" height="24"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                            </textField>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="s2U-U9-miO"/>
+                    <connections>
+                        <outlet property="btnRetrySmsCode" destination="3YI-WI-IGI" id="pvk-XL-4ix"/>
+                        <outlet property="fieldNewPswd" destination="5Wf-vO-Qid" id="7U8-1N-B2W"/>
+                        <outlet property="fieldNewPswdConfirm" destination="Nab-tX-Ayv" id="UP4-e0-n0N"/>
+                        <outlet property="fieldSmsCode" destination="74e-Ty-CvE" id="TAE-7V-LtH"/>
+                        <outlet property="imgConentBg" destination="OJ7-hB-hXU" id="jFg-3h-s5p"/>
+                        <outlet property="imgFieldBg1" destination="rRS-Bv-HV3" id="F2n-iH-UVj"/>
+                        <outlet property="imgFieldBg2" destination="98X-2E-6el" id="4ty-Qq-INN"/>
+                        <outlet property="imgFieldBg3" destination="ffP-Ys-FgZ" id="hi0-zC-BKl"/>
+                        <outlet property="textNotice" destination="nPf-7P-hJB" id="V8t-qP-Ki8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dbX-t7-Bou" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-590" y="-987"/>
+        </scene>
     </scenes>
     <resources>
         <image name="app-bg-type3.png" width="320" height="568"/>
         <image name="arrow-left-1.png" width="24" height="24"/>
         <image name="arrow-right-1.png" width="24" height="24"/>
         <image name="avatar-bg.png" width="115" height="115"/>
+        <image name="bg-input-normal.png" width="157" height="28"/>
         <image name="btn-settings-pressed.png" width="36" height="36"/>
         <image name="btn-settings.png" width="36" height="36"/>
         <image name="btn-type1-pressed.png" width="199" height="38"/>

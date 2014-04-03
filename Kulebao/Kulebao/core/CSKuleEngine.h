@@ -159,5 +159,16 @@
                       success:(SuccessResponseHandler)success
                       failure:(FailureResponseHandler)failure;
 
+- (void)reqGetSmsCode:(NSString*)phone
+              success:(SuccessResponseHandler)success
+              failure:(FailureResponseHandler)failure;
+
+- (void)reqResetPswd:(NSString*)account
+             smsCode:(NSString*)authcode
+         withNewPswd:(NSString*)newPswd
+             success:(SuccessResponseHandler)success
+             failure:(FailureResponseHandler)failure;
+
+
 
 @end

@@ -174,7 +174,7 @@
 }
 
 - (void)reloadNewsList {
-    SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         NSMutableArray* newsInfos = [NSMutableArray array];
         
         for (id newsInfoJson in dataJson) {
@@ -196,7 +196,7 @@
         [self.tableview reloadData];
     };
     
-    FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
         CSLog(@"failure:%@", error);
         self.tableview.pullTableIsRefreshing = NO;
         [gApp alert:[error localizedDescription]];
@@ -221,7 +221,7 @@
 - (void)loadMoreNewsList {
     CSKuleNewsInfo* lastNewsInfo = self.newsInfoList.lastObject;
     if (lastNewsInfo) {
-        SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
+        SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
             NSMutableArray* newsInfos = [NSMutableArray array];
             
             for (id newsInfoJson in dataJson) {
@@ -241,7 +241,7 @@
             [self.tableview reloadData];
         };
         
-        FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
+        FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
             CSLog(@"failure:%@", error);
             self.tableview.pullTableIsRefreshing = NO;
             [gApp alert:[error localizedDescription]];

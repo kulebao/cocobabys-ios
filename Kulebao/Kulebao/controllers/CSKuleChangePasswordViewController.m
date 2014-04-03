@@ -93,7 +93,7 @@
     NSParameterAssert(newPswd);
     NSParameterAssert(oldPswd);
     
-    SuccessResponseHandler sucessHandler = ^(NSURLRequest *request, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         NSString* access_token = [dataJson valueForKeyNotNull:@"access_token"];
         NSInteger error_code = [[dataJson valueForKeyNotNull:@"error_code"] integerValue];
         
@@ -110,7 +110,7 @@
         }
     };
     
-    FailureResponseHandler failureHandler = ^(NSURLRequest *request, NSError *error) {
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
         CSLog(@"failure:%@", error);
         [gApp alert:error.localizedDescription];
     };

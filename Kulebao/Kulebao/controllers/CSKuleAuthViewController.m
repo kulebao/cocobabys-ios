@@ -85,7 +85,15 @@
                 case PHONE_NUM_IS_FIRST_USE:
                 {
                     [gApp hideAlert];
-                    [self performSegueWithIdentifier:@"segue.login" sender:nil];
+                    
+                    NSDate* lastLoginDate = [gApp.engine.preferences.historyAccounts objectForKey:mobile];
+                    if (lastLoginDate) {
+                        [self performSegueWithIdentifier:@"segue.login" sender:nil];
+                    }
+                    else {
+                        CSLog(@"first login of account: %@", mobile);
+                        [self performSegueWithIdentifier:@"segue.login" sender:nil];
+                    }
                 }
                     break;
                 case PHONE_NUM_IS_INVALID:

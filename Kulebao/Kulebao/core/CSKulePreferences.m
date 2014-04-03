@@ -170,7 +170,7 @@ static NSString* kKeyHistoryAccounts = @"com.cocobabys.Kulebao.Preferences.histo
             _historyAccounts = [NSMutableDictionary dictionary];
         }
         
-        [_historyAccounts setObject:@(YES) forKey:account];
+        [_historyAccounts setObject:[NSDate date] forKey:account];
         [self savePreferences];
     }
 }

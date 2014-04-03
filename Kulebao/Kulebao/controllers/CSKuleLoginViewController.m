@@ -139,6 +139,8 @@
             
             gApp.engine.preferences.loginInfo = gApp.engine.loginInfo;
             
+            [gApp.engine.preferences addHistoryAccount:gApp.engine.loginInfo.accountName];
+            
             [gApp gotoMainProcess];
             [gApp hideAlert];
         }

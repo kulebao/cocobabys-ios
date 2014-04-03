@@ -18,13 +18,13 @@
     AFJSONRequestOperation *requestOperation = [(AFJSONRequestOperation *)[self alloc] initWithRequest:urlRequest];
     [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (responseObject && success) {
-            success(operation.request, responseObject);
+            success(operation, responseObject);
         }
         else if(failure) {
             NSError* error = [NSError errorWithDomain:@"CSKit"
                                                  code:-9999
                                              userInfo: @{NSLocalizedDescriptionKey:@"服务异常"}];
-            failure(operation.request, error);
+            failure(operation, error);
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -32,7 +32,7 @@
             [gApp.engine retryRequestOperationAfterBind:operation];
         }
         else if (failure) {
-            failure(operation.request, error);
+            failure(operation, error);
         }
     }];
     

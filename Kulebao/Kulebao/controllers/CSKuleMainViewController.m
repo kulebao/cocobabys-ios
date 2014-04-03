@@ -305,26 +305,28 @@
         self.labSchoolName.text = gApp.engine.loginInfo.schoolName;
         self.labChildNick.text = childInfo.displayNick;
         
+        NSURL* qiniuImgUrl = [gApp.engine urlFromPath:childInfo.portrait];
+        qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/256/h/256"];
+        
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:qiniuImgUrl];
+        [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
+        
         if (reloadPortrait) {
-            NSURL* qiniuImgUrl = [gApp.engine urlFromPath:childInfo.portrait];
-            qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/256/h/256"];
-            
-            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:qiniuImgUrl];
-            [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
-            
-            NSURLCache* cache = [NSURLCache sharedURLCache];
-            [cache removeCachedResponseForRequest:request];
             request.cachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
-            
-            UIImage* placeholderImage = [UIImage imageNamed:@"default_child_head_icon.png"];
-            if (self.imgChildPortrait.image) {
-                placeholderImage = self.imgChildPortrait.image;
-            }
-            [self.imgChildPortrait setImageWithURLRequest:request
-                                         placeholderImage:placeholderImage
-                                                  success:nil
-                                                  failure:nil];
         }
+        else {
+            request.cachePolicy = NSURLRequestUseProtocolCachePolicy;
+        }
+        
+        UIImage* placeholderImage = [UIImage imageNamed:@"default_child_head_icon.png"];
+        if (self.imgChildPortrait.image) {
+            placeholderImage = self.imgChildPortrait.image;
+        }
+        [self.imgChildPortrait setImageWithURLRequest:request
+                                     placeholderImage:placeholderImage
+                                              success:nil
+                                              failure:nil];
+        
     }
     else {
         [gApp alert:@"没有宝宝信息。"];

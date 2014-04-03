@@ -195,7 +195,7 @@
     NSString* cachePath = [homeDir stringByAppendingPathComponent:@"Documents/Cache"];
     
     CSKuleURLCache* cache = [[CSKuleURLCache alloc] initWithMemoryCapacity:4*1024*1024
-                                                              diskCapacity:20*1024*1024
+                                                              diskCapacity:64*1024*1024
                                                                   diskPath:cachePath];
     [CSKuleURLCache setSharedURLCache:cache];
     

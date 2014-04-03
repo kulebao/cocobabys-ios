@@ -703,20 +703,20 @@
 		09A9EBD418C0A01B00D83119 /* CSKuleMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleMainViewController.m; sourceTree = "<group>"; };
 		09A9EBD618C0A02800D83119 /* CSKuleSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleSettingsViewController.h; sourceTree = "<group>"; };
 		09A9EBD718C0A02800D83119 /* CSKuleSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleSettingsViewController.m; sourceTree = "<group>"; };
-		09BA1B8D18BB2AB300760182 /* Kulebao.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kulebao.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		09BA1B8D18BB2AB300760182 /* youlebao.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = youlebao.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09BA1B9018BB2AB300760182 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		09BA1B9218BB2AB300760182 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		09BA1B9418BB2AB300760182 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		09BA1B9818BB2AB300760182 /* Kulebao-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Kulebao-Info.plist"; sourceTree = "<group>"; };
+		09BA1B9818BB2AB300760182 /* youlebao-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "youlebao-Info.plist"; sourceTree = "<group>"; };
 		09BA1B9A18BB2AB300760182 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		09BA1B9C18BB2AB300760182 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		09BA1B9E18BB2AB300760182 /* Kulebao-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Kulebao-Prefix.pch"; sourceTree = "<group>"; };
+		09BA1B9E18BB2AB300760182 /* youlebao-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "youlebao-Prefix.pch"; sourceTree = "<group>"; };
 		09BA1B9F18BB2AB400760182 /* CSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSAppDelegate.h; sourceTree = "<group>"; };
 		09BA1BA018BB2AB400760182 /* CSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CSAppDelegate.m; sourceTree = "<group>"; };
 		09BA1BA818BB2AB400760182 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		09BA1BAE18BB2AB600760182 /* KulebaoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KulebaoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		09BA1BAE18BB2AB600760182 /* youlebaoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = youlebaoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		09BA1BAF18BB2AB600760182 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		09BA1BB718BB2AB600760182 /* KulebaoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KulebaoTests-Info.plist"; sourceTree = "<group>"; };
+		09BA1BB718BB2AB600760182 /* youlebaoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "youlebaoTests-Info.plist"; sourceTree = "<group>"; };
 		09BA1BB918BB2AB600760182 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		09BA1BBB18BB2AB600760182 /* KulebaoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KulebaoTests.m; sourceTree = "<group>"; };
 		09BA1BCC18BB2FC700760182 /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
@@ -1446,8 +1446,8 @@
 		09BA1B8E18BB2AB300760182 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				09BA1B8D18BB2AB300760182 /* Kulebao.app */,
-				09BA1BAE18BB2AB600760182 /* KulebaoTests.xctest */,
+				09BA1B8D18BB2AB300760182 /* youlebao.app */,
+				09BA1BAE18BB2AB600760182 /* youlebaoTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1494,13 +1494,13 @@
 			children = (
 				09BA1BA818BB2AB400760182 /* Images.xcassets */,
 				09BA1C3218BB429100760182 /* Main.storyboard */,
-				09BA1B9818BB2AB300760182 /* Kulebao-Info.plist */,
+				09BA1B9818BB2AB300760182 /* youlebao-Info.plist */,
 				09BA1B9918BB2AB300760182 /* InfoPlist.strings */,
 				09A9EBB718C07F6F00D83119 /* Localizable.strings */,
 				09BA1B9C18BB2AB300760182 /* main.m */,
 				09BA1B9F18BB2AB400760182 /* CSAppDelegate.h */,
 				09BA1BA018BB2AB400760182 /* CSAppDelegate.m */,
-				09BA1B9E18BB2AB300760182 /* Kulebao-Prefix.pch */,
+				09BA1B9E18BB2AB300760182 /* youlebao-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1518,7 +1518,7 @@
 		09BA1BB618BB2AB600760182 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				09BA1BB718BB2AB600760182 /* KulebaoTests-Info.plist */,
+				09BA1BB718BB2AB600760182 /* youlebaoTests-Info.plist */,
 				09BA1BB818BB2AB600760182 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -1705,9 +1705,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		09BA1B8C18BB2AB300760182 /* Kulebao */ = {
+		09BA1B8C18BB2AB300760182 /* youlebao */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 09BA1BBF18BB2AB600760182 /* Build configuration list for PBXNativeTarget "Kulebao" */;
+			buildConfigurationList = 09BA1BBF18BB2AB600760182 /* Build configuration list for PBXNativeTarget "youlebao" */;
 			buildPhases = (
 				09BA1B8918BB2AB300760182 /* Sources */,
 				09BA1B8A18BB2AB300760182 /* Frameworks */,
@@ -1717,14 +1717,14 @@
 			);
 			dependencies = (
 			);
-			name = Kulebao;
+			name = youlebao;
 			productName = Kulebao;
-			productReference = 09BA1B8D18BB2AB300760182 /* Kulebao.app */;
+			productReference = 09BA1B8D18BB2AB300760182 /* youlebao.app */;
 			productType = "com.apple.product-type.application";
 		};
-		09BA1BAD18BB2AB600760182 /* KulebaoTests */ = {
+		09BA1BAD18BB2AB600760182 /* youlebaoTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 09BA1BC218BB2AB600760182 /* Build configuration list for PBXNativeTarget "KulebaoTests" */;
+			buildConfigurationList = 09BA1BC218BB2AB600760182 /* Build configuration list for PBXNativeTarget "youlebaoTests" */;
 			buildPhases = (
 				09BA1BAA18BB2AB600760182 /* Sources */,
 				09BA1BAB18BB2AB600760182 /* Frameworks */,
@@ -1735,9 +1735,9 @@
 			dependencies = (
 				09BA1BB418BB2AB600760182 /* PBXTargetDependency */,
 			);
-			name = KulebaoTests;
+			name = youlebaoTests;
 			productName = KulebaoTests;
-			productReference = 09BA1BAE18BB2AB600760182 /* KulebaoTests.xctest */;
+			productReference = 09BA1BAE18BB2AB600760182 /* youlebaoTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -1751,14 +1751,14 @@
 				ORGANIZATIONNAME = Cocobabys;
 				TargetAttributes = {
 					09BA1B8C18BB2AB300760182 = {
-						DevelopmentTeam = 8KD84Z92HH;
+						DevelopmentTeam = J7M2ZSPTSZ;
 					};
 					09BA1BAD18BB2AB600760182 = {
 						TestTargetID = 09BA1B8C18BB2AB300760182;
 					};
 				};
 			};
-			buildConfigurationList = 09BA1B8818BB2AB300760182 /* Build configuration list for PBXProject "Kulebao" */;
+			buildConfigurationList = 09BA1B8818BB2AB300760182 /* Build configuration list for PBXProject "youlebao" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1772,8 +1772,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				09BA1B8C18BB2AB300760182 /* Kulebao */,
-				09BA1BAD18BB2AB600760182 /* KulebaoTests */,
+				09BA1B8C18BB2AB300760182 /* youlebao */,
+				09BA1BAD18BB2AB600760182 /* youlebaoTests */,
 			);
 		};
 /* End PBXProject section */
@@ -2144,7 +2144,7 @@
 /* Begin PBXTargetDependency section */
 		09BA1BB418BB2AB600760182 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 09BA1B8C18BB2AB300760182 /* Kulebao */;
+			target = 09BA1B8C18BB2AB300760182 /* youlebao */;
 			targetProxy = 09BA1BB318BB2AB600760182 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -2255,19 +2255,19 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Kulebao/Kulebao-Prefix.pch";
-				INFOPLIST_FILE = "Kulebao/Kulebao-Info.plist";
+				GCC_PREFIX_HEADER = "Kulebao/youlebao-Prefix.pch";
+				INFOPLIST_FILE = "Kulebao/youlebao-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/Venders/libBPush",
 					"$(PROJECT_DIR)/Venders/BaiduMobStat",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PRODUCT_NAME = youlebao;
+				PROVISIONING_PROFILE = "43731CFF-3503-4DA9-9270-94E2377AB3CF";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2278,19 +2278,19 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Kulebao/Kulebao-Prefix.pch";
-				INFOPLIST_FILE = "Kulebao/Kulebao-Info.plist";
+				GCC_PREFIX_HEADER = "Kulebao/youlebao-Prefix.pch";
+				INFOPLIST_FILE = "Kulebao/youlebao-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/Venders/libBPush",
 					"$(PROJECT_DIR)/Venders/BaiduMobStat",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PRODUCT_NAME = youlebao;
+				PROVISIONING_PROFILE = "43731CFF-3503-4DA9-9270-94E2377AB3CF";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2311,8 +2311,8 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "KulebaoTests/KulebaoTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "KulebaoTests/youlebaoTests-Info.plist";
+				PRODUCT_NAME = youlebaoTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -2329,8 +2329,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Kulebao/Kulebao-Prefix.pch";
-				INFOPLIST_FILE = "KulebaoTests/KulebaoTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "KulebaoTests/youlebaoTests-Info.plist";
+				PRODUCT_NAME = youlebaoTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -2339,7 +2339,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		09BA1B8818BB2AB300760182 /* Build configuration list for PBXProject "Kulebao" */ = {
+		09BA1B8818BB2AB300760182 /* Build configuration list for PBXProject "youlebao" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				09BA1BBD18BB2AB600760182 /* Debug */,
@@ -2348,7 +2348,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		09BA1BBF18BB2AB600760182 /* Build configuration list for PBXNativeTarget "Kulebao" */ = {
+		09BA1BBF18BB2AB600760182 /* Build configuration list for PBXNativeTarget "youlebao" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				09BA1BC018BB2AB600760182 /* Debug */,
@@ -2357,7 +2357,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		09BA1BC218BB2AB600760182 /* Build configuration list for PBXNativeTarget "KulebaoTests" */ = {
+		09BA1BC218BB2AB600760182 /* Build configuration list for PBXNativeTarget "youlebaoTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				09BA1BC318BB2AB600760182 /* Debug */,

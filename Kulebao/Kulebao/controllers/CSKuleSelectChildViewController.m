@@ -85,6 +85,9 @@
     if (cell == nil) {
         NSArray* nibs = [[NSBundle mainBundle] loadNibNamed:@"CSKuleChildCell" owner:nil options:nil];
         cell = [nibs firstObject];
+        
+        cell.imgChildPortrait.layer.cornerRadius = 4.0;
+        cell.imgChildPortrait.clipsToBounds = YES;
     }
     
     CSKuleRelationshipInfo* relationship = [self.relationships objectAtIndex:indexPath.row];

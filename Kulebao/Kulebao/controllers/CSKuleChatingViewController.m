@@ -103,6 +103,8 @@
         
         UIImageView* imgPortrait = [[UIImageView alloc] initWithFrame:CGRectNull];
         imgPortrait.tag = 103;
+        imgPortrait.layer.cornerRadius = 4.0;
+        imgPortrait.clipsToBounds = YES;
         [cell.contentView addSubview:imgPortrait];
         
         UILabel* labMsgTimestamp = [[UILabel alloc] initWithFrame:CGRectNull];
@@ -156,12 +158,19 @@
         
         if (msg.image.length > 0) {
             imgBubbleBg.frame = CGRectMake(36, 12, 90, 78);
-            
+            imgMsgBody.frame = CGRectMake(52, 18, 64, 64);
             labMsgBody.frame = CGRectNull;
             labMsgBody.text = nil;
-            
-            [imgMsgBody setImageWithURL:[gApp.engine urlFromPath:msg.image] placeholderImage:nil];
-            imgMsgBody.frame = CGRectMake(52, 18, 64, 64);
+
+            NSURL* qiniuImgUrl = [gApp.engine urlFromPath:msg.image];
+            qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/128/h/128"];
+            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:qiniuImgUrl];
+            [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
+            request.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
+            [imgMsgBody setImageWithURLRequest:request
+                              placeholderImage:nil
+                                       success:nil
+                                       failure:nil];
         }
         else {
             imgBubbleBg.frame = CGRectMake(36, 12, msgBodySize.width + 30, msgBodySize.height+14);
@@ -181,7 +190,7 @@
         [imgPortrait setImageWithURL:qiniuImgUrl placeholderImage:[UIImage imageNamed:@"chat_head_icon.png"]];
         
         
-        imgPortrait.frame = CGRectMake(320-2-32, 12, 32, 32);
+        imgPortrait.frame = CGRectMake(320-2-32-2, 12, 32, 32);
         
         UIImage* bgImage = [UIImage imageNamed:@"msg-bg-to.png"];
         imgBubbleBg.image = [bgImage resizableImageWithCapInsets:UIEdgeInsetsMake(35, 10, 10, 15)];
@@ -191,12 +200,19 @@
         
         if (msg.image.length > 0) {
             imgBubbleBg.frame =  CGRectMake(320-36-90, 12, 90, 78);
-            
+            imgMsgBody.frame = CGRectMake(imgBubbleBg.frame.origin.x+10, 18, 64, 64);
             labMsgBody.frame = CGRectNull;
             labMsgBody.text = nil;
             
-            [imgMsgBody setImageWithURL:[gApp.engine urlFromPath:msg.image] placeholderImage:nil];
-            imgMsgBody.frame = CGRectMake(imgBubbleBg.frame.origin.x+10, 18, 64, 64);
+            NSURL* qiniuImgUrl = [gApp.engine urlFromPath:msg.image];
+            qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/128/h/128"];
+            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:qiniuImgUrl];
+            [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
+            request.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
+            [imgMsgBody setImageWithURLRequest:request
+                              placeholderImage:nil
+                                       success:nil
+                                       failure:nil];
         }
         else {
             imgBubbleBg.frame = CGRectMake(320-36-msgBodySize.width-30, 12, msgBodySize.width + 30, msgBodySize.height+14);

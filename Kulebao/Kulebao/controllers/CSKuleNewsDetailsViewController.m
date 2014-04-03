@@ -10,7 +10,7 @@
 #import "CSAppDelegate.h"
 #import "BaiduMobStat.h"
 
-@interface CSKuleNewsDetailsViewController ()
+@interface CSKuleNewsDetailsViewController () <UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 
 @end
@@ -35,6 +35,7 @@
 	// Do any additional setup after loading the view.
     [self customizeBackBarItem];
     [self.webView hideGradientBackground];
+    self.webView.delegate = self;
     self.webView.scalesPageToFit = YES;
     [self reloadWebView];
 }
@@ -89,8 +90,13 @@
     }
 }
 
-#pragma mark - Private
+#pragma mark - UIWebViewDelegate
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
 
+    return YES;
+}
+
+#pragma mark - Private
 - (void)reloadWebView {
     if (_newsInfo) {
         NSString* html = [self htmlWithNewsInfo:_newsInfo];

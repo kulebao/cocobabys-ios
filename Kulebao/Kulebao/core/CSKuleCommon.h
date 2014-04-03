@@ -9,6 +9,8 @@
 #ifndef Kulebao_CSKuleCommon_h
 #define Kulebao_CSKuleCommon_h
 
+#define kKuleAppleID    @"854185603"
+
 // 性别
 enum KuleGender {
     kKuleGenderFemale = 0,

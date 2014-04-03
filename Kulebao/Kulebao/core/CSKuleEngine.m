@@ -855,6 +855,24 @@
                                failure:failure];
 }
 
+- (void)reqBindPhone:(NSString*)phone
+             smsCode:(NSString*)authcode
+             success:(SuccessResponseHandler)success
+             failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kGetSmsCodePath, phone];
+    
+    NSString* method = @"POST";
+    
+    NSDictionary* parameters = @{@"phone": phone,
+                                 @"code": authcode};
+    
+    [_httpClient httpRequestWithMethod:method
+                                  path:path
+                            parameters:parameters
+                               success:success
+                               failure:failure];
+}
+
 - (void)reqResetPswd:(NSString*)account
              smsCode:(NSString*)authcode
          withNewPswd:(NSString*)newPswd

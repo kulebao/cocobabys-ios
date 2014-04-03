@@ -110,6 +110,7 @@
 		09142E2F18E2DE1B00E5848F /* arrow-right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09142E2718E2DE1B00E5848F /* arrow-right@2x.png */; };
 		09148E5218DAEE8A00D08F63 /* Kulebao.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 09148E5018DAEE8A00D08F63 /* Kulebao.xcdatamodeld */; };
 		09148E5418DAEED300D08F63 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09148E5318DAEED300D08F63 /* CoreData.framework */; };
+		0915662218ED92810073AE22 /* CSKuleVerifyMobileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0915662118ED92810073AE22 /* CSKuleVerifyMobileViewController.m */; };
 		0917764718D0574D00D24F53 /* CSKuleAssignmentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0917764618D0574D00D24F53 /* CSKuleAssignmentInfo.m */; };
 		091AE81E18D7DC6A00EBC927 /* CSKuleSchoolInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 091AE81D18D7DC6A00EBC927 /* CSKuleSchoolInfo.m */; };
 		091AE82118D7E4E700EBC927 /* CSKuleAboutSchoolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 091AE82018D7E4E700EBC927 /* CSKuleAboutSchoolViewController.m */; };
@@ -516,6 +517,8 @@
 		09142E2718E2DE1B00E5848F /* arrow-right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-right@2x.png"; sourceTree = "<group>"; };
 		09148E5118DAEE8A00D08F63 /* Kulebao.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Kulebao.xcdatamodel; sourceTree = "<group>"; };
 		09148E5318DAEED300D08F63 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		0915662018ED92810073AE22 /* CSKuleVerifyMobileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleVerifyMobileViewController.h; sourceTree = "<group>"; };
+		0915662118ED92810073AE22 /* CSKuleVerifyMobileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleVerifyMobileViewController.m; sourceTree = "<group>"; };
 		0917764518D0574D00D24F53 /* CSKuleAssignmentInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleAssignmentInfo.h; sourceTree = "<group>"; };
 		0917764618D0574D00D24F53 /* CSKuleAssignmentInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleAssignmentInfo.m; sourceTree = "<group>"; };
 		091AE81C18D7DC6A00EBC927 /* CSKuleSchoolInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleSchoolInfo.h; sourceTree = "<group>"; };
@@ -1410,6 +1413,8 @@
 				090C9EC318C84E9F00883DE0 /* CSKuleSelectChildViewController.m */,
 				09A9EBD618C0A02800D83119 /* CSKuleSettingsViewController.h */,
 				09A9EBD718C0A02800D83119 /* CSKuleSettingsViewController.m */,
+				0915662018ED92810073AE22 /* CSKuleVerifyMobileViewController.h */,
+				0915662118ED92810073AE22 /* CSKuleVerifyMobileViewController.m */,
 				09FE6AEB18C5722500A840BE /* views */,
 			);
 			path = controllers;
@@ -2096,6 +2101,7 @@
 				09A9EBD818C0A02800D83119 /* CSKuleSettingsViewController.m in Sources */,
 				090C9EC018C846B200883DE0 /* AHAlertView.m in Sources */,
 				09BA1B9D18BB2AB300760182 /* main.m in Sources */,
+				0915662218ED92810073AE22 /* CSKuleVerifyMobileViewController.m in Sources */,
 				09BA1BDF18BB2FC700760182 /* MessageInterceptor.m in Sources */,
 				09BA1BDE18BB2FC700760182 /* LoadMoreTableFooterView.m in Sources */,
 				09142DB918E2713C00E5848F /* CJSONSerializer.m in Sources */,

@@ -11,6 +11,7 @@
 #import "EAIntroView.h"
 #import "CSKuleLoginViewController.h"
 #import "CSAppDelegate.h"
+#import "CSKuleVerifyMobileViewController.h"
 
 @interface CSKuleAuthViewController () <EAIntroDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *labNotice;
@@ -64,7 +65,6 @@
 #pragma mark - UI Actions
 - (IBAction)onBtnSendClicked:(id)sender {
     [self.fieldMobile resignFirstResponder];
-    //[self performSegueWithIdentifier:@"segue.login" sender:nil];
     [self doAuth];
 }
 
@@ -91,8 +91,8 @@
                         [self performSegueWithIdentifier:@"segue.login" sender:nil];
                     }
                     else {
-                        CSLog(@"first login of account: %@", mobile);
-                        [self performSegueWithIdentifier:@"segue.login" sender:nil];
+                        CSLog(@"first time to login using account: %@", mobile);
+                        [self performSegueWithIdentifier:@"segue.verifymobile" sender:nil];
                     }
                 }
                     break;
@@ -132,6 +132,18 @@
         CSKuleLoginViewController* loginCtrl = segue.destinationViewController;
         loginCtrl.mobile = self.fieldMobile.text;
     }
+    else if ([segue.identifier isEqualToString:@"segue.verifymobile"]) {
+        CSKuleVerifyMobileViewController* ctrl = segue.destinationViewController;
+        ctrl.mobile = self.fieldMobile.text;
+        ctrl.delegate = self;
+    }
+}
+
+#pragma mark - CSKuleVerifyMobileViewControllerDelegate
+- (void)verifyMobileViewControllerDidFinished:(CSKuleVerifyMobileViewController*)ctrl {
+    [gApp alert:@"绑定手机成功。"];
+    [self.navigationController popToViewController:self animated:NO];
+    [self performSegueWithIdentifier:@"segue.login" sender:nil];
 }
 
 #pragma mark - Private

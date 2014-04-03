@@ -1,39 +1,39 @@
 //
-//  CSKuleForgotPswdViewController.m
+//  CSKuleVerifyMobileViewController.m
 //  youlebao
 //
 //  Created by xin.c.wang on 14-4-3.
 //  Copyright (c) 2014年 Cocobabys. All rights reserved.
 //
 
-#import "CSKuleForgotPswdViewController.h"
+#import "CSKuleVerifyMobileViewController.h"
 #import "CSAppDelegate.h"
 
 static NSInteger kRetryInterval = 600; // 秒
 
-@interface CSKuleForgotPswdViewController () {
+@interface CSKuleVerifyMobileViewController () {
     NSTimer* _timer;
     NSInteger _counter;
+    NSString* _noticeTemp;
 }
 
 @property (weak, nonatomic) IBOutlet UIImageView *imgConentBg;
 @property (weak, nonatomic) IBOutlet UIImageView *imgFieldBg1;
-@property (weak, nonatomic) IBOutlet UIImageView *imgFieldBg2;
-@property (weak, nonatomic) IBOutlet UIImageView *imgFieldBg3;
 @property (weak, nonatomic) IBOutlet UITextField *fieldSmsCode;
-@property (weak, nonatomic) IBOutlet UITextField *fieldNewPswd;
-@property (weak, nonatomic) IBOutlet UITextField *fieldNewPswdConfirm;
 @property (weak, nonatomic) IBOutlet UITextView *textNotice;
-@property (weak, nonatomic) IBOutlet UIImageView *imgNoticeBg;
 @property (weak, nonatomic) IBOutlet UIButton *btnRetrySmsCode;
+@property (weak, nonatomic) IBOutlet UIImageView *imgNoticeBg;
+@property (weak, nonatomic) IBOutlet UIButton *btnBind;
+
 - (IBAction)onBtnBackClicked:(id)sender;
-- (IBAction)onBtnResetClicked:(id)sender;
+- (IBAction)onBtnBindClicked:(id)sender;
 - (IBAction)onBtnRetrySmsCodeClicked:(id)sender;
 
 @end
 
-@implementation CSKuleForgotPswdViewController
+@implementation CSKuleVerifyMobileViewController
 @synthesize mobile = _mobile;
+@synthesize delegate = _delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -48,14 +48,26 @@ static NSInteger kRetryInterval = 600; // 秒
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
     self.imgConentBg.image = [[UIImage imageNamed:@"bg-dialog.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     
     UIImage* fieldBgImg = [[UIImage imageNamed:@"bg-input-normal.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     self.imgFieldBg1.image = fieldBgImg;
-    self.imgFieldBg2.image = fieldBgImg;
-    self.imgFieldBg3.image = fieldBgImg;
     self.imgNoticeBg.image = fieldBgImg;
+    
+    _noticeTemp = @"您的手机号码%@已通过验证，请点击获取验证码按钮，稍后会有一个6位数字的验证码，通过短信发送到该手机上，请在下方的输入框内填入此验证码，点击绑定按钮，进行手机绑定，谢谢。\n\n特别提示：该验证码的有效时间为10分钟，请在有效时间内进行绑定操作。";
+    
+    NSString* notice = [NSString stringWithFormat:_noticeTemp, _mobile];
+    self.textNotice.text = notice;
+    self.textNotice.textColor = UIColorRGB(0xff, 0x33, 0x00);
+    self.textNotice.font = [UIFont systemFontOfSize:13.0];
+    
+    UIImage* btnBgImage = [[UIImage imageNamed:@"btn-type1.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+    UIImage* btnBgImagePressed = [[UIImage imageNamed:@"btn-type1-pressed.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+
+    [self.btnBind setBackgroundImage:btnBgImage
+                            forState:UIControlStateNormal];
+    [self.btnBind setBackgroundImage:btnBgImagePressed
+                            forState:UIControlStateHighlighted];
     
     _timer = nil;
 }
@@ -67,15 +79,15 @@ static NSInteger kRetryInterval = 600; // 秒
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+ {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 - (IBAction)onBtnBackClicked:(id)sender {
     [self hideKeyboard];
@@ -83,7 +95,7 @@ static NSInteger kRetryInterval = 600; // 秒
     [self goBack];
 }
 
-- (IBAction)onBtnResetClicked:(id)sender {
+- (IBAction)onBtnBindClicked:(id)sender {
     /* 090724 */
     
     [self hideKeyboard];
@@ -91,17 +103,8 @@ static NSInteger kRetryInterval = 600; // 秒
     if (self.fieldSmsCode.text.length == 0) {
         [gApp alert:@"请输入短信验证码。"];
     }
-    else if (self.fieldNewPswd.text.length == 0) {
-        [gApp alert:@"请输入新密码。"];
-    }
-    else if (self.fieldNewPswdConfirm.text.length == 0) {
-        [gApp alert:@"请再次输入新密码。"];
-    }
-    else if (![self.fieldNewPswd.text isEqualToString:self.fieldNewPswdConfirm.text]) {
-        [gApp alert:@"两次输入的密码不一致。"];
-    }
     else {
-        [self doResetPswd];
+        [self doBind];
     }
 }
 
@@ -112,8 +115,6 @@ static NSInteger kRetryInterval = 600; // 秒
 
 - (void)hideKeyboard {
     [self.fieldSmsCode resignFirstResponder];
-    [self.fieldNewPswd resignFirstResponder];
-    [self.fieldNewPswdConfirm resignFirstResponder];
 }
 
 #pragma mark - Private
@@ -131,7 +132,7 @@ static NSInteger kRetryInterval = 600; // 秒
 - (void)stopTimer {
     [_timer invalidate];
     _timer = nil;
-
+    
     _counter = 0;
     [self doCounting];
 }
@@ -181,7 +182,7 @@ static NSInteger kRetryInterval = 600; // 秒
                 [gApp alert:error_msg];
             }
         };
-
+        
         FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
             CSLog(@"failure:%@", error);
             if (operation.response.statusCode == 400) {
@@ -194,17 +195,16 @@ static NSInteger kRetryInterval = 600; // 秒
         
         [gApp waitingAlert:@"正在发送请求..."];
         [gApp.engine reqGetSmsCode:_mobile
-                      success:sucessHandler
-                      failure:failureHandler];
+                           success:sucessHandler
+                           failure:failureHandler];
     }
     else {
         [gApp alert:@"无效的手机号码，请退出重试。"];
     }
 }
 
-- (void)doResetPswd {
+- (void)doBind {
     NSString* authCode = self.fieldSmsCode.text;
-    NSString* newPswd = self.fieldNewPswd.text;
     
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         /* {"error_code":0,"access_token":"1393763572585"} */
@@ -214,15 +214,18 @@ static NSInteger kRetryInterval = 600; // 秒
         NSString* error_msg = [dataJson valueForKeyNotNull:@"error_msg"];
         
         if (error_code == 0) {
-            [gApp alert:@"重置密码成功，请牢记新密码。"];
-            [self goBack];
+            [self stopTimer];
+            
+            if ([_delegate respondsToSelector:@selector(verifyMobileViewControllerDidFinished:)]) {
+                [_delegate verifyMobileViewControllerDidFinished:self];
+            }
         }
         else {
             if (error_msg.length > 0) {
                 [gApp alert:error_msg];
             }
             else {
-                [gApp alert:@"短信验证码可能错误。" withTitle:@"重置密码失败"];
+                [gApp alert:@"短信验证码可能错误。" withTitle:@"绑定失败"];
             }
         }
     };
@@ -233,11 +236,11 @@ static NSInteger kRetryInterval = 600; // 秒
     };
     
     [gApp waitingAlert:@"正在发送请求..."];
-    [gApp.engine reqResetPswd:_mobile
+    [gApp.engine reqBindPhone:_mobile
                       smsCode:authCode
-                  withNewPswd:newPswd
                       success:sucessHandler
                       failure:failureHandler];
 }
+
 
 @end

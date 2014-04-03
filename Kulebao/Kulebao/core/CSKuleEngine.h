@@ -163,6 +163,11 @@
               success:(SuccessResponseHandler)success
               failure:(FailureResponseHandler)failure;
 
+- (void)reqBindPhone:(NSString*)phone
+             smsCode:(NSString*)authcode
+             success:(SuccessResponseHandler)success
+             failure:(FailureResponseHandler)failure;
+
 - (void)reqResetPswd:(NSString*)account
              smsCode:(NSString*)authcode
          withNewPswd:(NSString*)newPswd

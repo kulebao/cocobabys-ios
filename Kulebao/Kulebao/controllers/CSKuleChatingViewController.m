@@ -11,6 +11,7 @@
 #import "PullTableView.h"
 #import "CSAppDelegate.h"
 #import "CSKuleChatingEditorViewController.h"
+#import "MHFacebookImageViewer.h"
 
 @interface CSKuleChatingViewController () <UITableViewDataSource, UITableViewDelegate, PullTableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CSKuleChatingEditorViewControllerDelegate> {
     UIImagePickerController* _imgPicker;
@@ -163,6 +164,8 @@
             labMsgBody.text = nil;
 
             NSURL* qiniuImgUrl = [gApp.engine urlFromPath:msg.image];
+            [imgMsgBody setupImageViewerWithImageURL:qiniuImgUrl];
+            
             qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/128/h/128"];
             NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:qiniuImgUrl];
             [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
@@ -205,6 +208,8 @@
             labMsgBody.text = nil;
             
             NSURL* qiniuImgUrl = [gApp.engine urlFromPath:msg.image];
+            [imgMsgBody setupImageViewerWithImageURL:qiniuImgUrl];
+            
             qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/128/h/128"];
             NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:qiniuImgUrl];
             [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];

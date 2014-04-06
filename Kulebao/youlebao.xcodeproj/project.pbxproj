@@ -326,6 +326,10 @@
 		09F0BFA518F1A1B7004629BA /* MHFacebookImageViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = 09F0BFA118F1A1B7004629BA /* MHFacebookImageViewer.m */; };
 		09F0BFA618F1A1B7004629BA /* Done.png in Resources */ = {isa = PBXBuildFile; fileRef = 09F0BFA318F1A1B7004629BA /* Done.png */; };
 		09F0BFA718F1A1B7004629BA /* Done@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09F0BFA418F1A1B7004629BA /* Done@2x.png */; };
+		09F0BFAD18F1C483004629BA /* MJPopupBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09F0BFAA18F1C483004629BA /* MJPopupBackgroundView.m */; };
+		09F0BFAE18F1C483004629BA /* UIViewController+MJPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09F0BFAC18F1C483004629BA /* UIViewController+MJPopupViewController.m */; };
+		09F0BFB218F1C671004629BA /* CSKuleDatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09F0BFB018F1C671004629BA /* CSKuleDatePickerViewController.m */; };
+		09F0BFB318F1C671004629BA /* CSKuleDatePickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09F0BFB118F1C671004629BA /* CSKuleDatePickerViewController.xib */; };
 		09FE659718E06FF5008A1ED6 /* chat_head_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 09FE659518E06FF5008A1ED6 /* chat_head_icon.png */; };
 		09FE659818E06FF5008A1ED6 /* chat_head_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09FE659618E06FF5008A1ED6 /* chat_head_icon@2x.png */; };
 		09FE6AEE18C5729500A840BE /* CSKuleNoticeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE6AED18C5729500A840BE /* CSKuleNoticeCell.m */; };
@@ -819,6 +823,13 @@
 		09F0BFA118F1A1B7004629BA /* MHFacebookImageViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHFacebookImageViewer.m; sourceTree = "<group>"; };
 		09F0BFA318F1A1B7004629BA /* Done.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Done.png; sourceTree = "<group>"; };
 		09F0BFA418F1A1B7004629BA /* Done@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Done@2x.png"; sourceTree = "<group>"; };
+		09F0BFA918F1C483004629BA /* MJPopupBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPopupBackgroundView.h; sourceTree = "<group>"; };
+		09F0BFAA18F1C483004629BA /* MJPopupBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPopupBackgroundView.m; sourceTree = "<group>"; };
+		09F0BFAB18F1C483004629BA /* UIViewController+MJPopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MJPopupViewController.h"; sourceTree = "<group>"; };
+		09F0BFAC18F1C483004629BA /* UIViewController+MJPopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MJPopupViewController.m"; sourceTree = "<group>"; };
+		09F0BFAF18F1C671004629BA /* CSKuleDatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleDatePickerViewController.h; sourceTree = "<group>"; };
+		09F0BFB018F1C671004629BA /* CSKuleDatePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleDatePickerViewController.m; sourceTree = "<group>"; };
+		09F0BFB118F1C671004629BA /* CSKuleDatePickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSKuleDatePickerViewController.xib; sourceTree = "<group>"; };
 		09FE659518E06FF5008A1ED6 /* chat_head_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chat_head_icon.png; sourceTree = "<group>"; };
 		09FE659618E06FF5008A1ED6 /* chat_head_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chat_head_icon@2x.png"; sourceTree = "<group>"; };
 		09FE6AEC18C5729500A840BE /* CSKuleNoticeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleNoticeCell.h; sourceTree = "<group>"; };
@@ -1428,6 +1439,9 @@
 				0915662018ED92810073AE22 /* CSKuleVerifyMobileViewController.h */,
 				0915662118ED92810073AE22 /* CSKuleVerifyMobileViewController.m */,
 				09FE6AEB18C5722500A840BE /* views */,
+				09F0BFAF18F1C671004629BA /* CSKuleDatePickerViewController.h */,
+				09F0BFB018F1C671004629BA /* CSKuleDatePickerViewController.m */,
+				09F0BFB118F1C671004629BA /* CSKuleDatePickerViewController.xib */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -1549,18 +1563,19 @@
 		09BA1BC918BB2FC700760182 /* Venders */ = {
 			isa = PBXGroup;
 			children = (
-				09F0BF9F18F1A1B7004629BA /* MHFBImageViewController */,
-				09142DDD18E28E6000E5848F /* JSBadgeView */,
-				09142DC018E27E7600E5848F /* ALAlertBanner */,
-				09142D9318E2713C00E5848F /* BaiduMobStat */,
-				090CC92618DA88AF007781CB /* FTCoreText */,
 				09BA1C0F18BB3F8400760182 /* AFNetworking */,
 				090C9EBC18C846B200883DE0 /* AHAlertView */,
+				09142DC018E27E7600E5848F /* ALAlertBanner */,
+				09142D9318E2713C00E5848F /* BaiduMobStat */,
 				0934EFBE18BF3AF700E30ECA /* EAIntroView */,
 				09BA1BCA18BB2FC700760182 /* EGOTableViewPullRefresh */,
+				090CC92618DA88AF007781CB /* FTCoreText */,
+				09142DDD18E28E6000E5848F /* JSBadgeView */,
 				090C9ED818C87AEA00883DE0 /* KxMenu */,
 				09BA1BED18BB334900760182 /* libBPush */,
 				09219A2E18C42AF800166228 /* MBProgressHUD */,
+				09F0BF9F18F1A1B7004629BA /* MHFBImageViewController */,
+				09F0BFA818F1C483004629BA /* MJModalViewController */,
 				0934EFC518BF3D0600E30ECA /* SMPageControl */,
 				09219A4418C4878600166228 /* TPKeyboardAvoiding */,
 				091AE82218D820C800EBC927 /* VurigCalendar */,
@@ -1720,6 +1735,17 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		09F0BFA818F1C483004629BA /* MJModalViewController */ = {
+			isa = PBXGroup;
+			children = (
+				09F0BFA918F1C483004629BA /* MJPopupBackgroundView.h */,
+				09F0BFAA18F1C483004629BA /* MJPopupBackgroundView.m */,
+				09F0BFAB18F1C483004629BA /* UIViewController+MJPopupViewController.h */,
+				09F0BFAC18F1C483004629BA /* UIViewController+MJPopupViewController.m */,
+			);
+			path = MJModalViewController;
+			sourceTree = "<group>";
+		};
 		09FE6AEB18C5722500A840BE /* views */ = {
 			isa = PBXGroup;
 			children = (
@@ -1834,6 +1860,7 @@
 				09142E0318E2B9D800E5848F /* assess-dining.png in Resources */,
 				09142E1818E2B9D800E5848F /* rating-3stars@2x.png in Resources */,
 				0934F08F18BF5B0800E30ECA /* settings-icon-feedback@2x.png in Resources */,
+				09F0BFB318F1C671004629BA /* CSKuleDatePickerViewController.xib in Resources */,
 				0934F06818BF5B0800E30ECA /* btn-settings-pressed.png in Resources */,
 				0934F07118BF5B0800E30ECA /* btn-type2-pressed@2x.png in Resources */,
 				09BA1C0A18BB34F400760182 /* BPushConfig.plist in Resources */,
@@ -2078,6 +2105,7 @@
 				09142DD118E27E7600E5848F /* ALAlertBanner.m in Sources */,
 				09FE6AF918C5B97100A840BE /* CSKuleRecipeCell.m in Sources */,
 				09BA1BE018BB2FC700760182 /* PullTableView.m in Sources */,
+				09F0BFAE18F1C483004629BA /* UIViewController+MJPopupViewController.m in Sources */,
 				09DB73E918E0280B00121716 /* CSKuleChatMsg.m in Sources */,
 				09ED59B618CDBF3900187585 /* UIWebView+CSKit.m in Sources */,
 				09BA1C2818BB3F8400760182 /* AFPropertyListRequestOperation.m in Sources */,
@@ -2088,6 +2116,7 @@
 				09BA1C0018BB334900760182 /* OpenUDID.m in Sources */,
 				09219A5118C4878600166228 /* TPKeyboardAvoidingCollectionView.m in Sources */,
 				091AE82E18D820C800EBC927 /* NSMutableArray+convenience.m in Sources */,
+				09F0BFAD18F1C483004629BA /* MJPopupBackgroundView.m in Sources */,
 				091AE82D18D820C800EBC927 /* NSDate+convenience.m in Sources */,
 				09ED59AC18CD67FD00187585 /* CSKuleNewsInfo.m in Sources */,
 				09FEA72A18DCAA4D00513C87 /* CSTipsInfo.m in Sources */,
@@ -2137,6 +2166,7 @@
 				090C9EC018C846B200883DE0 /* AHAlertView.m in Sources */,
 				09BA1B9D18BB2AB300760182 /* main.m in Sources */,
 				0915662218ED92810073AE22 /* CSKuleVerifyMobileViewController.m in Sources */,
+				09F0BFB218F1C671004629BA /* CSKuleDatePickerViewController.m in Sources */,
 				09BA1BDF18BB2FC700760182 /* MessageInterceptor.m in Sources */,
 				09BA1BDE18BB2FC700760182 /* LoadMoreTableFooterView.m in Sources */,
 				09142DB918E2713C00E5848F /* CJSONSerializer.m in Sources */,

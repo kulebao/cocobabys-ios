@@ -13,6 +13,8 @@
 #import "CSKuleAboutSchoolViewController.h"
 #import "ALAlertBanner.h"
 #import "JSBadgeView.h"
+#import "CSKuleDatePickerViewController.h"
+#import "UIViewController+MJPopupViewController.h"
 
 @interface CSKuleMainViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
     UIImagePickerController* _imgPicker;
@@ -361,6 +363,45 @@
     [alert show];
 }
 
+- (void)doChangeChildBirthday {
+    CSKuleChildInfo* childInfo = gApp.engine.currentRelationship.child;
+    if (childInfo) {
+        NSDate* date = [NSDate dateFromString:childInfo.birthday withFormat:@"yyyy-MM-dd"];
+        CSKuleDatePickerViewController* ctrl = [[CSKuleDatePickerViewController alloc] initWithNibName:@"CSKuleDatePickerViewController" bundle:nil];
+        ctrl.date = date;
+        [self presentPopupViewController:ctrl animationType:MJPopupViewAnimationFade dismissed:^{
+            CSLog(@"%@", [ctrl.date isoDateString]);
+            
+            SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+                CSLog(@"success.");
+                [gApp alert:@"修改成功"];
+                
+                CSKuleChildInfo* cc = [CSKuleInterpreter decodeChildInfo:dataJson];
+                childInfo.birthday = cc.birthday;
+                
+                [self updateUI:NO];
+            };
+            
+            FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+                CSLog(@"failure:%@", error);
+                [gApp alert:[error localizedDescription]];
+            };
+            
+            [gApp waitingAlert:@"修改宝宝生日..."];
+            CSKuleChildInfo* cp = [childInfo copy];
+            cp.birthday = [ctrl.date isoDateString];
+            [gApp.engine reqUpdateChildInfo:cp
+                             inKindergarten:gApp.engine.loginInfo.schoolId
+                                    success:sucessHandler
+                                    failure:failureHandler];
+            
+        }];
+    }
+    else {
+        [gApp alert:@"没有宝宝信息。"];
+    }
+}
+
 - (void)doUpdateChildNick:(NSString*)nick {
     if (nick.length > 0) {
         CSKuleChildInfo* childInfo = gApp.engine.currentRelationship.child;
@@ -552,8 +593,8 @@
     
     KxMenuItem* item2 = [KxMenuItem menuItem:@"设置宝贝生日"
                                        image:nil
-                                      target:nil
-                                      action:nil];
+                                      target:self
+                                      action:@selector(doChangeChildBirthday)];
     
     KxMenuItem* item3 = [KxMenuItem menuItem:@"从相机拍摄头像"
                                        image:nil

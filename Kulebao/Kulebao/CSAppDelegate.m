@@ -79,12 +79,12 @@ CSAppDelegate* gApp = nil;
 }
 
 - (void)logout {
+    [self.engine reqUnbind];
+    
     self.engine.loginInfo = nil;
     self.engine.relationships = nil;
     self.engine.currentRelationship = nil;
     self.engine.preferences.loginInfo = nil;
-    
-    [self.engine reqUnbind];
     
     [self gotoLoginProcess];
 }

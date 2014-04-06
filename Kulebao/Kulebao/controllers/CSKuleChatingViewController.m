@@ -51,7 +51,7 @@
     self.tableview.backgroundColor = [UIColor clearColor];
     
     _chatingMsgList = [NSMutableArray array];
-    [self doReloadChatingMsgsFrom:-1 to:-1 most:-1];
+    [self doReloadChatingMsgsFrom:-1 to:-1 most:20];
 }
 
 - (void)didReceiveMemoryWarning
@@ -263,28 +263,122 @@
 - (void)pullTableViewDidTriggerLoadMore:(PullTableView*)pullTableView {
     [self performSelector:@selector(loadMoreDataToTable)
                withObject:nil
-               afterDelay:3.0f];
+               afterDelay:.0f];
 }
 
 - (void) refreshTable
 {
-    /*
-     
-     Code to actually refresh goes here.
-     
-     */
-    self.tableview.pullLastRefreshDate = [NSDate date];
-    self.tableview.pullTableIsRefreshing = NO;
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+        NSMutableArray* chatMsgs = [NSMutableArray array];
+        
+        if ([dataJson isKindOfClass:[NSArray class]]) {
+            for (id chatMsgJson in dataJson) {
+                CSKuleChatMsg* chatMsg = [CSKuleInterpreter decodeChatMsg:chatMsgJson];
+                [chatMsgs addObject:chatMsg];
+            }
+        }
+        else if ([dataJson isKindOfClass:[NSDictionary class]]) {
+            CSKuleChatMsg* chatMsg = [CSKuleInterpreter decodeChatMsg:dataJson];
+            [chatMsgs addObject:chatMsg];
+        }
+        
+        if (chatMsgs.count > 0) {
+            [chatMsgs addObjectsFromArray:_chatingMsgList];
+            _chatingMsgList = chatMsgs;
+            [self.tableview reloadData];
+            [gApp hideAlert];
+        }
+        else {
+            [gApp alert:@"没有历史消息"];
+        }
+
+        self.tableview.pullLastRefreshDate = [NSDate date];
+        self.tableview.pullTableIsRefreshing = NO;
+    };
+    
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        CSLog(@"failure:%@", error);
+        [gApp alert:[error localizedDescription]];
+        
+        self.tableview.pullTableIsRefreshing = NO;
+    };
+    
+    [gApp waitingAlert:@"获取信息中..."];
+    
+    
+    NSInteger most = 20;
+    NSInteger toId = 1;
+    
+    CSKuleChatMsg* chatMsg = [_chatingMsgList firstObject];
+    if (chatMsg) {
+        toId = chatMsg.msgId;
+    }
+    
+    NSInteger fromId = toId - most;
+    fromId = fromId > 0 ? fromId : 0;
+    
+    [gApp.engine reqGetChatingMsgsOfKindergarten:gApp.engine.loginInfo.schoolId
+                                            from:fromId
+                                              to:toId
+                                            most:most
+                                         success:sucessHandler
+                                         failure:failureHandler];
 }
 
 - (void) loadMoreDataToTable
 {
-    /*
-     
-     Code to actually load more data goes here.
-     
-     */
-    self.tableview.pullTableIsLoadingMore = NO;
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+        NSMutableArray* chatMsgs = [NSMutableArray array];
+        
+        if ([dataJson isKindOfClass:[NSArray class]]) {
+            for (id chatMsgJson in dataJson) {
+                CSKuleChatMsg* chatMsg = [CSKuleInterpreter decodeChatMsg:chatMsgJson];
+                [chatMsgs addObject:chatMsg];
+            }
+        }
+        else if ([dataJson isKindOfClass:[NSDictionary class]]) {
+            CSKuleChatMsg* chatMsg = [CSKuleInterpreter decodeChatMsg:dataJson];
+            [chatMsgs addObject:chatMsg];
+        }
+        
+        if (chatMsgs.count > 0) {
+            [_chatingMsgList addObjectsFromArray:chatMsgs];
+            [self.tableview reloadData];
+            [gApp hideAlert];
+        }
+        else {
+            [gApp alert:@"没有更多消息"];
+        }
+        
+        
+        self.tableview.pullTableIsLoadingMore = NO;
+    };
+    
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        CSLog(@"failure:%@", error);
+        [gApp alert:[error localizedDescription]];
+        self.tableview.pullTableIsLoadingMore = NO;
+    };
+    
+    [gApp waitingAlert:@"获取信息中..."];
+    
+    
+    NSInteger most = 20;
+    NSInteger fromId = 0;
+    
+    CSKuleChatMsg* chatMsg = [_chatingMsgList lastObject];
+    if (chatMsg) {
+        fromId = (NSInteger) chatMsg.msgId;
+    }
+    
+    NSInteger toId = fromId + most;
+    
+    [gApp.engine reqGetChatingMsgsOfKindergarten:gApp.engine.loginInfo.schoolId
+                                            from:fromId
+                                              to:toId
+                                            most:most
+                                         success:sucessHandler
+                                         failure:failureHandler];
 }
 
 
@@ -442,8 +536,17 @@
             [chatMsgs addObject:chatMsg];
         }
         
+        [_chatingMsgList removeAllObjects];
         [_chatingMsgList addObjectsFromArray:chatMsgs];
         [self.tableview reloadData];
+        
+        if (_chatingMsgList.count > 0) {
+            [self.tableview scrollToRowAtIndexPath:[NSIndexPath
+                                                    indexPathForItem:(_chatingMsgList.count-1) inSection:0]
+                                  atScrollPosition:UITableViewScrollPositionBottom
+                                          animated:NO];
+        }
+        
         [gApp hideAlert];
     };
     

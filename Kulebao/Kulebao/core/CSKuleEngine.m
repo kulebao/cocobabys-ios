@@ -509,7 +509,44 @@
 }
 
 - (void)reqUnbind {
-    [BPush unbindChannel];
+    NSString* path = kReceiveBindInfoPath;
+    
+    NSString* method = @"POST";
+    
+    NSDictionary* parameters = nil;
+    
+    
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+        CSKuleBindInfo* bindInfo = [CSKuleInterpreter decodeBindInfo:dataJson];
+        
+        if (bindInfo.errorCode == 0) {
+            [gApp hideAlert];
+        }
+        else {
+            CSLog(@"doReceiveBindInfo error_code=%d", bindInfo.errorCode);
+            [gApp alert:@"解除绑定失败。"];
+        }
+    };
+    
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        CSLog(@"failure:%@", error);
+        [gApp logout];
+        [gApp alert:error.localizedDescription];
+    };
+    
+    parameters = @{@"phonenum": _loginInfo.accountName,
+                   @"user_id": @"",
+                   @"channel_id": @"",
+                   @"access_token": gApp.engine.loginInfo.accessToken ? gApp.engine.loginInfo.accessToken : @"",
+                   @"device_type": @"ios"};
+    
+    [gApp waitingAlert:@"注销登录..."];
+    [_httpClient httpRequestWithMethod:method
+                                  path:path
+                            parameters:parameters
+                               success:sucessHandler
+                               failure:failureHandler];
+    
 }
 
 - (void)reqChangePassword:(NSString*)newPswd

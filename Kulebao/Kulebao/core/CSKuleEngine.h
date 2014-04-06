@@ -174,6 +174,9 @@
              success:(SuccessResponseHandler)success
              failure:(FailureResponseHandler)failure;
 
-
+- (void)reqSendFeedback:(NSString*)account
+            withContent:(NSString*)msgContent
+                success:(SuccessResponseHandler)success
+                failure:(FailureResponseHandler)failure;
 
 @end

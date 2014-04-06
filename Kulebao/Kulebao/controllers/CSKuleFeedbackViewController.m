@@ -1,22 +1,23 @@
 //
-//  CSKuleChatingEditorViewController.m
-//  Kulebao
+//  CSKuleFeedbackViewController.m
+//  youlebao
 //
-//  Created by xin.c.wang on 14-3-24.
+//  Created by xin.c.wang on 14-4-6.
 //  Copyright (c) 2014年 Cocobabys. All rights reserved.
 //
 
-#import "CSKuleChatingEditorViewController.h"
+#import "CSKuleFeedbackViewController.h"
 #import "CSAppDelegate.h"
 
-@interface CSKuleChatingEditorViewController ()
-@property (weak, nonatomic) IBOutlet UITextView *textMsgBody;
+@interface CSKuleFeedbackViewController ()
+
+@property (weak, nonatomic) IBOutlet UIView* viewContent;
 @property (weak, nonatomic) IBOutlet UIImageView *imgContentBg;
+@property (weak, nonatomic) IBOutlet UITextView *textMsgBody;
 
 @end
 
-@implementation CSKuleChatingEditorViewController
-@synthesize delegate = _delegate;
+@implementation CSKuleFeedbackViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -32,12 +33,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self customizeBackBarItem];
-    
     [self customizeOkBarItemWithTarget:self
-                                   action:@selector(onBtnSendClicked:)
-                                     text:@"发送"];
+                                action:@selector(onBtnSendClicked:)
+                                  text:@"发送"];
     
-    self.textMsgBody.backgroundColor = [UIColor clearColor];
     self.imgContentBg.image = [[UIImage imageNamed:@"bg-dialog.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     
     [self.textMsgBody becomeFirstResponder];
@@ -60,19 +59,6 @@
 }
 */
 
-#pragma mark - View lifecycle
--(void) viewDidAppear:(BOOL)animated
-{
-    NSString* cName = [NSString stringWithFormat:@"%@",  self.navigationItem.title, nil];
-    [[BaiduMobStat defaultStat] pageviewStartWithName:cName];
-}
-
--(void) viewDidDisappear:(BOOL)animated
-{
-    NSString* cName = [NSString stringWithFormat:@"%@", self.navigationItem.title, nil];
-    [[BaiduMobStat defaultStat] pageviewEndWithName:cName];
-}
-
 #pragma mark - UI Actions
 - (void)onBtnSendClicked:(id)sender {
     [self.textMsgBody resignFirstResponder];
@@ -82,14 +68,36 @@
         [self doSendText:msgBody];
     }
     else {
-        [gApp alert:@"不能发送空消息 ^_^"];
+        [gApp alert:@"不能发送空内容 ^_^"];
     }
 }
 
 - (void)doSendText:(NSString*)msgBody {
-    if ([_delegate respondsToSelector:@selector(willSendMsgWithText:)]) {
-        [_delegate willSendMsgWithText:msgBody];
-    }
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+        /* {"error_msg":"","error_code":1} */
+        NSString* error_msg = [dataJson valueForKeyNotNull:@"error_msg"];
+        NSInteger error_code = [[dataJson valueForKeyNotNull:@"error_code"] integerValue];
+        
+        if (error_code == 0) {
+            [gApp alert:@"谢谢您的反馈。"];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        else {
+            [gApp alert:error_msg];
+        }
+    };
+    
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        CSLog(@"failure:%@", error);
+        [gApp alert:[error localizedDescription]];
+     };
+    
+    [gApp waitingAlert:@"正在提交反馈..."];
+    [gApp.engine reqSendFeedback:gApp.engine.loginInfo.accountName
+                     withContent:msgBody
+                         success:sucessHandler
+                         failure:failureHandler];
+
 }
 
 @end

@@ -57,10 +57,11 @@
     // 添加百度统计
     [self setupBaiduMobStat];
     
-    // 添加Baidu Push
-    [BPush setupChannel:launchOptions];
     // 必须。参数对象必须实现(void)onMethod:(NSString*)method response:(NSDictionary*)data 方法, 本示例中为 self
     [BPush setDelegate:self];
+    
+    // 添加Baidu Push
+    [BPush setupChannel:launchOptions];
     
     [application registerForRemoteNotificationTypes:
      UIRemoteNotificationTypeAlert
@@ -423,10 +424,16 @@
         CSLog(@"failure:%@", error);
     };
     
-    [gApp waitingAlert:@"重新获取绑定信息..."];
-    [gApp.engine reqReceiveBindInfo:gApp.engine.loginInfo.accountName
+    if ([BPush getChannelId] && [BPush getUserId]) {
+        [gApp waitingAlert:@"重新获取绑定信息..."];
+        [gApp.engine reqReceiveBindInfo:gApp.engine.loginInfo.accountName
                             success:sucessHandler
                             failure:failureHandler];
+    }
+    else {
+        [gApp gotoLoginProcess];
+        [gApp alert:@"获取信息失败，请重新登录。"];
+    }
 }
 
 #pragma mark - HTTP Request
@@ -897,6 +904,27 @@
                                success:success
                                failure:failure];
     
+}
+
+- (void)reqSendFeedback:(NSString*)account
+            withContent:(NSString*)msgContent
+                success:(SuccessResponseHandler)success
+                failure:(FailureResponseHandler)failure {
+    NSParameterAssert(account);
+    NSParameterAssert(msgContent);
+    
+    NSString* path = kFeedbackPath;
+    
+    NSString* method = @"POST";
+    
+    NSDictionary* parameters = @{@"phone": account,
+                                 @"content": msgContent};
+    
+    [_httpClient httpRequestWithMethod:method
+                                  path:path
+                            parameters:parameters
+                               success:success
+                               failure:failure];
 }
 
 @end

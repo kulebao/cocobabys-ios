@@ -8,6 +8,7 @@
 
 #import "CSKuleRootViewController.h"
 #include "CSAppDelegate.h"
+#import "BPush.h"
 
 @interface CSKuleRootViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *imgBg;
@@ -84,10 +85,16 @@
         [gApp alert:error.localizedDescription];
     };
     
+    if ([BPush getChannelId] && [BPush getUserId]) {
     [gApp waitingAlert:@"获取绑定信息..."];
     [gApp.engine reqReceiveBindInfo:gApp.engine.loginInfo.accountName
                             success:sucessHandler
                             failure:failureHandler];
+    }
+    else {
+        [gApp logout];
+        [gApp alert:@"登录已过期，请重新登录。"];
+    }
 }
 
 @end

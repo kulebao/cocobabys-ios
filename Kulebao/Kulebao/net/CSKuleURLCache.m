@@ -11,14 +11,13 @@
 @implementation CSKuleURLCache
 
 - (NSCachedURLResponse *)cachedResponseForRequest:(NSURLRequest *)request {
-    CSLog(@"%s", __FUNCTION__);
+    //CSLog(@"%s", __FUNCTION__);
     NSCachedURLResponse* res = [super cachedResponseForRequest:request];
     return res;
 }
 
 - (void)storeCachedResponse:(NSCachedURLResponse *)cachedResponse forRequest:(NSURLRequest *)request {
-    CSLog(@"%s", __FUNCTION__);
-    
+    //CSLog(@"%s", __FUNCTION__);
     [super storeCachedResponse:cachedResponse forRequest:request];
 }
 

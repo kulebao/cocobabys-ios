@@ -157,10 +157,16 @@
         [gApp alert:error.localizedDescription];
     };
     
-    [gApp waitingAlert:@"获取绑定信息..."];
-    [gApp.engine reqReceiveBindInfo:gApp.engine.loginInfo.accountName
-                  success:sucessHandler
-                  failure:failureHandler];
+    if ([BPush getChannelId] && [BPush getUserId]) {
+        [gApp waitingAlert:@"获取绑定信息..."];
+        [gApp.engine reqReceiveBindInfo:gApp.engine.loginInfo.accountName
+                                success:sucessHandler
+                                failure:failureHandler];
+    }
+    else {
+        [gApp logout];
+        [gApp alert:@"绑定失败，请重新登录。"];
+    }
 }
 
 @end

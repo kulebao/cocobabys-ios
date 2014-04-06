@@ -89,4 +89,7 @@
 // PATH: 重置密码
 #define kResetPswdPath              @"/resetpwd.do"
 
+// PATH: 反馈
+#define kFeedbackPath               @"/feedback"
+
 #endif

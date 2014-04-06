@@ -63,7 +63,7 @@
 }
 
 - (IBAction)onBtnFeedbackClicked:(id)sender {
-
+    [self performSegueWithIdentifier:@"segue.feedback" sender:nil];
 }
 
 - (IBAction)onBtnChangePswdClicked:(id)sender {

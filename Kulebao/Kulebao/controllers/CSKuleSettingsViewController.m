@@ -10,7 +10,9 @@
 #import "AHAlertView.h"
 #import "CSAppDelegate.h"
 
-@interface CSKuleSettingsViewController ()
+@interface CSKuleSettingsViewController () {
+    CSHttpClient* _iTunesHttpClient;
+}
 - (IBAction)onBtnCheckUpdatesClicked:(id)sender;
 - (IBAction)onBtnFeedbackClicked:(id)sender;
 - (IBAction)onBtnChangePswdClicked:(id)sender;
@@ -37,6 +39,7 @@
 	// Do any additional setup after loading the view.
     [self customizeBackBarItem];
     
+    _iTunesHttpClient = [CSHttpClient httpClientWithHost:[NSURL URLWithString:@"http://itunes.apple.com"]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -60,6 +63,7 @@
 
 #pragma mark - UI Actions
 - (IBAction)onBtnCheckUpdatesClicked:(id)sender {
+    [self doCheckUpdates];
 }
 
 - (IBAction)onBtnFeedbackClicked:(id)sender {
@@ -97,6 +101,60 @@
 #pragma mark - Private
 - (void)doLogout {
     [gApp logout];
+}
+
+- (void)doCheckUpdates {
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+        NSInteger resultCount = [[dataJson valueForKeyNotNull:@"resultCount"] integerValue];
+        NSArray* results = [dataJson valueForKeyNotNull:@"results"];
+        
+        if (resultCount > 1) {
+            NSDictionary* rightDic = [results firstObject];
+            //获取appstore最新的版本号
+            NSString *newVersion = [rightDic objectForKey:@"version"];
+            //获取应用程序的地址
+            NSString *newURL = [rightDic objectForKey:@"trackViewUrl"];
+            NSDictionary *localDic =[[NSBundle mainBundle] infoDictionary];
+            NSString *localVersion =[localDic objectForKey:@"CFBundleShortVersionString"];
+            if ([localVersion isEqualToString:newVersion]) {
+                [gApp alert:@"没有更新"];
+            }
+            else {
+                NSString *title = @"新版本";
+                NSString *message = @"发现新版本，是否前去更新？";
+                AHAlertView *alert = [[AHAlertView alloc] initWithTitle:title message:message];
+                
+                [alert setCancelButtonTitle:@"取消" block:^{
+                }];
+                
+                [alert addButtonWithTitle:@"确定" block:^{
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:newURL]];
+                }];
+                
+                [alert show];
+            }
+        }
+        else {
+            CSLog(@"没有应用信息。");
+            [gApp alert:@"没有更新"];
+        }
+    };
+    
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        CSLog(@"failure:%@", error);
+        [gApp alert:[error localizedDescription]];
+    };
+    
+    [gApp waitingAlert:@"正在检查更新..."];
+    
+    NSString* path = @"/lookup";
+    NSString* method = @"POST";
+    NSDictionary* parameters = @{@"id": kKuleAppleID};
+    [_iTunesHttpClient httpRequestWithMethod:method
+                                  path:path
+                            parameters:parameters
+                               success:sucessHandler
+                               failure:failureHandler];
 }
 
 @end

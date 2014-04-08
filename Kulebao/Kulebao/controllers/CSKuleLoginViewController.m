@@ -129,7 +129,7 @@
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
 
         CSKuleBindInfo* bindInfo = [CSKuleInterpreter decodeBindInfo:dataJson];
-        
+        CSLog(@"doReceiveBindInfo error_code=%d", bindInfo.errorCode);
         if (bindInfo.errorCode == 0) {
             gApp.engine.loginInfo.schoolId = bindInfo.schoolId;
             gApp.engine.loginInfo.accessToken = bindInfo.accessToken;
@@ -144,10 +144,21 @@
             [gApp gotoMainProcess];
             [gApp hideAlert];
         }
-        else {
-            CSLog(@"doReceiveBindInfo error_code=%d", bindInfo.errorCode);
+        else if (bindInfo.errorCode == 1) {
             [gApp logout];
-            [gApp alert:@"绑定失败，请重新登录。"];
+            [gApp alert:@"账号绑定失败，请重新登录。"];
+        }
+        else if (bindInfo.errorCode == 2) {
+            [gApp logout];
+            [gApp alert:@"账号未激活或已过期，请联系幼儿园处理，谢谢。"];
+        }
+        else if (bindInfo.errorCode == 3) {
+            [gApp logout];
+            [gApp alert:@"该手机号已经在其他手机上登录，为了您账号的安全，请修改密码后再重新登录。"];
+        }
+        else {
+            [gApp logout];
+            [gApp alert:@"账号绑定失败，请重新登录。"];
         }
     };
     

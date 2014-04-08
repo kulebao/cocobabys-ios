@@ -441,6 +441,48 @@
     }
 }
 
+#pragma mark - Check Updates
+- (void)checkUpdatesOfNews {
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+        NSMutableArray* newsInfos = [NSMutableArray array];
+        CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
+        NSTimeInterval timestamp = [gApp.engine.preferences timestampOfModule:kKuleModuleNews forChild:currentChild.childId];
+        for (id newsInfoJson in dataJson) {
+            CSKuleNewsInfo* newsInfo = [CSKuleInterpreter decodeNewsInfo:newsInfoJson];
+            [newsInfos addObject:newsInfo];
+            if (newsInfo.timestamp > timestamp) {
+                timestamp = newsInfo.timestamp;
+            }
+        }
+        
+        NSTimeInterval oldTimestamp = [gApp.engine.preferences timestampOfModule:kKuleModuleNews forChild:currentChild.childId];
+        if (oldTimestamp < timestamp) {
+            [gApp.engine.preferences setTimestamp:timestamp ofModule:kKuleModuleNews forChild:currentChild.childId];
+            gApp.engine.badgeOfNews = 1;
+        }
+    };
+    
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        CSLog(@"failure:%@", error);
+        //[gApp alert:[error localizedDescription]];
+    };
+    
+    CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
+    if (currentChild) {
+        //[gApp waitingAlert:@"正在获取数据"];
+        [gApp.engine reqGetNewsOfKindergarten:gApp.engine.loginInfo.schoolId
+                                  withClassId:currentChild.classId
+                                         from:-1
+                                           to:-1
+                                         most:1
+                                      success:sucessHandler
+                                      failure:failureHandler];
+    }
+    else {
+        //[gApp alert:@"没有宝宝信息。"];
+    }
+}
+
 #pragma mark - HTTP Request
 - (void)reqCheckPhoneNum:(NSString*)mobile
                  success:(SuccessResponseHandler)success
@@ -575,7 +617,6 @@
                                success:success
                                failure:failure];
 }
-
 
 - (void)reqUpdateChildInfo:(CSKuleChildInfo*)childInfo
             inKindergarten:(NSInteger)kindergarten

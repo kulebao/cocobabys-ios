@@ -70,6 +70,9 @@
 #pragma mark - Retry
 - (void)retryRequestOperationAfterBind:(AFHTTPRequestOperation*)operation;
 
+#pragma mark - Check Updates
+- (void)checkUpdatesOfNews;
+
 #pragma mark - HTTP Request
 - (void)reqCheckPhoneNum:(NSString*)mobile
                  success:(SuccessResponseHandler)success

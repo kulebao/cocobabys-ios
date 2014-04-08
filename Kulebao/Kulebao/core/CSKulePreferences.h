@@ -25,4 +25,7 @@
 
 - (void)addHistoryAccount:(NSString*)account;
 
+- (NSTimeInterval)timestampOfModule:(NSInteger)moduleType forChild:(NSString*)childId;
+- (void)setTimestamp:(NSTimeInterval)timestamp ofModule:(NSInteger)moduleType forChild:(NSString*)childId;
+
 @end

@@ -14,9 +14,11 @@ static NSString* kKeyGuideShown = @"com.cocobabys.Kulebao.Preferences.guideShown
 static NSString* kKeyLoginInfo = @"com.cocobabys.Kulebao.Preferences.loginInfo";
 static NSString* kKeyBPushInfo = @"com.cocobabys.Kulebao.Preferences.baiduPushInfo";
 static NSString* kKeyHistoryAccounts = @"com.cocobabys.Kulebao.Preferences.historyAccounts";
+static NSString* kKeyTimestamps = @"com.cocobabys.Kulebao.Preferences.timestamps";
 
 @implementation CSKulePreferences {
     NSUserDefaults* _config;
+    NSMutableDictionary* _timestampDict;
 }
 
 @synthesize defaultUsername = _defaultUsername;
@@ -37,6 +39,7 @@ static NSString* kKeyHistoryAccounts = @"com.cocobabys.Kulebao.Preferences.histo
 - (id)init {
     if (self = [super init]) {
         _config = [NSUserDefaults standardUserDefaults];
+        _timestampDict = [NSMutableDictionary dictionary];
     }
     return self;
 }
@@ -76,6 +79,11 @@ static NSString* kKeyHistoryAccounts = @"com.cocobabys.Kulebao.Preferences.histo
     }
     else {
         _baiduPushInfo = nil;
+    }
+    
+    NSDictionary* timestamps = [_config objectForKey:kKeyTimestamps];
+    if (timestamps) {
+        _timestampDict = [NSMutableDictionary dictionaryWithDictionary:timestamps];
     }
     
     _historyAccounts = [_config objectForKey:kKeyHistoryAccounts];
@@ -136,6 +144,13 @@ static NSString* kKeyHistoryAccounts = @"com.cocobabys.Kulebao.Preferences.histo
     else {
         [_config removeObjectForKey:kKeyHistoryAccounts];
     }
+    
+    if (_timestampDict) {
+        [_config setObject:_timestampDict forKey:kKeyTimestamps];
+    }
+    else {
+        [_config removeObjectForKey:kKeyTimestamps];
+    }
 
     [_config synchronize];
 }
@@ -173,6 +188,30 @@ static NSString* kKeyHistoryAccounts = @"com.cocobabys.Kulebao.Preferences.histo
         }
         
         [_historyAccounts setObject:[NSDate date] forKey:account];
+        [self savePreferences];
+    }
+}
+
+- (NSTimeInterval)timestampOfModule:(NSInteger)moduleType forChild:(NSString*)childId {
+    NSTimeInterval ret = 0;
+    if (childId.length > 0) {
+        NSDictionary* childDict = [_timestampDict objectForKey:childId];
+        if (childDict) {
+            NSString* moduleName = [NSString stringWithFormat:@"Module_%d", moduleType];
+            NSNumber* value = [childDict objectForKey:moduleName];
+            ret = [value doubleValue];
+        }
+    }
+    return ret;
+}
+
+- (void)setTimestamp:(NSTimeInterval)timestamp ofModule:(NSInteger)moduleType forChild:(NSString*)childId{
+    if (childId.length > 0) {
+        NSDictionary* childDict = [_timestampDict objectForKey:childId];
+        NSMutableDictionary* childMutDict = [NSMutableDictionary dictionaryWithDictionary:childDict];
+        NSString* moduleName = [NSString stringWithFormat:@"Module_%d", moduleType];
+        [childMutDict setObject:@(timestamp) forKey:moduleName];
+        [_timestampDict setObject:childMutDict forKey:childId];
         [self savePreferences];
     }
 }

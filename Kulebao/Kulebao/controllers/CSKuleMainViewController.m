@@ -134,6 +134,8 @@
     CSLog(@"%@ changed.", keyPath);
     if ((object == gApp.engine) && [keyPath isEqualToString:@"currentRelationship"]) {
         [self updateUI:YES];
+        
+        [gApp.engine checkUpdatesOfNews];
     }
     else if((object == gApp.engine) && [keyPath isEqualToString:@"badgeOfNews"]) {
         JSBadgeView* badgeView = [_badges objectAtIndex:kKuleModuleNews];

@@ -176,11 +176,16 @@
 - (void)reloadNewsList {
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         NSMutableArray* newsInfos = [NSMutableArray array];
-        
+        CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
+        NSTimeInterval timestamp = [gApp.engine.preferences timestampOfModule:kKuleModuleNews forChild:currentChild.childId];
         for (id newsInfoJson in dataJson) {
             CSKuleNewsInfo* newsInfo = [CSKuleInterpreter decodeNewsInfo:newsInfoJson];
             [newsInfos addObject:newsInfo];
+            if (newsInfo.timestamp > timestamp) {
+                timestamp = newsInfo.timestamp;
+            }
         }
+        [gApp.engine.preferences setTimestamp:timestamp ofModule:kKuleModuleNews forChild:currentChild.childId];
         
         self.newsInfoList = newsInfos;
         if (_newsInfoList.count > 0) {
@@ -223,11 +228,16 @@
     if (lastNewsInfo) {
         SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
             NSMutableArray* newsInfos = [NSMutableArray array];
-            
+            CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
+            NSTimeInterval timestamp = [gApp.engine.preferences timestampOfModule:kKuleModuleNews forChild:currentChild.childId];
             for (id newsInfoJson in dataJson) {
                 CSKuleNewsInfo* newsInfo = [CSKuleInterpreter decodeNewsInfo:newsInfoJson];
                 [newsInfos addObject:newsInfo];
+                if (newsInfo.timestamp > timestamp) {
+                    timestamp = newsInfo.timestamp;
+                }
             }
+            [gApp.engine.preferences setTimestamp:timestamp ofModule:kKuleModuleNews forChild:currentChild.childId];
             
             if (newsInfos.count > 0) {
                 [self.newsInfoList addObjectsFromArray:newsInfos];

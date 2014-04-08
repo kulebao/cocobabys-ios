@@ -75,10 +75,16 @@
         [gApp alert:@"请输入旧密码"];
     }
     else if (newPswd.length == 0) {
-        [gApp alert:@"请输入新密码"];
+        [gApp alert:@"请输入新密码，密码由数字或英文组成，长度是6-16位。"];
+    }
+    else if (![newPswd isValidPswd]) {
+        [gApp alert:@"密码格式有误，请重新输入，谢谢。\n密码由数字或英文组成，长度是6-16位。"];
     }
     else if (newPswdAgain.length == 0) {
-        [gApp alert:@"请再次输入新密码"];
+        [gApp alert:@"请再次输入新密码，密码由数字或英文组成，长度是6-16位。"];
+    }
+    else if (![newPswdAgain isValidPswd]) {
+        [gApp alert:@"密码格式有误，请重新输入，谢谢。 \n密码由数字或英文组成，长度是6-16位。"];
     }
     else if (![newPswdAgain isEqualToString:newPswd]) {
         [gApp alert:@"两次输入的新密码不一致"];

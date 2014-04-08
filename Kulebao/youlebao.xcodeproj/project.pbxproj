@@ -11,6 +11,7 @@
 		0902458518EC41FA00579886 /* CSKuleURLCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0902458418EC41FA00579886 /* CSKuleURLCache.m */; };
 		0902782818C9C060002B9644 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0902782718C9C060002B9644 /* MessageUI.framework */; };
 		0902CAA818F4200A001901A8 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0902CAA718F4200A001901A8 /* AudioToolbox.framework */; };
+		0902CAAE18F4359D001901A8 /* NSString+CSKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 0902CAAD18F4359D001901A8 /* NSString+CSKit.m */; };
 		090468F518C6FE1000D0846E /* CSKuleBindInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 090468F418C6FE1000D0846E /* CSKuleBindInfo.m */; };
 		090468FA18C7007600D0846E /* input-bg-0.png in Resources */ = {isa = PBXBuildFile; fileRef = 090468F818C7007500D0846E /* input-bg-0.png */; };
 		090468FB18C7007600D0846E /* input-bg-0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 090468F918C7007600D0846E /* input-bg-0@2x.png */; };
@@ -391,6 +392,8 @@
 		0902458418EC41FA00579886 /* CSKuleURLCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleURLCache.m; sourceTree = "<group>"; };
 		0902782718C9C060002B9644 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		0902CAA718F4200A001901A8 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		0902CAAC18F4359D001901A8 /* NSString+CSKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CSKit.h"; sourceTree = "<group>"; };
+		0902CAAD18F4359D001901A8 /* NSString+CSKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CSKit.m"; sourceTree = "<group>"; };
 		090468F318C6FE1000D0846E /* CSKuleBindInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleBindInfo.h; sourceTree = "<group>"; };
 		090468F418C6FE1000D0846E /* CSKuleBindInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleBindInfo.m; sourceTree = "<group>"; };
 		090468F818C7007500D0846E /* input-bg-0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "input-bg-0.png"; sourceTree = "<group>"; };
@@ -1455,6 +1458,9 @@
 				09D04E3818DFCB830093577D /* CSKuleCheckinLogListViewController.m */,
 				09FE6B0518C5C23300A840BE /* CSKuleCheckinViewController.h */,
 				09FE6B0618C5C23300A840BE /* CSKuleCheckinViewController.m */,
+				09F0BFAF18F1C671004629BA /* CSKuleDatePickerViewController.h */,
+				09F0BFB018F1C671004629BA /* CSKuleDatePickerViewController.m */,
+				09F0BFB118F1C671004629BA /* CSKuleDatePickerViewController.xib */,
 				09F0BF9C18F18EA5004629BA /* CSKuleFeedbackViewController.h */,
 				09F0BF9D18F18EA5004629BA /* CSKuleFeedbackViewController.m */,
 				0912DCDD18ED35D500016868 /* CSKuleForgotPswdViewController.h */,
@@ -1480,9 +1486,6 @@
 				0915662018ED92810073AE22 /* CSKuleVerifyMobileViewController.h */,
 				0915662118ED92810073AE22 /* CSKuleVerifyMobileViewController.m */,
 				09FE6AEB18C5722500A840BE /* views */,
-				09F0BFAF18F1C671004629BA /* CSKuleDatePickerViewController.h */,
-				09F0BFB018F1C671004629BA /* CSKuleDatePickerViewController.m */,
-				09F0BFB118F1C671004629BA /* CSKuleDatePickerViewController.xib */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -1743,6 +1746,8 @@
 			isa = PBXGroup;
 			children = (
 				09A9EBB418C07E8800D83119 /* CSKit.h */,
+				0902CAAC18F4359D001901A8 /* NSString+CSKit.h */,
+				0902CAAD18F4359D001901A8 /* NSString+CSKit.m */,
 				09FE6AF418C5A53200A840BE /* CSTextFieldDelegate.h */,
 				09FE6AF518C5A53200A840BE /* CSTextFieldDelegate.m */,
 				09ED59B018CDB01600187585 /* NSDate+CSKit.h */,
@@ -2163,6 +2168,7 @@
 				09219A3618C42AF800166228 /* MBProgressHUD.m in Sources */,
 				09BA1C0018BB334900760182 /* OpenUDID.m in Sources */,
 				09219A5118C4878600166228 /* TPKeyboardAvoidingCollectionView.m in Sources */,
+				0902CAAE18F4359D001901A8 /* NSString+CSKit.m in Sources */,
 				091AE82E18D820C800EBC927 /* NSMutableArray+convenience.m in Sources */,
 				09F0BFAD18F1C483004629BA /* MJPopupBackgroundView.m in Sources */,
 				091AE82D18D820C800EBC927 /* NSDate+convenience.m in Sources */,

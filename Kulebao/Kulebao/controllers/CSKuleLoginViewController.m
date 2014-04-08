@@ -105,7 +105,7 @@
                            afterDelay:0];
             }
             else {
-                [gApp alert:@"密码错误，请重新输入,谢谢！" withTitle:@"提示"];
+                [gApp alert:@"密码错误，请重新输入，谢谢。" withTitle:@"提示"];
             }
         };
         

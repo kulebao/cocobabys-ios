@@ -103,6 +103,9 @@ static NSInteger kRetryInterval = 600; // 秒
     if (self.fieldSmsCode.text.length == 0) {
         [gApp alert:@"请输入短信验证码。"];
     }
+    else if (![self.fieldSmsCode.text isValidSmsCode]) {
+        [gApp alert:@"无效验证码，请检查后重新输入，谢谢。\n验证码为6位数字。"];
+    }
     else {
         [self doBind];
     }
@@ -179,7 +182,7 @@ static NSInteger kRetryInterval = 600; // 秒
                 [self performSelector:@selector(startTimer) withObject:nil afterDelay:0];
             }
             else {
-                [gApp alert:error_msg];
+                [gApp alert:@"验证码获取过于频繁，请稍后再试。"];
             }
         };
         
@@ -189,7 +192,7 @@ static NSInteger kRetryInterval = 600; // 秒
                 [gApp alert:@"验证码未过期，请勿重复获取。"];
             }
             else {
-                [gApp alert:[error localizedDescription]];
+                [gApp alert:@"获取验证码失败"];
             }
         };
         
@@ -225,7 +228,7 @@ static NSInteger kRetryInterval = 600; // 秒
                 [gApp alert:error_msg];
             }
             else {
-                [gApp alert:@"短信验证码可能错误。" withTitle:@"绑定失败"];
+                [gApp alert:@"验证码错误，请确认输入是否正确，如果点击了重新获取验证码，请输入最后一次收到的验证码，谢谢"];
             }
         }
     };

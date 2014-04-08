@@ -135,14 +135,16 @@
     CSLog(@"%@ changed.", keyPath);
     if ((object == gApp.engine) && [keyPath isEqualToString:@"currentRelationship"]) {
         [self updateUI:YES];
-        
-        [gApp.engine checkUpdatesOfNews];
-        [gApp.engine checkUpdatesOfRecipe];
-        [gApp.engine checkUpdatesOfCheckin];
-        [gApp.engine checkUpdatesOfSchedule];
-        [gApp.engine checkUpdatesOfAssignment];
-        [gApp.engine checkUpdatesOfChating];
-        [gApp.engine checkUpdatesOfAssess];
+        CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
+        if (currentChild) {
+            [gApp.engine checkUpdatesOfNews];
+            [gApp.engine checkUpdatesOfRecipe];
+            [gApp.engine checkUpdatesOfCheckin];
+            [gApp.engine checkUpdatesOfSchedule];
+            [gApp.engine checkUpdatesOfAssignment];
+            [gApp.engine checkUpdatesOfChating];
+            [gApp.engine checkUpdatesOfAssess];
+        }
     }
     else if((object == gApp.engine) && [keyPath isEqualToString:@"badgeOfNews"]) {
         JSBadgeView* badgeView = [_badges objectAtIndex:kKuleModuleNews];

@@ -120,7 +120,7 @@ CSAppDelegate* gApp = nil;
         self.hud.detailsLabelText = text;
         [_window bringSubviewToFront:self.hud];
         [self.hud show:YES];
-        [self hideAlertAfterDelay:1.5];
+        [self hideAlertAfterDelay:2];
     }
 }
 

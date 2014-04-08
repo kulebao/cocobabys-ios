@@ -70,7 +70,7 @@
 
 - (void)doAuth {
     NSString* mobile = self.fieldMobile.text;
-    if (mobile.length > 0) {
+    if ([mobile isValidMobile]) {
         gApp.engine.preferences.defaultUsername = mobile;
         SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
             /*
@@ -82,7 +82,6 @@
             
             switch (check_phone_result) {
                 case PHONE_NUM_IS_ALREADY_BIND:
-                case PHONE_NUM_IS_FIRST_USE:
                 {
                     [gApp hideAlert];
                     
@@ -96,16 +95,19 @@
                     }
                 }
                     break;
+                    
+                case PHONE_NUM_IS_FIRST_USE:
                 case PHONE_NUM_IS_INVALID:
                 {
-                    [gApp alert:@"手机号码没有注册，请确认输入是否正确或联系幼儿园处理，谢谢！"
+                    [gApp alert:@"账号未激活或已过期，请联系幼儿园处理，谢谢。"
                       withTitle:@"提示"];
                     
                 }
                     break;
                 default:
                 {
-                    [gApp hideAlert];
+                    [gApp alert:@"账号未激活或已过期，请联系幼儿园处理，谢谢。"
+                      withTitle:@"提示"];
                 }
                     break;
             }
@@ -120,6 +122,9 @@
         [gApp.engine reqCheckPhoneNum:mobile
                               success:sucessHandler
                               failure:failureHandler];
+    }
+    else if (mobile.length > 0) {
+        [gApp alert:@"无效手机号码，请检查后重新输入，谢谢。"];
     }
     else {
         [gApp alert:@"请输入手机号码"];

@@ -20,12 +20,12 @@
 #define CSLog (void)
 #endif
 
-
 #import "CSTextFieldDelegate.h"
 #import "NSDictionary+CSKit.h"
 #import "UIViewController+CSKit.h"
 #import "NSDate+CSKit.h"
 #import "UIWebView+CSKit.h"
 #import "NSURL+CSKit.h"
+#import "NSString+CSKit.h"
 
 #endif

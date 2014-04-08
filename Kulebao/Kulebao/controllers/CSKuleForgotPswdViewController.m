@@ -91,11 +91,20 @@ static NSInteger kRetryInterval = 600; // 秒
     if (self.fieldSmsCode.text.length == 0) {
         [gApp alert:@"请输入短信验证码。"];
     }
+    else if (![self.fieldSmsCode.text isValidSmsCode]) {
+        [gApp alert:@"无效验证码，请检查后重新输入，谢谢。\n验证码为6位数字。"];
+    }
     else if (self.fieldNewPswd.text.length == 0) {
-        [gApp alert:@"请输入新密码。"];
+        [gApp alert:@"请输入新密码，密码由数字或英文组成，长度是6-16位。"];
+    }
+    else if (![self.fieldNewPswd.text isValidPswd]) {
+        [gApp alert:@"密码格式有误，请重新输入，谢谢。 \n密码由数字或英文组成，长度是6-16位。"];
     }
     else if (self.fieldNewPswdConfirm.text.length == 0) {
-        [gApp alert:@"请再次输入新密码。"];
+        [gApp alert:@"请再次输入新密码，密码由数字或英文组成，长度是6-16位。"];
+    }
+    else if (![self.fieldNewPswdConfirm.text isValidPswd]) {
+        [gApp alert:@"密码格式有误，请重新输入，谢谢。 \n密码由数字或英文组成，长度是6-16位。"];
     }
     else if (![self.fieldNewPswd.text isEqualToString:self.fieldNewPswdConfirm.text]) {
         [gApp alert:@"两次输入的密码不一致。"];
@@ -178,7 +187,7 @@ static NSInteger kRetryInterval = 600; // 秒
                 [self performSelector:@selector(startTimer) withObject:nil afterDelay:0];
             }
             else {
-                [gApp alert:error_msg];
+                [gApp alert:@"验证码获取过于频繁，请稍后再试。"];
             }
         };
 
@@ -188,7 +197,7 @@ static NSInteger kRetryInterval = 600; // 秒
                 [gApp alert:@"验证码未过期，请勿重复获取。"];
             }
             else {
-                [gApp alert:[error localizedDescription]];
+                [gApp alert:@"获取验证码失败"];
             }
         };
         
@@ -217,12 +226,15 @@ static NSInteger kRetryInterval = 600; // 秒
             [gApp alert:@"重置密码成功，请牢记新密码。"];
             [self goBack];
         }
+        else if (error_code == 1232) {
+            [gApp alert:@"验证码错误，请确认输入是否正确，如果点击了重新获取验证码，请输入最后一次收到的验证码，谢谢。"];
+        }
         else {
             if (error_msg.length > 0) {
                 [gApp alert:error_msg];
             }
             else {
-                [gApp alert:@"短信验证码可能错误。" withTitle:@"重置密码失败"];
+                [gApp alert:@"密码修改失败。"];
             }
         }
     };

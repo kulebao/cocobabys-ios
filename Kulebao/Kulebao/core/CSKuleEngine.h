@@ -73,6 +73,7 @@
 #pragma mark - Check Updates
 - (void)checkUpdatesOfNews;
 - (void)checkUpdatesOfRecipe;
+- (void)checkUpdatesOfCheckin;
 - (void)checkUpdatesOfSchedule;
 - (void)checkUpdatesOfAssignment;
 - (void)checkUpdatesOfChating;

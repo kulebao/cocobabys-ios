@@ -137,6 +137,7 @@
         
         [gApp.engine checkUpdatesOfNews];
         [gApp.engine checkUpdatesOfRecipe];
+        [gApp.engine checkUpdatesOfCheckin];
         [gApp.engine checkUpdatesOfSchedule];
         [gApp.engine checkUpdatesOfAssignment];
         [gApp.engine checkUpdatesOfChating];

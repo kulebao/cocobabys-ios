@@ -94,6 +94,18 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    
+    CSKuleChildInfo* currentChild = _currentRelationship.child;
+    if (currentChild) {
+        [self checkUpdatesOfNews];
+        [self checkUpdatesOfRecipe];
+        [self checkUpdatesOfCheckin];
+        [self checkUpdatesOfSchedule];
+        [self checkUpdatesOfAssignment];
+        [self checkUpdatesOfChating];
+        [self checkUpdatesOfAssess];
+    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -129,6 +141,7 @@
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    CSLog(@"%@", @"Did receive a Remote Notification");
     //NSString *alert = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
     if (application.applicationState == UIApplicationStateActive) {
         // Nothing to do if applicationState is Inactive, the iOS already displayed an alert view.
@@ -139,13 +152,10 @@
         //                                                  otherButtonTitles:nil];
         //        [alertView show];
         
-        CSLog(@"%@", @"Did receive a Remote Notification");
+        self.badgeOfCheckin = self.badgeOfCheckin + 1;
+        [application setApplicationIconBadgeNumber:0];
     }
     
-    [application setApplicationIconBadgeNumber:0];
-    
-    self.badgeOfCheckin = self.badgeOfCheckin + 1;
-
     [BPush handleNotification:userInfo];
 }
 
@@ -524,6 +534,51 @@
     [gApp.engine reqGetCookbooksOfKindergarten:gApp.engine.loginInfo.schoolId
                                        success:sucessHandler
                                        failure:failureHandler];
+}
+
+- (void)checkUpdatesOfCheckin {
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+        NSMutableArray* checkInOutLogInfos = [NSMutableArray array];
+        
+        CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
+        NSTimeInterval oldTimestamp = [gApp.engine.preferences timestampOfModule:kKuleModuleCheckin forChild:currentChild.childId];
+        NSTimeInterval timestamp = oldTimestamp;
+        
+        for (id checkInOutLogInfoJson in dataJson) {
+            CSKuleCheckInOutLogInfo* checkInOutLogInfo = [CSKuleInterpreter decodeCheckInOutLogInfo:checkInOutLogInfoJson];
+            [checkInOutLogInfos addObject:checkInOutLogInfo];
+            if (timestamp < checkInOutLogInfo.timestamp) {
+                timestamp = checkInOutLogInfo.timestamp;
+            }
+        }
+        
+        if (oldTimestamp < timestamp) {
+            gApp.engine.badgeOfCheckin = 1;
+            [gApp.engine.preferences setTimestamp:timestamp
+                                         ofModule:kKuleModuleCheckin
+                                         forChild:currentChild.childId];
+        }
+    };
+    
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        CSLog(@"failure:%@", error);
+        //[gApp alert:[error localizedDescription]];
+    };
+    
+    CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
+    if (currentChild) {
+        //[gApp waitingAlert:@"正在获取签到信息..."];
+        [gApp.engine reqGetCheckInOutLogOfChild:currentChild
+                                 inKindergarten:gApp.engine.loginInfo.schoolId
+                                           from:-1
+                                             to:-1
+                                           most:1
+                                        success:sucessHandler
+                                        failure:failureHandler];
+    }
+    else {
+        //[gApp alert:@"没有宝宝信息。"];
+    }
 }
 
 - (void)checkUpdatesOfSchedule {

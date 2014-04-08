@@ -123,9 +123,22 @@
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         NSMutableArray* checkInOutLogInfos = [NSMutableArray array];
         
+        CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
+        NSTimeInterval oldTimestamp = [gApp.engine.preferences timestampOfModule:kKuleModuleCheckin forChild:currentChild.childId];
+        NSTimeInterval timestamp = oldTimestamp;
+        
         for (id checkInOutLogInfoJson in dataJson) {
             CSKuleCheckInOutLogInfo* checkInOutLogInfo = [CSKuleInterpreter decodeCheckInOutLogInfo:checkInOutLogInfoJson];
             [checkInOutLogInfos addObject:checkInOutLogInfo];
+            if (timestamp < checkInOutLogInfo.timestamp) {
+                timestamp = checkInOutLogInfo.timestamp;
+            }
+        }
+        
+        if (oldTimestamp < timestamp) {
+            [gApp.engine.preferences setTimestamp:timestamp
+                                         ofModule:kKuleModuleCheckin
+                                         forChild:currentChild.childId];
         }
         
         self.checkInOutLogInfos = checkInOutLogInfos;

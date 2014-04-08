@@ -77,17 +77,19 @@
     
     CSKuleChildInfo* child = gApp.engine.currentRelationship.child;
     
-    if (checkInOutLogInfo.noticeType == kKuleNoticeTypeCheckIn) {
-        cell.labContent.text = [NSString stringWithFormat:@"您的小孩 %@ 已刷卡入园。", child.name];
-    }
-    else if (checkInOutLogInfo.noticeType == kKuleNoticeTypeCheckOut) {
-        cell.labContent.text = [NSString stringWithFormat:@"您的小孩 %@ 已刷卡离园。", child.name];
-    }
-    else {
-        cell.labContent.text = @"";
-    }
+    NSString* timestampString = [[NSDate dateWithTimeIntervalSince1970:checkInOutLogInfo.timestamp] isoDateTimeString];
     
     NSString* publiser = gApp.engine.loginInfo.schoolName;
+    
+    NSString* body = @"";
+    if (checkInOutLogInfo.noticeType == kKuleNoticeTypeCheckIn) {
+        body = [NSString stringWithFormat:@"您的小孩 %@ 已于 %@  由 %@ 刷卡入园。", child.nick, timestampString, checkInOutLogInfo.parentName];
+    }
+    else if (checkInOutLogInfo.noticeType == kKuleNoticeTypeCheckOut){
+        body = [NSString stringWithFormat:@"您的小孩 %@ 已于 %@ 由 %@ 刷卡离园。", child.nick, timestampString, checkInOutLogInfo.parentName];
+    }
+    
+    cell.labContent.text = body;
     
     if (checkInOutLogInfo.recordUrl.length > 0) {
         NSURL* qiniuImgUrl = [gApp.engine urlFromPath:checkInOutLogInfo.recordUrl];

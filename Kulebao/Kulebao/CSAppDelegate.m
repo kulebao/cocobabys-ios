@@ -68,10 +68,7 @@ CSAppDelegate* gApp = nil;
 
 #pragma mark - Private
 - (void)gotoLoginProcess {
-    if ([BPush getChannelId] && [BPush getUserId]) {
-        
-    }
-    else {
+    if (![_engine.baiduPushInfo isValid]) {
         [BPush bindChannel];
     }
     
@@ -87,8 +84,6 @@ CSAppDelegate* gApp = nil;
 }
 
 - (void)logout {
-    [self.engine reqUnbind];
-    
     self.engine.loginInfo = nil;
     self.engine.relationships = nil;
     self.engine.currentRelationship = nil;

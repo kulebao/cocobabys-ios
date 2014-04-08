@@ -168,7 +168,7 @@
         [gApp alert:error.localizedDescription];
     };
     
-    if ([BPush getChannelId] && [BPush getUserId]) {
+    if ([gApp.engine.baiduPushInfo isValid]) {
         [gApp waitingAlert:@"获取绑定信息..."];
         [gApp.engine reqReceiveBindInfo:gApp.engine.loginInfo.accountName
                                 success:sucessHandler

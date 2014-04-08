@@ -100,7 +100,27 @@
 
 #pragma mark - Private
 - (void)doLogout {
-    [gApp logout];
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+        CSKuleBindInfo* bindInfo = [CSKuleInterpreter decodeBindInfo:dataJson];
+        if (bindInfo.errorCode == 0) {
+            [gApp hideAlert];
+        }
+        else {
+            CSLog(@"doReceiveBindInfo error_code=%d", bindInfo.errorCode);
+            [gApp alert:@"解除绑定失败。"];
+        }
+        
+        [gApp logout];
+    };
+    
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        CSLog(@"failure:%@", error);
+        [gApp alert:error.localizedDescription];
+        [gApp logout];
+    };
+    
+    [gApp waitingAlert:@"注销登录..."];
+    [gApp.engine reqUnbindWithSuccess:sucessHandler failure:failureHandler];
 }
 
 - (void)doCheckUpdates {

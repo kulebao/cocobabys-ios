@@ -21,6 +21,8 @@
 		0904FC9518F3A349001968D7 /* btn-start.png in Resources */ = {isa = PBXBuildFile; fileRef = 0904FC9118F3A349001968D7 /* btn-start.png */; };
 		0904FC9618F3A349001968D7 /* btn-start@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0904FC9218F3A349001968D7 /* btn-start@2x.png */; };
 		0904FC9918F3BDED001968D7 /* CSKuleEmployeeInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0904FC9818F3BDED001968D7 /* CSKuleEmployeeInfo.m */; };
+		0904FCA318F3E01D001968D7 /* SDCachedURLResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 0904FC9E18F3E01D001968D7 /* SDCachedURLResponse.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		0904FCA418F3E01D001968D7 /* SDURLCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0904FCA018F3E01D001968D7 /* SDURLCache.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		090C9EB018C813BD00883DE0 /* CSKulePreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 090C9EAF18C813BD00883DE0 /* CSKulePreferences.m */; };
 		090C9EB318C81D7500883DE0 /* CSKuleInterpreter.m in Sources */ = {isa = PBXBuildFile; fileRef = 090C9EB218C81D7500883DE0 /* CSKuleInterpreter.m */; };
 		090C9EB818C83D2C00883DE0 /* msg-bg-from.png in Resources */ = {isa = PBXBuildFile; fileRef = 090C9EB418C83D2C00883DE0 /* msg-bg-from.png */; };
@@ -404,6 +406,12 @@
 		0904FC9218F3A349001968D7 /* btn-start@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-start@2x.png"; sourceTree = "<group>"; };
 		0904FC9718F3BDED001968D7 /* CSKuleEmployeeInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleEmployeeInfo.h; sourceTree = "<group>"; };
 		0904FC9818F3BDED001968D7 /* CSKuleEmployeeInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleEmployeeInfo.m; sourceTree = "<group>"; };
+		0904FC9B18F3E01D001968D7 /* LICENCE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENCE; sourceTree = "<group>"; };
+		0904FC9C18F3E01D001968D7 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		0904FC9D18F3E01D001968D7 /* SDCachedURLResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCachedURLResponse.h; sourceTree = "<group>"; };
+		0904FC9E18F3E01D001968D7 /* SDCachedURLResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCachedURLResponse.m; sourceTree = "<group>"; };
+		0904FC9F18F3E01D001968D7 /* SDURLCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDURLCache.h; sourceTree = "<group>"; };
+		0904FCA018F3E01D001968D7 /* SDURLCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDURLCache.m; sourceTree = "<group>"; };
 		090C9EAE18C813BD00883DE0 /* CSKulePreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKulePreferences.h; sourceTree = "<group>"; };
 		090C9EAF18C813BD00883DE0 /* CSKulePreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKulePreferences.m; sourceTree = "<group>"; };
 		090C9EB118C81D7500883DE0 /* CSKuleInterpreter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleInterpreter.h; sourceTree = "<group>"; };
@@ -926,6 +934,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0904FC9A18F3E01D001968D7 /* SDURLCache */ = {
+			isa = PBXGroup;
+			children = (
+				0904FC9B18F3E01D001968D7 /* LICENCE */,
+				0904FC9C18F3E01D001968D7 /* README.md */,
+				0904FC9D18F3E01D001968D7 /* SDCachedURLResponse.h */,
+				0904FC9E18F3E01D001968D7 /* SDCachedURLResponse.m */,
+				0904FC9F18F3E01D001968D7 /* SDURLCache.h */,
+				0904FCA018F3E01D001968D7 /* SDURLCache.m */,
+			);
+			path = SDURLCache;
+			sourceTree = "<group>";
+		};
 		090C9EBC18C846B200883DE0 /* AHAlertView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1580,6 +1601,7 @@
 		09BA1BC918BB2FC700760182 /* Venders */ = {
 			isa = PBXGroup;
 			children = (
+				0904FC9A18F3E01D001968D7 /* SDURLCache */,
 				09BA1C0F18BB3F8400760182 /* AFNetworking */,
 				090C9EBC18C846B200883DE0 /* AHAlertView */,
 				09142DC018E27E7600E5848F /* ALAlertBanner */,
@@ -2118,6 +2140,7 @@
 				09142DB118E2713C00E5848F /* CFilteringJSONSerializer.m in Sources */,
 				09A9EBD518C0A01B00D83119 /* CSKuleMainViewController.m in Sources */,
 				09FFB5F718D6B46300F07B0A /* CSKuleScheduleInfo.m in Sources */,
+				0904FCA318F3E01D001968D7 /* SDCachedURLResponse.m in Sources */,
 				09142DD218E27E7600E5848F /* ALAlertBannerManager.m in Sources */,
 				09ED59BC18CDC5E800187585 /* CSKuleCookbookInfo.m in Sources */,
 				09BA1BFD18BB334900760182 /* Base64.m in Sources */,
@@ -2171,6 +2194,7 @@
 				0904690518C72E5000D0846E /* CSKuleParentInfo.m in Sources */,
 				09FE6AF618C5A53200A840BE /* CSTextFieldDelegate.m in Sources */,
 				09BA1C2418BB3F8400760182 /* AFHTTPRequestOperation.m in Sources */,
+				0904FCA418F3E01D001968D7 /* SDURLCache.m in Sources */,
 				09219A5318C4878600166228 /* TPKeyboardAvoidingTableView.m in Sources */,
 				090CC92C18DA88AF007781CB /* FTCoreTextView.m in Sources */,
 				0934EFC418BF3AF700E30ECA /* EAIntroView.m in Sources */,

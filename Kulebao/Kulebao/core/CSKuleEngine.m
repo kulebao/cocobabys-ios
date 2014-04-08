@@ -118,12 +118,14 @@
     if (![_preferences.deviceToken isEqualToData:deviceToken]) {
         _preferences.deviceToken = deviceToken;
         _preferences.baiduPushInfo = nil;
-        _baiduPushInfo = nil;
+        self.baiduPushInfo = _preferences.baiduPushInfo;
     }
     
     // 必须。可以在其它时机调用,只有在该方法返回(通过 onMethod:response:回调)绑定成功时,app 才能接收到 Push 消息。
     // 一个 app 绑定成功至少一次即可(如果 access token 变更请重新绑定)。
-    [BPush bindChannel];
+    if (![_baiduPushInfo isValid]) {
+        [BPush bindChannel];
+    }
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
@@ -198,7 +200,10 @@
     
     CSKuleURLCache* cache = [[CSKuleURLCache alloc] initWithMemoryCapacity:4*1024*1024
                                                               diskCapacity:64*1024*1024
-                                                                  diskPath:cachePath];
+                                                                  diskPath:cachePath
+                             enableForIOS5AndUp:YES];
+    cache.minCacheInterval = 30;
+
     [CSKuleURLCache setSharedURLCache:cache];
     
     if (_httpClient == nil) {
@@ -264,18 +269,17 @@
             baiduPushInfo.userId = userid;
             baiduPushInfo.channelId = channelid;
             
-            self.baiduPushInfo = baiduPushInfo;
             _preferences.baiduPushInfo = baiduPushInfo;
+            self.baiduPushInfo = _preferences.baiduPushInfo;
         }
         else {
-            //self.baiduPushInfo = nil;
-            //_preferences.baiduPushInfo = nil;
+            CSLog(@"BPushErrorCode_NOT_Success");
         }
     } else if ([BPushRequestMethod_Unbind isEqualToString:method]) {
         int returnCode = [[res valueForKey:BPushRequestErrorCodeKey] intValue];
         if (returnCode == BPushErrorCode_Success) {
-            self.baiduPushInfo = nil;
             _preferences.baiduPushInfo = nil;
+            self.baiduPushInfo = _preferences.baiduPushInfo;
         }
     }
 }
@@ -403,13 +407,13 @@
         CSKuleBindInfo* bindInfo = [CSKuleInterpreter decodeBindInfo:dataJson];
         
         if (bindInfo.errorCode == 0) {
-            gApp.engine.loginInfo.schoolId = bindInfo.schoolId;
-            gApp.engine.loginInfo.accessToken = bindInfo.accessToken;
-            gApp.engine.loginInfo.accountName = bindInfo.accountName;
-            gApp.engine.loginInfo.username = bindInfo.username;
-            gApp.engine.loginInfo.schoolName = bindInfo.schoolName;
+            _loginInfo.schoolId = bindInfo.schoolId;
+            _loginInfo.accessToken = bindInfo.accessToken;
+            _loginInfo.accountName = bindInfo.accountName;
+            _loginInfo.username = bindInfo.username;
+            _loginInfo.schoolName = bindInfo.schoolName;
             
-            gApp.engine.preferences.loginInfo = gApp.engine.loginInfo;
+            _preferences.loginInfo = _loginInfo;
             [gApp hideAlert];
             
             [_httpClient enqueueHTTPRequestOperation:operation];
@@ -425,9 +429,9 @@
         CSLog(@"failure:%@", error);
     };
     
-    if ([BPush getChannelId] && [BPush getUserId]) {
+    if (![_baiduPushInfo isValid]) {
         [gApp waitingAlert:@"重新获取绑定信息..."];
-        [gApp.engine reqReceiveBindInfo:gApp.engine.loginInfo.accountName
+        [gApp.engine reqReceiveBindInfo:_loginInfo.accountName
                             success:sucessHandler
                             failure:failureHandler];
     }
@@ -486,11 +490,11 @@
     
     NSDictionary* parameters = nil;
     
-    if ([BPush getChannelId] && [BPush getUserId]) {
+    if ([_baiduPushInfo isValid]) {
         parameters = @{@"phonenum": mobile,
-                       @"user_id": [BPush getUserId],
-                       @"channel_id": [BPush getChannelId],
-                       @"access_token": gApp.engine.loginInfo.accessToken ? gApp.engine.loginInfo.accessToken : @"",
+                       @"user_id": _baiduPushInfo.userId,
+                       @"channel_id": _baiduPushInfo.channelId,
+                       @"access_token": _loginInfo.accessToken ? _loginInfo.accessToken : @"",
                        @"device_type": @"ios"};
     }
     else {
@@ -498,7 +502,7 @@
         parameters = @{@"phonenum": mobile,
                        @"user_id": @"",
                        @"channel_id": @"",
-                       @"access_token": gApp.engine.loginInfo.accessToken ? gApp.engine.loginInfo.accessToken : @"",
+                       @"access_token":_loginInfo.accessToken ? _loginInfo.accessToken : @"",
                        @"device_type": @"ios"};
     }
     
@@ -509,44 +513,25 @@
                                failure:failure];
 }
 
-- (void)reqUnbind {
+- (void)reqUnbindWithSuccess:(SuccessResponseHandler)success
+                     failure:(FailureResponseHandler)failure {
     NSString* path = kReceiveBindInfoPath;
     
     NSString* method = @"POST";
     
     NSDictionary* parameters = nil;
     
-    
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
-        CSKuleBindInfo* bindInfo = [CSKuleInterpreter decodeBindInfo:dataJson];
-        
-        if (bindInfo.errorCode == 0) {
-            [gApp hideAlert];
-        }
-        else {
-            CSLog(@"doReceiveBindInfo error_code=%d", bindInfo.errorCode);
-            [gApp alert:@"解除绑定失败。"];
-        }
-    };
-    
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
-        CSLog(@"failure:%@", error);
-        [gApp logout];
-        [gApp alert:error.localizedDescription];
-    };
-    
     parameters = @{@"phonenum": _loginInfo.accountName,
                    @"user_id": @"",
                    @"channel_id": @"",
-                   @"access_token": gApp.engine.loginInfo.accessToken ? gApp.engine.loginInfo.accessToken : @"",
+                   @"access_token": _loginInfo.accessToken ? _loginInfo.accessToken : @"",
                    @"device_type": @"ios"};
     
-    [gApp waitingAlert:@"注销登录..."];
     [_httpClient httpRequestWithMethod:method
                                   path:path
                             parameters:parameters
-                               success:sucessHandler
-                               failure:failureHandler];
+                               success:success
+                               failure:failure];
     
 }
 

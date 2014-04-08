@@ -243,7 +243,7 @@
         
         FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
             CSLog(@"failure:%@", error);
-            self.tableview.pullTableIsRefreshing = NO;
+            self.tableview.pullTableIsLoadingMore = NO;
             [gApp alert:[error localizedDescription]];
         };
         

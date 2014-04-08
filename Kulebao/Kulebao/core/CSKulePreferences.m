@@ -69,8 +69,9 @@ static NSString* kKeyHistoryAccounts = @"com.cocobabys.Kulebao.Preferences.histo
     CSKuleBPushInfo* bpushInfo = [CSKuleBPushInfo new];
     bpushInfo.userId = [bpushInfoDict valueForKeyNotNull:@"userId"];
     bpushInfo.channelId = [bpushInfoDict valueForKeyNotNull:@"channelId"];
+    bpushInfo.appId = [bpushInfoDict valueForKeyNotNull:@"appId"];
     
-    if (bpushInfo.userId && bpushInfo.channelId) {
+    if ([bpushInfo isValid]) {
         _baiduPushInfo = bpushInfo;
     }
     else {
@@ -118,9 +119,10 @@ static NSString* kKeyHistoryAccounts = @"com.cocobabys.Kulebao.Preferences.histo
         [_config removeObjectForKey:kKeyLoginInfo];
     }
     
-    if (_baiduPushInfo && _baiduPushInfo.userId && _baiduPushInfo.channelId) {
+    if ([_baiduPushInfo isValid]) {
         NSDictionary* bpushInfoDict = @{@"userId": _baiduPushInfo.userId,
-                                        @"channelId": _baiduPushInfo.channelId};
+                                        @"channelId": _baiduPushInfo.channelId,
+                                        @"appId": _baiduPushInfo.appId};
         
         [_config setObject:bpushInfoDict forKey:kKeyBPushInfo];
     }

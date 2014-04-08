@@ -13,4 +13,6 @@
 @property (nonatomic, strong) NSString* userId;
 @property (nonatomic, strong) NSString* channelId;
 
+- (BOOL)isValid;
+
 @end

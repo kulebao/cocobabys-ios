@@ -171,8 +171,16 @@
         [introPages addObject:page];
     }
     
+    UIButton* skipButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [skipButton setBackgroundImage:[UIImage imageNamed:@"btn-start.png"] forState:UIControlStateNormal];
+    [skipButton setBackgroundImage:[UIImage imageNamed:@"btn-start-pressed.png"] forState:UIControlStateHighlighted];
+    
+    CGSize viewSize = self.view.bounds.size;
+    skipButton.frame = CGRectMake((viewSize.width-126)/2, viewSize.height-90, 126, 27);
+    
     EAIntroView *intro = [[EAIntroView alloc] initWithFrame:self.view.bounds
                                                    andPages:introPages];
+    intro.skipButton = skipButton;
     intro.backgroundColor = [UIColor whiteColor];
     intro.scrollView.bounces = NO;
     intro.swipeToExit = NO;

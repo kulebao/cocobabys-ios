@@ -49,6 +49,11 @@
                                                   path:path
                                             parameters:parameters];
     
+    if (self.networkReachabilityStatus == AFNetworkReachabilityStatusNotReachable
+        || self.networkReachabilityStatus == AFNetworkReachabilityStatusUnknown) {
+        req.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
+    }
+    
     [self httpRequest:req success:success failure:failure];
 }
 

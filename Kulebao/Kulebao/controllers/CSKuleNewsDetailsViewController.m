@@ -205,14 +205,14 @@
     <body>\
     <div style='text-align:left;font-size:13pt;font-weight:bold'>%@</div>\
     <p>\
-    <div style='word-break:break-all;width:300;font-size:13pt'>%@</div>\
+    <div style='word-break:break-all;width:300;font-size:13pt;font-weight:bold;text-indent:2em'>%@</div>\
     <p>\
-    <div style='text-align:right;font-size:13pt;'>%@</div>\
+    <div style='text-align:right;font-size:13pt;font-weight:bold'>%@</div>\
     <p>%@\
     </body>\
     </html>";
     
-    NSString* title = [NSString stringWithFormat:@"尊敬的用户 %@ 你好:", gApp.engine.loginInfo.username];;
+    NSString* title = [NSString stringWithFormat:@"尊敬的用户 <font color='black'>%@</font> 你好:", gApp.engine.loginInfo.username];;
     
     NSString* timestampString = [[NSDate dateWithTimeIntervalSince1970:checkInOutLogInfo.timestamp] isoDateTimeString];
     
@@ -221,10 +221,10 @@
     NSString* body = @"";
     CSKuleChildInfo* child = gApp.engine.currentRelationship.child;
     if (checkInOutLogInfo.noticeType == kKuleNoticeTypeCheckIn) {
-        body = [NSString stringWithFormat:@"您的小孩 %@ 已于 %@  由 %@ 刷卡入园。", child.nick, timestampString, checkInOutLogInfo.parentName];
+        body = [NSString stringWithFormat:@"您的小孩 <font color='black'>%@</font> 已于 %@  由 <font color='black'>%@</font> 刷卡入园。", child.nick, timestampString, checkInOutLogInfo.parentName];
     }
     else if (checkInOutLogInfo.noticeType == kKuleNoticeTypeCheckOut){
-        body = [NSString stringWithFormat:@"您的小孩 %@ 已于 %@ 由 %@ 刷卡离园。", child.nick, timestampString, checkInOutLogInfo.parentName];
+        body = [NSString stringWithFormat:@"您的小孩 <font color='black'>%@</font> 已于 %@ 由 <font color='black'>%@</font> 刷卡离园。", child.nick, timestampString, checkInOutLogInfo.parentName];
     }
     
     NSString* divImage = @"";

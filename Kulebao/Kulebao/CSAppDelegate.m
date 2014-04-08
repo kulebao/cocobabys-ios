@@ -7,6 +7,7 @@
 //
 
 #import "CSAppDelegate.h"
+#import "BPush.h"
 CSAppDelegate* gApp = nil;
 
 @implementation CSAppDelegate
@@ -67,6 +68,13 @@ CSAppDelegate* gApp = nil;
 
 #pragma mark - Private
 - (void)gotoLoginProcess {
+    if ([BPush getChannelId] && [BPush getUserId]) {
+        
+    }
+    else {
+        [BPush bindChannel];
+    }
+    
     UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     id ctrl = [mainStoryboard instantiateViewControllerWithIdentifier:@"CSLoginNavigationController"];
     gApp.window.rootViewController = ctrl;

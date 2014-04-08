@@ -111,7 +111,7 @@
     
     NSDate* timestamp = [NSDate dateWithTimeIntervalSince1970:assignmentInfo.timestamp];
     
-    cell.labDate.text = [NSString stringWithFormat:@"%@ 来自:%@", [timestamp isoDateTimeString], publiser];
+    cell.labDate.text = [NSString stringWithFormat:@"%@ 来自:%@", [timestamp timestampString], publiser];
     cell.labPublisher.text = nil;
     
     return cell;

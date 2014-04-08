@@ -20,12 +20,17 @@
 
 - (NSString*)isoDateTimeString {
     NSDateFormatter* fmt = [[NSDateFormatter alloc] init];
-    //fmt.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
     fmt.dateFormat = @"yyyy-MM-dd HH:mm:ss";
     NSString* dateString = [fmt stringFromDate:self];
     return dateString;
 }
 
+- (NSString*)timestampString {
+    NSDateFormatter* fmt = [[NSDateFormatter alloc] init];
+    fmt.dateFormat = @"yyyy-MM-dd HH:mm";
+    NSString* dateString = [fmt stringFromDate:self];
+    return dateString;
+}
 
 - (NSString*)zhCnDateString {
     NSDateFormatter* fmt = [[NSDateFormatter alloc] init];

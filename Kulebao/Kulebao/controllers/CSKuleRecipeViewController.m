@@ -11,7 +11,6 @@
 #import "CSAppDelegate.h"
 
 @interface CSKuleRecipeViewController ()<UITableViewDataSource, UITableViewDelegate> {
-    NSDate* _beginningOfWeek;
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
@@ -81,42 +80,45 @@
     
     CSKuleRecipeInfo* recipeInfo = nil;
     
+    
+    NSDate* beginningOfWeek = [[NSDate date] beginningOfWeek];
+    
     NSString* dateText = nil;
     switch (row) {
         case 0:
+        {
             recipeInfo = _currentCookbookInfo.mon;
-            if (_beginningOfWeek) {
-                NSDate* day = [_beginningOfWeek dateByAddingTimeInterval:24*60*60*1];
-                dateText = [NSString stringWithFormat:@"星期一 %@", [day isoDateString]];
-            }
+            NSDate* day = [beginningOfWeek dateByAddingTimeInterval:24*60*60*1];
+            dateText = [NSString stringWithFormat:@"星期一 %@", [day isoDateString]];
+        }
             break;
         case 1:
+        {
             recipeInfo = _currentCookbookInfo.tue;
-            if (_beginningOfWeek) {
-                NSDate* day = [_beginningOfWeek dateByAddingTimeInterval:24*60*60*2];
-                dateText = [NSString stringWithFormat:@"星期二 %@", [day isoDateString]];
-            }
+            NSDate* day = [beginningOfWeek dateByAddingTimeInterval:24*60*60*2];
+            dateText = [NSString stringWithFormat:@"星期二 %@", [day isoDateString]];
+        }
             break;
         case 2:
+        {
             recipeInfo = _currentCookbookInfo.wed;
-            if (_beginningOfWeek) {
-                NSDate* day = [_beginningOfWeek dateByAddingTimeInterval:24*60*60*3];
-                dateText = [NSString stringWithFormat:@"星期三 %@", [day isoDateString]];
-            }
+            NSDate* day = [beginningOfWeek dateByAddingTimeInterval:24*60*60*3];
+            dateText = [NSString stringWithFormat:@"星期三 %@", [day isoDateString]];
+        }
             break;
         case 3:
+        {
             recipeInfo = _currentCookbookInfo.thu;
-            if (_beginningOfWeek) {
-                NSDate* day = [_beginningOfWeek dateByAddingTimeInterval:24*60*60*4];
-                dateText = [NSString stringWithFormat:@"星期四 %@", [day isoDateString]];
-            }
+            NSDate* day = [beginningOfWeek dateByAddingTimeInterval:24*60*60*4];
+            dateText = [NSString stringWithFormat:@"星期四 %@", [day isoDateString]];
+        }
             break;
         case 4:
+        {
             recipeInfo = _currentCookbookInfo.fri;
-            if (_beginningOfWeek) {
-                NSDate* day = [_beginningOfWeek dateByAddingTimeInterval:24*60*60*5];
-                dateText = [NSString stringWithFormat:@"星期五 %@", [day isoDateString]];
-            }
+            NSDate* day = [beginningOfWeek dateByAddingTimeInterval:24*60*60*5];
+            dateText = [NSString stringWithFormat:@"星期五 %@", [day isoDateString]];
+        }
             break;
         default:
             break;
@@ -192,8 +194,6 @@
             CSKuleCookbookInfo* cookbookInfo = [cookbooks firstObject];
             if (cookbookInfo.errorCode == 0) {
                 _currentCookbookInfo = cookbookInfo;
-                
-                _beginningOfWeek = [NSDate dateWithTimeIntervalSince1970:_currentCookbookInfo.timestamp];
                 
                 [gApp hideAlert];
             }

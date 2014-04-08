@@ -21,6 +21,8 @@
 - (NSString*)isoDateString;
 - (NSString*)isoDateTimeString;
 
+- (NSString*)timestampString;
+
 - (NSString*)zhCnDateString;
 - (NSString*)zhCnDateTimeString;
 

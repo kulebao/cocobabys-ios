@@ -221,10 +221,10 @@
     NSString* body = @"";
     CSKuleChildInfo* child = gApp.engine.currentRelationship.child;
     if (checkInOutLogInfo.noticeType == kKuleNoticeTypeCheckIn) {
-        body = [NSString stringWithFormat:@"您的小孩 %@ 已于 %@ 刷卡入园。", child.name, timestampString];
+        body = [NSString stringWithFormat:@"您的小孩 %@ 已于 %@  由 %@ 刷卡入园。", child.name, timestampString, checkInOutLogInfo.parentName];
     }
     else if (checkInOutLogInfo.noticeType == kKuleNoticeTypeCheckOut){
-        body = [NSString stringWithFormat:@"您的小孩 %@ 已于 %@ 刷卡离园。", child.name, timestampString];
+        body = [NSString stringWithFormat:@"您的小孩 %@ 已于 %@ 由 %@ 刷卡离园。", child.name, timestampString, checkInOutLogInfo.parentName];
     }
     
     NSString* divImage = @"";

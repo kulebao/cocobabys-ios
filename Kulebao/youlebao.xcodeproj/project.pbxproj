@@ -2389,8 +2389,8 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Kulebao/youlebao-Prefix.pch";
 				INFOPLIST_FILE = "Kulebao/youlebao-Info.plist";
@@ -2401,7 +2401,7 @@
 					"$(PROJECT_DIR)/Venders/BaiduMobStat",
 				);
 				PRODUCT_NAME = youlebao;
-				PROVISIONING_PROFILE = "3B3B62D5-0CCA-4ED2-9348-55BE4D31B328";
+				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2412,8 +2412,8 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Kulebao/youlebao-Prefix.pch";
 				INFOPLIST_FILE = "Kulebao/youlebao-Info.plist";
@@ -2424,7 +2424,7 @@
 					"$(PROJECT_DIR)/Venders/BaiduMobStat",
 				);
 				PRODUCT_NAME = youlebao;
-				PROVISIONING_PROFILE = "3B3B62D5-0CCA-4ED2-9348-55BE4D31B328";
+				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};

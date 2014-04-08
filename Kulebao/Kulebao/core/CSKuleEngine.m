@@ -35,6 +35,7 @@
 @synthesize relationships = _relationships;
 @synthesize currentRelationship = _currentRelationship;
 @synthesize baiduPushInfo = _baiduPushInfo;
+@synthesize employees = _employees;
 
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize managedObjectContext = _managedObjectContext;
@@ -956,6 +957,22 @@
     
     NSDictionary* parameters = @{@"phone": account,
                                  @"content": msgContent};
+    
+    [_httpClient httpRequestWithMethod:method
+                                  path:path
+                            parameters:parameters
+                               success:success
+                               failure:failure];
+}
+
+- (void)reqGetEmployeeListOfKindergarten:(NSInteger)kindergarten
+                                 success:(SuccessResponseHandler)success
+                                 failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kGetEmployeeInfoPath, @(kindergarten)];
+    
+    NSString* method = @"GET";
+    
+    NSDictionary* parameters = @{};
     
     [_httpClient httpRequestWithMethod:method
                                   path:path

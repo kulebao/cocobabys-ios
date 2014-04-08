@@ -630,4 +630,50 @@
     return obj;
 }
 
++ (CSKuleEmployeeInfo*)decodeEmployeeInfo:(NSDictionary*)dataJson {
+    /*
+     {"id":"3_93740362_1122",
+     "name":"王豫",
+     "phone":"13258249821",
+     "gender":0,
+     "workgroup":"教师组",
+     "workduty":"教师",
+     "portrait":"",
+     "birthday":"1986-06-04",
+     "school_id":93740362,
+     "login_name":"e0001",
+     "timestamp":1394639512253, 
+     "privilege_group":"principal"}
+     */
+    NSParameterAssert(dataJson);
+    
+    NSString* employeeId = [dataJson valueForKeyNotNull:@"id"];
+    double timestamp = [[dataJson valueForKeyNotNull:@"timestamp"] doubleValue];
+    NSInteger school_id = [[dataJson valueForKeyNotNull:@"school_id"] integerValue];
+    
+    NSString* name = [dataJson valueForKeyNotNull:@"name"];
+    NSString* phone = [dataJson valueForKeyNotNull:@"phone"];
+    NSInteger gender = [[dataJson valueForKeyNotNull:@"gender"] integerValue];
+    NSString* workgroup = [dataJson valueForKeyNotNull:@"workgroup"];
+    NSString* workduty = [dataJson valueForKeyNotNull:@"workduty"];
+    NSString* portrait = [dataJson valueForKeyNotNull:@"portrait"];
+    NSString* login_name = [dataJson valueForKeyNotNull:@"login_name"];
+    NSString* privilege_group = [dataJson valueForKeyNotNull:@"privilege_group"];
+    
+    CSKuleEmployeeInfo* obj = [CSKuleEmployeeInfo new];
+    obj.timestamp = timestamp / 1000.0;
+    obj.schoolId = school_id;
+    obj.employeeId = employeeId;
+    obj.name = name;
+    obj.gender = gender;
+    obj.phone = phone;
+    obj.loginName = login_name;
+    obj.workduty = workduty;
+    obj.workgroup = workgroup;
+    obj.privilegeGroup = privilege_group;
+    obj.portrait = portrait;
+    
+    return obj;
+}
+
 @end

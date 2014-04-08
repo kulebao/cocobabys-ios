@@ -108,6 +108,9 @@
                      context:nil];
     
     [self performSelector:@selector(getRelationshipInfos) withObject:nil afterDelay:0];
+    if (gApp.engine.employees == nil) {
+        [self performSelector:@selector(getEmployeeInfos) withObject:nil afterDelay:0];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -697,14 +700,6 @@
         else {
             [gApp alert:@"没有关联宝宝信息"];
         }
-        
-//        gApp.engine.badgeOfNews = 100;
-//        gApp.engine.badgeOfRecipe = 100;
-//        gApp.engine.badgeOfCheckin = 100;
-//        gApp.engine.badgeOfSchedule = 100;
-//        gApp.engine.badgeOfAssignment = 100;
-//        gApp.engine.badgeOfChating = 100;
-//        gApp.engine.badgeOfAssess = 100;
     };
     
     FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -717,6 +712,30 @@
                            inKindergarten:gApp.engine.loginInfo.schoolId
                                   success:sucessHandler
                                   failure:failureHandler];
+}
+
+- (void)getEmployeeInfos {
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+        NSMutableArray* employeeInfos = [NSMutableArray array];
+        
+        for (id employeeInfoJson in dataJson) {
+            CSKuleEmployeeInfo* employeeInfo = [CSKuleInterpreter decodeEmployeeInfo:employeeInfoJson];
+            [employeeInfos addObject:employeeInfo];
+        }
+        
+        gApp.engine.employees = [NSArray arrayWithArray:employeeInfos];
+        [gApp hideAlert];
+    };
+    
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        CSLog(@"failure:%@", error);
+        [gApp alert:[error localizedDescription]];
+    };
+    
+    [gApp waitingAlert:@"获取信息..."];
+    [gApp.engine reqGetEmployeeListOfKindergarten:gApp.engine.loginInfo.schoolId
+                                          success:sucessHandler
+                                          failure:failureHandler];
 }
 
 - (void)showBanner:(NSString*)msg {

@@ -92,4 +92,7 @@
 // PATH: 反馈
 #define kFeedbackPath               @"/feedback"
 
+// PATH: 雇员信息
+#define kGetEmployeeInfoPath         @"/kindergarten/%@/employee"
+
 #endif

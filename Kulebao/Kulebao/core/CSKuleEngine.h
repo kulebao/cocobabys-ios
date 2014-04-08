@@ -17,12 +17,12 @@
 
 @interface CSKuleEngine : NSObject
 @property (strong, nonatomic) CSKulePreferences* preferences;
-
 @property (strong, nonatomic) CSKuleBPushInfo* baiduPushInfo;
 @property (strong, nonatomic) CSKuleLoginInfo* loginInfo;
 
 @property (strong, nonatomic) NSArray* relationships;
 @property (strong, nonatomic) CSKuleRelationshipInfo* currentRelationship;
+@property (strong, nonatomic) NSArray* employees;
 
 @property (strong, nonatomic, readonly) UIApplication* application;
 
@@ -178,5 +178,9 @@
             withContent:(NSString*)msgContent
                 success:(SuccessResponseHandler)success
                 failure:(FailureResponseHandler)failure;
+
+- (void)reqGetEmployeeListOfKindergarten:(NSInteger)kindergarten
+                                 success:(SuccessResponseHandler)success
+                                 failure:(FailureResponseHandler)failure;
 
 @end

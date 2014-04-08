@@ -52,12 +52,32 @@
     
     _chatingMsgList = [NSMutableArray array];
     [self doReloadChatingMsgsFrom:-1 to:-1 most:20];
+    
+    [gApp.engine addObserver:self
+                  forKeyPath:@"employees"
+                     options:NSKeyValueObservingOptionNew
+                     context:nil];
+    
+    if (gApp.engine.employees == nil) {
+        [self performSelector:@selector(getEmployeeInfos) withObject:nil afterDelay:0];
+    }
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc {
+    [gApp.engine removeObserver:self forKeyPath:@"employees"];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    CSLog(@"%@ changed.", keyPath);
+    if ((object == gApp.engine) && [keyPath isEqualToString:@"employees"]) {
+        [self.tableview reloadData];
+    }
 }
 
 #pragma mark - View lifecycle
@@ -148,7 +168,24 @@
     
     if (msg.sender.length > 0) {
         // From
-        imgPortrait.image = [UIImage imageNamed:@"chat_head_icon.png"];
+        CSKuleEmployeeInfo* senderInfo = [self employeeOfSenderId:msg.senderId];
+        if (senderInfo.portrait.length > 0) {
+            NSURL* qiniuImgUrl = [gApp.engine urlFromPath:senderInfo.portrait];
+            [imgMsgBody setupImageViewerWithImageURL:qiniuImgUrl];
+            
+            qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/64/h/64"];
+            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:qiniuImgUrl];
+            [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
+            request.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
+            [imgPortrait setImageWithURLRequest:request
+                              placeholderImage:[UIImage imageNamed:@"chat_head_icon.png"]
+                                       success:nil
+                                       failure:nil];
+        }
+        else {
+            imgPortrait.image = [UIImage imageNamed:@"chat_head_icon.png"];
+        }
+        
         imgPortrait.frame = CGRectMake(2, 12, 32, 32);
         
         UIImage* bgImage = [UIImage imageNamed:@"msg-bg-from.png"];
@@ -573,6 +610,42 @@
     textSz.height = MAX(textSz.height, 32);
     
     return textSz;
+}
+
+- (void)getEmployeeInfos {
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+        NSMutableArray* employeeInfos = [NSMutableArray array];
+        
+        for (id employeeInfoJson in dataJson) {
+            CSKuleEmployeeInfo* employeeInfo = [CSKuleInterpreter decodeEmployeeInfo:employeeInfoJson];
+            [employeeInfos addObject:employeeInfo];
+        }
+        
+        gApp.engine.employees = [NSArray arrayWithArray:employeeInfos];
+        [gApp hideAlert];
+    };
+    
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        CSLog(@"failure:%@", error);
+        [gApp alert:[error localizedDescription]];
+    };
+    
+    [gApp waitingAlert:@"获取信息..."];
+    [gApp.engine reqGetEmployeeListOfKindergarten:gApp.engine.loginInfo.schoolId
+                                          success:sucessHandler
+                                          failure:failureHandler];
+}
+
+- (CSKuleEmployeeInfo*)employeeOfSenderId:(NSString*)senderId {
+    CSKuleEmployeeInfo* ret = nil;
+    for (CSKuleEmployeeInfo* employee in gApp.engine.employees) {
+        if ([employee.phone isEqualToString:senderId] && employee.employeeId.length > 0) {
+            ret = employee;
+            break;
+        }
+    }
+    
+    return ret;
 }
 
 #pragma mark - Segues

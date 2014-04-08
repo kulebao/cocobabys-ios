@@ -77,6 +77,12 @@
         if (schduleInfo) {
             [self updateScheduleInfo:schduleInfo];
             [gApp hideAlert];
+            
+            CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
+            NSTimeInterval oldTimestamp = [gApp.engine.preferences timestampOfModule:kKuleModuleSchedule forChild:currentChild.childId];
+            if (oldTimestamp < schduleInfo.timestamp) {
+                [gApp.engine.preferences setTimestamp:schduleInfo.timestamp ofModule:kKuleModuleSchedule forChild:currentChild.childId];
+            }
         }
         else {
             [gApp alert:@"没有课程表信息"];
@@ -99,7 +105,6 @@
     else {
         [gApp alert:@"没有宝宝信息。"];
     }
-   
 }
 
 - (void)updateScheduleInfo:(CSKuleScheduleInfo*)schduleInfo {

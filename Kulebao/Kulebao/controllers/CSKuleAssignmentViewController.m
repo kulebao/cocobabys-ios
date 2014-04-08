@@ -168,9 +168,22 @@
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         NSMutableArray* assignmentInfos = [NSMutableArray array];
         
+        CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
+        NSTimeInterval oldTimestamp = [gApp.engine.preferences timestampOfModule:kKuleModuleAssignment forChild:currentChild.childId];
+        NSTimeInterval timestamp = oldTimestamp;
+        
         for (id assignmentInfoJson in dataJson) {
             CSKuleAssignmentInfo* assignmentInfo = [CSKuleInterpreter decodeAssignmentInfo:assignmentInfoJson];
             [assignmentInfos addObject:assignmentInfo];
+            if (timestamp < assignmentInfo.timestamp) {
+                timestamp = assignmentInfo.timestamp;
+            }
+        }
+        
+        if (oldTimestamp < timestamp) {
+            [gApp.engine.preferences setTimestamp:timestamp
+                                         ofModule:kKuleModuleAssignment
+                                         forChild:currentChild.childId];
         }
         
         self.assignmentInfoList = assignmentInfos;
@@ -208,9 +221,22 @@
         SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
             NSMutableArray* assignmentInfos = [NSMutableArray array];
             
+            CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
+            NSTimeInterval oldTimestamp = [gApp.engine.preferences timestampOfModule:kKuleModuleAssignment forChild:currentChild.childId];
+            NSTimeInterval timestamp = oldTimestamp;
+            
             for (id assignmentInfoJson in dataJson) {
                 CSKuleAssignmentInfo* assignmentInfo = [CSKuleInterpreter decodeAssignmentInfo:assignmentInfoJson];
                 [assignmentInfos addObject:assignmentInfo];
+                if (timestamp < assignmentInfo.timestamp) {
+                    timestamp = assignmentInfo.timestamp;
+                }
+            }
+            
+            if (oldTimestamp < timestamp) {
+                [gApp.engine.preferences setTimestamp:timestamp
+                                             ofModule:kKuleModuleAssignment
+                                             forChild:currentChild.childId];
             }
             
             if (assignmentInfos.count > 0) {

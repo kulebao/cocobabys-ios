@@ -200,8 +200,7 @@
     
     CSKuleURLCache* cache = [[CSKuleURLCache alloc] initWithMemoryCapacity:4*1024*1024
                                                               diskCapacity:64*1024*1024
-                                                                  diskPath:cachePath
-                             enableForIOS5AndUp:YES];
+                                                                  diskPath:cachePath];
     cache.minCacheInterval = 30;
 
     [CSKuleURLCache setSharedURLCache:cache];
@@ -481,6 +480,219 @@
     else {
         //[gApp alert:@"没有宝宝信息。"];
     }
+}
+
+- (void)checkUpdatesOfRecipe {
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+        NSMutableArray* cookbooks = [NSMutableArray array];
+        
+        for (id cookbookJson in dataJson) {
+            CSKuleCookbookInfo* cookbookInfo = [CSKuleInterpreter decodeCookbookInfo:cookbookJson];
+            [cookbooks addObject:cookbookInfo];
+        }
+        
+        if (cookbooks.count > 0) {
+            CSKuleCookbookInfo* cookbookInfo = [cookbooks firstObject];
+            if (cookbookInfo.errorCode == 0) {
+                
+                CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
+                NSTimeInterval oldTimestamp = [gApp.engine.preferences timestampOfModule:kKuleModuleRecipe forChild:currentChild.childId];
+                if (oldTimestamp < cookbookInfo.timestamp) {
+                    gApp.engine.badgeOfRecipe = 1;
+                    [gApp.engine.preferences setTimestamp:cookbookInfo.timestamp
+                                                 ofModule:kKuleModuleRecipe
+                                                 forChild:currentChild.childId];
+                }
+                
+                //[gApp hideAlert];
+            }
+            else {
+                //[gApp alert:@"获取数据失败"];
+            }
+        }
+        else {
+            //[gApp alert:@"没有食谱信息"];
+        }
+    };
+    
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        CSLog(@"failure:%@", error);
+        //[gApp alert:[error localizedDescription]];
+    };
+    
+    //[gApp waitingAlert:@"正在获取数据"];
+    [gApp.engine reqGetCookbooksOfKindergarten:gApp.engine.loginInfo.schoolId
+                                       success:sucessHandler
+                                       failure:failureHandler];
+}
+
+- (void)checkUpdatesOfSchedule {
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+        NSMutableArray* scheduleInfos = [NSMutableArray array];
+        
+        for (id scheduleInfoJson in dataJson) {
+            CSKuleScheduleInfo* scheduleInfo = [CSKuleInterpreter decodeScheduleInfo:scheduleInfoJson];
+            [scheduleInfos addObject:scheduleInfo];
+        }
+        
+        CSKuleScheduleInfo* schduleInfo = [scheduleInfos firstObject];
+        if (schduleInfo) {
+            //[gApp hideAlert];
+            
+            CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
+            NSTimeInterval oldTimestamp = [gApp.engine.preferences timestampOfModule:kKuleModuleSchedule forChild:currentChild.childId];
+            if (oldTimestamp < schduleInfo.timestamp) {
+                gApp.engine.badgeOfSchedule = 1;
+                [gApp.engine.preferences setTimestamp:schduleInfo.timestamp ofModule:kKuleModuleSchedule forChild:currentChild.childId];
+            }
+        }
+        else {
+            //[gApp alert:@"没有课程表信息"];
+        }
+    };
+    
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        CSLog(@"failure:%@", error);
+        //[gApp alert:[error localizedDescription]];
+    };
+    
+    CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
+    if (currentChild) {
+        //[gApp waitingAlert:@"获取信息中..."];
+        [gApp.engine reqGetSchedulesOfKindergarten:gApp.engine.loginInfo.schoolId
+                                       withClassId:currentChild.classId
+                                           success:sucessHandler
+                                           failure:failureHandler];
+    }
+    else {
+        //[gApp alert:@"没有宝宝信息。"];
+    }
+}
+
+- (void)checkUpdatesOfAssignment {
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+        NSMutableArray* assignmentInfos = [NSMutableArray array];
+        
+        CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
+        NSTimeInterval oldTimestamp = [gApp.engine.preferences timestampOfModule:kKuleModuleAssignment forChild:currentChild.childId];
+        NSTimeInterval timestamp = oldTimestamp;
+        
+        for (id assignmentInfoJson in dataJson) {
+            CSKuleAssignmentInfo* assignmentInfo = [CSKuleInterpreter decodeAssignmentInfo:assignmentInfoJson];
+            [assignmentInfos addObject:assignmentInfo];
+            if (timestamp < assignmentInfo.timestamp) {
+                timestamp = assignmentInfo.timestamp;
+            }
+        }
+        
+        if (oldTimestamp < timestamp) {
+            gApp.engine.badgeOfAssignment = 1;
+            [gApp.engine.preferences setTimestamp:timestamp
+                                         ofModule:kKuleModuleAssignment
+                                         forChild:currentChild.childId];
+        }
+    };
+    
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        CSLog(@"failure:%@", error);
+        //[gApp alert:[error localizedDescription]];
+    };
+    
+    [gApp.engine reqGetAssignmentsOfKindergarten:gApp.engine.loginInfo.schoolId
+                                            from:-1
+                                              to:-1
+                                            most:1
+                                         success:sucessHandler
+                                         failure:failureHandler];
+}
+
+- (void)checkUpdatesOfChating {
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+        NSMutableArray* chatMsgs = [NSMutableArray array];
+        
+        CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
+        NSTimeInterval oldTimestamp = [gApp.engine.preferences timestampOfModule:kKuleModuleChating forChild:currentChild.childId];
+        NSTimeInterval timestamp = oldTimestamp;
+        
+        if ([dataJson isKindOfClass:[NSArray class]]) {
+            for (id chatMsgJson in dataJson) {
+                CSKuleChatMsg* chatMsg = [CSKuleInterpreter decodeChatMsg:chatMsgJson];
+                [chatMsgs addObject:chatMsg];
+                
+                if (timestamp < chatMsg.timestamp) {
+                    timestamp = chatMsg.timestamp;
+                }
+            }
+        }
+        else if ([dataJson isKindOfClass:[NSDictionary class]]) {
+            CSKuleChatMsg* chatMsg = [CSKuleInterpreter decodeChatMsg:dataJson];
+            [chatMsgs addObject:chatMsg];
+            if (timestamp < chatMsg.timestamp) {
+                timestamp = chatMsg.timestamp;
+            }
+        }
+        
+        if (oldTimestamp < timestamp) {
+            gApp.engine.badgeOfChating = 1;
+            [gApp.engine.preferences setTimestamp:timestamp
+                                         ofModule:kKuleModuleChating
+                                         forChild:currentChild.childId];
+        }
+    };
+    
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        CSLog(@"failure:%@", error);
+        //[gApp alert:[error localizedDescription]];
+    };
+    
+    //[gApp waitingAlert:@"获取信息中..."];
+    [gApp.engine reqGetChatingMsgsOfKindergarten:gApp.engine.loginInfo.schoolId
+                                            from:-1
+                                              to:-1
+                                            most:1
+                                         success:sucessHandler
+                                         failure:failureHandler];
+}
+
+- (void)checkUpdatesOfAssess {
+    CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
+    
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+        NSMutableArray* assessInfos = [NSMutableArray array];
+        
+        NSTimeInterval oldTimestamp = [gApp.engine.preferences timestampOfModule:kKuleModuleAssess forChild:currentChild.childId];
+        NSTimeInterval timestamp = oldTimestamp;
+        
+        for (id assessInfoJson in dataJson) {
+            CSKuleAssessInfo* assessInfo = [CSKuleInterpreter decodeAssessInfo:assessInfoJson];
+            [assessInfos addObject:assessInfo];
+            
+            if (timestamp < assessInfo.timestamp) {
+                timestamp = assessInfo.timestamp;
+            }
+        }
+        
+        if (oldTimestamp < timestamp) {
+            gApp.engine.badgeOfAssess = 1;
+            [gApp.engine.preferences setTimestamp:timestamp
+                                         ofModule:kKuleModuleAssess
+                                         forChild:currentChild.childId];
+        }
+    };
+    
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        CSLog(@"failure:%@", error);
+        //[gApp alert:[error localizedDescription]];
+    };
+    
+    //[gApp waitingAlert:@"获取评价中"];
+    [gApp.engine reqGetAssessesOfChild:currentChild
+                        inKindergarten:gApp.engine.loginInfo.schoolId
+                                  from:-1
+                                    to:-1
+                                  most:1
+                               success:sucessHandler
+                               failure:failureHandler];
 }
 
 #pragma mark - HTTP Request

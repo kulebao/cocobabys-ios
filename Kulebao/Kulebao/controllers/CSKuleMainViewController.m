@@ -136,6 +136,11 @@
         [self updateUI:YES];
         
         [gApp.engine checkUpdatesOfNews];
+        [gApp.engine checkUpdatesOfRecipe];
+        [gApp.engine checkUpdatesOfSchedule];
+        [gApp.engine checkUpdatesOfAssignment];
+        [gApp.engine checkUpdatesOfChating];
+        [gApp.engine checkUpdatesOfAssess];
     }
     else if((object == gApp.engine) && [keyPath isEqualToString:@"badgeOfNews"]) {
         JSBadgeView* badgeView = [_badges objectAtIndex:kKuleModuleNews];

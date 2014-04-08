@@ -308,15 +308,32 @@
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         NSMutableArray* chatMsgs = [NSMutableArray array];
         
+        CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
+        NSTimeInterval oldTimestamp = [gApp.engine.preferences timestampOfModule:kKuleModuleChating forChild:currentChild.childId];
+        NSTimeInterval timestamp = oldTimestamp;
+        
         if ([dataJson isKindOfClass:[NSArray class]]) {
             for (id chatMsgJson in dataJson) {
                 CSKuleChatMsg* chatMsg = [CSKuleInterpreter decodeChatMsg:chatMsgJson];
                 [chatMsgs addObject:chatMsg];
+                
+                if (timestamp < chatMsg.timestamp) {
+                    timestamp = chatMsg.timestamp;
+                }
             }
         }
         else if ([dataJson isKindOfClass:[NSDictionary class]]) {
             CSKuleChatMsg* chatMsg = [CSKuleInterpreter decodeChatMsg:dataJson];
             [chatMsgs addObject:chatMsg];
+            if (timestamp < chatMsg.timestamp) {
+                timestamp = chatMsg.timestamp;
+            }
+        }
+        
+        if (oldTimestamp < timestamp) {
+            [gApp.engine.preferences setTimestamp:timestamp
+                                         ofModule:kKuleModuleChating
+                                         forChild:currentChild.childId];
         }
         
         if (chatMsgs.count > 0) {
@@ -367,15 +384,32 @@
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         NSMutableArray* chatMsgs = [NSMutableArray array];
         
+        CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
+        NSTimeInterval oldTimestamp = [gApp.engine.preferences timestampOfModule:kKuleModuleChating forChild:currentChild.childId];
+        NSTimeInterval timestamp = oldTimestamp;
+        
         if ([dataJson isKindOfClass:[NSArray class]]) {
             for (id chatMsgJson in dataJson) {
                 CSKuleChatMsg* chatMsg = [CSKuleInterpreter decodeChatMsg:chatMsgJson];
                 [chatMsgs addObject:chatMsg];
+                
+                if (timestamp < chatMsg.timestamp) {
+                    timestamp = chatMsg.timestamp;
+                }
             }
         }
         else if ([dataJson isKindOfClass:[NSDictionary class]]) {
             CSKuleChatMsg* chatMsg = [CSKuleInterpreter decodeChatMsg:dataJson];
             [chatMsgs addObject:chatMsg];
+            if (timestamp < chatMsg.timestamp) {
+                timestamp = chatMsg.timestamp;
+            }
+        }
+        
+        if (oldTimestamp < timestamp) {
+            [gApp.engine.preferences setTimestamp:timestamp
+                                         ofModule:kKuleModuleChating
+                                         forChild:currentChild.childId];
         }
         
         if (chatMsgs.count > 0) {
@@ -386,7 +420,6 @@
         else {
             [gApp alert:@"没有更多消息"];
         }
-        
         
         self.tableview.pullTableIsLoadingMore = NO;
     };
@@ -562,15 +595,32 @@
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         NSMutableArray* chatMsgs = [NSMutableArray array];
         
+        CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
+        NSTimeInterval oldTimestamp = [gApp.engine.preferences timestampOfModule:kKuleModuleChating forChild:currentChild.childId];
+        NSTimeInterval timestamp = oldTimestamp;
+        
         if ([dataJson isKindOfClass:[NSArray class]]) {
             for (id chatMsgJson in dataJson) {
                 CSKuleChatMsg* chatMsg = [CSKuleInterpreter decodeChatMsg:chatMsgJson];
                 [chatMsgs addObject:chatMsg];
+                
+                if (timestamp < chatMsg.timestamp) {
+                    timestamp = chatMsg.timestamp;
+                }
             }
         }
         else if ([dataJson isKindOfClass:[NSDictionary class]]) {
             CSKuleChatMsg* chatMsg = [CSKuleInterpreter decodeChatMsg:dataJson];
             [chatMsgs addObject:chatMsg];
+            if (timestamp < chatMsg.timestamp) {
+                timestamp = chatMsg.timestamp;
+            }
+        }
+        
+        if (oldTimestamp < timestamp) {
+            [gApp.engine.preferences setTimestamp:timestamp
+                                         ofModule:kKuleModuleChating
+                                         forChild:currentChild.childId];
         }
         
         [_chatingMsgList removeAllObjects];

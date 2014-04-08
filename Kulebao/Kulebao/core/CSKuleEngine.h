@@ -72,6 +72,11 @@
 
 #pragma mark - Check Updates
 - (void)checkUpdatesOfNews;
+- (void)checkUpdatesOfRecipe;
+- (void)checkUpdatesOfSchedule;
+- (void)checkUpdatesOfAssignment;
+- (void)checkUpdatesOfChating;
+- (void)checkUpdatesOfAssess;
 
 #pragma mark - HTTP Request
 - (void)reqCheckPhoneNum:(NSString*)mobile

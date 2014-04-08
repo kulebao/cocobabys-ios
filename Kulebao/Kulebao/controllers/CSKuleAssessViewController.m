@@ -198,14 +198,27 @@
 }
 
 - (void)doGetAssesses {
-    CSKuleChildInfo* childInfo = gApp.engine.currentRelationship.child;
-    if (childInfo) {
+    CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
+    if (currentChild) {
         SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
             NSMutableArray* assessInfos = [NSMutableArray array];
 
+            NSTimeInterval oldTimestamp = [gApp.engine.preferences timestampOfModule:kKuleModuleAssess forChild:currentChild.childId];
+            NSTimeInterval timestamp = oldTimestamp;
+            
             for (id assessInfoJson in dataJson) {
                 CSKuleAssessInfo* assessInfo = [CSKuleInterpreter decodeAssessInfo:assessInfoJson];
                 [assessInfos addObject:assessInfo];
+                
+                if (timestamp < assessInfo.timestamp) {
+                    timestamp = assessInfo.timestamp;
+                }
+            }
+            
+            if (oldTimestamp < timestamp) {
+                [gApp.engine.preferences setTimestamp:timestamp
+                                             ofModule:kKuleModuleAssess
+                                             forChild:currentChild.childId];
             }
             
             if (assessInfos.count > 0) {
@@ -231,7 +244,7 @@
         };
         
         [gApp waitingAlert:@"获取评价中"];
-        [gApp.engine reqGetAssessesOfChild:childInfo
+        [gApp.engine reqGetAssessesOfChild:currentChild
                             inKindergarten:gApp.engine.loginInfo.schoolId
                                       from:-1
                                         to:-1

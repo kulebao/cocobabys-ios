@@ -195,6 +195,12 @@
             if (cookbookInfo.errorCode == 0) {
                 _currentCookbookInfo = cookbookInfo;
                 
+                CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
+                NSTimeInterval oldTimestamp = [gApp.engine.preferences timestampOfModule:kKuleModuleRecipe forChild:currentChild.childId];
+                if (oldTimestamp < _currentCookbookInfo.timestamp) {
+                    [gApp.engine.preferences setTimestamp:_currentCookbookInfo.timestamp ofModule:kKuleModuleRecipe forChild:currentChild.childId];
+                }
+                
                 [gApp hideAlert];
             }
             else {

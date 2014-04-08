@@ -127,11 +127,13 @@
     // 必须
     [BPush registerDeviceToken:deviceToken];
     
+#ifdef TARGET_OS_IPHONE
     if (![_preferences.deviceToken isEqualToData:deviceToken]) {
         _preferences.deviceToken = deviceToken;
         _preferences.baiduPushInfo = nil;
         self.baiduPushInfo = _preferences.baiduPushInfo;
     }
+#endif
     
     // 必须。可以在其它时机调用,只有在该方法返回(通过 onMethod:response:回调)绑定成功时,app 才能接收到 Push 消息。
     // 一个 app 绑定成功至少一次即可(如果 access token 变更请重新绑定)。

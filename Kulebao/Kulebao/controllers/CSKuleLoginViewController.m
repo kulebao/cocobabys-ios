@@ -167,7 +167,14 @@
         [gApp logout];
         [gApp alert:error.localizedDescription];
     };
+
+#if TARGET_IPHONE_SIMULATOR
+    [gApp waitingAlert:@"获取绑定信息..."];
+    [gApp.engine reqReceiveBindInfo:gApp.engine.loginInfo.accountName
+                            success:sucessHandler
+                            failure:failureHandler];
     
+#else
     if ([gApp.engine.baiduPushInfo isValid]) {
         [gApp waitingAlert:@"获取绑定信息..."];
         [gApp.engine reqReceiveBindInfo:gApp.engine.loginInfo.accountName
@@ -176,8 +183,9 @@
     }
     else {
         [gApp logout];
-        [gApp alert:@"绑定失败，请重新登录。"];
+        [gApp alert:@"登录已过期，请重新登录。"];
     }
+#endif
 }
 
 @end

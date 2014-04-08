@@ -15,6 +15,7 @@
 #import "JSBadgeView.h"
 #import "CSKuleDatePickerViewController.h"
 #import "UIViewController+MJPopupViewController.h"
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface CSKuleMainViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
     UIImagePickerController* _imgPicker;
@@ -764,6 +765,12 @@
     banner.showAnimationDuration = 0.3;
     banner.hideAnimationDuration = 0.3;
     [banner show];
+    
+#if TARGET_OS_IPHONE
+    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+#endif
+    
+    AudioServicesPlaySystemSound(1007);
 }
 
 @end

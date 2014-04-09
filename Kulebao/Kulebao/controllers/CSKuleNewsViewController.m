@@ -96,7 +96,7 @@
         NSURL* qiniuImgUrl = [gApp.engine urlFromPath:newsInfo.image];
         qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/0/w/50/h/50"];
         [cell.imgAttachment setImageWithURL:qiniuImgUrl
-                           placeholderImage:[UIImage imageNamed:@"chating-picture.png"]];
+                           placeholderImage:[UIImage imageNamed:@"img-placeholder.png"]];
     }
     else {
         [cell.imgAttachment cancelImageRequestOperation];

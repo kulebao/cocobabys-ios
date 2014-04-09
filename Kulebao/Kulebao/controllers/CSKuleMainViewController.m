@@ -229,6 +229,10 @@
     [[BaiduMobStat defaultStat] pageviewStartWithName:cName];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+}
+
 -(void) viewDidDisappear:(BOOL)animated
 {
     NSString* cName = [NSString stringWithFormat:@"%@", self.navigationItem.title, nil];
@@ -751,6 +755,7 @@
 
 - (void)showBanner:(NSString*)msg {
     CSAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    
     ALAlertBannerStyle randomStyle = ALAlertBannerStyleNotify;
     ALAlertBannerPosition position = ALAlertBannerPositionUnderNavBar;
     ALAlertBanner *banner = [ALAlertBanner alertBannerForView:appDelegate.window
@@ -759,11 +764,10 @@
                                                         title:@"您有新的通知"
                                                      subtitle:msg
                                                   tappedBlock:^(ALAlertBanner *alertBanner) {
-                                                      CSLog(@"tapped!");
                                                       [alertBanner hide];
                                                   }];
     
-    banner.secondsToShow = 3;
+    banner.secondsToShow = 2;
     banner.showAnimationDuration = 0.3;
     banner.hideAnimationDuration = 0.3;
     [banner show];

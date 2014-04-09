@@ -12,6 +12,8 @@
 		0902782818C9C060002B9644 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0902782718C9C060002B9644 /* MessageUI.framework */; };
 		0902CAA818F4200A001901A8 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0902CAA718F4200A001901A8 /* AudioToolbox.framework */; };
 		0902CAAE18F4359D001901A8 /* NSString+CSKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 0902CAAD18F4359D001901A8 /* NSString+CSKit.m */; };
+		0904454C18F515BC005D01EA /* img-placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 0904454A18F515BC005D01EA /* img-placeholder.png */; };
+		0904454D18F515BC005D01EA /* img-placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0904454B18F515BC005D01EA /* img-placeholder@2x.png */; };
 		090468F518C6FE1000D0846E /* CSKuleBindInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 090468F418C6FE1000D0846E /* CSKuleBindInfo.m */; };
 		090468FA18C7007600D0846E /* input-bg-0.png in Resources */ = {isa = PBXBuildFile; fileRef = 090468F818C7007500D0846E /* input-bg-0.png */; };
 		090468FB18C7007600D0846E /* input-bg-0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 090468F918C7007600D0846E /* input-bg-0@2x.png */; };
@@ -392,6 +394,8 @@
 		0902CAA718F4200A001901A8 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		0902CAAC18F4359D001901A8 /* NSString+CSKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CSKit.h"; sourceTree = "<group>"; };
 		0902CAAD18F4359D001901A8 /* NSString+CSKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CSKit.m"; sourceTree = "<group>"; };
+		0904454A18F515BC005D01EA /* img-placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img-placeholder.png"; sourceTree = "<group>"; };
+		0904454B18F515BC005D01EA /* img-placeholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img-placeholder@2x.png"; sourceTree = "<group>"; };
 		090468F318C6FE1000D0846E /* CSKuleBindInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleBindInfo.h; sourceTree = "<group>"; };
 		090468F418C6FE1000D0846E /* CSKuleBindInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleBindInfo.m; sourceTree = "<group>"; };
 		090468F818C7007500D0846E /* input-bg-0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "input-bg-0.png"; sourceTree = "<group>"; };
@@ -1213,6 +1217,8 @@
 		0934EFD118BF499900E30ECA /* images */ = {
 			isa = PBXGroup;
 			children = (
+				0904454A18F515BC005D01EA /* img-placeholder.png */,
+				0904454B18F515BC005D01EA /* img-placeholder@2x.png */,
 				0904FC8F18F3A349001968D7 /* btn-start-pressed.png */,
 				0904FC9018F3A349001968D7 /* btn-start-pressed@2x.png */,
 				0904FC9118F3A349001968D7 /* btn-start.png */,
@@ -1966,6 +1972,7 @@
 				0934F08A18BF5B0800E30ECA /* settings-icon-change-pswd.png in Resources */,
 				0934F06718BF5B0800E30ECA /* btn-func-8@2x.png in Resources */,
 				09142E1718E2B9D800E5848F /* rating-3stars.png in Resources */,
+				0904454C18F515BC005D01EA /* img-placeholder.png in Resources */,
 				0934F05718BF5B0800E30ECA /* btn-back@2x.png in Resources */,
 				0934F07518BF5B0800E30ECA /* class-input-bg@2x.png in Resources */,
 				09FEA72718DC9D9600513C87 /* news-bg@2x.png in Resources */,
@@ -2092,6 +2099,7 @@
 				0934EFF418BF559900E30ECA /* guide-2-568h.png in Resources */,
 				0934F08818BF5B0800E30ECA /* settings-change-baby.png in Resources */,
 				0934F05318BF5B0800E30ECA /* avatar-bg@2x.png in Resources */,
+				0904454D18F515BC005D01EA /* img-placeholder@2x.png in Resources */,
 				0934EFF518BF559900E30ECA /* guide-2-568h@2x.png in Resources */,
 				0904FC9618F3A349001968D7 /* btn-start@2x.png in Resources */,
 				09BA1C0C18BB351700760182 /* PullTableViewLan.strings in Resources */,

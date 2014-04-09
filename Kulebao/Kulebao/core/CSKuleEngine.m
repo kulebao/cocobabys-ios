@@ -12,6 +12,8 @@
 #import "BPush.h"
 #import "BaiduMobStat.h"
 #import "CSKuleURLCache.h"
+#import "ALAlertBannerManager.h"
+#import "ALAlertBanner+Private.h"
 
 @interface CSKuleEngine() <BPushDelegate>
 
@@ -93,8 +95,11 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    
-    
+    NSArray* banners = [[ALAlertBannerManager sharedManager] alertBannersInView:gApp.window];
+    for (ALAlertBanner* banner in banners) {
+        [banner hideAlertBanner];
+    }
+
     CSKuleChildInfo* currentChild = _currentRelationship.child;
     if (currentChild) {
         [self checkUpdatesOfNews];

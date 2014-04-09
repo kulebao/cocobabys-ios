@@ -17,7 +17,6 @@
 
 @interface CSKuleEngine : NSObject
 @property (strong, nonatomic) CSKulePreferences* preferences;
-@property (strong, nonatomic) CSKuleBPushInfo* baiduPushInfo;
 @property (strong, nonatomic) CSKuleLoginInfo* loginInfo;
 
 @property (strong, nonatomic) NSArray* relationships;

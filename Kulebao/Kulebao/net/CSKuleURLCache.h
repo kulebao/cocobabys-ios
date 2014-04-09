@@ -7,8 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SDURLCache.h"
 
-@interface CSKuleURLCache : SDURLCache
+@interface CSKuleURLCache : NSURLCache
 
 @end

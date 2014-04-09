@@ -34,7 +34,6 @@
 @synthesize loginInfo = _loginInfo;
 @synthesize relationships = _relationships;
 @synthesize currentRelationship = _currentRelationship;
-@synthesize baiduPushInfo = _baiduPushInfo;
 @synthesize employees = _employees;
 
 @synthesize managedObjectModel = _managedObjectModel;
@@ -127,19 +126,13 @@
     // 必须
     [BPush registerDeviceToken:deviceToken];
     
-#ifdef TARGET_OS_IPHONE
     if (![_preferences.deviceToken isEqualToData:deviceToken]) {
         _preferences.deviceToken = deviceToken;
-        _preferences.baiduPushInfo = nil;
-        self.baiduPushInfo = _preferences.baiduPushInfo;
     }
-#endif
     
     // 必须。可以在其它时机调用,只有在该方法返回(通过 onMethod:response:回调)绑定成功时,app 才能接收到 Push 消息。
     // 一个 app 绑定成功至少一次即可(如果 access token 变更请重新绑定)。
-    if (![_baiduPushInfo isValid]) {
-        [BPush bindChannel];
-    }
+    [BPush bindChannel];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
@@ -165,11 +158,6 @@
 - (void)setLoginInfo:(CSKuleLoginInfo *)loginInfo {
     _loginInfo = loginInfo;
     CSLog(@"%s\n%@", __FUNCTION__, _loginInfo);
-}
-
-- (void)setBaiduPushInfo:(CSKuleBPushInfo *)baiduPushInfo {
-    _baiduPushInfo = baiduPushInfo;
-     CSLog(@"%s\n%@", __FUNCTION__, _baiduPushInfo);
 }
 
 - (UIApplication*)application {
@@ -203,18 +191,15 @@
 - (void)setupPreferences {
     _preferences = [CSKulePreferences defaultPreferences];
     _loginInfo = _preferences.loginInfo;
-    _baiduPushInfo = _preferences.baiduPushInfo;
 }
 
 - (void)setupHttpClient {
     NSString* homeDir = NSHomeDirectory();
-    NSString* cachePath = [homeDir stringByAppendingPathComponent:@"Documents/Cache"];
+    NSString* cachePath = [homeDir stringByAppendingPathComponent:@"Documents/Kule-Cache"];
     
-    CSKuleURLCache* cache = [[CSKuleURLCache alloc] initWithMemoryCapacity:4*1024*1024
+    CSKuleURLCache* cache = [[CSKuleURLCache alloc] initWithMemoryCapacity:1024
                                                               diskCapacity:64*1024*1024
                                                                   diskPath:cachePath];
-    cache.minCacheInterval = 30;
-
     [CSKuleURLCache setSharedURLCache:cache];
     
     if (_httpClient == nil) {
@@ -281,7 +266,6 @@
             baiduPushInfo.channelId = channelid;
             
             _preferences.baiduPushInfo = baiduPushInfo;
-            self.baiduPushInfo = _preferences.baiduPushInfo;
         }
         else {
             CSLog(@"BPushErrorCode_NOT_Success");
@@ -290,7 +274,6 @@
         int returnCode = [[res valueForKey:BPushRequestErrorCodeKey] intValue];
         if (returnCode == BPushErrorCode_Success) {
             _preferences.baiduPushInfo = nil;
-            self.baiduPushInfo = _preferences.baiduPushInfo;
         }
     }
 }
@@ -440,7 +423,7 @@
         CSLog(@"failure:%@", error);
     };
     
-    if (![_baiduPushInfo isValid]) {
+    if ([BPush getUserId] && [BPush getChannelId]) {
         [gApp waitingAlert:@"重新获取绑定信息..."];
         [gApp.engine reqReceiveBindInfo:_loginInfo.accountName
                             success:sucessHandler
@@ -801,10 +784,10 @@
     
     NSDictionary* parameters = nil;
     
-    if ([_baiduPushInfo isValid]) {
+    if ([BPush getChannelId] && [BPush getUserId]) {
         parameters = @{@"phonenum": mobile,
-                       @"user_id": _baiduPushInfo.userId,
-                       @"channel_id": _baiduPushInfo.channelId,
+                       @"user_id": [BPush getUserId],
+                       @"channel_id": [BPush getChannelId],
                        @"access_token": _loginInfo.accessToken ? _loginInfo.accessToken : @"",
                        @"device_type": @"ios"};
     }

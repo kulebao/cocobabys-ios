@@ -68,7 +68,7 @@ CSAppDelegate* gApp = nil;
 
 #pragma mark - Private
 - (void)gotoLoginProcess {
-    if (![_engine.baiduPushInfo isValid]) {
+    if (![BPush getChannelId] || ![BPush getUserId]) {
         [BPush bindChannel];
     }
     

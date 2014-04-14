@@ -68,6 +68,7 @@
     self.labChildNick.text = nil;
     self.imgChildPortrait.layer.cornerRadius = 6.0;
     self.imgChildPortrait.clipsToBounds = YES;
+    self.btnClassInfo.userInteractionEnabled = NO;
     
     _nickFieldDelegate = [[CSTextFieldDelegate alloc] initWithType:kCSTextFieldDelegateNormal];
     _nickFieldDelegate.maxLength = kKuleNickMaxLength;

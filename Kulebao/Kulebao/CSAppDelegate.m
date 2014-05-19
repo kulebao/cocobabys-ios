@@ -87,7 +87,6 @@ CSAppDelegate* gApp = nil;
     self.engine.loginInfo = nil;
     self.engine.relationships = nil;
     self.engine.currentRelationship = nil;
-    self.engine.employees = nil;
     self.engine.preferences.loginInfo = nil;
     
     [self gotoLoginProcess];

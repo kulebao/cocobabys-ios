@@ -129,7 +129,11 @@
 		09148E5218DAEE8A00D08F63 /* Kulebao.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 09148E5018DAEE8A00D08F63 /* Kulebao.xcdatamodeld */; };
 		09148E5418DAEED300D08F63 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09148E5318DAEED300D08F63 /* CoreData.framework */; };
 		0915662218ED92810073AE22 /* CSKuleVerifyMobileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0915662118ED92810073AE22 /* CSKuleVerifyMobileViewController.m */; };
+		09160883192A2F05000345CA /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 09160882192A2F05000345CA /* Settings.bundle */; };
 		0917764718D0574D00D24F53 /* CSKuleAssignmentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0917764618D0574D00D24F53 /* CSKuleAssignmentInfo.m */; };
+		0919B7731929D41900810556 /* CSKuleTopicMsg.m in Sources */ = {isa = PBXBuildFile; fileRef = 0919B7721929D41900810556 /* CSKuleTopicMsg.m */; };
+		0919B7761929D6A700810556 /* CSKuleMediaInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0919B7751929D6A700810556 /* CSKuleMediaInfo.m */; };
+		0919B7791929D6B200810556 /* CSKuleSenderInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0919B7781929D6B200810556 /* CSKuleSenderInfo.m */; };
 		091AE81E18D7DC6A00EBC927 /* CSKuleSchoolInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 091AE81D18D7DC6A00EBC927 /* CSKuleSchoolInfo.m */; };
 		091AE82118D7E4E700EBC927 /* CSKuleAboutSchoolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 091AE82018D7E4E700EBC927 /* CSKuleAboutSchoolViewController.m */; };
 		091AE82D18D820C800EBC927 /* NSDate+convenience.m in Sources */ = {isa = PBXBuildFile; fileRef = 091AE82418D820C800EBC927 /* NSDate+convenience.m */; };
@@ -564,8 +568,15 @@
 		09148E5318DAEED300D08F63 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		0915662018ED92810073AE22 /* CSKuleVerifyMobileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleVerifyMobileViewController.h; sourceTree = "<group>"; };
 		0915662118ED92810073AE22 /* CSKuleVerifyMobileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleVerifyMobileViewController.m; sourceTree = "<group>"; };
+		09160882192A2F05000345CA /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		0917764518D0574D00D24F53 /* CSKuleAssignmentInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleAssignmentInfo.h; sourceTree = "<group>"; };
 		0917764618D0574D00D24F53 /* CSKuleAssignmentInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleAssignmentInfo.m; sourceTree = "<group>"; };
+		0919B7711929D41900810556 /* CSKuleTopicMsg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleTopicMsg.h; sourceTree = "<group>"; };
+		0919B7721929D41900810556 /* CSKuleTopicMsg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleTopicMsg.m; sourceTree = "<group>"; };
+		0919B7741929D6A700810556 /* CSKuleMediaInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleMediaInfo.h; sourceTree = "<group>"; };
+		0919B7751929D6A700810556 /* CSKuleMediaInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleMediaInfo.m; sourceTree = "<group>"; };
+		0919B7771929D6B200810556 /* CSKuleSenderInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleSenderInfo.h; sourceTree = "<group>"; };
+		0919B7781929D6B200810556 /* CSKuleSenderInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleSenderInfo.m; sourceTree = "<group>"; };
 		091AE81C18D7DC6A00EBC927 /* CSKuleSchoolInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleSchoolInfo.h; sourceTree = "<group>"; };
 		091AE81D18D7DC6A00EBC927 /* CSKuleSchoolInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleSchoolInfo.m; sourceTree = "<group>"; };
 		091AE81F18D7E4E700EBC927 /* CSKuleAboutSchoolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleAboutSchoolViewController.h; sourceTree = "<group>"; };
@@ -1184,6 +1195,8 @@
 				0904FC9818F3BDED001968D7 /* CSKuleEmployeeInfo.m */,
 				09219A5818C4999B00166228 /* CSKuleLoginInfo.h */,
 				09219A5918C4999B00166228 /* CSKuleLoginInfo.m */,
+				0919B7741929D6A700810556 /* CSKuleMediaInfo.h */,
+				0919B7751929D6A700810556 /* CSKuleMediaInfo.m */,
 				09ED59AA18CD67FD00187585 /* CSKuleNewsInfo.h */,
 				09ED59AB18CD67FD00187585 /* CSKuleNewsInfo.m */,
 				0904690318C72E5000D0846E /* CSKuleParentInfo.h */,
@@ -1196,6 +1209,10 @@
 				09FFB5F618D6B46300F07B0A /* CSKuleScheduleInfo.m */,
 				091AE81C18D7DC6A00EBC927 /* CSKuleSchoolInfo.h */,
 				091AE81D18D7DC6A00EBC927 /* CSKuleSchoolInfo.m */,
+				0919B7771929D6B200810556 /* CSKuleSenderInfo.h */,
+				0919B7781929D6B200810556 /* CSKuleSenderInfo.m */,
+				0919B7711929D41900810556 /* CSKuleTopicMsg.h */,
+				0919B7721929D41900810556 /* CSKuleTopicMsg.m */,
 				09FFB5EF18D6B2E100F07B0A /* CSKuleWeekScheduleInfo.h */,
 				09FFB5F018D6B2E100F07B0A /* CSKuleWeekScheduleInfo.m */,
 				093CD69518D974930025972C /* Interpreter */,
@@ -1604,6 +1621,7 @@
 				09BA1B9F18BB2AB400760182 /* CSAppDelegate.h */,
 				09BA1BA018BB2AB400760182 /* CSAppDelegate.m */,
 				09BA1B9E18BB2AB300760182 /* youlebao-Prefix.pch */,
+				09160882192A2F05000345CA /* Settings.bundle */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1955,6 +1973,7 @@
 				0934F05818BF5B0800E30ECA /* btn-func-1.png in Resources */,
 				09142E1B18E2B9D800E5848F /* tips-bg.png in Resources */,
 				0911B1E618E015E9006D0588 /* resend_press@2x.png in Resources */,
+				09160883192A2F05000345CA /* Settings.bundle in Resources */,
 				0934F08618BF5B0800E30ECA /* settings-about.png in Resources */,
 				09BA1BE718BB2FC700760182 /* whiteArrow.png in Resources */,
 				0934F09118BF5B0800E30ECA /* settings-icon-logout@2x.png in Resources */,
@@ -2236,6 +2255,7 @@
 				09219A5318C4878600166228 /* TPKeyboardAvoidingTableView.m in Sources */,
 				090CC92C18DA88AF007781CB /* FTCoreTextView.m in Sources */,
 				0934EFC418BF3AF700E30ECA /* EAIntroView.m in Sources */,
+				0919B7731929D41900810556 /* CSKuleTopicMsg.m in Sources */,
 				09142E1F18E2BA2100E5848F /* CSKuleAssessInfo.m in Sources */,
 				091AE83018D820C800EBC927 /* UIView+convenience.m in Sources */,
 				091AE83518D8300A00EBC927 /* CSKuleCheckInOutLogInfo.m in Sources */,
@@ -2277,6 +2297,7 @@
 				09BA1C2618BB3F8400760182 /* AFJSONRequestOperation.m in Sources */,
 				0904FC9918F3BDED001968D7 /* CSKuleEmployeeInfo.m in Sources */,
 				0904690818C72E6C00D0846E /* CSKuleRelationshipInfo.m in Sources */,
+				0919B7761929D6A700810556 /* CSKuleMediaInfo.m in Sources */,
 				09FE6B0118C5BCFD00A840BE /* CSKuleAssignmentViewController.m in Sources */,
 				09ED59B918CDC5D800187585 /* CSKuleRecipeInfo.m in Sources */,
 				09148E5218DAEE8A00D08F63 /* Kulebao.xcdatamodeld in Sources */,
@@ -2287,6 +2308,7 @@
 				09BA1BFE18BB334900760182 /* GzipCompressor.m in Sources */,
 				0934EFC318BF3AF700E30ECA /* EAIntroPage.m in Sources */,
 				09FE6AF318C5762600A840BE /* CSKuleNewsViewController.m in Sources */,
+				0919B7791929D6B200810556 /* CSKuleSenderInfo.m in Sources */,
 				09ED59AF18CD8ED100187585 /* CSKuleNewsDetailsViewController.m in Sources */,
 				0912DCDF18ED35D600016868 /* CSKuleForgotPswdViewController.m in Sources */,
 			);

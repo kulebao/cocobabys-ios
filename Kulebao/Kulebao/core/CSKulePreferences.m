@@ -26,6 +26,7 @@ static NSString* kKeyTimestamps = @"com.cocobabys.Kulebao.Preferences.timestamps
 @synthesize loginInfo = _loginInfo;
 @synthesize deviceToken = _deviceToken;
 @synthesize historyAccounts = _historyAccounts;
+@synthesize enabledTest = _enabledTest;
 
 + (id)defaultPreferences {
     static CSKulePreferences* s_preferences = nil;
@@ -48,7 +49,7 @@ static NSString* kKeyTimestamps = @"com.cocobabys.Kulebao.Preferences.timestamps
     _deviceToken = [_config objectForKey:kKeyDeviceToken];
     _defaultUsername = [_config objectForKey:kKeyDefaultUsername];
     _guideShown = [[_config objectForKey:kKeyGuideShown] boolValue];
-    
+    _enabledTest = [[_config objectForKey:@"enabled_test"] boolValue];
     
     NSDictionary* loginInfoDict = [_config objectForKey:kKeyLoginInfo];
     CSKuleLoginInfo* loginInfo = [CSKuleLoginInfo new];

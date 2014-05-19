@@ -15,7 +15,7 @@
 
 @interface CSKuleChatingViewController () <UITableViewDataSource, UITableViewDelegate, PullTableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CSKuleChatingEditorViewControllerDelegate> {
     UIImagePickerController* _imgPicker;
-    NSMutableArray* _chatingMsgList;
+    NSMutableArray* _topicMsgList;
 }
 
 @property (weak, nonatomic) IBOutlet PullTableView *tableview;
@@ -50,17 +50,13 @@
     self.tableview.pullArrowImage = [UIImage imageNamed:@"grayArrow.png"];
     self.tableview.backgroundColor = [UIColor clearColor];
     
-    _chatingMsgList = [NSMutableArray array];
-    [self doReloadChatingMsgsFrom:-1 to:-1 most:20];
+    _topicMsgList = [NSMutableArray array];
+    [self doReloadTopicMsgsFrom:-1 to:-1 most:20];
     
     [gApp.engine addObserver:self
                   forKeyPath:@"employees"
                      options:NSKeyValueObservingOptionNew
                      context:nil];
-    
-    if (gApp.engine.employees == nil) {
-        [self performSelector:@selector(getEmployeeInfos) withObject:nil afterDelay:0];
-    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -95,7 +91,7 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _chatingMsgList.count;
+    return _topicMsgList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -154,7 +150,7 @@
     UILabel* labMsgTimestamp = (UILabel*)[cell.contentView viewWithTag:104];
     UILabel* labMsgSender = (UILabel*)[cell.contentView viewWithTag:105];
     
-    CSKuleChatMsg* msg = [_chatingMsgList objectAtIndex:indexPath.row];
+    CSKuleTopicMsg* msg = [_topicMsgList objectAtIndex:indexPath.row];
     CGSize msgBodySize = [self textSize:msg.content];
     NSString* timestampString = [[NSDate dateWithTimeIntervalSince1970:msg.timestamp] isoDateTimeString];
     labMsgTimestamp.frame = CGRectMake(40, 0, 320-40-40, 12);
@@ -165,10 +161,9 @@
 //        labMsgTimestamp.text = nil;
 //    }
     
-    
-    if (msg.sender.length > 0) {
+    if (![msg.sender.senderId isEqualToString:gApp.engine.currentRelationship.parent.parentId]) {
         // From
-        CSKuleEmployeeInfo* senderInfo = [self employeeOfSenderId:msg.senderId];
+        CSKuleEmployeeInfo* senderInfo = nil;// [self employeeOfSenderId:msg.senderId];
         if (senderInfo.portrait.length > 0) {
             NSURL* qiniuImgUrl = [gApp.engine urlFromPath:senderInfo.portrait];
             [imgMsgBody setupImageViewerWithImageURL:qiniuImgUrl];
@@ -191,16 +186,16 @@
         UIImage* bgImage = [UIImage imageNamed:@"msg-bg-from.png"];
         imgBubbleBg.image = [bgImage resizableImageWithCapInsets:UIEdgeInsetsMake(35, 15, 10, 10)];
 
-        labMsgSender.text = msg.sender;
+        labMsgSender.text = msg.sender.senderId;
         labMsgSender.frame = CGRectMake(0, 46, 36, 12);
         
-        if (msg.image.length > 0) {
+        if (msg.media.url.length > 0) {
             imgBubbleBg.frame = CGRectMake(36, 12, 90, 78);
             imgMsgBody.frame = CGRectMake(52, 18, 64, 64);
             labMsgBody.frame = CGRectNull;
             labMsgBody.text = nil;
 
-            NSURL* qiniuImgUrl = [gApp.engine urlFromPath:msg.image];
+            NSURL* qiniuImgUrl = [gApp.engine urlFromPath:msg.media.url];
             [imgMsgBody setupImageViewerWithImageURL:qiniuImgUrl];
             
             qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/128/h/128"];
@@ -238,13 +233,13 @@
         labMsgSender.text = @"我";
         labMsgSender.frame = CGRectMake(320-2-32-4, 46, 36, 12);
         
-        if (msg.image.length > 0) {
+        if (msg.media.url.length > 0) {
             imgBubbleBg.frame =  CGRectMake(320-36-90, 12, 90, 78);
             imgMsgBody.frame = CGRectMake(imgBubbleBg.frame.origin.x+10, 18, 64, 64);
             labMsgBody.frame = CGRectNull;
             labMsgBody.text = nil;
             
-            NSURL* qiniuImgUrl = [gApp.engine urlFromPath:msg.image];
+            NSURL* qiniuImgUrl = [gApp.engine urlFromPath:msg.media.url];
             [imgMsgBody setupImageViewerWithImageURL:qiniuImgUrl];
             
             qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/128/h/128"];
@@ -272,9 +267,9 @@
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CSKuleChatMsg* msg = [_chatingMsgList objectAtIndex:indexPath.row];
+    CSKuleTopicMsg* msg = [_topicMsgList objectAtIndex:indexPath.row];
     CGFloat height = 0.0;
-    if (msg.image.length > 0) {
+    if (msg.media.url.length > 0) {
         height = 95;
     }
     else {
@@ -303,106 +298,46 @@
                afterDelay:.0f];
 }
 
-- (void) refreshTable
-{
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
-        NSMutableArray* chatMsgs = [NSMutableArray array];
-        
-        CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
-        NSTimeInterval oldTimestamp = [gApp.engine.preferences timestampOfModule:kKuleModuleChating forChild:currentChild.childId];
-        NSTimeInterval timestamp = oldTimestamp;
-        
-        if ([dataJson isKindOfClass:[NSArray class]]) {
-            for (id chatMsgJson in dataJson) {
-                CSKuleChatMsg* chatMsg = [CSKuleInterpreter decodeChatMsg:chatMsgJson];
-                [chatMsgs addObject:chatMsg];
-                
-                if (timestamp < chatMsg.timestamp) {
-                    timestamp = chatMsg.timestamp;
-                }
-            }
-        }
-        else if ([dataJson isKindOfClass:[NSDictionary class]]) {
-            CSKuleChatMsg* chatMsg = [CSKuleInterpreter decodeChatMsg:dataJson];
-            [chatMsgs addObject:chatMsg];
-            if (timestamp < chatMsg.timestamp) {
-                timestamp = chatMsg.timestamp;
-            }
-        }
-        
-        if (oldTimestamp < timestamp) {
-            [gApp.engine.preferences setTimestamp:timestamp
-                                         ofModule:kKuleModuleChating
-                                         forChild:currentChild.childId];
-        }
-        
-        if (chatMsgs.count > 0) {
-            [chatMsgs addObjectsFromArray:_chatingMsgList];
-            _chatingMsgList = chatMsgs;
-            [self.tableview reloadData];
-            [gApp hideAlert];
-        }
-        else {
-            [gApp alert:@"没有历史消息"];
-        }
-
-        self.tableview.pullLastRefreshDate = [NSDate date];
-        self.tableview.pullTableIsRefreshing = NO;
-    };
-    
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
-        CSLog(@"failure:%@", error);
-        [gApp alert:[error localizedDescription]];
-        
-        self.tableview.pullTableIsRefreshing = NO;
-    };
-    
-    [gApp waitingAlert:@"获取信息中..."];
-    
-    
+- (void) refreshTable {
     NSInteger most = 20;
-    NSInteger toId = 1;
+    long long toId = 1;
     
-    CSKuleChatMsg* chatMsg = [_chatingMsgList firstObject];
-    if (chatMsg) {
-        toId = chatMsg.msgId;
+    CSKuleTopicMsg* topicMsg = [_topicMsgList firstObject];
+    if (topicMsg) {
+        toId = topicMsg.msgId;
     }
     
-    NSInteger fromId = toId - most;
+    long long fromId = toId - most;
     fromId = fromId > 0 ? fromId : 0;
-    
-    [gApp.engine reqGetChatingMsgsOfKindergarten:gApp.engine.loginInfo.schoolId
-                                            from:fromId
-                                              to:toId
-                                            most:most
-                                         success:sucessHandler
-                                         failure:failureHandler];
+
+    [self doReloadTopicMsgsFrom:fromId
+                             to:toId
+                           most:most];
 }
 
-- (void) loadMoreDataToTable
-{
+- (void) loadMoreDataToTable {
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
-        NSMutableArray* chatMsgs = [NSMutableArray array];
+        NSMutableArray* topicMsgs = [NSMutableArray array];
         
         CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
-        NSTimeInterval oldTimestamp = [gApp.engine.preferences timestampOfModule:kKuleModuleChating forChild:currentChild.childId];
+        NSTimeInterval oldTimestamp = [gApp.engine.preferences timestampOfModule:kKuleModuleChating
+                                                                        forChild:currentChild.childId];
         NSTimeInterval timestamp = oldTimestamp;
         
         if ([dataJson isKindOfClass:[NSArray class]]) {
-            for (id chatMsgJson in dataJson) {
-                CSKuleChatMsg* chatMsg = [CSKuleInterpreter decodeChatMsg:chatMsgJson];
-                [chatMsgs addObject:chatMsg];
-                
-                if (timestamp < chatMsg.timestamp) {
-                    timestamp = chatMsg.timestamp;
+            for (id topicMsgJson in dataJson) {
+                CSKuleTopicMsg* topicMsg = [CSKuleInterpreter decodeTopicMsg:topicMsgJson];
+                [topicMsgs addObject:topicMsg];
+                if (timestamp < topicMsg.timestamp) {
+                    timestamp = topicMsg.timestamp;
                 }
             }
         }
         else if ([dataJson isKindOfClass:[NSDictionary class]]) {
-            CSKuleChatMsg* chatMsg = [CSKuleInterpreter decodeChatMsg:dataJson];
-            [chatMsgs addObject:chatMsg];
-            if (timestamp < chatMsg.timestamp) {
-                timestamp = chatMsg.timestamp;
+            CSKuleTopicMsg* topicMsg = [CSKuleInterpreter decodeTopicMsg:dataJson];
+            [topicMsgs addObject:topicMsg];
+            if (timestamp < topicMsg.timestamp) {
+                timestamp = topicMsg.timestamp;
             }
         }
         
@@ -412,8 +347,9 @@
                                          forChild:currentChild.childId];
         }
         
-        if (chatMsgs.count > 0) {
-            [_chatingMsgList addObjectsFromArray:chatMsgs];
+        
+        if (topicMsgs.count > 0) {
+            [_topicMsgList addObjectsFromArray:topicMsgs];
             [self.tableview reloadData];
             [gApp hideAlert];
         }
@@ -434,21 +370,21 @@
     
     
     NSInteger most = 20;
-    NSInteger fromId = 0;
+    long long fromId = 0;
     
-    CSKuleChatMsg* chatMsg = [_chatingMsgList lastObject];
-    if (chatMsg) {
-        fromId = (NSInteger) chatMsg.msgId;
+    CSKuleTopicMsg* topicMsg = [_topicMsgList lastObject];
+    if (topicMsg) {
+        fromId = topicMsg.msgId;
     }
     
-    NSInteger toId = fromId + most;
+    long long toId = fromId + most;
     
-    [gApp.engine reqGetChatingMsgsOfKindergarten:gApp.engine.loginInfo.schoolId
-                                            from:fromId
-                                              to:toId
-                                            most:most
-                                         success:sucessHandler
-                                         failure:failureHandler];
+    [gApp.engine reqGetTopicMsgsOfKindergarten:gApp.engine.loginInfo.schoolId
+                                          from:fromId
+                                            to:toId
+                                          most:most
+                                       success:sucessHandler
+                                       failure:failureHandler];
 }
 
 
@@ -542,24 +478,24 @@
 
 - (void)doSendMsg:(NSString*)msgBody withImage:(NSString*)imgUrl {
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
-        NSMutableArray* chatMsgs = [NSMutableArray array];
+        NSMutableArray* topicMsgs = [NSMutableArray array];
         
         if ([dataJson isKindOfClass:[NSArray class]]) {
-            for (id chatMsgJson in dataJson) {
-                CSKuleChatMsg* chatMsg = [CSKuleInterpreter decodeChatMsg:chatMsgJson];
-                [chatMsgs addObject:chatMsg];
+            for (id topicMsgJson in dataJson) {
+                CSKuleTopicMsg* topicMsg = [CSKuleInterpreter decodeTopicMsg:topicMsgJson];
+                [topicMsgs addObject:topicMsg];
             }
         }
         else if ([dataJson isKindOfClass:[NSDictionary class]]) {
-            CSKuleChatMsg* chatMsg = [CSKuleInterpreter decodeChatMsg:dataJson];
-            [chatMsgs addObject:chatMsg];
+            CSKuleTopicMsg* topicMsg = [CSKuleInterpreter decodeTopicMsg:dataJson];
+            [topicMsgs addObject:topicMsg];
         }
         
-        [_chatingMsgList addObjectsFromArray:chatMsgs];
+        [_topicMsgList addObjectsFromArray:topicMsgs];
         [_tableview reloadData];
         
-        if (_chatingMsgList.count > 0) {
-            NSIndexPath* indexPath = [NSIndexPath indexPathForRow:_chatingMsgList.count-1
+        if (_topicMsgList.count > 0) {
+            NSIndexPath* indexPath = [NSIndexPath indexPathForRow:_topicMsgList.count-1
                                                         inSection:0];
             [_tableview scrollToRowAtIndexPath:indexPath
                               atScrollPosition:UITableViewScrollPositionBottom
@@ -577,43 +513,43 @@
     
     
     long long retrieveFrom = -1;
-    CSKuleChatMsg* msg = [_chatingMsgList lastObject];
+    CSKuleTopicMsg* msg = [_topicMsgList lastObject];
     if (msg) {
         retrieveFrom = msg.msgId;
     }
     
     [gApp waitingAlert:@"发送中..."];
-    [gApp.engine reqSendChatingMsgs:msgBody
-                          withImage:imgUrl
-                     toKindergarten:gApp.engine.loginInfo.schoolId
-                       retrieveFrom:retrieveFrom
-                            success:sucessHandler
-                            failure:failureHandler];
+    [gApp.engine reqSendTopicMsg:msgBody
+                       withImage:imgUrl
+                  toKindergarten:gApp.engine.loginInfo.schoolId
+                    retrieveFrom:retrieveFrom
+                         success:sucessHandler
+                         failure:failureHandler];
 }
 
-- (void)doReloadChatingMsgsFrom:(NSInteger)fromId to:(NSInteger)toId most:(NSInteger)most {
+- (void)doReloadTopicMsgsFrom:(long long)fromId to:(long long)toId most:(NSInteger)most {
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
-        NSMutableArray* chatMsgs = [NSMutableArray array];
+        NSMutableArray* topicMsgs = [NSMutableArray array];
         
         CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
         NSTimeInterval oldTimestamp = [gApp.engine.preferences timestampOfModule:kKuleModuleChating forChild:currentChild.childId];
         NSTimeInterval timestamp = oldTimestamp;
         
         if ([dataJson isKindOfClass:[NSArray class]]) {
-            for (id chatMsgJson in dataJson) {
-                CSKuleChatMsg* chatMsg = [CSKuleInterpreter decodeChatMsg:chatMsgJson];
-                [chatMsgs addObject:chatMsg];
+            for (id topicMsgJson in dataJson) {
+                CSKuleTopicMsg* topicMsg = [CSKuleInterpreter decodeTopicMsg:topicMsgJson];
+                [topicMsgs addObject:topicMsg];
                 
-                if (timestamp < chatMsg.timestamp) {
-                    timestamp = chatMsg.timestamp;
+                if (timestamp < topicMsg.timestamp) {
+                    timestamp = topicMsg.timestamp;
                 }
             }
         }
         else if ([dataJson isKindOfClass:[NSDictionary class]]) {
-            CSKuleChatMsg* chatMsg = [CSKuleInterpreter decodeChatMsg:dataJson];
-            [chatMsgs addObject:chatMsg];
-            if (timestamp < chatMsg.timestamp) {
-                timestamp = chatMsg.timestamp;
+            CSKuleTopicMsg* topicMsg = [CSKuleInterpreter decodeTopicMsg:dataJson];
+            [topicMsgs addObject:topicMsg];
+            if (timestamp < topicMsg.timestamp) {
+                timestamp = topicMsg.timestamp;
             }
         }
         
@@ -623,13 +559,13 @@
                                          forChild:currentChild.childId];
         }
         
-        [_chatingMsgList removeAllObjects];
-        [_chatingMsgList addObjectsFromArray:chatMsgs];
+        [_topicMsgList removeAllObjects];
+        [_topicMsgList addObjectsFromArray:topicMsgs];
         [self.tableview reloadData];
         
-        if (_chatingMsgList.count > 0) {
+        if (_topicMsgList.count > 0) {
             [self.tableview scrollToRowAtIndexPath:[NSIndexPath
-                                                    indexPathForItem:(_chatingMsgList.count-1) inSection:0]
+                                                    indexPathForItem:(_topicMsgList.count-1) inSection:0]
                                   atScrollPosition:UITableViewScrollPositionBottom
                                           animated:NO];
         }
@@ -660,42 +596,6 @@
     textSz.height = MAX(textSz.height, 32);
     
     return textSz;
-}
-
-- (void)getEmployeeInfos {
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
-        NSMutableArray* employeeInfos = [NSMutableArray array];
-        
-        for (id employeeInfoJson in dataJson) {
-            CSKuleEmployeeInfo* employeeInfo = [CSKuleInterpreter decodeEmployeeInfo:employeeInfoJson];
-            [employeeInfos addObject:employeeInfo];
-        }
-        
-        gApp.engine.employees = [NSArray arrayWithArray:employeeInfos];
-        [gApp hideAlert];
-    };
-    
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
-        CSLog(@"failure:%@", error);
-        [gApp alert:[error localizedDescription]];
-    };
-    
-    [gApp waitingAlert:@"获取信息..."];
-    [gApp.engine reqGetEmployeeListOfKindergarten:gApp.engine.loginInfo.schoolId
-                                          success:sucessHandler
-                                          failure:failureHandler];
-}
-
-- (CSKuleEmployeeInfo*)employeeOfSenderId:(NSString*)senderId {
-    CSKuleEmployeeInfo* ret = nil;
-    for (CSKuleEmployeeInfo* employee in gApp.engine.employees) {
-        if ([employee.phone isEqualToString:senderId] && employee.employeeId.length > 0) {
-            ret = employee;
-            break;
-        }
-    }
-    
-    return ret;
 }
 
 #pragma mark - Segues

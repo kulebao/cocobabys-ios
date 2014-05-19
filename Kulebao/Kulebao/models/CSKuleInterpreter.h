@@ -20,6 +20,7 @@
 #import "CSKuleChatMsg.h"
 #import "CSKuleAssessInfo.h"
 #import "CSKuleEmployeeInfo.h"
+#import "CSKuleTopicMsg.h"
 
 @interface CSKuleInterpreter : NSObject
 
@@ -48,6 +49,8 @@
 + (CSKuleCheckInOutLogInfo*)decodeCheckInOutLogInfo:(NSDictionary*)dataJson;
 
 + (CSKuleChatMsg*)decodeChatMsg:(NSDictionary*)dataJson;
+
++ (CSKuleTopicMsg*)decodeTopicMsg:(NSDictionary*)dataJson;
 
 + (CSKuleAssessInfo*)decodeAssessInfo:(NSDictionary*)dataJson;
 

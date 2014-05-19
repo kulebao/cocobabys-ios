@@ -149,26 +149,32 @@
 
 + (CSKuleParentInfo*)decodeParentInfo:(NSDictionary*)dataJson {
     /*
-     {
-     "id" : "2_1394011814045",
-     "school_id" : 93740362,
-     "name" : "飞哥",
-     "phone" : "13800138001",
-     "portrait" : "/assets/images/portrait_placeholder.png",
-     "gender" : 0,
-     "birthday" : "1980-01-01"
-     }
+     {"parent_id":"2_93740362_790",
+     "school_id":93740362,
+     "name":"老虎",
+     "phone":"13408654683",
+     "portrait":"",
+     "gender":0,
+     "birthday":"1799-12-31",
+     "timestamp":0,
+     "member_status":1,
+     "status":1,
+     "company":"ZTE"}
      */
     
     NSParameterAssert(dataJson);
     
-    NSString* parent_id = [dataJson valueForKeyNotNull:@"id"];
+    NSString* parent_id = [dataJson valueForKeyNotNull:@"parent_id"];
     NSInteger school_id = [[dataJson valueForKeyNotNull:@"school_id"] integerValue];
     NSString* name = [dataJson valueForKeyNotNull:@"name"];
     NSString* phone = [dataJson valueForKeyNotNull:@"phone"];
     NSString* portrait = [dataJson valueForKeyNotNull:@"portrait"];
     NSInteger gender = [[dataJson valueForKeyNotNull:@"gender"] integerValue];
     NSString* birthday = [dataJson valueForKeyNotNull:@"birthday"];
+    double timestamp = [[dataJson valueForKeyNotNull:@"timestamp"] doubleValue];
+    NSInteger memberStatus = [[dataJson valueForKeyNotNull:@"member_status"] integerValue];
+    NSInteger status = [[dataJson valueForKeyNotNull:@"status"] integerValue];
+    NSString* company = [dataJson valueForKeyNotNull:@"company"];
     
     CSKuleParentInfo* obj = [CSKuleParentInfo new];
     obj.parentId = parent_id;
@@ -178,6 +184,10 @@
     obj.portrait = portrait;
     obj.gender = gender;
     obj.birthday = birthday;
+    obj.timestamp = timestamp / 1000.0;
+    obj.memberStatus = memberStatus;
+    obj.status = status;
+    obj.company = company;
     
     return obj;
 }
@@ -569,6 +579,56 @@
     obj.sender = sender;
     obj.senderId = sender_id;
     
+    return obj;
+}
+
+
++ (CSKuleMediaInfo*)decodeMediaInfo:(NSDictionary*)dataJson {
+    CSKuleMediaInfo* obj = nil;
+    if (dataJson) {
+        
+    }
+    return obj;
+}
+
++ (CSKuleSenderInfo*)decodeSenderInfo:(NSDictionary*)dataJson {
+    CSKuleSenderInfo* obj = nil;
+    if (dataJson) {
+        
+    }
+    return obj;
+}
+
++ (CSKuleTopicMsg*)decodeTopicMsg:(NSDictionary*)dataJson {
+    /*
+     {"topic":"1_1396844597394",
+     "timestamp":112312313123,
+     "id":1,
+     "content":"老师你好，我们家王大侠怎么样。",
+     "media":{"url":"http://suoqin-test.u.qiniudn.com/FgPmIcRG6BGocpV1B9QMCaaBQ9LK","type":"image"},
+     "sender":{"id":"2_1003_1396844438388","type":"p"}
+     }
+     */
+    
+    NSParameterAssert(dataJson);
+    
+    double timestamp = [[dataJson valueForKeyNotNull:@"timestamp"] doubleValue];
+    long long msgId = [[dataJson valueForKeyNotNull:@"id"] longLongValue];
+    NSString* topic = [dataJson valueForKeyNotNull:@"topic"];
+    NSString* content = [dataJson valueForKeyNotNull:@"content"];
+    
+    CSKuleSenderInfo* sender = [CSKuleInterpreter decodeSenderInfo:[dataJson valueForKeyNotNull:@"sender"]];
+    
+    CSKuleMediaInfo* media = [CSKuleInterpreter decodeMediaInfo:[dataJson valueForKeyNotNull:@"media"]];
+
+    CSKuleTopicMsg* obj = [CSKuleTopicMsg new];
+    obj.timestamp = timestamp / 1000.0;
+    obj.msgId = msgId;
+    obj.topic = topic;
+    obj.content = content;
+    obj.media = media;
+    obj.sender = sender;
+
     return obj;
 }
 

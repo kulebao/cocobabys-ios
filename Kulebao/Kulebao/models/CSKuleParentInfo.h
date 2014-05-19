@@ -16,5 +16,9 @@
 @property (nonatomic, strong) NSString* portrait;
 @property (nonatomic, assign) NSInteger gender;
 @property (nonatomic, strong) NSString* birthday;
+@property (nonatomic, assign) NSTimeInterval timestamp;
+@property (nonatomic, assign) NSInteger memberStatus;
+@property (nonatomic, assign) NSInteger status;
+@property (nonatomic, assign) NSString* company;
 
 @end

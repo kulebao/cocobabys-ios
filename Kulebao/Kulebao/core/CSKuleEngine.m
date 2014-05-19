@@ -15,7 +15,9 @@
 #import "ALAlertBannerManager.h"
 #import "ALAlertBanner+Private.h"
 
-@interface CSKuleEngine() <BPushDelegate>
+@interface CSKuleEngine() <BPushDelegate> {
+    NSMutableDictionary* _senderProfiles;
+}
 
 @property (strong, nonatomic) CSHttpClient* httpClient;
 @property (strong, nonatomic) CSHttpClient* qiniuHttpClient;
@@ -36,7 +38,6 @@
 @synthesize loginInfo = _loginInfo;
 @synthesize relationships = _relationships;
 @synthesize currentRelationship = _currentRelationship;
-@synthesize employees = _employees;
 
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize managedObjectContext = _managedObjectContext;
@@ -183,6 +184,13 @@
 }
 
 - (void)setupEngine {
+    if (_senderProfiles == nil) {
+        _senderProfiles = [NSMutableDictionary dictionary];
+    }
+    else {
+        [_senderProfiles removeAllObjects];
+    }
+    
     // 加载外观设置
     [self setupAppearance];
     
@@ -208,7 +216,10 @@
     [CSKuleURLCache setSharedURLCache:cache];
     
     if (_httpClient == nil) {
-        NSURL* baseUrl = [NSURL URLWithString:kServerHost];
+        NSURL* baseUrl = [NSURL URLWithString:kServerHostForProd];
+        if (_preferences.enabledTest) {
+            baseUrl = [NSURL URLWithString:kServerHostForTest];
+        }
         _httpClient = [CSHttpClient httpClientWithHost:baseUrl];
     }
     
@@ -245,7 +256,10 @@
         }
         else {
             url = [NSURL URLWithString:path
-                         relativeToURL:[NSURL URLWithString:kServerHost]];
+                         relativeToURL:[NSURL URLWithString:kServerHostForProd]];
+            if (_preferences.enabledTest) {
+                url = [NSURL URLWithString:kServerHostForTest];
+            }
         }
     }
     
@@ -1056,8 +1070,8 @@
 }
 
 - (void)reqGetChatingMsgsOfKindergarten:(NSInteger)kindergarten
-                                   from:(NSInteger)fromId
-                                     to:(NSInteger)toId
+                                   from:(long long)fromId
+                                     to:(long long)toId
                                    most:(NSInteger)most
                                 success:(SuccessResponseHandler)success
                                 failure:(FailureResponseHandler)failure {
@@ -1085,17 +1099,16 @@
                             parameters:parameters
                                success:success
                                failure:failure];
-    
 }
 
-- (void)reqSendChatingMsgs:(NSString*)msgBody
-                 withImage:(NSString*)imgUrl
-            toKindergarten:(NSInteger)kindergarten
-              retrieveFrom:(long long)fromId
-                   success:(SuccessResponseHandler)success
-                   failure:(FailureResponseHandler)failure {
+- (void)reqSendChatingMsg:(NSString*)msgBody
+                withImage:(NSString*)imgUrl
+           toKindergarten:(NSInteger)kindergarten
+             retrieveFrom:(long long)fromId
+                  success:(SuccessResponseHandler)success
+                  failure:(FailureResponseHandler)failure {
     NSParameterAssert(msgBody || imgUrl); // 不能同时为空
-    NSParameterAssert(_loginInfo);
+    NSParameterAssert(_loginInfo.accountName);
     
     NSString* path = [NSString stringWithFormat:kChatingPath, @(kindergarten), _loginInfo.accountName];
     
@@ -1127,7 +1140,89 @@
                             parameters:parameters
                                success:success
                                failure:failure];
+}
+
+- (void)reqGetTopicMsgsOfKindergarten:(NSInteger)kindergarten
+                                 from:(long long)fromId
+                                   to:(long long)toId
+                                 most:(NSInteger)most
+                              success:(SuccessResponseHandler)success
+                              failure:(FailureResponseHandler)failure {
+    NSParameterAssert(_currentRelationship.child);
     
+    NSString* path = [NSString stringWithFormat:kChatingPath, @(kindergarten), _currentRelationship.child.childId];
+    
+    NSString* method = @"GET";
+    
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    if (fromId >= 0) {
+        [parameters setObject:@(fromId) forKey:@"from"];
+    }
+    
+    if (toId >= 0) {
+        [parameters setObject:@(toId) forKey:@"to"];
+    }
+    
+    if (most >= 0) {
+        [parameters setObject:@(most) forKey:@"most"];
+    }
+    
+    [_httpClient httpRequestWithMethod:method
+                                  path:path
+                            parameters:parameters
+                               success:success
+                               failure:failure];
+}
+
+- (void)reqSendTopicMsg:(NSString*)msgBody
+              withImage:(NSString*)imgUrl
+         toKindergarten:(NSInteger)kindergarten
+           retrieveFrom:(long long)fromId
+                success:(SuccessResponseHandler)success
+                failure:(FailureResponseHandler)failure {
+    NSParameterAssert(msgBody || imgUrl); // 不能同时为空
+    NSParameterAssert(_currentRelationship.child);
+    
+    
+    NSString* path = [NSString stringWithFormat:kTopicPath, @(kindergarten), _currentRelationship.child.childId];
+    
+    if (fromId >= 0) {
+        path = [path stringByAppendingFormat:@"?retrieve_recent_from=%lld", fromId];
+    }
+    
+    NSString* method = @"POST";
+    
+    /*
+     {"topic":"1_1396844597394",
+     "content":"我再说两句",
+     "media":{"url":"http://suoqin-test.u.qiniudn.com/FgPmIcRG6BGocpV1B9QMCaaBQ9LK","type":"image"},
+     "sender":{"id":"2_1003_1396844438388","type":"p"}}
+     */
+    
+    long long timestamp = [[NSDate date] timeIntervalSince1970]*1000;
+    
+    id msgMedia = @{@"url": @"",
+                    @"type": @"image"};
+    
+    if (imgUrl.length > 0) {
+        msgMedia = @{@"url": [[self urlFromPath:imgUrl] absoluteString],
+                     @"type": @"image"};
+    }
+    
+    id msgSender = @{@"id": _currentRelationship.parent.parentId,
+                     @"type": @"p"};
+    
+    NSDictionary* parameters = @{@"topic": _currentRelationship.child.childId,
+                                 @"timestamp": @(timestamp),
+                                 @"content": msgBody ? msgBody : @"",
+                                 @"media": msgMedia,
+                                 @"sender": msgSender};
+    
+    [_httpClient httpRequestWithMethod:method
+                                  path:path
+                            parameters:parameters
+                               success:success
+                               failure:failure];
 }
 
 - (void)reqGetAssessesOfChild:(CSKuleChildInfo*)childInfo
@@ -1262,6 +1357,55 @@
                             parameters:parameters
                                success:success
                                failure:failure];
+    
+}
+
+- (void)reqGetSenderProfileOfKindergarten:(NSInteger)kindergarten
+                               withSender:(CSKuleSenderInfo*)senderInfo
+                                 complete:(void (^)(id obj))complete {
+    if (senderInfo.senderId.length > 0) {
+        id obj = [_senderProfiles objectForKey:senderInfo.senderId];
+        if (obj && complete) {
+            complete(obj);
+        }
+        else if(obj == nil) {
+            if ([senderInfo.type isEqualToString:@"t"] || [senderInfo.type isEqualToString:@"p"]) {
+                NSString* path = [NSString stringWithFormat:kGetSenderInfoPath, @(kindergarten), senderInfo.senderId];
+                
+                NSString* method = @"GET";
+                
+                NSDictionary* parameters = @{@"type": senderInfo.type};
+                
+                id success = ^(AFHTTPRequestOperation *operation, id dataJson) {
+                    id profile = nil;
+                    if ([senderInfo.type isEqualToString:@"t"]) {
+                        profile = [CSKuleInterpreter decodeEmployeeInfo:dataJson];
+                    }
+                    else if ([senderInfo.type isEqualToString:@"p"]) {
+                        profile = [CSKuleInterpreter decodeParentInfo:dataJson];
+                    }
+                    
+                    if (profile) {
+                        [_senderProfiles setObject:profile forKey:senderInfo.senderId];
+                    }
+                    
+                    if (complete) {
+                        complete(profile);
+                    }
+                };
+                
+                id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
+                    
+                };
+                
+                [_httpClient httpRequestWithMethod:method
+                                              path:path
+                                        parameters:parameters
+                                           success:success
+                                           failure:failure];
+            }
+        }
+    }
 }
 
 @end

@@ -110,9 +110,6 @@
                      context:nil];
     
     [self performSelector:@selector(getRelationshipInfos) withObject:nil afterDelay:0];
-    if (gApp.engine.employees == nil) {
-        [self performSelector:@selector(getEmployeeInfos) withObject:nil afterDelay:0];
-    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -730,29 +727,29 @@
                                   failure:failureHandler];
 }
 
-- (void)getEmployeeInfos {
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
-        NSMutableArray* employeeInfos = [NSMutableArray array];
-        
-        for (id employeeInfoJson in dataJson) {
-            CSKuleEmployeeInfo* employeeInfo = [CSKuleInterpreter decodeEmployeeInfo:employeeInfoJson];
-            [employeeInfos addObject:employeeInfo];
-        }
-        
-        gApp.engine.employees = [NSArray arrayWithArray:employeeInfos];
-        [gApp hideAlert];
-    };
-    
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
-        CSLog(@"failure:%@", error);
-        [gApp alert:[error localizedDescription]];
-    };
-    
-    [gApp waitingAlert:@"获取信息..."];
-    [gApp.engine reqGetEmployeeListOfKindergarten:gApp.engine.loginInfo.schoolId
-                                          success:sucessHandler
-                                          failure:failureHandler];
-}
+//- (void)getEmployeeInfos {
+//    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+//        NSMutableArray* employeeInfos = [NSMutableArray array];
+//        
+//        for (id employeeInfoJson in dataJson) {
+//            CSKuleEmployeeInfo* employeeInfo = [CSKuleInterpreter decodeEmployeeInfo:employeeInfoJson];
+//            [employeeInfos addObject:employeeInfo];
+//        }
+//        
+//        gApp.engine.employees = [NSArray arrayWithArray:employeeInfos];
+//        [gApp hideAlert];
+//    };
+//    
+//    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+//        CSLog(@"failure:%@", error);
+//        [gApp alert:[error localizedDescription]];
+//    };
+//    
+//    [gApp waitingAlert:@"获取信息..."];
+//    [gApp.engine reqGetEmployeeListOfKindergarten:gApp.engine.loginInfo.schoolId
+//                                          success:sucessHandler
+//                                          failure:failureHandler];
+//}
 
 - (void)showBanner:(NSString*)msg {
     CSAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];

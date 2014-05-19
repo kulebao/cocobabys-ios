@@ -21,7 +21,6 @@
 
 @property (strong, nonatomic) NSArray* relationships;
 @property (strong, nonatomic) CSKuleRelationshipInfo* currentRelationship;
-@property (strong, nonatomic) NSArray* employees;
 
 @property (strong, nonatomic, readonly) UIApplication* application;
 
@@ -147,18 +146,32 @@
                            failure:(FailureResponseHandler)failure;
 
 - (void)reqGetChatingMsgsOfKindergarten:(NSInteger)kindergarten
-                                   from:(NSInteger)fromId
-                                     to:(NSInteger)toId
+                                   from:(long long)fromId
+                                     to:(long long)toId
                                    most:(NSInteger)most
                                 success:(SuccessResponseHandler)success
                                 failure:(FailureResponseHandler)failure;
 
-- (void)reqSendChatingMsgs:(NSString*)msgBody
-                 withImage:(NSString*)imgUrl
-            toKindergarten:(NSInteger)kindergarten
-              retrieveFrom:(long long)fromId
-                   success:(SuccessResponseHandler)success
-                   failure:(FailureResponseHandler)failure;
+- (void)reqSendChatingMsg:(NSString*)msgBody
+                withImage:(NSString*)imgUrl
+           toKindergarten:(NSInteger)kindergarten
+             retrieveFrom:(long long)fromId
+                  success:(SuccessResponseHandler)success
+                  failure:(FailureResponseHandler)failure;
+
+- (void)reqGetTopicMsgsOfKindergarten:(NSInteger)kindergarten
+                                 from:(long long)fromId
+                                   to:(long long)toId
+                                 most:(NSInteger)most
+                              success:(SuccessResponseHandler)success
+                              failure:(FailureResponseHandler)failure;
+
+- (void)reqSendTopicMsg:(NSString*)msgBody
+              withImage:(NSString*)imgUrl
+         toKindergarten:(NSInteger)kindergarten
+           retrieveFrom:(long long)fromId
+                success:(SuccessResponseHandler)success
+                failure:(FailureResponseHandler)failure;
 
 - (void)reqGetAssessesOfChild:(CSKuleChildInfo*)childInfo
                inKindergarten:(NSInteger)kindergarten
@@ -191,5 +204,9 @@
 - (void)reqGetEmployeeListOfKindergarten:(NSInteger)kindergarten
                                  success:(SuccessResponseHandler)success
                                  failure:(FailureResponseHandler)failure;
+
+- (void)reqGetSenderProfileOfKindergarten:(NSInteger)kindergarten
+                               withSender:(CSKuleSenderInfo*)senderInfo
+                                 complete:(void (^)(id obj))complete;
 
 @end

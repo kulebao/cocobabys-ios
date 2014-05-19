@@ -80,7 +80,6 @@
     
     CSKuleRecipeInfo* recipeInfo = nil;
     
-    
     NSDate* beginningOfWeek = [[NSDate date] beginningOfWeek];
     
     NSString* dateText = nil;

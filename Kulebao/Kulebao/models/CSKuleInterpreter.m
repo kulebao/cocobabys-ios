@@ -586,7 +586,12 @@
 + (CSKuleMediaInfo*)decodeMediaInfo:(NSDictionary*)dataJson {
     CSKuleMediaInfo* obj = nil;
     if (dataJson) {
+        NSString* url = [dataJson valueForKeyNotNull:@"url"];
+        NSString* type = [dataJson valueForKeyNotNull:@"type"];
         
+        obj = [CSKuleMediaInfo new];
+        obj.url = url;
+        obj.type = type;
     }
     return obj;
 }
@@ -594,7 +599,12 @@
 + (CSKuleSenderInfo*)decodeSenderInfo:(NSDictionary*)dataJson {
     CSKuleSenderInfo* obj = nil;
     if (dataJson) {
+        NSString* senderId = [dataJson valueForKeyNotNull:@"id"];
+        NSString* type = [dataJson valueForKeyNotNull:@"type"];
         
+        obj = [CSKuleSenderInfo new];
+        obj.senderId = senderId;
+        obj.type = type;
     }
     return obj;
 }

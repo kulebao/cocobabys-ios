@@ -12,6 +12,8 @@
 #import "CSAppDelegate.h"
 #import "CSKuleChatingEditorViewController.h"
 #import "MHFacebookImageViewer.h"
+#import "CSKuleEmployeeInfo.h"
+#import "CSKuleParentInfo.h"
 
 @interface CSKuleChatingViewController () <UITableViewDataSource, UITableViewDelegate, PullTableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CSKuleChatingEditorViewControllerDelegate> {
     UIImagePickerController* _imgPicker;
@@ -51,7 +53,20 @@
     self.tableview.backgroundColor = [UIColor clearColor];
     
     _topicMsgList = [NSMutableArray array];
-    [self doReloadTopicMsgsFrom:-1 to:-1 most:20];
+    
+    [self doReloadTopicMsgsFrom:-1
+                             to:-1
+                           most:20
+                        success:^{
+                            if (_topicMsgList.count > 0) {
+                                [self.tableview scrollToRowAtIndexPath:[NSIndexPath
+                                                                        indexPathForItem:(_topicMsgList.count-1) inSection:0]
+                                                      atScrollPosition:UITableViewScrollPositionBottom
+                                                              animated:NO];
+                            }
+                        } failure:^{
+                            
+                        }];
     
     [gApp.engine addObserver:self
                   forKeyPath:@"employees"
@@ -95,11 +110,11 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"CSKuleChatingTableCell"];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"CSKuleChatingTableCell"];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                      reuseIdentifier:@"CSKuleChatingTableCell"];
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
@@ -163,30 +178,50 @@
     
     if (![msg.sender.senderId isEqualToString:gApp.engine.currentRelationship.parent.parentId]) {
         // From
-        CSKuleEmployeeInfo* senderInfo = nil;// [self employeeOfSenderId:msg.senderId];
-        if (senderInfo.portrait.length > 0) {
-            NSURL* qiniuImgUrl = [gApp.engine urlFromPath:senderInfo.portrait];
-            [imgMsgBody setupImageViewerWithImageURL:qiniuImgUrl];
-            
-            qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/64/h/64"];
-            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:qiniuImgUrl];
-            [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
-            request.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
-            [imgPortrait setImageWithURLRequest:request
-                              placeholderImage:[UIImage imageNamed:@"chat_head_icon.png"]
-                                       success:nil
-                                       failure:nil];
-        }
-        else {
-            imgPortrait.image = [UIImage imageNamed:@"chat_head_icon.png"];
-        }
+        labMsgSender.text = nil;
+        imgPortrait.image = [UIImage imageNamed:@"chat_head_icon.png"];
+        
+        [gApp.engine reqGetSenderProfileOfKindergarten:gApp.engine.loginInfo.schoolId
+                                            withSender:msg.sender complete:^(id obj) {
+                                                NSURL* qiniuImgUrl = nil;
+                                                NSString* senderName = nil;
+                                                if ([obj isKindOfClass:[CSKuleEmployeeInfo class]]) {
+                                                    CSKuleEmployeeInfo* employeeInfo = obj;
+                                                    if (employeeInfo.portrait.length > 0) {
+                                                        qiniuImgUrl = [gApp.engine urlFromPath:employeeInfo.portrait];
+                                                    }
+                                                    
+                                                    senderName = employeeInfo.name;
+                                                }
+                                                else if ([obj isKindOfClass:[CSKuleParentInfo class]]) {
+                                                    CSKuleParentInfo* parentInfo = obj;
+                                                    if (parentInfo.portrait.length > 0) {
+                                                        qiniuImgUrl = [gApp.engine urlFromPath:parentInfo.portrait];
+                                                    }
+                                                    
+                                                    senderName = parentInfo.name;
+                                                }
+                                                
+                                                if (qiniuImgUrl) {
+                                                    qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/64/h/64"];
+                                                    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:qiniuImgUrl];
+                                                    [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
+                                                    request.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
+                                                    [imgPortrait setImageWithURLRequest:request
+                                                                       placeholderImage:[UIImage imageNamed:@"chat_head_icon.png"]
+                                                                                success:nil
+                                                                                failure:nil];
+                                                }
+                                                
+                                                labMsgSender.text = senderName;
+                                            }];
         
         imgPortrait.frame = CGRectMake(2, 12, 32, 32);
         
         UIImage* bgImage = [UIImage imageNamed:@"msg-bg-from.png"];
         imgBubbleBg.image = [bgImage resizableImageWithCapInsets:UIEdgeInsetsMake(35, 15, 10, 10)];
 
-        labMsgSender.text = msg.sender.senderId;
+        
         labMsgSender.frame = CGRectMake(0, 46, 36, 12);
         
         if (msg.media.url.length > 0) {
@@ -287,18 +322,18 @@
 
 #pragma mark - PullTableViewDelegate
 - (void)pullTableViewDidTriggerRefresh:(PullTableView*)pullTableView {
-    [self performSelector:@selector(refreshTable)
+    [self performSelector:@selector(loadHistoryMsgs)
                withObject:nil
                afterDelay:3.0f];
 }
 
 - (void)pullTableViewDidTriggerLoadMore:(PullTableView*)pullTableView {
-    [self performSelector:@selector(loadMoreDataToTable)
+    [self performSelector:@selector(loadNewMsgs)
                withObject:nil
                afterDelay:.0f];
 }
 
-- (void) refreshTable {
+- (void)loadHistoryMsgs {
     NSInteger most = 20;
     long long toId = 1;
     
@@ -312,63 +347,20 @@
 
     [self doReloadTopicMsgsFrom:fromId
                              to:toId
-                           most:most];
+                           most:most
+                        success:^{
+                            self.tableview.pullTableIsRefreshing = NO;
+                            CSKuleTopicMsg* firstTopicMsg = [_topicMsgList firstObject];
+                            if ([firstTopicMsg isEqual:topicMsg]) {
+                                [gApp alert:@"没有历史消息"];
+                            }
+                            
+                        } failure:^{
+                            self.tableview.pullTableIsRefreshing = NO;
+                        }];
 }
 
-- (void) loadMoreDataToTable {
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
-        NSMutableArray* topicMsgs = [NSMutableArray array];
-        
-        CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
-        NSTimeInterval oldTimestamp = [gApp.engine.preferences timestampOfModule:kKuleModuleChating
-                                                                        forChild:currentChild.childId];
-        NSTimeInterval timestamp = oldTimestamp;
-        
-        if ([dataJson isKindOfClass:[NSArray class]]) {
-            for (id topicMsgJson in dataJson) {
-                CSKuleTopicMsg* topicMsg = [CSKuleInterpreter decodeTopicMsg:topicMsgJson];
-                [topicMsgs addObject:topicMsg];
-                if (timestamp < topicMsg.timestamp) {
-                    timestamp = topicMsg.timestamp;
-                }
-            }
-        }
-        else if ([dataJson isKindOfClass:[NSDictionary class]]) {
-            CSKuleTopicMsg* topicMsg = [CSKuleInterpreter decodeTopicMsg:dataJson];
-            [topicMsgs addObject:topicMsg];
-            if (timestamp < topicMsg.timestamp) {
-                timestamp = topicMsg.timestamp;
-            }
-        }
-        
-        if (oldTimestamp < timestamp) {
-            [gApp.engine.preferences setTimestamp:timestamp
-                                         ofModule:kKuleModuleChating
-                                         forChild:currentChild.childId];
-        }
-        
-        
-        if (topicMsgs.count > 0) {
-            [_topicMsgList addObjectsFromArray:topicMsgs];
-            [self.tableview reloadData];
-            [gApp hideAlert];
-        }
-        else {
-            [gApp alert:@"没有更多消息"];
-        }
-        
-        self.tableview.pullTableIsLoadingMore = NO;
-    };
-    
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
-        CSLog(@"failure:%@", error);
-        [gApp alert:[error localizedDescription]];
-        self.tableview.pullTableIsLoadingMore = NO;
-    };
-    
-    [gApp waitingAlert:@"获取信息中..."];
-    
-    
+- (void)loadNewMsgs{
     NSInteger most = 20;
     long long fromId = 0;
     
@@ -379,12 +371,15 @@
     
     long long toId = fromId + most;
     
-    [gApp.engine reqGetTopicMsgsOfKindergarten:gApp.engine.loginInfo.schoolId
-                                          from:fromId
-                                            to:toId
-                                          most:most
-                                       success:sucessHandler
-                                       failure:failureHandler];
+    [self doReloadTopicMsgsFrom:fromId to:toId most:most success:^{
+        self.tableview.pullTableIsLoadingMore = NO;
+        CSKuleTopicMsg* lastTopicMsg = [_topicMsgList lastObject];
+        if ([lastTopicMsg isEqual:topicMsg]) {
+            [gApp alert:@"没有新消息"];
+        }
+    } failure:^{
+        self.tableview.pullTableIsLoadingMore = NO;
+    }];
 }
 
 
@@ -527,7 +522,11 @@
                          failure:failureHandler];
 }
 
-- (void)doReloadTopicMsgsFrom:(long long)fromId to:(long long)toId most:(NSInteger)most {
+- (void)doReloadTopicMsgsFrom:(long long)fromId
+                           to:(long long)toId
+                         most:(NSInteger)most
+                      success:(void (^)(void))success
+                      failure:(void (^)(void))failure {
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         NSMutableArray* topicMsgs = [NSMutableArray array];
         
@@ -559,32 +558,42 @@
                                          forChild:currentChild.childId];
         }
         
-        [_topicMsgList removeAllObjects];
         [_topicMsgList addObjectsFromArray:topicMsgs];
+        [_topicMsgList sortUsingComparator:^NSComparisonResult(CSKuleTopicMsg* obj1, CSKuleTopicMsg* obj2) {
+            NSComparisonResult ret = NSOrderedSame;
+            if (obj1.msgId < obj2.msgId) {
+                ret = NSOrderedAscending;
+            }
+            else if (obj1.msgId > obj2.msgId) {
+                ret = NSOrderedDescending;
+            }
+            
+            return ret;
+        }];
+        
         [self.tableview reloadData];
-        
-        if (_topicMsgList.count > 0) {
-            [self.tableview scrollToRowAtIndexPath:[NSIndexPath
-                                                    indexPathForItem:(_topicMsgList.count-1) inSection:0]
-                                  atScrollPosition:UITableViewScrollPositionBottom
-                                          animated:NO];
-        }
-        
         [gApp hideAlert];
+        
+        if (success) {
+            success();
+        }
     };
     
     FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
         CSLog(@"failure:%@", error);
         [gApp alert:[error localizedDescription]];
+        if (failure) {
+            failure();
+        }
     };
     
     [gApp waitingAlert:@"获取信息中..."];
-    [gApp.engine reqGetChatingMsgsOfKindergarten:gApp.engine.loginInfo.schoolId
-                                            from:fromId
-                                              to:toId
-                                            most:most
-                                         success:sucessHandler
-                                         failure:failureHandler];
+    [gApp.engine reqGetTopicMsgsOfKindergarten:gApp.engine.loginInfo.schoolId
+                                          from:fromId
+                                            to:toId
+                                          most:most
+                                       success:sucessHandler
+                                       failure:failureHandler];
 }
 
 - (CGSize)textSize:(NSString*)text {

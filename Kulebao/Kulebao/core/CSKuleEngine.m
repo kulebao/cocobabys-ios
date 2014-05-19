@@ -1150,7 +1150,7 @@
                               failure:(FailureResponseHandler)failure {
     NSParameterAssert(_currentRelationship.child);
     
-    NSString* path = [NSString stringWithFormat:kChatingPath, @(kindergarten), _currentRelationship.child.childId];
+    NSString* path = [NSString stringWithFormat:kTopicPath, @(kindergarten), _currentRelationship.child.childId];
     
     NSString* method = @"GET";
     

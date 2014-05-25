@@ -176,11 +176,98 @@
 //        labMsgTimestamp.text = nil;
 //    }
     
-    if (![msg.sender.senderId isEqualToString:gApp.engine.currentRelationship.parent.parentId]) {
+    //if (![msg.sender.senderId isEqualToString:gApp.engine.currentRelationship.parent.parentId]) {
+    if ([msg.sender.type isEqualToString:@"t"]) {
         // From
         labMsgSender.text = nil;
         imgPortrait.image = [UIImage imageNamed:@"chat_head_icon.png"];
         
+        imgPortrait.frame = CGRectMake(2, 24, 32, 32);
+        
+        UIImage* bgImage = [UIImage imageNamed:@"msg-bg-from.png"];
+        imgBubbleBg.image = [bgImage resizableImageWithCapInsets:UIEdgeInsetsMake(35, 15, 10, 10)];
+
+        labMsgSender.frame = CGRectMake(45, 12, 136, 12);
+        labMsgSender.textAlignment = NSTextAlignmentLeft;
+        
+        if (msg.media.url.length > 0) {
+            imgBubbleBg.frame = CGRectMake(36, 12+12, 90, 78);
+            imgMsgBody.frame = CGRectMake(52, 18+12, 64, 64);
+            labMsgBody.frame = CGRectNull;
+            labMsgBody.text = nil;
+
+            NSURL* qiniuImgUrl = [gApp.engine urlFromPath:msg.media.url];
+            [imgMsgBody setupImageViewerWithImageURL:qiniuImgUrl];
+            
+            qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/128/h/128"];
+            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:qiniuImgUrl];
+            [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
+            request.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
+            [imgMsgBody setImageWithURLRequest:request
+                              placeholderImage:nil
+                                       success:nil
+                                       failure:nil];
+        }
+        else {
+            imgBubbleBg.frame = CGRectMake(36, 12+12, msgBodySize.width + 30, msgBodySize.height+14);
+            
+            imgMsgBody.frame = CGRectNull;
+            imgMsgBody.image = nil;
+            
+            labMsgBody.text = msg.content;
+            labMsgBody.frame = CGRectMake(imgBubbleBg.frame.origin.x + 16, 18+12, msgBodySize.width, msgBodySize.height);
+        }
+    }
+    else {
+        // To
+        CSKuleChildInfo* childInfo = gApp.engine.currentRelationship.child;
+        NSURL* qiniuImgUrl = [gApp.engine urlFromPath:childInfo.portrait];
+        qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/64/h/64"];
+        [imgPortrait setImageWithURL:qiniuImgUrl placeholderImage:[UIImage imageNamed:@"chat_head_icon.png"]];
+        
+        
+        imgPortrait.frame = CGRectMake(320-2-32-2, 24, 32, 32);
+        
+        UIImage* bgImage = [UIImage imageNamed:@"msg-bg-to.png"];
+        imgBubbleBg.image = [bgImage resizableImageWithCapInsets:UIEdgeInsetsMake(35, 10, 10, 15)];
+
+        labMsgSender.frame = CGRectMake(320-2-132-4-45, 12, 136, 12);
+        labMsgSender.textAlignment = NSTextAlignmentRight;
+        
+        if (msg.media.url.length > 0) {
+            imgBubbleBg.frame =  CGRectMake(320-36-90, 12+12, 90, 78);
+            imgMsgBody.frame = CGRectMake(imgBubbleBg.frame.origin.x+10, 18+12, 64, 64);
+            labMsgBody.frame = CGRectNull;
+            labMsgBody.text = nil;
+            
+            NSURL* qiniuImgUrl = [gApp.engine urlFromPath:msg.media.url];
+            [imgMsgBody setupImageViewerWithImageURL:qiniuImgUrl];
+            
+            qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/128/h/128"];
+            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:qiniuImgUrl];
+            [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
+            request.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
+            [imgMsgBody setImageWithURLRequest:request
+                              placeholderImage:nil
+                                       success:nil
+                                       failure:nil];
+        }
+        else {
+            imgBubbleBg.frame = CGRectMake(320-36-msgBodySize.width-30, 12+12, msgBodySize.width + 30, msgBodySize.height+14);
+            
+            imgMsgBody.frame = CGRectNull;
+            imgMsgBody.image = nil;
+            
+            labMsgBody.text = msg.content;
+            labMsgBody.frame = CGRectMake(imgBubbleBg.frame.origin.x + 12, 18+12, msgBodySize.width, msgBodySize.height);
+        }
+    }
+    
+    if ([msg.sender.senderId isEqualToString:gApp.engine.currentRelationship.parent.parentId]
+        && [msg.sender.type isEqualToString:@"p"]) {
+        labMsgSender.text = @"我";
+    }
+    else {
         [gApp.engine reqGetSenderProfileOfKindergarten:gApp.engine.loginInfo.schoolId
                                             withSender:msg.sender complete:^(id obj) {
                                                 NSURL* qiniuImgUrl = nil;
@@ -215,87 +302,25 @@
                                                 
                                                 labMsgSender.text = senderName;
                                             }];
-        
-        imgPortrait.frame = CGRectMake(2, 12, 32, 32);
-        
-        UIImage* bgImage = [UIImage imageNamed:@"msg-bg-from.png"];
-        imgBubbleBg.image = [bgImage resizableImageWithCapInsets:UIEdgeInsetsMake(35, 15, 10, 10)];
-
-        
-        labMsgSender.frame = CGRectMake(0, 46, 36, 12);
-        
-        if (msg.media.url.length > 0) {
-            imgBubbleBg.frame = CGRectMake(36, 12, 90, 78);
-            imgMsgBody.frame = CGRectMake(52, 18, 64, 64);
-            labMsgBody.frame = CGRectNull;
-            labMsgBody.text = nil;
-
-            NSURL* qiniuImgUrl = [gApp.engine urlFromPath:msg.media.url];
-            [imgMsgBody setupImageViewerWithImageURL:qiniuImgUrl];
-            
-            qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/128/h/128"];
-            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:qiniuImgUrl];
-            [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
-            request.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
-            [imgMsgBody setImageWithURLRequest:request
-                              placeholderImage:nil
-                                       success:nil
-                                       failure:nil];
+    }
+    
+    
+    // Check if show the timestamp
+    NSInteger row = indexPath.row;
+    if (row > 0) {
+        CSKuleTopicMsg* preMsg = [_topicMsgList objectAtIndex:(row-1)];
+        if ([msg.sender.senderId isEqualToString:preMsg.sender.senderId]
+            && ABS(msg.timestamp - preMsg.timestamp)<180 ) {
+                labMsgTimestamp.hidden = YES;
         }
-        else {
-            imgBubbleBg.frame = CGRectMake(36, 12, msgBodySize.width + 30, msgBodySize.height+14);
-            
-            imgMsgBody.frame = CGRectNull;
-            imgMsgBody.image = nil;
-            
-            labMsgBody.text = msg.content;
-            labMsgBody.frame = CGRectMake(imgBubbleBg.frame.origin.x + 16, 18, msgBodySize.width, msgBodySize.height);
+        else  {
+            labMsgTimestamp.hidden = NO;
         }
     }
     else {
-        // To
-        CSKuleChildInfo* childInfo = gApp.engine.currentRelationship.child;
-        NSURL* qiniuImgUrl = [gApp.engine urlFromPath:childInfo.portrait];
-        qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/64/h/64"];
-        [imgPortrait setImageWithURL:qiniuImgUrl placeholderImage:[UIImage imageNamed:@"chat_head_icon.png"]];
-        
-        
-        imgPortrait.frame = CGRectMake(320-2-32-2, 12, 32, 32);
-        
-        UIImage* bgImage = [UIImage imageNamed:@"msg-bg-to.png"];
-        imgBubbleBg.image = [bgImage resizableImageWithCapInsets:UIEdgeInsetsMake(35, 10, 10, 15)];
-        
-        labMsgSender.text = @"我";
-        labMsgSender.frame = CGRectMake(320-2-32-4, 46, 36, 12);
-        
-        if (msg.media.url.length > 0) {
-            imgBubbleBg.frame =  CGRectMake(320-36-90, 12, 90, 78);
-            imgMsgBody.frame = CGRectMake(imgBubbleBg.frame.origin.x+10, 18, 64, 64);
-            labMsgBody.frame = CGRectNull;
-            labMsgBody.text = nil;
-            
-            NSURL* qiniuImgUrl = [gApp.engine urlFromPath:msg.media.url];
-            [imgMsgBody setupImageViewerWithImageURL:qiniuImgUrl];
-            
-            qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/128/h/128"];
-            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:qiniuImgUrl];
-            [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
-            request.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
-            [imgMsgBody setImageWithURLRequest:request
-                              placeholderImage:nil
-                                       success:nil
-                                       failure:nil];
-        }
-        else {
-            imgBubbleBg.frame = CGRectMake(320-36-msgBodySize.width-30, 12, msgBodySize.width + 30, msgBodySize.height+14);
-            
-            imgMsgBody.frame = CGRectNull;
-            imgMsgBody.image = nil;
-            
-            labMsgBody.text = msg.content;
-            labMsgBody.frame = CGRectMake(imgBubbleBg.frame.origin.x + 12, 18, msgBodySize.width, msgBodySize.height);
-        }
+        labMsgTimestamp.hidden = NO;
     }
+    
     
     return cell;
 }
@@ -312,6 +337,8 @@
         height = sz.height + 35;
         height = MAX(height, 60);
     }
+    
+    height += 12; // sender name;
     
     return height;
 }
@@ -505,7 +532,6 @@
         CSLog(@"failure:%@", error);
         [gApp alert:[error localizedDescription]];
     };
-    
     
     long long retrieveFrom = -1;
     CSKuleTopicMsg* msg = [_topicMsgList lastObject];

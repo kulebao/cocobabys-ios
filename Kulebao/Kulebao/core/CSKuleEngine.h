@@ -145,12 +145,12 @@
                            success:(SuccessResponseHandler)success
                            failure:(FailureResponseHandler)failure;
 
-- (void)reqGetChatingMsgsOfKindergarten:(NSInteger)kindergarten
-                                   from:(long long)fromId
-                                     to:(long long)toId
-                                   most:(NSInteger)most
-                                success:(SuccessResponseHandler)success
-                                failure:(FailureResponseHandler)failure;
+//- (void)reqGetChatingMsgsOfKindergarten:(NSInteger)kindergarten
+//                                   from:(long long)fromId
+//                                     to:(long long)toId
+//                                   most:(NSInteger)most
+//                                success:(SuccessResponseHandler)success
+//                                failure:(FailureResponseHandler)failure;
 
 - (void)reqSendChatingMsg:(NSString*)msgBody
                 withImage:(NSString*)imgUrl

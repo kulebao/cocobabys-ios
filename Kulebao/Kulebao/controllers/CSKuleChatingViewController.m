@@ -263,46 +263,54 @@
         }
     }
     
-    if ([msg.sender.senderId isEqualToString:gApp.engine.currentRelationship.parent.parentId]
-        && [msg.sender.type isEqualToString:@"p"]) {
-        labMsgSender.text = @"我";
-    }
-    else {
-        [gApp.engine reqGetSenderProfileOfKindergarten:gApp.engine.loginInfo.schoolId
-                                            withSender:msg.sender complete:^(id obj) {
-                                                NSURL* qiniuImgUrl = nil;
-                                                NSString* senderName = nil;
-                                                if ([obj isKindOfClass:[CSKuleEmployeeInfo class]]) {
-                                                    CSKuleEmployeeInfo* employeeInfo = obj;
-                                                    if (employeeInfo.portrait.length > 0) {
-                                                        qiniuImgUrl = [gApp.engine urlFromPath:employeeInfo.portrait];
-                                                    }
-                                                    
-                                                    senderName = employeeInfo.name;
-                                                }
-                                                else if ([obj isKindOfClass:[CSKuleParentInfo class]]) {
-                                                    CSKuleParentInfo* parentInfo = obj;
-                                                    if (parentInfo.portrait.length > 0) {
-                                                        qiniuImgUrl = [gApp.engine urlFromPath:parentInfo.portrait];
-                                                    }
-                                                    
-                                                    senderName = parentInfo.name;
-                                                }
-                                                
-                                                if (qiniuImgUrl) {
-                                                    qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/64/h/64"];
-                                                    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:qiniuImgUrl];
-                                                    [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
-                                                    request.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
-                                                    [imgPortrait setImageWithURLRequest:request
-                                                                       placeholderImage:[UIImage imageNamed:@"chat_head_icon.png"]
-                                                                                success:nil
-                                                                                failure:nil];
-                                                }
-                                                
-                                                labMsgSender.text = senderName;
-                                            }];
-    }
+    // Get Sender avatar and name.
+    [gApp.engine reqGetSenderProfileOfKindergarten:gApp.engine.loginInfo.schoolId
+                                        withSender:msg.sender
+                                          complete:^(id obj) {
+                                              NSURL* qiniuImgUrl = nil;
+                                              NSString* senderName = nil;
+                                              if ([obj isKindOfClass:[CSKuleEmployeeInfo class]]) {
+                                                  CSKuleEmployeeInfo* employeeInfo = obj;
+                                                  if (employeeInfo.portrait.length > 0) {
+                                                      qiniuImgUrl = [gApp.engine urlFromPath:employeeInfo.portrait];
+                                                  }
+                                                  
+                                                  senderName = employeeInfo.name;
+                                              }
+                                              else if ([obj isKindOfClass:[CSKuleParentInfo class]]) {
+                                                  CSKuleParentInfo* parentInfo = obj;
+                                                  if (parentInfo.portrait.length > 0) {
+                                                      qiniuImgUrl = [gApp.engine urlFromPath:parentInfo.portrait];
+                                                  }
+                                                  else {
+                                                      qiniuImgUrl = [gApp.engine urlFromPath:gApp.engine.currentRelationship.child.portrait];
+                                                  }
+                                                  
+                                                  if ([msg.sender.senderId isEqualToString:gApp.engine.currentRelationship.parent.parentId])
+                                                  {
+                                                      senderName = @"我";
+                                                  }
+                                                  else {
+                                                      senderName = parentInfo.name;
+                                                  }
+                                              }
+                                              
+                                              if (qiniuImgUrl) {
+                                                  qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/64/h/64"];
+                                                  NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:qiniuImgUrl];
+                                                  [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
+                                                  request.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
+                                                  [imgPortrait setImageWithURLRequest:request
+                                                                     placeholderImage:[UIImage imageNamed:@"chat_head_icon.png"]
+                                                                              success:nil
+                                                                              failure:nil];
+                                              }
+                                              else {
+                                                  imgPortrait.image = [UIImage imageNamed:@"chat_head_icon.png"];
+                                              }
+                                              
+                                              labMsgSender.text = senderName;
+                                          }];
     
     
     // Check if show the timestamp
@@ -502,15 +510,33 @@
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         NSMutableArray* topicMsgs = [NSMutableArray array];
         
+        CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
+        NSTimeInterval oldTimestamp = [gApp.engine.preferences timestampOfModule:kKuleModuleChating forChild:currentChild.childId];
+        NSTimeInterval timestamp = oldTimestamp;
+        
         if ([dataJson isKindOfClass:[NSArray class]]) {
             for (id topicMsgJson in dataJson) {
                 CSKuleTopicMsg* topicMsg = [CSKuleInterpreter decodeTopicMsg:topicMsgJson];
                 [topicMsgs addObject:topicMsg];
+                
+                if (timestamp < topicMsg.timestamp) {
+                    timestamp = topicMsg.timestamp;
+                }
             }
         }
         else if ([dataJson isKindOfClass:[NSDictionary class]]) {
             CSKuleTopicMsg* topicMsg = [CSKuleInterpreter decodeTopicMsg:dataJson];
             [topicMsgs addObject:topicMsg];
+            
+            if (timestamp < topicMsg.timestamp) {
+                timestamp = topicMsg.timestamp;
+            }
+        }
+        
+        if (oldTimestamp < timestamp) {
+            [gApp.engine.preferences setTimestamp:timestamp
+                                         ofModule:kKuleModuleChating
+                                         forChild:currentChild.childId];
         }
         
         [_topicMsgList addObjectsFromArray:topicMsgs];

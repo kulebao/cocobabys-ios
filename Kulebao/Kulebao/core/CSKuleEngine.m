@@ -675,7 +675,7 @@
         
         if ([dataJson isKindOfClass:[NSArray class]]) {
             for (id chatMsgJson in dataJson) {
-                CSKuleChatMsg* chatMsg = [CSKuleInterpreter decodeChatMsg:chatMsgJson];
+                CSKuleTopicMsg* chatMsg = [CSKuleInterpreter decodeTopicMsg:chatMsgJson];
                 [chatMsgs addObject:chatMsg];
                 
                 if (timestamp < chatMsg.timestamp) {
@@ -684,7 +684,7 @@
             }
         }
         else if ([dataJson isKindOfClass:[NSDictionary class]]) {
-            CSKuleChatMsg* chatMsg = [CSKuleInterpreter decodeChatMsg:dataJson];
+            CSKuleTopicMsg* chatMsg = [CSKuleInterpreter decodeTopicMsg:dataJson];
             [chatMsgs addObject:chatMsg];
             if (timestamp < chatMsg.timestamp) {
                 timestamp = chatMsg.timestamp;
@@ -705,12 +705,12 @@
     };
     
     //[gApp waitingAlert:@"获取信息中..."];
-    [gApp.engine reqGetChatingMsgsOfKindergarten:gApp.engine.loginInfo.schoolId
-                                            from:-1
-                                              to:-1
-                                            most:1
-                                         success:sucessHandler
-                                         failure:failureHandler];
+    [gApp.engine reqGetTopicMsgsOfKindergarten:gApp.engine.loginInfo.schoolId
+                                          from:-1
+                                            to:-1
+                                          most:1
+                                       success:sucessHandler
+                                       failure:failureHandler];
 }
 
 - (void)checkUpdatesOfAssess {
@@ -1069,37 +1069,37 @@
                                failure:failure];
 }
 
-- (void)reqGetChatingMsgsOfKindergarten:(NSInteger)kindergarten
-                                   from:(long long)fromId
-                                     to:(long long)toId
-                                   most:(NSInteger)most
-                                success:(SuccessResponseHandler)success
-                                failure:(FailureResponseHandler)failure {
-    NSParameterAssert(_loginInfo.accountName);
-    
-    NSString* path = [NSString stringWithFormat:kChatingPath, @(kindergarten), _loginInfo.accountName];
-    
-    NSString* method = @"GET";
-    
-    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
-    if (fromId >= 0) {
-        [parameters setObject:@(fromId) forKey:@"from"];
-    }
-    
-    if (toId >= 0) {
-        [parameters setObject:@(toId) forKey:@"to"];
-    }
-    
-    if (most >= 0) {
-        [parameters setObject:@(most) forKey:@"most"];
-    }
-    
-    [_httpClient httpRequestWithMethod:method
-                                  path:path
-                            parameters:parameters
-                               success:success
-                               failure:failure];
-}
+//- (void)reqGetChatingMsgsOfKindergarten:(NSInteger)kindergarten
+//                                   from:(long long)fromId
+//                                     to:(long long)toId
+//                                   most:(NSInteger)most
+//                                success:(SuccessResponseHandler)success
+//                                failure:(FailureResponseHandler)failure {
+//    NSParameterAssert(_loginInfo.accountName);
+//    
+//    NSString* path = [NSString stringWithFormat:kChatingPath, @(kindergarten), _loginInfo.accountName];
+//    
+//    NSString* method = @"GET";
+//    
+//    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+//    if (fromId >= 0) {
+//        [parameters setObject:@(fromId) forKey:@"from"];
+//    }
+//    
+//    if (toId >= 0) {
+//        [parameters setObject:@(toId) forKey:@"to"];
+//    }
+//    
+//    if (most >= 0) {
+//        [parameters setObject:@(most) forKey:@"most"];
+//    }
+//    
+//    [_httpClient httpRequestWithMethod:method
+//                                  path:path
+//                            parameters:parameters
+//                               success:success
+//                               failure:failure];
+//}
 
 - (void)reqSendChatingMsg:(NSString*)msgBody
                 withImage:(NSString*)imgUrl

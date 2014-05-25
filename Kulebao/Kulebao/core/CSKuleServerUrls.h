@@ -91,7 +91,7 @@
 #define kChatingPath                @"/kindergarten/%@/conversation/%@"
 
 // PATH: 聊天 - 新接口
-#define kTopicPath                  @"/kindergarten/%@/session/%@"
+#define kTopicPath                  @"/kindergarten/%@/session/%@/record"
 
 // PATH: 园内评价
 #define kAssessPath                 @"/kindergarten/%@/child/%@/assess"

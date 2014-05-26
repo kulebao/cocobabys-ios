@@ -93,10 +93,21 @@
     CSKuleRelationshipInfo* relationship = [self.relationships objectAtIndex:indexPath.row];
     cell.labChildName.text = relationship.child.nick;
     
-    NSURL* qiniuImgUrl = [gApp.engine urlFromPath:relationship.child.portrait];
-    qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/128/h/128"];
+//    NSURL* qiniuImgUrl = [gApp.engine urlFromPath:relationship.child.portrait];
+//    qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/128/h/128"];
+//    
+//    [cell.imgChildPortrait setImageWithURL:qiniuImgUrl placeholderImage:[UIImage imageNamed:@"default_child_head_icon.png"]];
     
-    [cell.imgChildPortrait setImageWithURL:qiniuImgUrl placeholderImage:[UIImage imageNamed:@"default_child_head_icon.png"]];
+    NSURL* qiniuImgUrl = [gApp.engine urlFromPath:relationship.child.portrait];
+    qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/256/h/256"];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:qiniuImgUrl];
+    [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
+    request.cachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
+    UIImage* placeholderImage = [UIImage imageNamed:@"default_child_head_icon.png"];
+    [cell.imgChildPortrait setImageWithURLRequest:request
+                                 placeholderImage:placeholderImage
+                                          success:nil
+                                          failure:nil];
     
     return cell;
 }

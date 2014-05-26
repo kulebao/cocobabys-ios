@@ -169,12 +169,7 @@
     CGSize msgBodySize = [self textSize:msg.content];
     NSString* timestampString = [[NSDate dateWithTimeIntervalSince1970:msg.timestamp] isoDateTimeString];
     labMsgTimestamp.frame = CGRectMake(40, 0, 320-40-40, 12);
-//    if (indexPath.row % 3 == 0) {
-        labMsgTimestamp.text = timestampString;
-//    }
-//    else {
-//        labMsgTimestamp.text = nil;
-//    }
+    labMsgTimestamp.text = timestampString;
     
     //if (![msg.sender.senderId isEqualToString:gApp.engine.currentRelationship.parent.parentId]) {
     if ([msg.sender.type isEqualToString:@"t"]) {
@@ -220,12 +215,10 @@
     }
     else {
         // To
-        CSKuleChildInfo* childInfo = gApp.engine.currentRelationship.child;
-        NSURL* qiniuImgUrl = [gApp.engine urlFromPath:childInfo.portrait];
-        qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/64/h/64"];
-        [imgPortrait setImageWithURL:qiniuImgUrl placeholderImage:[UIImage imageNamed:@"chat_head_icon.png"]];
-        
-        
+        //        CSKuleChildInfo* childInfo = gApp.engine.currentRelationship.child;
+        //        NSURL* qiniuImgUrl = [gApp.engine urlFromPath:childInfo.portrait];
+        //        qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/64/h/64"];
+        //        [imgPortrait setImageWithURL:qiniuImgUrl placeholderImage:[UIImage imageNamed:@"chat_head_icon.png"]];
         imgPortrait.frame = CGRectMake(320-2-32-2, 24, 32, 32);
         
         UIImage* bgImage = [UIImage imageNamed:@"msg-bg-to.png"];
@@ -286,8 +279,7 @@
                                                       qiniuImgUrl = [gApp.engine urlFromPath:gApp.engine.currentRelationship.child.portrait];
                                                   }
                                                   
-                                                  if ([msg.sender.senderId isEqualToString:gApp.engine.currentRelationship.parent.parentId])
-                                                  {
+                                                  if ([msg.sender.senderId isEqualToString:gApp.engine.currentRelationship.parent.parentId]) {
                                                       senderName = @"我";
                                                   }
                                                   else {
@@ -299,7 +291,7 @@
                                                   qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/64/h/64"];
                                                   NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:qiniuImgUrl];
                                                   [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
-                                                  request.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
+                                                  request.cachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
                                                   [imgPortrait setImageWithURLRequest:request
                                                                      placeholderImage:[UIImage imageNamed:@"chat_head_icon.png"]
                                                                               success:nil

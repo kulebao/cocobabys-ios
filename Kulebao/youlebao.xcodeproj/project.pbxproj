@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0901207219338B3800CE506E /* UIImage+CSExtends.m in Sources */ = {isa = PBXBuildFile; fileRef = 0901207119338B3800CE506E /* UIImage+CSExtends.m */; };
 		0901A96A18D95E38003BB152 /* CSKuleBPushInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0901A96918D95E38003BB152 /* CSKuleBPushInfo.m */; };
 		0902458518EC41FA00579886 /* CSKuleURLCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0902458418EC41FA00579886 /* CSKuleURLCache.m */; };
 		0902782818C9C060002B9644 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0902782718C9C060002B9644 /* MessageUI.framework */; };
@@ -396,6 +397,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0901207019338B3800CE506E /* UIImage+CSExtends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+CSExtends.h"; sourceTree = "<group>"; };
+		0901207119338B3800CE506E /* UIImage+CSExtends.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CSExtends.m"; sourceTree = "<group>"; };
 		0901A96818D95E38003BB152 /* CSKuleBPushInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleBPushInfo.h; sourceTree = "<group>"; };
 		0901A96918D95E38003BB152 /* CSKuleBPushInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleBPushInfo.m; sourceTree = "<group>"; };
 		0902458318EC41FA00579886 /* CSKuleURLCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleURLCache.h; sourceTree = "<group>"; };
@@ -1786,16 +1789,18 @@
 			isa = PBXGroup;
 			children = (
 				09A9EBB418C07E8800D83119 /* CSKit.h */,
-				0902CAAC18F4359D001901A8 /* NSString+CSKit.h */,
-				0902CAAD18F4359D001901A8 /* NSString+CSKit.m */,
 				09FE6AF418C5A53200A840BE /* CSTextFieldDelegate.h */,
 				09FE6AF518C5A53200A840BE /* CSTextFieldDelegate.m */,
 				09ED59B018CDB01600187585 /* NSDate+CSKit.h */,
 				09ED59B118CDB01600187585 /* NSDate+CSKit.m */,
 				09C1C76418BD973B0040B06D /* NSDictionary+CSKit.h */,
 				09C1C76518BD973B0040B06D /* NSDictionary+CSKit.m */,
+				0902CAAC18F4359D001901A8 /* NSString+CSKit.h */,
+				0902CAAD18F4359D001901A8 /* NSString+CSKit.m */,
 				090E6BDA18EAFDA900F21BA7 /* NSURL+CSKit.h */,
 				090E6BDB18EAFDA900F21BA7 /* NSURL+CSKit.m */,
+				0901207019338B3800CE506E /* UIImage+CSExtends.h */,
+				0901207119338B3800CE506E /* UIImage+CSExtends.m */,
 				09ED59A318CC8F5200187585 /* UIViewController+CSKit.h */,
 				09ED59A418CC8F5200187585 /* UIViewController+CSKit.m */,
 				09ED59B418CDBF3900187585 /* UIWebView+CSKit.h */,
@@ -2202,6 +2207,7 @@
 				09ED59BC18CDC5E800187585 /* CSKuleCookbookInfo.m in Sources */,
 				09BA1BFD18BB334900760182 /* Base64.m in Sources */,
 				09FFB5F118D6B2E100F07B0A /* CSKuleWeekScheduleInfo.m in Sources */,
+				0901207219338B3800CE506E /* UIImage+CSExtends.m in Sources */,
 				091AE82F18D820C800EBC927 /* UIColor+expanded.m in Sources */,
 				09142DD118E27E7600E5848F /* ALAlertBanner.m in Sources */,
 				09FE6AF918C5B97100A840BE /* CSKuleRecipeCell.m in Sources */,

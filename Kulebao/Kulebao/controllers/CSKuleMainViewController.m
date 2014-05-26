@@ -16,6 +16,7 @@
 #import "CSKuleDatePickerViewController.h"
 #import "UIViewController+MJPopupViewController.h"
 #import <AudioToolbox/AudioToolbox.h>
+#import "UIImage+CSExtends.h"
 
 @interface CSKuleMainViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
     UIImagePickerController* _imgPicker;
@@ -322,7 +323,7 @@
         self.labClassName.text = childInfo.className;
         self.labSchoolName.text = gApp.engine.loginInfo.schoolName;
         self.labChildNick.text = childInfo.displayNick;
-        
+
         NSURL* qiniuImgUrl = [gApp.engine urlFromPath:childInfo.portrait];
         qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/256/h/256"];
         
@@ -567,7 +568,8 @@
         NSString* name = [dataJson valueForKeyNotNull:@"name"];
         NSString* portrait = [NSString stringWithFormat:@"%@/%@", kQiniuDownloadServerHost, name];
         //self.imgChildPortrait.image = img;
-        [self doUpdateChildPortrait:portrait withImage:img];
+        UIImage* cropImg = [img imageByScalingAndCroppingForSize:CGSizeMake(256, 256)];
+        [self doUpdateChildPortrait:portrait withImage:cropImg];
     };
     
     FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {

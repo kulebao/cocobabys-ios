@@ -11,11 +11,12 @@
 #import "PullTableView.h"
 #import "CSAppDelegate.h"
 #import "CSKuleChatingEditorViewController.h"
-#import "MHFacebookImageViewer.h"
 #import "CSKuleEmployeeInfo.h"
 #import "CSKuleParentInfo.h"
+#import "XHImageViewer.h"
+#import "UIImageView+XHURLDownload.h"
 
-@interface CSKuleChatingViewController () <UITableViewDataSource, UITableViewDelegate, PullTableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CSKuleChatingEditorViewControllerDelegate> {
+@interface CSKuleChatingViewController () <UITableViewDataSource, UITableViewDelegate, PullTableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CSKuleChatingEditorViewControllerDelegate, XHImageViewerDelegate> {
     UIImagePickerController* _imgPicker;
     NSMutableArray* _topicMsgList;
 }
@@ -131,6 +132,10 @@
 
         UIImageView* imgMsgBody = [[UIImageView alloc] initWithFrame:CGRectNull];
         imgMsgBody.tag = 102;
+        UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                  action:@selector(tapHandle:)];
+        imgMsgBody.userInteractionEnabled = YES;
+        [imgMsgBody addGestureRecognizer:gesture];
         [cell.contentView addSubview:imgMsgBody];
         
         UIImageView* imgPortrait = [[UIImageView alloc] initWithFrame:CGRectNull];
@@ -171,7 +176,6 @@
     labMsgTimestamp.frame = CGRectMake(40, 0, 320-40-40, 12);
     labMsgTimestamp.text = timestampString;
     
-    //if (![msg.sender.senderId isEqualToString:gApp.engine.currentRelationship.parent.parentId]) {
     if ([msg.sender.type isEqualToString:@"t"]) {
         // From
         labMsgSender.text = nil;
@@ -190,18 +194,6 @@
             imgMsgBody.frame = CGRectMake(52, 18+12, 64, 64);
             labMsgBody.frame = CGRectNull;
             labMsgBody.text = nil;
-
-            NSURL* qiniuImgUrl = [gApp.engine urlFromPath:msg.media.url];
-            [imgMsgBody setupImageViewerWithImageURL:qiniuImgUrl];
-            
-            qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/128/h/128"];
-            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:qiniuImgUrl];
-            [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
-            request.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
-            [imgMsgBody setImageWithURLRequest:request
-                              placeholderImage:nil
-                                       success:nil
-                                       failure:nil];
         }
         else {
             imgBubbleBg.frame = CGRectMake(36, 12+12, msgBodySize.width + 30, msgBodySize.height+14);
@@ -215,10 +207,6 @@
     }
     else {
         // To
-        //        CSKuleChildInfo* childInfo = gApp.engine.currentRelationship.child;
-        //        NSURL* qiniuImgUrl = [gApp.engine urlFromPath:childInfo.portrait];
-        //        qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/64/h/64"];
-        //        [imgPortrait setImageWithURL:qiniuImgUrl placeholderImage:[UIImage imageNamed:@"chat_head_icon.png"]];
         imgPortrait.frame = CGRectMake(320-2-32-2, 24, 32, 32);
         
         UIImage* bgImage = [UIImage imageNamed:@"msg-bg-to.png"];
@@ -232,18 +220,6 @@
             imgMsgBody.frame = CGRectMake(imgBubbleBg.frame.origin.x+10, 18+12, 64, 64);
             labMsgBody.frame = CGRectNull;
             labMsgBody.text = nil;
-            
-            NSURL* qiniuImgUrl = [gApp.engine urlFromPath:msg.media.url];
-            [imgMsgBody setupImageViewerWithImageURL:qiniuImgUrl];
-            
-            qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/128/h/128"];
-            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:qiniuImgUrl];
-            [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
-            request.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
-            [imgMsgBody setImageWithURLRequest:request
-                              placeholderImage:nil
-                                       success:nil
-                                       failure:nil];
         }
         else {
             imgBubbleBg.frame = CGRectMake(320-36-msgBodySize.width-30, 12+12, msgBodySize.width + 30, msgBodySize.height+14);
@@ -254,6 +230,23 @@
             labMsgBody.text = msg.content;
             labMsgBody.frame = CGRectMake(imgBubbleBg.frame.origin.x + 12, 18+12, msgBodySize.width, msgBodySize.height);
         }
+    }
+    
+    // msg with picture.
+    if (msg.media.url.length > 0) {
+        NSURL* qiniuImgUrl = [gApp.engine urlFromPath:msg.media.url];
+        [imgMsgBody loadWithURL:qiniuImgUrl
+                     placeholer:[UIImage imageNamed:@"img-placeholder.png"]
+      showActivityIndicatorView:YES];
+        
+//        qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/128/h/128"];
+//        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:qiniuImgUrl];
+//        [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
+//        request.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
+//        [imgMsgBody setImageWithURLRequest:request
+//                          placeholderImage:nil
+//                                   success:nil
+//                                   failure:nil];
     }
     
     // Get Sender avatar and name.
@@ -662,6 +655,19 @@
 #pragma mark - CSKuleChatingEditorViewControllerDelegate
 - (void)willSendMsgWithText:(NSString *)msgBody {
     [self doSendText:msgBody];
+}
+
+
+#pragma mark - XHImageViewer
+- (void)tapHandle:(UITapGestureRecognizer *)tap {
+    XHImageViewer *imageViewer = [[XHImageViewer alloc] init];
+    imageViewer.delegate = self;
+    UIImageView* imgView = (UIImageView *)tap.view;
+    [imageViewer showWithImageViews:@[imgView] selectedView:imgView];
+}
+
+#pragma mark - XHImageViewerDelegate
+- (void)imageViewer:(XHImageViewer *)imageViewer willDismissWithSelectedView:(UIImageView *)selectedView {
 }
 
 @end

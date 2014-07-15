@@ -7,6 +7,7 @@
 //
 
 #import "CSAppDelegate.h"
+#import "AFNetworkActivityIndicatorManager.h"
 
 #import "CSMasterViewController.h"
 
@@ -19,7 +20,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-
+    [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
+    
     return YES;
 }
 							
@@ -148,7 +150,8 @@
 
 
 #pragma mark - Instance
-+ (CSAppDelegate*)getInstance {
++ (CSAppDelegate*)sharedInstance {
     return [[UIApplication sharedApplication] delegate];
 }
+
 @end

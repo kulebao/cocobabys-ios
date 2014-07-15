@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="pMD-1c-TKG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="pMD-1c-TKG">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -21,17 +21,14 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <connections>
-                                    <segue destination="4BM-eW-O85" kind="embed" id="46t-SY-yyI"/>
-                                </connections>
                             </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="jkE-G7-8qe"/>
                     <connections>
-                        <segue destination="ch9-lZ-I3D" kind="modal" identifier="segue.root.login" animates="NO" id="hW5-ZX-PEZ"/>
-                        <segue destination="4BM-eW-O85" kind="modal" identifier="segue.root.main" id="PxQ-UV-UPi"/>
+                        <segue destination="ch9-lZ-I3D" kind="custom" identifier="segue.root.login" customClass="CSRootSegue" id="hW5-ZX-PEZ"/>
+                        <segue destination="4BM-eW-O85" kind="custom" identifier="segue.root.main" customClass="CSRootSegue" id="PxQ-UV-UPi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ovN-cV-8Ki" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -310,7 +307,4 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
-    <inferredMetricsTieBreakers>
-        <segue reference="46t-SY-yyI"/>
-    </inferredMetricsTieBreakers>
 </document>

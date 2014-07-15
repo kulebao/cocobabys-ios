@@ -7,6 +7,7 @@
 //
 
 #import "CSLoginViewController.h"
+#import "CSHttpClient.h"
 
 @interface CSLoginViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *btnLogin;
@@ -51,6 +52,10 @@
 */
 
 - (IBAction)onBtnLoginClicked:(id)sender {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"noti.login.success" object:nil userInfo:nil];
+    CSHttpClient* http = [CSHttpClient sharedInstance];
+    
+    [http opLoginWithUsername:@"wx0011" password:@"18782242007"];
+    
+    //[[NSNotificationCenter defaultCenter] postNotificationName:@"noti.login.success" object:nil userInfo:nil];
 }
 @end

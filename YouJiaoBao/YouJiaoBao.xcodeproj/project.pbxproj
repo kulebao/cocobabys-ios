@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0906A83519757E2C007F25BE /* CSHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0906A83419757E2C007F25BE /* CSHttpClient.m */; };
+		0906A83A19758727007F25BE /* CSRootSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0906A83919758727007F25BE /* CSRootSegue.m */; };
 		095F13781967C309008CF3BE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 095F13771967C309008CF3BE /* Foundation.framework */; };
 		095F137A1967C309008CF3BE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 095F13791967C309008CF3BE /* CoreGraphics.framework */; };
 		095F137C1967C309008CF3BE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 095F137B1967C309008CF3BE /* UIKit.framework */; };
@@ -57,6 +59,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0906A83319757E2C007F25BE /* CSHttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSHttpClient.h; sourceTree = "<group>"; };
+		0906A83419757E2C007F25BE /* CSHttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSHttpClient.m; sourceTree = "<group>"; };
+		0906A83619757FA4007F25BE /* CSHttpUrls.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSHttpUrls.h; sourceTree = "<group>"; };
+		0906A83819758727007F25BE /* CSRootSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSRootSegue.h; sourceTree = "<group>"; };
+		0906A83919758727007F25BE /* CSRootSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSRootSegue.m; sourceTree = "<group>"; };
 		095F13741967C309008CF3BE /* YouJiaoBao.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouJiaoBao.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		095F13771967C309008CF3BE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		095F13791967C309008CF3BE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -148,6 +155,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0906A83219757DEE007F25BE /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				0906A83319757E2C007F25BE /* CSHttpClient.h */,
+				0906A83419757E2C007F25BE /* CSHttpClient.m */,
+				0906A83619757FA4007F25BE /* CSHttpUrls.h */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		0906A837197586F3007F25BE /* Segue */ = {
+			isa = PBXGroup;
+			children = (
+				0906A83819758727007F25BE /* CSRootSegue.h */,
+				0906A83919758727007F25BE /* CSRootSegue.m */,
+			);
+			path = Segue;
+			sourceTree = "<group>";
+		};
 		095F136B1967C309008CF3BE = {
 			isa = PBXGroup;
 			children = (
@@ -183,6 +209,8 @@
 		095F137F1967C309008CF3BE /* YouJiaoBao */ = {
 			isa = PBXGroup;
 			children = (
+				0906A837197586F3007F25BE /* Segue */,
+				0906A83219757DEE007F25BE /* Network */,
 				095F13881967C30A008CF3BE /* CSAppDelegate.h */,
 				095F13891967C30A008CF3BE /* CSAppDelegate.m */,
 				095F13941967C30B008CF3BE /* CSDetailViewController.h */,
@@ -409,9 +437,11 @@
 				09C2D4EF1969BCA000B8A895 /* UIButton+AFNetworking.m in Sources */,
 				095F138A1967C30A008CF3BE /* CSAppDelegate.m in Sources */,
 				09C2D4ED1969BCA000B8A895 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				0906A83A19758727007F25BE /* CSRootSegue.m in Sources */,
 				09C2D4E71969BCA000B8A895 /* AFURLRequestSerialization.m in Sources */,
 				09C2D4EC1969BCA000B8A895 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				09C2D4E51969BCA000B8A895 /* AFSecurityPolicy.m in Sources */,
+				0906A83519757E2C007F25BE /* CSHttpClient.m in Sources */,
 				09C2D4E11969BCA000B8A895 /* AFHTTPRequestOperation.m in Sources */,
 				09C2D4E91969BCA000B8A895 /* AFURLSessionManager.m in Sources */,
 				095F13861967C30A008CF3BE /* main.m in Sources */,

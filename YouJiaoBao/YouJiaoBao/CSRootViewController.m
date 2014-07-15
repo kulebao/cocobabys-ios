@@ -29,6 +29,8 @@
     // Do any additional setup after loading the view.
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onLoginSuccess:) name:@"noti.login.success" object:nil];
+    
+    [self showLoginView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -38,7 +40,7 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-   // [self showLoginView];
+
 }
 
 /*

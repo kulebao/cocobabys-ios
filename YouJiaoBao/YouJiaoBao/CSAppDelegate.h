@@ -19,6 +19,6 @@
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 
-+ (CSAppDelegate*)getInstance;
++ (CSAppDelegate*)sharedInstance;
 
 @end

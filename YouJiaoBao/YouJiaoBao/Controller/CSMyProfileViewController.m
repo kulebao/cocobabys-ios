@@ -1,23 +1,23 @@
 //
-//  CSLoginViewController.m
+//  CSMyProfileViewController.m
 //  YouJiaoBao
 //
-//  Created by xin.c.wang on 14-7-7.
+//  Created by xin.c.wang on 14-7-20.
 //  Copyright (c) 2014年 Codingsoft. All rights reserved.
 //
 
-#import "CSLoginViewController.h"
-#import "CSHttpClient.h"
+#import "CSMyProfileViewController.h"
+#import "UIImageView+AFNetworking.h"
+#import "CSEngine.h"
 
-@interface CSLoginViewController ()
-@property (weak, nonatomic) IBOutlet UIButton *btnLogin;
-@property (weak, nonatomic) IBOutlet UIButton *btnForgotPassword;
-
-- (IBAction)onBtnLoginClicked:(id)sender;
+@interface CSMyProfileViewController ()
+@property (weak, nonatomic) IBOutlet UIImageView *imgPortrait;
+@property (weak, nonatomic) IBOutlet UILabel *labLoginName;
+@property (weak, nonatomic) IBOutlet UILabel *labNick;
 
 @end
 
-@implementation CSLoginViewController
+@implementation CSMyProfileViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -32,6 +32,13 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    CSEngine* sharedEngine = [CSEngine sharedInstance];
+    
+    [self.imgPortrait setImageWithURL:[NSURL URLWithString:sharedEngine.loginInfo.portrait]
+                     placeholderImage:[UIImage imageNamed:@"logo-gray-big"]];
+    
+    self.labLoginName.text = sharedEngine.loginInfo.loginName;
+    self.labNick.text = sharedEngine.loginInfo.name;
 }
 
 - (void)didReceiveMemoryWarning
@@ -51,11 +58,4 @@
 }
 */
 
-- (IBAction)onBtnLoginClicked:(id)sender {
-    CSHttpClient* http = [CSHttpClient sharedInstance];
-    
-    [http opLoginWithUsername:@"wx0011" password:@"18782242007"];
-    
-    //[[NSNotificationCenter defaultCenter] postNotificationName:@"noti.login.success" object:nil userInfo:nil];
-}
 @end

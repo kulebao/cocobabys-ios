@@ -7,6 +7,7 @@
 //
 
 #import "CSRootViewController.h"
+#import "CSEngine.h"
 
 @interface CSRootViewController ()
 
@@ -64,6 +65,7 @@
 }
 
 - (void)onLoginSuccess:(NSNotification*)noti {
+    [[CSEngine sharedInstance] onLogin:noti.object];
     [self showMainView];
 }
 

@@ -27,8 +27,6 @@
 		095F13A21967C310008CF3BE /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 095F137D1967C309008CF3BE /* CoreData.framework */; };
 		095F13AA1967C310008CF3BE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 095F13A81967C310008CF3BE /* InfoPlist.strings */; };
 		095F13AC1967C310008CF3BE /* YouJiaoBaoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 095F13AB1967C310008CF3BE /* YouJiaoBaoTests.m */; };
-		095F13B81967C79C008CF3BE /* CSRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 095F13B71967C79C008CF3BE /* CSRootViewController.m */; };
-		09C2D4B31969B77A00B8A895 /* CSLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C2D4B21969B77A00B8A895 /* CSLoginViewController.m */; };
 		09C2D4E11969BCA000B8A895 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C2D4B91969BCA000B8A895 /* AFHTTPRequestOperation.m */; };
 		09C2D4E21969BCA000B8A895 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C2D4BB1969BCA000B8A895 /* AFHTTPRequestOperationManager.m */; };
 		09C2D4E31969BCA000B8A895 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C2D4BD1969BCA000B8A895 /* AFHTTPSessionManager.m */; };
@@ -46,6 +44,16 @@
 		09C2D4F11969BCA000B8A895 /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C2D4DA1969BCA000B8A895 /* UIProgressView+AFNetworking.m */; };
 		09C2D4F21969BCA000B8A895 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C2D4DC1969BCA000B8A895 /* UIRefreshControl+AFNetworking.m */; };
 		09C2D4F31969BCA000B8A895 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C2D4DE1969BCA000B8A895 /* UIWebView+AFNetworking.m */; };
+		09CD665F197BFA3D00CC08F1 /* EntityLoginInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09CD665E197BFA3D00CC08F1 /* EntityLoginInfo.m */; };
+		09CD6662197BFA6600CC08F1 /* EntityLoginInfoHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 09CD6661197BFA6600CC08F1 /* EntityLoginInfoHelper.m */; };
+		09CD6665197BFA9D00CC08F1 /* CSCoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 09CD6664197BFA9D00CC08F1 /* CSCoreDataHelper.m */; };
+		09CD6669197BFD3600CC08F1 /* CSEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 09CD6668197BFD3600CC08F1 /* CSEngine.m */; };
+		09CD666F197C0C2600CC08F1 /* CSLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09CD666C197C0C2600CC08F1 /* CSLoginViewController.m */; };
+		09CD6670197C0C2600CC08F1 /* CSRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09CD666E197C0C2600CC08F1 /* CSRootViewController.m */; };
+		09CD6673197C0EF500CC08F1 /* CSMyProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09CD6672197C0EF500CC08F1 /* CSMyProfileViewController.m */; };
+		09CD6677197C112900CC08F1 /* logo-gray-big.png in Resources */ = {isa = PBXBuildFile; fileRef = 09CD6675197C112900CC08F1 /* logo-gray-big.png */; };
+		09CD6678197C112900CC08F1 /* logo-gray-big@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09CD6676197C112900CC08F1 /* logo-gray-big@2x.png */; };
+		09CD667E197C153C00CC08F1 /* CSStudentListMainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09CD667D197C153C00CC08F1 /* CSStudentListMainTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,10 +95,6 @@
 		095F13A71967C310008CF3BE /* YouJiaoBaoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "YouJiaoBaoTests-Info.plist"; sourceTree = "<group>"; };
 		095F13A91967C310008CF3BE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		095F13AB1967C310008CF3BE /* YouJiaoBaoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YouJiaoBaoTests.m; sourceTree = "<group>"; };
-		095F13B61967C79C008CF3BE /* CSRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSRootViewController.h; sourceTree = "<group>"; };
-		095F13B71967C79C008CF3BE /* CSRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSRootViewController.m; sourceTree = "<group>"; };
-		09C2D4B11969B77A00B8A895 /* CSLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSLoginViewController.h; sourceTree = "<group>"; };
-		09C2D4B21969B77A00B8A895 /* CSLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSLoginViewController.m; sourceTree = "<group>"; };
 		09C2D4B81969BCA000B8A895 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		09C2D4B91969BCA000B8A895 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		09C2D4BA1969BCA000B8A895 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -127,6 +131,24 @@
 		09C2D4DC1969BCA000B8A895 /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
 		09C2D4DD1969BCA000B8A895 /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
 		09C2D4DE1969BCA000B8A895 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
+		09CD665D197BFA3D00CC08F1 /* EntityLoginInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityLoginInfo.h; sourceTree = "<group>"; };
+		09CD665E197BFA3D00CC08F1 /* EntityLoginInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityLoginInfo.m; sourceTree = "<group>"; };
+		09CD6660197BFA6600CC08F1 /* EntityLoginInfoHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityLoginInfoHelper.h; sourceTree = "<group>"; };
+		09CD6661197BFA6600CC08F1 /* EntityLoginInfoHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityLoginInfoHelper.m; sourceTree = "<group>"; };
+		09CD6663197BFA9D00CC08F1 /* CSCoreDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSCoreDataHelper.h; sourceTree = "<group>"; };
+		09CD6664197BFA9D00CC08F1 /* CSCoreDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSCoreDataHelper.m; sourceTree = "<group>"; };
+		09CD6667197BFD3600CC08F1 /* CSEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSEngine.h; sourceTree = "<group>"; };
+		09CD6668197BFD3600CC08F1 /* CSEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSEngine.m; sourceTree = "<group>"; };
+		09CD666B197C0C2600CC08F1 /* CSLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSLoginViewController.h; sourceTree = "<group>"; };
+		09CD666C197C0C2600CC08F1 /* CSLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSLoginViewController.m; sourceTree = "<group>"; };
+		09CD666D197C0C2600CC08F1 /* CSRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSRootViewController.h; sourceTree = "<group>"; };
+		09CD666E197C0C2600CC08F1 /* CSRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSRootViewController.m; sourceTree = "<group>"; };
+		09CD6671197C0EF500CC08F1 /* CSMyProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSMyProfileViewController.h; sourceTree = "<group>"; };
+		09CD6672197C0EF500CC08F1 /* CSMyProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSMyProfileViewController.m; sourceTree = "<group>"; };
+		09CD6675197C112900CC08F1 /* logo-gray-big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-gray-big.png"; sourceTree = "<group>"; };
+		09CD6676197C112900CC08F1 /* logo-gray-big@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-gray-big@2x.png"; sourceTree = "<group>"; };
+		09CD667C197C153C00CC08F1 /* CSStudentListMainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSStudentListMainTableViewController.h; sourceTree = "<group>"; };
+		09CD667D197C153C00CC08F1 /* CSStudentListMainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSStudentListMainTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +231,10 @@
 		095F137F1967C309008CF3BE /* YouJiaoBao */ = {
 			isa = PBXGroup;
 			children = (
+				09CD6674197C112100CC08F1 /* Res */,
+				09CD666A197C0C0400CC08F1 /* Controller */,
+				09CD6666197BFD2200CC08F1 /* Engine */,
+				09CD665A197BF9FA00CC08F1 /* Coredata */,
 				0906A837197586F3007F25BE /* Segue */,
 				0906A83219757DEE007F25BE /* Network */,
 				095F13881967C30A008CF3BE /* CSAppDelegate.h */,
@@ -217,10 +243,6 @@
 				095F13951967C30B008CF3BE /* CSDetailViewController.m */,
 				095F13911967C30B008CF3BE /* CSMasterViewController.h */,
 				095F13921967C30B008CF3BE /* CSMasterViewController.m */,
-				095F13B61967C79C008CF3BE /* CSRootViewController.h */,
-				095F13B71967C79C008CF3BE /* CSRootViewController.m */,
-				09C2D4B11969B77A00B8A895 /* CSLoginViewController.h */,
-				09C2D4B21969B77A00B8A895 /* CSLoginViewController.m */,
 				095F13971967C30C008CF3BE /* Images.xcassets */,
 				095F138B1967C30A008CF3BE /* Main.storyboard */,
 				095F13801967C309008CF3BE /* Supporting Files */,
@@ -325,6 +347,68 @@
 			path = "UIKit+AFNetworking";
 			sourceTree = "<group>";
 		};
+		09CD665A197BF9FA00CC08F1 /* Coredata */ = {
+			isa = PBXGroup;
+			children = (
+				09CD665B197BF9FA00CC08F1 /* Entity */,
+				09CD665C197BF9FA00CC08F1 /* Helper */,
+			);
+			path = Coredata;
+			sourceTree = "<group>";
+		};
+		09CD665B197BF9FA00CC08F1 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				09CD665D197BFA3D00CC08F1 /* EntityLoginInfo.h */,
+				09CD665E197BFA3D00CC08F1 /* EntityLoginInfo.m */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		09CD665C197BF9FA00CC08F1 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				09CD6660197BFA6600CC08F1 /* EntityLoginInfoHelper.h */,
+				09CD6661197BFA6600CC08F1 /* EntityLoginInfoHelper.m */,
+				09CD6663197BFA9D00CC08F1 /* CSCoreDataHelper.h */,
+				09CD6664197BFA9D00CC08F1 /* CSCoreDataHelper.m */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		09CD6666197BFD2200CC08F1 /* Engine */ = {
+			isa = PBXGroup;
+			children = (
+				09CD6667197BFD3600CC08F1 /* CSEngine.h */,
+				09CD6668197BFD3600CC08F1 /* CSEngine.m */,
+			);
+			path = Engine;
+			sourceTree = "<group>";
+		};
+		09CD666A197C0C0400CC08F1 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				09CD666B197C0C2600CC08F1 /* CSLoginViewController.h */,
+				09CD666C197C0C2600CC08F1 /* CSLoginViewController.m */,
+				09CD666D197C0C2600CC08F1 /* CSRootViewController.h */,
+				09CD666E197C0C2600CC08F1 /* CSRootViewController.m */,
+				09CD6671197C0EF500CC08F1 /* CSMyProfileViewController.h */,
+				09CD6672197C0EF500CC08F1 /* CSMyProfileViewController.m */,
+				09CD667C197C153C00CC08F1 /* CSStudentListMainTableViewController.h */,
+				09CD667D197C153C00CC08F1 /* CSStudentListMainTableViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		09CD6674197C112100CC08F1 /* Res */ = {
+			isa = PBXGroup;
+			children = (
+				09CD6675197C112900CC08F1 /* logo-gray-big.png */,
+				09CD6676197C112900CC08F1 /* logo-gray-big@2x.png */,
+			);
+			path = Res;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -405,8 +489,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09CD6677197C112900CC08F1 /* logo-gray-big.png in Resources */,
 				095F13981967C30C008CF3BE /* Images.xcassets in Resources */,
 				095F13841967C30A008CF3BE /* InfoPlist.strings in Resources */,
+				09CD6678197C112900CC08F1 /* logo-gray-big@2x.png in Resources */,
 				095F138D1967C30A008CF3BE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -426,28 +512,34 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09CD665F197BFA3D00CC08F1 /* EntityLoginInfo.m in Sources */,
 				09C2D4F21969BCA000B8A895 /* UIRefreshControl+AFNetworking.m in Sources */,
+				09CD6665197BFA9D00CC08F1 /* CSCoreDataHelper.m in Sources */,
 				09C2D4E61969BCA000B8A895 /* AFURLConnectionOperation.m in Sources */,
-				095F13B81967C79C008CF3BE /* CSRootViewController.m in Sources */,
 				09C2D4F11969BCA000B8A895 /* UIProgressView+AFNetworking.m in Sources */,
 				095F13961967C30B008CF3BE /* CSDetailViewController.m in Sources */,
+				09CD667E197C153C00CC08F1 /* CSStudentListMainTableViewController.m in Sources */,
 				09C2D4EE1969BCA000B8A895 /* UIAlertView+AFNetworking.m in Sources */,
 				095F13931967C30B008CF3BE /* CSMasterViewController.m in Sources */,
+				09CD6669197BFD3600CC08F1 /* CSEngine.m in Sources */,
+				09CD6670197C0C2600CC08F1 /* CSRootViewController.m in Sources */,
+				09CD6662197BFA6600CC08F1 /* EntityLoginInfoHelper.m in Sources */,
 				09C2D4E81969BCA000B8A895 /* AFURLResponseSerialization.m in Sources */,
 				09C2D4EF1969BCA000B8A895 /* UIButton+AFNetworking.m in Sources */,
 				095F138A1967C30A008CF3BE /* CSAppDelegate.m in Sources */,
 				09C2D4ED1969BCA000B8A895 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				09CD6673197C0EF500CC08F1 /* CSMyProfileViewController.m in Sources */,
 				0906A83A19758727007F25BE /* CSRootSegue.m in Sources */,
 				09C2D4E71969BCA000B8A895 /* AFURLRequestSerialization.m in Sources */,
 				09C2D4EC1969BCA000B8A895 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				09C2D4E51969BCA000B8A895 /* AFSecurityPolicy.m in Sources */,
+				09CD666F197C0C2600CC08F1 /* CSLoginViewController.m in Sources */,
 				0906A83519757E2C007F25BE /* CSHttpClient.m in Sources */,
 				09C2D4E11969BCA000B8A895 /* AFHTTPRequestOperation.m in Sources */,
 				09C2D4E91969BCA000B8A895 /* AFURLSessionManager.m in Sources */,
 				095F13861967C30A008CF3BE /* main.m in Sources */,
 				095F13901967C30B008CF3BE /* YouJiaoBao.xcdatamodeld in Sources */,
 				09C2D4E31969BCA000B8A895 /* AFHTTPSessionManager.m in Sources */,
-				09C2D4B31969B77A00B8A895 /* CSLoginViewController.m in Sources */,
 				09C2D4F31969BCA000B8A895 /* UIWebView+AFNetworking.m in Sources */,
 				09C2D4E41969BCA000B8A895 /* AFNetworkReachabilityManager.m in Sources */,
 				09C2D4F01969BCA000B8A895 /* UIImageView+AFNetworking.m in Sources */,

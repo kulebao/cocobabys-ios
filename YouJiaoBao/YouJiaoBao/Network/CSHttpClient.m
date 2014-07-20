@@ -52,20 +52,14 @@
 }
 
 - (AFHTTPRequestOperation*)opLoginWithUsername:(NSString*)username
-                                      password:(NSString*)password {
+                                      password:(NSString*)password
+                                       success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                       failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
     NSParameterAssert(username && password);
 
     id parameters = @{@"account_name": username,
                       @"password" : password};
-    
-    id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-    };
-    
-    id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-    };
-    
+
     AFHTTPRequestOperation* op =[self.opManager POST:kPathEmployeeLogin
                                           parameters:parameters
                                              success:success

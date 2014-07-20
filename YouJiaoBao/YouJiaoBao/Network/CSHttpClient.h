@@ -14,6 +14,8 @@
 + (id)sharedInstance;
 
 - (AFHTTPRequestOperation*)opLoginWithUsername:(NSString*)username
-                                      password:(NSString*)password;
+                                      password:(NSString*)password
+                                       success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                       failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 @end

@@ -68,4 +68,39 @@
     return op;
 }
 
+- (AFHTTPRequestOperation*)opGetClassListOfKindergarten:(NSInteger)schoolId
+                                         withEmployeeId:(NSString*)employeePhone
+                                                success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                                failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    NSParameterAssert(employeePhone);
+    
+    id parameters = nil;
+    
+    NSString* apiUrl = [NSString stringWithFormat:kPathEmployeeManagedClass, @(schoolId), employeePhone];
+    
+    AFHTTPRequestOperation* op =[self.opManager GET:apiUrl
+                                         parameters:parameters
+                                            success:success
+                                            failure:failure];
+    
+    return op;
+}
+
+- (AFHTTPRequestOperation*)opGetChildListOfKindergarten:(NSInteger)schoolId
+                                          withClassList:(NSArray*)classIdList
+                                                success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                                failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    id parameters = @{@"class_id": [classIdList componentsJoinedByString:@","],
+                      @"connected" : @"true"};
+    
+    NSString* apiUrl = [NSString stringWithFormat:kPathKindergartenChildList, @(schoolId)];
+    
+    AFHTTPRequestOperation* op =[self.opManager GET:apiUrl
+                                         parameters:parameters
+                                            success:success
+                                            failure:failure];
+    return op;
+    
+}
+
 @end

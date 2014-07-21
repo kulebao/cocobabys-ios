@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0906A83519757E2C007F25BE /* CSHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0906A83419757E2C007F25BE /* CSHttpClient.m */; };
 		0906A83A19758727007F25BE /* CSRootSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0906A83919758727007F25BE /* CSRootSegue.m */; };
+		09078D76197D6673006E8756 /* EntityClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09078D75197D6673006E8756 /* EntityClassInfo.m */; };
+		09078D79197D669C006E8756 /* EntityClassInfoHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 09078D78197D669C006E8756 /* EntityClassInfoHelper.m */; };
 		095F13781967C309008CF3BE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 095F13771967C309008CF3BE /* Foundation.framework */; };
 		095F137A1967C309008CF3BE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 095F13791967C309008CF3BE /* CoreGraphics.framework */; };
 		095F137C1967C309008CF3BE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 095F137B1967C309008CF3BE /* UIKit.framework */; };
@@ -72,6 +74,10 @@
 		0906A83619757FA4007F25BE /* CSHttpUrls.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSHttpUrls.h; sourceTree = "<group>"; };
 		0906A83819758727007F25BE /* CSRootSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSRootSegue.h; sourceTree = "<group>"; };
 		0906A83919758727007F25BE /* CSRootSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSRootSegue.m; sourceTree = "<group>"; };
+		09078D74197D6673006E8756 /* EntityClassInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityClassInfo.h; sourceTree = "<group>"; };
+		09078D75197D6673006E8756 /* EntityClassInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityClassInfo.m; sourceTree = "<group>"; };
+		09078D77197D669C006E8756 /* EntityClassInfoHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityClassInfoHelper.h; sourceTree = "<group>"; };
+		09078D78197D669C006E8756 /* EntityClassInfoHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityClassInfoHelper.m; sourceTree = "<group>"; };
 		095F13741967C309008CF3BE /* YouJiaoBao.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouJiaoBao.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		095F13771967C309008CF3BE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		095F13791967C309008CF3BE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -359,6 +365,8 @@
 		09CD665B197BF9FA00CC08F1 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				09078D74197D6673006E8756 /* EntityClassInfo.h */,
+				09078D75197D6673006E8756 /* EntityClassInfo.m */,
 				09CD665D197BFA3D00CC08F1 /* EntityLoginInfo.h */,
 				09CD665E197BFA3D00CC08F1 /* EntityLoginInfo.m */,
 			);
@@ -368,10 +376,12 @@
 		09CD665C197BF9FA00CC08F1 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				09CD6660197BFA6600CC08F1 /* EntityLoginInfoHelper.h */,
-				09CD6661197BFA6600CC08F1 /* EntityLoginInfoHelper.m */,
 				09CD6663197BFA9D00CC08F1 /* CSCoreDataHelper.h */,
 				09CD6664197BFA9D00CC08F1 /* CSCoreDataHelper.m */,
+				09078D77197D669C006E8756 /* EntityClassInfoHelper.h */,
+				09078D78197D669C006E8756 /* EntityClassInfoHelper.m */,
+				09CD6660197BFA6600CC08F1 /* EntityLoginInfoHelper.h */,
+				09CD6661197BFA6600CC08F1 /* EntityLoginInfoHelper.m */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -519,6 +529,7 @@
 				09C2D4F11969BCA000B8A895 /* UIProgressView+AFNetworking.m in Sources */,
 				095F13961967C30B008CF3BE /* CSDetailViewController.m in Sources */,
 				09CD667E197C153C00CC08F1 /* CSStudentListMainTableViewController.m in Sources */,
+				09078D79197D669C006E8756 /* EntityClassInfoHelper.m in Sources */,
 				09C2D4EE1969BCA000B8A895 /* UIAlertView+AFNetworking.m in Sources */,
 				095F13931967C30B008CF3BE /* CSMasterViewController.m in Sources */,
 				09CD6669197BFD3600CC08F1 /* CSEngine.m in Sources */,
@@ -536,6 +547,7 @@
 				09CD666F197C0C2600CC08F1 /* CSLoginViewController.m in Sources */,
 				0906A83519757E2C007F25BE /* CSHttpClient.m in Sources */,
 				09C2D4E11969BCA000B8A895 /* AFHTTPRequestOperation.m in Sources */,
+				09078D76197D6673006E8756 /* EntityClassInfo.m in Sources */,
 				09C2D4E91969BCA000B8A895 /* AFURLSessionManager.m in Sources */,
 				095F13861967C30A008CF3BE /* main.m in Sources */,
 				095F13901967C30B008CF3BE /* YouJiaoBao.xcdatamodeld in Sources */,

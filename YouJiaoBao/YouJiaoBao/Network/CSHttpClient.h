@@ -18,4 +18,14 @@
                                        success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                                        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
+- (AFHTTPRequestOperation*)opGetClassListOfKindergarten:(NSInteger)schoolId
+                                         withEmployeeId:(NSString*)employeePhone
+                                                success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                                failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+- (AFHTTPRequestOperation*)opGetChildListOfKindergarten:(NSInteger)schoolId
+                                          withClassList:(NSArray*)classIdList
+                                                success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                                failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
 @end

@@ -102,6 +102,7 @@
          
          */
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        [[NSFileManager defaultManager] removeItemAtURL:storeURL error:nil];
         abort();
     }
     

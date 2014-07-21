@@ -7,8 +7,12 @@
 //
 
 #import "CSStudentListMainTableViewController.h"
+#import "CSHttpClient.h"
+#import "CSEngine.h"
+#import "EntityClassInfoHelper.h"
 
 @interface CSStudentListMainTableViewController ()
+- (IBAction)onRefreshClicked:(id)sender;
 
 @end
 
@@ -31,7 +35,8 @@
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    [self doRefresh];
 }
 
 - (void)didReceiveMemoryWarning
@@ -115,5 +120,70 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (IBAction)onRefreshClicked:(id)sender {
+    [self doRefresh];
+}
+
+- (void)doRefresh {
+    [self doReloadClassList];
+}
+
+- (void)doReloadClassList {
+    CSHttpClient* http = [CSHttpClient sharedInstance];
+    CSEngine* engine = [CSEngine sharedInstance];
+    
+    id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSArray* classInfoList = [EntityClassInfoHelper updateEntities:responseObject
+                                                           forEmployee:engine.loginInfo.uid
+                                                        ofKindergarten:engine.loginInfo.schoolId.integerValue];
+        [self doReloadChildList:classInfoList];
+    };
+    
+    id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    };
+    
+    [http opGetClassListOfKindergarten:engine.loginInfo.schoolId.integerValue
+                        withEmployeeId:engine.loginInfo.phone
+                      success:success
+                      failure:failure];
+}
+
+- (void)doReloadChildList:(NSArray*)classInfoList{
+    NSMutableArray* classIdList = [NSMutableArray array];
+    for (EntityClassInfo* classInfo in classInfoList) {
+        [classIdList addObject:classInfo.classId];
+    }
+ 
+    CSHttpClient* http = [CSHttpClient sharedInstance];
+    CSEngine* engine = [CSEngine sharedInstance];
+    
+    id success = ^(AFHTTPRequestOperation *operation, id po) {
+        /*
+         address = "";
+         birthday = "2014-06-26";
+         "child_id" = "2_2088_896";
+         "class_id" = 33;
+         "class_name" = "\U5e93\U8d1d";
+         gender = 1;
+         name = "\U5b8b\U5dcd";
+         nick = "\U5b8b\U5dcd";
+         portrait = "https://dn-cocobabys.qbox.me/child_photo/2088/2_2088_896/2_2088_896.jpg";
+         "school_id" = 2088;
+         status = 1;
+         timestamp = 1405060847820;
+         */
+    };
+    
+    id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    };
+    
+    [http opGetChildListOfKindergarten:engine.loginInfo.schoolId.integerValue
+                         withClassList:classIdList
+                               success:success
+                               failure:failure];
+}
 
 @end

@@ -2,7 +2,7 @@
 //  EntityLoginInfo.h
 //  YouJiaoBao
 //
-//  Created by xin.c.wang on 14-7-20.
+//  Created by xin.c.wang on 14-7-21.
 //  Copyright (c) 2014年 Codingsoft. All rights reserved.
 //
 
@@ -14,6 +14,7 @@
 
 @property (nonatomic, retain) NSString * birthday;
 @property (nonatomic, retain) NSNumber * gender;
+@property (nonatomic, retain) NSString * loginName;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * phone;
 @property (nonatomic, retain) NSString * portrait;
@@ -23,6 +24,6 @@
 @property (nonatomic, retain) NSString * uid;
 @property (nonatomic, retain) NSString * workduty;
 @property (nonatomic, retain) NSString * workgroup;
-@property (nonatomic, retain) NSString * loginName;
+@property (nonatomic, retain) NSDate * loginDate;
 
 @end

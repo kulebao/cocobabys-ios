@@ -2,7 +2,7 @@
 //  EntityLoginInfo.m
 //  YouJiaoBao
 //
-//  Created by xin.c.wang on 14-7-20.
+//  Created by xin.c.wang on 14-7-21.
 //  Copyright (c) 2014年 Codingsoft. All rights reserved.
 //
 
@@ -13,6 +13,7 @@
 
 @dynamic birthday;
 @dynamic gender;
+@dynamic loginName;
 @dynamic name;
 @dynamic phone;
 @dynamic portrait;
@@ -22,6 +23,6 @@
 @dynamic uid;
 @dynamic workduty;
 @dynamic workgroup;
-@dynamic loginName;
+@dynamic loginDate;
 
 @end

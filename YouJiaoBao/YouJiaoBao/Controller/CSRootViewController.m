@@ -8,6 +8,7 @@
 
 #import "CSRootViewController.h"
 #import "CSEngine.h"
+#import "EntityLoginInfoHelper.h"
 
 @interface CSRootViewController ()
 
@@ -28,10 +29,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onLoginSuccess:) name:@"noti.login.success" object:nil];
     
-    [self showLoginView];
+    [self checkLocalData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -55,6 +55,18 @@
 }
 */
 
+- (void)checkLocalData {
+    NSFetchedResultsController* frCtrl = [EntityLoginInfoHelper frRecentLoginUser];
+    NSError* error = nil;
+    BOOL ok = [frCtrl performFetch:&error];
+    if (ok && frCtrl.fetchedObjects.count > 0) {
+        [[CSEngine sharedInstance] onLogin:frCtrl.fetchedObjects.lastObject];
+        [self showMainView];
+    }
+    else {
+        [self showLoginView];
+    }
+}
 
 - (void)showLoginView {
     [self performSegueWithIdentifier:@"segue.root.login" sender:nil];

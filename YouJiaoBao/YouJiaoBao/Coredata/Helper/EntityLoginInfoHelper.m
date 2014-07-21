@@ -53,10 +53,27 @@
             entity.loginName = [jsonObject objectForKey:@"login_name"];
         }
         
+        entity.loginDate = [NSDate date];
+        
         [context save:&error];
     }
     
     return entity;
+}
+
++ (NSFetchedResultsController*)frRecentLoginUser {
+    NSManagedObjectContext* context = [[CSCoreDataHelper sharedInstance] managedObjectContext];
+    
+    NSFetchRequest* fr = [[NSFetchRequest alloc] initWithEntityName:@"EntityLoginInfo"];
+    fr.fetchLimit = 1;
+    fr.resultType = NSManagedObjectResultType;
+    
+    NSSortDescriptor* sortDesc = [NSSortDescriptor sortDescriptorWithKey:@"loginDate" ascending:NO];
+    [fr setSortDescriptors:@[sortDesc]];
+    
+    NSFetchedResultsController* frCtrl = [[NSFetchedResultsController alloc] initWithFetchRequest:fr managedObjectContext:context sectionNameKeyPath:nil cacheName:@"RecentLoginUser"];
+    
+    return frCtrl;
 }
 
 @end

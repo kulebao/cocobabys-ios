@@ -13,4 +13,6 @@
 
 + (EntityLoginInfo*)updateEntity:(id)jsonObject;
 
++ (NSFetchedResultsController*)frRecentLoginUser;
+
 @end

@@ -15,7 +15,6 @@
 @dynamic name;
 @dynamic schoolId;
 @dynamic timestamp;
-@dynamic deleted;
 @dynamic employeeId;
 
 @end

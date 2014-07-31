@@ -16,7 +16,6 @@
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSNumber * schoolId;
 @property (nonatomic, retain) NSNumber * timestamp;
-@property (nonatomic, retain) NSNumber * deleted;
 @property (nonatomic, retain) NSString * employeeId;
 
 @end

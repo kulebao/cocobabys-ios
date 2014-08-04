@@ -8,6 +8,9 @@
 
 #import "CSEngine.h"
 
+NSString* kNotiLoginSuccess = @"noti.login.success";
+NSString* kNotiUnauthorized = @"noti.unauthorized";
+
 @implementation CSEngine
 @synthesize loginInfo = _loginInfo;
 

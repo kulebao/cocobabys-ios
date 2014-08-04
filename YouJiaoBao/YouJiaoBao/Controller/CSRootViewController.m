@@ -29,7 +29,10 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onLoginSuccess:) name:@"noti.login.success" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onLoginSuccess:) name:kNotiLoginSuccess object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUnauthorized:) name:kNotiUnauthorized object:nil];
+    
     
     [self checkLocalData];
 }
@@ -79,6 +82,11 @@
 - (void)onLoginSuccess:(NSNotification*)noti {
     [[CSEngine sharedInstance] onLogin:noti.object];
     [self showMainView];
+}
+
+- (void)onUnauthorized:(NSNotification*)noti {
+    [[CSEngine sharedInstance] onLogin:nil];
+    [self showLoginView];
 }
 
 @end

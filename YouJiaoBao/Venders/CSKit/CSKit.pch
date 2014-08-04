@@ -33,4 +33,10 @@
 #define UIColorRGBAf(rf, gf, bf, af)    [UIColor colorWithRed:rf green:gf blue:bf alpha:af]
 #define UIColorRGBf(rf, gf, bf)         UIColorRGBA(rf, gf, bf, 1.0)
 
+#ifdef DEBUG
+#define CSLog NSLog
+#else
+#define CSLog (void)
+#endif
+
 #endif

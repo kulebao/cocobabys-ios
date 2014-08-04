@@ -11,6 +11,8 @@
 
 
 extern NSString* kNotiLoginSuccess;
+extern NSString* kNotiUnauthorized;
+
 
 @interface CSEngine : NSObject
 @property (nonatomic, strong, readonly) EntityLoginInfo* loginInfo;

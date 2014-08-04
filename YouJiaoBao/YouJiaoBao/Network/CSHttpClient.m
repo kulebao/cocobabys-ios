@@ -39,6 +39,7 @@
         _opManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:kServerHostForTest]];
         
         _opManager.requestSerializer = [AFJSONRequestSerializer serializerWithWritingOptions:0];
+        [_opManager.requestSerializer setValue:@"ios" forHTTPHeaderField:@"source"];
         
         AFJSONResponseSerializer* responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:0];
         responseSerializer.removesKeysWithNullValues = YES;

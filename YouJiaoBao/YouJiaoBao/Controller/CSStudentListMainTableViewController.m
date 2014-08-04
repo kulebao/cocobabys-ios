@@ -10,8 +10,13 @@
 #import "CSHttpClient.h"
 #import "CSEngine.h"
 #import "EntityClassInfoHelper.h"
+#import "EntityChildInfoHelper.h"
 
-@interface CSStudentListMainTableViewController ()
+@interface CSStudentListMainTableViewController () <NSFetchedResultsControllerDelegate> {
+    NSMutableArray* _frChildrenList;
+    NSFetchedResultsController* _frClasses;
+}
+
 - (IBAction)onRefreshClicked:(id)sender;
 
 @end
@@ -37,6 +42,18 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     
     [self customizeBackBarItem];
+    
+    CSEngine* engine = [CSEngine sharedInstance];
+    
+    _frClasses = [EntityClassInfoHelper frClassesWithEmployee:engine.loginInfo.uid ofKindergarten:engine.loginInfo.schoolId.integerValue];
+    _frClasses.delegate = self;
+    
+    NSError* error = nil;
+    BOOL ok = [_frClasses performFetch:&error];
+    if (!ok) {
+        CSLog(@"error: %@", error);
+    }
+    
     [self doRefresh];
 }
 
@@ -142,7 +159,9 @@
     };
     
     id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
-        
+        if (operation.response.statusCode == 401) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotiUnauthorized object:nil userInfo:nil];
+        }
     };
     
     [http opGetClassListOfKindergarten:engine.loginInfo.schoolId.integerValue
@@ -154,13 +173,13 @@
 - (void)doReloadChildList:(NSArray*)classInfoList{
     NSMutableArray* classIdList = [NSMutableArray array];
     for (EntityClassInfo* classInfo in classInfoList) {
-        [classIdList addObject:classInfo.classId];
+        [classIdList addObject:classInfo.classId.stringValue];
     }
  
     CSHttpClient* http = [CSHttpClient sharedInstance];
     CSEngine* engine = [CSEngine sharedInstance];
     
-    id success = ^(AFHTTPRequestOperation *operation, id po) {
+    id success = ^(AFHTTPRequestOperation *operation, id jsonObjectList) {
         /*
          address = "";
          birthday = "2014-06-26";
@@ -175,6 +194,7 @@
          status = 1;
          timestamp = 1405060847820;
          */
+        [EntityChildInfoHelper updateEntities:jsonObjectList];
     };
     
     id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -185,6 +205,27 @@
                          withClassList:classIdList
                                success:success
                                failure:failure];
+}
+
+#pragma mark - NSFetchedResultsControllerDelegate
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    if ([controller isEqual:_frClasses]) {
+        _frChildrenList = [NSMutableArray array];
+        
+        for (EntityClassInfo* classInfo in _frClasses.fetchedObjects) {
+            NSFetchedResultsController* frCtrl = [EntityChildInfoHelper frChildrenWithClassId:classInfo.classId.integerValue ofKindergarten:classInfo.schoolId.integerValue];
+            
+            NSError* error = nil;
+            BOOL ok = [frCtrl performFetch:&error];
+            if (!ok) {
+                CSLog(@"error: %@", error);
+            }
+            
+            [_frChildrenList addObject:frCtrl];
+        }
+    }
+
+    [self.tableView reloadData];
 }
 
 @end

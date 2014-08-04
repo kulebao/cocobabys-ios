@@ -77,7 +77,10 @@
     NSSortDescriptor* sortDesc = [NSSortDescriptor sortDescriptorWithKey:@"classId" ascending:YES];
     [fr setSortDescriptors:@[sortDesc]];
     
-    NSFetchedResultsController* frCtrl = [[NSFetchedResultsController alloc] initWithFetchRequest:fr managedObjectContext:context sectionNameKeyPath:nil cacheName:@"ClassesWithEmployeeofKindergarten"];
+    NSFetchedResultsController* frCtrl = [[NSFetchedResultsController alloc] initWithFetchRequest:fr
+                                                                             managedObjectContext:context
+                                                                               sectionNameKeyPath:nil
+                                                                                        cacheName:[NSString stringWithFormat:@"ClassesWithEmployee%@ofKindergarten%d", employeeId, kindergartenId]];
     
     return frCtrl;
 }

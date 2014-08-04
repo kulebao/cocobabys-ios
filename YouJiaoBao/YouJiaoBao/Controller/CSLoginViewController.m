@@ -9,8 +9,10 @@
 #import "CSLoginViewController.h"
 #import "CSHttpClient.h"
 #import "EntityLoginInfoHelper.h"
+#import "CSEngine.h"
 
 @interface CSLoginViewController ()
+
 @property (weak, nonatomic) IBOutlet UIButton *btnLogin;
 @property (weak, nonatomic) IBOutlet UIButton *btnForgotPassword;
 @property (weak, nonatomic) IBOutlet UITextField *fieldUsername;
@@ -80,7 +82,7 @@
         id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
             EntityLoginInfo* loginInfo = [EntityLoginInfoHelper updateEntity:responseObject];
             if (loginInfo != nil) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"noti.login.success" object:loginInfo userInfo:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kNotiLoginSuccess object:loginInfo userInfo:nil];
             }
             else {
                 self.labNote.text = @"用户名或密码错误";

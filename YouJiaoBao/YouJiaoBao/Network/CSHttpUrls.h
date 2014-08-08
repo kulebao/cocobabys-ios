@@ -10,13 +10,15 @@
 #define YouJiaoBao_CSHttpUrls_h
 
 // HOST: 测试服务服务器接口Host地址
-#define kServerHostForTest          @"https://stage2.cocobabys.com"
+#define kServerHostForTest              @"https://stage2.cocobabys.com"
 
 // HOST: 产品服务服务器接口Host地址
-#define kServerHostForProd          @"https://www.cocobabys.com"
+#define kServerHostForProd              @"https://www.cocobabys.com"
 
-#define kPathEmployeeLogin          @"/employee_login.do"
-#define kPathEmployeeManagedClass   @"/kindergarten/%@/employee/%@/class"
-#define kPathKindergartenChildList  @"/kindergarten/%@/child"
+#define kPathEmployeeLogin              @"/employee_login.do"
+#define kPathEmployeeManagedClass       @"/kindergarten/%@/employee/%@/class"
+#define kPathKindergartenChildList      @"/kindergarten/%@/child"
+#define kPathKindergartenDailylogList   @"/kindergarten/%@/dailylog"
+#define kPathKindergartenRelationship   @"/kindergarten/%@/relationship"
 
 #endif

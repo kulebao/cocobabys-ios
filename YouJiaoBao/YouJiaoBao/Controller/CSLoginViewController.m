@@ -11,7 +11,9 @@
 #import "EntityLoginInfoHelper.h"
 #import "CSEngine.h"
 
-@interface CSLoginViewController ()
+@interface CSLoginViewController () {
+    ModelAccount* _loginAccount;
+}
 
 @property (weak, nonatomic) IBOutlet UIButton *btnLogin;
 @property (weak, nonatomic) IBOutlet UIButton *btnForgotPassword;
@@ -82,6 +84,9 @@
         id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
             EntityLoginInfo* loginInfo = [EntityLoginInfoHelper updateEntity:responseObject];
             if (loginInfo != nil) {
+                
+                [[CSEngine sharedInstance] encryptAccount:_loginAccount];
+                
                 [[NSNotificationCenter defaultCenter] postNotificationName:kNotiLoginSuccess object:loginInfo userInfo:nil];
             }
             else {
@@ -92,6 +97,8 @@
         id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
             self.labNote.text = @"用户名或密码错误";
         };
+        
+        _loginAccount = [ModelAccount accountWithUsername:username andPswd:password];
         
         [http opLoginWithUsername:username
                          password:password

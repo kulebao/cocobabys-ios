@@ -11,10 +11,14 @@
 #import "CSEngine.h"
 #import "EntityClassInfoHelper.h"
 #import "EntityChildInfoHelper.h"
+#import "CSChildListItemTableViewCell.h"
+#import "UIImageView+AFNetworking.h"
+#import "CSChildProfileViewController.h"
 
 @interface CSStudentListMainTableViewController () <NSFetchedResultsControllerDelegate> {
-    NSMutableArray* _frChildrenList;
+    NSMutableArray* _classChildren;
     NSFetchedResultsController* _frClasses;
+    NSFetchedResultsController* _frChildren;
 }
 
 - (IBAction)onRefreshClicked:(id)sender;
@@ -42,6 +46,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     
     [self customizeBackBarItem];
+    [self customizeOkBarItemWithTarget:self action:@selector(onBtnRefreshClicked:) text:@"刷新"];
     
     CSEngine* engine = [CSEngine sharedInstance];
     
@@ -54,6 +59,15 @@
         CSLog(@"error: %@", error);
     }
     
+    _frChildren = [EntityChildInfoHelper frChildrenWithKindergarten:engine.loginInfo.schoolId.integerValue];
+    _frChildren.delegate = self;
+    ok = [_frChildren performFetch:&error];
+    if (!ok) {
+        CSLog(@"error: %@", error);
+    }
+    
+    [self updateTableView];
+
     [self doRefresh];
 }
 
@@ -63,32 +77,58 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)onBtnRefreshClicked:(id)sender {
+    [self doRefresh];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return _classChildren.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    NSInteger numberOfRows = 0;
+    if (section < _classChildren.count) {
+        NSArray* children = [_classChildren objectAtIndex:section];
+        numberOfRows = children.count;
+    }
+
+    return numberOfRows;
 }
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    CSChildListItemTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CSChildListItemTableViewCell" forIndexPath:indexPath];
     
     // Configure the cell...
+    NSArray* children = [_classChildren objectAtIndex:indexPath.section];
+    EntityChildInfo* childInfo = [children objectAtIndex:indexPath.row];
+    
+    [cell.imgPortrait setImageWithURL:[NSURL URLWithString:childInfo.portrait]
+                   placeholderImage:[UIImage imageNamed:@"default_icon.png"]];
+    
+    cell.labName.text = childInfo.nick;
+
     
     return cell;
 }
-*/
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 80.0f;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    NSArray* children = [_classChildren objectAtIndex:indexPath.section];
+    EntityChildInfo* childInfo = [children objectAtIndex:indexPath.row];
+    
+    [self performSegueWithIdentifier:@"segue.babylist.childprofile" sender:childInfo];
+}
 
 /*
 // Override to support conditional editing of the table view.
@@ -128,7 +168,7 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -136,8 +176,12 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    if ([segue.identifier isEqualToString:@"segue.babylist.childprofile"]) {
+        CSChildProfileViewController* ctrl = [segue destinationViewController];
+        ctrl.childInfo = sender;
+    }
 }
-*/
 
 - (IBAction)onRefreshClicked:(id)sender {
     [self doRefresh];
@@ -156,11 +200,14 @@
                                                            forEmployee:engine.loginInfo.uid
                                                         ofKindergarten:engine.loginInfo.schoolId.integerValue];
         [self doReloadChildList:classInfoList];
+        [self doReloadDailylogList:classInfoList];
     };
     
     id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
         if (operation.response.statusCode == 401) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:kNotiUnauthorized object:nil userInfo:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotiUnauthorized
+                                                                object:error
+                                                              userInfo:nil];
         }
     };
     
@@ -180,20 +227,6 @@
     CSEngine* engine = [CSEngine sharedInstance];
     
     id success = ^(AFHTTPRequestOperation *operation, id jsonObjectList) {
-        /*
-         address = "";
-         birthday = "2014-06-26";
-         "child_id" = "2_2088_896";
-         "class_id" = 33;
-         "class_name" = "\U5e93\U8d1d";
-         gender = 1;
-         name = "\U5b8b\U5dcd";
-         nick = "\U5b8b\U5dcd";
-         portrait = "https://dn-cocobabys.qbox.me/child_photo/2088/2_2088_896/2_2088_896.jpg";
-         "school_id" = 2088;
-         status = 1;
-         timestamp = 1405060847820;
-         */
         [EntityChildInfoHelper updateEntities:jsonObjectList];
     };
     
@@ -207,25 +240,55 @@
                                failure:failure];
 }
 
+- (void)doReloadDailylogList:(NSArray*)classInfoList{
+    NSMutableArray* classIdList = [NSMutableArray array];
+    for (EntityClassInfo* classInfo in classInfoList) {
+        [classIdList addObject:classInfo.classId.stringValue];
+    }
+    
+    CSHttpClient* http = [CSHttpClient sharedInstance];
+    CSEngine* engine = [CSEngine sharedInstance];
+    
+    id success = ^(AFHTTPRequestOperation *operation, id jsonObjectList) {
+
+    };
+    
+    id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    };
+    
+    [http opGetDailylogOfKindergarten:engine.loginInfo.schoolId.integerValue
+                        withClassList:classIdList
+                              success:success
+                              failure:failure];
+}
+
 #pragma mark - NSFetchedResultsControllerDelegate
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     if ([controller isEqual:_frClasses]) {
-        _frChildrenList = [NSMutableArray array];
-        
-        for (EntityClassInfo* classInfo in _frClasses.fetchedObjects) {
-            NSFetchedResultsController* frCtrl = [EntityChildInfoHelper frChildrenWithClassId:classInfo.classId.integerValue ofKindergarten:classInfo.schoolId.integerValue];
-            
-            NSError* error = nil;
-            BOOL ok = [frCtrl performFetch:&error];
-            if (!ok) {
-                CSLog(@"error: %@", error);
-            }
-            
-            [_frChildrenList addObject:frCtrl];
-        }
     }
+    else if ([controller isEqual:_frChildren]) {
+        [self updateTableView];
+    }
+}
 
+
+#pragma mark - Private
+- (void)updateTableView {
+    _classChildren = [NSMutableArray array];
+    NSArray* childrenList = _frChildren.fetchedObjects;
+    
+    for (EntityClassInfo* classInfo in _frClasses.fetchedObjects) {
+        NSArray* classChildren = [childrenList filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"classId == %@", classInfo.classId]];
+        if (classChildren == nil) {
+            classChildren = @[];
+        }
+        
+        [_classChildren addObject:classChildren];
+    }
+    
     [self.tableView reloadData];
 }
+
 
 @end

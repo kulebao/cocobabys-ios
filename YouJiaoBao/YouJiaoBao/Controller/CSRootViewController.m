@@ -9,6 +9,7 @@
 #import "CSRootViewController.h"
 #import "CSEngine.h"
 #import "EntityLoginInfoHelper.h"
+#import "CSHttpClient.h"
 
 @interface CSRootViewController ()
 
@@ -34,7 +35,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUnauthorized:) name:kNotiUnauthorized object:nil];
     
     
-    [self checkLocalData];
+    [self autoLogin];
 }
 
 - (void)didReceiveMemoryWarning
@@ -71,6 +72,35 @@
     }
 }
 
+- (void)autoLogin {
+    ModelAccount* account = [[CSEngine sharedInstance] decryptAccount];
+    if ([account isValid]) {
+        CSHttpClient* http = [CSHttpClient sharedInstance];
+        
+        id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
+            EntityLoginInfo* loginInfo = [EntityLoginInfoHelper updateEntity:responseObject];
+            if (loginInfo != nil) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:kNotiLoginSuccess object:loginInfo userInfo:nil];
+            }
+            else {
+                [self showLoginView];
+            }
+        };
+        
+        id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
+            [self showLoginView];
+        };
+        
+        [http opLoginWithUsername:account.username
+                         password:account.password
+                          success:success
+                          failure:failure];
+    }
+    else {
+        [self showLoginView];
+    }
+}
+
 - (void)showLoginView {
     [self performSegueWithIdentifier:@"segue.root.login" sender:nil];
 }
@@ -85,6 +115,7 @@
 }
 
 - (void)onUnauthorized:(NSNotification*)noti {
+    CSLog(@"Unauthorized Error : %@", noti.object);
     [[CSEngine sharedInstance] onLogin:nil];
     [self showLoginView];
 }

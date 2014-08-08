@@ -36,9 +36,31 @@
         <attribute name="workduty" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="workgroup" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="EntityParentInfo" representedClassName="EntityParentInfo" syncable="YES">
+        <attribute name="birthday" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="company" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="gender" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="memberStatus" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="parentId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="portrait" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="schoolId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="timestamp" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="EntityRelationshipInfo" representedClassName="EntityRelationshipInfo" syncable="YES">
+        <attribute name="card" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="relationship" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="childInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EntityChildInfo" syncable="YES"/>
+        <relationship name="parentInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EntityParentInfo" syncable="YES"/>
+    </entity>
     <elements>
         <element name="EntityChildInfo" positionX="261" positionY="306" width="128" height="223"/>
         <element name="EntityClassInfo" positionX="261" positionY="297" width="128" height="120"/>
         <element name="EntityLoginInfo" positionX="261" positionY="198" width="128" height="240"/>
+        <element name="EntityParentInfo" positionX="261" positionY="342" width="128" height="208"/>
+        <element name="EntityRelationshipInfo" positionX="270" positionY="360" width="128" height="118"/>
     </elements>
 </model>

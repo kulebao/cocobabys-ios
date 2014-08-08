@@ -75,7 +75,7 @@
                                                 failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
     NSParameterAssert(employeePhone);
     
-    id parameters = nil;
+    id parameters = @{@"connected" : @"true"};
     
     NSString* apiUrl = [NSString stringWithFormat:kPathEmployeeManagedClass, @(schoolId), employeePhone];
     
@@ -95,6 +95,38 @@
                       @"connected" : @"true"};
     
     NSString* apiUrl = [NSString stringWithFormat:kPathKindergartenChildList, @(schoolId)];
+    
+    AFHTTPRequestOperation* op =[self.opManager GET:apiUrl
+                                         parameters:parameters
+                                            success:success
+                                            failure:failure];
+    return op;
+    
+}
+
+- (AFHTTPRequestOperation*)opGetDailylogOfKindergarten:(NSInteger)schoolId
+                                         withClassList:(NSArray*)classIdList
+                                               success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                               failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    id parameters = @{@"class_id": [classIdList componentsJoinedByString:@","],
+                      @"connected" : @"true"};
+    
+    NSString* apiUrl = [NSString stringWithFormat:kPathKindergartenDailylogList, @(schoolId)];
+    
+    AFHTTPRequestOperation* op =[self.opManager GET:apiUrl
+                                         parameters:parameters
+                                            success:success
+                                            failure:failure];
+    return op;
+}
+
+- (AFHTTPRequestOperation*)opGetRelationshipOfChild:(NSString*)childId
+                                     inKindergarten:(NSInteger)schoolId
+                                            success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                            failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    id parameters = @{@"child": childId};
+    
+    NSString* apiUrl = [NSString stringWithFormat:kPathKindergartenRelationship, @(schoolId)];
     
     AFHTTPRequestOperation* op =[self.opManager GET:apiUrl
                                          parameters:parameters

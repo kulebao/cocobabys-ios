@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "EntityLoginInfo.h"
-
+#import "ModelAccount.h"
 
 extern NSString* kNotiLoginSuccess;
 extern NSString* kNotiUnauthorized;
@@ -18,6 +18,12 @@ extern NSString* kNotiUnauthorized;
 @property (nonatomic, strong, readonly) EntityLoginInfo* loginInfo;
 
 + (id)sharedInstance;
+
+- (BOOL)encryptAccount:(ModelAccount*)account;
+
+- (ModelAccount*)decryptAccount;
+
+- (BOOL)clearAccount;
 
 - (void)onLogin:(EntityLoginInfo*)loginInfo;
 

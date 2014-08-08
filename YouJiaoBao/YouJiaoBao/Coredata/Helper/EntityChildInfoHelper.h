@@ -13,9 +13,11 @@
 
 + (EntityChildInfo*)queryEntityWithChildId:(NSString*)childId;
 
-+ (void)updateEntities:(id)jsonObjectList;
++ (NSArray*)updateEntities:(id)jsonObjectList;
 
 + (NSFetchedResultsController*)frChildrenWithClassId:(NSInteger)classId
                                       ofKindergarten:(NSInteger)kindergartenId;
+
++ (NSFetchedResultsController*)frChildrenWithKindergarten:(NSInteger)kindergartenId;
 
 @end

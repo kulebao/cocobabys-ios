@@ -28,4 +28,14 @@
                                                 success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                                                 failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
+- (AFHTTPRequestOperation*)opGetDailylogOfKindergarten:(NSInteger)schoolId
+                                         withClassList:(NSArray*)classIdList
+                                               success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                               failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+- (AFHTTPRequestOperation*)opGetRelationshipOfChild:(NSString*)childId
+                                     inKindergarten:(NSInteger)schoolId
+                                            success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                            failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
 @end

@@ -30,7 +30,9 @@
     return entity;
 }
 
-+ (void)updateEntities:(id)jsonObjectList {
++ (NSArray*)updateEntities:(id)jsonObjectList {
+    NSMutableArray* returnObjectList = [NSMutableArray array];
+    
     NSManagedObjectContext* context = [[CSCoreDataHelper sharedInstance] managedObjectContext];
     
     for (NSDictionary* jsonObject in jsonObjectList) {
@@ -63,16 +65,19 @@
                 entity.status = [jsonObject objectForKey:@"status"];
                 entity.timestamp = [jsonObject objectForKey:@"timestamp"];
             }
+            
+            [returnObjectList addObject:entity];
         }
     }
     
     NSError* error = nil;
     [context save:&error];
+    
+    return returnObjectList;
 }
 
 + (NSFetchedResultsController*)frChildrenWithClassId:(NSInteger)classId
                                       ofKindergarten:(NSInteger)kindergartenId {
-
     NSManagedObjectContext* context = [[CSCoreDataHelper sharedInstance] managedObjectContext];
     NSFetchRequest* fr = [[NSFetchRequest alloc] initWithEntityName:@"EntityChildInfo"];
     fr.resultType = NSManagedObjectResultType;
@@ -83,6 +88,21 @@
     [fr setSortDescriptors:@[sortDesc]];
     
     NSFetchedResultsController* frCtrl = [[NSFetchedResultsController alloc] initWithFetchRequest:fr managedObjectContext:context sectionNameKeyPath:nil cacheName:[NSString stringWithFormat:@"ChildrenWithClassId%dofKindergarten%d", classId, kindergartenId]];
+    
+    return frCtrl;
+}
+
++ (NSFetchedResultsController*)frChildrenWithKindergarten:(NSInteger)kindergartenId {
+    NSManagedObjectContext* context = [[CSCoreDataHelper sharedInstance] managedObjectContext];
+    NSFetchRequest* fr = [[NSFetchRequest alloc] initWithEntityName:@"EntityChildInfo"];
+    fr.resultType = NSManagedObjectResultType;
+    
+    [fr setPredicate:[NSPredicate predicateWithFormat:@"schoolId == %d", kindergartenId]];
+    
+    NSSortDescriptor* sortDesc = [NSSortDescriptor sortDescriptorWithKey:@"childId" ascending:YES];
+    [fr setSortDescriptors:@[sortDesc]];
+    
+    NSFetchedResultsController* frCtrl = [[NSFetchedResultsController alloc] initWithFetchRequest:fr managedObjectContext:context sectionNameKeyPath:nil cacheName:nil];
     
     return frCtrl;
 }

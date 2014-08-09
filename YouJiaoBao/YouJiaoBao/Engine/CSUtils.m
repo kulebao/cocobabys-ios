@@ -14,7 +14,7 @@
     NSString* str = nil;
     if (date) {
         NSDateFormatter* fmt = [[NSDateFormatter alloc] init];
-        fmt.dateFormat = @"MM月dd日 hh:mm";
+        fmt.dateFormat = @"MM月dd日 HH:mm";
         fmt.timeZone = [NSTimeZone localTimeZone];
         str = [fmt stringFromDate:date];
     }

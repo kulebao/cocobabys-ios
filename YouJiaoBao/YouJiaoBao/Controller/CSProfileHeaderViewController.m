@@ -9,6 +9,7 @@
 #import "CSProfileHeaderViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "CSEngine.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface CSProfileHeaderViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *imgPortrait;
@@ -53,10 +54,14 @@
     if (engine.loginInfo) {
         self.labUsername.text = [NSString stringWithFormat:@"登录名: %@", engine.loginInfo.loginName];
         self.labNick.text = [NSString stringWithFormat:@"昵称: %@", engine.loginInfo.name];
+        
+        [self.imgPortrait setImageWithURL:[NSURL URLWithString:engine.loginInfo.portrait]
+                         placeholderImage:[UIImage imageNamed:@"chat_head_icon.gif"]];
     }
     else {
         self.labUsername.text = nil;
         self.labNick.text = nil;
+        self.imgPortrait.image = [UIImage imageNamed:@"chat_head_icon.gif"];
     }
 }
 

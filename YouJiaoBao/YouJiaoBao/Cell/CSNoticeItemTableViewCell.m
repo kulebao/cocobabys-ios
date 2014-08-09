@@ -50,7 +50,13 @@
     if (_newsInfo) {
         self.labTitle.text = _newsInfo.title;
         self.labContent.text = _newsInfo.content;
-        [self.imgThumb setImageWithURL:[NSURL URLWithString:_newsInfo.image]];
+        if (_newsInfo.image.length > 0) {
+            [self.imgThumb setImageWithURL:[NSURL URLWithString:_newsInfo.image]];
+        }
+        else {
+            self.imgThumb.image = nil;
+        }
+        
         NSDate* date = [NSDate dateWithTimeIntervalSince1970:(_newsInfo.timestamp.longLongValue / 1000.0)];
         self.labDate.text = [CSUtils stringFromDateStyle1:date];
     }

@@ -15,6 +15,7 @@
 #import "EntityClassInfo.h"
 #import "EntityNewsInfoHelper.h"
 #import "CSNewsInfoDetailViewController.h"
+#import "CSCreateNoticeViewController.h"
 
 @interface CSNoticeTableViewController () <PullTableViewDelegate, NSFetchedResultsControllerDelegate> {
     NSFetchedResultsController* _frCtrl;
@@ -80,7 +81,7 @@
 }
 
 - (void)onSendNotice:(id)sender {
-    
+    [self performSegueWithIdentifier:@"segue.news.create" sender:nil];
 }
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
@@ -152,7 +153,6 @@
 }
 */
 
-
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -164,8 +164,16 @@
         CSNewsInfoDetailViewController* ctrl = segue.destinationViewController;
         ctrl.newsInfo = sender;
     }
+    else if ([segue.identifier isEqualToString:@"segue.news.create"]) {
+        CSCreateNoticeViewController* ctrl = segue.destinationViewController;
+        ctrl.delegate = self;
+    }
 }
 
+#pragma mark - CSCreateNoticeViewControllerDelegate
+- (void)createNoticeViewControllerSuccessed:(CSCreateNoticeViewController*)ctrl {
+    [self reloadNewsList];
+}
 
 #pragma mark - PullTableViewDelegate
 - (void)pullTableViewDidTriggerRefresh:(PullTableView*)pullTableView {

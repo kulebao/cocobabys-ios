@@ -731,7 +731,7 @@
                                                 <constraint firstAttribute="height" constant="26" id="gSW-sE-e3M"/>
                                             </constraints>
                                         </imageView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="787-aT-yB9">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="787-aT-yB9">
                                             <rect key="frame" x="276" y="37" width="36" height="36"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                             <constraints>
@@ -749,7 +749,7 @@
                                             <rect key="frame" x="45" y="7" width="260" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                            <color key="textColor" red="0.85490202900000001" green="0.392156899" blue="0.23529413339999999" alpha="1" colorSpace="deviceRGB"/>
+                                            <color key="textColor" red="0.80000000000000004" green="0.40000000000000002" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2014-03-08 12:00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zh5-Rn-Wjj">
@@ -812,6 +812,7 @@
                     <connections>
                         <outlet property="pullTableView" destination="P24-q7-rSW" id="VGT-RX-waT"/>
                         <segue destination="sKh-e5-I66" kind="push" identifier="segue.news.detail" id="tZO-D9-O9E"/>
+                        <segue destination="5JQ-vv-KxI" kind="push" identifier="segue.news.create" id="8Zp-E7-UcF"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jiG-EA-I4x" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1119,6 +1120,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X3l-no-ji2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="28" y="2630"/>
+        </scene>
+        <!--Create Notice View Controller - 发布新公告-->
+        <scene sceneID="DAK-2j-WoN">
+            <objects>
+                <viewController id="5JQ-vv-KxI" customClass="CSCreateNoticeViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0R6-tu-2ix"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ar5-4d-0ON"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vqH-4H-Bu7">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="发布新公告" id="4xr-zr-TM2"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kGb-rN-a0f" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2256" y="-13"/>
         </scene>
         <!--News Info Detail View Controller - 园内公告-->
         <scene sceneID="LDH-oi-rgZ">

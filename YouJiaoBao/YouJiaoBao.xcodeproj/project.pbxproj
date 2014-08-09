@@ -389,6 +389,7 @@
 		09FE720719965C66002E3ED4 /* CSNewsInfoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE720619965C66002E3ED4 /* CSNewsInfoDetailViewController.m */; };
 		09FE720A19965F14002E3ED4 /* UIWebView+CSKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE720919965F14002E3ED4 /* UIWebView+CSKit.m */; };
 		09FE720D199660D0002E3ED4 /* CSUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE720C199660D0002E3ED4 /* CSUtils.m */; };
+		09FE721019966801002E3ED4 /* CSCreateNoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE720F19966801002E3ED4 /* CSCreateNoticeViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -866,6 +867,8 @@
 		09FE720919965F14002E3ED4 /* UIWebView+CSKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIWebView+CSKit.m"; path = "../../../../CSKit-Github/CSKit/UIWebView+CSKit.m"; sourceTree = "<group>"; };
 		09FE720B199660D0002E3ED4 /* CSUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSUtils.h; sourceTree = "<group>"; };
 		09FE720C199660D0002E3ED4 /* CSUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSUtils.m; sourceTree = "<group>"; };
+		09FE720E19966801002E3ED4 /* CSCreateNoticeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSCreateNoticeViewController.h; sourceTree = "<group>"; };
+		09FE720F19966801002E3ED4 /* CSCreateNoticeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSCreateNoticeViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1614,6 +1617,8 @@
 				090C63981993A0D400398B40 /* CSChildProfileHeaderViewController.m */,
 				090C639419939D5400398B40 /* CSChildProfileViewController.h */,
 				090C639519939D5500398B40 /* CSChildProfileViewController.m */,
+				09FE720E19966801002E3ED4 /* CSCreateNoticeViewController.h */,
+				09FE720F19966801002E3ED4 /* CSCreateNoticeViewController.m */,
 				098E4081198B7ABC00CB4F0B /* CSGrowExpViewController.h */,
 				098E4082198B7ABC00CB4F0B /* CSGrowExpViewController.m */,
 				098E4087198B7B1F00CB4F0B /* CSHomeWorkTableViewController.h */,
@@ -2060,6 +2065,7 @@
 				098E407C198B799000CB4F0B /* TPKeyboardAvoidingTableView.m in Sources */,
 				098E407B198B799000CB4F0B /* TPKeyboardAvoidingScrollView.m in Sources */,
 				09B431B31994BCC300FF4071 /* EntityParentInfo.m in Sources */,
+				09FE721019966801002E3ED4 /* CSCreateNoticeViewController.m in Sources */,
 				09FE72041995DD89002E3ED4 /* EntityNewsInfoHelper.m in Sources */,
 				0956E3991981544B0049202E /* amrFileCodec.m in Sources */,
 				098E4063198B799000CB4F0B /* EGORefreshTableHeaderView.m in Sources */,

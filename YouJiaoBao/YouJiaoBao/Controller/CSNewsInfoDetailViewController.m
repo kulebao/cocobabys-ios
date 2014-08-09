@@ -74,10 +74,10 @@
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;' name='viewport' >\
     </head>\
     <body>\
-    <div style='text-align:center;font-size:18pt;font-weight:bold'>%@</div>\
+    <div style='text-align:center;font-size:16pt;font-weight:bold;color:#cc6633'>%@</div>\
     <div style='text-align:center;font-size:10pt;'>%@%@</div>\
     <p>\
-    <div style='word-break:break-all;width:300;font-size:13pt'>%@</div>\
+    <div style='word-break:break-all;width:100%%;font-size:13pt'>%@</div>\
     %@\
     </body>\
     </html>";

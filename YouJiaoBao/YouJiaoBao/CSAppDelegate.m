@@ -9,7 +9,6 @@
 #import "CSAppDelegate.h"
 #import "AFNetworkActivityIndicatorManager.h"
 #import "CSCoreDataHelper.h"
-#import "CSMasterViewController.h"
 
 @implementation CSAppDelegate
 @synthesize hud = _hud;

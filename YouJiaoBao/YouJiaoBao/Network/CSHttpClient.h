@@ -38,4 +38,12 @@
                                             success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                                             failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
+- (AFHTTPRequestOperation*)opGetNewsOfClasses:(NSArray*)classIdList
+                               inKindergarten:(NSInteger)schoolId
+                                         from:(NSNumber*)from
+                                           to:(NSNumber*)to
+                                         most:(NSNumber*)most
+                                      success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                      failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
 @end

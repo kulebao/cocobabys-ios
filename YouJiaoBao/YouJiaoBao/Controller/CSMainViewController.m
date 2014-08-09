@@ -7,6 +7,10 @@
 //
 
 #import "CSMainViewController.h"
+#import "EntityClassInfoHelper.h"
+#import "CSHttpClient.h"
+#import "CSEngine.h"
+#import "CSAppDelegate.h"
 
 @interface CSMainViewController () <UICollectionViewDataSource, UICollectionViewDelegate> {
     NSArray* _modules;
@@ -56,6 +60,8 @@
     
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
+    
+    [self reloadClassList];
 }
 
 - (void)didReceiveMemoryWarning
@@ -97,6 +103,37 @@
     NSString* segueName = [module objectForKey:@"segue"];
     
     [self performSegueWithIdentifier:segueName sender:nil];
+}
+
+#pragma mark - private
+- (void)reloadClassList {
+    CSHttpClient* http = [CSHttpClient sharedInstance];
+    CSEngine* engine = [CSEngine sharedInstance];
+    CSAppDelegate* app = [CSAppDelegate sharedInstance];
+    
+    id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSArray* classInfoList = [EntityClassInfoHelper updateEntities:responseObject
+                                                           forEmployee:engine.loginInfo.uid
+                                                        ofKindergarten:engine.loginInfo.schoolId.integerValue];
+        [engine onLoadClassInfoList:classInfoList];
+        
+        [app hideAlert];
+    };
+    
+    id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        [app hideAlert];
+        if (operation.response.statusCode == 401) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotiUnauthorized
+                                                                object:error
+                                                              userInfo:nil];
+        }
+    };
+    
+    [app waitingAlert:@"获取信息" withTitle:@"请稍候"];
+    [http opGetClassListOfKindergarten:engine.loginInfo.schoolId.integerValue
+                        withEmployeeId:engine.loginInfo.phone
+                               success:success
+                               failure:failure];
 }
 
 @end

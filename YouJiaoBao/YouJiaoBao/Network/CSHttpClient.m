@@ -136,4 +136,37 @@
     
 }
 
+- (AFHTTPRequestOperation*)opGetNewsOfClasses:(NSArray*)classIdList
+                               inKindergarten:(NSInteger)schoolId
+                                         from:(NSNumber*)from
+                                           to:(NSNumber*)to
+                                         most:(NSNumber*)most
+                                      success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                      failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    if (classIdList.count > 0) {
+        [parameters setObject:[classIdList componentsJoinedByString:@","] forKey:@"class_id"];
+    }
+    
+    if (from) {
+        [parameters setObject:from forKey:@"from"];
+    }
+    
+    if (to) {
+        [parameters setObject:to forKey:@"to"];
+    }
+    
+    if (most) {
+        [parameters setObject:most forKey:@"most"];
+    }
+    
+    NSString* apiUrl = [NSString stringWithFormat:kPathKindergartenNewsList, @(schoolId)];
+    
+    AFHTTPRequestOperation* op =[self.opManager GET:apiUrl
+                                         parameters:parameters
+                                            success:success
+                                            failure:failure];
+    return op;
+}
+
 @end

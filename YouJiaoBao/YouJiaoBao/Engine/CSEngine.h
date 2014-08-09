@@ -16,15 +16,18 @@ extern NSString* kNotiUnauthorized;
 
 @interface CSEngine : NSObject
 @property (nonatomic, strong, readonly) EntityLoginInfo* loginInfo;
+@property (nonatomic, strong, readonly) NSArray* classInfoList;
 
 + (id)sharedInstance;
+
+- (void)onLogin:(EntityLoginInfo*)loginInfo;
+
+- (void)onLoadClassInfoList:(NSArray*)classInfoList;
 
 - (BOOL)encryptAccount:(ModelAccount*)account;
 
 - (ModelAccount*)decryptAccount;
 
 - (BOOL)clearAccount;
-
-- (void)onLogin:(EntityLoginInfo*)loginInfo;
 
 @end

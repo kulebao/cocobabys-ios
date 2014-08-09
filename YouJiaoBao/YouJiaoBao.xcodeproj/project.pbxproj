@@ -29,8 +29,6 @@
 		095F138A1967C30A008CF3BE /* CSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 095F13891967C30A008CF3BE /* CSAppDelegate.m */; };
 		095F138D1967C30A008CF3BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 095F138B1967C30A008CF3BE /* Main.storyboard */; };
 		095F13901967C30B008CF3BE /* YouJiaoBao.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 095F138E1967C30B008CF3BE /* YouJiaoBao.xcdatamodeld */; };
-		095F13931967C30B008CF3BE /* CSMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 095F13921967C30B008CF3BE /* CSMasterViewController.m */; };
-		095F13961967C30B008CF3BE /* CSDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 095F13951967C30B008CF3BE /* CSDetailViewController.m */; };
 		095F13981967C30C008CF3BE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 095F13971967C30C008CF3BE /* Images.xcassets */; };
 		095F139F1967C310008CF3BE /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 095F139E1967C310008CF3BE /* XCTest.framework */; };
 		095F13A01967C310008CF3BE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 095F13771967C309008CF3BE /* Foundation.framework */; };
@@ -385,6 +383,12 @@
 		09CD666F197C0C2600CC08F1 /* CSLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09CD666C197C0C2600CC08F1 /* CSLoginViewController.m */; };
 		09CD6670197C0C2600CC08F1 /* CSRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09CD666E197C0C2600CC08F1 /* CSRootViewController.m */; };
 		09CD667E197C153C00CC08F1 /* CSStudentListMainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09CD667D197C153C00CC08F1 /* CSStudentListMainTableViewController.m */; };
+		09FE71FE1995C662002E3ED4 /* CSNoticeItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE71FD1995C662002E3ED4 /* CSNoticeItemTableViewCell.m */; };
+		09FE72011995DD5B002E3ED4 /* EntityNewsInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE72001995DD5B002E3ED4 /* EntityNewsInfo.m */; };
+		09FE72041995DD89002E3ED4 /* EntityNewsInfoHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE72031995DD89002E3ED4 /* EntityNewsInfoHelper.m */; };
+		09FE720719965C66002E3ED4 /* CSNewsInfoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE720619965C66002E3ED4 /* CSNewsInfoDetailViewController.m */; };
+		09FE720A19965F14002E3ED4 /* UIWebView+CSKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE720919965F14002E3ED4 /* UIWebView+CSKit.m */; };
+		09FE720D199660D0002E3ED4 /* CSUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE720C199660D0002E3ED4 /* CSUtils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -440,10 +444,6 @@
 		095F13891967C30A008CF3BE /* CSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CSAppDelegate.m; sourceTree = "<group>"; };
 		095F138C1967C30A008CF3BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		095F138F1967C30B008CF3BE /* YouJiaoBao.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = YouJiaoBao.xcdatamodel; sourceTree = "<group>"; };
-		095F13911967C30B008CF3BE /* CSMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSMasterViewController.h; sourceTree = "<group>"; };
-		095F13921967C30B008CF3BE /* CSMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CSMasterViewController.m; sourceTree = "<group>"; };
-		095F13941967C30B008CF3BE /* CSDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSDetailViewController.h; sourceTree = "<group>"; };
-		095F13951967C30B008CF3BE /* CSDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CSDetailViewController.m; sourceTree = "<group>"; };
 		095F13971967C30C008CF3BE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		095F139D1967C310008CF3BE /* YouJiaoBaoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YouJiaoBaoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		095F139E1967C310008CF3BE /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -854,6 +854,18 @@
 		09CD666E197C0C2600CC08F1 /* CSRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSRootViewController.m; sourceTree = "<group>"; };
 		09CD667C197C153C00CC08F1 /* CSStudentListMainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSStudentListMainTableViewController.h; sourceTree = "<group>"; };
 		09CD667D197C153C00CC08F1 /* CSStudentListMainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSStudentListMainTableViewController.m; sourceTree = "<group>"; };
+		09FE71FC1995C662002E3ED4 /* CSNoticeItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNoticeItemTableViewCell.h; sourceTree = "<group>"; };
+		09FE71FD1995C662002E3ED4 /* CSNoticeItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNoticeItemTableViewCell.m; sourceTree = "<group>"; };
+		09FE71FF1995DD5B002E3ED4 /* EntityNewsInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityNewsInfo.h; sourceTree = "<group>"; };
+		09FE72001995DD5B002E3ED4 /* EntityNewsInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityNewsInfo.m; sourceTree = "<group>"; };
+		09FE72021995DD89002E3ED4 /* EntityNewsInfoHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityNewsInfoHelper.h; sourceTree = "<group>"; };
+		09FE72031995DD89002E3ED4 /* EntityNewsInfoHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityNewsInfoHelper.m; sourceTree = "<group>"; };
+		09FE720519965C66002E3ED4 /* CSNewsInfoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNewsInfoDetailViewController.h; sourceTree = "<group>"; };
+		09FE720619965C66002E3ED4 /* CSNewsInfoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNewsInfoDetailViewController.m; sourceTree = "<group>"; };
+		09FE720819965F14002E3ED4 /* UIWebView+CSKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIWebView+CSKit.h"; path = "../../../../CSKit-Github/CSKit/UIWebView+CSKit.h"; sourceTree = "<group>"; };
+		09FE720919965F14002E3ED4 /* UIWebView+CSKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIWebView+CSKit.m"; path = "../../../../CSKit-Github/CSKit/UIWebView+CSKit.m"; sourceTree = "<group>"; };
+		09FE720B199660D0002E3ED4 /* CSUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSUtils.h; sourceTree = "<group>"; };
+		09FE720C199660D0002E3ED4 /* CSUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSUtils.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -910,6 +922,8 @@
 				09327E291992233A0089C653 /* CSChildListItemTableViewCell.m */,
 				09B431BE1994D2BF00FF4071 /* CSChildRelationshipItemTableViewCell.h */,
 				09B431BF1994D2BF00FF4071 /* CSChildRelationshipItemTableViewCell.m */,
+				09FE71FC1995C662002E3ED4 /* CSNoticeItemTableViewCell.h */,
+				09FE71FD1995C662002E3ED4 /* CSNoticeItemTableViewCell.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1015,10 +1029,6 @@
 				0906A83219757DEE007F25BE /* Network */,
 				095F13881967C30A008CF3BE /* CSAppDelegate.h */,
 				095F13891967C30A008CF3BE /* CSAppDelegate.m */,
-				095F13941967C30B008CF3BE /* CSDetailViewController.h */,
-				095F13951967C30B008CF3BE /* CSDetailViewController.m */,
-				095F13911967C30B008CF3BE /* CSMasterViewController.h */,
-				095F13921967C30B008CF3BE /* CSMasterViewController.m */,
 				095F13971967C30C008CF3BE /* Images.xcassets */,
 				095F138B1967C30A008CF3BE /* Main.storyboard */,
 				095F13801967C309008CF3BE /* Supporting Files */,
@@ -1072,6 +1082,8 @@
 		098E3DE0198B268500CB4F0B /* CSKit */ = {
 			isa = PBXGroup;
 			children = (
+				09FE720819965F14002E3ED4 /* UIWebView+CSKit.h */,
+				09FE720919965F14002E3ED4 /* UIWebView+CSKit.m */,
 				098E3E9F198B35DC00CB4F0B /* CSKit.pch */,
 				098E4035198B6B3A00CB4F0B /* UIViewController+CSKit.h */,
 				098E4036198B6B3A00CB4F0B /* UIViewController+CSKit.m */,
@@ -1552,11 +1564,13 @@
 				09078D75197D6673006E8756 /* EntityClassInfo.m */,
 				09CD665D197BFA3D00CC08F1 /* EntityLoginInfo.h */,
 				09CD665E197BFA3D00CC08F1 /* EntityLoginInfo.m */,
+				09FE71FF1995DD5B002E3ED4 /* EntityNewsInfo.h */,
+				09FE72001995DD5B002E3ED4 /* EntityNewsInfo.m */,
 				09B431B11994BCC300FF4071 /* EntityParentInfo.h */,
 				09B431B21994BCC300FF4071 /* EntityParentInfo.m */,
-				095F138E1967C30B008CF3BE /* YouJiaoBao.xcdatamodeld */,
 				09B431B41994BCE900FF4071 /* EntityRelationshipInfo.h */,
 				09B431B51994BCE900FF4071 /* EntityRelationshipInfo.m */,
+				095F138E1967C30B008CF3BE /* YouJiaoBao.xcdatamodeld */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -1564,16 +1578,18 @@
 		09CD665C197BF9FA00CC08F1 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				0907CE4A198FCC8700B13202 /* EntityChildInfoHelper.h */,
+				0907CE4B198FCC8700B13202 /* EntityChildInfoHelper.m */,
 				09078D77197D669C006E8756 /* EntityClassInfoHelper.h */,
 				09078D78197D669C006E8756 /* EntityClassInfoHelper.m */,
 				09CD6660197BFA6600CC08F1 /* EntityLoginInfoHelper.h */,
 				09CD6661197BFA6600CC08F1 /* EntityLoginInfoHelper.m */,
-				0907CE4A198FCC8700B13202 /* EntityChildInfoHelper.h */,
-				0907CE4B198FCC8700B13202 /* EntityChildInfoHelper.m */,
-				09B431B81994C1BF00FF4071 /* EntityRelationshipInfoHelper.h */,
-				09B431B91994C1BF00FF4071 /* EntityRelationshipInfoHelper.m */,
+				09FE72021995DD89002E3ED4 /* EntityNewsInfoHelper.h */,
+				09FE72031995DD89002E3ED4 /* EntityNewsInfoHelper.m */,
 				09B431BB1994C1DC00FF4071 /* EntityParentInfoHelper.h */,
 				09B431BC1994C1DC00FF4071 /* EntityParentInfoHelper.m */,
+				09B431B81994C1BF00FF4071 /* EntityRelationshipInfoHelper.h */,
+				09B431B91994C1BF00FF4071 /* EntityRelationshipInfoHelper.m */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -1584,6 +1600,8 @@
 				09B431C11995199A00FF4071 /* Model */,
 				09CD6667197BFD3600CC08F1 /* CSEngine.h */,
 				09CD6668197BFD3600CC08F1 /* CSEngine.m */,
+				09FE720B199660D0002E3ED4 /* CSUtils.h */,
+				09FE720C199660D0002E3ED4 /* CSUtils.m */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
@@ -1592,6 +1610,10 @@
 			isa = PBXGroup;
 			children = (
 				0956E3961981543B0049202E /* Amr */,
+				090C63971993A0D400398B40 /* CSChildProfileHeaderViewController.h */,
+				090C63981993A0D400398B40 /* CSChildProfileHeaderViewController.m */,
+				090C639419939D5400398B40 /* CSChildProfileViewController.h */,
+				090C639519939D5500398B40 /* CSChildProfileViewController.m */,
 				098E4081198B7ABC00CB4F0B /* CSGrowExpViewController.h */,
 				098E4082198B7ABC00CB4F0B /* CSGrowExpViewController.m */,
 				098E4087198B7B1F00CB4F0B /* CSHomeWorkTableViewController.h */,
@@ -1600,6 +1622,8 @@
 				09CD666C197C0C2600CC08F1 /* CSLoginViewController.m */,
 				098E402F198B647000CB4F0B /* CSMainViewController.h */,
 				098E4030198B647000CB4F0B /* CSMainViewController.m */,
+				09FE720519965C66002E3ED4 /* CSNewsInfoDetailViewController.h */,
+				09FE720619965C66002E3ED4 /* CSNewsInfoDetailViewController.m */,
 				098E408A198B7B2C00CB4F0B /* CSNoticeTableViewController.h */,
 				098E408B198B7B2C00CB4F0B /* CSNoticeTableViewController.m */,
 				098E3EA3198B614400CB4F0B /* CSProfileHeaderViewController.h */,
@@ -1610,10 +1634,6 @@
 				098E4033198B6A0500CB4F0B /* CSSettingsViewController.m */,
 				09CD667C197C153C00CC08F1 /* CSStudentListMainTableViewController.h */,
 				09CD667D197C153C00CC08F1 /* CSStudentListMainTableViewController.m */,
-				090C639419939D5400398B40 /* CSChildProfileViewController.h */,
-				090C639519939D5500398B40 /* CSChildProfileViewController.m */,
-				090C63971993A0D400398B40 /* CSChildProfileHeaderViewController.h */,
-				090C63981993A0D400398B40 /* CSChildProfileHeaderViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2034,18 +2054,19 @@
 				09C2D4E61969BCA000B8A895 /* AFURLConnectionOperation.m in Sources */,
 				09C2D4F11969BCA000B8A895 /* UIProgressView+AFNetworking.m in Sources */,
 				09B431B61994BCE900FF4071 /* EntityRelationshipInfo.m in Sources */,
-				095F13961967C30B008CF3BE /* CSDetailViewController.m in Sources */,
 				09CD667E197C153C00CC08F1 /* CSStudentListMainTableViewController.m in Sources */,
 				09078D79197D669C006E8756 /* EntityClassInfoHelper.m in Sources */,
 				09C2D4EE1969BCA000B8A895 /* UIAlertView+AFNetworking.m in Sources */,
 				098E407C198B799000CB4F0B /* TPKeyboardAvoidingTableView.m in Sources */,
 				098E407B198B799000CB4F0B /* TPKeyboardAvoidingScrollView.m in Sources */,
 				09B431B31994BCC300FF4071 /* EntityParentInfo.m in Sources */,
+				09FE72041995DD89002E3ED4 /* EntityNewsInfoHelper.m in Sources */,
 				0956E3991981544B0049202E /* amrFileCodec.m in Sources */,
-				095F13931967C30B008CF3BE /* CSMasterViewController.m in Sources */,
 				098E4063198B799000CB4F0B /* EGORefreshTableHeaderView.m in Sources */,
 				098E4031198B647000CB4F0B /* CSMainViewController.m in Sources */,
+				09FE720A19965F14002E3ED4 /* UIWebView+CSKit.m in Sources */,
 				09CD6669197BFD3600CC08F1 /* CSEngine.m in Sources */,
+				09FE72011995DD5B002E3ED4 /* EntityNewsInfo.m in Sources */,
 				098E4066198B799000CB4F0B /* PullTableView.m in Sources */,
 				098E4083198B7ABC00CB4F0B /* CSGrowExpViewController.m in Sources */,
 				09CD6670197C0C2600CC08F1 /* CSRootViewController.m in Sources */,
@@ -2059,7 +2080,9 @@
 				098E407A198B799000CB4F0B /* TPKeyboardAvoidingCollectionView.m in Sources */,
 				098E4065198B799000CB4F0B /* MessageInterceptor.m in Sources */,
 				095F138A1967C30A008CF3BE /* CSAppDelegate.m in Sources */,
+				09FE720719965C66002E3ED4 /* CSNewsInfoDetailViewController.m in Sources */,
 				09C2D4ED1969BCA000B8A895 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				09FE720D199660D0002E3ED4 /* CSUtils.m in Sources */,
 				098E4076198B799000CB4F0B /* MBProgressHUD.m in Sources */,
 				098E407D198B799000CB4F0B /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				0906A83A19758727007F25BE /* CSRootSegue.m in Sources */,
@@ -2076,6 +2099,7 @@
 				09CD666F197C0C2600CC08F1 /* CSLoginViewController.m in Sources */,
 				0906A83519757E2C007F25BE /* CSHttpClient.m in Sources */,
 				09C2D4E11969BCA000B8A895 /* AFHTTPRequestOperation.m in Sources */,
+				09FE71FE1995C662002E3ED4 /* CSNoticeItemTableViewCell.m in Sources */,
 				0907CE56198FD3B300B13202 /* EntityChildInfo.m in Sources */,
 				09B431BD1994C1DC00FF4071 /* EntityParentInfoHelper.m in Sources */,
 				098E4071198B799000CB4F0B /* JSBadgeView.m in Sources */,

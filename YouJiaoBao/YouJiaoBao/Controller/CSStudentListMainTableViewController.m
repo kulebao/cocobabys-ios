@@ -188,43 +188,20 @@
 }
 
 - (void)doRefresh {
-    [self doReloadClassList];
+    [self reloadChildList];
+    [self reloadDailylogList];
 }
 
-- (void)doReloadClassList {
-    CSHttpClient* http = [CSHttpClient sharedInstance];
+- (void)reloadChildList {
     CSEngine* engine = [CSEngine sharedInstance];
+    NSArray* classInfoList = engine.classInfoList;
     
-    id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSArray* classInfoList = [EntityClassInfoHelper updateEntities:responseObject
-                                                           forEmployee:engine.loginInfo.uid
-                                                        ofKindergarten:engine.loginInfo.schoolId.integerValue];
-        [self doReloadChildList:classInfoList];
-        [self doReloadDailylogList:classInfoList];
-    };
-    
-    id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
-        if (operation.response.statusCode == 401) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:kNotiUnauthorized
-                                                                object:error
-                                                              userInfo:nil];
-        }
-    };
-    
-    [http opGetClassListOfKindergarten:engine.loginInfo.schoolId.integerValue
-                        withEmployeeId:engine.loginInfo.phone
-                      success:success
-                      failure:failure];
-}
-
-- (void)doReloadChildList:(NSArray*)classInfoList{
     NSMutableArray* classIdList = [NSMutableArray array];
     for (EntityClassInfo* classInfo in classInfoList) {
         [classIdList addObject:classInfo.classId.stringValue];
     }
  
     CSHttpClient* http = [CSHttpClient sharedInstance];
-    CSEngine* engine = [CSEngine sharedInstance];
     
     id success = ^(AFHTTPRequestOperation *operation, id jsonObjectList) {
         [EntityChildInfoHelper updateEntities:jsonObjectList];
@@ -240,14 +217,16 @@
                                failure:failure];
 }
 
-- (void)doReloadDailylogList:(NSArray*)classInfoList{
+- (void)reloadDailylogList{
+    CSEngine* engine = [CSEngine sharedInstance];
+    NSArray* classInfoList = engine.classInfoList;
+    
     NSMutableArray* classIdList = [NSMutableArray array];
     for (EntityClassInfo* classInfo in classInfoList) {
         [classIdList addObject:classInfo.classId.stringValue];
     }
     
     CSHttpClient* http = [CSHttpClient sharedInstance];
-    CSEngine* engine = [CSEngine sharedInstance];
     
     id success = ^(AFHTTPRequestOperation *operation, id jsonObjectList) {
 

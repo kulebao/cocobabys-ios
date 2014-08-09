@@ -30,6 +30,10 @@ NSString* kKeyLoginAccount = @"key.login.account";
     _loginInfo = loginInfo;
 }
 
+- (void)onLoadClassInfoList:(NSArray*)classInfoList {
+    _classInfoList = classInfoList;
+}
+
 - (BOOL)encryptAccount:(ModelAccount*)account {
     BOOL ok = NO;
     if (account.username.length > 0 && account.password.length > 0) {

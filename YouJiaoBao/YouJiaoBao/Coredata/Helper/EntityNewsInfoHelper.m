@@ -63,9 +63,9 @@
                 entity.noticeType = [jsonObject objectForKey:@"notice_type"];
                 entity.timestamp = [jsonObject objectForKey:@"timestamp"];
                 entity.read = @(0);
+                
+                [returnObjectList addObject:entity];
             }
-            
-            [returnObjectList addObject:entity];
         }
     }
     

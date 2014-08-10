@@ -21,5 +21,6 @@
 #define kPathKindergartenDailylogList   @"/kindergarten/%@/dailylog"
 #define kPathKindergartenRelationship   @"/kindergarten/%@/relationship"
 #define kPathKindergartenNewsList       @"/kindergarten/%@/news"
+#define kPathKindergartenAssignmentList @"/kindergarten/%@/assignment"
 
 #endif

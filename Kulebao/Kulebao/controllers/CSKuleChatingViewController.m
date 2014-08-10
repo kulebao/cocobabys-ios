@@ -15,13 +15,19 @@
 #import "CSKuleParentInfo.h"
 #import "XHImageViewer.h"
 #import "UIImageView+XHURLDownload.h"
+#import <AVFoundation/AVFoundation.h>
+#import "amrFileCodec.h"
 
-@interface CSKuleChatingViewController () <UITableViewDataSource, UITableViewDelegate, PullTableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CSKuleChatingEditorViewControllerDelegate, XHImageViewerDelegate> {
+@interface CSKuleChatingViewController () <UITableViewDataSource, UITableViewDelegate, PullTableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CSKuleChatingEditorViewControllerDelegate, XHImageViewerDelegate, AVAudioPlayerDelegate> {
     UIImagePickerController* _imgPicker;
     NSMutableArray* _topicMsgList;
+    
+    AVAudioPlayer* _audioPlayer;
 }
 
 @property (weak, nonatomic) IBOutlet PullTableView *tableview;
+@property (nonatomic, strong) CSKuleTopicMsg* playingMsg;
+
 - (IBAction)onBtnEditorClicked:(id)sender;
 - (IBAction)onBtnCameraClicked:(id)sender;
 - (IBAction)onBtnPhotosClicked:(id)sender;
@@ -29,6 +35,8 @@
 @end
 
 @implementation CSKuleChatingViewController
+@synthesize playingMsg = _playingMsg;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -161,6 +169,14 @@
         labMsgSender.textAlignment = NSTextAlignmentCenter;
         labMsgSender.textColor = UIColorRGB(0xCC, 0x66, 0x33);;
         [cell.contentView addSubview:labMsgSender];
+        
+        UIImageView* voiceMsgBody = [[UIImageView alloc] initWithFrame:CGRectNull];
+        voiceMsgBody.tag = 106;
+        [cell.contentView addSubview:voiceMsgBody];
+        voiceMsgBody.animationImages = @[[UIImage imageNamed:@"playing_1.png"],
+                                         [UIImage imageNamed:@"playing_2.png"],
+                                         [UIImage imageNamed:@"playing_3.png"]];
+        voiceMsgBody.animationDuration = 0.7;
     }
     
     UIImageView* imgBubbleBg = (UIImageView*)[cell.contentView viewWithTag:100];
@@ -169,12 +185,29 @@
     UIImageView* imgPortrait = (UIImageView*)[cell.contentView viewWithTag:103];
     UILabel* labMsgTimestamp = (UILabel*)[cell.contentView viewWithTag:104];
     UILabel* labMsgSender = (UILabel*)[cell.contentView viewWithTag:105];
+    UIImageView* voiceMsgBody = (UIImageView*)[cell.contentView viewWithTag:106];
     
     CSKuleTopicMsg* msg = [_topicMsgList objectAtIndex:indexPath.row];
     CGSize msgBodySize = [self textSize:msg.content];
     NSString* timestampString = [[NSDate dateWithTimeIntervalSince1970:msg.timestamp] isoDateTimeString];
     labMsgTimestamp.frame = CGRectMake(40, 0, 320-40-40, 12);
     labMsgTimestamp.text = timestampString;
+    
+    labMsgBody.frame = CGRectNull;
+    labMsgBody.text = nil;
+    
+    imgMsgBody.frame = CGRectNull;
+    imgMsgBody.image = nil;
+    
+    voiceMsgBody.frame = CGRectNull;
+    voiceMsgBody.image = nil;
+    
+    if ([self.playingMsg isEqual:msg]) {
+        [voiceMsgBody startAnimating];
+    }
+    else {
+        [voiceMsgBody stopAnimating];
+    }
     
     if ([msg.sender.type isEqualToString:@"t"]) {
         // From
@@ -183,23 +216,26 @@
         
         imgPortrait.frame = CGRectMake(2, 24, 32, 32);
         
-        UIImage* bgImage = [UIImage imageNamed:@"msg-bg-from.png"];
-        imgBubbleBg.image = [bgImage resizableImageWithCapInsets:UIEdgeInsetsMake(35, 15, 10, 10)];
+        UIImage* bgImage = [UIImage imageNamed:@"chat_content_left.9.png"];
+        imgBubbleBg.image = [bgImage resizableImageWithCapInsets:UIEdgeInsetsMake(25, 25, 25, 25)];
 
         labMsgSender.frame = CGRectMake(45, 12, 136, 12);
         labMsgSender.textAlignment = NSTextAlignmentLeft;
         
         if (msg.media.url.length > 0) {
-            imgBubbleBg.frame = CGRectMake(36, 12+12, 90, 78);
-            imgMsgBody.frame = CGRectMake(52, 18+12, 64, 64);
-            labMsgBody.frame = CGRectNull;
-            labMsgBody.text = nil;
+            if ([msg.media.type isEqualToString:@"voice"]) {
+                imgBubbleBg.frame = CGRectMake(36, 12+12, 75, 48);
+                voiceMsgBody.frame = CGRectMake(52, 18+12, 32, 32);
+                
+                voiceMsgBody.image = [UIImage imageNamed:@"playing_3.png"];
+            }
+            else {
+                imgBubbleBg.frame = CGRectMake(36, 12+12, 90, 78);
+                imgMsgBody.frame = CGRectMake(52, 18+12, 64, 64);
+            }
         }
         else {
             imgBubbleBg.frame = CGRectMake(36, 12+12, msgBodySize.width + 30, msgBodySize.height+14);
-            
-            imgMsgBody.frame = CGRectNull;
-            imgMsgBody.image = nil;
             
             labMsgBody.text = msg.content;
             labMsgBody.frame = CGRectMake(imgBubbleBg.frame.origin.x + 16, 18+12, msgBodySize.width, msgBodySize.height);
@@ -209,23 +245,26 @@
         // To
         imgPortrait.frame = CGRectMake(320-2-32-2, 24, 32, 32);
         
-        UIImage* bgImage = [UIImage imageNamed:@"msg-bg-to.png"];
-        imgBubbleBg.image = [bgImage resizableImageWithCapInsets:UIEdgeInsetsMake(35, 10, 10, 15)];
+        UIImage* bgImage = [UIImage imageNamed:@"chat_content_right.9.png"];
+        imgBubbleBg.image = [bgImage resizableImageWithCapInsets:UIEdgeInsetsMake(25, 25, 25, 25)];
 
         labMsgSender.frame = CGRectMake(320-2-132-4-45, 12, 136, 12);
         labMsgSender.textAlignment = NSTextAlignmentRight;
         
         if (msg.media.url.length > 0) {
-            imgBubbleBg.frame =  CGRectMake(320-36-90, 12+12, 90, 78);
-            imgMsgBody.frame = CGRectMake(imgBubbleBg.frame.origin.x+10, 18+12, 64, 64);
-            labMsgBody.frame = CGRectNull;
-            labMsgBody.text = nil;
+            if ([msg.media.type isEqualToString:@"voice"]) {
+                imgBubbleBg.frame =  CGRectMake(320-36-90, 12+12, 75, 48);
+                voiceMsgBody.frame = CGRectMake(imgBubbleBg.frame.origin.x+10, 18+12, 32, 32);
+                
+                voiceMsgBody.image = [UIImage imageNamed:@"playing_3.png"];
+            }
+            else {
+                imgBubbleBg.frame =  CGRectMake(320-36-90, 12+12, 90, 78);
+                imgMsgBody.frame = CGRectMake(imgBubbleBg.frame.origin.x+10, 18+12, 64, 64);
+            }
         }
         else {
             imgBubbleBg.frame = CGRectMake(320-36-msgBodySize.width-30, 12+12, msgBodySize.width + 30, msgBodySize.height+14);
-            
-            imgMsgBody.frame = CGRectNull;
-            imgMsgBody.image = nil;
             
             labMsgBody.text = msg.content;
             labMsgBody.frame = CGRectMake(imgBubbleBg.frame.origin.x + 12, 18+12, msgBodySize.width, msgBodySize.height);
@@ -234,19 +273,15 @@
     
     // msg with picture.
     if (msg.media.url.length > 0) {
-        NSURL* qiniuImgUrl = [gApp.engine urlFromPath:msg.media.url];
-        [imgMsgBody loadWithURL:qiniuImgUrl
-                     placeholer:[UIImage imageNamed:@"img-placeholder.png"]
-      showActivityIndicatorView:YES];
-        
-//        qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/128/h/128"];
-//        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:qiniuImgUrl];
-//        [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
-//        request.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
-//        [imgMsgBody setImageWithURLRequest:request
-//                          placeholderImage:nil
-//                                   success:nil
-//                                   failure:nil];
+        if ([msg.media.type isEqualToString:@"voice"]) {
+            
+        }
+        else {
+            NSURL* qiniuImgUrl = [gApp.engine urlFromPath:msg.media.url];
+            [imgMsgBody loadWithURL:qiniuImgUrl
+                         placeholer:[UIImage imageNamed:@"img-placeholder.png"]
+          showActivityIndicatorView:YES];
+        }
     }
     
     // Get Sender avatar and name.
@@ -323,7 +358,12 @@
     CSKuleTopicMsg* msg = [_topicMsgList objectAtIndex:indexPath.row];
     CGFloat height = 0.0;
     if (msg.media.url.length > 0) {
-        height = 95;
+        if ([msg.media.type isEqualToString:@"voice"]) {
+            height = 65;
+        }
+        else {
+            height = 95;
+        }
     }
     else {
         CGSize sz = [self textSize:msg.content];
@@ -337,7 +377,40 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    CSKuleTopicMsg* msg = [_topicMsgList objectAtIndex:indexPath.row];
+    if ([msg.media.type isEqualToString:@"voice"]) {
+        NSURL* voiceUrl = [NSURL URLWithString:msg.media.url];
+        
+        NSMutableSet* updateIndexPaths = [NSMutableSet set];
+        
+        if (self.playingMsg != nil) {
+            NSUInteger index = [_topicMsgList indexOfObject:self.playingMsg];
+            if (index != NSNotFound) {
+                [updateIndexPaths addObject:[NSIndexPath indexPathForItem:index inSection:0]];
+            }
+            _audioPlayer.delegate = nil;
+            [_audioPlayer stop];
+        }
+        
+        self.playingMsg = msg;
+        [updateIndexPaths addObject:indexPath];
+        [tableView reloadRowsAtIndexPaths:[updateIndexPaths allObjects]
+                         withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+        if (self.playingMsg != nil) {
+            NSData* amrData = [NSData dataWithContentsOfURL:voiceUrl];
+            NSData* waveData = DecodeAMRToWAVE(amrData);
+            NSError* error = nil;
+            _audioPlayer = [[AVAudioPlayer alloc] initWithData:waveData error:&error];
+            if (error) {
+                CSLog(@"ERROR: %@", error);
+            }
+            else {
+                _audioPlayer.delegate = self;
+                [_audioPlayer play];
+            }
+        }
+    }
 }
 
 #pragma mark - PullTableViewDelegate
@@ -668,6 +741,48 @@
 
 #pragma mark - XHImageViewerDelegate
 - (void)imageViewer:(XHImageViewer *)imageViewer willDismissWithSelectedView:(UIImageView *)selectedView {
+}
+
+#pragma mark - AVAudioPlayerDelegate
+- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
+    NSMutableSet* updateIndexPaths = [NSMutableSet set];
+    
+    if (self.playingMsg != nil) {
+        NSUInteger index = [_topicMsgList indexOfObject:self.playingMsg];
+        if (index != NSNotFound) {
+            [updateIndexPaths addObject:[NSIndexPath indexPathForItem:index inSection:0]];
+        }
+        _audioPlayer.delegate = nil;
+        [_audioPlayer stop];
+        
+        self.playingMsg = nil;
+        [self.tableview reloadRowsAtIndexPaths:[updateIndexPaths allObjects]
+                         withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+}
+
+/* if an error occurs while decoding it will be reported to the delegate. */
+- (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError *)error {
+    NSMutableSet* updateIndexPaths = [NSMutableSet set];
+    
+    if (self.playingMsg != nil) {
+        NSUInteger index = [_topicMsgList indexOfObject:self.playingMsg];
+        if (index != NSNotFound) {
+            [updateIndexPaths addObject:[NSIndexPath indexPathForItem:index inSection:0]];
+        }
+        _audioPlayer.delegate = nil;
+        [_audioPlayer stop];
+        
+        self.playingMsg = nil;
+        [self.tableview reloadRowsAtIndexPaths:[updateIndexPaths allObjects]
+                              withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+}
+
+#pragma mark - PlayingMsg 
+- (void)setPlayingMsg:(CSKuleTopicMsg *)playingMsg {
+    _playingMsg = playingMsg;
+    
 }
 
 @end

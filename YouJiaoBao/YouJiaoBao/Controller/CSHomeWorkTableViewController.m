@@ -7,8 +7,21 @@
 //
 
 #import "CSHomeWorkTableViewController.h"
+#import "PullTableView.h"
+#import "CSAssignmentItemTableViewCell.h"
+#import "CSAppDelegate.h"
+#import "CSHttpClient.h"
+#import "CSEngine.h"
+#import "EntityClassInfo.h"
+#import "EntityAssignmentInfoHelper.h"
+#import "CSAssignmentInfoDetailViewController.h"
+#import "CSCreateNoticeViewController.h"
 
-@interface CSHomeWorkTableViewController ()
+@interface CSHomeWorkTableViewController () <PullTableViewDelegate, NSFetchedResultsControllerDelegate> {
+    NSFetchedResultsController* _frCtrl;
+}
+
+@property (strong, nonatomic) IBOutlet PullTableView *pullTableView;
 
 @end
 
@@ -33,6 +46,32 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     [self customizeBackBarItem];
+    
+    [self customizeOkBarItemWithTarget:self action:@selector(onCreateAssignment:) text:@"创建"];
+    
+    self.pullTableView.pullDelegate = self;
+    self.pullTableView.pullBackgroundColor = [UIColor clearColor];
+    self.pullTableView.pullTextColor = UIColorRGB(0xCC, 0x66, 0x33);
+    self.pullTableView.pullArrowImage = [UIImage imageNamed:@"grayArrow.png"];
+    
+    CSEngine* engine = [CSEngine sharedInstance];
+    NSArray* classInfoList = engine.classInfoList;
+    
+    NSMutableArray* classIdList = [NSMutableArray array];
+    for (EntityClassInfo* classInfo in classInfoList) {
+        [classIdList addObject:classInfo.classId.stringValue];
+    }
+    
+    _frCtrl = [EntityAssignmentInfoHelper frAssignmentsWithClassList:classIdList
+                                                      ofKindergarten:engine.loginInfo.schoolId.integerValue];
+    _frCtrl.delegate = self;
+    
+    NSError* error = nil;
+    if (![_frCtrl performFetch:&error]) {
+        CSLog(@"frAssignmentsWithClassList Error: %@", error);
+    }
+    
+    [self reloadAssignmentList];
 }
 
 - (void)didReceiveMemoryWarning
@@ -41,72 +80,79 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
+- (void)onCreateAssignment:(id)sender {
+    [self performSegueWithIdentifier:@"segue.assignment.create" sender:nil];
+}
 
+#pragma mark - UITableViewDelegate & UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return _frCtrl.fetchedObjects.count;
 }
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    CSAssignmentItemTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CSAssignmentItemTableViewCell" forIndexPath:indexPath];
     
     // Configure the cell...
+    EntityAssignmentInfo* AssignmentInfo = [_frCtrl objectAtIndexPath:indexPath];
+    cell.AssignmentInfo = AssignmentInfo;
     
     return cell;
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    EntityAssignmentInfo* AssignmentInfo = [_frCtrl objectAtIndexPath:indexPath];
+    [self performSegueWithIdentifier:@"segue.assignment.detail" sender:AssignmentInfo];
 }
-*/
 
 /*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
+ // Override to support conditional editing of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ // Return NO if you do not want the specified item to be editable.
+ return YES;
+ }
+ */
 
 /*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
+ // Override to support editing the table view.
+ - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ if (editingStyle == UITableViewCellEditingStyleDelete) {
+ // Delete the row from the data source
+ [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+ } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+ // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+ }
+ }
+ */
 
 /*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
+ // Override to support rearranging the table view.
+ - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+ {
+ }
+ */
 
 /*
+ // Override to support conditional rearranging of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ // Return NO if you do not want the item to be re-orderable.
+ return YES;
+ }
+ */
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -114,7 +160,181 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"segue.assignment.detail"]) {
+        CSAssignmentInfoDetailViewController* ctrl = segue.destinationViewController;
+        ctrl.assignmentInfo = sender;
+    }
+    else if ([segue.identifier isEqualToString:@"segue.assignment.create"]) {
+        CSCreateNoticeViewController* ctrl = segue.destinationViewController;
+        ctrl.delegate = self;
+    }
 }
-*/
+
+#pragma mark - CSCreateNoticeViewControllerDelegate
+- (void)createNoticeViewControllerSuccessed:(CSCreateNoticeViewController*)ctrl {
+    [self reloadAssignmentList];
+}
+
+#pragma mark - PullTableViewDelegate
+- (void)pullTableViewDidTriggerRefresh:(PullTableView*)pullTableView {
+    [self performSelector:@selector(refreshTable)
+               withObject:nil
+               afterDelay:.0f];
+}
+
+- (void)pullTableViewDidTriggerLoadMore:(PullTableView*)pullTableView {
+    [self performSelector:@selector(loadMoreDataToTable)
+               withObject:nil
+               afterDelay:.0f];
+}
+
+- (void) refreshTable
+{
+    /*
+     
+     Code to actually refresh goes here.
+     
+     */
+    
+    [self reloadAssignmentList];
+}
+
+- (void) loadMoreDataToTable
+{
+    /*
+     
+     Code to actually load more data goes here.
+     
+     */
+    [self loadMoreAssignmentList];
+}
+
+#pragma mark - Private
+- (void)reloadAssignmentList {
+    CSHttpClient* http = [CSHttpClient sharedInstance];
+    CSEngine* engine = [CSEngine sharedInstance];
+    CSAppDelegate* app = [CSAppDelegate sharedInstance];
+    NSArray* classInfoList = engine.classInfoList;
+    
+    NSMutableArray* classIdList = [NSMutableArray array];
+    for (EntityClassInfo* classInfo in classInfoList) {
+        [classIdList addObject:classInfo.classId.stringValue];
+    }
+    
+    id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSArray* list = [EntityAssignmentInfoHelper updateEntities: responseObject];
+        self.pullTableView.pullLastRefreshDate = [NSDate date];
+        self.pullTableView.pullTableIsRefreshing = NO;
+        
+        if (list.count == 0) {
+            [app alert:@"已是最新"];
+        }
+    };
+    
+    id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        self.pullTableView.pullLastRefreshDate = [NSDate date];
+        self.pullTableView.pullTableIsRefreshing = NO;
+    };
+    
+    EntityAssignmentInfo* lastestAssignmentInfo = [_frCtrl.fetchedObjects firstObject];
+    
+    [http opGetAssignmentsOfClasses:classIdList
+                     inKindergarten:engine.loginInfo.schoolId.integerValue
+                               from:lastestAssignmentInfo.timestamp
+                                 to:nil
+                               most:nil
+                            success:success
+                            failure:failure];
+}
+
+- (void)loadMoreAssignmentList {
+    CSHttpClient* http = [CSHttpClient sharedInstance];
+    CSEngine* engine = [CSEngine sharedInstance];
+    CSAppDelegate* app = [CSAppDelegate sharedInstance];
+    NSArray* classInfoList = engine.classInfoList;
+    
+    NSMutableArray* classIdList = [NSMutableArray array];
+    for (EntityClassInfo* classInfo in classInfoList) {
+        [classIdList addObject:classInfo.classId.stringValue];
+    }
+    
+    id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSArray* list = [EntityAssignmentInfoHelper updateEntities: responseObject];
+        
+        self.pullTableView.pullTableIsLoadingMore = NO;
+        
+        if (list.count == 0) {
+            [app alert:@"没有更多作业了"];
+        }
+    };
+    
+    id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        self.pullTableView.pullTableIsLoadingMore = NO;
+    };
+    
+    EntityAssignmentInfo* earliestAssignmentInfo = [_frCtrl.fetchedObjects lastObject];
+    
+    [http opGetAssignmentsOfClasses:classIdList
+                     inKindergarten:engine.loginInfo.schoolId.integerValue
+                               from:nil
+                                 to:earliestAssignmentInfo.timestamp
+                               most:nil
+                            success:success
+                            failure:failure];
+}
+
+#pragma mark - NSFetchedResultsControllerDelegate
+- (void)controller:(NSFetchedResultsController *)controller
+   didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath
+     forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath {
+    
+    UITableView* aTableView = self.pullTableView;
+    
+    if (aTableView) {
+        switch (type) {
+            case NSFetchedResultsChangeUpdate:
+                [aTableView reloadRowsAtIndexPaths:@[indexPath]
+                                  withRowAnimation:UITableViewRowAnimationAutomatic];
+                break;
+            case NSFetchedResultsChangeMove:
+                [aTableView deleteRowsAtIndexPaths:@[indexPath]
+                                  withRowAnimation:UITableViewRowAnimationBottom];
+                [aTableView insertRowsAtIndexPaths:@[newIndexPath]
+                                  withRowAnimation:UITableViewRowAnimationTop];
+                break;
+            case NSFetchedResultsChangeDelete:
+                [aTableView deleteRowsAtIndexPaths:@[indexPath]
+                                  withRowAnimation:UITableViewRowAnimationBottom];
+                break;
+            case NSFetchedResultsChangeInsert:
+                [aTableView insertRowsAtIndexPaths:@[newIndexPath]
+                                  withRowAnimation:UITableViewRowAnimationFade];
+                break;
+            default:
+                break;
+        }
+    }
+}
+
+- (void)controller:(NSFetchedResultsController *)controller
+  didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
+           atIndex:(NSUInteger)sectionIndex
+     forChangeType:(NSFetchedResultsChangeType)type {
+}
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    [self.pullTableView beginUpdates];
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    [self.pullTableView endUpdates];
+}
+
+- (NSString *)controller:(NSFetchedResultsController *)controller sectionIndexTitleForSectionName:(NSString *)sectionName {
+    return nil;
+}
 
 @end

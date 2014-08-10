@@ -336,4 +336,5 @@
 - (NSString *)controller:(NSFetchedResultsController *)controller sectionIndexTitleForSectionName:(NSString *)sectionName {
     return nil;
 }
+
 @end

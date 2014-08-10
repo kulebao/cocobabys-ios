@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13E28" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="EntityAssignmentInfo" representedClassName="EntityAssignmentInfo" syncable="YES">
+        <attribute name="classId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="iconUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="publisher" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="read" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="schoolId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="timestamp" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
     <entity name="EntityChildInfo" representedClassName="EntityChildInfo" syncable="YES">
         <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="birthday" optional="YES" attributeType="String" syncable="YES"/>
@@ -73,8 +84,9 @@
         <element name="EntityChildInfo" positionX="261" positionY="306" width="128" height="223"/>
         <element name="EntityClassInfo" positionX="261" positionY="297" width="128" height="120"/>
         <element name="EntityLoginInfo" positionX="261" positionY="198" width="128" height="240"/>
+        <element name="EntityNewsInfo" positionX="261" positionY="351" width="128" height="208"/>
         <element name="EntityParentInfo" positionX="261" positionY="342" width="128" height="210"/>
         <element name="EntityRelationshipInfo" positionX="270" positionY="360" width="128" height="118"/>
-        <element name="EntityNewsInfo" positionX="261" positionY="351" width="128" height="208"/>
+        <element name="EntityAssignmentInfo" positionX="261" positionY="351" width="128" height="178"/>
     </elements>
 </model>

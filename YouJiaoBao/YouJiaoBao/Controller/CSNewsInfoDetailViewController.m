@@ -75,7 +75,7 @@
     </head>\
     <body>\
     <div style='text-align:center;font-size:16pt;font-weight:bold;color:#cc6633'>%@</div>\
-    <div style='text-align:center;font-size:10pt;'>%@%@</div>\
+    <div style='text-align:center;font-size:10pt;color:#666666'>%@ %@</div>\
     <p>\
     <div style='word-break:break-all;width:100%%;font-size:13pt'>%@</div>\
     %@\

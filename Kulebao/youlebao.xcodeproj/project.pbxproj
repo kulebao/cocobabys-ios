@@ -255,8 +255,15 @@
 		0934F09618BF5B0800E30ECA /* settings-row-bg-top.png in Resources */ = {isa = PBXBuildFile; fileRef = 0934F04A18BF5B0800E30ECA /* settings-row-bg-top.png */; };
 		0934F09718BF5B0800E30ECA /* settings-row-bg-top@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0934F04B18BF5B0800E30ECA /* settings-row-bg-top@2x.png */; };
 		093904DD18BDDA90006E8F82 /* CSKuleRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 093904DC18BDDA90006E8F82 /* CSKuleRootViewController.m */; };
+		093C20F1199915B400A12F1A /* libHM_hmsdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 093C20EF199915B400A12F1A /* libHM_hmsdk.a */; };
 		093CD6B618D9771D0025972C /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 093CD6B518D9771D0025972C /* UIImageView+AFNetworking.m */; };
 		093CD6B918D986A20025972C /* CSKuleAssessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 093CD6B818D986A20025972C /* CSKuleAssessViewController.m */; };
+		093D89C91999BF4D006B013B /* CSKuleHistoryMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 093D89C81999BF4D006B013B /* CSKuleHistoryMainViewController.m */; };
+		093D89CC1999C242006B013B /* CSKuleCCTVMainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 093D89CB1999C242006B013B /* CSKuleCCTVMainTableViewController.m */; };
+		093D89CF1999C27E006B013B /* CSKuleHistoryMonthCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 093D89CE1999C27E006B013B /* CSKuleHistoryMonthCell.m */; };
+		093D89D2199A177A006B013B /* CSKuleHistoryListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 093D89D1199A177A006B013B /* CSKuleHistoryListTableViewController.m */; };
+		093D89D4199A76B9006B013B /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 093D89D3199A76B9006B013B /* GLKit.framework */; };
+		093D89D7199A76E1006B013B /* CSKuleCCTVPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 093D89D6199A76E1006B013B /* CSKuleCCTVPlayViewController.m */; };
 		09416C9918E41BF600DFEA44 /* bg-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 09416C8D18E41BF600DFEA44 /* bg-2.png */; };
 		09416C9A18E41BF600DFEA44 /* bg-2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09416C8E18E41BF600DFEA44 /* bg-2@2x.png */; };
 		09416C9B18E41BF600DFEA44 /* bg-dialog.png in Resources */ = {isa = PBXBuildFile; fileRef = 09416C8F18E41BF600DFEA44 /* bg-dialog.png */; };
@@ -842,10 +849,24 @@
 		093904D818BDDA40006E8F82 /* CSKuleServerUrls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleServerUrls.h; sourceTree = "<group>"; };
 		093904DB18BDDA90006E8F82 /* CSKuleRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleRootViewController.h; sourceTree = "<group>"; };
 		093904DC18BDDA90006E8F82 /* CSKuleRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleRootViewController.m; sourceTree = "<group>"; };
+		093C20EE199915B400A12F1A /* hm_sdk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hm_sdk.h; sourceTree = "<group>"; };
+		093C20EF199915B400A12F1A /* libHM_hmsdk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libHM_hmsdk.a; sourceTree = "<group>"; };
+		093C20F0199915B400A12F1A /* ShowDelay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowDelay.h; sourceTree = "<group>"; };
 		093CD6B418D9771D0025972C /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
 		093CD6B518D9771D0025972C /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
 		093CD6B718D986A20025972C /* CSKuleAssessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleAssessViewController.h; sourceTree = "<group>"; };
 		093CD6B818D986A20025972C /* CSKuleAssessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleAssessViewController.m; sourceTree = "<group>"; };
+		093D89C71999BF4D006B013B /* CSKuleHistoryMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleHistoryMainViewController.h; sourceTree = "<group>"; };
+		093D89C81999BF4D006B013B /* CSKuleHistoryMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleHistoryMainViewController.m; sourceTree = "<group>"; };
+		093D89CA1999C242006B013B /* CSKuleCCTVMainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleCCTVMainTableViewController.h; sourceTree = "<group>"; };
+		093D89CB1999C242006B013B /* CSKuleCCTVMainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleCCTVMainTableViewController.m; sourceTree = "<group>"; };
+		093D89CD1999C27E006B013B /* CSKuleHistoryMonthCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleHistoryMonthCell.h; sourceTree = "<group>"; };
+		093D89CE1999C27E006B013B /* CSKuleHistoryMonthCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleHistoryMonthCell.m; sourceTree = "<group>"; };
+		093D89D0199A177A006B013B /* CSKuleHistoryListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleHistoryListTableViewController.h; sourceTree = "<group>"; };
+		093D89D1199A177A006B013B /* CSKuleHistoryListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleHistoryListTableViewController.m; sourceTree = "<group>"; };
+		093D89D3199A76B9006B013B /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		093D89D5199A76E1006B013B /* CSKuleCCTVPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleCCTVPlayViewController.h; sourceTree = "<group>"; };
+		093D89D6199A76E1006B013B /* CSKuleCCTVPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleCCTVPlayViewController.m; sourceTree = "<group>"; };
 		09416C8D18E41BF600DFEA44 /* bg-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-2.png"; sourceTree = "<group>"; };
 		09416C8E18E41BF600DFEA44 /* bg-2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-2@2x.png"; sourceTree = "<group>"; };
 		09416C8F18E41BF600DFEA44 /* bg-dialog.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-dialog.png"; sourceTree = "<group>"; };
@@ -1155,6 +1176,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				093D89D4199A76B9006B013B /* GLKit.framework in Frameworks */,
 				09F74CC51997CB1E001555D0 /* AVFoundation.framework in Frameworks */,
 				0902CAA818F4200A001901A8 /* AudioToolbox.framework in Frameworks */,
 				09142DBF18E2751000E5848F /* libc++.dylib in Frameworks */,
@@ -1169,6 +1191,7 @@
 				09BA1C0418BB34B000760182 /* CoreTelephony.framework in Frameworks */,
 				09BA1BEA18BB2FE100760182 /* QuartzCore.framework in Frameworks */,
 				09142DAF18E2713C00E5848F /* libBaiduMobStat.a in Frameworks */,
+				093C20F1199915B400A12F1A /* libHM_hmsdk.a in Frameworks */,
 				09F74CD11997D10C001555D0 /* libopencore-amrnb.a in Frameworks */,
 				09BA1BFC18BB334900760182 /* libBPush.a in Frameworks */,
 				09BA1B9318BB2AB300760182 /* CoreGraphics.framework in Frameworks */,
@@ -1740,6 +1763,10 @@
 				09FE6B0018C5BCFD00A840BE /* CSKuleAssignmentViewController.m */,
 				09A9EBD018C090E100D83119 /* CSKuleAuthViewController.h */,
 				09A9EBD118C090E200D83119 /* CSKuleAuthViewController.m */,
+				093D89CA1999C242006B013B /* CSKuleCCTVMainTableViewController.h */,
+				093D89CB1999C242006B013B /* CSKuleCCTVMainTableViewController.m */,
+				093D89D5199A76E1006B013B /* CSKuleCCTVPlayViewController.h */,
+				093D89D6199A76E1006B013B /* CSKuleCCTVPlayViewController.m */,
 				097ED0B918DAB4AB0057ECA0 /* CSKuleChangePasswordViewController.h */,
 				097ED0BA18DAB4AB0057ECA0 /* CSKuleChangePasswordViewController.m */,
 				0911B1D618E00F62006D0588 /* CSKuleChatingEditorViewController.h */,
@@ -1757,6 +1784,10 @@
 				09F0BF9D18F18EA5004629BA /* CSKuleFeedbackViewController.m */,
 				0912DCDD18ED35D500016868 /* CSKuleForgotPswdViewController.h */,
 				0912DCDE18ED35D600016868 /* CSKuleForgotPswdViewController.m */,
+				093D89D0199A177A006B013B /* CSKuleHistoryListTableViewController.h */,
+				093D89D1199A177A006B013B /* CSKuleHistoryListTableViewController.m */,
+				093D89C71999BF4D006B013B /* CSKuleHistoryMainViewController.h */,
+				093D89C81999BF4D006B013B /* CSKuleHistoryMainViewController.m */,
 				09A9EBB918C0830900D83119 /* CSKuleLoginViewController.h */,
 				09A9EBBA18C0830900D83119 /* CSKuleLoginViewController.m */,
 				09A9EBD318C0A01B00D83119 /* CSKuleMainViewController.h */,
@@ -1795,6 +1826,17 @@
 			path = core;
 			sourceTree = "<group>";
 		};
+		093C20ED199915B400A12F1A /* hmsdk-v2 */ = {
+			isa = PBXGroup;
+			children = (
+				093C20EE199915B400A12F1A /* hm_sdk.h */,
+				093C20EF199915B400A12F1A /* libHM_hmsdk.a */,
+				093C20F0199915B400A12F1A /* ShowDelay.h */,
+			);
+			name = "hmsdk-v2";
+			path = "../../Common/hmsdk-v2";
+			sourceTree = "<group>";
+		};
 		093CD69518D974930025972C /* Interpreter */ = {
 			isa = PBXGroup;
 			children = (
@@ -1827,6 +1869,7 @@
 		09BA1B8F18BB2AB300760182 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				093D89D3199A76B9006B013B /* GLKit.framework */,
 				09F74CC41997CB1E001555D0 /* AVFoundation.framework */,
 				0902CAA718F4200A001901A8 /* AudioToolbox.framework */,
 				09142DBE18E2751000E5848F /* libc++.dylib */,
@@ -1902,6 +1945,7 @@
 		09BA1BC918BB2FC700760182 /* Venders */ = {
 			isa = PBXGroup;
 			children = (
+				093C20ED199915B400A12F1A /* hmsdk-v2 */,
 				09F74CDE1997D14D001555D0 /* Amr */,
 				09F74CC61997D10C001555D0 /* opencore-amr-0.1.3 */,
 				0901511E1939D4060066DEAB /* XHImageViewer */,
@@ -2262,6 +2306,8 @@
 				090C9EC518C84FB000883DE0 /* CSKuleChildCell.h */,
 				090C9EC618C84FB000883DE0 /* CSKuleChildCell.m */,
 				090C9EC818C84FC000883DE0 /* CSKuleChildCell.xib */,
+				093D89CD1999C27E006B013B /* CSKuleHistoryMonthCell.h */,
+				093D89CE1999C27E006B013B /* CSKuleHistoryMonthCell.m */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -2709,6 +2755,7 @@
 			files = (
 				09142DB118E2713C00E5848F /* CFilteringJSONSerializer.m in Sources */,
 				09A9EBD518C0A01B00D83119 /* CSKuleMainViewController.m in Sources */,
+				093D89CC1999C242006B013B /* CSKuleCCTVMainTableViewController.m in Sources */,
 				09FFB5F718D6B46300F07B0A /* CSKuleScheduleInfo.m in Sources */,
 				09142DD218E27E7600E5848F /* ALAlertBannerManager.m in Sources */,
 				09ED59BC18CDC5E800187585 /* CSKuleCookbookInfo.m in Sources */,
@@ -2782,6 +2829,7 @@
 				0904690218C7117D00D0846E /* CSKuleChildInfo.m in Sources */,
 				0934EFCC18BF3D0600E30ECA /* SMPageControl.m in Sources */,
 				09A9EBD818C0A02800D83119 /* CSKuleSettingsViewController.m in Sources */,
+				093D89C91999BF4D006B013B /* CSKuleHistoryMainViewController.m in Sources */,
 				09F0BF9E18F18EA5004629BA /* CSKuleFeedbackViewController.m in Sources */,
 				090C9EC018C846B200883DE0 /* AHAlertView.m in Sources */,
 				09BA1B9D18BB2AB300760182 /* main.m in Sources */,
@@ -2803,12 +2851,14 @@
 				09FE6AEE18C5729500A840BE /* CSKuleNoticeCell.m in Sources */,
 				090C9EB318C81D7500883DE0 /* CSKuleInterpreter.m in Sources */,
 				09A9EBBB18C0830900D83119 /* CSKuleLoginViewController.m in Sources */,
+				093D89CF1999C27E006B013B /* CSKuleHistoryMonthCell.m in Sources */,
 				0902458518EC41FA00579886 /* CSKuleURLCache.m in Sources */,
 				09142DB518E2713C00E5848F /* CDataScanner_Extensions.m in Sources */,
 				09BA1C0118BB334900760182 /* Reachability.m in Sources */,
 				09F0BFA518F1A1B7004629BA /* MHFacebookImageViewer.m in Sources */,
 				09219A5A18C4999C00166228 /* CSKuleLoginInfo.m in Sources */,
 				090C9EDC18C87AEA00883DE0 /* KxMenu.m in Sources */,
+				093D89D7199A76E1006B013B /* CSKuleCCTVPlayViewController.m in Sources */,
 				090151351939D4060066DEAB /* XHViewState.m in Sources */,
 				09C1C76018BD92990040B06D /* CSHttpClient.m in Sources */,
 				09142DB618E2713C00E5848F /* NSDictionary_JSONExtensions.m in Sources */,
@@ -2832,6 +2882,7 @@
 				0934EFC318BF3AF700E30ECA /* EAIntroPage.m in Sources */,
 				09FE6AF318C5762600A840BE /* CSKuleNewsViewController.m in Sources */,
 				0919B7791929D6B200810556 /* CSKuleSenderInfo.m in Sources */,
+				093D89D2199A177A006B013B /* CSKuleHistoryListTableViewController.m in Sources */,
 				09ED59AF18CD8ED100187585 /* CSKuleNewsDetailsViewController.m in Sources */,
 				0912DCDF18ED35D600016868 /* CSKuleForgotPswdViewController.m in Sources */,
 			);
@@ -2967,15 +3018,17 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Kulebao/youlebao-Prefix.pch";
 				INFOPLIST_FILE = "Kulebao/youlebao-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/Venders/libBPush",
 					"$(PROJECT_DIR)/Venders/BaiduMobStat",
 					"/Users/xinus/xin.github/Kulebao-iPhone/YouJiaoBao/Venders/opencore-amr-0.1.3/lib",
+					"/Users/xinus/xin.github/Kulebao-iPhone/Common/hmsdk-v2",
 				);
 				PRODUCT_NAME = youlebao;
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2991,15 +3044,17 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Kulebao/youlebao-Prefix.pch";
 				INFOPLIST_FILE = "Kulebao/youlebao-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/Venders/libBPush",
 					"$(PROJECT_DIR)/Venders/BaiduMobStat",
 					"/Users/xinus/xin.github/Kulebao-iPhone/YouJiaoBao/Venders/opencore-amr-0.1.3/lib",
+					"/Users/xinus/xin.github/Kulebao-iPhone/Common/hmsdk-v2",
 				);
 				PRODUCT_NAME = youlebao;
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};

@@ -13,6 +13,7 @@ CSAppDelegate* gApp = nil;
 @implementation CSAppDelegate
 @synthesize engine = _engine;
 @synthesize hud = _hud;
+@synthesize isPlayView = _isPlayView;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

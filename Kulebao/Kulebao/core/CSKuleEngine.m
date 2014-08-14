@@ -14,6 +14,7 @@
 #import "CSKuleURLCache.h"
 #import "ALAlertBannerManager.h"
 #import "ALAlertBanner+Private.h"
+#import "hm_sdk.h"
 
 @interface CSKuleEngine() <BPushDelegate> {
     NSMutableDictionary* _senderProfiles;
@@ -199,6 +200,17 @@
     
     // 加载HttpClient
     [self setupHttpClient];
+    
+    // 加载HM_SDK
+    [self setupHMSDK];
+}
+
+- (void)setupHMSDK {
+    /* 初始化SDK */
+    hm_result result = hm_sdk_init();
+    if (result != HMEC_OK) {
+        CSLog(@"hm_sdk_init failed - %d", result);
+    }
 }
 
 - (void)setupPreferences {

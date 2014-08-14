@@ -16,6 +16,8 @@
 @property (strong, nonatomic) CSKuleEngine* engine;
 @property (strong, nonatomic) MBProgressHUD* hud;
 
+@property (nonatomic) BOOL isPlayView;
+
 // - Process
 - (void)gotoLoginProcess;
 - (void)gotoMainProcess;

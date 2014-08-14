@@ -10,6 +10,6 @@
 #import <GLKit/GLKit.h>
 @interface CSKuleCCTVPlayViewController : GLKViewController <GLKViewControllerDelegate>
 
-@property (nonatomic, strong) NSDictionary* deviceInfo;
+@property (nonatomic, strong) NSDictionary* deviceMeta;
 
 @end

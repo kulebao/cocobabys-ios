@@ -9,9 +9,11 @@
 #import "CSKuleHistoryListTableViewController.h"
 #import "CSAppDelegate.h"
 #import "CSKuleHistoryItemTableViewCell.h"
+#import "EntityHistoryInfoHelper.h"
 
 @interface CSKuleHistoryListTableViewController () {
     NSMutableArray* _historyList;
+    NSFetchedResultsController* _frCtrl;
 }
 
 @end
@@ -41,6 +43,10 @@
     [self customizeBackBarItem];
     [self customizeOkBarItemWithTarget:self action:@selector(onBtnRefreshClicked:) text:@"刷新"];
     
+    _frCtrl = [EntityHistoryInfoHelper frCtrlForYear:_year month:_month];
+    NSError* error = nil;
+    [_frCtrl performFetch:&error];
+    
     [self doReloadHistory];
 }
 
@@ -61,7 +67,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return _historyList.count;
+    return _frCtrl.fetchedObjects.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -69,16 +75,21 @@
     CSKuleHistoryItemTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"CSKuleHistoryItemTableViewCell" forIndexPath:indexPath];
     
     // Configure the cell...
-    CSKuleHistoryInfo* historyInfo = [_historyList objectAtIndex:indexPath.row];
+    EntityHistoryInfo* historyInfo = [_frCtrl objectAtIndexPath:indexPath];
     cell.historyInfo = historyInfo;
     
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CSKuleHistoryInfo* historyInfo = [_historyList objectAtIndex:indexPath.row];
+    EntityHistoryInfo* historyInfo = [_frCtrl objectAtIndexPath:indexPath];
     CGFloat height = [CSKuleHistoryItemTableViewCell calcHeight:historyInfo];
     return height;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
 }
 
 /*
@@ -149,40 +160,16 @@
     NSDate* fromDate = [fmt dateFromString:fromDateString];
     NSDate* toDate = [fmt dateFromString:toDateString];
     
+    _historyList = [NSMutableArray array];
+
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
-        /*
-         {
-         content = "\U6d4b\U8bd5\U770b\U7f51\U9875\U663e\U793a\U95ee\U9898";
-         id = 796;
-         medium =     (
-         {
-         type = image;
-         url = "https://dn-cocobabys.qbox.me/2088/exp_cion/IMG_20140726_180338.jpg";
-         },
-         {
-         type = image;
-         url = "https://dn-cocobabys.qbox.me/2088/exp_cion/IMG_20140726_145407.jpg";
-         }
-         );
-         sender =     {
-         id = "3_2088_1403762507321";
-         type = t;
-         };
-         timestamp = 1406449306043;
-         topic = "2_2088_900";
-         },
-         */
-        
-        _historyList = [NSMutableArray array];
-        
-        for (id obj in dataJson) {
-            id historyInfo = [CSKuleInterpreter decodeHistoryInfo:obj];
-            if (historyInfo) {
-                [_historyList addObject:historyInfo];
-            }
-        }
+        [_historyList addObjectsFromArray:[EntityHistoryInfoHelper updateEntities:dataJson]];
         
         [self.tableView reloadData];
+        
+        if (_historyList.count == 0) {
+            [gApp alert:@"没有"];
+        }
         
         [gApp hideAlert];
     };

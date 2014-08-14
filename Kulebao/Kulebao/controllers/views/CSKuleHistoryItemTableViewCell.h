@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CSKuleHistoryInfo.h"
+#import "EntityHistoryInfo.h"
 
 @interface CSKuleHistoryItemTableViewCell : UITableViewCell
 
-@property (nonatomic, strong) CSKuleHistoryInfo* historyInfo;
+@property (nonatomic, strong) EntityHistoryInfo* historyInfo;
 
-+ (CGFloat)calcHeight:(CSKuleHistoryInfo*)historyInfo;
++ (CGFloat)calcHeight:(EntityHistoryInfo*)historyInfo;
 
 
 @end

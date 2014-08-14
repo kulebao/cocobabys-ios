@@ -9,6 +9,9 @@
 #import "CSKuleHistoryItemTableViewCell.h"
 #import "UIImageView+AFNetworking.h"
 #import "CSAppDelegate.h"
+#import "EntityMediaInfoHelper.h"
+#import "EntitySenderInfoHelper.h"
+#import "EntityHistoryInfoHelper.h"
 
 @interface CSKuleHistoryItemTableViewCell()
 @property (weak, nonatomic) IBOutlet UIImageView *imgPortrait;
@@ -45,16 +48,22 @@
     // Configure the view for the selected state
 }
 
-- (void)setHistoryInfo:(CSKuleHistoryInfo *)historyInfo {
+- (void)setHistoryInfo:(EntityHistoryInfo *)historyInfo {
     _historyInfo = historyInfo;
     
     [self updateUI];
 }
 
 - (void)updateUI {
-    self.labName.text = _historyInfo.topic;
+    EntitySenderInfo* senderInfo = (EntitySenderInfo*)_historyInfo.sender;
+    
+    self.labName.text = senderInfo.type;
     self.labContent.text = _historyInfo.content;
-    self.labDate.text = [NSString stringWithFormat:@"%@", [NSDate dateWithTimeIntervalSince1970:_historyInfo.timestamp]];
+    
+    NSDateFormatter* fmt = [[NSDateFormatter alloc] init];
+    fmt.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    NSDate* timestamp = [NSDate dateWithTimeIntervalSince1970:_historyInfo.timestamp.doubleValue/1000];
+    self.labDate.text = [fmt stringFromDate:timestamp];
     
     CGSize sz = [self.labContent sizeThatFits:CGSizeMake(230, 999)];
     self.labContent.frame = CGRectMake(70, 50, sz.width, sz.height);
@@ -77,7 +86,7 @@
             CSLog(@"%@", media.type);
         }
         
-        imgView.frame = CGRectMake((index%3)* (64+5), index / 3, 64, 64);
+        imgView.frame = CGRectMake((index%3)* (64+16), (index / 3) * (64+10), 64, 64);
         imgView.hidden = NO;
         
         ++index;
@@ -98,15 +107,19 @@
         }
     }
     
-    _viewImageContainer.frame = CGRectMake(70, 3+CGRectGetMaxY(self.labContent.frame), 230,
+    _viewImageContainer.frame = CGRectMake(70, 5+CGRectGetMaxY(self.labContent.frame), 230,
                                            ((_historyInfo.medium.count + 2) / 3 ) * 70);
     
     
     
     
     // Get Sender avatar and name.
+    CSKuleSenderInfo* sender = [CSKuleSenderInfo new];
+    sender.type = senderInfo.type;
+    sender.senderId = senderInfo.senderId;
+    
     [gApp.engine reqGetSenderProfileOfKindergarten:gApp.engine.loginInfo.schoolId
-                                        withSender:_historyInfo.sender
+                                        withSender:sender
                                           complete:^(id obj) {
                                               NSURL* qiniuImgUrl = nil;
                                               NSString* senderName = nil;
@@ -127,7 +140,7 @@
                                                       qiniuImgUrl = [gApp.engine urlFromPath:gApp.engine.currentRelationship.child.portrait];
                                                   }
                                                   
-                                                  if ([_historyInfo.sender.senderId isEqualToString:gApp.engine.currentRelationship.parent.parentId]) {
+                                                  if ([sender.senderId isEqualToString:gApp.engine.currentRelationship.parent.parentId]) {
                                                       senderName = @"我";
                                                   }
                                                   else {
@@ -165,7 +178,7 @@
     
     yy += sz.height + 5;
     
-    yy += ((historyInfo.medium.count + 2) / 3 ) * 64 + 10;
+    yy += ((historyInfo.medium.count + 2) / 3 ) * (64+10) + 2;
     
     return yy;
 }

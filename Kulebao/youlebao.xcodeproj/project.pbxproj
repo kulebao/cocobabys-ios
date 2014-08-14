@@ -281,6 +281,13 @@
 		09416CA218E41BF600DFEA44 /* logo-gray-big@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09416C9618E41BF600DFEA44 /* logo-gray-big@2x.png */; };
 		09416CA318E41BF600DFEA44 /* logo-gray-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 09416C9718E41BF600DFEA44 /* logo-gray-small.png */; };
 		09416CA418E41BF600DFEA44 /* logo-gray-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09416C9818E41BF600DFEA44 /* logo-gray-small@2x.png */; };
+		094373CB199D00E300EDD64C /* EntityMediaInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 094373CA199D00E300EDD64C /* EntityMediaInfo.m */; };
+		094373CE199D00E300EDD64C /* EntityHistoryInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 094373CD199D00E300EDD64C /* EntityHistoryInfo.m */; };
+		094373D1199D00E400EDD64C /* EntitySenderInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 094373D0199D00E400EDD64C /* EntitySenderInfo.m */; };
+		094373D4199D016A00EDD64C /* EntitySenderInfoHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 094373D3199D016A00EDD64C /* EntitySenderInfoHelper.m */; };
+		094373D7199D017B00EDD64C /* EntityHistoryInfoHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 094373D6199D017B00EDD64C /* EntityHistoryInfoHelper.m */; };
+		094373DA199D018900EDD64C /* EntityMediaInfoHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 094373D9199D018900EDD64C /* EntityMediaInfoHelper.m */; };
+		094E14E3199CF6DD00945B06 /* CSCoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 094E14E2199CF6DD00945B06 /* CSCoreDataHelper.m */; };
 		094F994D18E02A6100ACD196 /* btn-nav-right-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 094F994918E02A6100ACD196 /* btn-nav-right-pressed.png */; };
 		094F994E18E02A6100ACD196 /* btn-nav-right-pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 094F994A18E02A6100ACD196 /* btn-nav-right-pressed@2x.png */; };
 		094F994F18E02A6100ACD196 /* btn-nav-right.png in Resources */ = {isa = PBXBuildFile; fileRef = 094F994B18E02A6100ACD196 /* btn-nav-right.png */; };
@@ -898,6 +905,20 @@
 		09416C9618E41BF600DFEA44 /* logo-gray-big@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-gray-big@2x.png"; sourceTree = "<group>"; };
 		09416C9718E41BF600DFEA44 /* logo-gray-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-gray-small.png"; sourceTree = "<group>"; };
 		09416C9818E41BF600DFEA44 /* logo-gray-small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-gray-small@2x.png"; sourceTree = "<group>"; };
+		094373C9199D00E300EDD64C /* EntityMediaInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityMediaInfo.h; sourceTree = "<group>"; };
+		094373CA199D00E300EDD64C /* EntityMediaInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityMediaInfo.m; sourceTree = "<group>"; };
+		094373CC199D00E300EDD64C /* EntityHistoryInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityHistoryInfo.h; sourceTree = "<group>"; };
+		094373CD199D00E300EDD64C /* EntityHistoryInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityHistoryInfo.m; sourceTree = "<group>"; };
+		094373CF199D00E400EDD64C /* EntitySenderInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntitySenderInfo.h; sourceTree = "<group>"; };
+		094373D0199D00E400EDD64C /* EntitySenderInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntitySenderInfo.m; sourceTree = "<group>"; };
+		094373D2199D016A00EDD64C /* EntitySenderInfoHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntitySenderInfoHelper.h; sourceTree = "<group>"; };
+		094373D3199D016A00EDD64C /* EntitySenderInfoHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntitySenderInfoHelper.m; sourceTree = "<group>"; };
+		094373D5199D017B00EDD64C /* EntityHistoryInfoHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityHistoryInfoHelper.h; sourceTree = "<group>"; };
+		094373D6199D017B00EDD64C /* EntityHistoryInfoHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityHistoryInfoHelper.m; sourceTree = "<group>"; };
+		094373D8199D018900EDD64C /* EntityMediaInfoHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityMediaInfoHelper.h; sourceTree = "<group>"; };
+		094373D9199D018900EDD64C /* EntityMediaInfoHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityMediaInfoHelper.m; sourceTree = "<group>"; };
+		094E14E1199CF6DD00945B06 /* CSCoreDataHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSCoreDataHelper.h; sourceTree = "<group>"; };
+		094E14E2199CF6DD00945B06 /* CSCoreDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSCoreDataHelper.m; sourceTree = "<group>"; };
 		094F994918E02A6100ACD196 /* btn-nav-right-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-nav-right-pressed.png"; sourceTree = "<group>"; };
 		094F994A18E02A6100ACD196 /* btn-nav-right-pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-nav-right-pressed@2x.png"; sourceTree = "<group>"; };
 		094F994B18E02A6100ACD196 /* btn-nav-right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-nav-right.png"; sourceTree = "<group>"; };
@@ -1439,6 +1460,20 @@
 		09148E4F18DAEE5800D08F63 /* coredata */ = {
 			isa = PBXGroup;
 			children = (
+				094E14E1199CF6DD00945B06 /* CSCoreDataHelper.h */,
+				094E14E2199CF6DD00945B06 /* CSCoreDataHelper.m */,
+				094373CC199D00E300EDD64C /* EntityHistoryInfo.h */,
+				094373CD199D00E300EDD64C /* EntityHistoryInfo.m */,
+				094373D5199D017B00EDD64C /* EntityHistoryInfoHelper.h */,
+				094373D6199D017B00EDD64C /* EntityHistoryInfoHelper.m */,
+				094373C9199D00E300EDD64C /* EntityMediaInfo.h */,
+				094373CA199D00E300EDD64C /* EntityMediaInfo.m */,
+				094373D8199D018900EDD64C /* EntityMediaInfoHelper.h */,
+				094373D9199D018900EDD64C /* EntityMediaInfoHelper.m */,
+				094373CF199D00E400EDD64C /* EntitySenderInfo.h */,
+				094373D0199D00E400EDD64C /* EntitySenderInfo.m */,
+				094373D2199D016A00EDD64C /* EntitySenderInfoHelper.h */,
+				094373D3199D016A00EDD64C /* EntitySenderInfoHelper.m */,
 				09148E5018DAEE8A00D08F63 /* Kulebao.xcdatamodeld */,
 			);
 			path = coredata;
@@ -1499,6 +1534,8 @@
 				09FFB5F318D6B2FA00F07B0A /* CSKuleDailyScheduleInfo.m */,
 				0904FC9718F3BDED001968D7 /* CSKuleEmployeeInfo.h */,
 				0904FC9818F3BDED001968D7 /* CSKuleEmployeeInfo.m */,
+				090FC16E199CA5A300C3A31A /* CSKuleHistoryInfo.h */,
+				090FC16F199CA5A300C3A31A /* CSKuleHistoryInfo.m */,
 				09219A5818C4999B00166228 /* CSKuleLoginInfo.h */,
 				09219A5918C4999B00166228 /* CSKuleLoginInfo.m */,
 				0919B7741929D6A700810556 /* CSKuleMediaInfo.h */,
@@ -1519,8 +1556,6 @@
 				0919B7781929D6B200810556 /* CSKuleSenderInfo.m */,
 				0919B7711929D41900810556 /* CSKuleTopicMsg.h */,
 				0919B7721929D41900810556 /* CSKuleTopicMsg.m */,
-				090FC16E199CA5A300C3A31A /* CSKuleHistoryInfo.h */,
-				090FC16F199CA5A300C3A31A /* CSKuleHistoryInfo.m */,
 				09FFB5EF18D6B2E100F07B0A /* CSKuleWeekScheduleInfo.h */,
 				09FFB5F018D6B2E100F07B0A /* CSKuleWeekScheduleInfo.m */,
 				093CD69518D974930025972C /* Interpreter */,
@@ -2830,6 +2865,7 @@
 				093904DD18BDDA90006E8F82 /* CSKuleRootViewController.m in Sources */,
 				09BA1C2918BB3F8400760182 /* AFURLConnectionOperation.m in Sources */,
 				09BA1BDD18BB2FC700760182 /* EGORefreshTableHeaderView.m in Sources */,
+				094E14E3199CF6DD00945B06 /* CSCoreDataHelper.m in Sources */,
 				097ED0BB18DAB4AB0057ECA0 /* CSKuleChangePasswordViewController.m in Sources */,
 				09FE6B0A18C5C34F00A840BE /* CSKuleChatingViewController.m in Sources */,
 				09F74CE01997D14D001555D0 /* VoiceConverter.m in Sources */,
@@ -2857,6 +2893,7 @@
 				09142DB018E2713C00E5848F /* CDataScanner.m in Sources */,
 				0904690518C72E5000D0846E /* CSKuleParentInfo.m in Sources */,
 				09FE6AF618C5A53200A840BE /* CSTextFieldDelegate.m in Sources */,
+				094373D1199D00E400EDD64C /* EntitySenderInfo.m in Sources */,
 				09BA1C2418BB3F8400760182 /* AFHTTPRequestOperation.m in Sources */,
 				09219A5318C4878600166228 /* TPKeyboardAvoidingTableView.m in Sources */,
 				090CC92C18DA88AF007781CB /* FTCoreTextView.m in Sources */,
@@ -2877,6 +2914,7 @@
 				093D89C91999BF4D006B013B /* CSKuleHistoryMainViewController.m in Sources */,
 				09F0BF9E18F18EA5004629BA /* CSKuleFeedbackViewController.m in Sources */,
 				090C9EC018C846B200883DE0 /* AHAlertView.m in Sources */,
+				094373DA199D018900EDD64C /* EntityMediaInfoHelper.m in Sources */,
 				09BA1B9D18BB2AB300760182 /* main.m in Sources */,
 				0915662218ED92810073AE22 /* CSKuleVerifyMobileViewController.m in Sources */,
 				09F0BFB218F1C671004629BA /* CSKuleDatePickerViewController.m in Sources */,
@@ -2920,15 +2958,19 @@
 				090151301939D4060066DEAB /* UIImage+Utility.m in Sources */,
 				09ED59B918CDC5D800187585 /* CSKuleRecipeInfo.m in Sources */,
 				09148E5218DAEE8A00D08F63 /* Kulebao.xcdatamodeld in Sources */,
+				094373CE199D00E300EDD64C /* EntityHistoryInfo.m in Sources */,
 				090CC92B18DA88AF007781CB /* FTCoreTextStyle.m in Sources */,
 				09C1C75F18BD92990040B06D /* AFJSONRequestOperation+CSKit.m in Sources */,
 				09C1C76618BD973B0040B06D /* NSDictionary+CSKit.m in Sources */,
+				094373CB199D00E300EDD64C /* EntityMediaInfo.m in Sources */,
+				094373D7199D017B00EDD64C /* EntityHistoryInfoHelper.m in Sources */,
 				09FFB5F418D6B2FA00F07B0A /* CSKuleDailyScheduleInfo.m in Sources */,
 				09BA1BFE18BB334900760182 /* GzipCompressor.m in Sources */,
 				0934EFC318BF3AF700E30ECA /* EAIntroPage.m in Sources */,
 				09FE6AF318C5762600A840BE /* CSKuleNewsViewController.m in Sources */,
 				0919B7791929D6B200810556 /* CSKuleSenderInfo.m in Sources */,
 				093D89D2199A177A006B013B /* CSKuleHistoryListTableViewController.m in Sources */,
+				094373D4199D016A00EDD64C /* EntitySenderInfoHelper.m in Sources */,
 				09ED59AF18CD8ED100187585 /* CSKuleNewsDetailsViewController.m in Sources */,
 				0912DCDF18ED35D600016868 /* CSKuleForgotPswdViewController.m in Sources */,
 			);

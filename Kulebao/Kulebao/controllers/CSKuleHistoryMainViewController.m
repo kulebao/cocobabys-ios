@@ -10,6 +10,9 @@
 #import "CSKuleHistoryMonthCell.h"
 #import "CSKuleHistoryListTableViewController.h"
 #import "CSAppDelegate.h"
+#import "EntityHistoryInfoHelper.h"
+#import "EntityMediaInfoHelper.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface CSKuleHistoryMainViewController () <UICollectionViewDataSource, UICollectionViewDelegate> {
     NSInteger _year;
@@ -105,6 +108,10 @@
     
     cell.labTitle.text = [NSString stringWithFormat:@"%d月", indexPath.row+1];
     
+    EntityMediaInfo* mediaInfo = [EntityHistoryInfoHelper mediaWhereLatestImageOfYear:_year month:indexPath.row+1];
+    
+    [cell.imgIcon setImageWithURL:[NSURL URLWithString:mediaInfo.url] placeholderImage:[UIImage imageNamed:@"exp_default.png"]];
+    
     return cell;
 }
 
@@ -117,53 +124,7 @@
 }
 
 - (void)doReloadHistory {
-    NSString* fromDateString = [NSString stringWithFormat:@"%d-01-01 00:00:00", _year];
-    NSString* toDateString = [NSString stringWithFormat:@"%d-12-31 23:59:59", _year];
     
-    NSDateFormatter* fmt = [[NSDateFormatter alloc] init];
-    fmt.dateFormat = @"yyyy-MM-dd HH:mm:ss";
-    
-    NSDate* fromDate = [fmt dateFromString:fromDateString];
-    NSDate* toDate = [fmt dateFromString:toDateString];
-    
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
-        /*
-         {
-         content = "\U6d4b\U8bd5\U770b\U7f51\U9875\U663e\U793a\U95ee\U9898";
-         id = 796;
-         medium =     (
-         {
-         type = image;
-         url = "https://dn-cocobabys.qbox.me/2088/exp_cion/IMG_20140726_180338.jpg";
-         },
-         {
-         type = image;
-         url = "https://dn-cocobabys.qbox.me/2088/exp_cion/IMG_20140726_145407.jpg";
-         }
-         );
-         sender =     {
-         id = "3_2088_1403762507321";
-         type = t;
-         };
-         timestamp = 1406449306043;
-         topic = "2_2088_900";
-         },
-         */
-        
-        [gApp hideAlert];
-    };
-    
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
-        CSLog(@"failure:%@", error);
-        [gApp alert:error.localizedDescription];
-    };
-    
-    [gApp.engine reqGetHistoryListOfKindergarten:gApp.engine.loginInfo.schoolId
-                                     withChildId:gApp.engine.currentRelationship.child.childId
-                                        fromDate:fromDate
-                                          toDate:toDate
-                                         success:sucessHandler
-                                         failure:failureHandler];
 }
 
 @end

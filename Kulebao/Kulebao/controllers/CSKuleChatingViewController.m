@@ -395,7 +395,7 @@
         self.playingMsg = msg;
         [updateIndexPaths addObject:indexPath];
         [tableView reloadRowsAtIndexPaths:[updateIndexPaths allObjects]
-                         withRowAnimation:UITableViewRowAnimationAutomatic];
+                         withRowAnimation:UITableViewRowAnimationNone];
         
         if (self.playingMsg != nil) {
             NSData* amrData = [NSData dataWithContentsOfURL:voiceUrl];

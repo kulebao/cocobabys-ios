@@ -642,6 +642,59 @@
     return obj;
 }
 
++ (CSKuleHistoryInfo*)decodeHistoryInfo:(NSDictionary*)dataJson {
+    NSParameterAssert(dataJson);
+    
+    /*
+     {
+     content = "\U6d4b\U8bd5\U770b\U7f51\U9875\U663e\U793a\U95ee\U9898";
+     id = 796;
+     medium =     (
+     {
+     type = image;
+     url = "https://dn-cocobabys.qbox.me/2088/exp_cion/IMG_20140726_180338.jpg";
+     },
+     {
+     type = image;
+     url = "https://dn-cocobabys.qbox.me/2088/exp_cion/IMG_20140726_145407.jpg";
+     }
+     );
+     sender =     {
+     id = "3_2088_1403762507321";
+     type = t;
+     };
+     timestamp = 1406449306043;
+     topic = "2_2088_900";
+     },
+     */
+    
+    double timestamp = [[dataJson valueForKeyNotNull:@"timestamp"] doubleValue];
+    NSInteger uid = [[dataJson valueForKeyNotNull:@"id"] integerValue];
+    NSString* topic = [dataJson valueForKeyNotNull:@"topic"];
+    NSString* content = [dataJson valueForKeyNotNull:@"content"];
+    
+    CSKuleSenderInfo* sender = [CSKuleInterpreter decodeSenderInfo:[dataJson valueForKeyNotNull:@"sender"]];
+    
+    NSArray* mediaList = [dataJson valueForKeyNotNull:@"medium"];
+    NSMutableArray* mediumList = [NSMutableArray array];
+    for (NSDictionary* mediaObject in mediaList) {
+        CSKuleMediaInfo* media = [CSKuleInterpreter decodeMediaInfo:mediaObject];
+        [mediumList addObject:media];
+    }
+    
+    
+    
+    CSKuleHistoryInfo* obj = [CSKuleHistoryInfo new];
+    obj.timestamp = timestamp / 1000.0;
+    obj.uid = uid;
+    obj.topic = topic;
+    obj.content = content;
+    obj.medium = mediumList;
+    obj.sender = sender;
+    
+    return obj;
+}
+
 + (CSKuleAssessInfo*)decodeAssessInfo:(NSDictionary*)dataJson {
     /*
      {

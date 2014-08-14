@@ -257,8 +257,8 @@
       @[@"亲子作业", @"btn-func-8.png", @(kKuleModuleAssignment)],
       @[@"家园互动", @"btn-func-7.png", @(kKuleModuleChating)],
       @[@"在园表现", @"btn-func-4.png", @(kKuleModuleAssess)],
-      @[@"成长经历", @"btn-func-4.png", @(kKuleModuleHistory)],
-      @[@"看宝贝", @"btn-func-4.png", @(kKuleModuleCCTV)],
+      @[@"成长经历", @"exp.png", @(kKuleModuleHistory)],
+      @[@"看宝贝", @"watch.png", @(kKuleModuleCCTV)],
       ];
     
     _badges = [NSMutableArray arrayWithCapacity:kKuleModuleSize];

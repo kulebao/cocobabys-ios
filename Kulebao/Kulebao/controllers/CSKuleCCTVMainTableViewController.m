@@ -79,7 +79,9 @@
     // Configure the cell...
     NSDictionary* deviceInfo = [_deviceList objectAtIndex:indexPath.row];
     cell.textLabel.text = deviceInfo[@"name"];
-
+    
+    cell.imageView.image = [UIImage imageNamed:@"record.png"];
+    
     return cell;
 }
 

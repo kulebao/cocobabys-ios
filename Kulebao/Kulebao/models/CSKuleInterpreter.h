@@ -21,6 +21,7 @@
 #import "CSKuleAssessInfo.h"
 #import "CSKuleEmployeeInfo.h"
 #import "CSKuleTopicMsg.h"
+#import "CSKuleHistoryInfo.h"
 
 @interface CSKuleInterpreter : NSObject
 
@@ -52,8 +53,11 @@
 
 + (CSKuleTopicMsg*)decodeTopicMsg:(NSDictionary*)dataJson;
 
++ (CSKuleHistoryInfo*)decodeHistoryInfo:(NSDictionary*)dataJson;
+
 + (CSKuleAssessInfo*)decodeAssessInfo:(NSDictionary*)dataJson;
 
 + (CSKuleEmployeeInfo*)decodeEmployeeInfo:(NSDictionary*)dataJson;
+
 
 @end

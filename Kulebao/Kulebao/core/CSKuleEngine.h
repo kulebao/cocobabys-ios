@@ -209,4 +209,11 @@
                                withSender:(CSKuleSenderInfo*)senderInfo
                                  complete:(void (^)(id obj))complete;
 
+- (void)reqGetHistoryListOfKindergarten:(NSInteger)kindergarten
+                            withChildId:(NSString*)childId
+                               fromDate:(NSDate*)fromDate
+                                 toDate:(NSDate*)toDate
+                                success:(SuccessResponseHandler)success
+                                failure:(FailureResponseHandler)failure;
+
 @end

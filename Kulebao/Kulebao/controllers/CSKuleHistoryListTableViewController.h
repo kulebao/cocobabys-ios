@@ -10,4 +10,7 @@
 
 @interface CSKuleHistoryListTableViewController : UITableViewController
 
+@property (nonatomic, assign) NSInteger year;
+@property (nonatomic, assign) NSInteger month;
+
 @end

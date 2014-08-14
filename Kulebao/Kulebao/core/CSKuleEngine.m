@@ -1420,4 +1420,34 @@
     }
 }
 
+
+- (void)reqGetHistoryListOfKindergarten:(NSInteger)kindergarten
+                            withChildId:(NSString*)childId
+                               fromDate:(NSDate*)fromDate
+                                 toDate:(NSDate*)toDate
+                                success:(SuccessResponseHandler)success
+                                failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kGetHistoryListPath, @(kindergarten), childId];
+    
+    NSString* method = @"GET";
+    
+    
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    if (fromDate) {
+        long long msec = [fromDate timeIntervalSince1970] * 1000;
+        [parameters setObject:@(msec) forKey:@"from"];
+    }
+    
+    if (toDate) {
+        long long msec = [toDate timeIntervalSince1970] * 1000;
+        [parameters setObject:@(msec) forKey:@"to"];
+    }
+    
+    [_httpClient httpRequestWithMethod:method
+                                  path:path
+                            parameters:parameters
+                               success:success
+                               failure:failure];
+}
+
 @end

@@ -111,4 +111,7 @@
 // PATH: Sender信息
 #define kGetSenderInfoPath          @"/kindergarten/%@/sender/%@"
 
+// PATH: History信息
+#define kGetHistoryListPath         @"/kindergarten/%@/history/%@/record"
+
 #endif

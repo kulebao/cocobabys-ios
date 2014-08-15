@@ -90,14 +90,12 @@
                 
                 entity.sender = senderlist.firstObject;
                 
-                if (entity.medium.count > 0) {
-                    for (NSManagedObject* obj in entity.medium.allObjects) {
-                        [context deleteObject:obj];
-                    }
+                for (NSManagedObject* obj in entity.medium) {
+                    [context deleteObject:obj];
                 }
                 
                 NSArray* mediaInfoList = [EntityMediaInfoHelper updateEntities:[jsonObject valueForKeyNotNull:@"medium"]];
-                entity.medium = [NSSet setWithArray:mediaInfoList];
+                entity.medium = [NSOrderedSet orderedSetWithArray:mediaInfoList];
             }
             
             [returnObjectList addObject:entity];

@@ -91,7 +91,6 @@
 		09142DB818E2713C00E5848F /* CJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 09142DAB18E2713C00E5848F /* CJSONScanner.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		09142DB918E2713C00E5848F /* CJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 09142DAD18E2713C00E5848F /* CJSONSerializer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		09142DBB18E274B400E5848F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09142DBA18E274B400E5848F /* CoreLocation.framework */; };
-		09142DBF18E2751000E5848F /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 09142DBE18E2751000E5848F /* libc++.dylib */; };
 		09142DD118E27E7600E5848F /* ALAlertBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 09142DC318E27E7600E5848F /* ALAlertBanner.m */; };
 		09142DD218E27E7600E5848F /* ALAlertBannerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 09142DC518E27E7600E5848F /* ALAlertBannerManager.m */; };
 		09142DD318E27E7600E5848F /* bannerAlert.png in Resources */ = {isa = PBXBuildFile; fileRef = 09142DC718E27E7600E5848F /* bannerAlert.png */; };
@@ -282,7 +281,6 @@
 		09416CA318E41BF600DFEA44 /* logo-gray-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 09416C9718E41BF600DFEA44 /* logo-gray-small.png */; };
 		09416CA418E41BF600DFEA44 /* logo-gray-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09416C9818E41BF600DFEA44 /* logo-gray-small@2x.png */; };
 		094373CB199D00E300EDD64C /* EntityMediaInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 094373CA199D00E300EDD64C /* EntityMediaInfo.m */; };
-		094373CE199D00E300EDD64C /* EntityHistoryInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 094373CD199D00E300EDD64C /* EntityHistoryInfo.m */; };
 		094373D1199D00E400EDD64C /* EntitySenderInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 094373D0199D00E400EDD64C /* EntitySenderInfo.m */; };
 		094373D4199D016A00EDD64C /* EntitySenderInfoHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 094373D3199D016A00EDD64C /* EntitySenderInfoHelper.m */; };
 		094373D7199D017B00EDD64C /* EntityHistoryInfoHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 094373D6199D017B00EDD64C /* EntityHistoryInfoHelper.m */; };
@@ -357,6 +355,10 @@
 		09C1C75F18BD92990040B06D /* AFJSONRequestOperation+CSKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C1C75C18BD92990040B06D /* AFJSONRequestOperation+CSKit.m */; };
 		09C1C76018BD92990040B06D /* CSHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C1C75E18BD92990040B06D /* CSHttpClient.m */; };
 		09C1C76618BD973B0040B06D /* NSDictionary+CSKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C1C76518BD973B0040B06D /* NSDictionary+CSKit.m */; };
+		09C3AC21199D9D1A00A6251C /* EntityHistoryInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C3AC20199D9D1A00A6251C /* EntityHistoryInfo.m */; };
+		09C3AC25199DAC8600A6251C /* CSContentEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C3AC23199DAC8600A6251C /* CSContentEditorViewController.m */; };
+		09C3AC29199E148D00A6251C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C3AC28199E148C00A6251C /* CFNetwork.framework */; };
+		09C3AC2C199E21D400A6251C /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 09142DBE18E2751000E5848F /* libc++.dylib */; };
 		09D04E3918DFCB830093577D /* CSKuleCheckinLogListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09D04E3818DFCB830093577D /* CSKuleCheckinLogListViewController.m */; };
 		09DB73E918E0280B00121716 /* CSKuleChatMsg.m in Sources */ = {isa = PBXBuildFile; fileRef = 09DB73E818E0280B00121716 /* CSKuleChatMsg.m */; };
 		09ED59A518CC8F5200187585 /* UIViewController+CSKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 09ED59A418CC8F5200187585 /* UIViewController+CSKit.m */; };
@@ -907,8 +909,6 @@
 		09416C9818E41BF600DFEA44 /* logo-gray-small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-gray-small@2x.png"; sourceTree = "<group>"; };
 		094373C9199D00E300EDD64C /* EntityMediaInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityMediaInfo.h; sourceTree = "<group>"; };
 		094373CA199D00E300EDD64C /* EntityMediaInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityMediaInfo.m; sourceTree = "<group>"; };
-		094373CC199D00E300EDD64C /* EntityHistoryInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityHistoryInfo.h; sourceTree = "<group>"; };
-		094373CD199D00E300EDD64C /* EntityHistoryInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityHistoryInfo.m; sourceTree = "<group>"; };
 		094373CF199D00E400EDD64C /* EntitySenderInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntitySenderInfo.h; sourceTree = "<group>"; };
 		094373D0199D00E400EDD64C /* EntitySenderInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntitySenderInfo.m; sourceTree = "<group>"; };
 		094373D2199D016A00EDD64C /* EntitySenderInfoHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntitySenderInfoHelper.h; sourceTree = "<group>"; };
@@ -1026,6 +1026,12 @@
 		09C1C75E18BD92990040B06D /* CSHttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSHttpClient.m; sourceTree = "<group>"; };
 		09C1C76418BD973B0040B06D /* NSDictionary+CSKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+CSKit.h"; sourceTree = "<group>"; };
 		09C1C76518BD973B0040B06D /* NSDictionary+CSKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+CSKit.m"; sourceTree = "<group>"; };
+		09C3AC1F199D9D1A00A6251C /* EntityHistoryInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityHistoryInfo.h; sourceTree = "<group>"; };
+		09C3AC20199D9D1A00A6251C /* EntityHistoryInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityHistoryInfo.m; sourceTree = "<group>"; };
+		09C3AC22199DAC8600A6251C /* CSContentEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSContentEditorViewController.h; sourceTree = "<group>"; };
+		09C3AC23199DAC8600A6251C /* CSContentEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSContentEditorViewController.m; sourceTree = "<group>"; };
+		09C3AC28199E148C00A6251C /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		09C3AC2A199E217B00A6251C /* libc++abi.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++abi.dylib"; path = "usr/lib/libc++abi.dylib"; sourceTree = SDKROOT; };
 		09D04E3718DFCB830093577D /* CSKuleCheckinLogListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleCheckinLogListViewController.h; sourceTree = "<group>"; };
 		09D04E3818DFCB830093577D /* CSKuleCheckinLogListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleCheckinLogListViewController.m; sourceTree = "<group>"; };
 		09DB73E718E0280B00121716 /* CSKuleChatMsg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleChatMsg.h; sourceTree = "<group>"; };
@@ -1216,10 +1222,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09C3AC2C199E21D400A6251C /* libc++.dylib in Frameworks */,
+				09C3AC29199E148D00A6251C /* CFNetwork.framework in Frameworks */,
 				093D89D4199A76B9006B013B /* GLKit.framework in Frameworks */,
 				09F74CC51997CB1E001555D0 /* AVFoundation.framework in Frameworks */,
 				0902CAA818F4200A001901A8 /* AudioToolbox.framework in Frameworks */,
-				09142DBF18E2751000E5848F /* libc++.dylib in Frameworks */,
 				09142DBB18E274B400E5848F /* CoreLocation.framework in Frameworks */,
 				09148E5418DAEED300D08F63 /* CoreData.framework in Frameworks */,
 				090CC93218DA8A96007781CB /* CoreText.framework in Frameworks */,
@@ -1462,8 +1469,8 @@
 			children = (
 				094E14E1199CF6DD00945B06 /* CSCoreDataHelper.h */,
 				094E14E2199CF6DD00945B06 /* CSCoreDataHelper.m */,
-				094373CC199D00E300EDD64C /* EntityHistoryInfo.h */,
-				094373CD199D00E300EDD64C /* EntityHistoryInfo.m */,
+				09C3AC1F199D9D1A00A6251C /* EntityHistoryInfo.h */,
+				09C3AC20199D9D1A00A6251C /* EntityHistoryInfo.m */,
 				094373D5199D017B00EDD64C /* EntityHistoryInfoHelper.h */,
 				094373D6199D017B00EDD64C /* EntityHistoryInfoHelper.m */,
 				094373C9199D00E300EDD64C /* EntityMediaInfo.h */,
@@ -1876,6 +1883,8 @@
 				09A9EBD718C0A02800D83119 /* CSKuleSettingsViewController.m */,
 				0915662018ED92810073AE22 /* CSKuleVerifyMobileViewController.h */,
 				0915662118ED92810073AE22 /* CSKuleVerifyMobileViewController.m */,
+				09C3AC22199DAC8600A6251C /* CSContentEditorViewController.h */,
+				09C3AC23199DAC8600A6251C /* CSContentEditorViewController.m */,
 				09FE6AEB18C5722500A840BE /* views */,
 			);
 			path = controllers;
@@ -1938,6 +1947,8 @@
 		09BA1B8F18BB2AB300760182 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				09C3AC2A199E217B00A6251C /* libc++abi.dylib */,
+				09C3AC28199E148C00A6251C /* CFNetwork.framework */,
 				093D89D3199A76B9006B013B /* GLKit.framework */,
 				09F74CC41997CB1E001555D0 /* AVFoundation.framework */,
 				0902CAA718F4200A001901A8 /* AudioToolbox.framework */,
@@ -2833,6 +2844,7 @@
 				093D89CC1999C242006B013B /* CSKuleCCTVMainTableViewController.m in Sources */,
 				09FFB5F718D6B46300F07B0A /* CSKuleScheduleInfo.m in Sources */,
 				09142DD218E27E7600E5848F /* ALAlertBannerManager.m in Sources */,
+				09C3AC25199DAC8600A6251C /* CSContentEditorViewController.m in Sources */,
 				09ED59BC18CDC5E800187585 /* CSKuleCookbookInfo.m in Sources */,
 				09BA1BFD18BB334900760182 /* Base64.m in Sources */,
 				09FFB5F118D6B2E100F07B0A /* CSKuleWeekScheduleInfo.m in Sources */,
@@ -2902,6 +2914,7 @@
 				09142E1F18E2BA2100E5848F /* CSKuleAssessInfo.m in Sources */,
 				091AE83018D820C800EBC927 /* UIView+convenience.m in Sources */,
 				090FC170199CA5A300C3A31A /* CSKuleHistoryInfo.m in Sources */,
+				09C3AC21199D9D1A00A6251C /* EntityHistoryInfo.m in Sources */,
 				09F74CDF1997D14D001555D0 /* amrFileCodec.m in Sources */,
 				091AE83518D8300A00EBC927 /* CSKuleCheckInOutLogInfo.m in Sources */,
 				090C9ECC18C853B700883DE0 /* CSKuleAboutViewController.m in Sources */,
@@ -2958,7 +2971,6 @@
 				090151301939D4060066DEAB /* UIImage+Utility.m in Sources */,
 				09ED59B918CDC5D800187585 /* CSKuleRecipeInfo.m in Sources */,
 				09148E5218DAEE8A00D08F63 /* Kulebao.xcdatamodeld in Sources */,
-				094373CE199D00E300EDD64C /* EntityHistoryInfo.m in Sources */,
 				090CC92B18DA88AF007781CB /* FTCoreTextStyle.m in Sources */,
 				09C1C75F18BD92990040B06D /* AFJSONRequestOperation+CSKit.m in Sources */,
 				09C1C76618BD973B0040B06D /* NSDictionary+CSKit.m in Sources */,
@@ -3099,14 +3111,16 @@
 		09BA1BC018BB2AB600760182 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Chengdu Cocobabys Information Technology Co., Ltd. (J7M2ZSPTSZ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Chengdu Cocobabys Information Technology Co., Ltd. (J7M2ZSPTSZ)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Kulebao/youlebao-Prefix.pch";
+				GCC_VERSION = "";
 				INFOPLIST_FILE = "Kulebao/youlebao-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
@@ -3116,10 +3130,11 @@
 					"/Users/xinus/xin.github/Kulebao-iPhone/YouJiaoBao/Venders/opencore-amr-0.1.3/lib",
 					"/Users/xinus/xin.github/Kulebao-iPhone/Common/hmsdk-v2",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = youlebao;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "963089BD-160D-4193-B420-2B1724CC433C";
 				TARGETED_DEVICE_FAMILY = 1;
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "armv7s armv7";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -3127,14 +3142,16 @@
 		09BA1BC118BB2AB600760182 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Chengdu Cocobabys Information Technology Co., Ltd. (J7M2ZSPTSZ)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Kulebao/youlebao-Prefix.pch";
+				GCC_VERSION = "";
 				INFOPLIST_FILE = "Kulebao/youlebao-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
@@ -3144,10 +3161,11 @@
 					"/Users/xinus/xin.github/Kulebao-iPhone/YouJiaoBao/Venders/opencore-amr-0.1.3/lib",
 					"/Users/xinus/xin.github/Kulebao-iPhone/Common/hmsdk-v2",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = youlebao;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "963089BD-160D-4193-B420-2B1724CC433C";
 				TARGETED_DEVICE_FAMILY = 1;
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "armv7s armv7";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

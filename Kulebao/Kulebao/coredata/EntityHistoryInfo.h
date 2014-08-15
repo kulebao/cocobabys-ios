@@ -2,30 +2,35 @@
 //  EntityHistoryInfo.h
 //  youlebao
 //
-//  Created by xin.c.wang on 14-8-14.
+//  Created by xin.c.wang on 14-8-15.
 //  Copyright (c) 2014年 Cocobabys. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class EntityMediaInfo;
+@class EntityMediaInfo, EntitySenderInfo;
 
 @interface EntityHistoryInfo : NSManagedObject
 
 @property (nonatomic, retain) NSString * content;
-@property (nonatomic, retain) NSNumber * uid;
-@property (nonatomic, retain) NSString * topic;
 @property (nonatomic, retain) NSNumber * timestamp;
-@property (nonatomic, retain) NSSet *medium;
-@property (nonatomic, retain) NSManagedObject *sender;
+@property (nonatomic, retain) NSString * topic;
+@property (nonatomic, retain) NSNumber * uid;
+@property (nonatomic, retain) NSOrderedSet *medium;
+@property (nonatomic, retain) EntitySenderInfo *sender;
 @end
 
 @interface EntityHistoryInfo (CoreDataGeneratedAccessors)
 
+- (void)insertObject:(EntityMediaInfo *)value inMediumAtIndex:(NSUInteger)idx;
+- (void)removeObjectFromMediumAtIndex:(NSUInteger)idx;
+- (void)insertMedium:(NSArray *)value atIndexes:(NSIndexSet *)indexes;
+- (void)removeMediumAtIndexes:(NSIndexSet *)indexes;
+- (void)replaceObjectInMediumAtIndex:(NSUInteger)idx withObject:(EntityMediaInfo *)value;
+- (void)replaceMediumAtIndexes:(NSIndexSet *)indexes withMedium:(NSArray *)values;
 - (void)addMediumObject:(EntityMediaInfo *)value;
 - (void)removeMediumObject:(EntityMediaInfo *)value;
-- (void)addMedium:(NSSet *)values;
-- (void)removeMedium:(NSSet *)values;
-
+- (void)addMedium:(NSOrderedSet *)values;
+- (void)removeMedium:(NSOrderedSet *)values;
 @end

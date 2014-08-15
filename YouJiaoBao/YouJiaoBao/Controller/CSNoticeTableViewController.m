@@ -16,6 +16,7 @@
 #import "EntityNewsInfoHelper.h"
 #import "CSNewsInfoDetailViewController.h"
 #import "CSCreateNoticeViewController.h"
+#import "UIViewController+CSKit.h"
 
 @interface CSNoticeTableViewController () <PullTableViewDelegate, NSFetchedResultsControllerDelegate> {
     NSFetchedResultsController* _frCtrl;

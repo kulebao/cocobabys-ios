@@ -1450,4 +1450,34 @@
                                failure:failure];
 }
 
+- (void)reqPostHistoryOfKindergarten:(NSInteger)kindergarten
+                         withChildId:(NSString*)childId
+                         withContent:(NSString*)content
+                    withImageUrlList:(NSArray*)imgUrlList
+                             success:(SuccessResponseHandler)success
+                             failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kGetHistoryListPath, @(kindergarten), childId];
+    
+    NSString* method = @"POST";
+    
+    id msgSender = @{@"id": _currentRelationship.parent.parentId,
+                     @"type": @"p"};
+    
+    NSMutableArray* mediumList = [NSMutableArray array];
+    for (NSString* urlString in imgUrlList) {
+        [mediumList addObject:@{@"url": urlString, @"type": @"image"}];
+    }
+    
+    NSDictionary* parameters = @{@"topic": childId,
+                                 @"content": content ? content : @"",
+                                 @"medium" : mediumList,
+                                 @"sender": msgSender};
+    
+    [_httpClient httpRequestWithMethod:method
+                                  path:path
+                            parameters:parameters
+                               success:success
+                               failure:failure];
+}
+
 @end

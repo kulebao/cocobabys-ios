@@ -11,7 +11,7 @@
 #import "CSKuleHistoryItemTableViewCell.h"
 #import "EntityHistoryInfoHelper.h"
 
-@interface CSKuleHistoryListTableViewController () {
+@interface CSKuleHistoryListTableViewController () <NSFetchedResultsControllerDelegate> {
     NSMutableArray* _historyList;
     NSFetchedResultsController* _frCtrl;
 }
@@ -44,6 +44,7 @@
     [self customizeOkBarItemWithTarget:self action:@selector(onBtnRefreshClicked:) text:@"刷新"];
     
     _frCtrl = [EntityHistoryInfoHelper frCtrlForYear:_year month:_month];
+    _frCtrl.delegate = self;
     NSError* error = nil;
     [_frCtrl performFetch:&error];
     
@@ -142,7 +143,7 @@
 */
 
 - (void)onBtnRefreshClicked:(id)sender {
-    
+    [self doReloadHistory];
 }
 
 - (void)doReloadHistory {
@@ -187,6 +188,55 @@
                                           toDate:toDate
                                          success:sucessHandler
                                          failure:failureHandler];
+}
+
+#pragma mark - NSFetchedResultsControllerDelegate
+- (void)controller:(NSFetchedResultsController *)controller
+   didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath
+     forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath {
+    
+    UITableView* aTableView = self.tableView;
+    
+    if (aTableView) {
+        switch (type) {
+            case NSFetchedResultsChangeUpdate:
+                [aTableView reloadRowsAtIndexPaths:@[indexPath]
+                                  withRowAnimation:UITableViewRowAnimationAutomatic];
+                break;
+            case NSFetchedResultsChangeMove:
+                [aTableView deleteRowsAtIndexPaths:@[indexPath]
+                                  withRowAnimation:UITableViewRowAnimationBottom];
+                [aTableView insertRowsAtIndexPaths:@[newIndexPath]
+                                  withRowAnimation:UITableViewRowAnimationTop];
+                break;
+            case NSFetchedResultsChangeDelete:
+                [aTableView deleteRowsAtIndexPaths:@[indexPath]
+                                  withRowAnimation:UITableViewRowAnimationBottom];
+                break;
+            case NSFetchedResultsChangeInsert:
+                [aTableView insertRowsAtIndexPaths:@[newIndexPath]
+                                  withRowAnimation:UITableViewRowAnimationFade];
+                break;
+            default:
+                break;
+        }
+    }
+}
+
+- (void)controller:(NSFetchedResultsController *)controller
+  didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
+           atIndex:(NSUInteger)sectionIndex
+     forChangeType:(NSFetchedResultsChangeType)type {
+}
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    [self.tableView beginUpdates];
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    [self.tableView endUpdates];
 }
 
 @end

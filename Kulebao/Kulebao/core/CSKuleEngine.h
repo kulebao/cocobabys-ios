@@ -216,4 +216,11 @@
                                 success:(SuccessResponseHandler)success
                                 failure:(FailureResponseHandler)failure;
 
+- (void)reqPostHistoryOfKindergarten:(NSInteger)kindergarten
+                         withChildId:(NSString*)childId
+                         withContent:(NSString*)content
+                    withImageUrlList:(NSArray*)imgUrlList
+                             success:(SuccessResponseHandler)success
+                             failure:(FailureResponseHandler)failure;
+
 @end

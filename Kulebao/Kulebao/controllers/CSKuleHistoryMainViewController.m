@@ -13,9 +13,14 @@
 #import "EntityHistoryInfoHelper.h"
 #import "EntityMediaInfoHelper.h"
 #import "UIImageView+AFNetworking.h"
+#import "CSContentEditorViewController.h"
 
 @interface CSKuleHistoryMainViewController () <UICollectionViewDataSource, UICollectionViewDelegate> {
     NSInteger _year;
+    
+    NSMutableArray* _imageUrlList;
+    NSMutableArray* _imageList;
+    NSString* _historyContent;
 }
 @property (weak, nonatomic) IBOutlet UILabel *labTitle;
 @property (weak, nonatomic) IBOutlet UIButton *btnLeft;
@@ -57,7 +62,9 @@
     
     _year = components.year;
     self.labTitle.text = [NSString stringWithFormat:@"%d", _year];
-    
+}
+
+- (void)viewDidAppear:(BOOL)animated {
     [self doReloadHistory];
 }
 
@@ -68,7 +75,6 @@
 }
 
 #pragma mark - Navigation
-
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -80,6 +86,10 @@
         ctrl.navigationItem.title = [NSString stringWithFormat:@"%d-%02d", _year, indexPath.row+1];
         ctrl.year = _year;
         ctrl.month = indexPath.row + 1;
+    }
+    else if ([segue.identifier isEqualToString:@"segue.history.create"]) {
+        CSContentEditorViewController* ctrl = segue.destinationViewController;
+        ctrl.delegate = self;
     }
 }
 
@@ -95,6 +105,10 @@
     self.labTitle.text = [NSString stringWithFormat:@"%d", _year];
     
     [self doReloadHistory];
+}
+
+- (void)onBtnCreateNewClicked:(id)sender {
+    [self performSegueWithIdentifier:@"segue.history.create" sender:nil];
 }
 
 #pragma mark - UICollectionViewDataSource & UICollectionViewDelegate
@@ -119,12 +133,76 @@
     [self performSegueWithIdentifier:@"segue.history.list" sender:indexPath];
 }
 
-- (void)onBtnCreateNewClicked:(id)sender {
-    
+- (void)doReloadHistory {
+    [self.collectionView reloadData];
 }
 
-- (void)doReloadHistory {
+#pragma mark - CSContentEditorViewControllerDelegate
+- (void)contentEditorViewController:(CSContentEditorViewController*)ctrl finishEditText:(NSString*)text withImages:(NSArray*)imageList {
     
+    _historyContent = text;
+    _imageUrlList = [NSMutableArray array];
+    _imageList = [NSMutableArray arrayWithArray:imageList];
+    
+    if (_imageList.count > 0) {
+        [self doUploadImage];
+    }
+    else {
+        [self doSendHistory];
+    }
+}
+
+- (void)doUploadImage {
+    UIImage* img = [_imageList firstObject];
+    if (img) {
+        NSData* imgData = UIImageJPEGRepresentation(img, 0.8);
+        NSString* imgFileName = [NSString stringWithFormat:@"history_img/%@/topic_%@/%@.jpg",
+                                 @(gApp.engine.loginInfo.schoolId),
+                                 gApp.engine.currentRelationship.child.childId,
+                                 @((long long)[[NSDate date] timeIntervalSince1970]*1000)];
+        
+        SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+            NSString* imgUrl = [NSString stringWithFormat:@"%@/%@", kQiniuDownloadServerHost, imgFileName];
+            [_imageUrlList addObject:imgUrl];
+            [_imageList removeObjectAtIndex:0];
+
+            [self performSelectorInBackground:@selector(doUploadImage) withObject:nil];
+        };
+        
+        FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+            CSLog(@"failure:%@", error);
+            [gApp alert:[error localizedDescription]];
+        };
+        
+        [gApp waitingAlert:@"上传图片中"];
+        [gApp.engine reqUploadToQiniu:imgData
+                              withKey:imgFileName
+                             withMime:@"image/jpeg"
+                              success:sucessHandler
+                              failure:failureHandler];
+    }
+    else {
+        [self doSendHistory];
+    }
+}
+
+- (void)doSendHistory {
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+        [EntityHistoryInfoHelper updateEntities:@[dataJson]];
+        [gApp alert:@"提交成功"];
+        [self.navigationController popToViewController:self animated:YES];
+    };
+    
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        CSLog(@"failure:%@", error);
+        [gApp alert:[error localizedDescription]];
+    };
+    
+    [gApp waitingAlert:@"提交数据中"];
+    
+    [gApp.engine reqPostHistoryOfKindergarten:gApp.engine.loginInfo.schoolId
+                                  withChildId:gApp.engine.currentRelationship.child.childId
+                                  withContent:_historyContent  withImageUrlList:_imageUrlList success:sucessHandler failure:failureHandler];
 }
 
 @end

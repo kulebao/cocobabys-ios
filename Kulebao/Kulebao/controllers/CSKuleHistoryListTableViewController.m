@@ -12,7 +12,6 @@
 #import "EntityHistoryInfoHelper.h"
 
 @interface CSKuleHistoryListTableViewController () <NSFetchedResultsControllerDelegate> {
-    NSMutableArray* _historyList;
     NSFetchedResultsController* _frCtrl;
 }
 
@@ -161,18 +160,17 @@
     NSDate* fromDate = [fmt dateFromString:fromDateString];
     NSDate* toDate = [fmt dateFromString:toDateString];
     
-    _historyList = [NSMutableArray array];
-
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
-        [_historyList addObjectsFromArray:[EntityHistoryInfoHelper updateEntities:dataJson]];
+        NSArray* historyList = [EntityHistoryInfoHelper updateEntities:dataJson];
         
-        [self.tableView reloadData];
-        
-        if (_historyList.count == 0) {
-            [gApp alert:@"没有"];
+        if (historyList.count == 0) {
+            [gApp alert:@"没有新的数据"];
+        }
+        else {
+            [gApp hideAlert];
         }
         
-        [gApp hideAlert];
+        [self.tableView reloadData];
     };
     
     FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {

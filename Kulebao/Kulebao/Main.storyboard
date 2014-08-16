@@ -1578,6 +1578,10 @@
                                             <action selector="onBtnSendVoiceTouchUpInside:" destination="g0W-Gr-GbE" eventType="touchUpInside" id="CNk-zX-BXk"/>
                                         </connections>
                                     </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mic_1.png" id="0Vg-R3-yfc">
+                                        <rect key="frame" x="60" y="213" width="200" height="200"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    </imageView>
                                 </subviews>
                             </scrollView>
                         </subviews>
@@ -1588,6 +1592,7 @@
                     <connections>
                         <outlet property="btnSendVoice" destination="o5Z-7A-xaA" id="0Up-cU-WH5"/>
                         <outlet property="imgContentBg" destination="Ydk-jV-DGL" id="aXk-cV-VjT"/>
+                        <outlet property="imgVoice" destination="0Vg-R3-yfc" id="uJI-g6-IWA"/>
                         <outlet property="textMsgBody" destination="NRw-Hp-xCB" id="4b6-sA-eUq"/>
                     </connections>
                 </viewController>
@@ -2004,6 +2009,7 @@
         <image name="input-bg-2.png" width="234" height="227"/>
         <image name="left_arrow.png" width="37" height="37"/>
         <image name="logo-1.png" width="135" height="94"/>
+        <image name="mic_1.png" width="375" height="375"/>
         <image name="right_arrow.png" width="37" height="37"/>
         <image name="schedule-bg.png" width="300" height="369"/>
         <image name="settings-icon-change-pswd.png" width="23" height="23"/>

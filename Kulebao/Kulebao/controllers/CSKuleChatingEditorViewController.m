@@ -16,12 +16,14 @@
     NSString* _fileName;
     NSString* _wavfilePath;
     NSString* _amrfilePath;
+    NSTimer* _timer;
 }
 @property (strong, nonatomic) AVAudioRecorder* recorder;
 
 @property (weak, nonatomic) IBOutlet UITextView *textMsgBody;
 @property (weak, nonatomic) IBOutlet UIImageView *imgContentBg;
 @property (weak, nonatomic) IBOutlet UIButton *btnSendVoice;
+@property (weak, nonatomic) IBOutlet UIImageView *imgVoice;
 - (IBAction)onBtnSendVoiceTouchDragOutside:(id)sender;
 - (IBAction)onBtnSendVoiceTouchUpInside:(id)sender;
 - (IBAction)onBtnSendVocieTouchDown:(id)sender;
@@ -54,6 +56,7 @@
     self.imgContentBg.image = [[UIImage imageNamed:@"bg-dialog.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     
     //[self.textMsgBody becomeFirstResponder];
+    self.imgVoice.hidden = YES;
 }
 
 - (void)didReceiveMemoryWarning
@@ -62,6 +65,9 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)dealloc {
+    [_timer invalidate];
+}
 /*
 #pragma mark - Navigation
 
@@ -132,6 +138,12 @@
             [[AVAudioSession sharedInstance] setActive:YES error:&error];
             [self.recorder record];
             _isRecording = YES;
+            _timer = [NSTimer scheduledTimerWithTimeInterval:0.1
+                                                      target:self
+                                                    selector:@selector(onTimerFired:)
+                                                    userInfo:nil
+                                                     repeats:YES];
+            self.imgVoice.hidden = NO;
         }
     }
     else {
@@ -177,20 +189,22 @@
 - (void)stopRecord {
     [self.recorder stop];
     _isRecording = NO;
+    [_timer invalidate];
+    self.imgVoice.hidden = YES;
 }
 
 - (IBAction)onBtnSendVoiceTouchDragOutside:(id)sender {
-    CSLog(@"%s", __FUNCTION__);
+    //CSLog(@"%s", __FUNCTION__);
     [self cancelRecord];
 }
 
 - (IBAction)onBtnSendVoiceTouchUpInside:(id)sender {
-    CSLog(@"%s", __FUNCTION__);
+    //CSLog(@"%s", __FUNCTION__);
     [self sendRecord];
 }
 
 - (IBAction)onBtnSendVocieTouchDown:(id)sender {
-    CSLog(@"%s", __FUNCTION__);
+    //CSLog(@"%s", __FUNCTION__);
     [self startRecord];
 }
 
@@ -277,4 +291,29 @@
                                    nil];
     return recordSetting;
 }
+
+#pragma mark - Private
+- (void)onTimerFired:(id)sender {
+    if (self.recorder.isRecording && !self.imgVoice.hidden) {
+        [self.recorder updateMeters];
+        float power = [self.recorder peakPowerForChannel:0];
+        float peakPower = pow(10, (0.05 * power));
+        if (peakPower < 0.05) {
+            self.imgVoice.image = [UIImage imageNamed:@"mic_1.png"];
+        }
+        else if (peakPower < 0.15) {
+            self.imgVoice.image = [UIImage imageNamed:@"mic_2.png"];
+        }
+        else if (peakPower < 0.3) {
+            self.imgVoice.image = [UIImage imageNamed:@"mic_3.png"];
+        }
+        else if (peakPower < 0.7) {
+            self.imgVoice.image = [UIImage imageNamed:@"mic_4.png"];
+        }
+        else {
+            self.imgVoice.image = [UIImage imageNamed:@"mic_5.png"];
+        }
+    }
+}
+
 @end

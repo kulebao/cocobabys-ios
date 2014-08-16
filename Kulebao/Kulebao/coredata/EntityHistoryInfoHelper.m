@@ -77,28 +77,33 @@
                 }
             }
             
-            if (YES || updated) {
+            if (updated) {
                 entity.content = [jsonObject valueForKeyNotNull:@"content"];
                 entity.topic = [jsonObject valueForKeyNotNull:@"topic"];
                 entity.timestamp = [jsonObject valueForKeyNotNull:@"timestamp"];
                 
                 if (entity.sender) {
                     [context deleteObject:entity.sender];
+                    entity.sender = nil;
+                    NSError* error = nil;
+                    [context save:&error];
                 }
                 
                 NSArray* senderlist =[EntitySenderInfoHelper updateEntities:@[[jsonObject valueForKeyNotNull:@"sender"]]];
                 
                 entity.sender = senderlist.firstObject;
+                NSOrderedSet* mediums = entity.medium;
                 
-                for (NSManagedObject* obj in entity.medium) {
+                for (NSManagedObject* obj in mediums) {
                     [context deleteObject:obj];
                 }
+                NSError* error = nil;
+                [context save:&error];
                 
                 NSArray* mediaInfoList = [EntityMediaInfoHelper updateEntities:[jsonObject valueForKeyNotNull:@"medium"]];
                 entity.medium = [NSOrderedSet orderedSetWithArray:mediaInfoList];
+                [returnObjectList addObject:entity];
             }
-            
-            [returnObjectList addObject:entity];
         }
     }
     

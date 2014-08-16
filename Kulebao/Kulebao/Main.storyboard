@@ -1542,7 +1542,7 @@
                                 <rect key="frame" x="0.0" y="274" width="320" height="230"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             </imageView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="SIH-wO-v5f" customClass="TPKeyboardAvoidingScrollView">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" id="SIH-wO-v5f" customClass="TPKeyboardAvoidingScrollView">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
@@ -1564,6 +1564,20 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="o5Z-7A-xaA">
+                                        <rect key="frame" x="61" y="446" width="199" height="38"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                        <state key="normal" title="发送语音" backgroundImage="btn-type1.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted" backgroundImage="btn-type1-pressed.png"/>
+                                        <connections>
+                                            <action selector="onBtnSendVocieTouchDown:" destination="g0W-Gr-GbE" eventType="touchDown" id="be9-yM-6Ez"/>
+                                            <action selector="onBtnSendVoiceTouchDragOutside:" destination="g0W-Gr-GbE" eventType="touchDragOutside" id="SD9-UT-2yS"/>
+                                            <action selector="onBtnSendVoiceTouchUpInside:" destination="g0W-Gr-GbE" eventType="touchUpInside" id="CNk-zX-BXk"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </scrollView>
                         </subviews>
@@ -1572,6 +1586,7 @@
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="编辑内容" id="LfB-EJ-RnF"/>
                     <connections>
+                        <outlet property="btnSendVoice" destination="o5Z-7A-xaA" id="0Up-cU-WH5"/>
                         <outlet property="imgContentBg" destination="Ydk-jV-DGL" id="aXk-cV-VjT"/>
                         <outlet property="textMsgBody" destination="NRw-Hp-xCB" id="4b6-sA-eUq"/>
                     </connections>

@@ -557,14 +557,18 @@
 
 #pragma mark - Private
 - (void)doSendPicture:(NSString*)imgUrl {
-    [self doSendMsg:nil withImage:imgUrl];
+    [self doSendMsg:nil withMediaUrl:imgUrl ofType:@"image"];
 }
 
 - (void)doSendText:(NSString*)msgBody {
-    [self doSendMsg:msgBody withImage:nil];
+    [self doSendMsg:msgBody withMediaUrl:nil ofType:nil];
 }
 
-- (void)doSendMsg:(NSString*)msgBody withImage:(NSString*)imgUrl {
+- (void)doSendVoice:(NSString*)voiceUrl {
+    [self doSendMsg:nil withMediaUrl:voiceUrl ofType:@"voice"];
+}
+
+- (void)doSendMsg:(NSString*)msgBody withMediaUrl:(NSString*)mediaUrl ofType:(NSString*)mediaType {
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         NSMutableArray* topicMsgs = [NSMutableArray array];
         
@@ -625,7 +629,7 @@
     
     [gApp waitingAlert:@"发送中..."];
     [gApp.engine reqSendTopicMsg:msgBody
-                       withImage:imgUrl
+                    withMediaUrl:mediaUrl ofMediaType:mediaType
                   toKindergarten:gApp.engine.loginInfo.schoolId
                     retrieveFrom:retrieveFrom
                          success:sucessHandler
@@ -730,6 +734,29 @@
     [self doSendText:msgBody];
 }
 
+- (void)willSendMsgWithVoice:(NSData *)voice {
+    NSString* voiceFileName = [NSString stringWithFormat:@"chat_voice/%@/%@/%@.amr",
+                             @(gApp.engine.loginInfo.schoolId),
+                             gApp.engine.loginInfo.accountName,
+                             @((long long)[[NSDate date] timeIntervalSince1970]*1000)];
+    
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+        NSString* voiceUrl = [NSString stringWithFormat:@"%@/%@", kQiniuDownloadServerHost, voiceFileName];
+        [self doSendVoice:voiceUrl];
+    };
+    
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        CSLog(@"failure:%@", error);
+        [gApp alert:[error localizedDescription]];
+    };
+    
+    [gApp waitingAlert:@"上传语音中"];
+    [gApp.engine reqUploadToQiniu:voice
+                          withKey:voiceFileName
+                         withMime:@"image/jpeg"
+                          success:sucessHandler
+                          failure:failureHandler];
+}
 
 #pragma mark - XHImageViewer
 - (void)tapHandle:(UITapGestureRecognizer *)tap {

@@ -167,7 +167,8 @@
                               failure:(FailureResponseHandler)failure;
 
 - (void)reqSendTopicMsg:(NSString*)msgBody
-              withImage:(NSString*)imgUrl
+           withMediaUrl:(NSString*)mediaUrl
+            ofMediaType:(NSString*)mediaType
          toKindergarten:(NSInteger)kindergarten
            retrieveFrom:(long long)fromId
                 success:(SuccessResponseHandler)success

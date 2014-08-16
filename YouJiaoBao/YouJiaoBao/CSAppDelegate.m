@@ -81,7 +81,7 @@
         self.hud.detailsLabelText = text;
         [_window bringSubviewToFront:self.hud];
         [self.hud show:YES];
-        [self hideAlertAfterDelay:2];
+        [self hideAlertAfterDelay:1.5];
     }
 }
 

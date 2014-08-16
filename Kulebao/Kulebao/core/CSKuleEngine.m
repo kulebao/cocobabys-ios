@@ -1187,12 +1187,13 @@
 }
 
 - (void)reqSendTopicMsg:(NSString*)msgBody
-              withImage:(NSString*)imgUrl
+           withMediaUrl:(NSString*)mediaUrl
+            ofMediaType:(NSString*)mediaType
          toKindergarten:(NSInteger)kindergarten
            retrieveFrom:(long long)fromId
                 success:(SuccessResponseHandler)success
                 failure:(FailureResponseHandler)failure {
-    NSParameterAssert(msgBody || imgUrl); // 不能同时为空
+    NSParameterAssert(msgBody || mediaUrl); // 不能同时为空
     NSParameterAssert(_currentRelationship.child);
     
     
@@ -1214,11 +1215,11 @@
     long long timestamp = [[NSDate date] timeIntervalSince1970]*1000;
     
     id msgMedia = @{@"url": @"",
-                    @"type": @"image"};
+                    @"type": @""};
     
-    if (imgUrl.length > 0) {
-        msgMedia = @{@"url": [[self urlFromPath:imgUrl] absoluteString],
-                     @"type": @"image"};
+    if (mediaUrl.length > 0) {
+        msgMedia = @{@"url": [[self urlFromPath:mediaUrl] absoluteString],
+                     @"type": mediaType};
     }
     
     id msgSender = @{@"id": _currentRelationship.parent.parentId,

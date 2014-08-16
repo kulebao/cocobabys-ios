@@ -17,5 +17,6 @@
 @protocol CSKuleChatingEditorViewControllerDelegate <NSObject>
 @optional
 - (void)willSendMsgWithText:(NSString*)msgBody;
+- (void)willSendMsgWithVoice:(NSData*)voice;
 
 @end

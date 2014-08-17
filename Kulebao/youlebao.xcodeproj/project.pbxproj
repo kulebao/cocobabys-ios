@@ -179,6 +179,8 @@
 		0914E39A199FCEBC00276ABA /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0914E388199FCEBC00276ABA /* UIImageView+HighlightedWebCache.m */; };
 		0914E39B199FCEBC00276ABA /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0914E38A199FCEBC00276ABA /* UIImageView+WebCache.m */; };
 		0914E39C199FCEBC00276ABA /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0914E38C199FCEBC00276ABA /* UIView+WebCacheOperation.m */; };
+		0914E39F19A053AE00276ABA /* CSKuleChatingTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0914E39E19A053AE00276ABA /* CSKuleChatingTableCell.m */; };
+		0914E3A219A05A0800276ABA /* CSKuleCCTVItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0914E3A119A05A0800276ABA /* CSKuleCCTVItemTableViewCell.m */; };
 		0915662218ED92810073AE22 /* CSKuleVerifyMobileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0915662118ED92810073AE22 /* CSKuleVerifyMobileViewController.m */; };
 		0917764718D0574D00D24F53 /* CSKuleAssignmentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0917764618D0574D00D24F53 /* CSKuleAssignmentInfo.m */; };
 		0919B7731929D41900810556 /* CSKuleTopicMsg.m in Sources */ = {isa = PBXBuildFile; fileRef = 0919B7721929D41900810556 /* CSKuleTopicMsg.m */; };
@@ -832,6 +834,10 @@
 		0914E38A199FCEBC00276ABA /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		0914E38B199FCEBC00276ABA /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		0914E38C199FCEBC00276ABA /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
+		0914E39D19A053AE00276ABA /* CSKuleChatingTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleChatingTableCell.h; sourceTree = "<group>"; };
+		0914E39E19A053AE00276ABA /* CSKuleChatingTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleChatingTableCell.m; sourceTree = "<group>"; };
+		0914E3A019A05A0800276ABA /* CSKuleCCTVItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleCCTVItemTableViewCell.h; sourceTree = "<group>"; };
+		0914E3A119A05A0800276ABA /* CSKuleCCTVItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleCCTVItemTableViewCell.m; sourceTree = "<group>"; };
 		0915662018ED92810073AE22 /* CSKuleVerifyMobileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleVerifyMobileViewController.h; sourceTree = "<group>"; };
 		0915662118ED92810073AE22 /* CSKuleVerifyMobileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleVerifyMobileViewController.m; sourceTree = "<group>"; };
 		0917764518D0574D00D24F53 /* CSKuleAssignmentInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleAssignmentInfo.h; sourceTree = "<group>"; };
@@ -2586,6 +2592,10 @@
 				093D89CE1999C27E006B013B /* CSKuleHistoryMonthCell.m */,
 				090FC171199CAB5600C3A31A /* CSKuleHistoryItemTableViewCell.h */,
 				090FC172199CAB5600C3A31A /* CSKuleHistoryItemTableViewCell.m */,
+				0914E39D19A053AE00276ABA /* CSKuleChatingTableCell.h */,
+				0914E39E19A053AE00276ABA /* CSKuleChatingTableCell.m */,
+				0914E3A019A05A0800276ABA /* CSKuleCCTVItemTableViewCell.h */,
+				0914E3A119A05A0800276ABA /* CSKuleCCTVItemTableViewCell.m */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -3084,6 +3094,7 @@
 				093904DD18BDDA90006E8F82 /* CSKuleRootViewController.m in Sources */,
 				09BA1C2918BB3F8400760182 /* AFURLConnectionOperation.m in Sources */,
 				09BA1BDD18BB2FC700760182 /* EGORefreshTableHeaderView.m in Sources */,
+				0914E39F19A053AE00276ABA /* CSKuleChatingTableCell.m in Sources */,
 				094E14E3199CF6DD00945B06 /* CSCoreDataHelper.m in Sources */,
 				097ED0BB18DAB4AB0057ECA0 /* CSKuleChangePasswordViewController.m in Sources */,
 				09FE6B0A18C5C34F00A840BE /* CSKuleChatingViewController.m in Sources */,
@@ -3115,6 +3126,7 @@
 				0904690518C72E5000D0846E /* CSKuleParentInfo.m in Sources */,
 				09FE6AF618C5A53200A840BE /* CSTextFieldDelegate.m in Sources */,
 				0914E363199FCD7500276ABA /* MJPhoto.m in Sources */,
+				0914E3A219A05A0800276ABA /* CSKuleCCTVItemTableViewCell.m in Sources */,
 				09BA1C2418BB3F8400760182 /* AFHTTPRequestOperation.m in Sources */,
 				0914E398199FCEBC00276ABA /* UIImage+MultiFormat.m in Sources */,
 				09219A5318C4878600166228 /* TPKeyboardAvoidingTableView.m in Sources */,

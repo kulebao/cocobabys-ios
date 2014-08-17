@@ -10,6 +10,7 @@
 #import "CSAppDelegate.h"
 #import "CSKuleNoticeCell.h"
 #import "CSKuleNewsDetailsViewController.h"
+#import "UIImageView+WebCache.h"
 
 @interface CSKuleCheckinLogListViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
@@ -94,7 +95,7 @@
     if (checkInOutLogInfo.recordUrl.length > 0) {
         NSURL* qiniuImgUrl = [gApp.engine urlFromPath:checkInOutLogInfo.recordUrl];
         qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/0/w/50/h/50"];
-        [cell.imgAttachment setImageWithURL:qiniuImgUrl
+        [cell.imgAttachment sd_setImageWithURL:qiniuImgUrl
                            placeholderImage:[UIImage imageNamed:@"img-placeholder.png"]];
     }
     else {

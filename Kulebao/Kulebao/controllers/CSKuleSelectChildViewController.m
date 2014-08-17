@@ -9,7 +9,7 @@
 #import "CSKuleSelectChildViewController.h"
 #import "CSKuleChildCell.h"
 #import "CSAppDelegate.h"
-#import "UIImageView+AFNetworking.h"
+#import "UIImageView+WebCache.h"
 
 @interface CSKuleSelectChildViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
@@ -93,21 +93,12 @@
     CSKuleRelationshipInfo* relationship = [self.relationships objectAtIndex:indexPath.row];
     cell.labChildName.text = relationship.child.nick;
     
-//    NSURL* qiniuImgUrl = [gApp.engine urlFromPath:relationship.child.portrait];
-//    qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/128/h/128"];
-//    
-//    [cell.imgChildPortrait setImageWithURL:qiniuImgUrl placeholderImage:[UIImage imageNamed:@"default_child_head_icon.png"]];
-    
     NSURL* qiniuImgUrl = [gApp.engine urlFromPath:relationship.child.portrait];
     qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/256/h/256"];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:qiniuImgUrl];
-    [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
-    request.cachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
-    UIImage* placeholderImage = [UIImage imageNamed:@"default_child_head_icon.png"];
-    [cell.imgChildPortrait setImageWithURLRequest:request
-                                 placeholderImage:placeholderImage
-                                          success:nil
-                                          failure:nil];
+    
+    [cell.imgChildPortrait sd_setImageWithURL:qiniuImgUrl
+                             placeholderImage:[UIImage imageNamed:@"default_child_head_icon.png"]
+                                      options:SDWebImageRetryFailed | SDWebImageLowPriority | SDWebImageAllowInvalidSSLCertificates];
     
     return cell;
 }

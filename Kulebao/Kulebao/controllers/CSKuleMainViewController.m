@@ -17,6 +17,7 @@
 #import "UIViewController+MJPopupViewController.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import "UIImage+CSExtends.h"
+#import "UIImageView+WebCache.h"
 
 @interface CSKuleMainViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
     UIImagePickerController* _imgPicker;
@@ -329,24 +330,19 @@
         NSURL* qiniuImgUrl = [gApp.engine urlFromPath:childInfo.portrait];
         qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/256/h/256"];
         
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:qiniuImgUrl];
-        [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
+        SDWebImageOptions options = SDWebImageRetryFailed | SDWebImageLowPriority |SDWebImageAllowInvalidSSLCertificates;
         
         if (reloadPortrait) {
-            request.cachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
-        }
-        else {
-            request.cachePolicy = NSURLRequestUseProtocolCachePolicy;
+            options = options | SDWebImageRefreshCached;
         }
         
         UIImage* placeholderImage = [UIImage imageNamed:@"default_child_head_icon.png"];
         if (self.imgChildPortrait.image) {
             placeholderImage = self.imgChildPortrait.image;
         }
-        [self.imgChildPortrait setImageWithURLRequest:request
-                                     placeholderImage:placeholderImage
-                                              success:nil
-                                              failure:nil];
+        [self.imgChildPortrait  sd_setImageWithURL:qiniuImgUrl
+                                  placeholderImage:placeholderImage
+                                           options:options];
         
     }
     else {

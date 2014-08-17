@@ -11,6 +11,7 @@
 #import "PullTableView.h"
 #import "CSKuleNewsDetailsViewController.h"
 #import "CSAppDelegate.h"
+#import "UIImageView+WebCache.h"
 
 @interface CSKuleNewsViewController () <UITableViewDataSource, UITableViewDelegate, PullTableViewDelegate>
 @property (weak, nonatomic) IBOutlet PullTableView *tableview;
@@ -95,7 +96,7 @@
     if (newsInfo.image.length > 0) {
         NSURL* qiniuImgUrl = [gApp.engine urlFromPath:newsInfo.image];
         qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/0/w/50/h/50"];
-        [cell.imgAttachment setImageWithURL:qiniuImgUrl
+        [cell.imgAttachment sd_setImageWithURL:qiniuImgUrl
                            placeholderImage:[UIImage imageNamed:@"img-placeholder.png"]];
     }
     else {

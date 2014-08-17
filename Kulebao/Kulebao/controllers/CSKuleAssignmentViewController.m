@@ -11,7 +11,7 @@
 #import "PullTableView.h"
 #import "CSAppDelegate.h"
 #import "CSKuleNewsDetailsViewController.h"
-#import "UIImageView+AFNetworking.h"
+#import "UIImageView+WebCache.h"
 
 @interface CSKuleAssignmentViewController () <UITableViewDataSource, UITableViewDelegate, PullTableViewDelegate>
 @property (weak, nonatomic) IBOutlet PullTableView *tableview;
@@ -99,7 +99,7 @@
         NSURL* qiniuImgUrl = [gApp.engine urlFromPath:assignmentInfo.iconUrl];
         qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/0/w/50/h/50"];
         
-        [cell.imgAttachment setImageWithURL:qiniuImgUrl
+        [cell.imgAttachment sd_setImageWithURL:qiniuImgUrl
                            placeholderImage:[UIImage imageNamed:@"img-placeholder.png"]];
     }
     else {

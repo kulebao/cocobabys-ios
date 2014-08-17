@@ -44,6 +44,8 @@
     // Initialization code
     
     self.viewImageContainer.backgroundColor = [UIColor clearColor];
+    self.imgPortrait.layer.cornerRadius = 4.0;
+    self.imgPortrait.clipsToBounds = YES;
     
     self.tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
     [self.viewImageContainer addGestureRecognizer:self.tapGes];

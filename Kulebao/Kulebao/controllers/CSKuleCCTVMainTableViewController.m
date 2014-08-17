@@ -11,6 +11,7 @@
 #import "CSKuleCCTVPlayViewController.h"
 #import "CSAppDelegate.h"
 #import "HMPlayerView.h"
+#import "CSKuleCCTVItemTableViewCell.h"
 
 @interface CSKuleCCTVMainTableViewController () {
     NSMutableArray* _deviceList;
@@ -69,18 +70,17 @@
     return _deviceList.count;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 50.0;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseIdentifier"];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"reuseIdentifier"];
-    }
+    CSKuleCCTVItemTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CSKuleCCTVItemTableViewCell" forIndexPath:indexPath];
     
     // Configure the cell...
     NSDictionary* deviceInfo = [_deviceList objectAtIndex:indexPath.row];
-    cell.textLabel.text = deviceInfo[@"name"];
-    
-    cell.imageView.image = [UIImage imageNamed:@"record.png"];
+    cell.labDeviceName.text = deviceInfo[@"name"];
     
     return cell;
 }

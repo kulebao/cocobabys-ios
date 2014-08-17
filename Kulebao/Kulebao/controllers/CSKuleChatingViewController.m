@@ -13,12 +13,12 @@
 #import "CSKuleChatingEditorViewController.h"
 #import "CSKuleEmployeeInfo.h"
 #import "CSKuleParentInfo.h"
-#import "XHImageViewer.h"
-#import "UIImageView+XHURLDownload.h"
+#import "UIImageView+WebCache.h"
 #import <AVFoundation/AVFoundation.h>
 #import "amrFileCodec.h"
+#import "CSKuleChatingTableCell.h"
 
-@interface CSKuleChatingViewController () <UITableViewDataSource, UITableViewDelegate, PullTableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CSKuleChatingEditorViewControllerDelegate, XHImageViewerDelegate, AVAudioPlayerDelegate> {
+@interface CSKuleChatingViewController () <UITableViewDataSource, UITableViewDelegate, PullTableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CSKuleChatingEditorViewControllerDelegate, AVAudioPlayerDelegate> {
     UIImagePickerController* _imgPicker;
     NSMutableArray* _topicMsgList;
     
@@ -119,11 +119,11 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"CSKuleChatingTableCell"];
+    CSKuleChatingTableCell* cell = [tableView dequeueReusableCellWithIdentifier:@"CSKuleChatingTableCell"];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                      reuseIdentifier:@"CSKuleChatingTableCell"];
+        cell = [[CSKuleChatingTableCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                             reuseIdentifier:@"CSKuleChatingTableCell"];
         cell.backgroundColor = [UIColor clearColor];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
@@ -140,7 +140,7 @@
 
         UIImageView* imgMsgBody = [[UIImageView alloc] initWithFrame:CGRectNull];
         imgMsgBody.tag = 102;
-        UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:self
+        UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:cell
                                                                                   action:@selector(tapHandle:)];
         imgMsgBody.userInteractionEnabled = YES;
         [imgMsgBody addGestureRecognizer:gesture];
@@ -188,6 +188,8 @@
     UIImageView* voiceMsgBody = (UIImageView*)[cell.contentView viewWithTag:106];
     
     CSKuleTopicMsg* msg = [_topicMsgList objectAtIndex:indexPath.row];
+    cell.msg = msg;
+    
     CGSize msgBodySize = [self textSize:msg.content];
     NSString* timestampString = [[NSDate dateWithTimeIntervalSince1970:msg.timestamp] isoDateTimeString];
     labMsgTimestamp.frame = CGRectMake(40, 0, 320-40-40, 12);
@@ -260,7 +262,7 @@
             }
             else {
                 imgBubbleBg.frame =  CGRectMake(320-36-90, 12+12, 90, 78);
-                imgMsgBody.frame = CGRectMake(imgBubbleBg.frame.origin.x+10, 18+12, 64, 64);
+                imgMsgBody.frame = CGRectMake(imgBubbleBg.frame.origin.x+8, 18+10, 64, 64);
             }
         }
         else {
@@ -278,9 +280,9 @@
         }
         else {
             NSURL* qiniuImgUrl = [gApp.engine urlFromPath:msg.media.url];
-            [imgMsgBody loadWithURL:qiniuImgUrl
-                         placeholer:[UIImage imageNamed:@"img-placeholder.png"]
-          showActivityIndicatorView:YES];
+            [imgMsgBody sd_setImageWithURL:qiniuImgUrl
+                          placeholderImage:[UIImage imageNamed:@"img-placeholder.png"]];
+
         }
     }
     
@@ -317,13 +319,8 @@
                                               
                                               if (qiniuImgUrl) {
                                                   qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/64/h/64"];
-                                                  NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:qiniuImgUrl];
-                                                  [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
-                                                  request.cachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
-                                                  [imgPortrait setImageWithURLRequest:request
-                                                                     placeholderImage:[UIImage imageNamed:@"chat_head_icon.png"]
-                                                                              success:nil
-                                                                              failure:nil];
+                                                  
+                                                  [imgPortrait sd_setImageWithURL:qiniuImgUrl placeholderImage:[UIImage imageNamed:@"chat_head_icon.png"] options:SDWebImageRetryFailed|SDWebImageRefreshCached|SDWebImageAllowInvalidSSLCertificates];
                                               }
                                               else {
                                                   imgPortrait.image = [UIImage imageNamed:@"chat_head_icon.png"];
@@ -756,18 +753,6 @@
                          withMime:@"image/jpeg"
                           success:sucessHandler
                           failure:failureHandler];
-}
-
-#pragma mark - XHImageViewer
-- (void)tapHandle:(UITapGestureRecognizer *)tap {
-    XHImageViewer *imageViewer = [[XHImageViewer alloc] init];
-    imageViewer.delegate = self;
-    UIImageView* imgView = (UIImageView *)tap.view;
-    [imageViewer showWithImageViews:@[imgView] selectedView:imgView];
-}
-
-#pragma mark - XHImageViewerDelegate
-- (void)imageViewer:(XHImageViewer *)imageViewer willDismissWithSelectedView:(UIImageView *)selectedView {
 }
 
 #pragma mark - AVAudioPlayerDelegate

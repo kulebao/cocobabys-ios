@@ -12,7 +12,7 @@
 #import "CSAppDelegate.h"
 #import "EntityHistoryInfoHelper.h"
 #import "EntityMediaInfoHelper.h"
-#import "UIImageView+AFNetworking.h"
+#import "UIImageView+WebCache.h"
 #import "CSContentEditorViewController.h"
 
 @interface CSKuleHistoryMainViewController () <UICollectionViewDataSource, UICollectionViewDelegate> {
@@ -124,7 +124,8 @@
     
     EntityMediaInfo* mediaInfo = [EntityHistoryInfoHelper mediaWhereLatestImageOfYear:_year month:indexPath.row+1];
     
-    [cell.imgIcon setImageWithURL:[NSURL URLWithString:mediaInfo.url] placeholderImage:[UIImage imageNamed:@"exp_default.png"]];
+    [cell.imgIcon sd_setImageWithURL:[NSURL URLWithString:mediaInfo.url]
+                    placeholderImage:[UIImage imageNamed:@"exp_default.png"]];
     
     return cell;
 }

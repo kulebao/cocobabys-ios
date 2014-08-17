@@ -7,11 +7,13 @@
 //
 
 #import "CSKuleHistoryItemTableViewCell.h"
-#import "UIImageView+AFNetworking.h"
 #import "CSAppDelegate.h"
 #import "EntityMediaInfoHelper.h"
 #import "EntitySenderInfoHelper.h"
 #import "EntityHistoryInfoHelper.h"
+#import "MJPhoto.h"
+#import "MJPhotoBrowser.h"
+#import "UIImageView+WebCache.h"
 
 @interface CSKuleHistoryItemTableViewCell()
 @property (weak, nonatomic) IBOutlet UIImageView *imgPortrait;
@@ -20,10 +22,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *labContent;
 @property (weak, nonatomic) IBOutlet UIView *viewImageContainer;
 
+@property (nonatomic, strong) UITapGestureRecognizer* tapGes;
+
 @end
 
 @implementation CSKuleHistoryItemTableViewCell
 @synthesize historyInfo = _historyInfo;
+@synthesize tapGes = _tapGes;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -39,6 +44,9 @@
     // Initialization code
     
     self.viewImageContainer.backgroundColor = [UIColor clearColor];
+    
+    self.tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
+    [self.viewImageContainer addGestureRecognizer:self.tapGes];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -79,7 +87,7 @@
         }
         
         if ([media.type isEqualToString:@"image"]) {
-            [imgView setImageWithURL:[NSURL URLWithString:media.url]
+            [imgView sd_setImageWithURL:[NSURL URLWithString:media.url]
                     placeholderImage:[UIImage imageNamed:@"gallery.png"]];
         }
         else {
@@ -181,6 +189,41 @@
     yy += ((historyInfo.medium.count + 2) / 3 ) * (64+10) + 2;
     
     return yy;
+}
+
+- (void)onTap:(UITapGestureRecognizer*)ges {
+    if (ges.state == UIGestureRecognizerStateEnded) {
+        CGPoint point = [ges locationInView:self.viewImageContainer];
+        UIImageView* imgView = nil;
+        for (UIImageView* img in self.viewImageContainer.subviews) {
+            if(CGRectContainsPoint(img.frame, point)) {
+                imgView = img;
+                break;
+            }
+        }
+        
+        if (imgView) {
+            MJPhotoBrowser* browser = [[MJPhotoBrowser alloc] init];
+            browser.currentPhotoIndex = imgView.tag - 0x2000;
+            
+            NSMutableArray* photoList = [NSMutableArray array];
+            
+            NSInteger index = 0;
+            for (CSKuleMediaInfo* media in _historyInfo.medium) {
+                NSInteger vTag = 0x2000 + index;
+                UIImageView* imgView = (UIImageView*)[_viewImageContainer viewWithTag:vTag];
+                MJPhoto* photo = [MJPhoto new];
+                photo.srcImageView = imgView;
+                photo.url = [NSURL URLWithString:media.url];
+                
+                [photoList addObject:photo];
+            }
+            
+            browser.photos = photoList;
+            
+            [browser show];
+        }
+    }
 }
 
 @end

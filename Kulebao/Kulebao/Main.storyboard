@@ -1953,34 +1953,11 @@
                                     <action selector="onBtnFinishClicked:" destination="IRD-Ka-JqY" eventType="touchUpInside" id="eA9-6B-AKq"/>
                                 </connections>
                             </button>
-                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="sUZ-0j-1m5">
-                                <rect key="frame" x="4" y="138" width="312" height="362"/>
+                            <view contentMode="scaleToFill" id="YeT-wm-0Ev" customClass="GMGridView">
+                                <rect key="frame" x="4" y="142" width="312" height="357"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Gsh-MI-IVL">
-                                    <size key="itemSize" width="90" height="90"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="6" minY="6" maxX="6" maxY="6"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CSContentEditorImageItemCell" id="OnH-mR-mVv">
-                                        <rect key="frame" x="6" y="6" width="90" height="90"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" tag="1234" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="J1U-FF-duc">
-                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                </imageView>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                    </collectionViewCell>
-                                </cells>
-                            </collectionView>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -1990,7 +1967,7 @@
                         <outlet property="btnHideKeyboard" destination="xDa-BF-dYe" id="Oif-oP-pxs"/>
                         <outlet property="btnPhotoFromCamra" destination="h7F-gQ-WPM" id="1GG-pZ-EnY"/>
                         <outlet property="btnPhotoFromGallery" destination="jeS-Bw-Dpl" id="i6l-Co-Wpx"/>
-                        <outlet property="collectionViewImages" destination="sUZ-0j-1m5" id="UuK-dh-09j"/>
+                        <outlet property="gmGridView" destination="YeT-wm-0Ev" id="Dhk-2R-Ldh"/>
                         <outlet property="labTips" destination="akf-eW-UGc" id="SoE-JH-0uR"/>
                         <outlet property="textContent" destination="8Vz-By-Ouv" id="ln6-i6-T9c"/>
                     </connections>

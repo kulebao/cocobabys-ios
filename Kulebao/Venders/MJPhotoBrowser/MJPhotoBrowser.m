@@ -50,8 +50,11 @@
     // 1.创建UIScrollView
     [self createScrollView];
     
-    // 2.创建工具条
-    [self createToolbar];
+    if (!self.hidenToolbar) {
+        
+        // 2.创建工具条
+        [self createToolbar];
+    }
 }
 
 - (void)show
@@ -110,7 +113,7 @@
     for (int i = 0; i<_photos.count; i++) {
         MJPhoto *photo = _photos[i];
         photo.index = i;
-        photo.firstShow = i == _currentPhotoIndex;
+        //photo.firstShow = i == _currentPhotoIndex;
     }
 }
 
@@ -121,7 +124,7 @@
     
     for (int i = 0; i<_photos.count; i++) {
         MJPhoto *photo = _photos[i];
-        photo.firstShow = i == currentPhotoIndex;
+        //photo.firstShow = i == currentPhotoIndex;
     }
     
     if ([self isViewLoaded]) {

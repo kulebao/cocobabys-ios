@@ -42,7 +42,6 @@
 - (void)awakeFromNib
 {
     // Initialization code
-    
     self.viewImageContainer.backgroundColor = [UIColor clearColor];
     self.imgPortrait.layer.cornerRadius = 4.0;
     self.imgPortrait.clipsToBounds = YES;

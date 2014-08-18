@@ -164,7 +164,7 @@
         NSArray* historyList = [EntityHistoryInfoHelper updateEntities:dataJson];
         
         if (historyList.count == 0) {
-            [gApp alert:@"没有新的数据"];
+            [gApp shortAlert:@"没有新的数据"];
         }
         else {
             [gApp hideAlert];

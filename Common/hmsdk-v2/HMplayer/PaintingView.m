@@ -269,7 +269,7 @@
 				break;
 			case 4:
 			default:
-				[videoPlayerDelegate touchCentralArea];
+				//[videoPlayerDelegate touchCentralArea];
 				break;
 		}
     }

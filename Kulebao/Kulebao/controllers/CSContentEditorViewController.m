@@ -7,10 +7,14 @@
 //
 
 #import "CSContentEditorViewController.h"
+#import "GMGridView.h"
+#import "MJPhotoBrowser.h"
+#import "MJPhoto.h"
 
-@interface CSContentEditorViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
+@interface CSContentEditorViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GMGridViewDataSource, GMGridViewSortingDelegate, GMGridViewTransformationDelegate, GMGridViewActionDelegate> {
     NSMutableArray* _imageList;
     UIImagePickerController* _imgPicker;
+    NSInteger _lastDeleteItemIndexAsked;
 }
 
 @property (weak, nonatomic) IBOutlet UITextView *textContent;
@@ -20,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnFinishEdit;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionViewImages;
 @property (weak, nonatomic) IBOutlet UILabel *labTips;
+@property (weak, nonatomic) IBOutlet GMGridView *gmGridView;
 - (IBAction)onBtnHideKeyboardClicked:(id)sender;
 - (IBAction)onBtnPhotoFromCamraClicked:(id)sender;
 - (IBAction)onBtnPhotoFromGalleryClicked:(id)sender;
@@ -47,6 +52,16 @@
     
     self.collectionViewImages.delegate = self;
     self.collectionViewImages.dataSource = self;
+    
+//    self.gmGridView.centerGrid = YES;
+    self.gmGridView.actionDelegate = self;
+    self.gmGridView.dataSource = self;
+//    self.gmGridView.transformDelegate = self;
+//    self.gmGridView.sortingDelegate = self;
+    self.gmGridView.enableEditOnLongPress = YES;
+    self.gmGridView.disableEditOnEmptySpaceTap = YES;
+    self.gmGridView.clipsToBounds = YES;
+    
     self.textContent.delegate = self;
     
     self.btnHideKeyboard.hidden = YES;
@@ -55,6 +70,7 @@
     
     self.textContent.text = nil;
     self.labTips.hidden = (self.textContent.text.length > 0);
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -143,7 +159,7 @@
     UIImage* img = info[UIImagePickerControllerOriginalImage];
     if (img) {
         [_imageList addObject:img];
-        [self.collectionViewImages reloadData];
+        [self.gmGridView reloadData];
     }
     
     [picker dismissViewControllerAnimated:YES
@@ -162,6 +178,94 @@
     if (picker == _imgPicker) {
         _imgPicker = nil;
     }
+}
+
+#pragma mark - GMGridViewDataSource
+- (NSInteger)numberOfItemsInGMGridView:(GMGridView *)gridView {
+    return _imageList.count;
+}
+
+- (CGSize)GMGridView:(GMGridView *)gridView sizeForItemsInInterfaceOrientation:(UIInterfaceOrientation)orientation {
+    return CGSizeMake(80, 80);
+}
+
+- (GMGridViewCell *)GMGridView:(GMGridView *)gridView cellForItemAtIndex:(NSInteger)index {
+    // CGSize size = [self GMGridView:gridView sizeForItemsInInterfaceOrientation:[[UIApplication sharedApplication] statusBarOrientation]];
+    
+    GMGridViewCell *cell = [gridView dequeueReusableCell];
+    
+    if (!cell)
+    {
+        cell = [[GMGridViewCell alloc] init];
+        cell.deleteButtonIcon = [UIImage imageNamed:@"close_x.png"];
+        cell.deleteButtonOffset = CGPointMake(-15, -15);
+        
+        UIImageView* imgView = [[UIImageView alloc] initWithFrame:cell.bounds];
+        imgView.contentMode = UIViewContentModeScaleAspectFit;
+        imgView.userInteractionEnabled = YES;
+        imgView.tag = 0x1234;
+        imgView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        //[cell addSubview:imgView];
+        cell.contentView = imgView;
+    }
+    
+    UIImageView* imgView = (UIImageView* )cell.contentView;
+    imgView.image = [_imageList objectAtIndex:index];
+    
+    return cell;
+}
+
+- (BOOL)GMGridView:(GMGridView *)gridView canDeleteItemAtIndex:(NSInteger)index {
+    return YES;
+}
+
+#pragma mark - GMGridViewActionDelegate
+- (void)GMGridView:(GMGridView *)gridView didTapOnItemAtIndex:(NSInteger)position {
+    NSLog(@"Did tap at index %d", position);
+    
+    MJPhotoBrowser* browser = [[MJPhotoBrowser alloc] init];
+    browser.currentPhotoIndex = position;
+    // browser.hidenToolbar = YES;
+    
+    NSMutableArray* photoList = [NSMutableArray array];
+    
+    NSInteger index = 0;
+    for (UIImage* img in _imageList) {
+        MJPhoto* photo = [MJPhoto new];
+        photo.image = img;
+        
+        GMGridViewCell* cell = [gridView cellForItemAtIndex:index];
+        photo.srcImageView = (UIImageView*)cell.contentView;
+        [photoList addObject:photo];
+        
+        ++index;
+    }
+    browser.photos = photoList;
+    
+    [browser show];
+}
+
+- (void)GMGridViewDidTapOnEmptySpace:(GMGridView *)gridView {
+    NSLog(@"Tap on empty space");
+}
+
+- (void)GMGridView:(GMGridView *)gridView processDeleteActionForItemAtIndex:(NSInteger)index {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"删除照片" message:@"您将删除这张照片，确认吗?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"删除", nil];
+    
+    [alert show];
+    
+    _lastDeleteItemIndexAsked = index;
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == alertView.firstOtherButtonIndex) {
+        [_imageList removeObjectAtIndex:_lastDeleteItemIndexAsked];
+        [_gmGridView removeObjectAtIndex:_lastDeleteItemIndexAsked
+                           withAnimation:GMGridViewItemAnimationFade];
+    }
+    
+    [self.gmGridView setEditing:NO animated:YES];
 }
 
 @end

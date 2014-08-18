@@ -15,6 +15,8 @@
 // 当前展示的图片索引
 @property (nonatomic, assign) NSUInteger currentPhotoIndex;
 
+@property (nonatomic, assign) BOOL hidenToolbar;
+
 // 显示
 - (void)show;
 @end

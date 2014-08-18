@@ -112,6 +112,18 @@ CSAppDelegate* gApp = nil;
     [self alert:text withTitle:nil];
 }
 
+- (void)shortAlert:(NSString*)text {
+    if ([self createHudIfNeeded]) {
+        [NSObject cancelPreviousPerformRequestsWithTarget:self.hud];
+        self.hud.mode = MBProgressHUDModeText;
+        self.hud.labelText = nil;
+        self.hud.detailsLabelText = text;
+        [_window bringSubviewToFront:self.hud];
+        [self.hud show:YES];
+        [self hideAlertAfterDelay:1];
+    }
+}
+
 - (void)alert:(NSString*)text withTitle:(NSString*)title {
     if ([self createHudIfNeeded]) {
         [NSObject cancelPreviousPerformRequestsWithTarget:self.hud];
@@ -120,7 +132,7 @@ CSAppDelegate* gApp = nil;
         self.hud.detailsLabelText = text;
         [_window bringSubviewToFront:self.hud];
         [self.hud show:YES];
-        [self hideAlertAfterDelay:2];
+        [self hideAlertAfterDelay:1];
     }
 }
 

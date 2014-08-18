@@ -190,7 +190,7 @@
 - (void)doSendHistory {
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         [EntityHistoryInfoHelper updateEntities:@[dataJson]];
-        [gApp alert:@"提交成功"];
+        [gApp shortAlert:@"提交成功"];
         [self.navigationController popToViewController:self animated:YES];
     };
     

@@ -19,6 +19,8 @@
 		0901A96A18D95E38003BB152 /* CSKuleBPushInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0901A96918D95E38003BB152 /* CSKuleBPushInfo.m */; };
 		0902458518EC41FA00579886 /* CSKuleURLCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0902458418EC41FA00579886 /* CSKuleURLCache.m */; };
 		0902782818C9C060002B9644 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0902782718C9C060002B9644 /* MessageUI.framework */; };
+		090292AE19A1BB2B007D332F /* logo-gray-big.png in Resources */ = {isa = PBXBuildFile; fileRef = 09416C9518E41BF600DFEA44 /* logo-gray-big.png */; };
+		090292AF19A1BB2B007D332F /* logo-gray-big@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09416C9618E41BF600DFEA44 /* logo-gray-big@2x.png */; };
 		0902CAA818F4200A001901A8 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0902CAA718F4200A001901A8 /* AudioToolbox.framework */; };
 		0902CAAE18F4359D001901A8 /* NSString+CSKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 0902CAAD18F4359D001901A8 /* NSString+CSKit.m */; };
 		0904454C18F515BC005D01EA /* img-placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 0904454A18F515BC005D01EA /* img-placeholder.png */; };
@@ -316,8 +318,6 @@
 		09416C9E18E41BF600DFEA44 /* bg-input-normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09416C9218E41BF600DFEA44 /* bg-input-normal@2x.png */; };
 		09416C9F18E41BF600DFEA44 /* icon-checkin.png in Resources */ = {isa = PBXBuildFile; fileRef = 09416C9318E41BF600DFEA44 /* icon-checkin.png */; };
 		09416CA018E41BF600DFEA44 /* icon-checkin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09416C9418E41BF600DFEA44 /* icon-checkin@2x.png */; };
-		09416CA118E41BF600DFEA44 /* logo-gray-big.png in Resources */ = {isa = PBXBuildFile; fileRef = 09416C9518E41BF600DFEA44 /* logo-gray-big.png */; };
-		09416CA218E41BF600DFEA44 /* logo-gray-big@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09416C9618E41BF600DFEA44 /* logo-gray-big@2x.png */; };
 		09416CA318E41BF600DFEA44 /* logo-gray-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 09416C9718E41BF600DFEA44 /* logo-gray-small.png */; };
 		09416CA418E41BF600DFEA44 /* logo-gray-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09416C9818E41BF600DFEA44 /* logo-gray-small@2x.png */; };
 		094373D4199D016A00EDD64C /* EntitySenderInfoHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 094373D3199D016A00EDD64C /* EntitySenderInfoHelper.m */; };
@@ -2716,6 +2716,7 @@
 				09F74C9C1997C4F3001555D0 /* internal_logo.png in Resources */,
 				0934F06B18BF5B0800E30ECA /* btn-settings@2x.png in Resources */,
 				090C9EC918C84FC000883DE0 /* CSKuleChildCell.xib in Resources */,
+				090292AE19A1BB2B007D332F /* logo-gray-big.png in Resources */,
 				0934F06518BF5B0800E30ECA /* btn-func-7@2x.png in Resources */,
 				09F74C6D1997C4F3001555D0 /* bg_null.jpg in Resources */,
 				090CC93018DA89FE007781CB /* about-us-text-giraffe.txt in Resources */,
@@ -2733,7 +2734,6 @@
 				09F74CAC1997C4F3001555D0 /* notice.png in Resources */,
 				0914E333199FBD9E00276ABA /* mic_1.png in Resources */,
 				0934F08E18BF5B0800E30ECA /* settings-icon-feedback.png in Resources */,
-				09416CA218E41BF600DFEA44 /* logo-gray-big@2x.png in Resources */,
 				09F74C7A1997C4F3001555D0 /* chat.png in Resources */,
 				09F74C761997C4F3001555D0 /* btn_growth.png in Resources */,
 				09F74CBC1997C4F3001555D0 /* star_grey.png in Resources */,
@@ -2842,7 +2842,6 @@
 				0934F05718BF5B0800E30ECA /* btn-back@2x.png in Resources */,
 				0934F07518BF5B0800E30ECA /* class-input-bg@2x.png in Resources */,
 				09FEA72718DC9D9600513C87 /* news-bg@2x.png in Resources */,
-				09416CA118E41BF600DFEA44 /* logo-gray-big.png in Resources */,
 				0934F06218BF5B0800E30ECA /* btn-func-6.png in Resources */,
 				09142E1218E2B9D800E5848F /* comments-bg@2x.png in Resources */,
 				09142E2B18E2DE1B00E5848F /* arrow-left@2x.png in Resources */,
@@ -2892,6 +2891,7 @@
 				09416CA318E41BF600DFEA44 /* logo-gray-small.png in Resources */,
 				09142E0718E2B9D800E5848F /* assess-exercise.png in Resources */,
 				09FEA71D18DC9D9600513C87 /* chating-photo@2x.png in Resources */,
+				090292AF19A1BB2B007D332F /* logo-gray-big@2x.png in Resources */,
 				0934F07A18BF5B0800E30ECA /* input-bg-1.png in Resources */,
 				09A9EBCB18C08C7D00D83119 /* img-tree-type2@2x.png in Resources */,
 				09BA1BE618BB2FC700760182 /* grayArrow@2x.png in Resources */,

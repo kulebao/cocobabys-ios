@@ -328,6 +328,7 @@
 		094F994E18E02A6100ACD196 /* btn-nav-right-pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 094F994A18E02A6100ACD196 /* btn-nav-right-pressed@2x.png */; };
 		094F994F18E02A6100ACD196 /* btn-nav-right.png in Resources */ = {isa = PBXBuildFile; fileRef = 094F994B18E02A6100ACD196 /* btn-nav-right.png */; };
 		094F995018E02A6100ACD196 /* btn-nav-right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 094F994C18E02A6100ACD196 /* btn-nav-right@2x.png */; };
+		0960BFE119B05818008768A6 /* TSFileCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0960BFE019B05818008768A6 /* TSFileCache.m */; };
 		097ED0BB18DAB4AB0057ECA0 /* CSKuleChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 097ED0BA18DAB4AB0057ECA0 /* CSKuleChangePasswordViewController.m */; };
 		09A9EBB518C07F6F00D83119 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 09A9EBB718C07F6F00D83119 /* Localizable.strings */; };
 		09A9EBBB18C0830900D83119 /* CSKuleLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A9EBBA18C0830900D83119 /* CSKuleLoginViewController.m */; };
@@ -1042,6 +1043,8 @@
 		094F994A18E02A6100ACD196 /* btn-nav-right-pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-nav-right-pressed@2x.png"; sourceTree = "<group>"; };
 		094F994B18E02A6100ACD196 /* btn-nav-right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-nav-right.png"; sourceTree = "<group>"; };
 		094F994C18E02A6100ACD196 /* btn-nav-right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-nav-right@2x.png"; sourceTree = "<group>"; };
+		0960BFDF19B05818008768A6 /* TSFileCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSFileCache.h; sourceTree = "<group>"; };
+		0960BFE019B05818008768A6 /* TSFileCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSFileCache.m; sourceTree = "<group>"; };
 		097ED0B918DAB4AB0057ECA0 /* CSKuleChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleChangePasswordViewController.h; sourceTree = "<group>"; };
 		097ED0BA18DAB4AB0057ECA0 /* CSKuleChangePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleChangePasswordViewController.m; sourceTree = "<group>"; };
 		09A9EBB418C07E8800D83119 /* CSKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSKit.h; sourceTree = "<group>"; };
@@ -2133,6 +2136,15 @@
 			name = Interpreter;
 			sourceTree = "<group>";
 		};
+		0960BFDE19B05818008768A6 /* TSFileCache */ = {
+			isa = PBXGroup;
+			children = (
+				0960BFDF19B05818008768A6 /* TSFileCache.h */,
+				0960BFE019B05818008768A6 /* TSFileCache.m */,
+			);
+			path = TSFileCache;
+			sourceTree = "<group>";
+		};
 		09BA1B8418BB2AB300760182 = {
 			isa = PBXGroup;
 			children = (
@@ -2234,6 +2246,7 @@
 		09BA1BC918BB2FC700760182 /* Venders */ = {
 			isa = PBXGroup;
 			children = (
+				0960BFDE19B05818008768A6 /* TSFileCache */,
 				0914E36B199FCEBC00276ABA /* SDWebImage */,
 				0914E353199FCD7500276ABA /* MJPhotoBrowser */,
 				0914E339199FC61400276ABA /* GMGridView */,
@@ -3239,6 +3252,7 @@
 				09D04E3918DFCB830093577D /* CSKuleCheckinLogListViewController.m in Sources */,
 				09BA1C2618BB3F8400760182 /* AFJSONRequestOperation.m in Sources */,
 				0904FC9918F3BDED001968D7 /* CSKuleEmployeeInfo.m in Sources */,
+				0960BFE119B05818008768A6 /* TSFileCache.m in Sources */,
 				0904690818C72E6C00D0846E /* CSKuleRelationshipInfo.m in Sources */,
 				0919B7761929D6A700810556 /* CSKuleMediaInfo.m in Sources */,
 				09FE6B0118C5BCFD00A840BE /* CSKuleAssignmentViewController.m in Sources */,

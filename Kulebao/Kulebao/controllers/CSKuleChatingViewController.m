@@ -17,12 +17,16 @@
 #import <AVFoundation/AVFoundation.h>
 #import "amrFileCodec.h"
 #import "CSKuleChatingTableCell.h"
+#import "TSFileCache.h"
+#import "NSString+XHMD5.h"
 
 @interface CSKuleChatingViewController () <UITableViewDataSource, UITableViewDelegate, PullTableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CSKuleChatingEditorViewControllerDelegate, AVAudioPlayerDelegate> {
     UIImagePickerController* _imgPicker;
     NSMutableArray* _topicMsgList;
     
     AVAudioPlayer* _audioPlayer;
+    
+    TSFileCache* _voiceCache;
 }
 
 @property (weak, nonatomic) IBOutlet PullTableView *tableview;
@@ -51,6 +55,10 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     [self customizeBackBarItem];
+    
+    NSString* cachesDirectory = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0];
+    
+    _voiceCache = [TSFileCache cacheForURL:[NSURL fileURLWithPath:cachesDirectory isDirectory:YES]];
     
     self.tableview.delegate = self;
     self.tableview.dataSource = self;
@@ -380,7 +388,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     CSKuleTopicMsg* msg = [_topicMsgList objectAtIndex:indexPath.row];
     if ([msg.media.type isEqualToString:@"voice"]) {
-        NSURL* voiceUrl = [NSURL URLWithString:msg.media.url];
         
         NSMutableSet* updateIndexPaths = [NSMutableSet set];
         
@@ -399,8 +406,15 @@
                          withRowAnimation:UITableViewRowAnimationNone];
         
         if (self.playingMsg != nil) {
-            NSData* amrData = [NSData dataWithContentsOfURL:voiceUrl];
-            NSData* waveData = DecodeAMRToWAVE(amrData);
+            NSData* waveData = [_voiceCache dataForKey:msg.media.url.MD5Hash];
+            if (waveData == nil) {
+                NSURL* voiceUrl = [NSURL URLWithString:msg.media.url];
+                NSData* amrData = [NSData dataWithContentsOfURL:voiceUrl];
+                
+                waveData = DecodeAMRToWAVE(amrData);
+                [_voiceCache storeData:waveData forKey:msg.media.url.MD5Hash];
+            }
+            
             NSError* error = nil;
             _audioPlayer = [[AVAudioPlayer alloc] initWithData:waveData error:&error];
             if (error) {

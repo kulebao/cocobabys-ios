@@ -42,6 +42,7 @@
     
     HMAudioPlayer*                 audioPlyaer;
     HMAudioRecorder*               audioRecorder;
+    NSTimer* _autoHiddenTimer;
     
     
     IBOutlet UIView*               PaintView;

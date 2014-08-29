@@ -80,8 +80,17 @@
     
     // Configure the cell...
     NSDictionary* deviceInfo = [_deviceList objectAtIndex:indexPath.row];
-    cell.labDeviceName.text = deviceInfo[@"name"];
     
+    node_handle cur_node = [deviceInfo[@"node_handle"] pointerValue];
+    
+    bool isOnline = false;
+    hm_server_is_online(cur_node, &isOnline);
+    if (isOnline) {
+        cell.labDeviceName.text = deviceInfo[@"name"];
+    }
+    else {
+        cell.labDeviceName.text = [NSString stringWithFormat:@"%@ (离线)", deviceInfo[@"name"]];
+    }
     return cell;
 }
 

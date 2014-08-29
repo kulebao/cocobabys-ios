@@ -11,7 +11,8 @@
 #define video_data   0
 #define audio_data   1
 
-@interface HMPlayerView ()
+@interface HMPlayerView () {
+}
 @end
 
 @implementation HMPlayerView
@@ -83,7 +84,7 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
         videoDataArr = [[NSArray alloc] initWithObjects:self,[[NSNumber alloc] initWithInt:video_data], nil];
         audioDataArr = [[NSArray alloc] initWithObjects:self,[[NSNumber alloc] initWithInt:audio_data], nil];
         
-        [self setWantsFullScreenLayout: YES]; //设置这个属性为YES可以解决状态栏半透明带来的view位移问题
+       // [self setWantsFullScreenLayout: YES]; //设置这个属性为YES可以解决状态栏半透明带来的view位移问题
     }
     return self;
 }
@@ -97,10 +98,16 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
     ((PaintingView*)PaintView).videoPlayerDelegate = self;
     
     controlBarHidden = NO;
-    [[UIApplication sharedApplication] setStatusBarHidden: controlBarHidden withAnimation: UIStatusBarAnimationSlide];
+    [[UIApplication sharedApplication] setStatusBarHidden: YES withAnimation:UIStatusBarAnimationSlide];
     
     UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(touchCentralArea)];
     [self.view addGestureRecognizer:tap];
+    
+    _autoHiddenTimer = [NSTimer scheduledTimerWithTimeInterval:3
+                                                        target:self
+                                                      selector:@selector(onTimer:)
+                                                      userInfo:nil
+                                                       repeats:NO];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -116,7 +123,7 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
 }
 
 - (BOOL)shouldAutorotate {
-    return YES;
+    return NO;
 }
 
 // Returns interface orientation masks.
@@ -390,11 +397,16 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
 
 - (void)touchCentralArea
 {
+    if (_autoHiddenTimer) {
+        [_autoHiddenTimer invalidate];
+        _autoHiddenTimer = nil;
+    }
     controlBarHidden = !controlBarHidden;
-	[[UIApplication sharedApplication] setStatusBarHidden: controlBarHidden withAnimation: UIStatusBarAnimationSlide];
-	[self.navigationController setNavigationBarHidden: controlBarHidden animated:YES];
+//	[[UIApplication sharedApplication] setStatusBarHidden: controlBarHidden withAnimation: UIStatusBarAnimationSlide];
+//	[self.navigationController setNavigationBarHidden: controlBarHidden animated:YES];
     
-    navBar.hidden = controlBarHidden;
+    [self setNavHidden:controlBarHidden];
+    
 }
 
 #pragma mark - 听说操作
@@ -622,6 +634,23 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
     [self dismissViewControllerAnimated:YES completion:^{
         
     }];
+}
+
+- (void)setNavHidden:(BOOL)hidden {
+    [UIView animateWithDuration:0.4 animations:^{
+        CATransform3D trans = CATransform3DIdentity;
+        if (hidden) {
+            trans = CATransform3DMakeTranslation(0, -70, 0);
+        }
+        
+        navBar.layer.transform = trans;
+    }];
+}
+
+- (void)onTimer:(NSTimer*)timer {
+    _autoHiddenTimer = nil;
+    controlBarHidden = YES;
+    [self setNavHidden:controlBarHidden];
 }
 
 @end

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -9,10 +9,8 @@
             <connections>
                 <outlet property="CoverView" destination="ai3-Ct-MEh" id="xld-hy-Urg"/>
                 <outlet property="PaintView" destination="cez-eO-7u9" id="Cah-fU-8Cg"/>
-                <outlet property="btnListen" destination="bAM-Di-ZH5" id="arW-Fh-aQg"/>
-                <outlet property="btnListenStop" destination="Cti-wR-9sM" id="SyH-DX-Rlt"/>
-                <outlet property="btnSpeak" destination="qXl-ws-OIn" id="neH-hp-bNJ"/>
-                <outlet property="btnSpeakStop" destination="K01-e9-jcz" id="w49-eM-SRI"/>
+                <outlet property="labTitle" destination="icm-0p-DTk" id="qeV-gZ-AU3"/>
+                <outlet property="navBar" destination="o8T-gx-L8S" id="ukj-k6-ZfQ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -21,63 +19,22 @@
             <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" id="cez-eO-7u9" userLabel="PaintView" customClass="PaintingView">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cez-eO-7u9" userLabel="PaintView" customClass="PaintingView">
                     <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="-20" maxX="0.0" maxY="20"/>
                 </view>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="bAM-Di-ZH5">
-                    <rect key="frame" x="326" y="270" width="86" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <state key="normal" title="listen_start">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="btnListenAction:" destination="-1" eventType="touchUpInside" id="CwS-qO-MAs"/>
-                    </connections>
-                </button>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Cti-wR-9sM">
-                    <rect key="frame" x="420" y="270" width="86" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <state key="normal" title="listen_stop">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="btnListenAction:" destination="-1" eventType="touchUpInside" id="lmb-CX-IXv"/>
-                        <action selector="btnListenStopAction:" destination="-1" eventType="touchUpInside" id="gPa-nS-CE9"/>
-                    </connections>
-                </button>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="qXl-ws-OIn">
-                    <rect key="frame" x="68" y="270" width="94" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <state key="normal" title="speak_start">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="btnSpeakAction:" destination="-1" eventType="touchUpInside" id="xRC-5N-sRj"/>
-                    </connections>
-                </button>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="K01-e9-jcz">
-                    <rect key="frame" x="180" y="270" width="92" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <state key="normal" title="speak_stop">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="btnSpeakAction:" destination="-1" eventType="touchUpInside" id="mOn-uB-h6R"/>
-                        <action selector="btnSpeakStopAction:" destination="-1" eventType="touchUpInside" id="7vd-86-oMY"/>
-                    </connections>
-                </button>
-                <view contentMode="scaleToFill" id="ai3-Ct-MEh" userLabel="CoverView" customClass="UIControl">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ai3-Ct-MEh" userLabel="CoverView" customClass="UIControl">
                     <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
-                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" id="f07-dS-dq1">
-                            <rect key="frame" x="266" y="141" width="37" height="37"/>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="f07-dS-dq1">
+                            <rect key="frame" x="266" y="142" width="37" height="37"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </activityIndicatorView>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="正在连接设备" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WRx-4B-R8m">
-                            <rect key="frame" x="222" y="186" width="124" height="21"/>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="正在连接设备" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WRx-4B-R8m">
+                            <rect key="frame" x="233" y="199" width="102" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -85,12 +42,74 @@
                         </label>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="centerX" secondItem="WRx-4B-R8m" secondAttribute="centerX" id="CAQ-7m-RaK"/>
+                        <constraint firstItem="WRx-4B-R8m" firstAttribute="top" secondItem="f07-dS-dq1" secondAttribute="bottom" constant="20" id="fZ7-Fp-tEJ"/>
+                        <constraint firstAttribute="centerX" secondItem="f07-dS-dq1" secondAttribute="centerX" id="phf-Uy-pe0"/>
+                        <constraint firstAttribute="centerY" secondItem="f07-dS-dq1" secondAttribute="centerY" id="xfe-ei-gh6"/>
+                    </constraints>
+                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="-20" maxX="0.0" maxY="20"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o8T-gx-L8S">
+                    <rect key="frame" x="0.0" y="0.0" width="568" height="43"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="titlebar-bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="F2I-kx-rZo">
+                            <rect key="frame" x="0.0" y="0.0" width="568" height="43"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eij-tV-Mfj">
+                            <rect key="frame" x="20" y="8" width="50" height="28"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" backgroundImage="btn-back1.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted" backgroundImage="btn-back1-pressed.png"/>
+                            <connections>
+                                <action selector="onBackClicked:" destination="-1" eventType="touchUpInside" id="xzi-jB-xM8"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="看宝贝" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="icm-0p-DTk">
+                            <rect key="frame" x="259" y="11" width="51" height="21"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="centerY" secondItem="icm-0p-DTk" secondAttribute="centerY" id="MV0-zv-Dyf"/>
+                        <constraint firstItem="Eij-tV-Mfj" firstAttribute="leading" secondItem="o8T-gx-L8S" secondAttribute="leading" constant="20" id="Xye-kA-bZw"/>
+                        <constraint firstAttribute="height" constant="43" id="aqw-8H-oym"/>
+                        <constraint firstAttribute="centerY" secondItem="Eij-tV-Mfj" secondAttribute="centerY" id="cas-Y4-1ia"/>
+                        <constraint firstAttribute="centerX" secondItem="icm-0p-DTk" secondAttribute="centerX" id="wzX-Jj-vJu"/>
+                    </constraints>
+                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="-20" maxX="0.0" maxY="20"/>
                 </view>
             </subviews>
             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="o8T-gx-L8S" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="8Jx-0v-5vj"/>
+                <constraint firstAttribute="bottom" secondItem="cez-eO-7u9" secondAttribute="bottom" id="AoE-zI-AxG"/>
+                <constraint firstItem="ai3-Ct-MEh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="D9s-c3-er8"/>
+                <constraint firstItem="ai3-Ct-MEh" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Fol-8p-3nI"/>
+                <constraint firstItem="o8T-gx-L8S" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="KGH-1i-1YW"/>
+                <constraint firstAttribute="trailing" secondItem="o8T-gx-L8S" secondAttribute="trailing" id="LUI-Pg-XGm"/>
+                <constraint firstAttribute="trailing" secondItem="ai3-Ct-MEh" secondAttribute="trailing" id="WUB-dl-eZ8"/>
+                <constraint firstAttribute="trailing" secondItem="cez-eO-7u9" secondAttribute="trailing" id="bCb-8F-zhL"/>
+                <constraint firstAttribute="bottom" secondItem="ai3-Ct-MEh" secondAttribute="bottom" id="dK6-aE-4pi"/>
+                <constraint firstItem="cez-eO-7u9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="e0Q-mo-hCI"/>
+                <constraint firstItem="cez-eO-7u9" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="eln-0D-zVZ"/>
+            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>
+    <resources>
+        <image name="btn-back1-pressed.png" width="50" height="28"/>
+        <image name="btn-back1.png" width="50" height="28"/>
+        <image name="titlebar-bg.png" width="320" height="44"/>
+    </resources>
 </document>

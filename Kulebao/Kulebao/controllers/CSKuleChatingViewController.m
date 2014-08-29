@@ -173,9 +173,6 @@
         UIImageView* voiceMsgBody = [[UIImageView alloc] initWithFrame:CGRectNull];
         voiceMsgBody.tag = 106;
         [cell.contentView addSubview:voiceMsgBody];
-        voiceMsgBody.animationImages = @[[UIImage imageNamed:@"playing_1.png"],
-                                         [UIImage imageNamed:@"playing_2.png"],
-                                         [UIImage imageNamed:@"playing_3.png"]];
         voiceMsgBody.animationDuration = 0.7;
     }
     
@@ -204,13 +201,6 @@
     voiceMsgBody.frame = CGRectNull;
     voiceMsgBody.image = nil;
     
-    if ([self.playingMsg isEqual:msg]) {
-        [voiceMsgBody startAnimating];
-    }
-    else {
-        [voiceMsgBody stopAnimating];
-    }
-    
     if ([msg.sender.type isEqualToString:@"t"]) {
         // From
         labMsgSender.text = nil;
@@ -218,18 +208,22 @@
         
         imgPortrait.frame = CGRectMake(2, 24, 32, 32);
         
-        UIImage* bgImage = [UIImage imageNamed:@"chat_content_left.9.png"];
-        imgBubbleBg.image = [bgImage resizableImageWithCapInsets:UIEdgeInsetsMake(25, 25, 25, 25)];
+        UIImage* bgImage = [UIImage imageNamed:@"chating_left_1.png"];
+        imgBubbleBg.image = [bgImage resizableImageWithCapInsets:UIEdgeInsetsMake(15, 15, 10, 10)];
 
         labMsgSender.frame = CGRectMake(45, 12, 136, 12);
         labMsgSender.textAlignment = NSTextAlignmentLeft;
         
         if (msg.media.url.length > 0) {
             if ([msg.media.type isEqualToString:@"voice"]) {
-                imgBubbleBg.frame = CGRectMake(36, 12+12, 75, 48);
+                imgBubbleBg.frame = CGRectMake(36, 12+12, 60, 48);
                 voiceMsgBody.frame = CGRectMake(52, 18+12, 32, 32);
                 
                 voiceMsgBody.image = [UIImage imageNamed:@"playing_3.png"];
+                
+                voiceMsgBody.animationImages = @[[UIImage imageNamed:@"playing_1.png"],
+                                                 [UIImage imageNamed:@"playing_2.png"],
+                                                 [UIImage imageNamed:@"playing_3.png"]];
             }
             else {
                 imgBubbleBg.frame = CGRectMake(36, 12+12, 90, 78);
@@ -247,22 +241,25 @@
         // To
         imgPortrait.frame = CGRectMake(320-2-32-2, 24, 32, 32);
         
-        UIImage* bgImage = [UIImage imageNamed:@"chat_content_right.9.png"];
-        imgBubbleBg.image = [bgImage resizableImageWithCapInsets:UIEdgeInsetsMake(25, 25, 25, 25)];
+        UIImage* bgImage = [UIImage imageNamed:@"chating_right_1.png"];
+        imgBubbleBg.image = [bgImage resizableImageWithCapInsets:UIEdgeInsetsMake(15, 10, 10, 15)];
 
         labMsgSender.frame = CGRectMake(320-2-132-4-45, 12, 136, 12);
         labMsgSender.textAlignment = NSTextAlignmentRight;
         
         if (msg.media.url.length > 0) {
             if ([msg.media.type isEqualToString:@"voice"]) {
-                imgBubbleBg.frame =  CGRectMake(320-36-90, 12+12, 75, 48);
+                imgBubbleBg.frame =  CGRectMake(320-36-90+30, 12+12, 60, 48);
                 voiceMsgBody.frame = CGRectMake(imgBubbleBg.frame.origin.x+10, 18+12, 32, 32);
                 
-                voiceMsgBody.image = [UIImage imageNamed:@"playing_3.png"];
+                voiceMsgBody.image = [UIImage imageNamed:@"voice_right_1.png"];
+                voiceMsgBody.animationImages = @[[UIImage imageNamed:@"voice_right_3.png"],
+                                                 [UIImage imageNamed:@"voice_right_2.png"],
+                                                 [UIImage imageNamed:@"voice_right_1.png"]];
             }
             else {
-                imgBubbleBg.frame =  CGRectMake(320-36-90, 12+12, 90, 78);
-                imgMsgBody.frame = CGRectMake(imgBubbleBg.frame.origin.x+8, 18+10, 64, 64);
+                imgBubbleBg.frame =  CGRectMake(320-36-90-15, 12+12, 90, 78);
+                imgMsgBody.frame = CGRectMake(imgBubbleBg.frame.origin.x+10, 18+12, 64, 64);
             }
         }
         else {
@@ -346,6 +343,13 @@
         labMsgTimestamp.hidden = NO;
     }
     
+    
+    if ([self.playingMsg isEqual:msg]) {
+        [voiceMsgBody startAnimating];
+    }
+    else {
+        [voiceMsgBody stopAnimating];
+    }
     
     return cell;
 }

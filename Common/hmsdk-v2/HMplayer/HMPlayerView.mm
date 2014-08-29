@@ -12,12 +12,11 @@
 #define audio_data   1
 
 @interface HMPlayerView ()
-
 @end
 
 @implementation HMPlayerView
 @synthesize IsRunning;
-
+@synthesize videoLock = _videoLick;
 
 NSArray* videoDataArr = nil;
 NSArray* audioDataArr = nil;
@@ -68,6 +67,7 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
         
         //播放视频时候，隐藏tabBar
         self.hidesBottomBarWhenPushed = YES;
+        labTitle.text = nil;
         
         localVideoHandle = 0;
         localAudioHandel = 0;
@@ -97,19 +97,15 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
     ((PaintingView*)PaintView).videoPlayerDelegate = self;
     
     controlBarHidden = NO;
+    [[UIApplication sharedApplication] setStatusBarHidden: controlBarHidden withAnimation: UIStatusBarAnimationSlide];
+    
+    UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(touchCentralArea)];
+    [self.view addGestureRecognizer:tap];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     gApp.isPlayView = YES;
-    
-    //设置屏幕方向
-    if([[UIDevice currentDevice] respondsToSelector:@selector(setOrientation:)])
-    {
-        [[UIDevice currentDevice] performSelector:@selector(setOrientation:)
-                                       withObject:(id)UIInterfaceOrientationLandscapeRight];
-    }
-
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -119,6 +115,18 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
     [self performSelectorInBackground:@selector(CloseAllForLogOutDev) withObject:nil];
 }
 
+- (BOOL)shouldAutorotate {
+    return YES;
+}
+
+// Returns interface orientation masks.
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskLandscape;
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    return UIInterfaceOrientationLandscapeRight;
+}
 
 
 - (void)didReceiveMemoryWarning
@@ -126,8 +134,6 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
 
 - (void)ConnectVideoBynode:(node_handle)node
 {
@@ -142,6 +148,11 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
     
     [self performSelectorInBackground:@selector(HandConnectVideBynode) withObject:nil];
 }
+
+- (void)setNavTitle:(NSString *)title {
+    labTitle.text = title;
+}
+
 - (void)HandConnectVideBynode
 {
     if(my_node == NULL) return;
@@ -382,6 +393,8 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
     controlBarHidden = !controlBarHidden;
 	[[UIApplication sharedApplication] setStatusBarHidden: controlBarHidden withAnimation: UIStatusBarAnimationSlide];
 	[self.navigationController setNavigationBarHidden: controlBarHidden animated:YES];
+    
+    navBar.hidden = controlBarHidden;
 }
 
 #pragma mark - 听说操作
@@ -605,18 +618,10 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
         delete(pBuffer);
     }
 }
-
-
-- (BOOL)shouldAutorotate {
-    return YES;
-}
-
-- (NSUInteger)supportedInterfaceOrientations {
-    return UIInterfaceOrientationLandscapeLeft | UIInterfaceOrientationLandscapeRight;
-}
-// Returns interface orientation masks.
-- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
-    return UIInterfaceOrientationLandscapeLeft;
+- (IBAction)onBackClicked:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 
 @end

@@ -53,6 +53,10 @@
     IBOutlet UIButton *btnListen;
     IBOutlet UIButton *btnListenStop;
     
+    IBOutlet UIView *navBar;
+    
+    __weak IBOutlet UILabel *labTitle;
+    
     __weak IBOutlet UIControl      *CoverView;
     
     NSLock                         *videoLock;
@@ -73,6 +77,7 @@
 - (void)addObjcTOAudioDataArray:(char*)data Len:(NSInteger)len;
 
 - (void)ConnectVideoBynode:(node_handle)node;
+- (void)setNavTitle:(NSString *)title;
 
 - (void)DirectConnectVideo:(NSArray*)array;
 

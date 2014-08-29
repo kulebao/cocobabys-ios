@@ -53,9 +53,7 @@
         height = mainscr.currentMode.size.height;
         
         gLInit();
-        gLResize(width,width*9/16);    //初始化屏幕大小
 
-        eaglLayer.contentsScale = 2.0;  //设置缩放参数
         [self layoutSubviews];
         
     }
@@ -76,6 +74,13 @@
 // the same size as our display area.
 -(void)layoutSubviews
 {
+    CGFloat width = self.bounds.size.width;
+	CGFloat height = self.bounds.size.height;
+    
+    gLResize(width,height);    //初始化屏幕大小
+    CAEAGLLayer *eaglLayer = (CAEAGLLayer *)self.layer;
+    eaglLayer.contentsScale = 1;  //设置缩放参数
+    
 	[EAGLContext setCurrentContext: Mcontext];
 	[self destroyFramebuffer];
 	[self createFramebuffer];

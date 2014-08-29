@@ -100,12 +100,19 @@
                                               otherButtonTitles:@"确定", nil];
         [alert show];
     }
-    
-    HMPlayerView* playerView = [[HMPlayerView alloc] initWithNibName:@"HMPlayerView" bundle:nil];
-    [self.navigationController pushViewController:playerView animated:YES];
-    [playerView ConnectVideoBynode:cur_node];
-    
-    //[self performSegueWithIdentifier:@"segue.cctv.play" sender:deviceInfo];
+    else {
+        HMPlayerView* playerView = [[HMPlayerView alloc] initWithNibName:@"HMPlayerView" bundle:nil];
+        //[self.navigationController pushViewController:playerView animated:YES];
+        
+        [self presentViewController:playerView animated:YES
+                         completion:^{
+                             [playerView ConnectVideoBynode:cur_node];
+                             [playerView setNavTitle:deviceInfo[@"name"]];
+                         }];
+        
+        
+        //[self performSegueWithIdentifier:@"segue.cctv.play" sender:deviceInfo];
+    }
 }
 /*
 // Override to support conditional editing of the table view.

@@ -81,7 +81,7 @@
                   forKeyPath:@"currentRelationship"
                      options:NSKeyValueObservingOptionNew
                      context:nil];
-
+    
     [gApp.engine addObserver:self
                   forKeyPath:@"badgeOfNews"
                      options:NSKeyValueObservingOptionNew
@@ -326,7 +326,7 @@
         self.labClassName.text = childInfo.className;
         self.labSchoolName.text = gApp.engine.loginInfo.schoolName;
         self.labChildNick.text = childInfo.displayNick;
-
+        
         NSURL* qiniuImgUrl = [gApp.engine urlFromPath:childInfo.portrait];
         qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/256/h/256"];
         
@@ -366,9 +366,9 @@
     field.backgroundColor = [UIColor clearColor];
     field.font = [UIFont systemFontOfSize:14];
     field.delegate = _nickFieldDelegate;
-
+    
     [alert setCancelButtonTitle:@"取消" block:^{
-
+        
 	}];
     
 	[alert addButtonWithTitle:@"确定" block:^{
@@ -484,7 +484,7 @@
                              inKindergarten:gApp.engine.loginInfo.schoolId
                                     success:sucessHandler
                                     failure:failureHandler];
-
+            
         }
         else {
             [gApp alert:@"没有宝宝信息。"];
@@ -506,7 +506,7 @@
 }
 
 - (void)doChangePortraitFromCamera {
-#if TARGET_IPHONE_SIMULATOR 
+#if TARGET_IPHONE_SIMULATOR
 #else
     _imgPicker = [[UIImagePickerController alloc] init];
     _imgPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
@@ -629,6 +629,25 @@
 }
 
 #pragma mark - UI Actions
+- (BOOL)checkModuleTypeForMemberStatus:(NSInteger)moduleType {
+    BOOL ok = NO;
+    if ([gApp.engine.loginInfo.memberStatus isEqualToString:@"free"]) {
+        switch (moduleType) {
+            case kKuleModuleNews:
+            case kKuleModuleCheckin:
+                ok = YES;
+            default:
+                ok = NO;
+                break;
+        }
+    }
+    else if ([gApp.engine.loginInfo.memberStatus isEqualToString:@"paid"]) {
+        ok = YES;
+    }
+    
+    return ok;
+}
+
 - (void)onBtnModulesClicked:(UIButton*)sender {
     NSInteger moduleType = sender.tag;
     
@@ -645,35 +664,40 @@
     };
     
     if (moduleType < kKuleModuleSize && moduleType < sizeof(segueNames)) {
-        [self performSegueWithIdentifier:segueNames[moduleType] sender:nil];
-        
-        switch (moduleType) {
-            case kKuleModuleNews:
-                gApp.engine.badgeOfNews = 0;
-                break;
-            case kKuleModuleRecipe:
-                gApp.engine.badgeOfRecipe = 0;
-                break;
-            case kKuleModuleCheckin:
-                gApp.engine.badgeOfCheckin = 0;
-                break;
-            case kKuleModuleSchedule:
-                gApp.engine.badgeOfSchedule = 0;
-                break;
-            case kKuleModuleAssignment:
-                gApp.engine.badgeOfAssignment = 0;
-                break;
-            case kKuleModuleChating:
-                gApp.engine.badgeOfChating = 0;
-                break;
-            case kKuleModuleAssess:
-                gApp.engine.badgeOfAssess = 0;
-                break;
-            default:
-                break;
+        if ([self checkModuleTypeForMemberStatus:moduleType]) {
+            [self performSegueWithIdentifier:segueNames[moduleType] sender:nil];
+            
+            switch (moduleType) {
+                case kKuleModuleNews:
+                    gApp.engine.badgeOfNews = 0;
+                    break;
+                case kKuleModuleRecipe:
+                    gApp.engine.badgeOfRecipe = 0;
+                    break;
+                case kKuleModuleCheckin:
+                    gApp.engine.badgeOfCheckin = 0;
+                    break;
+                case kKuleModuleSchedule:
+                    gApp.engine.badgeOfSchedule = 0;
+                    break;
+                case kKuleModuleAssignment:
+                    gApp.engine.badgeOfAssignment = 0;
+                    break;
+                case kKuleModuleChating:
+                    gApp.engine.badgeOfChating = 0;
+                    break;
+                case kKuleModuleAssess:
+                    gApp.engine.badgeOfAssess = 0;
+                    break;
+                default:
+                    break;
+            }
         }
-//        JSBadgeView *badgeView = _badges[moduleType];
-//        badgeView.badgeText = nil;
+        else {
+            [gApp alert:@"升级为付费用户可使用完整功能^_^"];
+        }
+        //        JSBadgeView *badgeView = _badges[moduleType];
+        //        badgeView.badgeText = nil;
     }
 }
 
@@ -732,21 +756,21 @@
 //- (void)getEmployeeInfos {
 //    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
 //        NSMutableArray* employeeInfos = [NSMutableArray array];
-//        
+//
 //        for (id employeeInfoJson in dataJson) {
 //            CSKuleEmployeeInfo* employeeInfo = [CSKuleInterpreter decodeEmployeeInfo:employeeInfoJson];
 //            [employeeInfos addObject:employeeInfo];
 //        }
-//        
+//
 //        gApp.engine.employees = [NSArray arrayWithArray:employeeInfos];
 //        [gApp hideAlert];
 //    };
-//    
+//
 //    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
 //        CSLog(@"failure:%@", error);
 //        [gApp alert:[error localizedDescription]];
 //    };
-//    
+//
 //    [gApp waitingAlert:@"获取信息..."];
 //    [gApp.engine reqGetEmployeeListOfKindergarten:gApp.engine.loginInfo.schoolId
 //                                          success:sucessHandler

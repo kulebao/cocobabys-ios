@@ -137,6 +137,8 @@
             gApp.engine.loginInfo.username = bindInfo.username;
             gApp.engine.loginInfo.schoolName = bindInfo.schoolName;
             
+            gApp.engine.loginInfo.memberStatus = bindInfo.memberStatus;
+            
             gApp.engine.preferences.loginInfo = gApp.engine.loginInfo;
             
             [gApp.engine.preferences addHistoryAccount:gApp.engine.loginInfo.accountName];

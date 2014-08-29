@@ -55,7 +55,7 @@
 #define kLoginPath                  @"/login.do"
 
 // PATH: 获取绑定信息
-#define kReceiveBindInfoPath        @"/receiveBindInfo.do"
+#define kReceiveBindInfoPath        @"/api/v1/binding" //@"/receiveBindInfo.do"
 
 // PATH: 修改密码
 #define kChangePasswordPath         @"/changepwd.do"

@@ -329,6 +329,8 @@
 		094F994F18E02A6100ACD196 /* btn-nav-right.png in Resources */ = {isa = PBXBuildFile; fileRef = 094F994B18E02A6100ACD196 /* btn-nav-right.png */; };
 		094F995018E02A6100ACD196 /* btn-nav-right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 094F994C18E02A6100ACD196 /* btn-nav-right@2x.png */; };
 		0960BFE119B05818008768A6 /* TSFileCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0960BFE019B05818008768A6 /* TSFileCache.m */; };
+		0960CE7819B0B05700B3B51E /* BDMultiDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0960CE7719B0B05700B3B51E /* BDMultiDownloader.m */; };
+		0960CE7B19B0B19200B3B51E /* CSKuleURLDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0960CE7A19B0B19200B3B51E /* CSKuleURLDownloader.m */; };
 		097ED0BB18DAB4AB0057ECA0 /* CSKuleChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 097ED0BA18DAB4AB0057ECA0 /* CSKuleChangePasswordViewController.m */; };
 		09A9EBB518C07F6F00D83119 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 09A9EBB718C07F6F00D83119 /* Localizable.strings */; };
 		09A9EBBB18C0830900D83119 /* CSKuleLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A9EBBA18C0830900D83119 /* CSKuleLoginViewController.m */; };
@@ -1045,6 +1047,10 @@
 		094F994C18E02A6100ACD196 /* btn-nav-right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-nav-right@2x.png"; sourceTree = "<group>"; };
 		0960BFDF19B05818008768A6 /* TSFileCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSFileCache.h; sourceTree = "<group>"; };
 		0960BFE019B05818008768A6 /* TSFileCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSFileCache.m; sourceTree = "<group>"; };
+		0960CE7619B0B05700B3B51E /* BDMultiDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDMultiDownloader.h; sourceTree = "<group>"; };
+		0960CE7719B0B05700B3B51E /* BDMultiDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDMultiDownloader.m; sourceTree = "<group>"; };
+		0960CE7919B0B19200B3B51E /* CSKuleURLDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleURLDownloader.h; sourceTree = "<group>"; };
+		0960CE7A19B0B19200B3B51E /* CSKuleURLDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleURLDownloader.m; sourceTree = "<group>"; };
 		097ED0B918DAB4AB0057ECA0 /* CSKuleChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleChangePasswordViewController.h; sourceTree = "<group>"; };
 		097ED0BA18DAB4AB0057ECA0 /* CSKuleChangePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleChangePasswordViewController.m; sourceTree = "<group>"; };
 		09A9EBB418C07E8800D83119 /* CSKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSKit.h; sourceTree = "<group>"; };
@@ -2145,6 +2151,15 @@
 			path = TSFileCache;
 			sourceTree = "<group>";
 		};
+		0960CE7519B0B05700B3B51E /* BDMultiDownloader */ = {
+			isa = PBXGroup;
+			children = (
+				0960CE7619B0B05700B3B51E /* BDMultiDownloader.h */,
+				0960CE7719B0B05700B3B51E /* BDMultiDownloader.m */,
+			);
+			path = BDMultiDownloader;
+			sourceTree = "<group>";
+		};
 		09BA1B8418BB2AB300760182 = {
 			isa = PBXGroup;
 			children = (
@@ -2246,6 +2261,7 @@
 		09BA1BC918BB2FC700760182 /* Venders */ = {
 			isa = PBXGroup;
 			children = (
+				0960CE7519B0B05700B3B51E /* BDMultiDownloader */,
 				0960BFDE19B05818008768A6 /* TSFileCache */,
 				0914E36B199FCEBC00276ABA /* SDWebImage */,
 				0914E353199FCD7500276ABA /* MJPhotoBrowser */,
@@ -2384,6 +2400,8 @@
 				0913745B18CEE48800ED7CD7 /* CSKuleQiniuUploader.m */,
 				0902458318EC41FA00579886 /* CSKuleURLCache.h */,
 				0902458418EC41FA00579886 /* CSKuleURLCache.m */,
+				0960CE7919B0B19200B3B51E /* CSKuleURLDownloader.h */,
+				0960CE7A19B0B19200B3B51E /* CSKuleURLDownloader.m */,
 			);
 			path = net;
 			sourceTree = "<group>";
@@ -3156,6 +3174,7 @@
 				09BA1C2318BB3F8400760182 /* AFHTTPClient.m in Sources */,
 				091AE82118D7E4E700EBC927 /* CSKuleAboutSchoolViewController.m in Sources */,
 				09142DB318E2713C00E5848F /* CJSONSerialization.m in Sources */,
+				0960CE7B19B0B19200B3B51E /* CSKuleURLDownloader.m in Sources */,
 				09ED59A518CC8F5200187585 /* UIViewController+CSKit.m in Sources */,
 				09BA1BA118BB2AB400760182 /* CSAppDelegate.m in Sources */,
 				090C9EC418C84E9F00883DE0 /* CSKuleSelectChildViewController.m in Sources */,
@@ -3192,6 +3211,7 @@
 				090FC170199CA5A300C3A31A /* CSKuleHistoryInfo.m in Sources */,
 				09F74CDF1997D14D001555D0 /* amrFileCodec.m in Sources */,
 				091AE83518D8300A00EBC927 /* CSKuleCheckInOutLogInfo.m in Sources */,
+				0960CE7819B0B05700B3B51E /* BDMultiDownloader.m in Sources */,
 				090C9ECC18C853B700883DE0 /* CSKuleAboutViewController.m in Sources */,
 				0914E34A199FC61600276ABA /* GMGridViewCell.m in Sources */,
 				09142DB818E2713C00E5848F /* CJSONScanner.m in Sources */,

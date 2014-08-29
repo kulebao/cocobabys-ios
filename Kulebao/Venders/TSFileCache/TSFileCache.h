@@ -63,6 +63,8 @@
 /// Returns all set keys.
 - (NSArray *)allKeys;
 
+- (NSURL*)localURLForKey:(NSString *)key;
+
 /// If file exists attributes will be returned. Otherwise empty dictionary.
 - (NSDictionary *)attributesOfFileForKey:(NSString *)key error:(NSError **)error;
 

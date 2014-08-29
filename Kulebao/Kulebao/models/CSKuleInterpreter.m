@@ -49,7 +49,8 @@
      "username" : "袋鼠",
      "account_name" : "13408654680",
      "school_id" : 93740362,
-     "school_name" : "天之骄子幼儿园"
+     "school_name" : "天之骄子幼儿园",
+     "member_status":"free"
      }
      */
     
@@ -61,6 +62,7 @@
     NSInteger school_id = [[dataJson valueForKeyNotNull:@"school_id"] integerValue];
     NSString* school_name = [dataJson valueForKeyNotNull:@"school_name"];
     NSInteger error_code = [[dataJson valueForKeyNotNull:@"error_code"] integerValue];
+    NSString* member_status = [dataJson valueForKeyNotNull:@"member_status"];
     
     CSKuleBindInfo* obj = [CSKuleBindInfo new];
     obj.accessToken = access_token;
@@ -69,6 +71,7 @@
     obj.username = username;
     obj.schoolId = school_id;
     obj.errorCode = error_code;
+    obj.memberStatus = member_status;
     
     return obj;
 }

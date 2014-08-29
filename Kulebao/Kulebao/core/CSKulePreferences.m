@@ -60,6 +60,7 @@ static NSString* kKeyTimestamps = @"com.cocobabys.Kulebao.Preferences.timestamps
     loginInfo.username = [loginInfoDict valueForKeyNotNull:@"username"];
     loginInfo.schoolId = [[loginInfoDict valueForKeyNotNull:@"schoolId"] integerValue];
     loginInfo.errorCode = [[loginInfoDict valueForKeyNotNull:@"errorCode"] integerValue];
+    loginInfo.memberStatus = [loginInfoDict valueForKeyNotNull:@"memberStatus"];
     
     if (loginInfo.accessToken && loginInfo.accountName && loginInfo.schoolName
         && loginInfo.username && loginInfo.schoolId!=0 && loginInfo.errorCode == 0) {
@@ -120,7 +121,8 @@ static NSString* kKeyTimestamps = @"com.cocobabys.Kulebao.Preferences.timestamps
                                         @"schoolName": _loginInfo.schoolName,
                                         @"username": _loginInfo.username,
                                         @"schoolId": @(_loginInfo.schoolId),
-                                        @"errorCode": @(_loginInfo.errorCode)};
+                                        @"errorCode": @(_loginInfo.errorCode),
+                                        @"memberStatus": _loginInfo.memberStatus};
 
         [_config setObject:loginInfoDict forKey:kKeyLoginInfo];
     }

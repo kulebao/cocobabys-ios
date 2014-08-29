@@ -19,6 +19,7 @@
 #import "CSKuleChatingTableCell.h"
 #import "TSFileCache.h"
 #import "NSString+XHMD5.h"
+#import "CSKuleURLDownloader.h"
 
 @interface CSKuleChatingViewController () <UITableViewDataSource, UITableViewDelegate, PullTableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CSKuleChatingEditorViewControllerDelegate, AVAudioPlayerDelegate> {
     UIImagePickerController* _imgPicker;
@@ -59,6 +60,8 @@
     NSString* cachesDirectory = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0];
     
     _voiceCache = [TSFileCache cacheForURL:[NSURL fileURLWithPath:cachesDirectory isDirectory:YES]];
+    [_voiceCache prepare:nil];
+    [TSFileCache setSharedInstance:_voiceCache];
     
     self.tableview.delegate = self;
     self.tableview.dataSource = self;
@@ -182,6 +185,13 @@
         voiceMsgBody.tag = 106;
         [cell.contentView addSubview:voiceMsgBody];
         voiceMsgBody.animationDuration = 0.7;
+        
+        UILabel* labAudioDuration = [[UILabel alloc] initWithFrame:CGRectNull];
+        labAudioDuration.tag = 107;
+        [cell.contentView addSubview:labAudioDuration];
+        labAudioDuration.backgroundColor = [UIColor clearColor];
+        labAudioDuration.textColor = [UIColor grayColor];
+        labAudioDuration.font = [UIFont systemFontOfSize:12.0];
     }
     
     UIImageView* imgBubbleBg = (UIImageView*)[cell.contentView viewWithTag:100];
@@ -191,6 +201,7 @@
     UILabel* labMsgTimestamp = (UILabel*)[cell.contentView viewWithTag:104];
     UILabel* labMsgSender = (UILabel*)[cell.contentView viewWithTag:105];
     UIImageView* voiceMsgBody = (UIImageView*)[cell.contentView viewWithTag:106];
+    UILabel* labAudioDuration = (UILabel*)[cell.contentView viewWithTag:107];
     
     CSKuleTopicMsg* msg = [_topicMsgList objectAtIndex:indexPath.row];
     cell.msg = msg;
@@ -208,6 +219,7 @@
     
     voiceMsgBody.frame = CGRectNull;
     voiceMsgBody.image = nil;
+    labAudioDuration.text = nil;
     
     if ([msg.sender.type isEqualToString:@"t"]) {
         // From
@@ -232,6 +244,16 @@
                 voiceMsgBody.animationImages = @[[UIImage imageNamed:@"playing_1.png"],
                                                  [UIImage imageNamed:@"playing_2.png"],
                                                  [UIImage imageNamed:@"playing_3.png"]];
+                
+                NSError* error = nil;
+                NSData* waveData = [_voiceCache dataForKey:msg.media.url.MD5Hash];
+                AVAudioPlayer* aPlayer = [[AVAudioPlayer alloc] initWithData:waveData error:&error];
+                if (error == nil) {
+                    labAudioDuration.text = [NSString stringWithFormat:@"%.1f'", aPlayer.duration];
+                    [labAudioDuration sizeToFit];
+                    CGRect audioLabelFrame = labAudioDuration.frame;
+                    labAudioDuration.frame = CGRectMake(CGRectGetMaxX(voiceMsgBody.frame) + 14, imgBubbleBg.frame.origin.y, audioLabelFrame.size.width, audioLabelFrame.size.height);
+                }
             }
             else {
                 imgBubbleBg.frame = CGRectMake(36, 12+12, 90, 78);
@@ -257,6 +279,7 @@
         
         if (msg.media.url.length > 0) {
             if ([msg.media.type isEqualToString:@"voice"]) {
+                
                 imgBubbleBg.frame =  CGRectMake(320-36-90+30, 12+12, 60, 48);
                 voiceMsgBody.frame = CGRectMake(imgBubbleBg.frame.origin.x+10, 18+12, 32, 32);
                 
@@ -264,6 +287,16 @@
                 voiceMsgBody.animationImages = @[[UIImage imageNamed:@"voice_right_3.png"],
                                                  [UIImage imageNamed:@"voice_right_2.png"],
                                                  [UIImage imageNamed:@"voice_right_1.png"]];
+                
+                NSError* error = nil;
+                NSData* waveData = [_voiceCache dataForKey:msg.media.url.MD5Hash];
+                AVAudioPlayer* aPlayer = [[AVAudioPlayer alloc] initWithData:waveData error:&error];
+                if (error == nil) {
+                    labAudioDuration.text = [NSString stringWithFormat:@"%.1f'", aPlayer.duration];
+                    [labAudioDuration sizeToFit];
+                    CGRect audioLabelFrame = labAudioDuration.frame;
+                    labAudioDuration.frame = CGRectMake(imgBubbleBg.frame.origin.x-audioLabelFrame.size.width-4, imgBubbleBg.frame.origin.y, audioLabelFrame.size.width, audioLabelFrame.size.height);
+                }
             }
             else {
                 imgBubbleBg.frame =  CGRectMake(320-36-90-15, 12+12, 90, 78);
@@ -666,6 +699,7 @@
         if ([dataJson isKindOfClass:[NSArray class]]) {
             for (id topicMsgJson in dataJson) {
                 CSKuleTopicMsg* topicMsg = [CSKuleInterpreter decodeTopicMsg:topicMsgJson];
+                [self downloadVoice:topicMsg];
                 [topicMsgs addObject:topicMsg];
                 
                 if (timestamp < topicMsg.timestamp) {
@@ -675,6 +709,7 @@
         }
         else if ([dataJson isKindOfClass:[NSDictionary class]]) {
             CSKuleTopicMsg* topicMsg = [CSKuleInterpreter decodeTopicMsg:dataJson];
+            [self downloadVoice:topicMsg];
             [topicMsgs addObject:topicMsg];
             if (timestamp < topicMsg.timestamp) {
                 timestamp = topicMsg.timestamp;
@@ -813,6 +848,15 @@
 - (void)setPlayingMsg:(CSKuleTopicMsg *)playingMsg {
     _playingMsg = playingMsg;
     
+}
+
+- (void)downloadVoice:(CSKuleTopicMsg*)msg {
+    if (msg.media.url.length > 0 && [msg.media.type isEqualToString:@"voice"]) {
+        if (![_voiceCache existsDataForKey:msg.media.url.MD5Hash]) {
+            CSKuleURLDownloader* dn = [CSKuleURLDownloader URLDownloader:[NSURL URLWithString:msg.media.url]];
+            [dn start];
+        }
+    }
 }
 
 @end

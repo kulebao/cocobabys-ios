@@ -66,6 +66,7 @@
             gApp.engine.loginInfo.accountName = bindInfo.accountName;
             gApp.engine.loginInfo.username = bindInfo.username;
             gApp.engine.loginInfo.schoolName = bindInfo.schoolName;
+            gApp.engine.loginInfo.memberStatus = bindInfo.memberStatus;
             
             gApp.engine.preferences.loginInfo = gApp.engine.loginInfo;
             

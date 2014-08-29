@@ -437,6 +437,7 @@
             _loginInfo.accountName = bindInfo.accountName;
             _loginInfo.username = bindInfo.username;
             _loginInfo.schoolName = bindInfo.schoolName;
+            _loginInfo.memberStatus = bindInfo.memberStatus;
             
             _preferences.loginInfo = _loginInfo;
             [gApp hideAlert];

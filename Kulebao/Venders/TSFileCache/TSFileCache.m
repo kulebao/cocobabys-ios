@@ -133,6 +133,10 @@ static TSFileCache *_sharedInstance = nil;
     return [self _allFileNamesAtURL:_directoryURL];
 }
 
+- (NSURL*)localURLForKey:(NSString *)key {
+    return URLTo(key);
+}
+
 - (NSDictionary *)attributesOfFileForKey:(NSString *)key error:(NSError *__autoreleasing *)error {
     NSError *localError = nil;
     NSDictionary *attributes = [NSDictionary dictionary];

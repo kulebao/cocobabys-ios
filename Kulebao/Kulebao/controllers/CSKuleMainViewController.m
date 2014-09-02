@@ -137,13 +137,19 @@
         [self updateUI:YES];
         CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
         if (currentChild) {
-            [gApp.engine checkUpdatesOfNews];
-            [gApp.engine checkUpdatesOfRecipe];
-            [gApp.engine checkUpdatesOfCheckin];
-            [gApp.engine checkUpdatesOfSchedule];
-            [gApp.engine checkUpdatesOfAssignment];
-            [gApp.engine checkUpdatesOfChating];
-            [gApp.engine checkUpdatesOfAssess];
+            if ([gApp.engine.loginInfo.memberStatus isEqualToString:@"free"]) {
+                [gApp.engine checkUpdatesOfNews];
+                [gApp.engine checkUpdatesOfCheckin];
+            }
+            else if ([gApp.engine.loginInfo.memberStatus isEqualToString:@"paid"]) {
+                [gApp.engine checkUpdatesOfNews];
+                [gApp.engine checkUpdatesOfRecipe];
+                [gApp.engine checkUpdatesOfCheckin];
+                [gApp.engine checkUpdatesOfSchedule];
+                [gApp.engine checkUpdatesOfAssignment];
+                [gApp.engine checkUpdatesOfChating];
+                [gApp.engine checkUpdatesOfAssess];
+            }
         }
     }
     else if((object == gApp.engine) && [keyPath isEqualToString:@"badgeOfNews"]) {
@@ -636,6 +642,7 @@
             case kKuleModuleNews:
             case kKuleModuleCheckin:
                 ok = YES;
+                break;
             default:
                 ok = NO;
                 break;

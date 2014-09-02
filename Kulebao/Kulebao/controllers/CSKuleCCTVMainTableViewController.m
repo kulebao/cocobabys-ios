@@ -46,6 +46,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     [self customizeBackBarItem];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectNull];
     
     [self performSelector:@selector(hmLogin) withObject:nil afterDelay:0];
 }

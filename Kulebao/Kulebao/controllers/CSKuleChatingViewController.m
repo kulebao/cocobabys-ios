@@ -249,7 +249,7 @@
                 NSData* waveData = [_voiceCache dataForKey:msg.media.url.MD5Hash];
                 AVAudioPlayer* aPlayer = [[AVAudioPlayer alloc] initWithData:waveData error:&error];
                 if (error == nil) {
-                    labAudioDuration.text = [NSString stringWithFormat:@"%.1f'", aPlayer.duration];
+                    labAudioDuration.text = [NSString stringWithFormat:@"%.0f'", aPlayer.duration];
                     [labAudioDuration sizeToFit];
                     CGRect audioLabelFrame = labAudioDuration.frame;
                     labAudioDuration.frame = CGRectMake(CGRectGetMaxX(voiceMsgBody.frame) + 14, imgBubbleBg.frame.origin.y, audioLabelFrame.size.width, audioLabelFrame.size.height);
@@ -292,7 +292,7 @@
                 NSData* waveData = [_voiceCache dataForKey:msg.media.url.MD5Hash];
                 AVAudioPlayer* aPlayer = [[AVAudioPlayer alloc] initWithData:waveData error:&error];
                 if (error == nil) {
-                    labAudioDuration.text = [NSString stringWithFormat:@"%.1f'", aPlayer.duration];
+                    labAudioDuration.text = [NSString stringWithFormat:@"%.0f'", aPlayer.duration];
                     [labAudioDuration sizeToFit];
                     CGRect audioLabelFrame = labAudioDuration.frame;
                     labAudioDuration.frame = CGRectMake(imgBubbleBg.frame.origin.x-audioLabelFrame.size.width-4, imgBubbleBg.frame.origin.y, audioLabelFrame.size.width, audioLabelFrame.size.height);

@@ -9,11 +9,12 @@
 #import "CSKuleFeedbackViewController.h"
 #import "CSAppDelegate.h"
 
-@interface CSKuleFeedbackViewController ()
+@interface CSKuleFeedbackViewController () <UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView* viewContent;
 @property (weak, nonatomic) IBOutlet UIImageView *imgContentBg;
 @property (weak, nonatomic) IBOutlet UITextView *textMsgBody;
+@property (weak, nonatomic) IBOutlet UILabel *labTips;
 
 @end
 
@@ -39,6 +40,7 @@
     
     self.imgContentBg.image = [[UIImage imageNamed:@"bg-dialog.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     
+    self.textMsgBody.delegate = self;
     [self.textMsgBody becomeFirstResponder];
 }
 
@@ -98,6 +100,23 @@
                          success:sucessHandler
                          failure:failureHandler];
 
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    [self reloadTips];
+}
+
+- (void)textViewDidChange:(UITextView *)textView {
+    [self reloadTips];
+}
+
+- (void)reloadTips {
+    if (self.textMsgBody.text.length > 0) {
+        self.labTips.hidden = YES;
+    }
+    else {
+        self.labTips.hidden = NO;
+    }
 }
 
 @end

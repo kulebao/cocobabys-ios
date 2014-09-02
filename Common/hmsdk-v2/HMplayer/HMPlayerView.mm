@@ -108,6 +108,9 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
                                                       selector:@selector(onTimer:)
                                                       userInfo:nil
                                                        repeats:NO];
+    
+    [btnListen setEnabled:YES];
+    [btnListenStop setEnabled:NO];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -495,7 +498,8 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
     Audioparam.data    =  audioDataArr; //(void*)audio_data;
     Audioparam.cb_data = &data_callback;
     
-    if ( hm_pu_open_audio(myID, &Audioparam , Audio_res,&audio_h) == HMEC_OK)
+    hm_result result = hm_pu_open_audio(myID, &Audioparam , Audio_res,&audio_h);
+    if (result == HMEC_OK)
     {
         
         if (  hm_pu_start_audio(audio_h) == HMEC_OK)
@@ -524,6 +528,7 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
     }
     else
     {
+        // 0x900102
         NSLog(@"开启音频失败");
     }
 }

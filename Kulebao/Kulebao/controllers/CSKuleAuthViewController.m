@@ -81,6 +81,13 @@
             NSInteger check_phone_result = [[dataJson valueForKeyNotNull:@"check_phone_result"] integerValue];
             
             switch (check_phone_result) {
+                case PHONE_NUM_IS_FIRST_USE:
+//                {
+//                    [gApp hideAlert];
+//                    CSLog(@"Server says it's inactive: %@", mobile);
+//                    [self performSegueWithIdentifier:@"segue.verifymobile" sender:nil];
+//                }
+//                    break;
                 case PHONE_NUM_IS_ALREADY_BIND:
                 {
                     [gApp hideAlert];
@@ -96,7 +103,6 @@
                 }
                     break;
                     
-                case PHONE_NUM_IS_FIRST_USE:
                 case PHONE_NUM_IS_INVALID:
                 {
                     [gApp alert:@"账号未激活或已过期，请联系幼儿园处理，谢谢。"

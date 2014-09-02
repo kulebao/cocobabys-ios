@@ -47,6 +47,8 @@
     NSError* error = nil;
     [_frCtrl performFetch:&error];
     
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectNull];
+    
     [self doReloadHistory];
 }
 

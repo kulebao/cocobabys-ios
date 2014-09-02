@@ -104,13 +104,19 @@
 
     CSKuleChildInfo* currentChild = _currentRelationship.child;
     if (currentChild) {
-        [self checkUpdatesOfNews];
-        [self checkUpdatesOfRecipe];
-        [self checkUpdatesOfCheckin];
-        [self checkUpdatesOfSchedule];
-        [self checkUpdatesOfAssignment];
-        [self checkUpdatesOfChating];
-        [self checkUpdatesOfAssess];
+        if ([self.loginInfo.memberStatus isEqualToString:@"free"]) {
+            [self checkUpdatesOfNews];
+            [self checkUpdatesOfCheckin];
+        }
+        else if ([self.loginInfo.memberStatus isEqualToString:@"paid"]) {
+            [self checkUpdatesOfNews];
+            [self checkUpdatesOfRecipe];
+            [self checkUpdatesOfCheckin];
+            [self checkUpdatesOfSchedule];
+            [self checkUpdatesOfAssignment];
+            [self checkUpdatesOfChating];
+            [self checkUpdatesOfAssess];
+        }
     }
 }
 

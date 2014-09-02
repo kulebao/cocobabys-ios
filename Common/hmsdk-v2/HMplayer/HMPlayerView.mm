@@ -109,8 +109,13 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
                                                       userInfo:nil
                                                        repeats:NO];
     
-    [btnListen setEnabled:YES];
-    [btnListenStop setEnabled:NO];
+//    [btnListen setEnabled:YES];
+//    [btnListenStop setEnabled:NO];
+    
+    btnListen.hidden = NO;
+    btnListenStop.hidden = YES;
+    
+    rightBar.hidden = !IsRunning;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -202,6 +207,7 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
                 [CoverView setHidden:YES];
                 
                 IsRunning = YES;
+                rightBar.hidden = !IsRunning;
                 NSInvocationOperation* operationDisplay = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(HMRundisplayThread) object:nil];
                 NSOperationQueue* queue = [[NSOperationQueue alloc] init];
                 [queue addOperation:operationDisplay];
@@ -285,6 +291,7 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
                 [self performSelectorOnMainThread:@selector(HiddenCoverView) withObject:nil waitUntilDone:NO];
                 
                 IsRunning = YES;
+                rightBar.hidden = !IsRunning;
                 NSInvocationOperation* operationDisplay = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(HMRundisplayThread) object:nil];
                 NSOperationQueue* queue = [[NSOperationQueue alloc] init];
                 [queue addOperation:operationDisplay];
@@ -409,7 +416,15 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
 //	[self.navigationController setNavigationBarHidden: controlBarHidden animated:YES];
     
     [self setNavHidden:controlBarHidden];
+    [self setRightBarHidden:controlBarHidden];
     
+    if(!controlBarHidden) {
+        _autoHiddenTimer = [NSTimer scheduledTimerWithTimeInterval:3
+                                                            target:self
+                                                          selector:@selector(onTimer:)
+                                                          userInfo:nil
+                                                           repeats:NO];
+    }
 }
 
 #pragma mark - 听说操作
@@ -476,15 +491,20 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
 - (IBAction)btnListenAction:(id)sender
 {
     [self performSelectorInBackground:@selector(StartAudioPlayer) withObject:nil];
-    [btnListen setEnabled:NO];
-    [btnListenStop setEnabled:YES];
+//    [btnListen setEnabled:NO];
+//    [btnListenStop setEnabled:YES];
+    
+    btnListen.hidden = YES;
+    btnListenStop.hidden = NO;
 }
 
 - (IBAction)btnListenStopAction:(id)sender
 {
     [self performSelectorInBackground:@selector(StopAudioPlayer) withObject:nil];
-    [btnListen setEnabled:YES];
-    [btnListenStop setEnabled:NO];
+//    [btnListen setEnabled:YES];
+//    [btnListenStop setEnabled:NO];
+    btnListen.hidden = NO;
+    btnListenStop.hidden = YES;
 }
 
 - (void)StartAudioPlayer
@@ -573,6 +593,7 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
 {
     NSLog(@"退出视频开始");
     IsRunning = NO;
+    rightBar.hidden = !IsRunning;
     if (video_h != NULL) {
         hm_pu_stop_video(video_h);  //程序在出现网络异常的时候，切换视频通道，会卡死在此接口
         hm_pu_close_video(video_h);
@@ -652,10 +673,22 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
     }];
 }
 
+- (void)setRightBarHidden:(BOOL)hidden {
+    [UIView animateWithDuration:0.4 animations:^{
+        CATransform3D trans = CATransform3DIdentity;
+        if (hidden) {
+            trans = CATransform3DMakeTranslation(100, 0, 0);
+        }
+        
+        rightBar.layer.transform = trans;
+    }];
+}
+
 - (void)onTimer:(NSTimer*)timer {
     _autoHiddenTimer = nil;
     controlBarHidden = YES;
     [self setNavHidden:controlBarHidden];
+    [self setRightBarHidden:controlBarHidden];
 }
 
 @end

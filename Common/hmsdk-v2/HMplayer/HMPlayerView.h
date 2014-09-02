@@ -55,7 +55,7 @@
     IBOutlet UIButton *btnListenStop;
     
     IBOutlet UIView *navBar;
-    
+    __weak IBOutlet UIView *rightBar;
     __weak IBOutlet UILabel *labTitle;
     
     __weak IBOutlet UIControl      *CoverView;

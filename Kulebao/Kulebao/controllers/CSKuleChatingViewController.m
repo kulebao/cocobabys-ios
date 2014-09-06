@@ -28,6 +28,8 @@
     AVAudioPlayer* _audioPlayer;
     
     TSFileCache* _voiceCache;
+    
+    CSKuleChatingTableCell* _denyDeleteCell;
 }
 
 @property (weak, nonatomic) IBOutlet PullTableView *tableview;
@@ -141,14 +143,9 @@
         UIImageView* imgBubbleBg = [[UIImageView alloc] initWithFrame:CGRectNull];
         imgBubbleBg.tag = 100;
         [cell.contentView addSubview:imgBubbleBg];
-        UILongPressGestureRecognizer* longPressGes = [[UILongPressGestureRecognizer alloc] initWithTarget:cell action:@selector(longPressHandle:)];
         imgBubbleBg.userInteractionEnabled = YES;
-        [imgBubbleBg addGestureRecognizer:longPressGes];
-        
-        UITapGestureRecognizer* tapGes = [[UITapGestureRecognizer alloc] initWithTarget:cell
-                                                                                  action:@selector(tapHandle:)];
-        [tapGes requireGestureRecognizerToFail:longPressGes];
-        [imgBubbleBg addGestureRecognizer:tapGes];
+        [imgBubbleBg addGestureRecognizer:cell.longPressGes];
+        [imgBubbleBg addGestureRecognizer:cell.tapGes];
         
         UILabel* labMsgBody = [[UILabel alloc] initWithFrame:CGRectNull];
         labMsgBody.tag = 101;
@@ -159,11 +156,6 @@
 
         UIImageView* imgMsgBody = [[UIImageView alloc] initWithFrame:CGRectNull];
         imgMsgBody.tag = 102;
-//        UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:cell
-//                                                                                  action:@selector(tapHandle:)];
-//        [gesture requireGestureRecognizerToFail:longPressGes];
-//        imgMsgBody.userInteractionEnabled = YES;
-//        [imgMsgBody addGestureRecognizer:gesture];
         [cell.contentView addSubview:imgMsgBody];
         
         UIImageView* imgPortrait = [[UIImageView alloc] initWithFrame:CGRectNull];
@@ -194,11 +186,6 @@
         voiceMsgBody.tag = 106;
         [cell.contentView addSubview:voiceMsgBody];
         voiceMsgBody.animationDuration = 0.7;
-//        gesture = [[UITapGestureRecognizer alloc] initWithTarget:cell
-//                                                          action:@selector(tapVoiceHandle:)];
-//        [gesture requireGestureRecognizerToFail:longPressGes];
-//        voiceMsgBody.userInteractionEnabled = YES;
-//        [voiceMsgBody addGestureRecognizer:gesture];
         
         UILabel* labAudioDuration = [[UILabel alloc] initWithFrame:CGRectNull];
         labAudioDuration.tag = 107;
@@ -420,6 +407,24 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 }
+/*
+- (BOOL)tableView:(UITableView *)tableView shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canPerformAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
+    if (action == @selector(copy:)) {
+        return YES;
+    }
+    return NO;
+}
+
+- (void)tableView:(UITableView *)tableView performAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
+    if (action == @selector(copy:)) {
+//        [UIPasteboard generalPasteboard].string = [data objectAtIndex:indexPath.row];
+    }
+}
+ */
 
 #pragma mark - PullTableViewDelegate
 - (void)pullTableViewDidTriggerRefresh:(PullTableView*)pullTableView {
@@ -849,6 +854,31 @@
             }
         }
     }
+}
+
+- (void)chatingTableCellDidLongPress:(CSKuleChatingTableCell*)cell {
+    _denyDeleteCell = cell;
+    UIMenuItem *flag = [[UIMenuItem alloc] initWithTitle:@"删除" action:@selector(deleteCell:)];
+    UIMenuController *menu = [UIMenuController sharedMenuController];
+    [menu setMenuItems:[NSArray arrayWithObjects:flag, nil]];
+    [menu setTargetRect:cell.frame inView:cell.superview];
+    [menu setMenuVisible:YES animated:YES];
+}
+
+- (void)deleteCell:(id)sender {
+    NSLog(@"Cell was flagged");
+
+    if (_denyDeleteCell) {
+        NSIndexPath* indexPath = [self.tableview indexPathForCell:_denyDeleteCell];
+        if (indexPath) {
+            [_topicMsgList removeObjectAtIndex:indexPath.row];
+            [self.tableview deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
+    }
+}
+
+- (BOOL)canBecomeFirstResponder {
+    return YES;
 }
 
 @end

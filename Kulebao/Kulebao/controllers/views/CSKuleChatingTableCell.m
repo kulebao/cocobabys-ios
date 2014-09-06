@@ -9,15 +9,25 @@
 #import "CSKuleChatingTableCell.h"
 #import "MJPhotoBrowser.h"
 #import "MJPhoto.h"
+#import "CSAppDelegate.h"
 
 @implementation CSKuleChatingTableCell
 @synthesize msg = _msg;
 @synthesize delegate = _delegate;
+@synthesize longPressGes = _longPressGes;
+@synthesize tapGes = _tapGes;
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
+        self.longPressGes = [[UILongPressGestureRecognizer alloc] initWithTarget:self
+                                                                          action:@selector(longPressHandle:)];
+        
+        self.tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                              action:@selector(tapHandle:)];
+        [self.tapGes requireGestureRecognizerToFail:self.longPressGes];
     }
     return self;
 }
@@ -98,31 +108,39 @@
 
 
 - (void)longPressHandle:(UILongPressGestureRecognizer*)ges {
-    NSLog(@"longPressHandle");
+
+    if (ges.state == UIGestureRecognizerStateEnded) {
+        return;
+    } else if (ges.state == UIGestureRecognizerStateBegan) {
+            NSLog(@"longPressHandle");
+        if ([_delegate respondsToSelector:@selector(chatingTableCellDidLongPress:)]) {
+            [_delegate chatingTableCellDidLongPress:self];
+        }
+    }
     
-    [self becomeFirstResponder];
-    UIMenuItem *flag = [[UIMenuItem alloc] initWithTitle:@"Flag" action:@selector(flag:)];
-    UIMenuItem *approve = [[UIMenuItem alloc] initWithTitle:@"Approve" action:@selector(approve:)];
-    UIMenuItem *deny = [[UIMenuItem alloc] initWithTitle:@"Deny" action:@selector(deny:)];
-    UIMenuController *menu = [UIMenuController sharedMenuController];
-    [menu setMenuItems:[NSArray arrayWithObjects:flag, approve, deny, nil]];
-    [menu setTargetRect:self.contentView.frame inView:self];
-    [menu setMenuVisible:YES animated:YES];
+//    [self becomeFirstResponder];
+//    UIMenuItem *flag = [[UIMenuItem alloc] initWithTitle:@"Flag" action:@selector(flag:)];
+//    UIMenuItem *approve = [[UIMenuItem alloc] initWithTitle:@"Approve" action:@selector(approve:)];
+//    UIMenuItem *deny = [[UIMenuItem alloc] initWithTitle:@"Deny" action:@selector(deny:)];
+//    UIMenuController *menu = [UIMenuController sharedMenuController];
+//    [menu setMenuItems:[NSArray arrayWithObjects:flag, approve, deny, nil]];
+//    [menu setTargetRect:self.contentView.frame inView:self];
+//    [menu setMenuVisible:YES animated:YES];
+}
+
+- (void)setMsg:(CSKuleTopicMsg *)msg {
+    _msg = msg;
+    
+    if ([msg.sender.senderId isEqualToString:gApp.engine.currentRelationship.parent.parentId]) {
+        self.longPressGes.enabled = YES;
+    }
+    else {
+        self.longPressGes.enabled = NO;
+    }
 }
 
 - (BOOL)canBecomeFirstResponder {
     return YES;
 }
 
-- (void)flag:(id)sender {
-    NSLog(@"Cell was flagged");
-}
-
-- (void)approve:(id)sender {
-    NSLog(@"Cell was approved");
-}
-
-- (void)deny:(id)sender {
-    NSLog(@"Cell was denied");
-}
 @end

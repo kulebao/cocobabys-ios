@@ -15,6 +15,7 @@
 
 @optional
 - (void)chatingTableCell:(CSKuleChatingTableCell*)cell playVoice:(CSKuleTopicMsg*)msg;
+- (void)chatingTableCellDidLongPress:(CSKuleChatingTableCell*)cell;
 
 @end
 
@@ -22,6 +23,8 @@
 
 @property (nonatomic, weak) id delegate;
 @property (nonatomic, strong) CSKuleTopicMsg* msg;
+@property (nonatomic, strong) UILongPressGestureRecognizer* longPressGes;
+@property (nonatomic, strong) UITapGestureRecognizer* tapGes;
 
 + (CGFloat)calcHeightForMsg:(CSKuleTopicMsg*)msg;
 + (CGSize)textSize:(NSString*)text;

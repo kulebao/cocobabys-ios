@@ -45,7 +45,7 @@
     NSTimer* _autoHiddenTimer;
     
     
-    IBOutlet UIView*               PaintView;
+    IBOutlet PaintingView*               PaintView;
     
     IBOutlet UIButton *btnSpeak;
     

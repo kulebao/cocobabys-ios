@@ -375,9 +375,15 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
     while (IsRunning)
     {
         nLen = 0;
+        [videoLock lock];
         pdata = [videoBuffer dequeue:&nLen];
+        if (pdata == NULL) {
+            [videoLock unlock];
+            continue;
+        }
         yuv_handle      yuv_h = NULL;
         hm_video_decode_yuv(localVideoHandle, (char*)pdata, nLen,&yuv_h);
+        [videoLock unlock];
         if (yuv_h != NULL)
         {
             YUV_PICTURE yuv_pic ;
@@ -615,6 +621,8 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
         video_h = NULL;
     }
     
+    sleep(1);
+    
     if (videoBuffer != nil) {
         [videoBuffer release];
         videoBuffer = nil;
@@ -643,6 +651,15 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
         hm_pu_stop_audio(audio_h);
         hm_pu_close_audio(audio_h);
         audio_h = NULL;
+    }
+    
+    //关闭对讲
+    if (talk_h != NULL) {
+        [talkLock lock];
+        hm_pu_stop_talk(talk_h);
+        hm_pu_close_talk(talk_h);
+        talk_h = NULL;
+        [talkLock unlock];
     }
 
     if (myID!= NULL) {

@@ -117,7 +117,7 @@
         [self presentViewController:playerView animated:YES
                          completion:^{
                              [playerView ConnectVideoBynode:cur_node];
-                             [playerView setNavTitle:deviceInfo[@"name"]];
+                             //[playerView setNavTitle:deviceInfo[@"name"]];
                          }];
         
         

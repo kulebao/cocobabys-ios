@@ -9,9 +9,19 @@
 #import <UIKit/UIKit.h>
 #import "EntityHistoryInfo.h"
 
+@class CSKuleHistoryItemTableViewCell;
+
+@protocol CSKuleHistoryItemTableViewCellDelegate <NSObject>
+
+@optional
+- (void)historyItemTableCellDidLongPress:(CSKuleHistoryItemTableViewCell*)cell;
+
+@end
+
 @interface CSKuleHistoryItemTableViewCell : UITableViewCell
 
 @property (nonatomic, strong) EntityHistoryInfo* historyInfo;
+@property (nonatomic, weak) id delegate;
 
 + (CGFloat)calcHeight:(EntityHistoryInfo*)historyInfo;
 

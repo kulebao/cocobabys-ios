@@ -33,7 +33,7 @@
         _datepicker.date = _date;
     }
     
-    _datepicker.maximumDate = [NSDate date];
+    _datepicker.maximumDate = [[NSDate date] dateafterMonth:-12];
 }
 
 - (void)didReceiveMemoryWarning

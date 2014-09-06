@@ -19,8 +19,6 @@
 		0901A96A18D95E38003BB152 /* CSKuleBPushInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0901A96918D95E38003BB152 /* CSKuleBPushInfo.m */; };
 		0902458518EC41FA00579886 /* CSKuleURLCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0902458418EC41FA00579886 /* CSKuleURLCache.m */; };
 		0902782818C9C060002B9644 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0902782718C9C060002B9644 /* MessageUI.framework */; };
-		090292AE19A1BB2B007D332F /* logo-gray-big.png in Resources */ = {isa = PBXBuildFile; fileRef = 09416C9518E41BF600DFEA44 /* logo-gray-big.png */; };
-		090292AF19A1BB2B007D332F /* logo-gray-big@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09416C9618E41BF600DFEA44 /* logo-gray-big@2x.png */; };
 		0902CAA818F4200A001901A8 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0902CAA718F4200A001901A8 /* AudioToolbox.framework */; };
 		0902CAAE18F4359D001901A8 /* NSString+CSKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 0902CAAD18F4359D001901A8 /* NSString+CSKit.m */; };
 		0904454C18F515BC005D01EA /* img-placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 0904454A18F515BC005D01EA /* img-placeholder.png */; };
@@ -1053,8 +1051,6 @@
 		09416C9218E41BF600DFEA44 /* bg-input-normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-input-normal@2x.png"; sourceTree = "<group>"; };
 		09416C9318E41BF600DFEA44 /* icon-checkin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-checkin.png"; sourceTree = "<group>"; };
 		09416C9418E41BF600DFEA44 /* icon-checkin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-checkin@2x.png"; sourceTree = "<group>"; };
-		09416C9518E41BF600DFEA44 /* logo-gray-big.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-gray-big.png"; sourceTree = "<group>"; };
-		09416C9618E41BF600DFEA44 /* logo-gray-big@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-gray-big@2x.png"; sourceTree = "<group>"; };
 		09416C9718E41BF600DFEA44 /* logo-gray-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-gray-small.png"; sourceTree = "<group>"; };
 		09416C9818E41BF600DFEA44 /* logo-gray-small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-gray-small@2x.png"; sourceTree = "<group>"; };
 		094373D2199D016A00EDD64C /* EntitySenderInfoHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntitySenderInfoHelper.h; sourceTree = "<group>"; };
@@ -2031,8 +2027,6 @@
 				0934F03118BF5B0800E30ECA /* input-bg-2@2x.png */,
 				0934F03218BF5B0800E30ECA /* logo-1.png */,
 				0934F03318BF5B0800E30ECA /* logo-1@2x.png */,
-				09416C9518E41BF600DFEA44 /* logo-gray-big.png */,
-				09416C9618E41BF600DFEA44 /* logo-gray-big@2x.png */,
 				09416C9718E41BF600DFEA44 /* logo-gray-small.png */,
 				09416C9818E41BF600DFEA44 /* logo-gray-small@2x.png */,
 				090C9EB418C83D2C00883DE0 /* msg-bg-from.png */,
@@ -2849,7 +2843,6 @@
 				09F74C9C1997C4F3001555D0 /* internal_logo.png in Resources */,
 				0934F06B18BF5B0800E30ECA /* btn-settings@2x.png in Resources */,
 				090C9EC918C84FC000883DE0 /* CSKuleChildCell.xib in Resources */,
-				090292AE19A1BB2B007D332F /* logo-gray-big.png in Resources */,
 				0934F06518BF5B0800E30ECA /* btn-func-7@2x.png in Resources */,
 				09F74C6D1997C4F3001555D0 /* bg_null.jpg in Resources */,
 				09FE1EE119B5D53F0073D9D4 /* v3_7@2x.png in Resources */,
@@ -3043,7 +3036,6 @@
 				09142E0718E2B9D800E5848F /* assess-exercise.png in Resources */,
 				09CB08D419B01ABA00F57A07 /* voice_right_1@2x.png in Resources */,
 				09FEA71D18DC9D9600513C87 /* chating-photo@2x.png in Resources */,
-				090292AF19A1BB2B007D332F /* logo-gray-big@2x.png in Resources */,
 				0934F07A18BF5B0800E30ECA /* input-bg-1.png in Resources */,
 				09A9EBCB18C08C7D00D83119 /* img-tree-type2@2x.png in Resources */,
 				09BA1BE618BB2FC700760182 /* grayArrow@2x.png in Resources */,

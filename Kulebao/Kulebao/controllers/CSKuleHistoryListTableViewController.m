@@ -10,9 +10,12 @@
 #import "CSAppDelegate.h"
 #import "CSKuleHistoryItemTableViewCell.h"
 #import "EntityHistoryInfoHelper.h"
+#import "EntitySenderInfo.h"
+#import "EntityHistoryInfoHelper.h"
 
 @interface CSKuleHistoryListTableViewController () <NSFetchedResultsControllerDelegate> {
     NSFetchedResultsController* _frCtrl;
+    NSIndexPath* _denyIndexPath;
 }
 
 @end
@@ -79,6 +82,7 @@
     // Configure the cell...
     EntityHistoryInfo* historyInfo = [_frCtrl objectAtIndexPath:indexPath];
     cell.historyInfo = historyInfo;
+    cell.delegate = self;
     
     return cell;
 }
@@ -94,14 +98,60 @@
 
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
+- (void)historyItemTableCellDidLongPress:(CSKuleHistoryItemTableViewCell*)cell {
+    NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
+    _denyIndexPath = indexPath;
+    UIMenuItem *flag = [[UIMenuItem alloc] initWithTitle:@"删除" action:@selector(deleteCell:)];
+    UIMenuController *menu = [UIMenuController sharedMenuController];
+    [menu setMenuItems:[NSArray arrayWithObjects:flag, nil]];
+    [menu setTargetRect:cell.frame inView:cell.superview];
+    [menu setMenuVisible:YES animated:YES];
+}
+
+- (void)deleteCell:(id)sender {
+    if (_denyIndexPath) {
+        EntityHistoryInfo* historyInfo = [_frCtrl objectAtIndexPath:_denyIndexPath];
+        
+        SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+            NSInteger error_code = [[dataJson valueForKeyNotNull:@"error_code"] integerValue];
+            NSString* error_msg = [dataJson valueForKeyNotNull:@"error_msg"];
+            if (error_code == 0) {
+                [EntityHistoryInfoHelper deleteEntity:historyInfo];
+                [gApp hideAlert];
+            }
+            else {
+                [gApp alert:error_msg];
+            }
+            
+            _denyIndexPath = nil;
+        };
+        
+        FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+            _denyIndexPath = nil;
+            CSLog(@"failure:%@", error);
+            [gApp hideAlert];
+        };
+        
+        [gApp waitingAlert:@"请稍等"];
+        [gApp.engine reqDeleteHistoryOfKindergarten:gApp.engine.loginInfo.schoolId
+                                        withChildId:gApp.engine.currentRelationship.child.childId
+                                           recordId:historyInfo.uid.longLongValue
+                                            success:sucessHandler
+                                            failure:failureHandler];
+    }
+}
+
+
+- (BOOL)canBecomeFirstResponder {
     return YES;
 }
-*/
+
+// Override to support conditional editing of the table view.
+//- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    // Return NO if you do not want the specified item to be editable.
+//    return YES;
+//}
 
 /*
 // Override to support editing the table view.
@@ -238,5 +288,6 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView endUpdates];
 }
+
 
 @end

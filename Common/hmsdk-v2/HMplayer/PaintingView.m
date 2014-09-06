@@ -11,7 +11,10 @@
 #import <sys/types.h>
 #import "PaintingView.h"
 
-@implementation PaintingView
+@implementation PaintingView {
+    uint32	picture_width;		//	图像宽度
+	uint32	picture_height;		//	图像高度
+}
 
 @synthesize videoPlayerDelegate;
 
@@ -165,6 +168,9 @@
 - (void)DisplayYUVdata:(P_YUV_PICTURE)yuv_pic;
 {
     if (yuv_pic->ydata == NULL || yuv_pic->udata == NULL || yuv_pic->vdata == NULL) return;
+    
+    picture_width = yuv_pic->width;
+    picture_height = yuv_pic->height;
     
     setFrameBuffer(yuv_pic->ydata, yuv_pic->udata, yuv_pic->vdata, yuv_pic->ystripe, yuv_pic->ustripe, yuv_pic->ustripe, yuv_pic->width, yuv_pic->height);
     

@@ -23,12 +23,14 @@
 @property (weak, nonatomic) IBOutlet UIView *viewImageContainer;
 
 @property (nonatomic, strong) UITapGestureRecognizer* tapGes;
+@property (nonatomic, strong) UILongPressGestureRecognizer* longPressGes;
 
 @end
 
 @implementation CSKuleHistoryItemTableViewCell
 @synthesize historyInfo = _historyInfo;
 @synthesize tapGes = _tapGes;
+@synthesize delegate = _delegate;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -46,8 +48,12 @@
     self.imgPortrait.layer.cornerRadius = 4.0;
     self.imgPortrait.clipsToBounds = YES;
     
+    self.longPressGes = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPress:)];
+    [self addGestureRecognizer:self.longPressGes];
+    
     self.tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
     [self.viewImageContainer addGestureRecognizer:self.tapGes];
+    [self.tapGes requireGestureRecognizerToFail:self.longPressGes];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -59,6 +65,13 @@
 
 - (void)setHistoryInfo:(EntityHistoryInfo *)historyInfo {
     _historyInfo = historyInfo;
+    
+    if ([_historyInfo.sender.senderId isEqualToString:gApp.engine.currentRelationship.parent.parentId]) {
+        self.longPressGes.enabled = YES;
+    }
+    else {
+        self.longPressGes.enabled = NO;
+    }
     
     [self updateUI];
 }
@@ -190,6 +203,16 @@
     yy += ((historyInfo.medium.count + 2) / 3 ) * (64+10) + 2;
     
     return yy;
+}
+
+- (void)onLongPress:(UILongPressGestureRecognizer*)ges {
+    if (ges.state == UIGestureRecognizerStateEnded) {
+        return;
+    } else if (ges.state == UIGestureRecognizerStateBegan) {
+        if ([_delegate respondsToSelector:@selector(historyItemTableCellDidLongPress:)]) {
+            [_delegate historyItemTableCellDidLongPress:self];
+        }
+    }
 }
 
 - (void)onTap:(UITapGestureRecognizer*)ges {

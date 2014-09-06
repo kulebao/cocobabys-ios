@@ -1193,6 +1193,24 @@
                                failure:failure];
 }
 
+- (void)reqDeleteTopicMsgsOfKindergarten:(NSInteger)kindergarten
+                                recordId:(long long)msgId
+                                 success:(SuccessResponseHandler)success
+                                 failure:(FailureResponseHandler)failure {
+    
+    NSParameterAssert(_currentRelationship.child);
+    
+    NSString* path = [NSString stringWithFormat:kTopicIdPath, @(kindergarten), _currentRelationship.child.childId, @(msgId)];
+    NSString* method = @"DELETE";
+    
+    NSMutableDictionary* parameters = nil;
+    [_httpClient httpRequestWithMethod:method
+                                  path:path
+                            parameters:parameters
+                               success:success
+                               failure:failure];
+}
+
 - (void)reqSendTopicMsg:(NSString*)msgBody
            withMediaUrl:(NSString*)mediaUrl
             ofMediaType:(NSString*)mediaType
@@ -1439,7 +1457,6 @@
     
     NSString* method = @"GET";
     
-    
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
     if (fromDate) {
         long long msec = [fromDate timeIntervalSince1970] * 1000;
@@ -1465,7 +1482,7 @@
                              success:(SuccessResponseHandler)success
                              failure:(FailureResponseHandler)failure {
     NSString* path = [NSString stringWithFormat:kGetHistoryListPath, @(kindergarten), childId];
-    
+
     NSString* method = @"POST";
     
     id msgSender = @{@"id": _currentRelationship.parent.parentId,
@@ -1480,6 +1497,22 @@
                                  @"content": content ? content : @"",
                                  @"medium" : mediumList,
                                  @"sender": msgSender};
+    
+    [_httpClient httpRequestWithMethod:method
+                                  path:path
+                            parameters:parameters
+                               success:success
+                               failure:failure];
+}
+
+- (void)reqDeleteHistoryOfKindergarten:(NSInteger)kindergarten
+                           withChildId:(NSString*)childId
+                              recordId:(long long)msgId
+                               success:(SuccessResponseHandler)success
+                               failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kDeleteHistoryListPath, @(kindergarten), childId, @(msgId)];
+    NSString* method = @"DELETE";
+    NSMutableDictionary* parameters = nil;
     
     [_httpClient httpRequestWithMethod:method
                                   path:path

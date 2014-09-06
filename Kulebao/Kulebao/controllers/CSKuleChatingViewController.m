@@ -866,13 +866,34 @@
 }
 
 - (void)deleteCell:(id)sender {
-    NSLog(@"Cell was flagged");
-
     if (_denyDeleteCell) {
         NSIndexPath* indexPath = [self.tableview indexPathForCell:_denyDeleteCell];
         if (indexPath) {
-            [_topicMsgList removeObjectAtIndex:indexPath.row];
-            [self.tableview deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            CSKuleTopicMsg*msg = [_topicMsgList objectAtIndex:indexPath.row];
+            
+            SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+                NSInteger error_code = [[dataJson valueForKeyNotNull:@"error_code"] integerValue];
+                NSString* error_msg = [dataJson valueForKeyNotNull:@"error_msg"];
+                if (error_code == 0) {
+                    [_topicMsgList removeObject:msg];
+                    [self.tableview deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                    [gApp hideAlert];
+                }
+                else {
+                    [gApp alert:error_msg];
+                }
+            };
+            
+            FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+                CSLog(@"failure:%@", error);
+                [gApp hideAlert];
+            };
+            
+            [gApp waitingAlert:@"请稍等"];
+            [gApp.engine reqDeleteTopicMsgsOfKindergarten:gApp.engine.loginInfo.schoolId
+                                                 recordId:msg.msgId
+                                                  success:sucessHandler
+                                                  failure:failureHandler];
         }
     }
 }

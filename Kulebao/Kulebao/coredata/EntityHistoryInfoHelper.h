@@ -18,4 +18,6 @@
 
 + (EntityMediaInfo*)mediaWhereLatestImageOfYear:(NSInteger)year month:(NSInteger)month;
 
++ (void)deleteEntity:(EntityHistoryInfo*)entity;
+
 @end

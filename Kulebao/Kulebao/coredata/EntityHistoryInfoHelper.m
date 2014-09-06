@@ -179,4 +179,13 @@
     return returnEntity;
 }
 
++ (void)deleteEntity:(EntityHistoryInfo*)entity {
+    if (entity) {
+        NSManagedObjectContext* context = [[CSCoreDataHelper sharedInstance] managedObjectContext];
+        [context deleteObject:entity];
+        NSError* error = nil;
+        [context save:&error];
+    }
+}
+
 @end

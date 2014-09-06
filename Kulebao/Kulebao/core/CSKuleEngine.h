@@ -166,6 +166,11 @@
                               success:(SuccessResponseHandler)success
                               failure:(FailureResponseHandler)failure;
 
+- (void)reqDeleteTopicMsgsOfKindergarten:(NSInteger)kindergarten
+                                recordId:(long long)msgId
+                                 success:(SuccessResponseHandler)success
+                                 failure:(FailureResponseHandler)failure;
+
 - (void)reqSendTopicMsg:(NSString*)msgBody
            withMediaUrl:(NSString*)mediaUrl
             ofMediaType:(NSString*)mediaType
@@ -223,5 +228,11 @@
                     withImageUrlList:(NSArray*)imgUrlList
                              success:(SuccessResponseHandler)success
                              failure:(FailureResponseHandler)failure;
+
+- (void)reqDeleteHistoryOfKindergarten:(NSInteger)kindergarten
+                           withChildId:(NSString*)childId
+                              recordId:(long long)msgId
+                               success:(SuccessResponseHandler)success
+                               failure:(FailureResponseHandler)failure;
 
 @end

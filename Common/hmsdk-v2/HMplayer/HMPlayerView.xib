@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="CoverView" destination="ai3-Ct-MEh" id="xld-hy-Urg"/>
                 <outlet property="PaintView" destination="cez-eO-7u9" id="Cah-fU-8Cg"/>
+                <outlet property="btnCapture" destination="vLy-hw-ea8" id="6YD-rl-lOb"/>
                 <outlet property="btnListen" destination="Cua-kH-fJK" id="cmi-hk-p9Z"/>
                 <outlet property="btnListenStop" destination="iJr-8j-eae" id="fJi-Oc-cb3"/>
                 <outlet property="labTitle" destination="icm-0p-DTk" id="qeV-gZ-AU3"/>
@@ -103,6 +104,17 @@
                                 <action selector="btnListenStopAction:" destination="-1" eventType="touchUpInside" id="Evj-MA-2xH"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="vLy-hw-ea8">
+                            <rect key="frame" x="9" y="166" width="51" height="22"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <state key="normal" backgroundImage="video_capture.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="btnCaptureAction:" destination="-1" eventType="touchUpInside" id="MUW-gb-Mb2"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
@@ -115,6 +127,7 @@
         </view>
     </objects>
     <resources>
+        <image name="video_capture.png" width="51" height="22"/>
         <image name="video_voice_close.png" width="51" height="22"/>
         <image name="video_voice_open.png" width="51" height="22"/>
     </resources>

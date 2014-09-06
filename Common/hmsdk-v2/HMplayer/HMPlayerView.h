@@ -54,6 +54,7 @@
     IBOutlet UIButton *btnListen;
     IBOutlet UIButton *btnListenStop;
     
+    __weak IBOutlet UIButton *btnCapture;
     IBOutlet UIView *navBar;
     __weak IBOutlet UIView *rightBar;
     __weak IBOutlet UILabel *labTitle;
@@ -86,6 +87,7 @@
 - (IBAction)btnSpeakStopAction:(id)sender;
 - (IBAction)btnListenAction:(id)sender;
 - (IBAction)btnListenStopAction:(id)sender;
+- (IBAction)btnCaptureAction:(id)sender;
 
 
 @end

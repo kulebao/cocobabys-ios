@@ -7,6 +7,7 @@
 //
 
 #import "HMPlayerView.h"
+#import "CSAppDelegate.h"
 
 #define video_data   0
 #define audio_data   1
@@ -505,6 +506,20 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
 //    [btnListenStop setEnabled:NO];
     btnListen.hidden = NO;
     btnListenStop.hidden = YES;
+}
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
+    if (error) {
+        [gApp alert:error.localizedDescription];
+    }
+    else {
+        [gApp alert:@"拍照成功，已存入您的相册"];
+    }
+}
+
+- (IBAction)btnCaptureAction:(id)sender {
+    UIImage *viewImage = [PaintView snapshotImage];
+    UIImageWriteToSavedPhotosAlbum(viewImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
 }
 
 - (void)StartAudioPlayer

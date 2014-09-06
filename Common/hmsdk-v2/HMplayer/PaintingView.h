@@ -60,4 +60,6 @@ typedef enum  {
 - (void)DisplayYUVdata:(P_YUV_PICTURE)yuv_pic;
 
 - (void)erase;    //清屏
+- (UIImage*)snapshotImage;
+
 @end

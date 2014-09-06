@@ -141,6 +141,14 @@
         UIImageView* imgBubbleBg = [[UIImageView alloc] initWithFrame:CGRectNull];
         imgBubbleBg.tag = 100;
         [cell.contentView addSubview:imgBubbleBg];
+        UILongPressGestureRecognizer* longPressGes = [[UILongPressGestureRecognizer alloc] initWithTarget:cell action:@selector(longPressHandle:)];
+        imgBubbleBg.userInteractionEnabled = YES;
+        [imgBubbleBg addGestureRecognizer:longPressGes];
+        
+        UITapGestureRecognizer* tapGes = [[UITapGestureRecognizer alloc] initWithTarget:cell
+                                                                                  action:@selector(tapHandle:)];
+        [tapGes requireGestureRecognizerToFail:longPressGes];
+        [imgBubbleBg addGestureRecognizer:tapGes];
         
         UILabel* labMsgBody = [[UILabel alloc] initWithFrame:CGRectNull];
         labMsgBody.tag = 101;
@@ -151,10 +159,11 @@
 
         UIImageView* imgMsgBody = [[UIImageView alloc] initWithFrame:CGRectNull];
         imgMsgBody.tag = 102;
-        UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:cell
-                                                                                  action:@selector(tapHandle:)];
-        imgMsgBody.userInteractionEnabled = YES;
-        [imgMsgBody addGestureRecognizer:gesture];
+//        UITapGestureRecognizer* gesture = [[UITapGestureRecognizer alloc] initWithTarget:cell
+//                                                                                  action:@selector(tapHandle:)];
+//        [gesture requireGestureRecognizerToFail:longPressGes];
+//        imgMsgBody.userInteractionEnabled = YES;
+//        [imgMsgBody addGestureRecognizer:gesture];
         [cell.contentView addSubview:imgMsgBody];
         
         UIImageView* imgPortrait = [[UIImageView alloc] initWithFrame:CGRectNull];
@@ -185,6 +194,11 @@
         voiceMsgBody.tag = 106;
         [cell.contentView addSubview:voiceMsgBody];
         voiceMsgBody.animationDuration = 0.7;
+//        gesture = [[UITapGestureRecognizer alloc] initWithTarget:cell
+//                                                          action:@selector(tapVoiceHandle:)];
+//        [gesture requireGestureRecognizerToFail:longPressGes];
+//        voiceMsgBody.userInteractionEnabled = YES;
+//        [voiceMsgBody addGestureRecognizer:gesture];
         
         UILabel* labAudioDuration = [[UILabel alloc] initWithFrame:CGRectNull];
         labAudioDuration.tag = 107;
@@ -192,6 +206,8 @@
         labAudioDuration.backgroundColor = [UIColor clearColor];
         labAudioDuration.textColor = [UIColor grayColor];
         labAudioDuration.font = [UIFont systemFontOfSize:12.0];
+    
+        cell.delegate = self;
     }
     
     UIImageView* imgBubbleBg = (UIImageView*)[cell.contentView viewWithTag:100];
@@ -206,7 +222,7 @@
     CSKuleTopicMsg* msg = [_topicMsgList objectAtIndex:indexPath.row];
     cell.msg = msg;
     
-    CGSize msgBodySize = [self textSize:msg.content];
+    CGSize msgBodySize = [CSKuleChatingTableCell textSize:msg.content];
     NSString* timestampString = [[NSDate dateWithTimeIntervalSince1970:msg.timestamp] isoDateTimeString];
     labMsgTimestamp.frame = CGRectMake(40, 0, 320-40-40, 12);
     labMsgTimestamp.text = timestampString;
@@ -398,67 +414,11 @@
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     CSKuleTopicMsg* msg = [_topicMsgList objectAtIndex:indexPath.row];
-    CGFloat height = 0.0;
-    if (msg.media.url.length > 0) {
-        if ([msg.media.type isEqualToString:@"voice"]) {
-            height = 65;
-        }
-        else {
-            height = 95;
-        }
-    }
-    else {
-        CGSize sz = [self textSize:msg.content];
-        height = sz.height + 35;
-        height = MAX(height, 60);
-    }
-    
-    height += 12; // sender name;
-    
+    CGFloat height = [CSKuleChatingTableCell calcHeightForMsg:msg];
     return height;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    CSKuleTopicMsg* msg = [_topicMsgList objectAtIndex:indexPath.row];
-    if ([msg.media.type isEqualToString:@"voice"]) {
-        
-        NSMutableSet* updateIndexPaths = [NSMutableSet set];
-        
-        if (self.playingMsg != nil) {
-            NSUInteger index = [_topicMsgList indexOfObject:self.playingMsg];
-            if (index != NSNotFound) {
-                [updateIndexPaths addObject:[NSIndexPath indexPathForItem:index inSection:0]];
-            }
-            _audioPlayer.delegate = nil;
-            [_audioPlayer stop];
-        }
-        
-        self.playingMsg = msg;
-        [updateIndexPaths addObject:indexPath];
-        [tableView reloadRowsAtIndexPaths:[updateIndexPaths allObjects]
-                         withRowAnimation:UITableViewRowAnimationNone];
-        
-        if (self.playingMsg != nil) {
-            NSData* waveData = [_voiceCache dataForKey:msg.media.url.MD5Hash];
-            if (waveData == nil) {
-                NSURL* voiceUrl = [NSURL URLWithString:msg.media.url];
-                NSData* amrData = [NSData dataWithContentsOfURL:voiceUrl];
-                
-                waveData = DecodeAMRToWAVE(amrData);
-                [_voiceCache storeData:waveData forKey:msg.media.url.MD5Hash];
-            }
-            
-            NSError* error = nil;
-            _audioPlayer = [[AVAudioPlayer alloc] initWithData:waveData error:&error];
-            if (error) {
-                CSLog(@"ERROR: %@", error);
-            }
-            else {
-                _audioPlayer.delegate = self;
-                [_audioPlayer play];
-            }
-        }
-    }
 }
 
 #pragma mark - PullTableViewDelegate
@@ -760,17 +720,6 @@
                                        failure:failureHandler];
 }
 
-- (CGSize)textSize:(NSString*)text {
-    CGSize sz = CGSizeMake(200.0, 999.0);
-    CGSize textSz = [text sizeWithFont:[UIFont systemFontOfSize:14.0]
-                     constrainedToSize:sz];
-    
-    textSz.width = MAX(textSz.width, 32);
-    textSz.height = MAX(textSz.height, 32);
-    
-    return textSz;
-}
-
 #pragma mark - Segues
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"segue.chatingEditor"]) {
@@ -855,6 +804,49 @@
         if (![_voiceCache existsDataForKey:msg.media.url.MD5Hash]) {
             CSKuleURLDownloader* dn = [CSKuleURLDownloader URLDownloader:[NSURL URLWithString:msg.media.url]];
             [dn start];
+        }
+    }
+}
+
+#pragma mark - CSKuleChatingTableCellDelegate
+- (void)chatingTableCell:(CSKuleChatingTableCell*)cell playVoice:(CSKuleTopicMsg*)msg {
+    if ([msg.media.type isEqualToString:@"voice"]) {
+        NSIndexPath* indexPath = [self.tableview indexPathForCell:cell];
+        NSMutableSet* updateIndexPaths = [NSMutableSet set];
+        
+        if (self.playingMsg != nil) {
+            NSUInteger index = [_topicMsgList indexOfObject:self.playingMsg];
+            if (index != NSNotFound) {
+                [updateIndexPaths addObject:[NSIndexPath indexPathForItem:index inSection:0]];
+            }
+            _audioPlayer.delegate = nil;
+            [_audioPlayer stop];
+        }
+        
+        self.playingMsg = msg;
+        [updateIndexPaths addObject:indexPath];
+        [self.tableview reloadRowsAtIndexPaths:[updateIndexPaths allObjects]
+                         withRowAnimation:UITableViewRowAnimationNone];
+        
+        if (self.playingMsg != nil) {
+            NSData* waveData = [_voiceCache dataForKey:msg.media.url.MD5Hash];
+            if (waveData == nil) {
+                NSURL* voiceUrl = [NSURL URLWithString:msg.media.url];
+                NSData* amrData = [NSData dataWithContentsOfURL:voiceUrl];
+                
+                waveData = DecodeAMRToWAVE(amrData);
+                [_voiceCache storeData:waveData forKey:msg.media.url.MD5Hash];
+            }
+            
+            NSError* error = nil;
+            _audioPlayer = [[AVAudioPlayer alloc] initWithData:waveData error:&error];
+            if (error) {
+                CSLog(@"ERROR: %@", error);
+            }
+            else {
+                _audioPlayer.delegate = self;
+                [_audioPlayer play];
+            }
         }
     }
 }

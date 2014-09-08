@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CSKuleVideoMember.h"
 
 @interface CSKuleCCTVMainTableViewController : UITableViewController
+
+@property (nonatomic, strong) CSKuleVideoMember* videoMember;
 
 @end

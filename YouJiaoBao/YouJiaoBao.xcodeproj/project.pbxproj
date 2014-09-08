@@ -313,7 +313,6 @@
 		098E4022198B635400CB4F0B /* settings-row-bg-mid@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 098E3F5E198B635300CB4F0B /* settings-row-bg-mid@2x.png */; };
 		098E4023198B635400CB4F0B /* settings-row-bg-top.png in Resources */ = {isa = PBXBuildFile; fileRef = 098E3F5F198B635300CB4F0B /* settings-row-bg-top.png */; };
 		098E4024198B635400CB4F0B /* settings-row-bg-top@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 098E3F60198B635300CB4F0B /* settings-row-bg-top@2x.png */; };
-		098E4025198B635400CB4F0B /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = 098E3F61198B635300CB4F0B /* star.png */; };
 		098E4026198B635400CB4F0B /* star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 098E3F62198B635300CB4F0B /* star@2x.png */; };
 		098E4027198B635400CB4F0B /* tips-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 098E3F63198B635300CB4F0B /* tips-bg.png */; };
 		098E4028198B635400CB4F0B /* tips-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 098E3F64198B635400CB4F0B /* tips-bg@2x.png */; };
@@ -732,7 +731,6 @@
 		098E3F5E198B635300CB4F0B /* settings-row-bg-mid@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings-row-bg-mid@2x.png"; sourceTree = "<group>"; };
 		098E3F5F198B635300CB4F0B /* settings-row-bg-top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings-row-bg-top.png"; sourceTree = "<group>"; };
 		098E3F60198B635300CB4F0B /* settings-row-bg-top@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings-row-bg-top@2x.png"; sourceTree = "<group>"; };
-		098E3F61198B635300CB4F0B /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star.png; sourceTree = "<group>"; };
 		098E3F62198B635300CB4F0B /* star@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star@2x.png"; sourceTree = "<group>"; };
 		098E3F63198B635300CB4F0B /* tips-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tips-bg.png"; sourceTree = "<group>"; };
 		098E3F64198B635400CB4F0B /* tips-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tips-bg@2x.png"; sourceTree = "<group>"; };
@@ -1383,7 +1381,6 @@
 				098E3F5E198B635300CB4F0B /* settings-row-bg-mid@2x.png */,
 				098E3F5F198B635300CB4F0B /* settings-row-bg-top.png */,
 				098E3F60198B635300CB4F0B /* settings-row-bg-top@2x.png */,
-				098E3F61198B635300CB4F0B /* star.png */,
 				098E3F62198B635300CB4F0B /* star@2x.png */,
 				098E3F63198B635300CB4F0B /* tips-bg.png */,
 				098E3F64198B635400CB4F0B /* tips-bg@2x.png */,
@@ -1924,7 +1921,6 @@
 				098E3E97198B314500CB4F0B /* write_chat.png in Resources */,
 				098E3F9A198B635400CB4F0B /* btn-func-1@2x.png in Resources */,
 				098E3F71198B635400CB4F0B /* arrow-left-1.png in Resources */,
-				098E4025198B635400CB4F0B /* star.png in Resources */,
 				098E3E58198B314500CB4F0B /* default_icon.png in Resources */,
 				098E3FC1198B635400CB4F0B /* chating-picture.png in Resources */,
 				098E3E93198B314500CB4F0B /* text_normal.9.png in Resources */,
@@ -2270,7 +2266,7 @@
 					"$(PROJECT_DIR)/Venders/opencore-amr-0.1.3/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ab012dde-8a23-42d1-9157-45d690f64eae";
+				PROVISIONING_PROFILE = "d43c0800-766a-46fa-9e9d-6ce9425e2801";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2280,8 +2276,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Xinus Wang (MH48YP79V6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xinus Wang (MH48YP79V6)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Chengdu Cocobabys Information Technology Co., Ltd. (J7M2ZSPTSZ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Chengdu Cocobabys Information Technology Co., Ltd. (J7M2ZSPTSZ)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "YouJiaoBao/YouJiaoBao-Prefix.pch";
 				INFOPLIST_FILE = "YouJiaoBao/YouJiaoBao-Info.plist";
@@ -2291,7 +2287,7 @@
 					"$(PROJECT_DIR)/Venders/opencore-amr-0.1.3/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "151defbb-c956-46bc-9b5e-a6c19b15e403";
+				PROVISIONING_PROFILE = "d6abce80-e463-478e-a3d4-8ebd108b4394";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -235,4 +235,13 @@
                                success:(SuccessResponseHandler)success
                                failure:(FailureResponseHandler)failure;
 
+- (void)reqGetVideoMemberListOfKindergarten:(NSInteger)kindergarten
+                                    success:(SuccessResponseHandler)success
+                                    failure:(FailureResponseHandler)failure;
+
+- (void)reqGetVideoMemberOfKindergarten:(NSInteger)kindergarten
+                           withParentId:(NSString*)parentId
+                                success:(SuccessResponseHandler)success
+                                failure:(FailureResponseHandler)failure;
+
 @end

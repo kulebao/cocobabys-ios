@@ -802,4 +802,27 @@
     return obj;
 }
 
++ (CSKuleVideoMember*)decodeVideoMember:(NSDictionary*)dataJson {
+    /*
+     {"id":"2_2088_1404306110633",
+     "password":"dev_env_password",
+     "account":"0758B3F3CD5F947A9120135C72EB115F",
+     "school_id":2088},
+     */
+    NSParameterAssert(dataJson);
+    
+    NSString* uid = [dataJson valueForKeyNotNull:@"id"];
+    NSString* account = [dataJson valueForKeyNotNull:@"account"];
+    NSInteger school_id = [[dataJson valueForKeyNotNull:@"school_id"] integerValue];
+    NSString* password = [dataJson valueForKeyNotNull:@"password"];
+    
+    CSKuleVideoMember* obj = [CSKuleVideoMember new];
+    obj.uid = uid;
+    obj.password = password;
+    obj.account = account;
+    obj.schoolId = school_id;
+    
+    return obj;
+}
+
 @end

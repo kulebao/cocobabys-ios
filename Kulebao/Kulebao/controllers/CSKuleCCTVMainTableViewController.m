@@ -26,6 +26,7 @@
 @end
 
 @implementation CSKuleCCTVMainTableViewController
+@synthesize videoMember = _videoMember;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -186,10 +187,23 @@
     serverinfo.hard_ver = "iPhone";
     serverinfo.soft_ver = "1.3";
     serverinfo.plat_type = "ios";
-    serverinfo.user = "2222";
-    serverinfo.password = "6yWw2D";
+//    serverinfo.user = "2222";
+//    serverinfo.password = "6yWw2D";
     
-    pchar err = "";
+    /*
+     账号为 cocbaby  , 密码为 13880498549
+     测试账号：2222   测试密码：6yWw2D
+     */
+    
+    char account[128] = {0};
+    char password[128] = {0};
+    
+    [_videoMember.account getCString:account maxLength:128 encoding:NSUTF8StringEncoding];
+    [_videoMember.password getCString:password maxLength:128 encoding:NSUTF8StringEncoding];
+    serverinfo.user = account;
+    serverinfo.password = password;
+    
+    char err[128] = {0};
     
     [gApp waitingAlert:@"连接服务器"];
     // step 1: Connect the server.
@@ -198,7 +212,8 @@
         [self performSelector:@selector(hmGetDeviceList) withObject:nil afterDelay:0];
         
     }else{
-        [gApp alert:[NSString stringWithFormat:@"连接失败(%d)", result]];
+        NSString* errorString = [[NSString alloc] initWithCString:err encoding:NSUTF8StringEncoding];
+        [gApp alert:[NSString stringWithFormat:@"连接失败(%d): %@", result, errorString]];
     }
     
     return result;

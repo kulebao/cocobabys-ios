@@ -25,6 +25,7 @@
 		0904454D18F515BC005D01EA /* img-placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0904454B18F515BC005D01EA /* img-placeholder@2x.png */; };
 		0904456418F5204E005D01EA /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 0904455A18F5204E005D01EA /* iTunesArtwork */; };
 		0904456518F5204E005D01EA /* iTunesArtwork@2x in Resources */ = {isa = PBXBuildFile; fileRef = 0904455B18F5204E005D01EA /* iTunesArtwork@2x */; };
+		0904553219BDB8CA00FEF2C9 /* CSKuleVideoMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 0904553119BDB8CA00FEF2C9 /* CSKuleVideoMember.m */; };
 		090468F518C6FE1000D0846E /* CSKuleBindInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 090468F418C6FE1000D0846E /* CSKuleBindInfo.m */; };
 		090468FA18C7007600D0846E /* input-bg-0.png in Resources */ = {isa = PBXBuildFile; fileRef = 090468F818C7007500D0846E /* input-bg-0.png */; };
 		090468FB18C7007600D0846E /* input-bg-0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 090468F918C7007600D0846E /* input-bg-0@2x.png */; };
@@ -626,6 +627,8 @@
 		0904454F18F51C70005D01EA /* BPushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BPushConfig.plist; sourceTree = "<group>"; };
 		0904455A18F5204E005D01EA /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		0904455B18F5204E005D01EA /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iTunesArtwork@2x"; sourceTree = "<group>"; };
+		0904553019BDB8CA00FEF2C9 /* CSKuleVideoMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleVideoMember.h; sourceTree = "<group>"; };
+		0904553119BDB8CA00FEF2C9 /* CSKuleVideoMember.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleVideoMember.m; sourceTree = "<group>"; };
 		090468F318C6FE1000D0846E /* CSKuleBindInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleBindInfo.h; sourceTree = "<group>"; };
 		090468F418C6FE1000D0846E /* CSKuleBindInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleBindInfo.m; sourceTree = "<group>"; };
 		090468F818C7007500D0846E /* input-bg-0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "input-bg-0.png"; sourceTree = "<group>"; };
@@ -1827,6 +1830,8 @@
 				0919B7721929D41900810556 /* CSKuleTopicMsg.m */,
 				09FFB5EF18D6B2E100F07B0A /* CSKuleWeekScheduleInfo.h */,
 				09FFB5F018D6B2E100F07B0A /* CSKuleWeekScheduleInfo.m */,
+				0904553019BDB8CA00FEF2C9 /* CSKuleVideoMember.h */,
+				0904553119BDB8CA00FEF2C9 /* CSKuleVideoMember.m */,
 				093CD69518D974930025972C /* Interpreter */,
 			);
 			path = models;
@@ -3219,6 +3224,7 @@
 				09BA1BFD18BB334900760182 /* Base64.m in Sources */,
 				09FFB5F118D6B2E100F07B0A /* CSKuleWeekScheduleInfo.m in Sources */,
 				0901207219338B3800CE506E /* UIImage+CSExtends.m in Sources */,
+				0904553219BDB8CA00FEF2C9 /* CSKuleVideoMember.m in Sources */,
 				090FC122199B3FC300C3A31A /* PaintingView.m in Sources */,
 				091AE82F18D820C800EBC927 /* UIColor+expanded.m in Sources */,
 				09142DD118E27E7600E5848F /* ALAlertBanner.m in Sources */,
@@ -3532,7 +3538,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = youlebao;
-				PROVISIONING_PROFILE = "ab012dde-8a23-42d1-9157-45d690f64eae";
+				PROVISIONING_PROFILE = "7264b2e5-db0d-4866-bf34-cc4176fb75fe";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
@@ -3563,7 +3569,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = youlebao;
-				PROVISIONING_PROFILE = "9a2f3739-1d29-4c60-a3bb-8b434ed3a2c1";
+				PROVISIONING_PROFILE = "8c24eace-17fa-47e0-9450-bbdea4c23186";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;

@@ -18,6 +18,8 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import "UIImage+CSExtends.h"
 #import "UIImageView+WebCache.h"
+#import "CSKuleVideoMember.h"
+#import "CSKuleCCTVMainTableViewController.h"
 
 @interface CSKuleMainViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
     UIImagePickerController* _imgPicker;
@@ -37,6 +39,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnSchoolInfo;
 
 @property (nonatomic, strong) CSKuleSchoolInfo* schoolInfo;
+@property (nonatomic, strong) CSKuleVideoMember* videoMember;
 
 - (IBAction)onBtnShowChildMenuListClicked:(id)sender;
 - (IBAction)onBtnSettingsClicked:(id)sender;
@@ -47,6 +50,7 @@
 
 @implementation CSKuleMainViewController
 @synthesize schoolInfo = _schoolInfo;
+@synthesize videoMember = _videoMember;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -149,6 +153,8 @@
                 [gApp.engine checkUpdatesOfAssignment];
                 [gApp.engine checkUpdatesOfChating];
                 [gApp.engine checkUpdatesOfAssess];
+                
+                [self performSelector:@selector(reloadVideoMember) withObject:nil afterDelay:0];
             }
         }
     }
@@ -250,6 +256,10 @@
     if ([segue.identifier isEqualToString:@"segue.aboutschool"]) {
         CSKuleAboutSchoolViewController* destCtrl = segue.destinationViewController;
         destCtrl.schoolInfo = _schoolInfo;
+    }
+    else if ([segue.identifier isEqualToString:@"segue.cctv"]) {
+        CSKuleCCTVMainTableViewController* destCtrl = segue.destinationViewController;
+        destCtrl.videoMember = self.videoMember;
     }
 }
 
@@ -672,8 +682,6 @@
     
     if (moduleType < kKuleModuleSize && moduleType < sizeof(segueNames)) {
         if ([self checkModuleTypeForMemberStatus:moduleType]) {
-            [self performSegueWithIdentifier:segueNames[moduleType] sender:nil];
-            
             switch (moduleType) {
                 case kKuleModuleNews:
                     gApp.engine.badgeOfNews = 0;
@@ -696,15 +704,25 @@
                 case kKuleModuleAssess:
                     gApp.engine.badgeOfAssess = 0;
                     break;
+                case kKuleModuleCCTV: {
+                    if (self.videoMember.account.length > 0
+                        && self.videoMember.password.length > 0) {
+                    }
+                    else {
+                        [self performSelector:@selector(reloadVideoMember) withObject:nil afterDelay:0];
+                        return;
+                    }
+                    break;
+                }
                 default:
                     break;
             }
+            
+            [self performSegueWithIdentifier:segueNames[moduleType] sender:nil];
         }
         else {
             [gApp alert:@"升级为付费用户可使用完整功能^_^"];
         }
-        //        JSBadgeView *badgeView = _badges[moduleType];
-        //        badgeView.badgeText = nil;
     }
 }
 
@@ -758,6 +776,22 @@
                            inKindergarten:gApp.engine.loginInfo.schoolId
                                   success:sucessHandler
                                   failure:failureHandler];
+}
+
+- (void)reloadVideoMember {
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+        self.videoMember = [CSKuleInterpreter decodeVideoMember:dataJson];
+    };
+    
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        CSLog(@"failure:%@", error);
+        [gApp alert:[error localizedDescription]];
+    };
+    
+    [gApp.engine reqGetVideoMemberOfKindergarten:gApp.engine.loginInfo.schoolId
+                                    withParentId:gApp.engine.currentRelationship.parent.parentId
+                                         success:sucessHandler
+                                         failure:failureHandler];
 }
 
 //- (void)getEmployeeInfos {

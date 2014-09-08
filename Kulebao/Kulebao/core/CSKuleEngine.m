@@ -1521,4 +1521,35 @@
                                failure:failure];
 }
 
+- (void)reqGetVideoMemberListOfKindergarten:(NSInteger)kindergarten
+                                    success:(SuccessResponseHandler)success
+                                    failure:(FailureResponseHandler)failure {
+    
+    NSString* path = [NSString stringWithFormat:kGetVideoMemberListPath, @(kindergarten)];
+    NSString* method = @"GET";
+    NSMutableDictionary* parameters = nil;
+    
+    [_httpClient httpRequestWithMethod:method
+                                  path:path
+                            parameters:parameters
+                               success:success
+                               failure:failure];
+    
+}
+
+- (void)reqGetVideoMemberOfKindergarten:(NSInteger)kindergarten
+                           withParentId:(NSString*)parentId
+                                success:(SuccessResponseHandler)success
+                                failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kGetVideoMemberPath, @(kindergarten), parentId];
+    NSString* method = @"GET";
+    NSMutableDictionary* parameters = nil;
+    
+    [_httpClient httpRequestWithMethod:method
+                                  path:path
+                            parameters:parameters
+                               success:success
+                               failure:failure];
+}
+
 @end

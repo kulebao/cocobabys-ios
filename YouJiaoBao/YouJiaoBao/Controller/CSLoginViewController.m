@@ -10,6 +10,7 @@
 #import "CSHttpClient.h"
 #import "EntityLoginInfoHelper.h"
 #import "CSEngine.h"
+#import "CSAppDelegate.h"
 
 @interface CSLoginViewController () {
     ModelAccount* _loginAccount;
@@ -40,10 +41,12 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"header.png"] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{UITextAttributeFont: [UIFont systemFontOfSize:20], UITextAttributeTextColor:[UIColor whiteColor]}];
     
     self.labNote.text = nil;
     self.fieldUsername.text = @"wx001";
-    self.fieldPassword.text = @"18782242007";
+    self.fieldPassword.text = @"123456";
 }
 
 - (void)didReceiveMemoryWarning
@@ -84,22 +87,24 @@
         id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
             EntityLoginInfo* loginInfo = [EntityLoginInfoHelper updateEntity:responseObject];
             if (loginInfo != nil) {
-                
+                [gApp alert:@"登录成功"];
                 [[CSEngine sharedInstance] encryptAccount:_loginAccount];
-                
                 [[NSNotificationCenter defaultCenter] postNotificationName:kNotiLoginSuccess object:loginInfo userInfo:nil];
             }
             else {
-                self.labNote.text = @"用户名或密码错误";
+//                self.labNote.text = @"用户名或密码错误";
+                [gApp alert:@"用户名或密码错误"];
             }
         };
         
         id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
-            self.labNote.text = @"用户名或密码错误";
+//            self.labNote.text = @"用户名或密码错误";
+            [gApp alert:@"用户名或密码错误"];
         };
         
         _loginAccount = [ModelAccount accountWithUsername:username andPswd:password];
         
+        [gApp waitingAlert:@"请稍候" withTitle:@"登录中"];
         [http opLoginWithUsername:username
                          password:password
                           success:success

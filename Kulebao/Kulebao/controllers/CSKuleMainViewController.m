@@ -721,7 +721,7 @@
             [self performSegueWithIdentifier:segueNames[moduleType] sender:nil];
         }
         else {
-            [gApp alert:@"升级为付费用户可使用完整功能^_^"];
+            [gApp alert:@"权限不足，请联系幼儿园开通权限，谢谢。"];
         }
     }
 }

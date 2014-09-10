@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
+#import "EntityLoginInfo.h"
+
+typedef void (^SuccessResponseHandler) (AFHTTPRequestOperation *operation, id responseObject);
+typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSError *error);
 
 @interface CSHttpClient : NSObject
 
@@ -15,43 +19,54 @@
 
 - (AFHTTPRequestOperation*)opLoginWithUsername:(NSString*)username
                                       password:(NSString*)password
-                                       success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                                       failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+                                       success:(SuccessResponseHandler)success
+                                       failure:(FailureResponseHandler)failure;
 
 - (AFHTTPRequestOperation*)opGetClassListOfKindergarten:(NSInteger)schoolId
                                          withEmployeeId:(NSString*)employeePhone
-                                                success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                                                failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+                                                success:(SuccessResponseHandler)success
+                                                failure:(FailureResponseHandler)failure;
 
 - (AFHTTPRequestOperation*)opGetChildListOfKindergarten:(NSInteger)schoolId
                                           withClassList:(NSArray*)classIdList
-                                                success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                                                failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+                                                success:(SuccessResponseHandler)success
+                                                failure:(FailureResponseHandler)failure;
 
 - (AFHTTPRequestOperation*)opGetDailylogOfKindergarten:(NSInteger)schoolId
                                          withClassList:(NSArray*)classIdList
-                                               success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                                               failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+                                               success:(SuccessResponseHandler)success
+                                               failure:(FailureResponseHandler)failure;
 
 - (AFHTTPRequestOperation*)opGetRelationshipOfChild:(NSString*)childId
                                      inKindergarten:(NSInteger)schoolId
-                                            success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                                            failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+                                            success:(SuccessResponseHandler)success
+                                            failure:(FailureResponseHandler)failure;
 
 - (AFHTTPRequestOperation*)opGetNewsOfClasses:(NSArray*)classIdList
                                inKindergarten:(NSInteger)schoolId
                                          from:(NSNumber*)from
                                            to:(NSNumber*)to
                                          most:(NSNumber*)most
-                                      success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                                      failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+                                      success:(SuccessResponseHandler)success
+                                      failure:(FailureResponseHandler)failure;
 
 - (AFHTTPRequestOperation*)opGetAssignmentsOfClasses:(NSArray*)classIdList
                                       inKindergarten:(NSInteger)schoolId
                                                 from:(NSNumber*)from
                                                   to:(NSNumber*)to
                                                 most:(NSNumber*)most
-                                             success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                                             failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+                                             success:(SuccessResponseHandler)success
+                                             failure:(FailureResponseHandler)failure;
+
+- (AFHTTPRequestOperation*)opChangePassword:(NSString*)newPswd
+                                withOldPswd:(NSString*)oldPswd
+                                 forAccount:(EntityLoginInfo*)loginInfo
+                                    success:(SuccessResponseHandler)success
+                                    failure:(FailureResponseHandler)failure;
+
+- (AFHTTPRequestOperation*)opSendFeedback:(NSString*)account
+                              withContent:(NSString*)msgContent
+                                  success:(SuccessResponseHandler)success
+                                  failure:(FailureResponseHandler)failure;
 
 @end

@@ -10,6 +10,8 @@
 #import "AFNetworkActivityIndicatorManager.h"
 #import "CSCoreDataHelper.h"
 
+CSAppDelegate* gApp = nil;
+
 @implementation CSAppDelegate
 @synthesize hud = _hud;
 
@@ -17,6 +19,7 @@
 {
     // Override point for customization after application launch.
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
+    gApp = self;
     
     return YES;
 }

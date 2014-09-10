@@ -819,6 +819,8 @@
         NSIndexPath* indexPath = [self.tableview indexPathForCell:cell];
         NSMutableSet* updateIndexPaths = [NSMutableSet set];
         
+        BOOL theSame = [msg isEqual:self.playingMsg];
+        
         if (self.playingMsg != nil) {
             NSUInteger index = [_topicMsgList indexOfObject:self.playingMsg];
             if (index != NSNotFound) {
@@ -826,33 +828,38 @@
             }
             _audioPlayer.delegate = nil;
             [_audioPlayer stop];
+            
+            self.playingMsg = nil;
         }
         
-        self.playingMsg = msg;
+        if (!theSame) {
+            self.playingMsg = msg;
+            
+            if (self.playingMsg != nil) {
+                NSData* waveData = [_voiceCache dataForKey:msg.media.url.MD5Hash];
+                if (waveData == nil) {
+                    NSURL* voiceUrl = [NSURL URLWithString:msg.media.url];
+                    NSData* amrData = [NSData dataWithContentsOfURL:voiceUrl];
+                    
+                    waveData = DecodeAMRToWAVE(amrData);
+                    [_voiceCache storeData:waveData forKey:msg.media.url.MD5Hash];
+                }
+                
+                NSError* error = nil;
+                _audioPlayer = [[AVAudioPlayer alloc] initWithData:waveData error:&error];
+                if (error) {
+                    CSLog(@"ERROR: %@", error);
+                }
+                else {
+                    _audioPlayer.delegate = self;
+                    [_audioPlayer play];
+                }
+            }
+        }
+        
         [updateIndexPaths addObject:indexPath];
         [self.tableview reloadRowsAtIndexPaths:[updateIndexPaths allObjects]
-                         withRowAnimation:UITableViewRowAnimationNone];
-        
-        if (self.playingMsg != nil) {
-            NSData* waveData = [_voiceCache dataForKey:msg.media.url.MD5Hash];
-            if (waveData == nil) {
-                NSURL* voiceUrl = [NSURL URLWithString:msg.media.url];
-                NSData* amrData = [NSData dataWithContentsOfURL:voiceUrl];
-                
-                waveData = DecodeAMRToWAVE(amrData);
-                [_voiceCache storeData:waveData forKey:msg.media.url.MD5Hash];
-            }
-            
-            NSError* error = nil;
-            _audioPlayer = [[AVAudioPlayer alloc] initWithData:waveData error:&error];
-            if (error) {
-                CSLog(@"ERROR: %@", error);
-            }
-            else {
-                _audioPlayer.delegate = self;
-                [_audioPlayer play];
-            }
-        }
+                              withRowAnimation:UITableViewRowAnimationNone];
     }
 }
 

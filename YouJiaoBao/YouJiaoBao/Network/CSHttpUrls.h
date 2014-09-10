@@ -23,4 +23,10 @@
 #define kPathKindergartenNewsList       @"/kindergarten/%@/news"
 #define kPathKindergartenAssignmentList @"/kindergarten/%@/assignment"
 
+// PATH: 修改密码
+#define kChangePasswordPath             @"/kindergarten/%@/employee/%@/password"
+
+// PATH: 反馈
+#define kFeedbackPath               @"/feedback"
+
 #endif

@@ -15,6 +15,14 @@
 		0907CE56198FD3B300B13202 /* EntityChildInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0907CE55198FD3B300B13202 /* EntityChildInfo.m */; };
 		090C639619939D5500398B40 /* CSChildProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 090C639519939D5500398B40 /* CSChildProfileViewController.m */; };
 		090C63991993A0D400398B40 /* CSChildProfileHeaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 090C63981993A0D400398B40 /* CSChildProfileHeaderViewController.m */; };
+		091760F319C09070006FE2FB /* CSKuleAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 091760F219C09070006FE2FB /* CSKuleAboutViewController.m */; };
+		091760F619C0909A006FE2FB /* about-us-text-giraffe.txt in Resources */ = {isa = PBXBuildFile; fileRef = 091760F519C0909A006FE2FB /* about-us-text-giraffe.txt */; };
+		091760FE19C091B4006FE2FB /* FTCoreTextStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 091760F919C091B4006FE2FB /* FTCoreTextStyle.m */; };
+		091760FF19C091B4006FE2FB /* FTCoreTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 091760FB19C091B4006FE2FB /* FTCoreTextView.m */; };
+		0917610419C093CA006FE2FB /* CSKuleFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0917610319C093CA006FE2FB /* CSKuleFeedbackViewController.m */; };
+		0917610719C093E5006FE2FB /* CSKuleChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0917610619C093E5006FE2FB /* CSKuleChangePasswordViewController.m */; };
+		0917610A19C095D0006FE2FB /* NSString+CSKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 0917610919C095D0006FE2FB /* NSString+CSKit.m */; };
+		0917610D19C09873006FE2FB /* NSDictionary+CSKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 0917610C19C09873006FE2FB /* NSDictionary+CSKit.m */; };
 		09327E2A1992233B0089C653 /* CSChildListItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09327E291992233A0089C653 /* CSChildListItemTableViewCell.m */; };
 		0956E386198151810049202E /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0956E375198151810049202E /* libopencore-amrnb.a */; };
 		0956E38D198151810049202E /* libopencore-amrwb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0956E37C198151810049202E /* libopencore-amrwb.a */; };
@@ -421,6 +429,23 @@
 		090C639519939D5500398B40 /* CSChildProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSChildProfileViewController.m; sourceTree = "<group>"; };
 		090C63971993A0D400398B40 /* CSChildProfileHeaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSChildProfileHeaderViewController.h; sourceTree = "<group>"; };
 		090C63981993A0D400398B40 /* CSChildProfileHeaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSChildProfileHeaderViewController.m; sourceTree = "<group>"; };
+		091760F119C09070006FE2FB /* CSKuleAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleAboutViewController.h; sourceTree = "<group>"; };
+		091760F219C09070006FE2FB /* CSKuleAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleAboutViewController.m; sourceTree = "<group>"; };
+		091760F519C0909A006FE2FB /* about-us-text-giraffe.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "about-us-text-giraffe.txt"; sourceTree = "<group>"; };
+		091760F819C091B4006FE2FB /* FTCoreTextStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCoreTextStyle.h; sourceTree = "<group>"; };
+		091760F919C091B4006FE2FB /* FTCoreTextStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCoreTextStyle.m; sourceTree = "<group>"; };
+		091760FA19C091B4006FE2FB /* FTCoreTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCoreTextView.h; sourceTree = "<group>"; };
+		091760FB19C091B4006FE2FB /* FTCoreTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCoreTextView.m; sourceTree = "<group>"; };
+		091760FC19C091B4006FE2FB /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		091760FD19C091B4006FE2FB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		0917610219C093CA006FE2FB /* CSKuleFeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleFeedbackViewController.h; sourceTree = "<group>"; };
+		0917610319C093CA006FE2FB /* CSKuleFeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleFeedbackViewController.m; sourceTree = "<group>"; };
+		0917610519C093E5006FE2FB /* CSKuleChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleChangePasswordViewController.h; sourceTree = "<group>"; };
+		0917610619C093E5006FE2FB /* CSKuleChangePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleChangePasswordViewController.m; sourceTree = "<group>"; };
+		0917610819C095D0006FE2FB /* NSString+CSKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CSKit.h"; sourceTree = "<group>"; };
+		0917610919C095D0006FE2FB /* NSString+CSKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CSKit.m"; sourceTree = "<group>"; };
+		0917610B19C09873006FE2FB /* NSDictionary+CSKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+CSKit.h"; sourceTree = "<group>"; };
+		0917610C19C09873006FE2FB /* NSDictionary+CSKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+CSKit.m"; sourceTree = "<group>"; };
 		09327E281992233A0089C653 /* CSChildListItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSChildListItemTableViewCell.h; sourceTree = "<group>"; };
 		09327E291992233A0089C653 /* CSChildListItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSChildListItemTableViewCell.m; sourceTree = "<group>"; };
 		0956E36F198151810049202E /* interf_dec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interf_dec.h; sourceTree = "<group>"; };
@@ -939,6 +964,27 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		091760F419C0909A006FE2FB /* texts */ = {
+			isa = PBXGroup;
+			children = (
+				091760F519C0909A006FE2FB /* about-us-text-giraffe.txt */,
+			);
+			path = texts;
+			sourceTree = "<group>";
+		};
+		091760F719C091B4006FE2FB /* FTCoreText */ = {
+			isa = PBXGroup;
+			children = (
+				091760F819C091B4006FE2FB /* FTCoreTextStyle.h */,
+				091760F919C091B4006FE2FB /* FTCoreTextStyle.m */,
+				091760FA19C091B4006FE2FB /* FTCoreTextView.h */,
+				091760FB19C091B4006FE2FB /* FTCoreTextView.m */,
+				091760FC19C091B4006FE2FB /* LICENSE */,
+				091760FD19C091B4006FE2FB /* README.md */,
+			);
+			path = FTCoreText;
+			sourceTree = "<group>";
+		};
 		0956E36C198151810049202E /* opencore-amr-0.1.3 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1067,6 +1113,7 @@
 		095F13B91967CC9D008CF3BE /* Venders */ = {
 			isa = PBXGroup;
 			children = (
+				091760F719C091B4006FE2FB /* FTCoreText */,
 				09F74CD31997D137001555D0 /* Amr */,
 				098E4038198B798F00CB4F0B /* EGOTableViewPullRefresh */,
 				098E404D198B799000CB4F0B /* JSBadgeView */,
@@ -1082,15 +1129,19 @@
 		098E3DE0198B268500CB4F0B /* CSKit */ = {
 			isa = PBXGroup;
 			children = (
-				09FE720819965F14002E3ED4 /* UIWebView+CSKit.h */,
-				09FE720919965F14002E3ED4 /* UIWebView+CSKit.m */,
-				098E3E9F198B35DC00CB4F0B /* CSKit.pch */,
-				098E4035198B6B3A00CB4F0B /* UIViewController+CSKit.h */,
-				098E4036198B6B3A00CB4F0B /* UIViewController+CSKit.m */,
-				098E3EA0198B35DC00CB4F0B /* UIImage+CSKit.h */,
-				098E3EA1198B35DC00CB4F0B /* UIImage+CSKit.m */,
 				098E3E9C198B31AC00CB4F0B /* CSCoreDataHelper.h */,
 				098E3E9D198B31AC00CB4F0B /* CSCoreDataHelper.m */,
+				098E3E9F198B35DC00CB4F0B /* CSKit.pch */,
+				0917610B19C09873006FE2FB /* NSDictionary+CSKit.h */,
+				0917610C19C09873006FE2FB /* NSDictionary+CSKit.m */,
+				0917610819C095D0006FE2FB /* NSString+CSKit.h */,
+				0917610919C095D0006FE2FB /* NSString+CSKit.m */,
+				098E3EA0198B35DC00CB4F0B /* UIImage+CSKit.h */,
+				098E3EA1198B35DC00CB4F0B /* UIImage+CSKit.m */,
+				098E4035198B6B3A00CB4F0B /* UIViewController+CSKit.h */,
+				098E4036198B6B3A00CB4F0B /* UIViewController+CSKit.m */,
+				09FE720819965F14002E3ED4 /* UIWebView+CSKit.h */,
+				09FE720919965F14002E3ED4 /* UIWebView+CSKit.m */,
 			);
 			path = CSKit;
 			sourceTree = "<group>";
@@ -1638,6 +1689,12 @@
 				098E4033198B6A0500CB4F0B /* CSSettingsViewController.m */,
 				09CD667C197C153C00CC08F1 /* CSStudentListMainTableViewController.h */,
 				09CD667D197C153C00CC08F1 /* CSStudentListMainTableViewController.m */,
+				091760F119C09070006FE2FB /* CSKuleAboutViewController.h */,
+				091760F219C09070006FE2FB /* CSKuleAboutViewController.m */,
+				0917610219C093CA006FE2FB /* CSKuleFeedbackViewController.h */,
+				0917610319C093CA006FE2FB /* CSKuleFeedbackViewController.m */,
+				0917610519C093E5006FE2FB /* CSKuleChangePasswordViewController.h */,
+				0917610619C093E5006FE2FB /* CSKuleChangePasswordViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1645,6 +1702,7 @@
 		09CD6674197C112100CC08F1 /* Res */ = {
 			isa = PBXGroup;
 			children = (
+				091760F419C0909A006FE2FB /* texts */,
 				098E3DE3198B314400CB4F0B /* v1 */,
 				098E3EA6198B635200CB4F0B /* v2 */,
 			);
@@ -1920,6 +1978,7 @@
 				098E3E6D198B314500CB4F0B /* hw.png in Resources */,
 				098E3E97198B314500CB4F0B /* write_chat.png in Resources */,
 				098E3F9A198B635400CB4F0B /* btn-func-1@2x.png in Resources */,
+				091760F619C0909A006FE2FB /* about-us-text-giraffe.txt in Resources */,
 				098E3F71198B635400CB4F0B /* arrow-left-1.png in Resources */,
 				098E3E58198B314500CB4F0B /* default_icon.png in Resources */,
 				098E3FC1198B635400CB4F0B /* chating-picture.png in Resources */,
@@ -2069,9 +2128,12 @@
 				09C2D4F11969BCA000B8A895 /* UIProgressView+AFNetworking.m in Sources */,
 				09B431B61994BCE900FF4071 /* EntityRelationshipInfo.m in Sources */,
 				09CD667E197C153C00CC08F1 /* CSStudentListMainTableViewController.m in Sources */,
+				091760FF19C091B4006FE2FB /* FTCoreTextView.m in Sources */,
 				09F74C0A1997B214001555D0 /* CSAssignmentInfoDetailViewController.m in Sources */,
+				0917610A19C095D0006FE2FB /* NSString+CSKit.m in Sources */,
 				09078D79197D669C006E8756 /* EntityClassInfoHelper.m in Sources */,
 				09C2D4EE1969BCA000B8A895 /* UIAlertView+AFNetworking.m in Sources */,
+				0917610D19C09873006FE2FB /* NSDictionary+CSKit.m in Sources */,
 				09F74C071997B00D001555D0 /* CSAssignmentItemTableViewCell.m in Sources */,
 				098E407C198B799000CB4F0B /* TPKeyboardAvoidingTableView.m in Sources */,
 				098E407B198B799000CB4F0B /* TPKeyboardAvoidingScrollView.m in Sources */,
@@ -2088,6 +2150,7 @@
 				098E4083198B7ABC00CB4F0B /* CSGrowExpViewController.m in Sources */,
 				09CD6670197C0C2600CC08F1 /* CSRootViewController.m in Sources */,
 				09B431C01994D2BF00FF4071 /* CSChildRelationshipItemTableViewCell.m in Sources */,
+				091760F319C09070006FE2FB /* CSKuleAboutViewController.m in Sources */,
 				09CD6662197BFA6600CC08F1 /* EntityLoginInfoHelper.m in Sources */,
 				098E3E9E198B31AC00CB4F0B /* CSCoreDataHelper.m in Sources */,
 				09C2D4E81969BCA000B8A895 /* AFURLResponseSerialization.m in Sources */,
@@ -2099,6 +2162,7 @@
 				095F138A1967C30A008CF3BE /* CSAppDelegate.m in Sources */,
 				09FE720719965C66002E3ED4 /* CSNewsInfoDetailViewController.m in Sources */,
 				09F74C011997ACD8001555D0 /* EntityAssignmentInfoHelper.m in Sources */,
+				0917610419C093CA006FE2FB /* CSKuleFeedbackViewController.m in Sources */,
 				09C2D4ED1969BCA000B8A895 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				09FE720D199660D0002E3ED4 /* CSUtils.m in Sources */,
 				098E4076198B799000CB4F0B /* MBProgressHUD.m in Sources */,
@@ -2122,6 +2186,7 @@
 				09B431BD1994C1DC00FF4071 /* EntityParentInfoHelper.m in Sources */,
 				098E4071198B799000CB4F0B /* JSBadgeView.m in Sources */,
 				09078D76197D6673006E8756 /* EntityClassInfo.m in Sources */,
+				091760FE19C091B4006FE2FB /* FTCoreTextStyle.m in Sources */,
 				09C2D4E91969BCA000B8A895 /* AFURLSessionManager.m in Sources */,
 				095F13861967C30A008CF3BE /* main.m in Sources */,
 				09B431BA1994C1BF00FF4071 /* EntityRelationshipInfoHelper.m in Sources */,
@@ -2129,6 +2194,7 @@
 				098E4034198B6A0500CB4F0B /* CSSettingsViewController.m in Sources */,
 				09C2D4E31969BCA000B8A895 /* AFHTTPSessionManager.m in Sources */,
 				09C2D4F31969BCA000B8A895 /* UIWebView+AFNetworking.m in Sources */,
+				0917610719C093E5006FE2FB /* CSKuleChangePasswordViewController.m in Sources */,
 				09C2D4E41969BCA000B8A895 /* AFNetworkReachabilityManager.m in Sources */,
 				09C2D4F01969BCA000B8A895 /* UIImageView+AFNetworking.m in Sources */,
 				09C2D4E21969BCA000B8A895 /* AFHTTPRequestOperationManager.m in Sources */,

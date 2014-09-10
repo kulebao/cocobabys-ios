@@ -49,7 +49,7 @@ static NSString* kKeyTimestamps = @"com.cocobabys.Kulebao.Preferences.timestamps
     _deviceToken = [_config objectForKey:kKeyDeviceToken];
     _defaultUsername = [_config objectForKey:kKeyDefaultUsername];
     _guideShown = [[_config objectForKey:kKeyGuideShown] boolValue];
-    _enabledTest = YES;// [[_config objectForKey:@"enabled_test"] boolValue];
+    _enabledTest =  NO;//YES;// [[_config objectForKey:@"enabled_test"] boolValue];
     
     NSDictionary* loginInfoDict = [_config objectForKey:kKeyLoginInfo];
     CSKuleLoginInfo* loginInfo = [CSKuleLoginInfo new];

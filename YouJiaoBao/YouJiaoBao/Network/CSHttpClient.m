@@ -54,8 +54,8 @@
 
 - (AFHTTPRequestOperation*)opLoginWithUsername:(NSString*)username
                                       password:(NSString*)password
-                                       success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                                       failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+                                       success:(SuccessResponseHandler)success
+                                       failure:(FailureResponseHandler)failure {
     NSParameterAssert(username && password);
 
     id parameters = @{@"account_name": username,
@@ -71,8 +71,8 @@
 
 - (AFHTTPRequestOperation*)opGetClassListOfKindergarten:(NSInteger)schoolId
                                          withEmployeeId:(NSString*)employeePhone
-                                                success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                                                failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+                                                success:(SuccessResponseHandler)success
+                                                failure:(FailureResponseHandler)failure {
     NSParameterAssert(employeePhone);
     
     id parameters = @{@"connected" : @"true"};
@@ -89,8 +89,8 @@
 
 - (AFHTTPRequestOperation*)opGetChildListOfKindergarten:(NSInteger)schoolId
                                           withClassList:(NSArray*)classIdList
-                                                success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                                                failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+                                                success:(SuccessResponseHandler)success
+                                                failure:(FailureResponseHandler)failure {
     id parameters = @{@"class_id": [classIdList componentsJoinedByString:@","],
                       @"connected" : @"true"};
     
@@ -106,8 +106,8 @@
 
 - (AFHTTPRequestOperation*)opGetDailylogOfKindergarten:(NSInteger)schoolId
                                          withClassList:(NSArray*)classIdList
-                                               success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                                               failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+                                               success:(SuccessResponseHandler)success
+                                               failure:(FailureResponseHandler)failure {
     id parameters = @{@"class_id": [classIdList componentsJoinedByString:@","],
                       @"connected" : @"true"};
     
@@ -122,8 +122,8 @@
 
 - (AFHTTPRequestOperation*)opGetRelationshipOfChild:(NSString*)childId
                                      inKindergarten:(NSInteger)schoolId
-                                            success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                                            failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+                                            success:(SuccessResponseHandler)success
+                                            failure:(FailureResponseHandler)failure {
     id parameters = @{@"child": childId};
     
     NSString* apiUrl = [NSString stringWithFormat:kPathKindergartenRelationship, @(schoolId)];
@@ -141,8 +141,8 @@
                                          from:(NSNumber*)from
                                            to:(NSNumber*)to
                                          most:(NSNumber*)most
-                                      success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                                      failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+                                      success:(SuccessResponseHandler)success
+                                      failure:(FailureResponseHandler)failure {
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
     if (classIdList.count > 0) {
         [parameters setObject:[classIdList componentsJoinedByString:@","] forKey:@"class_id"];
@@ -174,8 +174,8 @@
                                                 from:(NSNumber*)from
                                                   to:(NSNumber*)to
                                                 most:(NSNumber*)most
-                                             success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                                             failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+                                             success:(SuccessResponseHandler)success
+                                             failure:(FailureResponseHandler)failure {
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
     if (classIdList.count > 0) {
         [parameters setObject:[classIdList componentsJoinedByString:@","] forKey:@"class_id"];
@@ -195,12 +195,57 @@
     
     NSString* apiUrl = [NSString stringWithFormat:kPathKindergartenAssignmentList, @(schoolId)];
     
-    AFHTTPRequestOperation* op =[self.opManager GET:apiUrl
-                                         parameters:parameters
-                                            success:success
-                                            failure:failure];
+    AFHTTPRequestOperation* op = [self.opManager GET:apiUrl
+                                          parameters:parameters
+                                             success:success
+                                             failure:failure];
     return op;
     
+}
+
+- (AFHTTPRequestOperation*)opChangePassword:(NSString*)newPswd
+                                withOldPswd:(NSString*)oldPswd
+                                 forAccount:(EntityLoginInfo*)loginInfo
+                                    success:(SuccessResponseHandler)success
+                                    failure:(FailureResponseHandler)failure {
+    NSParameterAssert(newPswd);
+    NSParameterAssert(oldPswd);
+    NSParameterAssert(loginInfo);
+    
+    NSString* apiUrl = [NSString stringWithFormat:kChangePasswordPath, loginInfo.schoolId, loginInfo.phone];
+    
+    NSDictionary* parameters = @{@"employee_id": loginInfo.uid,
+                                 @"school_id" : loginInfo.schoolId,
+                                 @"phone" : loginInfo.phone,
+                                 @"login_name" : loginInfo.loginName,
+                                 @"old_password": oldPswd,
+                                 @"new_password": newPswd};
+    
+    AFHTTPRequestOperation* op = [self.opManager POST:apiUrl
+                                           parameters:parameters
+                                              success:success
+                                              failure:failure];
+    return op;
+}
+
+- (AFHTTPRequestOperation*)opSendFeedback:(NSString*)account
+                              withContent:(NSString*)msgContent
+                                  success:(SuccessResponseHandler)success
+                                  failure:(FailureResponseHandler)failure {
+    NSParameterAssert(account);
+    NSParameterAssert(msgContent);
+    
+    NSString* apiUrl = kFeedbackPath;
+    
+    NSDictionary* parameters = @{@"phone": account,
+                                 @"content": msgContent,
+                                 @"source": @"ios_teacher"};
+    
+    AFHTTPRequestOperation* op = [self.opManager POST:apiUrl
+                                           parameters:parameters
+                                              success:success
+                                              failure:failure];
+    return op;
 }
 
 @end

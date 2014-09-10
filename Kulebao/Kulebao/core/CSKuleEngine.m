@@ -1372,7 +1372,8 @@
     NSString* method = @"POST";
     
     NSDictionary* parameters = @{@"phone": account,
-                                 @"content": msgContent};
+                                 @"content": msgContent,
+                                 @"source": @"ios_parent"};
     
     [_httpClient httpRequestWithMethod:method
                                   path:path

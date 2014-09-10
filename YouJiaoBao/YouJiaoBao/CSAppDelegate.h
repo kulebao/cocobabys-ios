@@ -28,3 +28,6 @@
 - (void)hideAlertAfterDelay:(NSTimeInterval)delay;
 
 @end
+
+
+extern CSAppDelegate* gApp;

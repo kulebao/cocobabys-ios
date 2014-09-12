@@ -26,6 +26,8 @@
     CSTextFieldDelegate* _nickFieldDelegate;
     NSMutableArray* _badges;
     NSArray* _moduleInfos;
+    
+    NSInteger _timesOfCCTV;
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *labSchoolName;
@@ -65,6 +67,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    _timesOfCCTV = 0;
+
     self.navigationController.navigationBarHidden = NO;
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"titlebar-1-bg.png"] forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setTitleTextAttributes:@{UITextAttributeFont: [UIFont systemFontOfSize:20], UITextAttributeTextColor:[UIColor whiteColor]}];
@@ -339,6 +343,7 @@
     CSKuleChildInfo* childInfo = gApp.engine.currentRelationship.child;
     if (childInfo) {
         CSLog(@"childInfo:%@", childInfo);
+         CSLog(@"parentInfo:%@", gApp.engine.currentRelationship.parent);
         self.labClassName.text = childInfo.className;
         self.labSchoolName.text = gApp.engine.loginInfo.schoolName;
         self.labChildNick.text = childInfo.displayNick;
@@ -649,9 +654,30 @@
     BOOL ok = NO;
     if ([gApp.engine.loginInfo.memberStatus isEqualToString:@"free"]) {
         switch (moduleType) {
-            case kKuleModuleNews:
-            case kKuleModuleCheckin:
+            case kKuleModuleNews:       // 校园公告
+            case kKuleModuleCheckin:    // 接送信息
                 ok = YES;
+                break;
+            case kKuleModuleRecipe:     // 每周食谱
+                [gApp alert:@"你想知道宝贝每天的膳食吗？赶快联系幼儿园开通此功能吧！"];
+                break;
+            case kKuleModuleSchedule:    // 课程表
+                [gApp alert:@"你想知道宝贝每天的学习内容吗？赶快联系幼儿园开通此功能吧！"];
+                break;
+            case kKuleModuleAssignment:  // 亲子作业
+                [gApp alert:@"你想看看老师布置了什么亲子作业吗？赶快联系幼儿园开通此功能吧！"];
+                break;
+            case kKuleModuleChating:     // 家园互动
+                [gApp alert:@"你想随时和老师零距离沟通吗？赶快联系幼儿园开通此功能吧！"];
+                break;
+            case kKuleModuleAssess:      // 在园表现
+                [gApp alert:@"你想看看老师对宝贝在幼儿园的表现有什么评价吗？赶快联系幼儿园开通此功能吧！"];
+                break;
+            case kKuleModuleHistory:     // 成长经历
+                [gApp alert:@"你想记录下宝贝在幼儿园的点点滴滴吗？赶快联系幼儿园开通此功能吧！"];
+                break;
+            case kKuleModuleCCTV:        // 看宝贝
+                [gApp alert:@"你想随时看到宝贝在做什么吗？赶快联系幼儿园开通此功能吧！"];
                 break;
             default:
                 ok = NO;
@@ -721,7 +747,7 @@
             [self performSegueWithIdentifier:segueNames[moduleType] sender:nil];
         }
         else {
-            [gApp alert:@"权限不足，请联系幼儿园开通权限，谢谢。"];
+//            [gApp alert:@"权限不足，请联系幼儿园开通权限，谢谢。"];
         }
     }
 }
@@ -781,12 +807,24 @@
 - (void)reloadVideoMember {
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         self.videoMember = [CSKuleInterpreter decodeVideoMember:dataJson];
+        [gApp hideAlert];
+        ++_timesOfCCTV;
     };
     
     FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
         CSLog(@"failure:%@", error);
-        [gApp alert:[error localizedDescription]];
+        if (_timesOfCCTV > 0) {
+            [gApp alert:@"还未开通 看宝贝 功能，该功能可以让家长通过视频，实时查看孩子在幼儿园的动态,如有需要请联系幼儿园开通。"];
+        }
+        else {
+            [gApp hideAlert];
+        }
+        ++_timesOfCCTV;
     };
+    
+    if (_timesOfCCTV > 0) {
+        [gApp waitingAlert:@"请求数据中"];
+    }
     
     [gApp.engine reqGetVideoMemberOfKindergarten:gApp.engine.loginInfo.schoolId
                                     withParentId:gApp.engine.currentRelationship.parent.parentId

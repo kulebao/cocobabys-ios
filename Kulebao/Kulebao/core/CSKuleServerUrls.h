@@ -124,6 +124,6 @@
 #define kGetVideoMemberListPath     @"/api/v1/kindergarten/%@/video_member"
 
 // PATH: 获取视频账号
-#define kGetVideoMemberPath     @"/api/v1/kindergarten/%@/video_member/%@"
+#define kGetVideoMemberPath         @"/api/v1/kindergarten/%@/video_member/%@"
 
 #endif

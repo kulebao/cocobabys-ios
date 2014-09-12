@@ -257,6 +257,9 @@
                     CGRect audioLabelFrame = labAudioDuration.frame;
                     labAudioDuration.frame = CGRectMake(CGRectGetMaxX(voiceMsgBody.frame) + 14, imgBubbleBg.frame.origin.y, audioLabelFrame.size.width, audioLabelFrame.size.height);
                 }
+                else {
+                    NSLog(@"error :%@", error);
+                }
             }
             else {
                 imgBubbleBg.frame = CGRectMake(36, 12+12, 90, 78);
@@ -299,6 +302,9 @@
                     [labAudioDuration sizeToFit];
                     CGRect audioLabelFrame = labAudioDuration.frame;
                     labAudioDuration.frame = CGRectMake(imgBubbleBg.frame.origin.x-audioLabelFrame.size.width-4, imgBubbleBg.frame.origin.y, audioLabelFrame.size.width, audioLabelFrame.size.height);
+                }
+                else {
+                    NSLog(@"error :%@", error);
                 }
             }
             else {
@@ -738,7 +744,7 @@
     [self doSendText:msgBody];
 }
 
-- (void)willSendMsgWithVoice:(NSData *)voice {
+- (void)willSendMsgWithVoice:(NSData *)amrData {
     NSString* voiceFileName = [NSString stringWithFormat:@"chat_voice/%@/%@/%@.amr",
                              @(gApp.engine.loginInfo.schoolId),
                              gApp.engine.loginInfo.accountName,
@@ -746,6 +752,8 @@
     
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         NSString* voiceUrl = [NSString stringWithFormat:@"%@/%@", kQiniuDownloadServerHost, voiceFileName];
+        NSData* waveData = DecodeAMRToWAVE(amrData);
+        [_voiceCache storeData:waveData forKey:voiceUrl.MD5Hash];
         [self doSendVoice:voiceUrl];
     };
     
@@ -755,7 +763,7 @@
     };
     
     [gApp waitingAlert:@"上传语音中"];
-    [gApp.engine reqUploadToQiniu:voice
+    [gApp.engine reqUploadToQiniu:amrData
                           withKey:voiceFileName
                          withMime:@"image/jpeg"
                           success:sucessHandler
@@ -847,6 +855,7 @@
                 
                 NSError* error = nil;
                 _audioPlayer = [[AVAudioPlayer alloc] initWithData:waveData error:&error];
+                _audioPlayer.volume = 1.0;
                 if (error) {
                     CSLog(@"ERROR: %@", error);
                 }
@@ -878,6 +887,12 @@
         if (indexPath) {
             CSKuleTopicMsg*msg = [_topicMsgList objectAtIndex:indexPath.row];
             
+            if ([msg isEqual:_playingMsg]) {
+                [_audioPlayer stop];
+                _audioPlayer.delegate = nil;
+                _playingMsg = nil;
+            }
+        
             SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
                 NSInteger error_code = [[dataJson valueForKeyNotNull:@"error_code"] integerValue];
                 NSString* error_msg = [dataJson valueForKeyNotNull:@"error_msg"];

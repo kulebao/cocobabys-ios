@@ -9,11 +9,38 @@
 #ifndef YouJiaoBao_CSHttpUrls_h
 #define YouJiaoBao_CSHttpUrls_h
 
+/************************************************************/
+/*   七牛存储相关API
+ ************************************************************/
+
+// HOST: 七牛上传服务器Host地址
+#define kQiniuUploadServerHost      @"http://up.qiniu.com"
+
+// PATH: 获取上传Token
+#define kUploadFileTokenPath        @"/ws/fileToken"
+
+// Bucket:
+#define kQiniuBucket                @"cocobabys"
+
+// 七牛资源下载服务器Host地址
+#define kQiniuDownloadServerHost        kQiniuDownloadHttpsServerHost
+
+#define kQiniuDownloadHttpServerHost    @"http://cocobabys.qiniudn.com"
+
+// 七牛资源下载服务器Host地址 (Https)
+#define kQiniuDownloadHttpsServerHost   @"https://dn-cocobabys.qbox.me"
+
+/************************************************************/
+/*   Kule API
+ ************************************************************/
+
 // HOST: 测试服务服务器接口Host地址
 #define kServerHostForTest              @"https://stage2.cocobabys.com"
 
 // HOST: 产品服务服务器接口Host地址
 #define kServerHostForProd              @"https://www.cocobabys.com"
+
+#define kServerHostUsing                kServerHostForTest
 
 #define kPathEmployeeLogin              @"/employee_login.do"
 #define kPathEmployeeManagedClass       @"/kindergarten/%@/employee/%@/class"
@@ -28,5 +55,8 @@
 
 // PATH: 反馈
 #define kFeedbackPath               @"/feedback"
+
+// PATH: History信息
+#define kGetHistoryListPath         @"/kindergarten/%@/history/%@/record"
 
 #endif

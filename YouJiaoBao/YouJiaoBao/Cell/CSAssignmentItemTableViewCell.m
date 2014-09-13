@@ -7,7 +7,7 @@
 //
 
 #import "CSAssignmentItemTableViewCell.h"
-#import "UIImageView+AFNetworking.h"
+#import "UIImageView+WebCache.h"
 #import "CSUtils.h"
 #import "CSEngine.h"
 #import "EntityClassInfoHelper.h"
@@ -54,7 +54,7 @@
         self.labTitle.text = _assignmentInfo.title;
         self.labContent.text = _assignmentInfo.content;
         if (_assignmentInfo.iconUrl.length > 0) {
-            [self.imgThumb setImageWithURL:[NSURL URLWithString:_assignmentInfo.iconUrl]];
+            [self.imgThumb sd_setImageWithURL:[NSURL URLWithString:_assignmentInfo.iconUrl]];
         }
         else {
             self.imgThumb.image = nil;

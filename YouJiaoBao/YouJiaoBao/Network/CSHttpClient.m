@@ -12,11 +12,13 @@
 @interface CSHttpClient ()
 
 @property (nonatomic, strong) AFHTTPRequestOperationManager* opManager;
+@property (nonatomic, strong) AFHTTPRequestOperationManager* opQiniuManager;
 
 @end
 
 @implementation CSHttpClient
 @synthesize opManager = _opManager;
+@synthesize opQiniuManager = _opQiniuManager;
 
 + (id)sharedInstance {
     static CSHttpClient* s_httpClient = nil;
@@ -36,7 +38,7 @@
 
 - (AFHTTPRequestOperationManager*)opManager {
     if (_opManager == nil) {
-        _opManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:kServerHostForTest]];
+        _opManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:kServerHostUsing]];
         
         _opManager.requestSerializer = [AFJSONRequestSerializer serializerWithWritingOptions:0];
         [_opManager.requestSerializer setValue:@"ios" forHTTPHeaderField:@"source"];
@@ -50,6 +52,107 @@
     }
     
     return _opManager;
+}
+
+- (AFHTTPRequestOperationManager*)opQiniuManager {
+    if (_opQiniuManager == nil) {
+        _opQiniuManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:kQiniuUploadServerHost]];
+        
+        _opQiniuManager.requestSerializer = [AFJSONRequestSerializer serializerWithWritingOptions:0];
+//        [_opQiniuManager.requestSerializer setValue:@"ios" forHTTPHeaderField:@"source"];
+        
+        AFJSONResponseSerializer* responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:0];
+        responseSerializer.removesKeysWithNullValues = YES;
+        responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/plain", nil];
+        _opQiniuManager.responseSerializer = responseSerializer;
+        
+        _opQiniuManager.securityPolicy.allowInvalidCertificates = YES;
+    }
+    
+    return _opQiniuManager;
+}
+
+- (AFHTTPRequestOperation*)opUploadToQiniu:(NSData*)data
+                                   withKey:(NSString*)key
+                                  withMime:(NSString*)mime
+                                   success:(SuccessResponseHandler)success
+                                   failure:(FailureResponseHandler)failure {
+    
+    id _success = ^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSString* token = [responseObject valueForKeyNotNull:@"token"];
+        if (token) {
+            [self _opDoUploadToQiniuWithData:data
+                                   withToken:token
+                                      andKey:key
+                                     andMime:mime
+                                     success:success
+                                     failure:failure];
+        }
+        else {
+            NSError* error = [NSError errorWithDomain:@"Qiniu"
+                                                 code:-8888
+                                             userInfo: @{NSLocalizedDescriptionKey:@"Invalid Token."}];
+            
+            failure(operation, error);
+        }
+    };
+    
+    id _failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        failure(operation, error);
+    };
+    
+
+    AFHTTPRequestOperation* op = [self _opGetUploadTokenWithKey:key
+                                                        success:_success
+                                                        failure:_failure];
+    
+    return op;
+}
+
+- (AFHTTPRequestOperation*)_opGetUploadTokenWithKey:(NSString*)key
+                         success:(SuccessResponseHandler)success
+                         failure:(FailureResponseHandler)failure {
+    NSParameterAssert(key);
+    
+    NSString* path = kUploadFileTokenPath;
+    
+    NSDictionary* parameters = @{@"bucket": kQiniuBucket,
+                                 @"key": key};
+    
+    AFHTTPRequestOperation* op =[self.opManager GET:path
+                                         parameters:parameters
+                                            success:success
+                                            failure:failure];
+    
+    return op;
+}
+
+- (AFHTTPRequestOperation*)_opDoUploadToQiniuWithData:(NSData*)data
+                                           withToken:(NSString*)token
+                                              andKey:(NSString*)key
+                                             andMime:(NSString*)mime
+                                             success:(SuccessResponseHandler)success
+                                             failure:(FailureResponseHandler)failure {
+    
+    id _formDataBlock = ^(id <AFMultipartFormData> formData) {
+        [formData appendPartWithFileData:data
+                                    name:@"file"
+                                fileName:key
+                                mimeType:mime];
+        
+        [formData appendPartWithFormData:[key dataUsingEncoding:NSUTF8StringEncoding]
+                                    name:@"key"];
+        
+        [formData appendPartWithFormData:[token dataUsingEncoding:NSUTF8StringEncoding]
+                                    name:@"token"];
+    };
+    
+    AFHTTPRequestOperation* op =[self.opQiniuManager POST:@"/"
+                                               parameters:nil
+                                constructingBodyWithBlock:_formDataBlock
+                                                  success:success
+                                                  failure:failure];
+    return op;
 }
 
 - (AFHTTPRequestOperation*)opLoginWithUsername:(NSString*)username
@@ -240,6 +343,35 @@
     NSDictionary* parameters = @{@"phone": account,
                                  @"content": msgContent,
                                  @"source": @"ios_teacher"};
+    
+    AFHTTPRequestOperation* op = [self.opManager POST:apiUrl
+                                           parameters:parameters
+                                              success:success
+                                              failure:failure];
+    return op;
+}
+
+
+- (AFHTTPRequestOperation*)opPostHistoryOfKindergarten:(NSInteger)kindergarten
+                                          withSenderId:(NSString*)senderId
+                                           withChildId:(NSString*)childId
+                                           withContent:(NSString*)content
+                                      withImageUrlList:(NSArray*)imgUrlList
+                                               success:(SuccessResponseHandler)success
+                                               failure:(FailureResponseHandler)failure {
+    NSString* apiUrl = [NSString stringWithFormat:kGetHistoryListPath, @(kindergarten), childId];
+    
+    id msgSender = @{@"id": senderId, @"type": @"t"};
+    
+    NSMutableArray* mediumList = [NSMutableArray array];
+    for (NSString* urlString in imgUrlList) {
+        [mediumList addObject:@{@"url": urlString, @"type": @"image"}];
+    }
+    
+    NSDictionary* parameters = @{@"topic": childId,
+                                 @"content": content ? content : @"",
+                                 @"medium" : mediumList,
+                                 @"sender": msgSender};
     
     AFHTTPRequestOperation* op = [self.opManager POST:apiUrl
                                            parameters:parameters

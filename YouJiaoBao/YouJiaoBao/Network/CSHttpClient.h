@@ -17,6 +17,12 @@ typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSErr
 
 + (id)sharedInstance;
 
+- (AFHTTPRequestOperation*)opUploadToQiniu:(NSData*)data
+                                   withKey:(NSString*)key
+                                  withMime:(NSString*)mime
+                                   success:(SuccessResponseHandler)success
+                                   failure:(FailureResponseHandler)failure;
+
 - (AFHTTPRequestOperation*)opLoginWithUsername:(NSString*)username
                                       password:(NSString*)password
                                        success:(SuccessResponseHandler)success
@@ -68,5 +74,13 @@ typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSErr
                               withContent:(NSString*)msgContent
                                   success:(SuccessResponseHandler)success
                                   failure:(FailureResponseHandler)failure;
+
+- (AFHTTPRequestOperation*)opPostHistoryOfKindergarten:(NSInteger)kindergarten
+                                          withSenderId:(NSString*)senderId
+                                           withChildId:(NSString*)childId
+                                           withContent:(NSString*)content
+                                      withImageUrlList:(NSArray*)imgUrlList
+                                               success:(SuccessResponseHandler)success
+                                               failure:(FailureResponseHandler)failure;
 
 @end

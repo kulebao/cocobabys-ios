@@ -7,7 +7,7 @@
 //
 
 #import "CSNoticeItemTableViewCell.h"
-#import "UIImageView+AFNetworking.h"
+#import "UIImageView+WebCache.h"
 #import "CSUtils.h"
 
 @interface CSNoticeItemTableViewCell()
@@ -51,7 +51,7 @@
         self.labTitle.text = _newsInfo.title;
         self.labContent.text = _newsInfo.content;
         if (_newsInfo.image.length > 0) {
-            [self.imgThumb setImageWithURL:[NSURL URLWithString:_newsInfo.image]];
+            [self.imgThumb sd_setImageWithURL:[NSURL URLWithString:_newsInfo.image]];
         }
         else {
             self.imgThumb.image = nil;

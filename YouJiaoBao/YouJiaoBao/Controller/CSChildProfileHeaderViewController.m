@@ -7,7 +7,7 @@
 //
 
 #import "CSChildProfileHeaderViewController.h"
-#import "UIImageView+AFNetworking.h"
+#import "UIImageView+WebCache.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface CSChildProfileHeaderViewController ()
@@ -42,8 +42,8 @@
     self.imgPortrait.clipsToBounds = YES;
     self.imgPortrait.layer.cornerRadius = 40.0;
     
-    [self.imgPortrait setImageWithURL:[NSURL URLWithString:self.childInfo.portrait]
-                     placeholderImage:[UIImage imageNamed:@"default_icon.png"]];
+    [self.imgPortrait sd_setImageWithURL:[NSURL URLWithString:self.childInfo.portrait]
+                        placeholderImage:[UIImage imageNamed:@"default_icon.png"]];
     
     self.labName.text = self.childInfo.nick;
 }

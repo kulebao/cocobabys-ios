@@ -12,7 +12,7 @@
 #import "EntityClassInfoHelper.h"
 #import "EntityChildInfoHelper.h"
 #import "CSChildListItemTableViewCell.h"
-#import "UIImageView+AFNetworking.h"
+#import "UIImageView+WebCache.h"
 #import "CSChildProfileViewController.h"
 
 @interface CSStudentListMainTableViewController () <NSFetchedResultsControllerDelegate> {
@@ -109,7 +109,7 @@
     NSArray* children = [_classChildren objectAtIndex:indexPath.section];
     EntityChildInfo* childInfo = [children objectAtIndex:indexPath.row];
     
-    [cell.imgPortrait setImageWithURL:[NSURL URLWithString:childInfo.portrait]
+    [cell.imgPortrait sd_setImageWithURL:[NSURL URLWithString:childInfo.portrait]
                    placeholderImage:[UIImage imageNamed:@"default_icon.png"]];
     
     cell.labName.text = childInfo.nick;

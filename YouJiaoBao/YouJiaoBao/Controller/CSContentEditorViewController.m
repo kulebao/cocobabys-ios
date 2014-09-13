@@ -17,6 +17,8 @@
     NSInteger _lastDeleteItemIndexAsked;
 }
 
+@property (weak, nonatomic) IBOutlet UIView *viewTitle;
+@property (weak, nonatomic) IBOutlet UITextField *fieldTitle;
 @property (weak, nonatomic) IBOutlet UITextView *textContent;
 @property (weak, nonatomic) IBOutlet UIButton *btnHideKeyboard;
 @property (weak, nonatomic) IBOutlet UIButton *btnPhotoFromCamra;
@@ -25,6 +27,7 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionViewImages;
 @property (weak, nonatomic) IBOutlet UILabel *labTips;
 @property (weak, nonatomic) IBOutlet GMGridView *gmGridView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *layoutViewTitleHeight;
 - (IBAction)onBtnHideKeyboardClicked:(id)sender;
 - (IBAction)onBtnPhotoFromCamraClicked:(id)sender;
 - (IBAction)onBtnPhotoFromGalleryClicked:(id)sender;
@@ -34,6 +37,7 @@
 
 @implementation CSContentEditorViewController
 @synthesize delegate = _delegate;
+@synthesize hasTitle = _hasTitle;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -49,6 +53,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self customizeBackBarItem];
+    
+    if (!self.hasTitle) {
+        self.viewTitle.frame = CGRectZero;
+        self.viewTitle.clipsToBounds = YES;
+    }
     
     self.collectionViewImages.delegate = self;
     self.collectionViewImages.dataSource = self;

@@ -12,6 +12,8 @@
 
 @property (nonatomic, weak) id delegate;
 
+@property (nonatomic, assign) BOOL hasTitle;
+
 @end
 
 @protocol CSContentEditorViewControllerDelegate <NSObject>

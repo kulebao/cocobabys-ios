@@ -12,6 +12,7 @@
 #import "CSHttpClient.h"
 
 @interface CSRootViewController ()
+@property (weak, nonatomic) IBOutlet UIImageView *imgBg;
 
 @end
 
@@ -30,6 +31,13 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    if (IS_IPHONE5) {
+        self.imgBg.image = [UIImage imageNamed:@"Default-568h.png"];
+    }
+    else {
+        self.imgBg.image = [UIImage imageNamed:@"Default.png"];
+    }
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onLoginSuccess:) name:kNotiLoginSuccess object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUnauthorized:) name:kNotiUnauthorized object:nil];

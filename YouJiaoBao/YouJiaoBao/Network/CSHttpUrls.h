@@ -48,6 +48,7 @@
 #define kPathKindergartenDailylogList   @"/kindergarten/%@/dailylog"
 #define kPathKindergartenRelationship   @"/kindergarten/%@/relationship"
 #define kPathKindergartenNewsList       @"/kindergarten/%@/news"
+#define kPathKindergartenNews           @"/kindergarten/%@/news/%@"
 #define kPathKindergartenAssignmentList @"/kindergarten/%@/assignment"
 
 // PATH: 修改密码

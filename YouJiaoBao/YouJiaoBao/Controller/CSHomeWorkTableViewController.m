@@ -15,10 +15,15 @@
 #import "EntityClassInfo.h"
 #import "EntityAssignmentInfoHelper.h"
 #import "CSAssignmentInfoDetailViewController.h"
-#import "CSCreateNoticeViewController.h"
+#import "CSContentEditorViewController.h"
 
 @interface CSHomeWorkTableViewController () <PullTableViewDelegate, NSFetchedResultsControllerDelegate> {
     NSFetchedResultsController* _frCtrl;
+    
+    NSMutableArray* _imageUrlList;
+    NSMutableArray* _imageList;
+    NSString* _textContent;
+    NSString* _textTitle;
 }
 
 @property (strong, nonatomic) IBOutlet PullTableView *pullTableView;
@@ -47,7 +52,7 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     [self customizeBackBarItem];
     
-    [self customizeOkBarItemWithTarget:self action:@selector(onCreateAssignment:) text:@"创建"];
+    [self customizeOkBarItemWithTarget:self action:@selector(onCreateAssignment:) text:@"发布"];
     
     self.pullTableView.pullDelegate = self;
     self.pullTableView.pullBackgroundColor = [UIColor clearColor];
@@ -165,14 +170,93 @@
         ctrl.assignmentInfo = sender;
     }
     else if ([segue.identifier isEqualToString:@"segue.assignment.create"]) {
-        CSCreateNoticeViewController* ctrl = segue.destinationViewController;
+        CSContentEditorViewController* ctrl = segue.destinationViewController;
+        ctrl.navigationItem.title = @"发布亲子作业";
         ctrl.delegate = self;
     }
 }
 
-#pragma mark - CSCreateNoticeViewControllerDelegate
-- (void)createNoticeViewControllerSuccessed:(CSCreateNoticeViewController*)ctrl {
-    [self reloadAssignmentList];
+#pragma mark - CSContentEditorViewControllerDelegate
+- (void)contentEditorViewController:(CSContentEditorViewController*)ctrl
+                     finishEditText:(NSString*)text
+                          withTitle:(NSString*)title
+                         withImages:(NSArray*)imageList {
+    _textContent = text;
+    _textTitle = title;
+    _imageUrlList = [NSMutableArray array];
+    _imageList = [NSMutableArray arrayWithArray:imageList];
+    
+    if (_imageList.count > 0) {
+        [self doUploadImage];
+    }
+    else {
+        [self doSendSubmit];
+    }
+    
+}
+
+- (void)doUploadImage {
+    CSHttpClient* http = [CSHttpClient sharedInstance];
+    CSEngine* engine = [CSEngine sharedInstance];
+    
+    UIImage* img = [_imageList firstObject];
+    if (img) {
+        NSData* imgData = UIImageJPEGRepresentation(img, 0.8);
+        NSString* imgFileName = [NSString stringWithFormat:@"homework_img/%@/t_%@/%@.jpg",
+                                 engine.loginInfo.schoolId,
+                                 engine.loginInfo.uid,
+                                 @((long long)[[NSDate date] timeIntervalSince1970]*1000)];
+        
+        SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+            NSString* imgUrl = [NSString stringWithFormat:@"%@/%@", kQiniuDownloadServerHost, imgFileName];
+            CSLog(@"Uploaded:%@", imgUrl);
+            [_imageUrlList addObject:imgUrl];
+            [_imageList removeObjectAtIndex:0];
+            
+            [self performSelectorInBackground:@selector(doUploadImage) withObject:nil];
+        };
+        
+        FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+            CSLog(@"failure:%@", error);
+            [gApp alert:[error localizedDescription]];
+        };
+        
+        [gApp waitingAlert:@"上传图片中"];
+        
+        [http opUploadToQiniu:imgData
+                      withKey:imgFileName
+                     withMime:@"image/jpeg"
+                      success:sucessHandler
+                      failure:failureHandler];
+    }
+    else {
+        [self doSendSubmit];
+    }
+}
+
+- (void)doSendSubmit {
+    CSHttpClient* http = [CSHttpClient sharedInstance];
+    CSEngine* engine = [CSEngine sharedInstance];
+    
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+        [gApp alert:@"提交成功"];
+        [self.navigationController popToViewController:self animated:YES];
+    };
+    
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        CSLog(@"failure:%@", error);
+        [gApp alert:[error localizedDescription]];
+    };
+    
+    [gApp waitingAlert:@"提交数据中"];
+//    
+//    [http opPostHistoryOfKindergarten:engine.loginInfo.schoolId.integerValue
+//                         withSenderId:engine.loginInfo.uid
+//                          withChildId:kTestChildId
+//                          withContent:_textContent
+//                     withImageUrlList:_imageUrlList
+//                              success:sucessHandler
+//                              failure:failureHandler];
 }
 
 #pragma mark - PullTableViewDelegate
@@ -208,6 +292,7 @@
      */
     [self loadMoreAssignmentList];
 }
+
 
 #pragma mark - Private
 - (void)reloadAssignmentList {

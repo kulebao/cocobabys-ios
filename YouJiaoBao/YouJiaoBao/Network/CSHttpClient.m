@@ -380,4 +380,41 @@
     return op;
 }
 
+- (AFHTTPRequestOperation*)opPostNewsOfKindergarten:(NSInteger)kindergarten
+                                     withSenderName:(NSString*)senderName
+                                        withClassId:(NSNumber*)classId
+                                        withContent:(NSString*)content
+                                          withTitle:(NSString*)title
+                                   withImageUrlList:(NSArray*)imgUrlList
+                                            success:(SuccessResponseHandler)success
+                                            failure:(FailureResponseHandler)failure {
+    NSString* apiUrl = [NSString stringWithFormat:kPathKindergartenNewsList, @(kindergarten)];
+    
+    /*
+     "news_id": 1,
+     "school_id": 93740362,
+     "title" : "updated title",
+     "content" : "updated content",
+     "published": "王老师",
+     "class_id": 0,
+     "image":"http://suoqin-test.u.qiniudn.com/Fmz0zi5Y7qZw1spdUidluOQ2PvXm"
+     */
+    
+    NSString* imgUrl = [imgUrlList firstObject];
+    
+    NSDictionary* parameters = @{
+                                 @"school_id" : @(kindergarten),
+                                 @"content": content ? content : @"",
+                                 @"title": title ? title : @"",
+                                 @"class_id" : classId,
+                                 @"published": senderName,
+                                 @"image" : imgUrl ? imgUrl : @""};
+    
+    AFHTTPRequestOperation* op = [self.opManager POST:apiUrl
+                                           parameters:parameters
+                                              success:success
+                                              failure:failure];
+    return op;
+}
+
 @end

@@ -19,6 +19,9 @@
 @protocol CSContentEditorViewControllerDelegate <NSObject>
 @optional
 
-- (void)contentEditorViewController:(CSContentEditorViewController*)ctrl finishEditText:(NSString*)text withImages:(NSArray*)imageList;
+- (void)contentEditorViewController:(CSContentEditorViewController*)ctrl
+                     finishEditText:(NSString*)text
+                          withTitle:(NSString*)title
+                         withImages:(NSArray*)imageList;
 
 @end

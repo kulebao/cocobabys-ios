@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
 #import "EntityLoginInfo.h"
+#import "CSHttpUrls.h"
 
 typedef void (^SuccessResponseHandler) (AFHTTPRequestOperation *operation, id responseObject);
 typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSError *error);
@@ -82,5 +83,14 @@ typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSErr
                                       withImageUrlList:(NSArray*)imgUrlList
                                                success:(SuccessResponseHandler)success
                                                failure:(FailureResponseHandler)failure;
+
+- (AFHTTPRequestOperation*)opPostNewsOfKindergarten:(NSInteger)kindergarten
+                                     withSenderName:(NSString*)senderName
+                                        withClassId:(NSNumber*)classId
+                                        withContent:(NSString*)content
+                                          withTitle:(NSString*)title
+                                   withImageUrlList:(NSArray*)imgUrlList
+                                            success:(SuccessResponseHandler)success
+                                            failure:(FailureResponseHandler)failure;
 
 @end

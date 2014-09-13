@@ -371,6 +371,7 @@
 		09A3C63A19C479EC001AFE8C /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A3C62819C479EC001AFE8C /* UIImageView+HighlightedWebCache.m */; };
 		09A3C63B19C479EC001AFE8C /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A3C62A19C479EC001AFE8C /* UIImageView+WebCache.m */; };
 		09A3C63C19C479EC001AFE8C /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A3C62C19C479EC001AFE8C /* UIView+WebCacheOperation.m */; };
+		09A3C64219C4B40D001AFE8C /* CSModuleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A3C64119C4B40D001AFE8C /* CSModuleCell.m */; };
 		09B431B31994BCC300FF4071 /* EntityParentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09B431B21994BCC300FF4071 /* EntityParentInfo.m */; };
 		09B431B61994BCE900FF4071 /* EntityRelationshipInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09B431B51994BCE900FF4071 /* EntityRelationshipInfo.m */; };
 		09B431BA1994C1BF00FF4071 /* EntityRelationshipInfoHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 09B431B91994C1BF00FF4071 /* EntityRelationshipInfoHelper.m */; };
@@ -882,6 +883,8 @@
 		09A3C62A19C479EC001AFE8C /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		09A3C62B19C479EC001AFE8C /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		09A3C62C19C479EC001AFE8C /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
+		09A3C64019C4B40D001AFE8C /* CSModuleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSModuleCell.h; sourceTree = "<group>"; };
+		09A3C64119C4B40D001AFE8C /* CSModuleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSModuleCell.m; sourceTree = "<group>"; };
 		09B431B11994BCC300FF4071 /* EntityParentInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityParentInfo.h; sourceTree = "<group>"; };
 		09B431B21994BCC300FF4071 /* EntityParentInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityParentInfo.m; sourceTree = "<group>"; };
 		09B431B41994BCE900FF4071 /* EntityRelationshipInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityRelationshipInfo.h; sourceTree = "<group>"; };
@@ -1028,6 +1031,8 @@
 				09FE71FD1995C662002E3ED4 /* CSNoticeItemTableViewCell.m */,
 				09F74C051997B00D001555D0 /* CSAssignmentItemTableViewCell.h */,
 				09F74C061997B00D001555D0 /* CSAssignmentItemTableViewCell.m */,
+				09A3C64019C4B40D001AFE8C /* CSModuleCell.h */,
+				09A3C64119C4B40D001AFE8C /* CSModuleCell.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -2375,6 +2380,7 @@
 				09C2D4E41969BCA000B8A895 /* AFNetworkReachabilityManager.m in Sources */,
 				09C2D4F01969BCA000B8A895 /* UIImageView+AFNetworking.m in Sources */,
 				09C2D4E21969BCA000B8A895 /* AFHTTPRequestOperationManager.m in Sources */,
+				09A3C64219C4B40D001AFE8C /* CSModuleCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

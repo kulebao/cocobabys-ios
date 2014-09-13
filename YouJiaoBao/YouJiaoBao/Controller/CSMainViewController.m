@@ -13,6 +13,7 @@
 #import "CSAppDelegate.h"
 #import "CSContentEditorViewController.h"
 #import "CSHttpUrls.h"
+#import "CSModuleCell.h"
 
 #define kTestChildId    @"2_2088_900"
 
@@ -21,7 +22,7 @@
     
     NSMutableArray* _imageUrlList;
     NSMutableArray* _imageList;
-    NSString* _historyContent;
+    NSString* _textContent;
 }
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
@@ -98,11 +99,10 @@
 
 // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"main.module.cell" forIndexPath:indexPath];
+    CSModuleCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"main.module.cell" forIndexPath:indexPath];
     
-    UIImageView* imgView = (UIImageView*)[cell viewWithTag:100];
     NSDictionary* module = [_modules objectAtIndex:indexPath.row];
-    imgView.image = [module objectForKey:@"icon"];
+    cell.imgBg.image = [module objectForKey:@"icon"];
     
     return cell;
 }
@@ -148,9 +148,11 @@
 }
 
 #pragma mark - CSContentEditorViewControllerDelegate
-- (void)contentEditorViewController:(CSContentEditorViewController*)ctrl finishEditText:(NSString*)text withImages:(NSArray*)imageList {
-    
-    _historyContent = text;
+- (void)contentEditorViewController:(CSContentEditorViewController*)ctrl
+                     finishEditText:(NSString*)text
+                          withTitle:(NSString*)title
+                         withImages:(NSArray*)imageList {
+    _textContent = text;
     _imageUrlList = [NSMutableArray array];
     _imageList = [NSMutableArray arrayWithArray:imageList];
     
@@ -220,7 +222,7 @@
     [http opPostHistoryOfKindergarten:engine.loginInfo.schoolId.integerValue
                          withSenderId:engine.loginInfo.uid
                           withChildId:kTestChildId
-                          withContent:_historyContent
+                          withContent:_textContent
                      withImageUrlList:_imageUrlList
                               success:sucessHandler
                               failure:failureHandler];

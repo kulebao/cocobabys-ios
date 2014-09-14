@@ -24,6 +24,7 @@
         <attribute name="schoolId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="status" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="timestamp" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <relationship name="classInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EntityClassInfo" inverseName="childrenList" inverseEntity="EntityClassInfo" syncable="YES"/>
     </entity>
     <entity name="EntityClassInfo" representedClassName="EntityClassInfo" syncable="YES">
         <attribute name="classId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -31,6 +32,7 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="schoolId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="timestamp" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <relationship name="childrenList" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="EntityChildInfo" inverseName="classInfo" inverseEntity="EntityChildInfo" syncable="YES"/>
     </entity>
     <entity name="EntityLoginInfo" representedClassName="EntityLoginInfo" syncable="YES">
         <attribute name="birthday" optional="YES" attributeType="String" syncable="YES"/>
@@ -81,12 +83,12 @@
         <relationship name="parentInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EntityParentInfo" syncable="YES"/>
     </entity>
     <elements>
-        <element name="EntityChildInfo" positionX="261" positionY="306" width="128" height="223"/>
-        <element name="EntityClassInfo" positionX="261" positionY="297" width="128" height="120"/>
+        <element name="EntityAssignmentInfo" positionX="261" positionY="351" width="128" height="178"/>
+        <element name="EntityChildInfo" positionX="261" positionY="306" width="128" height="238"/>
+        <element name="EntityClassInfo" positionX="261" positionY="297" width="128" height="133"/>
         <element name="EntityLoginInfo" positionX="261" positionY="198" width="128" height="240"/>
         <element name="EntityNewsInfo" positionX="261" positionY="351" width="128" height="208"/>
         <element name="EntityParentInfo" positionX="261" positionY="342" width="128" height="210"/>
         <element name="EntityRelationshipInfo" positionX="270" positionY="360" width="128" height="118"/>
-        <element name="EntityAssignmentInfo" positionX="261" positionY="351" width="128" height="178"/>
     </elements>
 </model>

@@ -9,10 +9,8 @@
 /* Begin PBXBuildFile section */
 		0906A83519757E2C007F25BE /* CSHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0906A83419757E2C007F25BE /* CSHttpClient.m */; };
 		0906A83A19758727007F25BE /* CSRootSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0906A83919758727007F25BE /* CSRootSegue.m */; };
-		09078D76197D6673006E8756 /* EntityClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09078D75197D6673006E8756 /* EntityClassInfo.m */; };
 		09078D79197D669C006E8756 /* EntityClassInfoHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 09078D78197D669C006E8756 /* EntityClassInfoHelper.m */; };
 		0907CE4C198FCC8700B13202 /* EntityChildInfoHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0907CE4B198FCC8700B13202 /* EntityChildInfoHelper.m */; };
-		0907CE56198FD3B300B13202 /* EntityChildInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0907CE55198FD3B300B13202 /* EntityChildInfo.m */; };
 		090C639619939D5500398B40 /* CSChildProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 090C639519939D5500398B40 /* CSChildProfileViewController.m */; };
 		090C63991993A0D400398B40 /* CSChildProfileHeaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 090C63981993A0D400398B40 /* CSChildProfileHeaderViewController.m */; };
 		091760F319C09070006FE2FB /* CSKuleAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 091760F219C09070006FE2FB /* CSKuleAboutViewController.m */; };
@@ -27,6 +25,14 @@
 		0956E386198151810049202E /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0956E375198151810049202E /* libopencore-amrnb.a */; };
 		0956E38D198151810049202E /* libopencore-amrwb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0956E37C198151810049202E /* libopencore-amrwb.a */; };
 		095D857719C5CD5F00F2F926 /* AHAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 095D857519C5CD5F00F2F926 /* AHAlertView.m */; };
+		095D857C19C5D67200F2F926 /* EntityChildInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 095D857B19C5D67200F2F926 /* EntityChildInfo.m */; };
+		095D857F19C5D67200F2F926 /* EntityClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 095D857E19C5D67200F2F926 /* EntityClassInfo.m */; };
+		095D858219C5D92900F2F926 /* ModelClassData.m in Sources */ = {isa = PBXBuildFile; fileRef = 095D858119C5D92900F2F926 /* ModelClassData.m */; };
+		095D858619C5DD9400F2F926 /* CSClassHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 095D858519C5DD9400F2F926 /* CSClassHeaderView.m */; };
+		095D858819C5DDA700F2F926 /* CSClassHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 095D858719C5DDA700F2F926 /* CSClassHeaderView.xib */; };
+		095D858C19C5ECB700F2F926 /* CSPopupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 095D858B19C5ECB700F2F926 /* CSPopupController.m */; };
+		095D859019C5ED1900F2F926 /* CSClassPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 095D858F19C5ED1900F2F926 /* CSClassPickerView.m */; };
+		095D859219C5ED2B00F2F926 /* CSClassPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 095D859119C5ED2B00F2F926 /* CSClassPickerView.xib */; };
 		095F13781967C309008CF3BE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 095F13771967C309008CF3BE /* Foundation.framework */; };
 		095F137A1967C309008CF3BE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 095F13791967C309008CF3BE /* CoreGraphics.framework */; };
 		095F137C1967C309008CF3BE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 095F137B1967C309008CF3BE /* UIKit.framework */; };
@@ -440,14 +446,10 @@
 		0906A83619757FA4007F25BE /* CSHttpUrls.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSHttpUrls.h; sourceTree = "<group>"; };
 		0906A83819758727007F25BE /* CSRootSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSRootSegue.h; sourceTree = "<group>"; };
 		0906A83919758727007F25BE /* CSRootSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSRootSegue.m; sourceTree = "<group>"; };
-		09078D74197D6673006E8756 /* EntityClassInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityClassInfo.h; sourceTree = "<group>"; };
-		09078D75197D6673006E8756 /* EntityClassInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityClassInfo.m; sourceTree = "<group>"; };
 		09078D77197D669C006E8756 /* EntityClassInfoHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityClassInfoHelper.h; sourceTree = "<group>"; };
 		09078D78197D669C006E8756 /* EntityClassInfoHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityClassInfoHelper.m; sourceTree = "<group>"; };
 		0907CE4A198FCC8700B13202 /* EntityChildInfoHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityChildInfoHelper.h; sourceTree = "<group>"; };
 		0907CE4B198FCC8700B13202 /* EntityChildInfoHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityChildInfoHelper.m; sourceTree = "<group>"; };
-		0907CE54198FD3B300B13202 /* EntityChildInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityChildInfo.h; sourceTree = "<group>"; };
-		0907CE55198FD3B300B13202 /* EntityChildInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityChildInfo.m; sourceTree = "<group>"; };
 		090C639419939D5400398B40 /* CSChildProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSChildProfileViewController.h; sourceTree = "<group>"; };
 		090C639519939D5500398B40 /* CSChildProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSChildProfileViewController.m; sourceTree = "<group>"; };
 		090C63971993A0D400398B40 /* CSChildProfileHeaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSChildProfileHeaderViewController.h; sourceTree = "<group>"; };
@@ -480,6 +482,20 @@
 		095D857419C5CD5F00F2F926 /* AHAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHAlertView.h; sourceTree = "<group>"; };
 		095D857519C5CD5F00F2F926 /* AHAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHAlertView.m; sourceTree = "<group>"; };
 		095D857619C5CD5F00F2F926 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		095D857A19C5D67200F2F926 /* EntityChildInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityChildInfo.h; sourceTree = "<group>"; };
+		095D857B19C5D67200F2F926 /* EntityChildInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityChildInfo.m; sourceTree = "<group>"; };
+		095D857D19C5D67200F2F926 /* EntityClassInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityClassInfo.h; sourceTree = "<group>"; };
+		095D857E19C5D67200F2F926 /* EntityClassInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityClassInfo.m; sourceTree = "<group>"; };
+		095D858019C5D92900F2F926 /* ModelClassData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelClassData.h; sourceTree = "<group>"; };
+		095D858119C5D92900F2F926 /* ModelClassData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelClassData.m; sourceTree = "<group>"; };
+		095D858419C5DD9400F2F926 /* CSClassHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSClassHeaderView.h; sourceTree = "<group>"; };
+		095D858519C5DD9400F2F926 /* CSClassHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSClassHeaderView.m; sourceTree = "<group>"; };
+		095D858719C5DDA700F2F926 /* CSClassHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSClassHeaderView.xib; sourceTree = "<group>"; };
+		095D858A19C5ECB700F2F926 /* CSPopupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSPopupController.h; sourceTree = "<group>"; };
+		095D858B19C5ECB700F2F926 /* CSPopupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSPopupController.m; sourceTree = "<group>"; };
+		095D858E19C5ED1900F2F926 /* CSClassPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSClassPickerView.h; sourceTree = "<group>"; };
+		095D858F19C5ED1900F2F926 /* CSClassPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSClassPickerView.m; sourceTree = "<group>"; };
+		095D859119C5ED2B00F2F926 /* CSClassPickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSClassPickerView.xib; sourceTree = "<group>"; };
 		095F13741967C309008CF3BE /* YouJiaoBao.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouJiaoBao.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		095F13771967C309008CF3BE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		095F13791967C309008CF3BE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -1117,6 +1133,19 @@
 			path = AHAlertView;
 			sourceTree = "<group>";
 		};
+		095D858319C5DD7D00F2F926 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				095D858419C5DD9400F2F926 /* CSClassHeaderView.h */,
+				095D858519C5DD9400F2F926 /* CSClassHeaderView.m */,
+				095D858719C5DDA700F2F926 /* CSClassHeaderView.xib */,
+				095D858E19C5ED1900F2F926 /* CSClassPickerView.h */,
+				095D858F19C5ED1900F2F926 /* CSClassPickerView.m */,
+				095D859119C5ED2B00F2F926 /* CSClassPickerView.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		095F136B1967C309008CF3BE = {
 			isa = PBXGroup;
 			children = (
@@ -1152,6 +1181,7 @@
 		095F137F1967C309008CF3BE /* YouJiaoBao */ = {
 			isa = PBXGroup;
 			children = (
+				095D858319C5DD7D00F2F926 /* View */,
 				0907CE4D198FD2F500B13202 /* Cell */,
 				09CD6674197C112100CC08F1 /* Res */,
 				09CD666A197C0C0400CC08F1 /* Controller */,
@@ -1220,6 +1250,8 @@
 		098E3DE0198B268500CB4F0B /* CSKit */ = {
 			isa = PBXGroup;
 			children = (
+				095D858A19C5ECB700F2F926 /* CSPopupController.h */,
+				095D858B19C5ECB700F2F926 /* CSPopupController.m */,
 				098E3E9C198B31AC00CB4F0B /* CSCoreDataHelper.h */,
 				098E3E9D198B31AC00CB4F0B /* CSCoreDataHelper.m */,
 				098E3E9F198B35DC00CB4F0B /* CSKit.pch */,
@@ -1696,6 +1728,8 @@
 			children = (
 				09B431C2199519DC00FF4071 /* ModelAccount.h */,
 				09B431C3199519DC00FF4071 /* ModelAccount.m */,
+				095D858019C5D92900F2F926 /* ModelClassData.h */,
+				095D858119C5D92900F2F926 /* ModelClassData.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1773,10 +1807,10 @@
 			children = (
 				09F74C021997ADC3001555D0 /* EntityAssignmentInfo.h */,
 				09F74C031997ADC3001555D0 /* EntityAssignmentInfo.m */,
-				0907CE54198FD3B300B13202 /* EntityChildInfo.h */,
-				0907CE55198FD3B300B13202 /* EntityChildInfo.m */,
-				09078D74197D6673006E8756 /* EntityClassInfo.h */,
-				09078D75197D6673006E8756 /* EntityClassInfo.m */,
+				095D857A19C5D67200F2F926 /* EntityChildInfo.h */,
+				095D857B19C5D67200F2F926 /* EntityChildInfo.m */,
+				095D857D19C5D67200F2F926 /* EntityClassInfo.h */,
+				095D857E19C5D67200F2F926 /* EntityClassInfo.m */,
 				09CD665D197BFA3D00CC08F1 /* EntityLoginInfo.h */,
 				09CD665E197BFA3D00CC08F1 /* EntityLoginInfo.m */,
 				09FE71FF1995DD5B002E3ED4 /* EntityNewsInfo.h */,
@@ -2053,6 +2087,7 @@
 				098E3F76198B635400CB4F0B /* arrow-right-1@2x.png in Resources */,
 				098E4016198B635400CB4F0B /* settings-change-baby@2x.png in Resources */,
 				098E3F81198B635400CB4F0B /* assess-game.png in Resources */,
+				095D858819C5DDA700F2F926 /* CSClassHeaderView.xib in Resources */,
 				098E3E76198B314500CB4F0B /* login_bg2.png in Resources */,
 				098E3FA3198B635400CB4F0B /* btn-func-6.png in Resources */,
 				098E4026198B635400CB4F0B /* star@2x.png in Resources */,
@@ -2075,6 +2110,7 @@
 				098E3F9F198B635400CB4F0B /* btn-func-4.png in Resources */,
 				098E3F82198B635400CB4F0B /* assess-game@2x.png in Resources */,
 				098E3FE5198B635400CB4F0B /* icon-news.png in Resources */,
+				095D859219C5ED2B00F2F926 /* CSClassPickerView.xib in Resources */,
 				098E3E51198B314500CB4F0B /* chat_btn.9.png in Resources */,
 				098E4028198B635400CB4F0B /* tips-bg@2x.png in Resources */,
 				095F13981967C30C008CF3BE /* Images.xcassets in Resources */,
@@ -2298,6 +2334,7 @@
 				09C2D4E61969BCA000B8A895 /* AFURLConnectionOperation.m in Sources */,
 				09A3C5EF19C47986001AFE8C /* UIView+GMGridViewAdditions.m in Sources */,
 				09C2D4F11969BCA000B8A895 /* UIProgressView+AFNetworking.m in Sources */,
+				095D858C19C5ECB700F2F926 /* CSPopupController.m in Sources */,
 				09A3C63419C479EC001AFE8C /* SDWebImageManager.m in Sources */,
 				09A3C5EC19C47986001AFE8C /* GMGridViewCell.m in Sources */,
 				09B431B61994BCE900FF4071 /* EntityRelationshipInfo.m in Sources */,
@@ -2330,6 +2367,7 @@
 				09B431C01994D2BF00FF4071 /* CSChildRelationshipItemTableViewCell.m in Sources */,
 				091760F319C09070006FE2FB /* CSKuleAboutViewController.m in Sources */,
 				09A3C63019C479EC001AFE8C /* SDWebImageCompat.m in Sources */,
+				095D858219C5D92900F2F926 /* ModelClassData.m in Sources */,
 				09CD6662197BFA6600CC08F1 /* EntityLoginInfoHelper.m in Sources */,
 				098E3E9E198B31AC00CB4F0B /* CSCoreDataHelper.m in Sources */,
 				09C2D4E81969BCA000B8A895 /* AFURLResponseSerialization.m in Sources */,
@@ -2352,8 +2390,10 @@
 				0917610419C093CA006FE2FB /* CSKuleFeedbackViewController.m in Sources */,
 				09A3C63119C479EC001AFE8C /* SDWebImageDecoder.m in Sources */,
 				09A3C62F19C479EC001AFE8C /* SDImageCache.m in Sources */,
+				095D857C19C5D67200F2F926 /* EntityChildInfo.m in Sources */,
 				09C2D4ED1969BCA000B8A895 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				09FE720D199660D0002E3ED4 /* CSUtils.m in Sources */,
+				095D858619C5DD9400F2F926 /* CSClassHeaderView.m in Sources */,
 				09A3C63A19C479EC001AFE8C /* UIImageView+HighlightedWebCache.m in Sources */,
 				098E4076198B799000CB4F0B /* MBProgressHUD.m in Sources */,
 				098E407D198B799000CB4F0B /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
@@ -2373,14 +2413,14 @@
 				098E4089198B7B1F00CB4F0B /* CSHomeWorkTableViewController.m in Sources */,
 				09C2D4E51969BCA000B8A895 /* AFSecurityPolicy.m in Sources */,
 				098E408C198B7B2C00CB4F0B /* CSNoticeTableViewController.m in Sources */,
+				095D859019C5ED1900F2F926 /* CSClassPickerView.m in Sources */,
 				09CD666F197C0C2600CC08F1 /* CSLoginViewController.m in Sources */,
 				0906A83519757E2C007F25BE /* CSHttpClient.m in Sources */,
 				09C2D4E11969BCA000B8A895 /* AFHTTPRequestOperation.m in Sources */,
 				09FE71FE1995C662002E3ED4 /* CSNoticeItemTableViewCell.m in Sources */,
-				0907CE56198FD3B300B13202 /* EntityChildInfo.m in Sources */,
 				09B431BD1994C1DC00FF4071 /* EntityParentInfoHelper.m in Sources */,
+				095D857F19C5D67200F2F926 /* EntityClassInfo.m in Sources */,
 				098E4071198B799000CB4F0B /* JSBadgeView.m in Sources */,
-				09078D76197D6673006E8756 /* EntityClassInfo.m in Sources */,
 				091760FE19C091B4006FE2FB /* FTCoreTextStyle.m in Sources */,
 				09C2D4E91969BCA000B8A895 /* AFURLSessionManager.m in Sources */,
 				095F13861967C30A008CF3BE /* main.m in Sources */,

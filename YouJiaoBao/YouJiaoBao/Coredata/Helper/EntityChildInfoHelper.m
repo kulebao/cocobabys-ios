@@ -8,6 +8,7 @@
 
 #import "EntityChildInfoHelper.h"
 #import "CSCoreDataHelper.h"
+#import "EntityClassInfoHelper.h"
 
 @implementation EntityChildInfoHelper
 
@@ -100,6 +101,7 @@
     [fr setPredicate:[NSPredicate predicateWithFormat:@"schoolId == %d", kindergartenId]];
     
     NSSortDescriptor* sortDesc = [NSSortDescriptor sortDescriptorWithKey:@"childId" ascending:YES];
+
     [fr setSortDescriptors:@[sortDesc]];
     
     NSFetchedResultsController* frCtrl = [[NSFetchedResultsController alloc] initWithFetchRequest:fr managedObjectContext:context sectionNameKeyPath:nil cacheName:nil];

@@ -16,6 +16,8 @@
 #import "EntityAssignmentInfoHelper.h"
 #import "CSAssignmentInfoDetailViewController.h"
 #import "CSContentEditorViewController.h"
+#import "CSPopupController.h"
+#import "CSClassPickerView.h"
 
 @interface CSHomeWorkTableViewController () <PullTableViewDelegate, NSFetchedResultsControllerDelegate> {
     NSFetchedResultsController* _frCtrl;
@@ -24,9 +26,15 @@
     NSMutableArray* _imageList;
     NSString* _textContent;
     NSString* _textTitle;
+    
+    NSArray* _classInfoList;
+    EntityClassInfo* _classInfo;
 }
 
 @property (strong, nonatomic) IBOutlet PullTableView *pullTableView;
+
+@property (nonatomic, strong) CSPopupController* popCtrl;
+@property (nonatomic, strong) CSClassPickerView* classPickerView;
 
 @end
 
@@ -53,6 +61,11 @@
     [self customizeBackBarItem];
     
     [self customizeOkBarItemWithTarget:self action:@selector(onCreateAssignment:) text:@"发布"];
+    
+    self.popCtrl = [CSPopupController popupControllerWithView:gApp.window];
+    
+    self.classPickerView = [CSClassPickerView defaultClassPickerView];
+    self.classPickerView.delegate = self;
     
     self.pullTableView.pullDelegate = self;
     self.pullTableView.pullBackgroundColor = [UIColor clearColor];
@@ -187,15 +200,37 @@
     _imageUrlList = [NSMutableArray array];
     _imageList = [NSMutableArray arrayWithArray:imageList];
     
-    if (_imageList.count > 0) {
-        [self doUploadImage];
-    }
-    else {
-        [self doSendSubmit];
-    }
-    
+    [self doSelectClass];
 }
 
+- (void)doSelectClass {
+    self.classPickerView.center = CGPointMake(gApp.window.bounds.size.width/2, gApp.window.bounds.size.height/2);
+    
+    [self.classPickerView reset];
+
+    [self.popCtrl presentView:self.classPickerView animated:NO completion:^{
+        
+    }];
+}
+
+#pragma mark - CSClassPickerViewDelegate
+- (void)classPickerViewDidOk:(CSClassPickerView*)view withClassInfo:(EntityClassInfo*)classInfo {
+    [self.popCtrl dismiss];
+    
+    _classInfo = classInfo;
+    if (_classInfo) {
+        if (_imageList.count > 0) {
+            [self doUploadImage];
+        }
+        else {
+            [self doSendSubmit];
+        }
+    }
+}
+
+- (void)classPickerViewDidCancel:(CSClassPickerView*)view {
+    [self.popCtrl dismiss];
+}
 - (void)doUploadImage {
     CSHttpClient* http = [CSHttpClient sharedInstance];
     CSEngine* engine = [CSEngine sharedInstance];
@@ -254,7 +289,7 @@
     
     [http opPostAssignmentOfKindergarten:engine.loginInfo.schoolId.integerValue
                               withSender:engine.loginInfo
-                             withClassId:@(33)
+                             withClassId:_classInfo.classId
                              withContent:_textContent
                                withTitle:_textTitle
                         withImageUrlList:_imageUrlList

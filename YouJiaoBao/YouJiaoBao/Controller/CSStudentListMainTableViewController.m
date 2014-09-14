@@ -14,6 +14,7 @@
 #import "CSChildListItemTableViewCell.h"
 #import "UIImageView+WebCache.h"
 #import "CSChildProfileViewController.h"
+#import "ModelClassData.h"
 
 @interface CSStudentListMainTableViewController () <NSFetchedResultsControllerDelegate> {
     NSMutableArray* _classChildren;
@@ -47,9 +48,10 @@
     
     [self customizeBackBarItem];
     [self customizeOkBarItemWithTarget:self action:@selector(onBtnRefreshClicked:) text:@"刷新"];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectNull];
     
     CSEngine* engine = [CSEngine sharedInstance];
-    
+
     _frClasses = [EntityClassInfoHelper frClassesWithEmployee:engine.loginInfo.uid ofKindergarten:engine.loginInfo.schoolId.integerValue];
     _frClasses.delegate = self;
     
@@ -67,7 +69,6 @@
     }
     
     [self updateTableView];
-
     [self doRefresh];
 }
 
@@ -82,7 +83,6 @@
 }
 
 #pragma mark - Table view data source
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
@@ -94,11 +94,26 @@
     // Return the number of rows in the section.
     NSInteger numberOfRows = 0;
     if (section < _classChildren.count) {
-        NSArray* children = [_classChildren objectAtIndex:section];
-        numberOfRows = children.count;
+        ModelClassData* classData = [_classChildren objectAtIndex:section];
+        if(classData.expand) {
+            NSArray* childrenList = classData.childrenList;
+            numberOfRows = childrenList.count;
+        }
+        else {
+            numberOfRows = 0;
+        }
     }
 
     return numberOfRows;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    ModelClassData* classData = [_classChildren objectAtIndex:section];
+    return classData.classHeaderView;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 32;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -106,14 +121,14 @@
     CSChildListItemTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CSChildListItemTableViewCell" forIndexPath:indexPath];
     
     // Configure the cell...
-    NSArray* children = [_classChildren objectAtIndex:indexPath.section];
-    EntityChildInfo* childInfo = [children objectAtIndex:indexPath.row];
+    ModelClassData* classData = [_classChildren objectAtIndex:indexPath.section];
+    NSArray* childrenList = classData.childrenList;
+    EntityChildInfo* childInfo = [childrenList objectAtIndex:indexPath.row];
     
     [cell.imgPortrait sd_setImageWithURL:[NSURL URLWithString:childInfo.portrait]
                    placeholderImage:[UIImage imageNamed:@"default_icon.png"]];
     
     cell.labName.text = childInfo.nick;
-
     
     return cell;
 }
@@ -124,8 +139,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    NSArray* children = [_classChildren objectAtIndex:indexPath.section];
-    EntityChildInfo* childInfo = [children objectAtIndex:indexPath.row];
+    ModelClassData* classData = [_classChildren objectAtIndex:indexPath.section];
+    NSArray* childrenList = classData.childrenList;
+    EntityChildInfo* childInfo = [childrenList objectAtIndex:indexPath.row];
+    
     CSLog(@"child:%@", childInfo);
     
     [self performSegueWithIdentifier:@"segue.babylist.childprofile" sender:childInfo];
@@ -246,6 +263,7 @@
 #pragma mark - NSFetchedResultsControllerDelegate
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     if ([controller isEqual:_frClasses]) {
+        [self updateTableView];
     }
     else if ([controller isEqual:_frChildren]) {
         [self updateTableView];
@@ -260,15 +278,24 @@
     
     for (EntityClassInfo* classInfo in _frClasses.fetchedObjects) {
         NSArray* classChildren = [childrenList filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"classId == %@", classInfo.classId]];
-        if (classChildren == nil) {
-            classChildren = @[];
-        }
         
-        [_classChildren addObject:classChildren];
+        ModelClassData* classData = [ModelClassData new];
+        classData.classInfo = classInfo;
+        classData.childrenList = classChildren;
+        classData.expand = YES;
+        classData.classHeaderView = [CSClassHeaderView defaultClassHeaderView];
+        classData.classHeaderView.modelData = classData;
+        classData.classHeaderView.delegate = self;
+        
+        [_classChildren addObject:classData];
     }
     
     [self.tableView reloadData];
 }
 
+#pragma mark - CSClassHeaderViewDelegate
+- (void)classHeaderViewExpandChanged:(CSClassHeaderView*)view {
+    [self.tableView reloadData];
+}
 
 @end

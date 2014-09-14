@@ -48,16 +48,19 @@
 #define kPathKindergartenDailylogList   @"/kindergarten/%@/dailylog"
 #define kPathKindergartenRelationship   @"/kindergarten/%@/relationship"
 #define kPathKindergartenNewsList       @"/kindergarten/%@/news"
-#define kPathKindergartenNews           @"/kindergarten/%@/news/%@"
+#define kPathKindergartenPostNews       @"/kindergarten/%@/admin/%@/news"
 #define kPathKindergartenAssignmentList @"/kindergarten/%@/assignment"
 
 // PATH: 修改密码
-#define kChangePasswordPath             @"/kindergarten/%@/employee/%@/password"
+#define kChangePasswordPath         @"/kindergarten/%@/employee/%@/password"
 
 // PATH: 反馈
 #define kFeedbackPath               @"/feedback"
 
 // PATH: History信息
 #define kGetHistoryListPath         @"/kindergarten/%@/history/%@/record"
+
+// PATH: 亲子作业列表
+#define kAssignmentListPath         @"/kindergarten/%@/assignment"
 
 #endif

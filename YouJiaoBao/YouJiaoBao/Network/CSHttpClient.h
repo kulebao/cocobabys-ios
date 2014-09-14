@@ -85,12 +85,21 @@ typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSErr
                                                failure:(FailureResponseHandler)failure;
 
 - (AFHTTPRequestOperation*)opPostNewsOfKindergarten:(NSInteger)kindergarten
-                                     withSenderName:(NSString*)senderName
+                                         withSender:(EntityLoginInfo*)senderInfo
                                         withClassId:(NSNumber*)classId
                                         withContent:(NSString*)content
                                           withTitle:(NSString*)title
                                    withImageUrlList:(NSArray*)imgUrlList
                                             success:(SuccessResponseHandler)success
                                             failure:(FailureResponseHandler)failure;
+
+- (AFHTTPRequestOperation*)opPostAssignmentOfKindergarten:(NSInteger)kindergarten
+                                               withSender:(EntityLoginInfo*)senderInfo
+                                              withClassId:(NSNumber*)classId
+                                              withContent:(NSString*)content
+                                                withTitle:(NSString*)title
+                                         withImageUrlList:(NSArray*)imgUrlList
+                                                  success:(SuccessResponseHandler)success
+                                                  failure:(FailureResponseHandler)failure;
 
 @end

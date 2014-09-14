@@ -94,7 +94,7 @@
 #define kTopicPath                  @"/kindergarten/%@/session/%@/record"
 
 // PATH: 指定的聊天记录 - 新接口
-#define kTopicIdPath                  @"/kindergarten/%@/session/%@/record/%@"
+#define kTopicIdPath                @"/kindergarten/%@/session/%@/record/%@"
 
 // PATH: 园内评价
 #define kAssessPath                 @"/kindergarten/%@/child/%@/assess"

@@ -173,6 +173,7 @@
         CSContentEditorViewController* ctrl = segue.destinationViewController;
         ctrl.navigationItem.title = @"发布亲子作业";
         ctrl.delegate = self;
+        ctrl.singleImage = YES;
     }
 }
 
@@ -241,6 +242,7 @@
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         [gApp alert:@"提交成功"];
         [self.navigationController popToViewController:self animated:YES];
+        [self reloadAssignmentList];
     };
     
     FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -249,14 +251,15 @@
     };
     
     [gApp waitingAlert:@"提交数据中"];
-//    
-//    [http opPostHistoryOfKindergarten:engine.loginInfo.schoolId.integerValue
-//                         withSenderId:engine.loginInfo.uid
-//                          withChildId:kTestChildId
-//                          withContent:_textContent
-//                     withImageUrlList:_imageUrlList
-//                              success:sucessHandler
-//                              failure:failureHandler];
+    
+    [http opPostAssignmentOfKindergarten:engine.loginInfo.schoolId.integerValue
+                              withSender:engine.loginInfo
+                             withClassId:@(33)
+                             withContent:_textContent
+                               withTitle:_textTitle
+                        withImageUrlList:_imageUrlList
+                                 success:sucessHandler
+                                 failure:failureHandler];
 }
 
 #pragma mark - PullTableViewDelegate
@@ -313,6 +316,14 @@
         
         if (list.count == 0) {
             [app alert:@"已是最新"];
+        }
+        else {
+            NSError* error = nil;
+            if (![_frCtrl performFetch:&error]) {
+                CSLog(@"frAssignmentsWithClassList Error: %@", error);
+            }
+            
+            [self.pullTableView reloadData];
         }
     };
     

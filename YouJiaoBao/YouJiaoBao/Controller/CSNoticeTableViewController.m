@@ -174,6 +174,7 @@
         CSContentEditorViewController* ctrl = segue.destinationViewController;
         ctrl.navigationItem.title = @"发布园内公告";
         ctrl.delegate = self;
+        ctrl.singleImage = YES;
     }
 }
 
@@ -242,6 +243,8 @@
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         [gApp alert:@"提交成功"];
         [self.navigationController popToViewController:self animated:YES];
+        
+        [self reloadNewsList];
     };
     
     FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -252,7 +255,7 @@
     [gApp waitingAlert:@"提交数据中"];
     
     [http opPostNewsOfKindergarten:engine.loginInfo.schoolId.integerValue
-                    withSenderName:engine.loginInfo.name
+                        withSender:engine.loginInfo
                        withClassId:@(0)
                        withContent:_textContent
                          withTitle:_textTitle

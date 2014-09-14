@@ -12,7 +12,7 @@
 
 @property (nonatomic, weak) id delegate;
 
-@property (nonatomic, assign) BOOL hasTitle;
+@property (nonatomic, assign) BOOL singleImage;
 
 @end
 

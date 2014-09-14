@@ -35,7 +35,7 @@
 
 @implementation CSContentEditorViewController
 @synthesize delegate = _delegate;
-@synthesize hasTitle = _hasTitle;
+@synthesize singleImage = _singleImage;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -158,6 +158,10 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     UIImage* img = info[UIImagePickerControllerOriginalImage];
     if (img) {
+        if (self.singleImage) {
+            [_imageList removeAllObjects];
+        }
+        
         [_imageList addObject:img];
         [self.gmGridView reloadData];
     }

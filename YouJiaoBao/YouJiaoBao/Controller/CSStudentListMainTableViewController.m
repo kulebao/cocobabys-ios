@@ -126,6 +126,7 @@
     
     NSArray* children = [_classChildren objectAtIndex:indexPath.section];
     EntityChildInfo* childInfo = [children objectAtIndex:indexPath.row];
+    CSLog(@"child:%@", childInfo);
     
     [self performSegueWithIdentifier:@"segue.babylist.childprofile" sender:childInfo];
 }

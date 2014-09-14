@@ -39,9 +39,8 @@
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onLoginSuccess:) name:kNotiLoginSuccess object:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onLogoutSuccess:) name:kNotiLogoutSuccess object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUnauthorized:) name:kNotiUnauthorized object:nil];
-    
     
     [self autoLogin];
 }
@@ -120,6 +119,11 @@
 - (void)onLoginSuccess:(NSNotification*)noti {
     [[CSEngine sharedInstance] onLogin:noti.object];
     [self showMainView];
+}
+
+- (void)onLogoutSuccess:(NSNotification*)noti {
+    [[CSEngine sharedInstance] clearAccount];
+    [self showLoginView];
 }
 
 - (void)onUnauthorized:(NSNotification*)noti {

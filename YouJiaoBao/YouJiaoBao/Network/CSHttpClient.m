@@ -13,12 +13,14 @@
 
 @property (nonatomic, strong) AFHTTPRequestOperationManager* opManager;
 @property (nonatomic, strong) AFHTTPRequestOperationManager* opQiniuManager;
+@property (nonatomic, strong) AFHTTPRequestOperationManager* opiTunesManager;
 
 @end
 
 @implementation CSHttpClient
 @synthesize opManager = _opManager;
 @synthesize opQiniuManager = _opQiniuManager;
+@synthesize opiTunesManager = _opiTunesManager;
 
 + (id)sharedInstance {
     static CSHttpClient* s_httpClient = nil;
@@ -60,7 +62,6 @@
         _opQiniuManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:kQiniuUploadServerHost]];
         
         _opQiniuManager.requestSerializer = [AFJSONRequestSerializer serializerWithWritingOptions:0];
-//        [_opQiniuManager.requestSerializer setValue:@"ios" forHTTPHeaderField:@"source"];
         
         AFJSONResponseSerializer* responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:0];
         responseSerializer.removesKeysWithNullValues = YES;
@@ -71,6 +72,23 @@
     }
     
     return _opQiniuManager;
+}
+
+- (AFNetworkReachabilityManager*)opiTunesManager {
+    if (_opiTunesManager == nil) {
+        _opiTunesManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:kQiniuUploadServerHost]];
+        
+        _opiTunesManager.requestSerializer = [AFJSONRequestSerializer serializerWithWritingOptions:0];
+        
+        AFJSONResponseSerializer* responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:0];
+        responseSerializer.removesKeysWithNullValues = YES;
+        responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/plain", nil];
+        _opiTunesManager.responseSerializer = responseSerializer;
+        
+        _opiTunesManager.securityPolicy.allowInvalidCertificates = YES;
+    }
+    
+    return _opiTunesManager;
 }
 
 - (AFHTTPRequestOperation*)opUploadToQiniu:(NSData*)data
@@ -433,4 +451,18 @@
                                               failure:failure];
     return op;
 }
+
+- (AFHTTPRequestOperation*)opCheckUpdates:(NSString*)appId
+                                  success:(SuccessResponseHandler)success
+                                  failure:(FailureResponseHandler)failure {
+    NSString* apiUrl = @"/lookup";
+    NSDictionary* parameters = @{@"id": appId};
+    
+    AFHTTPRequestOperation* op = [self.opiTunesManager POST:apiUrl
+                                                 parameters:parameters
+                                                    success:success
+                                                    failure:failure];
+    return op;
+}
+
 @end

@@ -838,6 +838,9 @@
                                 <state key="highlighted" backgroundImage="btn_click.png">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="onBtnCheckUpdatesClicked:" destination="8kA-hd-XTO" eventType="touchUpInside" id="MjT-YZ-nQ1"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="khJ-Ic-bgf">
                                 <rect key="frame" x="10" y="172" width="300" height="42"/>
@@ -911,6 +914,9 @@
                                 <state key="highlighted" backgroundImage="btn_click.png">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="onBtnLogoutClicked:" destination="8kA-hd-XTO" eventType="touchUpInside" id="SC1-VN-sGQ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -1155,6 +1161,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="Zh8-gs-gBB">
                                 <rect key="frame" x="20" y="30" width="80" height="80"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="VK0-Ip-5D1"/>
                                     <constraint firstAttribute="width" constant="80" id="Z8k-3g-tea"/>
@@ -1858,7 +1865,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="4dZ-qf-s5s"/>
         <segue reference="a0J-HN-Yn1"/>
+        <segue reference="19H-fG-dXX"/>
     </inferredMetricsTieBreakers>
 </document>

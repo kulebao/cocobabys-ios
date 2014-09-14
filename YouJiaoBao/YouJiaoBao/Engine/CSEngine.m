@@ -7,12 +7,14 @@
 //
 
 #import "CSEngine.h"
+#import "AHAlertView.h"
 
 NSString* kNotiLoginSuccess = @"noti.login.success";
+NSString* kNotiLogoutSuccess = @"noti.logout.success";
 NSString* kNotiUnauthorized = @"noti.unauthorized";
-
 NSString* kKeyLoginAccount = @"key.login.account";
 
+NSString* kAppleID = @"917314512";
 
 @implementation CSEngine
 @synthesize loginInfo = _loginInfo;
@@ -24,6 +26,24 @@ NSString* kKeyLoginAccount = @"key.login.account";
     }
     
     return s_instance;
+}
+
+- (void)setupAppearance {
+    UIImage* imgAlertBg = [UIImage imageNamed:@"alert-bg.png"];
+    UIImage* imgBtnBg = [UIImage imageNamed:@"btn-type1.png"];
+    UIImage* imgBtnPressedBg = [UIImage imageNamed:@"btn-type1-pressed.png"];
+    
+    imgAlertBg = [imgAlertBg resizableImageWithCapInsets:UIEdgeInsetsMake(100, 50, 10, 50)];
+    
+    id alertAppearance = [AHAlertView appearance];
+    [alertAppearance setBackgroundImage:imgAlertBg];
+    [alertAppearance setTitleTextAttributes:@{UITextAttributeTextColor:[UIColor blackColor],}];
+    [alertAppearance setMessageTextAttributes:@{UITextAttributeTextColor:[UIColor blackColor],}];
+    [alertAppearance setButtonBackgroundImage:imgBtnBg forState:UIControlStateNormal];
+    [alertAppearance setCancelButtonBackgroundImage:imgBtnBg forState:UIControlStateNormal];
+    [alertAppearance setButtonBackgroundImage:imgBtnPressedBg forState:UIControlStateHighlighted];
+    [alertAppearance setCancelButtonBackgroundImage:imgBtnPressedBg forState:UIControlStateHighlighted];
+    [alertAppearance setContentInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
 }
 
 - (void)onLogin:(EntityLoginInfo*)loginInfo {

@@ -102,4 +102,8 @@ typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSErr
                                                   success:(SuccessResponseHandler)success
                                                   failure:(FailureResponseHandler)failure;
 
+- (AFHTTPRequestOperation*)opCheckUpdates:(NSString*)appId
+                                   success:(SuccessResponseHandler)success
+                                   failure:(FailureResponseHandler)failure;
+
 @end

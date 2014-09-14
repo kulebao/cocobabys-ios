@@ -9,6 +9,7 @@
 #import "CSAppDelegate.h"
 #import "AFNetworkActivityIndicatorManager.h"
 #import "CSCoreDataHelper.h"
+#import "CSEngine.h"
 
 CSAppDelegate* gApp = nil;
 
@@ -19,6 +20,8 @@ CSAppDelegate* gApp = nil;
 {
     // Override point for customization after application launch.
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
+    [[CSEngine sharedInstance] setupAppearance];
+    
     gApp = self;
     
     return YES;
@@ -112,5 +115,6 @@ CSAppDelegate* gApp = nil;
     [NSObject cancelPreviousPerformRequestsWithTarget:self.hud];
     [self.hud hide:YES afterDelay:delay];
 }
+
 
 @end

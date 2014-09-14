@@ -11,13 +11,18 @@
 #import "ModelAccount.h"
 
 extern NSString* kNotiLoginSuccess;
+extern NSString* kNotiLogoutSuccess;
 extern NSString* kNotiUnauthorized;
+
+extern NSString* kAppleID;
 
 @interface CSEngine : NSObject
 @property (nonatomic, strong, readonly) EntityLoginInfo* loginInfo;
 @property (nonatomic, strong, readonly) NSArray* classInfoList;
 
 + (id)sharedInstance;
+
+- (void)setupAppearance;
 
 - (void)onLogin:(EntityLoginInfo*)loginInfo;
 

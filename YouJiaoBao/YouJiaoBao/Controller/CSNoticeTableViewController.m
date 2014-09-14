@@ -318,6 +318,14 @@
         if (list.count == 0) {
             [app alert:@"已是最新"];
         }
+        else {
+            NSError* error = nil;
+            if (![_frCtrl performFetch:&error]) {
+                CSLog(@"frNewsWithClassList Error: %@", error);
+            }
+            
+            [self.pullTableView reloadData];
+        }
     };
     
     id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {

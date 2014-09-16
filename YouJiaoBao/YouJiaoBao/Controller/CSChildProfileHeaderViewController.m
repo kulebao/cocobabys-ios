@@ -22,6 +22,7 @@
 
 @implementation CSChildProfileHeaderViewController
 @synthesize childInfo = _childInfo;
+@synthesize delegate = _delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -45,7 +46,7 @@
     [self.imgPortrait sd_setImageWithURL:[NSURL URLWithString:self.childInfo.portrait]
                         placeholderImage:[UIImage imageNamed:@"default_icon.png"]];
     
-    self.labName.text = self.childInfo.nick;
+    self.labName.text = self.childInfo.name;
 }
 
 - (void)didReceiveMemoryWarning
@@ -66,8 +67,15 @@
 */
 
 - (IBAction)onBtnSessionClicked:(id)sender {
+    if ([_delegate respondsToSelector:@selector(childProfileHeaderViewControllerShowChating:)]) {
+        [_delegate childProfileHeaderViewControllerShowChating:self];
+    }
 }
 
 - (IBAction)onBtnAssessmentsClicked:(id)sender {
+    if ([_delegate respondsToSelector:@selector(childProfileHeaderViewControllerShowAssessment:)]) {
+        [_delegate childProfileHeaderViewControllerShowAssessment:self];
+    }
 }
+
 @end

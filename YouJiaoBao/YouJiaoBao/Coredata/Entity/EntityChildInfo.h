@@ -2,14 +2,14 @@
 //  EntityChildInfo.h
 //  YouJiaoBao
 //
-//  Created by xin.c.wang on 14-9-14.
+//  Created by xin.c.wang on 14-9-16.
 //  Copyright (c) 2014年 Codingsoft. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class EntityClassInfo;
+@class EntityClassInfo, EntityDailylog;
 
 @interface EntityChildInfo : NSManagedObject
 
@@ -26,5 +26,6 @@
 @property (nonatomic, retain) NSNumber * status;
 @property (nonatomic, retain) NSNumber * timestamp;
 @property (nonatomic, retain) EntityClassInfo *classInfo;
+@property (nonatomic, retain) EntityDailylog *dailylog;
 
 @end

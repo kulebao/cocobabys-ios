@@ -8,11 +8,13 @@
 
 #import "CSClassHeaderView.h"
 #import "ModelClassData.h"
+#import "EntityDailylogHelper.h"
 
 @interface CSClassHeaderView ()
 @property (weak, nonatomic) IBOutlet UIImageView *imgIcon;
 @property (weak, nonatomic) IBOutlet UILabel *labTitle;
 @property (weak, nonatomic) IBOutlet UIButton *onBtnFull;
+@property (weak, nonatomic) IBOutlet UILabel *labDetail;
 - (IBAction)onBtnFullClicked:(id)sender;
 
 @end
@@ -60,7 +62,15 @@
 
 - (void)reloadData {
     if (_modelData) {
-        self.labTitle.text = [NSString stringWithFormat:@"%@ (0/%d)", _modelData.classInfo.name, _modelData.childrenList.count];
+        NSInteger recordNum = 0;
+        for (EntityChildInfo* childInfo in _modelData.childrenList) {
+            if ([EntityDailylogHelper isDailylogOfToday:childInfo.dailylog] && childInfo.dailylog.noticeType.integerValue == kKuleNoticeTypeCheckIn) {
+                recordNum++;
+            }
+        }
+        
+        self.labTitle.text = [NSString stringWithFormat:@"%@", _modelData.classInfo.name];
+        self.labDetail.text = [NSString stringWithFormat:@"(实到%d人/应到%d人)", recordNum, _modelData.childrenList.count];
         self.imgIcon.highlighted = _modelData.expand;
     }
 }

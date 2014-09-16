@@ -226,10 +226,10 @@
     
 }
 
-- (AFHTTPRequestOperation*)opGetDailylogOfKindergarten:(NSInteger)schoolId
-                                         withClassList:(NSArray*)classIdList
-                                               success:(SuccessResponseHandler)success
-                                               failure:(FailureResponseHandler)failure {
+- (AFHTTPRequestOperation*)opGetDailyLogListOfKindergarten:(NSInteger)schoolId
+                                             withClassList:(NSArray*)classIdList
+                                                   success:(SuccessResponseHandler)success
+                                                   failure:(FailureResponseHandler)failure {
     id parameters = @{@"class_id": [classIdList componentsJoinedByString:@","],
                       @"connected" : @"true"};
     
@@ -240,6 +240,7 @@
                                             success:success
                                             failure:failure];
     return op;
+    
 }
 
 - (AFHTTPRequestOperation*)opGetRelationshipOfChild:(NSString*)childId

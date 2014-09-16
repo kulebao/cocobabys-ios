@@ -10,6 +10,7 @@
 #import "GMGridView.h"
 #import "MJPhotoBrowser.h"
 #import "MJPhoto.h"
+#import "CSAppDelegate.h"
 
 @interface CSContentEditorViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GMGridViewDataSource, GMGridViewSortingDelegate, GMGridViewTransformationDelegate, GMGridViewActionDelegate> {
     NSMutableArray* _imageList;
@@ -30,6 +31,7 @@
 - (IBAction)onBtnPhotoFromCamraClicked:(id)sender;
 - (IBAction)onBtnPhotoFromGalleryClicked:(id)sender;
 - (IBAction)onBtnFinishClicked:(id)sender;
+- (IBAction)onFieldDidEndOnExit:(id)sender;
 
 @end
 
@@ -52,11 +54,11 @@
     // Do any additional setup after loading the view from its nib.
     [self customizeBackBarItem];
     
-//    self.gmGridView.centerGrid = YES;
+    //    self.gmGridView.centerGrid = YES;
     self.gmGridView.actionDelegate = self;
     self.gmGridView.dataSource = self;
-//    self.gmGridView.transformDelegate = self;
-//    self.gmGridView.sortingDelegate = self;
+    //    self.gmGridView.transformDelegate = self;
+    //    self.gmGridView.sortingDelegate = self;
     self.gmGridView.enableEditOnLongPress = YES;
     self.gmGridView.disableEditOnEmptySpaceTap = YES;
     self.gmGridView.clipsToBounds = YES;
@@ -109,15 +111,41 @@
     }];
 }
 
+- (IBAction)onFieldDidEndOnExit:(id)sender {
+    [self.textContent becomeFirstResponder];
+}
+
 - (IBAction)onBtnFinishClicked:(id)sender {
+    [self.fieldTitle resignFirstResponder];
     [self.textContent resignFirstResponder];
     
-    if ([_delegate respondsToSelector:@selector(contentEditorViewController:finishEditText:withTitle:withImages:)]) {
-        [_delegate contentEditorViewController:self
-                                finishEditText:self.textContent.text
-                                     withTitle:self.fieldTitle.text
-                                    withImages:_imageList];
+    if ([self checkInput]) {
+        if ([_delegate respondsToSelector:@selector(contentEditorViewController:finishEditText:withTitle:withImages:)]) {
+            [_delegate contentEditorViewController:self
+                                    finishEditText:self.textContent.text
+                                         withTitle:self.fieldTitle.text
+                                        withImages:_imageList];
+        }
     }
+    else {
+        
+    }
+}
+
+- (BOOL)checkInput {
+    BOOL ok = YES;
+    
+    if (self.fieldTitle && self.fieldTitle.text.length == 0) {
+        ok = NO;
+        [self.fieldTitle becomeFirstResponder];
+        [gApp alert:@"请填写标题"];
+    }
+    else if (self.textContent.text.length == 0) {
+        ok = NO;
+        [gApp alert:@"请填写内容"];
+    }
+    
+    return ok;
 }
 
 #pragma mark - UITextViewDelegate

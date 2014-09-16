@@ -19,8 +19,15 @@
                         <constraint firstAttribute="height" constant="24" id="Tbj-lQ-E2K"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="库贝班  (0/0)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NGr-Hh-Iny">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="库贝班" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NGr-Hh-Iny">
                     <rect key="frame" x="32" y="5" width="288" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" (实到0人/应到0人)" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="810-o7-7Bp">
+                    <rect key="frame" x="32" y="5" width="280" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -50,6 +57,7 @@
                 <constraint firstAttribute="trailing" secondItem="OOs-C5-avi" secondAttribute="trailing" id="8r9-Ag-0dy"/>
                 <constraint firstAttribute="bottom" secondItem="NGr-Hh-Iny" secondAttribute="bottom" constant="6" id="BjD-PG-Mh2"/>
                 <constraint firstAttribute="trailing" secondItem="NGr-Hh-Iny" secondAttribute="trailing" id="FkM-7U-Opn"/>
+                <constraint firstItem="ZZ0-f3-Mvf" firstAttribute="top" secondItem="810-o7-7Bp" secondAttribute="bottom" constant="5" id="IaQ-La-EUM"/>
                 <constraint firstItem="OOs-C5-avi" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Ije-RW-Jc3"/>
                 <constraint firstAttribute="bottom" secondItem="ZZ0-f3-Mvf" secondAttribute="bottom" id="JKs-gE-ia2"/>
                 <constraint firstAttribute="trailing" secondItem="ZZ0-f3-Mvf" secondAttribute="trailing" id="KcM-ov-Jfh"/>
@@ -57,13 +65,17 @@
                 <constraint firstItem="NGr-Hh-Iny" firstAttribute="leading" secondItem="b7u-VR-R0y" secondAttribute="trailing" constant="8" symbolic="YES" id="Nwm-4k-v1w"/>
                 <constraint firstAttribute="centerY" secondItem="b7u-VR-R0y" secondAttribute="centerY" id="Rju-gK-tts"/>
                 <constraint firstAttribute="bottom" secondItem="OOs-C5-avi" secondAttribute="bottom" id="aW9-CN-9lK"/>
+                <constraint firstItem="810-o7-7Bp" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="fF9-QR-nWW"/>
                 <constraint firstItem="ZZ0-f3-Mvf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="k12-WW-7uA"/>
                 <constraint firstItem="b7u-VR-R0y" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="mUd-Uq-vq1"/>
+                <constraint firstAttribute="trailing" secondItem="810-o7-7Bp" secondAttribute="trailing" constant="8" id="r3t-Bo-20I"/>
+                <constraint firstItem="810-o7-7Bp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="32" id="vnW-yD-UyO"/>
                 <constraint firstItem="NGr-Hh-Iny" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="xW8-L4-QX8"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="imgIcon" destination="b7u-VR-R0y" id="JNE-l1-aqa"/>
+                <outlet property="labDetail" destination="810-o7-7Bp" id="nI4-nD-Aad"/>
                 <outlet property="labTitle" destination="NGr-Hh-Iny" id="TyK-aw-QBU"/>
                 <outlet property="onBtnFull" destination="OOs-C5-avi" id="mej-q4-yvB"/>
             </connections>

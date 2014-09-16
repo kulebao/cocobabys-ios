@@ -17,6 +17,8 @@
 #import "CSNewsInfoDetailViewController.h"
 #import "CSContentEditorViewController.h"
 #import "UIViewController+CSKit.h"
+#import "CSPopupController.h"
+#import "CSClassPickerView.h"
 
 @interface CSNoticeTableViewController () <PullTableViewDelegate, NSFetchedResultsControllerDelegate> {
     NSFetchedResultsController* _frCtrl;
@@ -25,9 +27,14 @@
     NSMutableArray* _imageList;
     NSString* _textContent;
     NSString* _textTitle;
+    
+    NSNumber* _classId;
 }
 
 @property (strong, nonatomic) IBOutlet PullTableView *pullTableView;
+
+@property (nonatomic, strong) CSPopupController* popCtrl;
+@property (nonatomic, strong) CSClassPickerView* classPickerView;
 
 @end
 
@@ -52,8 +59,13 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     [self customizeBackBarItem];
-    
     [self customizeOkBarItemWithTarget:self action:@selector(onSendNotice:) text:@"发布"];
+    
+    self.popCtrl = [CSPopupController popupControllerWithView:gApp.window];
+    
+    self.classPickerView = [CSClassPickerView defaultClassPickerView];
+    self.classPickerView.delegate = self;
+    self.classPickerView.canSelectAll = YES;
     
     self.pullTableView.pullDelegate = self;
     self.pullTableView.pullBackgroundColor = [UIColor clearColor];
@@ -187,14 +199,36 @@
     _textTitle = title;
     _imageUrlList = [NSMutableArray array];
     _imageList = [NSMutableArray arrayWithArray:imageList];
+ 
+    [self doSelectClass];
+}
+
+- (void)doSelectClass {
+    self.classPickerView.center = CGPointMake(gApp.window.bounds.size.width/2, gApp.window.bounds.size.height/2);
     
-    if (_imageList.count > 0) {
-        [self doUploadImage];
-    }
-    else {
-        [self doSendSubmit];
-    }
+    [self.classPickerView reset];
+    [self.popCtrl presentView:self.classPickerView animated:NO completion:^{
+        
+    }];
+}
+
+#pragma mark - CSClassPickerViewDelegate
+- (void)classPickerViewDidOk:(CSClassPickerView*)view withClassId:(NSNumber *)classId{
+    [self.popCtrl dismiss];
     
+    _classId = classId;
+    if (_classId) {
+        if (_imageList.count > 0) {
+            [self doUploadImage];
+        }
+        else {
+            [self doSendSubmit];
+        }
+    }
+}
+
+- (void)classPickerViewDidCancel:(CSClassPickerView*)view {
+    [self.popCtrl dismiss];
 }
 
 - (void)doUploadImage {
@@ -256,7 +290,7 @@
     
     [http opPostNewsOfKindergarten:engine.loginInfo.schoolId.integerValue
                         withSender:engine.loginInfo
-                       withClassId:@(0)
+                       withClassId:_classId
                        withContent:_textContent
                          withTitle:_textTitle
                   withImageUrlList:_imageUrlList

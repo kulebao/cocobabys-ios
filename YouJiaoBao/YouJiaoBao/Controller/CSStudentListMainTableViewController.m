@@ -11,18 +11,18 @@
 #import "CSEngine.h"
 #import "EntityClassInfoHelper.h"
 #import "EntityChildInfoHelper.h"
+#import "EntityDailylogHelper.h"
 #import "CSChildListItemTableViewCell.h"
 #import "UIImageView+WebCache.h"
 #import "CSChildProfileViewController.h"
 #import "ModelClassData.h"
+#import "NSDate+CSKit.h"
 
 @interface CSStudentListMainTableViewController () <NSFetchedResultsControllerDelegate> {
     NSMutableArray* _classChildren;
     NSFetchedResultsController* _frClasses;
     NSFetchedResultsController* _frChildren;
 }
-
-- (IBAction)onRefreshClicked:(id)sender;
 
 @end
 
@@ -109,6 +109,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     ModelClassData* classData = [_classChildren objectAtIndex:section];
+    [classData.classHeaderView reloadData];
     return classData.classHeaderView;
 }
 
@@ -128,7 +129,27 @@
     [cell.imgPortrait sd_setImageWithURL:[NSURL URLWithString:childInfo.portrait]
                    placeholderImage:[UIImage imageNamed:@"default_icon.png"]];
     
-    cell.labName.text = childInfo.nick;
+    cell.labName.text = childInfo.name;
+    
+    EntityDailylog* dailyLog = childInfo.dailylog;
+    if (dailyLog && [EntityDailylogHelper isDailylogOfToday:dailyLog]) {
+        NSString* timestampString = [[NSDate dateWithTimeIntervalSince1970:dailyLog.timestamp.longLongValue/1000.0] isoDateTimeString];
+        NSString* body = @"";
+        if (dailyLog.noticeType.integerValue == kKuleNoticeTypeCheckIn) {
+            body = [NSString stringWithFormat:@"由 %@ 于 %@ 刷卡入园。", dailyLog.parentName, timestampString];
+        }
+        else if (dailyLog.noticeType.integerValue == kKuleNoticeTypeCheckOut){
+            body = [NSString stringWithFormat:@"由 %@ 于 %@ 刷卡离园。", dailyLog.parentName, timestampString];
+        }
+        else {
+            body = [NSString stringWithFormat:@"由 %@ 于 %@ 刷卡(%@)。", dailyLog.parentName, timestampString, dailyLog.noticeType];
+        }
+        
+        cell.labNotification.text = body;
+    }
+    else {
+        cell.labNotification.text = @"未刷卡";
+    }
     
     return cell;
 }
@@ -201,10 +222,6 @@
     }
 }
 
-- (IBAction)onRefreshClicked:(id)sender {
-    [self doRefresh];
-}
-
 - (void)doRefresh {
     [self reloadChildList];
     [self reloadDailylogList];
@@ -247,17 +264,18 @@
     CSHttpClient* http = [CSHttpClient sharedInstance];
     
     id success = ^(AFHTTPRequestOperation *operation, id jsonObjectList) {
-
+        [EntityDailylogHelper updateEntities:jsonObjectList];
+        [self.tableView reloadData];
     };
     
     id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
         
     };
     
-    [http opGetDailylogOfKindergarten:engine.loginInfo.schoolId.integerValue
-                        withClassList:classIdList
-                              success:success
-                              failure:failure];
+    [http opGetDailyLogListOfKindergarten:engine.loginInfo.schoolId.integerValue
+                            withClassList:classIdList
+                                  success:success
+                                  failure:failure];
 }
 
 #pragma mark - NSFetchedResultsControllerDelegate

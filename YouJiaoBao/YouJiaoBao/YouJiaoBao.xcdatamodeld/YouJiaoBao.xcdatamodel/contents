@@ -25,6 +25,7 @@
         <attribute name="status" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="timestamp" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <relationship name="classInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EntityClassInfo" inverseName="childrenList" inverseEntity="EntityClassInfo" syncable="YES"/>
+        <relationship name="dailylog" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EntityDailylog" inverseName="childInfo" inverseEntity="EntityDailylog" syncable="YES"/>
     </entity>
     <entity name="EntityClassInfo" representedClassName="EntityClassInfo" syncable="YES">
         <attribute name="classId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -33,6 +34,14 @@
         <attribute name="schoolId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="timestamp" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <relationship name="childrenList" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="EntityChildInfo" inverseName="classInfo" inverseEntity="EntityChildInfo" syncable="YES"/>
+    </entity>
+    <entity name="EntityDailylog" representedClassName="EntityDailylog" syncable="YES">
+        <attribute name="childId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="noticeType" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="parentName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="recordUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="timestamp" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <relationship name="childInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EntityChildInfo" inverseName="dailylog" inverseEntity="EntityChildInfo" syncable="YES"/>
     </entity>
     <entity name="EntityLoginInfo" representedClassName="EntityLoginInfo" syncable="YES">
         <attribute name="birthday" optional="YES" attributeType="String" syncable="YES"/>
@@ -84,11 +93,12 @@
     </entity>
     <elements>
         <element name="EntityAssignmentInfo" positionX="261" positionY="351" width="128" height="178"/>
-        <element name="EntityChildInfo" positionX="261" positionY="306" width="128" height="238"/>
+        <element name="EntityChildInfo" positionX="261" positionY="306" width="128" height="253"/>
         <element name="EntityClassInfo" positionX="261" positionY="297" width="128" height="133"/>
         <element name="EntityLoginInfo" positionX="261" positionY="198" width="128" height="240"/>
         <element name="EntityNewsInfo" positionX="261" positionY="351" width="128" height="208"/>
         <element name="EntityParentInfo" positionX="261" positionY="342" width="128" height="210"/>
         <element name="EntityRelationshipInfo" positionX="270" positionY="360" width="128" height="118"/>
+        <element name="EntityDailylog" positionX="270" positionY="351" width="128" height="133"/>
     </elements>
 </model>

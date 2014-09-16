@@ -9,6 +9,7 @@
 #import "CSClassPickerView.h"
 #import "CSEngine.h"
 #import "EntityClassInfo.h"
+#import "CSSelectableTableViewCell.h"
 
 @interface CSClassPickerView () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -51,25 +52,43 @@
     self.tableView.dataSource = self;
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectNull];
     
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+    [self.tableView registerClass:[CSSelectableTableViewCell class] forCellReuseIdentifier:@"cell"];
     
     self.btnOk.enabled = NO;
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[[CSEngine sharedInstance] classInfoList] count];
+    NSInteger numberOfRows = 0;
+    if (section == 0 && self.canSelectAll) {
+        numberOfRows = 1;
+    }
+    else if (section == 1) {
+        numberOfRows = [[[CSEngine sharedInstance] classInfoList] count];
+    }
+    return numberOfRows;
 }
 
 // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
 // Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    
-    NSArray* classInfoList = [[CSEngine sharedInstance] classInfoList];
-    EntityClassInfo* classInfo = [classInfoList objectAtIndex:indexPath.row];
-    cell.textLabel.text = classInfo.name;
+    CSSelectableTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     cell.textLabel.font = [UIFont systemFontOfSize:14.0];
+    
+    NSInteger section = indexPath.section;
+    if (section == 0) {
+        cell.textLabel.text = @"全校范围";
+    }
+    else if (section == 1) {
+        NSArray* classInfoList = [[CSEngine sharedInstance] classInfoList];
+        EntityClassInfo* classInfo = [classInfoList objectAtIndex:indexPath.row];
+        cell.textLabel.text = classInfo.name;
+        
+    }
     
     return cell;
 }
@@ -87,12 +106,24 @@
 }
 
 - (IBAction)onBtnOkClicked:(id)sender {
-    if ([_delegate respondsToSelector:@selector(classPickerViewDidOk:withClassInfo:)]) {
+    if ([_delegate respondsToSelector:@selector(classPickerViewDidOk:withClassId:)]) {
         NSArray* classInfoList = [[CSEngine sharedInstance] classInfoList];
         NSIndexPath* indexPath = [self.tableView indexPathForSelectedRow];
-        EntityClassInfo* classInfo = [classInfoList objectAtIndex:indexPath.row];
+        NSInteger section = indexPath.section;
+        NSNumber* classId = nil;
+        if (section == 0) {
+            classId = @(0);
+        }
+        else {
+            EntityClassInfo* classInfo = [classInfoList objectAtIndex:indexPath.row];
+            if (classInfo) {
+                classId = classInfo.classId;
+            }
+        }
         
-        [_delegate classPickerViewDidOk:self withClassInfo:classInfo];
+        if (classId) {
+            [_delegate classPickerViewDidOk:self withClassId:classId];
+        }
     }
 }
 

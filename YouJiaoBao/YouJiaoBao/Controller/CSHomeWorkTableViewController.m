@@ -27,8 +27,7 @@
     NSString* _textContent;
     NSString* _textTitle;
     
-    NSArray* _classInfoList;
-    EntityClassInfo* _classInfo;
+    NSNumber* _classId;
 }
 
 @property (strong, nonatomic) IBOutlet PullTableView *pullTableView;
@@ -59,7 +58,6 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     [self customizeBackBarItem];
-    
     [self customizeOkBarItemWithTarget:self action:@selector(onCreateAssignment:) text:@"发布"];
     
     self.popCtrl = [CSPopupController popupControllerWithView:gApp.window];
@@ -214,11 +212,11 @@
 }
 
 #pragma mark - CSClassPickerViewDelegate
-- (void)classPickerViewDidOk:(CSClassPickerView*)view withClassInfo:(EntityClassInfo*)classInfo {
+- (void)classPickerViewDidOk:(CSClassPickerView*)view withClassId:(NSNumber *)classId{
     [self.popCtrl dismiss];
     
-    _classInfo = classInfo;
-    if (_classInfo) {
+    _classId = classId;
+    if (_classId) {
         if (_imageList.count > 0) {
             [self doUploadImage];
         }
@@ -231,6 +229,7 @@
 - (void)classPickerViewDidCancel:(CSClassPickerView*)view {
     [self.popCtrl dismiss];
 }
+
 - (void)doUploadImage {
     CSHttpClient* http = [CSHttpClient sharedInstance];
     CSEngine* engine = [CSEngine sharedInstance];
@@ -289,7 +288,7 @@
     
     [http opPostAssignmentOfKindergarten:engine.loginInfo.schoolId.integerValue
                               withSender:engine.loginInfo
-                             withClassId:_classInfo.classId
+                             withClassId:_classId
                              withContent:_textContent
                                withTitle:_textTitle
                         withImageUrlList:_imageUrlList

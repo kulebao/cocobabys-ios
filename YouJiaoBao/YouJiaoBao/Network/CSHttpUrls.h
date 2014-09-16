@@ -45,22 +45,24 @@
 #define kPathEmployeeLogin              @"/employee_login.do"
 #define kPathEmployeeManagedClass       @"/kindergarten/%@/employee/%@/class"
 #define kPathKindergartenChildList      @"/kindergarten/%@/child"
-#define kPathKindergartenDailylogList   @"/kindergarten/%@/dailylog"
 #define kPathKindergartenRelationship   @"/kindergarten/%@/relationship"
 #define kPathKindergartenNewsList       @"/kindergarten/%@/news"
 #define kPathKindergartenPostNews       @"/kindergarten/%@/admin/%@/news"
 #define kPathKindergartenAssignmentList @"/kindergarten/%@/assignment"
 
 // PATH: 修改密码
-#define kChangePasswordPath         @"/kindergarten/%@/employee/%@/password"
+#define kChangePasswordPath             @"/kindergarten/%@/employee/%@/password"
 
 // PATH: 反馈
-#define kFeedbackPath               @"/feedback"
+#define kFeedbackPath                   @"/feedback"
 
 // PATH: History信息
-#define kGetHistoryListPath         @"/kindergarten/%@/history/%@/record"
+#define kGetHistoryListPath             @"/kindergarten/%@/history/%@/record"
 
 // PATH: 亲子作业列表
-#define kAssignmentListPath         @"/kindergarten/%@/assignment"
+#define kAssignmentListPath             @"/kindergarten/%@/assignment"
+
+// PATH: 当日批量打卡日志
+#define kPathKindergartenDailylogList   @"/kindergarten/%@/dailylog"
 
 #endif

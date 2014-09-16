@@ -17,6 +17,7 @@
     NSInteger _lastDeleteItemIndexAsked;
 }
 
+- (IBAction)onFieldDidEndOnExit:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextView *textContent;
 @property (weak, nonatomic) IBOutlet UIButton *btnHideKeyboard;
 @property (weak, nonatomic) IBOutlet UIButton *btnPhotoFromCamra;
@@ -268,4 +269,6 @@
     [self.gmGridView setEditing:NO animated:YES];
 }
 
+- (IBAction)onFieldDidEndOnExit:(id)sender {
+}
 @end

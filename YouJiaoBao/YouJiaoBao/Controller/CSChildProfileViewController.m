@@ -12,10 +12,10 @@
 #import "CSEngine.h"
 #import "EntityRelationshipInfoHelper.h"
 #import "CSChildRelationshipItemTableViewCell.h"
+#import "CSAssessmentEditorViewController.h"
 
-@interface CSChildProfileViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface CSChildProfileViewController () <UITableViewDataSource, UITableViewDelegate, CSChildProfileHeaderViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
 @property (nonatomic, strong) NSArray* childRelationships;
 
 @end
@@ -63,6 +63,11 @@
     // Pass the selected object to the new view controller.
     if ([segue.identifier isEqualToString:@"segue.childprofile.header"]) {
         CSChildProfileHeaderViewController* ctrl = [segue destinationViewController];
+        ctrl.childInfo = self.childInfo;
+        ctrl.delegate = self;
+    }
+    else if ([segue.identifier isEqualToString:@"segue.childprofile.assessment"]) {
+        CSAssessmentEditorViewController* ctrl = [segue destinationViewController];
         ctrl.childInfo = self.childInfo;
     }
 }
@@ -166,5 +171,14 @@
  return YES;
  }
  */
+
+#pragma mark - CSChildProfileHeaderViewControllerDelegate
+- (void)childProfileHeaderViewControllerShowChating:(CSChildProfileHeaderViewController*)ctrl {
+    
+}
+
+- (void)childProfileHeaderViewControllerShowAssessment:(CSChildProfileHeaderViewController*)ctrl {
+    [self performSegueWithIdentifier:@"segue.childprofile.assessment" sender:nil];
+}
 
 @end

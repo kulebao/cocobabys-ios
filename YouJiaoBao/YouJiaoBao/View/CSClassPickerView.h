@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "EntityClassInfo.h"
 
 @interface CSClassPickerView : UIView
 
 @property (nonatomic, weak) id delegate;
+@property (nonatomic, assign) BOOL canSelectAll;
 
 + (instancetype)defaultClassPickerView;
 
@@ -23,7 +23,7 @@
 @protocol CSClassPickerViewDelegate <NSObject>
 
 @optional
-- (void)classPickerViewDidOk:(CSClassPickerView*)view withClassInfo:(EntityClassInfo*)classInfo;
+- (void)classPickerViewDidOk:(CSClassPickerView*)view withClassId:(NSNumber*)classId;
 - (void)classPickerViewDidCancel:(CSClassPickerView*)view;
 
 @end

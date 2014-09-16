@@ -17,6 +17,8 @@
 
 + (instancetype)defaultClassHeaderView;
 
+- (void)reloadData;
+
 @end
 
 @protocol CSClassHeaderViewDelegate <NSObject>

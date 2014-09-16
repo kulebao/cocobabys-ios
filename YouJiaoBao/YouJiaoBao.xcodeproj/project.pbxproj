@@ -25,7 +25,6 @@
 		0956E386198151810049202E /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0956E375198151810049202E /* libopencore-amrnb.a */; };
 		0956E38D198151810049202E /* libopencore-amrwb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0956E37C198151810049202E /* libopencore-amrwb.a */; };
 		095D857719C5CD5F00F2F926 /* AHAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 095D857519C5CD5F00F2F926 /* AHAlertView.m */; };
-		095D857C19C5D67200F2F926 /* EntityChildInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 095D857B19C5D67200F2F926 /* EntityChildInfo.m */; };
 		095D857F19C5D67200F2F926 /* EntityClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 095D857E19C5D67200F2F926 /* EntityClassInfo.m */; };
 		095D858219C5D92900F2F926 /* ModelClassData.m in Sources */ = {isa = PBXBuildFile; fileRef = 095D858119C5D92900F2F926 /* ModelClassData.m */; };
 		095D858619C5DD9400F2F926 /* CSClassHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 095D858519C5DD9400F2F926 /* CSClassHeaderView.m */; };
@@ -49,6 +48,14 @@
 		095F13A21967C310008CF3BE /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 095F137D1967C309008CF3BE /* CoreData.framework */; };
 		095F13AA1967C310008CF3BE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 095F13A81967C310008CF3BE /* InfoPlist.strings */; };
 		095F13AC1967C310008CF3BE /* YouJiaoBaoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 095F13AB1967C310008CF3BE /* YouJiaoBaoTests.m */; };
+		0982A79719C67AF40036DEC1 /* CSSelectableTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0982A79619C67AF40036DEC1 /* CSSelectableTableViewCell.m */; };
+		0982A79F19C6ED1C0036DEC1 /* EDStarRating.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0982A79C19C6ED1C0036DEC1 /* EDStarRating.bundle */; };
+		0982A7A019C6ED1C0036DEC1 /* EDStarRating.m in Sources */ = {isa = PBXBuildFile; fileRef = 0982A79E19C6ED1C0036DEC1 /* EDStarRating.m */; };
+		0982A7A419C6EFD20036DEC1 /* CSAssessmentEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0982A7A319C6EFD20036DEC1 /* CSAssessmentEditorViewController.m */; };
+		0982A7AE19C8265E0036DEC1 /* NSDate+CSKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 0982A7AD19C8265E0036DEC1 /* NSDate+CSKit.m */; };
+		0982A7B219C8913B0036DEC1 /* EntityDailylog.m in Sources */ = {isa = PBXBuildFile; fileRef = 0982A7B119C8913B0036DEC1 /* EntityDailylog.m */; };
+		0982A7B519C8913B0036DEC1 /* EntityChildInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0982A7B419C8913B0036DEC1 /* EntityChildInfo.m */; };
+		0982A7B919C891810036DEC1 /* EntityDailylogHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0982A7B819C891810036DEC1 /* EntityDailylogHelper.m */; };
 		098E3E3E198B314500CB4F0B /* activity.png in Resources */ = {isa = PBXBuildFile; fileRef = 098E3DE4198B314400CB4F0B /* activity.png */; };
 		098E3E3F198B314500CB4F0B /* babylist.png in Resources */ = {isa = PBXBuildFile; fileRef = 098E3DE5198B314400CB4F0B /* babylist.png */; };
 		098E3E40198B314500CB4F0B /* backarrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 098E3DE6198B314400CB4F0B /* backarrow.png */; };
@@ -482,8 +489,6 @@
 		095D857419C5CD5F00F2F926 /* AHAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHAlertView.h; sourceTree = "<group>"; };
 		095D857519C5CD5F00F2F926 /* AHAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHAlertView.m; sourceTree = "<group>"; };
 		095D857619C5CD5F00F2F926 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		095D857A19C5D67200F2F926 /* EntityChildInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityChildInfo.h; sourceTree = "<group>"; };
-		095D857B19C5D67200F2F926 /* EntityChildInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityChildInfo.m; sourceTree = "<group>"; };
 		095D857D19C5D67200F2F926 /* EntityClassInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityClassInfo.h; sourceTree = "<group>"; };
 		095D857E19C5D67200F2F926 /* EntityClassInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityClassInfo.m; sourceTree = "<group>"; };
 		095D858019C5D92900F2F926 /* ModelClassData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelClassData.h; sourceTree = "<group>"; };
@@ -515,6 +520,21 @@
 		095F13A71967C310008CF3BE /* YouJiaoBaoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "YouJiaoBaoTests-Info.plist"; sourceTree = "<group>"; };
 		095F13A91967C310008CF3BE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		095F13AB1967C310008CF3BE /* YouJiaoBaoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YouJiaoBaoTests.m; sourceTree = "<group>"; };
+		0982A79519C67AF40036DEC1 /* CSSelectableTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSelectableTableViewCell.h; sourceTree = "<group>"; };
+		0982A79619C67AF40036DEC1 /* CSSelectableTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSelectableTableViewCell.m; sourceTree = "<group>"; };
+		0982A79C19C6ED1C0036DEC1 /* EDStarRating.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = EDStarRating.bundle; sourceTree = "<group>"; };
+		0982A79D19C6ED1C0036DEC1 /* EDStarRating.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EDStarRating.h; sourceTree = "<group>"; };
+		0982A79E19C6ED1C0036DEC1 /* EDStarRating.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EDStarRating.m; sourceTree = "<group>"; };
+		0982A7A219C6EFD20036DEC1 /* CSAssessmentEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSAssessmentEditorViewController.h; sourceTree = "<group>"; };
+		0982A7A319C6EFD20036DEC1 /* CSAssessmentEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSAssessmentEditorViewController.m; sourceTree = "<group>"; };
+		0982A7AC19C8265E0036DEC1 /* NSDate+CSKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+CSKit.h"; sourceTree = "<group>"; };
+		0982A7AD19C8265E0036DEC1 /* NSDate+CSKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+CSKit.m"; sourceTree = "<group>"; };
+		0982A7B019C8913B0036DEC1 /* EntityDailylog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityDailylog.h; sourceTree = "<group>"; };
+		0982A7B119C8913B0036DEC1 /* EntityDailylog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityDailylog.m; sourceTree = "<group>"; };
+		0982A7B319C8913B0036DEC1 /* EntityChildInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityChildInfo.h; sourceTree = "<group>"; };
+		0982A7B419C8913B0036DEC1 /* EntityChildInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityChildInfo.m; sourceTree = "<group>"; };
+		0982A7B719C891810036DEC1 /* EntityDailylogHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityDailylogHelper.h; sourceTree = "<group>"; };
+		0982A7B819C891810036DEC1 /* EntityDailylogHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityDailylogHelper.m; sourceTree = "<group>"; };
 		098E3DE4198B314400CB4F0B /* activity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = activity.png; sourceTree = "<group>"; };
 		098E3DE5198B314400CB4F0B /* babylist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = babylist.png; sourceTree = "<group>"; };
 		098E3DE6198B314400CB4F0B /* backarrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backarrow.png; sourceTree = "<group>"; };
@@ -1053,6 +1073,8 @@
 				09F74C061997B00D001555D0 /* CSAssignmentItemTableViewCell.m */,
 				09A3C64019C4B40D001AFE8C /* CSModuleCell.h */,
 				09A3C64119C4B40D001AFE8C /* CSModuleCell.m */,
+				0982A79519C67AF40036DEC1 /* CSSelectableTableViewCell.h */,
+				0982A79619C67AF40036DEC1 /* CSSelectableTableViewCell.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1230,6 +1252,7 @@
 		095F13B91967CC9D008CF3BE /* Venders */ = {
 			isa = PBXGroup;
 			children = (
+				0982A79B19C6ED1C0036DEC1 /* EDStarRating */,
 				095D857319C5CD5F00F2F926 /* AHAlertView */,
 				09A3C60B19C479EC001AFE8C /* SDWebImage */,
 				09A3C5F319C479C7001AFE8C /* MJPhotoBrowser */,
@@ -1247,14 +1270,26 @@
 			path = Venders;
 			sourceTree = "<group>";
 		};
+		0982A79B19C6ED1C0036DEC1 /* EDStarRating */ = {
+			isa = PBXGroup;
+			children = (
+				0982A79C19C6ED1C0036DEC1 /* EDStarRating.bundle */,
+				0982A79D19C6ED1C0036DEC1 /* EDStarRating.h */,
+				0982A79E19C6ED1C0036DEC1 /* EDStarRating.m */,
+			);
+			path = EDStarRating;
+			sourceTree = "<group>";
+		};
 		098E3DE0198B268500CB4F0B /* CSKit */ = {
 			isa = PBXGroup;
 			children = (
-				095D858A19C5ECB700F2F926 /* CSPopupController.h */,
-				095D858B19C5ECB700F2F926 /* CSPopupController.m */,
 				098E3E9C198B31AC00CB4F0B /* CSCoreDataHelper.h */,
 				098E3E9D198B31AC00CB4F0B /* CSCoreDataHelper.m */,
 				098E3E9F198B35DC00CB4F0B /* CSKit.pch */,
+				095D858A19C5ECB700F2F926 /* CSPopupController.h */,
+				095D858B19C5ECB700F2F926 /* CSPopupController.m */,
+				0982A7AC19C8265E0036DEC1 /* NSDate+CSKit.h */,
+				0982A7AD19C8265E0036DEC1 /* NSDate+CSKit.m */,
 				0917610B19C09873006FE2FB /* NSDictionary+CSKit.h */,
 				0917610C19C09873006FE2FB /* NSDictionary+CSKit.m */,
 				0917610819C095D0006FE2FB /* NSString+CSKit.h */,
@@ -1807,8 +1842,6 @@
 			children = (
 				09F74C021997ADC3001555D0 /* EntityAssignmentInfo.h */,
 				09F74C031997ADC3001555D0 /* EntityAssignmentInfo.m */,
-				095D857A19C5D67200F2F926 /* EntityChildInfo.h */,
-				095D857B19C5D67200F2F926 /* EntityChildInfo.m */,
 				095D857D19C5D67200F2F926 /* EntityClassInfo.h */,
 				095D857E19C5D67200F2F926 /* EntityClassInfo.m */,
 				09CD665D197BFA3D00CC08F1 /* EntityLoginInfo.h */,
@@ -1820,6 +1853,10 @@
 				09B431B41994BCE900FF4071 /* EntityRelationshipInfo.h */,
 				09B431B51994BCE900FF4071 /* EntityRelationshipInfo.m */,
 				095F138E1967C30B008CF3BE /* YouJiaoBao.xcdatamodeld */,
+				0982A7B319C8913B0036DEC1 /* EntityChildInfo.h */,
+				0982A7B419C8913B0036DEC1 /* EntityChildInfo.m */,
+				0982A7B019C8913B0036DEC1 /* EntityDailylog.h */,
+				0982A7B119C8913B0036DEC1 /* EntityDailylog.m */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -1841,6 +1878,8 @@
 				09B431B91994C1BF00FF4071 /* EntityRelationshipInfoHelper.m */,
 				09F74BFF1997ACD8001555D0 /* EntityAssignmentInfoHelper.h */,
 				09F74C001997ACD8001555D0 /* EntityAssignmentInfoHelper.m */,
+				0982A7B719C891810036DEC1 /* EntityDailylogHelper.h */,
+				0982A7B819C891810036DEC1 /* EntityDailylogHelper.m */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -1896,6 +1935,8 @@
 				0917610619C093E5006FE2FB /* CSKuleChangePasswordViewController.m */,
 				09A3C5D619C47835001AFE8C /* CSContentEditorViewController.h */,
 				09A3C5D719C47835001AFE8C /* CSContentEditorViewController.m */,
+				0982A7A219C6EFD20036DEC1 /* CSAssessmentEditorViewController.h */,
+				0982A7A319C6EFD20036DEC1 /* CSAssessmentEditorViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2180,6 +2221,7 @@
 				098E3E84198B314500CB4F0B /* playing_3.png in Resources */,
 				098E3F7B198B635400CB4F0B /* assess-dining.png in Resources */,
 				098E3E6C198B314500CB4F0B /* homework_item.png in Resources */,
+				0982A79F19C6ED1C0036DEC1 /* EDStarRating.bundle in Resources */,
 				098E4067198B799000CB4F0B /* PullTableViewLan.strings in Resources */,
 				098E3FBE198B635400CB4F0B /* chat_head_icon@2x.png in Resources */,
 				098E3F8E198B635400CB4F0B /* bg-dialog@2x.png in Resources */,
@@ -2331,11 +2373,13 @@
 				090C639619939D5500398B40 /* CSChildProfileViewController.m in Sources */,
 				09F74C041997ADC3001555D0 /* EntityAssignmentInfo.m in Sources */,
 				095D857719C5CD5F00F2F926 /* AHAlertView.m in Sources */,
+				0982A7AE19C8265E0036DEC1 /* NSDate+CSKit.m in Sources */,
 				09C2D4E61969BCA000B8A895 /* AFURLConnectionOperation.m in Sources */,
 				09A3C5EF19C47986001AFE8C /* UIView+GMGridViewAdditions.m in Sources */,
 				09C2D4F11969BCA000B8A895 /* UIProgressView+AFNetworking.m in Sources */,
 				095D858C19C5ECB700F2F926 /* CSPopupController.m in Sources */,
 				09A3C63419C479EC001AFE8C /* SDWebImageManager.m in Sources */,
+				0982A7B219C8913B0036DEC1 /* EntityDailylog.m in Sources */,
 				09A3C5EC19C47986001AFE8C /* GMGridViewCell.m in Sources */,
 				09B431B61994BCE900FF4071 /* EntityRelationshipInfo.m in Sources */,
 				09CD667E197C153C00CC08F1 /* CSStudentListMainTableViewController.m in Sources */,
@@ -2365,11 +2409,14 @@
 				098E4083198B7ABC00CB4F0B /* CSGrowExpViewController.m in Sources */,
 				09CD6670197C0C2600CC08F1 /* CSRootViewController.m in Sources */,
 				09B431C01994D2BF00FF4071 /* CSChildRelationshipItemTableViewCell.m in Sources */,
+				0982A79719C67AF40036DEC1 /* CSSelectableTableViewCell.m in Sources */,
 				091760F319C09070006FE2FB /* CSKuleAboutViewController.m in Sources */,
+				0982A7A419C6EFD20036DEC1 /* CSAssessmentEditorViewController.m in Sources */,
 				09A3C63019C479EC001AFE8C /* SDWebImageCompat.m in Sources */,
 				095D858219C5D92900F2F926 /* ModelClassData.m in Sources */,
 				09CD6662197BFA6600CC08F1 /* EntityLoginInfoHelper.m in Sources */,
 				098E3E9E198B31AC00CB4F0B /* CSCoreDataHelper.m in Sources */,
+				0982A7B519C8913B0036DEC1 /* EntityChildInfo.m in Sources */,
 				09C2D4E81969BCA000B8A895 /* AFURLResponseSerialization.m in Sources */,
 				09A3C5EB19C47986001AFE8C /* GMGridView.m in Sources */,
 				09A3C60519C479C7001AFE8C /* MJPhotoBrowser.m in Sources */,
@@ -2387,10 +2434,10 @@
 				095F138A1967C30A008CF3BE /* CSAppDelegate.m in Sources */,
 				09FE720719965C66002E3ED4 /* CSNewsInfoDetailViewController.m in Sources */,
 				09F74C011997ACD8001555D0 /* EntityAssignmentInfoHelper.m in Sources */,
+				0982A7A019C6ED1C0036DEC1 /* EDStarRating.m in Sources */,
 				0917610419C093CA006FE2FB /* CSKuleFeedbackViewController.m in Sources */,
 				09A3C63119C479EC001AFE8C /* SDWebImageDecoder.m in Sources */,
 				09A3C62F19C479EC001AFE8C /* SDImageCache.m in Sources */,
-				095D857C19C5D67200F2F926 /* EntityChildInfo.m in Sources */,
 				09C2D4ED1969BCA000B8A895 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				09FE720D199660D0002E3ED4 /* CSUtils.m in Sources */,
 				095D858619C5DD9400F2F926 /* CSClassHeaderView.m in Sources */,
@@ -2415,6 +2462,7 @@
 				098E408C198B7B2C00CB4F0B /* CSNoticeTableViewController.m in Sources */,
 				095D859019C5ED1900F2F926 /* CSClassPickerView.m in Sources */,
 				09CD666F197C0C2600CC08F1 /* CSLoginViewController.m in Sources */,
+				0982A7B919C891810036DEC1 /* EntityDailylogHelper.m in Sources */,
 				0906A83519757E2C007F25BE /* CSHttpClient.m in Sources */,
 				09C2D4E11969BCA000B8A895 /* AFHTTPRequestOperation.m in Sources */,
 				09FE71FE1995C662002E3ED4 /* CSNoticeItemTableViewCell.m in Sources */,
@@ -2561,7 +2609,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Xinus Wang (MH48YP79V6)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Xinus Wang (46XA3MUP9B)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "YouJiaoBao/YouJiaoBao-Prefix.pch";
 				INFOPLIST_FILE = "YouJiaoBao/YouJiaoBao-Info.plist";
@@ -2571,7 +2619,7 @@
 					"$(PROJECT_DIR)/Venders/opencore-amr-0.1.3/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d43c0800-766a-46fa-9e9d-6ce9425e2801";
+				PROVISIONING_PROFILE = "a404074d-ae21-4086-9dc4-2c2a0ac708b1";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;

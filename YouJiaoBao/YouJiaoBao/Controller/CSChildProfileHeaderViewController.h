@@ -11,6 +11,17 @@
 
 @interface CSChildProfileHeaderViewController : UIViewController
 
+@property (nonatomic, weak) id delegate;
+
 @property (nonatomic, strong) EntityChildInfo* childInfo;
+
+@end
+
+
+@protocol CSChildProfileHeaderViewControllerDelegate <NSObject>
+
+@optional
+- (void)childProfileHeaderViewControllerShowChating:(CSChildProfileHeaderViewController*)ctrl;
+- (void)childProfileHeaderViewControllerShowAssessment:(CSChildProfileHeaderViewController*)ctrl;
 
 @end

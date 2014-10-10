@@ -187,14 +187,7 @@
     serverinfo.hard_ver = "iPhone";
     serverinfo.soft_ver = "1.3";
     serverinfo.plat_type = "ios";
-//    serverinfo.user = "2222";
-//    serverinfo.password = "6yWw2D";
-    
-    /*
-     账号为 cocbaby  , 密码为 13880498549
-     测试账号：2222   测试密码：6yWw2D
-     */
-    
+
     char account[128] = {0};
     char password[128] = {0};
     
@@ -203,11 +196,18 @@
     serverinfo.user = account;
     serverinfo.password = password;
     
+    /*
+     账号为 cocbaby  , 密码为 13880498549
+     测试账号：2222   测试密码：6yWw2D
+     */
+    //    serverinfo.user = "2222";
+    //    serverinfo.password = "6yWw2D";
+    
     char err[128] = {0};
     
     [gApp waitingAlert:@"连接服务器"];
     // step 1: Connect the server.
-    result =  hm_server_connect(&serverinfo, &_serverId, err);
+    result =  hm_server_connect(&serverinfo, &_serverId, err, 128);
     if (result == HMEC_OK) {
         [self performSelector:@selector(hmGetDeviceList) withObject:nil afterDelay:0];
         

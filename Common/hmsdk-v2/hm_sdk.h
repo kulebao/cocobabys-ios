@@ -1,11 +1,11 @@
 /****************************************************\
- *	Copyright (c) 成都华迈通信技术有限公司版权所有	*
- *													*
- *	文件名称 : hm_sdk.h								*
- *	当前版本 : 2.1									*
- *	编写目的 : 提供二次开发需要的函数接口之声明		*
- *	首次完成日期 : 2013-12-16						*
- \****************************************************/
+*	Copyright (c) 成都华迈通信技术有限公司版权所有	*
+*													*
+*	文件名称 : hm_sdk.h								*
+*	当前版本 : 2.1									*
+*	编写目的 : 提供二次开发需要的函数接口之声明		*
+*	首次完成日期 : 2013-12-16						*
+\****************************************************/
 #ifndef __HM_SDK_H__
 #define __HM_SDK_H__
 
@@ -19,13 +19,8 @@ typedef signed short		int16;
 typedef unsigned short		uint16;
 typedef signed int			int32;
 typedef unsigned int		uint32;
-#ifdef WIN32
-typedef __int64				int64;
-typedef unsigned __int64	uint64;
-#else
 typedef long long			int64;
 typedef unsigned long long	uint64;
-#endif
 typedef float				real32;
 typedef double				real64;
 typedef uint32				hm_result;					//	返回错误码类型
@@ -39,9 +34,9 @@ typedef pointer				alarm_host_handle;			//	报警句柄
 typedef pointer				record_handle;				//	手动录像句柄
 typedef pointer				find_file_handle;			//	录像查找句柄
 typedef pointer				playback_handle;			//	录像回放句柄
-typedef pointer				get_file_handle;			//	下载录像句柄
+typedef pointer				get_file_handle;			//	下载录像句柄	
 typedef pointer				find_picture_handle;		//	图片查找句柄
-typedef pointer				get_picture_handle;			//	下载图片句柄
+typedef pointer				get_picture_handle;			//	下载图片句柄	
 typedef pointer				search_wifi_handle;			//	获取wifi信息句柄
 typedef pointer				get_online_user_handle;		//	获取在线用户句柄
 typedef pointer				upgrade_handle;				//	升级句柄
@@ -68,12 +63,12 @@ typedef pointer				user_data;					//	用户数据
 #define hm_call
 
 /****************\
- *	错误码定义	*
- \****************/
+*	错误码定义	*
+\****************/
 typedef enum _HM_ERROR_CODE
 {
 	HMEC_OK							= 0,			//	成功
-    
+
 	HMEC_GEN_SDK_INIT				= 0x01000001,	//	SDK初始化失败
 	HMEC_GEN_CREATE_HANDLE,							//	创建句柄错误
 	HMEC_GEN_PARAM_INVALID,							//	参数无效
@@ -85,7 +80,7 @@ typedef enum _HM_ERROR_CODE
 	HMEC_GEN_START_LISTEN,							//	监听失败
 	HMEC_GEN_NOT_SUPPORT,							//	接口不被支持
 	HMEC_GEN_INTERNAL,								//	内部错误
-    
+
 	HMEC_ERR_UTIL_INIT				= 0x00A00001,	//	初始化失败
 	HMEC_ERR_UTIL_FILE_INVALID,						//	文件无效
 	HMEC_ERR_UTIL_FILE_NOT_OPEN,					//	打开文件失败
@@ -98,7 +93,7 @@ typedef enum _HM_ERROR_CODE
 	HMEC_ERR_UTIL_IP_NOT_FOUND,						//	IP未识别
 	HMEC_ERR_UTIL_SEND_MODE,						//	错误的发送模式
 	HMEC_ERR_UTIL_NOT_SUPPORT_IN_MODE,				//	当前模式下不支持该命令
-    
+
 	HMEC_ERR_PU_UNDEF				= 0x00800001,	//	未定义错误
 	HMEC_ERR_PU_BUSY,								//	设备忙
 	HMEC_ERR_PU_BAD_PARAM,							//	错误的参数
@@ -120,7 +115,7 @@ typedef enum _HM_ERROR_CODE
 	HMEC_ERR_PU_NONSUPPORT,							//	未能支持的操作或者协议不完整
 	HMEC_ERR_PU_SEND_DATA_INVALID,					//	发送数据无效
 	HMEC_ERR_PU_NR_ERROR,							//	中转或穿透失败
-    
+
 	HMEC_ERR_SERVER_NETWORK			= 0x00700001,	//	网络错误
 	HMEC_ERR_SERVER_COMMAND,						//	命令错误
 	HMEC_ERR_SERVER_USER_OR_PWD,					//	用户名或密码错误
@@ -143,10 +138,13 @@ typedef enum _HM_ERROR_CODE
 	HMEC_ERR_SERVER_MOBILE_ERROR,					//	手机号码错误
 	HMEC_ERR_SERVER_CAPTCHA_ERROR,					//	验证码错误
 	HMEC_ERR_SERVER_CAPTCHA_EXPIRED,				//	验证码已过期
+	HMEC_ERR_SERVER_NICKNAME_UESD,					//	昵称已被注册
 	HMEC_ERR_SERVER_EMAIL_ERROR,					//	邮箱错误
 	HMEC_ERR_SERVER_SM_UNAVAILABLE,					//	短信服务不可用
 	HMEC_ERR_SERVER_USER_MOBILE_INCORRECT,			//	用户名手机号不匹配
 	HMEC_ERR_SERVER_ERROR_MOBILE,					//	手机号码格式错误
+	HMEC_ERR_SERVER_MOBILE_USED,					//	手机号已经被注册
+	HMEC_ERR_SERVER_ERROR_PASSWORD,					//	密码格式不正确
 	HMEC_ERR_SERVER_USER_EMAIL_INCORRECT,			//	用户名邮箱不匹配
 	HMEC_ERR_SERVER_EMAIL_NOT_AUTH,					//	邮箱未认证
 	HMEC_ERR_SERVER_EMAIL_SERV_UNAVAILABLE,			//	邮件服务不可用
@@ -160,8 +158,15 @@ typedef enum _HM_ERROR_CODE
 	HMEC_ERR_SERVER_UPDATE_PARAM,					//	升级参数错误
 	HMEC_ERR_SERVER_UPDATE_HASH,					//	验证码错误
 	HMEC_ERR_SERVER_UPDATE_PACKAGE,					//	无升级包
+	HMEC_ERR_SERVER_GET_HISTORY_ERROR,				//	获取报警历史信息失败
+	HMEC_ERR_SERVER_GET_HISTORY_UNREAD_COUNT_ERROR,	//	获取报警未读条数失败
+	HMEC_ERR_SERVER_MARK_ALARM_HISTORY_READ_ERROR,	//	标记已读失败
+	HMEC_ERR_SERVER_MARK_PARAM_ERROR,				//	参数不正确
+	HMEC_ERR_SERVER_MARK_NO_ALARM,					//	没有找到报警
+	HMEC_ERR_SERVER_SYS_NOTI_ERROR,					//	获取系统通知信息失败
+	HMEC_ERR_SERVER_UPGRADE_USERNAME,				//	升级用户信息失败
 	HMEC_ERR_SERVER_MAXERR,
-    
+
 	HMEC_ERR_VIDEO_FIND_DECODER		= 0x00300001,	//	未知解码类型
 	HMEC_ERR_VIDEO_ALLOC_CONTEXT,					//	分配上下文失败
 	HMEC_ERR_VIDEO_CODEC_OPEN,						//	打开解码器失败
@@ -212,7 +217,7 @@ typedef enum _ALARM_DEVICE_TYPE
 	HME_ADT_QUAKE_DEV			=	0x00000200,	//	震动
 	HME_ADT_PC_CLIENT			=	0x00000400,	//	PC客户端
 	HME_ADT_PHONE_CLIENT		=	0x00000800,	//	手机客户端
-	HME_ADT_WEB_PLUGIN			=	0x00001000,	//	网页插件
+	HME_ADT_WEB_PLUGIN			=	0x00001000,	//	网页插件 
 	HME_ADT_KEEP_NIGHT_WATCH	=	0x00002000,	//	巡更
 	HME_ADT_GUARDBAIL			=	0x00004000,	//	护栏
 	HME_ADT_BOUNDARY			=	0x00008000,	//	周界
@@ -293,9 +298,10 @@ typedef enum _NODE_TYPE_INFO
 typedef enum _SEARCH_MODE
 {
 	HME_SM_NONE				= 0,
-	HME_SM_BEG_AND_END_TIME	= 1,
+	HME_SM_BEG_AND_END_TIME	= 1,	
 	HME_SM_MONTH			= 2,
 } SEARCH_MODE;
+
 
 //	录像查询，可以组合
 typedef enum _VIDEO_RECORD
@@ -309,9 +315,9 @@ typedef enum _VIDEO_RECORD
 typedef enum _REMOTE_PLAYBACK_MODE
 {
 	HME_PBM_NONE		= 0,
-	HME_PBM_NAME_TIME	= 1,
-	HME_PBM_START_END	= 2,
-	HME_PBM_ALARM_KEY	= 3,
+	HME_PBM_NAME_TIME	= 1,	//	根据文件名和文件播放时间回放
+	HME_PBM_START_END	= 2,	//	从开始时间处开始回放到结束时间处为止
+	HME_PBM_ALARM_KEY	= 3,	//	根据报警key搜索文件回放
 } REMOTE_PLAYBACK_MODE;
 
 //	图片相关操作
@@ -416,7 +422,7 @@ typedef enum _MATCH_SENSOR_RESULT
 	MSR_UNKNOWN_RESULT,
 	MSR_SUCCUSS,
 	MSR_NOT_LEARN_MOD,
-	MSR_NO_SENSOR
+	MSR_NO_SENSOR	
 } MATCH_SENSOR_RESULT;
 
 typedef void (hm_call * cb_pu_net) (user_data data, hm_result result, uint32 connect_type);
@@ -521,7 +527,7 @@ typedef struct _REMOTE_CAPTURE_PIC_PARAM
 typedef struct _ALARM_INFO
 {
 	int32	alarm_dev_type;
-	int32	alarm_type;
+	int32	alarm_type; 
 	int32	channel;
 	int32	area_id;
 	char	key[512];
@@ -571,10 +577,10 @@ typedef struct _WIFI_INFO
 {
 	char	ssid_name[260];	//	wifi名称
 	uint8	wifi_mode;
-	uint8	is_encrypt;		//	是否加密
-	uint8	encrypt_type;	//	加密类型：1(WEP64)、2(WEP128)、3(TKIP)、4(AES)
+	uint8	is_encrypt;		//	是否加密 
+	uint8	encrypt_type;	//	加密类型：1(WEP64)、2(WEP128)、3(TKIP)、4(AES)	
 	uint8	key_type;		//	密码类型：0(16进制)、1(ASICC)
-    
+
 } WIFI_INFO, *P_WIFI_INFO;
 
 typedef void (hm_call * cb_pu_wifi) (user_data data,  WIFI_INFO wifi_info);
@@ -765,10 +771,10 @@ typedef struct _PT_SYSTEM_INFO
 typedef void (hm_call * cb_pu_upgrade_firm)(user_data data, uint32 flag, hm_result result);
 typedef struct _HARD_UPDATE_PARAM
 {
-	uint32	file_size;
-	char	hash[33];
-	cb_pu_upgrade_firm cb_firm;
+	cpchar file_cont;
+	uint32 file_size;
 	user_data data;
+	cb_pu_upgrade_firm cb_firm;
 } HARD_UPDATE_PARAM, *P_HARD_UPDATE_PARAM;
 
 //	用户在线信息
@@ -787,7 +793,7 @@ typedef struct _CONFIG_VIDEO
 	int32		fps;			//	帧率
 	int32		bitrate;		//	码流大小,16-4096
 	CODE_STREAM	stream_type	;	//	码流类型(0-无效、1-主码流、2-次码流)
-	char		resolution[20];	//	分辨率 160*120，176*144，176*120，320*240，352*288，352*240，640*480，704*576，704*480，1280*720，1280*960
+	char		resolution[20];	//	分辨率 160*120，176*144，176*120，320*240，352*288，352*240，640*480，704*576，704*480，1280*720，1280*960 
 } CONFIG_VIDEO, *P_CONFIG_VIDEO;
 
 //	3G配置
@@ -824,7 +830,7 @@ typedef struct _CONFIG_NET
 } CONFIG_NET, *P_CONFIG_NET;
 
 //	DDNS
-typedef struct _CONFIG_DDNS
+typedef struct _CONFIG_DDNS 
 {
 	bool	enable;			//	是否开启DDNS
 	char	service[50];	//	服务商(如www.3322.org/dyndns.com)
@@ -834,7 +840,7 @@ typedef struct _CONFIG_DDNS
 } CONFIG_DDNS, *P_CONFIG_DDNS;
 
 //	PPPOE
-typedef struct _CONFIG_PPPOE
+typedef struct _CONFIG_PPPOE 
 {
 	bool	is_open_pppoe;	//	开启PPPOE拨号
 	char	user_name[260];	//	帐号
@@ -862,7 +868,7 @@ typedef struct _CONFIG_WIFI
 } CONFIG_WIFI, *P_CONFIG_WIFI;
 
 //	视频编码参数设置
-typedef struct _CONFIG_VIDEO_ENCODE
+typedef struct _CONFIG_VIDEO_ENCODE 
 {
 	int32		channel;
 	bool		enable_main;		//	开启主码流
@@ -906,7 +912,7 @@ typedef struct _CONFIG_AUDIO_ENCODE
 } CONFIG_AUDIO_ENCODE, *P_CONFIG_AUDIO_ENCODE;
 
 //	OSD配置结构(nXPos、nYPos取值0-511)
-typedef struct _OSD_STRING
+typedef struct _OSD_STRING 
 {
 	bool		enable;
 	int32		x_pos;
@@ -914,14 +920,14 @@ typedef struct _OSD_STRING
 	char		osd_str[70];	//	叠加的字符串，总共不超过32byte的中文或英文
 } OSD_STRING, *P_OSD_STRING;
 
-typedef struct _OSD_BITRATE
+typedef struct _OSD_BITRATE 
 {
 	bool		enable;
 	int32		x_pos;
 	int32		y_pos;
 } OSD_BITRATE, *P_OSD_BITRATE;
 
-typedef struct _OSD_TIME
+typedef struct _OSD_TIME 
 {
 	bool		enable;
 	int32		time_format;	//	时间格式 0(YY-MM-DD HH:MM:SS)、1(HH:MM:SS YY-MM-DD)
@@ -933,13 +939,13 @@ typedef struct _CONFIG_OSD
 {
 	int32		channel;
 	int32		front_color;	//	前景色
-	int32		back_color;
+	int32		back_color;	
 	int32		transp;			//	透明度
 	OSD_STRING	osd_string1;
 	OSD_STRING	osd_string2;
 	OSD_BITRATE	osd_bitrate;
 	OSD_TIME	osd_time;
-} CONFIG_OSD, *P_CONFIG_OSDG;
+} CONFIG_OSD, *P_CONFIG_OSDG;	
 
 //	云台和图像配置
 typedef struct _CONFIG_IMAGE_AND_PTZ
@@ -954,8 +960,8 @@ typedef struct _CONFIG_IMAGE_AND_PTZ
 	int32		scene;				//	场景
 	bool		enable_night;		//	是否启用夜间模式
 	//	云台的一些参数
-	char		ptz_protocol[20];	//	云台协议
-	int32		baud_rate;
+	char		ptz_protocol[20];	//	云台协议			
+	int32		baud_rate;		
 	int32		addr;
 	int32		reverse;
 	int32		inout;
@@ -1019,11 +1025,11 @@ typedef struct _CONFIG_ALARM_POLICY
 {
 	bool	enable_video_record;	//	联动录相使能
 	uint32	record_time_long;		//	录相时间长度
-    
+
 	bool	enable_capture_image;	//	联动抓图使能
 	uint32	capture_count;			//	抓拍次数
 	uint32	capture_interval_time;	//	抓拍间隔时间
-    
+
 	uint32	enable_gpio_out;		//	报警端口输出
 	uint32	gpio_time_long;			//	输出时长
 	uint32	elect_level;			//	输出电频（常开、常闭）
@@ -1310,6 +1316,27 @@ typedef struct _PUSH_MSG
 	pchar	rsv;
 } PUSH_MSG, *P_PUSH_MSG;
 
+//	报警历史信息
+typedef struct _ALARM_HISTORY_INFO
+{
+	char	m_id[50];
+	char	m_image_url[512];
+	char	m_content[1024];
+	char	m_sn[14];
+	char	m_devname[128];
+	int32	m_state;
+	char	m_date[20];
+} ALARM_HISTORY_INFO, *P_ALARM_HISTORY_INFO;
+
+//	系统通知信息
+typedef struct _SYS_NOTI_INFO
+{
+	char	m_id[50];
+	char	m_content[1024];
+	char	m_title[512];
+	char	m_date[20];
+} SYS_NOTI_INFO, *P_SYS_NOTI_INFO;
+
 //	回放数据
 typedef struct _PLAYBACK_FRAME
 {
@@ -1329,335 +1356,350 @@ typedef void (hm_call * cb_util_push_service)	(user_data data, hm_result result,
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+/************************************************************************************************/
+/*										初始化SDK												*/
+/************************************************************************************************/
+HMCAPI hm_result hm_sdk_init();
+HMCAPI hm_result hm_sdk_uninit();
+
+/************************************************************************************************/
+/*										设备相关接口												*/
+/************************************************************************************************/
+//	登录/登出设备
+HMCAPI hm_result hm_pu_login(cpchar ip, uint16 port, cpchar sn, cpchar user, cpchar pwd, user_id* id);
+HMCAPI hm_result hm_pu_login_ex(node_handle handle, user_id* id);
+HMCAPI hm_result hm_pu_set_net_cb(user_id id, cb_pu_net cb, user_data data);
+HMCAPI hm_result hm_pu_logout(user_id id);
+HMCAPI hm_result hm_pu_get_device_info(user_id id, P_DEVICE_INFO device);
+
+//	反向连接
+HMCAPI hm_result hm_pu_listen_init(listen_handle* lh);
+HMCAPI hm_result hm_pu_listen_set_user_info(listen_handle lh, cpchar* usr, cpchar* pwd, int32 count);
+HMCAPI hm_result hm_pu_listen_set_callback(listen_handle lh, cb_pu_dev_connect cb, user_data data);
+HMCAPI hm_result hm_pu_listen_open(listen_handle lh, cpchar ip, uint16 port);
+HMCAPI hm_result hm_pu_listen_close(listen_handle lh);
+HMCAPI hm_result hm_pu_listen_uninit(listen_handle lh);
+
+//	视频
+HMCAPI hm_result hm_pu_open_video(user_id id, P_OPEN_VIDEO_PARAM param, video_handle* handle);
+HMCAPI hm_result hm_pu_start_video(video_handle handle, P_OPEN_VIDEO_RES res);
+HMCAPI hm_result hm_pu_force_iframe(video_handle handle);
+HMCAPI hm_result hm_pu_stop_video(video_handle handle);
+HMCAPI hm_result hm_pu_close_video(video_handle handle);
+
+//	音频
+HMCAPI hm_result hm_pu_open_audio(user_id id, P_OPEN_AUDIO_PARAM param, P_OPEN_AUDIO_RES res, audio_handle* handle);
+HMCAPI hm_result hm_pu_start_audio(audio_handle handle);
+HMCAPI hm_result hm_pu_stop_audio(audio_handle handle);
+HMCAPI hm_result hm_pu_close_audio(audio_handle handle);
+
+//	对讲
+HMCAPI hm_result hm_pu_open_talk(user_id id, P_OPEN_TALK_PARAM param, talk_handle* handle);
+HMCAPI hm_result hm_pu_send_talk_data(talk_handle handle, P_FRAME_DATA frame);
+HMCAPI hm_result hm_pu_start_talk(talk_handle handle);
+HMCAPI hm_result hm_pu_stop_talk(talk_handle handle);
+HMCAPI hm_result hm_pu_close_talk(talk_handle handle);
+
+//	云台
+HMCAPI hm_result hm_pu_ptz_control(user_id id, uint32 channel, PTZ_COMMAND ptz_cmd, int32 speed);
+HMCAPI hm_result hm_pu_ptz_focus_up(user_id id, uint32 channel, int32 speed);
+HMCAPI hm_result hm_pu_ptz_focus_down(user_id id, uint32 channel, int32 speed);
+HMCAPI hm_result hm_pu_ptz_set_preset(user_id id, uint32 channel, uint8 index, cpchar preset_name);
+HMCAPI hm_result hm_pu_ptz_clr_preset(user_id id, uint32 channel, uint8 index);
+HMCAPI hm_result hm_pu_ptz_goto_preset(user_id id, uint32 channel, uint8 index);
+HMCAPI hm_result hm_pu_ptz_cruise(user_id id, PTZ_INTERVAL type, uint32 channel, int32 speed);
+
+//	报警
+HMCAPI hm_result hm_pu_open_alarm(user_id id, P_OPEN_ALARM_PARAM param, alarm_handle* handle);
+HMCAPI hm_result hm_pu_start_alarm(alarm_handle handle);
+HMCAPI hm_result hm_pu_stop_alarm(alarm_handle handle);
+HMCAPI hm_result hm_pu_close_alarm(alarm_handle handle);
+
+//	获取布防状态
+HMCAPI hm_result hm_pu_get_arming_state(user_id id, bool* state);
+
+//  布防和撤防
+HMCAPI hm_result hm_pu_arming_area(user_id user, int32 area_id, cpchar expand);
+HMCAPI hm_result hm_pu_disarming_area(user_id user, int32 area_id, cpchar expand);
+
+// 操作防区
+HMCAPI hm_result hm_pu_add_area(user_id user, P_AREA_INFO_PARAM param);
+HMCAPI hm_result hm_pu_change_area(user_id user, P_AREA_INFO_PARAM param);
+HMCAPI hm_result hm_pu_delete_area(user_id user, P_AREA_INFO_PARAM param);
+
+// 操作传感器
+HMCAPI hm_result hm_pu_add_sensor(user_id user, P_SENSOR_INFO_PARAM param);
+HMCAPI hm_result hm_pu_change_sensor(user_id user, P_SENSOR_INFO_PARAM param);
+HMCAPI hm_result hm_pu_delete_sensor(user_id user, P_SENSOR_INFO_PARAM param);
+
+// 报警主机学习
+HMCAPI hm_result hm_pu_open_alarm_host(user_id user, cb_pu_alarm cb_alarm, alarm_host_handle* handle);
+HMCAPI hm_result hm_pu_start_learn(alarm_host_handle handle);
+HMCAPI hm_result hm_pu_stop_learn(alarm_host_handle handle);
+HMCAPI hm_result hm_pu_close_alarm_host(alarm_host_handle handle);
+
+// 报警主机配对
+HMCAPI hm_result hm_pu_get_match_sensor(user_id user, P_MATCH_SENSOR_RES res);
+
+//	录像与回放
+HMCAPI hm_result hm_pu_open_record(user_id id, int32 chn, record_handle* handle);
+HMCAPI hm_result hm_pu_start_record(record_handle handle, uint32 channel);
+HMCAPI hm_result hm_pu_stop_record(record_handle handle, uint32 channel);
+HMCAPI hm_result hm_pu_close_record(record_handle handle);
+HMCAPI hm_result hm_pu_find_file(user_id id, P_FIND_FILE_PARAM param, find_file_handle* handle);
+HMCAPI hm_result hm_pu_find_next_file(find_file_handle handle, P_FIND_FILE_DATA data);
+HMCAPI hm_result hm_pu_close_find_file(find_file_handle handle);
+HMCAPI hm_result hm_pu_delete_record_file(user_id id, P_DELETE_RECORD_FILE_PARAM param);
+HMCAPI hm_result hm_pu_open_playback(user_id id, P_PLAYBACK_PARAM param, P_PLAYBACK_RES res, playback_handle* handle);
+HMCAPI hm_result hm_pu_start_playback(playback_handle handle);
+HMCAPI hm_result hm_pu_stop_playback(playback_handle handle);
+HMCAPI hm_result hm_pu_pause_playback(playback_handle handle);
+HMCAPI hm_result hm_pu_resume_playback(playback_handle handle);
+HMCAPI hm_result hm_pu_step_playback(playback_handle handle);
+HMCAPI hm_result hm_pu_close_playback(playback_handle handle);
+
+//	视频与图片下载
+HMCAPI hm_result hm_pu_open_get_file(user_id id, P_GET_FILE_PARAM param, P_GET_FILE_RES res, get_file_handle* handle);
+HMCAPI hm_result hm_pu_set_get_file_callback(get_file_handle handle, cb_pu_data cb, user_data data);
+HMCAPI hm_result hm_pu_start_get_file(get_file_handle handle);
+HMCAPI hm_result hm_pu_cancel_get_file(get_file_handle handle);
+HMCAPI hm_result hm_pu_close_get_file(get_file_handle handle);
+HMCAPI hm_result hm_pu_find_picture(user_id id, P_FIND_PICTURE_PARAM param, find_picture_handle* handle);
+HMCAPI hm_result hm_pu_find_next_picture(find_picture_handle handle, P_FIND_PICTURE_DATA data);
+HMCAPI hm_result hm_pu_close_find_picture(find_picture_handle handle);
+HMCAPI hm_result hm_pu_delete_picture(user_id id, P_DELETE_PICTURE_PARAM param);
+HMCAPI hm_result hm_pu_open_get_picture(user_id id, P_GET_PICTURE_PARAM param, P_GET_PICTURE_RES res, get_picture_handle* handle);
+HMCAPI hm_result hm_pu_start_get_picture(get_picture_handle handle);
+HMCAPI hm_result hm_pu_cancel_get_picture(get_picture_handle handle);
+HMCAPI hm_result hm_pu_close_get_picture(get_picture_handle handle);
+
+//	抓图
+HMCAPI hm_result hm_pu_remote_capture_pic(user_id id, P_REMOTE_CAPTURE_PIC_PARAM param);
+
+//  升级
+HMCAPI hm_result hm_pu_open_upgrade(user_id id, P_HARD_UPDATE_PARAM param, upgrade_handle* handle);
+HMCAPI hm_result hm_pu_start_upgrade(upgrade_handle handle);
+HMCAPI hm_result hm_pu_send_upgrade_data(upgrade_handle handle, uint32 len, cpointer buf);
+HMCAPI hm_result hm_pu_cancel_upgrade(upgrade_handle handle);
+HMCAPI hm_result hm_pu_close_upgrade(upgrade_handle handle);
+HMCAPI hm_result hm_pu_get_online_user(user_id id, get_online_user_handle* handle);
+HMCAPI hm_result hm_pu_get_next_online_user(get_online_user_handle handle, P_ONLINE_USER_DATA data);
+HMCAPI hm_result hm_pu_close_get_online_user(get_online_user_handle handle);
+HMCAPI hm_result hm_pu_set_wifi_config(user_id user, P_CONFIG_WIFI config);
+HMCAPI hm_result hm_pu_get_wifi_config(user_id user, P_CONFIG_WIFI config);
+HMCAPI hm_result hm_pu_lock_device(user_id user, uint32 lock);
+HMCAPI hm_result hm_pu_protect_privacy(user_id user, DEV_PRIVACY prot);
+
+//  其他
+HMCAPI hm_result hm_pu_reboot(user_id id);
+HMCAPI hm_result hm_pu_open_search_wifi(user_id id, P_QUERY_WIFI_PARAM param, search_wifi_handle* handle);
+HMCAPI hm_result hm_pu_set_wifi_callback(search_wifi_handle handle, cb_pu_wifi cb, user_data data);
+HMCAPI hm_result hm_pu_start_search_wifi(search_wifi_handle handle);
+HMCAPI hm_result hm_pu_close_search_wifi(search_wifi_handle handle);
+HMCAPI hm_result hm_pu_detect_upnp(user_id id, P_DETECT_UPNP upnp);
+HMCAPI hm_result hm_pu_format_sd(user_id id, uint8* format_result);
+HMCAPI hm_result hm_pu_restore_default_config(user_id id, uint8* restore_result);
+HMCAPI hm_result hm_pu_get_system_info(user_id id, P_PT_SYSTEM_INFO system_info);
+HMCAPI hm_result hm_pu_time_sync(user_id id, uint32 time);
+HMCAPI hm_result hm_pu_set_normal_config(user_id user, cpchar cfg);
+HMCAPI hm_result hm_pu_get_normal_config(user_id user, cpchar cfg, pchar* msg);
+
+//	获取连接信息
+HMCAPI hm_result hm_pu_get_connect_type(user_id id, int32* ct);
+
+//	PU通用协议
+HMCAPI hm_result hm_pu_common_command(user_id id, int32 cmdid, cpchar cmdbody, pchar recv_buf, int32 buf_len);
+
+/************************************************************************************************/
+/*										平台相关接口												*/
+/************************************************************************************************/
+//	连接平台
+HMCAPI hm_result hm_server_connect(P_LOGIN_SERVER_INFO lsi, server_id* hserver, pchar err, int32 err_len);
+HMCAPI hm_result hm_server_disconnect(server_id server);
+
+//	获取分组、设备列表、用户信息、中转穿透信息
+HMCAPI hm_result hm_server_get_device_list(server_id server);
+HMCAPI hm_result hm_server_get_user_info(server_id server, P_USER_INFO* uinfo);
+HMCAPI hm_result hm_server_get_transfer_info(server_id server);
+HMCAPI hm_result hm_server_get_time(server_id server, uint64* time);
+HMCAPI hm_result hm_server_get_channel_info(node_handle channel, P_CHANNEL_INFO* cinfo);
+HMCAPI hm_result hm_server_get_node_type(node_handle node, NODE_TYPE_INFO* tinfo);
+HMCAPI hm_result hm_server_get_node_id(node_handle device, int32* id);
+HMCAPI hm_result hm_server_get_parent_id(node_handle device, int32* id);
+HMCAPI hm_result hm_server_get_device_sn(node_handle device, cpchar* sn);
+HMCAPI hm_result hm_server_get_device_url(node_handle device, cpchar* url);
+HMCAPI hm_result hm_server_get_device_power(node_handle device, int64* power);
+HMCAPI hm_result hm_server_get_node_name(node_handle node, cpchar* name);
+HMCAPI hm_result hm_server_get_last_update(node_handle device, uint64* update);
+HMCAPI hm_result hm_server_bind_device(server_id server, cpchar sn, cpchar pwd, int32* device_id);
+HMCAPI hm_result hm_server_unbind_device(server_id server, int32 device_id);
+HMCAPI hm_result hm_server_modify_device_name(server_id server, int32 device_id, cpchar new_name);
+HMCAPI hm_result hm_server_add_group(server_id server, cpchar usrname, cpchar comment, int32 parent_id);
+HMCAPI hm_result hm_server_change_device_group(server_id server, int32 device_id, int32 group_id);
+HMCAPI hm_result hm_server_is_online(node_handle device, bool* is_online);
+HMCAPI hm_result hm_server_get_online_count(node_handle device, int32* online_cnt, int32* total_cnt);
+HMCAPI hm_result hm_server_save_token(server_id server, P_TOKEN_INFO pti);
+HMCAPI hm_result hm_server_user_exist(cpchar ip, uint16 port, cpchar usrname, bool* exist);
+HMCAPI hm_result hm_server_register_user_with_mobile(cpchar ip, uint16 port, cpchar usrname, cpchar password, cpchar mobile, cpchar captcha);
+HMCAPI hm_result hm_server_register_user_by_email(cpchar ip, uint16 port, cpchar usrname, cpchar password, cpchar email);
+HMCAPI hm_result hm_server_request_mobile_captcha(cpchar ip, uint16 port, cpchar usrname, cpchar mobile);
+HMCAPI hm_result hm_server_reset_password_by_email(cpchar ip, uint16 port, cpchar usrname, cpchar email);
+HMCAPI hm_result hm_server_reset_password_by_mobile(cpchar ip, uint16 port, cpchar usrname, cpchar new_password, cpchar mobile, cpchar captcha);
+HMCAPI hm_result hm_server_set_privacy(server_id server, cpchar sn, DEV_PRIVACY dp);
+HMCAPI hm_result hm_server_get_privacy(server_id, cpchar sn, DEV_PRIVACY* dp);
+HMCAPI hm_result hm_server_get_device_privacy_status(node_handle device, DEV_PRIVACY* dp);
+HMCAPI hm_result hm_server_get_session_time_left(server_id server, int32* time);
+HMCAPI hm_result hm_server_get_version(server_id server, cpchar* ver);
+HMCAPI hm_result hm_server_get_update_info(cpchar ip, uint16 port, int32 ctype, cpchar ver, cpchar os, P_UPDATE_INFO pui);
+HMCAPI hm_result hm_server_release_update_info(P_UPDATE_INFO pui);
+HMCAPI hm_result hm_server_get_alarm_history(server_id server, cpchar start_time, cpchar end_time, int32 index);
+HMCAPI hm_result hm_server_get_alarm_history_unread_count(server_id server, int32* count);
+HMCAPI hm_result hm_server_mark_all_history_read(server_id server);
+HMCAPI hm_result hm_server_mark_history_read(server_id server, cpchar id);
+HMCAPI hm_result hm_server_get_alarm_history_count(server_id server, int32* count);
+HMCAPI hm_result hm_server_get_alarm_history_at(server_id server, int32 index, P_ALARM_HISTORY_INFO ahi);
+HMCAPI hm_result hm_server_get_system_notification_info(server_id server, cpchar start_time, cpchar end_time);
+HMCAPI hm_result hm_server_get_system_notification_count(server_id server, int32* count);
+HMCAPI hm_result hm_server_get_system_notification_at(server_id server, int32 index, P_SYS_NOTI_INFO sni);
+HMCAPI hm_result hm_server_register_user_by_mobile(cpchar ip, uint16 port, cpchar mobile, cpchar nick_name, cpchar password, cpchar captcha);
+HMCAPI hm_result hm_server_nick_name_exists(cpchar ip, uint16 port, cpchar nick_name, bool* exist);
+HMCAPI hm_result hm_server_upgrade_user_name(server_id server, cpchar user_name, cpchar captcha);
+HMCAPI hm_result hm_server_get_last_error_describe(server_id server, cpchar* err);
+
+//	用户注册、密码修改
+HMCAPI hm_result hm_server_register_user(cpchar ip, uint16 port, cpchar usrname, cpchar pwd);
+HMCAPI hm_result hm_server_modify_password(server_id server, cpchar old_pwd, cpchar new_pwd);
+
+//	设备树操作
+HMCAPI hm_result hm_server_get_tree(server_id server, tree_handle* htree);
+HMCAPI hm_result hm_server_get_root(tree_handle tree, node_handle* node);
+HMCAPI hm_result hm_server_find_group_by_id(tree_handle tree, int32 id, node_handle* node);
+HMCAPI hm_result hm_server_find_device_by_id(tree_handle tree, int32 id, node_handle* node);
+HMCAPI hm_result hm_server_find_device_by_sn(tree_handle tree, cpchar sn, node_handle* node);
+HMCAPI hm_result hm_server_release_tree(tree_handle tree);
+HMCAPI hm_result hm_server_sort_in_node(tree_handle tree, node_handle node, int32 sm);
+HMCAPI hm_result hm_server_filter_in_node(tree_handle tree, node_handle node, cpchar keywords);
+HMCAPI hm_result hm_server_get_all_device_count(tree_handle tree, int32* count);
+HMCAPI hm_result hm_server_get_all_device_at(tree_handle tree, int32 index, node_handle* node);
+HMCAPI hm_result hm_server_get_children_count(node_handle device, int32* count);
+HMCAPI hm_result hm_server_get_child_at(node_handle device, int32 index, node_handle* node);
+HMCAPI hm_result hm_server_get_parent(node_handle device, node_handle* node);
+
+/************************************************************************************************/
+/*									编解码相关接口												*/
+/************************************************************************************************/
+//	音频编/解码
+HMCAPI hm_result hm_audio_init(AUDIO_ENCODE type, audio_codec_handle* haudio);
+HMCAPI hm_result hm_audio_decode(audio_codec_handle handle,
+								 pointer des, int32* des_len,
+								 pointer src, int32 src_len, int32 sample);
+HMCAPI hm_result hm_audio_encode(audio_codec_handle handle,
+								 pointer des, int32* des_len,
+								 pointer src, int32 src_len, int32 sample);
+HMCAPI hm_result hm_audio_uninit(audio_codec_handle handle);
+
+//	音频采集接口仅支持Windows平台
+HMCAPI hm_result hm_audio_capture_init(audio_capture_handle* handle);
+HMCAPI hm_result hm_audio_capture_set_callback(audio_capture_handle handle, cb_audio_capture cb, user_data data);
+HMCAPI hm_result hm_audio_capture_start(audio_capture_handle handle);
+HMCAPI hm_result hm_audio_capture_stop(audio_capture_handle handle);
+HMCAPI hm_result hm_audio_capture_uninit(audio_capture_handle handle);
+
+//	音频播放接口仅支持Windows平台
+HMCAPI hm_result hm_audio_player_init(audio_player_handle* handle,
+												  window_handle wnd,
+												  AUDIO_ENCODE audio_type, int32 sample /*= 8000*/, int32 chn_num /*= 1*/, int32 bitwidth /*= 16*/);
+HMCAPI hm_result hm_audio_player_start(audio_player_handle handle);
+HMCAPI hm_result hm_audio_player_stop(audio_player_handle handle);
+HMCAPI hm_result hm_audio_player_insert_frame(audio_player_handle handle, cpchar buf, int32 len);
+HMCAPI hm_result hm_audio_player_uninit(audio_player_handle handle);
+
+//	视频解码
+HMCAPI hm_result hm_video_init(VIDEO_ENCODE type, video_codec_handle* hvideo);
+HMCAPI hm_result hm_video_decode_yuv(video_codec_handle handle, pointer video_data, int32 video_len, yuv_handle* yuv);
+HMCAPI hm_result hm_video_decode_bitmap(video_codec_handle handle, pointer video_data, int32 video_len, BITMAP_FORMAT bf, bitmap_handle* bmp);
+HMCAPI hm_result hm_video_encode_yuv420(video_codec_handle handle, cpointer dst, int32* dst_len, pointer src, int32 src_len, int32 width, int32 height, int32 bit_rate);
+HMCAPI hm_result hm_video_release_yuv(yuv_handle handle);
+HMCAPI hm_result hm_video_release_bitmap(bitmap_handle handle);
+HMCAPI hm_result hm_video_yuv_2_rgb(yuv_handle handle, BITMAP_FORMAT bf, bitmap_handle* bmp);
+HMCAPI hm_result hm_video_get_yuv_data(yuv_handle handle, P_YUV_PICTURE yuv_pic);
+HMCAPI hm_result hm_video_get_bitmap_data(bitmap_handle handle, uint32* len, cpchar* data);
+HMCAPI hm_result hm_video_get_bitmap_file_data(bitmap_handle handle, uint32* len, cpchar* data);
+HMCAPI hm_result hm_video_get_bitmap_info(bitmap_handle handle, P_BITMAP_INFO_HEADER* hinfo);
+HMCAPI hm_result hm_video_uninit(video_codec_handle handle);
+
+/************************************************************************************************/
+/*									视频显示相关接口												*/
+/************************************************************************************************/
+//	视频显示（接口不关心数据来源，只负责显示）
+HMCAPI hm_result hm_video_display_open_port(window_handle hwnd, P_DISPLAY_OPTION disp_option, port_handle* port);
+HMCAPI hm_result hm_video_display_start(port_handle port, int32 vw /*= 0*/, int32 vh /*= 0*/, int32 fps /*= 25*/);
+HMCAPI hm_result hm_video_display_input_data(port_handle port, cpointer video_data, int32 len, bool bDisp /*= true*/);
+HMCAPI hm_result hm_video_display_stop(port_handle port);
+HMCAPI hm_result hm_video_display_get_buffer_size(port_handle port, int32* size);
+HMCAPI hm_result hm_video_display_close_port(port_handle port);
+
+/************************************************************************************************/
+/*									内存释放相关接口												*/
+/************************************************************************************************/
+//	内存释放
+HMCAPI hm_result hm_mem_free(pointer p);
+
+/************************************************************************************************/
+/*							本地视频录像/回放/抓图相关接口										*/
+/************************************************************************************************/
+//	本地录像
+HMCAPI hm_result hm_util_local_record_init(P_LOCAL_RECORD_PARAM param, local_record_handle* hrecord);
+HMCAPI hm_result hm_util_local_record_write(local_record_handle handle, P_FRAME_DATA frame, uint32* time_cost);
+HMCAPI hm_result hm_util_local_record_uninit(local_record_handle hrecord);
+
+//	本地回放（主、被动模式）
+HMCAPI hm_result hm_util_local_playback_init(P_LOCAL_RECORD_PARAM param, local_playback_handle* hplayback, PB_MODE pbm);
+HMCAPI hm_result hm_util_local_playback_get_one_frame(local_playback_handle hplayback, P_PLAYBACK_FRAME frame);
+HMCAPI hm_result hm_util_local_playback_set_callback(local_playback_handle hplayback, cb_util_playback cb, user_data data);
+HMCAPI hm_result hm_util_local_playback_start(local_playback_handle hplayback);
+HMCAPI hm_result hm_util_local_playback_stop(local_playback_handle hplayback);
+HMCAPI hm_result hm_util_local_playback_pause(local_playback_handle hplayback);
+HMCAPI hm_result hm_util_local_playback_resume(local_playback_handle hplayback);
+HMCAPI hm_result hm_util_local_playback_get_rate(local_playback_handle hplayback, PLAYBACK_RATE* rate);
+HMCAPI hm_result hm_util_local_playback_set_rate(local_playback_handle hplayback, PLAYBACK_RATE rate);
+HMCAPI hm_result hm_util_local_playback_get_position(local_playback_handle hplayback, real64* pos);
+HMCAPI hm_result hm_util_local_playback_set_position(local_playback_handle hplayback, real64 pos);
+HMCAPI hm_result hm_util_local_playback_step_forward(local_playback_handle hplayback);
+HMCAPI hm_result hm_util_local_playback_step_backward(local_playback_handle hplayback);
+HMCAPI hm_result hm_util_local_playback_uninit(local_playback_handle hplayback);
+
+//	本地抓图
+HMCAPI hm_result hm_util_local_capture(cpchar path, yuv_handle handle, BITMAP_FORMAT bf);
+
+/************************************************************************************************/
+/*							局域网设备搜索相关接口												*/
+/************************************************************************************************/
+HMCAPI hm_result hm_util_lan_device_search_init(P_LAN_DEVICE_SEARCH_PARAM param, lan_device_search_handle* handle);
+HMCAPI hm_result hm_util_lan_device_search_query(lan_device_search_handle handle);
+HMCAPI hm_result hm_util_lan_device_search_reset_ip(lan_device_search_handle handle, P_LAN_DEVICE_RESET_IP param);
+HMCAPI hm_result hm_util_lan_device_search_config_sn(lan_device_search_handle handle, P_LAN_CONFIG_SN_INFO sn);
+HMCAPI hm_result hm_util_lan_device_search_config_update(lan_device_search_handle handle, P_LAN_CONFIG_UPDATE_INFO info);
+HMCAPI hm_result hm_util_lan_device_search_config_lot(lan_device_search_handle handle, P_LAN_CONFIG_LOT_INFO lot);
+HMCAPI hm_result hm_util_lan_device_search_uninit(lan_device_search_handle handle);
+
+/************************************************************************************************/
+/*							推送相关接口（仅安卓平台）											*/
+/************************************************************************************************/
+HMCAPI hm_result hm_util_push_service_init(cpchar addr, uint16 port, cpchar token, push_service_handle* handle);
+HMCAPI hm_result hm_util_push_service_start(push_service_handle handle);
+HMCAPI hm_result hm_util_push_service_set_callback(push_service_handle handle, cb_util_push_service cb, user_data data);
+HMCAPI hm_result hm_util_push_service_stop(push_service_handle handle);
+HMCAPI hm_result hm_util_push_service_uninit(push_service_handle handle);
+
+extern void gLInit();
+extern void gLUninit();
+extern void gLRender();
+extern void renderFrame();
+extern void gLResize(int width,int height);
+extern void setFrameBuffer(char* ydata, char* udata, char* vdata, int ystripe, int ustripe, int vstripe,int width, int height);
     
-    /************************************************************************************************/
-    /*										初始化SDK												*/
-    /************************************************************************************************/
-    HMCAPI hm_result hm_sdk_init();
-    HMCAPI hm_result hm_sdk_uninit();
-    
-    /************************************************************************************************/
-    /*										设备相关接口												*/
-    /************************************************************************************************/
-    //	登录/登出设备
-    HMCAPI hm_result hm_pu_login(cpchar ip, uint16 port, cpchar sn, cpchar user, cpchar pwd, user_id* id);
-    HMCAPI hm_result hm_pu_login_ex(node_handle handle, user_id* id);
-    HMCAPI hm_result hm_pu_set_net_cb(user_id id, cb_pu_net cb, user_data data);
-    HMCAPI hm_result hm_pu_logout(user_id id);
-    HMCAPI hm_result hm_pu_get_device_info(user_id id, P_DEVICE_INFO device);
-    
-    //	反向连接
-    HMCAPI hm_result hm_pu_listen_init(listen_handle* lh);
-    HMCAPI hm_result hm_pu_listen_set_user_info(listen_handle lh, cpchar* usr, cpchar* pwd, int32 count);
-    HMCAPI hm_result hm_pu_listen_set_callback(listen_handle lh, cb_pu_dev_connect cb, user_data data);
-    HMCAPI hm_result hm_pu_listen_open(listen_handle lh, cpchar ip, uint16 port);
-    HMCAPI hm_result hm_pu_listen_close(listen_handle lh);
-    HMCAPI hm_result hm_pu_listen_uninit(listen_handle lh);
-    
-    //	视频
-    HMCAPI hm_result hm_pu_open_video(user_id id, P_OPEN_VIDEO_PARAM param, video_handle* handle);
-    HMCAPI hm_result hm_pu_start_video(video_handle handle, P_OPEN_VIDEO_RES res);
-    HMCAPI hm_result hm_pu_force_iframe(video_handle handle);
-    HMCAPI hm_result hm_pu_stop_video(video_handle handle);
-    HMCAPI hm_result hm_pu_close_video(video_handle handle);
-    
-    //	音频
-    HMCAPI hm_result hm_pu_open_audio(user_id id, P_OPEN_AUDIO_PARAM param, P_OPEN_AUDIO_RES res, audio_handle* handle);
-    HMCAPI hm_result hm_pu_start_audio(audio_handle handle);
-    HMCAPI hm_result hm_pu_stop_audio(audio_handle handle);
-    HMCAPI hm_result hm_pu_close_audio(audio_handle handle);
-    
-    //	对讲
-    HMCAPI hm_result hm_pu_open_talk(user_id id, P_OPEN_TALK_PARAM param, talk_handle* handle);
-    HMCAPI hm_result hm_pu_send_talk_data(talk_handle handle, P_FRAME_DATA frame);
-    HMCAPI hm_result hm_pu_start_talk(talk_handle handle);
-    HMCAPI hm_result hm_pu_stop_talk(talk_handle handle);
-    HMCAPI hm_result hm_pu_close_talk(talk_handle handle);
-    
-    //	云台
-    HMCAPI hm_result hm_pu_ptz_control(user_id id, uint32 channel, PTZ_COMMAND ptz_cmd, int32 speed);
-    HMCAPI hm_result hm_pu_ptz_focus_up(user_id id, uint32 channel, int32 speed);
-    HMCAPI hm_result hm_pu_ptz_focus_down(user_id id, uint32 channel, int32 speed);
-    HMCAPI hm_result hm_pu_ptz_set_preset(user_id id, uint32 channel, uint8 index, cpchar preset_name);
-    HMCAPI hm_result hm_pu_ptz_clr_preset(user_id id, uint32 channel, uint8 index);
-    HMCAPI hm_result hm_pu_ptz_goto_preset(user_id id, uint32 channel, uint8 index);
-    HMCAPI hm_result hm_pu_ptz_cruise(user_id id, PTZ_INTERVAL type, uint32 channel, int32 speed);
-    
-    //	报警
-    HMCAPI hm_result hm_pu_open_alarm(user_id id, P_OPEN_ALARM_PARAM param, alarm_handle* handle);
-    HMCAPI hm_result hm_pu_start_alarm(alarm_handle handle);
-    HMCAPI hm_result hm_pu_stop_alarm(alarm_handle handle);
-    HMCAPI hm_result hm_pu_close_alarm(alarm_handle handle);
-    
-    //	获取布防状态
-    HMCAPI hm_result hm_pu_get_arming_state(user_id id, bool* state);
-    
-    //  布防和撤防
-    HMCAPI hm_result hm_pu_arming_area(user_id user, int32 area_id, cpchar expand);
-    HMCAPI hm_result hm_pu_disarming_area(user_id user, int32 area_id, cpchar expand);
-    
-    // 操作防区
-    HMCAPI hm_result hm_pu_add_area(user_id user, P_AREA_INFO_PARAM param);
-    HMCAPI hm_result hm_pu_change_area(user_id user, P_AREA_INFO_PARAM param);
-    HMCAPI hm_result hm_pu_delete_area(user_id user, P_AREA_INFO_PARAM param);
-    
-    // 操作传感器
-    HMCAPI hm_result hm_pu_add_sensor(user_id user, P_SENSOR_INFO_PARAM param);
-    HMCAPI hm_result hm_pu_change_sensor(user_id user, P_SENSOR_INFO_PARAM param);
-    HMCAPI hm_result hm_pu_delete_sensor(user_id user, P_SENSOR_INFO_PARAM param);
-    
-    // 报警主机学习
-    HMCAPI hm_result hm_pu_open_alarm_host(user_id user, cb_pu_alarm cb_alarm, alarm_host_handle* handle);
-    HMCAPI hm_result hm_pu_start_learn(alarm_host_handle handle);
-    HMCAPI hm_result hm_pu_stop_learn(alarm_host_handle handle);
-    HMCAPI hm_result hm_pu_close_alarm_host(alarm_host_handle handle);
-    
-    // 报警主机配对
-    HMCAPI hm_result hm_pu_get_match_sensor(user_id user, P_MATCH_SENSOR_RES res);
-    
-    //	录像与回放
-    HMCAPI hm_result hm_pu_open_record(user_id id, int32 chn, record_handle* handle);
-    HMCAPI hm_result hm_pu_start_record(record_handle handle, uint32 channel);
-    HMCAPI hm_result hm_pu_stop_record(record_handle handle, uint32 channel);
-    HMCAPI hm_result hm_pu_close_record(record_handle handle);
-    HMCAPI hm_result hm_pu_find_file(user_id id, P_FIND_FILE_PARAM param, find_file_handle* handle);
-    HMCAPI hm_result hm_pu_find_next_file(find_file_handle handle, P_FIND_FILE_DATA data);
-    HMCAPI hm_result hm_pu_close_find_file(find_file_handle handle);
-    HMCAPI hm_result hm_pu_delete_record_file(user_id id, P_DELETE_RECORD_FILE_PARAM param);
-    HMCAPI hm_result hm_pu_open_playback(user_id id, P_PLAYBACK_PARAM param, P_PLAYBACK_RES res, playback_handle* handle);
-    HMCAPI hm_result hm_pu_start_playback(playback_handle handle);
-    HMCAPI hm_result hm_pu_stop_playback(playback_handle handle);
-    HMCAPI hm_result hm_pu_pause_playback(playback_handle handle);
-    HMCAPI hm_result hm_pu_resume_playback(playback_handle handle);
-    HMCAPI hm_result hm_pu_step_playback(playback_handle handle);
-    HMCAPI hm_result hm_pu_close_playback(playback_handle handle);
-    
-    //	视频与图片下载
-    HMCAPI hm_result hm_pu_open_get_file(user_id id, P_GET_FILE_PARAM param, P_GET_FILE_RES res, get_file_handle* handle);
-    HMCAPI hm_result hm_pu_set_get_file_callback(get_file_handle handle, cb_pu_data cb, user_data data);
-    HMCAPI hm_result hm_pu_start_get_file(get_file_handle handle);
-    HMCAPI hm_result hm_pu_cancel_get_file(get_file_handle handle);
-    HMCAPI hm_result hm_pu_close_get_file(get_file_handle handle);
-    HMCAPI hm_result hm_pu_find_picture(user_id id, P_FIND_PICTURE_PARAM param, find_picture_handle* handle);
-    HMCAPI hm_result hm_pu_find_next_picture(find_picture_handle handle, P_FIND_PICTURE_DATA data);
-    HMCAPI hm_result hm_pu_close_find_picture(find_picture_handle handle);
-    HMCAPI hm_result hm_pu_delete_picture(user_id id, P_DELETE_PICTURE_PARAM param);
-    HMCAPI hm_result hm_pu_open_get_picture(user_id id, P_GET_PICTURE_PARAM param, P_GET_PICTURE_RES res, get_picture_handle* handle);
-    HMCAPI hm_result hm_pu_start_get_picture(get_picture_handle handle);
-    HMCAPI hm_result hm_pu_cancel_get_picture(get_picture_handle handle);
-    HMCAPI hm_result hm_pu_close_get_picture(get_picture_handle handle);
-    
-    //	抓图
-    HMCAPI hm_result hm_pu_remote_capture_pic(user_id id, P_REMOTE_CAPTURE_PIC_PARAM param);
-    
-    //  升级
-    HMCAPI hm_result hm_pu_open_upgrade(user_id id, P_HARD_UPDATE_PARAM param, upgrade_handle* handle);
-    HMCAPI hm_result hm_pu_start_upgrade(upgrade_handle handle);
-    HMCAPI hm_result hm_pu_send_upgrade_data(upgrade_handle handle, uint32 len, cpointer buf);
-    HMCAPI hm_result hm_pu_cancel_upgrade(upgrade_handle handle);
-    HMCAPI hm_result hm_pu_close_upgrade(upgrade_handle handle);
-    HMCAPI hm_result hm_pu_get_online_user(user_id id, get_online_user_handle* handle);
-    HMCAPI hm_result hm_pu_get_next_online_user(get_online_user_handle handle, P_ONLINE_USER_DATA data);
-    HMCAPI hm_result hm_pu_close_get_online_user(get_online_user_handle handle);
-    HMCAPI hm_result hm_pu_set_wifi_config(user_id user, P_CONFIG_WIFI config);
-    HMCAPI hm_result hm_pu_get_wifi_config(user_id user, P_CONFIG_WIFI config);
-    HMCAPI hm_result hm_pu_lock_device(user_id user, uint32 lock);
-    HMCAPI hm_result hm_pu_protect_privacy(user_id user, DEV_PRIVACY prot);
-    
-    //  其他
-    HMCAPI hm_result hm_pu_reboot(user_id id);
-    HMCAPI hm_result hm_pu_open_search_wifi(user_id id, P_QUERY_WIFI_PARAM param, search_wifi_handle* handle);
-    HMCAPI hm_result hm_pu_set_wifi_callback(search_wifi_handle handle, cb_pu_wifi cb, user_data data);
-    HMCAPI hm_result hm_pu_start_search_wifi(search_wifi_handle handle);
-    HMCAPI hm_result hm_pu_close_search_wifi(search_wifi_handle handle);
-    HMCAPI hm_result hm_pu_detect_upnp(user_id id, P_DETECT_UPNP upnp);
-    HMCAPI hm_result hm_pu_format_sd(user_id id, uint8* format_result);
-    HMCAPI hm_result hm_pu_restore_default_config(user_id id, uint8* restore_result);
-    HMCAPI hm_result hm_pu_get_system_info(user_id id, P_PT_SYSTEM_INFO system_info);
-    HMCAPI hm_result hm_pu_time_sync(user_id id, uint32 time);
-    
-    //	获取连接信息
-    HMCAPI hm_result hm_pu_get_connect_type(user_id id, int32* ct);
-    
-    /************************************************************************************************/
-    /*										平台相关接口												*/
-    /************************************************************************************************/
-    //	连接平台
-    HMCAPI hm_result hm_server_connect(P_LOGIN_SERVER_INFO lsi, server_id* hserver, pchar err);
-    HMCAPI hm_result hm_server_disconnect(server_id server);
-    
-    //	获取分组、设备列表、用户信息、中转穿透信息
-    HMCAPI hm_result hm_server_get_device_list(server_id server);
-    HMCAPI hm_result hm_server_get_user_info(server_id server, P_USER_INFO* uinfo);
-    HMCAPI hm_result hm_server_get_transfer_info(server_id server);
-    HMCAPI hm_result hm_server_get_time(server_id server, uint64* time);
-    HMCAPI hm_result hm_server_get_channel_info(node_handle channel, P_CHANNEL_INFO* cinfo);
-    HMCAPI hm_result hm_server_get_node_type(node_handle node, NODE_TYPE_INFO* tinfo);
-    HMCAPI hm_result hm_server_get_node_id(node_handle device, int32* id);
-    HMCAPI hm_result hm_server_get_parent_id(node_handle device, int32* id);
-    HMCAPI hm_result hm_server_get_device_sn(node_handle device, cpchar* sn);
-    HMCAPI hm_result hm_server_get_device_url(node_handle device, cpchar* url);
-    HMCAPI hm_result hm_server_get_device_power(node_handle device, int64* power);
-    HMCAPI hm_result hm_server_get_node_name(node_handle node, cpchar* name);
-    HMCAPI hm_result hm_server_get_last_update(node_handle device, uint64* update);
-    HMCAPI hm_result hm_server_bind_device(server_id server, cpchar sn, cpchar pwd, int32 parentid, int32* device_id);
-    HMCAPI hm_result hm_server_unbind_device(server_id server, int32 device_id);
-    HMCAPI hm_result hm_server_modify_device_name(server_id server, int32 device_id, cpchar new_name);
-    HMCAPI hm_result hm_server_add_group(server_id server, cpchar usrname, cpchar comment, int32 parent_id);
-    HMCAPI hm_result hm_server_change_device_group(server_id server, int32 device_id, int32 group_id);
-    HMCAPI hm_result hm_server_is_online(node_handle device, bool* is_online);
-    HMCAPI hm_result hm_server_get_online_count(node_handle device, int32* online_cnt, int32* total_cnt);
-    HMCAPI hm_result hm_server_save_token(server_id server, P_TOKEN_INFO pti);
-    HMCAPI hm_result hm_server_user_exist(cpchar ip, uint16 port, cpchar usrname);
-    HMCAPI hm_result hm_server_register_user_by_mobile(cpchar ip, uint16 port, cpchar usrname, cpchar password, cpchar mobile, cpchar captcha);
-    HMCAPI hm_result hm_server_register_user_by_email(cpchar ip, uint16 port, cpchar usrname, cpchar password, cpchar email);
-    HMCAPI hm_result hm_server_request_mobile_captcha(cpchar ip, uint16 port, cpchar usrname, cpchar mobile);
-    HMCAPI hm_result hm_server_reset_password_by_email(cpchar ip, uint16 port, cpchar usrname, cpchar email);
-    HMCAPI hm_result hm_server_reset_password_by_mobile(cpchar ip, uint16 port, cpchar usrname, cpchar new_password, cpchar mobile, cpchar captcha);
-    HMCAPI hm_result hm_server_set_privacy(server_id server, cpchar sn, DEV_PRIVACY dp);
-    HMCAPI hm_result hm_server_get_privacy(server_id, cpchar sn, DEV_PRIVACY* dp);
-    HMCAPI hm_result hm_server_get_device_privacy_status(node_handle device, DEV_PRIVACY* dp);
-    HMCAPI hm_result hm_server_get_session_time_left(server_id server, int32* time);
-    HMCAPI hm_result hm_server_get_version(server_id server, cpchar* ver);
-    HMCAPI hm_result hm_server_get_update_info(cpchar ip, uint16 port, int32 ctype, cpchar ver, cpchar os, P_UPDATE_INFO pui);
-    HMCAPI hm_result hm_server_release_update_info(P_UPDATE_INFO pui);
-    HMCAPI hm_result hm_server_get_last_error_describe(server_id server, cpchar* err);
-    
-    //	用户注册、密码修改
-    HMCAPI hm_result hm_server_register_user(cpchar ip, uint16 port, cpchar usrname, cpchar pwd);
-    HMCAPI hm_result hm_server_modify_password(server_id server, cpchar old_pwd, cpchar new_pwd);
-    
-    //	设备树操作
-    HMCAPI hm_result hm_server_get_tree(server_id server, tree_handle* htree);
-    HMCAPI hm_result hm_server_get_root(tree_handle tree, node_handle* node);
-    HMCAPI hm_result hm_server_find_group_by_id(tree_handle tree, int32 id, node_handle* node);
-    HMCAPI hm_result hm_server_find_device_by_id(tree_handle tree, int32 id, node_handle* node);
-    HMCAPI hm_result hm_server_find_device_by_sn(tree_handle tree, cpchar sn, node_handle* node);
-    HMCAPI hm_result hm_server_release_tree(tree_handle tree);
-    HMCAPI hm_result hm_server_sort_in_node(tree_handle tree, node_handle node, int32 sm);
-    HMCAPI hm_result hm_server_filter_in_node(tree_handle tree, node_handle node, cpchar keywords);
-    HMCAPI hm_result hm_server_get_all_device_count(tree_handle tree, int32* count);
-    HMCAPI hm_result hm_server_get_all_device_at(tree_handle tree, int32 index, node_handle* node);
-    HMCAPI hm_result hm_server_get_children_count(node_handle device, int32* count);
-    HMCAPI hm_result hm_server_get_child_at(node_handle device, int32 index, node_handle* node);
-    HMCAPI hm_result hm_server_get_parent(node_handle device, node_handle* node);
-    
-    /************************************************************************************************/
-    /*									编解码相关接口												*/
-    /************************************************************************************************/
-    //	音频编/解码
-    HMCAPI hm_result hm_audio_init(AUDIO_ENCODE type, audio_codec_handle* haudio);
-    HMCAPI hm_result hm_audio_decode(audio_codec_handle handle,
-                                     pointer des, int32* des_len,
-                                     pointer src, int32 src_len, int32 sample);
-    HMCAPI hm_result hm_audio_encode(audio_codec_handle handle,
-                                     pointer des, int32* des_len,
-                                     pointer src, int32 src_len, int32 sample);
-    HMCAPI hm_result hm_audio_uninit(audio_codec_handle handle);
-    
-    //	音频采集接口仅支持Windows平台
-    HMCAPI hm_result hm_audio_capture_init(audio_capture_handle* handle);
-    HMCAPI hm_result hm_audio_capture_set_callback(audio_capture_handle handle, cb_audio_capture cb, user_data data);
-    HMCAPI hm_result hm_audio_capture_start(audio_capture_handle handle);
-    HMCAPI hm_result hm_audio_capture_stop(audio_capture_handle handle);
-    HMCAPI hm_result hm_audio_capture_uninit(audio_capture_handle handle);
-    
-    //	音频播放接口仅支持Windows平台
-    HMCAPI hm_result hm_audio_player_init(audio_player_handle* handle,
-                                          window_handle wnd,
-                                          AUDIO_ENCODE audio_type, int32 sample /*= 8000*/, int32 chn_num /*= 1*/, int32 bitwidth /*= 16*/);
-    HMCAPI hm_result hm_audio_player_start(audio_player_handle handle);
-    HMCAPI hm_result hm_audio_player_stop(audio_player_handle handle);
-    HMCAPI hm_result hm_audio_player_insert_frame(audio_player_handle handle, cpchar buf, int32 len);
-    HMCAPI hm_result hm_audio_player_uninit(audio_player_handle handle);
-    
-    //	视频解码
-    HMCAPI hm_result hm_video_init(VIDEO_ENCODE type, video_codec_handle* hvideo);
-    HMCAPI hm_result hm_video_decode_yuv(video_codec_handle handle, pointer video_data, int32 video_len, yuv_handle* yuv);
-    HMCAPI hm_result hm_video_decode_bitmap(video_codec_handle handle, pointer video_data, int32 video_len, BITMAP_FORMAT bf, bitmap_handle* bmp);
-    HMCAPI hm_result hm_video_encode_yuv420(video_codec_handle handle, cpointer dst, int32* dst_len, pointer src, int32 src_len, int32 width, int32 height, int32 bit_rate);
-    HMCAPI hm_result hm_video_release_yuv(yuv_handle handle);
-    HMCAPI hm_result hm_video_release_bitmap(bitmap_handle handle);
-    HMCAPI hm_result hm_video_yuv_2_rgb(yuv_handle handle, BITMAP_FORMAT bf, bitmap_handle* bmp);
-    HMCAPI hm_result hm_video_get_yuv_data(yuv_handle handle, P_YUV_PICTURE yuv_pic);
-    HMCAPI hm_result hm_video_get_bitmap_data(bitmap_handle handle, uint32* len, cpchar* data);
-    HMCAPI hm_result hm_video_get_bitmap_file_data(bitmap_handle handle, uint32* len, cpchar* data);
-    HMCAPI hm_result hm_video_get_bitmap_info(bitmap_handle handle, P_BITMAP_INFO_HEADER* hinfo);
-    HMCAPI hm_result hm_video_uninit(video_codec_handle handle);
-    
-    /************************************************************************************************/
-    /*									视频显示相关接口												*/
-    /************************************************************************************************/
-    //	视频显示（接口不关心数据来源，只负责显示）
-    HMCAPI hm_result hm_video_display_open_port(window_handle hwnd, P_DISPLAY_OPTION disp_option, port_handle* port);
-    HMCAPI hm_result hm_video_display_start(port_handle port, int32 vw /*= 0*/, int32 vh /*= 0*/, int32 fps /*= 25*/);
-    HMCAPI hm_result hm_video_display_input_data(port_handle port, cpointer video_data, int32 len, bool bDisp /*= true*/);
-    HMCAPI hm_result hm_video_display_stop(port_handle port);
-    HMCAPI hm_result hm_video_display_get_buffer_size(port_handle port, int32* size);
-    HMCAPI hm_result hm_video_display_close_port(port_handle port);
-    
-    /************************************************************************************************/
-    /*									内存释放相关接口												*/
-    /************************************************************************************************/
-    //	内存释放
-    HMCAPI hm_result hm_mem_free(pointer p);
-    
-    /************************************************************************************************/
-    /*							本地视频录像/回放/抓图相关接口										*/
-    /************************************************************************************************/
-    //	本地录像
-    HMCAPI hm_result hm_util_local_record_init(P_LOCAL_RECORD_PARAM param, local_record_handle* hrecord);
-    HMCAPI hm_result hm_util_local_record_write(local_record_handle handle, P_FRAME_DATA frame, uint32* time_cost);
-    HMCAPI hm_result hm_util_local_record_uninit(local_record_handle hrecord);
-    
-    //	本地回放（主、被动模式）
-    HMCAPI hm_result hm_util_local_playback_init(P_LOCAL_RECORD_PARAM param, local_playback_handle* hplayback, PB_MODE pbm);
-    HMCAPI hm_result hm_util_local_playback_get_one_frame(local_playback_handle hplayback, P_PLAYBACK_FRAME frame);
-    HMCAPI hm_result hm_util_local_playback_set_callback(local_playback_handle hplayback, cb_util_playback cb, user_data data);
-    HMCAPI hm_result hm_util_local_playback_start(local_playback_handle hplayback);
-    HMCAPI hm_result hm_util_local_playback_stop(local_playback_handle hplayback);
-    HMCAPI hm_result hm_util_local_playback_pause(local_playback_handle hplayback);
-    HMCAPI hm_result hm_util_local_playback_resume(local_playback_handle hplayback);
-    HMCAPI hm_result hm_util_local_playback_get_rate(local_playback_handle hplayback, PLAYBACK_RATE* rate);
-    HMCAPI hm_result hm_util_local_playback_set_rate(local_playback_handle hplayback, PLAYBACK_RATE rate);
-    HMCAPI hm_result hm_util_local_playback_get_position(local_playback_handle hplayback, real64* pos);
-    HMCAPI hm_result hm_util_local_playback_set_position(local_playback_handle hplayback, real64 pos);
-    HMCAPI hm_result hm_util_local_playback_step_forward(local_playback_handle hplayback);
-    HMCAPI hm_result hm_util_local_playback_step_backward(local_playback_handle hplayback);
-    HMCAPI hm_result hm_util_local_playback_uninit(local_playback_handle hplayback);
-    
-    //	本地抓图
-    HMCAPI hm_result hm_util_local_capture(cpchar path, yuv_handle handle, BITMAP_FORMAT bf);
-    
-    /************************************************************************************************/
-    /*							局域网设备搜索相关接口												*/
-    /************************************************************************************************/
-    HMCAPI hm_result hm_util_lan_device_search_init(P_LAN_DEVICE_SEARCH_PARAM param, lan_device_search_handle* handle);
-    HMCAPI hm_result hm_util_lan_device_search_query(lan_device_search_handle handle);
-    HMCAPI hm_result hm_util_lan_device_search_reset_ip(lan_device_search_handle handle, P_LAN_DEVICE_RESET_IP param);
-    HMCAPI hm_result hm_util_lan_device_search_config_sn(lan_device_search_handle handle, P_LAN_CONFIG_SN_INFO sn);
-    HMCAPI hm_result hm_util_lan_device_search_config_update(lan_device_search_handle handle, P_LAN_CONFIG_UPDATE_INFO info);
-    HMCAPI hm_result hm_util_lan_device_search_config_lot(lan_device_search_handle handle, P_LAN_CONFIG_LOT_INFO lot);
-    HMCAPI hm_result hm_util_lan_device_search_uninit(lan_device_search_handle handle);
-    
-    /************************************************************************************************/
-    /*							推送相关接口（仅安卓平台）											*/
-    /************************************************************************************************/
-    HMCAPI hm_result hm_util_push_service_init(cpchar addr, uint16 port, cpchar token, push_service_handle* handle);
-    HMCAPI hm_result hm_util_push_service_start(push_service_handle handle);
-    HMCAPI hm_result hm_util_push_service_set_callback(push_service_handle handle, cb_util_push_service cb, user_data data);
-    HMCAPI hm_result hm_util_push_service_stop(push_service_handle handle);
-    HMCAPI hm_result hm_util_push_service_uninit(push_service_handle handle);
-    
-    
-    /* ios YUV视频显示相关接口 */
-    extern void gLInit();
-    extern void gLUninit();
-    extern void gLRender();
-    extern void renderFrame();
-    extern void gLResize(int width,int height);
-    extern void setFrameBuffer(char* ydata, char* udata, char* vdata, int ystripe, int ustripe, int vstripe,
-                               int width, int height);
 #ifdef __cplusplus
 }
 #endif

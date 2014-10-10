@@ -38,6 +38,23 @@
     return self;
 }
 
+#pragma mark - URL
+- (NSURL*)urlFromPath:(NSString*)path {
+    NSURL* url = nil;
+    if (path.length > 0) {
+        if ([path hasPrefix:@"http"]) {
+            url = [NSURL URLWithString:path];
+        }
+        else {
+            url = [NSURL URLWithString:path
+                         relativeToURL:[NSURL URLWithString:kServerHostUsing]];
+        }
+    }
+    
+    return url;
+}
+
+#pragma mark - Operations
 - (AFHTTPRequestOperationManager*)opManager {
     if (_opManager == nil) {
         _opManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:kServerHostUsing]];
@@ -74,7 +91,7 @@
     return _opQiniuManager;
 }
 
-- (AFNetworkReachabilityManager*)opiTunesManager {
+- (AFHTTPRequestOperationManager*)opiTunesManager {
     if (_opiTunesManager == nil) {
         _opiTunesManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:kQiniuUploadServerHost]];
         
@@ -241,6 +258,22 @@
                                             failure:failure];
     return op;
     
+}
+
+- (AFHTTPRequestOperation*)opGetSessionListOfKindergarten:(NSInteger)schoolId
+                                            withClassList:(NSArray*)classIdList
+                                                  success:(SuccessResponseHandler)success
+                                                  failure:(FailureResponseHandler)failure {
+    id parameters = @{@"class_id": [classIdList componentsJoinedByString:@","],
+                      @"connected" : @"true"};
+    
+    NSString* apiUrl = [NSString stringWithFormat:kPathKindergartenSessionList, @(schoolId)];
+    
+    AFHTTPRequestOperation* op =[self.opManager GET:apiUrl
+                                         parameters:parameters
+                                            success:success
+                                            failure:failure];
+    return op;
 }
 
 - (AFHTTPRequestOperation*)opGetRelationshipOfChild:(NSString*)childId
@@ -463,6 +496,127 @@
                                                  parameters:parameters
                                                     success:success
                                                     failure:failure];
+    return op;
+}
+
+- (AFHTTPRequestOperation*)opGetTopicMsgsOfChild:(NSString*)childId
+                                  inKindergarten:(NSInteger)kindergarten
+                                            from:(long long)fromId
+                                              to:(long long)toId
+                                            most:(NSInteger)most
+                                         success:(SuccessResponseHandler)success
+                                         failure:(FailureResponseHandler)failure {
+    NSParameterAssert(childId);
+    
+    NSString* apiUrl = [NSString stringWithFormat:kTopicPath, @(kindergarten), childId];
+    
+    
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    if (fromId >= 0) {
+        [parameters setObject:@(fromId) forKey:@"from"];
+    }
+    
+    if (toId >= 0) {
+        [parameters setObject:@(toId) forKey:@"to"];
+    }
+    
+    if (most >= 0) {
+        [parameters setObject:@(most) forKey:@"most"];
+    }
+    
+    AFHTTPRequestOperation* op = [self.opManager GET:apiUrl
+                                          parameters:parameters
+                                             success:success
+                                             failure:failure];
+    return op;
+}
+
+- (AFHTTPRequestOperation*)opDeleteTopicMsgs:(long long)msgId
+                                     ofChild:(NSString*)childId
+                              inKindergarten:(NSInteger)kindergarten
+                                     success:(SuccessResponseHandler)success
+                                     failure:(FailureResponseHandler)failure {
+    
+    NSParameterAssert(childId);
+    
+    NSString* apiUrl = [NSString stringWithFormat:kTopicIdPath, @(kindergarten), childId, @(msgId)];
+    
+    NSMutableDictionary* parameters = nil;
+    
+    AFHTTPRequestOperation* op = [self.opManager DELETE:apiUrl
+                                             parameters:parameters
+                                                success:success
+                                                failure:failure];
+    return op;
+}
+
+- (AFHTTPRequestOperation*)opSendTopicMsg:(NSString*)msgBody
+                               withSender:(EntityLoginInfo*)senderInfo
+                             withMediaUrl:(NSString*)mediaUrl
+                              ofMediaType:(NSString*)mediaType
+                                  ofChild:(NSString*)childId
+                           inKindergarten:(NSInteger)kindergarten
+                             retrieveFrom:(long long)fromId
+                                  success:(SuccessResponseHandler)success
+                                  failure:(FailureResponseHandler)failure {
+    NSParameterAssert(msgBody || mediaUrl); // 不能同时为空
+    NSParameterAssert(childId);
+    
+    
+    NSString* apiUrl = [NSString stringWithFormat:kTopicPath, @(kindergarten), childId];
+    
+    if (fromId >= 0) {
+        apiUrl = [apiUrl stringByAppendingFormat:@"?retrieve_recent_from=%lld", fromId];
+    }
+    
+    /*
+     {"topic":"1_1396844597394",
+     "content":"我再说两句",
+     "media":{"url":"http://suoqin-test.u.qiniudn.com/FgPmIcRG6BGocpV1B9QMCaaBQ9LK","type":"image"},
+     "sender":{"id":"2_1003_1396844438388","type":"p"}}
+     */
+    
+    long long timestamp = [[NSDate date] timeIntervalSince1970]*1000;
+    
+    id msgMedia = @{@"url": @"",
+                    @"type": @""};
+    
+    if (mediaUrl.length > 0) {
+        msgMedia = @{@"url": [[self urlFromPath:mediaUrl] absoluteString],
+                     @"type": mediaType};
+    }
+    
+    id msgSender = @{@"id": senderInfo.uid,
+                     @"type": @"t"};
+    
+    NSDictionary* parameters = @{@"topic": childId,
+                                 @"timestamp": @(timestamp),
+                                 @"content": msgBody ? msgBody : @"",
+                                 @"media": msgMedia,
+                                 @"sender": msgSender};
+    
+    AFHTTPRequestOperation* op = [self.opManager POST:apiUrl
+                                           parameters:parameters
+                                              success:success
+                                              failure:failure];
+    return op;
+}
+
+- (AFHTTPRequestOperation*)opGetTopicMsgSender:(NSString*)senderId
+                                        ofType:(NSString*)senderType
+                                inKindergarten:(NSInteger)kindergarten
+                                       success:(SuccessResponseHandler)success
+                                       failure:(FailureResponseHandler)failure {
+    NSParameterAssert(senderId && senderType);
+    
+    NSString* apiUrl = [NSString stringWithFormat:kTopicSenderPath, @(kindergarten), senderId];
+    
+    NSDictionary* parameters = @{@"type": senderType};
+    
+    AFHTTPRequestOperation* op = [self.opManager GET:apiUrl
+                                          parameters:parameters
+                                             success:success
+                                             failure:failure];
     return op;
 }
 

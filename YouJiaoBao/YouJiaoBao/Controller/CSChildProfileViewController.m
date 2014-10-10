@@ -13,6 +13,7 @@
 #import "EntityRelationshipInfoHelper.h"
 #import "CSChildRelationshipItemTableViewCell.h"
 #import "CSAssessmentEditorViewController.h"
+#import "CSKuleChatingViewController.h"
 
 @interface CSChildProfileViewController () <UITableViewDataSource, UITableViewDelegate, CSChildProfileHeaderViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -68,6 +69,10 @@
     }
     else if ([segue.identifier isEqualToString:@"segue.childprofile.assessment"]) {
         CSAssessmentEditorViewController* ctrl = [segue destinationViewController];
+        ctrl.childInfo = self.childInfo;
+    }
+    else if ([segue.identifier isEqualToString:@"segue.childprofile.chating"]) {
+        CSKuleChatingViewController* ctrl = [segue destinationViewController];
         ctrl.childInfo = self.childInfo;
     }
 }
@@ -174,7 +179,7 @@
 
 #pragma mark - CSChildProfileHeaderViewControllerDelegate
 - (void)childProfileHeaderViewControllerShowChating:(CSChildProfileHeaderViewController*)ctrl {
-    
+    [self performSegueWithIdentifier:@"segue.childprofile.chating" sender:nil];
 }
 
 - (void)childProfileHeaderViewControllerShowAssessment:(CSChildProfileHeaderViewController*)ctrl {

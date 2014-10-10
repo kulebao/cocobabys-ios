@@ -65,4 +65,16 @@
 // PATH: 当日批量打卡日志
 #define kPathKindergartenDailylogList   @"/kindergarten/%@/dailylog"
 
+// PATH: 批量获取新到聊天记录
+#define kPathKindergartenSessionList    @"/kindergarten/%@/session"
+
+// PATH: 聊天 - 新接口
+#define kTopicPath                      @"/kindergarten/%@/session/%@/record"
+
+// PATH: 指定的聊天记录 - 新接口
+#define kTopicIdPath                    @"/kindergarten/%@/session/%@/record/%@"
+
+// PATH: Sender Info
+#define kTopicSenderPath                @"/kindergarten/%@/sender/%@"
+
 #endif

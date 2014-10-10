@@ -44,6 +44,11 @@ typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSErr
                                                    success:(SuccessResponseHandler)success
                                                    failure:(FailureResponseHandler)failure;
 
+- (AFHTTPRequestOperation*)opGetSessionListOfKindergarten:(NSInteger)schoolId
+                                            withClassList:(NSArray*)classIdList
+                                                  success:(SuccessResponseHandler)success
+                                                  failure:(FailureResponseHandler)failure;
+
 - (AFHTTPRequestOperation*)opGetRelationshipOfChild:(NSString*)childId
                                      inKindergarten:(NSInteger)schoolId
                                             success:(SuccessResponseHandler)success
@@ -105,5 +110,35 @@ typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSErr
 - (AFHTTPRequestOperation*)opCheckUpdates:(NSString*)appId
                                    success:(SuccessResponseHandler)success
                                    failure:(FailureResponseHandler)failure;
+
+- (AFHTTPRequestOperation*)opGetTopicMsgsOfChild:(NSString*)childId
+                                  inKindergarten:(NSInteger)kindergarten
+                                            from:(long long)fromId
+                                              to:(long long)toId
+                                            most:(NSInteger)most
+                                         success:(SuccessResponseHandler)success
+                                         failure:(FailureResponseHandler)failure;
+
+- (AFHTTPRequestOperation*)opDeleteTopicMsgs:(long long)msgId
+                                     ofChild:(NSString*)childId
+                              inKindergarten:(NSInteger)kindergarten
+                                     success:(SuccessResponseHandler)success
+                                     failure:(FailureResponseHandler)failure;
+
+- (AFHTTPRequestOperation*)opSendTopicMsg:(NSString*)msgBody
+                               withSender:(EntityLoginInfo*)senderInfo
+                             withMediaUrl:(NSString*)mediaUrl
+                              ofMediaType:(NSString*)mediaType
+                                  ofChild:(NSString*)childId
+                           inKindergarten:(NSInteger)kindergarten
+                             retrieveFrom:(long long)fromId
+                                  success:(SuccessResponseHandler)success
+                                  failure:(FailureResponseHandler)failure;
+
+- (AFHTTPRequestOperation*)opGetTopicMsgSender:(NSString*)senderId
+                                        ofType:(NSString*)senderType
+                                inKindergarten:(NSInteger)kindergarten
+                                       success:(SuccessResponseHandler)success
+                                       failure:(FailureResponseHandler)failure;
 
 @end

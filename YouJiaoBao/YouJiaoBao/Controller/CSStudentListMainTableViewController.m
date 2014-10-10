@@ -12,6 +12,7 @@
 #import "EntityClassInfoHelper.h"
 #import "EntityChildInfoHelper.h"
 #import "EntityDailylogHelper.h"
+#import "EntityTopicMsgHelper.h"
 #import "CSChildListItemTableViewCell.h"
 #import "UIImageView+WebCache.h"
 #import "CSChildProfileViewController.h"
@@ -151,6 +152,25 @@
         cell.labNotification.text = @"未刷卡";
     }
     
+    EntityTopicMsg* topicMsg = childInfo.lastTopicMsg;
+    if (topicMsg) {
+        if ([topicMsg.mediaType isEqualToString:@"image"]) {
+            cell.labMessage.text = @"[图片]";
+        }
+        else if ([topicMsg.mediaType isEqualToString:@"voice"]) {
+            cell.labMessage.text = @"[语言]";
+        }
+        else {
+            cell.labMessage.text = topicMsg.content;
+        }
+        
+        cell.imgNewMsg.hidden = (topicMsg.read.integerValue > 0);
+    }
+    else {
+        cell.labMessage.text = @"";
+        cell.imgNewMsg.hidden = YES;
+    }
+    
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -225,6 +245,7 @@
 - (void)doRefresh {
     [self reloadChildList];
     [self reloadDailylogList];
+    [self reloadSessionList];
 }
 
 - (void)reloadChildList {
@@ -276,6 +297,32 @@
                             withClassList:classIdList
                                   success:success
                                   failure:failure];
+}
+
+- (void)reloadSessionList{
+    CSEngine* engine = [CSEngine sharedInstance];
+    NSArray* classInfoList = engine.classInfoList;
+    
+    NSMutableArray* classIdList = [NSMutableArray array];
+    for (EntityClassInfo* classInfo in classInfoList) {
+        [classIdList addObject:classInfo.classId.stringValue];
+    }
+    
+    CSHttpClient* http = [CSHttpClient sharedInstance];
+    
+    id success = ^(AFHTTPRequestOperation *operation, id jsonObjectList) {
+        [EntityTopicMsgHelper updateEntities:jsonObjectList];
+        [self.tableView reloadData];
+    };
+    
+    id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    };
+    
+    [http opGetSessionListOfKindergarten:engine.loginInfo.schoolId.integerValue
+                           withClassList:classIdList
+                                 success:success
+                                 failure:failure];
 }
 
 #pragma mark - NSFetchedResultsControllerDelegate

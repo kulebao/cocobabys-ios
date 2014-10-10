@@ -2,7 +2,7 @@
 //  EntityNewsInfo.h
 //  YouJiaoBao
 //
-//  Created by xin.c.wang on 14-8-9.
+//  Created by xin.c.wang on 14-9-17.
 //  Copyright (c) 2014年 Codingsoft. All rights reserved.
 //
 
@@ -19,9 +19,9 @@
 @property (nonatomic, retain) NSNumber * noticeType;
 @property (nonatomic, retain) NSNumber * published;
 @property (nonatomic, retain) NSString * publisherId;
+@property (nonatomic, retain) NSNumber * read;
 @property (nonatomic, retain) NSNumber * schoolId;
 @property (nonatomic, retain) NSNumber * timestamp;
 @property (nonatomic, retain) NSString * title;
-@property (nonatomic, retain) NSNumber * read;
 
 @end

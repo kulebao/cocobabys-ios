@@ -141,4 +141,12 @@ typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSErr
                                        success:(SuccessResponseHandler)success
                                        failure:(FailureResponseHandler)failure;
 
+- (AFHTTPRequestOperation*)opSendAssessment:(NSArray*)assessmentList
+                             inKindergarten:(NSInteger)kindergarten
+                                 fromSender:(NSString*)sender
+                               withSenderId:(NSString*)senderId
+                                    success:(SuccessResponseHandler)success
+                                    failure:(FailureResponseHandler)failure;
+
+
 @end

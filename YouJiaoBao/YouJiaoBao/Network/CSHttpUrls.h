@@ -62,6 +62,9 @@
 // PATH: 亲子作业列表
 #define kAssignmentListPath             @"/kindergarten/%@/assignment"
 
+// PATH: 在园评价列表
+#define kAssessmentListPath             @"/kindergarten/%@/assessments"
+
 // PATH: 当日批量打卡日志
 #define kPathKindergartenDailylogList   @"/kindergarten/%@/dailylog"
 

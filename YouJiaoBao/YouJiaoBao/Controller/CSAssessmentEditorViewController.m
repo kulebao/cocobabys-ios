@@ -9,6 +9,10 @@
 #import "CSAssessmentEditorViewController.h"
 #import "TPKeyboardAvoidingScrollView.h"
 #import "EDStarRating.h"
+#import "CSAppDelegate.h"
+#import "ModelAssessment.h"
+#import "CSHttpClient.h"
+#import "CSEngine.h"
 
 @interface CSAssessmentEditorViewController () <EDStarRatingProtocol>
 @property (weak, nonatomic) IBOutlet TPKeyboardAvoidingScrollView *scrollView;
@@ -24,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet UITextView *textView1;
 @property (weak, nonatomic) IBOutlet UIImageView *imgText2Bg;
 @property (weak, nonatomic) IBOutlet UITextView *textView2;
+- (IBAction)onBtnSendClicked:(id)sender;
 
 @end
 
@@ -102,4 +107,50 @@
         control.rating = 1;
     }
 }
+
+- (IBAction)onBtnSendClicked:(id)sender {
+    [self doSend];
+}
+
+- (void)doSend {
+    CSHttpClient* http = [CSHttpClient sharedInstance];
+    CSEngine* engine = [CSEngine sharedInstance];
+    
+    id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSInteger error_code = [[responseObject valueForKeyNotNull:@"error_code"] integerValue];
+        if (error_code == 0) {
+            [gApp alert:@"发布成功。"];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        else {
+            CSLog(@"doChangePswd error_code=%d", error_code);
+            [gApp alert:@"发布失败。"];
+        }
+    };
+    
+    id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        [gApp alert:@"发布失败。"];
+    };
+    
+    ModelAssessment* assessment = [ModelAssessment new];
+    assessment.emotion = self.starRating2.rating;
+    assessment.dining = self.starRating1.rating;
+    assessment.rest = self.starRating5.rating;
+    assessment.activity = self.starRating0.rating;
+    assessment.game = self.starRating3.rating;
+    assessment.exercise = self.starRating7.rating;
+    assessment.selfCare = self.starRating6.rating;
+    assessment.manner = self.starRating4.rating;
+    assessment.childId = self.childInfo.childId;
+    assessment.comments = self.textView2.text;
+    
+    [gApp waitingAlert:@"发送中..."];
+    [http opSendAssessment:@[assessment]
+            inKindergarten:engine.loginInfo.schoolId.integerValue
+                fromSender:engine.loginInfo.name
+              withSenderId:engine.loginInfo.uid
+                   success:success
+                   failure:failure];
+}
+
 @end

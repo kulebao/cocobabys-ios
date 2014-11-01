@@ -1233,29 +1233,15 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="app-bg-type3.png" translatesAutoresizingMaskIntoConstraints="NO" id="rmK-1o-FX2">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app-bg-type3.png" translatesAutoresizingMaskIntoConstraints="NO" id="rmK-1o-FX2">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="600"/>
                             </imageView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j2H-Nd-lWX" customClass="TPKeyboardAvoidingScrollView">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j2H-Nd-lWX" customClass="TPKeyboardAvoidingScrollView">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="600"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="51Q-gX-wOn">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="51Q-gX-wOn">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l8d-hv-qqt" userLabel="View - Cell">
-                                                <rect key="frame" x="10" y="8" width="64" height="92"/>
-                                                <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="activity.png" translatesAutoresizingMaskIntoConstraints="NO" id="n8A-g7-cPC">
-                                                        <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
-                                                    </imageView>
-                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TvP-Wu-5nm" customClass="EDStarRating">
-                                                        <rect key="frame" x="0.0" y="64" width="64" height="24"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                                        <color key="tintColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    </view>
-                                                </subviews>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            </view>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RJP-6V-5YI" userLabel="View - Cell">
                                                 <rect key="frame" x="89" y="8" width="64" height="92"/>
                                                 <subviews>
@@ -1263,7 +1249,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
                                                     </imageView>
                                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X74-A6-KfJ" customClass="EDStarRating">
-                                                        <rect key="frame" x="0.0" y="64" width="64" height="24"/>
+                                                        <rect key="frame" x="0.0" y="64" width="64" height="28"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                         <color key="tintColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     </view>
@@ -1271,13 +1257,13 @@
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             </view>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rmq-be-F7p" userLabel="View - Cell">
-                                                <rect key="frame" x="170" y="8" width="64" height="92"/>
+                                                <rect key="frame" x="10" y="8" width="64" height="92"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="emotion.png" translatesAutoresizingMaskIntoConstraints="NO" id="cYk-PA-A3T">
                                                         <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
                                                     </imageView>
                                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zji-cX-Ocw" customClass="EDStarRating">
-                                                        <rect key="frame" x="0.0" y="64" width="64" height="24"/>
+                                                        <rect key="frame" x="0.0" y="64" width="64" height="28"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                         <color key="tintColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     </view>
@@ -1285,13 +1271,13 @@
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             </view>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Les-cI-T7F" userLabel="View - Cell">
-                                                <rect key="frame" x="248" y="8" width="64" height="92"/>
+                                                <rect key="frame" x="10" y="108" width="64" height="92"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="game.png" translatesAutoresizingMaskIntoConstraints="NO" id="efd-XU-Tl4">
                                                         <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
                                                     </imageView>
                                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EtX-XO-RGu" customClass="EDStarRating">
-                                                        <rect key="frame" x="0.0" y="64" width="64" height="24"/>
+                                                        <rect key="frame" x="0.0" y="64" width="64" height="28"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                         <color key="tintColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     </view>
@@ -1299,13 +1285,27 @@
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             </view>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NxF-YH-Lpr" userLabel="View - Cell">
-                                                <rect key="frame" x="10" y="108" width="64" height="92"/>
+                                                <rect key="frame" x="248" y="108" width="64" height="92"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="manner.png" translatesAutoresizingMaskIntoConstraints="NO" id="upf-mB-tmH">
                                                         <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
                                                     </imageView>
                                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pUG-MT-jkv" customClass="EDStarRating">
-                                                        <rect key="frame" x="0.0" y="64" width="64" height="24"/>
+                                                        <rect key="frame" x="0.0" y="64" width="64" height="28"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                        <color key="tintColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </view>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jsi-4x-TZY" userLabel="View - Cell">
+                                                <rect key="frame" x="170" y="8" width="64" height="92"/>
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="rest.png" translatesAutoresizingMaskIntoConstraints="NO" id="PXX-Sj-Cw7">
+                                                        <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
+                                                    </imageView>
+                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FHg-rB-cY1" customClass="EDStarRating">
+                                                        <rect key="frame" x="0.0" y="64" width="64" height="28"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                         <color key="tintColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     </view>
@@ -1319,7 +1319,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
                                                     </imageView>
                                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nLQ-YY-GVi" customClass="EDStarRating">
-                                                        <rect key="frame" x="0.0" y="64" width="64" height="24"/>
+                                                        <rect key="frame" x="0.0" y="64" width="64" height="28"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                         <color key="tintColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     </view>
@@ -1327,27 +1327,27 @@
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             </view>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IO1-2I-yK1" userLabel="View - Cell">
-                                                <rect key="frame" x="248" y="108" width="64" height="92"/>
+                                                <rect key="frame" x="89" y="108" width="64" height="92"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="exercise.png" translatesAutoresizingMaskIntoConstraints="NO" id="l4x-JQ-Mnc">
                                                         <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
                                                     </imageView>
                                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l3O-T6-fWH" customClass="EDStarRating">
-                                                        <rect key="frame" x="0.0" y="64" width="64" height="24"/>
+                                                        <rect key="frame" x="0.0" y="64" width="64" height="28"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                         <color key="tintColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     </view>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             </view>
-                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jsi-4x-TZY" userLabel="View - Cell">
-                                                <rect key="frame" x="89" y="108" width="64" height="92"/>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l8d-hv-qqt" userLabel="View - Cell">
+                                                <rect key="frame" x="248" y="8" width="64" height="92"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="rest.png" translatesAutoresizingMaskIntoConstraints="NO" id="PXX-Sj-Cw7">
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="activity.png" translatesAutoresizingMaskIntoConstraints="NO" id="n8A-g7-cPC">
                                                         <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
                                                     </imageView>
-                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FHg-rB-cY1" customClass="EDStarRating">
-                                                        <rect key="frame" x="0.0" y="64" width="64" height="24"/>
+                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TvP-Wu-5nm" customClass="EDStarRating">
+                                                        <rect key="frame" x="0.0" y="64" width="64" height="28"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                         <color key="tintColor" red="0.80000000000000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     </view>
@@ -1356,8 +1356,11 @@
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="200" id="dSa-nS-f5t"/>
+                                        </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hmz-e6-7RT">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hmz-e6-7RT">
                                         <rect key="frame" x="0.0" y="208" width="320" height="160"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="最后一次评价：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ghr-fM-0Zc">
@@ -1377,8 +1380,11 @@
                                             </textView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="160" id="BM4-1I-BXV"/>
+                                        </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5gj-yK-p8y">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5gj-yK-p8y">
                                         <rect key="frame" x="0.0" y="385" width="320" height="160"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="当前评价：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BOC-z4-xgV">
@@ -1398,8 +1404,11 @@
                                             </textView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="160" id="aSy-6O-UKF"/>
+                                        </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TI7-di-TGX">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TI7-di-TGX">
                                         <rect key="frame" x="20" y="553" width="280" height="32"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <state key="normal" title="发送" backgroundImage="btn_link.png">
@@ -1409,11 +1418,41 @@
                                         <state key="highlighted" backgroundImage="btn_click.png">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="onBtnSendClicked:" destination="ElS-ZA-XAG" eventType="touchUpInside" id="geX-tN-4DC"/>
+                                        </connections>
                                     </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="5gj-yK-p8y" firstAttribute="centerX" secondItem="j2H-Nd-lWX" secondAttribute="centerX" id="5PD-QB-InW"/>
+                                    <constraint firstItem="hmz-e6-7RT" firstAttribute="top" secondItem="51Q-gX-wOn" secondAttribute="bottom" constant="8" symbolic="YES" id="9VM-dT-ZcA"/>
+                                    <constraint firstAttribute="bottom" secondItem="5gj-yK-p8y" secondAttribute="bottom" constant="55" id="HXe-qV-MP6"/>
+                                    <constraint firstItem="51Q-gX-wOn" firstAttribute="top" secondItem="j2H-Nd-lWX" secondAttribute="top" id="IFH-dC-0HC"/>
+                                    <constraint firstItem="TI7-di-TGX" firstAttribute="centerX" secondItem="5gj-yK-p8y" secondAttribute="centerX" id="JRo-g5-g8o"/>
+                                    <constraint firstItem="hmz-e6-7RT" firstAttribute="leading" secondItem="j2H-Nd-lWX" secondAttribute="leading" id="Mcl-8K-R9w"/>
+                                    <constraint firstItem="5gj-yK-p8y" firstAttribute="top" secondItem="hmz-e6-7RT" secondAttribute="bottom" constant="17" id="O4g-IS-KfV"/>
+                                    <constraint firstItem="hmz-e6-7RT" firstAttribute="trailing" secondItem="5gj-yK-p8y" secondAttribute="trailing" id="Rtp-CW-9cn"/>
+                                    <constraint firstItem="TI7-di-TGX" firstAttribute="top" secondItem="5gj-yK-p8y" secondAttribute="bottom" constant="8" symbolic="YES" id="aFF-Li-jO5"/>
+                                    <constraint firstAttribute="bottom" secondItem="TI7-di-TGX" secondAttribute="bottom" constant="15" id="jVL-zv-yGd"/>
+                                    <constraint firstItem="5gj-yK-p8y" firstAttribute="leading" secondItem="hmz-e6-7RT" secondAttribute="leading" id="mQq-XC-8M7"/>
+                                    <constraint firstItem="TI7-di-TGX" firstAttribute="leading" secondItem="j2H-Nd-lWX" secondAttribute="leading" constant="20" id="nYQ-10-rou"/>
+                                    <constraint firstAttribute="trailing" secondItem="51Q-gX-wOn" secondAttribute="trailing" id="t3U-9i-arM"/>
+                                    <constraint firstItem="51Q-gX-wOn" firstAttribute="leading" secondItem="hmz-e6-7RT" secondAttribute="leading" id="y9Z-45-hG6"/>
+                                    <constraint firstItem="hmz-e6-7RT" firstAttribute="trailing" secondItem="51Q-gX-wOn" secondAttribute="trailing" id="zXg-hA-Bsn"/>
+                                </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="rmK-1o-FX2" firstAttribute="top" secondItem="NCl-mS-uHN" secondAttribute="bottom" id="39f-lV-Kih"/>
+                            <constraint firstAttribute="trailing" secondItem="rmK-1o-FX2" secondAttribute="trailing" id="4nF-cE-MM9"/>
+                            <constraint firstItem="j2H-Nd-lWX" firstAttribute="top" secondItem="NCl-mS-uHN" secondAttribute="bottom" id="6Od-6a-UBZ"/>
+                            <constraint firstItem="rmK-1o-FX2" firstAttribute="leading" secondItem="AEi-dZ-xSP" secondAttribute="leading" id="FVM-CQ-oyH"/>
+                            <constraint firstItem="ICK-eS-5pj" firstAttribute="top" secondItem="rmK-1o-FX2" secondAttribute="bottom" id="ctO-j0-ecD"/>
+                            <constraint firstItem="j2H-Nd-lWX" firstAttribute="leading" secondItem="AEi-dZ-xSP" secondAttribute="leading" id="iFZ-TH-bXT"/>
+                            <constraint firstItem="ICK-eS-5pj" firstAttribute="top" secondItem="j2H-Nd-lWX" secondAttribute="bottom" id="tG3-BZ-VtY"/>
+                            <constraint firstAttribute="trailing" secondItem="j2H-Nd-lWX" secondAttribute="trailing" id="wp8-N3-ykZ"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="在园评价" id="ewQ-G0-X2V"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

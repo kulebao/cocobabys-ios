@@ -441,6 +441,7 @@
 		09CD666F197C0C2600CC08F1 /* CSLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09CD666C197C0C2600CC08F1 /* CSLoginViewController.m */; };
 		09CD6670197C0C2600CC08F1 /* CSRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09CD666E197C0C2600CC08F1 /* CSRootViewController.m */; };
 		09CD667E197C153C00CC08F1 /* CSStudentListMainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09CD667D197C153C00CC08F1 /* CSStudentListMainTableViewController.m */; };
+		09DF51D91A050FBF004D6A4E /* ModelAssessment.m in Sources */ = {isa = PBXBuildFile; fileRef = 09DF51D81A050FBF004D6A4E /* ModelAssessment.m */; };
 		09F74C011997ACD8001555D0 /* EntityAssignmentInfoHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 09F74C001997ACD8001555D0 /* EntityAssignmentInfoHelper.m */; };
 		09F74C041997ADC3001555D0 /* EntityAssignmentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09F74C031997ADC3001555D0 /* EntityAssignmentInfo.m */; };
 		09F74C071997B00D001555D0 /* CSAssignmentItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09F74C061997B00D001555D0 /* CSAssignmentItemTableViewCell.m */; };
@@ -1056,6 +1057,8 @@
 		09CD666E197C0C2600CC08F1 /* CSRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSRootViewController.m; sourceTree = "<group>"; };
 		09CD667C197C153C00CC08F1 /* CSStudentListMainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSStudentListMainTableViewController.h; sourceTree = "<group>"; };
 		09CD667D197C153C00CC08F1 /* CSStudentListMainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSStudentListMainTableViewController.m; sourceTree = "<group>"; };
+		09DF51D71A050FBF004D6A4E /* ModelAssessment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelAssessment.h; sourceTree = "<group>"; };
+		09DF51D81A050FBF004D6A4E /* ModelAssessment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelAssessment.m; sourceTree = "<group>"; };
 		09F74BFF1997ACD8001555D0 /* EntityAssignmentInfoHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityAssignmentInfoHelper.h; sourceTree = "<group>"; };
 		09F74C001997ACD8001555D0 /* EntityAssignmentInfoHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityAssignmentInfoHelper.m; sourceTree = "<group>"; };
 		09F74C021997ADC3001555D0 /* EntityAssignmentInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityAssignmentInfo.h; sourceTree = "<group>"; };
@@ -1890,6 +1893,8 @@
 				09B431C3199519DC00FF4071 /* ModelAccount.m */,
 				095D858019C5D92900F2F926 /* ModelClassData.h */,
 				095D858119C5D92900F2F926 /* ModelClassData.m */,
+				09DF51D71A050FBF004D6A4E /* ModelAssessment.h */,
+				09DF51D81A050FBF004D6A4E /* ModelAssessment.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2644,6 +2649,7 @@
 				091EE50619E83F820050092E /* XHFileAttribute.m in Sources */,
 				0917610719C093E5006FE2FB /* CSKuleChangePasswordViewController.m in Sources */,
 				09C2D4E41969BCA000B8A895 /* AFNetworkReachabilityManager.m in Sources */,
+				09DF51D91A050FBF004D6A4E /* ModelAssessment.m in Sources */,
 				09C2D4F01969BCA000B8A895 /* UIImageView+AFNetworking.m in Sources */,
 				09C2D4E21969BCA000B8A895 /* AFHTTPRequestOperationManager.m in Sources */,
 				09A3C64219C4B40D001AFE8C /* CSModuleCell.m in Sources */,

@@ -8,6 +8,7 @@
 
 #import "CSHttpClient.h"
 #import "CSHttpUrls.h"
+#import "ModelAssessment.h"
 
 @interface CSHttpClient ()
 
@@ -618,6 +619,43 @@
                                              success:success
                                              failure:failure];
     return op;
+}
+
+- (AFHTTPRequestOperation*)opSendAssessment:(NSArray*)assessmentList
+                             inKindergarten:(NSInteger)kindergarten
+                                 fromSender:(NSString*)sender
+                               withSenderId:(NSString*)senderId
+                                    success:(SuccessResponseHandler)success
+                                    failure:(FailureResponseHandler)failure {
+    NSString* apiUrl = [NSString stringWithFormat:kAssessmentListPath, @(kindergarten)];
+    
+    NSMutableArray* payload = [NSMutableArray array];
+    for (ModelAssessment* assessment in assessmentList) {
+        NSDictionary* dict = @{@"publisher": sender,
+                               @"publisher_id": senderId,
+                               @"comments": assessment.comments,
+                               @"emotion": @(assessment.emotion),
+                               @"dining": @(assessment.dining),
+                               @"rest": @(assessment.rest),
+                               @"activity": @(assessment.activity),
+                               @"game": @(assessment.game),
+                               @"exercise": @(assessment.exercise),
+                               @"self_care": @(assessment.selfCare),
+                               @"manner": @(assessment.manner),
+                               @"child_id": assessment.childId,
+                               @"school_id":@(kindergarten)
+                               };
+        [payload addObject:dict];
+    }
+    
+    id parameters = payload;
+    
+    AFHTTPRequestOperation* op = [self.opManager POST:apiUrl
+                                           parameters:parameters
+                                              success:success
+                                              failure:failure];
+    return op;
+    
 }
 
 @end

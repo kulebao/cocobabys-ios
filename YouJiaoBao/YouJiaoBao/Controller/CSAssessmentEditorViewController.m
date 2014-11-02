@@ -55,7 +55,7 @@
     // Do any additional setup after loading the view.
     [self customizeBackBarItem];
     
-    self.scrollView.contentSize = CGSizeMake(self.scrollView.bounds.size.width, 540);
+    self.scrollView.contentSize = CGSizeMake(self.scrollView.bounds.size.width, 536);
     self.imgText1Bg.image = [[UIImage imageNamed:@"bg-2.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     self.imgText2Bg.image = [[UIImage imageNamed:@"bg-2.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     

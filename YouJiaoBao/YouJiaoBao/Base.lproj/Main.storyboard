@@ -161,7 +161,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <connections>
-                                    <segue destination="jU7-Ep-U1e" kind="embed" id="4dZ-qf-s5s"/>
+                                    <segue destination="jU7-Ep-U1e" kind="embed" identifier="segue.main.profileHeader" id="4dZ-qf-s5s"/>
                                 </connections>
                             </containerView>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="8tw-Mu-Qj3">
@@ -600,7 +600,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <connections>
-                                    <segue destination="jU7-Ep-U1e" kind="embed" id="19H-fG-dXX"/>
+                                    <segue destination="jU7-Ep-U1e" kind="embed" identifier="segue.settings.profileHeader" id="19H-fG-dXX"/>
                                 </connections>
                             </containerView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pE2-z3-548">
@@ -794,14 +794,18 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="chat_head_icon.gif" translatesAutoresizingMaskIntoConstraints="NO" id="cH2-Bt-U91">
                                 <rect key="frame" x="10" y="18" width="64" height="64"/>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="登录名: wxx" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="222" translatesAutoresizingMaskIntoConstraints="NO" id="4hq-b5-HXR">
-                                <rect key="frame" x="82" y="22" width="222" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="昵称：xxx" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="222" translatesAutoresizingMaskIntoConstraints="NO" id="EiD-wp-eje">
-                                <rect key="frame" x="82" y="55" width="222" height="21"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DtJ-pu-njE">
+                                <rect key="frame" x="10" y="18" width="64" height="64"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onBtnPhotoClicked:" destination="jU7-Ep-U1e" eventType="touchUpInside" id="GF3-MM-Aea"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="222" translatesAutoresizingMaskIntoConstraints="NO" id="4hq-b5-HXR">
+                                <rect key="frame" x="82" y="29" width="222" height="42"/>
+                                <string key="text">登录名: wxx昵称:xxx</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -812,7 +816,6 @@
                     <toolbarItems/>
                     <connections>
                         <outlet property="imgPortrait" destination="cH2-Bt-U91" id="ped-DA-sPp"/>
-                        <outlet property="labNick" destination="EiD-wp-eje" id="jYJ-D4-mGT"/>
                         <outlet property="labUsername" destination="4hq-b5-HXR" id="RMN-WR-acG"/>
                     </connections>
                 </viewController>
@@ -1841,7 +1844,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="4dZ-qf-s5s"/>
+        <segue reference="19H-fG-dXX"/>
         <segue reference="C7y-3W-3sb"/>
     </inferredMetricsTieBreakers>
 </document>

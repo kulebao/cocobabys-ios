@@ -8,6 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+@class CSProfileHeaderViewController;
+
+@protocol CSProfileHeaderViewControllerDelegate <NSObject>
+
+@optional
+- (void)profileHeaderViewControllerWillUpdateProfile:(CSProfileHeaderViewController*)ctrl;
+
+@end
+
 @interface CSProfileHeaderViewController : UIViewController
+
+@property (nonatomic, weak) id delegate;
+
+@property (nonatomic, assign) BOOL moreDetails;
 
 @end

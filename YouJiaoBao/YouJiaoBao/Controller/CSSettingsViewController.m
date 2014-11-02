@@ -11,14 +11,22 @@
 #import "CSEngine.h"
 #import "CSHttpClient.h"
 #import "CSAppDelegate.h"
+#import "CSProfileHeaderViewController.h"
+#import "CSPopupController.h"
+#import "CSUserOptionMenuView.h"
 
 @interface CSSettingsViewController ()
 - (IBAction)onBtnLogoutClicked:(id)sender;
 - (IBAction)onBtnCheckUpdatesClicked:(id)sender;
 
+@property (nonatomic, strong) CSPopupController* popCtrl;
+@property (nonatomic, strong) CSUserOptionMenuView* userOptionMenuView;
+
 @end
 
 @implementation CSSettingsViewController
+@synthesize popCtrl = _popCtrl;
+@synthesize userOptionMenuView = _userOptionMenuView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -42,7 +50,26 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
+- (CSPopupController*)popCtrl {
+    if (_popCtrl == nil) {
+        _popCtrl = [CSPopupController popupControllerWithView:self.view];
+    }
+    
+    return _popCtrl;
+}
+
+- (CSUserOptionMenuView*)userOptionMenuView {
+    if (_userOptionMenuView == nil) {
+        _userOptionMenuView = [CSUserOptionMenuView userOptionMenuView];
+        _userOptionMenuView.delegate = self;
+        _userOptionMenuView.center = CGPointMake(self.view.bounds.size.width/2,
+                                                 self.view.bounds.size.height/2);
+    }
+    
+    return  _userOptionMenuView;
+}
+
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -50,8 +77,12 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"segue.settings.profileHeader"]) {
+        CSProfileHeaderViewController* profileHeader = segue.destinationViewController;
+        profileHeader.delegate = self;
+        profileHeader.moreDetails = YES;
+    }
 }
-*/
 
 - (IBAction)onBtnLogoutClicked:(id)sender {
     NSString *title = @"提示";
@@ -123,6 +154,28 @@
     [gApp waitingAlert:@"正在检查更新..."];
     CSHttpClient* http = [CSHttpClient sharedInstance];
     [http opCheckUpdates:kAppleID success:sucessHandler failure:failureHandler];
+}
+
+#pragma mark - CSProfileHeaderViewControllerDelegate
+- (void)profileHeaderViewControllerWillUpdateProfile:(CSProfileHeaderViewController*)ctrl {
+    [self.popCtrl presentView:self.userOptionMenuView animated:NO completion:^{
+        
+    }];
+}
+
+#pragma mark - CSUserOptionMenuViewDelegate
+- (void)userOptionMenuView:(CSUserOptionMenuView*)view selectedMenuAtIndex:(NSUInteger)index {
+    [self.popCtrl dismiss];
+    
+    if (index == 0) {
+        
+    }
+    else if (index == 1) {
+        
+    }
+    else if (index == 2) {
+        
+    }
 }
 
 @end

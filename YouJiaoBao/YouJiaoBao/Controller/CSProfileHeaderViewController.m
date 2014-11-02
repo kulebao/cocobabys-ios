@@ -14,11 +14,13 @@
 @interface CSProfileHeaderViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *imgPortrait;
 @property (weak, nonatomic) IBOutlet UILabel *labUsername;
-@property (weak, nonatomic) IBOutlet UILabel *labNick;
+- (IBAction)onBtnPhotoClicked:(id)sender;
 
 @end
 
 @implementation CSProfileHeaderViewController
+@synthesize delegate = _delegate;
+@synthesize moreDetails;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -53,14 +55,19 @@
     CSEngine* engine = [CSEngine sharedInstance];
     if (engine.loginInfo) {
         self.labUsername.text = [NSString stringWithFormat:@"登录名: %@", engine.loginInfo.loginName];
-        self.labNick.text = [NSString stringWithFormat:@"昵称: %@", engine.loginInfo.name];
+        
+        if (self.moreDetails) {
+            self.labUsername.text = [NSString stringWithFormat:@"登录名: %@\n昵称: %@", engine.loginInfo.loginName, engine.loginInfo.name];
+        }
+        else {
+            self.labUsername.text = engine.loginInfo.name;
+        }
         
         [self.imgPortrait sd_setImageWithURL:[NSURL URLWithString:engine.loginInfo.portrait]
                          placeholderImage:[UIImage imageNamed:@"chat_head_icon.gif"]];
     }
     else {
-        self.labUsername.text = nil;
-        self.labNick.text = nil;
+        self.labUsername.text = @"未登录";
         self.imgPortrait.image = [UIImage imageNamed:@"chat_head_icon.gif"];
     }
 }
@@ -76,5 +83,12 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (IBAction)onBtnPhotoClicked:(id)sender {
+    CSEngine* engine = [CSEngine sharedInstance];
+    if (engine.loginInfo && [_delegate respondsToSelector:@selector(profileHeaderViewControllerWillUpdateProfile:)]) {
+        [_delegate profileHeaderViewControllerWillUpdateProfile:self];
+    }
+}
 
 @end

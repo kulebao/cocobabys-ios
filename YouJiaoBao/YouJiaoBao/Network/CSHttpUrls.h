@@ -50,6 +50,7 @@
 #define kPathKindergartenNewsList       @"/kindergarten/%@/news"
 #define kPathKindergartenPostNews       @"/kindergarten/%@/admin/%@/news"
 #define kPathKindergartenAssignmentList @"/kindergarten/%@/assignment"
+#define kPathChildAssess                @"/kindergarten/%@/child/%@/assess"
 
 // PATH: 修改密码
 #define kChangePasswordPath             @"/kindergarten/%@/employee/%@/password"

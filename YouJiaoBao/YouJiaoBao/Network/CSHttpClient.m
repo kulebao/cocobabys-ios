@@ -689,4 +689,34 @@
     return op;
 }
 
+- (AFHTTPRequestOperation*)opGetAssessmentsOfChild:(EntityChildInfo*)childInfo
+                                              from:(long long)fromId
+                                                to:(long long)toId
+                                              most:(NSInteger)most
+                                           success:(SuccessResponseHandler)success
+                                           failure:(FailureResponseHandler)failure {
+    NSParameterAssert(childInfo);
+    NSString* apiUrl = [NSString stringWithFormat:kPathChildAssess, childInfo.schoolId, childInfo.childId];
+    
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    
+    if (fromId >= 0) {
+        [parameters setObject:@(fromId) forKey:@"from"];
+    }
+    
+    if (toId >= 0) {
+        [parameters setObject:@(toId) forKey:@"to"];
+    }
+    
+    if (most >= 0) {
+        [parameters setObject:@(most) forKey:@"most"];
+    }
+    
+    AFHTTPRequestOperation* op = [self.opManager GET:apiUrl
+                                          parameters:parameters
+                                             success:success
+                                             failure:failure];
+    return op;
+}
+
 @end

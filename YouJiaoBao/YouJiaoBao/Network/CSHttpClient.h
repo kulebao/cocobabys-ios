@@ -10,6 +10,7 @@
 #import "AFNetworking.h"
 #import "EntityLoginInfo.h"
 #import "CSHttpUrls.h"
+#import "EntityChildInfo.h"
 
 typedef void (^SuccessResponseHandler) (AFHTTPRequestOperation *operation, id responseObject);
 typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSError *error);
@@ -152,6 +153,13 @@ typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSErr
                                   ofSender:(EntityLoginInfo*)loginInfo
                                    success:(SuccessResponseHandler)success
                                    failure:(FailureResponseHandler)failure;
+
+- (AFHTTPRequestOperation*)opGetAssessmentsOfChild:(EntityChildInfo*)childInfo
+                                              from:(long long)fromId
+                                                to:(long long)toId
+                                              most:(NSInteger)most
+                                           success:(SuccessResponseHandler)success
+                                           failure:(FailureResponseHandler)failure;
 
 
 @end

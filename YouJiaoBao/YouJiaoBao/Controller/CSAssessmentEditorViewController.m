@@ -13,6 +13,8 @@
 #import "ModelAssessment.h"
 #import "CSHttpClient.h"
 #import "CSEngine.h"
+#import "EntityAssessInfoHelper.h"
+#import "NSDate+CSKit.h"
 
 @interface CSAssessmentEditorViewController () <EDStarRatingProtocol>
 @property (weak, nonatomic) IBOutlet TPKeyboardAvoidingScrollView *scrollView;
@@ -30,10 +32,13 @@
 @property (weak, nonatomic) IBOutlet UITextView *textView2;
 - (IBAction)onBtnSendClicked:(id)sender;
 
+@property (nonatomic, strong) EntityAssessInfo* lastAssessInfo;
+
 @end
 
 @implementation CSAssessmentEditorViewController
 @synthesize childInfo = _childInfo;
+@synthesize lastAssessInfo = _lastAssessInfo;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -50,7 +55,7 @@
     // Do any additional setup after loading the view.
     [self customizeBackBarItem];
     
-    self.scrollView.contentSize = CGSizeMake(self.scrollView.bounds.size.width, 600);
+    self.scrollView.contentSize = CGSizeMake(self.scrollView.bounds.size.width, 540);
     self.imgText1Bg.image = [[UIImage imageNamed:@"bg-2.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     self.imgText2Bg.image = [[UIImage imageNamed:@"bg-2.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     
@@ -85,12 +90,83 @@
         [starRating setNeedsDisplay];
         starRating.tintColor = [UIColor orangeColor];
     }
+    
+    [self reloadData];
+    
+    [self refreshAssess];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)reloadData {
+    EntityAssessInfo* assessInfo = [EntityAssessInfoHelper lastEntityOfChild:self.childInfo.childId];
+    if (assessInfo) {
+//        self.starRating0.rating = assessInfo.emotion.integerValue;
+//        self.starRating1.rating = assessInfo.dining.integerValue;
+//        self.starRating2.rating = assessInfo.rest.integerValue;
+//        self.starRating3.rating = assessInfo.activity.integerValue;
+//        self.starRating4.rating = assessInfo.game.integerValue;
+//        self.starRating5.rating = assessInfo.exercise.integerValue;
+//        self.starRating6.rating = assessInfo.selfCare.integerValue;
+//        self.starRating7.rating = assessInfo.manner.integerValue;
+        
+        NSString* timestampString = [[NSDate dateWithTimeIntervalSince1970:(assessInfo.timestamp.longLongValue)/1000.0] isoDateTimeString];
+        NSString* content = [NSString stringWithFormat:@"情绪:%@  进餐:%@  睡觉:%@  集体活动:%@ \n游戏:%@  锻炼:%@  自我服务:%@  礼貌:%@",
+                             assessInfo.emotion, assessInfo.dining, assessInfo.rest, assessInfo.activity,
+                             assessInfo.game, assessInfo.exercise, assessInfo.selfCare, assessInfo.manner];
+        
+        NSString* text = [NSString stringWithFormat:@"%@\n%@:%@\n%@",
+                          timestampString,
+                          assessInfo.publisher,
+                          assessInfo.comments,
+                          content];
+        
+        self.textView1.text = text;
+    }
+    else {
+        self.textView1.text = @"无";
+    }
+}
+
+- (void)refreshAssess {
+    CSHttpClient* http = [CSHttpClient sharedInstance];
+    
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+        CSLog(@"success.");
+        [EntityAssessInfoHelper updateEntities:dataJson];
+        [self reloadData];
+        
+        EntityAssessInfo* assessInfo = [EntityAssessInfoHelper lastEntityOfChild:self.childInfo.childId];
+        [self reloadData];
+        if (assessInfo == nil) {
+            [gApp alert:@"没有历史评价"];
+        }
+    };
+    
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        CSLog(@"failure:%@", error);
+        [gApp alert:[error localizedDescription]];
+    };
+    
+    long long fromId = -1;
+    long long toId = -1;
+    NSInteger most = 25;
+    
+    EntityAssessInfo* assessInfo = [EntityAssessInfoHelper lastEntityOfChild:self.childInfo.childId];
+    if (assessInfo) {
+        fromId = assessInfo.uid.integerValue;
+    }
+
+    [http opGetAssessmentsOfChild:self.childInfo
+                             from:fromId
+                               to:toId
+                             most:most
+                          success:sucessHandler
+                          failure:failureHandler];
 }
 
 /*

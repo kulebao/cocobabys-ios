@@ -54,6 +54,8 @@
 		094C29EF1A0666F8009BDC4E /* CSUserOptionMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 094C29EE1A0666F8009BDC4E /* CSUserOptionMenuView.m */; };
 		094C29F21A06670C009BDC4E /* CSUserOptionMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 094C29F11A06670C009BDC4E /* CSUserOptionMenuView.xib */; };
 		094C29F81A067D28009BDC4E /* CSTextFieldDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 094C29F71A067D28009BDC4E /* CSTextFieldDelegate.m */; };
+		094C29FF1A068E89009BDC4E /* EntityAssessInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 094C29FE1A068E89009BDC4E /* EntityAssessInfo.m */; };
+		094C2A031A068EAA009BDC4E /* EntityAssessInfoHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 094C2A021A068EAA009BDC4E /* EntityAssessInfoHelper.m */; };
 		0956E386198151810049202E /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0956E375198151810049202E /* libopencore-amrnb.a */; };
 		0956E38D198151810049202E /* libopencore-amrwb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0956E37C198151810049202E /* libopencore-amrwb.a */; };
 		095D857719C5CD5F00F2F926 /* AHAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 095D857519C5CD5F00F2F926 /* AHAlertView.m */; };
@@ -566,6 +568,10 @@
 		094C29F11A06670C009BDC4E /* CSUserOptionMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSUserOptionMenuView.xib; sourceTree = "<group>"; };
 		094C29F61A067D28009BDC4E /* CSTextFieldDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSTextFieldDelegate.h; sourceTree = "<group>"; };
 		094C29F71A067D28009BDC4E /* CSTextFieldDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSTextFieldDelegate.m; sourceTree = "<group>"; };
+		094C29FD1A068E89009BDC4E /* EntityAssessInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityAssessInfo.h; sourceTree = "<group>"; };
+		094C29FE1A068E89009BDC4E /* EntityAssessInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityAssessInfo.m; sourceTree = "<group>"; };
+		094C2A011A068EAA009BDC4E /* EntityAssessInfoHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityAssessInfoHelper.h; sourceTree = "<group>"; };
+		094C2A021A068EAA009BDC4E /* EntityAssessInfoHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityAssessInfoHelper.m; sourceTree = "<group>"; };
 		0956E36F198151810049202E /* interf_dec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interf_dec.h; sourceTree = "<group>"; };
 		0956E370198151810049202E /* interf_enc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interf_enc.h; sourceTree = "<group>"; };
 		0956E372198151810049202E /* dec_if.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dec_if.h; sourceTree = "<group>"; };
@@ -2001,6 +2007,8 @@
 		09CD665B197BF9FA00CC08F1 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				094C29FD1A068E89009BDC4E /* EntityAssessInfo.h */,
+				094C29FE1A068E89009BDC4E /* EntityAssessInfo.m */,
 				09F74C021997ADC3001555D0 /* EntityAssignmentInfo.h */,
 				09F74C031997ADC3001555D0 /* EntityAssignmentInfo.m */,
 				0982A7CF19C8A51E0036DEC1 /* EntityChildInfo.h */,
@@ -2029,6 +2037,8 @@
 		09CD665C197BF9FA00CC08F1 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				094C2A011A068EAA009BDC4E /* EntityAssessInfoHelper.h */,
+				094C2A021A068EAA009BDC4E /* EntityAssessInfoHelper.m */,
 				09F74BFF1997ACD8001555D0 /* EntityAssignmentInfoHelper.h */,
 				09F74C001997ACD8001555D0 /* EntityAssignmentInfoHelper.m */,
 				0907CE4A198FCC8700B13202 /* EntityChildInfoHelper.h */,
@@ -2622,6 +2632,7 @@
 				09C2D4EF1969BCA000B8A895 /* UIButton+AFNetworking.m in Sources */,
 				09A3C5D819C47835001AFE8C /* CSContentEditorViewController.m in Sources */,
 				09A3C63819C479EC001AFE8C /* UIImage+MultiFormat.m in Sources */,
+				094C29FF1A068E89009BDC4E /* EntityAssessInfo.m in Sources */,
 				098E407A198B799000CB4F0B /* TPKeyboardAvoidingCollectionView.m in Sources */,
 				098E4065198B799000CB4F0B /* MessageInterceptor.m in Sources */,
 				09A3C63919C479EC001AFE8C /* UIImage+WebP.m in Sources */,
@@ -2674,6 +2685,7 @@
 				098E4071198B799000CB4F0B /* JSBadgeView.m in Sources */,
 				091760FE19C091B4006FE2FB /* FTCoreTextStyle.m in Sources */,
 				09C2D4E91969BCA000B8A895 /* AFURLSessionManager.m in Sources */,
+				094C2A031A068EAA009BDC4E /* EntityAssessInfoHelper.m in Sources */,
 				095F13861967C30A008CF3BE /* main.m in Sources */,
 				09B431BA1994C1BF00FF4071 /* EntityRelationshipInfoHelper.m in Sources */,
 				095F13901967C30B008CF3BE /* YouJiaoBao.xcdatamodeld in Sources */,

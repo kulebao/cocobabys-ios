@@ -14,13 +14,28 @@
 #import "CSProfileHeaderViewController.h"
 #import "CSPopupController.h"
 #import "CSUserOptionMenuView.h"
+#import "CSTextFieldDelegate.h"
+#import "EntityChildInfoHelper.h"
+#import "UIImage+CSKit.h"
+#import "EntityLoginInfoHelper.h"
 
-@interface CSSettingsViewController ()
+enum {
+    // 昵称长度
+    kKuleNickMaxLength = 12,
+};
+
+@interface CSSettingsViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
+    CSTextFieldDelegate* _nickFieldDelegate;
+    UIImagePickerController* _imgPicker;
+}
+
 - (IBAction)onBtnLogoutClicked:(id)sender;
 - (IBAction)onBtnCheckUpdatesClicked:(id)sender;
 
 @property (nonatomic, strong) CSPopupController* popCtrl;
 @property (nonatomic, strong) CSUserOptionMenuView* userOptionMenuView;
+
+@property (nonatomic, weak) CSProfileHeaderViewController* profileHeaderViewCtrl;
 
 @end
 
@@ -42,6 +57,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self customizeBackBarItem];
+    
+    _nickFieldDelegate = [[CSTextFieldDelegate alloc] initWithType:kCSTextFieldDelegateNormal];
+    
+
+    _nickFieldDelegate.maxLength = kKuleNickMaxLength;
 }
 
 - (void)didReceiveMemoryWarning
@@ -81,6 +101,7 @@
         CSProfileHeaderViewController* profileHeader = segue.destinationViewController;
         profileHeader.delegate = self;
         profileHeader.moreDetails = YES;
+        self.profileHeaderViewCtrl = profileHeader;
     }
 }
 
@@ -168,13 +189,188 @@
     [self.popCtrl dismiss];
     
     if (index == 0) {
-        
+        [self doChangeProfileNick];
     }
     else if (index == 1) {
-        
+        [self doChangePortraitFromCamera];
     }
     else if (index == 2) {
+        [self doChangePortraitFromPhoto];
+    }
+}
+
+#pragma mark - 
+- (void)doChangeProfileNick {
+    NSString *title = @"请输入新昵称";
+    NSString *message = @"";
+    
+    CSEngine* engine = [CSEngine sharedInstance];
+    
+    AHAlertView *alert = [[AHAlertView alloc] initWithTitle:title message:message];
+    alert.alertViewStyle = AHAlertViewStylePlainTextInput;
+    
+    UITextField* field = [alert textFieldAtIndex:0];
+    field.placeholder = @"请输入新昵称";
+    field.text = engine.loginInfo.name;
+    
+    field.keyboardAppearance = UIKeyboardAppearanceDefault;
+    field.background = [[UIImage imageNamed:@"input-bg-0.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 50, 10, 10)];
+    field.borderStyle = UITextBorderStyleBezel;
+    field.backgroundColor = [UIColor clearColor];
+    field.font = [UIFont systemFontOfSize:14];
+    field.delegate = _nickFieldDelegate;
+    
+    [alert setCancelButtonTitle:@"取消" block:^{
         
+    }];
+    
+    [alert addButtonWithTitle:@"确定" block:^{
+        [self doUpdateChildNick:field.text];
+    }];
+    
+    [alert show];
+}
+
+- (void)doUpdateChildNick:(NSString*)nick {
+    if (nick.length > 0) {
+        CSEngine* engine = [CSEngine sharedInstance];
+        CSHttpClient* http = [CSHttpClient sharedInstance];
+        
+        if (engine.loginInfo) {
+            SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+                CSLog(@"success.");
+                [gApp alert:@"修改成功"];
+                [EntityLoginInfoHelper updateEntity:dataJson];
+                [self.profileHeaderViewCtrl reloadData];
+            };
+            
+            FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+                CSLog(@"failure:%@", error);
+                [gApp alert:[error localizedDescription]];
+            };
+            
+            [gApp waitingAlert:@"修改昵称中，请稍候"];
+            [http opUpdateProfile:@{@"name": nick}
+                         ofSender:engine.loginInfo
+                          success:sucessHandler
+                          failure:failureHandler];
+        }
+        else {
+            [gApp alert:@"未登录。"];
+        }
+    }
+    else {
+        [gApp alert:@"昵称不能为空"];
+    }
+}
+
+- (void)doUpdateChildPortrait:(NSString*)portrait withImage:(UIImage*)img {
+    if (portrait.length > 0) {
+        CSEngine* engine = [CSEngine sharedInstance];
+        CSHttpClient* http = [CSHttpClient sharedInstance];
+        if (engine.loginInfo) {
+            SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+                CSLog(@"success.");
+                [gApp alert:@"修改成功"];
+                [EntityLoginInfoHelper updateEntity:dataJson];
+                [self.profileHeaderViewCtrl reloadData];
+            };
+            
+            FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+                CSLog(@"failure:%@", error);
+                [gApp alert:[error localizedDescription]];
+            };
+            
+            [gApp waitingAlert:@"修改头像中，请稍候"];
+            [http opUpdateProfile:@{@"portrait": portrait}
+                         ofSender:engine.loginInfo
+                          success:sucessHandler
+                          failure:failureHandler];
+        }
+        else {
+        }
+    }
+    else {
+        [gApp alert:@"头像不存在"];
+    }
+}
+
+- (void)doChangePortraitFromPhoto {
+    _imgPicker = [[UIImagePickerController alloc] init];
+    _imgPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    _imgPicker.allowsEditing = YES;
+    _imgPicker.delegate = self;
+    [self presentViewController:_imgPicker animated:YES completion:^{
+        
+    }];
+}
+
+- (void)doChangePortraitFromCamera {
+#if TARGET_IPHONE_SIMULATOR
+#else
+    _imgPicker = [[UIImagePickerController alloc] init];
+    _imgPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    _imgPicker.allowsEditing = YES;
+    _imgPicker.delegate = self;
+    [self presentViewController:_imgPicker animated:YES completion:^{
+        
+    }];
+#endif
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    UIImage* img = info[UIImagePickerControllerEditedImage];
+    NSData* imgData = UIImageJPEGRepresentation(img, 0.8);
+    
+    CSEngine* engine = [CSEngine sharedInstance];
+    CSHttpClient* http = [CSHttpClient sharedInstance];
+    
+    long long timestamp = [[NSDate date] timeIntervalSince1970] * 1000;
+    
+    NSString* imgFileName = [NSString stringWithFormat:@"employee_photo/%@/%@/%@_%@.jpg",
+                             engine.loginInfo.schoolId,
+                             engine.loginInfo.uid,
+                             engine.loginInfo.loginName,
+                             @(timestamp)];
+    
+    
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+        NSString* name = [dataJson valueForKeyNotNull:@"name"];
+        NSString* portrait = [NSString stringWithFormat:@"%@/%@", kQiniuDownloadServerHost, name];
+        //self.imgChildPortrait.image = img;
+        UIImage* cropImg = [img imageByScalingAndCroppingForSize:CGSizeMake(256, 256)];
+        [self doUpdateChildPortrait:portrait withImage:cropImg];
+    };
+    
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        CSLog(@"failure:%@", error);
+        [gApp alert:[error localizedDescription]];
+    };
+    
+    [gApp waitingAlert:@"上传头像中"];
+    
+    [http opUploadToQiniu:imgData
+                  withKey:imgFileName
+                 withMime:@"image/jpeg"
+                  success:sucessHandler
+                  failure:failureHandler];
+    
+    [picker dismissViewControllerAnimated:YES
+                               completion:^{
+                                   if (picker == _imgPicker) {
+                                       _imgPicker = nil;
+                                   }
+                               }];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [picker dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+    
+    if (picker == _imgPicker) {
+        _imgPicker = nil;
     }
 }
 

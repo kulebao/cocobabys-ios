@@ -48,9 +48,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+- (void)reloadData {
     
     CSEngine* engine = [CSEngine sharedInstance];
     if (engine.loginInfo) {
@@ -64,12 +62,18 @@
         }
         
         [self.imgPortrait sd_setImageWithURL:[NSURL URLWithString:engine.loginInfo.portrait]
-                         placeholderImage:[UIImage imageNamed:@"chat_head_icon.gif"]];
+                            placeholderImage:[UIImage imageNamed:@"chat_head_icon.gif"]];
     }
     else {
         self.labUsername.text = @"未登录";
         self.imgPortrait.image = [UIImage imageNamed:@"chat_head_icon.gif"];
     }
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+   
+    [self reloadData];
 }
 
 

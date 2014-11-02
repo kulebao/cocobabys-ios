@@ -44,6 +44,7 @@
 
 #define kPathEmployeeLogin              @"/employee_login.do"
 #define kPathEmployeeManagedClass       @"/kindergarten/%@/employee/%@/class"
+#define kPathEmployeeProfile            @"/kindergarten/%@/employee/%@"
 #define kPathKindergartenChildList      @"/kindergarten/%@/child"
 #define kPathKindergartenRelationship   @"/kindergarten/%@/relationship"
 #define kPathKindergartenNewsList       @"/kindergarten/%@/news"

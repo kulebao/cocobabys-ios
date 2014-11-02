@@ -1,4 +1,4 @@
-// NSURL+CSKit.m
+// CSTextFieldDelegate.h
 //
 // Copyright (c) 2014 Xinus Wang. All rights reserved.
 // https://github.com/xinus/CSKit
@@ -21,15 +21,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "NSURL+CSKit.h"
+#import <Foundation/Foundation.h>
 
-@implementation NSURL (CSKit)
+enum CSTextFieldDelegateType {
+    kCSTextFieldDelegateNormal = 0,
+    kCSTextFieldDelegateNumberOnly = 1,
+    kCSTextFieldDelegateNationalID = 2,
+};
 
-- (NSURL*)URLByQiniuImageView:(NSString*)op {
-    NSString* imgUrlString = [NSString stringWithFormat:@"%@?imageView2%@",
-                              [self absoluteString], op];
+@interface CSTextFieldDelegate : NSObject <UITextFieldDelegate>
 
-    return [NSURL URLWithString:imgUrlString];
-}
+- (id)initWithType:(NSInteger)type;
+
+@property (nonatomic, assign) NSInteger maxLength;
 
 @end

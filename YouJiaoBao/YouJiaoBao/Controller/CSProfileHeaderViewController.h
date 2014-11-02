@@ -23,4 +23,6 @@
 
 @property (nonatomic, assign) BOOL moreDetails;
 
+- (void)reloadData;
+
 @end

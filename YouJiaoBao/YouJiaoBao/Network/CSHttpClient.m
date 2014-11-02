@@ -658,4 +658,35 @@
     
 }
 
+- (AFHTTPRequestOperation*)opUpdateProfile:(NSDictionary*)newProfile
+                                  ofSender:(EntityLoginInfo*)loginInfo
+                                   success:(SuccessResponseHandler)success
+                                   failure:(FailureResponseHandler)failure {
+    
+    NSString* apiUrl = [NSString stringWithFormat:kPathEmployeeProfile, loginInfo.schoolId, loginInfo.phone];
+    
+    NSDictionary* profile = @{
+                              @"id":loginInfo.uid,
+                              @"name":loginInfo.name,
+                              @"phone":loginInfo.phone,
+                              @"portrait":loginInfo.portrait,
+                              @"gender":loginInfo.gender,
+                              @"workgroup":loginInfo.workgroup,
+                              @"workduty":loginInfo.workduty,
+                              @"birthday":loginInfo.birthday,
+                              @"school_id":loginInfo.schoolId,
+                              @"login_name":loginInfo.loginName,
+                              };
+    
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionaryWithDictionary:profile];
+    [parameters addEntriesFromDictionary:newProfile];
+
+    
+    AFHTTPRequestOperation* op = [self.opManager POST:apiUrl
+                                           parameters:parameters
+                                              success:success
+                                              failure:failure];
+    return op;
+}
+
 @end

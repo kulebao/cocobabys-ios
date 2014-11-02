@@ -148,5 +148,10 @@ typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSErr
                                     success:(SuccessResponseHandler)success
                                     failure:(FailureResponseHandler)failure;
 
+- (AFHTTPRequestOperation*)opUpdateProfile:(NSDictionary*)newProfile
+                                  ofSender:(EntityLoginInfo*)loginInfo
+                                   success:(SuccessResponseHandler)success
+                                   failure:(FailureResponseHandler)failure;
+
 
 @end

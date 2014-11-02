@@ -81,6 +81,11 @@
 		095F13A21967C310008CF3BE /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 095F137D1967C309008CF3BE /* CoreData.framework */; };
 		095F13AA1967C310008CF3BE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 095F13A81967C310008CF3BE /* InfoPlist.strings */; };
 		095F13AC1967C310008CF3BE /* YouJiaoBaoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 095F13AB1967C310008CF3BE /* YouJiaoBaoTests.m */; };
+		097415AB1A06AE4300DAF2F9 /* mic_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 097415A61A06AE4300DAF2F9 /* mic_1.png */; };
+		097415AC1A06AE4300DAF2F9 /* mic_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 097415A71A06AE4300DAF2F9 /* mic_2.png */; };
+		097415AD1A06AE4300DAF2F9 /* mic_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 097415A81A06AE4300DAF2F9 /* mic_3.png */; };
+		097415AE1A06AE4300DAF2F9 /* mic_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 097415A91A06AE4300DAF2F9 /* mic_4.png */; };
+		097415AF1A06AE4300DAF2F9 /* mic_5.png in Resources */ = {isa = PBXBuildFile; fileRef = 097415AA1A06AE4300DAF2F9 /* mic_5.png */; };
 		0982A79719C67AF40036DEC1 /* CSSelectableTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0982A79619C67AF40036DEC1 /* CSSelectableTableViewCell.m */; };
 		0982A79F19C6ED1C0036DEC1 /* EDStarRating.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0982A79C19C6ED1C0036DEC1 /* EDStarRating.bundle */; };
 		0982A7A019C6ED1C0036DEC1 /* EDStarRating.m in Sources */ = {isa = PBXBuildFile; fileRef = 0982A79E19C6ED1C0036DEC1 /* EDStarRating.m */; };
@@ -610,6 +615,11 @@
 		095F13A71967C310008CF3BE /* YouJiaoBaoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "YouJiaoBaoTests-Info.plist"; sourceTree = "<group>"; };
 		095F13A91967C310008CF3BE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		095F13AB1967C310008CF3BE /* YouJiaoBaoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YouJiaoBaoTests.m; sourceTree = "<group>"; };
+		097415A61A06AE4300DAF2F9 /* mic_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mic_1.png; sourceTree = "<group>"; };
+		097415A71A06AE4300DAF2F9 /* mic_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mic_2.png; sourceTree = "<group>"; };
+		097415A81A06AE4300DAF2F9 /* mic_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mic_3.png; sourceTree = "<group>"; };
+		097415A91A06AE4300DAF2F9 /* mic_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mic_4.png; sourceTree = "<group>"; };
+		097415AA1A06AE4300DAF2F9 /* mic_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mic_5.png; sourceTree = "<group>"; };
 		0982A79519C67AF40036DEC1 /* CSSelectableTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSelectableTableViewCell.h; sourceTree = "<group>"; };
 		0982A79619C67AF40036DEC1 /* CSSelectableTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSelectableTableViewCell.m; sourceTree = "<group>"; };
 		0982A79C19C6ED1C0036DEC1 /* EDStarRating.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = EDStarRating.bundle; sourceTree = "<group>"; };
@@ -1460,6 +1470,11 @@
 		098E3DE3198B314400CB4F0B /* v1 */ = {
 			isa = PBXGroup;
 			children = (
+				097415A61A06AE4300DAF2F9 /* mic_1.png */,
+				097415A71A06AE4300DAF2F9 /* mic_2.png */,
+				097415A81A06AE4300DAF2F9 /* mic_3.png */,
+				097415A91A06AE4300DAF2F9 /* mic_4.png */,
+				097415AA1A06AE4300DAF2F9 /* mic_5.png */,
 				098E3DE4198B314400CB4F0B /* activity.png */,
 				098E3DE5198B314400CB4F0B /* babylist.png */,
 				098E3DE6198B314400CB4F0B /* backarrow.png */,
@@ -2300,6 +2315,7 @@
 				098E3F9E198B635400CB4F0B /* btn-func-3@2x.png in Resources */,
 				098E3E42198B314500CB4F0B /* bg_2.9.png in Resources */,
 				098E3F88198B635400CB4F0B /* assess-selfcare@2x.png in Resources */,
+				097415AB1A06AE4300DAF2F9 /* mic_1.png in Resources */,
 				098E4008198B635400CB4F0B /* rating-3stars@2x.png in Resources */,
 				098E3F84198B635400CB4F0B /* assess-manner@2x.png in Resources */,
 				098E400E198B635400CB4F0B /* resend_normal@2x.png in Resources */,
@@ -2394,6 +2410,7 @@
 				098E3F8C198B635400CB4F0B /* bg-2@2x.png in Resources */,
 				098E3FC0198B635400CB4F0B /* chating-photo@2x.png in Resources */,
 				098E3FCD198B635400CB4F0B /* default_child_head_icon.png in Resources */,
+				097415AE1A06AE4300DAF2F9 /* mic_4.png in Resources */,
 				098E3FA0198B635400CB4F0B /* btn-func-4@2x.png in Resources */,
 				098E3FA4198B635400CB4F0B /* btn-func-6@2x.png in Resources */,
 				098E3E40198B314500CB4F0B /* backarrow.png in Resources */,
@@ -2471,6 +2488,7 @@
 				098E3FAF198B635400CB4F0B /* btn-settings.png in Resources */,
 				098E4074198B799000CB4F0B /* 37x-Checkmark.png in Resources */,
 				098E4009198B635400CB4F0B /* rating-bg.png in Resources */,
+				097415AD1A06AE4300DAF2F9 /* mic_3.png in Resources */,
 				098E3E45198B314500CB4F0B /* bottom_bar.9.png in Resources */,
 				098E3E5B198B314500CB4F0B /* dialog_bg.png in Resources */,
 				098E3F83198B635400CB4F0B /* assess-manner.png in Resources */,
@@ -2515,6 +2533,7 @@
 				098E3FC6198B635400CB4F0B /* class-input-bg@2x.png in Resources */,
 				098E3FC4198B635400CB4F0B /* chating-text@2x.png in Resources */,
 				098E3E5E198B314500CB4F0B /* drawable_expand_close.9.png in Resources */,
+				097415AC1A06AE4300DAF2F9 /* mic_2.png in Resources */,
 				098E3E78198B314500CB4F0B /* login_input_lock.png in Resources */,
 				098E3FFD198B635400CB4F0B /* msg-bg-to.png in Resources */,
 				098E400D198B635400CB4F0B /* resend_normal.png in Resources */,
@@ -2536,6 +2555,7 @@
 				098E3E71198B314500CB4F0B /* input_normal.9.png in Resources */,
 				098E3E4C198B314500CB4F0B /* btn_growth.png in Resources */,
 				098E3E8C198B314500CB4F0B /* small_btn_pressed.png in Resources */,
+				097415AF1A06AE4300DAF2F9 /* mic_5.png in Resources */,
 				098E3E54198B314500CB4F0B /* chat_head_icon.gif in Resources */,
 				098E3FC2198B635400CB4F0B /* chating-picture@2x.png in Resources */,
 				098E3E57198B314500CB4F0B /* childlist.png in Resources */,
@@ -2829,7 +2849,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Xinus Wang (MH48YP79V6)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "YouJiaoBao/YouJiaoBao-Prefix.pch";
 				INFOPLIST_FILE = "YouJiaoBao/YouJiaoBao-Info.plist";
@@ -2849,8 +2869,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Chengdu Cocobabys Information Technology Co., Ltd. (J7M2ZSPTSZ)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Xinus Wang (MH48YP79V6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xinus Wang (MH48YP79V6)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "YouJiaoBao/YouJiaoBao-Prefix.pch";
 				INFOPLIST_FILE = "YouJiaoBao/YouJiaoBao-Info.plist";
@@ -2860,7 +2880,7 @@
 					"$(PROJECT_DIR)/Venders/opencore-amr-0.1.3/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "406badf4-4e56-488f-a585-12e69ac9c276";
+				PROVISIONING_PROFILE = "6d27beb4-5ad8-44db-a06d-9f88a5e32fae";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -44,7 +44,7 @@
             senderType = @"p";
         }
         else {
-            parentId = [jsonObject objectForKey:@"id"];
+            senderId = [jsonObject objectForKey:@"id"];
             senderType = @"t";
         }
         

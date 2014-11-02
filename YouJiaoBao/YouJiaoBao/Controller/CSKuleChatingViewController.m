@@ -34,6 +34,8 @@
     TSFileCache* _voiceCache;
     
     CSKuleChatingTableCell* _denyDeleteCell;
+    
+    NSMutableSet* _senderIdSet;
 }
 
 @property (weak, nonatomic) IBOutlet PullTableView *tableview;
@@ -80,6 +82,8 @@
     self.tableview.backgroundColor = [UIColor clearColor];
     
     _topicMsgList = [NSMutableArray array];
+    
+    _senderIdSet  = [NSMutableSet set];
     
     [self doReloadTopicMsgsFrom:-1
                              to:-1
@@ -200,8 +204,8 @@
     voiceMsgBody.image = nil;
     labAudioDuration.text = nil;
     
-    if ([msg.senderType isEqualToString:@"t"]) {
-        // From
+    if (![msg.senderType isEqualToString:@"t"]) {
+        // To
         labMsgSender.text = nil;
         imgPortrait.image = [UIImage imageNamed:@"chat_head_icon.png"];
         
@@ -250,7 +254,7 @@
         }
     }
     else {
-        // To
+        // From
         imgPortrait.frame = CGRectMake(320-2-32-2, 24, 32, 32);
         
         UIImage* bgImage = [UIImage imageNamed:@"chating_right_1.png"];
@@ -309,46 +313,62 @@
         }
     }
     
-    // Get Sender avatar and name.
     CSHttpClient* http = [CSHttpClient sharedInstance];
     CSEngine* engine = [CSEngine sharedInstance];
-
-    [http opGetTopicMsgSender:msg.senderId
-                       ofType:msg.senderType
-               inKindergarten:engine.loginInfo.schoolId.integerValue
-                      success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                          EntityTopicMsgSender* senderInfo = [[EntityTopicMsgSenderHelper updateEntities:@[responseObject]] firstObject];
-                          
-                          if (senderInfo) {
-                              NSURL* qiniuImgUrl = nil;
-                              NSString* senderName = nil;
-                              
-                              senderName = senderInfo.name;
-                              if ([msg.senderId isEqualToString:engine.loginInfo.uid]) {
-                                  senderName = @"我";
+    
+    EntityTopicMsgSender* senderInfo = [EntityTopicMsgSenderHelper queryEntityWithUid:msg.senderId];
+    if (senderInfo) {
+        NSURL* qiniuImgUrl = nil;
+        NSString* senderName = nil;
+        
+        senderName = senderInfo.name;
+        if ([msg.senderId isEqualToString:engine.loginInfo.uid]) {
+            senderName = @"我";
+        }
+        
+        if (senderName.length == 0) {
+            if ([msg.senderType isEqualToString:@"t"]) {
+                senderName = @"教师";
+            }
+            else {
+                senderName = @"家长";
+            }
+        }
+        
+        if (senderInfo.portrait.length > 0) {
+            qiniuImgUrl = [NSURL URLWithString:senderInfo.portrait];
+            qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/64/h/64"];
+            
+            [imgPortrait sd_setImageWithURL:qiniuImgUrl placeholderImage:[UIImage imageNamed:@"chat_head_icon.png"] options:SDWebImageRetryFailed|SDWebImageRefreshCached|SDWebImageAllowInvalidSSLCertificates];
+        }
+        else {
+            imgPortrait.image = [UIImage imageNamed:@"chat_head_icon.png"];
+        }
+        
+        labMsgSender.text = senderName;
+    }
+    else {
+        // Get Sender avatar and name.
+        if (![_senderIdSet containsObject:msg.senderId]) {
+            [_senderIdSet addObject:msg.senderId];
+            CSLog(@"++ %@", msg.senderId);
+            [http opGetTopicMsgSender:msg.senderId
+                               ofType:msg.senderType
+                       inKindergarten:engine.loginInfo.schoolId.integerValue
+                              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                  [EntityTopicMsgSenderHelper updateEntities:@[responseObject]];
+                                  [_senderIdSet removeObject:msg.senderId];
+                                  CSLog(@"-- %@", msg.senderId);
                               }
-                              
-                              if (senderInfo.portrait.length > 0) {
-                                  qiniuImgUrl = [NSURL URLWithString:senderInfo.portrait];
-                              }
-                              else {
-                                  qiniuImgUrl = [NSURL URLWithString:msg.childInfo.portrait];
-                              }
-                              
-                              if (qiniuImgUrl) {
-                                  qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/64/h/64"];
-                                  
-                                  [imgPortrait sd_setImageWithURL:qiniuImgUrl placeholderImage:[UIImage imageNamed:@"chat_head_icon.png"] options:SDWebImageRetryFailed|SDWebImageRefreshCached|SDWebImageAllowInvalidSSLCertificates];
-                              }
-                              else {
-                                  imgPortrait.image = [UIImage imageNamed:@"chat_head_icon.png"];
-                              }
-                              
-                              labMsgSender.text = senderName;
-                          }
-                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                          
-                      }];
+                              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                  [_senderIdSet removeObject:msg.senderId];
+                                  CSLog(@"-- %@", msg.senderId);
+                              }];
+        }
+        else {
+            CSLog(@"== %@", msg.senderId);
+        }
+    }
     
     // Check if show the timestamp
     NSInteger row = indexPath.row;

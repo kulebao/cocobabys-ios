@@ -57,6 +57,8 @@
     self.textView1.frame = self.imgText1Bg.frame;
     self.textView2.frame = self.imgText2Bg.frame;
     
+    self.textView1.text = self.textView2.text = nil;
+    
     NSArray* starRatings = @[self.starRating0,
                              self.starRating1,
                              self.starRating2,

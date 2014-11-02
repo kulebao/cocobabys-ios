@@ -122,7 +122,13 @@
 
 
 + (void)markAsRead:(EntityTopicMsg*)entity {
-    
+    if (entity) {
+        entity.read = @(1);
+        
+        NSManagedObjectContext* context = [[CSCoreDataHelper sharedInstance] managedObjectContext];
+        NSError* error = nil;
+        [context save:&error];
+    }
 }
 
 @end

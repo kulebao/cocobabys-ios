@@ -378,6 +378,13 @@
 }
 
 #pragma mark - UITableViewDelegate
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    EntityTopicMsg* msg = [_topicMsgList objectAtIndex:indexPath.row];
+    if (msg.read.integerValue == 0) {
+        [EntityTopicMsgHelper markAsRead:msg];
+    }
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     EntityTopicMsg* msg = [_topicMsgList objectAtIndex:indexPath.row];
     CGFloat height = [CSKuleChatingTableCell calcHeightForMsg:msg];
@@ -645,7 +652,19 @@
                       success:(void (^)(void))success
                       failure:(void (^)(void))failure {
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
-        NSMutableArray* topicMsgs = [NSMutableArray array];
+        NSArray* topicMsgs = nil;
+        
+        if ([dataJson isKindOfClass:[NSArray class]]) {
+            topicMsgs = [EntityTopicMsgHelper updateEntities:dataJson];
+        }
+        else if ([dataJson isKindOfClass:[NSDictionary class]]) {
+            topicMsgs = [EntityTopicMsgHelper updateEntities:@[dataJson]];
+        }
+        
+        if (topicMsgs) {
+            [_topicMsgList addObjectsFromArray:topicMsgs];
+        }
+        
         /*
         CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
         NSTimeInterval oldTimestamp = [gApp.engine.preferences timestampOfModule:kKuleModuleChating forChild:currentChild.childId];
@@ -694,10 +713,25 @@
          success();
          }
         */
-        [self.tableview reloadData];
-        [gApp hideAlert];
         
-
+        [_topicMsgList sortUsingComparator:^NSComparisonResult(EntityTopicMsg* obj1, EntityTopicMsg* obj2) {
+            NSComparisonResult ret = NSOrderedSame;
+            if (obj1.uid.longLongValue < obj2.uid.longLongValue) {
+                ret = NSOrderedAscending;
+            }
+            else if (obj1.uid.longLongValue > obj2.uid.longLongValue) {
+                ret = NSOrderedDescending;
+            }
+            
+            return ret;
+        }];
+        
+        [gApp hideAlert];
+        [self.tableview reloadData];
+        
+        if (success) {
+            success();
+        }
     };
     
     FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {

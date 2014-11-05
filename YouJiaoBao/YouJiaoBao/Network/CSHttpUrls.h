@@ -82,4 +82,8 @@
 // PATH: Sender Info
 #define kTopicSenderPath                @"/kindergarten/%@/sender/%@"
 
+// PATH: 短信验证
+#define kGetSmsCodePath                 @"/ws/verify/phone/%@"
+#define kResetPswd                      @"/employee_resetpwd.do"
+
 #endif

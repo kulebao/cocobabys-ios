@@ -161,5 +161,14 @@ typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSErr
                                            success:(SuccessResponseHandler)success
                                            failure:(FailureResponseHandler)failure;
 
+- (AFHTTPRequestOperation*)opResetPswdOfAccount:(NSString*)accountName
+                                    withNewPswd:(NSString*)newPswd
+                                    andAuthCode:(NSString*)authCode
+                                        success:(SuccessResponseHandler)success
+                                        failure:(FailureResponseHandler)failure;
+
+- (AFHTTPRequestOperation*)opGetSmsCode:(NSString*)phone
+                                success:(SuccessResponseHandler)success
+                                failure:(FailureResponseHandler)failure;
 
 @end

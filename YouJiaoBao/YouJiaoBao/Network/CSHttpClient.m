@@ -719,4 +719,41 @@
     return op;
 }
 
+- (AFHTTPRequestOperation*)opResetPswdOfAccount:(NSString*)accountName
+                                    withNewPswd:(NSString*)newPswd
+                                    andAuthCode:(NSString*)authCode
+                                        success:(SuccessResponseHandler)success
+                                        failure:(FailureResponseHandler)failure {
+    NSParameterAssert(accountName && newPswd && authCode);
+    
+    NSString* apiUrl = kResetPswd;
+    
+    NSDictionary* parameters = @{@"account_name": accountName,
+                                 @"authcode": authCode,
+                                 @"new_password": newPswd};
+    
+    AFHTTPRequestOperation* op = [self.opManager POST:apiUrl
+                                           parameters:parameters
+                                              success:success
+                                              failure:failure];
+    return op;
+}
+
+- (AFHTTPRequestOperation*)opGetSmsCode:(NSString*)phone
+                                success:(SuccessResponseHandler)success
+                                failure:(FailureResponseHandler)failure {
+    NSParameterAssert(phone);
+    
+    NSString* path = [NSString stringWithFormat:kGetSmsCodePath, phone];
+    
+    
+    NSDictionary* parameters = nil;
+    
+    AFHTTPRequestOperation* op = [self.opManager GET:path
+                                          parameters:parameters
+                                             success:success
+                                             failure:failure];
+    return op;
+}
+
 @end

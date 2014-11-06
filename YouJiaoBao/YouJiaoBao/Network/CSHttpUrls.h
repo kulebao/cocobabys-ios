@@ -61,6 +61,8 @@
 // PATH: History信息
 #define kGetHistoryListPath             @"/kindergarten/%@/history/%@/record"
 
+#define kPostBatchHistoryPath           @"/kindergarten/%@/history?child_id=%@"
+
 // PATH: 亲子作业列表
 #define kAssignmentListPath             @"/kindergarten/%@/assignment"
 

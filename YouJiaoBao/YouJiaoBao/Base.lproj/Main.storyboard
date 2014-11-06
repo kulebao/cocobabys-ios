@@ -205,6 +205,7 @@
                         <segue destination="rc9-Jp-JZD" kind="push" identifier="segue.main.hw" id="hFT-Wg-s1H"/>
                         <segue destination="8kA-hd-XTO" kind="push" identifier="segue.main.setting" id="fmm-Br-qeo"/>
                         <segue destination="tQI-PV-Zpq" kind="push" identifier="segue.main.growexp" id="BgW-pr-PXr"/>
+                        <segue destination="T3h-7E-PKI" kind="push" identifier="segue.main.studentpickup" id="yHN-tG-lCD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wSt-dj-TfE" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1761,6 +1762,50 @@
             </objects>
             <point key="canvasLocation" x="2264" y="1093"/>
         </scene>
+        <!--Student List Pick Up Table View Controller-->
+        <scene sceneID="91C-Hl-Nul">
+            <objects>
+                <tableViewController id="T3h-7E-PKI" customClass="CSStudentListPickUpTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="7Xa-Vk-1xQ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CSChildListItemTableViewCell" rowHeight="60" id="co9-CD-erZ" customClass="CSChildListItemTableViewCell">
+                                <rect key="frame" x="0.0" y="22" width="320" height="80"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="co9-CD-erZ" id="2kV-RZ-NbC">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="default_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="dPk-wf-Za1">
+                                            <rect key="frame" x="8" y="6" width="48" height="48"/>
+                                        </imageView>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="名字" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gcc-Ur-fgT">
+                                            <rect key="frame" x="75" y="19" width="220" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="imgPortrait" destination="dPk-wf-Za1" id="8Ln-qH-kuW"/>
+                                    <outlet property="labName" destination="gcc-Ur-fgT" id="RlT-lw-JD4"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="T3h-7E-PKI" id="Kch-gy-8vb"/>
+                            <outlet property="delegate" destination="T3h-7E-PKI" id="1gE-tl-eXA"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="wW3-rY-hY9"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fZO-tq-j3V" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="233" y="839"/>
+        </scene>
         <!--编辑器-->
         <scene sceneID="Dkf-FK-Bs6">
             <objects>
@@ -2127,7 +2172,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="19H-fG-dXX"/>
+        <segue reference="4dZ-qf-s5s"/>
         <segue reference="C7y-3W-3sb"/>
     </inferredMetricsTieBreakers>
 </document>

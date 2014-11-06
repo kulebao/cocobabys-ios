@@ -335,7 +335,6 @@
     }
 }
 
-
 #pragma mark - Private
 - (void)updateTableView {
     _classChildren = [NSMutableArray array];

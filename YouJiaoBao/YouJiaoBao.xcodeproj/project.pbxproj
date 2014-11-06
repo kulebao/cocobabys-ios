@@ -51,6 +51,9 @@
 		091EE51619E848670050092E /* EntityTopicMsgSenderHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 091EE51519E848670050092E /* EntityTopicMsgSenderHelper.m */; };
 		091EE51919E850890050092E /* NSURL+CSKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 091EE51819E850890050092E /* NSURL+CSKit.m */; };
 		09327E2A1992233B0089C653 /* CSChildListItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09327E291992233A0089C653 /* CSChildListItemTableViewCell.m */; };
+		0936DD5D1A0BD3DC006B7E89 /* CSStudentListPickUpTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0936DD5C1A0BD3DC006B7E89 /* CSStudentListPickUpTableViewController.m */; };
+		0936DD601A0BE070006B7E89 /* CSStudentPickerHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0936DD5F1A0BE070006B7E89 /* CSStudentPickerHeaderView.m */; };
+		0936DD621A0BE08D006B7E89 /* CSStudentPickerHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0936DD611A0BE08D006B7E89 /* CSStudentPickerHeaderView.xib */; };
 		094C29EF1A0666F8009BDC4E /* CSUserOptionMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 094C29EE1A0666F8009BDC4E /* CSUserOptionMenuView.m */; };
 		094C29F21A06670C009BDC4E /* CSUserOptionMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 094C29F11A06670C009BDC4E /* CSUserOptionMenuView.xib */; };
 		094C29F81A067D28009BDC4E /* CSTextFieldDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 094C29F71A067D28009BDC4E /* CSTextFieldDelegate.m */; };
@@ -570,6 +573,11 @@
 		091EE51819E850890050092E /* NSURL+CSKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+CSKit.m"; sourceTree = "<group>"; };
 		09327E281992233A0089C653 /* CSChildListItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSChildListItemTableViewCell.h; sourceTree = "<group>"; };
 		09327E291992233A0089C653 /* CSChildListItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSChildListItemTableViewCell.m; sourceTree = "<group>"; };
+		0936DD5B1A0BD3DC006B7E89 /* CSStudentListPickUpTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSStudentListPickUpTableViewController.h; sourceTree = "<group>"; };
+		0936DD5C1A0BD3DC006B7E89 /* CSStudentListPickUpTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSStudentListPickUpTableViewController.m; sourceTree = "<group>"; };
+		0936DD5E1A0BE070006B7E89 /* CSStudentPickerHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSStudentPickerHeaderView.h; sourceTree = "<group>"; };
+		0936DD5F1A0BE070006B7E89 /* CSStudentPickerHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSStudentPickerHeaderView.m; sourceTree = "<group>"; };
+		0936DD611A0BE08D006B7E89 /* CSStudentPickerHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSStudentPickerHeaderView.xib; sourceTree = "<group>"; };
 		094C29ED1A0666F8009BDC4E /* CSUserOptionMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSUserOptionMenuView.h; sourceTree = "<group>"; };
 		094C29EE1A0666F8009BDC4E /* CSUserOptionMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSUserOptionMenuView.m; sourceTree = "<group>"; };
 		094C29F11A06670C009BDC4E /* CSUserOptionMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSUserOptionMenuView.xib; sourceTree = "<group>"; };
@@ -1320,6 +1328,9 @@
 				095D858419C5DD9400F2F926 /* CSClassHeaderView.h */,
 				095D858519C5DD9400F2F926 /* CSClassHeaderView.m */,
 				095D858719C5DDA700F2F926 /* CSClassHeaderView.xib */,
+				0936DD5E1A0BE070006B7E89 /* CSStudentPickerHeaderView.h */,
+				0936DD5F1A0BE070006B7E89 /* CSStudentPickerHeaderView.m */,
+				0936DD611A0BE08D006B7E89 /* CSStudentPickerHeaderView.xib */,
 				095D858E19C5ED1900F2F926 /* CSClassPickerView.h */,
 				095D858F19C5ED1900F2F926 /* CSClassPickerView.m */,
 				095D859119C5ED2B00F2F926 /* CSClassPickerView.xib */,
@@ -2127,6 +2138,8 @@
 				098E4033198B6A0500CB4F0B /* CSSettingsViewController.m */,
 				09CD667C197C153C00CC08F1 /* CSStudentListMainTableViewController.h */,
 				09CD667D197C153C00CC08F1 /* CSStudentListMainTableViewController.m */,
+				0936DD5B1A0BD3DC006B7E89 /* CSStudentListPickUpTableViewController.h */,
+				0936DD5C1A0BD3DC006B7E89 /* CSStudentListPickUpTableViewController.m */,
 				091760F119C09070006FE2FB /* CSKuleAboutViewController.h */,
 				091760F219C09070006FE2FB /* CSKuleAboutViewController.m */,
 				0917610219C093CA006FE2FB /* CSKuleFeedbackViewController.h */,
@@ -2349,6 +2362,7 @@
 				098E3F8B198B635400CB4F0B /* bg-2.png in Resources */,
 				098E3E75198B314500CB4F0B /* login_bg1.png in Resources */,
 				098E3FA8198B635400CB4F0B /* btn-func-8@2x.png in Resources */,
+				0936DD621A0BE08D006B7E89 /* CSStudentPickerHeaderView.xib in Resources */,
 				098E3FB3198B635400CB4F0B /* btn-start.png in Resources */,
 				098E3F87198B635400CB4F0B /* assess-selfcare.png in Resources */,
 				098E3E4D198B314500CB4F0B /* btn_hover.9.png in Resources */,
@@ -2601,6 +2615,7 @@
 				095D857719C5CD5F00F2F926 /* AHAlertView.m in Sources */,
 				0982A7AE19C8265E0036DEC1 /* NSDate+CSKit.m in Sources */,
 				09C2D4E61969BCA000B8A895 /* AFURLConnectionOperation.m in Sources */,
+				0936DD5D1A0BD3DC006B7E89 /* CSStudentListPickUpTableViewController.m in Sources */,
 				09A3C5EF19C47986001AFE8C /* UIView+GMGridViewAdditions.m in Sources */,
 				0982A7C819C8A51D0036DEC1 /* EntityDailylog.m in Sources */,
 				09C2D4F11969BCA000B8A895 /* UIProgressView+AFNetworking.m in Sources */,
@@ -2634,6 +2649,7 @@
 				098E4063198B799000CB4F0B /* EGORefreshTableHeaderView.m in Sources */,
 				098E4031198B647000CB4F0B /* CSMainViewController.m in Sources */,
 				09FE720A19965F14002E3ED4 /* UIWebView+CSKit.m in Sources */,
+				0936DD601A0BE070006B7E89 /* CSStudentPickerHeaderView.m in Sources */,
 				09CD6669197BFD3600CC08F1 /* CSEngine.m in Sources */,
 				091EE50C19E83FC80050092E /* CSKuleURLDownloader.m in Sources */,
 				098E4066198B799000CB4F0B /* PullTableView.m in Sources */,

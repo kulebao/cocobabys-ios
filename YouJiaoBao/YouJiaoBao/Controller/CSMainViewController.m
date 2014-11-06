@@ -14,6 +14,7 @@
 #import "CSContentEditorViewController.h"
 #import "CSHttpUrls.h"
 #import "CSModuleCell.h"
+#import "CSStudentListPickUpTableViewController.h"
 
 #define kTestChildId    @"2_2088_900"
 
@@ -23,6 +24,7 @@
     NSMutableArray* _imageUrlList;
     NSMutableArray* _imageList;
     NSString* _textContent;
+    NSArray* _childList;
 }
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
@@ -91,6 +93,10 @@
         CSContentEditorViewController* ctrl = segue.destinationViewController;
         ctrl.delegate = self;
     }
+    else if ([segue.identifier isEqualToString:@"segue.main.studentpickup"]) {
+        CSStudentListPickUpTableViewController* ctrl = segue.destinationViewController;
+        ctrl.delegate = self;
+    }
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -156,12 +162,7 @@
     _imageUrlList = [NSMutableArray array];
     _imageList = [NSMutableArray arrayWithArray:imageList];
     
-    if (_imageList.count > 0) {
-        [self doUploadImage];
-    }
-    else {
-        [self doSendHistory];
-    }
+    [self performSegueWithIdentifier:@"segue.main.studentpickup" sender:nil];
 }
 
 - (void)doUploadImage {
@@ -217,15 +218,36 @@
         [gApp alert:[error localizedDescription]];
     };
     
-    [gApp waitingAlert:@"提交数据中"];
+    NSMutableArray* childIdList = [NSMutableArray array];
+    for (EntityChildInfo* childInfo in _childList) {
+        [childIdList addObject:childInfo.childId];
+    }
     
-    [http opPostHistoryOfKindergarten:engine.loginInfo.schoolId.integerValue
-                         withSenderId:engine.loginInfo.uid
-                          withChildId:kTestChildId
-                          withContent:_textContent
-                     withImageUrlList:_imageUrlList
-                              success:sucessHandler
-                              failure:failureHandler];
+    if (childIdList.count > 0) {
+        [gApp waitingAlert:@"提交数据中"];
+        [http opPostHistoryOfKindergarten:engine.loginInfo.schoolId.integerValue
+                             withSenderId:engine.loginInfo.uid
+                          withChildIdList:childIdList
+                              withContent:_textContent
+                         withImageUrlList:_imageUrlList
+                                  success:sucessHandler
+                                  failure:failureHandler];
+    }
+}
+
+#pragma mark - CSStudentListPickUpTableViewControllerDelegate
+- (void)studentListPickUpTableViewController:(CSStudentListPickUpTableViewController*)ctrl
+                                   didPickUp:(NSArray*)childList {
+    _childList = childList;
+    if (_childList.count == 0) {
+        [gApp alert:@"必须选择至少一个小孩"];
+    }
+    else if (_imageList.count > 0) {
+        [self doUploadImage];
+    }
+    else {
+        [self doSendHistory];
+    }
 }
 
 @end

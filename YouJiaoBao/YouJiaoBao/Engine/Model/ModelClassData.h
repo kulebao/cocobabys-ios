@@ -11,12 +11,14 @@
 #import "EntityClassInfo.h"
 #import "EntityChildInfo.h"
 #import "CSClassHeaderView.h"
+#import "CSStudentPickerHeaderView.h"
 
 @interface ModelClassData : NSObject
 
 @property (nonatomic, strong) EntityClassInfo* classInfo;
 @property (nonatomic, strong) NSArray* childrenList;
 @property (nonatomic, strong) CSClassHeaderView* classHeaderView;
+@property (nonatomic, strong) CSStudentPickerHeaderView* studentPickerHeaderView;
 
 @property (nonatomic, assign) BOOL expand;
 

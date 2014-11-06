@@ -434,6 +434,36 @@
     return op;
 }
 
+- (AFHTTPRequestOperation*)opPostHistoryOfKindergarten:(NSInteger)kindergarten
+                                          withSenderId:(NSString*)senderId
+                                       withChildIdList:(NSArray*)childIdList
+                                           withContent:(NSString*)content
+                                      withImageUrlList:(NSArray*)imgUrlList
+                                               success:(SuccessResponseHandler)success
+                                               failure:(FailureResponseHandler)failure {
+    
+    NSString* childIdListString = [childIdList componentsJoinedByString:@","];
+    NSString* apiUrl = [NSString stringWithFormat:kPostBatchHistoryPath, @(kindergarten), childIdListString];
+    
+    id msgSender = @{@"id": senderId, @"type": @"t"};
+    
+    NSMutableArray* mediumList = [NSMutableArray array];
+    for (NSString* urlString in imgUrlList) {
+        [mediumList addObject:@{@"url": urlString, @"type": @"image"}];
+    }
+    
+    NSDictionary* parameters = @{@"topic": [childIdList firstObject],
+                                 @"content": content ? content : @"",
+                                 @"medium" : mediumList,
+                                 @"sender": msgSender};
+    
+    AFHTTPRequestOperation* op = [self.opManager POST:apiUrl
+                                           parameters:parameters
+                                              success:success
+                                              failure:failure];
+    return op;
+}
+
 - (AFHTTPRequestOperation*)opPostNewsOfKindergarten:(NSInteger)kindergarten
                                          withSender:(EntityLoginInfo*)senderInfo
                                         withClassId:(NSNumber*)classId

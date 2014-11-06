@@ -316,36 +316,20 @@
     CSHttpClient* http = [CSHttpClient sharedInstance];
     CSEngine* engine = [CSEngine sharedInstance];
     
+    NSURL* qiniuImgUrl = nil;
+    NSString* senderName = nil;
+    
     EntityTopicMsgSender* senderInfo = [EntityTopicMsgSenderHelper queryEntityWithUid:msg.senderId];
     if (senderInfo) {
-        NSURL* qiniuImgUrl = nil;
-        NSString* senderName = nil;
-        
         senderName = senderInfo.name;
         if ([msg.senderId isEqualToString:engine.loginInfo.uid]) {
             senderName = @"我";
         }
         
-        if (senderName.length == 0) {
-            if ([msg.senderType isEqualToString:@"t"]) {
-                senderName = @"教师";
-            }
-            else {
-                senderName = @"家长";
-            }
-        }
-        
         if (senderInfo.portrait.length > 0) {
             qiniuImgUrl = [NSURL URLWithString:senderInfo.portrait];
             qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/64/h/64"];
-            
-            [imgPortrait sd_setImageWithURL:qiniuImgUrl placeholderImage:[UIImage imageNamed:@"chat_head_icon.png"] options:SDWebImageRetryFailed|SDWebImageRefreshCached|SDWebImageAllowInvalidSSLCertificates];
         }
-        else {
-            imgPortrait.image = [UIImage imageNamed:@"chat_head_icon.png"];
-        }
-        
-        labMsgSender.text = senderName;
     }
     else {
         // Get Sender avatar and name.
@@ -369,6 +353,23 @@
             CSLog(@"== %@", msg.senderId);
         }
     }
+    
+    if(qiniuImgUrl) {
+        [imgPortrait sd_setImageWithURL:qiniuImgUrl placeholderImage:[UIImage imageNamed:@"chat_head_icon.png"] options:SDWebImageRetryFailed|SDWebImageRefreshCached|SDWebImageAllowInvalidSSLCertificates];
+    }
+    else {
+        imgPortrait.image = [UIImage imageNamed:@"chat_head_icon.png"];
+    }
+    
+    if (senderName.length == 0) {
+        if ([msg.senderType isEqualToString:@"t"]) {
+            senderName = @"教师";
+        }
+        else {
+            senderName = @"家长";
+        }
+    }
+    labMsgSender.text = senderName;
     
     // Check if show the timestamp
     NSInteger row = indexPath.row;

@@ -17,6 +17,8 @@
 - (void)setup {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(TPKeyboardAvoiding_keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(TPKeyboardAvoiding_keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToActiveTextField) name:UITextViewTextDidBeginEditingNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToActiveTextField) name:UITextFieldTextDidBeginEditingNotification object:nil];
 }
 
 -(id)initWithFrame:(CGRect)frame {
@@ -62,6 +64,13 @@
 
 #pragma mark - Responders, events
 
+-(void)willMoveToSuperview:(UIView *)newSuperview {
+    [super willMoveToSuperview:newSuperview];
+    if ( !newSuperview ) {
+        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(TPKeyboardAvoiding_assignTextDelegateForViewsBeneathView:) object:self];
+    }
+}
+
 - (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     [[self TPKeyboardAvoiding_findFirstResponderBeneathView:self] resignFirstResponder];
     [super touchesEnded:touches withEvent:event];
@@ -72,14 +81,6 @@
         [textField resignFirstResponder];
     }
     return YES;
-}
-
--(void)textFieldDidBeginEditing:(UITextField *)textField {
-    [self scrollToActiveTextField];
-}
-
--(void)textViewDidBeginEditing:(UITextView *)textView {
-    [self scrollToActiveTextField];
 }
 
 -(void)layoutSubviews {

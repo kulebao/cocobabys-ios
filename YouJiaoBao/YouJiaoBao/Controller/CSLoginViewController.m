@@ -46,8 +46,10 @@
     
     self.labNote.text = nil;
 #ifdef DEBUG
-    self.fieldUsername.text = @"wx001";
-    self.fieldPassword.text = @"123456";
+    //self.fieldUsername.text = @"wx001";
+    //self.fieldPassword.text = @"123456";
+    self.fieldUsername.text = @"test15";
+    self.fieldPassword.text = @"13555555555";
 #endif
 }
 

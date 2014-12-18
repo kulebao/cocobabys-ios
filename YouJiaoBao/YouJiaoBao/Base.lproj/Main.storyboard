@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="pMD-1c-TKG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="pMD-1c-TKG">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
         <!--Root View Controller-->
@@ -62,7 +62,7 @@
                         <viewControllerLayoutGuide type="bottom" id="3AS-MQ-yHX"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="faA-ny-MMW">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg_null.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="YVb-Lp-jH8">
@@ -154,7 +154,7 @@
                         <viewControllerLayoutGuide type="bottom" id="RQM-ed-c3e"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="udy-Nb-axF">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <containerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MDX-3v-QBJ">
@@ -216,7 +216,7 @@
             <objects>
                 <tableViewController id="yuK-du-IDt" customClass="CSStudentListMainTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="113" sectionHeaderHeight="22" sectionFooterHeight="22" id="auw-jg-Kp2">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -286,7 +286,7 @@
                         <viewControllerLayoutGuide type="bottom" id="uQI-gI-oE5"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="lM7-9g-aiW">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <containerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JRr-Cg-luw">
@@ -388,7 +388,7 @@
             <objects>
                 <tableViewController id="rc9-Jp-JZD" customClass="CSHomeWorkTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" id="CjV-sZ-CrB" customClass="PullTableView">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -469,7 +469,7 @@
                         <viewControllerLayoutGuide type="bottom" id="CkT-hZ-Pie"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="DKR-2p-wCr">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Fl-20-2EN">
@@ -497,7 +497,7 @@
             <objects>
                 <tableViewController id="TCA-O8-OiJ" customClass="CSNoticeTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="100" sectionHeaderHeight="22" sectionFooterHeight="22" id="P24-q7-rSW" customClass="PullTableView">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -594,7 +594,7 @@
                         <viewControllerLayoutGuide type="bottom" id="JLp-4J-1IR"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="oKw-JI-MSJ">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <containerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nAK-8F-ebD">
@@ -692,7 +692,7 @@
                         <viewControllerLayoutGuide type="bottom" id="S08-1z-hec"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="BcR-yR-ncA">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg_null.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="hVx-1R-dnL">
@@ -767,7 +767,7 @@
                         <viewControllerLayoutGuide type="bottom" id="coN-W0-b1r"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8hu-gv-lcL">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg_null.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Ff8-C2-PFf">
@@ -898,7 +898,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Ziv-K8-CtG"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="a30-e6-jY9">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YyM-X5-AAN">
@@ -995,7 +995,7 @@
                         <viewControllerLayoutGuide type="bottom" id="GCX-5a-xpK"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="uE5-yV-czn">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="app-bg-type3.png" translatesAutoresizingMaskIntoConstraints="NO" id="wgf-aq-cB1">
@@ -1023,7 +1023,7 @@
                         <viewControllerLayoutGuide type="bottom" id="ygA-DW-t0c"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="tsz-5t-EpV">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="app-bg-type3.png" translatesAutoresizingMaskIntoConstraints="NO" id="imc-3J-yij">
@@ -1141,7 +1141,7 @@
                         <viewControllerLayoutGuide type="bottom" id="IpD-Wn-MKE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ngi-aw-jCg">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="app-bg-type3.png" translatesAutoresizingMaskIntoConstraints="NO" id="VzL-yk-iKp">
@@ -1200,7 +1200,7 @@
                         <viewControllerLayoutGuide type="bottom" id="aA0-Rt-WK8"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Fjr-He-AAV">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zKF-2p-dIv" userLabel="View - Editor -Content">
@@ -1299,13 +1299,13 @@
                         <viewControllerLayoutGuide type="bottom" id="ICK-eS-5pj"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="AEi-dZ-xSP">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app-bg-type3.png" translatesAutoresizingMaskIntoConstraints="NO" id="aw6-4M-Xrk">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                             </imageView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YGp-ju-hU6" customClass="TPKeyboardAvoidingScrollView">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YGp-ju-hU6" customClass="TPKeyboardAvoidingScrollView">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" fixedFrame="YES" placeholderIntrinsicWidth="320" placeholderIntrinsicHeight="200" translatesAutoresizingMaskIntoConstraints="NO" id="WU3-mM-aHQ" userLabel="View1">
@@ -1571,7 +1571,7 @@
                         <viewControllerLayoutGuide type="bottom" id="pgW-sU-RsW"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="PCH-sC-b2p">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rFC-aF-WRg" userLabel="View - Editor - Title">
@@ -1929,6 +1929,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="4dZ-qf-s5s"/>
-        <segue reference="C7y-3W-3sb"/>
+        <segue reference="a0J-HN-Yn1"/>
     </inferredMetricsTieBreakers>
 </document>

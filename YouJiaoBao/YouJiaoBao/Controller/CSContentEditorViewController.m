@@ -11,10 +11,12 @@
 #import "MJPhotoBrowser.h"
 #import "MJPhoto.h"
 #import "CSAppDelegate.h"
+#import "ELCImagePickerController.h"
 
-@interface CSContentEditorViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GMGridViewDataSource, GMGridViewSortingDelegate, GMGridViewTransformationDelegate, GMGridViewActionDelegate> {
+@interface CSContentEditorViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, ELCImagePickerControllerDelegate, UINavigationControllerDelegate, GMGridViewDataSource, GMGridViewSortingDelegate, GMGridViewTransformationDelegate, GMGridViewActionDelegate> {
     NSMutableArray* _imageList;
     UIImagePickerController* _imgPicker;
+    ELCImagePickerController* _elcPicker;
     NSInteger _lastDeleteItemIndexAsked;
 }
 
@@ -102,13 +104,27 @@
 - (IBAction)onBtnPhotoFromGalleryClicked:(id)sender {
     [self.textContent resignFirstResponder];
     
-    _imgPicker = [[UIImagePickerController alloc] init];
-    _imgPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    _imgPicker.allowsEditing = NO;
-    _imgPicker.delegate = self;
-    [self presentViewController:_imgPicker animated:YES completion:^{
-        
-    }];
+    _elcPicker = [[ELCImagePickerController alloc] initImagePicker];
+    
+    if (self.singleImage) {
+        //Set the maximum number of images to select, defaults to 4
+        _elcPicker.maximumImagesCount = 1;
+        //For multiple image selection, display and return selected order of images
+        _elcPicker.onOrder = NO;
+    }
+    else {
+        //Set the maximum number of images to select, defaults to 4
+        _elcPicker.maximumImagesCount = 9;
+        //For multiple image selection, display and return selected order of images
+        _elcPicker.onOrder = YES;
+    }
+    
+    _elcPicker.returnsOriginalImage = NO; //Only return the fullScreenImage, not the fullResolutionImage
+    _elcPicker.returnsImage = YES; //Return UIimage if YES. If NO, only return asset location information
+    _elcPicker.imagePickerDelegate = self;
+    
+    //Present modally
+    [self presentViewController:_elcPicker animated:YES completion:nil];
 }
 
 - (IBAction)onFieldDidEndOnExit:(id)sender {
@@ -209,6 +225,40 @@
     
     if (picker == _imgPicker) {
         _imgPicker = nil;
+    }
+}
+
+#pragma mark - ELCImagePickerControllerDelegate
+- (void)elcImagePickerController:(ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)infoList {
+    if ([picker isEqual:_elcPicker]) {
+        for (NSDictionary* info in infoList) {
+            UIImage* img = info[UIImagePickerControllerOriginalImage];
+            if (img) {
+                if (self.singleImage) {
+                    [_imageList removeAllObjects];
+                }
+                
+                [_imageList addObject:img];
+                [self.gmGridView reloadData];
+            }
+        }
+    }
+    
+    [picker dismissViewControllerAnimated:YES
+                               completion:^{
+                                   if (picker == _elcPicker) {
+                                       _elcPicker = nil;
+                                   }
+                               }];
+}
+
+- (void)elcImagePickerControllerDidCancel:(ELCImagePickerController *)picker {
+    [picker dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+    
+    if (picker == _elcPicker) {
+        _elcPicker = nil;
     }
 }
 

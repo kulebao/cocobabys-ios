@@ -14,6 +14,7 @@
 #import "CSKuleServerUrls.h"
 #import "CSKulePreferences.h"
 #import "CSKuleInterpreter.h"
+#import "hm_sdk.h"
 
 @interface CSKuleEngine : NSObject
 @property (strong, nonatomic) CSKulePreferences* preferences;
@@ -31,6 +32,8 @@
 @property (nonatomic, assign) NSInteger badgeOfAssignment;
 @property (nonatomic, assign) NSInteger badgeOfChating;
 @property (nonatomic, assign) NSInteger badgeOfAssess;
+
+@property (nonatomic, assign) server_id hmServerId;
 
 #pragma mark - application
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;

@@ -15,8 +15,6 @@
 
 @interface CSKuleCCTVMainTableViewController () {
     NSMutableArray* _deviceList;
-    
-    server_id _serverId;
     P_USER_INFO _pUserInfo;
     
     node_handle _rootNodeHandle;
@@ -49,7 +47,18 @@
     [self customizeBackBarItem];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectNull];
     
+    _treeHandle = NULL;
+    
     [self performSelector:@selector(hmLogin) withObject:nil afterDelay:0];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+    if (_treeHandle!=NULL) {
+        hm_server_release_tree(_treeHandle);
+        _treeHandle = NULL;
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -207,7 +216,16 @@
     
     [gApp waitingAlert:@"连接服务器"];
     // step 1: Connect the server.
-    result =  hm_server_connect(&serverinfo, &_serverId, err, 128);
+    if (gApp.engine.hmServerId != NULL) {
+        hm_server_disconnect(gApp.engine.hmServerId);
+        gApp.engine.hmServerId = NULL;
+        CSLog(@"退出成功");
+    }
+    
+    server_id serverId = NULL;
+    result =  hm_server_connect(&serverinfo, &serverId, err, 128);
+    gApp.engine.hmServerId = serverId;
+    
     if (result == HMEC_OK) {
         [self performSelector:@selector(hmGetDeviceList) withObject:nil afterDelay:0];
         
@@ -222,22 +240,27 @@
 - (hm_result)hmGetDeviceList {
     hm_result result = HMEC_OK;
     [gApp waitingAlert:@"获取列表"];
-    result = hm_server_get_device_list(_serverId);
+    result = hm_server_get_device_list(gApp.engine.hmServerId);
     
     if (result == HMEC_OK) {
         // step 2: Get user information.
-        result = hm_server_get_user_info(_serverId, &_pUserInfo);
+        result = hm_server_get_user_info(gApp.engine.hmServerId, &_pUserInfo);
         if (result == HMEC_OK) {
             // step 3: Get transfer service.
             if (_pUserInfo->use_transfer_service != HMEC_OK) {
                 [gApp waitingAlert:@"获取穿透信息"];
-                result = hm_server_get_transfer_info(_serverId);
+                result = hm_server_get_transfer_info(gApp.engine.hmServerId);
             }
             
             if (result == HMEC_OK) {
                 [gApp waitingAlert:@"获取列表"];
                 
-                result = hm_server_get_tree(_serverId, &_treeHandle);
+                if (_treeHandle!=NULL) {
+                    hm_server_release_tree(_treeHandle);
+                    _treeHandle = NULL;
+                }
+                
+                result = hm_server_get_tree(gApp.engine.hmServerId, &_treeHandle);
                 result = hm_server_get_root(_treeHandle, &_rootNodeHandle);
                 
                 int32 deviceCount = 0;

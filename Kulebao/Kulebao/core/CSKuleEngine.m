@@ -52,6 +52,8 @@
 @synthesize badgeOfChating = _badgeOfChating;
 @synthesize badgeOfAssess = _badgeOfAssess;
 
+@synthesize hmServerId = _hmServerId;
+
 #pragma mark - application
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -123,6 +125,12 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    
+    if (_hmServerId != NULL) {
+        hm_server_disconnect(_hmServerId);
+        _hmServerId = NULL;
+        CSLog(@"hmServerId退出成功");
+    }
     
     NSError *error;
     if (_managedObjectContext != nil) {

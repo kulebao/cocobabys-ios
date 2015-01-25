@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="YlV-Z1-aZX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="YlV-Z1-aZX">
     <dependencies>
-        <deployment defaultVersion="1536" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
         <!--Kule Root View Controller-->
@@ -42,7 +42,6 @@
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="b6N-0J-JfA">
-                        <rect key="frame" x="0.0" y="-44" width="0.0" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -53,7 +52,7 @@
             </objects>
             <point key="canvasLocation" x="-2164" y="1910"/>
         </scene>
-        <!--Kule Main View Controller - 幼乐宝-->
+        <!--幼乐宝-->
         <scene sceneID="cfE-ky-XQA">
             <objects>
                 <viewController storyboardIdentifier="CSKuleMainViewController" id="nb4-8s-InE" customClass="CSKuleMainViewController" sceneMemberID="viewController">
@@ -208,7 +207,7 @@
             </objects>
             <point key="canvasLocation" x="-1466" y="1910"/>
         </scene>
-        <!--KuleCCTV Main Table View Controller - 看宝贝-->
+        <!--看宝贝-->
         <scene sceneID="73y-EE-nJW">
             <objects>
                 <tableViewController id="SQ3-hE-aqT" customClass="CSKuleCCTVMainTableViewController" sceneMemberID="viewController">
@@ -257,7 +256,7 @@
             </objects>
             <point key="canvasLocation" x="174" y="7940"/>
         </scene>
-        <!--GLKit View Controller - 视频-->
+        <!--视频-->
         <scene sceneID="2kb-rf-jw5">
             <objects>
                 <glkViewController autoresizesArchivedViewToFullSize="NO" preferredFramesPerSecond="30" id="oAq-wC-fy0" customClass="CSKuleCCTVPlayViewController" sceneMemberID="viewController">
@@ -271,7 +270,7 @@
             </objects>
             <point key="canvasLocation" x="967" y="7940"/>
         </scene>
-        <!--Kule History Main View Controller - 成长经历-->
+        <!--成长经历-->
         <scene sceneID="yyA-w7-471">
             <objects>
                 <viewController id="PFo-TZ-Hfo" customClass="CSKuleHistoryMainViewController" sceneMemberID="viewController">
@@ -377,7 +376,7 @@
             </objects>
             <point key="canvasLocation" x="182" y="6496"/>
         </scene>
-        <!--Kule About School View Controller - 关于我园-->
+        <!--关于我园-->
         <scene sceneID="UeY-Eb-Xg9">
             <objects>
                 <viewController storyboardIdentifier="CSKuleAboutSchoolViewController" id="5Eq-sp-dh6" customClass="CSKuleAboutSchoolViewController" sceneMemberID="viewController">
@@ -616,7 +615,7 @@
             </objects>
             <point key="canvasLocation" x="-998" y="-987"/>
         </scene>
-        <!--Kule Settings View Controller - 设置-->
+        <!--设置-->
         <scene sceneID="AzY-uz-JrF">
             <objects>
                 <viewController storyboardIdentifier="CSKuleSettingsViewController" id="Ot5-TZ-qvn" customClass="CSKuleSettingsViewController" sceneMemberID="viewController">
@@ -720,7 +719,7 @@
             </objects>
             <point key="canvasLocation" x="182" y="4961"/>
         </scene>
-        <!--Kule News View Controller - 园内公告-->
+        <!--园内公告-->
         <scene sceneID="jEC-2w-Oh7">
             <objects>
                 <viewController storyboardIdentifier="CSKuleNewsViewController" id="hSh-cH-xBP" customClass="CSKuleNewsViewController" sceneMemberID="viewController">
@@ -755,7 +754,7 @@
             </objects>
             <point key="canvasLocation" x="174" y="37"/>
         </scene>
-        <!--Kule News Details View Controller - 通知消息-->
+        <!--通知消息-->
         <scene sceneID="FYj-G1-JYp">
             <objects>
                 <viewController storyboardIdentifier="CSKuleNewsDetailsViewController" id="gZu-Ur-sSP" customClass="CSKuleNewsDetailsViewController" sceneMemberID="viewController">
@@ -790,7 +789,7 @@
             </objects>
             <point key="canvasLocation" x="1404" y="1377"/>
         </scene>
-        <!--Kule Recipe View Controller - 每周食谱-->
+        <!--每周食谱-->
         <scene sceneID="9KS-iG-ZHj">
             <objects>
                 <viewController storyboardIdentifier="CSKuleRecipeViewController" id="p7o-xu-qXK" customClass="CSKuleRecipeViewController" sceneMemberID="viewController">
@@ -824,7 +823,7 @@
             </objects>
             <point key="canvasLocation" x="174" y="705"/>
         </scene>
-        <!--Kule Assignment View Controller - 亲子作业-->
+        <!--亲子作业-->
         <scene sceneID="5NA-PF-QhV">
             <objects>
                 <viewController storyboardIdentifier="CSKuleHomeworkViewController" id="iCB-cn-3Ye" customClass="CSKuleAssignmentViewController" sceneMemberID="viewController">
@@ -859,7 +858,7 @@
             </objects>
             <point key="canvasLocation" x="174" y="2723"/>
         </scene>
-        <!--Kule Schedule View Controller - 课程表-->
+        <!--课程表-->
         <scene sceneID="ElJ-U8-0p3">
             <objects>
                 <viewController storyboardIdentifier="CSKuleScheduleViewController" id="Vta-Cg-yNO" customClass="CSKuleScheduleViewController" sceneMemberID="viewController">
@@ -978,7 +977,7 @@
             </objects>
             <point key="canvasLocation" x="174" y="2053"/>
         </scene>
-        <!--Kule Checkin View Controller - 接送信息-->
+        <!--接送信息-->
         <scene sceneID="Fnv-1l-gqr">
             <objects>
                 <viewController storyboardIdentifier="CSKuleCheckinViewController" id="1UC-eH-jjs" customClass="CSKuleCheckinViewController" sceneMemberID="viewController">
@@ -1007,7 +1006,7 @@
             </objects>
             <point key="canvasLocation" x="174" y="1377"/>
         </scene>
-        <!--Kule Chating View Controller - 家园互动-->
+        <!--家园互动-->
         <scene sceneID="iHg-u8-ESX">
             <objects>
                 <viewController storyboardIdentifier="CSKuleChatingViewController" id="Oe0-Pk-5G3" customClass="CSKuleChatingViewController" sceneMemberID="viewController">
@@ -1083,7 +1082,7 @@
             </objects>
             <point key="canvasLocation" x="174" y="3381"/>
         </scene>
-        <!--Kule Select Child View Controller - 选择宝宝-->
+        <!--选择宝宝-->
         <scene sceneID="HI3-MM-NYt">
             <objects>
                 <viewController storyboardIdentifier="CSKuleSelectChildViewController" id="D7Z-M9-tG6" customClass="CSKuleSelectChildViewController" sceneMemberID="viewController">
@@ -1117,7 +1116,7 @@
             </objects>
             <point key="canvasLocation" x="964" y="4181"/>
         </scene>
-        <!--Kule About View Controller - 关于我们-->
+        <!--关于我们-->
         <scene sceneID="DbE-lH-wXR">
             <objects>
                 <viewController storyboardIdentifier="CSKuleAboutViewController" id="PYd-FB-IrR" customClass="CSKuleAboutViewController" sceneMemberID="viewController">
@@ -1143,7 +1142,7 @@
             </objects>
             <point key="canvasLocation" x="964" y="5723"/>
         </scene>
-        <!--Kule History List Table View Controller - 2014-08-->
+        <!--2014-08-->
         <scene sceneID="fMx-37-P99">
             <objects>
                 <tableViewController id="WoR-oe-vzr" customClass="CSKuleHistoryListTableViewController" sceneMemberID="viewController">
@@ -1212,7 +1211,7 @@
             </objects>
             <point key="canvasLocation" x="964" y="6496"/>
         </scene>
-        <!--Kule Feedback View Controller - 反馈-->
+        <!--反馈-->
         <scene sceneID="1UR-IV-3Lr">
             <objects>
                 <viewController storyboardIdentifier="CSKuleFeedbackViewController" id="cLJ-mi-FQf" customClass="CSKuleFeedbackViewController" sceneMemberID="viewController">
@@ -1274,7 +1273,7 @@
             </objects>
             <point key="canvasLocation" x="1445" y="5414"/>
         </scene>
-        <!--Kule Assess View Controller - 在园表现-->
+        <!--在园表现-->
         <scene sceneID="j6h-vr-1d7">
             <objects>
                 <viewController storyboardIdentifier="CSKuleAssessViewController" id="9Fo-0X-dxb" customClass="CSKuleAssessViewController" sceneMemberID="viewController">
@@ -1383,7 +1382,7 @@
             </objects>
             <point key="canvasLocation" x="174" y="4082"/>
         </scene>
-        <!--Kule Change Password View Controller - 修改密码-->
+        <!--修改密码-->
         <scene sceneID="Shl-Jg-80q">
             <objects>
                 <viewController storyboardIdentifier="CSKuleChangePasswordViewController" id="yZC-Oa-gVt" customClass="CSKuleChangePasswordViewController" sceneMemberID="viewController">
@@ -1516,7 +1515,7 @@
             </objects>
             <point key="canvasLocation" x="964" y="4961"/>
         </scene>
-        <!--Kule Checkin Log List View Controller - 刷卡记录-->
+        <!--刷卡记录-->
         <scene sceneID="99u-Vz-cU0">
             <objects>
                 <viewController storyboardIdentifier="CSKuleCheckinLogListViewController" id="Etr-Mb-xMG" customClass="CSKuleCheckinLogListViewController" sceneMemberID="viewController">
@@ -1551,7 +1550,7 @@
             </objects>
             <point key="canvasLocation" x="720" y="1377"/>
         </scene>
-        <!--Kule Chating Editor View Controller - 编辑内容-->
+        <!--编辑内容-->
         <scene sceneID="Cqc-rK-mFX">
             <objects>
                 <viewController storyboardIdentifier="CSKuleChatingEditorViewController" id="g0W-Gr-GbE" customClass="CSKuleChatingEditorViewController" sceneMemberID="viewController">
@@ -1880,7 +1879,7 @@
             </objects>
             <point key="canvasLocation" x="-998" y="-1697"/>
         </scene>
-        <!--Content Editor View Controller - 发布内容-->
+        <!--发布内容-->
         <scene sceneID="358-Jn-d4q">
             <objects>
                 <viewController id="IRD-Ka-JqY" customClass="CSContentEditorViewController" sceneMemberID="viewController">

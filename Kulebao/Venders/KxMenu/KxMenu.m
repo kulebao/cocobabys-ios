@@ -47,7 +47,7 @@ const CGFloat kArrowSize = 12.f;
 @interface KxMenuView : UIView
 @end
 
-@interface KxMenuOverlay : UIView
+@interface KxMenuOverlay : UIView <UIGestureRecognizerDelegate>
 @end
 
 @implementation KxMenuOverlay
@@ -64,6 +64,7 @@ const CGFloat kArrowSize = 12.f;
         UITapGestureRecognizer *gestureRecognizer;
         gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                     action:@selector(singleTap:)];
+        gestureRecognizer.delegate = self;
         gestureRecognizer.cancelsTouchesInView = NO;
         [self addGestureRecognizer:gestureRecognizer];
     }
@@ -80,6 +81,16 @@ const CGFloat kArrowSize = 12.f;
             [v performSelector:@selector(dismissMenu:) withObject:@(YES)];
         }
     }
+}
+
+#pragma mark - UIGestureRecognizerDelegate
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    if([touch.view isKindOfClass:[UIButton class]])
+    {
+        return NO;
+    }
+    return YES;
 }
 
 @end

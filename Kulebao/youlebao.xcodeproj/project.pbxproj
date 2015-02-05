@@ -309,6 +309,7 @@
 		093D89D2199A177A006B013B /* CSKuleHistoryListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 093D89D1199A177A006B013B /* CSKuleHistoryListTableViewController.m */; };
 		093D89D4199A76B9006B013B /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 093D89D3199A76B9006B013B /* GLKit.framework */; };
 		093D89D7199A76E1006B013B /* CSKuleCCTVPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 093D89D6199A76E1006B013B /* CSKuleCCTVPlayViewController.m */; };
+		093FB8F31A83BD8500A589A8 /* CSKuleDevSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 093FB8F21A83BD8500A589A8 /* CSKuleDevSettingsViewController.m */; };
 		09416C9918E41BF600DFEA44 /* bg-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 09416C8D18E41BF600DFEA44 /* bg-2.png */; };
 		09416C9A18E41BF600DFEA44 /* bg-2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09416C8E18E41BF600DFEA44 /* bg-2@2x.png */; };
 		09416C9B18E41BF600DFEA44 /* bg-dialog.png in Resources */ = {isa = PBXBuildFile; fileRef = 09416C8F18E41BF600DFEA44 /* bg-dialog.png */; };
@@ -1045,6 +1046,8 @@
 		093D89D3199A76B9006B013B /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		093D89D5199A76E1006B013B /* CSKuleCCTVPlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleCCTVPlayViewController.h; sourceTree = "<group>"; };
 		093D89D6199A76E1006B013B /* CSKuleCCTVPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleCCTVPlayViewController.m; sourceTree = "<group>"; };
+		093FB8F11A83BD8500A589A8 /* CSKuleDevSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleDevSettingsViewController.h; sourceTree = "<group>"; };
+		093FB8F21A83BD8500A589A8 /* CSKuleDevSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleDevSettingsViewController.m; sourceTree = "<group>"; };
 		09416C8D18E41BF600DFEA44 /* bg-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-2.png"; sourceTree = "<group>"; };
 		09416C8E18E41BF600DFEA44 /* bg-2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-2@2x.png"; sourceTree = "<group>"; };
 		09416C8F18E41BF600DFEA44 /* bg-dialog.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-dialog.png"; sourceTree = "<group>"; };
@@ -2149,6 +2152,8 @@
 				09C3AC22199DAC8600A6251C /* CSContentEditorViewController.h */,
 				09C3AC23199DAC8600A6251C /* CSContentEditorViewController.m */,
 				09FE6AEB18C5722500A840BE /* views */,
+				093FB8F11A83BD8500A589A8 /* CSKuleDevSettingsViewController.h */,
+				093FB8F21A83BD8500A589A8 /* CSKuleDevSettingsViewController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -3382,6 +3387,7 @@
 				09FE6AF318C5762600A840BE /* CSKuleNewsViewController.m in Sources */,
 				0914E39A199FCEBC00276ABA /* UIImageView+HighlightedWebCache.m in Sources */,
 				0914E32D199FBB5C00276ABA /* EntityMediaInfo.m in Sources */,
+				093FB8F31A83BD8500A589A8 /* CSKuleDevSettingsViewController.m in Sources */,
 				0919B7791929D6B200810556 /* CSKuleSenderInfo.m in Sources */,
 				093D89D2199A177A006B013B /* CSKuleHistoryListTableViewController.m in Sources */,
 				094373D4199D016A00EDD64C /* EntitySenderInfoHelper.m in Sources */,
@@ -3549,8 +3555,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Chengdu Cocobabys Information Technology Co., Ltd. (J7M2ZSPTSZ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Chengdu Cocobabys Information Technology Co., Ltd. (J7M2ZSPTSZ)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Kulebao/youlebao-Prefix.pch";
 				GCC_VERSION = "";
@@ -3565,7 +3571,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = youlebao;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "896801b2-74e5-4c3d-9a5a-6c667d165155";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;

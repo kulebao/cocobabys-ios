@@ -15,6 +15,7 @@ static NSString* kKeyLoginInfo = @"com.cocobabys.Kulebao.Preferences.loginInfo";
 static NSString* kKeyBPushInfo = @"com.cocobabys.Kulebao.Preferences.baiduPushInfo";
 static NSString* kKeyHistoryAccounts = @"com.cocobabys.Kulebao.Preferences.historyAccounts";
 static NSString* kKeyTimestamps = @"com.cocobabys.Kulebao.Preferences.timestamps";
+static NSString* kKeyServerSettings = @"com.cocobabys.Kulebao.Preferences.serverSettings";
 
 @implementation CSKulePreferences {
     NSUserDefaults* _config;
@@ -217,6 +218,32 @@ static NSString* kKeyTimestamps = @"com.cocobabys.Kulebao.Preferences.timestamps
         [_timestampDict setObject:childMutDict forKey:childId];
         [self savePreferences];
     }
+}
+
+- (void)setServerSettings:(NSDictionary*)settings {
+    if (settings) {
+        [_config setObject:settings forKey:kKeyServerSettings];
+        [_config synchronize];
+    }
+    else {
+        [_config removeObjectForKey:kKeyServerSettings];
+        [_config synchronize];
+    }
+}
+
+- (NSDictionary*)getServerSettings {
+    NSDictionary* settings = [_config objectForKey:kKeyServerSettings];
+    if (settings == nil) {
+        NSArray* serverList = [self getSupportServerSettingsList];
+        settings = serverList[0];
+    }
+    return settings;
+}
+
+- (NSArray*)getSupportServerSettingsList {
+    NSArray* serverList = @[@{@"name": @"产品服务器", @"url":@"https://www.cocobabys.com"},
+                            @{@"name": @"测试服务器", @"url":@"https://stage.cocobabys.com"}];
+    return serverList;
 }
 
 @end

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="YlV-Z1-aZX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="YlV-Z1-aZX">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -473,6 +473,26 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="eQS-pb-GVA">
+                                        <rect key="frame" x="280" y="528" width="32" height="32"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <state key="normal" backgroundImage="btn-settings.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted" backgroundImage="btn-settings-pressed.png"/>
+                                        <connections>
+                                            <action selector="onBtnDevSettingClicked:" destination="oni-l6-Qxa" eventType="touchUpInside" id="dpi-92-Wid"/>
+                                            <segue destination="xOP-Oe-kQT" kind="push" id="Uv8-M2-Mrh"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Server Name" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nE2-PZ-3Wa">
+                                        <rect key="frame" x="43" y="533" width="234" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" red="0.36078431370000003" green="0.25490196079999999" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                             </scrollView>
                         </subviews>
@@ -480,8 +500,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="ige-P2-cWh"/>
                     <connections>
+                        <outlet property="btnDevSetting" destination="eQS-pb-GVA" id="wGn-gk-Yew"/>
                         <outlet property="fieldMobile" destination="kfS-WC-J28" id="5N3-nA-WeS"/>
                         <outlet property="labNotice" destination="J1g-3M-npH" id="4NS-vr-KQh"/>
+                        <outlet property="labServerName" destination="nE2-PZ-3Wa" id="qIW-Ab-fm5"/>
                         <segue destination="0Td-Sl-NAB" kind="push" identifier="segue.login" id="neE-Pg-yeA"/>
                         <segue destination="N3F-Q0-I25" kind="push" identifier="segue.verifymobile" id="UV7-91-LGL"/>
                     </connections>
@@ -614,6 +636,54 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ty5-Hr-rCS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-998" y="-987"/>
+        </scene>
+        <!--Kule Dev Settings View Controller-->
+        <scene sceneID="nKl-fP-eDh">
+            <objects>
+                <viewController id="xOP-Oe-kQT" customClass="CSKuleDevSettingsViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1M0-aO-2XH">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="app-bg-type3.png" id="OfT-e3-y4q">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="当前服务器" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ghx-YZ-IxV">
+                                <rect key="frame" x="16" y="20" width="288" height="21"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="测试服务器" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fFU-Ea-Ugs">
+                                <rect key="frame" x="16" y="49" width="288" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="is8-6F-O6x">
+                                <rect key="frame" x="16" y="101" width="288" height="30"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="切换服务器">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onBtnSwitchServerClicked:" destination="xOP-Oe-kQT" eventType="touchUpInside" id="uIO-N3-w9l"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Sl6-tV-9vd"/>
+                    <connections>
+                        <outlet property="btnSwitchServer" destination="is8-6F-O6x" id="wrl-dF-yx9"/>
+                        <outlet property="labServerName" destination="fFU-Ea-Ugs" id="g45-w0-fWY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fMF-BI-cKp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-998" y="-238"/>
         </scene>
         <!--设置-->
         <scene sceneID="AzY-uz-JrF">

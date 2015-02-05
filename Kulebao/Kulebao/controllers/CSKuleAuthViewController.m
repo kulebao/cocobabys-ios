@@ -16,7 +16,10 @@
 @interface CSKuleAuthViewController () <EAIntroDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *labNotice;
 @property (weak, nonatomic) IBOutlet UITextField *fieldMobile;
+@property (weak, nonatomic) IBOutlet UIButton *btnDevSetting;
+@property (weak, nonatomic) IBOutlet UILabel *labServerName;
 - (IBAction)onBtnSendClicked:(id)sender;
+- (IBAction)onBtnDevSettingClicked:(id)sender;
 
 @end
 
@@ -39,6 +42,19 @@
     self.navigationItem.title = @"登录账号";
     
     self.fieldMobile.text = gApp.engine.preferences.defaultUsername;
+    
+    if(COCOBABYS_DEV_MODEL) {
+        self.labServerName.hidden = NO;
+        self.btnDevSetting.hidden = NO;
+        
+        NSDictionary* serverInfo = [[CSKulePreferences defaultPreferences] getServerSettings];
+        self.labServerName.text = serverInfo[@"name"];
+    }
+    else {
+        self.labServerName.hidden = YES;
+        self.btnDevSetting.hidden = YES;
+    }
+    
     
     [self showIntroViewsIfNeeded];
 }
@@ -66,6 +82,9 @@
 - (IBAction)onBtnSendClicked:(id)sender {
     [self.fieldMobile resignFirstResponder];
     [self doAuth];
+}
+
+- (IBAction)onBtnDevSettingClicked:(id)sender {
 }
 
 - (void)doAuth {

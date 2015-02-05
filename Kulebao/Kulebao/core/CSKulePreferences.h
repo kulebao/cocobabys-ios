@@ -28,6 +28,11 @@
 - (void)addHistoryAccount:(NSString*)account;
 
 - (NSTimeInterval)timestampOfModule:(NSInteger)moduleType forChild:(NSString*)childId;
+
 - (void)setTimestamp:(NSTimeInterval)timestamp ofModule:(NSInteger)moduleType forChild:(NSString*)childId;
+
+- (void)setServerSettings:(NSDictionary*)settings;
+- (NSDictionary*)getServerSettings;
+- (NSArray*)getSupportServerSettingsList;
 
 @end

@@ -242,11 +242,16 @@
     [CSKuleURLCache setSharedURLCache:cache];
     
     if (_httpClient == nil) {
-        NSURL* baseUrl = [NSURL URLWithString:kServerHostForProd];
-        if (_preferences.enabledTest) {
-            baseUrl = [NSURL URLWithString:kServerHostForTest];
+//        NSURL* baseUrl = [NSURL URLWithString:kServerHostForProd];
+//        if (_preferences.enabledTest) {
+//            baseUrl = [NSURL URLWithString:kServerHostForTest];
+//        }
+        NSDictionary* serverInfo = [_preferences getServerSettings];
+        NSString* serverUrlString = serverInfo[@"url"];
+        if(serverUrlString.length == 0) {
+            serverUrlString = kServerHostForProd;
         }
-        _httpClient = [CSHttpClient httpClientWithHost:baseUrl];
+        _httpClient = [CSHttpClient httpClientWithHost:[NSURL URLWithString:serverUrlString]];
     }
     
     if (_qiniuHttpClient == nil) {

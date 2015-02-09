@@ -247,4 +247,8 @@
                                 success:(SuccessResponseHandler)success
                                 failure:(FailureResponseHandler)failure;
 
+- (void)reqGetDefaultVideoMemberOfKindergarten:(NSInteger)kindergarten
+                                       success:(SuccessResponseHandler)success
+                                       failure:(FailureResponseHandler)failure;
+
 @end

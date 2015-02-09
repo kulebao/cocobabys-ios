@@ -69,10 +69,21 @@
     // 添加Baidu Push
     [BPush setupChannel:launchOptions];
     
-    [application registerForRemoteNotificationTypes:
-     UIRemoteNotificationTypeAlert
-     | UIRemoteNotificationTypeBadge
-     | UIRemoteNotificationTypeSound];
+    UIRemoteNotificationType notificationTypes = UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound;
+    
+#ifdef __IPHONE_8_0
+    if (IsAtLeastiOSVersion(@"8.0")) {
+        // do something for iOS 8.0 or greater
+        UIUserNotificationSettings* settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge|UIUserNotificationTypeSound|UIUserNotificationTypeAlert categories:nil];
+        
+        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    }
+    else {
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:notificationTypes];
+    }
+#else
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:notificationTypes];
+#endif
     
     [application setApplicationIconBadgeNumber:0];
     
@@ -1556,6 +1567,20 @@
                                 success:(SuccessResponseHandler)success
                                 failure:(FailureResponseHandler)failure {
     NSString* path = [NSString stringWithFormat:kGetVideoMemberPath, @(kindergarten), parentId];
+    NSString* method = @"GET";
+    NSMutableDictionary* parameters = nil;
+    
+    [_httpClient httpRequestWithMethod:method
+                                  path:path
+                            parameters:parameters
+                               success:success
+                               failure:failure];
+}
+
+- (void)reqGetDefaultVideoMemberOfKindergarten:(NSInteger)kindergarten
+                                       success:(SuccessResponseHandler)success
+                                       failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kGetDefaultVideoMemberPath, @(kindergarten)];
     NSString* method = @"GET";
     NSMutableDictionary* parameters = nil;
     

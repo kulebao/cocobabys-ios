@@ -58,6 +58,12 @@ CSAppDelegate* gApp = nil;
     [_engine applicationWillTerminate:application];
 }
 
+#ifdef __IPHONE_8_0
+- (void)application:(UIApplication*)application didRegisterUserNotificationSettings:(UIUserNotificationSettings*)notificationSettings {
+    [application registerForRemoteNotifications];
+}
+#endif
+
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
     [_engine application:application didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];

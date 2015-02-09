@@ -27,7 +27,7 @@
     NSMutableArray* _badges;
     NSArray* _moduleInfos;
     
-    NSInteger _timesOfCCTV;
+    BOOL _actionToCCTV;
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *labSchoolName;
@@ -42,6 +42,7 @@
 
 @property (nonatomic, strong) CSKuleSchoolInfo* schoolInfo;
 @property (nonatomic, strong) CSKuleVideoMember* videoMember;
+@property (nonatomic, strong) CSKuleVideoMember* defaultVideoMember;
 
 - (IBAction)onBtnShowChildMenuListClicked:(id)sender;
 - (IBAction)onBtnSettingsClicked:(id)sender;
@@ -53,6 +54,7 @@
 @implementation CSKuleMainViewController
 @synthesize schoolInfo = _schoolInfo;
 @synthesize videoMember = _videoMember;
+@synthesize defaultVideoMember = _defaultVideoMember;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -66,9 +68,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
-    _timesOfCCTV = 0;
-
+    // Do any additional setup after loading the view.
     self.navigationController.navigationBarHidden = NO;
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"titlebar-1-bg.png"] forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setTitleTextAttributes:@{UITextAttributeFont: [UIFont systemFontOfSize:20], UITextAttributeTextColor:[UIColor whiteColor]}];
@@ -263,7 +263,22 @@
     }
     else if ([segue.identifier isEqualToString:@"segue.cctv"]) {
         CSKuleCCTVMainTableViewController* destCtrl = segue.destinationViewController;
-        destCtrl.videoMember = self.videoMember;
+        if (self.videoMember.account.length > 0
+            && self.videoMember.password.length > 0) {
+            destCtrl.videoMember = self.videoMember;
+            destCtrl.isTrail = NO;
+        }
+        else if (self.defaultVideoMember.account.length > 0
+                 && self.defaultVideoMember.password.length > 0) {
+            destCtrl.videoMember = self.defaultVideoMember;
+            destCtrl.isTrail = YES;
+            //[gApp alert:@"宝宝所在的幼儿园暂未开通此功能，该实时视频仅供演示，如需要开通，请联系幼儿园。"];
+        }
+        else {
+            
+        }
+        
+        _actionToCCTV = NO;
     }
 }
 
@@ -343,7 +358,7 @@
     CSKuleChildInfo* childInfo = gApp.engine.currentRelationship.child;
     if (childInfo) {
         CSLog(@"childInfo:%@", childInfo);
-         CSLog(@"parentInfo:%@", gApp.engine.currentRelationship.parent);
+        CSLog(@"parentInfo:%@", gApp.engine.currentRelationship.parent);
         self.labClassName.text = childInfo.className;
         self.labSchoolName.text = gApp.engine.loginInfo.schoolName;
         self.labChildNick.text = childInfo.displayNick;
@@ -373,9 +388,9 @@
 
 - (void)doChangeChildNick {
     NSString *title = @"设置宝宝昵称";
-	NSString *message = @"";
-	
-	AHAlertView *alert = [[AHAlertView alloc] initWithTitle:title message:message];
+    NSString *message = @"";
+    
+    AHAlertView *alert = [[AHAlertView alloc] initWithTitle:title message:message];
     alert.alertViewStyle = AHAlertViewStylePlainTextInput;
     
     UITextField* field = [alert textFieldAtIndex:0];
@@ -390,11 +405,11 @@
     
     [alert setCancelButtonTitle:@"取消" block:^{
         
-	}];
+    }];
     
-	[alert addButtonWithTitle:@"确定" block:^{
+    [alert addButtonWithTitle:@"确定" block:^{
         [self doUpdateChildNick:field.text];
-	}];
+    }];
     
     [alert show];
 }
@@ -734,7 +749,11 @@
                     if (self.videoMember.account.length > 0
                         && self.videoMember.password.length > 0) {
                     }
+                    else if (self.defaultVideoMember.account.length > 0
+                             && self.defaultVideoMember.password.length > 0) {
+                    }
                     else {
+                        _actionToCCTV = YES;
                         [self performSelector:@selector(reloadVideoMember) withObject:nil afterDelay:0];
                         return;
                     }
@@ -747,7 +766,7 @@
             [self performSegueWithIdentifier:segueNames[moduleType] sender:nil];
         }
         else {
-//            [gApp alert:@"权限不足，请联系幼儿园开通权限，谢谢。"];
+            //            [gApp alert:@"权限不足，请联系幼儿园开通权限，谢谢。"];
         }
     }
 }
@@ -808,28 +827,46 @@
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         self.videoMember = [CSKuleInterpreter decodeVideoMember:dataJson];
         [gApp hideAlert];
-        ++_timesOfCCTV;
+        if(_actionToCCTV) {
+            [self performSegueWithIdentifier:@"segue.cctv" sender:nil];
+        }
     };
     
     FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
         CSLog(@"failure:%@", error);
-        if (_timesOfCCTV > 0) {
-            [gApp alert:@"还未开通 看宝贝 功能，该功能可以让家长通过视频，实时查看孩子在幼儿园的动态,如有需要请联系幼儿园开通。"];
-        }
-        else {
-            [gApp hideAlert];
-        }
-        ++_timesOfCCTV;
+        [gApp hideAlert];
+        [self performSelector:@selector(reloadDefaultVideoMember) withObject:nil afterDelay:0];
     };
     
-    if (_timesOfCCTV > 0) {
+    if(_actionToCCTV) {
         [gApp waitingAlert:@"请求数据中"];
     }
-    
     [gApp.engine reqGetVideoMemberOfKindergarten:gApp.engine.loginInfo.schoolId
                                     withParentId:gApp.engine.currentRelationship.parent.parentId
                                          success:sucessHandler
                                          failure:failureHandler];
+}
+
+- (void)reloadDefaultVideoMember {
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+        self.defaultVideoMember = [CSKuleInterpreter decodeVideoMember:dataJson];
+        [gApp hideAlert];
+        if(_actionToCCTV) {
+            [self performSegueWithIdentifier:@"segue.cctv" sender:nil];
+        }
+    };
+    
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        CSLog(@"failure:%@", error);
+        [gApp alert:@"还未开通看宝贝功能，该功能可以让家长通过视频，实时查看孩子在幼儿园的动态,如有需要请联系幼儿园开通。"];
+    };
+    
+    if(_actionToCCTV) {
+        [gApp waitingAlert:@"请求数据中"];
+    }
+    [gApp.engine reqGetDefaultVideoMemberOfKindergarten:gApp.engine.loginInfo.schoolId
+                                                success:sucessHandler
+                                                failure:failureHandler];
 }
 
 //- (void)getEmployeeInfos {

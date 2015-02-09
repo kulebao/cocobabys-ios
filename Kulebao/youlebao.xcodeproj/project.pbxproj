@@ -3524,8 +3524,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Xinus Wang (MH48YP79V6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xinus Wang (MH48YP79V6)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Kulebao/youlebao-Prefix.pch";
 				GCC_VERSION = "";
@@ -3540,7 +3540,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = youlebao;
-				PROVISIONING_PROFILE = "b20e4cdd-3543-4683-a37d-0fc7a6dfbe19";
+				PROVISIONING_PROFILE = "a2810821-3eec-41a6-8cd9-4972f53f2cce";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
@@ -3571,7 +3571,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = youlebao;
-				PROVISIONING_PROFILE = "896801b2-74e5-4c3d-9a5a-6c667d165155";
+				PROVISIONING_PROFILE = "0caf2a00-0aad-4e9b-a366-db94dd374ddd";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;

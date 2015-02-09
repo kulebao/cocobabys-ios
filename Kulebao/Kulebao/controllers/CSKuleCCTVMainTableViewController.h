@@ -12,5 +12,6 @@
 @interface CSKuleCCTVMainTableViewController : UITableViewController
 
 @property (nonatomic, strong) CSKuleVideoMember* videoMember;
+@property (nonatomic, assign) BOOL isTrail;
 
 @end

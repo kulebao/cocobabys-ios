@@ -126,4 +126,7 @@
 // PATH: 获取视频账号
 #define kGetVideoMemberPath         @"/api/v1/kindergarten/%@/video_member/%@"
 
+// PATH: 获取公用视频账号
+#define kGetDefaultVideoMemberPath  @"/api/v1/kindergarten/%@/video_member/default"
+
 #endif

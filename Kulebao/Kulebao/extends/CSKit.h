@@ -9,6 +9,16 @@
 #ifndef CSKit_CSKit_h
 #define CSKit_CSKit_h
 
+
+/*
+ Returns YES if it is at least version specified as NSString(X)
+ Usage:
+ if (IsAtLeastiOSVersion(@"5.1")) {
+ // do something for iOS 5.1 or greater
+ }
+ */
+#define IsAtLeastiOSVersion(X) ([[[UIDevice currentDevice] systemVersion] compare:X options:NSNumericSearch] != NSOrderedAscending)
+
 #define IS_IPHONE5 (([[UIScreen mainScreen] bounds].size.height-568)?NO:YES)
 
 #define UIColorRGB(r,g,b) \

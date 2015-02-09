@@ -25,6 +25,7 @@
 
 @implementation CSKuleCCTVMainTableViewController
 @synthesize videoMember = _videoMember;
+@synthesize isTrail = _isTrail;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -46,6 +47,14 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     [self customizeBackBarItem];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectNull];
+    
+    if(self.isTrail) {
+        UILabel* tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+        tipLabel.text = @"宝宝所在的幼儿园暂未开通此功能，该实时视频仅供演示，如需要开通，请联系幼儿园。";
+        tipLabel.numberOfLines = 2;
+        tipLabel.font = [UIFont systemFontOfSize:12.0];
+        self.tableView.tableHeaderView = tipLabel;
+    }
     
     _treeHandle = NULL;
     

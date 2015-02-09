@@ -89,7 +89,7 @@ static NSString* kKeyServerSettings = @"com.cocobabys.Kulebao.Preferences.server
         _timestampDict = [NSMutableDictionary dictionaryWithDictionary:timestamps];
     }
     
-    _historyAccounts = [_config objectForKey:kKeyHistoryAccounts];
+    _historyAccounts = [[NSMutableDictionary alloc] initWithDictionary:[_config objectForKey:kKeyHistoryAccounts]];
 }
 
 - (void)savePreferences {

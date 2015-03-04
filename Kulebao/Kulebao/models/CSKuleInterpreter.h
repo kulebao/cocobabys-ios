@@ -20,6 +20,9 @@
 #import "CSKuleChatMsg.h"
 #import "CSKuleAssessInfo.h"
 #import "CSKuleEmployeeInfo.h"
+#import "CSKuleTopicMsg.h"
+#import "CSKuleHistoryInfo.h"
+#import "CSKuleVideoMember.h"
 
 @interface CSKuleInterpreter : NSObject
 
@@ -49,8 +52,14 @@
 
 + (CSKuleChatMsg*)decodeChatMsg:(NSDictionary*)dataJson;
 
++ (CSKuleTopicMsg*)decodeTopicMsg:(NSDictionary*)dataJson;
+
++ (CSKuleHistoryInfo*)decodeHistoryInfo:(NSDictionary*)dataJson;
+
 + (CSKuleAssessInfo*)decodeAssessInfo:(NSDictionary*)dataJson;
 
 + (CSKuleEmployeeInfo*)decodeEmployeeInfo:(NSDictionary*)dataJson;
+
++ (CSKuleVideoMember*)decodeVideoMember:(NSDictionary*)dataJson;
 
 @end

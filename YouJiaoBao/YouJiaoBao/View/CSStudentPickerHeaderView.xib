@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CSStudentPickerHeaderView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="36"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="drawable_expand_close.9.png" highlightedImage="drawable_expand_open.9.png" translatesAutoresizingMaskIntoConstraints="NO" id="b7u-VR-R0y">
+                    <rect key="frame" x="0.0" y="6" width="24" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="24" id="0ZG-7B-6EC"/>
+                        <constraint firstAttribute="height" constant="24" id="Tbj-lQ-E2K"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="库贝班 (实到0人/应到0人)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NGr-Hh-Iny">
+                    <rect key="frame" x="32" y="5" width="288" height="25"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="810-o7-7Bp">
+                    <rect key="frame" x="32" y="5" width="280" height="25"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZZ0-f3-Mvf" userLabel="View - Line">
+                    <rect key="frame" x="0.0" y="35" width="320" height="1"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="0.5" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="npB-bF-0aJ"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OOs-C5-avi">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="36"/>
+                    <state key="normal">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onBtnFullClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="agj-33-0s0"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="22W-gs-V9R">
+                    <rect key="frame" x="280" y="6" width="24" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="24" id="BDD-jR-2YZ"/>
+                        <constraint firstAttribute="width" constant="24" id="NGX-eu-UdI"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="checkbox_up.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected" backgroundImage="checkbox_selected.png"/>
+                    <connections>
+                        <action selector="onBtnCheckClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="rDz-IM-FdB"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="OOs-C5-avi" secondAttribute="trailing" id="8r9-Ag-0dy"/>
+                <constraint firstAttribute="bottom" secondItem="NGr-Hh-Iny" secondAttribute="bottom" constant="6" id="BjD-PG-Mh2"/>
+                <constraint firstAttribute="trailing" secondItem="NGr-Hh-Iny" secondAttribute="trailing" id="FkM-7U-Opn"/>
+                <constraint firstItem="ZZ0-f3-Mvf" firstAttribute="top" secondItem="810-o7-7Bp" secondAttribute="bottom" constant="5" id="IaQ-La-EUM"/>
+                <constraint firstItem="OOs-C5-avi" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Ije-RW-Jc3"/>
+                <constraint firstAttribute="bottom" secondItem="ZZ0-f3-Mvf" secondAttribute="bottom" id="JKs-gE-ia2"/>
+                <constraint firstAttribute="trailing" secondItem="ZZ0-f3-Mvf" secondAttribute="trailing" id="KcM-ov-Jfh"/>
+                <constraint firstItem="OOs-C5-avi" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="M3F-Kq-2pf"/>
+                <constraint firstItem="NGr-Hh-Iny" firstAttribute="leading" secondItem="b7u-VR-R0y" secondAttribute="trailing" constant="8" symbolic="YES" id="Nwm-4k-v1w"/>
+                <constraint firstAttribute="trailing" secondItem="22W-gs-V9R" secondAttribute="trailing" constant="16" id="P1Z-0n-Yb8"/>
+                <constraint firstAttribute="centerY" secondItem="b7u-VR-R0y" secondAttribute="centerY" id="Rju-gK-tts"/>
+                <constraint firstAttribute="bottom" secondItem="OOs-C5-avi" secondAttribute="bottom" id="aW9-CN-9lK"/>
+                <constraint firstItem="810-o7-7Bp" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="fF9-QR-nWW"/>
+                <constraint firstItem="ZZ0-f3-Mvf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="k12-WW-7uA"/>
+                <constraint firstItem="b7u-VR-R0y" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="mUd-Uq-vq1"/>
+                <constraint firstAttribute="centerY" secondItem="22W-gs-V9R" secondAttribute="centerY" id="o4A-uj-FHV"/>
+                <constraint firstAttribute="trailing" secondItem="810-o7-7Bp" secondAttribute="trailing" constant="8" id="r3t-Bo-20I"/>
+                <constraint firstItem="810-o7-7Bp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="32" id="vnW-yD-UyO"/>
+                <constraint firstItem="NGr-Hh-Iny" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="xW8-L4-QX8"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="btnCheck" destination="22W-gs-V9R" id="564-M7-i2g"/>
+                <outlet property="imgIcon" destination="b7u-VR-R0y" id="JNE-l1-aqa"/>
+                <outlet property="labDetail" destination="810-o7-7Bp" id="nI4-nD-Aad"/>
+                <outlet property="labTitle" destination="NGr-Hh-Iny" id="TyK-aw-QBU"/>
+                <outlet property="onBtnFull" destination="OOs-C5-avi" id="mej-q4-yvB"/>
+            </connections>
+            <point key="canvasLocation" x="140" y="158.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="checkbox_selected.png" width="31" height="31"/>
+        <image name="checkbox_up.png" width="31" height="31"/>
+        <image name="drawable_expand_close.9.png" width="48" height="54"/>
+        <image name="drawable_expand_open.9.png" width="48" height="54"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

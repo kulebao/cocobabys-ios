@@ -15,6 +15,7 @@ static NSString* kKeyLoginInfo = @"com.cocobabys.Kulebao.Preferences.loginInfo";
 static NSString* kKeyBPushInfo = @"com.cocobabys.Kulebao.Preferences.baiduPushInfo";
 static NSString* kKeyHistoryAccounts = @"com.cocobabys.Kulebao.Preferences.historyAccounts";
 static NSString* kKeyTimestamps = @"com.cocobabys.Kulebao.Preferences.timestamps";
+static NSString* kKeyServerSettings = @"com.cocobabys.Kulebao.Preferences.serverSettings";
 
 @implementation CSKulePreferences {
     NSUserDefaults* _config;
@@ -26,6 +27,7 @@ static NSString* kKeyTimestamps = @"com.cocobabys.Kulebao.Preferences.timestamps
 @synthesize loginInfo = _loginInfo;
 @synthesize deviceToken = _deviceToken;
 @synthesize historyAccounts = _historyAccounts;
+@synthesize enabledTest = _enabledTest;
 
 + (id)defaultPreferences {
     static CSKulePreferences* s_preferences = nil;
@@ -48,7 +50,7 @@ static NSString* kKeyTimestamps = @"com.cocobabys.Kulebao.Preferences.timestamps
     _deviceToken = [_config objectForKey:kKeyDeviceToken];
     _defaultUsername = [_config objectForKey:kKeyDefaultUsername];
     _guideShown = [[_config objectForKey:kKeyGuideShown] boolValue];
-    
+    _enabledTest =  NO;//YES;// [[_config objectForKey:@"enabled_test"] boolValue];
     
     NSDictionary* loginInfoDict = [_config objectForKey:kKeyLoginInfo];
     CSKuleLoginInfo* loginInfo = [CSKuleLoginInfo new];
@@ -59,6 +61,7 @@ static NSString* kKeyTimestamps = @"com.cocobabys.Kulebao.Preferences.timestamps
     loginInfo.username = [loginInfoDict valueForKeyNotNull:@"username"];
     loginInfo.schoolId = [[loginInfoDict valueForKeyNotNull:@"schoolId"] integerValue];
     loginInfo.errorCode = [[loginInfoDict valueForKeyNotNull:@"errorCode"] integerValue];
+    loginInfo.memberStatus = [loginInfoDict valueForKeyNotNull:@"memberStatus"];
     
     if (loginInfo.accessToken && loginInfo.accountName && loginInfo.schoolName
         && loginInfo.username && loginInfo.schoolId!=0 && loginInfo.errorCode == 0) {
@@ -86,7 +89,7 @@ static NSString* kKeyTimestamps = @"com.cocobabys.Kulebao.Preferences.timestamps
         _timestampDict = [NSMutableDictionary dictionaryWithDictionary:timestamps];
     }
     
-    _historyAccounts = [_config objectForKey:kKeyHistoryAccounts];
+    _historyAccounts = [[NSMutableDictionary alloc] initWithDictionary:[_config objectForKey:kKeyHistoryAccounts]];
 }
 
 - (void)savePreferences {
@@ -119,7 +122,8 @@ static NSString* kKeyTimestamps = @"com.cocobabys.Kulebao.Preferences.timestamps
                                         @"schoolName": _loginInfo.schoolName,
                                         @"username": _loginInfo.username,
                                         @"schoolId": @(_loginInfo.schoolId),
-                                        @"errorCode": @(_loginInfo.errorCode)};
+                                        @"errorCode": @(_loginInfo.errorCode),
+                                        @"memberStatus": _loginInfo.memberStatus};
 
         [_config setObject:loginInfoDict forKey:kKeyLoginInfo];
     }
@@ -214,6 +218,32 @@ static NSString* kKeyTimestamps = @"com.cocobabys.Kulebao.Preferences.timestamps
         [_timestampDict setObject:childMutDict forKey:childId];
         [self savePreferences];
     }
+}
+
+- (void)setServerSettings:(NSDictionary*)settings {
+    if (settings) {
+        [_config setObject:settings forKey:kKeyServerSettings];
+        [_config synchronize];
+    }
+    else {
+        [_config removeObjectForKey:kKeyServerSettings];
+        [_config synchronize];
+    }
+}
+
+- (NSDictionary*)getServerSettings {
+    NSDictionary* settings = [_config objectForKey:kKeyServerSettings];
+    if (settings == nil) {
+        NSArray* serverList = [self getSupportServerSettingsList];
+        settings = serverList[0];
+    }
+    return settings;
+}
+
+- (NSArray*)getSupportServerSettingsList {
+    NSArray* serverList = @[@{@"name": @"产品服务器", @"url":@"https://www.cocobabys.com"},
+                            @{@"name": @"测试服务器", @"url":@"https://stage.cocobabys.com"}];
+    return serverList;
 }
 
 @end

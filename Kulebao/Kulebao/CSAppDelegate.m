@@ -13,6 +13,7 @@ CSAppDelegate* gApp = nil;
 @implementation CSAppDelegate
 @synthesize engine = _engine;
 @synthesize hud = _hud;
+@synthesize isPlayView = _isPlayView;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -57,6 +58,12 @@ CSAppDelegate* gApp = nil;
     [_engine applicationWillTerminate:application];
 }
 
+#ifdef __IPHONE_8_0
+- (void)application:(UIApplication*)application didRegisterUserNotificationSettings:(UIUserNotificationSettings*)notificationSettings {
+    [application registerForRemoteNotifications];
+}
+#endif
+
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
     [_engine application:application didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
@@ -68,7 +75,7 @@ CSAppDelegate* gApp = nil;
 
 #pragma mark - Private
 - (void)gotoLoginProcess {
-    if (![_engine.baiduPushInfo isValid]) {
+    if (![BPush getChannelId] || ![BPush getUserId]) {
         [BPush bindChannel];
     }
     
@@ -87,7 +94,6 @@ CSAppDelegate* gApp = nil;
     self.engine.loginInfo = nil;
     self.engine.relationships = nil;
     self.engine.currentRelationship = nil;
-    self.engine.employees = nil;
     self.engine.preferences.loginInfo = nil;
     
     [self gotoLoginProcess];
@@ -112,6 +118,18 @@ CSAppDelegate* gApp = nil;
     [self alert:text withTitle:nil];
 }
 
+- (void)shortAlert:(NSString*)text {
+    if ([self createHudIfNeeded]) {
+        [NSObject cancelPreviousPerformRequestsWithTarget:self.hud];
+        self.hud.mode = MBProgressHUDModeText;
+        self.hud.labelText = nil;
+        self.hud.detailsLabelText = text;
+        [_window bringSubviewToFront:self.hud];
+        [self.hud show:YES];
+        [self hideAlertAfterDelay:1];
+    }
+}
+
 - (void)alert:(NSString*)text withTitle:(NSString*)title {
     if ([self createHudIfNeeded]) {
         [NSObject cancelPreviousPerformRequestsWithTarget:self.hud];
@@ -120,7 +138,7 @@ CSAppDelegate* gApp = nil;
         self.hud.detailsLabelText = text;
         [_window bringSubviewToFront:self.hud];
         [self.hud show:YES];
-        [self hideAlertAfterDelay:2];
+        [self hideAlertAfterDelay:1];
     }
 }
 

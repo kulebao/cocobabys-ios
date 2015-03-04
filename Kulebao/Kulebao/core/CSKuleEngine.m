@@ -12,8 +12,13 @@
 #import "BPush.h"
 #import "BaiduMobStat.h"
 #import "CSKuleURLCache.h"
+#import "ALAlertBannerManager.h"
+#import "ALAlertBanner+Private.h"
+#import "hm_sdk.h"
 
-@interface CSKuleEngine() <BPushDelegate>
+@interface CSKuleEngine() <BPushDelegate> {
+    NSMutableDictionary* _senderProfiles;
+}
 
 @property (strong, nonatomic) CSHttpClient* httpClient;
 @property (strong, nonatomic) CSHttpClient* qiniuHttpClient;
@@ -34,8 +39,6 @@
 @synthesize loginInfo = _loginInfo;
 @synthesize relationships = _relationships;
 @synthesize currentRelationship = _currentRelationship;
-@synthesize baiduPushInfo = _baiduPushInfo;
-@synthesize employees = _employees;
 
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize managedObjectContext = _managedObjectContext;
@@ -48,6 +51,8 @@
 @synthesize badgeOfAssignment = _badgeOfAssignment;
 @synthesize badgeOfChating = _badgeOfChating;
 @synthesize badgeOfAssess = _badgeOfAssess;
+
+@synthesize hmServerId = _hmServerId;
 
 #pragma mark - application
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -64,10 +69,21 @@
     // 添加Baidu Push
     [BPush setupChannel:launchOptions];
     
-    [application registerForRemoteNotificationTypes:
-     UIRemoteNotificationTypeAlert
-     | UIRemoteNotificationTypeBadge
-     | UIRemoteNotificationTypeSound];
+    UIRemoteNotificationType notificationTypes = UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound;
+    
+#ifdef __IPHONE_8_0
+    if (IsAtLeastiOSVersion(@"8.0")) {
+        // do something for iOS 8.0 or greater
+        UIUserNotificationSettings* settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge|UIUserNotificationTypeSound|UIUserNotificationTypeAlert categories:nil];
+        
+        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    }
+    else {
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:notificationTypes];
+    }
+#else
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:notificationTypes];
+#endif
     
     [application setApplicationIconBadgeNumber:0];
     
@@ -94,23 +110,38 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    
-    
+    NSArray* banners = [[ALAlertBannerManager sharedManager] alertBannersInView:gApp.window];
+    for (ALAlertBanner* banner in banners) {
+        [banner hideAlertBanner];
+    }
+
     CSKuleChildInfo* currentChild = _currentRelationship.child;
     if (currentChild) {
-        [self checkUpdatesOfNews];
-        [self checkUpdatesOfRecipe];
-        [self checkUpdatesOfCheckin];
-        [self checkUpdatesOfSchedule];
-        [self checkUpdatesOfAssignment];
-        [self checkUpdatesOfChating];
-        [self checkUpdatesOfAssess];
+        if ([self.loginInfo.memberStatus isEqualToString:@"free"]) {
+            [self checkUpdatesOfNews];
+            [self checkUpdatesOfCheckin];
+        }
+        else if ([self.loginInfo.memberStatus isEqualToString:@"paid"]) {
+            [self checkUpdatesOfNews];
+            [self checkUpdatesOfRecipe];
+            [self checkUpdatesOfCheckin];
+            [self checkUpdatesOfSchedule];
+            [self checkUpdatesOfAssignment];
+            [self checkUpdatesOfChating];
+            [self checkUpdatesOfAssess];
+        }
     }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    
+    if (_hmServerId != NULL) {
+        hm_server_disconnect(_hmServerId);
+        _hmServerId = NULL;
+        CSLog(@"hmServerId退出成功");
+    }
     
     NSError *error;
     if (_managedObjectContext != nil) {
@@ -127,19 +158,13 @@
     // 必须
     [BPush registerDeviceToken:deviceToken];
     
-#ifdef TARGET_OS_IPHONE
     if (![_preferences.deviceToken isEqualToData:deviceToken]) {
         _preferences.deviceToken = deviceToken;
-        _preferences.baiduPushInfo = nil;
-        self.baiduPushInfo = _preferences.baiduPushInfo;
     }
-#endif
     
     // 必须。可以在其它时机调用,只有在该方法返回(通过 onMethod:response:回调)绑定成功时,app 才能接收到 Push 消息。
     // 一个 app 绑定成功至少一次即可(如果 access token 变更请重新绑定)。
-    if (![_baiduPushInfo isValid]) {
-        [BPush bindChannel];
-    }
+    [BPush bindChannel];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
@@ -167,11 +192,6 @@
     CSLog(@"%s\n%@", __FUNCTION__, _loginInfo);
 }
 
-- (void)setBaiduPushInfo:(CSKuleBPushInfo *)baiduPushInfo {
-    _baiduPushInfo = baiduPushInfo;
-     CSLog(@"%s\n%@", __FUNCTION__, _baiduPushInfo);
-}
-
 - (UIApplication*)application {
     return [UIApplication sharedApplication];
 }
@@ -190,6 +210,13 @@
 }
 
 - (void)setupEngine {
+    if (_senderProfiles == nil) {
+        _senderProfiles = [NSMutableDictionary dictionary];
+    }
+    else {
+        [_senderProfiles removeAllObjects];
+    }
+    
     // 加载外观设置
     [self setupAppearance];
     
@@ -198,28 +225,44 @@
     
     // 加载HttpClient
     [self setupHttpClient];
+    
+    // 加载HM_SDK
+    [self setupHMSDK];
+}
+
+- (void)setupHMSDK {
+    /* 初始化SDK */
+    hm_result result = hm_sdk_init();
+    if (result != HMEC_OK) {
+        CSLog(@"hm_sdk_init failed - %d", result);
+    }
 }
 
 - (void)setupPreferences {
     _preferences = [CSKulePreferences defaultPreferences];
     _loginInfo = _preferences.loginInfo;
-    _baiduPushInfo = _preferences.baiduPushInfo;
 }
 
 - (void)setupHttpClient {
     NSString* homeDir = NSHomeDirectory();
-    NSString* cachePath = [homeDir stringByAppendingPathComponent:@"Documents/Cache"];
+    NSString* cachePath = [homeDir stringByAppendingPathComponent:@"Documents/Kule-Cache"];
     
-    CSKuleURLCache* cache = [[CSKuleURLCache alloc] initWithMemoryCapacity:4*1024*1024
+    CSKuleURLCache* cache = [[CSKuleURLCache alloc] initWithMemoryCapacity:1024
                                                               diskCapacity:64*1024*1024
                                                                   diskPath:cachePath];
-    cache.minCacheInterval = 30;
-
     [CSKuleURLCache setSharedURLCache:cache];
     
     if (_httpClient == nil) {
-        NSURL* baseUrl = [NSURL URLWithString:kServerHost];
-        _httpClient = [CSHttpClient httpClientWithHost:baseUrl];
+//        NSURL* baseUrl = [NSURL URLWithString:kServerHostForProd];
+//        if (_preferences.enabledTest) {
+//            baseUrl = [NSURL URLWithString:kServerHostForTest];
+//        }
+        NSDictionary* serverInfo = [_preferences getServerSettings];
+        NSString* serverUrlString = serverInfo[@"url"];
+        if(serverUrlString.length == 0) {
+            serverUrlString = kServerHostForProd;
+        }
+        _httpClient = [CSHttpClient httpClientWithHost:[NSURL URLWithString:serverUrlString]];
     }
     
     if (_qiniuHttpClient == nil) {
@@ -255,7 +298,10 @@
         }
         else {
             url = [NSURL URLWithString:path
-                         relativeToURL:[NSURL URLWithString:kServerHost]];
+                         relativeToURL:[NSURL URLWithString:kServerHostForProd]];
+            if (_preferences.enabledTest) {
+                url = [NSURL URLWithString:kServerHostForTest];
+            }
         }
     }
     
@@ -281,7 +327,6 @@
             baiduPushInfo.channelId = channelid;
             
             _preferences.baiduPushInfo = baiduPushInfo;
-            self.baiduPushInfo = _preferences.baiduPushInfo;
         }
         else {
             CSLog(@"BPushErrorCode_NOT_Success");
@@ -290,7 +335,6 @@
         int returnCode = [[res valueForKey:BPushRequestErrorCodeKey] intValue];
         if (returnCode == BPushErrorCode_Success) {
             _preferences.baiduPushInfo = nil;
-            self.baiduPushInfo = _preferences.baiduPushInfo;
         }
     }
 }
@@ -423,6 +467,7 @@
             _loginInfo.accountName = bindInfo.accountName;
             _loginInfo.username = bindInfo.username;
             _loginInfo.schoolName = bindInfo.schoolName;
+            _loginInfo.memberStatus = bindInfo.memberStatus;
             
             _preferences.loginInfo = _loginInfo;
             [gApp hideAlert];
@@ -440,7 +485,7 @@
         CSLog(@"failure:%@", error);
     };
     
-    if (![_baiduPushInfo isValid]) {
+    if ([BPush getUserId] && [BPush getChannelId]) {
         [gApp waitingAlert:@"重新获取绑定信息..."];
         [gApp.engine reqReceiveBindInfo:_loginInfo.accountName
                             success:sucessHandler
@@ -673,7 +718,7 @@
         
         if ([dataJson isKindOfClass:[NSArray class]]) {
             for (id chatMsgJson in dataJson) {
-                CSKuleChatMsg* chatMsg = [CSKuleInterpreter decodeChatMsg:chatMsgJson];
+                CSKuleTopicMsg* chatMsg = [CSKuleInterpreter decodeTopicMsg:chatMsgJson];
                 [chatMsgs addObject:chatMsg];
                 
                 if (timestamp < chatMsg.timestamp) {
@@ -682,7 +727,7 @@
             }
         }
         else if ([dataJson isKindOfClass:[NSDictionary class]]) {
-            CSKuleChatMsg* chatMsg = [CSKuleInterpreter decodeChatMsg:dataJson];
+            CSKuleTopicMsg* chatMsg = [CSKuleInterpreter decodeTopicMsg:dataJson];
             [chatMsgs addObject:chatMsg];
             if (timestamp < chatMsg.timestamp) {
                 timestamp = chatMsg.timestamp;
@@ -703,12 +748,12 @@
     };
     
     //[gApp waitingAlert:@"获取信息中..."];
-    [gApp.engine reqGetChatingMsgsOfKindergarten:gApp.engine.loginInfo.schoolId
-                                            from:-1
-                                              to:-1
-                                            most:1
-                                         success:sucessHandler
-                                         failure:failureHandler];
+    [gApp.engine reqGetTopicMsgsOfKindergarten:gApp.engine.loginInfo.schoolId
+                                          from:-1
+                                            to:-1
+                                          most:1
+                                       success:sucessHandler
+                                       failure:failureHandler];
 }
 
 - (void)checkUpdatesOfAssess {
@@ -801,10 +846,10 @@
     
     NSDictionary* parameters = nil;
     
-    if ([_baiduPushInfo isValid]) {
+    if ([BPush getChannelId] && [BPush getUserId]) {
         parameters = @{@"phonenum": mobile,
-                       @"user_id": _baiduPushInfo.userId,
-                       @"channel_id": _baiduPushInfo.channelId,
+                       @"user_id": [BPush getUserId],
+                       @"channel_id": [BPush getChannelId],
                        @"access_token": _loginInfo.accessToken ? _loginInfo.accessToken : @"",
                        @"device_type": @"ios"};
     }
@@ -1067,47 +1112,46 @@
                                failure:failure];
 }
 
-- (void)reqGetChatingMsgsOfKindergarten:(NSInteger)kindergarten
-                                   from:(NSInteger)fromId
-                                     to:(NSInteger)toId
-                                   most:(NSInteger)most
-                                success:(SuccessResponseHandler)success
-                                failure:(FailureResponseHandler)failure {
-    NSParameterAssert(_loginInfo.accountName);
-    
-    NSString* path = [NSString stringWithFormat:kChatingPath, @(kindergarten), _loginInfo.accountName];
-    
-    NSString* method = @"GET";
-    
-    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
-    if (fromId >= 0) {
-        [parameters setObject:@(fromId) forKey:@"from"];
-    }
-    
-    if (toId >= 0) {
-        [parameters setObject:@(toId) forKey:@"to"];
-    }
-    
-    if (most >= 0) {
-        [parameters setObject:@(most) forKey:@"most"];
-    }
-    
-    [_httpClient httpRequestWithMethod:method
-                                  path:path
-                            parameters:parameters
-                               success:success
-                               failure:failure];
-    
-}
+//- (void)reqGetChatingMsgsOfKindergarten:(NSInteger)kindergarten
+//                                   from:(long long)fromId
+//                                     to:(long long)toId
+//                                   most:(NSInteger)most
+//                                success:(SuccessResponseHandler)success
+//                                failure:(FailureResponseHandler)failure {
+//    NSParameterAssert(_loginInfo.accountName);
+//    
+//    NSString* path = [NSString stringWithFormat:kChatingPath, @(kindergarten), _loginInfo.accountName];
+//    
+//    NSString* method = @"GET";
+//    
+//    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+//    if (fromId >= 0) {
+//        [parameters setObject:@(fromId) forKey:@"from"];
+//    }
+//    
+//    if (toId >= 0) {
+//        [parameters setObject:@(toId) forKey:@"to"];
+//    }
+//    
+//    if (most >= 0) {
+//        [parameters setObject:@(most) forKey:@"most"];
+//    }
+//    
+//    [_httpClient httpRequestWithMethod:method
+//                                  path:path
+//                            parameters:parameters
+//                               success:success
+//                               failure:failure];
+//}
 
-- (void)reqSendChatingMsgs:(NSString*)msgBody
-                 withImage:(NSString*)imgUrl
-            toKindergarten:(NSInteger)kindergarten
-              retrieveFrom:(long long)fromId
-                   success:(SuccessResponseHandler)success
-                   failure:(FailureResponseHandler)failure {
+- (void)reqSendChatingMsg:(NSString*)msgBody
+                withImage:(NSString*)imgUrl
+           toKindergarten:(NSInteger)kindergarten
+             retrieveFrom:(long long)fromId
+                  success:(SuccessResponseHandler)success
+                  failure:(FailureResponseHandler)failure {
     NSParameterAssert(msgBody || imgUrl); // 不能同时为空
-    NSParameterAssert(_loginInfo);
+    NSParameterAssert(_loginInfo.accountName);
     
     NSString* path = [NSString stringWithFormat:kChatingPath, @(kindergarten), _loginInfo.accountName];
     
@@ -1139,7 +1183,108 @@
                             parameters:parameters
                                success:success
                                failure:failure];
+}
+
+- (void)reqGetTopicMsgsOfKindergarten:(NSInteger)kindergarten
+                                 from:(long long)fromId
+                                   to:(long long)toId
+                                 most:(NSInteger)most
+                              success:(SuccessResponseHandler)success
+                              failure:(FailureResponseHandler)failure {
+    NSParameterAssert(_currentRelationship.child);
     
+    NSString* path = [NSString stringWithFormat:kTopicPath, @(kindergarten), _currentRelationship.child.childId];
+    
+    NSString* method = @"GET";
+    
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    if (fromId >= 0) {
+        [parameters setObject:@(fromId) forKey:@"from"];
+    }
+    
+    if (toId >= 0) {
+        [parameters setObject:@(toId) forKey:@"to"];
+    }
+    
+    if (most >= 0) {
+        [parameters setObject:@(most) forKey:@"most"];
+    }
+    
+    [_httpClient httpRequestWithMethod:method
+                                  path:path
+                            parameters:parameters
+                               success:success
+                               failure:failure];
+}
+
+- (void)reqDeleteTopicMsgsOfKindergarten:(NSInteger)kindergarten
+                                recordId:(long long)msgId
+                                 success:(SuccessResponseHandler)success
+                                 failure:(FailureResponseHandler)failure {
+    
+    NSParameterAssert(_currentRelationship.child);
+    
+    NSString* path = [NSString stringWithFormat:kTopicIdPath, @(kindergarten), _currentRelationship.child.childId, @(msgId)];
+    NSString* method = @"DELETE";
+    
+    NSMutableDictionary* parameters = nil;
+    [_httpClient httpRequestWithMethod:method
+                                  path:path
+                            parameters:parameters
+                               success:success
+                               failure:failure];
+}
+
+- (void)reqSendTopicMsg:(NSString*)msgBody
+           withMediaUrl:(NSString*)mediaUrl
+            ofMediaType:(NSString*)mediaType
+         toKindergarten:(NSInteger)kindergarten
+           retrieveFrom:(long long)fromId
+                success:(SuccessResponseHandler)success
+                failure:(FailureResponseHandler)failure {
+    NSParameterAssert(msgBody || mediaUrl); // 不能同时为空
+    NSParameterAssert(_currentRelationship.child);
+    
+    
+    NSString* path = [NSString stringWithFormat:kTopicPath, @(kindergarten), _currentRelationship.child.childId];
+    
+    if (fromId >= 0) {
+        path = [path stringByAppendingFormat:@"?retrieve_recent_from=%lld", fromId];
+    }
+    
+    NSString* method = @"POST";
+    
+    /*
+     {"topic":"1_1396844597394",
+     "content":"我再说两句",
+     "media":{"url":"http://suoqin-test.u.qiniudn.com/FgPmIcRG6BGocpV1B9QMCaaBQ9LK","type":"image"},
+     "sender":{"id":"2_1003_1396844438388","type":"p"}}
+     */
+    
+    long long timestamp = [[NSDate date] timeIntervalSince1970]*1000;
+    
+    id msgMedia = @{@"url": @"",
+                    @"type": @""};
+    
+    if (mediaUrl.length > 0) {
+        msgMedia = @{@"url": [[self urlFromPath:mediaUrl] absoluteString],
+                     @"type": mediaType};
+    }
+    
+    id msgSender = @{@"id": _currentRelationship.parent.parentId,
+                     @"type": @"p"};
+    
+    NSDictionary* parameters = @{@"topic": _currentRelationship.child.childId,
+                                 @"timestamp": @(timestamp),
+                                 @"content": msgBody ? msgBody : @"",
+                                 @"media": msgMedia,
+                                 @"sender": msgSender};
+    
+    [_httpClient httpRequestWithMethod:method
+                                  path:path
+                            parameters:parameters
+                               success:success
+                               failure:failure];
 }
 
 - (void)reqGetAssessesOfChild:(CSKuleChildInfo*)childInfo
@@ -1251,7 +1396,8 @@
     NSString* method = @"POST";
     
     NSDictionary* parameters = @{@"phone": account,
-                                 @"content": msgContent};
+                                 @"content": msgContent,
+                                 @"source": @"ios_parent"};
     
     [_httpClient httpRequestWithMethod:method
                                   path:path
@@ -1268,6 +1414,175 @@
     NSString* method = @"GET";
     
     NSDictionary* parameters = @{};
+    
+    [_httpClient httpRequestWithMethod:method
+                                  path:path
+                            parameters:parameters
+                               success:success
+                               failure:failure];
+    
+}
+
+- (void)reqGetSenderProfileOfKindergarten:(NSInteger)kindergarten
+                               withSender:(CSKuleSenderInfo*)senderInfo
+                                 complete:(void (^)(id obj))complete {
+    if (senderInfo.senderId.length > 0) {
+        id obj = [_senderProfiles objectForKey:senderInfo.senderId];
+        if (obj && complete) {
+            complete(obj);
+        }
+        else if(obj == nil) {
+            if ([senderInfo.type isEqualToString:@"t"] || [senderInfo.type isEqualToString:@"p"]) {
+                NSString* path = [NSString stringWithFormat:kGetSenderInfoPath, @(kindergarten), senderInfo.senderId];
+                
+                NSString* method = @"GET";
+                
+                NSDictionary* parameters = @{@"type": senderInfo.type};
+                
+                id success = ^(AFHTTPRequestOperation *operation, id dataJson) {
+                    id profile = nil;
+                    if ([senderInfo.type isEqualToString:@"t"]) {
+                        profile = [CSKuleInterpreter decodeEmployeeInfo:dataJson];
+                    }
+                    else if ([senderInfo.type isEqualToString:@"p"]) {
+                        profile = [CSKuleInterpreter decodeParentInfo:dataJson];
+                    }
+                    
+                    if (profile) {
+                        [_senderProfiles setObject:profile forKey:senderInfo.senderId];
+                    }
+                    
+                    if (complete) {
+                        complete(profile);
+                    }
+                };
+                
+                id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
+                    
+                };
+                
+                [_httpClient httpRequestWithMethod:method
+                                              path:path
+                                        parameters:parameters
+                                           success:success
+                                           failure:failure];
+            }
+        }
+    }
+}
+
+
+- (void)reqGetHistoryListOfKindergarten:(NSInteger)kindergarten
+                            withChildId:(NSString*)childId
+                               fromDate:(NSDate*)fromDate
+                                 toDate:(NSDate*)toDate
+                                success:(SuccessResponseHandler)success
+                                failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kGetHistoryListPath, @(kindergarten), childId];
+    
+    NSString* method = @"GET";
+    
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    if (fromDate) {
+        long long msec = [fromDate timeIntervalSince1970] * 1000;
+        [parameters setObject:@(msec) forKey:@"from"];
+    }
+    
+    if (toDate) {
+        long long msec = [toDate timeIntervalSince1970] * 1000;
+        [parameters setObject:@(msec) forKey:@"to"];
+    }
+    
+    [_httpClient httpRequestWithMethod:method
+                                  path:path
+                            parameters:parameters
+                               success:success
+                               failure:failure];
+}
+
+- (void)reqPostHistoryOfKindergarten:(NSInteger)kindergarten
+                         withChildId:(NSString*)childId
+                         withContent:(NSString*)content
+                    withImageUrlList:(NSArray*)imgUrlList
+                             success:(SuccessResponseHandler)success
+                             failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kGetHistoryListPath, @(kindergarten), childId];
+
+    NSString* method = @"POST";
+    
+    id msgSender = @{@"id": _currentRelationship.parent.parentId,
+                     @"type": @"p"};
+    
+    NSMutableArray* mediumList = [NSMutableArray array];
+    for (NSString* urlString in imgUrlList) {
+        [mediumList addObject:@{@"url": urlString, @"type": @"image"}];
+    }
+    
+    NSDictionary* parameters = @{@"topic": childId,
+                                 @"content": content ? content : @"",
+                                 @"medium" : mediumList,
+                                 @"sender": msgSender};
+    
+    [_httpClient httpRequestWithMethod:method
+                                  path:path
+                            parameters:parameters
+                               success:success
+                               failure:failure];
+}
+
+- (void)reqDeleteHistoryOfKindergarten:(NSInteger)kindergarten
+                           withChildId:(NSString*)childId
+                              recordId:(long long)msgId
+                               success:(SuccessResponseHandler)success
+                               failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kDeleteHistoryListPath, @(kindergarten), childId, @(msgId)];
+    NSString* method = @"DELETE";
+    NSMutableDictionary* parameters = nil;
+    
+    [_httpClient httpRequestWithMethod:method
+                                  path:path
+                            parameters:parameters
+                               success:success
+                               failure:failure];
+}
+
+- (void)reqGetVideoMemberListOfKindergarten:(NSInteger)kindergarten
+                                    success:(SuccessResponseHandler)success
+                                    failure:(FailureResponseHandler)failure {
+    
+    NSString* path = [NSString stringWithFormat:kGetVideoMemberListPath, @(kindergarten)];
+    NSString* method = @"GET";
+    NSMutableDictionary* parameters = nil;
+    
+    [_httpClient httpRequestWithMethod:method
+                                  path:path
+                            parameters:parameters
+                               success:success
+                               failure:failure];
+    
+}
+
+- (void)reqGetVideoMemberOfKindergarten:(NSInteger)kindergarten
+                           withParentId:(NSString*)parentId
+                                success:(SuccessResponseHandler)success
+                                failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kGetVideoMemberPath, @(kindergarten), parentId];
+    NSString* method = @"GET";
+    NSMutableDictionary* parameters = nil;
+    
+    [_httpClient httpRequestWithMethod:method
+                                  path:path
+                            parameters:parameters
+                               success:success
+                               failure:failure];
+}
+
+- (void)reqGetDefaultVideoMemberOfKindergarten:(NSInteger)kindergarten
+                                       success:(SuccessResponseHandler)success
+                                       failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kGetDefaultVideoMemberPath, @(kindergarten)];
+    NSString* method = @"GET";
+    NSMutableDictionary* parameters = nil;
     
     [_httpClient httpRequestWithMethod:method
                                   path:path

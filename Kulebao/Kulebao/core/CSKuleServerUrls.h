@@ -35,8 +35,18 @@
 /*   Kule API
  ************************************************************/
 
-// HOST: 服务器接口Host地址
-#define kServerHost                 @"https://www.cocobabys.com"
+// HOST: 测试服务服务器接口Host地址
+#define kServerHostForTest          @"https://stage.cocobabys.com"
+
+// HOST: 产品服务服务器接口Host地址
+#define kServerHostForProd          @"https://www.cocobabys.com"
+
+//// HOST: 服务器接口Host地址
+//#ifdef DEBUG
+//    #define kServerHost                 kServerHostForTest
+//#else
+//    #define kServerHost                 kServerHostForProd
+//#endif
 
 // PATH: 检查电话号码
 #define kCheckPhoneNumPath          @"/checkphonenum.do"
@@ -45,7 +55,7 @@
 #define kLoginPath                  @"/login.do"
 
 // PATH: 获取绑定信息
-#define kReceiveBindInfoPath        @"/receiveBindInfo.do"
+#define kReceiveBindInfoPath        @"/api/v1/binding" //@"/receiveBindInfo.do"
 
 // PATH: 修改密码
 #define kChangePasswordPath         @"/changepwd.do"
@@ -77,8 +87,14 @@
 // PATH: 签到签出记录
 #define kGetCheckInOutLogPath       @"/kindergarten/%@/child/%@/dailylog"
 
-// PATH: 聊天
+// PATH: 聊天 - 旧接口
 #define kChatingPath                @"/kindergarten/%@/conversation/%@"
+
+// PATH: 聊天 - 新接口
+#define kTopicPath                  @"/kindergarten/%@/session/%@/record"
+
+// PATH: 指定的聊天记录 - 新接口
+#define kTopicIdPath                @"/kindergarten/%@/session/%@/record/%@"
 
 // PATH: 园内评价
 #define kAssessPath                 @"/kindergarten/%@/child/%@/assess"
@@ -93,6 +109,24 @@
 #define kFeedbackPath               @"/feedback"
 
 // PATH: 雇员信息
-#define kGetEmployeeInfoPath         @"/kindergarten/%@/employee"
+#define kGetEmployeeInfoPath        @"/kindergarten/%@/employee"
+
+// PATH: Sender信息
+#define kGetSenderInfoPath          @"/kindergarten/%@/sender/%@"
+
+// PATH: History信息
+#define kGetHistoryListPath         @"/kindergarten/%@/history/%@/record"
+
+// PATH: 删除History信息
+#define kDeleteHistoryListPath      @"/kindergarten/%@/history/%@/record/%@"
+
+// PATH: 获取视频账号列表
+#define kGetVideoMemberListPath     @"/api/v1/kindergarten/%@/video_member"
+
+// PATH: 获取视频账号
+#define kGetVideoMemberPath         @"/api/v1/kindergarten/%@/video_member/%@"
+
+// PATH: 获取公用视频账号
+#define kGetDefaultVideoMemberPath  @"/api/v1/kindergarten/%@/video_member/default"
 
 #endif

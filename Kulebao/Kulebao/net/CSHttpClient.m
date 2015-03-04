@@ -48,6 +48,7 @@
     NSMutableURLRequest* req = [self requestWithMethod:method
                                                   path:path
                                             parameters:parameters];
+    [req setValue:@"ios" forHTTPHeaderField:@"source"];
     
     if (self.networkReachabilityStatus == AFNetworkReachabilityStatusNotReachable
         || self.networkReachabilityStatus == AFNetworkReachabilityStatusUnknown) {

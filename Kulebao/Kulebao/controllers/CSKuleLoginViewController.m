@@ -137,6 +137,8 @@
             gApp.engine.loginInfo.username = bindInfo.username;
             gApp.engine.loginInfo.schoolName = bindInfo.schoolName;
             
+            gApp.engine.loginInfo.memberStatus = bindInfo.memberStatus;
+            
             gApp.engine.preferences.loginInfo = gApp.engine.loginInfo;
             
             [gApp.engine.preferences addHistoryAccount:gApp.engine.loginInfo.accountName];
@@ -168,24 +170,11 @@
         [gApp alert:error.localizedDescription];
     };
 
-#if TARGET_IPHONE_SIMULATOR
     [gApp waitingAlert:@"获取绑定信息..."];
     [gApp.engine reqReceiveBindInfo:gApp.engine.loginInfo.accountName
                             success:sucessHandler
                             failure:failureHandler];
     
-#else
-    if ([gApp.engine.baiduPushInfo isValid]) {
-        [gApp waitingAlert:@"获取绑定信息..."];
-        [gApp.engine reqReceiveBindInfo:gApp.engine.loginInfo.accountName
-                                success:sucessHandler
-                                failure:failureHandler];
-    }
-    else {
-        [gApp logout];
-        [gApp alert:@"登录已过期，请重新登录。"];
-    }
-#endif
 }
 
 @end

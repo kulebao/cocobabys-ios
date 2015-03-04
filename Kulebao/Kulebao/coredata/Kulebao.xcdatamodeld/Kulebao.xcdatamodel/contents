@@ -1,4 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5063" systemVersion="13C64" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13E28" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="EntityHistoryInfo" representedClassName="EntityHistoryInfo" syncable="YES">
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="timestamp" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="topic" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="medium" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="EntityMediaInfo" inverseName="historyInfo" inverseEntity="EntityMediaInfo" syncable="YES"/>
+        <relationship name="sender" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EntitySenderInfo" inverseName="historyInfo" inverseEntity="EntitySenderInfo" syncable="YES"/>
+        <fetchedProperty name="fetchedProperty" optional="YES" syncable="YES">
+            <fetchRequest name="fetchedPropertyFetchRequest" entity="EntityHistoryInfo"/>
+        </fetchedProperty>
+    </entity>
+    <entity name="EntityMediaInfo" representedClassName="EntityMediaInfo" syncable="YES">
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="historyInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EntityHistoryInfo" inverseName="medium" inverseEntity="EntityHistoryInfo" syncable="YES"/>
+    </entity>
+    <entity name="EntitySenderInfo" representedClassName="EntitySenderInfo" syncable="YES">
+        <attribute name="senderId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="historyInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EntityHistoryInfo" inverseName="sender" inverseEntity="EntityHistoryInfo" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="EntityHistoryInfo" positionX="-36" positionY="27" width="128" height="161"/>
+        <element name="EntityMediaInfo" positionX="-63" positionY="-18" width="128" height="88"/>
+        <element name="EntitySenderInfo" positionX="-54" positionY="9" width="128" height="88"/>
+    </elements>
 </model>

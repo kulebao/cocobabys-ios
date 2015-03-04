@@ -9,7 +9,7 @@
 #import "CSKuleSelectChildViewController.h"
 #import "CSKuleChildCell.h"
 #import "CSAppDelegate.h"
-#import "UIImageView+AFNetworking.h"
+#import "UIImageView+WebCache.h"
 
 @interface CSKuleSelectChildViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
@@ -94,9 +94,11 @@
     cell.labChildName.text = relationship.child.nick;
     
     NSURL* qiniuImgUrl = [gApp.engine urlFromPath:relationship.child.portrait];
-    qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/128/h/128"];
+    qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/256/h/256"];
     
-    [cell.imgChildPortrait setImageWithURL:qiniuImgUrl placeholderImage:[UIImage imageNamed:@"default_child_head_icon.png"]];
+    [cell.imgChildPortrait sd_setImageWithURL:qiniuImgUrl
+                             placeholderImage:[UIImage imageNamed:@"default_child_head_icon.png"]
+                                      options:SDWebImageRetryFailed | SDWebImageLowPriority | SDWebImageAllowInvalidSSLCertificates];
     
     return cell;
 }

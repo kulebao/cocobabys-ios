@@ -16,6 +16,10 @@
 @synthesize portrait = _portrait;
 @synthesize gender = _gender;
 @synthesize birthday = _birthday;
+@synthesize timestamp = _timestamp;
+@synthesize memberStatus = _memberStatus;
+@synthesize status = _status;
+@synthesize company = _company;
 
 - (NSString*)description {
     NSDictionary* meta = @{@"parentId": _parentId,
@@ -24,7 +28,12 @@
                            @"phone": _phone,
                            @"portrait": _portrait,
                            @"gender": @(_gender),
-                           @"birthday": _birthday};
+                           @"birthday": _birthday,
+                           @"timestamp": @(_timestamp),
+                           @"memberStatus": @(_memberStatus),
+                           @"status": @(_status),
+                           @"company": _company
+                           };
     
     NSString* desc = [NSString stringWithFormat:@"%@", meta];
     return desc;

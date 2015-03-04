@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HMPlayerView">
+            <connections>
+                <outlet property="CoverView" destination="ai3-Ct-MEh" id="xld-hy-Urg"/>
+                <outlet property="PaintView" destination="cez-eO-7u9" id="Cah-fU-8Cg"/>
+                <outlet property="btnCapture" destination="vLy-hw-ea8" id="6YD-rl-lOb"/>
+                <outlet property="btnListen" destination="Cua-kH-fJK" id="cmi-hk-p9Z"/>
+                <outlet property="btnListenStop" destination="iJr-8j-eae" id="fJi-Oc-cb3"/>
+                <outlet property="labTitle" destination="icm-0p-DTk" id="qeV-gZ-AU3"/>
+                <outlet property="navBar" destination="o8T-gx-L8S" id="ukj-k6-ZfQ"/>
+                <outlet property="rightBar" destination="XZa-N4-NGm" id="yi4-uj-51Y"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cez-eO-7u9" userLabel="PaintView" customClass="PaintingView">
+                    <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ai3-Ct-MEh" userLabel="CoverView" customClass="UIControl">
+                    <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                    <subviews>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="f07-dS-dq1">
+                            <rect key="frame" x="274" y="150" width="20" height="20"/>
+                        </activityIndicatorView>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="正在连接设备" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WRx-4B-R8m">
+                            <rect key="frame" x="233" y="190" width="102" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="centerX" secondItem="WRx-4B-R8m" secondAttribute="centerX" id="AVL-bC-fGn"/>
+                        <constraint firstItem="WRx-4B-R8m" firstAttribute="top" secondItem="f07-dS-dq1" secondAttribute="bottom" constant="20" id="FXQ-uh-now"/>
+                        <constraint firstAttribute="centerX" secondItem="f07-dS-dq1" secondAttribute="centerX" id="VRl-oB-lEj"/>
+                        <constraint firstAttribute="centerY" secondItem="f07-dS-dq1" secondAttribute="centerY" id="ztS-0k-Png"/>
+                    </constraints>
+                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o8T-gx-L8S" userLabel="View - title">
+                    <rect key="frame" x="0.0" y="0.0" width="568" height="30"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F2I-kx-rZo"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eij-tV-Mfj">
+                            <rect key="frame" x="10" y="1" width="50" height="28"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="28" id="PGH-4I-Oqd"/>
+                                <constraint firstAttribute="width" constant="50" id="Sup-Yj-sSC"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <state key="normal" title="返回">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="onBackClicked:" destination="-1" eventType="touchUpInside" id="xzi-jB-xM8"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="看宝贝" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="icm-0p-DTk">
+                            <rect key="frame" x="259" y="4" width="51" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.10000000000000001" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="centerX" secondItem="icm-0p-DTk" secondAttribute="centerX" id="86t-N1-epQ"/>
+                        <constraint firstAttribute="centerY" secondItem="icm-0p-DTk" secondAttribute="centerY" id="Hma-oZ-8rt"/>
+                        <constraint firstAttribute="centerY" secondItem="Eij-tV-Mfj" secondAttribute="centerY" id="Zfm-sd-agm"/>
+                        <constraint firstItem="Eij-tV-Mfj" firstAttribute="leading" secondItem="o8T-gx-L8S" secondAttribute="leading" constant="10" id="i0d-1P-1Va"/>
+                        <constraint firstAttribute="height" constant="30" id="vsi-99-R2i"/>
+                    </constraints>
+                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XZa-N4-NGm" userLabel="View - right">
+                    <rect key="frame" x="499" y="0.0" width="69" height="320"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cua-kH-fJK">
+                            <rect key="frame" x="9" y="89" width="51" height="22"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <state key="normal" backgroundImage="video_voice_open.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="btnListenAction:" destination="-1" eventType="touchUpInside" id="ach-br-MyF"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iJr-8j-eae">
+                            <rect key="frame" x="9" y="89" width="51" height="22"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <state key="normal" backgroundImage="video_voice_close.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="btnListenStopAction:" destination="-1" eventType="touchUpInside" id="Evj-MA-2xH"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vLy-hw-ea8">
+                            <rect key="frame" x="9" y="166" width="51" height="22"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <state key="normal" backgroundImage="video_capture.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="btnCaptureAction:" destination="-1" eventType="touchUpInside" id="MUW-gb-Mb2"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="69" id="UKu-eT-nqm"/>
+                    </constraints>
+                    <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="XZa-N4-NGm" secondAttribute="trailing" id="3gE-hg-5Tn"/>
+                <constraint firstItem="ai3-Ct-MEh" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="5kL-zS-kYl"/>
+                <constraint firstItem="o8T-gx-L8S" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="9Y4-U8-Ucj"/>
+                <constraint firstItem="cez-eO-7u9" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Ev8-I0-Fgj"/>
+                <constraint firstItem="XZa-N4-NGm" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="J6Z-GT-lfd"/>
+                <constraint firstItem="ai3-Ct-MEh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Jfv-nI-j9z"/>
+                <constraint firstAttribute="bottom" secondItem="cez-eO-7u9" secondAttribute="bottom" id="MaM-VM-MW9"/>
+                <constraint firstAttribute="bottom" secondItem="ai3-Ct-MEh" secondAttribute="bottom" id="WBy-zw-urn"/>
+                <constraint firstAttribute="trailing" secondItem="cez-eO-7u9" secondAttribute="trailing" id="dvz-M9-sUk"/>
+                <constraint firstAttribute="bottom" secondItem="XZa-N4-NGm" secondAttribute="bottom" id="nYg-eG-ki6"/>
+                <constraint firstAttribute="trailing" secondItem="o8T-gx-L8S" secondAttribute="trailing" id="onI-yb-QPV"/>
+                <constraint firstItem="cez-eO-7u9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="pNf-qb-Uxc"/>
+                <constraint firstItem="o8T-gx-L8S" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="rSb-OK-np9"/>
+                <constraint firstAttribute="trailing" secondItem="ai3-Ct-MEh" secondAttribute="trailing" id="s9Z-nd-20N"/>
+            </constraints>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="video_capture.png" width="51" height="22"/>
+        <image name="video_voice_close.png" width="51" height="22"/>
+        <image name="video_voice_open.png" width="51" height="22"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

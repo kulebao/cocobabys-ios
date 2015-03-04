@@ -14,15 +14,14 @@
 #import "CSKuleServerUrls.h"
 #import "CSKulePreferences.h"
 #import "CSKuleInterpreter.h"
+#import "hm_sdk.h"
 
 @interface CSKuleEngine : NSObject
 @property (strong, nonatomic) CSKulePreferences* preferences;
-@property (strong, nonatomic) CSKuleBPushInfo* baiduPushInfo;
 @property (strong, nonatomic) CSKuleLoginInfo* loginInfo;
 
 @property (strong, nonatomic) NSArray* relationships;
 @property (strong, nonatomic) CSKuleRelationshipInfo* currentRelationship;
-@property (strong, nonatomic) NSArray* employees;
 
 @property (strong, nonatomic, readonly) UIApplication* application;
 
@@ -33,6 +32,8 @@
 @property (nonatomic, assign) NSInteger badgeOfAssignment;
 @property (nonatomic, assign) NSInteger badgeOfChating;
 @property (nonatomic, assign) NSInteger badgeOfAssess;
+
+@property (nonatomic, assign) server_id hmServerId;
 
 #pragma mark - application
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
@@ -147,19 +148,39 @@
                            success:(SuccessResponseHandler)success
                            failure:(FailureResponseHandler)failure;
 
-- (void)reqGetChatingMsgsOfKindergarten:(NSInteger)kindergarten
-                                   from:(NSInteger)fromId
-                                     to:(NSInteger)toId
-                                   most:(NSInteger)most
-                                success:(SuccessResponseHandler)success
-                                failure:(FailureResponseHandler)failure;
+//- (void)reqGetChatingMsgsOfKindergarten:(NSInteger)kindergarten
+//                                   from:(long long)fromId
+//                                     to:(long long)toId
+//                                   most:(NSInteger)most
+//                                success:(SuccessResponseHandler)success
+//                                failure:(FailureResponseHandler)failure;
 
-- (void)reqSendChatingMsgs:(NSString*)msgBody
-                 withImage:(NSString*)imgUrl
-            toKindergarten:(NSInteger)kindergarten
-              retrieveFrom:(long long)fromId
-                   success:(SuccessResponseHandler)success
-                   failure:(FailureResponseHandler)failure;
+- (void)reqSendChatingMsg:(NSString*)msgBody
+                withImage:(NSString*)imgUrl
+           toKindergarten:(NSInteger)kindergarten
+             retrieveFrom:(long long)fromId
+                  success:(SuccessResponseHandler)success
+                  failure:(FailureResponseHandler)failure;
+
+- (void)reqGetTopicMsgsOfKindergarten:(NSInteger)kindergarten
+                                 from:(long long)fromId
+                                   to:(long long)toId
+                                 most:(NSInteger)most
+                              success:(SuccessResponseHandler)success
+                              failure:(FailureResponseHandler)failure;
+
+- (void)reqDeleteTopicMsgsOfKindergarten:(NSInteger)kindergarten
+                                recordId:(long long)msgId
+                                 success:(SuccessResponseHandler)success
+                                 failure:(FailureResponseHandler)failure;
+
+- (void)reqSendTopicMsg:(NSString*)msgBody
+           withMediaUrl:(NSString*)mediaUrl
+            ofMediaType:(NSString*)mediaType
+         toKindergarten:(NSInteger)kindergarten
+           retrieveFrom:(long long)fromId
+                success:(SuccessResponseHandler)success
+                failure:(FailureResponseHandler)failure;
 
 - (void)reqGetAssessesOfChild:(CSKuleChildInfo*)childInfo
                inKindergarten:(NSInteger)kindergarten
@@ -192,5 +213,42 @@
 - (void)reqGetEmployeeListOfKindergarten:(NSInteger)kindergarten
                                  success:(SuccessResponseHandler)success
                                  failure:(FailureResponseHandler)failure;
+
+- (void)reqGetSenderProfileOfKindergarten:(NSInteger)kindergarten
+                               withSender:(CSKuleSenderInfo*)senderInfo
+                                 complete:(void (^)(id obj))complete;
+
+- (void)reqGetHistoryListOfKindergarten:(NSInteger)kindergarten
+                            withChildId:(NSString*)childId
+                               fromDate:(NSDate*)fromDate
+                                 toDate:(NSDate*)toDate
+                                success:(SuccessResponseHandler)success
+                                failure:(FailureResponseHandler)failure;
+
+- (void)reqPostHistoryOfKindergarten:(NSInteger)kindergarten
+                         withChildId:(NSString*)childId
+                         withContent:(NSString*)content
+                    withImageUrlList:(NSArray*)imgUrlList
+                             success:(SuccessResponseHandler)success
+                             failure:(FailureResponseHandler)failure;
+
+- (void)reqDeleteHistoryOfKindergarten:(NSInteger)kindergarten
+                           withChildId:(NSString*)childId
+                              recordId:(long long)msgId
+                               success:(SuccessResponseHandler)success
+                               failure:(FailureResponseHandler)failure;
+
+- (void)reqGetVideoMemberListOfKindergarten:(NSInteger)kindergarten
+                                    success:(SuccessResponseHandler)success
+                                    failure:(FailureResponseHandler)failure;
+
+- (void)reqGetVideoMemberOfKindergarten:(NSInteger)kindergarten
+                           withParentId:(NSString*)parentId
+                                success:(SuccessResponseHandler)success
+                                failure:(FailureResponseHandler)failure;
+
+- (void)reqGetDefaultVideoMemberOfKindergarten:(NSInteger)kindergarten
+                                       success:(SuccessResponseHandler)success
+                                       failure:(FailureResponseHandler)failure;
 
 @end

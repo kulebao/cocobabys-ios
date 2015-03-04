@@ -16,6 +16,8 @@
 @property (strong, nonatomic) CSKuleEngine* engine;
 @property (strong, nonatomic) MBProgressHUD* hud;
 
+@property (nonatomic) BOOL isPlayView;
+
 // - Process
 - (void)gotoLoginProcess;
 - (void)gotoMainProcess;
@@ -24,6 +26,7 @@
 - (void)logout;
 
 // - Alert
+- (void)shortAlert:(NSString*)text;
 - (void)alert:(NSString*)text;
 - (void)alert:(NSString*)text withTitle:(NSString*)title;
 - (void)waitingAlert:(NSString*)text;

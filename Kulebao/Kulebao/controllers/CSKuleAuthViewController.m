@@ -16,7 +16,10 @@
 @interface CSKuleAuthViewController () <EAIntroDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *labNotice;
 @property (weak, nonatomic) IBOutlet UITextField *fieldMobile;
+@property (weak, nonatomic) IBOutlet UIButton *btnDevSetting;
+@property (weak, nonatomic) IBOutlet UILabel *labServerName;
 - (IBAction)onBtnSendClicked:(id)sender;
+- (IBAction)onBtnDevSettingClicked:(id)sender;
 
 @end
 
@@ -39,6 +42,19 @@
     self.navigationItem.title = @"登录账号";
     
     self.fieldMobile.text = gApp.engine.preferences.defaultUsername;
+    
+    if(COCOBABYS_DEV_MODEL) {
+        self.labServerName.hidden = NO;
+        self.btnDevSetting.hidden = NO;
+        
+        NSDictionary* serverInfo = [[CSKulePreferences defaultPreferences] getServerSettings];
+        self.labServerName.text = serverInfo[@"name"];
+    }
+    else {
+        self.labServerName.hidden = YES;
+        self.btnDevSetting.hidden = YES;
+    }
+    
     
     [self showIntroViewsIfNeeded];
 }
@@ -68,6 +84,9 @@
     [self doAuth];
 }
 
+- (IBAction)onBtnDevSettingClicked:(id)sender {
+}
+
 - (void)doAuth {
     NSString* mobile = self.fieldMobile.text;
     if ([mobile isValidMobile]) {
@@ -81,6 +100,13 @@
             NSInteger check_phone_result = [[dataJson valueForKeyNotNull:@"check_phone_result"] integerValue];
             
             switch (check_phone_result) {
+                case PHONE_NUM_IS_FIRST_USE:
+//                {
+//                    [gApp hideAlert];
+//                    CSLog(@"Server says it's inactive: %@", mobile);
+//                    [self performSegueWithIdentifier:@"segue.verifymobile" sender:nil];
+//                }
+//                    break;
                 case PHONE_NUM_IS_ALREADY_BIND:
                 {
                     [gApp hideAlert];
@@ -96,7 +122,6 @@
                 }
                     break;
                     
-                case PHONE_NUM_IS_FIRST_USE:
                 case PHONE_NUM_IS_INVALID:
                 {
                     [gApp alert:@"账号未激活或已过期，请联系幼儿园处理，谢谢。"

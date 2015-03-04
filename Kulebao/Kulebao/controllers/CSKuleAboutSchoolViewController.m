@@ -7,7 +7,7 @@
 //
 
 #import "CSKuleAboutSchoolViewController.h"
-#import "UIImageView+AFNetworking.h"
+#import "UIImageView+WebCache.h"
 #import "CSAppDelegate.h"
 #import <QuartzCore/QuartzCore.h>
 
@@ -112,7 +112,7 @@
             schoolLogo.contentMode = UIViewContentModeScaleAspectFit;
             schoolLogo.clipsToBounds = YES;
             
-            [schoolLogo setImageWithURL:[gApp.engine urlFromPath:_schoolInfo.schoolLogoUrl]];
+            [schoolLogo sd_setImageWithURL:[gApp.engine urlFromPath:_schoolInfo.schoolLogoUrl]];
             [self.scrollView addSubview:schoolLogo];
             yy += kSchoolLogoHeight;
         }

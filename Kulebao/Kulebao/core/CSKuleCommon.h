@@ -44,6 +44,8 @@ enum KuleModule {
     kKuleModuleAssignment,  // 亲子作业
     kKuleModuleChating,     // 家园互动
     kKuleModuleAssess,      // 在园表现
+    kKuleModuleHistory,     // 成长经历
+    kKuleModuleCCTV,        // 看宝贝
     kKuleModuleSize,        // -模块数量-统计
 };
 

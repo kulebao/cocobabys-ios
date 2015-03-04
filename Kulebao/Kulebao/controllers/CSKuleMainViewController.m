@@ -16,12 +16,18 @@
 #import "CSKuleDatePickerViewController.h"
 #import "UIViewController+MJPopupViewController.h"
 #import <AudioToolbox/AudioToolbox.h>
+#import "UIImage+CSExtends.h"
+#import "UIImageView+WebCache.h"
+#import "CSKuleVideoMember.h"
+#import "CSKuleCCTVMainTableViewController.h"
 
 @interface CSKuleMainViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
     UIImagePickerController* _imgPicker;
     CSTextFieldDelegate* _nickFieldDelegate;
     NSMutableArray* _badges;
     NSArray* _moduleInfos;
+    
+    BOOL _actionToCCTV;
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *labSchoolName;
@@ -35,6 +41,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnSchoolInfo;
 
 @property (nonatomic, strong) CSKuleSchoolInfo* schoolInfo;
+@property (nonatomic, strong) CSKuleVideoMember* videoMember;
+@property (nonatomic, strong) CSKuleVideoMember* defaultVideoMember;
 
 - (IBAction)onBtnShowChildMenuListClicked:(id)sender;
 - (IBAction)onBtnSettingsClicked:(id)sender;
@@ -45,6 +53,8 @@
 
 @implementation CSKuleMainViewController
 @synthesize schoolInfo = _schoolInfo;
+@synthesize videoMember = _videoMember;
+@synthesize defaultVideoMember = _defaultVideoMember;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -58,7 +68,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    // Do any additional setup after loading the view.
     self.navigationController.navigationBarHidden = NO;
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"titlebar-1-bg.png"] forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setTitleTextAttributes:@{UITextAttributeFont: [UIFont systemFontOfSize:20], UITextAttributeTextColor:[UIColor whiteColor]}];
@@ -68,6 +78,7 @@
     self.labChildNick.text = nil;
     self.imgChildPortrait.layer.cornerRadius = 6.0;
     self.imgChildPortrait.clipsToBounds = YES;
+    self.btnClassInfo.userInteractionEnabled = NO;
     
     _nickFieldDelegate = [[CSTextFieldDelegate alloc] initWithType:kCSTextFieldDelegateNormal];
     _nickFieldDelegate.maxLength = kKuleNickMaxLength;
@@ -78,7 +89,7 @@
                   forKeyPath:@"currentRelationship"
                      options:NSKeyValueObservingOptionNew
                      context:nil];
-
+    
     [gApp.engine addObserver:self
                   forKeyPath:@"badgeOfNews"
                      options:NSKeyValueObservingOptionNew
@@ -109,9 +120,6 @@
                      context:nil];
     
     [self performSelector:@selector(getRelationshipInfos) withObject:nil afterDelay:0];
-    if (gApp.engine.employees == nil) {
-        [self performSelector:@selector(getEmployeeInfos) withObject:nil afterDelay:0];
-    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -137,13 +145,21 @@
         [self updateUI:YES];
         CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
         if (currentChild) {
-            [gApp.engine checkUpdatesOfNews];
-            [gApp.engine checkUpdatesOfRecipe];
-            [gApp.engine checkUpdatesOfCheckin];
-            [gApp.engine checkUpdatesOfSchedule];
-            [gApp.engine checkUpdatesOfAssignment];
-            [gApp.engine checkUpdatesOfChating];
-            [gApp.engine checkUpdatesOfAssess];
+            if ([gApp.engine.loginInfo.memberStatus isEqualToString:@"free"]) {
+                [gApp.engine checkUpdatesOfNews];
+                [gApp.engine checkUpdatesOfCheckin];
+            }
+            else if ([gApp.engine.loginInfo.memberStatus isEqualToString:@"paid"]) {
+                [gApp.engine checkUpdatesOfNews];
+                [gApp.engine checkUpdatesOfRecipe];
+                [gApp.engine checkUpdatesOfCheckin];
+                [gApp.engine checkUpdatesOfSchedule];
+                [gApp.engine checkUpdatesOfAssignment];
+                [gApp.engine checkUpdatesOfChating];
+                [gApp.engine checkUpdatesOfAssess];
+                
+                [self performSelector:@selector(reloadVideoMember) withObject:nil afterDelay:0];
+            }
         }
     }
     else if((object == gApp.engine) && [keyPath isEqualToString:@"badgeOfNews"]) {
@@ -229,6 +245,10 @@
     [[BaiduMobStat defaultStat] pageviewStartWithName:cName];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+}
+
 -(void) viewDidDisappear:(BOOL)animated
 {
     NSString* cName = [NSString stringWithFormat:@"%@", self.navigationItem.title, nil];
@@ -240,6 +260,25 @@
     if ([segue.identifier isEqualToString:@"segue.aboutschool"]) {
         CSKuleAboutSchoolViewController* destCtrl = segue.destinationViewController;
         destCtrl.schoolInfo = _schoolInfo;
+    }
+    else if ([segue.identifier isEqualToString:@"segue.cctv"]) {
+        CSKuleCCTVMainTableViewController* destCtrl = segue.destinationViewController;
+        if (self.videoMember.account.length > 0
+            && self.videoMember.password.length > 0) {
+            destCtrl.videoMember = self.videoMember;
+            destCtrl.isTrail = NO;
+        }
+        else if (self.defaultVideoMember.account.length > 0
+                 && self.defaultVideoMember.password.length > 0) {
+            destCtrl.videoMember = self.defaultVideoMember;
+            destCtrl.isTrail = YES;
+            //[gApp alert:@"宝宝所在的幼儿园暂未开通此功能，该实时视频仅供演示，如需要开通，请联系幼儿园。"];
+        }
+        else {
+            
+        }
+        
+        _actionToCCTV = NO;
     }
 }
 
@@ -254,6 +293,8 @@
       @[@"亲子作业", @"btn-func-8.png", @(kKuleModuleAssignment)],
       @[@"家园互动", @"btn-func-7.png", @(kKuleModuleChating)],
       @[@"在园表现", @"btn-func-4.png", @(kKuleModuleAssess)],
+      @[@"成长经历", @"exp.png", @(kKuleModuleHistory)],
+      @[@"看宝贝", @"watch.png", @(kKuleModuleCCTV)],
       ];
     
     _badges = [NSMutableArray arrayWithCapacity:kKuleModuleSize];
@@ -317,6 +358,7 @@
     CSKuleChildInfo* childInfo = gApp.engine.currentRelationship.child;
     if (childInfo) {
         CSLog(@"childInfo:%@", childInfo);
+        CSLog(@"parentInfo:%@", gApp.engine.currentRelationship.parent);
         self.labClassName.text = childInfo.className;
         self.labSchoolName.text = gApp.engine.loginInfo.schoolName;
         self.labChildNick.text = childInfo.displayNick;
@@ -324,24 +366,19 @@
         NSURL* qiniuImgUrl = [gApp.engine urlFromPath:childInfo.portrait];
         qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/256/h/256"];
         
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:qiniuImgUrl];
-        [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
+        SDWebImageOptions options = SDWebImageRetryFailed | SDWebImageLowPriority |SDWebImageAllowInvalidSSLCertificates;
         
         if (reloadPortrait) {
-            request.cachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
-        }
-        else {
-            request.cachePolicy = NSURLRequestUseProtocolCachePolicy;
+            options = options | SDWebImageRefreshCached;
         }
         
         UIImage* placeholderImage = [UIImage imageNamed:@"default_child_head_icon.png"];
         if (self.imgChildPortrait.image) {
             placeholderImage = self.imgChildPortrait.image;
         }
-        [self.imgChildPortrait setImageWithURLRequest:request
-                                     placeholderImage:placeholderImage
-                                              success:nil
-                                              failure:nil];
+        [self.imgChildPortrait  sd_setImageWithURL:qiniuImgUrl
+                                  placeholderImage:placeholderImage
+                                           options:options];
         
     }
     else {
@@ -351,9 +388,9 @@
 
 - (void)doChangeChildNick {
     NSString *title = @"设置宝宝昵称";
-	NSString *message = @"";
-	
-	AHAlertView *alert = [[AHAlertView alloc] initWithTitle:title message:message];
+    NSString *message = @"";
+    
+    AHAlertView *alert = [[AHAlertView alloc] initWithTitle:title message:message];
     alert.alertViewStyle = AHAlertViewStylePlainTextInput;
     
     UITextField* field = [alert textFieldAtIndex:0];
@@ -365,14 +402,14 @@
     field.backgroundColor = [UIColor clearColor];
     field.font = [UIFont systemFontOfSize:14];
     field.delegate = _nickFieldDelegate;
-
-    [alert setCancelButtonTitle:@"取消" block:^{
-
-	}];
     
-	[alert addButtonWithTitle:@"确定" block:^{
+    [alert setCancelButtonTitle:@"取消" block:^{
+        
+    }];
+    
+    [alert addButtonWithTitle:@"确定" block:^{
         [self doUpdateChildNick:field.text];
-	}];
+    }];
     
     [alert show];
 }
@@ -483,7 +520,7 @@
                              inKindergarten:gApp.engine.loginInfo.schoolId
                                     success:sucessHandler
                                     failure:failureHandler];
-
+            
         }
         else {
             [gApp alert:@"没有宝宝信息。"];
@@ -505,7 +542,7 @@
 }
 
 - (void)doChangePortraitFromCamera {
-#if TARGET_IPHONE_SIMULATOR 
+#if TARGET_IPHONE_SIMULATOR
 #else
     _imgPicker = [[UIImagePickerController alloc] init];
     _imgPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
@@ -565,7 +602,8 @@
         NSString* name = [dataJson valueForKeyNotNull:@"name"];
         NSString* portrait = [NSString stringWithFormat:@"%@/%@", kQiniuDownloadServerHost, name];
         //self.imgChildPortrait.image = img;
-        [self doUpdateChildPortrait:portrait withImage:img];
+        UIImage* cropImg = [img imageByScalingAndCroppingForSize:CGSizeMake(256, 256)];
+        [self doUpdateChildPortrait:portrait withImage:cropImg];
     };
     
     FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -627,6 +665,47 @@
 }
 
 #pragma mark - UI Actions
+- (BOOL)checkModuleTypeForMemberStatus:(NSInteger)moduleType {
+    BOOL ok = NO;
+    if ([gApp.engine.loginInfo.memberStatus isEqualToString:@"free"]) {
+        switch (moduleType) {
+            case kKuleModuleNews:       // 校园公告
+            case kKuleModuleCheckin:    // 接送信息
+                ok = YES;
+                break;
+            case kKuleModuleRecipe:     // 每周食谱
+                [gApp alert:@"你想知道宝贝每天的膳食吗？赶快联系幼儿园开通此功能吧！"];
+                break;
+            case kKuleModuleSchedule:    // 课程表
+                [gApp alert:@"你想知道宝贝每天的学习内容吗？赶快联系幼儿园开通此功能吧！"];
+                break;
+            case kKuleModuleAssignment:  // 亲子作业
+                [gApp alert:@"你想看看老师布置了什么亲子作业吗？赶快联系幼儿园开通此功能吧！"];
+                break;
+            case kKuleModuleChating:     // 家园互动
+                [gApp alert:@"你想随时和老师零距离沟通吗？赶快联系幼儿园开通此功能吧！"];
+                break;
+            case kKuleModuleAssess:      // 在园表现
+                [gApp alert:@"你想看看老师对宝贝在幼儿园的表现有什么评价吗？赶快联系幼儿园开通此功能吧！"];
+                break;
+            case kKuleModuleHistory:     // 成长经历
+                [gApp alert:@"你想记录下宝贝在幼儿园的点点滴滴吗？赶快联系幼儿园开通此功能吧！"];
+                break;
+            case kKuleModuleCCTV:        // 看宝贝
+                [gApp alert:@"你想随时看到宝贝在做什么吗？赶快联系幼儿园开通此功能吧！"];
+                break;
+            default:
+                ok = NO;
+                break;
+        }
+    }
+    else if ([gApp.engine.loginInfo.memberStatus isEqualToString:@"paid"]) {
+        ok = YES;
+    }
+    
+    return ok;
+}
+
 - (void)onBtnModulesClicked:(UIButton*)sender {
     NSInteger moduleType = sender.tag;
     
@@ -638,38 +717,57 @@
         @"segue.assignment",
         @"segue.chating",
         @"segue.assess",
+        @"segue.history",
+        @"segue.cctv",
     };
     
-    if (moduleType < kKuleModuleSize) {
-        [self performSegueWithIdentifier:segueNames[moduleType] sender:nil];
-        
-        switch (moduleType) {
-            case kKuleModuleNews:
-                gApp.engine.badgeOfNews = 0;
-                break;
-            case kKuleModuleRecipe:
-                gApp.engine.badgeOfRecipe = 0;
-                break;
-            case kKuleModuleCheckin:
-                gApp.engine.badgeOfCheckin = 0;
-                break;
-            case kKuleModuleSchedule:
-                gApp.engine.badgeOfSchedule = 0;
-                break;
-            case kKuleModuleAssignment:
-                gApp.engine.badgeOfAssignment = 0;
-                break;
-            case kKuleModuleChating:
-                gApp.engine.badgeOfChating = 0;
-                break;
-            case kKuleModuleAssess:
-                gApp.engine.badgeOfAssess = 0;
-                break;
-            default:
-                break;
+    if (moduleType < kKuleModuleSize && moduleType < sizeof(segueNames)) {
+        if ([self checkModuleTypeForMemberStatus:moduleType]) {
+            switch (moduleType) {
+                case kKuleModuleNews:
+                    gApp.engine.badgeOfNews = 0;
+                    break;
+                case kKuleModuleRecipe:
+                    gApp.engine.badgeOfRecipe = 0;
+                    break;
+                case kKuleModuleCheckin:
+                    gApp.engine.badgeOfCheckin = 0;
+                    break;
+                case kKuleModuleSchedule:
+                    gApp.engine.badgeOfSchedule = 0;
+                    break;
+                case kKuleModuleAssignment:
+                    gApp.engine.badgeOfAssignment = 0;
+                    break;
+                case kKuleModuleChating:
+                    gApp.engine.badgeOfChating = 0;
+                    break;
+                case kKuleModuleAssess:
+                    gApp.engine.badgeOfAssess = 0;
+                    break;
+                case kKuleModuleCCTV: {
+                    if (self.videoMember.account.length > 0
+                        && self.videoMember.password.length > 0) {
+                    }
+                    else if (self.defaultVideoMember.account.length > 0
+                             && self.defaultVideoMember.password.length > 0) {
+                    }
+                    else {
+                        _actionToCCTV = YES;
+                        [self performSelector:@selector(reloadVideoMember) withObject:nil afterDelay:0];
+                        return;
+                    }
+                    break;
+                }
+                default:
+                    break;
+            }
+            
+            [self performSegueWithIdentifier:segueNames[moduleType] sender:nil];
         }
-//        JSBadgeView *badgeView = _badges[moduleType];
-//        badgeView.badgeText = nil;
+        else {
+            //            [gApp alert:@"权限不足，请联系幼儿园开通权限，谢谢。"];
+        }
     }
 }
 
@@ -725,32 +823,79 @@
                                   failure:failureHandler];
 }
 
-- (void)getEmployeeInfos {
+- (void)reloadVideoMember {
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
-        NSMutableArray* employeeInfos = [NSMutableArray array];
-        
-        for (id employeeInfoJson in dataJson) {
-            CSKuleEmployeeInfo* employeeInfo = [CSKuleInterpreter decodeEmployeeInfo:employeeInfoJson];
-            [employeeInfos addObject:employeeInfo];
-        }
-        
-        gApp.engine.employees = [NSArray arrayWithArray:employeeInfos];
+        self.videoMember = [CSKuleInterpreter decodeVideoMember:dataJson];
         [gApp hideAlert];
+        if(_actionToCCTV) {
+            [self performSegueWithIdentifier:@"segue.cctv" sender:nil];
+        }
     };
     
     FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
         CSLog(@"failure:%@", error);
-        [gApp alert:[error localizedDescription]];
+        [gApp hideAlert];
+        [self performSelector:@selector(reloadDefaultVideoMember) withObject:nil afterDelay:0];
     };
     
-    [gApp waitingAlert:@"获取信息..."];
-    [gApp.engine reqGetEmployeeListOfKindergarten:gApp.engine.loginInfo.schoolId
-                                          success:sucessHandler
-                                          failure:failureHandler];
+    if(_actionToCCTV) {
+        [gApp waitingAlert:@"请求数据中"];
+    }
+    [gApp.engine reqGetVideoMemberOfKindergarten:gApp.engine.loginInfo.schoolId
+                                    withParentId:gApp.engine.currentRelationship.parent.parentId
+                                         success:sucessHandler
+                                         failure:failureHandler];
 }
+
+- (void)reloadDefaultVideoMember {
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+        self.defaultVideoMember = [CSKuleInterpreter decodeVideoMember:dataJson];
+        [gApp hideAlert];
+        if(_actionToCCTV) {
+            [self performSegueWithIdentifier:@"segue.cctv" sender:nil];
+        }
+    };
+    
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        CSLog(@"failure:%@", error);
+        [gApp alert:@"还未开通看宝贝功能，该功能可以让家长通过视频，实时查看孩子在幼儿园的动态,如有需要请联系幼儿园开通。"];
+    };
+    
+    if(_actionToCCTV) {
+        [gApp waitingAlert:@"请求数据中"];
+    }
+    [gApp.engine reqGetDefaultVideoMemberOfKindergarten:gApp.engine.loginInfo.schoolId
+                                                success:sucessHandler
+                                                failure:failureHandler];
+}
+
+//- (void)getEmployeeInfos {
+//    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+//        NSMutableArray* employeeInfos = [NSMutableArray array];
+//
+//        for (id employeeInfoJson in dataJson) {
+//            CSKuleEmployeeInfo* employeeInfo = [CSKuleInterpreter decodeEmployeeInfo:employeeInfoJson];
+//            [employeeInfos addObject:employeeInfo];
+//        }
+//
+//        gApp.engine.employees = [NSArray arrayWithArray:employeeInfos];
+//        [gApp hideAlert];
+//    };
+//
+//    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+//        CSLog(@"failure:%@", error);
+//        [gApp alert:[error localizedDescription]];
+//    };
+//
+//    [gApp waitingAlert:@"获取信息..."];
+//    [gApp.engine reqGetEmployeeListOfKindergarten:gApp.engine.loginInfo.schoolId
+//                                          success:sucessHandler
+//                                          failure:failureHandler];
+//}
 
 - (void)showBanner:(NSString*)msg {
     CSAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    
     ALAlertBannerStyle randomStyle = ALAlertBannerStyleNotify;
     ALAlertBannerPosition position = ALAlertBannerPositionUnderNavBar;
     ALAlertBanner *banner = [ALAlertBanner alertBannerForView:appDelegate.window
@@ -759,11 +904,10 @@
                                                         title:@"您有新的通知"
                                                      subtitle:msg
                                                   tappedBlock:^(ALAlertBanner *alertBanner) {
-                                                      CSLog(@"tapped!");
                                                       [alertBanner hide];
                                                   }];
     
-    banner.secondsToShow = 3;
+    banner.secondsToShow = 2;
     banner.showAnimationDuration = 0.3;
     banner.hideAnimationDuration = 0.3;
     [banner show];

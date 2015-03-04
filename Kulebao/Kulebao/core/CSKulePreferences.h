@@ -21,11 +21,18 @@
 @property (nonatomic, strong) CSKuleLoginInfo* loginInfo;
 @property (nonatomic, strong, readonly) NSMutableDictionary* historyAccounts; // {mobile:date,}
 
+@property (nonatomic, readonly) BOOL enabledTest;
+
 + (id)defaultPreferences;
 
 - (void)addHistoryAccount:(NSString*)account;
 
 - (NSTimeInterval)timestampOfModule:(NSInteger)moduleType forChild:(NSString*)childId;
+
 - (void)setTimestamp:(NSTimeInterval)timestamp ofModule:(NSInteger)moduleType forChild:(NSString*)childId;
+
+- (void)setServerSettings:(NSDictionary*)settings;
+- (NSDictionary*)getServerSettings;
+- (NSArray*)getSupportServerSettingsList;
 
 @end

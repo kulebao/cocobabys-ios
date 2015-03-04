@@ -16,6 +16,7 @@
 @synthesize username = _username;
 @synthesize schoolId = _schoolId;
 @synthesize errorCode = _errorCode;
+@synthesize memberStatus = _memberStatus;
 
 - (NSString*)description {
     NSDictionary* meta = @{@"accessToken": _accessToken,
@@ -23,7 +24,8 @@
                            @"schoolName": _schoolName,
                            @"username": _username,
                            @"schoolId": @(_schoolId),
-                           @"errorCode": @(_errorCode)};
+                           @"errorCode": @(_errorCode),
+                           @"memberStatus": _memberStatus ? _memberStatus : @""};
     
     NSString* desc = [NSString stringWithFormat:@"%@", meta];
     return desc;

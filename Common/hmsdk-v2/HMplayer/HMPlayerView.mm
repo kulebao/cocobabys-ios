@@ -173,7 +173,12 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
 {
     if(my_node == NULL) return;
     
-    if (hm_pu_login_ex(my_node, &myID) == HMEC_OK)
+    CONNECT_INFO connectInfo;
+    connectInfo.cm = CM_DEF;
+    connectInfo.cp = CPI_DEF;
+    connectInfo.ct = CT_MOBILE;
+    
+    if (hm_pu_login_ex(my_node, &connectInfo, &myID) == HMEC_OK)
     {
         
         if (localVideoHandle == NULL) {
@@ -254,7 +259,7 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
     
     
     
-    if (hm_pu_login(ip, port, sn, username, pass, &myID)== HMEC_OK)
+    if (hm_pu_login(ip, port, sn, username, pass, CT_MOBILE, &myID)== HMEC_OK)
     {
         
         if (localVideoHandle == NULL)
@@ -368,15 +373,15 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
 - (void)HMRundisplayThread
 {
     [[NSThread currentThread] setName: @"Run display thread"];
-	int           	nLen;			//数据长度
-	const char		*pdata = NULL;			//数据区
+	NSInteger nLen;			//数据长度
+    char* pdata = NULL;			//数据区
     
     if (localVideoHandle == NULL) return;
     while (IsRunning)
     {
         nLen = 0;
         [videoLock lock];
-        pdata = [videoBuffer dequeue:&nLen];
+        pdata = (char*)[videoBuffer dequeue:&nLen];
         if (pdata == NULL) {
             [videoLock unlock];
             continue;

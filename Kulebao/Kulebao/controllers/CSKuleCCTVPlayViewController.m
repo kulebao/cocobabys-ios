@@ -58,7 +58,12 @@ static void pCall (user_data data, P_FRAME_DATA frame, hm_result result) {
     self.navigationItem.title = _deviceMeta[@"name"];
     _nodeHandle = [_deviceMeta[@"node_handle"] pointerValue];
     
-    hm_pu_login_ex(_nodeHandle, &_userId);
+    CONNECT_INFO connectInfo;
+    connectInfo.cm = CM_DEF;
+    connectInfo.cp = CPI_DEF;
+    connectInfo.ct = CT_MOBILE;
+    
+    hm_pu_login_ex(_nodeHandle, &connectInfo, &_userId);
     
     hm_video_init(HME_VE_H264, &_videoCodecHandle);
     

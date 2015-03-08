@@ -300,7 +300,6 @@
 		0934F09618BF5B0800E30ECA /* settings-row-bg-top.png in Resources */ = {isa = PBXBuildFile; fileRef = 0934F04A18BF5B0800E30ECA /* settings-row-bg-top.png */; };
 		0934F09718BF5B0800E30ECA /* settings-row-bg-top@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0934F04B18BF5B0800E30ECA /* settings-row-bg-top@2x.png */; };
 		093904DD18BDDA90006E8F82 /* CSKuleRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 093904DC18BDDA90006E8F82 /* CSKuleRootViewController.m */; };
-		093C20F1199915B400A12F1A /* libHM_hmsdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 093C20EF199915B400A12F1A /* libHM_hmsdk.a */; };
 		093CD6B618D9771D0025972C /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 093CD6B518D9771D0025972C /* UIImageView+AFNetworking.m */; };
 		093CD6B918D986A20025972C /* CSKuleAssessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 093CD6B818D986A20025972C /* CSKuleAssessViewController.m */; };
 		093D89C91999BF4D006B013B /* CSKuleHistoryMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 093D89C81999BF4D006B013B /* CSKuleHistoryMainViewController.m */; };
@@ -347,6 +346,10 @@
 		09A9EBD218C090E200D83119 /* CSKuleAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A9EBD118C090E200D83119 /* CSKuleAuthViewController.m */; };
 		09A9EBD518C0A01B00D83119 /* CSKuleMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A9EBD418C0A01B00D83119 /* CSKuleMainViewController.m */; };
 		09A9EBD818C0A02800D83119 /* CSKuleSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A9EBD718C0A02800D83119 /* CSKuleSettingsViewController.m */; };
+		09AC5A311AAC95D900C88ECE /* libBPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09BA1BEF18BB334900760182 /* libBPush.a */; };
+		09AC5A321AAC9BA200C88ECE /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09F74CCF1997D10C001555D0 /* libopencore-amrnb.a */; };
+		09AC5A331AAC9BAA00C88ECE /* libHM_hmsdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 093C20EF199915B400A12F1A /* libHM_hmsdk.a */; };
+		09AC5A361AAC9D9000C88ECE /* BPushClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 09AC5A351AAC9D9000C88ECE /* BPushClass.m */; };
 		09BA1B9118BB2AB300760182 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09BA1B9018BB2AB300760182 /* Foundation.framework */; };
 		09BA1B9318BB2AB300760182 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09BA1B9218BB2AB300760182 /* CoreGraphics.framework */; };
 		09BA1B9518BB2AB300760182 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09BA1B9418BB2AB300760182 /* UIKit.framework */; };
@@ -372,7 +375,6 @@
 		09BA1BE718BB2FC700760182 /* whiteArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 09BA1BDB18BB2FC700760182 /* whiteArrow.png */; };
 		09BA1BE818BB2FC700760182 /* whiteArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09BA1BDC18BB2FC700760182 /* whiteArrow@2x.png */; };
 		09BA1BEA18BB2FE100760182 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09BA1BE918BB2FE100760182 /* QuartzCore.framework */; };
-		09BA1BFC18BB334900760182 /* libBPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09BA1BEF18BB334900760182 /* libBPush.a */; };
 		09BA1BFD18BB334900760182 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 09BA1BF218BB334900760182 /* Base64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		09BA1BFE18BB334900760182 /* GzipCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 09BA1BF518BB334900760182 /* GzipCompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		09BA1BFF18BB334900760182 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 09BA1BF718BB334900760182 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -520,7 +522,6 @@
 		09F74CC21997C4F3001555D0 /* top_btn_press.9.png in Resources */ = {isa = PBXBuildFile; fileRef = 09F74C661997C4F3001555D0 /* top_btn_press.9.png */; };
 		09F74CC31997C4F3001555D0 /* write_chat.png in Resources */ = {isa = PBXBuildFile; fileRef = 09F74C671997C4F3001555D0 /* write_chat.png */; };
 		09F74CC51997CB1E001555D0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09F74CC41997CB1E001555D0 /* AVFoundation.framework */; };
-		09F74CD11997D10C001555D0 /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09F74CCF1997D10C001555D0 /* libopencore-amrnb.a */; };
 		09F74CD21997D10C001555D0 /* libopencore-amrwb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09F74CD01997D10C001555D0 /* libopencore-amrwb.a */; };
 		09F74CDF1997D14D001555D0 /* amrFileCodec.m in Sources */ = {isa = PBXBuildFile; fileRef = 09F74CDB1997D14D001555D0 /* amrFileCodec.m */; };
 		09F74CE01997D14D001555D0 /* VoiceConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 09F74CDD1997D14D001555D0 /* VoiceConverter.m */; };
@@ -1099,6 +1100,8 @@
 		09A9EBD418C0A01B00D83119 /* CSKuleMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleMainViewController.m; sourceTree = "<group>"; };
 		09A9EBD618C0A02800D83119 /* CSKuleSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleSettingsViewController.h; sourceTree = "<group>"; };
 		09A9EBD718C0A02800D83119 /* CSKuleSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleSettingsViewController.m; sourceTree = "<group>"; };
+		09AC5A341AAC9D9000C88ECE /* BPushClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPushClass.h; sourceTree = "<group>"; };
+		09AC5A351AAC9D9000C88ECE /* BPushClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPushClass.m; sourceTree = "<group>"; };
 		09BA1B8D18BB2AB300760182 /* youlebao.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = youlebao.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09BA1B9018BB2AB300760182 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		09BA1B9218BB2AB300760182 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -1417,16 +1420,16 @@
 				0902782818C9C060002B9644 /* MessageUI.framework in Frameworks */,
 				09F74CD21997D10C001555D0 /* libopencore-amrwb.a in Frameworks */,
 				09BA1C2E18BB412600760182 /* MobileCoreServices.framework in Frameworks */,
+				09AC5A321AAC9BA200C88ECE /* libopencore-amrnb.a in Frameworks */,
+				09AC5A331AAC9BAA00C88ECE /* libHM_hmsdk.a in Frameworks */,
 				09BA1C0818BB34BD00760182 /* SystemConfiguration.framework in Frameworks */,
 				09BA1C0618BB34B500760182 /* libz.dylib in Frameworks */,
 				09BA1C0418BB34B000760182 /* CoreTelephony.framework in Frameworks */,
 				09BA1BEA18BB2FE100760182 /* QuartzCore.framework in Frameworks */,
 				09142DAF18E2713C00E5848F /* libBaiduMobStat.a in Frameworks */,
-				093C20F1199915B400A12F1A /* libHM_hmsdk.a in Frameworks */,
-				09F74CD11997D10C001555D0 /* libopencore-amrnb.a in Frameworks */,
-				09BA1BFC18BB334900760182 /* libBPush.a in Frameworks */,
 				09BA1B9318BB2AB300760182 /* CoreGraphics.framework in Frameworks */,
 				09BA1B9518BB2AB300760182 /* UIKit.framework in Frameworks */,
+				09AC5A311AAC95D900C88ECE /* libBPush.a in Frameworks */,
 				09BA1B9118BB2AB300760182 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2398,6 +2401,8 @@
 		09BA1BF018BB334900760182 /* opensource */ = {
 			isa = PBXGroup;
 			children = (
+				09AC5A341AAC9D9000C88ECE /* BPushClass.h */,
+				09AC5A351AAC9D9000C88ECE /* BPushClass.m */,
 				09BA1BF118BB334900760182 /* Base64.h */,
 				09BA1BF218BB334900760182 /* Base64.m */,
 				09BA1BF318BB334900760182 /* Base64Defines.h */,
@@ -3338,6 +3343,7 @@
 				090E6BDC18EAFDA900F21BA7 /* NSURL+CSKit.m in Sources */,
 				090468F518C6FE1000D0846E /* CSKuleBindInfo.m in Sources */,
 				09FE6B0718C5C23300A840BE /* CSKuleCheckinViewController.m in Sources */,
+				09AC5A361AAC9D9000C88ECE /* BPushClass.m in Sources */,
 				0914E397199FCEBC00276ABA /* UIImage+GIF.m in Sources */,
 				0914E349199FC61600276ABA /* GMGridView.m in Sources */,
 				093CD6B618D9771D0025972C /* UIImageView+AFNetworking.m in Sources */,
@@ -3519,13 +3525,12 @@
 		09BA1BC018BB2AB600760182 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
-				CLANG_CXX_LIBRARY = "compiler-default";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Xinus Wang (MH48YP79V6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xinus Wang (MH48YP79V6)";
+				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xinus Wang (46XA3MUP9B)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Kulebao/youlebao-Prefix.pch";
 				GCC_VERSION = "";
@@ -3533,16 +3538,17 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)/Venders/libBPush",
 					"$(PROJECT_DIR)/Venders/BaiduMobStat",
+					"$(PROJECT_DIR)/Venders/libBPush",
 					"/Users/xinus/xin.github/Kulebao-iPhone/YouJiaoBao/Venders/opencore-amr-0.1.3/lib",
 					"/Users/xinus/xin.github/Kulebao-iPhone/Common/hmsdk-v2",
 				);
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = youlebao;
-				PROVISIONING_PROFILE = "a2810821-3eec-41a6-8cd9-4972f53f2cce";
+				PROVISIONING_PROFILE = "d985c1c8-cb0d-4e09-b18d-a6def46c5171";
 				TARGETED_DEVICE_FAMILY = 1;
-				VALID_ARCHS = armv7;
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -3550,12 +3556,11 @@
 		09BA1BC118BB2AB600760182 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
-				CLANG_CXX_LIBRARY = "compiler-default";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Chengdu Cocobabys Information Technology Co., Ltd. (J7M2ZSPTSZ)";
+				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Chengdu Cocobabys Information Technology Co., Ltd. (J7M2ZSPTSZ)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Kulebao/youlebao-Prefix.pch";
@@ -3564,16 +3569,17 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)/Venders/libBPush",
 					"$(PROJECT_DIR)/Venders/BaiduMobStat",
+					"$(PROJECT_DIR)/Venders/libBPush",
 					"/Users/xinus/xin.github/Kulebao-iPhone/YouJiaoBao/Venders/opencore-amr-0.1.3/lib",
 					"/Users/xinus/xin.github/Kulebao-iPhone/Common/hmsdk-v2",
 				);
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = youlebao;
-				PROVISIONING_PROFILE = "0caf2a00-0aad-4e9b-a366-db94dd374ddd";
+				PROVISIONING_PROFILE = "25904364-9a8a-41d1-8c4d-cd146471596c";
 				TARGETED_DEVICE_FAMILY = 1;
-				VALID_ARCHS = armv7;
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

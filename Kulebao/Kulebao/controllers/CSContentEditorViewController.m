@@ -10,6 +10,11 @@
 #import "GMGridView.h"
 #import "MJPhotoBrowser.h"
 #import "MJPhoto.h"
+#import "CaptureViewController.h"
+#import <MediaPlayer/MediaPlayer.h>
+#import "SBCaptureToolKit.h"
+#import <AVFoundation/AVFoundation.h>
+#import "PlayViewController.h"
 
 @interface CSContentEditorViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GMGridViewDataSource, GMGridViewSortingDelegate, GMGridViewTransformationDelegate, GMGridViewActionDelegate> {
     NSMutableArray* _imageList;
@@ -29,6 +34,7 @@
 - (IBAction)onBtnHideKeyboardClicked:(id)sender;
 - (IBAction)onBtnPhotoFromCamraClicked:(id)sender;
 - (IBAction)onBtnPhotoFromGalleryClicked:(id)sender;
+- (IBAction)onBtnVideoClicked:(id)sender;
 - (IBAction)onBtnFinishClicked:(id)sender;
 
 @end
@@ -109,6 +115,15 @@
     [self presentViewController:_imgPicker animated:YES completion:^{
         
     }];
+}
+
+- (IBAction)onBtnVideoClicked:(id)sender {
+    UINavigationController *navCon = [[UINavigationController alloc] init];
+    navCon.navigationBarHidden = YES;
+    
+    CaptureViewController *captureViewCon = [[CaptureViewController alloc] initWithNibName:@"CaptureViewController" bundle:nil];
+    [navCon pushViewController:captureViewCon animated:NO];
+    [self presentViewController:navCon animated:YES completion:nil];
 }
 
 - (IBAction)onBtnFinishClicked:(id)sender {

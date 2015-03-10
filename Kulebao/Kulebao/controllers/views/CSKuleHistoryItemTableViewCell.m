@@ -100,9 +100,15 @@
             [_viewImageContainer addSubview:imgView];
         }
         
+        imgView.backgroundColor = [UIColor clearColor];
+
         if ([media.type isEqualToString:@"image"]) {
             [imgView sd_setImageWithURL:[NSURL URLWithString:media.url]
                     placeholderImage:[UIImage imageNamed:@"gallery.png"]];
+        }
+        else if([media.type isEqualToString:@"video"]) {
+            imgView.backgroundColor = [UIColor blackColor];
+            imgView.image = [UIImage imageNamed:@"video_icon.png"];
         }
         else {
             CSLog(@"%@", media.type);

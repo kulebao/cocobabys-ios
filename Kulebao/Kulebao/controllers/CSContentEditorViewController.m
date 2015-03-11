@@ -122,9 +122,11 @@
     navCon.navigationBarHidden = YES;
     
     CaptureViewController *captureViewCon = [[CaptureViewController alloc] initWithNibName:@"CaptureViewController" bundle:nil];
+    captureViewCon.delegate = self;
     [navCon pushViewController:captureViewCon animated:NO];
     [self presentViewController:navCon animated:YES completion:nil];
 }
+
 
 - (IBAction)onBtnFinishClicked:(id)sender {
     [self.textContent resignFirstResponder];
@@ -286,4 +288,12 @@
 
 - (IBAction)onFieldDidEndOnExit:(id)sender {
 }
+
+#pragma mark - CaptureViewControllerDelegate
+- (void)captureViewController:(CaptureViewController *)ctrl didFinishMergingVideosToOutPutFileAtURL:(NSURL *)outputFileURL {
+    if ([_delegate respondsToSelector:@selector(contentEditorViewController:finishWithVideo:)] && outputFileURL) {
+        [_delegate contentEditorViewController:self finishWithVideo:outputFileURL];
+    }
+}
+
 @end

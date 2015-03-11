@@ -21,8 +21,8 @@
 
 #define BG_COLOR color(11, 11, 11, 1)
 
-#define INDICATOR_W 16
-#define INDICATOR_H 22
+#define INDICATOR_W 2
+#define INDICATOR_H 1
 
 #define TIMER_INTERVAL 1.0f
 

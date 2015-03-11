@@ -229,6 +229,7 @@
                          withChildId:(NSString*)childId
                          withContent:(NSString*)content
                     withImageUrlList:(NSArray*)imgUrlList
+                        withVideoUrl:(NSString*)videoUrl
                              success:(SuccessResponseHandler)success
                              failure:(FailureResponseHandler)failure;
 

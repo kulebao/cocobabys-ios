@@ -257,7 +257,11 @@
 }
 
 - (void)pressSendButton {
-    
+    if ([_delegate respondsToSelector:@selector(captureViewController:didFinishMergingVideosToOutPutFileAtURL:)]
+        && self.videoFileURL) {
+        [_delegate captureViewController:self didFinishMergingVideosToOutPutFileAtURL:self.videoFileURL];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 - (void)pressSwitchButton

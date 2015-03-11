@@ -13,4 +13,13 @@
 
 @interface CaptureViewController : UIViewController <SBVideoRecorderDelegate, UIAlertViewDelegate>
 
+@property (nonatomic, weak) id delegate;
+
+@end
+
+@protocol CaptureViewControllerDelegate <NSObject>
+
+//recorder完成视频的合成
+- (void)captureViewController:(CaptureViewController *)ctrl didFinishMergingVideosToOutPutFileAtURL:(NSURL *)outputFileURL;
+
 @end

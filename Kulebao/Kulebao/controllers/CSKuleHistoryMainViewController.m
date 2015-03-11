@@ -21,6 +21,8 @@
     NSMutableArray* _imageUrlList;
     NSMutableArray* _imageList;
     NSString* _historyContent;
+    NSString* _videoUrl;
+    NSURL* _videoFileUrl;
 }
 @property (weak, nonatomic) IBOutlet UILabel *labTitle;
 @property (weak, nonatomic) IBOutlet UIButton *btnLeft;
@@ -153,6 +155,16 @@
     }
 }
 
+- (void)contentEditorViewController:(CSContentEditorViewController*)ctrl
+                    finishWithVideo:(NSURL*)videoLocalUrl {
+    _videoFileUrl = videoLocalUrl;
+    _videoUrl = nil;
+    
+    if (_videoFileUrl) {
+        [self doUploadVideo];
+    }
+}
+
 - (void)doUploadImage {
     UIImage* img = [_imageList firstObject];
     if (img) {
@@ -187,6 +199,32 @@
     }
 }
 
+- (void)doUploadVideo {
+    NSData* videoData = [NSData dataWithContentsOfURL:_videoFileUrl];
+    
+    NSString* videoFileName = [NSString stringWithFormat:@"history_video/%@/topic_%@/%@.mp4",
+                             @(gApp.engine.loginInfo.schoolId),
+                             gApp.engine.currentRelationship.child.childId,
+                             @((long long)[[NSDate date] timeIntervalSince1970]*1000)];
+    
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+        _videoUrl = [NSString stringWithFormat:@"%@/%@", kQiniuDownloadServerHost, videoFileName];
+        [self doSendHistory];
+    };
+    
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        CSLog(@"failure:%@", error);
+        [gApp alert:[error localizedDescription]];
+    };
+    
+    [gApp waitingAlert:@"上传视频中"];
+    [gApp.engine reqUploadToQiniu:videoData
+                          withKey:videoFileName
+                         withMime:@""
+                          success:sucessHandler
+                          failure:failureHandler];
+}
+
 - (void)doSendHistory {
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         [EntityHistoryInfoHelper updateEntities:@[dataJson]];
@@ -203,7 +241,11 @@
     
     [gApp.engine reqPostHistoryOfKindergarten:gApp.engine.loginInfo.schoolId
                                   withChildId:gApp.engine.currentRelationship.child.childId
-                                  withContent:_historyContent  withImageUrlList:_imageUrlList success:sucessHandler failure:failureHandler];
+                                  withContent:_historyContent
+                             withImageUrlList:_imageUrlList
+                                 withVideoUrl:_videoUrl
+                                      success:sucessHandler
+                                      failure:failureHandler];
 }
 
 @end

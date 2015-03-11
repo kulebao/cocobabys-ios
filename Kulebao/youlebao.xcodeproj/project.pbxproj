@@ -205,6 +205,7 @@
 		09219A5418C4878600166228 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 09219A4E18C4878600166228 /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
 		09219A5718C48A2100166228 /* CSKuleEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 09219A5618C48A2100166228 /* CSKuleEngine.m */; };
 		09219A5A18C4999C00166228 /* CSKuleLoginInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09219A5918C4999B00166228 /* CSKuleLoginInfo.m */; };
+		092B86F51AAFF01200C9C4F0 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 092B86F41AAFF01200C9C4F0 /* libiconv.dylib */; };
 		0934EFC318BF3AF700E30ECA /* EAIntroPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0934EFC018BF3AF700E30ECA /* EAIntroPage.m */; };
 		0934EFC418BF3AF700E30ECA /* EAIntroView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0934EFC218BF3AF700E30ECA /* EAIntroView.m */; };
 		0934EFCC18BF3D0600E30ECA /* SMPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0934EFC918BF3D0600E30ECA /* SMPageControl.m */; };
@@ -996,6 +997,7 @@
 		09219A5618C48A2100166228 /* CSKuleEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleEngine.m; sourceTree = "<group>"; };
 		09219A5818C4999B00166228 /* CSKuleLoginInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleLoginInfo.h; sourceTree = "<group>"; };
 		09219A5918C4999B00166228 /* CSKuleLoginInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleLoginInfo.m; sourceTree = "<group>"; };
+		092B86F41AAFF01200C9C4F0 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
 		0934EFBF18BF3AF700E30ECA /* EAIntroPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAIntroPage.h; sourceTree = "<group>"; };
 		0934EFC018BF3AF700E30ECA /* EAIntroPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAIntroPage.m; sourceTree = "<group>"; };
 		0934EFC118BF3AF700E30ECA /* EAIntroView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAIntroView.h; sourceTree = "<group>"; };
@@ -1560,6 +1562,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				092B86F51AAFF01200C9C4F0 /* libiconv.dylib in Frameworks */,
 				0979FE311AAF532D00B58F41 /* MediaPlayer.framework in Frameworks */,
 				0979FE2F1AAF532500B58F41 /* CoreMedia.framework in Frameworks */,
 				09C3AC2C199E21D400A6251C /* libc++.dylib in Frameworks */,
@@ -2391,6 +2394,7 @@
 		09BA1B8F18BB2AB300760182 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				092B86F41AAFF01200C9C4F0 /* libiconv.dylib */,
 				0979FE301AAF532D00B58F41 /* MediaPlayer.framework */,
 				0979FE2E1AAF532500B58F41 /* CoreMedia.framework */,
 				09C3AC2A199E217B00A6251C /* libc++abi.dylib */,
@@ -3914,7 +3918,6 @@
 				PRODUCT_NAME = youlebao;
 				PROVISIONING_PROFILE = "d985c1c8-cb0d-4e09-b18d-a6def46c5171";
 				TARGETED_DEVICE_FAMILY = 1;
-				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -3945,7 +3948,6 @@
 				PRODUCT_NAME = youlebao;
 				PROVISIONING_PROFILE = "25904364-9a8a-41d1-8c4d-cd146471596c";
 				TARGETED_DEVICE_FAMILY = 1;
-				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

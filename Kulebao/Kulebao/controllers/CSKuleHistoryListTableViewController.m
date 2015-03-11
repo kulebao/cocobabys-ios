@@ -9,6 +9,7 @@
 #import "CSKuleHistoryListTableViewController.h"
 #import "CSAppDelegate.h"
 #import "CSKuleHistoryItemTableViewCell.h"
+#import "CSKuleHistoryVideoItemTableViewCell.h"
 #import "EntityHistoryInfoHelper.h"
 #import "EntitySenderInfo.h"
 #import "EntityHistoryInfoHelper.h"
@@ -77,19 +78,37 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CSKuleHistoryItemTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"CSKuleHistoryItemTableViewCell" forIndexPath:indexPath];
-    
-    // Configure the cell...
+    UITableViewCell* baseCell = nil;
     EntityHistoryInfo* historyInfo = [_frCtrl objectAtIndexPath:indexPath];
-    cell.historyInfo = historyInfo;
-    cell.delegate = self;
+
     
-    return cell;
+    if ([self isVideoItem:historyInfo]) {
+        CSKuleHistoryVideoItemTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"CSKuleHistoryVideoItemTableViewCell" forIndexPath:indexPath];
+        cell.historyInfo = historyInfo;
+        cell.delegate = self;
+        baseCell = cell;
+    }
+    else {
+        CSKuleHistoryItemTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"CSKuleHistoryItemTableViewCell" forIndexPath:indexPath];
+        
+        // Configure the cell...
+        cell.historyInfo = historyInfo;
+        cell.delegate = self;
+        baseCell = cell;
+    }
+    
+    return baseCell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    CGFloat height = 0;
     EntityHistoryInfo* historyInfo = [_frCtrl objectAtIndexPath:indexPath];
-    CGFloat height = [CSKuleHistoryItemTableViewCell calcHeight:historyInfo];
+    if ([self isVideoItem:historyInfo]) {
+        height = [CSKuleHistoryVideoItemTableViewCell calcHeight:historyInfo];
+    }
+    else {
+        height = [CSKuleHistoryItemTableViewCell calcHeight:historyInfo];
+    }
     return height;
 }
 
@@ -289,5 +308,14 @@
     [self.tableView endUpdates];
 }
 
+- (BOOL)isVideoItem:(EntityHistoryInfo*)historyInfo {
+    BOOL ret = NO;
+    if (historyInfo.medium.count == 1) {
+        CSKuleMediaInfo* media = [historyInfo.medium firstObject];
+        ret = [media.type isEqualToString:@"video"];
+    }
+    
+    return ret;
+}
 
 @end

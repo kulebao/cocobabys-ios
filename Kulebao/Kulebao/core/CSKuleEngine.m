@@ -15,6 +15,7 @@
 #import "ALAlertBannerManager.h"
 #import "ALAlertBanner+Private.h"
 #import "hm_sdk.h"
+#import "TSFileCache.h"
 
 @interface CSKuleEngine() <BPushDelegate> {
     NSMutableDictionary* _senderProfiles;
@@ -210,6 +211,13 @@
 }
 
 - (void)setupEngine {
+    
+    NSString* cachesDirectory = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0];
+    
+    TSFileCache* fileCache = [TSFileCache cacheForURL:[NSURL fileURLWithPath:cachesDirectory isDirectory:YES]];
+    [fileCache prepare:nil];
+    [TSFileCache setSharedInstance:fileCache];
+    
     if (_senderProfiles == nil) {
         _senderProfiles = [NSMutableDictionary dictionary];
     }

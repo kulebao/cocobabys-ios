@@ -58,12 +58,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     [self customizeBackBarItem];
-    
-    NSString* cachesDirectory = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0];
-    
-    _voiceCache = [TSFileCache cacheForURL:[NSURL fileURLWithPath:cachesDirectory isDirectory:YES]];
-    [_voiceCache prepare:nil];
-    [TSFileCache setSharedInstance:_voiceCache];
+
+    _voiceCache = [TSFileCache sharedInstance];
     
     self.tableview.delegate = self;
     self.tableview.dataSource = self;
@@ -815,7 +811,7 @@
 - (void)downloadVoice:(CSKuleTopicMsg*)msg {
     if (msg.media.url.length > 0 && [msg.media.type isEqualToString:@"voice"]) {
         if (![_voiceCache existsDataForKey:msg.media.url.MD5Hash]) {
-            CSKuleURLDownloader* dn = [CSKuleURLDownloader URLDownloader:[NSURL URLWithString:msg.media.url]];
+            CSKuleURLDownloader* dn = [CSKuleURLDownloader audioURLDownloader:[NSURL URLWithString:msg.media.url]];
             [dn start];
         }
     }

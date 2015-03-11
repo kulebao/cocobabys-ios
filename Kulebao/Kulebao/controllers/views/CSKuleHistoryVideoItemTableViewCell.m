@@ -1,50 +1,44 @@
 //
-//  CSKuleHistoryItemTableViewCell.m
+//  CSKuleHistoryVideoItemTableViewCell.m
 //  youlebao
 //
-//  Created by xin.c.wang on 14-8-14.
-//  Copyright (c) 2014年 Cocobabys. All rights reserved.
+//  Created by xin.c.wang on 15/3/12.
+//  Copyright (c) 2015年 Cocobabys. All rights reserved.
 //
 
-#import "CSKuleHistoryItemTableViewCell.h"
+#import "CSKuleHistoryVideoItemTableViewCell.h"
 #import "CSAppDelegate.h"
-#import "EntityMediaInfoHelper.h"
 #import "EntitySenderInfoHelper.h"
-#import "EntityHistoryInfoHelper.h"
-#import "MJPhoto.h"
-#import "MJPhotoBrowser.h"
-#import "UIImageView+WebCache.h"
+#import <QuartzCore/QuartzCore.h>
+#import <AVFoundation/AVFoundation.h>
+#import "CSKuleURLDownloader.h"
+#import "TSFileCache.h"
+#import "NSString+CSKit.h"
+#import "NSString+XHMD5.h"
 
-@interface CSKuleHistoryItemTableViewCell()
+@interface CSKuleHistoryVideoItemTableViewCell()
 @property (weak, nonatomic) IBOutlet UIImageView *imgPortrait;
 @property (weak, nonatomic) IBOutlet UILabel *labName;
 @property (weak, nonatomic) IBOutlet UILabel *labDate;
-@property (weak, nonatomic) IBOutlet UILabel *labContent;
-@property (weak, nonatomic) IBOutlet UIView *viewImageContainer;
+@property (weak, nonatomic) IBOutlet UIView *viewVideoContainer;
+@property (weak, nonatomic) IBOutlet UIButton *btnPlay;
+- (IBAction)onBtnPlayClicked:(id)sender;
+
+@property (strong, nonatomic) AVPlayer *player;
+@property (strong, nonatomic) AVPlayerLayer *playerLayer;
+@property (strong, nonatomic) AVPlayerItem* playerItem;
 
 @property (nonatomic, strong) UITapGestureRecognizer* tapGes;
 @property (nonatomic, strong) UILongPressGestureRecognizer* longPressGes;
 
 @end
 
-@implementation CSKuleHistoryItemTableViewCell
-@synthesize historyInfo = _historyInfo;
-@synthesize tapGes = _tapGes;
-@synthesize delegate = _delegate;
-
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        // Initialization code
-    }
-    return self;
-}
+@implementation CSKuleHistoryVideoItemTableViewCell
 
 - (void)awakeFromNib
 {
     // Initialization code
-    self.viewImageContainer.backgroundColor = [UIColor clearColor];
+    self.viewVideoContainer.backgroundColor = [UIColor clearColor];
     self.imgPortrait.layer.cornerRadius = 4.0;
     self.imgPortrait.clipsToBounds = YES;
     
@@ -52,12 +46,19 @@
     [self addGestureRecognizer:self.longPressGes];
     
     self.tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
-    [self.viewImageContainer addGestureRecognizer:self.tapGes];
+    [self.viewVideoContainer addGestureRecognizer:self.tapGes];
     [self.tapGes requireGestureRecognizerToFail:self.longPressGes];
+    
+    self.viewVideoContainer.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    self.viewVideoContainer.layer.borderWidth = 1;
+    self.viewVideoContainer.layer.cornerRadius = 4.0;
+    self.viewVideoContainer.clipsToBounds = YES;
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(avPlayerItemDidPlayToEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
@@ -76,70 +77,51 @@
     [self updateUI];
 }
 
++ (CGFloat)calcHeight:(EntityHistoryInfo*)historyInfo {
+    return 200;
+}
+
 - (void)updateUI {
     EntitySenderInfo* senderInfo = (EntitySenderInfo*)_historyInfo.sender;
     
     self.labName.text = senderInfo.type;
-    self.labContent.text = _historyInfo.content;
     
     NSDateFormatter* fmt = [[NSDateFormatter alloc] init];
     fmt.dateFormat = @"yyyy-MM-dd HH:mm:ss";
     NSDate* timestamp = [NSDate dateWithTimeIntervalSince1970:_historyInfo.timestamp.doubleValue/1000];
     self.labDate.text = [fmt stringFromDate:timestamp];
     
-    CGSize sz = [self.labContent sizeThatFits:CGSizeMake(230, 999)];
-    self.labContent.frame = CGRectMake(70, 50, sz.width, sz.height);
+    CSKuleMediaInfo* media = _historyInfo.medium.firstObject;
     
-    NSInteger index = 0;
-    for (CSKuleMediaInfo* media in _historyInfo.medium) {
-        NSInteger vTag = 0x2000 + index;
-        UIImageView* imgView = (UIImageView*)[_viewImageContainer viewWithTag:vTag];
-        if (imgView == nil) {
-            imgView = [[UIImageView alloc] initWithFrame:CGRectNull];
-            imgView.tag = vTag;
-            [_viewImageContainer addSubview:imgView];
-        }
-        
-        imgView.backgroundColor = [UIColor clearColor];
+    if (self.player) {
+        [self.player pause];
+    }
 
-        if ([media.type isEqualToString:@"image"]) {
-            [imgView sd_setImageWithURL:[NSURL URLWithString:media.url]
-                    placeholderImage:[UIImage imageNamed:@"gallery.png"]];
-        }
-//        else if([media.type isEqualToString:@"video"]) {
-//            imgView.backgroundColor = [UIColor blackColor];
-//            imgView.image = [UIImage imageNamed:@"video_icon.png"];
-//        }
-        else {
-            CSLog(@"%@", media.type);
-        }
+#if 0
+    TSFileCache* fileCache = [TSFileCache sharedInstance];
+    
+    if (![fileCache existsDataForKey:media.url.MD5HashEx]) {
+        CSKuleURLDownloader* dn = [CSKuleURLDownloader videoURLDownloader:[NSURL URLWithString:media.url]];
+        [dn start];
         
-        imgView.frame = CGRectMake((index%3)* (64+16), (index / 3) * (64+10), 64, 64);
-        imgView.hidden = NO;
-        
-        ++index;
+        self.playerItem = [AVPlayerItem playerItemWithURL:[NSURL URLWithString:media.url]];
     }
-    
-    NSInteger kBaseTag = 0x2000 + index;
-    BOOL con = YES;
-    for (NSInteger i=0; i<100 && con; i++) {
-        NSInteger vTag = kBaseTag + i;
-        UIImageView* imgView = (UIImageView*)[_viewImageContainer viewWithTag:vTag];
-        if (imgView) {
-            imgView.frame = CGRectNull;
-            imgView.image = nil;
-            imgView.hidden = YES;
-        }
-        else {
-            con = NO;
-        }
+    else {
+        self.playerItem = [AVPlayerItem playerItemWithURL:[fileCache localURLForKey:media.url.MD5HashEx]];
     }
+#else
+    self.playerItem = [AVPlayerItem playerItemWithURL:[NSURL URLWithString:media.url]];
+#endif
+    self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
+   
+    if (self.playerLayer) {
+        [self.playerLayer removeFromSuperlayer];
+    }
+    self.playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
+    [self.viewVideoContainer.layer addSublayer:self.playerLayer];
+    self.playerLayer.frame = self.viewVideoContainer.layer.bounds;
     
-    _viewImageContainer.frame = CGRectMake(70, 5+CGRectGetMaxY(self.labContent.frame), 230,
-                                           ((_historyInfo.medium.count + 2) / 3 ) * 70);
-    
-    
-    
+    self.btnPlay.alpha = 1.0f;
     
     // Get Sender avatar and name.
     CSKuleSenderInfo* sender = [CSKuleSenderInfo new];
@@ -182,9 +164,9 @@
                                                   [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
                                                   request.cachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
                                                   [self.imgPortrait setImageWithURLRequest:request
-                                                                     placeholderImage:[UIImage imageNamed:@"chat_head_icon.png"]
-                                                                              success:nil
-                                                                              failure:nil];
+                                                                          placeholderImage:[UIImage imageNamed:@"chat_head_icon.png"]
+                                                                                   success:nil
+                                                                                   failure:nil];
                                               }
                                               else {
                                                   self.imgPortrait.image = [UIImage imageNamed:@"chat_head_icon.png"];
@@ -192,68 +174,46 @@
                                               
                                               self.labName.text = senderName;
                                           }];
-
-}
-
-+ (CGFloat)calcHeight:(CSKuleHistoryInfo*)historyInfo {
-    CGFloat yy = 50;
-    //CGFloat xx = 70;
-    
-    const CGFloat kFixedWidth = 230.0;
-    
-    CGSize sz = [historyInfo.content sizeWithFont:[UIFont systemFontOfSize:14.0]
-                                constrainedToSize:CGSizeMake(kFixedWidth, 9999)];
-    
-    yy += sz.height + 5;
-    
-    yy += ((historyInfo.medium.count + 2) / 3 ) * (64+10) + 2;
-    
-    return yy;
 }
 
 - (void)onLongPress:(UILongPressGestureRecognizer*)ges {
     if (ges.state == UIGestureRecognizerStateEnded) {
         return;
     } else if (ges.state == UIGestureRecognizerStateBegan) {
-        if ([_delegate respondsToSelector:@selector(historyItemTableCellDidLongPress:)]) {
-            [_delegate historyItemTableCellDidLongPress:self];
+        if ([_delegate respondsToSelector:@selector(historyVideoItemTableCellDidLongPress:)]) {
+            [_delegate historyVideoItemTableCellDidLongPress:self];
         }
     }
 }
 
 - (void)onTap:(UITapGestureRecognizer*)ges {
     if (ges.state == UIGestureRecognizerStateEnded) {
-        CGPoint point = [ges locationInView:self.viewImageContainer];
-        UIImageView* imgView = nil;
-        for (UIImageView* img in self.viewImageContainer.subviews) {
-            if(CGRectContainsPoint(img.frame, point)) {
-                imgView = img;
-                break;
-            }
-        }
-        
-        if (imgView) {
-            MJPhotoBrowser* browser = [[MJPhotoBrowser alloc] init];
-            browser.currentPhotoIndex = imgView.tag - 0x2000;
+        CGPoint point = [ges locationInView:self.viewVideoContainer];
+        if(CGRectContainsPoint(self.viewVideoContainer.frame, point)) {
             
-            NSMutableArray* photoList = [NSMutableArray array];
-            
-            NSInteger index = 0;
-            for (CSKuleMediaInfo* media in _historyInfo.medium) {
-                NSInteger vTag = 0x2000 + index;
-                UIImageView* imgView = (UIImageView*)[_viewImageContainer viewWithTag:vTag];
-                MJPhoto* photo = [MJPhoto new];
-                photo.srcImageView = imgView;
-                photo.url = [NSURL URLWithString:media.url];
-                
-                [photoList addObject:photo];
-            }
-            
-            browser.photos = photoList;
-            
-            [browser show];
         }
     }
+}
+
+- (IBAction)onBtnPlayClicked:(id)sender {
+    if (self.player) {
+        self.btnPlay.alpha = 0.0f;
+        [_playerItem seekToTime:kCMTimeZero];
+        [self.player play];
+    }
+}
+
+#pragma mark - PlayEndNotification
+- (void)avPlayerItemDidPlayToEnd:(NSNotification *)notification
+{
+    if ((AVPlayerItem *)notification.object != _playerItem) {
+        return;
+    }
+    [UIView animateWithDuration:0.3f animations:^{
+        [_playerItem seekToTime:kCMTimeZero];
+        self.btnPlay.alpha = 1.0f;
+        [self setNeedsDisplay];
+    }];
 }
 
 @end

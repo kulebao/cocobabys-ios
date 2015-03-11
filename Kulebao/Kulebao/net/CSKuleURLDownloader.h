@@ -10,7 +10,8 @@
 
 @interface CSKuleURLDownloader : NSObject
 
-+(instancetype)URLDownloader:(NSURL*)url;
++(instancetype)audioURLDownloader:(NSURL*)url;
++(instancetype)videoURLDownloader:(NSURL*)url;
 
 - (void)start;
 

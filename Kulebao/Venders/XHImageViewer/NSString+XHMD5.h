@@ -6,4 +6,5 @@
 
 @interface NSString (XHMD5)
 - (NSString *)MD5Hash;
+- (NSString *)MD5HashEx;
 @end

@@ -355,6 +355,7 @@
 		09AC5A361AAC9D9000C88ECE /* BPushClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 09AC5A351AAC9D9000C88ECE /* BPushClass.m */; };
 		09AC5A3C1AACBB2200C88ECE /* video_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 09AC5A3A1AACBB2200C88ECE /* video_icon.png */; };
 		09AC5A3D1AACBB2200C88ECE /* video_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09AC5A3B1AACBB2200C88ECE /* video_icon@2x.png */; };
+		09B8FB971AB0B89400123378 /* CSKuleHistoryVideoItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09B8FB961AB0B89400123378 /* CSKuleHistoryVideoItemTableViewCell.m */; };
 		09BA1B9118BB2AB300760182 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09BA1B9018BB2AB300760182 /* Foundation.framework */; };
 		09BA1B9318BB2AB300760182 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09BA1B9218BB2AB300760182 /* CoreGraphics.framework */; };
 		09BA1B9518BB2AB300760182 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09BA1B9418BB2AB300760182 /* UIKit.framework */; };
@@ -1180,6 +1181,8 @@
 		09AC5A351AAC9D9000C88ECE /* BPushClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPushClass.m; sourceTree = "<group>"; };
 		09AC5A3A1AACBB2200C88ECE /* video_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = video_icon.png; sourceTree = "<group>"; };
 		09AC5A3B1AACBB2200C88ECE /* video_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "video_icon@2x.png"; sourceTree = "<group>"; };
+		09B8FB951AB0B89400123378 /* CSKuleHistoryVideoItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleHistoryVideoItemTableViewCell.h; sourceTree = "<group>"; };
+		09B8FB961AB0B89400123378 /* CSKuleHistoryVideoItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleHistoryVideoItemTableViewCell.m; sourceTree = "<group>"; };
 		09BA1B8D18BB2AB300760182 /* youlebao.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = youlebao.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09BA1B9018BB2AB300760182 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		09BA1B9218BB2AB300760182 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -3031,6 +3034,8 @@
 				093D89CE1999C27E006B013B /* CSKuleHistoryMonthCell.m */,
 				090FC171199CAB5600C3A31A /* CSKuleHistoryItemTableViewCell.h */,
 				090FC172199CAB5600C3A31A /* CSKuleHistoryItemTableViewCell.m */,
+				09B8FB951AB0B89400123378 /* CSKuleHistoryVideoItemTableViewCell.h */,
+				09B8FB961AB0B89400123378 /* CSKuleHistoryVideoItemTableViewCell.m */,
 				0914E39D19A053AE00276ABA /* CSKuleChatingTableCell.h */,
 				0914E39E19A053AE00276ABA /* CSKuleChatingTableCell.m */,
 				0914E3A019A05A0800276ABA /* CSKuleCCTVItemTableViewCell.h */,
@@ -3642,6 +3647,7 @@
 				09142DB318E2713C00E5848F /* CJSONSerialization.m in Sources */,
 				09EA4D201AAF519100B95C5B /* ProgressBar.m in Sources */,
 				09EA4D6E1AAF519100B95C5B /* SBVideoRecorder.m in Sources */,
+				09B8FB971AB0B89400123378 /* CSKuleHistoryVideoItemTableViewCell.m in Sources */,
 				0960CE7B19B0B19200B3B51E /* CSKuleURLDownloader.m in Sources */,
 				09ED59A518CC8F5200187585 /* UIViewController+CSKit.m in Sources */,
 				09BA1BA118BB2AB400760182 /* CSAppDelegate.m in Sources */,
@@ -3913,7 +3919,6 @@
 					"/Users/xinus/xin.github/Kulebao-iPhone/YouJiaoBao/Venders/opencore-amr-0.1.3/lib",
 					"/Users/xinus/xin.github/Kulebao-iPhone/Common/hmsdk-v2",
 				);
-				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = youlebao;
 				PROVISIONING_PROFILE = "d985c1c8-cb0d-4e09-b18d-a6def46c5171";
@@ -3943,7 +3948,6 @@
 					"/Users/xinus/xin.github/Kulebao-iPhone/YouJiaoBao/Venders/opencore-amr-0.1.3/lib",
 					"/Users/xinus/xin.github/Kulebao-iPhone/Common/hmsdk-v2",
 				);
-				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = youlebao;
 				PROVISIONING_PROFILE = "25904364-9a8a-41d1-8c4d-cd146471596c";

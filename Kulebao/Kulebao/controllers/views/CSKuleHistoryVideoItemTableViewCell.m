@@ -16,7 +16,10 @@
 #import "NSString+CSKit.h"
 #import "NSString+XHMD5.h"
 
-@interface CSKuleHistoryVideoItemTableViewCell()
+@interface CSKuleHistoryVideoItemTableViewCell() {
+    NSURL* _videoURL;
+}
+
 @property (weak, nonatomic) IBOutlet UIImageView *imgPortrait;
 @property (weak, nonatomic) IBOutlet UILabel *labName;
 @property (weak, nonatomic) IBOutlet UILabel *labDate;
@@ -41,6 +44,7 @@
     self.viewVideoContainer.backgroundColor = [UIColor clearColor];
     self.imgPortrait.layer.cornerRadius = 4.0;
     self.imgPortrait.clipsToBounds = YES;
+    self.btnPlay.userInteractionEnabled = NO;
     
     self.longPressGes = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPress:)];
     [self addGestureRecognizer:self.longPressGes];
@@ -97,17 +101,27 @@
         [self.player pause];
     }
 
-#if 0
+#if 1
     TSFileCache* fileCache = [TSFileCache sharedInstance];
     
     if (![fileCache existsDataForKey:media.url.MD5HashEx]) {
+        _videoURL = [NSURL URLWithString:media.url];
+        self.playerItem = [AVPlayerItem playerItemWithURL:_videoURL];
+        
         CSKuleURLDownloader* dn = [CSKuleURLDownloader videoURLDownloader:[NSURL URLWithString:media.url]];
         [dn start];
-        
-        self.playerItem = [AVPlayerItem playerItemWithURL:[NSURL URLWithString:media.url]];
     }
     else {
-        self.playerItem = [AVPlayerItem playerItemWithURL:[fileCache localURLForKey:media.url.MD5HashEx]];
+        _videoURL = [fileCache localURLForKey:media.url.MD5HashEx];
+        self.playerItem = [AVPlayerItem playerItemWithURL:_videoURL];
+        
+        if (self.playerItem.status != AVPlayerItemStatusReadyToPlay) {
+            _videoURL = [NSURL URLWithString:media.url];
+            self.playerItem = [AVPlayerItem playerItemWithURL:_videoURL];
+            
+            CSKuleURLDownloader* dn = [CSKuleURLDownloader videoURLDownloader:[NSURL URLWithString:media.url]];
+            [dn start];
+        }
     }
 #else
     self.playerItem = [AVPlayerItem playerItemWithURL:[NSURL URLWithString:media.url]];
@@ -189,8 +203,23 @@
 - (void)onTap:(UITapGestureRecognizer*)ges {
     if (ges.state == UIGestureRecognizerStateEnded) {
         CGPoint point = [ges locationInView:self.viewVideoContainer];
-        if(CGRectContainsPoint(self.viewVideoContainer.frame, point)) {
-            
+        if(CGRectContainsPoint(self.viewVideoContainer.bounds, point)) {
+            if (self.player && self.btnPlay.alpha > 0) {
+                self.btnPlay.alpha = 0.0f;
+                [_playerItem seekToTime:kCMTimeZero];
+                [self.player play];
+            }
+            else if (self.player) {
+                CSLog(@"open full screen.");
+                [self stop];
+                
+                CSKuleMediaInfo* media = _historyInfo.medium.firstObject;
+                TSFileCache* fileCache = [TSFileCache sharedInstance];
+                NSURL* videoURL = [fileCache localURLForKey:media.url.MD5HashEx];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"noti.video"
+                                                                    object:videoURL];
+            }
         }
     }
 }
@@ -210,10 +239,15 @@
         return;
     }
     [UIView animateWithDuration:0.3f animations:^{
-        [_playerItem seekToTime:kCMTimeZero];
-        self.btnPlay.alpha = 1.0f;
-        [self setNeedsDisplay];
+        [self stop];
     }];
+}
+
+- (void)stop {
+    [self.player pause];
+    [_playerItem seekToTime:kCMTimeZero];
+    self.btnPlay.alpha = 1.0f;
+    [self setNeedsDisplay];
 }
 
 @end

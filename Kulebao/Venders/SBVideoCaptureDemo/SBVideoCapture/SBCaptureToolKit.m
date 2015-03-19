@@ -42,7 +42,7 @@
 + (BOOL)createVideoFolderIfNotExist
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *path = [paths objectAtIndex:0];
+    NSString *path = NSTemporaryDirectory();
     
     NSString *folderPath = [path stringByAppendingPathComponent:VIDEO_FOLDER];
     
@@ -64,8 +64,7 @@
 
 + (NSString *)getVideoMergeFilePathString
 {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *path = [paths objectAtIndex:0];
+    NSString *path = NSTemporaryDirectory();
     
     path = [path stringByAppendingPathComponent:VIDEO_FOLDER];
     
@@ -80,8 +79,7 @@
 
 + (NSString *)getVideoSaveFilePathString
 {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *path = [paths objectAtIndex:0];
+    NSString *path = NSTemporaryDirectory();
     
     path = [path stringByAppendingPathComponent:VIDEO_FOLDER];
     
@@ -96,11 +94,8 @@
 
 + (NSString *)getVideoSaveFolderPathString
 {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *path = [paths objectAtIndex:0];
-    
+    NSString *path = NSTemporaryDirectory();
     path = [path stringByAppendingPathComponent:VIDEO_FOLDER];
-    
     return path;
 }
 @end

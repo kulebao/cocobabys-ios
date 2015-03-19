@@ -537,6 +537,9 @@
     
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         NSString* imgUrl = [NSString stringWithFormat:@"%@/%@", kQiniuDownloadServerHost, imgFileName];
+        TSFileCache* cache = [TSFileCache sharedInstance];
+        [cache storeData:imgData
+                  forKey:imgUrl.MD5Hash];
         [self doSendPicture:imgUrl];
     };
     
@@ -666,7 +669,7 @@
         if ([dataJson isKindOfClass:[NSArray class]]) {
             for (id topicMsgJson in dataJson) {
                 CSKuleTopicMsg* topicMsg = [CSKuleInterpreter decodeTopicMsg:topicMsgJson];
-                [self downloadVoice:topicMsg];
+                [self downloadMedia:topicMsg];
                 [topicMsgs addObject:topicMsg];
                 
                 if (timestamp < topicMsg.timestamp) {
@@ -676,7 +679,7 @@
         }
         else if ([dataJson isKindOfClass:[NSDictionary class]]) {
             CSKuleTopicMsg* topicMsg = [CSKuleInterpreter decodeTopicMsg:dataJson];
-            [self downloadVoice:topicMsg];
+            [self downloadMedia:topicMsg];
             [topicMsgs addObject:topicMsg];
             if (timestamp < topicMsg.timestamp) {
                 timestamp = topicMsg.timestamp;
@@ -808,10 +811,14 @@
     
 }
 
-- (void)downloadVoice:(CSKuleTopicMsg*)msg {
-    if (msg.media.url.length > 0 && [msg.media.type isEqualToString:@"voice"]) {
-        if (![_voiceCache existsDataForKey:msg.media.url.MD5Hash]) {
+- (void)downloadMedia:(CSKuleTopicMsg*)msg {
+    if (msg.media.url.length > 0) {
+        if ([msg.media.type isEqualToString:@"voice"] && ![_voiceCache existsDataForKey:msg.media.url.MD5Hash]) {
             CSKuleURLDownloader* dn = [CSKuleURLDownloader audioURLDownloader:[NSURL URLWithString:msg.media.url]];
+            [dn start];
+        }
+        else if ([msg.media.type isEqualToString:@"video"] && ![_voiceCache existsDataForKey:msg.media.url.MD5HashEx]) {
+            CSKuleURLDownloader* dn = [CSKuleURLDownloader videoURLDownloader:[NSURL URLWithString:msg.media.url]];
             [dn start];
         }
     }

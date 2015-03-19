@@ -14,6 +14,8 @@
 #import "EntityMediaInfoHelper.h"
 #import "UIImageView+WebCache.h"
 #import "CSContentEditorViewController.h"
+#import "TSFileCache.h"
+#import "NSString+XHMD5.h"
 
 @interface CSKuleHistoryMainViewController () <UICollectionViewDataSource, UICollectionViewDelegate> {
     NSInteger _year;
@@ -178,6 +180,10 @@
             NSString* imgUrl = [NSString stringWithFormat:@"%@/%@", kQiniuDownloadServerHost, imgFileName];
             [_imageUrlList addObject:imgUrl];
             [_imageList removeObjectAtIndex:0];
+            
+            TSFileCache* cache = [TSFileCache sharedInstance];
+            [cache storeData:imgData
+                      forKey:imgUrl.MD5Hash];
 
             [self performSelectorInBackground:@selector(doUploadImage) withObject:nil];
         };
@@ -209,6 +215,9 @@
     
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         _videoUrl = [NSString stringWithFormat:@"%@/%@", kQiniuDownloadServerHost, videoFileName];
+        TSFileCache* cache = [TSFileCache sharedInstance];
+        [cache storeData:videoData
+                  forKey:_videoUrl.MD5HashEx];
         [self doSendHistory];
     };
     

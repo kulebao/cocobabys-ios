@@ -205,6 +205,7 @@
 		09219A5418C4878600166228 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 09219A4E18C4878600166228 /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
 		09219A5718C48A2100166228 /* CSKuleEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 09219A5618C48A2100166228 /* CSKuleEngine.m */; };
 		09219A5A18C4999C00166228 /* CSKuleLoginInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09219A5918C4999B00166228 /* CSKuleLoginInfo.m */; };
+		092294E41AB9A7E600E40C84 /* CSVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 092294E31AB9A7E600E40C84 /* CSVideoView.m */; };
 		092B86F51AAFF01200C9C4F0 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 092B86F41AAFF01200C9C4F0 /* libiconv.dylib */; };
 		0934EFC318BF3AF700E30ECA /* EAIntroPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0934EFC018BF3AF700E30ECA /* EAIntroPage.m */; };
 		0934EFC418BF3AF700E30ECA /* EAIntroView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0934EFC218BF3AF700E30ECA /* EAIntroView.m */; };
@@ -599,6 +600,7 @@
 		09F74CD21997D10C001555D0 /* libopencore-amrwb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09F74CD01997D10C001555D0 /* libopencore-amrwb.a */; };
 		09F74CDF1997D14D001555D0 /* amrFileCodec.m in Sources */ = {isa = PBXBuildFile; fileRef = 09F74CDB1997D14D001555D0 /* amrFileCodec.m */; };
 		09F74CE01997D14D001555D0 /* VoiceConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 09F74CDD1997D14D001555D0 /* VoiceConverter.m */; };
+		09FA71E11ABB32B5009D5BBB /* CSKuleVideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FA71E01ABB32B5009D5BBB /* CSKuleVideoPlayerViewController.m */; };
 		09FE1EBC19B566DD0073D9D4 /* video_capture.png in Resources */ = {isa = PBXBuildFile; fileRef = 09FE1EB419B566DD0073D9D4 /* video_capture.png */; };
 		09FE1EBD19B566DD0073D9D4 /* video_capture@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09FE1EB519B566DD0073D9D4 /* video_capture@2x.png */; };
 		09FE1EBE19B566DD0073D9D4 /* video_save.png in Resources */ = {isa = PBXBuildFile; fileRef = 09FE1EB619B566DD0073D9D4 /* video_save.png */; };
@@ -998,6 +1000,8 @@
 		09219A5618C48A2100166228 /* CSKuleEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleEngine.m; sourceTree = "<group>"; };
 		09219A5818C4999B00166228 /* CSKuleLoginInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleLoginInfo.h; sourceTree = "<group>"; };
 		09219A5918C4999B00166228 /* CSKuleLoginInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleLoginInfo.m; sourceTree = "<group>"; };
+		092294E21AB9A7E600E40C84 /* CSVideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSVideoView.h; sourceTree = "<group>"; };
+		092294E31AB9A7E600E40C84 /* CSVideoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSVideoView.m; sourceTree = "<group>"; };
 		092B86F41AAFF01200C9C4F0 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
 		0934EFBF18BF3AF700E30ECA /* EAIntroPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAIntroPage.h; sourceTree = "<group>"; };
 		0934EFC018BF3AF700E30ECA /* EAIntroPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAIntroPage.m; sourceTree = "<group>"; };
@@ -1487,6 +1491,8 @@
 		09F74CDB1997D14D001555D0 /* amrFileCodec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = amrFileCodec.m; sourceTree = "<group>"; };
 		09F74CDC1997D14D001555D0 /* VoiceConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceConverter.h; sourceTree = "<group>"; };
 		09F74CDD1997D14D001555D0 /* VoiceConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoiceConverter.m; sourceTree = "<group>"; };
+		09FA71DF1ABB32B5009D5BBB /* CSKuleVideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSKuleVideoPlayerViewController.h; path = views/CSKuleVideoPlayerViewController.h; sourceTree = "<group>"; };
+		09FA71E01ABB32B5009D5BBB /* CSKuleVideoPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSKuleVideoPlayerViewController.m; path = views/CSKuleVideoPlayerViewController.m; sourceTree = "<group>"; };
 		09FE1EB419B566DD0073D9D4 /* video_capture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = video_capture.png; sourceTree = "<group>"; };
 		09FE1EB519B566DD0073D9D4 /* video_capture@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "video_capture@2x.png"; sourceTree = "<group>"; };
 		09FE1EB619B566DD0073D9D4 /* video_save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = video_save.png; sourceTree = "<group>"; };
@@ -2315,6 +2321,8 @@
 				0915662118ED92810073AE22 /* CSKuleVerifyMobileViewController.m */,
 				09C3AC22199DAC8600A6251C /* CSContentEditorViewController.h */,
 				09C3AC23199DAC8600A6251C /* CSContentEditorViewController.m */,
+				09FA71DF1ABB32B5009D5BBB /* CSKuleVideoPlayerViewController.h */,
+				09FA71E01ABB32B5009D5BBB /* CSKuleVideoPlayerViewController.m */,
 				09FE6AEB18C5722500A840BE /* views */,
 				093FB8F11A83BD8500A589A8 /* CSKuleDevSettingsViewController.h */,
 				093FB8F21A83BD8500A589A8 /* CSKuleDevSettingsViewController.m */,
@@ -2646,6 +2654,8 @@
 				09ED59A418CC8F5200187585 /* UIViewController+CSKit.m */,
 				09ED59B418CDBF3900187585 /* UIWebView+CSKit.h */,
 				09ED59B518CDBF3900187585 /* UIWebView+CSKit.m */,
+				092294E21AB9A7E600E40C84 /* CSVideoView.h */,
+				092294E31AB9A7E600E40C84 /* CSVideoView.m */,
 			);
 			path = extends;
 			sourceTree = "<group>";
@@ -3667,8 +3677,10 @@
 				09BA1C2718BB3F8400760182 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				091AE83118D820C800EBC927 /* VRGCalendarView.m in Sources */,
 				090FC173199CAB5600C3A31A /* CSKuleHistoryItemTableViewCell.m in Sources */,
+				09FA71E11ABB32B5009D5BBB /* CSKuleVideoPlayerViewController.m in Sources */,
 				091AE81E18D7DC6A00EBC927 /* CSKuleSchoolInfo.m in Sources */,
 				09EA4D1F1AAF519100B95C5B /* DeleteButton.m in Sources */,
+				092294E41AB9A7E600E40C84 /* CSVideoView.m in Sources */,
 				0914E366199FCD7500276ABA /* MJPhotoLoadingView.m in Sources */,
 				09142DB018E2713C00E5848F /* CDataScanner.m in Sources */,
 				0904690518C72E5000D0846E /* CSKuleParentInfo.m in Sources */,

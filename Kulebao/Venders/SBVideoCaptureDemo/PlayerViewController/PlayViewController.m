@@ -49,6 +49,8 @@
     [_playButton setImage:[UIImage imageNamed:@"video_icon.png"] forState:UIControlStateNormal];
     [_playButton addTarget:self action:@selector(pressPlayButton:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_playButton];
+    
+    [self pressPlayButton:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -79,7 +81,6 @@
     _playerLayer.frame = CGRectMake(0, 44, DEVICE_SIZE.width, DEVICE_SIZE.width);
     _playerLayer.videoGravity = AVLayerVideoGravityResizeAspect;
     [self.view.layer addSublayer:_playerLayer];
-
 }
 
 - (void)pressPlayButton:(UIButton *)button

@@ -171,14 +171,17 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
 
 - (void)HandConnectVideBynode
 {
-    if(my_node == NULL) return;
+    if(my_node == NULL)
+        return;
     
     CONNECT_INFO connectInfo;
     connectInfo.cm = CM_DEF;
     connectInfo.cp = CPI_DEF;
     connectInfo.ct = CT_MOBILE;
     
-    if (hm_pu_login_ex(my_node, &connectInfo, &myID) == HMEC_OK)
+    hm_result result = hm_pu_login_ex(my_node, &connectInfo, &myID);
+    
+    if (result == HMEC_OK)
     {
         
         if (localVideoHandle == NULL) {

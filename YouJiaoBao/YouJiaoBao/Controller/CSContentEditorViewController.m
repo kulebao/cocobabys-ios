@@ -12,6 +12,11 @@
 #import "MJPhoto.h"
 #import "CSAppDelegate.h"
 #import "ELCImagePickerController.h"
+#import "CaptureViewController.h"
+#import <MediaPlayer/MediaPlayer.h>
+#import "SBCaptureToolKit.h"
+#import <AVFoundation/AVFoundation.h>
+#import "PlayViewController.h"
 
 @interface CSContentEditorViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, ELCImagePickerControllerDelegate, UINavigationControllerDelegate, GMGridViewDataSource, GMGridViewSortingDelegate, GMGridViewTransformationDelegate, GMGridViewActionDelegate> {
     NSMutableArray* _imageList;
@@ -34,6 +39,7 @@
 - (IBAction)onBtnPhotoFromGalleryClicked:(id)sender;
 - (IBAction)onBtnFinishClicked:(id)sender;
 - (IBAction)onFieldDidEndOnExit:(id)sender;
+- (IBAction)onBtnVideoClicked:(id)sender;
 
 @end
 
@@ -146,6 +152,16 @@
     else {
         
     }
+}
+
+- (IBAction)onBtnVideoClicked:(id)sender {
+    UINavigationController *navCon = [[UINavigationController alloc] init];
+    navCon.navigationBarHidden = YES;
+    
+    CaptureViewController *captureViewCon = [[CaptureViewController alloc] initWithNibName:@"CaptureViewController" bundle:nil];
+    captureViewCon.delegate = self;
+    [navCon pushViewController:captureViewCon animated:NO];
+    [self presentViewController:navCon animated:YES completion:nil];
 }
 
 - (BOOL)checkInput {
@@ -329,6 +345,8 @@
 
 - (void)GMGridViewDidTapOnEmptySpace:(GMGridView *)gridView {
     NSLog(@"Tap on empty space");
+    [self.textContent resignFirstResponder];
+    [self.fieldTitle resignFirstResponder];
 }
 
 - (void)GMGridView:(GMGridView *)gridView processDeleteActionForItemAtIndex:(NSInteger)index {
@@ -348,6 +366,13 @@
     }
     
     [self.gmGridView setEditing:NO animated:YES];
+}
+
+#pragma mark - CaptureViewControllerDelegate
+- (void)captureViewController:(CaptureViewController *)ctrl didFinishMergingVideosToOutPutFileAtURL:(NSURL *)outputFileURL {
+    if ([_delegate respondsToSelector:@selector(contentEditorViewController:finishWithVideo:)] && outputFileURL) {
+        [_delegate contentEditorViewController:self finishWithVideo:outputFileURL];
+    }
 }
 
 @end

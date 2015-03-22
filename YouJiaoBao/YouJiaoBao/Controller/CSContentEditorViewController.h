@@ -24,4 +24,7 @@
                           withTitle:(NSString*)title
                          withImages:(NSArray*)imageList;
 
+- (void)contentEditorViewController:(CSContentEditorViewController*)ctrl
+                     finishWithVideo:(NSURL*)videoLocalUrl;
+
 @end

@@ -439,6 +439,7 @@
                                        withChildIdList:(NSArray*)childIdList
                                            withContent:(NSString*)content
                                       withImageUrlList:(NSArray*)imgUrlList
+                                          withVideoUrl:(NSString*)videoUrl
                                                success:(SuccessResponseHandler)success
                                                failure:(FailureResponseHandler)failure {
     
@@ -450,6 +451,10 @@
     NSMutableArray* mediumList = [NSMutableArray array];
     for (NSString* urlString in imgUrlList) {
         [mediumList addObject:@{@"url": urlString, @"type": @"image"}];
+    }
+    
+    if (videoUrl.length > 0) {
+        [mediumList addObject:@{@"url": videoUrl, @"type": @"video"}];
     }
     
     NSDictionary* parameters = @{@"topic": [childIdList firstObject],

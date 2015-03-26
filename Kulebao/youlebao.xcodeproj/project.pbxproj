@@ -17,6 +17,7 @@
 		090151351939D4060066DEAB /* XHViewState.m in Sources */ = {isa = PBXBuildFile; fileRef = 0901512C1939D4060066DEAB /* XHViewState.m */; };
 		090151361939D4060066DEAB /* XHZoomingImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0901512E1939D4060066DEAB /* XHZoomingImageView.m */; };
 		0901A96A18D95E38003BB152 /* CSKuleBPushInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0901A96918D95E38003BB152 /* CSKuleBPushInfo.m */; };
+		0901CDA41ABEFF070044838A /* EGOCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0901CDA31ABEFF070044838A /* EGOCache.m */; };
 		0902458518EC41FA00579886 /* CSKuleURLCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0902458418EC41FA00579886 /* CSKuleURLCache.m */; };
 		0902782818C9C060002B9644 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0902782718C9C060002B9644 /* MessageUI.framework */; };
 		0902CAA818F4200A001901A8 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0902CAA718F4200A001901A8 /* AudioToolbox.framework */; };
@@ -693,6 +694,8 @@
 		090151391939DFC30066DEAB /* youlebao.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = youlebao.entitlements; path = ../youlebao.entitlements; sourceTree = "<group>"; };
 		0901A96818D95E38003BB152 /* CSKuleBPushInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleBPushInfo.h; sourceTree = "<group>"; };
 		0901A96918D95E38003BB152 /* CSKuleBPushInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleBPushInfo.m; sourceTree = "<group>"; };
+		0901CDA21ABEFF070044838A /* EGOCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOCache.h; sourceTree = "<group>"; };
+		0901CDA31ABEFF070044838A /* EGOCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOCache.m; sourceTree = "<group>"; };
 		0902458318EC41FA00579886 /* CSKuleURLCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleURLCache.h; sourceTree = "<group>"; };
 		0902458418EC41FA00579886 /* CSKuleURLCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleURLCache.m; sourceTree = "<group>"; };
 		0902782718C9C060002B9644 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -1635,6 +1638,15 @@
 			path = XHImageViewer;
 			sourceTree = "<group>";
 		};
+		0901CDA11ABEFF070044838A /* EGOCache */ = {
+			isa = PBXGroup;
+			children = (
+				0901CDA21ABEFF070044838A /* EGOCache.h */,
+				0901CDA31ABEFF070044838A /* EGOCache.m */,
+			);
+			path = EGOCache;
+			sourceTree = "<group>";
+		};
 		0904454E18F51C70005D01EA /* dev */ = {
 			isa = PBXGroup;
 			children = (
@@ -2486,6 +2498,7 @@
 		09BA1BC918BB2FC700760182 /* Venders */ = {
 			isa = PBXGroup;
 			children = (
+				0901CDA11ABEFF070044838A /* EGOCache */,
 				09EA4CB21AAF519100B95C5B /* SBVideoCaptureDemo */,
 				0960CE7519B0B05700B3B51E /* BDMultiDownloader */,
 				0960BFDE19B05818008768A6 /* TSFileCache */,
@@ -3729,6 +3742,7 @@
 				09ED59B218CDB01600187585 /* NSDate+CSKit.m in Sources */,
 				09BA1C2A18BB3F8400760182 /* AFXMLRequestOperation.m in Sources */,
 				090E6BDC18EAFDA900F21BA7 /* NSURL+CSKit.m in Sources */,
+				0901CDA41ABEFF070044838A /* EGOCache.m in Sources */,
 				090468F518C6FE1000D0846E /* CSKuleBindInfo.m in Sources */,
 				09FE6B0718C5C23300A840BE /* CSKuleCheckinViewController.m in Sources */,
 				09AC5A361AAC9D9000C88ECE /* BPushClass.m in Sources */,

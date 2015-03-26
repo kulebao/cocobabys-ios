@@ -125,6 +125,7 @@
                               failure:(FailureResponseHandler)failure;
 
 - (void)reqGetAssignmentsOfKindergarten:(NSInteger)kindergarten
+                            withClassId:(NSInteger)classId
                                    from:(NSInteger)fromId
                                      to:(NSInteger)toId
                                    most:(NSInteger)most

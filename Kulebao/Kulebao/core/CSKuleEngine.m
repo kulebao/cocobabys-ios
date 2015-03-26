@@ -680,10 +680,9 @@
 }
 
 - (void)checkUpdatesOfAssignment {
+    CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         NSMutableArray* assignmentInfos = [NSMutableArray array];
-        
-        CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
         NSTimeInterval oldTimestamp = [gApp.engine.preferences timestampOfModule:kKuleModuleAssignment forChild:currentChild.childId];
         NSTimeInterval timestamp = oldTimestamp;
         
@@ -709,6 +708,7 @@
     };
     
     [gApp.engine reqGetAssignmentsOfKindergarten:gApp.engine.loginInfo.schoolId
+                                     withClassId:currentChild.classId
                                             from:-1
                                               to:-1
                                             most:1
@@ -1019,6 +1019,7 @@
 }
 
 - (void)reqGetAssignmentsOfKindergarten:(NSInteger)kindergarten
+                            withClassId:(NSInteger)classId
                                    from:(NSInteger)fromId
                                      to:(NSInteger)toId
                                    most:(NSInteger)most
@@ -1030,6 +1031,10 @@
     NSString* method = @"GET";
     
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    if (classId > 0) {
+        [parameters setObject:@(classId) forKey:@"class_id"];
+    }
+    
     if (fromId >= 0) {
         [parameters setObject:@(fromId) forKey:@"from"];
     }

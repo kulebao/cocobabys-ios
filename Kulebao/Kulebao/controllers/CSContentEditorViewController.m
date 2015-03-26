@@ -28,7 +28,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnPhotoFromCamra;
 @property (weak, nonatomic) IBOutlet UIButton *btnPhotoFromGallery;
 @property (weak, nonatomic) IBOutlet UIButton *btnFinishEdit;
-@property (weak, nonatomic) IBOutlet UICollectionView *collectionViewImages;
 @property (weak, nonatomic) IBOutlet UILabel *labTips;
 @property (weak, nonatomic) IBOutlet GMGridView *gmGridView;
 - (IBAction)onBtnHideKeyboardClicked:(id)sender;
@@ -56,9 +55,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self customizeBackBarItem];
-    
-    self.collectionViewImages.delegate = self;
-    self.collectionViewImages.dataSource = self;
     
 //    self.gmGridView.centerGrid = YES;
     self.gmGridView.actionDelegate = self;

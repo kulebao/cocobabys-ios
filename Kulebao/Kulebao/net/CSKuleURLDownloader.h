@@ -13,6 +13,9 @@
 +(instancetype)audioURLDownloader:(NSURL*)url;
 +(instancetype)videoURLDownloader:(NSURL*)url;
 
++(BOOL)cacheAudioData:(NSData*)data forURL:(NSURL*)url;
++(BOOL)cacheVideoData:(NSData*)data forURL:(NSURL*)url;
+
 - (void)start;
 
 @end

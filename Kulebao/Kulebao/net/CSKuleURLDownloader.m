@@ -9,7 +9,6 @@
 #import "CSKuleURLDownloader.h"
 #import "TSFileCache.h"
 #import "NSString+XHMD5.h"
-#import "BDMultiDownloader.h"
 #import "amrFileCodec.h"
 
 enum {
@@ -61,6 +60,26 @@ enum {
 
 - (void)start {
     [_connection start];
+}
+
++(BOOL)cacheAudioData:(NSData*)data forURL:(NSURL*)url {
+    BOOL ret = YES;
+    
+    TSFileCache* cache = [TSFileCache sharedInstance];
+    [cache storeData:data
+              forKey:url.absoluteString.MD5Hash];
+    
+    return ret;
+}
+
++(BOOL)cacheVideoData:(NSData*)data forURL:(NSURL*)url {
+    BOOL ret = YES;
+    
+    TSFileCache* cache = [TSFileCache sharedInstance];
+    [cache storeData:data
+              forKey:url.absoluteString.MD5HashEx];
+    
+    return ret;
 }
 
 @end

@@ -15,6 +15,7 @@
 #import "EntityHistoryInfoHelper.h"
 #import "CSKuleVideoPlayerViewController.h"
 #import "PlayViewController.h"
+#import <MediaPlayer/MediaPlayer.h>
 
 @interface CSKuleHistoryListTableViewController () <NSFetchedResultsControllerDelegate> {
     NSFetchedResultsController* _frCtrl;
@@ -71,6 +72,16 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:animated];
+    [self setNeedsStatusBarAppearanceUpdate];
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
 }
 
 #pragma mark - Table view data source
@@ -334,13 +345,15 @@
 - (void)playFullScreen:(NSURL*)videoURL {
     if (videoURL) {
         //[self performSegueWithIdentifier:@"segue.video.player" sender:videoURL];
-        PlayViewController* ctrl = [[PlayViewController alloc] initWithNibName:@"PlayViewController" bundle:nil withVideoFileURL:videoURL];
+        //PlayViewController* ctrl = [[PlayViewController alloc] initWithNibName:@"PlayViewController" bundle:nil withVideoFileURL:videoURL];
         
-        //[self.navigationController pushViewController:ctrl animated:YES];
+        MPMoviePlayerViewController* ctrl = [[MPMoviePlayerViewController alloc] initWithContentURL:videoURL];
         
-        [self presentViewController:ctrl animated:YES completion:^{
-            
-        }];
+//        [[NSNotificationCenter defaultCenter] removeObserver:ctrl
+//                                                        name:MPMoviePlayerPlaybackDidFinishNotification
+//                                                      object:nil];
+        
+        [self presentMoviePlayerViewControllerAnimated:ctrl];
     }
 }
 

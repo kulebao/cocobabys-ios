@@ -10,6 +10,7 @@
 #import "TSFileCache.h"
 #import "NSString+XHMD5.h"
 #import "amrFileCodec.h"
+#import "BDMultiDownloader.h"
 
 enum {
     kDownloaderTypeAudio,
@@ -36,7 +37,25 @@ enum {
 - (id)initWithURL:(NSURL*)url withType:(NSInteger)type{
     if (self = [super init]) {
         _type = type;
-        _connection = [[NSURLConnection alloc] initWithRequest:[NSURLRequest requestWithURL:url] delegate:self];
+        //_connection = [[NSURLConnection alloc] initWithRequest:[NSURLRequest requestWithURL:url] delegate:self];
+        
+        BDMultiDownloader* dn = [BDMultiDownloader shared];
+        [dn queueURLRequest:[NSURLRequest requestWithURL:url]
+                 completion:^(NSData * data) {
+                     TSFileCache* cache = [TSFileCache sharedInstance];
+                     if (cache && data) {
+                         if (_type == kDownloaderTypeAudio) {
+                             NSData* waveData = DecodeAMRToWAVE(data);
+                             
+                             [cache storeData:waveData
+                                       forKey:url.absoluteString.MD5Hash];
+                         }
+                         else {
+                             [cache storeData:data
+                                       forKey:url.absoluteString.MD5HashEx];
+                         }
+                     }
+        }];
     }
 
     return self;
@@ -59,7 +78,7 @@ enum {
 }
 
 - (void)start {
-    [_connection start];
+    //[_connection start];
 }
 
 +(BOOL)cacheAudioData:(NSData*)data forURL:(NSURL*)url {

@@ -212,8 +212,9 @@
 
 - (void)setupEngine {
     
-    NSString* cachesDirectory = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0];
-    
+    //NSString* cachesDirectory = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0];
+    NSString* homeDir = NSHomeDirectory();
+    NSString* cachesDirectory = [homeDir stringByAppendingPathComponent:@"Documents/File-Cache"];
     TSFileCache* fileCache = [TSFileCache cacheForURL:[NSURL fileURLWithPath:cachesDirectory isDirectory:YES]];
     [fileCache prepare:nil];
     [TSFileCache setSharedInstance:fileCache];
@@ -256,7 +257,7 @@
     NSString* cachePath = [homeDir stringByAppendingPathComponent:@"Documents/Kule-Cache"];
     
     CSKuleURLCache* cache = [[CSKuleURLCache alloc] initWithMemoryCapacity:1024
-                                                              diskCapacity:64*1024*1024
+                                                              diskCapacity:512*1024*1024
                                                                   diskPath:cachePath];
     [CSKuleURLCache setSharedURLCache:cache];
     

@@ -115,7 +115,7 @@
         _videoURL = [fileCache localURLForKey:media.url.MD5HashEx];
         self.playerItem = [AVPlayerItem playerItemWithURL:_videoURL];
         
-        if (self.playerItem.status != AVPlayerItemStatusReadyToPlay) {
+        if (self.playerItem.status == AVPlayerItemStatusFailed) {
             _videoURL = [NSURL URLWithString:media.url];
             self.playerItem = [AVPlayerItem playerItemWithURL:_videoURL];
             
@@ -203,23 +203,33 @@
 - (void)onTap:(UITapGestureRecognizer*)ges {
     if (ges.state == UIGestureRecognizerStateEnded) {
         CGPoint point = [ges locationInView:self.viewVideoContainer];
-        if(CGRectContainsPoint(self.viewVideoContainer.bounds, point)) {
+        if(CGRectContainsPoint(self.viewVideoContainer.bounds, point)
+           && self.playerItem.status == AVPlayerItemStatusReadyToPlay) {
             if (self.player && self.btnPlay.alpha > 0) {
                 self.btnPlay.alpha = 0.0f;
                 [_playerItem seekToTime:kCMTimeZero];
                 [self.player play];
             }
-            else if (self.player) {
+            else if (self.player && _videoURL) {
                 CSLog(@"open full screen.");
                 [self stop];
-                
-                CSKuleMediaInfo* media = _historyInfo.medium.firstObject;
-                TSFileCache* fileCache = [TSFileCache sharedInstance];
-                NSURL* videoURL = [fileCache localURLForKey:media.url.MD5HashEx];
+//
+//                CSKuleMediaInfo* media = _historyInfo.medium.firstObject;
+//                TSFileCache* fileCache = [TSFileCache sharedInstance];
+//                NSURL* videoURL = [fileCache localURLForKey:media.url.MD5HashEx];
+//                videoURL = [NSURL URLWithString:media.url];
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"noti.video"
-                                                                    object:videoURL];
+                                                                    object:_videoURL];
             }
+        }
+        else if (self.playerItem.status == AVPlayerItemStatusFailed) {
+            CSKuleMediaInfo* media = _historyInfo.medium.firstObject;
+            _videoURL = [NSURL URLWithString:media.url];
+            self.playerItem = [AVPlayerItem playerItemWithURL:_videoURL];
+            
+            CSKuleURLDownloader* dn = [CSKuleURLDownloader videoURLDownloader:[NSURL URLWithString:media.url]];
+            [dn start];
         }
     }
 }

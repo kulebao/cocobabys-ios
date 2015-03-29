@@ -165,10 +165,10 @@
 }
 
 - (void)reloadAssignmentList {
+    CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         NSMutableArray* assignmentInfos = [NSMutableArray array];
         
-        CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
         NSTimeInterval oldTimestamp = [gApp.engine.preferences timestampOfModule:kKuleModuleAssignment forChild:currentChild.childId];
         NSTimeInterval timestamp = oldTimestamp;
         
@@ -208,20 +208,21 @@
     };
     
     [gApp.engine reqGetAssignmentsOfKindergarten:gApp.engine.loginInfo.schoolId
-                                     from:-1
-                                       to:-1
-                                     most:-1
-                                  success:sucessHandler
-                                  failure:failureHandler];
+                                     withClassId:currentChild.classId
+                                            from:-1
+                                              to:-1
+                                            most:-1
+                                         success:sucessHandler
+                                         failure:failureHandler];
 }
 
 - (void)loadMoreAssignmentList {
     CSKuleAssignmentInfo* lastAssignmentInfo = self.assignmentInfoList.lastObject;
+    CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
     if (lastAssignmentInfo) {
         SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
             NSMutableArray* assignmentInfos = [NSMutableArray array];
             
-            CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
             NSTimeInterval oldTimestamp = [gApp.engine.preferences timestampOfModule:kKuleModuleAssignment forChild:currentChild.childId];
             NSTimeInterval timestamp = oldTimestamp;
             
@@ -258,6 +259,7 @@
         };
         
         [gApp.engine reqGetAssignmentsOfKindergarten:gApp.engine.loginInfo.schoolId
+                                         withClassId:currentChild.classId
                                          from:1
                                            to:lastAssignmentInfo.assignmentId
                                          most:25

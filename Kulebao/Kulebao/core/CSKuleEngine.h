@@ -125,6 +125,7 @@
                               failure:(FailureResponseHandler)failure;
 
 - (void)reqGetAssignmentsOfKindergarten:(NSInteger)kindergarten
+                            withClassId:(NSInteger)classId
                                    from:(NSInteger)fromId
                                      to:(NSInteger)toId
                                    most:(NSInteger)most
@@ -229,6 +230,7 @@
                          withChildId:(NSString*)childId
                          withContent:(NSString*)content
                     withImageUrlList:(NSArray*)imgUrlList
+                        withVideoUrl:(NSString*)videoUrl
                              success:(SuccessResponseHandler)success
                              failure:(FailureResponseHandler)failure;
 

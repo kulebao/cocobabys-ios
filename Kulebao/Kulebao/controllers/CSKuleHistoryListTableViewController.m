@@ -9,9 +9,13 @@
 #import "CSKuleHistoryListTableViewController.h"
 #import "CSAppDelegate.h"
 #import "CSKuleHistoryItemTableViewCell.h"
+#import "CSKuleHistoryVideoItemTableViewCell.h"
 #import "EntityHistoryInfoHelper.h"
 #import "EntitySenderInfo.h"
 #import "EntityHistoryInfoHelper.h"
+#import "CSKuleVideoPlayerViewController.h"
+#import "PlayViewController.h"
+#import <MediaPlayer/MediaPlayer.h>
 
 @interface CSKuleHistoryListTableViewController () <NSFetchedResultsControllerDelegate> {
     NSFetchedResultsController* _frCtrl;
@@ -53,12 +57,31 @@
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectNull];
     
     [self doReloadHistory];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onNoti:)
+                                                 name:@"noti.video"
+                                               object:nil];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:animated];
+    [self setNeedsStatusBarAppearanceUpdate];
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
 }
 
 #pragma mark - Table view data source
@@ -77,19 +100,37 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CSKuleHistoryItemTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"CSKuleHistoryItemTableViewCell" forIndexPath:indexPath];
-    
-    // Configure the cell...
+    UITableViewCell* baseCell = nil;
     EntityHistoryInfo* historyInfo = [_frCtrl objectAtIndexPath:indexPath];
-    cell.historyInfo = historyInfo;
-    cell.delegate = self;
+
     
-    return cell;
+    if ([self isVideoItem:historyInfo]) {
+        CSKuleHistoryVideoItemTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"CSKuleHistoryVideoItemTableViewCell" forIndexPath:indexPath];
+        cell.historyInfo = historyInfo;
+        cell.delegate = self;
+        baseCell = cell;
+    }
+    else {
+        CSKuleHistoryItemTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"CSKuleHistoryItemTableViewCell" forIndexPath:indexPath];
+        
+        // Configure the cell...
+        cell.historyInfo = historyInfo;
+        cell.delegate = self;
+        baseCell = cell;
+    }
+    
+    return baseCell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    CGFloat height = 0;
     EntityHistoryInfo* historyInfo = [_frCtrl objectAtIndexPath:indexPath];
-    CGFloat height = [CSKuleHistoryItemTableViewCell calcHeight:historyInfo];
+    if ([self isVideoItem:historyInfo]) {
+        height = [CSKuleHistoryVideoItemTableViewCell calcHeight:historyInfo];
+    }
+    else {
+        height = [CSKuleHistoryItemTableViewCell calcHeight:historyInfo];
+    }
     return height;
 }
 
@@ -182,7 +223,6 @@
 }
 */
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -190,20 +230,23 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"segue.video.player"]) {
+        CSKuleVideoPlayerViewController* ctrl = segue.destinationViewController;
+        ctrl.videoURL = sender;
+    }
 }
-*/
 
 - (void)onBtnRefreshClicked:(id)sender {
     [self doReloadHistory];
 }
 
 - (void)doReloadHistory {
-    NSString* fromDateString = [NSString stringWithFormat:@"%d-%d-01 00:00:00", _year, _month];
-    NSString* toDateString = [NSString stringWithFormat:@"%d-%d-01 00:00:00", _year, _month+1];
+    NSString* fromDateString = [NSString stringWithFormat:@"%ld-%ld-01 00:00:00", (long)_year, (long)_month];
+    NSString* toDateString = [NSString stringWithFormat:@"%ld-%ld-01 00:00:00", (long)_year, _month+1];
     
     if (_month >= 12) {
-        fromDateString = [NSString stringWithFormat:@"%d-12-01 00:00:00", _year];
-        toDateString = [NSString stringWithFormat:@"%d-01-01 00:00:00", _year+1];
+        fromDateString = [NSString stringWithFormat:@"%ld-12-01 00:00:00", (long)_year];
+        toDateString = [NSString stringWithFormat:@"%ld-01-01 00:00:00", _year+1];
     }
     
     NSDateFormatter* fmt = [[NSDateFormatter alloc] init];
@@ -289,5 +332,33 @@
     [self.tableView endUpdates];
 }
 
+- (BOOL)isVideoItem:(EntityHistoryInfo*)historyInfo {
+    BOOL ret = NO;
+    if (historyInfo.medium.count == 1) {
+        CSKuleMediaInfo* media = [historyInfo.medium firstObject];
+        ret = [media.type isEqualToString:@"video"];
+    }
+    
+    return ret;
+}
+
+- (void)playFullScreen:(NSURL*)videoURL {
+    if (videoURL) {
+        //[self performSegueWithIdentifier:@"segue.video.player" sender:videoURL];
+        //PlayViewController* ctrl = [[PlayViewController alloc] initWithNibName:@"PlayViewController" bundle:nil withVideoFileURL:videoURL];
+        
+        MPMoviePlayerViewController* ctrl = [[MPMoviePlayerViewController alloc] initWithContentURL:videoURL];
+        
+//        [[NSNotificationCenter defaultCenter] removeObserver:ctrl
+//                                                        name:MPMoviePlayerPlaybackDidFinishNotification
+//                                                      object:nil];
+        
+        [self presentMoviePlayerViewControllerAnimated:ctrl];
+    }
+}
+
+- (void)onNoti:(NSNotification*)noti {
+    [self playFullScreen:noti.object];
+}
 
 @end

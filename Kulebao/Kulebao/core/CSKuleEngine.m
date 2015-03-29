@@ -15,6 +15,7 @@
 #import "ALAlertBannerManager.h"
 #import "ALAlertBanner+Private.h"
 #import "hm_sdk.h"
+#import "TSFileCache.h"
 
 @interface CSKuleEngine() <BPushDelegate> {
     NSMutableDictionary* _senderProfiles;
@@ -210,6 +211,14 @@
 }
 
 - (void)setupEngine {
+    
+    //NSString* cachesDirectory = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0];
+    NSString* homeDir = NSHomeDirectory();
+    NSString* cachesDirectory = [homeDir stringByAppendingPathComponent:@"Documents/File-Cache"];
+    TSFileCache* fileCache = [TSFileCache cacheForURL:[NSURL fileURLWithPath:cachesDirectory isDirectory:YES]];
+    [fileCache prepare:nil];
+    [TSFileCache setSharedInstance:fileCache];
+    
     if (_senderProfiles == nil) {
         _senderProfiles = [NSMutableDictionary dictionary];
     }
@@ -248,7 +257,7 @@
     NSString* cachePath = [homeDir stringByAppendingPathComponent:@"Documents/Kule-Cache"];
     
     CSKuleURLCache* cache = [[CSKuleURLCache alloc] initWithMemoryCapacity:1024
-                                                              diskCapacity:64*1024*1024
+                                                              diskCapacity:512*1024*1024
                                                                   diskPath:cachePath];
     [CSKuleURLCache setSharedURLCache:cache];
     
@@ -672,10 +681,9 @@
 }
 
 - (void)checkUpdatesOfAssignment {
+    CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         NSMutableArray* assignmentInfos = [NSMutableArray array];
-        
-        CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
         NSTimeInterval oldTimestamp = [gApp.engine.preferences timestampOfModule:kKuleModuleAssignment forChild:currentChild.childId];
         NSTimeInterval timestamp = oldTimestamp;
         
@@ -701,6 +709,7 @@
     };
     
     [gApp.engine reqGetAssignmentsOfKindergarten:gApp.engine.loginInfo.schoolId
+                                     withClassId:currentChild.classId
                                             from:-1
                                               to:-1
                                             most:1
@@ -1011,6 +1020,7 @@
 }
 
 - (void)reqGetAssignmentsOfKindergarten:(NSInteger)kindergarten
+                            withClassId:(NSInteger)classId
                                    from:(NSInteger)fromId
                                      to:(NSInteger)toId
                                    most:(NSInteger)most
@@ -1022,6 +1032,10 @@
     NSString* method = @"GET";
     
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    if (classId > 0) {
+        [parameters setObject:@(classId) forKey:@"class_id"];
+    }
+    
     if (fromId >= 0) {
         [parameters setObject:@(fromId) forKey:@"from"];
     }
@@ -1504,6 +1518,7 @@
                          withChildId:(NSString*)childId
                          withContent:(NSString*)content
                     withImageUrlList:(NSArray*)imgUrlList
+                        withVideoUrl:(NSString*)videoUrl
                              success:(SuccessResponseHandler)success
                              failure:(FailureResponseHandler)failure {
     NSString* path = [NSString stringWithFormat:kGetHistoryListPath, @(kindergarten), childId];
@@ -1516,6 +1531,10 @@
     NSMutableArray* mediumList = [NSMutableArray array];
     for (NSString* urlString in imgUrlList) {
         [mediumList addObject:@{@"url": urlString, @"type": @"image"}];
+    }
+    
+    if (videoUrl.length > 0) {
+        [mediumList addObject:@{@"url": videoUrl, @"type": @"video"}];
     }
     
     NSDictionary* parameters = @{@"topic": childId,

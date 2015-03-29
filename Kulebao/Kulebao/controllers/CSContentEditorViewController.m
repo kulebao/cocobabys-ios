@@ -10,6 +10,11 @@
 #import "GMGridView.h"
 #import "MJPhotoBrowser.h"
 #import "MJPhoto.h"
+#import "CaptureViewController.h"
+#import <MediaPlayer/MediaPlayer.h>
+#import "SBCaptureToolKit.h"
+#import <AVFoundation/AVFoundation.h>
+#import "PlayViewController.h"
 
 @interface CSContentEditorViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GMGridViewDataSource, GMGridViewSortingDelegate, GMGridViewTransformationDelegate, GMGridViewActionDelegate> {
     NSMutableArray* _imageList;
@@ -23,12 +28,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnPhotoFromCamra;
 @property (weak, nonatomic) IBOutlet UIButton *btnPhotoFromGallery;
 @property (weak, nonatomic) IBOutlet UIButton *btnFinishEdit;
-@property (weak, nonatomic) IBOutlet UICollectionView *collectionViewImages;
 @property (weak, nonatomic) IBOutlet UILabel *labTips;
 @property (weak, nonatomic) IBOutlet GMGridView *gmGridView;
 - (IBAction)onBtnHideKeyboardClicked:(id)sender;
 - (IBAction)onBtnPhotoFromCamraClicked:(id)sender;
 - (IBAction)onBtnPhotoFromGalleryClicked:(id)sender;
+- (IBAction)onBtnVideoClicked:(id)sender;
 - (IBAction)onBtnFinishClicked:(id)sender;
 
 @end
@@ -51,9 +56,6 @@
     // Do any additional setup after loading the view from its nib.
     [self customizeBackBarItem];
     
-    self.collectionViewImages.delegate = self;
-    self.collectionViewImages.dataSource = self;
-    
 //    self.gmGridView.centerGrid = YES;
     self.gmGridView.actionDelegate = self;
     self.gmGridView.dataSource = self;
@@ -72,6 +74,12 @@
     self.textContent.text = nil;
     self.labTips.hidden = (self.textContent.text.length > 0);
     
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:animated];
+    [self setNeedsStatusBarAppearanceUpdate];
 }
 
 - (void)didReceiveMemoryWarning
@@ -110,6 +118,17 @@
         
     }];
 }
+
+- (IBAction)onBtnVideoClicked:(id)sender {
+    UINavigationController *navCon = [[UINavigationController alloc] init];
+    navCon.navigationBarHidden = YES;
+    
+    CaptureViewController *captureViewCon = [[CaptureViewController alloc] initWithNibName:@"CaptureViewController" bundle:nil];
+    captureViewCon.delegate = self;
+    [navCon pushViewController:captureViewCon animated:NO];
+    [self presentViewController:navCon animated:YES completion:nil];
+}
+
 
 - (IBAction)onBtnFinishClicked:(id)sender {
     [self.textContent resignFirstResponder];
@@ -271,4 +290,12 @@
 
 - (IBAction)onFieldDidEndOnExit:(id)sender {
 }
+
+#pragma mark - CaptureViewControllerDelegate
+- (void)captureViewController:(CaptureViewController *)ctrl didFinishMergingVideosToOutPutFileAtURL:(NSURL *)outputFileURL {
+    if ([_delegate respondsToSelector:@selector(contentEditorViewController:finishWithVideo:)] && outputFileURL) {
+        [_delegate contentEditorViewController:self finishWithVideo:outputFileURL];
+    }
+}
+
 @end

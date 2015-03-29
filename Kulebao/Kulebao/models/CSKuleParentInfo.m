@@ -32,7 +32,7 @@
                            @"timestamp": @(_timestamp),
                            @"memberStatus": @(_memberStatus),
                            @"status": @(_status),
-                           @"company": _company
+                           @"company": _company ? _company : @"",
                            };
     
     NSString* desc = [NSString stringWithFormat:@"%@", meta];

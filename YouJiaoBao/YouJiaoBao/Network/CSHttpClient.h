@@ -92,9 +92,10 @@ typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSErr
 
 - (AFHTTPRequestOperation*)opPostHistoryOfKindergarten:(NSInteger)kindergarten
                                           withSenderId:(NSString*)senderId
-                                           withChildIdList:(NSArray*)childIdList
+                                       withChildIdList:(NSArray*)childIdList
                                            withContent:(NSString*)content
                                       withImageUrlList:(NSArray*)imgUrlList
+                                          withVideoUrl:(NSString*)videoUrl
                                                success:(SuccessResponseHandler)success
                                                failure:(FailureResponseHandler)failure;
 

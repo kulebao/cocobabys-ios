@@ -23,6 +23,8 @@
     
     NSMutableArray* _imageUrlList;
     NSMutableArray* _imageList;
+    NSString* _videoUrl;
+    NSURL* _videoFileUrl;
     NSString* _textContent;
     NSArray* _childList;
 }
@@ -161,8 +163,50 @@
     _textContent = text;
     _imageUrlList = [NSMutableArray array];
     _imageList = [NSMutableArray arrayWithArray:imageList];
+    _videoFileUrl = nil;
+    _videoUrl = nil;
     
     [self performSegueWithIdentifier:@"segue.main.studentpickup" sender:nil];
+}
+
+- (void)contentEditorViewController:(CSContentEditorViewController*)ctrl
+                    finishWithVideo:(NSURL*)videoLocalUrl {
+    _textContent = @"";
+    _imageUrlList = [NSMutableArray array];
+    _imageList = [NSMutableArray array];
+    _videoFileUrl = videoLocalUrl;
+    _videoUrl = nil;
+    
+    [self performSegueWithIdentifier:@"segue.main.studentpickup" sender:nil];
+}
+
+- (void)doUploadVideo {
+    CSHttpClient* http = [CSHttpClient sharedInstance];
+    CSEngine* engine = [CSEngine sharedInstance];
+    
+    NSData* videoData = [NSData dataWithContentsOfURL:_videoFileUrl];
+    
+    NSString* videoFileName = [NSString stringWithFormat:@"history_video/%@/topic_%@/%@.mp4",
+                               engine.loginInfo.schoolId,
+                               kTestChildId,
+                               @((long long)[[NSDate date] timeIntervalSince1970]*1000)];
+    
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+        _videoUrl = [NSString stringWithFormat:@"%@/%@", kQiniuDownloadServerHost, videoFileName];
+        [self doSendHistory];
+    };
+    
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        CSLog(@"failure:%@", error);
+        [gApp alert:[error localizedDescription]];
+    };
+    
+    [gApp waitingAlert:@"上传视频中"];
+    [http opUploadToQiniu:videoData
+                  withKey:videoFileName
+                 withMime:@""
+                  success:sucessHandler
+                  failure:failureHandler];
 }
 
 - (void)doUploadImage {
@@ -230,8 +274,12 @@
                           withChildIdList:childIdList
                               withContent:_textContent
                          withImageUrlList:_imageUrlList
+                             withVideoUrl:_videoUrl
                                   success:sucessHandler
                                   failure:failureHandler];
+    }
+    else {
+        [gApp alert:@"请选择发布对象"];
     }
 }
 
@@ -241,6 +289,9 @@
     _childList = childList;
     if (_childList.count == 0) {
         [gApp alert:@"必须选择至少一个小孩"];
+    }
+    else if (_videoFileUrl) {
+        [self doUploadVideo];
     }
     else if (_imageList.count > 0) {
         [self doUploadImage];

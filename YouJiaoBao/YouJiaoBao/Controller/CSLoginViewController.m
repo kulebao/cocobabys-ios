@@ -43,6 +43,8 @@
     // Do any additional setup after loading the view.
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"header.png"] forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setTitleTextAttributes:@{UITextAttributeFont: [UIFont systemFontOfSize:20], UITextAttributeTextColor:[UIColor whiteColor]}];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent
+                                                animated:YES];
     
     self.labNote.text = nil;
 #ifdef DEBUG
@@ -50,6 +52,8 @@
     //self.fieldPassword.text = @"123456";
     self.fieldUsername.text = @"test15";
     self.fieldPassword.text = @"13555555555";
+    //self.fieldUsername.text = @"admin2007";
+    //self.fieldPassword.text = @"18782242007";
 #endif
 }
 

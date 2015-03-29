@@ -31,6 +31,11 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.view.backgroundColor = [UIColor whiteColor];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent
+                                                animated:YES];
+    [self setNeedsStatusBarAppearanceUpdate];
+    
     if (IS_IPHONE5) {
         self.imgBg.image = [UIImage imageNamed:@"Default-568h.png"];
     }

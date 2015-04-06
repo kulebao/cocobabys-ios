@@ -225,23 +225,23 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
             }
             else
             {
-                NSString* message= @"请求视频失败";
+                NSString* message= @"请求视频数据失败";
                 [self performSelectorOnMainThread:@selector(ConnectFailShowMessage:) withObject:message waitUntilDone:YES];
-                NSLog(@"请求视频失败");
+                NSLog(@"请求视频数据失败");
             }
         }
         else
         {
-            NSString* message= @"请求视频失败";
+            NSString* message= @"开启视频失败";
             [self performSelectorOnMainThread:@selector(ConnectFailShowMessage:) withObject:message waitUntilDone:YES];
-            NSLog(@"请求视频失败");
+            NSLog(@"开启视频失败");
         }
     }
     else
     {
         NSString* message= @"连接视频失败";
         [self performSelectorOnMainThread:@selector(ConnectFailShowMessage:) withObject:message waitUntilDone:YES];
-        NSLog(@"请求视频失败");
+        NSLog(@"连接视频失败 result=0x%X", result);
     }
 }
 

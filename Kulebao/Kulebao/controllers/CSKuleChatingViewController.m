@@ -110,8 +110,10 @@
 }
 
 #pragma mark - View lifecycle
--(void) viewDidAppear:(BOOL)animated
-{
+-(void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:animated];
+    [self setNeedsStatusBarAppearanceUpdate];
     NSString* cName = [NSString stringWithFormat:@"%@",  self.navigationItem.title, nil];
     [[BaiduMobStat defaultStat] pageviewStartWithName:cName];
 }

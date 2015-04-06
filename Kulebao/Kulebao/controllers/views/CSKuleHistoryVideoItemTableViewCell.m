@@ -15,6 +15,10 @@
 #import "TSFileCache.h"
 #import "NSString+CSKit.h"
 #import "NSString+XHMD5.h"
+#import "EGOCache.h"
+#import "BDMultiDownloader.h"
+#import "MBProgressHUD.h"
+#import "AHAlertView.h"
 
 @interface CSKuleHistoryVideoItemTableViewCell() {
     NSURL* _videoURL;
@@ -34,6 +38,8 @@
 @property (nonatomic, strong) UITapGestureRecognizer* tapGes;
 @property (nonatomic, strong) UILongPressGestureRecognizer* longPressGes;
 
+@property (nonatomic, strong) MBProgressHUD* hub;
+
 @end
 
 @implementation CSKuleHistoryVideoItemTableViewCell
@@ -41,7 +47,7 @@
 - (void)awakeFromNib
 {
     // Initialization code
-    self.viewVideoContainer.backgroundColor = [UIColor clearColor];
+    self.viewVideoContainer.backgroundColor = [UIColor blackColor];
     self.imgPortrait.layer.cornerRadius = 4.0;
     self.imgPortrait.clipsToBounds = YES;
     self.btnPlay.userInteractionEnabled = NO;
@@ -57,6 +63,9 @@
     self.viewVideoContainer.layer.borderWidth = 1;
     self.viewVideoContainer.layer.cornerRadius = 4.0;
     self.viewVideoContainer.clipsToBounds = YES;
+    
+//    self.hub = [[MBProgressHUD alloc] initWithView:self];
+//    self.hub.mode = MBProgressHUDModeAnnularDeterminate;
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(avPlayerItemDidPlayToEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
@@ -94,46 +103,44 @@
     fmt.dateFormat = @"yyyy-MM-dd HH:mm:ss";
     NSDate* timestamp = [NSDate dateWithTimeIntervalSince1970:_historyInfo.timestamp.doubleValue/1000];
     self.labDate.text = [fmt stringFromDate:timestamp];
+
+    _videoURL = nil;
+    self.playerItem = nil;
+
+    if (self.player) {
+        [self.player pause];
+        self.player = nil;
+    }
+    
+    if (self.playerLayer) {
+        [self.playerLayer removeFromSuperlayer];
+        self.playerLayer = nil;
+    }
     
     CSKuleMediaInfo* media = _historyInfo.medium.firstObject;
     
-    if (self.player) {
-        [self.player pause];
-    }
-
-#if 1
-    TSFileCache* fileCache = [TSFileCache sharedInstance];
+    //检查视频是否已经下载
+    NSString* videoKey = media.url.MD5HashEx;
+    EGOCache* cache = [EGOCache globalCache];
+    BOOL localExist = NO;
     
-    if (![fileCache existsDataForKey:media.url.MD5HashEx]) {
-        _videoURL = [NSURL URLWithString:media.url];
-        self.playerItem = [AVPlayerItem playerItemWithURL:_videoURL];
-        
-        CSKuleURLDownloader* dn = [CSKuleURLDownloader videoURLDownloader:[NSURL URLWithString:media.url]];
-        [dn start];
-    }
-    else {
-        _videoURL = [fileCache localURLForKey:media.url.MD5HashEx];
-        self.playerItem = [AVPlayerItem playerItemWithURL:_videoURL];
-        
-        if (self.playerItem.status == AVPlayerItemStatusFailed) {
+    if (media.url.length > 0) {
+        localExist = [cache hasCacheForKey:videoKey];
+        if (localExist) {
+            _videoURL = [cache localURLForKey:videoKey];
+        }
+        else {
             _videoURL = [NSURL URLWithString:media.url];
-            self.playerItem = [AVPlayerItem playerItemWithURL:_videoURL];
-            
-            CSKuleURLDownloader* dn = [CSKuleURLDownloader videoURLDownloader:[NSURL URLWithString:media.url]];
-            [dn start];
         }
     }
-#else
-    self.playerItem = [AVPlayerItem playerItemWithURL:[NSURL URLWithString:media.url]];
-#endif
-    self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
-   
-    if (self.playerLayer) {
-        [self.playerLayer removeFromSuperlayer];
+    
+    if (_videoURL && _videoURL.fileURL) {
+        self.playerItem = [AVPlayerItem playerItemWithURL:_videoURL];
+        self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
+        self.playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
+        [self.viewVideoContainer.layer addSublayer:self.playerLayer];
+        self.playerLayer.frame = self.viewVideoContainer.layer.bounds;
     }
-    self.playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
-    [self.viewVideoContainer.layer addSublayer:self.playerLayer];
-    self.playerLayer.frame = self.viewVideoContainer.layer.bounds;
     
     self.btnPlay.alpha = 1.0f;
     
@@ -188,6 +195,8 @@
                                               
                                               self.labName.text = senderName;
                                           }];
+    
+    [self setNeedsDisplay];
 }
 
 - (void)onLongPress:(UILongPressGestureRecognizer*)ges {
@@ -203,7 +212,18 @@
 - (void)onTap:(UITapGestureRecognizer*)ges {
     if (ges.state == UIGestureRecognizerStateEnded) {
         CGPoint point = [ges locationInView:self.viewVideoContainer];
-        if(CGRectContainsPoint(self.viewVideoContainer.bounds, point)
+        if(CGRectContainsPoint(self.viewVideoContainer.bounds, point)) {
+            if (_videoURL && _videoURL.fileURL) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"noti.video"
+                                                                    object:_videoURL];
+            }
+            else if (_videoURL) {
+                [self queryToDownload];
+            }
+        }
+    }
+           
+           /*
            && self.playerItem.status == AVPlayerItemStatusReadyToPlay) {
             if (self.player && self.btnPlay.alpha > 0) {
                 self.btnPlay.alpha = 0.0f;
@@ -231,7 +251,10 @@
             CSKuleURLDownloader* dn = [CSKuleURLDownloader videoURLDownloader:[NSURL URLWithString:media.url]];
             [dn start];
         }
+            
     }
+            */
+            
 }
 
 - (IBAction)onBtnPlayClicked:(id)sender {
@@ -239,6 +262,35 @@
         self.btnPlay.alpha = 0.0f;
         [_playerItem seekToTime:kCMTimeZero];
         [self.player play];
+    }
+}
+
+- (void)queryToDownload {
+    NSString *title = @"提示";
+    NSString *message = @"是否下载视频？建议在Wifi下进行下载。";
+    
+    AHAlertView *alert = [[AHAlertView alloc] initWithTitle:title message:message];
+    
+    [alert setCancelButtonTitle:@"取消" block:^{
+    }];
+    
+    [alert addButtonWithTitle:@"确定" block:^{
+        [self performSelector:@selector(startDownloader) withObject:nil];
+    }];
+    
+    [alert show];
+}
+
+- (void)startDownloader {
+    CSLog(@"Start download video at %@", _videoURL);
+    if (_videoURL) {
+        [[BDMultiDownloader shared] queueURLRequest:[NSURLRequest requestWithURL:_videoURL] completion:^(NSData* data) {
+            if (data) {
+                CSLog(@"End download video at %@", _videoURL);
+                [[EGOCache globalCache] setData:data forKey:_videoURL.absoluteString.MD5HashEx];
+                [self performSelector:@selector(updateUI) withObject:nil];
+            }
+        }];
     }
 }
 

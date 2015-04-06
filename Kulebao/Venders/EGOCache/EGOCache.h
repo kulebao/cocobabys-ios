@@ -40,6 +40,8 @@
 // Opitionally create a different EGOCache instance with it's own cache directory
 - (id)initWithCacheDirectory:(NSString*)cacheDirectory;
 
+- (NSURL*)localURLForKey:(NSString *)key;
+
 - (void)clearCache;
 - (void)removeCacheForKey:(NSString*)key;
 

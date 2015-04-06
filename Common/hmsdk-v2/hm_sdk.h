@@ -1752,6 +1752,9 @@ extern "C" {
     HMCAPI hm_result hm_server_get_child_at(node_handle device, int32 index, node_handle* node);
     HMCAPI hm_result hm_server_get_parent(node_handle device, node_handle* node);
     
+    //	通用接口（resp指针使用完毕后需调用 hm_mem_free 释放）
+    HMCAPI hm_result hm_server_common_command(server_id server, cpchar method, cpchar cmd, pchar* resp, int32* len);
+    
     /************************************************************************************************/
     /*									编解码相关接口												*/
     /************************************************************************************************/

@@ -47,7 +47,6 @@
 - (void)awakeFromNib
 {
     // Initialization code
-    self.viewVideoContainer.backgroundColor = [UIColor blackColor];
     self.imgPortrait.layer.cornerRadius = 4.0;
     self.imgPortrait.clipsToBounds = YES;
     self.btnPlay.userInteractionEnabled = NO;
@@ -59,6 +58,7 @@
     [self.viewVideoContainer addGestureRecognizer:self.tapGes];
     [self.tapGes requireGestureRecognizerToFail:self.longPressGes];
     
+    self.viewVideoContainer.backgroundColor = [UIColor blackColor];
     self.viewVideoContainer.layer.borderColor = [[UIColor lightGrayColor] CGColor];
     self.viewVideoContainer.layer.borderWidth = 1;
     self.viewVideoContainer.layer.cornerRadius = 4.0;
@@ -124,6 +124,12 @@
     EGOCache* cache = [EGOCache globalCache];
     BOOL localExist = NO;
     
+    self.viewVideoContainer.backgroundColor = [UIColor blackColor];
+    self.viewVideoContainer.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    self.viewVideoContainer.layer.borderWidth = 1;
+    self.viewVideoContainer.layer.cornerRadius = 4.0;
+    self.viewVideoContainer.clipsToBounds = YES;
+    
     if (media.url.length > 0) {
         localExist = [cache hasCacheForKey:videoKey];
         if (localExist) {
@@ -140,6 +146,12 @@
         self.playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
         [self.viewVideoContainer.layer addSublayer:self.playerLayer];
         self.playerLayer.frame = self.viewVideoContainer.layer.bounds;
+        
+        
+        self.viewVideoContainer.backgroundColor = [UIColor clearColor];
+        self.viewVideoContainer.layer.borderWidth = 0;
+        self.viewVideoContainer.layer.cornerRadius = 0.0;
+        self.viewVideoContainer.clipsToBounds = YES;
     }
     
     self.btnPlay.alpha = 1.0f;
@@ -196,7 +208,6 @@
                                               self.labName.text = senderName;
                                           }];
     
-    [self setNeedsDisplay];
 }
 
 - (void)onLongPress:(UILongPressGestureRecognizer*)ges {
@@ -282,16 +293,24 @@
 }
 
 - (void)startDownloader {
-    CSLog(@"Start download video at %@", _videoURL);
+    CSLog(@"Start download task of video at %@", _videoURL);
     if (_videoURL) {
+        [gApp waitingAlert:@"下载中"];
         [[BDMultiDownloader shared] queueURLRequest:[NSURLRequest requestWithURL:_videoURL] completion:^(NSData* data) {
             if (data) {
-                CSLog(@"End download video at %@", _videoURL);
-                [[EGOCache globalCache] setData:data forKey:_videoURL.absoluteString.MD5HashEx];
-                [self performSelector:@selector(updateUI) withObject:nil];
+                CSLog(@"Downloaded video at %@. Cacheing", _videoURL);
+                [[EGOCache globalCache] setData:data forKey:_videoURL.absoluteString.MD5HashEx completion:^(BOOL ok) {
+                    CSLog(@"Cached video as key %@", _videoURL.absoluteString.MD5HashEx);
+                    [self performSelectorOnMainThread:@selector(downloadFinished) withObject:nil waitUntilDone:YES];
+                }];
             }
         }];
     }
+}
+
+- (void)downloadFinished {
+    [gApp hideAlert];
+    [self updateUI];
 }
 
 #pragma mark - PlayEndNotification

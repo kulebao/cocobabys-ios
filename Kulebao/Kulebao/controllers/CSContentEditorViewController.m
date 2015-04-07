@@ -15,8 +15,10 @@
 #import "SBCaptureToolKit.h"
 #import <AVFoundation/AVFoundation.h>
 #import "PlayViewController.h"
+#import <MobileCoreServices/MobileCoreServices.h>
 
-@interface CSContentEditorViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GMGridViewDataSource, GMGridViewSortingDelegate, GMGridViewTransformationDelegate, GMGridViewActionDelegate> {
+@interface CSContentEditorViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GMGridViewDataSource, GMGridViewSortingDelegate, GMGridViewTransformationDelegate, GMGridViewActionDelegate,
+    UIActionSheetDelegate> {
     NSMutableArray* _imageList;
     UIImagePickerController* _imgPicker;
     NSInteger _lastDeleteItemIndexAsked;
@@ -120,6 +122,16 @@
 }
 
 - (IBAction)onBtnVideoClicked:(id)sender {
+    [self.textContent resignFirstResponder];
+    
+    UIActionSheet* actSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                          delegate:self
+                                                 cancelButtonTitle:@"取消"
+                                            destructiveButtonTitle:nil
+                                                 otherButtonTitles:@"录像", @"选择视频文件", nil];
+    [actSheet showInView:self.view];
+    
+    /*
     UINavigationController *navCon = [[UINavigationController alloc] init];
     navCon.navigationBarHidden = YES;
     
@@ -127,6 +139,70 @@
     captureViewCon.delegate = self;
     [navCon pushViewController:captureViewCon animated:NO];
     [self presentViewController:navCon animated:YES completion:nil];
+     */
+}
+
+#pragma mark - UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == actionSheet.firstOtherButtonIndex) {
+        //录像
+        
+        //检查相机模式是否可用
+        if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            NSLog(@"sorry, no camera or camera is unavailable!!!");
+            return;
+        }
+        
+#if TARGET_IPHONE_SIMULATOR
+#else
+        _imgPicker = [[UIImagePickerController alloc] init];
+        _imgPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        @try{
+            // exception:cameraCaptureMode 1 not available because mediaTypes does contain public.movie
+            // _imgPicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureModeVideo;
+            _imgPicker.mediaTypes = @[(NSString *)kUTTypeMovie];
+            _imgPicker.videoMaximumDuration = 30; // 30s
+            _imgPicker.videoQuality = UIImagePickerControllerQualityTypeMedium;
+        }
+        @catch(NSException *exception) {
+            CSLog(@"exception:%@", exception);
+        }
+        @finally {
+            
+        }
+        _imgPicker.allowsEditing = NO;
+        _imgPicker.delegate = self;
+        [self presentViewController:_imgPicker animated:YES completion:^{
+            
+        }];
+#endif
+        /*
+        _imgPicker = [[UIImagePickerController alloc] init];
+        _imgPicker.delegate = self;
+        _imgPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        _imgPicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureModeVideo;
+        _imgPicker.videoMaximumDuration = 30; // 30s
+        _imgPicker.videoQuality = UIImagePickerControllerQualityType640x480;
+        _imgPicker.allowsEditing = NO;
+        [self presentViewController:_imgPicker animated:YES completion:^{
+            
+        }];
+         */
+    }
+    else if (buttonIndex == (actionSheet.firstOtherButtonIndex+1)) {
+        //选择视频文件
+        
+        _imgPicker = [[UIImagePickerController alloc] init];
+        _imgPicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+        _imgPicker.mediaTypes = @[(NSString *)kUTTypeMovie, (NSString *)kUTTypeVideo];
+        _imgPicker.videoMaximumDuration = 30; // 30s
+        _imgPicker.videoQuality = UIImagePickerControllerQualityType640x480;
+        _imgPicker.allowsEditing = NO;
+        _imgPicker.delegate = self;
+        [self presentViewController:_imgPicker animated:YES completion:^{
+            
+        }];
+    }
 }
 
 
@@ -176,10 +252,37 @@
 
 #pragma mark - UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    UIImage* img = info[UIImagePickerControllerOriginalImage];
-    if (img) {
-        [_imageList addObject:img];
-        [self.gmGridView reloadData];
+    /*
+     {
+     UIImagePickerControllerMediaType = "public.movie";
+     UIImagePickerControllerMediaURL = "file:///private/var/mobile/Containers/Data/Application/70F97512-9F16-482D-9A25-B60F8BCF6550/tmp/capture-T0x170067940.tmp.epvD4C/capturedvideo.MOV";
+     }
+     
+     {
+     UIImagePickerControllerMediaType = "public.movie";
+     UIImagePickerControllerMediaURL = "file:///private/var/mobile/Containers/Data/Application/CBFBF882-4F26-4156-B703-A1D668479B7C/tmp/trim.8DA2F943-52D8-4A1F-AECA-BFD81B27B1E1.MOV";
+     UIImagePickerControllerReferenceURL = "assets-library://asset/asset.MOV?id=19AA1392-795A-4EA2-9AF3-816D4E4C2521&ext=MOV";
+     }
+     
+     {
+     UIImagePickerControllerMediaType = "public.image";
+     UIImagePickerControllerOriginalImage = "<UIImage: 0x170498380> size {2448, 3264} orientation 3 scale 1.000000";
+     ..........
+     
+     }
+     */
+    
+    NSString* mediaType = info[UIImagePickerControllerMediaType];
+    if ([mediaType isEqualToString:@"public.image"]) {
+        UIImage* img = info[UIImagePickerControllerOriginalImage];
+        if (img) {
+            [_imageList addObject:img];
+            [self.gmGridView reloadData];
+        }
+    }
+    else if ([mediaType isEqualToString:@"public.movie"]) {
+        NSURL* fileURL = info[UIImagePickerControllerMediaURL];
+        [self performSelectorInBackground:@selector(doCompressMovFile:) withObject:fileURL];
     }
     
     [picker dismissViewControllerAnimated:YES
@@ -197,6 +300,51 @@
     
     if (picker == _imgPicker) {
         _imgPicker = nil;
+    }
+}
+
+#pragma mark - 
+- (void)doCompressMovFile:(NSURL*)movFileURL {
+    CSLog(@"%s %@", __FUNCTION__, movFileURL);
+    AVURLAsset *avAsset = [AVURLAsset URLAssetWithURL:movFileURL options:nil];
+    NSArray *compatiblePresets = [AVAssetExportSession exportPresetsCompatibleWithAsset:avAsset];
+    CSLog(@"%@", compatiblePresets);
+    
+    if([compatiblePresets containsObject:AVAssetExportPresetMediumQuality]) {
+        AVAssetExportSession *exportSession = [[AVAssetExportSession alloc]initWithAsset:avAsset
+                                                                              presetName:AVAssetExportPresetMediumQuality];
+        NSString* mp4Path = [movFileURL.absoluteString.stringByDeletingPathExtension stringByAppendingPathExtension:@"mp4"];
+        mp4Path = [NSTemporaryDirectory() stringByAppendingPathComponent:[mp4Path.pathComponents lastObject]];
+        exportSession.outputURL = [NSURL fileURLWithPath: mp4Path];
+        exportSession.shouldOptimizeForNetworkUse = YES;
+        exportSession.outputFileType = AVFileTypeMPEG4;
+        [exportSession exportAsynchronouslyWithCompletionHandler:^{
+            switch ([exportSession status]) {
+                case AVAssetExportSessionStatusFailed:
+                {
+                    CSLog(@"AVAssetExportSessionStatusFailed! %@", exportSession.error);
+                    break;
+                }
+                    
+                case AVAssetExportSessionStatusCancelled:
+                    CSLog(@"AVAssetExportSessionStatusCancelled!");
+                    break;
+                case AVAssetExportSessionStatusCompleted:
+                    CSLog(@"AVAssetExportSessionStatusCompleted!");
+                    [self performSelectorOnMainThread:@selector(convertFinish:)
+                                           withObject:exportSession.outputURL
+                                        waitUntilDone:NO];
+                    break;
+                default:
+                    break;
+            }
+        }];
+    }
+}
+
+- (void)convertFinish:(NSURL*)mp4FileURL {
+    if ([_delegate respondsToSelector:@selector(contentEditorViewController:finishWithVideo:)] && mp4FileURL) {
+        [_delegate contentEditorViewController:self finishWithVideo:mp4FileURL];
     }
 }
 

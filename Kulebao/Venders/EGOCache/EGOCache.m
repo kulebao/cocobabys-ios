@@ -225,10 +225,11 @@ static inline NSString* cachePathForKey(NSString* directory, NSString* key) {
 }
 
 - (void)copyFilePath:(NSString*)filePath asKey:(NSString*)key withTimeoutInterval:(NSTimeInterval)timeoutInterval {
-	dispatch_async(_diskQueue, ^{
+	//dispatch_async(_diskQueue, ^{
+    dispatch_sync(_diskQueue, ^{
 		[[NSFileManager defaultManager] copyItemAtPath:filePath toPath:cachePathForKey(_directory, key) error:NULL];
 	});
-	
+    
 	[self setCacheTimeoutInterval:timeoutInterval forKey:key];
 }
 
@@ -236,19 +237,30 @@ static inline NSString* cachePathForKey(NSString* directory, NSString* key) {
 #pragma mark Data methods
 
 - (void)setData:(NSData*)data forKey:(NSString*)key {
-	[self setData:data forKey:key withTimeoutInterval:self.defaultTimeoutInterval];
+    [self setData:data forKey:key completion:nil];
 }
 
 - (void)setData:(NSData*)data forKey:(NSString*)key withTimeoutInterval:(NSTimeInterval)timeoutInterval {
-	CHECK_FOR_EGOCACHE_PLIST();
-	
-	NSString* cachePath = cachePathForKey(_directory, key);
-	
-	dispatch_async(_diskQueue, ^{
-		[data writeToFile:cachePath atomically:YES];
-	});
-	
-	[self setCacheTimeoutInterval:timeoutInterval forKey:key];
+    [self setData:data forKey:key withTimeoutInterval:timeoutInterval completion:nil];
+}
+
+- (void)setData:(NSData*)data forKey:(NSString*)key completion:(void(^)(BOOL))completionWithSaved {
+    [self setData:data forKey:key withTimeoutInterval:self.defaultTimeoutInterval completion:completionWithSaved];
+}
+
+- (void)setData:(NSData*)data forKey:(NSString*)key withTimeoutInterval:(NSTimeInterval)timeoutInterval completion:(void(^)(BOOL))completionWithSaved {
+    CHECK_FOR_EGOCACHE_PLIST();
+    
+    NSString* cachePath = cachePathForKey(_directory, key);
+    
+    dispatch_async(_diskQueue, ^{
+        BOOL ok = [data writeToFile:cachePath atomically:YES];
+        if (completionWithSaved) {
+            completionWithSaved(ok);
+        }
+    });
+    
+    [self setCacheTimeoutInterval:timeoutInterval forKey:key];
 }
 
 - (void)setNeedsSave {

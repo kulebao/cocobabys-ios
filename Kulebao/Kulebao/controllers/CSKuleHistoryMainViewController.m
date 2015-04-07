@@ -16,6 +16,7 @@
 #import "CSContentEditorViewController.h"
 #import "TSFileCache.h"
 #import "NSString+XHMD5.h"
+#import "EGOCache.h"
 
 @interface CSKuleHistoryMainViewController () <UICollectionViewDataSource, UICollectionViewDelegate> {
     NSInteger _year;
@@ -215,10 +216,13 @@
     
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         _videoUrl = [NSString stringWithFormat:@"%@/%@", kQiniuDownloadServerHost, videoFileName];
-        TSFileCache* cache = [TSFileCache sharedInstance];
-        [cache storeData:videoData
-                  forKey:_videoUrl.MD5HashEx];
-        [self doSendHistory];
+        
+        [[EGOCache globalCache] setData:videoData
+                                 forKey:_videoUrl.MD5HashEx
+                             completion:^(BOOL ok) {
+                                 CSLog(@"Cached video as key %@", _videoUrl.MD5HashEx);
+                                 [self doSendHistory];
+        }];
     };
     
     FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {

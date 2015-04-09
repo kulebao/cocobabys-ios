@@ -672,6 +672,18 @@
                                     <action selector="onBtnSwitchServerClicked:" destination="xOP-Oe-kQT" eventType="touchUpInside" id="uIO-N3-w9l"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="29Y-Jb-I1t">
+                                <rect key="frame" x="61" y="510" width="199" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <state key="normal" title="返回" backgroundImage="btn-type1.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" backgroundImage="btn-type1-pressed.png"/>
+                                <connections>
+                                    <action selector="onBtnBackClicked:" destination="xOP-Oe-kQT" eventType="touchUpInside" id="Foo-EI-uAe"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>

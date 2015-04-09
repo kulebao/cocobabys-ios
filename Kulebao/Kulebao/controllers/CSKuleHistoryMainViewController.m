@@ -126,8 +126,9 @@
     CSKuleHistoryMonthCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CSKuleHistoryMonthCell" forIndexPath:indexPath];
     
     cell.labTitle.text = [NSString stringWithFormat:@"%d月", indexPath.row+1];
+    CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
     
-    EntityMediaInfo* mediaInfo = [EntityHistoryInfoHelper mediaWhereLatestImageOfYear:_year month:indexPath.row+1];
+    EntityMediaInfo* mediaInfo = [EntityHistoryInfoHelper mediaWhereLatestImageOfYear:_year month:indexPath.row+1 topic:currentChild.childId];
     
     [cell.imgIcon sd_setImageWithURL:[NSURL URLWithString:mediaInfo.url]
                     placeholderImage:[UIImage imageNamed:@"exp_default.png"]];

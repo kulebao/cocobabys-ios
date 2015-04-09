@@ -14,9 +14,9 @@
 
 + (NSArray*)updateEntities:(id)jsonObjectList;
 
-+ (NSFetchedResultsController*)frCtrlForYear:(NSInteger)year month:(NSInteger)month; // month 1 - 12
++ (NSFetchedResultsController*)frCtrlForYear:(NSInteger)year month:(NSInteger)month topic:(NSString*)topic; // month 1 - 12
 
-+ (EntityMediaInfo*)mediaWhereLatestImageOfYear:(NSInteger)year month:(NSInteger)month;
++ (EntityMediaInfo*)mediaWhereLatestImageOfYear:(NSInteger)year month:(NSInteger)month topic:(NSString*)topic;
 
 + (void)deleteEntity:(EntityHistoryInfo*)entity;
 

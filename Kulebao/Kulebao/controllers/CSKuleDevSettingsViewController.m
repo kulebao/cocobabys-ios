@@ -15,6 +15,7 @@
 @property (nonatomic, strong) NSArray* serverList;
 
 - (IBAction)onBtnSwitchServerClicked:(id)sender;
+- (IBAction)onBtnBackClicked:(id)sender;
 
 @end
 
@@ -52,6 +53,10 @@
     }
     
     [actSheet showInView:self.view];
+}
+
+- (IBAction)onBtnBackClicked:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)updateContent {

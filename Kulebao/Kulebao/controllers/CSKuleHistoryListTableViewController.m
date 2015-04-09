@@ -49,7 +49,8 @@
     [self customizeBackBarItem];
     [self customizeOkBarItemWithTarget:self action:@selector(onBtnRefreshClicked:) text:@"刷新"];
     
-    _frCtrl = [EntityHistoryInfoHelper frCtrlForYear:_year month:_month];
+    CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
+    _frCtrl = [EntityHistoryInfoHelper frCtrlForYear:_year month:_month topic:currentChild.childId];
     _frCtrl.delegate = self;
     NSError* error = nil;
     [_frCtrl performFetch:&error];

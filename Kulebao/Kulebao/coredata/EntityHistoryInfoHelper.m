@@ -113,7 +113,7 @@
     return returnObjectList;
 }
 
-+ (NSFetchedResultsController*)frCtrlForYear:(NSInteger)year month:(NSInteger)month {
++ (NSFetchedResultsController*)frCtrlForYear:(NSInteger)year month:(NSInteger)month topic:(NSString*)topic{
     NSManagedObjectContext* context = [[CSCoreDataHelper sharedInstance] managedObjectContext];
     NSFetchRequest* fr = [[NSFetchRequest alloc] initWithEntityName:@"EntityHistoryInfo"];
     fr.resultType = NSManagedObjectResultType;
@@ -125,12 +125,12 @@
         month = 0;
     }
     
-    NSString* fromDateString = [NSString stringWithFormat:@"%d-%d-01 00:00:00", year, month];
-    NSString* toDateString = [NSString stringWithFormat:@"%d-%d-01 00:00:00", year, month+1];
+    NSString* fromDateString = [NSString stringWithFormat:@"%d-%d-01 00:00:00", (int)year, (int)month];
+    NSString* toDateString = [NSString stringWithFormat:@"%d-%d-01 00:00:00", (int)year, (int)month+1];
     
     if (month >= 12) {
-        fromDateString = [NSString stringWithFormat:@"%d-12-01 00:00:00", year];
-        toDateString = [NSString stringWithFormat:@"%d-01-01 00:00:00", year+1];
+        fromDateString = [NSString stringWithFormat:@"%d-12-01 00:00:00", (int)year];
+        toDateString = [NSString stringWithFormat:@"%d-01-01 00:00:00", (int)year+1];
     }
     
     NSDateFormatter* fmt = [[NSDateFormatter alloc] init];
@@ -143,7 +143,7 @@
     double toTimestamp = [toDate timeIntervalSince1970] * 1000;
     
     
-    [fr setPredicate:[NSPredicate predicateWithFormat:@"timestamp >= %lf AND timestamp < %lf", fromTimestamp, toTimestamp]];
+    [fr setPredicate:[NSPredicate predicateWithFormat:@"timestamp >= %lf && timestamp < %lf && topic == %@", fromTimestamp, toTimestamp, topic]];
     
     NSSortDescriptor* sortDesc = [NSSortDescriptor sortDescriptorWithKey:@"timestamp" ascending:NO];
     [fr setSortDescriptors:@[sortDesc]];
@@ -153,8 +153,8 @@
     return frCtrl;
 }
 
-+ (EntityMediaInfo*)mediaWhereLatestImageOfYear:(NSInteger)year month:(NSInteger)month {
-    NSFetchedResultsController* frCtrl = [EntityHistoryInfoHelper frCtrlForYear:year month:month];
++ (EntityMediaInfo*)mediaWhereLatestImageOfYear:(NSInteger)year month:(NSInteger)month topic:(NSString*)topic{
+    NSFetchedResultsController* frCtrl = [EntityHistoryInfoHelper frCtrlForYear:year month:month topic:topic];
     
     NSError* error = nil;
     [frCtrl performFetch:&error];

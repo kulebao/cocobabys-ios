@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+@class CSKuleNewsInfo;
+@protocol CSKuleNewsInfoDelegate <NSObject>
+@optional
+- (void)newsInfoDataUpdated:(CSKuleNewsInfo*)newsInfo;
+@end
+
 @interface CSKuleNewsInfo : NSObject
 
 /*
@@ -39,6 +45,10 @@
 @property (nonatomic, assign) BOOL feedbackRequired;
 @property (nonatomic, strong) NSArray* tags;
 
+@property (nonatomic, weak) id delegate;
+
 - (BOOL)containsTag:(NSString*)tag;
+- (BOOL)isSendingMark;
+- (void)markAsRead;
 
 @end

@@ -31,6 +31,16 @@
     return ret;
 }
 
+- (BOOL)isSendingMark {
+    return NO;
+}
+
+- (void)markAsRead {
+    self.feedbackRequired = NO;
+    
+    [self noticeUpdate];
+}
+
 - (NSString*)description {
     NSDictionary* meta = @{@"newsId": @(_newsId),
                            @"schoolId": @(_schoolId),
@@ -46,6 +56,12 @@
     
     NSString* desc = [NSString stringWithFormat:@"%@", meta];
     return desc;
+}
+
+- (void)noticeUpdate {
+    if ([self.delegate respondsToSelector:@selector(newsInfoDataUpdated:)]) {
+        [self.delegate newsInfoDataUpdated:self];
+    }
 }
 
 @end

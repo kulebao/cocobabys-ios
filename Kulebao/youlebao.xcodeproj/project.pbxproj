@@ -421,6 +421,8 @@
 		09CB08D619B01ABA00F57A07 /* voice_right_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09CB08D119B01ABA00F57A07 /* voice_right_3@2x.png */; };
 		09D04E3918DFCB830093577D /* CSKuleCheckinLogListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09D04E3818DFCB830093577D /* CSKuleCheckinLogListViewController.m */; };
 		09DB73E918E0280B00121716 /* CSKuleChatMsg.m in Sources */ = {isa = PBXBuildFile; fileRef = 09DB73E818E0280B00121716 /* CSKuleChatMsg.m */; };
+		09DDA12C1ADA9FCA004BAAF5 /* CSKuleNewsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09DDA12A1ADA9FCA004BAAF5 /* CSKuleNewsTableViewCell.m */; };
+		09DDA12D1ADA9FCA004BAAF5 /* CSKuleNewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09DDA12B1ADA9FCA004BAAF5 /* CSKuleNewsTableViewCell.xib */; };
 		09EA4D1D1AAF519100B95C5B /* CaptureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09EA4CB71AAF519100B95C5B /* CaptureViewController.m */; };
 		09EA4D1E1AAF519100B95C5B /* CaptureViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09EA4CB81AAF519100B95C5B /* CaptureViewController.xib */; };
 		09EA4D1F1AAF519100B95C5B /* DeleteButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 09EA4CBB1AAF519100B95C5B /* DeleteButton.m */; };
@@ -1288,6 +1290,9 @@
 		09D04E3818DFCB830093577D /* CSKuleCheckinLogListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleCheckinLogListViewController.m; sourceTree = "<group>"; };
 		09DB73E718E0280B00121716 /* CSKuleChatMsg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleChatMsg.h; sourceTree = "<group>"; };
 		09DB73E818E0280B00121716 /* CSKuleChatMsg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleChatMsg.m; sourceTree = "<group>"; };
+		09DDA1291ADA9FCA004BAAF5 /* CSKuleNewsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleNewsTableViewCell.h; sourceTree = "<group>"; };
+		09DDA12A1ADA9FCA004BAAF5 /* CSKuleNewsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleNewsTableViewCell.m; sourceTree = "<group>"; };
+		09DDA12B1ADA9FCA004BAAF5 /* CSKuleNewsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSKuleNewsTableViewCell.xib; sourceTree = "<group>"; };
 		09EA4CB61AAF519100B95C5B /* CaptureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureViewController.h; sourceTree = "<group>"; };
 		09EA4CB71AAF519100B95C5B /* CaptureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptureViewController.m; sourceTree = "<group>"; };
 		09EA4CB81AAF519100B95C5B /* CaptureViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaptureViewController.xib; sourceTree = "<group>"; };
@@ -3063,6 +3068,9 @@
 				0914E39E19A053AE00276ABA /* CSKuleChatingTableCell.m */,
 				0914E3A019A05A0800276ABA /* CSKuleCCTVItemTableViewCell.h */,
 				0914E3A119A05A0800276ABA /* CSKuleCCTVItemTableViewCell.m */,
+				09DDA1291ADA9FCA004BAAF5 /* CSKuleNewsTableViewCell.h */,
+				09DDA12A1ADA9FCA004BAAF5 /* CSKuleNewsTableViewCell.m */,
+				09DDA12B1ADA9FCA004BAAF5 /* CSKuleNewsTableViewCell.xib */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -3430,6 +3438,7 @@
 				09F74CAB1997C4F3001555D0 /* normal_btn_pressed.png in Resources */,
 				0934F06318BF5B0800E30ECA /* btn-func-6@2x.png in Resources */,
 				0904FC9318F3A349001968D7 /* btn-start-pressed.png in Resources */,
+				09DDA12D1ADA9FCA004BAAF5 /* CSKuleNewsTableViewCell.xib in Resources */,
 				0911B1E718E015E9006D0588 /* star.png in Resources */,
 				0934F05918BF5B0800E30ECA /* btn-func-1@2x.png in Resources */,
 				09EA4D401AAF519100B95C5B /* record_flashlight_highlighted@2x.png in Resources */,
@@ -3677,6 +3686,7 @@
 				090C9EC418C84E9F00883DE0 /* CSKuleSelectChildViewController.m in Sources */,
 				0914E395199FCEBC00276ABA /* SDWebImagePrefetcher.m in Sources */,
 				093CD6B918D986A20025972C /* CSKuleAssessViewController.m in Sources */,
+				09DDA12C1ADA9FCA004BAAF5 /* CSKuleNewsTableViewCell.m in Sources */,
 				0911B1D818E00F62006D0588 /* CSKuleChatingEditorViewController.m in Sources */,
 				09BA1C2518BB3F8400760182 /* AFImageRequestOperation.m in Sources */,
 				09219A5218C4878600166228 /* TPKeyboardAvoidingScrollView.m in Sources */,

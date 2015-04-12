@@ -7,11 +7,12 @@
 //
 
 #import "CSKuleNewsViewController.h"
-#import "CSKuleNoticeCell.h"
+//#import "CSKuleNoticeCell.h"
 #import "PullTableView.h"
 #import "CSKuleNewsDetailsViewController.h"
 #import "CSAppDelegate.h"
 #import "UIImageView+WebCache.h"
+#import "CSKuleNewsTableViewCell.h"
 
 @interface CSKuleNewsViewController () <UITableViewDataSource, UITableViewDelegate, PullTableViewDelegate>
 @property (weak, nonatomic) IBOutlet PullTableView *tableview;
@@ -45,6 +46,9 @@
     self.tableview.pullTextColor = UIColorRGB(0xCC, 0x66, 0x33);
     self.tableview.pullArrowImage = [UIImage imageNamed:@"grayArrow.png"];
     
+    [self.tableview registerNib:[UINib nibWithNibName:@"CSKuleNewsTableViewCell" bundle:nil]
+         forCellReuseIdentifier:@"CSKuleNewsTableViewCell"];
+    
     _newsInfoList = [NSMutableArray array];
     [self reloadNewsList];
 }
@@ -73,6 +77,57 @@
     return self.newsInfoList.count;
 }
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    CSKuleNewsTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"CSKuleNewsTableViewCell"];
+    if (cell == nil) {
+        NSArray* nibs = [[NSBundle mainBundle] loadNibNamed:@"CSKuleNewsTableViewCell" owner:nil options:nil];
+        cell = [nibs firstObject];
+    }
+    
+    CSKuleNewsInfo* newsInfo = [self.newsInfoList objectAtIndex:indexPath.row];
+
+    cell.labTitle.text = newsInfo.title;
+    cell.labContent.text = newsInfo.content;
+    
+    NSString* publiser = nil;
+    if (newsInfo.classId > 0 && newsInfo.classId == gApp.engine.currentRelationship.child.classId) {
+        publiser =  [NSString stringWithFormat:@"%@ %@", gApp.engine.loginInfo.schoolName, gApp.engine.currentRelationship.child.className];
+    }
+    else {
+        publiser = gApp.engine.loginInfo.schoolName;
+    }
+    
+    if (newsInfo.image.length > 0) {
+        NSURL* qiniuImgUrl = [gApp.engine urlFromPath:newsInfo.image];
+        qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/0/w/50/h/50"];
+        [cell.imgAttachment sd_setImageWithURL:qiniuImgUrl
+                              placeholderImage:[UIImage imageNamed:@"img-placeholder.png"]];
+        cell.imgAttachment.hidden = NO;
+        cell.iconWidth.constant = 48;
+        cell.titleLeading.constant = 8;
+    }
+    else {
+        [cell.imgAttachment cancelImageRequestOperation];
+        cell.imgAttachment.image = nil;
+        cell.imgAttachment.hidden = YES;
+        cell.iconWidth.constant = 0;
+        cell.titleLeading.constant = 0;
+    }
+    cell.imgAttachment.clipsToBounds = YES;
+    cell.imgAttachment.layer.cornerRadius = 4;
+    
+    [cell setNeedsUpdateConstraints];
+    
+    NSDate* timestamp = [NSDate dateWithTimeIntervalSince1970:newsInfo.timestamp];
+    
+    cell.labPublisher.text = [NSString stringWithFormat:@"%@ 来自:%@", [timestamp timestampString], publiser];
+    
+    [cell loadNewsInfo:newsInfo];
+    
+    return cell;
+}
+
+/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CSKuleNoticeCell* cell = [tableView dequeueReusableCellWithIdentifier:@"CSKuleNoticeCell"];
     if (cell == nil) {
@@ -113,10 +168,11 @@
     
     return cell;
 }
+*/
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 100.0+5.0;
+    return 100;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -164,7 +220,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"segue.newsdetails"]) {
         CSKuleNewsDetailsViewController* destCtrl = segue.destinationViewController;
-        destCtrl.navigationItem.title = @"公告内容";
+        destCtrl.navigationItem.title = @"通知内容";
         destCtrl.newsInfo = sender;
     }
 }

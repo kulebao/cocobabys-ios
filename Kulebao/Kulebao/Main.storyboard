@@ -801,7 +801,7 @@
             </objects>
             <point key="canvasLocation" x="182" y="4961"/>
         </scene>
-        <!--园内公告-->
+        <!--通知-->
         <scene sceneID="jEC-2w-Oh7">
             <objects>
                 <viewController storyboardIdentifier="CSKuleNewsViewController" id="hSh-cH-xBP" customClass="CSKuleNewsViewController" sceneMemberID="viewController">
@@ -817,16 +817,18 @@
                                 <rect key="frame" x="0.0" y="274" width="320" height="230"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="cXC-Tw-KRl" customClass="PullTableView">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="cXC-Tw-KRl" customClass="PullTableView">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="separatorColor" red="0.0" green="0.40000000000000002" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" title="园内公告" id="AsG-R7-F49"/>
+                    <navigationItem key="navigationItem" title="通知" id="AsG-R7-F49"/>
                     <connections>
                         <outlet property="tableview" destination="cXC-Tw-KRl" id="mFe-ak-ztl"/>
                         <segue destination="gZu-Ur-sSP" kind="push" identifier="segue.newsdetails" id="qNJ-JJ-pfw"/>
@@ -1293,14 +1295,14 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="名字" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Cw4-Go-aOl">
-                                            <rect key="frame" x="70" y="9" width="228" height="21"/>
+                                            <rect key="frame" x="65" y="9" width="232" height="21"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" red="0.80000000000000004" green="0.40000000000000002" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2014-04-03 08:08:24" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ygK-9y-L45">
-                                            <rect key="frame" x="70" y="29" width="228" height="19"/>
+                                            <rect key="frame" x="65" y="29" width="232" height="19"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -2197,6 +2199,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="8DM-yn-6yq"/>
+        <segue reference="qNJ-JJ-pfw"/>
     </inferredMetricsTieBreakers>
 </document>

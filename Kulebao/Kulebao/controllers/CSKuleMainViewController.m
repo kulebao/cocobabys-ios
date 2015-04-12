@@ -106,10 +106,13 @@
                   forKeyPath:@"badgeOfSchedule"
                      options:NSKeyValueObservingOptionNew
                      context:nil];
+    /*
     [gApp.engine addObserver:self
                   forKeyPath:@"badgeOfAssignment"
                      options:NSKeyValueObservingOptionNew
                      context:nil];
+     */
+    
     [gApp.engine addObserver:self
                   forKeyPath:@"badgeOfChating"
                      options:NSKeyValueObservingOptionNew
@@ -134,7 +137,7 @@
     [gApp.engine removeObserver:self forKeyPath:@"badgeOfRecipe"];
     [gApp.engine removeObserver:self forKeyPath:@"badgeOfCheckin"];
     [gApp.engine removeObserver:self forKeyPath:@"badgeOfSchedule"];
-    [gApp.engine removeObserver:self forKeyPath:@"badgeOfAssignment"];
+    //[gApp.engine removeObserver:self forKeyPath:@"badgeOfAssignment"];
     [gApp.engine removeObserver:self forKeyPath:@"badgeOfChating"];
     [gApp.engine removeObserver:self forKeyPath:@"badgeOfAssess"];
 }
@@ -288,23 +291,22 @@
 - (void)setupModules {
     _moduleInfos =
     @[
-      @[@"园内公告", @"btn-func-6.png", @(kKuleModuleNews)],
+      @[@"通知", @"btn-func-6.png", @(kKuleModuleNews)],
       @[@"每周食谱", @"btn-func-2.png", @(kKuleModuleRecipe)],
       @[@"接送信息", @"btn-func-3.png", @(kKuleModuleCheckin)],
       @[@"课程表",  @"btn-func-5.png", @(kKuleModuleSchedule)],
-      @[@"亲子作业", @"btn-func-8.png", @(kKuleModuleAssignment)],
+      //@[@"亲子作业", @"btn-func-8.png", @(kKuleModuleAssignment)],
       @[@"家园互动", @"btn-func-7.png", @(kKuleModuleChating)],
       @[@"在园表现", @"btn-func-4.png", @(kKuleModuleAssess)],
       @[@"成长经历", @"exp.png", @(kKuleModuleHistory)],
       @[@"看宝贝", @"watch.png", @(kKuleModuleCCTV)],
       ];
     
-    _badges = [NSMutableArray arrayWithCapacity:kKuleModuleSize];
+    _badges = [NSMutableArray arrayWithCapacity:_moduleInfos.count];
     
     const CGSize kModuleIconSize = CGSizeMake(71, 71);
     const CGSize kModuleTitleSize = CGSizeMake(71, 21);
     const NSInteger kModuleColumns = 3;
-    //const NSInteger kModuleRows = (kKuleModuleSize + MAX((kKuleModuleSize -1), 0)) / kModuleColumns;
     const CGFloat kModuleTopMagin = 5;
     const CGFloat kModuleRowSpace = 5;
     const CGFloat kModuleColumnSpace = (_scrollContent.bounds.size.width - kModuleIconSize.width*kModuleColumns)/(kModuleColumns*2.0);
@@ -318,7 +320,7 @@
         [v removeFromSuperview];
     }
     
-    for (NSInteger i=0; i<kKuleModuleSize; i++) {
+    for (NSInteger i=0; i<_moduleInfos.count; i++) {
         row = i / kModuleColumns;
         col = i % kModuleColumns;
         xx = kModuleColumnSpace + col * (kModuleIconSize.width+2*kModuleColumnSpace);

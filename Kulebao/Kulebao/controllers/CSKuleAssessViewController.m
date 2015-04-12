@@ -146,7 +146,6 @@
     const CGSize kModuleIconSize = CGSizeMake(71, 71);
     const CGSize kModuleRatingSize = CGSizeMake(71, 23);
     const NSInteger kModuleColumns = 4;
-    //const NSInteger kModuleRows = (kKuleModuleSize + MAX((kKuleModuleSize -1), 0)) / kModuleColumns;
     const CGFloat kModuleTopMagin = 45;
     const CGFloat kModuleRatingTopMagin = 5;
     const CGFloat kModuleRowSpace = 10;

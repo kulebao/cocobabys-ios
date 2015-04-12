@@ -127,7 +127,7 @@
             [self checkUpdatesOfRecipe];
             [self checkUpdatesOfCheckin];
             [self checkUpdatesOfSchedule];
-            [self checkUpdatesOfAssignment];
+            //[self checkUpdatesOfAssignment];
             [self checkUpdatesOfChating];
             [self checkUpdatesOfAssess];
         }
@@ -974,7 +974,7 @@
                             most:(NSInteger)most
                          success:(SuccessResponseHandler)success
                          failure:(FailureResponseHandler)failure {
-    NSString* path = [NSString stringWithFormat:kKindergartenNewsListPath, @(kindergarten)];
+    NSString* path = [NSString stringWithFormat:kKindergartenNewsListPathV2, @(kindergarten)];
     
     NSString* method = @"GET";
     

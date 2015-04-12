@@ -19,6 +19,17 @@
 @synthesize published = _published;
 @synthesize noticeType = _noticeType;
 @synthesize image = _image;
+@synthesize publisherId = _publisherId;
+@synthesize feedbackRequired = _feedbackRequired;
+@synthesize tags = _tags;
+
+- (BOOL)containsTag:(NSString*)tag {
+    BOOL ret = NO;
+    if (tag.length > 0) {
+        ret = [_tags containsObject:tag];
+    }
+    return ret;
+}
 
 - (NSString*)description {
     NSDictionary* meta = @{@"newsId": @(_newsId),
@@ -29,7 +40,9 @@
                            @"timestamp": @(_timestamp),
                            @"published": @(_published),
                            @"noticeType": @(_noticeType),
-                           @"image": _image};
+                           @"publisherId": _publisherId,
+                           @"feedbackRequired": @(_feedbackRequired),
+                           @"tags": _tags};
     
     NSString* desc = [NSString stringWithFormat:@"%@", meta];
     return desc;

@@ -198,14 +198,18 @@
 + (CSKuleNewsInfo*)decodeNewsInfo:(NSDictionary*)dataJson {
     /*
      {
-     "news_id" : 292,
-     "school_id" : 93740362,
-     "title" : "新标题",
-     "content" : "新内容",
-     "timestamp" : 1393511644614,
-     "published" : true,
-     "notice_type" : 2,
-     "image" : "http://suoqin-test.u.qiniudn.com/Fmz0zi5Y7qZw1spdUidluOQ2PvXm",
+     "news_id":11,
+     "school_id":93740362,
+     "title":"通知14",
+     "content":"测试信息",
+     "timestamp":1426691242108,
+     "published":true,
+     "notice_type":2,
+     "class_id":0,
+     "image":"",
+     "publisher_id":"3_93740362_3344",
+     "feedback_required":false,
+     "tags":["作业","活动"]
      }
      */
     
@@ -221,6 +225,10 @@
     BOOL published = [[dataJson valueForKeyNotNull:@"published"] boolValue];
     NSInteger notice_type = [[dataJson valueForKeyNotNull:@"notice_type"] integerValue];
     
+    NSString* publisher_id = [dataJson valueForKeyNotNull:@"publisher_id"];
+    BOOL feedback_required = [[dataJson valueForKeyNotNull:@"feedback_required"] boolValue];
+    NSArray* tags = [dataJson valueForKeyNotNull:@"tags"];
+    
     CSKuleNewsInfo* obj = [CSKuleNewsInfo new];
     obj.newsId = news_id;
     obj.schoolId = school_id;
@@ -231,6 +239,9 @@
     obj.timestamp = timestamp/1000.0;
     obj.published = published;
     obj.noticeType = notice_type;
+    obj.publisherId = publisher_id;
+    obj.feedbackRequired = feedback_required;
+    obj.tags = tags;
     
     return obj;
 }

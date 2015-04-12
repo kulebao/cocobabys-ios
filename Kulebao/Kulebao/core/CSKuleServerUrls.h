@@ -69,8 +69,17 @@
 // PATH: 小孩信息
 #define kChildInfoPath              @"/kindergarten/%@/child/%@"
 
-// PATH: 幼儿园公告
+// PATH: 幼儿园公告列表
 #define kKindergartenNewsListPath   @"/kindergarten/%@/news"
+
+// PATH: 幼儿园公告列表V2
+#define kKindergartenNewsListPathV2     @"/api/v2/kindergarten/%@/news"
+
+// PATH: 幼儿园公告详情V2
+#define kKindergartenNewsDetailPathV2   @"/api/v2/kindergarten/%@/news/%@"
+
+// PATH: 幼儿园公告回执
+#define kKindergartenNewsMarkedPathV2   @"/api/v2/kindergarten/%@/news/%@/reader"
 
 // PATH: 食谱
 #define kKindergartenCookbooksPath  @"/kindergarten/%@/cookbook"

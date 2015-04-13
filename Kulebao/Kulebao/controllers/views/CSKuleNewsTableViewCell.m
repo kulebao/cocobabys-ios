@@ -27,7 +27,10 @@
 }
 
 - (IBAction)onBtnMarkClicked:(id)sender {
-    [self.newsInfo markAsRead];
+    if (self.newsInfo.status == kNewsStatusUnknown
+        || self.newsInfo.status == kNewsStatusUnread) {
+        [self.newsInfo markAsRead];
+    }
 }
 
 - (void)loadNewsInfo:(CSKuleNewsInfo*)newsInfo {
@@ -48,21 +51,32 @@
     }
     
     if (self.newsInfo.feedbackRequired) {
-        if ([self.newsInfo isSendingMark]) {
+        if (self.newsInfo.status == kNewsStatusMarking) {
             [self.btnMark setTitle:@"发送中" forState:UIControlStateNormal];
+            [self.btnMark setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [self.btnMark setBackgroundColor:[UIColor orangeColor]];
+        }
+        else if (self.newsInfo.status == kNewsStatusRead) {
+            [self.btnMark setTitle:@"已回执" forState:UIControlStateNormal];
+            [self.btnMark setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [self.btnMark setBackgroundColor:[UIColor lightGrayColor]];
         }
         else {
             [self.btnMark setTitle:@"请回执" forState:UIControlStateNormal];
+            [self.btnMark setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [self.btnMark setBackgroundColor:[UIColor orangeColor]];
         }
-        [self.btnMark setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [self.btnMark setBackgroundColor:[UIColor orangeColor]];
+        
+        self.btnMark.hidden = NO;
     }
     else {
         [self.btnMark setTitle:nil forState:UIControlStateNormal];
         [self.btnMark setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
         [self.btnMark setBackgroundColor:[UIColor clearColor]];
+        self.btnMark.hidden = YES;
     }
 }
+
 
 #pragma mark - CSKuleNewsInfoDelegate
 - (void)newsInfoDataUpdated:(CSKuleNewsInfo*)newsInfo {

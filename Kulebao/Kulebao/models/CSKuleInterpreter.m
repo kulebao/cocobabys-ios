@@ -497,12 +497,18 @@
 
 + (CSKuleSchoolInfo*)decodeSchoolInfo:(NSDictionary*)dataJson {
     /*
-     {"school_id":93740362,
-     "phone":"13991855476",
-     "timestamp":1387649057933,
-     "desc":"...",
-     "school_logo_url":"http://www.jslfgz.com.cn/UploadFiles/xxgl/2013/4/201342395834.jpg", 
-     "name":"成都市第三军区幼儿园"
+     {
+     address = "\U963f\U65af\U52a0\U5c14\U5fb7\Uff08\U725b\U903c\U5427\Uff09";
+     desc = "";
+     "full_name" = "\U738b\U946b\U8d85\U7ea7\U5e7c\U513f\U56ed";
+     name = "\U738b\U946b\U8d85\U7ea7\U5e7c\U513f\U56ed";
+     phone = 18782242007;
+     properties =     (
+     );
+     "school_id" = 9028;
+     "school_logo_url" = "";
+     timestamp = 1428476926181;
+     token = 3DA866E3D78612FDD3D7EDF5D610732E34B5C005B163CC8E;
      }
      */
     
@@ -514,6 +520,10 @@
     NSString* desc = [dataJson valueForKeyNotNull:@"desc"];
     NSString* school_logo_url = [dataJson valueForKeyNotNull:@"school_logo_url"];
     NSString* name = [dataJson valueForKeyNotNull:@"name"];
+    NSString* fullName = [dataJson valueForKeyNotNull:@"full_name"];
+    NSString* address = [dataJson valueForKeyNotNull:@"address"];
+    NSArray* properties = [dataJson valueForKeyNotNull:@"properties"];
+    NSString* token = [dataJson valueForKeyNotNull:@"token"];
     
     CSKuleSchoolInfo* obj = [CSKuleSchoolInfo new];
     obj.schoolId = school_id;
@@ -521,7 +531,11 @@
     obj.desc = desc;
     obj.timestamp = timestamp / 1000.0;
     obj.schoolLogoUrl = school_logo_url;
+    obj.fullName = fullName;
     obj.name = name;
+    obj.address = address;
+    obj.properties = properties;
+    obj.token = token;
     
     return obj;
 }

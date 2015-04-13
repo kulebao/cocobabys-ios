@@ -17,4 +17,11 @@
 @property (nonatomic, strong) NSString* schoolLogoUrl;
 @property (nonatomic, strong) NSString* name;
 
+@property (nonatomic, strong) NSString* fullName;
+@property (nonatomic, strong) NSString* address;
+@property (nonatomic, strong) NSArray* properties;
+@property (nonatomic, strong) NSString* token;
+
+- (BOOL)hasProperty:(NSString*)key;
+
 @end

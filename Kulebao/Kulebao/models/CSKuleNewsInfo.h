@@ -8,6 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum : NSUInteger {
+    kNewsStatusUnknown,
+    kNewsStatusRead,
+    kNewsStatusUnread,
+    kNewsStatusMarking,
+    kNewsStatusQuerying,
+}NewsStatus;
+
 @class CSKuleNewsInfo;
 @protocol CSKuleNewsInfoDelegate <NSObject>
 @optional
@@ -45,10 +53,13 @@
 @property (nonatomic, assign) BOOL feedbackRequired;
 @property (nonatomic, strong) NSArray* tags;
 
+@property (nonatomic, assign) NSInteger status;
 @property (nonatomic, weak) id delegate;
 
 - (BOOL)containsTag:(NSString*)tag;
 - (BOOL)isSendingMark;
 - (void)markAsRead;
+- (void)reloadStatus;
+- (void)queryReadStatus;
 
 @end

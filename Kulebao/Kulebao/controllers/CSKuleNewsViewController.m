@@ -14,7 +14,11 @@
 #import "UIImageView+WebCache.h"
 #import "CSKuleNewsTableViewCell.h"
 
-@interface CSKuleNewsViewController () <UITableViewDataSource, UITableViewDelegate, PullTableViewDelegate>
+@interface CSKuleNewsViewController () <UITableViewDataSource,
+                                        UITableViewDelegate,
+                                        PullTableViewDelegate,
+                                        CSKuleNewsInfoDelegate>
+
 @property (weak, nonatomic) IBOutlet PullTableView *tableview;
 @property (nonatomic, strong) NSMutableArray* newsInfoList;
 
@@ -45,6 +49,8 @@
     self.tableview.pullBackgroundColor = [UIColor clearColor];
     self.tableview.pullTextColor = UIColorRGB(0xCC, 0x66, 0x33);
     self.tableview.pullArrowImage = [UIImage imageNamed:@"grayArrow.png"];
+    
+    self.tableview.tableFooterView = [[UIView alloc] initWithFrame:CGRectNull];
     
     [self.tableview registerNib:[UINib nibWithNibName:@"CSKuleNewsTableViewCell" bundle:nil]
          forCellReuseIdentifier:@"CSKuleNewsTableViewCell"];
@@ -237,6 +243,7 @@
         NSTimeInterval timestamp = [gApp.engine.preferences timestampOfModule:kKuleModuleNews forChild:currentChild.childId];
         for (id newsInfoJson in dataJson) {
             CSKuleNewsInfo* newsInfo = [CSKuleInterpreter decodeNewsInfo:newsInfoJson];
+            [newsInfo reloadStatus];
             [newsInfos addObject:newsInfo];
             if (newsInfo.timestamp > timestamp) {
                 timestamp = newsInfo.timestamp;

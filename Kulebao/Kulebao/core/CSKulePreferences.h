@@ -10,6 +10,7 @@
 
 #import "CSKuleLoginInfo.h"
 #import "CSKuleBPushInfo.h"
+#import "CSKuleNewsInfo.h"
 
 @interface CSKulePreferences : NSObject
 @property (nonatomic, strong) NSData* deviceToken;
@@ -34,5 +35,8 @@
 - (void)setServerSettings:(NSDictionary*)settings;
 - (NSDictionary*)getServerSettings;
 - (NSArray*)getSupportServerSettingsList;
+
+- (void)markNews:(CSKuleNewsInfo*)newsInfo;
+- (BOOL)hasMarkedNews:(CSKuleNewsInfo*)newsInfo;
 
 @end

@@ -82,8 +82,11 @@
     
     _nickFieldDelegate = [[CSTextFieldDelegate alloc] initWithType:kCSTextFieldDelegateNormal];
     _nickFieldDelegate.maxLength = kKuleNickMaxLength;
-    
+
     [self setupModules];
+    [self doGetSchoolInfo:^{
+        [self setupModules];
+    }];
     
     [gApp.engine addObserver:self
                   forKeyPath:@"currentRelationship"
@@ -289,18 +292,32 @@
 
 #pragma mark - UI
 - (void)setupModules {
-    _moduleInfos =
-    @[
-      @[@"通知", @"btn-func-6.png", @(kKuleModuleNews)],
-      @[@"每周食谱", @"btn-func-2.png", @(kKuleModuleRecipe)],
-      @[@"接送信息", @"btn-func-3.png", @(kKuleModuleCheckin)],
-      @[@"课程表",  @"btn-func-5.png", @(kKuleModuleSchedule)],
-      //@[@"亲子作业", @"btn-func-8.png", @(kKuleModuleAssignment)],
-      @[@"家园互动", @"btn-func-7.png", @(kKuleModuleChating)],
-      @[@"在园表现", @"btn-func-4.png", @(kKuleModuleAssess)],
-      @[@"成长经历", @"exp.png", @(kKuleModuleHistory)],
-      @[@"看宝贝", @"watch.png", @(kKuleModuleCCTV)],
-      ];
+    if (_schoolInfo && [_schoolInfo hasProperty:@"hideVideo"]) {
+        _moduleInfos = @[
+                         @[@"通知", @"btn-func-6.png", @(kKuleModuleNews)],
+                         @[@"每周食谱", @"btn-func-2.png", @(kKuleModuleRecipe)],
+                         @[@"接送信息", @"btn-func-3.png", @(kKuleModuleCheckin)],
+                         @[@"课程表",  @"btn-func-5.png", @(kKuleModuleSchedule)],
+                         //@[@"亲子作业", @"btn-func-8.png", @(kKuleModuleAssignment)],
+                         @[@"家园互动", @"btn-func-7.png", @(kKuleModuleChating)],
+                         @[@"在园表现", @"btn-func-4.png", @(kKuleModuleAssess)],
+                         @[@"成长经历", @"exp.png", @(kKuleModuleHistory)],
+                         //@[@"看宝贝", @"watch.png", @(kKuleModuleCCTV)],
+                         ];
+    }
+    else {
+        _moduleInfos = @[
+                         @[@"通知", @"btn-func-6.png", @(kKuleModuleNews)],
+                         @[@"每周食谱", @"btn-func-2.png", @(kKuleModuleRecipe)],
+                         @[@"接送信息", @"btn-func-3.png", @(kKuleModuleCheckin)],
+                         @[@"课程表",  @"btn-func-5.png", @(kKuleModuleSchedule)],
+                         //@[@"亲子作业", @"btn-func-8.png", @(kKuleModuleAssignment)],
+                         @[@"家园互动", @"btn-func-7.png", @(kKuleModuleChating)],
+                         @[@"在园表现", @"btn-func-4.png", @(kKuleModuleAssess)],
+                         @[@"成长经历", @"exp.png", @(kKuleModuleHistory)],
+                         @[@"看宝贝", @"watch.png", @(kKuleModuleCCTV)],
+                         ];
+    }
     
     _badges = [NSMutableArray arrayWithCapacity:_moduleInfos.count];
     
@@ -558,7 +575,7 @@
 #endif
 }
 
-- (void)doGetSchoolInfo {
+- (void)doGetSchoolInfo:(void(^)())completion {
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         id schoolInfoJson = [dataJson valueForKeyNotNull:@"school_info"];
         
@@ -569,8 +586,12 @@
         
         if(schoolInfo) {
             _schoolInfo = schoolInfo;
-            [self performSegueWithIdentifier:@"segue.aboutschool" sender:nil];
+            //[self performSegueWithIdentifier:@"segue.aboutschool" sender:nil];
             [gApp hideAlert];
+            
+            if (completion) {
+                completion();
+            }
         }
         else {
             [gApp alert:@"无学校信息"];
@@ -784,7 +805,26 @@
         [self performSegueWithIdentifier:@"segue.aboutschool" sender:nil];
     }
     else {
-        [self doGetSchoolInfo];
+        [self doGetSchoolInfo:^{
+            [self performSegueWithIdentifier:@"segue.aboutschool" sender:nil];
+        }];
+    }
+}
+
+- (void)checkCCTVShown {
+    if (_schoolInfo) {
+        [self doCheckCCTVShown];
+    }
+    else {
+        [self doGetSchoolInfo:^{
+            [self doCheckCCTVShown];
+        }];
+    }
+}
+
+- (void)doCheckCCTVShown {
+    if (_schoolInfo) {
+        
     }
 }
 

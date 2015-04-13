@@ -16,6 +16,23 @@
 @synthesize desc = _desc;
 @synthesize schoolLogoUrl = _schoolLogoUrl;
 @synthesize name = _name;
+@synthesize fullName = _fullName;
+@synthesize address = _address;
+@synthesize properties = _properties;
+@synthesize token = _token;
+
+- (BOOL)hasProperty:(NSString*)key {
+    BOOL ret = NO;
+    
+    for (NSDictionary* propertyInfo in _properties) {
+        if (key && [propertyInfo[@"name"] isEqualToString:key]) {
+            ret = [propertyInfo[@"value"] boolValue];
+            break;
+        }
+    }
+    
+    return ret;
+}
 
 - (NSString*)description {
     NSDictionary* meta = @{@"schoolId": @(_schoolId),
@@ -23,7 +40,11 @@
                            @"phone": _phone,
                            @"desc": _desc,
                            @"schoolLogoUrl": _schoolLogoUrl,
-                           @"name": _name};
+                           @"name": _name,
+                           @"fullName" : _fullName,
+                           @"address" : _address,
+                           @"properties" : _properties,
+                           @"token" : _token};
     
     NSString* desc = [NSString stringWithFormat:@"%@", meta];
     return desc;

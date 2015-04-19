@@ -11,6 +11,7 @@
 @interface CSContentEditorViewController : UIViewController
 
 @property (nonatomic, weak) id delegate;
+@property (nonatomic, assign) BOOL singleImage;
 
 @end
 

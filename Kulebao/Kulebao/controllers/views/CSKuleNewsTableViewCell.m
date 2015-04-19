@@ -41,14 +41,15 @@
 }
 
 - (void)refresh {
-    if ([self.newsInfo containsTag:@"作业"]) {
-        self.labTag.text = @"亲子作业";
+    
+    NSString* tagTitle = [self.newsInfo tagTitle];
+    if ([tagTitle isEqualToString:@"亲子作业"]) {
         self.labTag.backgroundColor = [UIColor orangeColor];
     }
     else {
-        self.labTag.text = @"园内公告";
         self.labTag.backgroundColor = UIColorRGB(0x00, 0x66, 0xCC);
     }
+    self.labTag.text = tagTitle;
     
     if (self.newsInfo.feedbackRequired) {
         if (self.newsInfo.status == kNewsStatusMarking) {

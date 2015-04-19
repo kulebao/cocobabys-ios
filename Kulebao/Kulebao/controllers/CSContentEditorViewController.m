@@ -10,11 +10,8 @@
 #import "GMGridView.h"
 #import "MJPhotoBrowser.h"
 #import "MJPhoto.h"
-#import "CaptureViewController.h"
 #import <MediaPlayer/MediaPlayer.h>
-#import "SBCaptureToolKit.h"
 #import <AVFoundation/AVFoundation.h>
-#import "PlayViewController.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 
 @interface CSContentEditorViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GMGridViewDataSource, GMGridViewSortingDelegate, GMGridViewTransformationDelegate, GMGridViewActionDelegate,
@@ -437,13 +434,6 @@
 }
 
 - (IBAction)onFieldDidEndOnExit:(id)sender {
-}
-
-#pragma mark - CaptureViewControllerDelegate
-- (void)captureViewController:(CaptureViewController *)ctrl didFinishMergingVideosToOutPutFileAtURL:(NSURL *)outputFileURL {
-    if ([_delegate respondsToSelector:@selector(contentEditorViewController:finishWithVideo:)] && outputFileURL) {
-        [_delegate contentEditorViewController:self finishWithVideo:outputFileURL];
-    }
 }
 
 @end

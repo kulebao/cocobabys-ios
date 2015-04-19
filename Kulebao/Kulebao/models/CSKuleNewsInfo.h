@@ -57,6 +57,8 @@ typedef enum : NSUInteger {
 @property (nonatomic, weak) id delegate;
 
 - (BOOL)containsTag:(NSString*)tag;
+- (NSString*)tagTitle;
+
 - (BOOL)isSendingMark;
 - (void)markAsRead;
 - (void)reloadStatus;

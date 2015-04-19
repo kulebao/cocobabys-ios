@@ -97,7 +97,7 @@
     
     NSString* publiser = nil;
     if (newsInfo.classId > 0 && newsInfo.classId == gApp.engine.currentRelationship.child.classId) {
-        publiser =  [NSString stringWithFormat:@"%@ %@", gApp.engine.loginInfo.schoolName, gApp.engine.currentRelationship.child.className];
+        publiser =  [NSString stringWithFormat:@"%@%@", gApp.engine.loginInfo.schoolName, gApp.engine.currentRelationship.child.className];
     }
     else {
         publiser = gApp.engine.loginInfo.schoolName;
@@ -178,7 +178,7 @@
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 100;
+    return 120;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -226,8 +226,8 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"segue.newsdetails"]) {
         CSKuleNewsDetailsViewController* destCtrl = segue.destinationViewController;
-        destCtrl.navigationItem.title = @"通知内容";
         destCtrl.newsInfo = sender;
+        destCtrl.navigationItem.title = [destCtrl.newsInfo tagTitle];
     }
 }
 

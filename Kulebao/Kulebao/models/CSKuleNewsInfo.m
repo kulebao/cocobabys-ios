@@ -44,6 +44,15 @@
     return ret;
 }
 
+- (NSString*)tagTitle {
+    NSString* tTitle = @"园内公告";
+    if ([self containsTag:@"作业"]) {
+        tTitle = @"亲子作业";
+    }
+    
+    return tTitle;
+}
+
 - (BOOL)isSendingMark {
     return self.status == kNewsStatusMarking;
 }

@@ -14,7 +14,7 @@
 
 + (id)httpClientWithHost:(NSURL*)hostUrl;
 
-- (void)httpRequestWithMethod:(NSString *)method
+- (AFHTTPRequestOperation*)httpRequestWithMethod:(NSString *)method
                          path:(NSString *)path
                    parameters:(NSDictionary *)parameters
                       success:(SuccessResponseHandler)success

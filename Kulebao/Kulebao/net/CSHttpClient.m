@@ -39,7 +39,7 @@
     return client;
 }
 
-- (void)httpRequestWithMethod:(NSString *)method
+- (AFHTTPRequestOperation*)httpRequestWithMethod:(NSString *)method
                          path:(NSString *)path
                    parameters:(NSDictionary *)parameters
                       success:(SuccessResponseHandler)success
@@ -55,11 +55,12 @@
         req.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
     }
     
-    [self httpRequest:req success:success failure:failure];
+    AFHTTPRequestOperation* operation = [self httpRequest:req success:success failure:failure];
+    return operation;
 }
 
 
-- (void)httpRequest:(NSMutableURLRequest *)request
+- (AFHTTPRequestOperation*)httpRequest:(NSMutableURLRequest *)request
             success:(SuccessResponseHandler)success
             failure:(FailureResponseHandler)failure {
     
@@ -71,6 +72,7 @@
                                                       failure:failure];
     
     [self enqueueHTTPRequestOperation:jsonOperation];
+    return jsonOperation;
 }
 
 @end

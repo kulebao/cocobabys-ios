@@ -69,7 +69,7 @@
 // PATH: 小孩信息
 #define kChildInfoPath              @"/kindergarten/%@/child/%@"
 
-// PATH: 幼儿园公告
+// PATH: 幼儿园公告列表
 #define kKindergartenNewsListPath   @"/kindergarten/%@/news"
 
 // PATH: 食谱
@@ -128,5 +128,20 @@
 
 // PATH: 获取公用视频账号
 #define kGetDefaultVideoMemberPath  @"/api/v1/kindergarten/%@/video_member/default"
+
+// PATH: 获取学校配置
+#define kGetKindergartenConfigurePath  @"/api/v2/school_config/%@"
+
+// PATH: 幼儿园公告列表V2
+#define kKindergartenNewsListPathV2     @"/api/v2/kindergarten/%@/news"
+
+// PATH: 幼儿园公告详情V2
+#define kKindergartenNewsDetailPathV2   @"/api/v2/kindergarten/%@/news/%@"
+
+// PATH: 幼儿园公告回执V2
+#define kKindergartenNewsMarkedPathV2   @"/api/v2/kindergarten/%@/news/%@/reader"
+
+// PATH: 查询幼儿园公告回执状态V2
+#define kKindergartenNewsMarkedStatusPathV2   @"/api/v2/kindergarten/%@/news/%@/reader/%@"
 
 #endif

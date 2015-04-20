@@ -14,7 +14,6 @@
 #import "EntitySenderInfo.h"
 #import "EntityHistoryInfoHelper.h"
 #import "CSKuleVideoPlayerViewController.h"
-#import "PlayViewController.h"
 #import <MediaPlayer/MediaPlayer.h>
 
 @interface CSKuleHistoryListTableViewController () <NSFetchedResultsControllerDelegate> {

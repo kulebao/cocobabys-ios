@@ -253,4 +253,14 @@
                                        success:(SuccessResponseHandler)success
                                        failure:(FailureResponseHandler)failure;
 
+- (AFHTTPRequestOperation*)reqMarkAsRead:(CSKuleNewsInfo*)newsInfo
+                                byParent:(CSKuleParentInfo*)parentInfo
+                                 success:(SuccessResponseHandler)success
+                                 failure:(FailureResponseHandler)failure;
+
+- (AFHTTPRequestOperation*)reqQueryReadStatusOf:(CSKuleNewsInfo*)newsInfo
+                                       byParent:(CSKuleParentInfo*)parentInfo
+                                        success:(SuccessResponseHandler)success
+                                        failure:(FailureResponseHandler)failure;
+
 @end

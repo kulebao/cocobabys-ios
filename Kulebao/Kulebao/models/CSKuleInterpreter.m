@@ -198,14 +198,18 @@
 + (CSKuleNewsInfo*)decodeNewsInfo:(NSDictionary*)dataJson {
     /*
      {
-     "news_id" : 292,
-     "school_id" : 93740362,
-     "title" : "新标题",
-     "content" : "新内容",
-     "timestamp" : 1393511644614,
-     "published" : true,
-     "notice_type" : 2,
-     "image" : "http://suoqin-test.u.qiniudn.com/Fmz0zi5Y7qZw1spdUidluOQ2PvXm",
+     "news_id":11,
+     "school_id":93740362,
+     "title":"通知14",
+     "content":"测试信息",
+     "timestamp":1426691242108,
+     "published":true,
+     "notice_type":2,
+     "class_id":0,
+     "image":"",
+     "publisher_id":"3_93740362_3344",
+     "feedback_required":false,
+     "tags":["作业","活动"]
      }
      */
     
@@ -221,6 +225,10 @@
     BOOL published = [[dataJson valueForKeyNotNull:@"published"] boolValue];
     NSInteger notice_type = [[dataJson valueForKeyNotNull:@"notice_type"] integerValue];
     
+    NSString* publisher_id = [dataJson valueForKeyNotNull:@"publisher_id"];
+    BOOL feedback_required = [[dataJson valueForKeyNotNull:@"feedback_required"] boolValue];
+    NSArray* tags = [dataJson valueForKeyNotNull:@"tags"];
+    
     CSKuleNewsInfo* obj = [CSKuleNewsInfo new];
     obj.newsId = news_id;
     obj.schoolId = school_id;
@@ -231,6 +239,9 @@
     obj.timestamp = timestamp/1000.0;
     obj.published = published;
     obj.noticeType = notice_type;
+    obj.publisherId = publisher_id;
+    obj.feedbackRequired = feedback_required;
+    obj.tags = tags;
     
     return obj;
 }
@@ -486,12 +497,18 @@
 
 + (CSKuleSchoolInfo*)decodeSchoolInfo:(NSDictionary*)dataJson {
     /*
-     {"school_id":93740362,
-     "phone":"13991855476",
-     "timestamp":1387649057933,
-     "desc":"...",
-     "school_logo_url":"http://www.jslfgz.com.cn/UploadFiles/xxgl/2013/4/201342395834.jpg", 
-     "name":"成都市第三军区幼儿园"
+     {
+     address = "\U963f\U65af\U52a0\U5c14\U5fb7\Uff08\U725b\U903c\U5427\Uff09";
+     desc = "";
+     "full_name" = "\U738b\U946b\U8d85\U7ea7\U5e7c\U513f\U56ed";
+     name = "\U738b\U946b\U8d85\U7ea7\U5e7c\U513f\U56ed";
+     phone = 18782242007;
+     properties =     (
+     );
+     "school_id" = 9028;
+     "school_logo_url" = "";
+     timestamp = 1428476926181;
+     token = 3DA866E3D78612FDD3D7EDF5D610732E34B5C005B163CC8E;
      }
      */
     
@@ -503,6 +520,10 @@
     NSString* desc = [dataJson valueForKeyNotNull:@"desc"];
     NSString* school_logo_url = [dataJson valueForKeyNotNull:@"school_logo_url"];
     NSString* name = [dataJson valueForKeyNotNull:@"name"];
+    NSString* fullName = [dataJson valueForKeyNotNull:@"full_name"];
+    NSString* address = [dataJson valueForKeyNotNull:@"address"];
+    NSArray* properties = [dataJson valueForKeyNotNull:@"properties"];
+    NSString* token = [dataJson valueForKeyNotNull:@"token"];
     
     CSKuleSchoolInfo* obj = [CSKuleSchoolInfo new];
     obj.schoolId = school_id;
@@ -510,7 +531,11 @@
     obj.desc = desc;
     obj.timestamp = timestamp / 1000.0;
     obj.schoolLogoUrl = school_logo_url;
+    obj.fullName = fullName;
     obj.name = name;
+    obj.address = address;
+    obj.properties = properties;
+    obj.token = token;
     
     return obj;
 }

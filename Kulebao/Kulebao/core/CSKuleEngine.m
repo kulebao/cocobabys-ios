@@ -127,7 +127,7 @@
             [self checkUpdatesOfRecipe];
             [self checkUpdatesOfCheckin];
             [self checkUpdatesOfSchedule];
-            [self checkUpdatesOfAssignment];
+            //[self checkUpdatesOfAssignment];
             [self checkUpdatesOfChating];
             [self checkUpdatesOfAssess];
         }
@@ -974,7 +974,7 @@
                             most:(NSInteger)most
                          success:(SuccessResponseHandler)success
                          failure:(FailureResponseHandler)failure {
-    NSString* path = [NSString stringWithFormat:kKindergartenNewsListPath, @(kindergarten)];
+    NSString* path = [NSString stringWithFormat:kKindergartenNewsListPathV2, @(kindergarten)];
     
     NSString* method = @"GET";
     
@@ -995,6 +995,8 @@
     if (most >= 0) {
         [parameters setObject:@(most) forKey:@"most"];
     }
+    
+    [parameters setObject:@(1) forKey:@"tag"];
     
     [_httpClient httpRequestWithMethod:method
                                   path:path
@@ -1608,6 +1610,57 @@
                             parameters:parameters
                                success:success
                                failure:failure];
+}
+
+- (AFHTTPRequestOperation*)reqMarkAsRead:(CSKuleNewsInfo*)newsInfo
+                                byParent:(CSKuleParentInfo*)parentInfo
+                                 success:(SuccessResponseHandler)success
+                                 failure:(FailureResponseHandler)failure {
+    NSParameterAssert(newsInfo);
+    NSParameterAssert(parentInfo);
+    
+    NSString* path = [NSString stringWithFormat:kKindergartenNewsMarkedPathV2, @(parentInfo.schoolId),
+                      @(newsInfo.newsId)];
+    NSString* method = @"POST";
+    NSDictionary* parameters = @{
+                                 @"school_id": @(parentInfo.schoolId),
+                                 @"name": parentInfo.name,
+                                 @"phone": parentInfo.phone,
+                                 @"portrait": parentInfo.portrait,
+                                 @"gender": @(parentInfo.gender),
+                                 @"birthday": parentInfo.birthday,
+                                 @"parent_id": parentInfo.parentId,
+                                 @"timestamp": @(parentInfo.timestamp),
+                                 @"member_status": @(parentInfo.memberStatus),
+                                 @"status": @(parentInfo.status)};
+    
+    return [_httpClient httpRequestWithMethod:method
+                                         path:path
+                                   parameters:parameters
+                                      success:success
+                                      failure:failure];
+}
+
+- (AFHTTPRequestOperation*)reqQueryReadStatusOf:(CSKuleNewsInfo*)newsInfo
+                                       byParent:(CSKuleParentInfo*)parentInfo
+                                        success:(SuccessResponseHandler)success
+                                        failure:(FailureResponseHandler)failure {
+    NSParameterAssert(newsInfo);
+    NSParameterAssert(parentInfo);
+    
+    NSString* path = [NSString stringWithFormat:kKindergartenNewsMarkedStatusPathV2,
+                      @(parentInfo.schoolId),
+                      @(newsInfo.newsId),
+                      parentInfo.parentId];
+    
+    NSString* method = @"GET";
+    NSDictionary* parameters = nil;
+    
+    return [_httpClient httpRequestWithMethod:method
+                                         path:path
+                                   parameters:parameters
+                                      success:success
+                                      failure:failure];
 }
 
 @end

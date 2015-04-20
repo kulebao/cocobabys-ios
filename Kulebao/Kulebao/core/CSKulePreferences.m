@@ -7,6 +7,7 @@
 //
 
 #import "CSKulePreferences.h"
+#import "CSAppDelegate.h"
 
 static NSString* kKeyDeviceToken = @"com.cocobabys.Kulebao.Preferences.deviceToken";
 static NSString* kKeyDefaultUsername = @"com.cocobabys.Kulebao.Preferences.defaultUsername";
@@ -16,10 +17,12 @@ static NSString* kKeyBPushInfo = @"com.cocobabys.Kulebao.Preferences.baiduPushIn
 static NSString* kKeyHistoryAccounts = @"com.cocobabys.Kulebao.Preferences.historyAccounts";
 static NSString* kKeyTimestamps = @"com.cocobabys.Kulebao.Preferences.timestamps";
 static NSString* kKeyServerSettings = @"com.cocobabys.Kulebao.Preferences.serverSettings";
+static NSString* kKeyMarkedNews = @"com.cocobabys.Kulebao.Preferences.markedNews";
 
 @implementation CSKulePreferences {
     NSUserDefaults* _config;
     NSMutableDictionary* _timestampDict;
+    NSMutableSet* _markedNews;
 }
 
 @synthesize defaultUsername = _defaultUsername;
@@ -90,10 +93,11 @@ static NSString* kKeyServerSettings = @"com.cocobabys.Kulebao.Preferences.server
     }
     
     _historyAccounts = [[NSMutableDictionary alloc] initWithDictionary:[_config objectForKey:kKeyHistoryAccounts]];
+    
+    _markedNews = [NSMutableSet setWithArray:[_config objectForKey:kKeyMarkedNews]];
 }
 
 - (void)savePreferences {
-    
     if (_deviceToken) {
         [_config setObject:_deviceToken forKey:kKeyDeviceToken];
     }
@@ -154,6 +158,13 @@ static NSString* kKeyServerSettings = @"com.cocobabys.Kulebao.Preferences.server
     }
     else {
         [_config removeObjectForKey:kKeyTimestamps];
+    }
+    
+    if (_markedNews) {
+        [_config setObject:[_markedNews allObjects] forKey:kKeyMarkedNews];
+    }
+    else {
+        [_config removeObjectForKey:kKeyMarkedNews];
     }
 
     [_config synchronize];
@@ -244,6 +255,44 @@ static NSString* kKeyServerSettings = @"com.cocobabys.Kulebao.Preferences.server
     NSArray* serverList = @[@{@"name": @"产品服务器", @"url":@"https://www.cocobabys.com"},
                             @{@"name": @"测试服务器", @"url":@"https://stage.cocobabys.com"}];
     return serverList;
+}
+
+- (void)markNews:(CSKuleNewsInfo*)newsInfo {
+    if (newsInfo && _markedNews) {
+        CSKuleParentInfo* parentInfo = gApp.engine.currentRelationship.parent;
+        
+        NSString* key = [NSString stringWithFormat:@"%@-%@-%@",
+                         @(parentInfo.schoolId),
+                         @(newsInfo.newsId),
+                         parentInfo.parentId];
+        
+        [_markedNews addObject:key];
+        
+        if (_markedNews) {
+            [_config setObject:[_markedNews allObjects] forKey:kKeyMarkedNews];
+        }
+        else {
+            [_config removeObjectForKey:kKeyMarkedNews];
+        }
+        
+        [_config synchronize];
+    }
+}
+
+- (BOOL)hasMarkedNews:(CSKuleNewsInfo*)newsInfo {
+    BOOL ret = NO;
+    if (newsInfo && _markedNews) {
+        CSKuleParentInfo* parentInfo = gApp.engine.currentRelationship.parent;
+        
+        NSString* key = [NSString stringWithFormat:@"%@-%@-%@",
+                         @(parentInfo.schoolId),
+                         @(newsInfo.newsId),
+                         parentInfo.parentId];
+        
+        ret = [_markedNews containsObject:key];
+    }
+    
+    return ret;
 }
 
 @end

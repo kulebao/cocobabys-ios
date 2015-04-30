@@ -33,8 +33,8 @@
 }
 
 - (void)customizeBackBarItemWithTarget:(id)target action:(SEL)action {
-    UIImage* imgNormal = [UIImage imageNamed:@"btn-back1.png"];
-    UIImage* imgHighlight = [UIImage imageNamed:@"btn-back1-pressed.png"];
+    UIImage* imgNormal = [UIImage imageNamed:@"v2-btn_back.png"];
+    UIImage* imgHighlight = nil;
     
     [self customizeLeftBarItemWithTarget:target
                                   action:action

@@ -33,6 +33,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *labSchoolName;
 @property (weak, nonatomic) IBOutlet UILabel *labClassName;
 @property (weak, nonatomic) IBOutlet UILabel *labChildNick;
+@property (weak, nonatomic) IBOutlet UILabel *labChildAge;
+@property (weak, nonatomic) IBOutlet UILabel *labChildSchool;
 @property (weak, nonatomic) IBOutlet UIImageView *imgChildPortrait;
 @property (weak, nonatomic) IBOutlet UIView *viewChildContainer;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollContent;
@@ -70,13 +72,15 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationController.navigationBarHidden = NO;
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"titlebar-1-bg.png"] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"v2-head.png"] forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setTitleTextAttributes:@{UITextAttributeFont: [UIFont systemFontOfSize:20], UITextAttributeTextColor:[UIColor whiteColor]}];
     
     self.labClassName.text = nil;
     self.labSchoolName.text = gApp.engine.loginInfo.schoolName;
     self.labChildNick.text = nil;
-    self.imgChildPortrait.layer.cornerRadius = 6.0;
+    self.labChildAge.text = nil;
+    self.labChildSchool.text = nil;
+    self.imgChildPortrait.layer.cornerRadius = 47.0;
     self.imgChildPortrait.clipsToBounds = YES;
     self.btnClassInfo.userInteractionEnabled = NO;
     
@@ -294,39 +298,39 @@
 - (void)setupModules {
     if (_schoolInfo && [_schoolInfo hasProperty:@"hideVideo"]) {
         _moduleInfos = @[
-                         @[@"通知", @"btn-func-6.png", @(kKuleModuleNews)],
-                         @[@"每周食谱", @"btn-func-2.png", @(kKuleModuleRecipe)],
-                         @[@"接送信息", @"btn-func-3.png", @(kKuleModuleCheckin)],
-                         @[@"课程表",  @"btn-func-5.png", @(kKuleModuleSchedule)],
-                         //@[@"亲子作业", @"btn-func-8.png", @(kKuleModuleAssignment)],
-                         @[@"家园互动", @"btn-func-7.png", @(kKuleModuleChating)],
-                         @[@"在园表现", @"btn-func-4.png", @(kKuleModuleAssess)],
-                         @[@"成长经历", @"exp.png", @(kKuleModuleHistory)],
-                         //@[@"看宝贝", @"watch.png", @(kKuleModuleCCTV)],
-                         ];
+                         @[@"接送消息", @"v2-接送消息.png", @(kKuleModuleCheckin)],
+                         @[@"校园公告", @"v2-校园公告.png", @(kKuleModuleNews)],
+                         @[@"在园表现", @"v2-在园表现.png", @(kKuleModuleAssess)],
+                         
+                         @[@"每周食谱", @"v2-每周食谱.png", @(kKuleModuleRecipe)],
+                         @[@"成长经历", @"v2-成长经历.png", @(kKuleModuleHistory)],
+                         //@[@"看宝宝", @"v2-看宝宝.png", @(kKuleModuleCCTV)],
+                         
+                         @[@"家园互动", @"v2-家园互动.png", @(kKuleModuleChating)],
+                         @[@"课程表",  @"v2-课程表.png", @(kKuleModuleSchedule)]];
     }
     else {
         _moduleInfos = @[
-                         @[@"通知", @"btn-func-6.png", @(kKuleModuleNews)],
-                         @[@"每周食谱", @"btn-func-2.png", @(kKuleModuleRecipe)],
-                         @[@"接送信息", @"btn-func-3.png", @(kKuleModuleCheckin)],
-                         @[@"课程表",  @"btn-func-5.png", @(kKuleModuleSchedule)],
-                         //@[@"亲子作业", @"btn-func-8.png", @(kKuleModuleAssignment)],
-                         @[@"家园互动", @"btn-func-7.png", @(kKuleModuleChating)],
-                         @[@"在园表现", @"btn-func-4.png", @(kKuleModuleAssess)],
-                         @[@"成长经历", @"exp.png", @(kKuleModuleHistory)],
-                         @[@"看宝贝", @"watch.png", @(kKuleModuleCCTV)],
-                         ];
+                         @[@"接送消息", @"v2-接送消息.png", @(kKuleModuleCheckin)],
+                         @[@"校园公告", @"v2-校园公告.png", @(kKuleModuleNews)],
+                         @[@"在园表现", @"v2-在园表现.png", @(kKuleModuleAssess)],
+                         
+                         @[@"每周食谱", @"v2-每周食谱.png", @(kKuleModuleRecipe)],
+                         @[@"成长经历", @"v2-成长经历.png", @(kKuleModuleHistory)],
+                         @[@"看宝宝", @"v2-看宝宝.png", @(kKuleModuleCCTV)],
+                         
+                         @[@"家园互动", @"v2-家园互动.png", @(kKuleModuleChating)],
+                         @[@"课程表",  @"v2-课程表.png", @(kKuleModuleSchedule)]];
     }
     
     _badges = [NSMutableArray arrayWithCapacity:_moduleInfos.count];
     
-    const CGSize kModuleIconSize = CGSizeMake(71, 71);
-    const CGSize kModuleTitleSize = CGSizeMake(71, 21);
+    const CGSize kModuleIconSize = CGSizeMake(88, 88);
+    const CGSize kModuleTitleSize = CGSizeMake(88, 0);
     const NSInteger kModuleColumns = 3;
-    const CGFloat kModuleTopMagin = 5;
-    const CGFloat kModuleRowSpace = 5;
-    const CGFloat kModuleColumnSpace = (_scrollContent.bounds.size.width - kModuleIconSize.width*kModuleColumns)/(kModuleColumns*2.0);
+    const CGFloat kModuleTopMagin = 15;
+    const CGFloat kModuleRowSpace = 8;
+    const CGFloat kModuleColumnSpace = (_scrollContent.bounds.size.width - kModuleIconSize.width*kModuleColumns)/(kModuleColumns+1);
     
     CGFloat xx = 0.0;
     CGFloat yy = 0.0;
@@ -340,11 +344,10 @@
     for (NSInteger i=0; i<_moduleInfos.count; i++) {
         row = i / kModuleColumns;
         col = i % kModuleColumns;
-        xx = kModuleColumnSpace + col * (kModuleIconSize.width+2*kModuleColumnSpace);
+        xx = kModuleColumnSpace + col * (kModuleIconSize.width+kModuleColumnSpace);
         yy = kModuleTopMagin + row*(kModuleIconSize.height+kModuleTitleSize.height+kModuleRowSpace);
         
         UIButton* btnIcon = [UIButton buttonWithType:UIButtonTypeCustom];
-        NSString* moduleName = _moduleInfos[i][0];
         NSString* moduleIconName = _moduleInfos[i][1];
         NSInteger moduleType = [_moduleInfos[i][2] integerValue];
         [btnIcon setBackgroundImage:[UIImage imageNamed:moduleIconName] forState:UIControlStateNormal];
@@ -354,6 +357,9 @@
         [btnIcon addTarget:self action:@selector(onBtnModulesClicked:) forControlEvents:UIControlEventTouchUpInside];
         
         yy += kModuleIconSize.height;
+        
+#ifdef COCOSBABY_HAS_MODULE_TITLE
+        NSString* moduleName = _moduleInfos[i][0];
         UILabel* labTitle = [[UILabel alloc] initWithFrame:CGRectMake(xx, yy, kModuleTitleSize.width, kModuleTitleSize.height)];
         labTitle.textColor = UIColorRGB(0xCC, 0x66, 0x33);
         labTitle.font = [UIFont boldSystemFontOfSize:14];
@@ -361,6 +367,7 @@
         labTitle.textAlignment = NSTextAlignmentCenter;
         labTitle.backgroundColor = [UIColor clearColor];
         [_scrollContent addSubview:labTitle];
+#endif
         
         JSBadgeView *badgeView = [[JSBadgeView alloc] initWithParentView:btnIcon
                                                                alignment:JSBadgeViewAlignmentTopRight];
@@ -383,6 +390,8 @@
         self.labClassName.text = childInfo.className;
         self.labSchoolName.text = gApp.engine.loginInfo.schoolName;
         self.labChildNick.text = childInfo.displayNick;
+        self.labChildAge.text = childInfo.displayAge;
+        self.labChildSchool.text = gApp.engine.loginInfo.schoolName;
         
         NSURL* qiniuImgUrl = [gApp.engine urlFromPath:childInfo.portrait];
         qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/256/h/256"];

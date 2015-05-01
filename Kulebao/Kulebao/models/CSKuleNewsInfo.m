@@ -49,6 +49,9 @@
     if ([self containsTag:@"作业"]) {
         tTitle = @"亲子作业";
     }
+    else if(self.classId > 0) {
+        tTitle = @"班级通知";
+    }
     
     return tTitle;
 }

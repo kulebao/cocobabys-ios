@@ -31,12 +31,12 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    if (IS_IPHONE5) {
-        self.imgBg.image = [UIImage imageNamed:@"Default-568h.png"];
-    }
-    else {
-        self.imgBg.image = [UIImage imageNamed:@"Default.png"];
-    }
+//    if (IS_IPHONE5) {
+//        self.imgBg.image = [UIImage imageNamed:@"Default-568h.png"];
+//    }
+//    else {
+//        self.imgBg.image = [UIImage imageNamed:@"Default.png"];
+//    }
     
     self.indicatorLoading.hidesWhenStopped = YES;
     

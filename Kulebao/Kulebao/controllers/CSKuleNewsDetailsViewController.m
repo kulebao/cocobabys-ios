@@ -123,17 +123,17 @@
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;' name='viewport' >\
     </head>\
     <body>\
-        <div style='text-align:center;font-size:16pt;font-weight:bold'>%@</div>\
-        <div style='text-align:center;font-size:10pt;'>%@ 来自:%@</div>\
+        <div style='text-align:center;font-size:14pt;font-weight:bold'>%@</div>\
+        <div style='text-align:center;font-size:10pt;'>%@ %@</div>\
         <p>\
-        <div style='word-break:break-all;width:300;font-size:13pt'>%@</div>\
+        <div style='word-break:break-all;width:100%;font-size:12pt'>%@</div>\
         %@\
     </body>\
     </html>";
     
     NSString* title = newsInfo.title;
     
-    NSString* timestampString = [[NSDate dateWithTimeIntervalSince1970:newsInfo.timestamp] isoDateTimeString];
+    NSString* timestampString = [[NSDate dateWithTimeIntervalSince1970:newsInfo.timestamp] timestampStringZhCN];
     
     NSString* publiser = gApp.engine.loginInfo.schoolName;
     if (newsInfo.classId > 0 && newsInfo.classId == gApp.engine.currentRelationship.child.classId) {
@@ -145,9 +145,9 @@
     NSString* divImage = @"";
     if (newsInfo.image.length > 0) {
         NSURL* qiniuImgUrl = [gApp.engine urlFromPath:newsInfo.image];
-        qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/2/w/640/h/960"];
+        qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/2/w/720/h/720"];
         
-        divImage = [NSString stringWithFormat:@"<div><img src='%@' width='300' /></div>", [qiniuImgUrl absoluteString]];
+        divImage = [NSString stringWithFormat:@"<div><img src='%@' width='100%%' /></div>", [qiniuImgUrl absoluteString]];
     }
     
     NSString* ss = [NSString stringWithFormat:htmlTemp, title, title, timestampString, publiser, body, divImage];
@@ -163,17 +163,17 @@
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;' name='viewport' >\
     </head>\
     <body>\
-    <div style='text-align:center;font-size:16pt;font-weight:bold'>%@</div>\
+    <div style='text-align:center;font-size:14pt;font-weight:bold'>%@</div>\
     <div style='text-align:center;font-size:10pt;'>%@ 来自:%@</div>\
     <p>\
-    <div style='word-break:break-all;width:300;font-size:13pt'>%@</div>\
+    <div style='word-break:break-all;width:100%;font-size:12pt'>%@</div>\
     %@\
     </body>\
     </html>";
     
     NSString* title = assignmentInfo.title;
     
-    NSString* timestampString = [[NSDate dateWithTimeIntervalSince1970:assignmentInfo.timestamp] isoDateTimeString];
+    NSString* timestampString = [[NSDate dateWithTimeIntervalSince1970:assignmentInfo.timestamp] timestampStringZhCN];
     
     NSString* publiser = gApp.engine.loginInfo.schoolName;
     if (assignmentInfo.classId > 0 && assignmentInfo.classId == gApp.engine.currentRelationship.child.classId) {
@@ -185,9 +185,9 @@
     NSString* divImage = @"";
     if (assignmentInfo.iconUrl.length > 0) {
         NSURL* qiniuImgUrl = [gApp.engine urlFromPath:assignmentInfo.iconUrl];
-        qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/2/w/640/h/960"];
+        qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/2/w/720/h/720"];
         
-        divImage = [NSString stringWithFormat:@"<div><img src='%@' width='300' /></div>", [qiniuImgUrl absoluteString]];
+        divImage = [NSString stringWithFormat:@"<div><img src='%@' width='100%%' /></div>", [qiniuImgUrl absoluteString]];
     }
     
     NSString* ss = [NSString stringWithFormat:htmlTemp, title, title, timestampString, publiser, body, divImage];
@@ -205,7 +205,7 @@
     <body>\
     <div style='text-align:left;font-size:13pt;font-weight:bold'>%@</div>\
     <p>\
-    <div style='word-break:break-all;width:300;font-size:13pt;font-weight:bold;text-indent:2em'>%@</div>\
+    <div style='word-break:break-all;width:100%;font-size:13pt;font-weight:bold;text-indent:2em'>%@</div>\
     <p>\
     <div style='text-align:right;font-size:13pt;font-weight:bold'>%@</div>\
     <p>%@\
@@ -214,7 +214,7 @@
     
     NSString* title = [NSString stringWithFormat:@"尊敬的用户 <font color='black'>%@</font> 你好:", gApp.engine.loginInfo.username];;
     
-    NSString* timestampString = [[NSDate dateWithTimeIntervalSince1970:checkInOutLogInfo.timestamp] isoDateTimeString];
+    NSString* timestampString = [[NSDate dateWithTimeIntervalSince1970:checkInOutLogInfo.timestamp] timestampStringZhCN];
     
     NSString* publiser = gApp.engine.loginInfo.schoolName;
     
@@ -230,9 +230,9 @@
     NSString* divImage = @"";
     if (checkInOutLogInfo.recordUrl.length > 0) {
         NSURL* qiniuImgUrl = [gApp.engine urlFromPath:checkInOutLogInfo.recordUrl];
-        qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/2/w/640/h/960"];
+        qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/2/w/720/h/720"];
         
-        divImage = [NSString stringWithFormat:@"<div><img src='%@' width='300' /></div>", [qiniuImgUrl absoluteString]];
+        divImage = [NSString stringWithFormat:@"<div><img src='%@' width='100%%' /></div>", [qiniuImgUrl absoluteString]];
     }
     
     NSString* ss = [NSString stringWithFormat:htmlTemp, title, title, body, publiser, divImage];

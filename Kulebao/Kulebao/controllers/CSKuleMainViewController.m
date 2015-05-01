@@ -87,7 +87,7 @@
     _nickFieldDelegate = [[CSTextFieldDelegate alloc] initWithType:kCSTextFieldDelegateNormal];
     _nickFieldDelegate.maxLength = kKuleNickMaxLength;
 
-    [self setupModules];
+    //[self setupModules];
     [self doGetSchoolInfo:^{
         [self setupModules];
     }];

@@ -96,37 +96,39 @@
     cell.labContent.text = newsInfo.content;
     
     NSString* publiser = nil;
+#ifdef COCOSBABY_SHOW_CLASSNAME
     if (newsInfo.classId > 0 && newsInfo.classId == gApp.engine.currentRelationship.child.classId) {
         publiser =  [NSString stringWithFormat:@"%@%@", gApp.engine.loginInfo.schoolName, gApp.engine.currentRelationship.child.className];
     }
     else {
         publiser = gApp.engine.loginInfo.schoolName;
     }
+#else
+    publiser = gApp.engine.loginInfo.schoolName;
+#endif
     
     if (newsInfo.image.length > 0) {
         NSURL* qiniuImgUrl = [gApp.engine urlFromPath:newsInfo.image];
-        qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/0/w/50/h/50"];
+        qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/0/w/60/h/60"];
         [cell.imgAttachment sd_setImageWithURL:qiniuImgUrl
                               placeholderImage:[UIImage imageNamed:@"img-placeholder.png"]];
         cell.imgAttachment.hidden = NO;
-        cell.iconWidth.constant = 48;
-        cell.titleLeading.constant = 8;
+        cell.iconWidth.constant = 60;
     }
     else {
         [cell.imgAttachment cancelImageRequestOperation];
         cell.imgAttachment.image = nil;
         cell.imgAttachment.hidden = YES;
         cell.iconWidth.constant = 0;
-        cell.titleLeading.constant = 0;
     }
     cell.imgAttachment.clipsToBounds = YES;
-    cell.imgAttachment.layer.cornerRadius = 4;
+    //cell.imgAttachment.layer.cornerRadius = 4;
     
     [cell setNeedsUpdateConstraints];
     
     NSDate* timestamp = [NSDate dateWithTimeIntervalSince1970:newsInfo.timestamp];
     
-    cell.labPublisher.text = [NSString stringWithFormat:@"%@ 来自:%@", [timestamp timestampString], publiser];
+    cell.labPublisher.text = [NSString stringWithFormat:@"%@ %@", [timestamp timestampStringZhCN], publiser];
     
     [cell loadNewsInfo:newsInfo];
     
@@ -178,7 +180,7 @@
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 120;
+    return 80;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

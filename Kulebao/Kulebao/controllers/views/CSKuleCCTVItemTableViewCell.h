@@ -10,5 +10,6 @@
 
 @interface CSKuleCCTVItemTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *labDeviceName;
+@property (weak, nonatomic) IBOutlet UIImageView *imgBoxBg;
 
 @end

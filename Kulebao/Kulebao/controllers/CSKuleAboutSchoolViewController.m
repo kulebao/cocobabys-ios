@@ -12,8 +12,6 @@
 #import <QuartzCore/QuartzCore.h>
 
 @interface CSKuleAboutSchoolViewController ()
-
-@property (weak, nonatomic) IBOutlet UIView *viewContainer;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @end
@@ -35,10 +33,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self customizeBackBarItem];
-    
-    self.viewContainer.layer.cornerRadius = 8;
-    self.viewContainer.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.3];
-    self.viewContainer.layer.borderColor = [[[UIColor grayColor] colorWithAlphaComponent:0.3] CGColor];
     
     [self reloadSchoolInfo];
 }

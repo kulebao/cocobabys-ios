@@ -13,6 +13,19 @@
 #import "UIView+convenience.h"
 #import "CSTipsInfo.h"
 
+
+static CGFloat kVRGCalendarViewTopBarHeight = 60;
+static CGFloat kVRGCalendarViewWidth = 320;
+static CGFloat kVRGCalendarViewDayWidth = 44;
+static CGFloat kVRGCalendarViewDayHeight = 44;
+
+static BOOL s_hasInitVRGCalendarView = NO;
+
+void s_InitVRGCalendarView() {
+    s_hasInitVRGCalendarView = YES;
+    kVRGCalendarViewWidth = [[[UIApplication sharedApplication] keyWindow] bounds].size.width;
+}
+
 @implementation VRGCalendarView
 @synthesize currentMonth,delegate,labelCurrentMonth, animationView_A,animationView_B;
 @synthesize markedDates,markedColors,markedTips,calendarHeight,selectedDate;
@@ -574,6 +587,8 @@
 
 #pragma mark - Init
 -(id)init {
+    s_InitVRGCalendarView();
+
     self = [super initWithFrame:CGRectMake(0, 0, kVRGCalendarViewWidth, 0)];
     if (self) {
         self.contentMode = UIViewContentModeTop;

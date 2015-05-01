@@ -126,7 +126,7 @@
         <div style='text-align:center;font-size:14pt;font-weight:bold'>%@</div>\
         <div style='text-align:center;font-size:10pt;'>%@ %@</div>\
         <p>\
-        <div style='word-break:break-all;width:100%;font-size:12pt'>%@</div>\
+        <div style='word-break:break-all;width:100%%;font-size:12pt'>%@</div>\
         %@\
     </body>\
     </html>";
@@ -166,7 +166,7 @@
     <div style='text-align:center;font-size:14pt;font-weight:bold'>%@</div>\
     <div style='text-align:center;font-size:10pt;'>%@ 来自:%@</div>\
     <p>\
-    <div style='word-break:break-all;width:100%;font-size:12pt'>%@</div>\
+    <div style='word-break:break-all;width:100%%;font-size:12pt'>%@</div>\
     %@\
     </body>\
     </html>";
@@ -205,7 +205,7 @@
     <body>\
     <div style='text-align:left;font-size:13pt;font-weight:bold'>%@</div>\
     <p>\
-    <div style='word-break:break-all;width:100%;font-size:13pt;font-weight:bold;text-indent:2em'>%@</div>\
+    <div style='word-break:break-all;width:100%%;font-size:13pt;font-weight:bold;text-indent:2em'>%@</div>\
     <p>\
     <div style='text-align:right;font-size:13pt;font-weight:bold'>%@</div>\
     <p>%@\

@@ -25,10 +25,11 @@
     [btn setBackgroundImage:imgNormal forState:UIControlStateNormal];
     [btn setBackgroundImage:imgHighlight forState:UIControlStateHighlighted];
     [btn setTitle:text forState:UIControlStateNormal];
-    btn.frame = CGRectMake(0, 0, imgNormal.size.width, imgNormal.size.height);
+    btn.frame = CGRectMake(0, 0, 44, 24);
     [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem* btnItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
-    btn.titleLabel.font = [UIFont boldSystemFontOfSize:14.0];
+    btn.titleLabel.font = [UIFont systemFontOfSize:16.0];
+    [btn sizeToFit];
     self.navigationItem.rightBarButtonItem = btnItem;
 }
 
@@ -47,8 +48,8 @@
 }
 
 - (void)customizeOkBarItemWithTarget:(id)target action:(SEL)action text:(NSString*)text {
-    UIImage* imgNormal = [UIImage imageNamed:@"btn-nav-right.png"];
-    UIImage* imgHighlight = [UIImage imageNamed:@"btn-nav-right-pressed.png"];
+    UIImage* imgNormal = nil;
+    UIImage* imgHighlight = nil;
     [self customizeRightBarItemWithTarget:target action:action normal:imgNormal hightlight:imgHighlight text:text];
 }
 

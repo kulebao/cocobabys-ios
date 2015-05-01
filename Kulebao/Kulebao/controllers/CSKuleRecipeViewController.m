@@ -167,7 +167,7 @@
             break;
     }
     
-    CGFloat rowHeight = recipeInfo ? (290.0 + 10.0) : 0.0;
+    CGFloat rowHeight = recipeInfo ? 320 : 0.0;
     
     return rowHeight;
 }

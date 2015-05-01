@@ -548,6 +548,16 @@
 		09DDA12D1ADA9FCA004BAAF5 /* CSKuleNewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09DDA12B1ADA9FCA004BAAF5 /* CSKuleNewsTableViewCell.xib */; };
 		09E709701AF36C9700628FF9 /* v2-line.png in Resources */ = {isa = PBXBuildFile; fileRef = 09E7096F1AF36C9700628FF9 /* v2-line.png */; };
 		09E709721AF38A9F00628FF9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09E709711AF38A9F00628FF9 /* LaunchScreen.xib */; };
+		09E709791AF393B000628FF9 /* v2-pic-default.png in Resources */ = {isa = PBXBuildFile; fileRef = 09E709731AF393B000628FF9 /* v2-pic-default.png */; };
+		09E7097A1AF393B000628FF9 /* v2-pic-default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09E709741AF393B000628FF9 /* v2-pic-default@2x.png */; };
+		09E7097B1AF393B000628FF9 /* v2-点击头像弹出框.png in Resources */ = {isa = PBXBuildFile; fileRef = 09E709751AF393B000628FF9 /* v2-点击头像弹出框.png */; };
+		09E7097C1AF393B000628FF9 /* v2-点击头像弹出框@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09E709761AF393B000628FF9 /* v2-点击头像弹出框@2x.png */; };
+		09E7097D1AF393B000628FF9 /* v2-食谱.png in Resources */ = {isa = PBXBuildFile; fileRef = 09E709771AF393B000628FF9 /* v2-食谱.png */; };
+		09E7097E1AF393B000628FF9 /* v2-食谱@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09E709781AF393B000628FF9 /* v2-食谱@2x.png */; };
+		09E709811AF3E13B00628FF9 /* v2-课程表表格.png in Resources */ = {isa = PBXBuildFile; fileRef = 09E7097F1AF3E13B00628FF9 /* v2-课程表表格.png */; };
+		09E709821AF3E13B00628FF9 /* v2-课程表表格@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09E709801AF3E13B00628FF9 /* v2-课程表表格@2x.png */; };
+		09E709851AF3E61A00628FF9 /* v2-课程表表格-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 09E709831AF3E61A00628FF9 /* v2-课程表表格-1.png */; };
+		09E709861AF3E61A00628FF9 /* v2-课程表表格-1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09E709841AF3E61A00628FF9 /* v2-课程表表格-1@2x.png */; };
 		09ED59A518CC8F5200187585 /* UIViewController+CSKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 09ED59A418CC8F5200187585 /* UIViewController+CSKit.m */; };
 		09ED59A818CCA22700187585 /* titlebar-1-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 09ED59A618CCA22700187585 /* titlebar-1-bg.png */; };
 		09ED59A918CCA22700187585 /* titlebar-1-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09ED59A718CCA22700187585 /* titlebar-1-bg@2x.png */; };
@@ -1485,6 +1495,16 @@
 		09DDA12B1ADA9FCA004BAAF5 /* CSKuleNewsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSKuleNewsTableViewCell.xib; sourceTree = "<group>"; };
 		09E7096F1AF36C9700628FF9 /* v2-line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-line.png"; sourceTree = "<group>"; };
 		09E709711AF38A9F00628FF9 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		09E709731AF393B000628FF9 /* v2-pic-default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-pic-default.png"; sourceTree = "<group>"; };
+		09E709741AF393B000628FF9 /* v2-pic-default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-pic-default@2x.png"; sourceTree = "<group>"; };
+		09E709751AF393B000628FF9 /* v2-点击头像弹出框.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-点击头像弹出框.png"; sourceTree = "<group>"; };
+		09E709761AF393B000628FF9 /* v2-点击头像弹出框@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-点击头像弹出框@2x.png"; sourceTree = "<group>"; };
+		09E709771AF393B000628FF9 /* v2-食谱.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-食谱.png"; sourceTree = "<group>"; };
+		09E709781AF393B000628FF9 /* v2-食谱@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-食谱@2x.png"; sourceTree = "<group>"; };
+		09E7097F1AF3E13B00628FF9 /* v2-课程表表格.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-课程表表格.png"; sourceTree = "<group>"; };
+		09E709801AF3E13B00628FF9 /* v2-课程表表格@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-课程表表格@2x.png"; sourceTree = "<group>"; };
+		09E709831AF3E61A00628FF9 /* v2-课程表表格-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-课程表表格-1.png"; sourceTree = "<group>"; };
+		09E709841AF3E61A00628FF9 /* v2-课程表表格-1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-课程表表格-1@2x.png"; sourceTree = "<group>"; };
 		09ED59A318CC8F5200187585 /* UIViewController+CSKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+CSKit.h"; sourceTree = "<group>"; };
 		09ED59A418CC8F5200187585 /* UIViewController+CSKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CSKit.m"; sourceTree = "<group>"; };
 		09ED59A618CCA22700187585 /* titlebar-1-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "titlebar-1-bg.png"; sourceTree = "<group>"; };
@@ -2921,6 +2941,8 @@
 				09D9BB921AEE933D009456ED /* v2-logo@2x.png */,
 				09D9BB901AEE933D009456ED /* v2-logo2.png */,
 				09D9BB911AEE933D009456ED /* v2-logo2@2x.png */,
+				09E709731AF393B000628FF9 /* v2-pic-default.png */,
+				09E709741AF393B000628FF9 /* v2-pic-default@2x.png */,
 				09D9BB931AEE933D009456ED /* v2-启动界面.png */,
 				09D9BB941AEE933D009456ED /* v2-启动界面@2x.png */,
 				09D9BB951AEE933D009456ED /* v2-在园表现.png */,
@@ -2941,6 +2963,8 @@
 				09D9BBA41AEE933D009456ED /* v2-每周食谱@2x.png */,
 				09D9BBA51AEE933D009456ED /* v2-游戏.png */,
 				09D9BBA61AEE933D009456ED /* v2-游戏@2x.png */,
+				09E709751AF393B000628FF9 /* v2-点击头像弹出框.png */,
+				09E709761AF393B000628FF9 /* v2-点击头像弹出框@2x.png */,
 				09D9BBA71AEE933D009456ED /* v2-看宝宝.png */,
 				09D9BBA81AEE933D009456ED /* v2-看宝宝@2x.png */,
 				09D9BBA91AEE933D009456ED /* v2-睡觉.png */,
@@ -2951,12 +2975,18 @@
 				09D9BBAE1AEE933D009456ED /* v2-自我服务@2x.png */,
 				09D9BBAF1AEE933D009456ED /* v2-课程表.png */,
 				09D9BBB01AEE933D009456ED /* v2-课程表@2x.png */,
+				09E709831AF3E61A00628FF9 /* v2-课程表表格-1.png */,
+				09E709841AF3E61A00628FF9 /* v2-课程表表格-1@2x.png */,
+				09E7097F1AF3E13B00628FF9 /* v2-课程表表格.png */,
+				09E709801AF3E13B00628FF9 /* v2-课程表表格@2x.png */,
 				09D9BBB11AEE933D009456ED /* v2-进餐.png */,
 				09D9BBB21AEE933D009456ED /* v2-进餐@2x.png */,
 				09D9BBB31AEE933D009456ED /* v2-锻炼.png */,
 				09D9BBB41AEE933D009456ED /* v2-锻炼@2x.png */,
 				09D9BBB51AEE933D009456ED /* v2-集体活动.png */,
 				09D9BBB61AEE933D009456ED /* v2-集体活动@2x.png */,
+				09E709771AF393B000628FF9 /* v2-食谱.png */,
+				09E709781AF393B000628FF9 /* v2-食谱@2x.png */,
 			);
 			path = images;
 			sourceTree = "<group>";
@@ -3339,6 +3369,7 @@
 				09BA1C0A18BB34F400760182 /* BPushConfig.plist in Resources */,
 				09F74C9C1997C4F3001555D0 /* internal_logo.png in Resources */,
 				09D9BBDA1AEE933D009456ED /* v2-btn_mic@2x.png in Resources */,
+				09E7097B1AF393B000628FF9 /* v2-点击头像弹出框.png in Resources */,
 				09D9BBEB1AEE933D009456ED /* v2-btn_发送回执.png in Resources */,
 				0934F06B18BF5B0800E30ECA /* btn-settings@2x.png in Resources */,
 				09D9BBCF1AEE933D009456ED /* v2-btn_day.png in Resources */,
@@ -3377,6 +3408,7 @@
 				09142E2F18E2DE1B00E5848F /* arrow-right@2x.png in Resources */,
 				09F74CBF1997C4F3001555D0 /* text_normal.9.png in Resources */,
 				09F74CBD1997C4F3001555D0 /* star_red.png in Resources */,
+				09E709791AF393B000628FF9 /* v2-pic-default.png in Resources */,
 				09F74C951997C4F3001555D0 /* homework.png in Resources */,
 				0934EFFB18BF559900E30ECA /* guide-3@2x.png in Resources */,
 				09F74CB21997C4F3001555D0 /* rest.png in Resources */,
@@ -3423,6 +3455,7 @@
 				0911B1E518E015E9006D0588 /* resend_press.png in Resources */,
 				09FEA71C18DC9D9600513C87 /* chating-photo.png in Resources */,
 				09F74C9B1997C4F3001555D0 /* input_normal.9.png in Resources */,
+				09E7097D1AF393B000628FF9 /* v2-食谱.png in Resources */,
 				09142E1318E2B9D800E5848F /* rating-1star.png in Resources */,
 				09BA1BE218BB2FC700760182 /* blackArrow@2x.png in Resources */,
 				0934EFF118BF559900E30ECA /* guide-1-568h@2x.png in Resources */,
@@ -3547,6 +3580,7 @@
 				09FE1EC219B566DD0073D9D4 /* video_voice_open.png in Resources */,
 				09FE1ED419B5D53E0073D9D4 /* v3_1.png in Resources */,
 				0934F08C18BF5B0800E30ECA /* settings-icon-check-update.png in Resources */,
+				09E709821AF3E13B00628FF9 /* v2-课程表表格@2x.png in Resources */,
 				09142E1618E2B9D800E5848F /* rating-2stars@2x.png in Resources */,
 				09BA1C3318BB429100760182 /* Main.storyboard in Resources */,
 				09D9BBBC1AEE933D009456ED /* v2-bg@2x.png in Resources */,
@@ -3601,6 +3635,7 @@
 				0934F07A18BF5B0800E30ECA /* input-bg-1.png in Resources */,
 				09A9EBCB18C08C7D00D83119 /* img-tree-type2@2x.png in Resources */,
 				09BA1BE618BB2FC700760182 /* grayArrow@2x.png in Resources */,
+				09E7097C1AF393B000628FF9 /* v2-点击头像弹出框@2x.png in Resources */,
 				09FEA72218DC9D9600513C87 /* icon-assignment.png in Resources */,
 				0934F09518BF5B0800E30ECA /* settings-row-bg-mid@2x.png in Resources */,
 				09F74C791997C4F3001555D0 /* camera.png in Resources */,
@@ -3662,6 +3697,7 @@
 				09BA1BA918BB2AB400760182 /* Images.xcassets in Resources */,
 				09D9BBE11AEE933D009456ED /* v2-btn_set.png in Resources */,
 				09416C9F18E41BF600DFEA44 /* icon-checkin.png in Resources */,
+				09E7097A1AF393B000628FF9 /* v2-pic-default@2x.png in Resources */,
 				0934F06118BF5B0800E30ECA /* btn-func-5@2x.png in Resources */,
 				09ED59A818CCA22700187585 /* titlebar-1-bg.png in Resources */,
 				09D9BBF81AEE933D009456ED /* v2-input_bg_家园互动@2x.png in Resources */,
@@ -3710,9 +3746,11 @@
 				0942B1681AE3E559008D3BDA /* Overlay@2x.png in Resources */,
 				0934F06418BF5B0800E30ECA /* btn-func-7.png in Resources */,
 				09142DDA18E27E7600E5848F /* bannerSuccess@2x.png in Resources */,
+				09E709851AF3E61A00628FF9 /* v2-课程表表格-1.png in Resources */,
 				09FE6AF018C572A500A840BE /* CSKuleNoticeCell.xib in Resources */,
 				09D9BC251AEE933D009456ED /* v2-集体活动@2x.png in Resources */,
 				09D9BC171AEE933D009456ED /* v2-看宝宝@2x.png in Resources */,
+				09E709861AF3E61A00628FF9 /* v2-课程表表格-1@2x.png in Resources */,
 				09FE1EDA19B5D53F0073D9D4 /* v3_4.png in Resources */,
 				09E709701AF36C9700628FF9 /* v2-line.png in Resources */,
 				09FEA72018DC9D9600513C87 /* chating-text.png in Resources */,
@@ -3743,6 +3781,7 @@
 				09AC5A3C1AACBB2200C88ECE /* video_icon.png in Resources */,
 				09F74CA61997C4F3001555D0 /* manner.png in Resources */,
 				0934F05418BF5B0800E30ECA /* btn-back-pressed.png in Resources */,
+				09E709811AF3E13B00628FF9 /* v2-课程表表格.png in Resources */,
 				09F74C6F1997C4F3001555D0 /* bottom_bar.9.png in Resources */,
 				09416CA018E41BF600DFEA44 /* icon-checkin@2x.png in Resources */,
 				09F74CB61997C4F3001555D0 /* setting.png in Resources */,
@@ -3779,6 +3818,7 @@
 				09D9BC191AEE933D009456ED /* v2-睡觉@2x.png in Resources */,
 				09BA1C0C18BB351700760182 /* PullTableViewLan.strings in Resources */,
 				0934EFF718BF559900E30ECA /* guide-2@2x.png in Resources */,
+				09E7097E1AF393B000628FF9 /* v2-食谱@2x.png in Resources */,
 				09F74CC31997C4F3001555D0 /* write_chat.png in Resources */,
 				09FE1ED919B5D53F0073D9D4 /* v3_3@2x.png in Resources */,
 				0934F06018BF5B0800E30ECA /* btn-func-5.png in Resources */,

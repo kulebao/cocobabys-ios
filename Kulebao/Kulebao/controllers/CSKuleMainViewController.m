@@ -692,7 +692,8 @@
                                       target:self
                                       action:@selector(doChangePortraitFromPhoto)];
     
-    [KxMenu setTintColor:UIColorRGB(0xCC, 0x66, 0x33)];
+    //[KxMenu setTintColor:UIColorRGB(0xCC, 0x66, 0x33)];
+    [KxMenu setTintColor:[UIColor colorWithRed:0.129f green:0.565f blue:0.839f alpha:1.0f]];
     [KxMenu showMenuInView:self.view
                   fromRect:self.viewChildContainer.frame
                  menuItems:@[item1, item2, item3, item4]];

@@ -1860,7 +1860,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oJ8-pn-OHO" userLabel="View - Tips">
-                                <rect key="frame" x="9" y="274" width="302" height="32"/>
+                                <rect key="frame" x="9" y="269" width="302" height="32"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="v2-bg_1.png" translatesAutoresizingMaskIntoConstraints="NO" id="6A1-Rq-MDI">
                                         <rect key="frame" x="0.0" y="0.0" width="302" height="32"/>
@@ -1886,7 +1886,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ySt-DS-uGR" userLabel="View - Comment">
-                                <rect key="frame" x="9" y="314" width="302" height="92"/>
+                                <rect key="frame" x="9" y="309" width="302" height="92"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="v2-bg_1.png" translatesAutoresizingMaskIntoConstraints="NO" id="uui-uz-fF6">
                                         <rect key="frame" x="0.0" y="0.0" width="302" height="92"/>
@@ -1925,7 +1925,7 @@
                         <color key="tintColor" red="0.12941176469999999" green="0.56470588239999997" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="ySt-DS-uGR" secondAttribute="trailing" constant="9" id="72V-Gb-0kp"/>
-                            <constraint firstItem="oJ8-pn-OHO" firstAttribute="top" secondItem="zrh-nS-py1" secondAttribute="bottom" constant="230" id="CEb-2x-MOO"/>
+                            <constraint firstItem="oJ8-pn-OHO" firstAttribute="top" secondItem="zrh-nS-py1" secondAttribute="bottom" constant="225" id="CEb-2x-MOO"/>
                             <constraint firstItem="zrh-nS-py1" firstAttribute="top" secondItem="p0Z-e5-dQZ" secondAttribute="bottom" id="Nxe-bS-qgc"/>
                             <constraint firstItem="oJ8-pn-OHO" firstAttribute="leading" secondItem="Hxl-Gz-y7N" secondAttribute="leading" constant="9" id="V1T-qb-Iba"/>
                             <constraint firstItem="ySt-DS-uGR" firstAttribute="top" secondItem="oJ8-pn-OHO" secondAttribute="bottom" constant="8" id="YM7-fP-zYI"/>

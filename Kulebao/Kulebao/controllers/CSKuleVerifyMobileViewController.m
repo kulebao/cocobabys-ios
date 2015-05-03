@@ -17,13 +17,12 @@ static NSInteger kRetryInterval = 600; // 秒
     NSString* _noticeTemp;
 }
 
-@property (weak, nonatomic) IBOutlet UIImageView *imgConentBg;
 @property (weak, nonatomic) IBOutlet UIImageView *imgFieldBg1;
 @property (weak, nonatomic) IBOutlet UITextField *fieldSmsCode;
 @property (weak, nonatomic) IBOutlet UITextView *textNotice;
 @property (weak, nonatomic) IBOutlet UIButton *btnRetrySmsCode;
-@property (weak, nonatomic) IBOutlet UIImageView *imgNoticeBg;
 @property (weak, nonatomic) IBOutlet UIButton *btnBind;
+@property (weak, nonatomic) IBOutlet UIImageView *imgContentBg;
 
 - (IBAction)onBtnBackClicked:(id)sender;
 - (IBAction)onBtnBindClicked:(id)sender;
@@ -48,26 +47,22 @@ static NSInteger kRetryInterval = 600; // 秒
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.imgConentBg.image = [[UIImage imageNamed:@"bg-dialog.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+    self.imgContentBg.image = [[UIImage imageNamed:@"v2-input_login_bg.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     
-    UIImage* fieldBgImg = [[UIImage imageNamed:@"bg-input-normal.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+    UIImage* fieldBgImg = [[UIImage imageNamed:@"v2-input_login.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     self.imgFieldBg1.image = fieldBgImg;
-    self.imgNoticeBg.image = fieldBgImg;
     
-    _noticeTemp = @"您的手机号码%@已通过验证，请点击获取验证码按钮，稍后会有一个6位数字的验证码，通过短信发送到该手机上，请在下方的输入框内填入此验证码，点击绑定按钮，进行手机绑定，谢谢。\n\n特别提示：该验证码的有效时间为10分钟，请在有效时间内进行绑定操作。";
+    _noticeTemp = @"尊敬的%@用户，您好！您的手机已通过验证。请注意查收验证码短信。";
     
     NSString* notice = [NSString stringWithFormat:_noticeTemp, _mobile];
     self.textNotice.text = notice;
     self.textNotice.textColor = UIColorRGB(0xff, 0x33, 0x00);
     self.textNotice.font = [UIFont systemFontOfSize:13.0];
     
-    UIImage* btnBgImage = [[UIImage imageNamed:@"btn-type1.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
-    UIImage* btnBgImagePressed = [[UIImage imageNamed:@"btn-type1-pressed.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+    UIImage* btnBgImage = [[UIImage imageNamed:@"v2-btn_green.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
 
     [self.btnBind setBackgroundImage:btnBgImage
                             forState:UIControlStateNormal];
-    [self.btnBind setBackgroundImage:btnBgImagePressed
-                            forState:UIControlStateHighlighted];
     
     _timer = nil;
 }

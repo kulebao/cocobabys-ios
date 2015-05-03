@@ -33,8 +33,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self customizeBackBarItem];
-    
-    [self reloadSchoolInfo];
 }
 
 - (void)didReceiveMemoryWarning
@@ -59,6 +57,7 @@
 {
     NSString* cName = [NSString stringWithFormat:@"%@",  self.navigationItem.title, nil];
     [[BaiduMobStat defaultStat] pageviewStartWithName:cName];
+    [self reloadSchoolInfo];
 }
 
 -(void) viewDidDisappear:(BOOL)animated
@@ -125,18 +124,17 @@
         }
         
         if (_schoolInfo.phone.length > 0) {
-            UIView* line = [[UIView alloc] initWithFrame:CGRectMake(10, yy, kWidth-10*2, 1)];
-            line.backgroundColor = UIColorRGB(0xCC, 0x66, 0x33);
+            UIImageView* line = [[UIImageView alloc] initWithFrame:CGRectMake(10, yy, kWidth-10*2, 1)];
+            //line.backgroundColor = UIColorRGB(0xCC, 0x66, 0x33);
+            line.image = [UIImage imageNamed:@"v2-line.png"];
             [_scrollView addSubview:line];
             yy += 5;
             
-            UIImage* imgBtnBg = [UIImage imageNamed:@"btn-type1.png"];
-            UIImage* imgBtnBgPress = [UIImage imageNamed:@"btn-type1-pressed.png"];
+            UIImage* imgBtnBg = [[UIImage imageNamed:@"v2-btn_blue"] resizableImageWithCapInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
             UIButton* btnCallPhone = [UIButton buttonWithType:UIButtonTypeCustom];
-            btnCallPhone.frame = CGRectMake((kWidth-imgBtnBg.size.width)/2, yy, imgBtnBg.size.width, imgBtnBg.size.height);
+            btnCallPhone.frame = CGRectMake((kWidth-imgBtnBg.size.width-20)/2, yy, imgBtnBg.size.width+20, imgBtnBg.size.height);
             
             [btnCallPhone setBackgroundImage:imgBtnBg forState:UIControlStateNormal];
-            [btnCallPhone setBackgroundImage:imgBtnBgPress forState:UIControlStateHighlighted];
             [btnCallPhone addTarget:self action:@selector(onBtnCallPhoneClicked:) forControlEvents:UIControlEventTouchUpInside];
             [btnCallPhone setTitle:@"联系我们" forState:UIControlStateNormal];
             

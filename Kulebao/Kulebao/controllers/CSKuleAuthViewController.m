@@ -18,6 +18,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *fieldMobile;
 @property (weak, nonatomic) IBOutlet UIButton *btnDevSetting;
 @property (weak, nonatomic) IBOutlet UILabel *labServerName;
+@property (weak, nonatomic) IBOutlet UIView *viewContainer;
+@property (weak, nonatomic) IBOutlet UIImageView *imgContentBg;
 - (IBAction)onBtnSendClicked:(id)sender;
 - (IBAction)onBtnDevSettingClicked:(id)sender;
 
@@ -55,6 +57,7 @@
         self.btnDevSetting.hidden = YES;
     }
     
+    self.imgContentBg.image = [[UIImage imageNamed:@"v2-input_login_bg.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
     
     [self showIntroViewsIfNeeded];
 }

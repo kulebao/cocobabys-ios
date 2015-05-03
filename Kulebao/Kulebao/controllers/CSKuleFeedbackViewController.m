@@ -38,7 +38,7 @@
                                 action:@selector(onBtnSendClicked:)
                                   text:@"发送"];
     
-    self.imgContentBg.image = [[UIImage imageNamed:@"bg-dialog.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+    self.imgContentBg.image = [[UIImage imageNamed:@"v2-input_login_bg.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     
     self.textMsgBody.delegate = self;
     [self.textMsgBody becomeFirstResponder];

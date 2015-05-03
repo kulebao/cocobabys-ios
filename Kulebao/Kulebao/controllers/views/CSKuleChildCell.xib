@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
@@ -8,29 +8,41 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CSKuleChildCell" id="4Pq-gW-MHS" customClass="CSKuleChildCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="110"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4Pq-gW-MHS" id="Eag-sh-0PQ">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="109"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="notice-cell-bg.png" id="9F3-G6-vc0">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="110"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9F3-G6-vc0">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="63"/>
                     </imageView>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BbL-ee-b3Z">
-                        <rect key="frame" x="92" y="50" width="208" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                        <color key="textColor" red="0.85490202900000001" green="0.392156899" blue="0.23529413339999999" alpha="1" colorSpace="deviceRGB"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VGK-dR-OsS">
+                        <rect key="frame" x="8" y="4" width="56" height="56"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="56" id="032-1j-KCd"/>
+                            <constraint firstAttribute="width" constant="56" id="8xy-A4-zNm"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BbL-ee-b3Z">
+                        <rect key="frame" x="72" y="22" width="240" height="20"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" red="0.1215686275" green="0.52941176469999995" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="VGK-dR-OsS">
-                        <rect key="frame" x="20" y="29" width="64" height="64"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    </imageView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="9F3-G6-vc0" secondAttribute="bottom" id="0Iu-65-Rgm"/>
+                    <constraint firstItem="BbL-ee-b3Z" firstAttribute="leading" secondItem="VGK-dR-OsS" secondAttribute="trailing" constant="8" id="3ca-DR-fos"/>
+                    <constraint firstAttribute="trailing" secondItem="BbL-ee-b3Z" secondAttribute="trailing" constant="8" id="D8S-RC-ztC"/>
+                    <constraint firstItem="9F3-G6-vc0" firstAttribute="top" secondItem="Eag-sh-0PQ" secondAttribute="top" id="Hwc-rG-kfR"/>
+                    <constraint firstAttribute="trailing" secondItem="9F3-G6-vc0" secondAttribute="trailing" id="QCf-JB-eLt"/>
+                    <constraint firstItem="VGK-dR-OsS" firstAttribute="leading" secondItem="Eag-sh-0PQ" secondAttribute="leading" constant="8" id="Qgr-tN-G33"/>
+                    <constraint firstAttribute="centerY" secondItem="BbL-ee-b3Z" secondAttribute="centerY" id="gms-Ua-s1i"/>
+                    <constraint firstItem="9F3-G6-vc0" firstAttribute="leading" secondItem="Eag-sh-0PQ" secondAttribute="leading" id="ir0-H8-Yx5"/>
+                    <constraint firstAttribute="centerY" secondItem="VGK-dR-OsS" secondAttribute="centerY" id="lKK-GT-jkg"/>
+                </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
@@ -39,9 +51,6 @@
             </connections>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="notice-cell-bg.png" width="320" height="110"/>
-    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

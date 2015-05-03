@@ -282,8 +282,8 @@
 
 - (void)setupAppearance {
     UIImage* imgAlertBg = [UIImage imageNamed:@"alert-bg.png"];
-    UIImage* imgBtnBg = [UIImage imageNamed:@"btn-type1.png"];
-    UIImage* imgBtnPressedBg = [UIImage imageNamed:@"btn-type1-pressed.png"];
+    UIImage* imgBtnCancelBg = [[UIImage imageNamed:@"v2-btn_gray.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
+    UIImage* imgBtnOkBg = [[UIImage imageNamed:@"v2-btn_green.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
     
     imgAlertBg = [imgAlertBg resizableImageWithCapInsets:UIEdgeInsetsMake(100, 50, 10, 50)];
     
@@ -291,10 +291,10 @@
     [alertAppearance setBackgroundImage:imgAlertBg];
     [alertAppearance setTitleTextAttributes:@{UITextAttributeTextColor:[UIColor blackColor],}];
     [alertAppearance setMessageTextAttributes:@{UITextAttributeTextColor:[UIColor blackColor],}];
-    [alertAppearance setButtonBackgroundImage:imgBtnBg forState:UIControlStateNormal];
-    [alertAppearance setCancelButtonBackgroundImage:imgBtnBg forState:UIControlStateNormal];
-    [alertAppearance setButtonBackgroundImage:imgBtnPressedBg forState:UIControlStateHighlighted];
-    [alertAppearance setCancelButtonBackgroundImage:imgBtnPressedBg forState:UIControlStateHighlighted];
+    [alertAppearance setButtonBackgroundImage:imgBtnOkBg forState:UIControlStateNormal];
+    [alertAppearance setCancelButtonBackgroundImage:imgBtnCancelBg forState:UIControlStateNormal];
+//    [alertAppearance setButtonBackgroundImage:imgBtnPressedBg forState:UIControlStateHighlighted];
+//    [alertAppearance setCancelButtonBackgroundImage:imgBtnPressedBg forState:UIControlStateHighlighted];
     [alertAppearance setContentInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
 }
 

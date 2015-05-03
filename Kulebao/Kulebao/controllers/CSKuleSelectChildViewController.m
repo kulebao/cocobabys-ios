@@ -86,7 +86,7 @@
         NSArray* nibs = [[NSBundle mainBundle] loadNibNamed:@"CSKuleChildCell" owner:nil options:nil];
         cell = [nibs firstObject];
         
-        cell.imgChildPortrait.layer.cornerRadius = 4.0;
+        cell.imgChildPortrait.layer.cornerRadius = 56.0/2;
         cell.imgChildPortrait.clipsToBounds = YES;
     }
     
@@ -105,7 +105,7 @@
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 110.0;
+    return 64;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

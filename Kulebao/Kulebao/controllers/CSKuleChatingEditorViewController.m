@@ -53,7 +53,10 @@
                                      text:@"发送"];
     
     self.textMsgBody.backgroundColor = [UIColor clearColor];
-    self.imgContentBg.image = [[UIImage imageNamed:@"bg-dialog.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+    self.imgContentBg.image = [[UIImage imageNamed:@"v2-input_bg_家园互动.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+    
+    UIImage* imgBtnGreenBg = [[UIImage imageNamed:@"v2-btn_green.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+    [self.btnSendVoice setBackgroundImage:imgBtnGreenBg forState:UIControlStateNormal];
     
     //[self.textMsgBody becomeFirstResponder];
     self.imgVoice.hidden = YES;

@@ -24,8 +24,8 @@ static NSInteger kRetryInterval = 600; // 秒
 @property (weak, nonatomic) IBOutlet UITextField *fieldNewPswd;
 @property (weak, nonatomic) IBOutlet UITextField *fieldNewPswdConfirm;
 @property (weak, nonatomic) IBOutlet UITextView *textNotice;
-@property (weak, nonatomic) IBOutlet UIImageView *imgNoticeBg;
 @property (weak, nonatomic) IBOutlet UIButton *btnRetrySmsCode;
+@property (weak, nonatomic) IBOutlet UIButton *btnSubmit;
 - (IBAction)onBtnBackClicked:(id)sender;
 - (IBAction)onBtnResetClicked:(id)sender;
 - (IBAction)onBtnRetrySmsCodeClicked:(id)sender;
@@ -49,13 +49,19 @@ static NSInteger kRetryInterval = 600; // 秒
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.imgConentBg.image = [[UIImage imageNamed:@"bg-dialog.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+    self.imgConentBg.image = [[UIImage imageNamed:@"v2-input_login_bg.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     
-    UIImage* fieldBgImg = [[UIImage imageNamed:@"bg-input-normal.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+    UIImage* fieldBgImg = [[UIImage imageNamed:@"v2-input_login.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     self.imgFieldBg1.image = fieldBgImg;
     self.imgFieldBg2.image = fieldBgImg;
     self.imgFieldBg3.image = fieldBgImg;
-    self.imgNoticeBg.image = fieldBgImg;
+    
+    UIImage* imgBtnBlueBg = [[UIImage imageNamed:@"v2-btn_blue.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+    
+    UIImage* imgBtnGreenBg = [[UIImage imageNamed:@"v2-btn_green.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+    
+    [self.btnRetrySmsCode setBackgroundImage:imgBtnBlueBg forState:UIControlStateNormal];
+    [self.btnSubmit setBackgroundImage:imgBtnGreenBg forState:UIControlStateNormal];
     
     _timer = nil;
 }

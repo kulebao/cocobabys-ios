@@ -253,7 +253,17 @@
         }
         [gApp.engine.preferences setTimestamp:timestamp ofModule:kKuleModuleNews forChild:currentChild.childId];
         
-        self.newsInfoList = newsInfos;
+        @try {
+            [self.newsInfoList removeAllObjects];
+            [self.newsInfoList addObjectsFromArray:newsInfos];
+        }
+        @catch (NSException *exception) {
+            CSLog(@"exception:%@", exception);
+        }
+        @finally {
+            //
+        }
+        
         if (_newsInfoList.count > 0) {
             [gApp hideAlert];
         }

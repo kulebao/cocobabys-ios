@@ -56,7 +56,6 @@ static NSInteger kRetryInterval = 600; // 秒
     
     NSString* notice = [NSString stringWithFormat:_noticeTemp, _mobile];
     self.textNotice.text = notice;
-    self.textNotice.textColor = UIColorRGB(0xff, 0x33, 0x00);
     self.textNotice.font = [UIFont systemFontOfSize:13.0];
     
     UIImage* btnBgImage = [[UIImage imageNamed:@"v2-btn_green.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];

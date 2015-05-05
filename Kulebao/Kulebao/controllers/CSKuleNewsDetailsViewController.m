@@ -46,6 +46,12 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)dealloc {
+    if (_newsInfo) {
+        [_newsInfo removeObserver:self forKeyPath:@"status"];
+    }
+}
+
 #pragma mark - View lifecycle
 -(void) viewDidAppear:(BOOL)animated
 {
@@ -59,22 +65,42 @@
     [[BaiduMobStat defaultStat] pageviewEndWithName:cName];
 }
 
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if ([object isEqual:_newsInfo] && [keyPath isEqualToString:@"status"]) {
+        [self updateNewsUI];
+    }
+}
+
+- (void)updateNewsUI {
+    if (self.newsInfo.feedbackRequired) {
+        if (self.newsInfo.status == kNewsStatusMarking){
+            [gApp waitingAlert:@"发送回执中"];
+        }
+        else if(self.newsInfo.status == kNewsStatusRead) {
+            self.navigationItem.rightBarButtonItems = nil;
+            [gApp hideAlert];
+            [self customizeOkBarItemWithTarget:nil action:nil text:@"已回执"];
+        }
+        else {
+            [self customizeOkBarItemWithTarget:self action:@selector(onMarkNews) text:@"发送回执"];
+        }
+    }
+}
+
 #pragma mark - Setters
 - (void)setNewsInfo:(CSKuleNewsInfo *)newsInfo{
     _newsInfo = newsInfo;
     _checkInOutLogInfo = nil;
     _assignmentInfo = nil;
     
-    if (self.newsInfo.feedbackRequired) {
-        if (self.newsInfo.status == kNewsStatusMarking
-            || self.newsInfo.status == kNewsStatusRead) {
-            self.navigationItem.rightBarButtonItems = nil;
-        }
-        else {
-            [self customizeOkBarItemWithTarget:self action:@selector(onMarkNews) text:@"发送回执"];
-        }
+    if (_newsInfo) {
+        [_newsInfo addObserver:self
+                    forKeyPath:@"status"
+                       options:NSKeyValueObservingOptionNew
+                       context:nil];
     }
-
+    
+    [self updateNewsUI];
     
     if ([self isViewLoaded]) {
         [self reloadWebView];
@@ -227,7 +253,7 @@
     </body>\
     </html>";
     
-    NSString* title = [NSString stringWithFormat:@"尊敬的用户 <font color='black'>%@</font> 你好:", gApp.engine.loginInfo.username];;
+    NSString* title = [NSString stringWithFormat:@"尊敬的<font color='black'>%@</font>家长，您好:", gApp.engine.loginInfo.username];;
     
     NSString* timestampString = [[NSDate dateWithTimeIntervalSince1970:checkInOutLogInfo.timestamp] timestampStringZhCN];
     
@@ -236,10 +262,10 @@
     NSString* body = @"";
     CSKuleChildInfo* child = gApp.engine.currentRelationship.child;
     if (checkInOutLogInfo.noticeType == kKuleNoticeTypeCheckIn) {
-        body = [NSString stringWithFormat:@"您的小孩 <font color='black'>%@</font> 已于 %@  由 <font color='black'>%@</font> 刷卡入园。", child.nick, timestampString, checkInOutLogInfo.parentName];
+        body = [NSString stringWithFormat:@"【%@】幼儿园提醒您，您的宝宝 <font color='black'>%@</font> 已于 %@  由 <font color='black'>%@</font> 刷卡入园。", publiser, child.nick, timestampString, checkInOutLogInfo.parentName];
     }
     else if (checkInOutLogInfo.noticeType == kKuleNoticeTypeCheckOut){
-        body = [NSString stringWithFormat:@"您的小孩 <font color='black'>%@</font> 已于 %@ 由 <font color='black'>%@</font> 刷卡离园。", child.nick, timestampString, checkInOutLogInfo.parentName];
+        body = [NSString stringWithFormat:@"%@】幼儿园提醒您，您的宝宝 <font color='black'>%@</font> 已于 %@ 由 <font color='black'>%@</font> 刷卡离园。", publiser, child.nick, timestampString, checkInOutLogInfo.parentName];
     }
     
     NSString* divImage = @"";

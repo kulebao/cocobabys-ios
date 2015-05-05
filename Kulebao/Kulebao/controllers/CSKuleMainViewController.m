@@ -173,18 +173,18 @@
         }
     }
     else if((object == gApp.engine) && [keyPath isEqualToString:@"badgeOfNews"]) {
-        JSBadgeView* badgeView = [_badges objectAtIndex:kKuleModuleNews];
-        if (gApp.engine.badgeOfNews > 0) {
+        JSBadgeView* badgeView = [self badgeViewForModule:kKuleModuleNews];
+        if (badgeView && gApp.engine.badgeOfNews > 0) {
             badgeView.badgeText = @"新";
-            [self showBanner:@"您收到新的园内公告"];
+            [self showBanner:@"您收到新的校园公告"];
         }
         else {
             badgeView.badgeText = nil;
         }
     }
     else if((object == gApp.engine) && [keyPath isEqualToString:@"badgeOfRecipe"]) {
-        JSBadgeView* badgeView = [_badges objectAtIndex:kKuleModuleRecipe];
-        if (gApp.engine.badgeOfRecipe > 0) {
+        JSBadgeView* badgeView = [self badgeViewForModule:kKuleModuleRecipe];
+        if (badgeView && gApp.engine.badgeOfRecipe > 0) {
             badgeView.badgeText = @"新";
             [self showBanner:@"您收到新的每周食谱"];
         }
@@ -193,8 +193,8 @@
         }
     }
     else if((object == gApp.engine) && [keyPath isEqualToString:@"badgeOfCheckin"]) {
-        JSBadgeView* badgeView = [_badges objectAtIndex:kKuleModuleCheckin];
-        if (gApp.engine.badgeOfCheckin > 0) {
+        JSBadgeView* badgeView = [self badgeViewForModule:kKuleModuleCheckin];
+        if (badgeView && gApp.engine.badgeOfCheckin > 0) {
             badgeView.badgeText = @"新";
             [self showBanner:@"您收到新的接送消息"];
         }
@@ -203,8 +203,8 @@
         }
     }
     else if((object == gApp.engine) && [keyPath isEqualToString:@"badgeOfSchedule"]) {
-        JSBadgeView* badgeView = [_badges objectAtIndex:kKuleModuleSchedule];
-        if (gApp.engine.badgeOfSchedule > 0) {
+        JSBadgeView* badgeView = [self badgeViewForModule:kKuleModuleSchedule];
+        if (badgeView && gApp.engine.badgeOfSchedule > 0) {
             badgeView.badgeText = @"新";
             [self showBanner:@"您收到新的课程表"];
         }
@@ -213,8 +213,8 @@
         }
     }
     else if((object == gApp.engine) && [keyPath isEqualToString:@"badgeOfAssignment"]) {
-        JSBadgeView* badgeView = [_badges objectAtIndex:kKuleModuleAssignment];
-        if (gApp.engine.badgeOfAssignment > 0) {
+        JSBadgeView* badgeView = [self badgeViewForModule:kKuleModuleAssignment];
+        if (badgeView && gApp.engine.badgeOfAssignment > 0) {
             badgeView.badgeText = @"新";
             [self showBanner:@"您收到新的亲子作业"];
         }
@@ -223,8 +223,8 @@
         }
     }
     else if((object == gApp.engine) && [keyPath isEqualToString:@"badgeOfChating"]) {
-        JSBadgeView* badgeView = [_badges objectAtIndex:kKuleModuleChating];
-        if (gApp.engine.badgeOfChating > 0) {
+        JSBadgeView* badgeView = [self badgeViewForModule:kKuleModuleChating];
+        if (badgeView && gApp.engine.badgeOfChating > 0) {
             badgeView.badgeText = @"新";
             [self showBanner:@"您收到新的家园互动"];
         }
@@ -233,8 +233,8 @@
         }
     }
     else if((object == gApp.engine) && [keyPath isEqualToString:@"badgeOfAssess"]) {
-        JSBadgeView* badgeView = [_badges objectAtIndex:kKuleModuleAssess];
-        if (gApp.engine.badgeOfAssess > 0) {
+        JSBadgeView* badgeView = [self badgeViewForModule:kKuleModuleAssess];
+        if (badgeView && gApp.engine.badgeOfAssess > 0) {
             badgeView.badgeText = @"新";
             [self showBanner:@"您收到新的在园表现"];
         }
@@ -245,6 +245,18 @@
     else {
         CSLog(@"UNKNOWN.");
     }
+}
+
+- (JSBadgeView*)badgeViewForModule:(NSUInteger)moduleType {
+    JSBadgeView* badgeView = nil;
+    for (JSBadgeView* v in _badges) {
+        if (v.tag == moduleType) {
+            badgeView = v;
+            break;
+        }
+    }
+    
+    return badgeView;
 }
 
 #pragma mark - View lifecycle
@@ -371,6 +383,7 @@
         
         JSBadgeView *badgeView = [[JSBadgeView alloc] initWithParentView:btnIcon
                                                                alignment:JSBadgeViewAlignmentTopRight];
+        badgeView.tag = moduleType;
         badgeView.badgePositionAdjustment = CGPointMake(-5, 5);
         //badgeView.badgeText =[NSString stringWithFormat:@"%d", i];
         [_badges addObject:badgeView];

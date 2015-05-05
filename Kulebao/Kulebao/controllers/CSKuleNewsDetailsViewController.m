@@ -65,6 +65,17 @@
     _checkInOutLogInfo = nil;
     _assignmentInfo = nil;
     
+    if (self.newsInfo.feedbackRequired) {
+        if (self.newsInfo.status == kNewsStatusMarking
+            || self.newsInfo.status == kNewsStatusRead) {
+            self.navigationItem.rightBarButtonItems = nil;
+        }
+        else {
+            [self customizeOkBarItemWithTarget:self action:@selector(onMarkNews) text:@"发送回执"];
+        }
+    }
+
+    
     if ([self isViewLoaded]) {
         [self reloadWebView];
     }
@@ -88,6 +99,10 @@
     if ([self isViewLoaded]) {
         [self reloadWebView];
     }
+}
+
+- (void)onMarkNews {
+    [self.newsInfo markAsRead];
 }
 
 #pragma mark - UIWebViewDelegate

@@ -575,6 +575,7 @@
 		09F0BFAE18F1C483004629BA /* UIViewController+MJPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09F0BFAC18F1C483004629BA /* UIViewController+MJPopupViewController.m */; };
 		09F0BFB218F1C671004629BA /* CSKuleDatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09F0BFB018F1C671004629BA /* CSKuleDatePickerViewController.m */; };
 		09F0BFB318F1C671004629BA /* CSKuleDatePickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09F0BFB118F1C671004629BA /* CSKuleDatePickerViewController.xib */; };
+		09F31CF31AF7595200CD0C5E /* CSKuleCheckinLogTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09F31CF21AF7595200CD0C5E /* CSKuleCheckinLogTableViewCell.m */; };
 		09F74C681997C4F3001555D0 /* activity.png in Resources */ = {isa = PBXBuildFile; fileRef = 09F74C0C1997C4F2001555D0 /* activity.png */; };
 		09F74C691997C4F3001555D0 /* babylist.png in Resources */ = {isa = PBXBuildFile; fileRef = 09F74C0D1997C4F2001555D0 /* babylist.png */; };
 		09F74C6A1997C4F3001555D0 /* backarrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 09F74C0E1997C4F2001555D0 /* backarrow.png */; };
@@ -1534,6 +1535,8 @@
 		09F0BFAF18F1C671004629BA /* CSKuleDatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleDatePickerViewController.h; sourceTree = "<group>"; };
 		09F0BFB018F1C671004629BA /* CSKuleDatePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleDatePickerViewController.m; sourceTree = "<group>"; };
 		09F0BFB118F1C671004629BA /* CSKuleDatePickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSKuleDatePickerViewController.xib; sourceTree = "<group>"; };
+		09F31CF11AF7595200CD0C5E /* CSKuleCheckinLogTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleCheckinLogTableViewCell.h; sourceTree = "<group>"; };
+		09F31CF21AF7595200CD0C5E /* CSKuleCheckinLogTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleCheckinLogTableViewCell.m; sourceTree = "<group>"; };
 		09F74C0C1997C4F2001555D0 /* activity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = activity.png; sourceTree = "<group>"; };
 		09F74C0D1997C4F2001555D0 /* babylist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = babylist.png; sourceTree = "<group>"; };
 		09F74C0E1997C4F2001555D0 /* backarrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backarrow.png; sourceTree = "<group>"; };
@@ -3246,6 +3249,8 @@
 				09DDA1291ADA9FCA004BAAF5 /* CSKuleNewsTableViewCell.h */,
 				09DDA12A1ADA9FCA004BAAF5 /* CSKuleNewsTableViewCell.m */,
 				09DDA12B1ADA9FCA004BAAF5 /* CSKuleNewsTableViewCell.xib */,
+				09F31CF11AF7595200CD0C5E /* CSKuleCheckinLogTableViewCell.h */,
+				09F31CF21AF7595200CD0C5E /* CSKuleCheckinLogTableViewCell.m */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -3977,6 +3982,7 @@
 				09F0BF9E18F18EA5004629BA /* CSKuleFeedbackViewController.m in Sources */,
 				0914E367199FCD7500276ABA /* MJPhotoProgressView.m in Sources */,
 				090C9EC018C846B200883DE0 /* AHAlertView.m in Sources */,
+				09F31CF31AF7595200CD0C5E /* CSKuleCheckinLogTableViewCell.m in Sources */,
 				094373DA199D018900EDD64C /* EntityMediaInfoHelper.m in Sources */,
 				09BA1B9D18BB2AB300760182 /* main.m in Sources */,
 				0915662218ED92810073AE22 /* CSKuleVerifyMobileViewController.m in Sources */,

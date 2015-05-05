@@ -70,7 +70,7 @@
     
     CSKuleCheckInOutLogInfo* checkInOutLogInfo = [_checkInOutLogInfoList objectAtIndex:indexPath.row];
     
-    cell.labTitle.text = [NSString stringWithFormat:@"%@的家长，您好：", gApp.engine.loginInfo.username];
+    cell.labTitle.text = [NSString stringWithFormat:@"%@家长，您好：", gApp.engine.loginInfo.username];
     
     CSKuleChildInfo* child = gApp.engine.currentRelationship.child;
     

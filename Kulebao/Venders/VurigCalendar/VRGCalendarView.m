@@ -24,6 +24,7 @@ static BOOL s_hasInitVRGCalendarView = NO;
 void s_InitVRGCalendarView() {
     s_hasInitVRGCalendarView = YES;
     kVRGCalendarViewWidth = [[[UIApplication sharedApplication] keyWindow] bounds].size.width;
+    kVRGCalendarViewDayWidth = kVRGCalendarViewWidth/7 - 2;
 }
 
 @implementation VRGCalendarView

@@ -73,6 +73,12 @@ CSAppDelegate* gApp = nil;
     [_engine application:application didReceiveRemoteNotification:userInfo];
 }
 
+// 当 DeviceToken 获取失败时,系统会回调此⽅方法
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
+{
+    NSLog(@"DeviceToken 获取失败,原因:%@",error);
+}
+
 #pragma mark - Private
 - (void)gotoLoginProcess {
     if (![BPush getChannelId] || ![BPush getUserId]) {

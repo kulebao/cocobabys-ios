@@ -208,6 +208,7 @@
 		09219A5A18C4999C00166228 /* CSKuleLoginInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09219A5918C4999B00166228 /* CSKuleLoginInfo.m */; };
 		092294E41AB9A7E600E40C84 /* CSVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 092294E31AB9A7E600E40C84 /* CSVideoView.m */; };
 		092B86F51AAFF01200C9C4F0 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 092B86F41AAFF01200C9C4F0 /* libiconv.dylib */; };
+		0932A67E1AFA870E00961861 /* CSKuleDeveloperSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0932A67D1AFA870E00961861 /* CSKuleDeveloperSettingsViewController.m */; };
 		0934EFC318BF3AF700E30ECA /* EAIntroPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0934EFC018BF3AF700E30ECA /* EAIntroPage.m */; };
 		0934EFC418BF3AF700E30ECA /* EAIntroView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0934EFC218BF3AF700E30ECA /* EAIntroView.m */; };
 		0934EFCC18BF3D0600E30ECA /* SMPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 0934EFC918BF3D0600E30ECA /* SMPageControl.m */; };
@@ -1076,6 +1077,11 @@
 		092294E21AB9A7E600E40C84 /* CSVideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSVideoView.h; sourceTree = "<group>"; };
 		092294E31AB9A7E600E40C84 /* CSVideoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSVideoView.m; sourceTree = "<group>"; };
 		092B86F41AAFF01200C9C4F0 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
+		0932A6791AFA7F8F00961861 /* sdk更新说明.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "sdk更新说明.pdf"; sourceTree = "<group>"; };
+		0932A67A1AFA7F8F00961861 /* sdk用户手册（ios版）.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "sdk用户手册（ios版）.pdf"; sourceTree = "<group>"; };
+		0932A67B1AFA7F8F00961861 /* 附录-注册推送证书.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "附录-注册推送证书.pdf"; sourceTree = "<group>"; };
+		0932A67C1AFA870E00961861 /* CSKuleDeveloperSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleDeveloperSettingsViewController.h; sourceTree = "<group>"; };
+		0932A67D1AFA870E00961861 /* CSKuleDeveloperSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleDeveloperSettingsViewController.m; sourceTree = "<group>"; };
 		0934EFBF18BF3AF700E30ECA /* EAIntroPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAIntroPage.h; sourceTree = "<group>"; };
 		0934EFC018BF3AF700E30ECA /* EAIntroPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EAIntroPage.m; sourceTree = "<group>"; };
 		0934EFC118BF3AF700E30ECA /* EAIntroView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EAIntroView.h; sourceTree = "<group>"; };
@@ -1333,8 +1339,6 @@
 		09BA1C0718BB34BD00760182 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		09BA1C0918BB34F400760182 /* BPushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BPushConfig.plist; sourceTree = "<group>"; };
 		09BA1C0B18BB351700760182 /* PullTableViewLan.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = PullTableViewLan.strings; sourceTree = "<group>"; };
-		09BA1C0D18BB386100760182 /* 版本说明.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "版本说明.pdf"; sourceTree = "<group>"; };
-		09BA1C0E18BB386100760182 /* 用户手册.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "用户手册.pdf"; sourceTree = "<group>"; };
 		09BA1C1018BB3F8400760182 /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
 		09BA1C1118BB3F8400760182 /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
 		09BA1C1218BB3F8400760182 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -2483,6 +2487,8 @@
 				09FE6AEB18C5722500A840BE /* views */,
 				093FB8F11A83BD8500A589A8 /* CSKuleDevSettingsViewController.h */,
 				093FB8F21A83BD8500A589A8 /* CSKuleDevSettingsViewController.m */,
+				0932A67C1AFA870E00961861 /* CSKuleDeveloperSettingsViewController.h */,
+				0932A67D1AFA870E00961861 /* CSKuleDeveloperSettingsViewController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -2758,9 +2764,10 @@
 			isa = PBXGroup;
 			children = (
 				0904454E18F51C70005D01EA /* dev */,
-				09BA1C0D18BB386100760182 /* 版本说明.pdf */,
-				09BA1C0E18BB386100760182 /* 用户手册.pdf */,
 				09BA1BEE18BB334900760182 /* BPush.h */,
+				0932A6791AFA7F8F00961861 /* sdk更新说明.pdf */,
+				0932A67A1AFA7F8F00961861 /* sdk用户手册（ios版）.pdf */,
+				0932A67B1AFA7F8F00961861 /* 附录-注册推送证书.pdf */,
 				09BA1BEF18BB334900760182 /* libBPush.a */,
 				09BA1BF018BB334900760182 /* opensource */,
 				09BA1C0918BB34F400760182 /* BPushConfig.plist */,
@@ -4021,6 +4028,7 @@
 				09219A5A18C4999C00166228 /* CSKuleLoginInfo.m in Sources */,
 				0914E369199FCD7500276ABA /* MJPhotoView.m in Sources */,
 				090C9EDC18C87AEA00883DE0 /* KxMenu.m in Sources */,
+				0932A67E1AFA870E00961861 /* CSKuleDeveloperSettingsViewController.m in Sources */,
 				093D89D7199A76E1006B013B /* CSKuleCCTVPlayViewController.m in Sources */,
 				090151351939D4060066DEAB /* XHViewState.m in Sources */,
 				09C1C76018BD92990040B06D /* CSHttpClient.m in Sources */,
@@ -4190,7 +4198,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xinus Wang (46XA3MUP9B)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xinus Wang (MH48YP79V6)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Kulebao/youlebao-Prefix.pch";
 				GCC_VERSION = "";
@@ -4205,7 +4213,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = youlebao;
-				PROVISIONING_PROFILE = "d985c1c8-cb0d-4e09-b18d-a6def46c5171";
+				PROVISIONING_PROFILE = "f8518ddc-11c3-4f61-beee-11bcc4993942";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -4234,7 +4242,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = youlebao;
-				PROVISIONING_PROFILE = "25904364-9a8a-41d1-8c4d-cd146471596c";
+				PROVISIONING_PROFILE = "1948f8a0-5c85-446e-baf7-e32d67de4918";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

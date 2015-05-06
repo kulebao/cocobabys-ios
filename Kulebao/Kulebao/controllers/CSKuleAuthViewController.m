@@ -191,7 +191,7 @@
 -(void)showIntroViews {
     //float systemVersion = [[[UIDevice currentDevice] systemVersion] floatValue];
     NSArray* introImageNames = @[@"guide-1.png", @"guide-2.png", @"guide-3.png", @"guide-4.png"];
-    if (IS_IPHONE5) {
+    if (!IS_IPHONE4) {
         introImageNames = @[@"guide-1-568h.png", @"guide-2-568h.png", @"guide-3-568h.png", @"guide-4-568h.png"];
     }
     

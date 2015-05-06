@@ -1050,15 +1050,36 @@
                                     <action selector="onBtnLogoutClicked:" destination="Ot5-TZ-qvn" eventType="touchUpInside" id="RY1-ai-3mS"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="40B-sq-q93">
+                                <rect key="frame" x="20" y="418" width="280" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="29" id="zUt-RQ-3dM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="开发者" backgroundImage="v2-bg_set.png">
+                                    <color key="titleColor" red="0.1215686275" green="0.52941176469999995" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onBtnCheckUpdatesClicked:" destination="Ot5-TZ-qvn" eventType="touchUpInside" id="yjj-ik-qLP"/>
+                                    <segue destination="SFa-8h-5LP" kind="push" id="oJS-Dt-pBw"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="DI7-I2-1Ea" firstAttribute="width" secondItem="qCV-bB-WDo" secondAttribute="width" id="01A-Ea-MVO"/>
+                            <constraint firstItem="DI7-I2-1Ea" firstAttribute="top" secondItem="40B-sq-q93" secondAttribute="bottom" constant="8" id="18h-oM-PpF"/>
                             <constraint firstItem="qCV-bB-WDo" firstAttribute="top" secondItem="VY4-i5-iVK" secondAttribute="bottom" constant="20" id="1DR-qJ-LGa"/>
                             <constraint firstItem="DI7-I2-1Ea" firstAttribute="height" secondItem="afG-xz-IJY" secondAttribute="height" id="1l9-hv-gCq"/>
+                            <constraint firstAttribute="trailing" secondItem="40B-sq-q93" secondAttribute="trailing" constant="20" id="6eb-N2-1iJ"/>
                             <constraint firstItem="uBd-UQ-FDO" firstAttribute="top" secondItem="DI7-I2-1Ea" secondAttribute="bottom" constant="20" id="8iq-r2-M5g"/>
                             <constraint firstItem="qCV-bB-WDo" firstAttribute="leading" secondItem="OhV-Hz-SJf" secondAttribute="leading" constant="20" id="9i4-3B-Hhu"/>
                             <constraint firstItem="DI7-I2-1Ea" firstAttribute="width" secondItem="7av-24-GNw" secondAttribute="width" id="Abj-MM-nWm"/>
+                            <constraint firstItem="40B-sq-q93" firstAttribute="leading" secondItem="OhV-Hz-SJf" secondAttribute="leading" constant="20" id="CMM-rl-7wE"/>
                             <constraint firstItem="44e-Am-3iE" firstAttribute="top" secondItem="afG-xz-IJY" secondAttribute="bottom" constant="10" id="FsS-kO-u0w"/>
                             <constraint firstItem="DI7-I2-1Ea" firstAttribute="height" secondItem="0mg-N8-nkY" secondAttribute="height" id="HTf-Ti-Uc8"/>
                             <constraint firstItem="0mg-N8-nkY" firstAttribute="top" secondItem="44e-Am-3iE" secondAttribute="bottom" constant="10" id="I0s-Ek-UBf"/>
@@ -1081,6 +1102,7 @@
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="设置" id="QFA-Su-eb8"/>
                     <connections>
+                        <outlet property="btnDevSettings" destination="40B-sq-q93" id="WG5-lo-C39"/>
                         <segue destination="D7Z-M9-tG6" kind="push" identifier="segue.selectChild" id="SDD-Kf-gHh"/>
                         <segue destination="PYd-FB-IrR" kind="push" identifier="segue.about" id="Sgw-CB-atc"/>
                         <segue destination="yZC-Oa-gVt" kind="push" identifier="segue.changepswd" id="fSQ-gh-Ltp"/>
@@ -1871,6 +1893,42 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0hF-0g-baQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1445" y="6496"/>
+        </scene>
+        <!--开发者-->
+        <scene sceneID="EGd-jg-K4w">
+            <objects>
+                <viewController id="SFa-8h-5LP" customClass="CSKuleDeveloperSettingsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="RE2-d9-Btn"/>
+                        <viewControllerLayoutGuide type="bottom" id="dDz-4i-dMw"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="WVX-Sa-aVs">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="1" translatesAutoresizingMaskIntoConstraints="NO" id="7ak-e8-0mO">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="dDz-4i-dMw" firstAttribute="top" secondItem="7ak-e8-0mO" secondAttribute="bottom" id="KuQ-Kr-HVA"/>
+                            <constraint firstItem="7ak-e8-0mO" firstAttribute="top" secondItem="RE2-d9-Btn" secondAttribute="bottom" id="Mjf-ED-NRC"/>
+                            <constraint firstAttribute="trailing" secondItem="7ak-e8-0mO" secondAttribute="trailing" id="P5y-iV-bQN"/>
+                            <constraint firstItem="7ak-e8-0mO" firstAttribute="leading" secondItem="WVX-Sa-aVs" secondAttribute="leading" id="oYq-x4-Jfg"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="开发者" id="efV-m7-2fp"/>
+                    <connections>
+                        <outlet property="textLog" destination="7ak-e8-0mO" id="SJB-nA-BSI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H6B-zg-WlL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1696" y="4353"/>
         </scene>
         <!--反馈-->
         <scene sceneID="1UR-IV-3Lr">

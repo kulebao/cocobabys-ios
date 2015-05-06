@@ -13,6 +13,7 @@
 @interface CSKuleSettingsViewController () {
     CSHttpClient* _iTunesHttpClient;
 }
+@property (weak, nonatomic) IBOutlet UIButton *btnDevSettings;
 - (IBAction)onBtnCheckUpdatesClicked:(id)sender;
 - (IBAction)onBtnFeedbackClicked:(id)sender;
 - (IBAction)onBtnChangePswdClicked:(id)sender;
@@ -40,6 +41,13 @@
     [self customizeBackBarItem];
     
     _iTunesHttpClient = [CSHttpClient httpClientWithHost:[NSURL URLWithString:@"http://itunes.apple.com"]];
+    
+    if (COCOBABYS_DEV_MODEL) {
+        self.btnDevSettings.hidden = NO;
+    }
+    else {
+        self.btnDevSettings.hidden = YES;
+    }
 }
 
 - (void)didReceiveMemoryWarning

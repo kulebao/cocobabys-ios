@@ -265,7 +265,7 @@
         body = [NSString stringWithFormat:@"【%@】幼儿园提醒您，您的宝宝 <font color='black'>%@</font> 已于 %@  由 <font color='black'>%@</font> 刷卡入园。", publiser, child.nick, timestampString, checkInOutLogInfo.parentName];
     }
     else if (checkInOutLogInfo.noticeType == kKuleNoticeTypeCheckOut){
-        body = [NSString stringWithFormat:@"%@】幼儿园提醒您，您的宝宝 <font color='black'>%@</font> 已于 %@ 由 <font color='black'>%@</font> 刷卡离园。", publiser, child.nick, timestampString, checkInOutLogInfo.parentName];
+        body = [NSString stringWithFormat:@"【%@】幼儿园提醒您，您的宝宝 <font color='black'>%@</font> 已于 %@ 由 <font color='black'>%@</font> 刷卡离园。", publiser, child.nick, timestampString, checkInOutLogInfo.parentName];
     }
     
     NSString* divImage = @"";

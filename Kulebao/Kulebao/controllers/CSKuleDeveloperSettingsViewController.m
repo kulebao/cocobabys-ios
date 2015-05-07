@@ -8,6 +8,7 @@
 
 #import "CSKuleDeveloperSettingsViewController.h"
 #import "BPush.h"
+#import "CSKulePreferences.h"
 
 @interface CSKuleDeveloperSettingsViewController ()
 @property (weak, nonatomic) IBOutlet UITextView *textLog;
@@ -21,9 +22,25 @@
     // Do any additional setup after loading the view.
     [self customizeBackBarItem];
     
-    NSString* baiduPushLog = [NSString stringWithFormat:@"百度推送信息：\napp_id:%@\nuser_id:%@\nchannel_id:%@", [BPush getAppId], [BPush getUserId], [BPush getChannelId]];
+    CSKulePreferences* preference = [CSKulePreferences defaultPreferences];
+    NSDictionary* serverInfo = [preference getServerSettings];
     
-    self.textLog.text = baiduPushLog;
+    NSString* serverInfoLog = [NSString stringWithFormat:@"服务器信息:\n名称：%@\n地址：%@", serverInfo[@"name"], serverInfo[@"url"]];
+    
+    NSString* baiduApiKey = serverInfo[@"baidu_api_key"];
+    if (baiduApiKey.length > 4) {
+        baiduApiKey = [baiduApiKey stringByReplacingCharactersInRange:NSMakeRange(2, baiduApiKey.length-4)
+                                                           withString:@"********"];
+    }
+    
+    NSString* baiduPushLog = [NSString stringWithFormat:@"百度推送信息：\napi_key:%@\napp_id:%@\nuser_id:%@\nchannel_id:%@", baiduApiKey, [BPush getAppId], [BPush getUserId], [BPush getChannelId]];
+    
+    NSArray* logList = @[serverInfoLog, baiduPushLog];
+    
+    
+    NSString* logText = [logList componentsJoinedByString:@"\n\n"];
+    self.textLog.text = logText;
+    CSLog(@"%@", logText);
 }
 
 - (void)didReceiveMemoryWarning {

@@ -99,7 +99,7 @@
 - (void)onBtnSendClicked:(id)sender {
     [self.textMsgBody resignFirstResponder];
     
-    NSString* msgBody = self.textMsgBody.text;
+    NSString* msgBody = [self.textMsgBody.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     if (msgBody.length > 0) {
         [self doSendText:msgBody];
     }

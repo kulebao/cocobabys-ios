@@ -81,13 +81,12 @@
     
     [BPush setDelegate:self];
     
-    //dev: O7Xwbt4DWOzsji57xybprqUc
-    //prod: 9mzy6mOGMormOggT67K3jqBg
-#ifdef DEBUG
-    [BPush registerChannel:launchOptions apiKey:@"9mzy6mOGMormOggT67K3jqBg" pushMode:BPushModeDevelopment isDebug:YES];
-#else
-    [BPush registerChannel:launchOptions apiKey:@"9mzy6mOGMormOggT67K3jqBg" pushMode:BPushModeProduction isDebug:NO];
-#endif
+    CSKulePreferences* preference = [CSKulePreferences defaultPreferences];
+    NSDictionary* serverInfo = [preference getServerSettings];
+    [BPush registerChannel:launchOptions
+                    apiKey:serverInfo[@"baidu_api_key"]
+                  pushMode:BPushModeProduction
+                   isDebug:NO];
 
     // 设置 BPush 的回调 [BPush setDelegate:self];
     // App 是⽤用户点击推送消息启动

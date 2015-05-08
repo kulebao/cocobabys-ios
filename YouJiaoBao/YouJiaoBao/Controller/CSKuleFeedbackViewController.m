@@ -42,6 +42,7 @@
     
     self.imgContentBg.image = [[UIImage imageNamed:@"bg-dialog.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     
+    self.textMsgBody.text = nil;
     self.textMsgBody.delegate = self;
     [self.textMsgBody becomeFirstResponder];
 }

@@ -36,7 +36,7 @@
                                                 animated:YES];
     [self setNeedsStatusBarAppearanceUpdate];
     
-    if (IS_IPHONE5) {
+    if (!IS_IPHONE4) {
         self.imgBg.image = [UIImage imageNamed:@"Default-568h.png"];
     }
     else {

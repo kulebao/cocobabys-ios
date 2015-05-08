@@ -53,7 +53,10 @@
                                      text:@"发送"];
     
     self.textMsgBody.backgroundColor = [UIColor clearColor];
-    self.imgContentBg.image = [[UIImage imageNamed:@"bg-dialog.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+    self.imgContentBg.image = [[UIImage imageNamed:@"v2-input_bg_家园互动.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+    
+    UIImage* imgBtnGreenBg = [[UIImage imageNamed:@"v2-btn_green.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+    [self.btnSendVoice setBackgroundImage:imgBtnGreenBg forState:UIControlStateNormal];
     
     //[self.textMsgBody becomeFirstResponder];
     self.imgVoice.hidden = YES;
@@ -79,11 +82,26 @@
 }
 */
 
+#pragma mark - View lifecycle
+#if 0
+-(void) viewDidAppear:(BOOL)animated
+{
+    NSString* cName = [NSString stringWithFormat:@"%@",  self.navigationItem.title, nil];
+    [[BaiduMobStat defaultStat] pageviewStartWithName:cName];
+}
+
+-(void) viewDidDisappear:(BOOL)animated
+{
+    NSString* cName = [NSString stringWithFormat:@"%@", self.navigationItem.title, nil];
+    [[BaiduMobStat defaultStat] pageviewEndWithName:cName];
+}
+#endif
+
 #pragma mark - UI Actions
 - (void)onBtnSendClicked:(id)sender {
     [self.textMsgBody resignFirstResponder];
     
-    NSString* msgBody = self.textMsgBody.text;
+    NSString* msgBody = [self.textMsgBody.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     if (msgBody.length > 0) {
         [self doSendText:msgBody];
     }

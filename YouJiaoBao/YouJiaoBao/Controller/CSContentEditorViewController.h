@@ -11,7 +11,6 @@
 @interface CSContentEditorViewController : UIViewController
 
 @property (nonatomic, weak) id delegate;
-
 @property (nonatomic, assign) BOOL singleImage;
 
 @end
@@ -21,7 +20,6 @@
 
 - (void)contentEditorViewController:(CSContentEditorViewController*)ctrl
                      finishEditText:(NSString*)text
-                          withTitle:(NSString*)title
                          withImages:(NSArray*)imageList;
 
 - (void)contentEditorViewController:(CSContentEditorViewController*)ctrl

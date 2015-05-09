@@ -431,6 +431,8 @@
 		0936DD5D1A0BD3DC006B7E89 /* CSStudentListPickUpTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0936DD5C1A0BD3DC006B7E89 /* CSStudentListPickUpTableViewController.m */; };
 		0936DD601A0BE070006B7E89 /* CSStudentPickerHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0936DD5F1A0BE070006B7E89 /* CSStudentPickerHeaderView.m */; };
 		0936DD621A0BE08D006B7E89 /* CSStudentPickerHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0936DD611A0BE08D006B7E89 /* CSStudentPickerHeaderView.xib */; };
+		093BB9DB1AFE4B9E007AAEB8 /* v2-启动界面.png in Resources */ = {isa = PBXBuildFile; fileRef = 093BB9D91AFE4B9E007AAEB8 /* v2-启动界面.png */; };
+		093BB9DC1AFE4B9E007AAEB8 /* v2-启动界面@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 093BB9DA1AFE4B9E007AAEB8 /* v2-启动界面@2x.png */; };
 		094C29EF1A0666F8009BDC4E /* CSUserOptionMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 094C29EE1A0666F8009BDC4E /* CSUserOptionMenuView.m */; };
 		094C29F21A06670C009BDC4E /* CSUserOptionMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 094C29F11A06670C009BDC4E /* CSUserOptionMenuView.xib */; };
 		094C29F81A067D28009BDC4E /* CSTextFieldDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 094C29F71A067D28009BDC4E /* CSTextFieldDelegate.m */; };
@@ -1173,6 +1175,8 @@
 		0936DD5E1A0BE070006B7E89 /* CSStudentPickerHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSStudentPickerHeaderView.h; sourceTree = "<group>"; };
 		0936DD5F1A0BE070006B7E89 /* CSStudentPickerHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSStudentPickerHeaderView.m; sourceTree = "<group>"; };
 		0936DD611A0BE08D006B7E89 /* CSStudentPickerHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSStudentPickerHeaderView.xib; sourceTree = "<group>"; };
+		093BB9D91AFE4B9E007AAEB8 /* v2-启动界面.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-启动界面.png"; sourceTree = "<group>"; };
+		093BB9DA1AFE4B9E007AAEB8 /* v2-启动界面@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-启动界面@2x.png"; sourceTree = "<group>"; };
 		094C29ED1A0666F8009BDC4E /* CSUserOptionMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSUserOptionMenuView.h; sourceTree = "<group>"; };
 		094C29EE1A0666F8009BDC4E /* CSUserOptionMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSUserOptionMenuView.m; sourceTree = "<group>"; };
 		094C29F11A06670C009BDC4E /* CSUserOptionMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSUserOptionMenuView.xib; sourceTree = "<group>"; };
@@ -1864,6 +1868,8 @@
 		093571BC1AFD13EE00134BBF /* v2 */ = {
 			isa = PBXGroup;
 			children = (
+				093BB9D91AFE4B9E007AAEB8 /* v2-启动界面.png */,
+				093BB9DA1AFE4B9E007AAEB8 /* v2-启动界面@2x.png */,
 				093571BF1AFD13EE00134BBF /* v2-bg_1.png */,
 				093571C01AFD13EE00134BBF /* v2-bg_1@2x.png */,
 				093571C11AFD13EE00134BBF /* v2-bg_input_家园互动成长经历.png */,
@@ -3061,6 +3067,7 @@
 				098E3E49198B314500CB4F0B /* btn_blank.png in Resources */,
 				098E3E7B198B314500CB4F0B /* msg.png in Resources */,
 				0935724D1AFD13EF00134BBF /* v2-btn_需回执.png in Resources */,
+				093BB9DB1AFE4B9E007AAEB8 /* v2-启动界面.png in Resources */,
 				093571B51AFD128200134BBF /* voice_right_2.png in Resources */,
 				093571071AFD128200134BBF /* assess-exercise@2x.png in Resources */,
 				098E3E4F198B314500CB4F0B /* camera.png in Resources */,
@@ -3211,6 +3218,7 @@
 				093572251AFD13EF00134BBF /* v2-box.png in Resources */,
 				093571311AFD128200134BBF /* btn-nav-right-pressed@2x.png in Resources */,
 				093572451AFD13EF00134BBF /* v2-btn_star.png in Resources */,
+				093BB9DC1AFE4B9E007AAEB8 /* v2-启动界面@2x.png in Resources */,
 				0935717D1AFD128200134BBF /* logo-1@2x.png in Resources */,
 				09A3C60419C479C7001AFE8C /* MJPhotoBrowser.bundle in Resources */,
 				0935724F1AFD13EF00134BBF /* v2-foot.png in Resources */,

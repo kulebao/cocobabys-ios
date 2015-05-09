@@ -15,10 +15,10 @@
 #import "EntityClassInfo.h"
 #import "EntityNewsInfoHelper.h"
 #import "CSNewsInfoDetailViewController.h"
-#import "CSContentEditorViewController.h"
 #import "UIViewController+CSKit.h"
 #import "CSPopupController.h"
 #import "CSClassPickerView.h"
+#import "CSCreateNoticeViewController.h"
 
 @interface CSNoticeTableViewController () <PullTableViewDelegate, NSFetchedResultsControllerDelegate> {
     NSFetchedResultsController* _frCtrl;
@@ -99,7 +99,7 @@
 }
 
 - (void)onSendNotice:(id)sender {
-    [self performSegueWithIdentifier:@"segue.news.create" sender:nil];
+    [self performSegueWithIdentifier:@"segue.createnotice" sender:nil];
 }
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
@@ -182,16 +182,16 @@
         CSNewsInfoDetailViewController* ctrl = segue.destinationViewController;
         ctrl.newsInfo = sender;
     }
-    else if ([segue.identifier isEqualToString:@"segue.news.create"]) {
-        CSContentEditorViewController* ctrl = segue.destinationViewController;
-        ctrl.navigationItem.title = @"发布园内公告";
+    else if ([segue.identifier isEqualToString:@"segue.createnotice"]) {
+        CSCreateNoticeViewController* ctrl = segue.destinationViewController;
+        ctrl.navigationItem.title = @"发布公告";
         ctrl.delegate = self;
         ctrl.singleImage = YES;
     }
 }
 
 #pragma mark - CSContentEditorViewControllerDelegate
-- (void)contentEditorViewController:(CSContentEditorViewController*)ctrl
+- (void)createNoticeViewController:(CSCreateNoticeViewController*)ctrl
                      finishEditText:(NSString*)text
                           withTitle:(NSString*)title
                          withImages:(NSArray*)imageList {

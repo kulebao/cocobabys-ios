@@ -32,15 +32,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent
-                                                animated:YES];
     [self setNeedsStatusBarAppearanceUpdate];
     
     if (!IS_IPHONE4) {
-        self.imgBg.image = [UIImage imageNamed:@"Default-568h.png"];
+        self.imgBg.image = [UIImage imageNamed:@"v2-启动界面.png"];
     }
     else {
-        self.imgBg.image = [UIImage imageNamed:@"Default.png"];
+        self.imgBg.image = [UIImage imageNamed:@"v2-启动界面.png"];
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onLoginSuccess:) name:kNotiLoginSuccess object:nil];

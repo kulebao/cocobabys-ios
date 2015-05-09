@@ -51,10 +51,15 @@
 #ifdef DEBUG
     //self.fieldUsername.text = @"wx001";
     //self.fieldPassword.text = @"123456";
-    self.fieldUsername.text = @"test15";
-    self.fieldPassword.text = @"13555555555";
     //self.fieldUsername.text = @"admin2007";
     //self.fieldPassword.text = @"18782242007";
+    //self.fieldUsername.text = @"test15";
+    //self.fieldPassword.text = @"13555555555";
+    
+    //TEST
+    self.fieldUsername.text = @"admin9028";
+    self.fieldPassword.text = @"82242007";
+    
 #endif
 }
 

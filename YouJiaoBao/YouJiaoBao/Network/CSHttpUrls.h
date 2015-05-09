@@ -40,7 +40,7 @@
 // HOST: 产品服务服务器接口Host地址
 #define kServerHostForProd              @"https://www.cocobabys.com"
 
-#define kServerHostUsing                kServerHostForProd
+#define kServerHostUsing                kServerHostForTest
 
 #define kPathEmployeeLogin              @"/employee_login.do"
 #define kPathEmployeeManagedClass       @"/kindergarten/%@/employee/%@/class"

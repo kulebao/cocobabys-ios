@@ -11,7 +11,10 @@
 #import "EntityLoginInfoHelper.h"
 #import "CSHttpClient.h"
 
-@interface CSRootViewController ()
+#import "CSMainViewController.h"
+#import "CSLoginViewController.h"
+
+@interface CSRootViewController () <UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imgBg;
 
 @end
@@ -32,8 +35,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-    [self setNeedsStatusBarAppearanceUpdate];
-    
+    self.navigationController.delegate =self;
+    self.navigationController.navigationBarHidden = YES;
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"v2-head.png"] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:20], NSForegroundColorAttributeName:[UIColor whiteColor]}];
+
     if (!IS_IPHONE4) {
         self.imgBg.image = [UIImage imageNamed:@"v2-启动界面.png"];
     }
@@ -112,6 +118,7 @@
 }
 
 - (void)showLoginView {
+    [self.navigationController popToRootViewControllerAnimated:NO];
     [self performSegueWithIdentifier:@"segue.root.login" sender:nil];
 }
 
@@ -133,6 +140,31 @@
     CSLog(@"Unauthorized Error : %@", noti.object);
     [[CSEngine sharedInstance] onLogin:nil];
     [self showLoginView];
+}
+
+#pragma mark - UINavigationControllerDelegate
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    if ([viewController isEqual:self]) {
+        [navigationController setNavigationBarHidden:YES animated:animated];
+    }
+    else if ([viewController isKindOfClass:[CSMainViewController class]]) {
+        [navigationController setNavigationBarHidden:NO animated:animated];
+    }
+    else if ([viewController isKindOfClass:[CSLoginViewController class]]) {
+        [navigationController setNavigationBarHidden:YES animated:animated];
+    }
+}
+
+- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    if ([viewController isEqual:self]) {
+        [navigationController setNavigationBarHidden:YES animated:animated];
+    }
+    else if ([viewController isKindOfClass:[CSMainViewController class]]) {
+        [navigationController setNavigationBarHidden:NO animated:animated];
+    }
+    else if ([viewController isKindOfClass:[CSLoginViewController class]]) {
+        [navigationController setNavigationBarHidden:YES animated:animated];
+    }
 }
 
 @end

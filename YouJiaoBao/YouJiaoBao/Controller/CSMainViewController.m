@@ -49,8 +49,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"v2-head.png"] forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:20], NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    [self.navigationItem setHidesBackButton:YES];
     
     _modules = @[@{@"icon": [UIImage imageNamed:@"v2-校园公告.png"],
                    @"segue": @"segue.main.notice",
@@ -73,12 +72,13 @@
 //                   @"name": @"设置"}
                  ];
     
+    
+    CGFloat cellWidth = (self.view.bounds.size.width - 40) / 3.0;
+    self.layoutCollectionView.itemSize = CGSizeMake(cellWidth, cellWidth);
+    
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     
-    CGFloat cellWidth = (self.view.bounds.size.width - 40) / 3.0;
-    
-    self.layoutCollectionView.itemSize = CGSizeMake(cellWidth, cellWidth);
     [self reloadClassList];
 }
 

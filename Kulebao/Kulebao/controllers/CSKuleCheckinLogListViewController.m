@@ -79,11 +79,25 @@
     NSString* publiser = gApp.engine.loginInfo.schoolName;
     
     NSString* body = @"";
-    if (checkInOutLogInfo.noticeType == kKuleNoticeTypeCheckIn) {
-        body = [NSString stringWithFormat:@"【%@】幼儿园提醒您，您的宝宝 %@ 已于 %@  由 %@ 刷卡入园。", publiser, child.nick, timestampString, checkInOutLogInfo.parentName];
-    }
-    else if (checkInOutLogInfo.noticeType == kKuleNoticeTypeCheckOut){
-        body = [NSString stringWithFormat:@"【%@】幼儿园提醒您，您的宝宝 %@ 已于 %@ 由 %@ 刷卡离园。", publiser, child.nick, timestampString, checkInOutLogInfo.parentName];
+    
+    switch (checkInOutLogInfo.noticeType) {
+        case kKuleNoticeTypeCheckIn:
+            body = [NSString stringWithFormat:@"【%@】幼儿园提醒您，您的宝宝 %@ 已于 %@  由 %@ 刷卡入园。", publiser, child.nick, timestampString, checkInOutLogInfo.parentName];
+            break;
+        case kKuleNoticeTypeCheckOut:
+            body = [NSString stringWithFormat:@"【%@】幼儿园提醒您，您的宝宝 %@ 已于 %@ 由 %@ 刷卡离园。", publiser, child.nick, timestampString, checkInOutLogInfo.parentName];
+            break;
+        case kKuleNoticeTypeCheckInCarMorning:
+        case kKuleNoticeTypeCheckInCarAfternoon:
+            body = [NSString stringWithFormat:@"【%@】幼儿园提醒您，您的宝宝 %@ 已于 %@ 刷卡坐上校车。", publiser, child.nick, timestampString];
+            break;
+        case kKuleNoticeTypeCheckOutCarMorning:
+        case kKuleNoticeTypeCheckOutCarAfternoon:
+            body = [NSString stringWithFormat:@"【%@】幼儿园提醒您，您的宝宝 %@ 已于 %@ 刷卡离开校车。", publiser, child.nick, timestampString];
+            break;
+        default:
+            body = [NSString stringWithFormat:@"【%@】幼儿园提醒您，您的宝宝 %@ 已于 %@ 刷卡(type=%@)。", publiser, child.nick, timestampString, @(checkInOutLogInfo.noticeType)];
+            break;
     }
     
     cell.labDesc.text = body;
@@ -96,7 +110,7 @@
     }
     else {
         [cell.imgPhoto cancelImageRequestOperation];
-        cell.imgPhoto.image = nil;
+        cell.imgPhoto.image = [UIImage imageNamed:@"img-placeholder.png"];
     }
     cell.imgPhoto.clipsToBounds = YES;
     //cell.imgPhoto.layer.cornerRadius = 4;

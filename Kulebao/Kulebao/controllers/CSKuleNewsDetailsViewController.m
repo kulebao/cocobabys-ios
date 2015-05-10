@@ -261,11 +261,26 @@
     
     NSString* body = @"";
     CSKuleChildInfo* child = gApp.engine.currentRelationship.child;
-    if (checkInOutLogInfo.noticeType == kKuleNoticeTypeCheckIn) {
-        body = [NSString stringWithFormat:@"【%@】幼儿园提醒您，您的宝宝 <font color='black'>%@</font> 已于 %@  由 <font color='black'>%@</font> 刷卡入园。", publiser, child.nick, timestampString, checkInOutLogInfo.parentName];
-    }
-    else if (checkInOutLogInfo.noticeType == kKuleNoticeTypeCheckOut){
-        body = [NSString stringWithFormat:@"【%@】幼儿园提醒您，您的宝宝 <font color='black'>%@</font> 已于 %@ 由 <font color='black'>%@</font> 刷卡离园。", publiser, child.nick, timestampString, checkInOutLogInfo.parentName];
+    
+    switch (checkInOutLogInfo.noticeType) {
+        case kKuleNoticeTypeCheckIn:
+            body = [NSString stringWithFormat:@"【%@】幼儿园提醒您，您的宝宝 <font color='black'>%@</font> 已于 %@  由 <font color='black'>%@</font> 刷卡入园。", publiser, child.nick, timestampString, checkInOutLogInfo.parentName];
+            break;
+        case kKuleNoticeTypeCheckOut:
+            body = [NSString stringWithFormat:@"【%@】幼儿园提醒您，您的宝宝 <font color='black'>%@</font> 已于 %@ 由 <font color='black'>%@</font> 刷卡离园。", publiser, child.nick, timestampString, checkInOutLogInfo.parentName];
+            break;
+        case kKuleNoticeTypeCheckInCarMorning:
+        case kKuleNoticeTypeCheckInCarAfternoon:
+            body = [NSString stringWithFormat:@"【%@】幼儿园提醒您，您的宝宝 <font color='black'>%@</font> 已于 %@ 刷卡坐上校车。", publiser, child.nick, timestampString];
+            
+            break;
+        case kKuleNoticeTypeCheckOutCarMorning:
+        case kKuleNoticeTypeCheckOutCarAfternoon:
+            body = [NSString stringWithFormat:@"【%@】幼儿园提醒您，您的宝宝 <font color='black'>%@</font> 已于 %@ 刷卡离开校车。", publiser, child.nick, timestampString];
+            break;
+        default:
+            body = [NSString stringWithFormat:@"【%@】幼儿园提醒您，您的宝宝 <font color='black'>%@</font> 已于 %@ 刷卡(type=%@)。", publiser, child.nick, timestampString, @(checkInOutLogInfo.noticeType)];
+            break;
     }
     
     NSString* divImage = @"";

@@ -297,12 +297,10 @@
     
     id alertAppearance = [AHAlertView appearance];
     [alertAppearance setBackgroundImage:imgAlertBg];
-    [alertAppearance setTitleTextAttributes:@{UITextAttributeTextColor:[UIColor blackColor],}];
-    [alertAppearance setMessageTextAttributes:@{UITextAttributeTextColor:[UIColor blackColor],}];
+    [alertAppearance setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
+    [alertAppearance setMessageTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
     [alertAppearance setButtonBackgroundImage:imgBtnOkBg forState:UIControlStateNormal];
     [alertAppearance setCancelButtonBackgroundImage:imgBtnCancelBg forState:UIControlStateNormal];
-//    [alertAppearance setButtonBackgroundImage:imgBtnPressedBg forState:UIControlStateHighlighted];
-//    [alertAppearance setCancelButtonBackgroundImage:imgBtnPressedBg forState:UIControlStateHighlighted];
     [alertAppearance setContentInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
 }
 

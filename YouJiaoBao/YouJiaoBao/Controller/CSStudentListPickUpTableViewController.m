@@ -130,6 +130,8 @@
     
     [cell.imgPortrait sd_setImageWithURL:[NSURL URLWithString:childInfo.portrait]
                         placeholderImage:[UIImage imageNamed:@"default_icon.png"]];
+    cell.imgPortrait.layer.cornerRadius = 24;
+    cell.imgPortrait.clipsToBounds = YES;
     
     cell.labName.text = childInfo.name;
     

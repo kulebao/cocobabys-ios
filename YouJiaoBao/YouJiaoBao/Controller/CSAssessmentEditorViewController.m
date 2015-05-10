@@ -30,6 +30,7 @@
 @property (weak, nonatomic) IBOutlet UITextView *textView1;
 @property (weak, nonatomic) IBOutlet UIImageView *imgText2Bg;
 @property (weak, nonatomic) IBOutlet UITextView *textView2;
+@property (weak, nonatomic) IBOutlet UIButton *btnSubmit;
 - (IBAction)onBtnSendClicked:(id)sender;
 
 @property (nonatomic, strong) EntityAssessInfo* lastAssessInfo;
@@ -58,7 +59,8 @@
     //self.scrollView.contentSize = CGSizeMake(self.scrollView.bounds.size.width, 536);
     self.imgText1Bg.image = [[UIImage imageNamed:@"v2-input_bg_家园互动.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     self.imgText2Bg.image = [[UIImage imageNamed:@"v2-input_bg_家园互动.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
-    
+    UIImage* imgBtnGreenBg = [[UIImage imageNamed:@"v2-btn_green.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+    [self.btnSubmit setBackgroundImage:imgBtnGreenBg forState:UIControlStateNormal];
     
     self.textView1.text = self.textView2.text = nil;
     

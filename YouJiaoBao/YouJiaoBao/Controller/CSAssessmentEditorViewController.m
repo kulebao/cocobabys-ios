@@ -56,11 +56,9 @@
     [self customizeBackBarItem];
     
     //self.scrollView.contentSize = CGSizeMake(self.scrollView.bounds.size.width, 536);
-    self.imgText1Bg.image = [[UIImage imageNamed:@"bg-2.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
-    self.imgText2Bg.image = [[UIImage imageNamed:@"bg-2.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+    self.imgText1Bg.image = [[UIImage imageNamed:@"v2-input_bg_家园互动.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+    self.imgText2Bg.image = [[UIImage imageNamed:@"v2-input_bg_家园互动.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     
-    self.textView1.frame = self.imgText1Bg.frame;
-    self.textView2.frame = self.imgText2Bg.frame;
     
     self.textView1.text = self.textView2.text = nil;
     
@@ -74,8 +72,7 @@
                              self.starRating7];
     
     for (EDStarRating* starRating in starRatings) {
-        
-        starRating.frame = CGRectMake(0, 64, 64, 28);
+        //starRating.frame = CGRectMake(0, 64, 64, 28);
         starRating.backgroundColor  = [UIColor clearColor];
         starRating.maxRating = 3.0;
         starRating.delegate = self;

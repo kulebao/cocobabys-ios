@@ -9,6 +9,7 @@
 #import "CSHttpClient.h"
 #import "CSHttpUrls.h"
 #import "ModelAssessment.h"
+#import "CSEngine.h"
 
 @interface CSHttpClient ()
 
@@ -317,7 +318,10 @@
         [parameters setObject:most forKey:@"most"];
     }
     
-    NSString* apiUrl = [NSString stringWithFormat:kPathKindergartenNewsList, @(schoolId)];
+    CSEngine* engine = [CSEngine sharedInstance];
+    NSString* apiUrl = [NSString stringWithFormat:kPathKindergartenPostNewsV2,
+                        @(schoolId),
+                        engine.loginInfo.uid];
     
     AFHTTPRequestOperation* op =[self.opManager GET:apiUrl
                                          parameters:parameters
@@ -475,9 +479,11 @@
                                         withContent:(NSString*)content
                                           withTitle:(NSString*)title
                                    withImageUrlList:(NSArray*)imgUrlList
+                                           withTags:(NSArray*)tags
+                               withRequriedFeedback:(BOOL)requriedFeedback
                                             success:(SuccessResponseHandler)success
                                             failure:(FailureResponseHandler)failure {
-    NSString* apiUrl = [NSString stringWithFormat:kPathKindergartenPostNews, @(kindergarten), senderInfo.uid];
+    NSString* apiUrl = [NSString stringWithFormat:kPathKindergartenPostNewsV2, @(kindergarten), senderInfo.uid];
     
     NSString* imgUrl = [imgUrlList firstObject];
     
@@ -487,7 +493,9 @@
                                  @"published" : @"true",
                                  @"class_id" : classId,
                                  @"publisher_id": senderInfo.uid,
-                                 @"image" : imgUrl ? imgUrl : @""};
+                                 @"image" : imgUrl ? imgUrl : @"",
+                                 @"tags": tags ? tags : @[@"公告"],
+                                 @"feedback_required" : requriedFeedback ? @(1) : @(0)};
     
     AFHTTPRequestOperation* op = [self.opManager POST:apiUrl
                                            parameters:parameters

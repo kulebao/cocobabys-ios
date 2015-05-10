@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CSKuleNewsTableViewCell" rowHeight="80" id="KGk-i7-Jjw" customClass="CSKuleNewsTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="v2-btn_blue_s.png" translatesAutoresizingMaskIntoConstraints="NO" id="Hq0-2S-5o1">
+                        <rect key="frame" x="8" y="2" width="52" height="19"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="园内公告" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ner-Rp-kox">
+                        <rect key="frame" x="10" y="4" width="48" height="15"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="园内公告标题" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ghC-OC-hAs">
+                        <rect key="frame" x="68" y="3" width="176" height="16"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容这里是内容" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n7A-JI-99Y">
+                        <rect key="frame" x="8" y="23" width="236" height="35"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="4月12日 12:19 测试幼儿园" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UqB-SX-4AZ">
+                        <rect key="frame" x="8" y="60" width="176" height="14"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="v2-btn_请回执.png" translatesAutoresizingMaskIntoConstraints="NO" id="mHg-hG-sMb">
+                        <rect key="frame" x="192" y="60" width="40" height="14"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="14" id="Uip-nT-6L2"/>
+                            <constraint firstAttribute="width" constant="40" id="iX4-es-HID"/>
+                        </constraints>
+                    </imageView>
+                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jr7-TP-LOx">
+                        <rect key="frame" x="193" y="61" width="38" height="12"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <state key="normal" title="请回执">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="onBtnMarkClicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="hs6-zq-b0k"/>
+                        </connections>
+                    </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="v2-line.png" translatesAutoresizingMaskIntoConstraints="NO" id="qFU-BU-rve">
+                        <rect key="frame" x="8" y="78" width="304" height="1"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="1F5-oT-p6B"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="infinite" image="v2-bg_set.png" translatesAutoresizingMaskIntoConstraints="NO" id="l7H-KK-XHU">
+                        <rect key="frame" x="252" y="10" width="60" height="60"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="8Fz-c4-agm"/>
+                            <constraint firstAttribute="height" constant="60" id="jsM-cS-stE"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="centerY" secondItem="l7H-KK-XHU" secondAttribute="centerY" id="0TA-7a-Iea"/>
+                    <constraint firstItem="jr7-TP-LOx" firstAttribute="trailing" secondItem="mHg-hG-sMb" secondAttribute="trailing" constant="-1" id="164-Ke-WHy"/>
+                    <constraint firstItem="jr7-TP-LOx" firstAttribute="leading" secondItem="mHg-hG-sMb" secondAttribute="leading" constant="1" id="59d-Fj-8Fg"/>
+                    <constraint firstAttribute="bottom" secondItem="qFU-BU-rve" secondAttribute="bottom" id="6PZ-fZ-rJg"/>
+                    <constraint firstItem="Hq0-2S-5o1" firstAttribute="bottom" secondItem="Ner-Rp-kox" secondAttribute="bottom" constant="2" id="6fN-fI-VXQ"/>
+                    <constraint firstAttribute="trailing" secondItem="l7H-KK-XHU" secondAttribute="trailing" constant="8" id="DIi-mm-01H"/>
+                    <constraint firstItem="jr7-TP-LOx" firstAttribute="bottom" secondItem="mHg-hG-sMb" secondAttribute="bottom" constant="-1" id="DRO-Si-OXp"/>
+                    <constraint firstItem="n7A-JI-99Y" firstAttribute="top" secondItem="Hq0-2S-5o1" secondAttribute="bottom" constant="2" id="DeS-xA-qaj"/>
+                    <constraint firstItem="Ner-Rp-kox" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="E6c-93-jzU"/>
+                    <constraint firstItem="ghC-OC-hAs" firstAttribute="leading" secondItem="Hq0-2S-5o1" secondAttribute="trailing" constant="8" id="Lpp-i2-Acb"/>
+                    <constraint firstItem="Hq0-2S-5o1" firstAttribute="leading" secondItem="Ner-Rp-kox" secondAttribute="leading" constant="-2" id="N4j-iX-FiW"/>
+                    <constraint firstItem="l7H-KK-XHU" firstAttribute="leading" secondItem="ghC-OC-hAs" secondAttribute="trailing" constant="8" id="OY8-DS-shu"/>
+                    <constraint firstItem="UqB-SX-4AZ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="OjU-k2-khG"/>
+                    <constraint firstItem="mHg-hG-sMb" firstAttribute="top" secondItem="n7A-JI-99Y" secondAttribute="bottom" constant="2" id="SfH-1O-mo7"/>
+                    <constraint firstAttribute="trailing" secondItem="mHg-hG-sMb" secondAttribute="trailing" constant="88" id="TKw-ct-RSx"/>
+                    <constraint firstItem="ghC-OC-hAs" firstAttribute="centerY" secondItem="Ner-Rp-kox" secondAttribute="centerY" constant="-0.5" id="U6d-ko-XYo"/>
+                    <constraint firstItem="l7H-KK-XHU" firstAttribute="leading" secondItem="n7A-JI-99Y" secondAttribute="trailing" constant="8" id="VzV-R4-33d"/>
+                    <constraint firstItem="Ner-Rp-kox" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Yba-XM-N9R"/>
+                    <constraint firstItem="Hq0-2S-5o1" firstAttribute="top" secondItem="Ner-Rp-kox" secondAttribute="top" constant="-2" id="ZFg-vB-njb"/>
+                    <constraint firstItem="mHg-hG-sMb" firstAttribute="leading" secondItem="UqB-SX-4AZ" secondAttribute="trailing" constant="8" id="ic7-ua-Ywo"/>
+                    <constraint firstItem="n7A-JI-99Y" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="ojd-RH-8P1"/>
+                    <constraint firstItem="jr7-TP-LOx" firstAttribute="top" secondItem="mHg-hG-sMb" secondAttribute="top" constant="1" id="pjU-id-x0e"/>
+                    <constraint firstItem="qFU-BU-rve" firstAttribute="top" secondItem="mHg-hG-sMb" secondAttribute="bottom" constant="4" id="suu-Tf-fC7"/>
+                    <constraint firstItem="mHg-hG-sMb" firstAttribute="centerY" secondItem="UqB-SX-4AZ" secondAttribute="centerY" constant="0.5" id="uTf-z5-42O"/>
+                    <constraint firstAttribute="trailing" secondItem="qFU-BU-rve" secondAttribute="trailing" constant="8" id="uyp-Eu-aYo"/>
+                    <constraint firstItem="qFU-BU-rve" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="xDP-3q-WIE"/>
+                    <constraint firstItem="Hq0-2S-5o1" firstAttribute="trailing" secondItem="Ner-Rp-kox" secondAttribute="trailing" constant="2" id="z7h-WR-6Ng"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="btnMark" destination="jr7-TP-LOx" id="PxO-Gc-bHl"/>
+                <outlet property="iconWidth" destination="8Fz-c4-agm" id="cTA-nV-s37"/>
+                <outlet property="imgAttachment" destination="l7H-KK-XHU" id="Ohu-W3-GWI"/>
+                <outlet property="imgMarkBg" destination="mHg-hG-sMb" id="nau-Bb-GXC"/>
+                <outlet property="imgTagBg" destination="Hq0-2S-5o1" id="f6L-hg-g1l"/>
+                <outlet property="labContent" destination="n7A-JI-99Y" id="KEg-Pv-jpc"/>
+                <outlet property="labPublisher" destination="UqB-SX-4AZ" id="109-88-pnp"/>
+                <outlet property="labTag" destination="Ner-Rp-kox" id="Mcu-TL-2Ll"/>
+                <outlet property="labTitle" destination="ghC-OC-hAs" id="l3d-hO-lNa"/>
+            </connections>
+            <point key="canvasLocation" x="146.5" y="-3"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="v2-bg_set.png" width="15" height="14"/>
+        <image name="v2-btn_blue_s.png" width="20" height="12"/>
+        <image name="v2-btn_请回执.png" width="20" height="12"/>
+        <image name="v2-line.png" width="1" height="1"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

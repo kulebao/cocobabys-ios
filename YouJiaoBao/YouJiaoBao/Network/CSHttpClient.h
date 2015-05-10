@@ -105,6 +105,8 @@ typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSErr
                                         withContent:(NSString*)content
                                           withTitle:(NSString*)title
                                    withImageUrlList:(NSArray*)imgUrlList
+                                           withTags:(NSArray*)tags
+                               withRequriedFeedback:(BOOL)requriedFeedback
                                             success:(SuccessResponseHandler)success
                                             failure:(FailureResponseHandler)failure;
 

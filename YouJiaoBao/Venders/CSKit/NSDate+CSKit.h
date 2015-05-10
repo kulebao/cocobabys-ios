@@ -25,6 +25,7 @@
 
 - (NSString*)zhCnDateString;
 - (NSString*)zhCnDateTimeString;
+- (NSString*)timestampStringZhCN;
 
 - (NSString*)shortDateTimeString;
 

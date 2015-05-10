@@ -51,6 +51,7 @@
 #define kPathKindergartenPostNews       @"/kindergarten/%@/admin/%@/news"
 #define kPathKindergartenAssignmentList @"/kindergarten/%@/assignment"
 #define kPathChildAssess                @"/kindergarten/%@/child/%@/assess"
+#define kPathKindergartenPostNewsV2     @"/api/v2/kindergarten/%@/admin/%@/news"
 
 // PATH: 修改密码
 #define kChangePasswordPath             @"/kindergarten/%@/employee/%@/password"
@@ -87,5 +88,17 @@
 // PATH: 短信验证
 #define kGetSmsCodePath                 @"/ws/verify/phone/%@"
 #define kResetPswd                      @"/employee_resetpwd.do"
+
+// PATH: 幼儿园公告列表V2
+#define kKindergartenNewsListPathV2     @"/api/v2/kindergarten/%@/news"
+
+// PATH: 幼儿园公告详情V2
+#define kKindergartenNewsDetailPathV2   @"/api/v2/kindergarten/%@/news/%@"
+
+// PATH: 幼儿园公告回执V2
+#define kKindergartenNewsMarkedPathV2   @"/api/v2/kindergarten/%@/news/%@/reader"
+
+// PATH: 查询幼儿园公告回执状态V2
+#define kKindergartenNewsMarkedStatusPathV2   @"/api/v2/kindergarten/%@/news/%@/reader/%@"
 
 #endif

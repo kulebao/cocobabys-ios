@@ -63,7 +63,8 @@
                 entity.noticeType = [jsonObject objectForKey:@"notice_type"];
                 entity.timestamp = [jsonObject objectForKey:@"timestamp"];
                 entity.read = @(0);
-                
+                entity.feedbackRequired = [jsonObject objectForKey:@"feedback_required"];
+                entity.tags = [[jsonObject objectForKey:@"tags"] componentsJoinedByString:@","];
                 [returnObjectList addObject:entity];
             }
         }

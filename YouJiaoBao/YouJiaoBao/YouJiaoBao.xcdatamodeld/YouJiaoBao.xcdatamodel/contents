@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6252" systemVersion="13F34" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14D136" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="EntityAssessInfo" representedClassName="EntityAssessInfo" syncable="YES">
         <attribute name="activity" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="childId" optional="YES" attributeType="String" syncable="YES"/>
@@ -78,6 +78,7 @@
     <entity name="EntityNewsInfo" representedClassName="EntityNewsInfo" syncable="YES">
         <attribute name="classId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="feedbackRequired" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="newsId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="noticeType" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -85,6 +86,7 @@
         <attribute name="publisherId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="read" optional="YES" attributeType="Integer 32" syncable="YES"/>
         <attribute name="schoolId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="tags" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="timestamp" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
@@ -131,16 +133,16 @@
         <attribute name="uid" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
+        <element name="EntityAssessInfo" positionX="270" positionY="351" width="128" height="253"/>
         <element name="EntityAssignmentInfo" positionX="261" positionY="351" width="128" height="178"/>
         <element name="EntityChildInfo" positionX="261" positionY="306" width="128" height="268"/>
         <element name="EntityClassInfo" positionX="261" positionY="297" width="128" height="133"/>
         <element name="EntityDailylog" positionX="270" positionY="351" width="128" height="133"/>
         <element name="EntityLoginInfo" positionX="261" positionY="198" width="128" height="240"/>
-        <element name="EntityNewsInfo" positionX="261" positionY="351" width="128" height="208"/>
+        <element name="EntityNewsInfo" positionX="261" positionY="351" width="128" height="240"/>
         <element name="EntityParentInfo" positionX="261" positionY="342" width="128" height="210"/>
         <element name="EntityRelationshipInfo" positionX="270" positionY="360" width="128" height="118"/>
         <element name="EntityTopicMsg" positionX="279" positionY="360" width="128" height="208"/>
         <element name="EntityTopicMsgSender" positionX="270" positionY="351" width="128" height="148"/>
-        <element name="EntityAssessInfo" positionX="270" positionY="351" width="128" height="253"/>
     </elements>
 </model>

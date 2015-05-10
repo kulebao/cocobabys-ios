@@ -22,5 +22,7 @@
 @dynamic schoolId;
 @dynamic timestamp;
 @dynamic title;
+@dynamic feedbackRequired;
+@dynamic tags;
 
 @end

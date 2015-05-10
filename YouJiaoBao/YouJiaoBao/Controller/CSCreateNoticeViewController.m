@@ -24,6 +24,7 @@ UIActionSheetDelegate, ELCImagePickerControllerDelegate> {
 }
 
 - (IBAction)onFieldDidEndOnExit:(id)sender;
+- (IBAction)onBtnSelectorClicked:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextView *textContent;
 @property (weak, nonatomic) IBOutlet UIButton *btnHideKeyboard;
 @property (weak, nonatomic) IBOutlet UIButton *btnPhotoFromCamra;
@@ -32,11 +33,15 @@ UIActionSheetDelegate, ELCImagePickerControllerDelegate> {
 @property (weak, nonatomic) IBOutlet UILabel *labTips;
 @property (weak, nonatomic) IBOutlet GMGridView *gmGridView;
 @property (weak, nonatomic) IBOutlet UIImageView *imgContentBg;
+@property (weak, nonatomic) IBOutlet UIImageView *fieldBg1;
+@property (weak, nonatomic) IBOutlet UITextField *fieldTitle;
+@property (weak, nonatomic) IBOutlet UIButton *btnFeedback;
 - (IBAction)onBtnHideKeyboardClicked:(id)sender;
 - (IBAction)onBtnPhotoFromCamraClicked:(id)sender;
 - (IBAction)onBtnPhotoFromGalleryClicked:(id)sender;
 - (IBAction)onBtnVideoClicked:(id)sender;
 - (IBAction)onBtnFinishClicked:(id)sender;
+- (IBAction)onBtnFeedbackClicked:(id)sender;
 
 @end
 
@@ -59,7 +64,11 @@ UIActionSheetDelegate, ELCImagePickerControllerDelegate> {
     // Do any additional setup after loading the view from its nib.
     [self customizeBackBarItem];
     
-    self.imgContentBg.image = [[UIImage imageNamed:@"v2-input_bg_家园互动.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+    self.imgContentBg.image = [[UIImage imageNamed:@"v2-input_bg_家园互动.png"]
+                               resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+    
+    self.fieldBg1.image = [[UIImage imageNamed:@"v2-input_login.png"]
+                           resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     
     //    self.gmGridView.centerGrid = YES;
     self.gmGridView.actionDelegate = self;
@@ -94,11 +103,11 @@ UIActionSheetDelegate, ELCImagePickerControllerDelegate> {
 }
 
 - (IBAction)onBtnHideKeyboardClicked:(id)sender {
-    [self.textContent resignFirstResponder];
+    [self hideKeyboard];
 }
 
 - (IBAction)onBtnPhotoFromCamraClicked:(id)sender {
-    [self.textContent resignFirstResponder];
+    [self hideKeyboard];
     
 #if TARGET_IPHONE_SIMULATOR
 #else
@@ -113,7 +122,7 @@ UIActionSheetDelegate, ELCImagePickerControllerDelegate> {
 }
 
 - (IBAction)onBtnPhotoFromGalleryClicked:(id)sender {
-    [self.textContent resignFirstResponder];
+    [self hideKeyboard];
 #if 0
     _imgPicker = [[UIImagePickerController alloc] init];
     _imgPicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
@@ -233,13 +242,24 @@ UIActionSheetDelegate, ELCImagePickerControllerDelegate> {
 
 
 - (IBAction)onBtnFinishClicked:(id)sender {
-    [self.textContent resignFirstResponder];
-    
-    if ([_delegate respondsToSelector:@selector(createNoticeViewController:finishEditText:withImages:)]) {
+    [self hideKeyboard];
+
+    if ([_delegate respondsToSelector:@selector(createNoticeViewController:finishEditText:withTitle:withImages:requriedFeedback:)]) {
         [_delegate createNoticeViewController:self
-                                finishEditText:self.textContent.text
-                                    withImages:_imageList];
+                               finishEditText:self.textContent.text
+                                    withTitle:self.fieldTitle.text
+                                   withImages:_imageList
+                             requriedFeedback:self.btnFeedback.selected];
     }
+}
+
+- (IBAction)onBtnFeedbackClicked:(id)sender {
+    self.btnFeedback.selected = !self.btnFeedback.selected;
+}
+
+- (void)hideKeyboard {
+    [self.textContent resignFirstResponder];
+    [self.fieldTitle resignFirstResponder];
 }
 
 #pragma mark - UITextViewDelegate
@@ -497,6 +517,9 @@ UIActionSheetDelegate, ELCImagePickerControllerDelegate> {
 }
 
 - (IBAction)onFieldDidEndOnExit:(id)sender {
+}
+
+- (IBAction)onBtnSelectorClicked:(id)sender {
 }
 
 @end

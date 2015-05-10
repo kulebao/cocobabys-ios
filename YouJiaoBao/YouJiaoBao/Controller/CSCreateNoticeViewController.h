@@ -19,6 +19,12 @@
 @optional
 
 - (void)createNoticeViewController:(CSCreateNoticeViewController*)ctrl
+                    finishEditText:(NSString*)text
+                         withTitle:(NSString*)title
+                        withImages:(NSArray*)imageList
+                  requriedFeedback:(BOOL)feedback;
+
+- (void)createNoticeViewController:(CSCreateNoticeViewController*)ctrl
                      finishEditText:(NSString*)text
                          withImages:(NSArray*)imageList;
 

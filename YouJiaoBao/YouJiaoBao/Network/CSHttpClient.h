@@ -98,7 +98,7 @@ typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSErr
                                           withVideoUrl:(NSString*)videoUrl
                                                success:(SuccessResponseHandler)success
                                                failure:(FailureResponseHandler)failure;
-
+//tags : 作业、备忘、活动 （校园公告即没有tag)
 - (AFHTTPRequestOperation*)opPostNewsOfKindergarten:(NSInteger)kindergarten
                                          withSender:(EntityLoginInfo*)senderInfo
                                         withClassId:(NSNumber*)classId

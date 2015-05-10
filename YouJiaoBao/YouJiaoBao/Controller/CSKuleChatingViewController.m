@@ -113,6 +113,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CSKuleChatingTableCell* cell = [tableView dequeueReusableCellWithIdentifier:@"CSKuleChatingTableCell"];
+    const CGFloat kWidth = tableView.bounds.size.width;
     
     if (cell == nil) {
         cell = [[CSKuleChatingTableCell alloc] initWithStyle:UITableViewCellStyleDefault
@@ -191,7 +192,7 @@
     
     CGSize msgBodySize = [CSKuleChatingTableCell textSize:msg.content];
     NSString* timestampString = [[NSDate dateWithTimeIntervalSince1970:(msg.timestamp.longLongValue)/1000.0] isoDateTimeString];
-    labMsgTimestamp.frame = CGRectMake(40, 0, 320-40-40, 12);
+    labMsgTimestamp.frame = CGRectMake(40, 0, kWidth-40-40, 12);
     labMsgTimestamp.text = timestampString;
     
     labMsgBody.frame = CGRectNull;
@@ -255,18 +256,18 @@
     }
     else {
         // From
-        imgPortrait.frame = CGRectMake(320-2-32-2, 24, 32, 32);
+        imgPortrait.frame = CGRectMake(kWidth-2-32-2, 24, 32, 32);
         
         UIImage* bgImage = [UIImage imageNamed:@"chating_right_1.png"];
         imgBubbleBg.image = [bgImage resizableImageWithCapInsets:UIEdgeInsetsMake(15, 10, 10, 15)];
 
-        labMsgSender.frame = CGRectMake(320-2-132-4-45, 12, 136, 12);
+        labMsgSender.frame = CGRectMake(kWidth-2-132-4-45, 12, 136, 12);
         labMsgSender.textAlignment = NSTextAlignmentRight;
         
         if (msg.mediaUrl.length > 0) {
             if ([msg.mediaType isEqualToString:@"voice"]) {
                 
-                imgBubbleBg.frame =  CGRectMake(320-36-90+30, 12+12, 60, 48);
+                imgBubbleBg.frame =  CGRectMake(kWidth-36-90+30, 12+12, 60, 48);
                 voiceMsgBody.frame = CGRectMake(imgBubbleBg.frame.origin.x+10, 18+12, 32, 32);
                 
                 voiceMsgBody.image = [UIImage imageNamed:@"voice_right_1.png"];
@@ -288,12 +289,12 @@
                 }
             }
             else {
-                imgBubbleBg.frame =  CGRectMake(320-36-90-15, 12+12, 90, 78);
+                imgBubbleBg.frame =  CGRectMake(kWidth-36-90-15, 12+12, 90, 78);
                 imgMsgBody.frame = CGRectMake(imgBubbleBg.frame.origin.x+10, 18+12, 64, 64);
             }
         }
         else {
-            imgBubbleBg.frame = CGRectMake(320-36-msgBodySize.width-30, 12+12, msgBodySize.width + 30, msgBodySize.height+14);
+            imgBubbleBg.frame = CGRectMake(kWidth-36-msgBodySize.width-30, 12+12, msgBodySize.width + 30, msgBodySize.height+14);
             
             labMsgBody.text = msg.content;
             labMsgBody.frame = CGRectMake(imgBubbleBg.frame.origin.x + 12, 18+12, msgBodySize.width, msgBodySize.height);

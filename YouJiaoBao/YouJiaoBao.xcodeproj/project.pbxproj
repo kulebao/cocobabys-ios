@@ -461,6 +461,8 @@
 		095D858C19C5ECB700F2F926 /* CSPopupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 095D858B19C5ECB700F2F926 /* CSPopupController.m */; };
 		095D859019C5ED1900F2F926 /* CSClassPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 095D858F19C5ED1900F2F926 /* CSClassPickerView.m */; };
 		095D859219C5ED2B00F2F926 /* CSClassPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 095D859119C5ED2B00F2F926 /* CSClassPickerView.xib */; };
+		095EF4AD1AFF4DF700251886 /* v2-btn_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = 095EF4AB1AFF4DF700251886 /* v2-btn_gray.png */; };
+		095EF4AE1AFF4DF700251886 /* v2-btn_gray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 095EF4AC1AFF4DF700251886 /* v2-btn_gray@2x.png */; };
 		095F13781967C309008CF3BE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 095F13771967C309008CF3BE /* Foundation.framework */; };
 		095F137A1967C309008CF3BE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 095F13791967C309008CF3BE /* CoreGraphics.framework */; };
 		095F137C1967C309008CF3BE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 095F137B1967C309008CF3BE /* UIKit.framework */; };
@@ -1234,6 +1236,8 @@
 		095D858E19C5ED1900F2F926 /* CSClassPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSClassPickerView.h; sourceTree = "<group>"; };
 		095D858F19C5ED1900F2F926 /* CSClassPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSClassPickerView.m; sourceTree = "<group>"; };
 		095D859119C5ED2B00F2F926 /* CSClassPickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSClassPickerView.xib; sourceTree = "<group>"; };
+		095EF4AB1AFF4DF700251886 /* v2-btn_gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-btn_gray.png"; sourceTree = "<group>"; };
+		095EF4AC1AFF4DF700251886 /* v2-btn_gray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-btn_gray@2x.png"; sourceTree = "<group>"; };
 		095F13741967C309008CF3BE /* YouJiaoBao.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouJiaoBao.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		095F13771967C309008CF3BE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		095F13791967C309008CF3BE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -1900,6 +1904,8 @@
 		093571BC1AFD13EE00134BBF /* v2 */ = {
 			isa = PBXGroup;
 			children = (
+				095EF4AB1AFF4DF700251886 /* v2-btn_gray.png */,
+				095EF4AC1AFF4DF700251886 /* v2-btn_gray@2x.png */,
 				0938DC721AFF22D700883DD7 /* v2-btn_已回执.png */,
 				0938DC731AFF22D700883DD7 /* v2-btn_已回执@2x.png */,
 				0938DC741AFF22D700883DD7 /* v2-btn_请回执.png */,
@@ -3474,6 +3480,7 @@
 				093570FE1AFD128200134BBF /* arrow-right.png in Resources */,
 				0901CE371ABF2FBB0044838A /* video_icon@2x.png in Resources */,
 				0901CE101ABF2FBB0044838A /* record_flashlight_normal.png in Resources */,
+				095EF4AE1AFF4DF700251886 /* v2-btn_gray@2x.png in Resources */,
 				0935715C1AFD128200134BBF /* guide-2-568h.png in Resources */,
 				093572381AFD13EF00134BBF /* v2-btn_message@2x.png in Resources */,
 				0935726C1AFD13EF00134BBF /* v2-游戏@2x.png in Resources */,
@@ -3514,6 +3521,7 @@
 				093572621AFD13EF00134BBF /* v2-宝宝列表@2x.png in Resources */,
 				0935725C1AFD13EF00134BBF /* v2-logo@2x.png in Resources */,
 				093572311AFD13EF00134BBF /* v2-btn_go.png in Resources */,
+				095EF4AD1AFF4DF700251886 /* v2-btn_gray.png in Resources */,
 				098E3E70198B314500CB4F0B /* input_d.9.png in Resources */,
 				093571A01AFD128200134BBF /* settings-icon-feedback.png in Resources */,
 				098E3E91198B314500CB4F0B /* star_red.png in Resources */,

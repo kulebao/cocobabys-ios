@@ -64,6 +64,9 @@
         _opManager.requestSerializer = [AFJSONRequestSerializer serializerWithWritingOptions:0];
         [_opManager.requestSerializer setValue:@"ios" forHTTPHeaderField:@"source"];
         
+        NSString* version = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+        [_opManager.requestSerializer setValue:version forHTTPHeaderField:@"versioncode"];
+        
         AFJSONResponseSerializer* responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:0];
         
         responseSerializer.removesKeysWithNullValues = YES;
@@ -490,12 +493,12 @@
     NSDictionary* parameters = @{@"school_id" : @(kindergarten),
                                  @"content": content ? content : @"",
                                  @"title": title ? title : @"",
-                                 @"published" : @"true",
+                                 @"published" : @(YES),
                                  @"class_id" : classId,
                                  @"publisher_id": senderInfo.uid,
                                  @"image" : imgUrl ? imgUrl : @"",
-                                 @"tags": tags ? tags : @[@"公告"],
-                                 @"feedback_required" : requriedFeedback ? @(1) : @(0)};
+                                 @"tags": tags ? tags : @[],
+                                 @"feedback_required" : @(requriedFeedback)};
     
     AFHTTPRequestOperation* op = [self.opManager POST:apiUrl
                                            parameters:parameters

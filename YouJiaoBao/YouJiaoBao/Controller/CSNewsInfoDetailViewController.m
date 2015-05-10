@@ -10,6 +10,7 @@
 #import "UIWebView+AFNetworking.h"
 #import "UIWebView+CSKit.h"
 #import "CSUtils.h"
+#import "EntityClassInfoHelper.h"
 
 @interface CSNewsInfoDetailViewController () <UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
@@ -87,6 +88,12 @@
     NSString* timestampString = [CSUtils stringFromDateStyle1:[NSDate dateWithTimeIntervalSince1970:newsInfo.timestamp.doubleValue/1000.0]];
     
     NSString* publiser = @"";
+    if (newsInfo.classId.integerValue > 0) {
+        EntityClassInfo* classInfo = [EntityClassInfoHelper queryEntityWithClassId:newsInfo.classId.integerValue];
+        if (classInfo.name.length > 0) {
+            publiser = classInfo.name;
+        }
+    }
     
     NSString* body = newsInfo.content;
     

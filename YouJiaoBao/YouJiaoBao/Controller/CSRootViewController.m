@@ -151,7 +151,7 @@
         [navigationController setNavigationBarHidden:NO animated:animated];
     }
     else if ([viewController isKindOfClass:[CSLoginViewController class]]) {
-        [navigationController setNavigationBarHidden:YES animated:animated];
+        [navigationController setNavigationBarHidden:NO animated:animated];
     }
 }
 
@@ -163,7 +163,7 @@
         [navigationController setNavigationBarHidden:NO animated:animated];
     }
     else if ([viewController isKindOfClass:[CSLoginViewController class]]) {
-        [navigationController setNavigationBarHidden:YES animated:animated];
+        [navigationController setNavigationBarHidden:NO animated:animated];
     }
 }
 

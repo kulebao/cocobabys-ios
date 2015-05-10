@@ -41,7 +41,7 @@
     self.imgPortrait.layer.borderColor = [[UIColor whiteColor] CGColor];
     self.imgPortrait.layer.borderWidth = 2;
     self.imgPortrait.clipsToBounds = YES;
-    self.imgPortrait.layer.cornerRadius = 40.0;
+    self.imgPortrait.layer.cornerRadius = 42.0;
     
     [self.imgPortrait sd_setImageWithURL:[NSURL URLWithString:self.childInfo.portrait]
                         placeholderImage:[UIImage imageNamed:@"default_icon.png"]];

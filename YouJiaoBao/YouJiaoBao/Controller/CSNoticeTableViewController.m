@@ -28,7 +28,7 @@
     NSString* _textContent;
     NSString* _textTitle;
     BOOL _requriedFeedback;
-    NSMutableArray* _tags;
+    NSArray* _tags;
     
     NSNumber* _classId;
 }
@@ -204,12 +204,14 @@
                      finishEditText:(NSString*)text
                           withTitle:(NSString*)title
                          withImages:(NSArray*)imageList
+                          withTags:(NSArray *)tags
                   requriedFeedback:(BOOL)feedback {
     _textContent = text;
     _textTitle = title;
     _imageUrlList = [NSMutableArray array];
     _imageList = [NSMutableArray arrayWithArray:imageList];
     _requriedFeedback = feedback;
+    _tags = tags;
  
     [self doSelectClass];
 }

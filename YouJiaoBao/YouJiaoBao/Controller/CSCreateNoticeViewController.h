@@ -22,6 +22,7 @@
                     finishEditText:(NSString*)text
                          withTitle:(NSString*)title
                         withImages:(NSArray*)imageList
+                          withTags:(NSArray*)tags
                   requriedFeedback:(BOOL)feedback;
 
 - (void)createNoticeViewController:(CSCreateNoticeViewController*)ctrl

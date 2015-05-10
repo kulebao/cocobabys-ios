@@ -62,14 +62,6 @@
                  @{@"icon": [UIImage imageNamed:@"v2-成长经历.png"],
                    @"segue": @"segue.main.growexp",
                    @"name": @"成长经历"},
-                 
-//                 @{@"icon": [UIImage imageNamed:@"hw.png"],
-//                   @"segue": @"segue.main.hw",
-//                   @"name": @"亲子作业"},
-//                 
-//                 @{@"icon": [UIImage imageNamed:@"setting.png"],
-//                   @"segue": @"segue.main.setting",
-//                   @"name": @"设置"}
                  ];
     
     

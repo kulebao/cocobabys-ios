@@ -36,7 +36,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.imgPortrait.layer.cornerRadius = 32.0;
+    self.imgPortrait.layer.cornerRadius = 40.0;
     self.imgPortrait.clipsToBounds = YES;
     self.imgPortrait.layer.borderWidth = 2;
     self.imgPortrait.layer.borderColor = [[UIColor whiteColor] CGColor];

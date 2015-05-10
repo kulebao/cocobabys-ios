@@ -16,15 +16,20 @@
 #import "ELCImagePickerController.h"
 
 @interface CSCreateNoticeViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GMGridViewDataSource, GMGridViewSortingDelegate, GMGridViewTransformationDelegate, GMGridViewActionDelegate,
-UIActionSheetDelegate, ELCImagePickerControllerDelegate> {
-    NSMutableArray* _imageList;
-    UIImagePickerController* _imgPicker;
-    ELCImagePickerController* _elcPicker;
-    NSInteger _lastDeleteItemIndexAsked;
+    UIActionSheetDelegate, ELCImagePickerControllerDelegate> {
+    
+        NSMutableArray* _imageList;
+        UIImagePickerController* _imgPicker;
+        ELCImagePickerController* _elcPicker;
+        NSInteger _lastDeleteItemIndexAsked;
+        NSString* _tag;
+        UIActionSheet* _typeSelectorActionSheet;
+        UIActionSheet* _videoActionSheet;
 }
 
 - (IBAction)onFieldDidEndOnExit:(id)sender;
 - (IBAction)onBtnSelectorClicked:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *btnTagSelector;
 @property (weak, nonatomic) IBOutlet UITextView *textContent;
 @property (weak, nonatomic) IBOutlet UIButton *btnHideKeyboard;
 @property (weak, nonatomic) IBOutlet UIButton *btnPhotoFromCamra;
@@ -159,12 +164,12 @@ UIActionSheetDelegate, ELCImagePickerControllerDelegate> {
 - (IBAction)onBtnVideoClicked:(id)sender {
     [self.textContent resignFirstResponder];
     
-    UIActionSheet* actSheet = [[UIActionSheet alloc] initWithTitle:nil
+    _videoActionSheet = [[UIActionSheet alloc] initWithTitle:nil
                                                           delegate:self
                                                  cancelButtonTitle:@"取消"
                                             destructiveButtonTitle:nil
                                                  otherButtonTitles:@"录像", @"选择视频文件", nil];
-    [actSheet showInView:self.view];
+    [_videoActionSheet showInView:self.view];
     
     /*
      UINavigationController *navCon = [[UINavigationController alloc] init];
@@ -179,64 +184,76 @@ UIActionSheetDelegate, ELCImagePickerControllerDelegate> {
 
 #pragma mark - UIActionSheetDelegate
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == actionSheet.firstOtherButtonIndex) {
-        //录像
-        
-        //检查相机模式是否可用
-        if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-            NSLog(@"sorry, no camera or camera is unavailable!!!");
-            return;
+    if ([actionSheet isEqual:_typeSelectorActionSheet]) {
+        if (buttonIndex == actionSheet.firstOtherButtonIndex) {
+            _tag = nil;
+            [self.btnTagSelector setTitle:@"园内公告" forState:UIControlStateNormal];
         }
-        
+        else {
+            _tag = @"作业";
+            [self.btnTagSelector setTitle:@"亲子作业" forState:UIControlStateNormal];
+        }
+    }
+    else if ([actionSheet isEqual:_videoActionSheet]) {
+        if (buttonIndex == actionSheet.firstOtherButtonIndex) {
+            //录像
+            
+            //检查相机模式是否可用
+            if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+                NSLog(@"sorry, no camera or camera is unavailable!!!");
+                return;
+            }
+            
 #if TARGET_IPHONE_SIMULATOR
 #else
-        _imgPicker = [[UIImagePickerController alloc] init];
-        _imgPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-        @try{
-            // exception:cameraCaptureMode 1 not available because mediaTypes does contain public.movie
-            // _imgPicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureModeVideo;
-            _imgPicker.mediaTypes = @[(NSString *)kUTTypeMovie];
-            _imgPicker.videoMaximumDuration = 30; // 30s
-            _imgPicker.videoQuality = UIImagePickerControllerQualityTypeMedium;
-        }
-        @catch(NSException *exception) {
-            CSLog(@"exception:%@", exception);
-        }
-        @finally {
-            
-        }
-        _imgPicker.allowsEditing = NO;
-        _imgPicker.delegate = self;
-        [self presentViewController:_imgPicker animated:YES completion:^{
-            
-        }];
+            _imgPicker = [[UIImagePickerController alloc] init];
+            _imgPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            @try{
+                // exception:cameraCaptureMode 1 not available because mediaTypes does contain public.movie
+                // _imgPicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureModeVideo;
+                _imgPicker.mediaTypes = @[(NSString *)kUTTypeMovie];
+                _imgPicker.videoMaximumDuration = 30; // 30s
+                _imgPicker.videoQuality = UIImagePickerControllerQualityTypeMedium;
+            }
+            @catch(NSException *exception) {
+                CSLog(@"exception:%@", exception);
+            }
+            @finally {
+                
+            }
+            _imgPicker.allowsEditing = NO;
+            _imgPicker.delegate = self;
+            [self presentViewController:_imgPicker animated:YES completion:^{
+                
+            }];
 #endif
-        /*
-         _imgPicker = [[UIImagePickerController alloc] init];
-         _imgPicker.delegate = self;
-         _imgPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-         _imgPicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureModeVideo;
-         _imgPicker.videoMaximumDuration = 30; // 30s
-         _imgPicker.videoQuality = UIImagePickerControllerQualityType640x480;
-         _imgPicker.allowsEditing = NO;
-         [self presentViewController:_imgPicker animated:YES completion:^{
-         
-         }];
-         */
-    }
-    else if (buttonIndex == (actionSheet.firstOtherButtonIndex+1)) {
-        //选择视频文件
-        
-        _imgPicker = [[UIImagePickerController alloc] init];
-        _imgPicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-        _imgPicker.mediaTypes = @[(NSString *)kUTTypeMovie, (NSString *)kUTTypeVideo];
-        _imgPicker.videoMaximumDuration = 30; // 30s
-        _imgPicker.videoQuality = UIImagePickerControllerQualityType640x480;
-        _imgPicker.allowsEditing = NO;
-        _imgPicker.delegate = self;
-        [self presentViewController:_imgPicker animated:YES completion:^{
+            /*
+             _imgPicker = [[UIImagePickerController alloc] init];
+             _imgPicker.delegate = self;
+             _imgPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+             _imgPicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureModeVideo;
+             _imgPicker.videoMaximumDuration = 30; // 30s
+             _imgPicker.videoQuality = UIImagePickerControllerQualityType640x480;
+             _imgPicker.allowsEditing = NO;
+             [self presentViewController:_imgPicker animated:YES completion:^{
+             
+             }];
+             */
+        }
+        else if (buttonIndex == (actionSheet.firstOtherButtonIndex+1)) {
+            //选择视频文件
             
-        }];
+            _imgPicker = [[UIImagePickerController alloc] init];
+            _imgPicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+            _imgPicker.mediaTypes = @[(NSString *)kUTTypeMovie, (NSString *)kUTTypeVideo];
+            _imgPicker.videoMaximumDuration = 30; // 30s
+            _imgPicker.videoQuality = UIImagePickerControllerQualityType640x480;
+            _imgPicker.allowsEditing = NO;
+            _imgPicker.delegate = self;
+            [self presentViewController:_imgPicker animated:YES completion:^{
+                
+            }];
+        }
     }
 }
 
@@ -244,11 +261,12 @@ UIActionSheetDelegate, ELCImagePickerControllerDelegate> {
 - (IBAction)onBtnFinishClicked:(id)sender {
     [self hideKeyboard];
 
-    if ([_delegate respondsToSelector:@selector(createNoticeViewController:finishEditText:withTitle:withImages:requriedFeedback:)]) {
+    if ([_delegate respondsToSelector:@selector(createNoticeViewController:finishEditText:withTitle:withImages:withTags:requriedFeedback:)]) {
         [_delegate createNoticeViewController:self
                                finishEditText:self.textContent.text
                                     withTitle:self.fieldTitle.text
                                    withImages:_imageList
+                                     withTags:_tag ? @[_tag] : @[]
                              requriedFeedback:self.btnFeedback.selected];
     }
 }
@@ -520,6 +538,12 @@ UIActionSheetDelegate, ELCImagePickerControllerDelegate> {
 }
 
 - (IBAction)onBtnSelectorClicked:(id)sender {
+    _typeSelectorActionSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                delegate:self
+                                       cancelButtonTitle:@"取消"
+                                  destructiveButtonTitle:nil
+                                       otherButtonTitles:@"校园公告",@"亲子作业", nil];
+    [_typeSelectorActionSheet showInView:self.view];
 }
 
 @end

@@ -21,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *fieldUsername;
 @property (weak, nonatomic) IBOutlet UITextField *fieldPassword;
 @property (weak, nonatomic) IBOutlet UILabel *labNote;
+@property (weak, nonatomic) IBOutlet UIImageView *imgFieldBg1;
+@property (weak, nonatomic) IBOutlet UIImageView *imgFieldBg2;
 
 - (IBAction)onBtnLoginClicked:(id)sender;
 
@@ -41,11 +43,13 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"v2-head.png"] forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:20], NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    [self.navigationItem setHidesBackButton:YES];
     
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent
-                                                animated:YES];
+    UIImage* fieldBgImg = [[UIImage imageNamed:@"v2-input_login.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+    self.imgFieldBg1.image = fieldBgImg;
+    self.imgFieldBg2.image = fieldBgImg;
+    UIImage* imgBtnGreenBg = [[UIImage imageNamed:@"v2-btn_green.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+    [self.btnLogin setBackgroundImage:imgBtnGreenBg forState:UIControlStateNormal];
     
     self.labNote.text = nil;
 #ifdef DEBUG

@@ -12,6 +12,7 @@
 #import "UIImageView+WebCache.h"
 #import "NSDate+CSKit.h"
 #import "UIImageView+AFNetworking.h"
+#import "EntityClassInfoHelper.h"
 
 @interface CSKuleNewsTableViewCell ()
 
@@ -41,12 +42,12 @@
     self.labTitle.text = newsInfo.title;
     self.labContent.text = newsInfo.content;
     
-    NSString* publiser = nil;
-    if (newsInfo.classId > 0) {
-        publiser =  @"";
-    }
-    else {
-        publiser = @"";
+    NSString* publiser = @"";
+    if (newsInfo.classId.integerValue > 0) {
+        EntityClassInfo* classInfo = [EntityClassInfoHelper queryEntityWithClassId:newsInfo.classId.integerValue];
+        if (classInfo.name.length > 0) {
+            publiser = classInfo.name;
+        }
     }
     
     if (newsInfo.image.length > 0) {
@@ -93,7 +94,7 @@
         self.imgTagBg.image = [[UIImage imageNamed:@"v2-btn_亲子作业.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(4, 4, 4, 4)];
     }
     else {
-        if (self.newsInfo.classId > 0) {
+        if (self.newsInfo.classId.integerValue > 0) {
             tagTitle = @"班级通知";
             self.imgTagBg.image = [[UIImage imageNamed:@"v2-btn_班级通知.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(4, 4, 4, 4)];
         }

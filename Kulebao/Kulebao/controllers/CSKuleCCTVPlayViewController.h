@@ -11,5 +11,6 @@
 @interface CSKuleCCTVPlayViewController : GLKViewController <GLKViewControllerDelegate>
 
 @property (nonatomic, strong) NSDictionary* deviceMeta;
+@property (nonatomic, assign) BOOL isTrail;
 
 @end

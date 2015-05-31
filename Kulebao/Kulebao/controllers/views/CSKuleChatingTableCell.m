@@ -84,7 +84,8 @@
             [_delegate chatingTableCell:self playVoice:_msg];
         }
     }
-    else if ([_msg.media.type isEqualToString:@"image"]) {
+    else if ([_msg.media.type isEqualToString:@"image"]
+             && _msg.media.url.length > 0) {
         UIImageView* imgView = (UIImageView*)[self.contentView viewWithTag:102];
         
         MJPhoto* photo = [MJPhoto new];

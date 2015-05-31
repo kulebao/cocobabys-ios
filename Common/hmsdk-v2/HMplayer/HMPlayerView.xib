@@ -13,6 +13,7 @@
                 <outlet property="btnListen" destination="Cua-kH-fJK" id="cmi-hk-p9Z"/>
                 <outlet property="btnListenStop" destination="iJr-8j-eae" id="fJi-Oc-cb3"/>
                 <outlet property="labTitle" destination="icm-0p-DTk" id="qeV-gZ-AU3"/>
+                <outlet property="labTrailTips" destination="d4z-ps-KR1" id="QTL-AX-SNb"/>
                 <outlet property="navBar" destination="o8T-gx-L8S" id="ukj-k6-ZfQ"/>
                 <outlet property="rightBar" destination="XZa-N4-NGm" id="yi4-uj-51Y"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -28,6 +29,12 @@
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                 </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="演示视频，如需要开通，请联系幼儿园" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d4z-ps-KR1">
+                    <rect key="frame" x="16" y="279" width="536" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ai3-Ct-MEh" userLabel="CoverView" customClass="UIControl">
                     <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
                     <subviews>
@@ -131,13 +138,16 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="XZa-N4-NGm" secondAttribute="trailing" id="3gE-hg-5Tn"/>
                 <constraint firstItem="ai3-Ct-MEh" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="5kL-zS-kYl"/>
+                <constraint firstAttribute="bottom" secondItem="d4z-ps-KR1" secondAttribute="bottom" constant="24" id="7WB-YE-787"/>
                 <constraint firstItem="o8T-gx-L8S" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="9Y4-U8-Ucj"/>
                 <constraint firstItem="cez-eO-7u9" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Ev8-I0-Fgj"/>
                 <constraint firstItem="XZa-N4-NGm" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="J6Z-GT-lfd"/>
                 <constraint firstItem="ai3-Ct-MEh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Jfv-nI-j9z"/>
                 <constraint firstAttribute="bottom" secondItem="cez-eO-7u9" secondAttribute="bottom" id="MaM-VM-MW9"/>
                 <constraint firstAttribute="bottom" secondItem="ai3-Ct-MEh" secondAttribute="bottom" id="WBy-zw-urn"/>
+                <constraint firstItem="d4z-ps-KR1" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="Zmy-eo-g1g"/>
                 <constraint firstAttribute="trailing" secondItem="cez-eO-7u9" secondAttribute="trailing" id="dvz-M9-sUk"/>
+                <constraint firstAttribute="trailing" secondItem="d4z-ps-KR1" secondAttribute="trailing" constant="16" id="nQV-p1-Eqo"/>
                 <constraint firstAttribute="bottom" secondItem="XZa-N4-NGm" secondAttribute="bottom" id="nYg-eG-ki6"/>
                 <constraint firstAttribute="trailing" secondItem="o8T-gx-L8S" secondAttribute="trailing" id="onI-yb-QPV"/>
                 <constraint firstItem="cez-eO-7u9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="pNf-qb-Uxc"/>

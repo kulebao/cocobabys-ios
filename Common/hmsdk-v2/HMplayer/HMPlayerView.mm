@@ -117,6 +117,8 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
     btnListenStop.hidden = YES;
     
     rightBar.hidden = !IsRunning;
+    
+    labTrailTips.hidden = !self.isTrail;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -505,12 +507,14 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
 
 - (IBAction)btnListenAction:(id)sender
 {
-    [self performSelectorInBackground:@selector(StartAudioPlayer) withObject:nil];
-//    [btnListen setEnabled:NO];
-//    [btnListenStop setEnabled:YES];
-    
-    btnListen.hidden = YES;
-    btnListenStop.hidden = NO;
+    if (self.isTrail) {
+        [gApp shortAlert:@"演示视频，不允许打开声音"];
+    }
+    else {
+        [self performSelectorInBackground:@selector(StartAudioPlayer) withObject:nil];
+        btnListen.hidden = YES;
+        btnListenStop.hidden = NO;
+    }
 }
 
 - (IBAction)btnListenStopAction:(id)sender
@@ -532,8 +536,13 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
 }
 
 - (IBAction)btnCaptureAction:(id)sender {
-    UIImage *viewImage = [PaintView snapshotImage];
-    UIImageWriteToSavedPhotosAlbum(viewImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    if (self.isTrail) {
+        [gApp shortAlert:@"演示视频，不允许拍照"];
+    }
+    else {
+        UIImage *viewImage = [PaintView snapshotImage];
+        UIImageWriteToSavedPhotosAlbum(viewImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    }
 }
 
 - (void)StartAudioPlayer

@@ -337,11 +337,13 @@
     
     _badges = [NSMutableArray arrayWithCapacity:_moduleInfos.count];
     
-    const CGSize kModuleIconSize = CGSizeMake(88, 88);
-    const CGSize kModuleTitleSize = CGSizeMake(88, 0);
     const NSInteger kModuleColumns = 3;
     const CGFloat kModuleTopMagin = 15;
-    const CGFloat kModuleRowSpace = 8;
+    const CGFloat kCellSize = (self.view.bounds.size.width - 50) / kModuleColumns;
+    const CGSize kModuleIconSize = CGSizeMake(kCellSize, kCellSize);
+    const CGSize kModuleTitleSize = CGSizeMake(kCellSize, 0);
+    const CGFloat kModuleRowSpace = kCellSize/8;
+
     const CGFloat kModuleColumnSpace = (_scrollContent.bounds.size.width - kModuleIconSize.width*kModuleColumns)/(kModuleColumns+1);
     
     CGFloat xx = 0.0;

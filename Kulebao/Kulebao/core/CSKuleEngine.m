@@ -16,6 +16,7 @@
 #import "ALAlertBanner+Private.h"
 #import "hm_sdk.h"
 #import "TSFileCache.h"
+#import "CSKit.h"
 
 @interface CSKuleEngine() <BPushDelegate> {
     NSMutableDictionary* _senderProfiles;
@@ -1213,6 +1214,10 @@
                                  most:(NSInteger)most
                               success:(SuccessResponseHandler)success
                               failure:(FailureResponseHandler)failure {
+    if (_currentRelationship == nil) {
+        return;
+    }
+    
     NSParameterAssert(_currentRelationship.child);
     
     NSString* path = [NSString stringWithFormat:kTopicPath, @(kindergarten), _currentRelationship.child.childId];
@@ -1289,7 +1294,7 @@
                     @"type": @""};
     
     if (mediaUrl.length > 0) {
-        msgMedia = @{@"url": [[self urlFromPath:mediaUrl] absoluteString],
+        msgMedia = @{@"url": SAFE_STRING([[self urlFromPath:mediaUrl] absoluteString]),
                      @"type": mediaType};
     }
     

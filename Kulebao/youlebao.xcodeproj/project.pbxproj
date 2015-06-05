@@ -59,7 +59,7 @@
 		090E6BDC18EAFDA900F21BA7 /* NSURL+CSKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 090E6BDB18EAFDA900F21BA7 /* NSURL+CSKit.m */; };
 		090FC11D199B3FC300C3A31A /* HMAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 090FC112199B3FC300C3A31A /* HMAudioPlayer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		090FC11E199B3FC300C3A31A /* HMAudioRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 090FC114199B3FC300C3A31A /* HMAudioRecorder.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		090FC11F199B3FC300C3A31A /* HMPlayerView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 090FC117199B3FC300C3A31A /* HMPlayerView.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		090FC11F199B3FC300C3A31A /* HMPlayerView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 090FC117199B3FC300C3A31A /* HMPlayerView.mm */; };
 		090FC120199B3FC300C3A31A /* HMPlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 090FC118199B3FC300C3A31A /* HMPlayerView.xib */; };
 		090FC121199B3FC300C3A31A /* NSCyscleBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 090FC11A199B3FC300C3A31A /* NSCyscleBuffer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		090FC122199B3FC300C3A31A /* PaintingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 090FC11C199B3FC300C3A31A /* PaintingView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -194,7 +194,7 @@
 		091AE82E18D820C800EBC927 /* NSMutableArray+convenience.m in Sources */ = {isa = PBXBuildFile; fileRef = 091AE82618D820C800EBC927 /* NSMutableArray+convenience.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		091AE82F18D820C800EBC927 /* UIColor+expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = 091AE82818D820C800EBC927 /* UIColor+expanded.m */; };
 		091AE83018D820C800EBC927 /* UIView+convenience.m in Sources */ = {isa = PBXBuildFile; fileRef = 091AE82A18D820C800EBC927 /* UIView+convenience.m */; };
-		091AE83118D820C800EBC927 /* VRGCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 091AE82C18D820C800EBC927 /* VRGCalendarView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		091AE83118D820C800EBC927 /* VRGCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 091AE82C18D820C800EBC927 /* VRGCalendarView.m */; };
 		091AE83518D8300A00EBC927 /* CSKuleCheckInOutLogInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 091AE83418D8300A00EBC927 /* CSKuleCheckInOutLogInfo.m */; };
 		09219A3418C42AF800166228 /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 09219A2F18C42AF800166228 /* 37x-Checkmark.png */; };
 		09219A3518C42AF800166228 /* 37x-Checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09219A3018C42AF800166228 /* 37x-Checkmark@2x.png */; };
@@ -4211,6 +4211,7 @@
 					"/Users/xinus/xin.github/Kulebao-iPhone/YouJiaoBao/Venders/opencore-amr-0.1.3/lib",
 					"/Users/xinus/xin.github/Kulebao-iPhone/Common/hmsdk-v2",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = youlebao;
 				PROVISIONING_PROFILE = "7a85bde6-e196-4fb7-a757-6922f663790d";

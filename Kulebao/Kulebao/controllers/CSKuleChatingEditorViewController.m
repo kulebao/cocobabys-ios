@@ -85,12 +85,14 @@
 #pragma mark - View lifecycle
 -(void) viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
     NSString* cName = [NSString stringWithFormat:@"%@",  self.navigationItem.title, nil];
     [[BaiduMobStat defaultStat] pageviewStartWithName:cName];
 }
 
 -(void) viewDidDisappear:(BOOL)animated
 {
+    [super viewDidDisappear:animated];
     NSString* cName = [NSString stringWithFormat:@"%@", self.navigationItem.title, nil];
     [[BaiduMobStat defaultStat] pageviewEndWithName:cName];
 }
@@ -166,7 +168,7 @@
             NSString* wavFilePath = [self.class getPathByFileName:_fileName ofType:@"wav"];
             NSString* amrFilePath = [self.class getPathByFileName:_fileName ofType:@"amr"];
             
-            int err = [VoiceConverter wavToAmr:wavFilePath amrSavePath:amrFilePath];
+           [VoiceConverter wavToAmr:wavFilePath amrSavePath:amrFilePath];
             
             NSData* amrData = [NSData dataWithContentsOfFile:amrFilePath];
             if (amrData.length > 0) {

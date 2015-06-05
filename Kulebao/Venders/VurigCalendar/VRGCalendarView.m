@@ -69,7 +69,7 @@ void s_InitVRGCalendarView() {
     }
     
     self.markedColors = [NSArray arrayWithArray:colors];
-    [colors release];
+    //[colors release];
     self.markedTips = nil;
     
     [self setNeedsDisplay];
@@ -134,7 +134,7 @@ void s_InitVRGCalendarView() {
     UIView *animationHolder = [[UIView alloc] initWithFrame:CGRectMake(0, kVRGCalendarViewTopBarHeight, kVRGCalendarViewWidth, targetSize-kVRGCalendarViewTopBarHeight)];
     [animationHolder setClipsToBounds:YES];
     [self addSubview:animationHolder];
-    [animationHolder release];
+    //[animationHolder release];
     
     //Animate
     self.animationView_A = [[UIImageView alloc] initWithImage:imageCurrentMonth];
@@ -195,7 +195,7 @@ void s_InitVRGCalendarView() {
     
     [animationHolder setClipsToBounds:YES];
     [self addSubview:animationHolder];
-    [animationHolder release];
+    //[animationHolder release];
     
     self.animationView_A = [[UIImageView alloc] initWithImage:imageCurrentMonth];
     self.animationView_B = [[UIImageView alloc] initWithImage:imagePreviousMonth];
@@ -304,7 +304,7 @@ void s_InitVRGCalendarView() {
     //[labelCurrentMonth sizeToFit];
     labelCurrentMonth.frameX = roundf(self.frame.size.width/2 - labelCurrentMonth.frameWidth/2);
     labelCurrentMonth.frameY = 10;
-    [formatter release];
+    //[formatter release];
     [currentMonth firstWeekDayInMonth];
     
     CGContextClearRect(UIGraphicsGetCurrentContext(),rect);
@@ -610,14 +610,11 @@ void s_InitVRGCalendarView() {
 }
 
 -(void)dealloc {
-    
     self.delegate=nil;
     self.currentMonth=nil;
     self.labelCurrentMonth=nil;
     
     self.markedDates=nil;
     self.markedColors=nil;
-    
-    [super dealloc];
 }
 @end

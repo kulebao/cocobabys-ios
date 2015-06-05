@@ -20,7 +20,7 @@ static NSInteger kRetryInterval = 120; // 秒
 
 @property (weak, nonatomic) IBOutlet UIImageView *imgFieldBg1;
 @property (weak, nonatomic) IBOutlet UITextField *fieldSmsCode;
-@property (weak, nonatomic) IBOutlet UITextView *textNotice;
+@property (weak, nonatomic) IBOutlet UILabel *labNotice;
 @property (weak, nonatomic) IBOutlet UIButton *btnRetrySmsCode;
 @property (weak, nonatomic) IBOutlet UIButton *btnBind;
 @property (weak, nonatomic) IBOutlet UIImageView *imgContentBg;
@@ -56,8 +56,8 @@ static NSInteger kRetryInterval = 120; // 秒
     _noticeTemp = @"尊敬的%@用户，您好！您的手机已通过验证。请注意查收验证码短信。";
     
     NSString* notice = [NSString stringWithFormat:_noticeTemp, _mobile];
-    self.textNotice.text = notice;
-    self.textNotice.font = [UIFont systemFontOfSize:13.0];
+    self.labNotice.text = notice;
+    self.labNotice.font = [UIFont systemFontOfSize:13.0];
     
     UIImage* btnBgImage = [[UIImage imageNamed:@"v2-btn_green.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
 
@@ -169,7 +169,7 @@ static NSInteger kRetryInterval = 120; // 秒
         SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
             /* {"error_msg":"请求太频繁。","error_code":1} */
             
-            NSString* error_msg = [dataJson valueForKeyNotNull:@"error_msg"];
+            //NSString* error_msg = [dataJson valueForKeyNotNull:@"error_msg"];
             NSInteger error_code = [[dataJson valueForKeyNotNull:@"error_code"] integerValue];
             
             if (error_code == 0) {

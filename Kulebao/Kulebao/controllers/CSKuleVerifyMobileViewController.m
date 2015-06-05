@@ -9,11 +9,12 @@
 #import "CSKuleVerifyMobileViewController.h"
 #import "CSAppDelegate.h"
 
-static NSInteger kRetryInterval = 600; // 秒
+static NSInteger kRetryInterval = 120; // 秒
 
 @interface CSKuleVerifyMobileViewController () {
     NSTimer* _timer;
-    NSInteger _counter;
+    //NSInteger _counter;
+    NSDate* _counterStart;
     NSString* _noticeTemp;
 }
 
@@ -117,7 +118,7 @@ static NSInteger kRetryInterval = 600; // 秒
 #pragma mark - Private
 - (void)startTimer {
     if (_timer == nil) {
-        _counter = kRetryInterval;
+        _counterStart = [NSDate date];
         [self doCounting];
         
         _timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(onTimeOut:) userInfo:nil repeats:YES];
@@ -129,29 +130,29 @@ static NSInteger kRetryInterval = 600; // 秒
 - (void)stopTimer {
     [_timer invalidate];
     _timer = nil;
-    
-    _counter = 0;
+    _counterStart = nil;
+
     [self doCounting];
 }
 
 - (void)onTimeOut:(NSTimer*)timer {
-    --_counter;
     [self doCounting];
-    
-    if (_counter <= 0) {
-        [_timer invalidate];
-        _timer = nil;
-    }
 }
 
 - (void)doCounting {
-    if (_counter > 0) {
-        NSString* title = [NSString stringWithFormat:@"%d秒后重新获取", _counter];
+    NSTimeInterval counter = [_counterStart timeIntervalSinceNow];
+    NSInteger retrySecond = counter + kRetryInterval;
+    
+    if (retrySecond > 0) {
+        NSString* title = [NSString stringWithFormat:@"(%@)秒", @(retrySecond)];
         self.btnRetrySmsCode.enabled = NO;
         [self.btnRetrySmsCode setTitle:title
                               forState:UIControlStateDisabled];
     }
     else {
+        [_timer invalidate];
+        _timer = nil;
+        _counterStart = nil;
         [self.btnRetrySmsCode setTitle:@"获取验证码" forState:UIControlStateNormal];
         self.btnRetrySmsCode.enabled = YES;
     }

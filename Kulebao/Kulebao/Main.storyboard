@@ -2829,9 +2829,11 @@
                                                     <constraint firstAttribute="height" constant="32" id="wIp-GK-LVb"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <state key="normal" title="获取验证码" backgroundImage="v2-btn_gray.png">
+                                                <state key="normal" title="获取验证码" backgroundImage="v2-btn_green.png">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <state key="disabled" backgroundImage="v2-btn_gray.png"/>
+                                                <state key="highlighted" backgroundImage="v2-btn_gray.png"/>
                                                 <connections>
                                                     <action selector="onBtnRetrySmsCodeClicked:" destination="N3F-Q0-I25" eventType="touchUpInside" id="ezQ-ul-0Bg"/>
                                                 </connections>

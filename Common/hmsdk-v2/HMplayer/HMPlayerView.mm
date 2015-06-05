@@ -29,7 +29,7 @@ BOOL controlBarHidden = NO;
 #pragma mark 接收到视频数据回调函数
 static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
 {
-    NSArray* dataArray = (NSArray*)CFBridgingRelease(data);
+    NSArray* dataArray = (__bridge NSArray*)(data);
     HMPlayerView* playerView = [dataArray objectAtIndex:0];
     if (result == HMEC_OK)
     {
@@ -88,6 +88,20 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
        // [self setWantsFullScreenLayout: YES]; //设置这个属性为YES可以解决状态栏半透明带来的view位移问题
     }
     return self;
+}
+
+- (void)dealloc {
+    if (Video_res) {
+        free(Video_res);
+    }
+    
+    if (Audio_res) {
+        free(Audio_res);
+    }
+    
+    if (devInfo) {
+        free(devInfo);
+    }
 }
 
 - (void)viewDidLoad
@@ -194,7 +208,7 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
         
         OPEN_VIDEO_PARAM videoParam = {};
         videoParam.channel = 0;
-        videoParam.data    =  (void*)CFBridgingRetain(videoDataArr);  //(void*)video_data;
+        videoParam.data    =  (__bridge void*)(videoDataArr);  //(void*)video_data;
         videoParam.cb_data = &data_callback;
         videoParam.cs_type = HME_CS_MAJOR;  //设置为主，次码流;
         videoParam.vs_type = HME_VS_REAL;
@@ -209,6 +223,9 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
             {
                 if ( hm_pu_get_device_info(myID, devInfo) != HMEC_OK)
                 {
+                    if (devInfo) {
+                        free(devInfo);
+                    }
                     devInfo = nil;
                 }
                 else
@@ -276,7 +293,7 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
         
         OPEN_VIDEO_PARAM videoParam = {};
         videoParam.channel = 0;
-        videoParam.data    =  (void*)CFBridgingRetain(videoDataArr);  //(void*)video_data;
+        videoParam.data    =  (__bridge void*)(videoDataArr);  //(void*)video_data;
         videoParam.cb_data = &data_callback;
         videoParam.cs_type = HME_CS_MAJOR;  //设置为主，次码流;
         videoParam.vs_type = HME_VS_REAL;
@@ -293,6 +310,9 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
                 
                 if ( hm_pu_get_device_info(myID, devInfo) != HMEC_OK)
                 {
+                    if (devInfo) {
+                        free(devInfo);
+                    }
                     devInfo = nil;
                 }
                 else
@@ -553,9 +573,13 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
     
     OPEN_AUDIO_PARAM Aparam;
     Aparam.channel = 0;
+    if (Audio_res) {
+        free(Audio_res);
+        Audio_res = NULL;
+    }
     Audio_res = (P_OPEN_AUDIO_RES)malloc(sizeof(OPEN_AUDIO_RES));
     OPEN_AUDIO_PARAM Audioparam = {};
-    Audioparam.data    =  (void*)CFBridgingRetain(audioDataArr); //(void*)audio_data;
+    Audioparam.data    =  (__bridge void*)(audioDataArr); //(void*)audio_data;
     Audioparam.cb_data = &data_callback;
     
     hm_result result = hm_pu_open_audio(myID, &Audioparam , Audio_res,&audio_h);

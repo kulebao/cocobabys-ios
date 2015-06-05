@@ -227,7 +227,7 @@
     
     if ([msg.sender.type isEqualToString:@"t"]) {
         // From
-        labMsgSender.text = nil;
+        labMsgSender.text = @"老师";
         imgPortrait.image = [UIImage imageNamed:@"chat_head_icon.png"];
         
         imgPortrait.frame = CGRectMake(2, 24, 32, 32);
@@ -283,6 +283,7 @@
 
         labMsgSender.frame = CGRectMake(kWidth-2-132-4-45, 12, 136, 12);
         labMsgSender.textAlignment = NSTextAlignmentRight;
+        labMsgSender.text = @"家长";
         
         if (msg.media.url.length > 0) {
             if ([msg.media.type isEqualToString:@"voice"]) {

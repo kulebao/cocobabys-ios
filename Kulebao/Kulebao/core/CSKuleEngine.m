@@ -16,6 +16,7 @@
 #import "ALAlertBanner+Private.h"
 #import "hm_sdk.h"
 #import "TSFileCache.h"
+#import "CSKit.h"
 
 @interface CSKuleEngine() <BPushDelegate> {
     NSMutableDictionary* _senderProfiles;
@@ -64,30 +65,38 @@
     // 添加百度统计
     [self setupBaiduMobStat];
     
-    // 必须。参数对象必须实现(void)onMethod:(NSString*)method response:(NSDictionary*)data 方法, 本示例中为 self
-    [BPush setDelegate:self];
-    
-    // 添加Baidu Push
-    [BPush setupChannel:launchOptions];
-    
-    UIRemoteNotificationType notificationTypes = UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound;
-    
 #ifdef __IPHONE_8_0
     if (IsAtLeastiOSVersion(@"8.0")) {
-        // do something for iOS 8.0 or greater
-        UIUserNotificationSettings* settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge|UIUserNotificationTypeSound|UIUserNotificationTypeAlert categories:nil];
-        
+        UIUserNotificationType myTypes =
+        UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:myTypes categories:nil];
         [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-    }
-    else {
-        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:notificationTypes];
+    }else {
+        UIRemoteNotificationType myTypes =
+        UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound;
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:myTypes];
     }
 #else
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:notificationTypes];
 #endif
     
-    [application setApplicationIconBadgeNumber:0];
+    [BPush setDelegate:self];
     
+    CSKulePreferences* preference = [CSKulePreferences defaultPreferences];
+    NSDictionary* serverInfo = [preference getServerSettings];
+    [BPush registerChannel:launchOptions
+                    apiKey:serverInfo[@"baidu_api_key"]
+                  pushMode:BPushModeProduction
+                   isDebug:NO];
+
+    // 设置 BPush 的回调 [BPush setDelegate:self];
+    // App 是⽤用户点击推送消息启动
+    NSDictionary *userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    if (userInfo) {
+        [BPush handleNotification:userInfo];
+    }
+    
+    [application setApplicationIconBadgeNumber:0];
     return YES;
 }
 
@@ -282,19 +291,17 @@
 
 - (void)setupAppearance {
     UIImage* imgAlertBg = [UIImage imageNamed:@"alert-bg.png"];
-    UIImage* imgBtnBg = [UIImage imageNamed:@"btn-type1.png"];
-    UIImage* imgBtnPressedBg = [UIImage imageNamed:@"btn-type1-pressed.png"];
+    UIImage* imgBtnCancelBg = [[UIImage imageNamed:@"v2-btn_gray.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
+    UIImage* imgBtnOkBg = [[UIImage imageNamed:@"v2-btn_green.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
     
     imgAlertBg = [imgAlertBg resizableImageWithCapInsets:UIEdgeInsetsMake(100, 50, 10, 50)];
     
     id alertAppearance = [AHAlertView appearance];
     [alertAppearance setBackgroundImage:imgAlertBg];
-    [alertAppearance setTitleTextAttributes:@{UITextAttributeTextColor:[UIColor blackColor],}];
-    [alertAppearance setMessageTextAttributes:@{UITextAttributeTextColor:[UIColor blackColor],}];
-    [alertAppearance setButtonBackgroundImage:imgBtnBg forState:UIControlStateNormal];
-    [alertAppearance setCancelButtonBackgroundImage:imgBtnBg forState:UIControlStateNormal];
-    [alertAppearance setButtonBackgroundImage:imgBtnPressedBg forState:UIControlStateHighlighted];
-    [alertAppearance setCancelButtonBackgroundImage:imgBtnPressedBg forState:UIControlStateHighlighted];
+    [alertAppearance setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
+    [alertAppearance setMessageTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
+    [alertAppearance setButtonBackgroundImage:imgBtnOkBg forState:UIControlStateNormal];
+    [alertAppearance setCancelButtonBackgroundImage:imgBtnCancelBg forState:UIControlStateNormal];
     [alertAppearance setContentInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
 }
 
@@ -319,16 +326,16 @@
 
 #pragma mark - BPushDelegate
 // 必须,如果正确调用了 setDelegate,在 bindChannel 之后,结果在这个回调中返回。若绑定失败,请进行重新绑定,确保至少绑定成功一次
-- (void) onMethod:(NSString*)method response:(NSDictionary*)data {
+- (void)onMethod:(NSString*)method response:(NSDictionary*)data {
     NSDictionary* res = [[NSDictionary alloc] initWithDictionary:data];
-    if ([BPushRequestMethod_Bind isEqualToString:method]) {
+    if ([BPushRequestMethodBind isEqualToString:method]) {
         NSString *appid = [res valueForKey:BPushRequestAppIdKey];
         NSString *userid = [res valueForKey:BPushRequestUserIdKey];
         NSString *channelid = [res valueForKey:BPushRequestChannelIdKey];
         //NSString *requestid = [res valueForKey:BPushRequestRequestIdKey];
         int returnCode = [[res valueForKey:BPushRequestErrorCodeKey] intValue];
         
-        if (returnCode == BPushErrorCode_Success) {
+        if (returnCode == 0) {
             CSLog(@"BPushErrorCode_Success");
             CSKuleBPushInfo* baiduPushInfo = [CSKuleBPushInfo new];
             baiduPushInfo.appId = appid;
@@ -340,9 +347,9 @@
         else {
             CSLog(@"BPushErrorCode_NOT_Success");
         }
-    } else if ([BPushRequestMethod_Unbind isEqualToString:method]) {
+    } else if ([BPushRequestMethodUnbind isEqualToString:method]) {
         int returnCode = [[res valueForKey:BPushRequestErrorCodeKey] intValue];
-        if (returnCode == BPushErrorCode_Success) {
+        if (returnCode == 0) {
             _preferences.baiduPushInfo = nil;
         }
     }
@@ -1207,6 +1214,10 @@
                                  most:(NSInteger)most
                               success:(SuccessResponseHandler)success
                               failure:(FailureResponseHandler)failure {
+    if (_currentRelationship == nil) {
+        return;
+    }
+    
     NSParameterAssert(_currentRelationship.child);
     
     NSString* path = [NSString stringWithFormat:kTopicPath, @(kindergarten), _currentRelationship.child.childId];
@@ -1283,7 +1294,7 @@
                     @"type": @""};
     
     if (mediaUrl.length > 0) {
-        msgMedia = @{@"url": [[self urlFromPath:mediaUrl] absoluteString],
+        msgMedia = @{@"url": SAFE_STRING([[self urlFromPath:mediaUrl] absoluteString]),
                      @"type": mediaType};
     }
     

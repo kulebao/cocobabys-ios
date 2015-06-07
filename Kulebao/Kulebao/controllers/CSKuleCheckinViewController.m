@@ -94,12 +94,14 @@
 #pragma mark - View lifecycle
 -(void) viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
     NSString* cName = [NSString stringWithFormat:@"%@",  self.navigationItem.title, nil];
     [[BaiduMobStat defaultStat] pageviewStartWithName:cName];
 }
 
 -(void) viewDidDisappear:(BOOL)animated
 {
+    [super viewDidDisappear:animated];
     NSString* cName = [NSString stringWithFormat:@"%@", self.navigationItem.title, nil];
     [[BaiduMobStat defaultStat] pageviewEndWithName:cName];
 }
@@ -223,7 +225,7 @@
     
     for (NSInteger i=0; i<31; i++) {
         CSTipsInfo* tips = tipsList[i];
-        if (tips) {
+        if (tips && (tips.tips1 || tips.tips2)) { // 排除校车的显示
             [dates addObject:@(i+1)];
             [tipInfos addObject:tips];
             

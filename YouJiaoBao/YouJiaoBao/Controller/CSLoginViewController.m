@@ -21,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *fieldUsername;
 @property (weak, nonatomic) IBOutlet UITextField *fieldPassword;
 @property (weak, nonatomic) IBOutlet UILabel *labNote;
+@property (weak, nonatomic) IBOutlet UIImageView *imgFieldBg1;
+@property (weak, nonatomic) IBOutlet UIImageView *imgFieldBg2;
 
 - (IBAction)onBtnLoginClicked:(id)sender;
 
@@ -41,19 +43,27 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"header.png"] forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{UITextAttributeFont: [UIFont systemFontOfSize:20], UITextAttributeTextColor:[UIColor whiteColor]}];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent
-                                                animated:YES];
+    [self.navigationItem setHidesBackButton:YES];
+    
+    UIImage* fieldBgImg = [[UIImage imageNamed:@"v2-input_login.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+    self.imgFieldBg1.image = fieldBgImg;
+    self.imgFieldBg2.image = fieldBgImg;
+    UIImage* imgBtnGreenBg = [[UIImage imageNamed:@"v2-btn_green.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+    [self.btnLogin setBackgroundImage:imgBtnGreenBg forState:UIControlStateNormal];
     
     self.labNote.text = nil;
 #ifdef DEBUG
     //self.fieldUsername.text = @"wx001";
     //self.fieldPassword.text = @"123456";
-    self.fieldUsername.text = @"test15";
-    self.fieldPassword.text = @"13555555555";
     //self.fieldUsername.text = @"admin2007";
     //self.fieldPassword.text = @"18782242007";
+    //self.fieldUsername.text = @"test15";
+    //self.fieldPassword.text = @"13555555555";
+    
+    //TEST
+    self.fieldUsername.text = @"admin9028";
+    self.fieldPassword.text = @"82242007";
+    
 #endif
 }
 

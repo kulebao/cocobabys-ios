@@ -23,6 +23,8 @@
 
 - (NSString*)timestampString;
 
+- (NSString*)timestampStringZhCN;
+
 - (NSString*)zhCnDateString;
 - (NSString*)zhCnDateTimeString;
 

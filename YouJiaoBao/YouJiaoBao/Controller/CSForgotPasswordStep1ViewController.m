@@ -17,6 +17,7 @@
 @property (nonatomic, strong) NSDate* lastSMSSentDate;
 @property (nonatomic, strong) NSTimer* countdownTimer;
 
+@property (weak, nonatomic) IBOutlet UIImageView *imgFieldBg1;
 @property (weak, nonatomic) IBOutlet UITextField *fieldPhoneNumer;
 @property (weak, nonatomic) IBOutlet UIButton *btnGetVerifyCode;
 @property (weak, nonatomic) IBOutlet UIButton *btnNext;
@@ -32,6 +33,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self customizeBackBarItem];
+    
+    UIImage* fieldBgImg = [[UIImage imageNamed:@"v2-input_login.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+    self.imgFieldBg1.image = fieldBgImg;
+    UIImage* imgBtnGreenBg = [[UIImage imageNamed:@"v2-btn_green.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+    [self.btnGetVerifyCode setBackgroundImage:imgBtnGreenBg forState:UIControlStateNormal];
+    [self.btnNext setBackgroundImage:imgBtnGreenBg forState:UIControlStateNormal];
 }
 
 - (void)didReceiveMemoryWarning {

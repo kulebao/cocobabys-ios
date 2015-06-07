@@ -13,6 +13,20 @@
 #import "UIView+convenience.h"
 #import "CSTipsInfo.h"
 
+
+static CGFloat kVRGCalendarViewTopBarHeight = 60;
+static CGFloat kVRGCalendarViewWidth = 320;
+static CGFloat kVRGCalendarViewDayWidth = 44;
+static CGFloat kVRGCalendarViewDayHeight = 44;
+
+static BOOL s_hasInitVRGCalendarView = NO;
+
+void s_InitVRGCalendarView() {
+    s_hasInitVRGCalendarView = YES;
+    kVRGCalendarViewWidth = [[[UIApplication sharedApplication] keyWindow] bounds].size.width;
+    kVRGCalendarViewDayWidth = kVRGCalendarViewWidth/7 - 2;
+}
+
 @implementation VRGCalendarView
 @synthesize currentMonth,delegate,labelCurrentMonth, animationView_A,animationView_B;
 @synthesize markedDates,markedColors,markedTips,calendarHeight,selectedDate;
@@ -55,7 +69,7 @@
     }
     
     self.markedColors = [NSArray arrayWithArray:colors];
-    [colors release];
+    //[colors release];
     self.markedTips = nil;
     
     [self setNeedsDisplay];
@@ -120,7 +134,7 @@
     UIView *animationHolder = [[UIView alloc] initWithFrame:CGRectMake(0, kVRGCalendarViewTopBarHeight, kVRGCalendarViewWidth, targetSize-kVRGCalendarViewTopBarHeight)];
     [animationHolder setClipsToBounds:YES];
     [self addSubview:animationHolder];
-    [animationHolder release];
+    //[animationHolder release];
     
     //Animate
     self.animationView_A = [[UIImageView alloc] initWithImage:imageCurrentMonth];
@@ -181,7 +195,7 @@
     
     [animationHolder setClipsToBounds:YES];
     [self addSubview:animationHolder];
-    [animationHolder release];
+    //[animationHolder release];
     
     self.animationView_A = [[UIImageView alloc] initWithImage:imageCurrentMonth];
     self.animationView_B = [[UIImageView alloc] initWithImage:imagePreviousMonth];
@@ -290,7 +304,7 @@
     //[labelCurrentMonth sizeToFit];
     labelCurrentMonth.frameX = roundf(self.frame.size.width/2 - labelCurrentMonth.frameWidth/2);
     labelCurrentMonth.frameY = 10;
-    [formatter release];
+    //[formatter release];
     [currentMonth firstWeekDayInMonth];
     
     CGContextClearRect(UIGraphicsGetCurrentContext(),rect);
@@ -574,6 +588,8 @@
 
 #pragma mark - Init
 -(id)init {
+    s_InitVRGCalendarView();
+
     self = [super initWithFrame:CGRectMake(0, 0, kVRGCalendarViewWidth, 0)];
     if (self) {
         self.contentMode = UIViewContentModeTop;
@@ -594,14 +610,11 @@
 }
 
 -(void)dealloc {
-    
     self.delegate=nil;
     self.currentMonth=nil;
     self.labelCurrentMonth=nil;
     
     self.markedDates=nil;
     self.markedColors=nil;
-    
-    [super dealloc];
 }
 @end

@@ -29,7 +29,7 @@ BOOL controlBarHidden = NO;
 #pragma mark 接收到视频数据回调函数
 static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
 {
-    NSArray* dataArray = (NSArray*)data;
+    NSArray* dataArray = (__bridge NSArray*)(data);
     HMPlayerView* playerView = [dataArray objectAtIndex:0];
     if (result == HMEC_OK)
     {
@@ -90,6 +90,20 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
     return self;
 }
 
+- (void)dealloc {
+    if (Video_res) {
+        free(Video_res);
+    }
+    
+    if (Audio_res) {
+        free(Audio_res);
+    }
+    
+    if (devInfo) {
+        free(devInfo);
+    }
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -117,15 +131,19 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
     btnListenStop.hidden = YES;
     
     rightBar.hidden = !IsRunning;
+    
+    labTrailTips.hidden = !self.isTrail;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     gApp.isPlayView = YES;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
     gApp.isPlayView = NO;
     
     [self performSelectorInBackground:@selector(CloseAllForLogOutDev) withObject:nil];
@@ -190,7 +208,7 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
         
         OPEN_VIDEO_PARAM videoParam = {};
         videoParam.channel = 0;
-        videoParam.data    =  videoDataArr;  //(void*)video_data;
+        videoParam.data    =  (__bridge void*)(videoDataArr);  //(void*)video_data;
         videoParam.cb_data = &data_callback;
         videoParam.cs_type = HME_CS_MAJOR;  //设置为主，次码流;
         videoParam.vs_type = HME_VS_REAL;
@@ -205,6 +223,9 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
             {
                 if ( hm_pu_get_device_info(myID, devInfo) != HMEC_OK)
                 {
+                    if (devInfo) {
+                        free(devInfo);
+                    }
                     devInfo = nil;
                 }
                 else
@@ -220,7 +241,7 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
                 NSInvocationOperation* operationDisplay = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(HMRundisplayThread) object:nil];
                 NSOperationQueue* queue = [[NSOperationQueue alloc] init];
                 [queue addOperation:operationDisplay];
-                [queue release];
+                //[queue release];
                 
             }
             else
@@ -272,7 +293,7 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
         
         OPEN_VIDEO_PARAM videoParam = {};
         videoParam.channel = 0;
-        videoParam.data    =  videoDataArr;  //(void*)video_data;
+        videoParam.data    =  (__bridge void*)(videoDataArr);  //(void*)video_data;
         videoParam.cb_data = &data_callback;
         videoParam.cs_type = HME_CS_MAJOR;  //设置为主，次码流;
         videoParam.vs_type = HME_VS_REAL;
@@ -289,6 +310,9 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
                 
                 if ( hm_pu_get_device_info(myID, devInfo) != HMEC_OK)
                 {
+                    if (devInfo) {
+                        free(devInfo);
+                    }
                     devInfo = nil;
                 }
                 else
@@ -304,7 +328,7 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
                 NSInvocationOperation* operationDisplay = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(HMRundisplayThread) object:nil];
                 NSOperationQueue* queue = [[NSOperationQueue alloc] init];
                 [queue addOperation:operationDisplay];
-                [queue release];
+                //[queue release];
                 
             }
             else
@@ -342,7 +366,7 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
                                           cancelButtonTitle:nil
                                           otherButtonTitles:@"确定", nil];
     [alert show];
-    [alert release];
+   // [alert release];
 }
 
 
@@ -505,12 +529,14 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
 
 - (IBAction)btnListenAction:(id)sender
 {
-    [self performSelectorInBackground:@selector(StartAudioPlayer) withObject:nil];
-//    [btnListen setEnabled:NO];
-//    [btnListenStop setEnabled:YES];
-    
-    btnListen.hidden = YES;
-    btnListenStop.hidden = NO;
+    if (self.isTrail) {
+        [gApp shortAlert:@"演示视频，不允许打开声音"];
+    }
+    else {
+        [self performSelectorInBackground:@selector(StartAudioPlayer) withObject:nil];
+        btnListen.hidden = YES;
+        btnListenStop.hidden = NO;
+    }
 }
 
 - (IBAction)btnListenStopAction:(id)sender
@@ -532,8 +558,13 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
 }
 
 - (IBAction)btnCaptureAction:(id)sender {
-    UIImage *viewImage = [PaintView snapshotImage];
-    UIImageWriteToSavedPhotosAlbum(viewImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    if (self.isTrail) {
+        [gApp shortAlert:@"演示视频，不允许拍照"];
+    }
+    else {
+        UIImage *viewImage = [PaintView snapshotImage];
+        UIImageWriteToSavedPhotosAlbum(viewImage, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    }
 }
 
 - (void)StartAudioPlayer
@@ -542,9 +573,13 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
     
     OPEN_AUDIO_PARAM Aparam;
     Aparam.channel = 0;
+    if (Audio_res) {
+        free(Audio_res);
+        Audio_res = NULL;
+    }
     Audio_res = (P_OPEN_AUDIO_RES)malloc(sizeof(OPEN_AUDIO_RES));
     OPEN_AUDIO_PARAM Audioparam = {};
-    Audioparam.data    =  audioDataArr; //(void*)audio_data;
+    Audioparam.data    =  (__bridge void*)(audioDataArr); //(void*)audio_data;
     Audioparam.cb_data = &data_callback;
     
     hm_result result = hm_pu_open_audio(myID, &Audioparam , Audio_res,&audio_h);
@@ -609,7 +644,7 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
     [audioLock lock];
     if (audioRecorder!= nil) {
         [audioRecorder stop];
-        [audioRecorder release];
+        //[audioRecorder release];
         audioRecorder = nil;
     }
     [audioLock unlock];
@@ -632,7 +667,7 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
     sleep(1);
     
     if (videoBuffer != nil) {
-        [videoBuffer release];
+        //[videoBuffer release];
         videoBuffer = nil;
     }
     
@@ -693,7 +728,7 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
         frameData.frame_stream = pBuffer;
         frameData.frame_len    = nlen;
         if (rlt == 0) hm_pu_send_talk_data(talk_h, &frameData);  //发送音频数据
-        delete(pBuffer);
+        delete [] pBuffer;
     }
 }
 - (IBAction)onBackClicked:(id)sender {

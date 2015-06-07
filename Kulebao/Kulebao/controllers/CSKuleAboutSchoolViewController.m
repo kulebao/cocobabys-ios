@@ -12,8 +12,6 @@
 #import <QuartzCore/QuartzCore.h>
 
 @interface CSKuleAboutSchoolViewController ()
-
-@property (weak, nonatomic) IBOutlet UIView *viewContainer;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @end
@@ -35,12 +33,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self customizeBackBarItem];
-    
-    self.viewContainer.layer.cornerRadius = 8;
-    self.viewContainer.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.3];
-    self.viewContainer.layer.borderColor = [[[UIColor grayColor] colorWithAlphaComponent:0.3] CGColor];
-    
-    [self reloadSchoolInfo];
 }
 
 - (void)didReceiveMemoryWarning
@@ -63,12 +55,15 @@
 #pragma mark - View lifecycle
 -(void) viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
     NSString* cName = [NSString stringWithFormat:@"%@",  self.navigationItem.title, nil];
     [[BaiduMobStat defaultStat] pageviewStartWithName:cName];
+    [self reloadSchoolInfo];
 }
 
 -(void) viewDidDisappear:(BOOL)animated
 {
+    [super viewDidDisappear:animated];
     NSString* cName = [NSString stringWithFormat:@"%@", self.navigationItem.title, nil];
     [[BaiduMobStat defaultStat] pageviewEndWithName:cName];
 }
@@ -131,18 +126,17 @@
         }
         
         if (_schoolInfo.phone.length > 0) {
-            UIView* line = [[UIView alloc] initWithFrame:CGRectMake(10, yy, kWidth-10*2, 1)];
-            line.backgroundColor = UIColorRGB(0xCC, 0x66, 0x33);
+            UIImageView* line = [[UIImageView alloc] initWithFrame:CGRectMake(10, yy, kWidth-10*2, 1)];
+            //line.backgroundColor = UIColorRGB(0xCC, 0x66, 0x33);
+            line.image = [UIImage imageNamed:@"v2-line.png"];
             [_scrollView addSubview:line];
             yy += 5;
             
-            UIImage* imgBtnBg = [UIImage imageNamed:@"btn-type1.png"];
-            UIImage* imgBtnBgPress = [UIImage imageNamed:@"btn-type1-pressed.png"];
+            UIImage* imgBtnBg = [[UIImage imageNamed:@"v2-btn_blue"] resizableImageWithCapInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
             UIButton* btnCallPhone = [UIButton buttonWithType:UIButtonTypeCustom];
-            btnCallPhone.frame = CGRectMake((kWidth-imgBtnBg.size.width)/2, yy, imgBtnBg.size.width, imgBtnBg.size.height);
+            btnCallPhone.frame = CGRectMake((kWidth-imgBtnBg.size.width-20)/2, yy, imgBtnBg.size.width+20, imgBtnBg.size.height);
             
             [btnCallPhone setBackgroundImage:imgBtnBg forState:UIControlStateNormal];
-            [btnCallPhone setBackgroundImage:imgBtnBgPress forState:UIControlStateHighlighted];
             [btnCallPhone addTarget:self action:@selector(onBtnCallPhoneClicked:) forControlEvents:UIControlEventTouchUpInside];
             [btnCallPhone setTitle:@"联系我们" forState:UIControlStateNormal];
             

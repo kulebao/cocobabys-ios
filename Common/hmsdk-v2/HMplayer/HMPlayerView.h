@@ -59,6 +59,9 @@
     __weak IBOutlet UIView *rightBar;
     __weak IBOutlet UILabel *labTitle;
     
+    
+    __weak IBOutlet UILabel *labTrailTips;
+    
     __weak IBOutlet UIControl      *CoverView;
     
     NSLock                         *videoLock;
@@ -69,6 +72,7 @@
 }
 
 @property (nonatomic) BOOL IsRunning;
+@property (nonatomic, assign) BOOL isTrail;
 
 //@property (strong, nonatomic) NSLock*           talkLock;
 @property (strong, nonatomic) NSLock*           videoLock;

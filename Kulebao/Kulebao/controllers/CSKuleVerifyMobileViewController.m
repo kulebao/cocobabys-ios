@@ -9,21 +9,21 @@
 #import "CSKuleVerifyMobileViewController.h"
 #import "CSAppDelegate.h"
 
-static NSInteger kRetryInterval = 600; // 秒
+static NSInteger kRetryInterval = 120; // 秒
 
 @interface CSKuleVerifyMobileViewController () {
     NSTimer* _timer;
-    NSInteger _counter;
+    //NSInteger _counter;
+    NSDate* _counterStart;
     NSString* _noticeTemp;
 }
 
-@property (weak, nonatomic) IBOutlet UIImageView *imgConentBg;
 @property (weak, nonatomic) IBOutlet UIImageView *imgFieldBg1;
 @property (weak, nonatomic) IBOutlet UITextField *fieldSmsCode;
-@property (weak, nonatomic) IBOutlet UITextView *textNotice;
+@property (weak, nonatomic) IBOutlet UILabel *labNotice;
 @property (weak, nonatomic) IBOutlet UIButton *btnRetrySmsCode;
-@property (weak, nonatomic) IBOutlet UIImageView *imgNoticeBg;
 @property (weak, nonatomic) IBOutlet UIButton *btnBind;
+@property (weak, nonatomic) IBOutlet UIImageView *imgContentBg;
 
 - (IBAction)onBtnBackClicked:(id)sender;
 - (IBAction)onBtnBindClicked:(id)sender;
@@ -48,26 +48,21 @@ static NSInteger kRetryInterval = 600; // 秒
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.imgConentBg.image = [[UIImage imageNamed:@"bg-dialog.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+    self.imgContentBg.image = [[UIImage imageNamed:@"v2-input_login_bg.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     
-    UIImage* fieldBgImg = [[UIImage imageNamed:@"bg-input-normal.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+    UIImage* fieldBgImg = [[UIImage imageNamed:@"v2-input_login.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     self.imgFieldBg1.image = fieldBgImg;
-    self.imgNoticeBg.image = fieldBgImg;
     
-    _noticeTemp = @"您的手机号码%@已通过验证，请点击获取验证码按钮，稍后会有一个6位数字的验证码，通过短信发送到该手机上，请在下方的输入框内填入此验证码，点击绑定按钮，进行手机绑定，谢谢。\n\n特别提示：该验证码的有效时间为10分钟，请在有效时间内进行绑定操作。";
+    _noticeTemp = @"尊敬的%@用户，您好！您的手机已通过验证。请注意查收验证码短信。";
     
     NSString* notice = [NSString stringWithFormat:_noticeTemp, _mobile];
-    self.textNotice.text = notice;
-    self.textNotice.textColor = UIColorRGB(0xff, 0x33, 0x00);
-    self.textNotice.font = [UIFont systemFontOfSize:13.0];
+    self.labNotice.text = notice;
+    self.labNotice.font = [UIFont systemFontOfSize:13.0];
     
-    UIImage* btnBgImage = [[UIImage imageNamed:@"btn-type1.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
-    UIImage* btnBgImagePressed = [[UIImage imageNamed:@"btn-type1-pressed.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+    UIImage* btnBgImage = [[UIImage imageNamed:@"v2-btn_green.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
 
     [self.btnBind setBackgroundImage:btnBgImage
                             forState:UIControlStateNormal];
-    [self.btnBind setBackgroundImage:btnBgImagePressed
-                            forState:UIControlStateHighlighted];
     
     _timer = nil;
 }
@@ -123,7 +118,7 @@ static NSInteger kRetryInterval = 600; // 秒
 #pragma mark - Private
 - (void)startTimer {
     if (_timer == nil) {
-        _counter = kRetryInterval;
+        _counterStart = [NSDate date];
         [self doCounting];
         
         _timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(onTimeOut:) userInfo:nil repeats:YES];
@@ -135,29 +130,29 @@ static NSInteger kRetryInterval = 600; // 秒
 - (void)stopTimer {
     [_timer invalidate];
     _timer = nil;
-    
-    _counter = 0;
+    _counterStart = nil;
+
     [self doCounting];
 }
 
 - (void)onTimeOut:(NSTimer*)timer {
-    --_counter;
     [self doCounting];
-    
-    if (_counter <= 0) {
-        [_timer invalidate];
-        _timer = nil;
-    }
 }
 
 - (void)doCounting {
-    if (_counter > 0) {
-        NSString* title = [NSString stringWithFormat:@"%d秒后重新获取", _counter];
+    NSTimeInterval counter = [_counterStart timeIntervalSinceNow];
+    NSInteger retrySecond = counter + kRetryInterval;
+    
+    if (retrySecond > 0) {
+        NSString* title = [NSString stringWithFormat:@"(%@)秒", @(retrySecond)];
         self.btnRetrySmsCode.enabled = NO;
         [self.btnRetrySmsCode setTitle:title
                               forState:UIControlStateDisabled];
     }
     else {
+        [_timer invalidate];
+        _timer = nil;
+        _counterStart = nil;
         [self.btnRetrySmsCode setTitle:@"获取验证码" forState:UIControlStateNormal];
         self.btnRetrySmsCode.enabled = YES;
     }
@@ -174,7 +169,7 @@ static NSInteger kRetryInterval = 600; // 秒
         SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
             /* {"error_msg":"请求太频繁。","error_code":1} */
             
-            NSString* error_msg = [dataJson valueForKeyNotNull:@"error_msg"];
+            //NSString* error_msg = [dataJson valueForKeyNotNull:@"error_msg"];
             NSInteger error_code = [[dataJson valueForKeyNotNull:@"error_code"] integerValue];
             
             if (error_code == 0) {

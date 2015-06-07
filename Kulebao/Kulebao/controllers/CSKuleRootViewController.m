@@ -31,12 +31,12 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    if (IS_IPHONE5) {
-        self.imgBg.image = [UIImage imageNamed:@"Default-568h.png"];
-    }
-    else {
-        self.imgBg.image = [UIImage imageNamed:@"Default.png"];
-    }
+//    if (IS_IPHONE5) {
+//        self.imgBg.image = [UIImage imageNamed:@"Default-568h.png"];
+//    }
+//    else {
+//        self.imgBg.image = [UIImage imageNamed:@"Default.png"];
+//    }
     
     self.indicatorLoading.hidesWhenStopped = YES;
     
@@ -59,7 +59,7 @@
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         
         CSKuleBindInfo* bindInfo = [CSKuleInterpreter decodeBindInfo:dataJson];
-        CSLog(@"doReceiveBindInfo error_code=%d", bindInfo.errorCode);
+        CSLog(@"doReceiveBindInfo error_code=%ld", (long)bindInfo.errorCode);
         if (bindInfo.errorCode == 0) {
             gApp.engine.loginInfo.schoolId = bindInfo.schoolId;
             gApp.engine.loginInfo.accessToken = bindInfo.accessToken;

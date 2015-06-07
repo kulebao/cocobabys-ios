@@ -21,4 +21,6 @@
 
 
 - (NSString *)displayNick;
+- (NSString *)displayAge;
+
 @end

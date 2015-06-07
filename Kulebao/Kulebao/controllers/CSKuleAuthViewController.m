@@ -18,6 +18,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *fieldMobile;
 @property (weak, nonatomic) IBOutlet UIButton *btnDevSetting;
 @property (weak, nonatomic) IBOutlet UILabel *labServerName;
+@property (weak, nonatomic) IBOutlet UIView *viewContainer;
+@property (weak, nonatomic) IBOutlet UIImageView *imgContentBg;
 - (IBAction)onBtnSendClicked:(id)sender;
 - (IBAction)onBtnDevSettingClicked:(id)sender;
 
@@ -55,6 +57,7 @@
         self.btnDevSetting.hidden = YES;
     }
     
+    self.imgContentBg.image = [[UIImage imageNamed:@"v2-input_login_bg.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
     
     [self showIntroViewsIfNeeded];
 }
@@ -68,12 +71,14 @@
 #pragma mark - View lifecycle
 -(void) viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
     NSString* cName = [NSString stringWithFormat:@"%@",  self.navigationItem.title, nil];
     [[BaiduMobStat defaultStat] pageviewStartWithName:cName];
 }
 
 -(void) viewDidDisappear:(BOOL)animated
 {
+    [super viewDidDisappear:animated];
     NSString* cName = [NSString stringWithFormat:@"%@", self.navigationItem.title, nil];
     [[BaiduMobStat defaultStat] pageviewEndWithName:cName];
 }
@@ -188,7 +193,7 @@
 -(void)showIntroViews {
     //float systemVersion = [[[UIDevice currentDevice] systemVersion] floatValue];
     NSArray* introImageNames = @[@"guide-1.png", @"guide-2.png", @"guide-3.png", @"guide-4.png"];
-    if (IS_IPHONE5) {
+    if (!IS_IPHONE4) {
         introImageNames = @[@"guide-1-568h.png", @"guide-2-568h.png", @"guide-3-568h.png", @"guide-4-568h.png"];
     }
     

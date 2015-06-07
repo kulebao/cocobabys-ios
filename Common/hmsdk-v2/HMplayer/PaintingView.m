@@ -29,8 +29,8 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
 	
-	CGFloat width = 320.0;
-	CGFloat height = 480.0;
+	//CGFloat width = 320.0;
+	//CGFloat height = 480.0;
     
     if ((self = [super initWithCoder:aDecoder]))
     {
@@ -50,24 +50,20 @@
 			return nil;
 		}
         
+        //中央点击区域
+        CGRect boundsRect = self.bounds;
+        centalTouchRect.size.width = boundsRect.size.width / 3;
+        centalTouchRect.size.height = boundsRect.size.height / 3;
+        centalTouchRect.origin.x = (boundsRect.size.width - centalTouchRect.size.width) / 2;
+        centalTouchRect.origin.y = (boundsRect.size.height - centalTouchRect.size.height) / 2;
         
-        UIScreen* mainscr = [UIScreen mainScreen];
-        width = mainscr.currentMode.size.width;
-        height = mainscr.currentMode.size.height;
+        //UIScreen* mainscr = [UIScreen mainScreen];
+        //width = mainscr.currentMode.size.width;
+        //height = mainscr.currentMode.size.height;
         
         gLInit();
-
         [self layoutSubviews];
-        
     }
-    
-    //中央点击区域
-    CGRect boundsRect = self.bounds;
-    centalTouchRect.size.width = boundsRect.size.width / 3;
-    centalTouchRect.size.height = boundsRect.size.height / 3;
-    centalTouchRect.origin.x = (boundsRect.size.width - centalTouchRect.size.width) / 2;
-    centalTouchRect.origin.y = (boundsRect.size.height - centalTouchRect.size.height) / 2;
-    
     return self;
 }
 

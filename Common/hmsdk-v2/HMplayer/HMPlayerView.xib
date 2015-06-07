@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HMPlayerView">
@@ -13,6 +13,7 @@
                 <outlet property="btnListen" destination="Cua-kH-fJK" id="cmi-hk-p9Z"/>
                 <outlet property="btnListenStop" destination="iJr-8j-eae" id="fJi-Oc-cb3"/>
                 <outlet property="labTitle" destination="icm-0p-DTk" id="qeV-gZ-AU3"/>
+                <outlet property="labTrailTips" destination="d4z-ps-KR1" id="QTL-AX-SNb"/>
                 <outlet property="navBar" destination="o8T-gx-L8S" id="ukj-k6-ZfQ"/>
                 <outlet property="rightBar" destination="XZa-N4-NGm" id="yi4-uj-51Y"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -28,6 +29,12 @@
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                 </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="演示视频，如需要开通，请联系幼儿园" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d4z-ps-KR1">
+                    <rect key="frame" x="16" y="279" width="536" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ai3-Ct-MEh" userLabel="CoverView" customClass="UIControl">
                     <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
                     <subviews>
@@ -51,13 +58,13 @@
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o8T-gx-L8S" userLabel="View - title">
-                    <rect key="frame" x="0.0" y="0.0" width="568" height="30"/>
+                    <rect key="frame" x="0.0" y="0.0" width="568" height="44"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F2I-kx-rZo"/>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eij-tV-Mfj">
-                            <rect key="frame" x="4" y="0.0" width="80" height="30"/>
+                            <rect key="frame" x="4" y="2" width="80" height="40"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="30" id="PGH-4I-Oqd"/>
+                                <constraint firstAttribute="height" constant="40" id="PGH-4I-Oqd"/>
                                 <constraint firstAttribute="width" constant="80" id="Sup-Yj-sSC"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -70,19 +77,19 @@
                             </connections>
                         </button>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="看宝贝" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="icm-0p-DTk">
-                            <rect key="frame" x="259" y="4" width="51" height="21"/>
+                            <rect key="frame" x="259" y="11" width="51" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.10000000000000001" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.0078431372549019607" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="centerX" secondItem="icm-0p-DTk" secondAttribute="centerX" id="86t-N1-epQ"/>
                         <constraint firstAttribute="centerY" secondItem="icm-0p-DTk" secondAttribute="centerY" id="Hma-oZ-8rt"/>
                         <constraint firstAttribute="centerY" secondItem="Eij-tV-Mfj" secondAttribute="centerY" id="Zfm-sd-agm"/>
                         <constraint firstItem="Eij-tV-Mfj" firstAttribute="leading" secondItem="o8T-gx-L8S" secondAttribute="leading" constant="4" id="i0d-1P-1Va"/>
-                        <constraint firstAttribute="height" constant="30" id="vsi-99-R2i"/>
+                        <constraint firstAttribute="height" constant="44" id="vsi-99-R2i"/>
                     </constraints>
                     <inset key="insetFor6xAndEarlier" minX="0.0" minY="20" maxX="0.0" maxY="-20"/>
                 </view>
@@ -131,13 +138,16 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="XZa-N4-NGm" secondAttribute="trailing" id="3gE-hg-5Tn"/>
                 <constraint firstItem="ai3-Ct-MEh" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="5kL-zS-kYl"/>
+                <constraint firstAttribute="bottom" secondItem="d4z-ps-KR1" secondAttribute="bottom" constant="24" id="7WB-YE-787"/>
                 <constraint firstItem="o8T-gx-L8S" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="9Y4-U8-Ucj"/>
                 <constraint firstItem="cez-eO-7u9" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Ev8-I0-Fgj"/>
                 <constraint firstItem="XZa-N4-NGm" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="J6Z-GT-lfd"/>
                 <constraint firstItem="ai3-Ct-MEh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Jfv-nI-j9z"/>
                 <constraint firstAttribute="bottom" secondItem="cez-eO-7u9" secondAttribute="bottom" id="MaM-VM-MW9"/>
                 <constraint firstAttribute="bottom" secondItem="ai3-Ct-MEh" secondAttribute="bottom" id="WBy-zw-urn"/>
+                <constraint firstItem="d4z-ps-KR1" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="Zmy-eo-g1g"/>
                 <constraint firstAttribute="trailing" secondItem="cez-eO-7u9" secondAttribute="trailing" id="dvz-M9-sUk"/>
+                <constraint firstAttribute="trailing" secondItem="d4z-ps-KR1" secondAttribute="trailing" constant="16" id="nQV-p1-Eqo"/>
                 <constraint firstAttribute="bottom" secondItem="XZa-N4-NGm" secondAttribute="bottom" id="nYg-eG-ki6"/>
                 <constraint firstAttribute="trailing" secondItem="o8T-gx-L8S" secondAttribute="trailing" id="onI-yb-QPV"/>
                 <constraint firstItem="cez-eO-7u9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="pNf-qb-Uxc"/>

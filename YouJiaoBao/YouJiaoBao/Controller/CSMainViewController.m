@@ -29,6 +29,8 @@
     NSArray* _childList;
 }
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet UICollectionViewFlowLayout *layoutCollectionView;
+- (IBAction)onBtnSettingsClicked:(id)sender;
 
 @end
 
@@ -47,29 +49,24 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"header.png"] forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{UITextAttributeFont: [UIFont systemFontOfSize:20], UITextAttributeTextColor:[UIColor whiteColor]}];
+    [self.navigationItem setHidesBackButton:YES];
     
-    _modules = @[@{@"icon": [UIImage imageNamed:@"notice.png"],
+    _modules = @[@{@"icon": [UIImage imageNamed:@"v2-校园公告.png"],
                    @"segue": @"segue.main.notice",
                    @"name": @"园内公告"},
                  
-                 @{@"icon": [UIImage imageNamed:@"babylist.png"],
+                 @{@"icon": [UIImage imageNamed:@"v2-宝宝列表.png"],
                    @"segue": @"segue.main.babylist",
                    @"name": @"宝宝列表"},
                  
-                 @{@"icon": [UIImage imageNamed:@"growexp.png"],
+                 @{@"icon": [UIImage imageNamed:@"v2-成长经历.png"],
                    @"segue": @"segue.main.growexp",
                    @"name": @"成长经历"},
-                 
-                 @{@"icon": [UIImage imageNamed:@"hw.png"],
-                   @"segue": @"segue.main.hw",
-                   @"name": @"亲子作业"},
-                 
-                 @{@"icon": [UIImage imageNamed:@"setting.png"],
-                   @"segue": @"segue.main.setting",
-                   @"name": @"设置"}
                  ];
+    
+    
+    CGFloat cellWidth = (self.view.bounds.size.width - 40) / 3.0;
+    self.layoutCollectionView.itemSize = CGSizeMake(cellWidth, cellWidth);
     
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
@@ -83,6 +80,9 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+}
 
 #pragma mark - Navigation
 
@@ -158,7 +158,6 @@
 #pragma mark - CSContentEditorViewControllerDelegate
 - (void)contentEditorViewController:(CSContentEditorViewController*)ctrl
                      finishEditText:(NSString*)text
-                          withTitle:(NSString*)title
                          withImages:(NSArray*)imageList {
     _textContent = text;
     _imageUrlList = [NSMutableArray array];
@@ -299,6 +298,10 @@
     else {
         [self doSendHistory];
     }
+}
+
+- (IBAction)onBtnSettingsClicked:(id)sender {
+    [self performSegueWithIdentifier:@"segue.main.setting" sender:nil];
 }
 
 @end

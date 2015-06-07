@@ -32,6 +32,13 @@
     return dateString;
 }
 
+- (NSString*)timestampStringZhCN {
+    NSDateFormatter* fmt = [[NSDateFormatter alloc] init];
+    fmt.dateFormat = @"MM月dd日 HH:mm";
+    NSString* dateString = [fmt stringFromDate:self];
+    return dateString;
+}
+
 - (NSString*)zhCnDateString {
     NSDateFormatter* fmt = [[NSDateFormatter alloc] init];
     fmt.locale = [NSLocale currentLocale];

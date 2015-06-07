@@ -33,6 +33,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *labSchoolName;
 @property (weak, nonatomic) IBOutlet UILabel *labClassName;
 @property (weak, nonatomic) IBOutlet UILabel *labChildNick;
+@property (weak, nonatomic) IBOutlet UILabel *labChildAge;
+@property (weak, nonatomic) IBOutlet UILabel *labChildSchool;
 @property (weak, nonatomic) IBOutlet UIImageView *imgChildPortrait;
 @property (weak, nonatomic) IBOutlet UIView *viewChildContainer;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollContent;
@@ -70,20 +72,22 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationController.navigationBarHidden = NO;
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"titlebar-1-bg.png"] forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{UITextAttributeFont: [UIFont systemFontOfSize:20], UITextAttributeTextColor:[UIColor whiteColor]}];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"v2-head.png"] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:20], NSForegroundColorAttributeName:[UIColor whiteColor]}];
     
     self.labClassName.text = nil;
     self.labSchoolName.text = gApp.engine.loginInfo.schoolName;
     self.labChildNick.text = nil;
-    self.imgChildPortrait.layer.cornerRadius = 6.0;
+    self.labChildAge.text = nil;
+    self.labChildSchool.text = nil;
+    self.imgChildPortrait.layer.cornerRadius = 47.0;
     self.imgChildPortrait.clipsToBounds = YES;
     self.btnClassInfo.userInteractionEnabled = NO;
     
     _nickFieldDelegate = [[CSTextFieldDelegate alloc] initWithType:kCSTextFieldDelegateNormal];
     _nickFieldDelegate.maxLength = kKuleNickMaxLength;
 
-    [self setupModules];
+    //[self setupModules];
     [self doGetSchoolInfo:^{
         [self setupModules];
     }];
@@ -169,18 +173,18 @@
         }
     }
     else if((object == gApp.engine) && [keyPath isEqualToString:@"badgeOfNews"]) {
-        JSBadgeView* badgeView = [_badges objectAtIndex:kKuleModuleNews];
-        if (gApp.engine.badgeOfNews > 0) {
+        JSBadgeView* badgeView = [self badgeViewForModule:kKuleModuleNews];
+        if (badgeView && gApp.engine.badgeOfNews > 0) {
             badgeView.badgeText = @"新";
-            [self showBanner:@"您收到新的园内公告"];
+            [self showBanner:@"您收到新的校园公告"];
         }
         else {
             badgeView.badgeText = nil;
         }
     }
     else if((object == gApp.engine) && [keyPath isEqualToString:@"badgeOfRecipe"]) {
-        JSBadgeView* badgeView = [_badges objectAtIndex:kKuleModuleRecipe];
-        if (gApp.engine.badgeOfRecipe > 0) {
+        JSBadgeView* badgeView = [self badgeViewForModule:kKuleModuleRecipe];
+        if (badgeView && gApp.engine.badgeOfRecipe > 0) {
             badgeView.badgeText = @"新";
             [self showBanner:@"您收到新的每周食谱"];
         }
@@ -189,8 +193,8 @@
         }
     }
     else if((object == gApp.engine) && [keyPath isEqualToString:@"badgeOfCheckin"]) {
-        JSBadgeView* badgeView = [_badges objectAtIndex:kKuleModuleCheckin];
-        if (gApp.engine.badgeOfCheckin > 0) {
+        JSBadgeView* badgeView = [self badgeViewForModule:kKuleModuleCheckin];
+        if (badgeView && gApp.engine.badgeOfCheckin > 0) {
             badgeView.badgeText = @"新";
             [self showBanner:@"您收到新的接送消息"];
         }
@@ -199,8 +203,8 @@
         }
     }
     else if((object == gApp.engine) && [keyPath isEqualToString:@"badgeOfSchedule"]) {
-        JSBadgeView* badgeView = [_badges objectAtIndex:kKuleModuleSchedule];
-        if (gApp.engine.badgeOfSchedule > 0) {
+        JSBadgeView* badgeView = [self badgeViewForModule:kKuleModuleSchedule];
+        if (badgeView && gApp.engine.badgeOfSchedule > 0) {
             badgeView.badgeText = @"新";
             [self showBanner:@"您收到新的课程表"];
         }
@@ -209,8 +213,8 @@
         }
     }
     else if((object == gApp.engine) && [keyPath isEqualToString:@"badgeOfAssignment"]) {
-        JSBadgeView* badgeView = [_badges objectAtIndex:kKuleModuleAssignment];
-        if (gApp.engine.badgeOfAssignment > 0) {
+        JSBadgeView* badgeView = [self badgeViewForModule:kKuleModuleAssignment];
+        if (badgeView && gApp.engine.badgeOfAssignment > 0) {
             badgeView.badgeText = @"新";
             [self showBanner:@"您收到新的亲子作业"];
         }
@@ -219,8 +223,8 @@
         }
     }
     else if((object == gApp.engine) && [keyPath isEqualToString:@"badgeOfChating"]) {
-        JSBadgeView* badgeView = [_badges objectAtIndex:kKuleModuleChating];
-        if (gApp.engine.badgeOfChating > 0) {
+        JSBadgeView* badgeView = [self badgeViewForModule:kKuleModuleChating];
+        if (badgeView && gApp.engine.badgeOfChating > 0) {
             badgeView.badgeText = @"新";
             [self showBanner:@"您收到新的家园互动"];
         }
@@ -229,8 +233,8 @@
         }
     }
     else if((object == gApp.engine) && [keyPath isEqualToString:@"badgeOfAssess"]) {
-        JSBadgeView* badgeView = [_badges objectAtIndex:kKuleModuleAssess];
-        if (gApp.engine.badgeOfAssess > 0) {
+        JSBadgeView* badgeView = [self badgeViewForModule:kKuleModuleAssess];
+        if (badgeView && gApp.engine.badgeOfAssess > 0) {
             badgeView.badgeText = @"新";
             [self showBanner:@"您收到新的在园表现"];
         }
@@ -241,6 +245,18 @@
     else {
         CSLog(@"UNKNOWN.");
     }
+}
+
+- (JSBadgeView*)badgeViewForModule:(NSUInteger)moduleType {
+    JSBadgeView* badgeView = nil;
+    for (JSBadgeView* v in _badges) {
+        if (v.tag == moduleType) {
+            badgeView = v;
+            break;
+        }
+    }
+    
+    return badgeView;
 }
 
 #pragma mark - View lifecycle
@@ -259,6 +275,7 @@
 
 -(void) viewDidDisappear:(BOOL)animated
 {
+    [super viewDidDisappear:animated];
     NSString* cName = [NSString stringWithFormat:@"%@", self.navigationItem.title, nil];
     [[BaiduMobStat defaultStat] pageviewEndWithName:cName];
 }
@@ -294,39 +311,41 @@
 - (void)setupModules {
     if (_schoolInfo && [_schoolInfo hasProperty:@"hideVideo"]) {
         _moduleInfos = @[
-                         @[@"通知", @"btn-func-6.png", @(kKuleModuleNews)],
-                         @[@"每周食谱", @"btn-func-2.png", @(kKuleModuleRecipe)],
-                         @[@"接送信息", @"btn-func-3.png", @(kKuleModuleCheckin)],
-                         @[@"课程表",  @"btn-func-5.png", @(kKuleModuleSchedule)],
-                         //@[@"亲子作业", @"btn-func-8.png", @(kKuleModuleAssignment)],
-                         @[@"家园互动", @"btn-func-7.png", @(kKuleModuleChating)],
-                         @[@"在园表现", @"btn-func-4.png", @(kKuleModuleAssess)],
-                         @[@"成长经历", @"exp.png", @(kKuleModuleHistory)],
-                         //@[@"看宝贝", @"watch.png", @(kKuleModuleCCTV)],
-                         ];
+                         @[@"接送消息", @"v2-接送消息.png", @(kKuleModuleCheckin)],
+                         @[@"校园公告", @"v2-校园公告.png", @(kKuleModuleNews)],
+                         @[@"在园表现", @"v2-在园表现.png", @(kKuleModuleAssess)],
+                         
+                         @[@"每周食谱", @"v2-每周食谱.png", @(kKuleModuleRecipe)],
+                         @[@"成长经历", @"v2-成长经历.png", @(kKuleModuleHistory)],
+                         //@[@"看宝宝", @"v2-看宝宝.png", @(kKuleModuleCCTV)],
+                         
+                         @[@"家园互动", @"v2-家园互动.png", @(kKuleModuleChating)],
+                         @[@"课程表",  @"v2-课程表.png", @(kKuleModuleSchedule)]];
     }
     else {
         _moduleInfos = @[
-                         @[@"通知", @"btn-func-6.png", @(kKuleModuleNews)],
-                         @[@"每周食谱", @"btn-func-2.png", @(kKuleModuleRecipe)],
-                         @[@"接送信息", @"btn-func-3.png", @(kKuleModuleCheckin)],
-                         @[@"课程表",  @"btn-func-5.png", @(kKuleModuleSchedule)],
-                         //@[@"亲子作业", @"btn-func-8.png", @(kKuleModuleAssignment)],
-                         @[@"家园互动", @"btn-func-7.png", @(kKuleModuleChating)],
-                         @[@"在园表现", @"btn-func-4.png", @(kKuleModuleAssess)],
-                         @[@"成长经历", @"exp.png", @(kKuleModuleHistory)],
-                         @[@"看宝贝", @"watch.png", @(kKuleModuleCCTV)],
-                         ];
+                         @[@"接送消息", @"v2-接送消息.png", @(kKuleModuleCheckin)],
+                         @[@"校园公告", @"v2-校园公告.png", @(kKuleModuleNews)],
+                         @[@"在园表现", @"v2-在园表现.png", @(kKuleModuleAssess)],
+                         
+                         @[@"每周食谱", @"v2-每周食谱.png", @(kKuleModuleRecipe)],
+                         @[@"成长经历", @"v2-成长经历.png", @(kKuleModuleHistory)],
+                         @[@"看宝宝", @"v2-看宝宝.png", @(kKuleModuleCCTV)],
+                         
+                         @[@"家园互动", @"v2-家园互动.png", @(kKuleModuleChating)],
+                         @[@"课程表",  @"v2-课程表.png", @(kKuleModuleSchedule)]];
     }
     
     _badges = [NSMutableArray arrayWithCapacity:_moduleInfos.count];
     
-    const CGSize kModuleIconSize = CGSizeMake(71, 71);
-    const CGSize kModuleTitleSize = CGSizeMake(71, 21);
     const NSInteger kModuleColumns = 3;
-    const CGFloat kModuleTopMagin = 5;
-    const CGFloat kModuleRowSpace = 5;
-    const CGFloat kModuleColumnSpace = (_scrollContent.bounds.size.width - kModuleIconSize.width*kModuleColumns)/(kModuleColumns*2.0);
+    const CGFloat kModuleTopMagin = 15;
+    const CGFloat kCellSize = (self.view.bounds.size.width - 50) / kModuleColumns;
+    const CGSize kModuleIconSize = CGSizeMake(kCellSize, kCellSize);
+    const CGSize kModuleTitleSize = CGSizeMake(kCellSize, 0);
+    const CGFloat kModuleRowSpace = kCellSize/8;
+
+    const CGFloat kModuleColumnSpace = (_scrollContent.bounds.size.width - kModuleIconSize.width*kModuleColumns)/(kModuleColumns+1);
     
     CGFloat xx = 0.0;
     CGFloat yy = 0.0;
@@ -340,11 +359,10 @@
     for (NSInteger i=0; i<_moduleInfos.count; i++) {
         row = i / kModuleColumns;
         col = i % kModuleColumns;
-        xx = kModuleColumnSpace + col * (kModuleIconSize.width+2*kModuleColumnSpace);
+        xx = kModuleColumnSpace + col * (kModuleIconSize.width+kModuleColumnSpace);
         yy = kModuleTopMagin + row*(kModuleIconSize.height+kModuleTitleSize.height+kModuleRowSpace);
         
         UIButton* btnIcon = [UIButton buttonWithType:UIButtonTypeCustom];
-        NSString* moduleName = _moduleInfos[i][0];
         NSString* moduleIconName = _moduleInfos[i][1];
         NSInteger moduleType = [_moduleInfos[i][2] integerValue];
         [btnIcon setBackgroundImage:[UIImage imageNamed:moduleIconName] forState:UIControlStateNormal];
@@ -354,6 +372,9 @@
         [btnIcon addTarget:self action:@selector(onBtnModulesClicked:) forControlEvents:UIControlEventTouchUpInside];
         
         yy += kModuleIconSize.height;
+        
+#ifdef COCOSBABY_HAS_MODULE_TITLE
+        NSString* moduleName = _moduleInfos[i][0];
         UILabel* labTitle = [[UILabel alloc] initWithFrame:CGRectMake(xx, yy, kModuleTitleSize.width, kModuleTitleSize.height)];
         labTitle.textColor = UIColorRGB(0xCC, 0x66, 0x33);
         labTitle.font = [UIFont boldSystemFontOfSize:14];
@@ -361,9 +382,11 @@
         labTitle.textAlignment = NSTextAlignmentCenter;
         labTitle.backgroundColor = [UIColor clearColor];
         [_scrollContent addSubview:labTitle];
+#endif
         
         JSBadgeView *badgeView = [[JSBadgeView alloc] initWithParentView:btnIcon
                                                                alignment:JSBadgeViewAlignmentTopRight];
+        badgeView.tag = moduleType;
         badgeView.badgePositionAdjustment = CGPointMake(-5, 5);
         //badgeView.badgeText =[NSString stringWithFormat:@"%d", i];
         [_badges addObject:badgeView];
@@ -383,6 +406,8 @@
         self.labClassName.text = childInfo.className;
         self.labSchoolName.text = gApp.engine.loginInfo.schoolName;
         self.labChildNick.text = childInfo.displayNick;
+        self.labChildAge.text = childInfo.displayAge;
+        self.labChildSchool.text = gApp.engine.loginInfo.schoolName;
         
         NSURL* qiniuImgUrl = [gApp.engine urlFromPath:childInfo.portrait];
         qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/256/h/256"];
@@ -683,7 +708,8 @@
                                       target:self
                                       action:@selector(doChangePortraitFromPhoto)];
     
-    [KxMenu setTintColor:UIColorRGB(0xCC, 0x66, 0x33)];
+    //[KxMenu setTintColor:UIColorRGB(0xCC, 0x66, 0x33)];
+    [KxMenu setTintColor:[UIColor colorWithRed:0.129f green:0.565f blue:0.839f alpha:1.0f]];
     [KxMenu showMenuInView:self.view
                   fromRect:self.viewChildContainer.frame
                  menuItems:@[item1, item2, item3, item4]];

@@ -13,6 +13,7 @@
 @interface CSKuleSettingsViewController () {
     CSHttpClient* _iTunesHttpClient;
 }
+@property (weak, nonatomic) IBOutlet UIButton *btnDevSettings;
 - (IBAction)onBtnCheckUpdatesClicked:(id)sender;
 - (IBAction)onBtnFeedbackClicked:(id)sender;
 - (IBAction)onBtnChangePswdClicked:(id)sender;
@@ -40,6 +41,13 @@
     [self customizeBackBarItem];
     
     _iTunesHttpClient = [CSHttpClient httpClientWithHost:[NSURL URLWithString:@"http://itunes.apple.com"]];
+    
+    if (COCOBABYS_DEV_MODEL) {
+        self.btnDevSettings.hidden = NO;
+    }
+    else {
+        self.btnDevSettings.hidden = YES;
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -51,12 +59,14 @@
 #pragma mark - View lifecycle
 -(void) viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
     NSString* cName = [NSString stringWithFormat:@"%@",  self.navigationItem.title, nil];
     [[BaiduMobStat defaultStat] pageviewStartWithName:cName];
 }
 
 -(void) viewDidDisappear:(BOOL)animated
 {
+    [super viewDidDisappear:animated];
     NSString* cName = [NSString stringWithFormat:@"%@", self.navigationItem.title, nil];
     [[BaiduMobStat defaultStat] pageviewEndWithName:cName];
 }

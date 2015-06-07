@@ -13,6 +13,11 @@
 @property (weak, nonatomic) IBOutlet UITextField *fieldOldPswd;
 @property (weak, nonatomic) IBOutlet UITextField *fieldNewPswd;
 @property (weak, nonatomic) IBOutlet UITextField *fieldNewPswdAgain;
+@property (weak, nonatomic) IBOutlet UIImageView *imgFieldBg1;
+@property (weak, nonatomic) IBOutlet UIImageView *imgFieldBg2;
+@property (weak, nonatomic) IBOutlet UIImageView *imgFieldBg3;
+@property (weak, nonatomic) IBOutlet UIButton *btnSubmit;
+
 - (IBAction)onBtnChangePswdClicked:(id)sender;
 
 @end
@@ -33,6 +38,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self customizeBackBarItem];
+    
+    UIImage* fieldBgImg = [[UIImage imageNamed:@"v2-input_login.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+    self.imgFieldBg1.image = fieldBgImg;
+    self.imgFieldBg2.image = fieldBgImg;
+    self.imgFieldBg3.image = fieldBgImg;
+    UIImage* imgBtnGreenBg = [[UIImage imageNamed:@"v2-btn_green.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+    [self.btnSubmit setBackgroundImage:imgBtnGreenBg forState:UIControlStateNormal];
 }
 
 - (void)didReceiveMemoryWarning
@@ -55,12 +67,14 @@
 #pragma mark - View lifecycle
 -(void) viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
     NSString* cName = [NSString stringWithFormat:@"%@",  self.navigationItem.title, nil];
     [[BaiduMobStat defaultStat] pageviewStartWithName:cName];
 }
 
 -(void) viewDidDisappear:(BOOL)animated
 {
+    [super viewDidDisappear:animated];
     NSString* cName = [NSString stringWithFormat:@"%@", self.navigationItem.title, nil];
     [[BaiduMobStat defaultStat] pageviewEndWithName:cName];
 }

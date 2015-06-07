@@ -14,6 +14,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 @interface CSForgotPasswordStep2ViewController ()
+
 @property (weak, nonatomic) IBOutlet UIView *viewContainer;
 @property (weak, nonatomic) IBOutlet UITextField *fieldUsername;
 @property (weak, nonatomic) IBOutlet UITextField *fieldVerifyCode;
@@ -21,6 +22,11 @@
 @property (weak, nonatomic) IBOutlet UITextField *fieldNewPswdAgain;
 @property (weak, nonatomic) IBOutlet UIButton *btnResetPswd;
 @property (weak, nonatomic) IBOutlet UIImageView *imgTextBg;
+@property (weak, nonatomic) IBOutlet UIImageView *imgFieldBg1;
+@property (weak, nonatomic) IBOutlet UIImageView *imgFieldBg2;
+@property (weak, nonatomic) IBOutlet UIImageView *imgFieldBg3;
+@property (weak, nonatomic) IBOutlet UIImageView *imgFieldBg4;
+
 - (IBAction)onBtnResetPswdClicked:(id)sender;
 
 @end
@@ -31,6 +37,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self customizeBackBarItem];
+    UIImage* fieldBgImg = [[UIImage imageNamed:@"v2-input_login.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+    self.imgFieldBg1.image = fieldBgImg;
+    self.imgFieldBg2.image = fieldBgImg;
+    self.imgFieldBg3.image = fieldBgImg;
+    self.imgFieldBg4.image = fieldBgImg;
+    UIImage* imgBtnGreenBg = [[UIImage imageNamed:@"v2-btn_green.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+    [self.btnResetPswd setBackgroundImage:imgBtnGreenBg forState:UIControlStateNormal];
     
     self.viewContainer.layer.cornerRadius = 4;
     self.viewContainer.clipsToBounds = YES;

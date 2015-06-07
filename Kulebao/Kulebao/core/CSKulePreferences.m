@@ -252,8 +252,15 @@ static NSString* kKeyMarkedNews = @"com.cocobabys.Kulebao.Preferences.markedNews
 }
 
 - (NSArray*)getSupportServerSettingsList {
-    NSArray* serverList = @[@{@"name": @"产品服务器", @"url":@"https://www.cocobabys.com"},
-                            @{@"name": @"测试服务器", @"url":@"https://stage.cocobabys.com"}];
+    //kangaroo103     coco999
+    //dev: 9mzy6mOGMormOggT67K3jqBg
+    //prod: O7Xwbt4DWOzsji57xybprqUc
+    NSArray* serverList = @[@{@"name": @"产品服务器",
+                              @"url":@"https://www.cocobabys.com",
+                              @"baidu_api_key":@"O7Xwbt4DWOzsji57xybprqUc"},
+                            @{@"name": @"测试服务器",
+                              @"url":@"https://stage.cocobabys.com",
+                              @"baidu_api_key":@"9mzy6mOGMormOggT67K3jqBg"}];
     return serverList;
 }
 

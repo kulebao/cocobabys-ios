@@ -11,12 +11,25 @@
 @interface CSCreateNoticeViewController : UIViewController
 
 @property (nonatomic, weak) id delegate;
+@property (nonatomic, assign) BOOL singleImage;
 
 @end
 
-
 @protocol CSCreateNoticeViewControllerDelegate <NSObject>
+@optional
 
-- (void)createNoticeViewControllerSuccessed:(CSCreateNoticeViewController*)ctrl;
+- (void)createNoticeViewController:(CSCreateNoticeViewController*)ctrl
+                    finishEditText:(NSString*)text
+                         withTitle:(NSString*)title
+                        withImages:(NSArray*)imageList
+                          withTags:(NSArray*)tags
+                  requriedFeedback:(BOOL)feedback;
+
+- (void)createNoticeViewController:(CSCreateNoticeViewController*)ctrl
+                     finishEditText:(NSString*)text
+                         withImages:(NSArray*)imageList;
+
+- (void)createNoticeViewController:(CSCreateNoticeViewController*)ctrl
+                    finishWithVideo:(NSURL*)videoLocalUrl;
 
 @end

@@ -9,6 +9,7 @@
 #import "CSHttpClient.h"
 #import "CSHttpUrls.h"
 #import "ModelAssessment.h"
+#import "CSEngine.h"
 
 @interface CSHttpClient ()
 
@@ -62,6 +63,9 @@
         
         _opManager.requestSerializer = [AFJSONRequestSerializer serializerWithWritingOptions:0];
         [_opManager.requestSerializer setValue:@"ios" forHTTPHeaderField:@"source"];
+        
+        NSString* version = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+        [_opManager.requestSerializer setValue:version forHTTPHeaderField:@"versioncode"];
         
         AFJSONResponseSerializer* responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:0];
         
@@ -317,7 +321,10 @@
         [parameters setObject:most forKey:@"most"];
     }
     
-    NSString* apiUrl = [NSString stringWithFormat:kPathKindergartenNewsList, @(schoolId)];
+    CSEngine* engine = [CSEngine sharedInstance];
+    NSString* apiUrl = [NSString stringWithFormat:kPathKindergartenPostNewsV2,
+                        @(schoolId),
+                        engine.loginInfo.uid];
     
     AFHTTPRequestOperation* op =[self.opManager GET:apiUrl
                                          parameters:parameters
@@ -475,19 +482,23 @@
                                         withContent:(NSString*)content
                                           withTitle:(NSString*)title
                                    withImageUrlList:(NSArray*)imgUrlList
+                                           withTags:(NSArray*)tags
+                               withRequriedFeedback:(BOOL)requriedFeedback
                                             success:(SuccessResponseHandler)success
                                             failure:(FailureResponseHandler)failure {
-    NSString* apiUrl = [NSString stringWithFormat:kPathKindergartenPostNews, @(kindergarten), senderInfo.uid];
+    NSString* apiUrl = [NSString stringWithFormat:kPathKindergartenPostNewsV2, @(kindergarten), senderInfo.uid];
     
     NSString* imgUrl = [imgUrlList firstObject];
     
     NSDictionary* parameters = @{@"school_id" : @(kindergarten),
                                  @"content": content ? content : @"",
                                  @"title": title ? title : @"",
-                                 @"published" : @"true",
+                                 @"published" : @(YES),
                                  @"class_id" : classId,
                                  @"publisher_id": senderInfo.uid,
-                                 @"image" : imgUrl ? imgUrl : @""};
+                                 @"image" : imgUrl ? imgUrl : @"",
+                                 @"tags": tags ? tags : @[],
+                                 @"feedback_required" : @(requriedFeedback)};
     
     AFHTTPRequestOperation* op = [self.opManager POST:apiUrl
                                            parameters:parameters

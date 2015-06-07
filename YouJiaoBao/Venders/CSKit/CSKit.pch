@@ -40,5 +40,6 @@
 #endif
 
 #define IS_IPHONE5 (([[UIScreen mainScreen] bounds].size.height-568) ? NO : YES)
+#define IS_IPHONE4 (([[UIScreen mainScreen] bounds].size.height-480)>0 ? NO : YES)
 
 #endif

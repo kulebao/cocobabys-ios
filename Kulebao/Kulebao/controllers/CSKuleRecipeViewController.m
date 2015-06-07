@@ -52,12 +52,14 @@
 #pragma mark - View lifecycle
 -(void) viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
     NSString* cName = [NSString stringWithFormat:@"%@",  self.navigationItem.title, nil];
     [[BaiduMobStat defaultStat] pageviewStartWithName:cName];
 }
 
 -(void) viewDidDisappear:(BOOL)animated
 {
+    [super viewDidDisappear:animated];
     NSString* cName = [NSString stringWithFormat:@"%@", self.navigationItem.title, nil];
     [[BaiduMobStat defaultStat] pageviewEndWithName:cName];
 }
@@ -167,7 +169,7 @@
             break;
     }
     
-    CGFloat rowHeight = recipeInfo ? (290.0 + 10.0) : 0.0;
+    CGFloat rowHeight = recipeInfo ? 320 : 0.0;
     
     return rowHeight;
 }

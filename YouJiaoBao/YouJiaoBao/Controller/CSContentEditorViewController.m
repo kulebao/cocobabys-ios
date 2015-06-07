@@ -10,23 +10,20 @@
 #import "GMGridView.h"
 #import "MJPhotoBrowser.h"
 #import "MJPhoto.h"
-#import "CSAppDelegate.h"
-#import "ELCImagePickerController.h"
-#import "CaptureViewController.h"
 #import <MediaPlayer/MediaPlayer.h>
-#import "SBCaptureToolKit.h"
 #import <AVFoundation/AVFoundation.h>
-#import "PlayViewController.h"
+#import <MobileCoreServices/MobileCoreServices.h>
+#import "ELCImagePickerController.h"
 
-@interface CSContentEditorViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, ELCImagePickerControllerDelegate, UINavigationControllerDelegate, GMGridViewDataSource, GMGridViewSortingDelegate, GMGridViewTransformationDelegate, GMGridViewActionDelegate> {
+@interface CSContentEditorViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GMGridViewDataSource, GMGridViewSortingDelegate, GMGridViewTransformationDelegate, GMGridViewActionDelegate,
+    UIActionSheetDelegate, ELCImagePickerControllerDelegate> {
     NSMutableArray* _imageList;
     UIImagePickerController* _imgPicker;
     ELCImagePickerController* _elcPicker;
     NSInteger _lastDeleteItemIndexAsked;
 }
 
-@property (weak, nonatomic) IBOutlet UIView *viewTitle;
-@property (weak, nonatomic) IBOutlet UITextField *fieldTitle;
+- (IBAction)onFieldDidEndOnExit:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextView *textContent;
 @property (weak, nonatomic) IBOutlet UIButton *btnHideKeyboard;
 @property (weak, nonatomic) IBOutlet UIButton *btnPhotoFromCamra;
@@ -34,12 +31,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnFinishEdit;
 @property (weak, nonatomic) IBOutlet UILabel *labTips;
 @property (weak, nonatomic) IBOutlet GMGridView *gmGridView;
+@property (weak, nonatomic) IBOutlet UIImageView *imgContentBg;
 - (IBAction)onBtnHideKeyboardClicked:(id)sender;
 - (IBAction)onBtnPhotoFromCamraClicked:(id)sender;
 - (IBAction)onBtnPhotoFromGalleryClicked:(id)sender;
-- (IBAction)onBtnFinishClicked:(id)sender;
-- (IBAction)onFieldDidEndOnExit:(id)sender;
 - (IBAction)onBtnVideoClicked:(id)sender;
+- (IBAction)onBtnFinishClicked:(id)sender;
 
 @end
 
@@ -61,12 +58,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self customizeBackBarItem];
+
+    self.imgContentBg.image = [[UIImage imageNamed:@"v2-input_bg_家园互动.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     
-    //    self.gmGridView.centerGrid = YES;
+//    self.gmGridView.centerGrid = YES;
     self.gmGridView.actionDelegate = self;
     self.gmGridView.dataSource = self;
-    //    self.gmGridView.transformDelegate = self;
-    //    self.gmGridView.sortingDelegate = self;
+//    self.gmGridView.transformDelegate = self;
+//    self.gmGridView.sortingDelegate = self;
     self.gmGridView.enableEditOnLongPress = YES;
     self.gmGridView.disableEditOnEmptySpaceTap = YES;
     self.gmGridView.clipsToBounds = YES;
@@ -80,6 +79,12 @@
     self.textContent.text = nil;
     self.labTips.hidden = (self.textContent.text.length > 0);
     
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:animated];
+    [self setNeedsStatusBarAppearanceUpdate];
 }
 
 - (void)didReceiveMemoryWarning
@@ -109,7 +114,15 @@
 
 - (IBAction)onBtnPhotoFromGalleryClicked:(id)sender {
     [self.textContent resignFirstResponder];
-    
+#if 0
+    _imgPicker = [[UIImagePickerController alloc] init];
+    _imgPicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+    _imgPicker.allowsEditing = NO;
+    _imgPicker.delegate = self;
+    [self presentViewController:_imgPicker animated:YES completion:^{
+        
+    }];
+#else
     _elcPicker = [[ELCImagePickerController alloc] initImagePicker];
     
     if (self.singleImage) {
@@ -131,30 +144,20 @@
     
     //Present modally
     [self presentViewController:_elcPicker animated:YES completion:nil];
-}
-
-- (IBAction)onFieldDidEndOnExit:(id)sender {
-    [self.textContent becomeFirstResponder];
-}
-
-- (IBAction)onBtnFinishClicked:(id)sender {
-    [self.fieldTitle resignFirstResponder];
-    [self.textContent resignFirstResponder];
-    
-    if ([self checkInput]) {
-        if ([_delegate respondsToSelector:@selector(contentEditorViewController:finishEditText:withTitle:withImages:)]) {
-            [_delegate contentEditorViewController:self
-                                    finishEditText:self.textContent.text
-                                         withTitle:self.fieldTitle.text
-                                        withImages:_imageList];
-        }
-    }
-    else {
-        
-    }
+#endif
 }
 
 - (IBAction)onBtnVideoClicked:(id)sender {
+    [self.textContent resignFirstResponder];
+    
+    UIActionSheet* actSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                          delegate:self
+                                                 cancelButtonTitle:@"取消"
+                                            destructiveButtonTitle:nil
+                                                 otherButtonTitles:@"录像", @"选择视频文件", nil];
+    [actSheet showInView:self.view];
+    
+    /*
     UINavigationController *navCon = [[UINavigationController alloc] init];
     navCon.navigationBarHidden = YES;
     
@@ -162,22 +165,81 @@
     captureViewCon.delegate = self;
     [navCon pushViewController:captureViewCon animated:NO];
     [self presentViewController:navCon animated:YES completion:nil];
+     */
 }
 
-- (BOOL)checkInput {
-    BOOL ok = YES;
-    
-    if (self.fieldTitle && self.fieldTitle.text.length == 0) {
-        ok = NO;
-        [self.fieldTitle becomeFirstResponder];
-        [gApp alert:@"请填写标题"];
+#pragma mark - UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == actionSheet.firstOtherButtonIndex) {
+        //录像
+        
+        //检查相机模式是否可用
+        if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            NSLog(@"sorry, no camera or camera is unavailable!!!");
+            return;
+        }
+        
+#if TARGET_IPHONE_SIMULATOR
+#else
+        _imgPicker = [[UIImagePickerController alloc] init];
+        _imgPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        @try{
+            // exception:cameraCaptureMode 1 not available because mediaTypes does contain public.movie
+            // _imgPicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureModeVideo;
+            _imgPicker.mediaTypes = @[(NSString *)kUTTypeMovie];
+            _imgPicker.videoMaximumDuration = 30; // 30s
+            _imgPicker.videoQuality = UIImagePickerControllerQualityTypeMedium;
+        }
+        @catch(NSException *exception) {
+            CSLog(@"exception:%@", exception);
+        }
+        @finally {
+            
+        }
+        _imgPicker.allowsEditing = NO;
+        _imgPicker.delegate = self;
+        [self presentViewController:_imgPicker animated:YES completion:^{
+            
+        }];
+#endif
+        /*
+        _imgPicker = [[UIImagePickerController alloc] init];
+        _imgPicker.delegate = self;
+        _imgPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        _imgPicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureModeVideo;
+        _imgPicker.videoMaximumDuration = 30; // 30s
+        _imgPicker.videoQuality = UIImagePickerControllerQualityType640x480;
+        _imgPicker.allowsEditing = NO;
+        [self presentViewController:_imgPicker animated:YES completion:^{
+            
+        }];
+         */
     }
-    else if (self.textContent.text.length == 0) {
-        ok = NO;
-        [gApp alert:@"请填写内容"];
+    else if (buttonIndex == (actionSheet.firstOtherButtonIndex+1)) {
+        //选择视频文件
+        
+        _imgPicker = [[UIImagePickerController alloc] init];
+        _imgPicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+        _imgPicker.mediaTypes = @[(NSString *)kUTTypeMovie, (NSString *)kUTTypeVideo];
+        _imgPicker.videoMaximumDuration = 30; // 30s
+        _imgPicker.videoQuality = UIImagePickerControllerQualityType640x480;
+        _imgPicker.allowsEditing = NO;
+        _imgPicker.delegate = self;
+        [self presentViewController:_imgPicker animated:YES completion:^{
+            
+        }];
     }
+}
+
+
+- (IBAction)onBtnFinishClicked:(id)sender {
+    [self.textContent resignFirstResponder];
     
-    return ok;
+    if ([_delegate respondsToSelector:@selector(contentEditorViewController:finishEditText:withImages:)]) {
+        [_delegate contentEditorViewController:self
+                                finishEditText:self.textContent.text
+                                    withImages:_imageList];
+    }
 }
 
 #pragma mark - UITextViewDelegate
@@ -216,14 +278,37 @@
 
 #pragma mark - UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    UIImage* img = info[UIImagePickerControllerOriginalImage];
-    if (img) {
-        if (self.singleImage) {
-            [_imageList removeAllObjects];
+    /*
+     {
+     UIImagePickerControllerMediaType = "public.movie";
+     UIImagePickerControllerMediaURL = "file:///private/var/mobile/Containers/Data/Application/70F97512-9F16-482D-9A25-B60F8BCF6550/tmp/capture-T0x170067940.tmp.epvD4C/capturedvideo.MOV";
+     }
+     
+     {
+     UIImagePickerControllerMediaType = "public.movie";
+     UIImagePickerControllerMediaURL = "file:///private/var/mobile/Containers/Data/Application/CBFBF882-4F26-4156-B703-A1D668479B7C/tmp/trim.8DA2F943-52D8-4A1F-AECA-BFD81B27B1E1.MOV";
+     UIImagePickerControllerReferenceURL = "assets-library://asset/asset.MOV?id=19AA1392-795A-4EA2-9AF3-816D4E4C2521&ext=MOV";
+     }
+     
+     {
+     UIImagePickerControllerMediaType = "public.image";
+     UIImagePickerControllerOriginalImage = "<UIImage: 0x170498380> size {2448, 3264} orientation 3 scale 1.000000";
+     ..........
+     
+     }
+     */
+    
+    NSString* mediaType = info[UIImagePickerControllerMediaType];
+    if ([mediaType isEqualToString:@"public.image"]) {
+        UIImage* img = info[UIImagePickerControllerOriginalImage];
+        if (img) {
+            [_imageList addObject:img];
+            [self.gmGridView reloadData];
         }
-        
-        [_imageList addObject:img];
-        [self.gmGridView reloadData];
+    }
+    else if ([mediaType isEqualToString:@"public.movie"]) {
+        NSURL* fileURL = info[UIImagePickerControllerMediaURL];
+        [self performSelectorInBackground:@selector(doCompressMovFile:) withObject:fileURL];
     }
     
     [picker dismissViewControllerAnimated:YES
@@ -275,6 +360,51 @@
     
     if (picker == _elcPicker) {
         _elcPicker = nil;
+    }
+}
+
+#pragma mark - 
+- (void)doCompressMovFile:(NSURL*)movFileURL {
+    CSLog(@"%s %@", __FUNCTION__, movFileURL);
+    AVURLAsset *avAsset = [AVURLAsset URLAssetWithURL:movFileURL options:nil];
+    NSArray *compatiblePresets = [AVAssetExportSession exportPresetsCompatibleWithAsset:avAsset];
+    CSLog(@"%@", compatiblePresets);
+    
+    if([compatiblePresets containsObject:AVAssetExportPresetMediumQuality]) {
+        AVAssetExportSession *exportSession = [[AVAssetExportSession alloc]initWithAsset:avAsset
+                                                                              presetName:AVAssetExportPresetMediumQuality];
+        NSString* mp4Path = [movFileURL.absoluteString.stringByDeletingPathExtension stringByAppendingPathExtension:@"mp4"];
+        mp4Path = [NSTemporaryDirectory() stringByAppendingPathComponent:[mp4Path.pathComponents lastObject]];
+        exportSession.outputURL = [NSURL fileURLWithPath: mp4Path];
+        exportSession.shouldOptimizeForNetworkUse = YES;
+        exportSession.outputFileType = AVFileTypeMPEG4;
+        [exportSession exportAsynchronouslyWithCompletionHandler:^{
+            switch ([exportSession status]) {
+                case AVAssetExportSessionStatusFailed:
+                {
+                    CSLog(@"AVAssetExportSessionStatusFailed! %@", exportSession.error);
+                    break;
+                }
+                    
+                case AVAssetExportSessionStatusCancelled:
+                    CSLog(@"AVAssetExportSessionStatusCancelled!");
+                    break;
+                case AVAssetExportSessionStatusCompleted:
+                    CSLog(@"AVAssetExportSessionStatusCompleted!");
+                    [self performSelectorOnMainThread:@selector(convertFinish:)
+                                           withObject:exportSession.outputURL
+                                        waitUntilDone:NO];
+                    break;
+                default:
+                    break;
+            }
+        }];
+    }
+}
+
+- (void)convertFinish:(NSURL*)mp4FileURL {
+    if ([_delegate respondsToSelector:@selector(contentEditorViewController:finishWithVideo:)] && mp4FileURL) {
+        [_delegate contentEditorViewController:self finishWithVideo:mp4FileURL];
     }
 }
 
@@ -345,8 +475,6 @@
 
 - (void)GMGridViewDidTapOnEmptySpace:(GMGridView *)gridView {
     NSLog(@"Tap on empty space");
-    [self.textContent resignFirstResponder];
-    [self.fieldTitle resignFirstResponder];
 }
 
 - (void)GMGridView:(GMGridView *)gridView processDeleteActionForItemAtIndex:(NSInteger)index {
@@ -368,11 +496,7 @@
     [self.gmGridView setEditing:NO animated:YES];
 }
 
-#pragma mark - CaptureViewControllerDelegate
-- (void)captureViewController:(CaptureViewController *)ctrl didFinishMergingVideosToOutPutFileAtURL:(NSURL *)outputFileURL {
-    if ([_delegate respondsToSelector:@selector(contentEditorViewController:finishWithVideo:)] && outputFileURL) {
-        [_delegate contentEditorViewController:self finishWithVideo:outputFileURL];
-    }
+- (IBAction)onFieldDidEndOnExit:(id)sender {
 }
 
 @end

@@ -31,6 +31,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnFinishEdit;
 @property (weak, nonatomic) IBOutlet UILabel *labTips;
 @property (weak, nonatomic) IBOutlet GMGridView *gmGridView;
+@property (weak, nonatomic) IBOutlet UIImageView *imgContentBg;
 - (IBAction)onBtnHideKeyboardClicked:(id)sender;
 - (IBAction)onBtnPhotoFromCamraClicked:(id)sender;
 - (IBAction)onBtnPhotoFromGalleryClicked:(id)sender;
@@ -57,6 +58,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self customizeBackBarItem];
+
+    self.imgContentBg.image = [[UIImage imageNamed:@"v2-input_bg_家园互动.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     
 //    self.gmGridView.centerGrid = YES;
     self.gmGridView.actionDelegate = self;

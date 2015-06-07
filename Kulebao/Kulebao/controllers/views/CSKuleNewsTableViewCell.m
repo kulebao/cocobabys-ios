@@ -44,37 +44,42 @@
     
     NSString* tagTitle = [self.newsInfo tagTitle];
     if ([tagTitle isEqualToString:@"亲子作业"]) {
-        self.labTag.backgroundColor = [UIColor orangeColor];
+        self.imgTagBg.image = [[UIImage imageNamed:@"v2-btn_亲子作业.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(4, 4, 4, 4)];
     }
     else {
-        self.labTag.backgroundColor = UIColorRGB(0x00, 0x66, 0xCC);
+        if (self.newsInfo.classId > 0) {
+            tagTitle = @"班级通知";
+            self.imgTagBg.image = [[UIImage imageNamed:@"v2-btn_班级通知.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(4, 4, 4, 4)];
+        }
+        else {
+            tagTitle = @"园内公告";
+            self.imgTagBg.image = [[UIImage imageNamed:@"v2-btn_blue_s.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(4, 4, 4, 4)];
+        }
     }
     self.labTag.text = tagTitle;
     
     if (self.newsInfo.feedbackRequired) {
         if (self.newsInfo.status == kNewsStatusMarking) {
             [self.btnMark setTitle:@"发送中" forState:UIControlStateNormal];
-            [self.btnMark setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            [self.btnMark setBackgroundColor:[UIColor orangeColor]];
+            self.imgMarkBg.image = [[UIImage imageNamed:@"v2-btn_请回执.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(4, 4, 4, 4)];
         }
         else if (self.newsInfo.status == kNewsStatusRead) {
             [self.btnMark setTitle:@"已回执" forState:UIControlStateNormal];
-            [self.btnMark setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            [self.btnMark setBackgroundColor:[UIColor lightGrayColor]];
+            self.imgMarkBg.image = [[UIImage imageNamed:@"v2-btn_已回执.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(4, 4, 4, 4)];
         }
         else {
             [self.btnMark setTitle:@"请回执" forState:UIControlStateNormal];
-            [self.btnMark setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            [self.btnMark setBackgroundColor:[UIColor orangeColor]];
+            self.imgMarkBg.image = [[UIImage imageNamed:@"v2-btn_请回执.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(4, 4, 4, 4)];
         }
-        
+        [self.btnMark setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.btnMark.hidden = NO;
+        self.imgMarkBg.hidden = NO;
     }
     else {
         [self.btnMark setTitle:nil forState:UIControlStateNormal];
-        [self.btnMark setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
-        [self.btnMark setBackgroundColor:[UIColor clearColor]];
+        self.imgMarkBg.image = nil;
         self.btnMark.hidden = YES;
+        self.imgMarkBg.hidden = YES;
     }
 }
 

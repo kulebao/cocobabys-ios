@@ -137,6 +137,7 @@
     }
     else {
         HMPlayerView* playerView = [[HMPlayerView alloc] initWithNibName:@"HMPlayerView" bundle:nil];
+        playerView.isTrail = self.isTrail;
         //[self.navigationController pushViewController:playerView animated:YES];
         
         [self presentViewController:playerView animated:YES
@@ -198,6 +199,7 @@
     if ([segue.identifier isEqualToString:@"segue.cctv.play"]) {
         CSKuleCCTVPlayViewController* ctrl = segue.destinationViewController;
         ctrl.deviceMeta = sender;
+        ctrl.isTrail = self.isTrail;
     }
 }
 

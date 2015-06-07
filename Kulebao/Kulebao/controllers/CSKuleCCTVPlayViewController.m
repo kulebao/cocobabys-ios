@@ -93,6 +93,7 @@ static void pCall (user_data data, P_FRAME_DATA frame, hm_result result) {
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     gLResize(self.view.bounds.size.width, self.view.bounds.size.height);
 }
 

@@ -22,7 +22,7 @@
     NSDictionary* meta = @{@"timestamp": @(_timestamp),
                            @"noticeType": @(_noticeType),
                            @"childId": _childId,
-                           @"pushId": _pushId,
+                           @"pushId": _pushId ? _pushId : @"",
                            @"recordUrl": _recordUrl,
                            @"parentName": _parentName,
                            @"deviceType": @(_deviceType)};

@@ -14,6 +14,11 @@
 @interface CSKuleLoginViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *labNotice;
 @property (weak, nonatomic) IBOutlet UITextField *fieldPassword;
+@property (weak, nonatomic) IBOutlet UIImageView *imgConentBg;
+@property (weak, nonatomic) IBOutlet UIImageView *imgFieldBg1;
+@property (weak, nonatomic) IBOutlet UIButton *btnLogin;
+
+
 - (IBAction)onBtnLoginClicked:(id)sender;
 - (IBAction)onBtnChangeAccountClicked:(id)sender;
 - (IBAction)onBtnForgotPswdClicked:(id)sender;
@@ -37,7 +42,16 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     self.navigationItem.title = @"登录密码";
-    self.labNotice.text = [NSString stringWithFormat:@"尊敬的%@用户，您好！您的手机已经激活过，请输入密码进行登录，谢谢。", self.mobile];
+    self.labNotice.text = [NSString stringWithFormat:@"尊敬的%@用户，您的手机已激活，请输入密码进行登录，谢谢。", self.mobile];
+    
+    self.imgConentBg.image = [[UIImage imageNamed:@"v2-input_login_bg.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+    
+    UIImage* fieldBgImg = [[UIImage imageNamed:@"v2-input_login.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+    self.imgFieldBg1.image = fieldBgImg;
+    
+    UIImage* imgBtnGreenBg = [[UIImage imageNamed:@"v2-btn_green.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+
+    [self.btnLogin setBackgroundImage:imgBtnGreenBg forState:UIControlStateNormal];
     
     self.fieldPassword.text = nil;
 }
@@ -51,12 +65,14 @@
 #pragma mark - View lifecycle
 -(void) viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
     NSString* cName = [NSString stringWithFormat:@"%@",  self.navigationItem.title, nil];
     [[BaiduMobStat defaultStat] pageviewStartWithName:cName];
 }
 
 -(void) viewDidDisappear:(BOOL)animated
 {
+    [super viewDidDisappear:animated];
     NSString* cName = [NSString stringWithFormat:@"%@", self.navigationItem.title, nil];
     [[BaiduMobStat defaultStat] pageviewEndWithName:cName];
 }

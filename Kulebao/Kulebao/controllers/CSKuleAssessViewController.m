@@ -85,12 +85,14 @@
 #pragma mark - View lifecycle
 -(void) viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
     NSString* cName = [NSString stringWithFormat:@"%@",  self.navigationItem.title, nil];
     [[BaiduMobStat defaultStat] pageviewStartWithName:cName];
 }
 
 -(void) viewDidDisappear:(BOOL)animated
 {
+    [super viewDidDisappear:animated];
     NSString* cName = [NSString stringWithFormat:@"%@", self.navigationItem.title, nil];
     [[BaiduMobStat defaultStat] pageviewEndWithName:cName];
 }
@@ -110,35 +112,35 @@
     
     _assessModules =
     @[
-      @[@"情绪", @"assess-emotion.png", @(kKuleAssessEmotion),
+      @[@"情绪", @"v2-情绪.png", @(kKuleAssessEmotion),
         @"情绪：情绪稳定、适应集体生活、乐于亲近老师和同学。",
         [[UIImageView alloc] initWithFrame:CGRectNull]],
       
-      @[@"进餐", @"assess-dining.png", @(kKuleAssessDining),
+      @[@"进餐", @"v2-进餐.png", @(kKuleAssessDining),
         @"进餐：能愉快的进餐、不挑食、能吃完一份饭菜。",
         [[UIImageView alloc] initWithFrame:CGRectNull]],
       
-      @[@"睡觉", @"assess-rest.png", @(kKuleAssessRest),
+      @[@"睡觉", @"v2-睡觉.png", @(kKuleAssessRest),
         @"睡觉：能安静的就寝、正确地穿脱衣帽和鞋袜、按时起床。",
         [[UIImageView alloc] initWithFrame:CGRectNull]],
         
-      @[@"集体活动", @"assess-activity.png", @(kKuleAssessActivity),
+      @[@"集体活动", @"v2-集体活动.png", @(kKuleAssessActivity),
         @"集体活动：乐于参加各种集体活动、注意力集中、能积极发言。",
         [[UIImageView alloc] initWithFrame:CGRectNull]],
       
-      @[@"游戏", @"assess-game.png", @(kKuleAssessGame),
+      @[@"游戏", @"v2-游戏.png", @(kKuleAssessGame),
         @"游戏：喜欢玩游戏、能与同学分享玩具，学习并遵守游戏规则。",
         [[UIImageView alloc] initWithFrame:CGRectNull]],
       
-      @[@"锻炼", @"assess-exercise.png", @(kKuleAssessExercise),
+      @[@"锻炼", @"v2-锻炼.png", @(kKuleAssessExercise),
         @"锻炼：喜欢参加体育活动、能坚持锻炼身体、并注意运动安全。",
         [[UIImageView alloc] initWithFrame:CGRectNull]],
       
-      @[@"自我服务", @"assess-selfcare.png", @(kKuleAssessSelfcare),
+      @[@"自我服务", @"v2-自我服务.png", @(kKuleAssessSelfcare),
         @"自我服务：能自己收拾整理玩具和用具、自己入厕。",
         [[UIImageView alloc] initWithFrame:CGRectNull]],
       
-      @[@"礼貌", @"assess-manner.png", @(kKuleAssessManner),
+      @[@"礼貌", @"v2-礼貌.png", @(kKuleAssessManner),
         @"礼貌：对人有礼貌、会主动使用礼貌用语、尊重他人、不打扰别人。",
         [[UIImageView alloc] initWithFrame:CGRectNull]],
       ];
@@ -178,7 +180,7 @@
         
         yy += kModuleIconSize.height+kModuleRatingTopMagin;
         ratingImageView.frame = CGRectMake(xx, yy, kModuleRatingSize.width, kModuleRatingSize.height);
-        ratingImageView.image = [UIImage imageNamed:@"rating-bg.png"];
+        ratingImageView.image = [UIImage imageNamed:@"v2-bg_1.png"];
         [self.view addSubview:ratingImageView];
         
         index++;

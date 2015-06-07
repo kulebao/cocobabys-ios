@@ -8,25 +8,27 @@
 
 #import "CSNoticeTableViewController.h"
 #import "PullTableView.h"
-#import "CSNoticeItemTableViewCell.h"
+#import "CSKuleNewsTableViewCell.h"
 #import "CSAppDelegate.h"
 #import "CSHttpClient.h"
 #import "CSEngine.h"
 #import "EntityClassInfo.h"
 #import "EntityNewsInfoHelper.h"
 #import "CSNewsInfoDetailViewController.h"
-#import "CSContentEditorViewController.h"
 #import "UIViewController+CSKit.h"
 #import "CSPopupController.h"
 #import "CSClassPickerView.h"
+#import "CSCreateNoticeViewController.h"
 
-@interface CSNoticeTableViewController () <PullTableViewDelegate, NSFetchedResultsControllerDelegate> {
+@interface CSNoticeTableViewController () <PullTableViewDelegate, NSFetchedResultsControllerDelegate, CSCreateNoticeViewControllerDelegate> {
     NSFetchedResultsController* _frCtrl;
     
     NSMutableArray* _imageUrlList;
     NSMutableArray* _imageList;
     NSString* _textContent;
     NSString* _textTitle;
+    BOOL _requriedFeedback;
+    NSArray* _tags;
     
     NSNumber* _classId;
 }
@@ -71,6 +73,9 @@
     self.pullTableView.pullBackgroundColor = [UIColor clearColor];
     self.pullTableView.pullTextColor = UIColorRGB(0xCC, 0x66, 0x33);
     self.pullTableView.pullArrowImage = [UIImage imageNamed:@"grayArrow.png"];
+
+    [self.pullTableView registerNib:[UINib nibWithNibName:@"CSKuleNewsTableViewCell" bundle:nil]
+         forCellReuseIdentifier:@"CSKuleNewsTableViewCell"];
     
     CSEngine* engine = [CSEngine sharedInstance];
     NSArray* classInfoList = engine.classInfoList;
@@ -99,7 +104,7 @@
 }
 
 - (void)onSendNotice:(id)sender {
-    [self performSegueWithIdentifier:@"segue.news.create" sender:nil];
+    [self performSegueWithIdentifier:@"segue.createnotice" sender:nil];
 }
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
@@ -117,13 +122,17 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CSNoticeItemTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CSNoticeItemTableViewCell" forIndexPath:indexPath];
+    CSKuleNewsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CSKuleNewsTableViewCell" forIndexPath:indexPath];
     
     // Configure the cell...
     EntityNewsInfo* newsInfo = [_frCtrl objectAtIndexPath:indexPath];
-    cell.newsInfo = newsInfo;
+    [cell loadNewsInfo:newsInfo];
     
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 80;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -182,23 +191,27 @@
         CSNewsInfoDetailViewController* ctrl = segue.destinationViewController;
         ctrl.newsInfo = sender;
     }
-    else if ([segue.identifier isEqualToString:@"segue.news.create"]) {
-        CSContentEditorViewController* ctrl = segue.destinationViewController;
-        ctrl.navigationItem.title = @"发布园内公告";
+    else if ([segue.identifier isEqualToString:@"segue.createnotice"]) {
+        CSCreateNoticeViewController* ctrl = segue.destinationViewController;
+        ctrl.navigationItem.title = @"发布公告";
         ctrl.delegate = self;
         ctrl.singleImage = YES;
     }
 }
 
-#pragma mark - CSContentEditorViewControllerDelegate
-- (void)contentEditorViewController:(CSContentEditorViewController*)ctrl
+#pragma mark - CSCreateNoticeViewControllerDelegate
+- (void)createNoticeViewController:(CSCreateNoticeViewController*)ctrl
                      finishEditText:(NSString*)text
                           withTitle:(NSString*)title
-                         withImages:(NSArray*)imageList {
+                         withImages:(NSArray*)imageList
+                          withTags:(NSArray *)tags
+                  requriedFeedback:(BOOL)feedback {
     _textContent = text;
     _textTitle = title;
     _imageUrlList = [NSMutableArray array];
     _imageList = [NSMutableArray arrayWithArray:imageList];
+    _requriedFeedback = feedback;
+    _tags = tags;
  
     [self doSelectClass];
 }
@@ -294,6 +307,8 @@
                        withContent:_textContent
                          withTitle:_textTitle
                   withImageUrlList:_imageUrlList
+                          withTags:_tags
+              withRequriedFeedback:_requriedFeedback
                            success:sucessHandler
                            failure:failureHandler];
 }

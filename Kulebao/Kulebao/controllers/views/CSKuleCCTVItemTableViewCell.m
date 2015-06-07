@@ -22,6 +22,7 @@
 - (void)awakeFromNib
 {
     // Initialization code
+    self.imgBoxBg.image = [[UIImage imageNamed:@"v2-box_看宝宝.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

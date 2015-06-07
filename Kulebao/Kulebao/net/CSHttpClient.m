@@ -50,6 +50,9 @@
                                             parameters:parameters];
     [req setValue:@"ios" forHTTPHeaderField:@"source"];
     
+    NSString* version = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    [req setValue:version forHTTPHeaderField:@"versioncode"];
+    
     if (self.networkReachabilityStatus == AFNetworkReachabilityStatusNotReachable
         || self.networkReachabilityStatus == AFNetworkReachabilityStatusUnknown) {
         req.cachePolicy = NSURLRequestReturnCacheDataElseLoad;

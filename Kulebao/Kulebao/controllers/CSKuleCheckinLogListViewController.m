@@ -11,6 +11,7 @@
 #import "CSKuleNoticeCell.h"
 #import "CSKuleNewsDetailsViewController.h"
 #import "UIImageView+WebCache.h"
+#import "CSKuleCheckinLogTableViewCell.h"
 
 @interface CSKuleCheckinLogListViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
@@ -49,12 +50,14 @@
 #pragma mark - View lifecycle
 -(void) viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
     NSString* cName = [NSString stringWithFormat:@"%@",  self.navigationItem.title, nil];
     [[BaiduMobStat defaultStat] pageviewStartWithName:cName];
 }
 
 -(void) viewDidDisappear:(BOOL)animated
 {
+    [super viewDidDisappear:animated];
     NSString* cName = [NSString stringWithFormat:@"%@", self.navigationItem.title, nil];
     [[BaiduMobStat defaultStat] pageviewEndWithName:cName];
 }
@@ -65,16 +68,11 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CSKuleNoticeCell* cell = [tableView dequeueReusableCellWithIdentifier:@"CSKuleNoticeCell"];
-    if (cell == nil) {
-        NSArray* nibs = [[NSBundle mainBundle] loadNibNamed:@"CSKuleNoticeCell" owner:nil options:nil];
-        cell = [nibs firstObject];
-        cell.imgIcon.image = [UIImage imageNamed:@"icon-checkin.png"];
-    }
+    CSKuleCheckinLogTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"CSKuleCheckinLogTableViewCell"];
     
     CSKuleCheckInOutLogInfo* checkInOutLogInfo = [_checkInOutLogInfoList objectAtIndex:indexPath.row];
     
-    cell.labTitle.text = [NSString stringWithFormat:@"尊敬的用户 %@ 您好：", gApp.engine.loginInfo.username];
+    cell.labTitle.text = [NSString stringWithFormat:@"%@家长，您好：", gApp.engine.loginInfo.username];
     
     CSKuleChildInfo* child = gApp.engine.currentRelationship.child;
     
@@ -83,39 +81,52 @@
     NSString* publiser = gApp.engine.loginInfo.schoolName;
     
     NSString* body = @"";
-    if (checkInOutLogInfo.noticeType == kKuleNoticeTypeCheckIn) {
-        body = [NSString stringWithFormat:@"您的小孩 %@ 已于 %@  由 %@ 刷卡入园。", child.nick, timestampString, checkInOutLogInfo.parentName];
-    }
-    else if (checkInOutLogInfo.noticeType == kKuleNoticeTypeCheckOut){
-        body = [NSString stringWithFormat:@"您的小孩 %@ 已于 %@ 由 %@ 刷卡离园。", child.nick, timestampString, checkInOutLogInfo.parentName];
+    
+    switch (checkInOutLogInfo.noticeType) {
+        case kKuleNoticeTypeCheckIn:
+            body = [NSString stringWithFormat:@"【%@】幼儿园提醒您，您的宝宝 %@ 已于 %@  由 %@ 刷卡入园。", publiser, child.nick, timestampString, checkInOutLogInfo.parentName];
+            break;
+        case kKuleNoticeTypeCheckOut:
+            body = [NSString stringWithFormat:@"【%@】幼儿园提醒您，您的宝宝 %@ 已于 %@ 由 %@ 刷卡离园。", publiser, child.nick, timestampString, checkInOutLogInfo.parentName];
+            break;
+        case kKuleNoticeTypeCheckInCarMorning:
+        case kKuleNoticeTypeCheckInCarAfternoon:
+            body = [NSString stringWithFormat:@"【%@】幼儿园提醒您，您的宝宝 %@ 已于 %@ 刷卡坐上校车。", publiser, child.nick, timestampString];
+            break;
+        case kKuleNoticeTypeCheckOutCarMorning:
+        case kKuleNoticeTypeCheckOutCarAfternoon:
+            body = [NSString stringWithFormat:@"【%@】幼儿园提醒您，您的宝宝 %@ 已于 %@ 刷卡离开校车。", publiser, child.nick, timestampString];
+            break;
+        default:
+            body = [NSString stringWithFormat:@"【%@】幼儿园提醒您，您的宝宝 %@ 已于 %@ 刷卡(type=%@)。", publiser, child.nick, timestampString, @(checkInOutLogInfo.noticeType)];
+            break;
     }
     
-    cell.labContent.text = body;
+    cell.labDesc.text = body;
     
     if (checkInOutLogInfo.recordUrl.length > 0) {
         NSURL* qiniuImgUrl = [gApp.engine urlFromPath:checkInOutLogInfo.recordUrl];
         qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/0/w/50/h/50"];
-        [cell.imgAttachment sd_setImageWithURL:qiniuImgUrl
+        [cell.imgPhoto sd_setImageWithURL:qiniuImgUrl
                            placeholderImage:[UIImage imageNamed:@"img-placeholder.png"]];
     }
     else {
-        [cell.imgAttachment cancelImageRequestOperation];
-        cell.imgAttachment.image = nil;
+        [cell.imgPhoto cancelImageRequestOperation];
+        cell.imgPhoto.image = [UIImage imageNamed:@"img-placeholder.png"];
     }
-    cell.imgAttachment.clipsToBounds = YES;
-    cell.imgAttachment.layer.cornerRadius = 4;
+    cell.imgPhoto.clipsToBounds = YES;
+    //cell.imgPhoto.layer.cornerRadius = 4;
     
     NSDate* timestamp = [NSDate dateWithTimeIntervalSince1970:checkInOutLogInfo.timestamp];
     
-    cell.labDate.text = [NSString stringWithFormat:@"%@ 来自:%@", [timestamp isoDateTimeString], publiser];
-    cell.labPublisher.text = nil;
+    cell.labDate.text = [NSDate stringFromDate:timestamp withFormat:@"HH:mm"];
     
     return cell;
 }
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 100.0+5.0;
+    return 64;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

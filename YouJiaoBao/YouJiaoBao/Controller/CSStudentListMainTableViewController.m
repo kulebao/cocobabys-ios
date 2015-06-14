@@ -18,11 +18,17 @@
 #import "CSChildProfileViewController.h"
 #import "ModelClassData.h"
 #import "NSDate+CSKit.h"
+#import "CSAppDelegate.h"
 
 @interface CSStudentListMainTableViewController () <NSFetchedResultsControllerDelegate> {
     NSMutableArray* _classChildren;
     NSFetchedResultsController* _frClasses;
     NSFetchedResultsController* _frChildren;
+    
+    AFHTTPRequestOperation* _opReloadClassList;
+    AFHTTPRequestOperation* _opReloadChildList;
+    AFHTTPRequestOperation* _opReloadDailylogList;
+    AFHTTPRequestOperation* _opReloadSessionList;
 }
 
 @end
@@ -52,7 +58,7 @@
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectNull];
     
     CSEngine* engine = [CSEngine sharedInstance];
-
+    
     _frClasses = [EntityClassInfoHelper frClassesWithEmployee:engine.loginInfo.uid ofKindergarten:engine.loginInfo.schoolId.integerValue];
     _frClasses.delegate = self;
     
@@ -104,7 +110,7 @@
             numberOfRows = 0;
         }
     }
-
+    
     return numberOfRows;
 }
 
@@ -128,8 +134,8 @@
     EntityChildInfo* childInfo = [childrenList objectAtIndex:indexPath.row];
     
     [cell.imgPortrait sd_setImageWithURL:[NSURL URLWithString:childInfo.portrait]
-                   placeholderImage:[UIImage imageNamed:@"default_icon.png"]];
-    cell.imgPortrait.layer.cornerRadius = 32;
+                        placeholderImage:[UIImage imageNamed:@"default_icon.png"]];
+    cell.imgPortrait.layer.cornerRadius = 29;
     cell.imgPortrait.clipsToBounds = YES;
     
     cell.labName.text = childInfo.name;
@@ -200,42 +206,42 @@
 }
 
 /*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
+ // Override to support conditional editing of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ // Return NO if you do not want the specified item to be editable.
+ return YES;
+ }
+ */
 
 /*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
+ // Override to support editing the table view.
+ - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ if (editingStyle == UITableViewCellEditingStyleDelete) {
+ // Delete the row from the data source
+ [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+ } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+ // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+ }
+ }
+ */
 
 /*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
+ // Override to support rearranging the table view.
+ - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+ {
+ }
+ */
 
 /*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
+ // Override to support conditional rearranging of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ // Return NO if you do not want the item to be re-orderable.
+ return YES;
+ }
+ */
 
 
 #pragma mark - Navigation
@@ -253,9 +259,52 @@
 }
 
 - (void)doRefresh {
+    [self reloadClassList];
+}
+
+- (void)doRefresh2 {
     [self reloadChildList];
     [self reloadDailylogList];
     [self reloadSessionList];
+}
+
+- (void)reloadClassList {
+    CSHttpClient* http = [CSHttpClient sharedInstance];
+    CSEngine* engine = [CSEngine sharedInstance];
+    
+    id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSArray* classInfoList = [EntityClassInfoHelper updateEntities:responseObject
+                                                           forEmployee:engine.loginInfo.uid
+                                                        ofKindergarten:engine.loginInfo.schoolId.integerValue];
+        [engine onLoadClassInfoList:classInfoList];
+        
+        [self doRefresh2];
+        _opReloadClassList = nil;
+        [self hideWaitingAlertIfNeeded];
+    };
+    
+    id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (operation.response.statusCode == 401) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotiUnauthorized
+                                                                object:error
+                                                              userInfo:nil];
+        }
+        else {
+            [self doRefresh2];
+        }
+        _opReloadClassList = nil;
+        [self hideWaitingAlertIfNeeded];
+    };
+    
+    if (_opReloadClassList) {
+        [_opReloadClassList cancel];
+    }
+    
+    [gApp waitingAlert:@"获取信息" withTitle:@"请稍候"];
+    _opReloadClassList = [http opGetClassListOfKindergarten:engine.loginInfo.schoolId.integerValue
+                                             withEmployeeId:engine.loginInfo.phone
+                                                    success:success
+                                                    failure:failure];
 }
 
 - (void)reloadChildList {
@@ -266,21 +315,28 @@
     for (EntityClassInfo* classInfo in classInfoList) {
         [classIdList addObject:classInfo.classId.stringValue];
     }
- 
+    
     CSHttpClient* http = [CSHttpClient sharedInstance];
     
     id success = ^(AFHTTPRequestOperation *operation, id jsonObjectList) {
         [EntityChildInfoHelper updateEntities:jsonObjectList];
+        _opReloadChildList = nil;
+        [self hideWaitingAlertIfNeeded];
     };
     
     id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
-        
+        _opReloadChildList = nil;
+        [self hideWaitingAlertIfNeeded];
     };
     
-    [http opGetChildListOfKindergarten:engine.loginInfo.schoolId.integerValue
-                         withClassList:classIdList
-                               success:success
-                               failure:failure];
+    if (_opReloadChildList) {
+        [_opReloadChildList cancel];
+    }
+    [gApp waitingAlert:@"获取信息" withTitle:@"请稍候"];
+    _opReloadChildList = [http opGetChildListOfKindergarten:engine.loginInfo.schoolId.integerValue
+                                              withClassList:classIdList
+                                                    success:success
+                                                    failure:failure];
 }
 
 - (void)reloadDailylogList{
@@ -297,16 +353,23 @@
     id success = ^(AFHTTPRequestOperation *operation, id jsonObjectList) {
         [EntityDailylogHelper updateEntities:jsonObjectList];
         [self.tableView reloadData];
+        _opReloadDailylogList = nil;
+        [self hideWaitingAlertIfNeeded];
     };
     
     id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
-        
+        _opReloadDailylogList = nil;
+        [self hideWaitingAlertIfNeeded];
     };
     
-    [http opGetDailyLogListOfKindergarten:engine.loginInfo.schoolId.integerValue
-                            withClassList:classIdList
-                                  success:success
-                                  failure:failure];
+    if (_opReloadDailylogList) {
+        [_opReloadDailylogList cancel];
+    }
+    [gApp waitingAlert:@"获取信息" withTitle:@"请稍候"];
+    _opReloadDailylogList = [http opGetDailyLogListOfKindergarten:engine.loginInfo.schoolId.integerValue
+                                                    withClassList:classIdList
+                                                          success:success
+                                                          failure:failure];
 }
 
 - (void)reloadSessionList{
@@ -323,16 +386,32 @@
     id success = ^(AFHTTPRequestOperation *operation, id jsonObjectList) {
         [EntityTopicMsgHelper updateEntities:jsonObjectList];
         [self.tableView reloadData];
+        _opReloadSessionList = nil;
+        [self hideWaitingAlertIfNeeded];
     };
     
     id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
-        
+        _opReloadSessionList = nil;
+        [self hideWaitingAlertIfNeeded];
     };
     
-    [http opGetSessionListOfKindergarten:engine.loginInfo.schoolId.integerValue
-                           withClassList:classIdList
-                                 success:success
-                                 failure:failure];
+    if (_opReloadSessionList) {
+        [_opReloadSessionList cancel];
+    }
+    [gApp waitingAlert:@"获取信息" withTitle:@"请稍候"];
+    _opReloadSessionList = [http opGetSessionListOfKindergarten:engine.loginInfo.schoolId.integerValue
+                                                  withClassList:classIdList
+                                                        success:success
+                                                        failure:failure];
+}
+
+- (void)hideWaitingAlertIfNeeded {
+    if (_opReloadClassList == nil
+        && _opReloadChildList == nil
+        && _opReloadDailylogList == nil
+        && _opReloadSessionList == nil) {
+        [gApp hideAlert];
+    }
 }
 
 #pragma mark - NSFetchedResultsControllerDelegate

@@ -115,7 +115,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 36;
+    return 44.f;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -144,8 +144,16 @@
         else if (dailyLog.noticeType.integerValue == kKuleNoticeTypeCheckOut){
             body = [NSString stringWithFormat:@"由 %@ 于 %@ 刷卡离园。", dailyLog.parentName, timestampString];
         }
+        else if (dailyLog.noticeType.integerValue == kKuleNoticeTypeCheckInCarMorning
+                 || dailyLog.noticeType.integerValue == kKuleNoticeTypeCheckInCarAfternoon){
+            body = [NSString stringWithFormat:@"由 %@ 于 %@ 刷卡坐上校车。", dailyLog.parentName, timestampString];
+        }
+        else if (dailyLog.noticeType.integerValue == kKuleNoticeTypeCheckOutCarMorning
+                 || dailyLog.noticeType.integerValue == kKuleNoticeTypeCheckOutCarAfternoon){
+            body = [NSString stringWithFormat:@"由 %@ 于 %@ 刷卡离开校车。", dailyLog.parentName, timestampString];
+        }
         else {
-            body = [NSString stringWithFormat:@"由 %@ 于 %@ 刷卡(%@)。", dailyLog.parentName, timestampString, dailyLog.noticeType];
+            body = [NSString stringWithFormat:@"由 %@ 于 %@ 刷卡(type:%@)。", dailyLog.parentName, timestampString, dailyLog.noticeType];
         }
         
         cell.labNotification.text = body;
@@ -176,7 +184,7 @@
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 80.0f;
+    return 70.0f;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

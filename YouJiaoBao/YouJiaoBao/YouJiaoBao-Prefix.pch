@@ -19,3 +19,6 @@
     #import "NSDictionary+CSKit.h"
     #import "NSString+CSKit.h"
 #endif
+
+#define _AFNETWORKING_ALLOW_INVALID_SSL_CERTIFICATES_
+#define COCOBABYS_DEV_MODEL 1

@@ -232,6 +232,11 @@ enum {
 }
 
 - (void)doUpdateChildNick:(NSString*)nick {
+    nick = [nick stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];  //去除掉首尾的空白字符和换行字符
+    nick = [nick stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+    nick = [nick stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    nick = [nick stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
     if (nick.length > 0) {
         CSEngine* engine = [CSEngine sharedInstance];
         CSHttpClient* http = [CSHttpClient sharedInstance];

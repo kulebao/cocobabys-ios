@@ -426,11 +426,11 @@
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="hasnew.png.9.png" translatesAutoresizingMaskIntoConstraints="NO" id="Cko-zU-ftz">
-                                            <rect key="frame" x="8" y="8" width="16" height="16"/>
-                                        </imageView>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="v2-logo2.png" translatesAutoresizingMaskIntoConstraints="NO" id="4dg-jn-AAr">
                                             <rect key="frame" x="8" y="8" width="64" height="64"/>
+                                        </imageView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="hasnew.png.9.png" translatesAutoresizingMaskIntoConstraints="NO" id="Cko-zU-ftz">
+                                            <rect key="frame" x="8" y="8" width="16" height="16"/>
                                         </imageView>
                                     </subviews>
                                 </tableViewCellContentView>

@@ -14,6 +14,8 @@
 #import <AVFoundation/AVFoundation.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "ELCImagePickerController.h"
+#import "NSString+CSKit.h"
+#import "CSAppDelegate.h"
 
 @interface CSCreateNoticeViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GMGridViewDataSource, GMGridViewSortingDelegate, GMGridViewTransformationDelegate, GMGridViewActionDelegate,
     UIActionSheetDelegate, ELCImagePickerControllerDelegate> {
@@ -260,8 +262,16 @@
 
 - (IBAction)onBtnFinishClicked:(id)sender {
     [self hideKeyboard];
-
-    if ([_delegate respondsToSelector:@selector(createNoticeViewController:finishEditText:withTitle:withImages:withTags:requriedFeedback:)]) {
+    
+    NSString* title = [self.fieldTitle.text trim];
+    NSString* content = [self.textContent.text trim];
+    if (title.length == 0) {
+        [gApp alert:@"公告标题不能为空"];
+    }
+    else if (content.length == 0) {
+        [gApp alert:@"公告内容不能为空"];
+    }
+    else if ([_delegate respondsToSelector:@selector(createNoticeViewController:finishEditText:withTitle:withImages:withTags:requriedFeedback:)]) {
         [_delegate createNoticeViewController:self
                                finishEditText:self.textContent.text
                                     withTitle:self.fieldTitle.text

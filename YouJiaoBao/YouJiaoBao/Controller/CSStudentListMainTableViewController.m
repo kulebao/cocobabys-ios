@@ -115,7 +115,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 32;
+    return 36;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -348,7 +348,7 @@
         ModelClassData* classData = [ModelClassData new];
         classData.classInfo = classInfo;
         classData.childrenList = classChildren;
-        classData.expand = YES;
+        classData.expand = NO;
         classData.classHeaderView = [CSClassHeaderView defaultClassHeaderView];
         classData.classHeaderView.modelData = classData;
         classData.classHeaderView.delegate = self;

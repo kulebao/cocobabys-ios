@@ -94,6 +94,7 @@
     if ([segue.identifier isEqualToString:@"segue.main.growexp"]) {
         CSContentEditorViewController* ctrl = segue.destinationViewController;
         ctrl.delegate = self;
+        ctrl.navigationItem.title = @"成长经历";
     }
     else if ([segue.identifier isEqualToString:@"segue.main.studentpickup"]) {
         CSStudentListPickUpTableViewController* ctrl = segue.destinationViewController;

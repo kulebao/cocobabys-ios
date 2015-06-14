@@ -14,6 +14,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "ELCImagePickerController.h"
+#import "CSAppDelegate.h"
 
 @interface CSContentEditorViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GMGridViewDataSource, GMGridViewSortingDelegate, GMGridViewTransformationDelegate, GMGridViewActionDelegate,
     UIActionSheetDelegate, ELCImagePickerControllerDelegate> {
@@ -234,10 +235,13 @@
 
 - (IBAction)onBtnFinishClicked:(id)sender {
     [self.textContent resignFirstResponder];
-    
-    if ([_delegate respondsToSelector:@selector(contentEditorViewController:finishEditText:withImages:)]) {
+    NSString* content = [self.textContent.text trim];
+    if (content.length == 0) {
+        [gApp alert:@"发布内容不能为空"];
+    }
+    else if ([_delegate respondsToSelector:@selector(contentEditorViewController:finishEditText:withImages:)]) {
         [_delegate contentEditorViewController:self
-                                finishEditText:self.textContent.text
+                                finishEditText:content
                                     withImages:_imageList];
     }
 }

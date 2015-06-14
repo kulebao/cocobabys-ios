@@ -273,8 +273,8 @@
     }
     else if ([_delegate respondsToSelector:@selector(createNoticeViewController:finishEditText:withTitle:withImages:withTags:requriedFeedback:)]) {
         [_delegate createNoticeViewController:self
-                               finishEditText:self.textContent.text
-                                    withTitle:self.fieldTitle.text
+                               finishEditText:content
+                                    withTitle:title
                                    withImages:_imageList
                                      withTags:_tag ? @[_tag] : @[]
                              requriedFeedback:self.btnFeedback.selected];

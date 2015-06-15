@@ -16,6 +16,10 @@
 #import "ELCImagePickerController.h"
 #import "CSAppDelegate.h"
 
+enum {
+    kPictureMaxCount = 9
+};
+
 @interface CSContentEditorViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GMGridViewDataSource, GMGridViewSortingDelegate, GMGridViewTransformationDelegate, GMGridViewActionDelegate,
     UIActionSheetDelegate, ELCImagePickerControllerDelegate> {
     NSMutableArray* _imageList;
@@ -101,6 +105,11 @@
 - (IBAction)onBtnPhotoFromCamraClicked:(id)sender {
     [self.textContent resignFirstResponder];
     
+    if (!self.singleImage && _imageList.count >= kPictureMaxCount) {
+        [gApp alert:@"最多只能选择9张图片"];
+        return;
+    }
+    
 #if TARGET_IPHONE_SIMULATOR
 #else
     _imgPicker = [[UIImagePickerController alloc] init];
@@ -124,24 +133,27 @@
         
     }];
 #else
-    _elcPicker = [[ELCImagePickerController alloc] initImagePicker];
     
-    if (self.singleImage) {
-        //Set the maximum number of images to select, defaults to 4
-        _elcPicker.maximumImagesCount = 1;
-        //For multiple image selection, display and return selected order of images
-        _elcPicker.onOrder = NO;
+    if (_elcPicker == nil) {
+        _elcPicker = [[ELCImagePickerController alloc] initImagePicker];
+        
+        if (self.singleImage) {
+            //Set the maximum number of images to select, defaults to 4
+            _elcPicker.maximumImagesCount = 1;
+            //For multiple image selection, display and return selected order of images
+            _elcPicker.onOrder = NO;
+        }
+        else {
+            //Set the maximum number of images to select, defaults to 4
+            _elcPicker.maximumImagesCount = kPictureMaxCount;
+            //For multiple image selection, display and return selected order of images
+            _elcPicker.onOrder = YES;
+        }
+        
+        _elcPicker.returnsOriginalImage = NO; //Only return the fullScreenImage, not the fullResolutionImage
+        _elcPicker.returnsImage = YES; //Return UIimage if YES. If NO, only return asset location information
+        _elcPicker.imagePickerDelegate = self;
     }
-    else {
-        //Set the maximum number of images to select, defaults to 4
-        _elcPicker.maximumImagesCount = 9;
-        //For multiple image selection, display and return selected order of images
-        _elcPicker.onOrder = YES;
-    }
-    
-    _elcPicker.returnsOriginalImage = NO; //Only return the fullScreenImage, not the fullResolutionImage
-    _elcPicker.returnsImage = YES; //Return UIimage if YES. If NO, only return asset location information
-    _elcPicker.imagePickerDelegate = self;
     
     //Present modally
     [self presentViewController:_elcPicker animated:YES completion:nil];
@@ -340,13 +352,10 @@
 #pragma mark - ELCImagePickerControllerDelegate
 - (void)elcImagePickerController:(ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)infoList {
     if ([picker isEqual:_elcPicker]) {
+        [_imageList removeAllObjects];
         for (NSDictionary* info in infoList) {
             UIImage* img = info[UIImagePickerControllerOriginalImage];
             if (img) {
-                if (self.singleImage) {
-                    [_imageList removeAllObjects];
-                }
-                
                 [_imageList addObject:img];
                 [self.gmGridView reloadData];
             }
@@ -356,7 +365,7 @@
     [picker dismissViewControllerAnimated:YES
                                completion:^{
                                    if (picker == _elcPicker) {
-                                       _elcPicker = nil;
+                                       //_elcPicker = nil;
                                    }
                                }];
 }
@@ -367,7 +376,7 @@
     }];
     
     if (picker == _elcPicker) {
-        _elcPicker = nil;
+        //_elcPicker = nil;
     }
 }
 

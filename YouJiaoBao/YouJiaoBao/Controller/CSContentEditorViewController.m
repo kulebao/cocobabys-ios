@@ -236,7 +236,7 @@
 - (IBAction)onBtnFinishClicked:(id)sender {
     [self.textContent resignFirstResponder];
     NSString* content = [self.textContent.text trim];
-    if (content.length == 0) {
+    if (content.length == 0 && _imageList.count==0) {
         [gApp alert:@"发布内容不能为空"];
     }
     else if ([_delegate respondsToSelector:@selector(contentEditorViewController:finishEditText:withImages:)]) {
@@ -306,6 +306,10 @@
     if ([mediaType isEqualToString:@"public.image"]) {
         UIImage* img = info[UIImagePickerControllerOriginalImage];
         if (img) {
+            if (self.singleImage) {
+                [_imageList removeAllObjects];
+            }
+            
             [_imageList addObject:img];
             [self.gmGridView reloadData];
         }

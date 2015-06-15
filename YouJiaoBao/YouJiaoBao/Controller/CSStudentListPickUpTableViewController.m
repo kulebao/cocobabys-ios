@@ -230,7 +230,7 @@
         ModelClassData* classData = [ModelClassData new];
         classData.classInfo = classInfo;
         classData.childrenList = classChildren;
-        classData.expand = YES;
+        classData.expand = NO;
         classData.studentPickerHeaderView = [CSStudentPickerHeaderView defaultClassHeaderView];
         classData.studentPickerHeaderView.modelData = classData;
         classData.studentPickerHeaderView.delegate = self;

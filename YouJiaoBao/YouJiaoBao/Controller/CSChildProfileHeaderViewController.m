@@ -39,7 +39,7 @@
     // Do any additional setup after loading the view.
     
     self.imgPortrait.layer.borderColor = [[UIColor whiteColor] CGColor];
-    self.imgPortrait.layer.borderWidth = 2;
+    self.imgPortrait.layer.borderWidth = 1;
     self.imgPortrait.clipsToBounds = YES;
     
     [self.imgPortrait sd_setImageWithURL:[NSURL URLWithString:self.childInfo.portrait]

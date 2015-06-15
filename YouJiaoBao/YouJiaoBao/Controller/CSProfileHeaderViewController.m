@@ -35,11 +35,15 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    self.imgPortrait.layer.cornerRadius = 40.0;
     self.imgPortrait.clipsToBounds = YES;
-    self.imgPortrait.layer.borderWidth = 2;
+    self.imgPortrait.layer.borderWidth = 1;
     self.imgPortrait.layer.borderColor = [[UIColor whiteColor] CGColor];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.imgPortrait.layer.cornerRadius = self.imgPortrait.bounds.size.width/2;
+    [self reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -69,13 +73,6 @@
         self.imgPortrait.image = [UIImage imageNamed:@"chat_head_icon.gif"];
     }
 }
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-   
-    [self reloadData];
-}
-
 
 /*
 #pragma mark - Navigation

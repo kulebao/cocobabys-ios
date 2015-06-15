@@ -65,9 +65,6 @@
                  ];
     
     
-    CGFloat cellWidth = (self.view.bounds.size.width - 40) / 3.0;
-    self.layoutCollectionView.itemSize = CGSizeMake(cellWidth, cellWidth);
-    
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     
@@ -82,6 +79,10 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    CGFloat cellWidth = floor((self.view.bounds.size.width - 40) / 3.0);
+    self.layoutCollectionView.itemSize = CGSizeMake(cellWidth, cellWidth);
+    [self.collectionView reloadData];
 }
 
 #pragma mark - Navigation

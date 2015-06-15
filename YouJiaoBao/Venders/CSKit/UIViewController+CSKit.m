@@ -12,9 +12,11 @@
 
 - (void)customizeLeftBarItemWithTarget:(id)target action:(SEL)action normal:(UIImage*)imgNormal hightlight:(UIImage*)imgHighlight {
     UIButton* btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btn setBackgroundImage:imgNormal forState:UIControlStateNormal];
-    [btn setBackgroundImage:imgHighlight forState:UIControlStateHighlighted];
-    btn.frame = CGRectMake(0, 0, imgNormal.size.width, imgNormal.size.height);
+    [btn setImage:imgNormal forState:UIControlStateNormal];
+    [btn setImage:imgHighlight forState:UIControlStateHighlighted];
+    //btn.frame = CGRectMake(0, 0, imgNormal.size.width, imgNormal.size.height);
+    btn.frame = CGRectMake(0, 0, 44, 24);
+    btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem* btnItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
     self.navigationItem.leftBarButtonItem = btnItem;

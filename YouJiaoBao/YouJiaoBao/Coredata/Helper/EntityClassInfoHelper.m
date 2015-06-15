@@ -24,26 +24,36 @@
     
     for (NSDictionary* jsonObject in jsonObjectList) {
         NSInteger classId = [[jsonObject objectForKey:@"class_id"] integerValue];
-        NSArray* tmpObjectList = [fetchedObjects filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"classId == %d", classId]];
-        EntityClassInfo* entity = [tmpObjectList lastObject];
-        if (entity == nil) {
-            entity = [NSEntityDescription insertNewObjectForEntityForName:@"EntityClassInfo" inManagedObjectContext:context];
-            entity.classId = @(classId);
-            entity.employeeId = employeeId;
+        
+        @try {
+            NSArray* tmpObjectList = [fetchedObjects filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"classId == %d", classId]];
+            EntityClassInfo* entity = [tmpObjectList lastObject];
+            if (entity == nil) {
+                entity = [NSEntityDescription insertNewObjectForEntityForName:@"EntityClassInfo" inManagedObjectContext:context];
+                entity.classId = @(classId);
+                entity.employeeId = employeeId;
+            }
+            else {
+                [fetchedObjects removeObject:entity];
+            }
+            
+            entity.name = [jsonObject objectForKey:@"name"];
+            entity.schoolId = [jsonObject objectForKey:@"school_id"];
+            [updatedObjects addObject:entity];
         }
-        else {
-            [fetchedObjects removeObject:entity];
+        @catch (NSException *exception) {
+            CSLog(@"exception:%@", exception);
         }
-
-        entity.name = [jsonObject objectForKey:@"name"];
-        entity.schoolId = [jsonObject objectForKey:@"school_id"];
-        [updatedObjects addObject:entity];
+        @finally {
+            
+        }
     }
     
-    for (NSManagedObject* willDeleteObject in fetchedObjects) {
-        [context delete:willDeleteObject];
+    for (EntityClassInfo* willDeleteObject in fetchedObjects) {
+        [context deleteObject:willDeleteObject];
     }
     
+    //[NSFetchedResultsController deleteCacheWithName:frCtrl.cacheName];
     [context save:&error];
     
     return updatedObjects;
@@ -77,10 +87,12 @@
     NSSortDescriptor* sortDesc = [NSSortDescriptor sortDescriptorWithKey:@"classId" ascending:YES];
     [fr setSortDescriptors:@[sortDesc]];
     
+    NSString* cacheName = [NSString stringWithFormat:@"ClassesWithEmployee%@ofKindergarten%ld", employeeId, (long)kindergartenId];
+    cacheName = nil;
     NSFetchedResultsController* frCtrl = [[NSFetchedResultsController alloc] initWithFetchRequest:fr
                                                                              managedObjectContext:context
                                                                                sectionNameKeyPath:nil
-                                                                                        cacheName:[NSString stringWithFormat:@"ClassesWithEmployee%@ofKindergarten%d", employeeId, kindergartenId]];
+                                                                                        cacheName:cacheName];
     
     return frCtrl;
 }

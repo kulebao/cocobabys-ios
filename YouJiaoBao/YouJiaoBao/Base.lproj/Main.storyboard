@@ -1205,7 +1205,7 @@
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="v2-logo2.png" translatesAutoresizingMaskIntoConstraints="NO" id="cH2-Bt-U91">
-                                <rect key="frame" x="16" y="14" width="72" height="72"/>
+                                <rect key="frame" x="14" y="12" width="76" height="76"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DtJ-pu-njE">
                                 <rect key="frame" x="12" y="10" width="80" height="80"/>
@@ -1227,7 +1227,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="lWS-iP-M45" firstAttribute="top" secondItem="cH2-Bt-U91" secondAttribute="top" constant="-4" id="0pa-V8-7xU"/>
+                            <constraint firstItem="lWS-iP-M45" firstAttribute="top" secondItem="cH2-Bt-U91" secondAttribute="top" constant="-2" id="0pa-V8-7xU"/>
                             <constraint firstItem="lWS-iP-M45" firstAttribute="leading" secondItem="DtJ-pu-njE" secondAttribute="leading" id="A6S-4a-62i"/>
                             <constraint firstAttribute="centerY" secondItem="4hq-b5-HXR" secondAttribute="centerY" id="Aar-3G-uxV"/>
                             <constraint firstItem="Krg-Rh-Oq1" firstAttribute="leading" secondItem="SGX-xU-LAY" secondAttribute="leading" id="LWS-4O-KYd"/>
@@ -1235,13 +1235,13 @@
                             <constraint firstItem="4hq-b5-HXR" firstAttribute="leading" secondItem="DtJ-pu-njE" secondAttribute="trailing" constant="8" id="ShW-0s-9Ky"/>
                             <constraint firstItem="lWS-iP-M45" firstAttribute="leading" secondItem="SGX-xU-LAY" secondAttribute="leading" constant="12" id="UMp-wB-Bmf"/>
                             <constraint firstItem="lWS-iP-M45" firstAttribute="bottom" secondItem="DtJ-pu-njE" secondAttribute="bottom" id="bVk-Xd-Z0I"/>
-                            <constraint firstItem="lWS-iP-M45" firstAttribute="bottom" secondItem="cH2-Bt-U91" secondAttribute="bottom" constant="4" id="dKA-pi-96w"/>
+                            <constraint firstItem="lWS-iP-M45" firstAttribute="bottom" secondItem="cH2-Bt-U91" secondAttribute="bottom" constant="2" id="dKA-pi-96w"/>
                             <constraint firstItem="lWS-iP-M45" firstAttribute="trailing" secondItem="DtJ-pu-njE" secondAttribute="trailing" id="iXm-AC-yzv"/>
                             <constraint firstAttribute="centerY" secondItem="lWS-iP-M45" secondAttribute="centerY" id="miy-KT-icH"/>
-                            <constraint firstItem="lWS-iP-M45" firstAttribute="trailing" secondItem="cH2-Bt-U91" secondAttribute="trailing" constant="4" id="pF4-hj-veD"/>
+                            <constraint firstItem="lWS-iP-M45" firstAttribute="trailing" secondItem="cH2-Bt-U91" secondAttribute="trailing" constant="2" id="pF4-hj-veD"/>
                             <constraint firstAttribute="trailing" secondItem="Krg-Rh-Oq1" secondAttribute="trailing" id="q24-xM-IIr"/>
                             <constraint firstAttribute="trailing" secondItem="4hq-b5-HXR" secondAttribute="trailing" constant="8" id="q6b-gD-EEy"/>
-                            <constraint firstItem="lWS-iP-M45" firstAttribute="leading" secondItem="cH2-Bt-U91" secondAttribute="leading" constant="-4" id="s3L-Oi-tSG"/>
+                            <constraint firstItem="lWS-iP-M45" firstAttribute="leading" secondItem="cH2-Bt-U91" secondAttribute="leading" constant="-2" id="s3L-Oi-tSG"/>
                             <constraint firstItem="lWS-iP-M45" firstAttribute="top" secondItem="DtJ-pu-njE" secondAttribute="top" id="y6P-ap-IZ0"/>
                             <constraint firstItem="Krg-Rh-Oq1" firstAttribute="top" secondItem="Inm-bV-Jh5" secondAttribute="bottom" id="yxK-iH-uIO"/>
                         </constraints>

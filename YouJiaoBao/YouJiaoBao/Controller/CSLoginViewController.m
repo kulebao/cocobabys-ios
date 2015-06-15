@@ -61,8 +61,10 @@
     //self.fieldPassword.text = @"13555555555";
     
     //TEST
-    self.fieldUsername.text = @"admin9028";
-    self.fieldPassword.text = @"82242007";
+    //self.fieldUsername.text = @"admin9028";
+    //self.fieldPassword.text = @"82242007";
+    self.fieldUsername.text = @"Joe_tian";
+    self.fieldPassword.text = @"123456";
     
 #endif
 }

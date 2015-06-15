@@ -60,11 +60,29 @@
 */
 
 #pragma mark - Private
+- (NSString*)tagTitle {
+    NSString* tTitle = @"园内公告";
+    if ([self.newsInfo.tags containsString:@"作业"]) {
+        tTitle = @"亲子作业";
+    }
+    else if(self.newsInfo.classId.integerValue > 0) {
+        tTitle = @"班级通知";
+    }
+    
+    return tTitle;
+}
 - (void)reloadWebView {
     if (_newsInfo) {
         NSString* html = [self htmlWithNewsInfo:_newsInfo];
         [self.webView loadHTMLString:html baseURL:nil];
+        
+        self.navigationItem.title = [self tagTitle];
     }
+}
+
+- (void)setNewsInfo:(EntityNewsInfo *)newsInfo {
+    _newsInfo = newsInfo;
+    [self reloadWebView];
 }
 
 - (NSString*)htmlWithNewsInfo:(EntityNewsInfo*)newsInfo{

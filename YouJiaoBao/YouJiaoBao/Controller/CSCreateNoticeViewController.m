@@ -350,6 +350,10 @@
     if ([mediaType isEqualToString:@"public.image"]) {
         UIImage* img = info[UIImagePickerControllerOriginalImage];
         if (img) {
+            if (self.singleImage) {
+                [_imageList removeAllObjects];
+            }
+            
             [_imageList addObject:img];
             [self.gmGridView reloadData];
         }

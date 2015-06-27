@@ -18,7 +18,7 @@
 #import "TSFileCache.h"
 #import "CSKit.h"
 
-@interface CSKuleEngine() <BPushDelegate> {
+@interface CSKuleEngine() {
     NSMutableDictionary* _senderProfiles;
 }
 
@@ -65,38 +65,38 @@
     // 添加百度统计
     [self setupBaiduMobStat];
     
-#ifdef __IPHONE_8_0
-    if (IsAtLeastiOSVersion(@"8.0")) {
-        UIUserNotificationType myTypes =
-        UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+    // iOS8 下需要使用新的 API
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
+        UIUserNotificationType myTypes = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+        
         UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:myTypes categories:nil];
         [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
     }else {
-        UIRemoteNotificationType myTypes =
-        UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound;
+        UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound;
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:myTypes];
     }
-#else
-    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:notificationTypes];
-#endif
-    
-    [BPush setDelegate:self];
     
     CSKulePreferences* preference = [CSKulePreferences defaultPreferences];
     NSDictionary* serverInfo = [preference getServerSettings];
-    [BPush registerChannel:launchOptions
-                    apiKey:serverInfo[@"baidu_api_key"]
+    
+    // 在 App 启动时注册百度云推送服务，需要提供 Apikey
+    [BPush registerChannel:launchOptions apiKey:serverInfo[@"baidu_api_key"]
                   pushMode:BPushModeProduction
+           withFirstAction:nil
+          withSecondAction:nil
+              withCategory:nil
                    isDebug:NO];
 
-    // 设置 BPush 的回调 [BPush setDelegate:self];
-    // App 是⽤用户点击推送消息启动
+    // App 是用户点击推送消息启动
     NSDictionary *userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     if (userInfo) {
+        CSLog(@"从消息启动:%@",userInfo);
         [BPush handleNotification:userInfo];
     }
     
-    [application setApplicationIconBadgeNumber:0];
+    //角标清0
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+
     return YES;
 }
 
@@ -172,9 +172,27 @@
         _preferences.deviceToken = deviceToken;
     }
     
-    // 必须。可以在其它时机调用,只有在该方法返回(通过 onMethod:response:回调)绑定成功时,app 才能接收到 Push 消息。
     // 一个 app 绑定成功至少一次即可(如果 access token 变更请重新绑定)。
-    [BPush bindChannel];
+    [BPush bindChannelWithCompleteHandler:^(id result, NSError *error) {
+        CSLog(@"Method: %@\n%@", BPushRequestMethodBind, result);
+        
+        NSString *appid = [BPush getAppId];
+        NSString *userid = [BPush getUserId];
+        NSString *channelid = [BPush getChannelId];
+        
+        if (appid && userid && channelid) {
+            CSLog(@"BPushErrorCode_Success");
+            CSKuleBPushInfo* baiduPushInfo = [CSKuleBPushInfo new];
+            baiduPushInfo.appId = appid;
+            baiduPushInfo.userId = userid;
+            baiduPushInfo.channelId = channelid;
+            
+            _preferences.baiduPushInfo = baiduPushInfo;
+        }
+        else {
+            CSLog(@"BPushErrorCode_NOT_Success");
+        }
+    }];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
@@ -324,36 +342,36 @@
     return url;
 }
 
-#pragma mark - BPushDelegate
-// 必须,如果正确调用了 setDelegate,在 bindChannel 之后,结果在这个回调中返回。若绑定失败,请进行重新绑定,确保至少绑定成功一次
-- (void)onMethod:(NSString*)method response:(NSDictionary*)data {
-    NSDictionary* res = [[NSDictionary alloc] initWithDictionary:data];
-    if ([BPushRequestMethodBind isEqualToString:method]) {
-        NSString *appid = [res valueForKey:BPushRequestAppIdKey];
-        NSString *userid = [res valueForKey:BPushRequestUserIdKey];
-        NSString *channelid = [res valueForKey:BPushRequestChannelIdKey];
-        //NSString *requestid = [res valueForKey:BPushRequestRequestIdKey];
-        int returnCode = [[res valueForKey:BPushRequestErrorCodeKey] intValue];
-        
-        if (returnCode == 0) {
-            CSLog(@"BPushErrorCode_Success");
-            CSKuleBPushInfo* baiduPushInfo = [CSKuleBPushInfo new];
-            baiduPushInfo.appId = appid;
-            baiduPushInfo.userId = userid;
-            baiduPushInfo.channelId = channelid;
-            
-            _preferences.baiduPushInfo = baiduPushInfo;
-        }
-        else {
-            CSLog(@"BPushErrorCode_NOT_Success");
-        }
-    } else if ([BPushRequestMethodUnbind isEqualToString:method]) {
-        int returnCode = [[res valueForKey:BPushRequestErrorCodeKey] intValue];
-        if (returnCode == 0) {
-            _preferences.baiduPushInfo = nil;
-        }
-    }
-}
+//#pragma mark - BPushDelegate
+//// 必须,如果正确调用了 setDelegate,在 bindChannel 之后,结果在这个回调中返回。若绑定失败,请进行重新绑定,确保至少绑定成功一次
+//- (void)onMethod:(NSString*)method response:(NSDictionary*)data {
+//    NSDictionary* res = [[NSDictionary alloc] initWithDictionary:data];
+//    if ([BPushRequestMethodBind isEqualToString:method]) {
+//        NSString *appid = [res valueForKey:BPushRequestAppIdKey];
+//        NSString *userid = [res valueForKey:BPushRequestUserIdKey];
+//        NSString *channelid = [res valueForKey:BPushRequestChannelIdKey];
+//        //NSString *requestid = [res valueForKey:BPushRequestRequestIdKey];
+//        int returnCode = [[res valueForKey:BPushRequestErrorCodeKey] intValue];
+//        
+//        if (returnCode == 0) {
+//            CSLog(@"BPushErrorCode_Success");
+//            CSKuleBPushInfo* baiduPushInfo = [CSKuleBPushInfo new];
+//            baiduPushInfo.appId = appid;
+//            baiduPushInfo.userId = userid;
+//            baiduPushInfo.channelId = channelid;
+//            
+//            _preferences.baiduPushInfo = baiduPushInfo;
+//        }
+//        else {
+//            CSLog(@"BPushErrorCode_NOT_Success");
+//        }
+//    } else if ([BPushRequestMethodUnbind isEqualToString:method]) {
+//        int returnCode = [[res valueForKey:BPushRequestErrorCodeKey] intValue];
+//        if (returnCode == 0) {
+//            _preferences.baiduPushInfo = nil;
+//        }
+//    }
+//}
 
 #pragma mark - Core Data
 -(NSManagedObjectModel *)managedObjectModel {

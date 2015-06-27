@@ -62,6 +62,14 @@ CSAppDelegate* gApp = nil;
 - (void)application:(UIApplication*)application didRegisterUserNotificationSettings:(UIUserNotificationSettings*)notificationSettings {
     [application registerForRemoteNotifications];
 }
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+{
+    // 打印到日志
+    CSLog(@"backgroud : %@",userInfo);
+    completionHandler(UIBackgroundFetchResultNewData);
+}
+
 #endif
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
@@ -80,11 +88,7 @@ CSAppDelegate* gApp = nil;
 }
 
 #pragma mark - Private
-- (void)gotoLoginProcess {
-    if (![BPush getChannelId] || ![BPush getUserId]) {
-        [BPush bindChannel];
-    }
-    
+- (void)gotoLoginProcess {    
     UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     id ctrl = [mainStoryboard instantiateViewControllerWithIdentifier:@"CSLoginNavigationController"];
     gApp.window.rootViewController = ctrl;

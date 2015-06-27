@@ -80,8 +80,14 @@
     NSDictionary* serverInfo = [preference getServerSettings];
     
     // 在 App 启动时注册百度云推送服务，需要提供 Apikey
-    [BPush registerChannel:launchOptions apiKey:serverInfo[@"baidu_api_key"]
-                  pushMode:BPushModeProduction
+    NSInteger bdPushModel = BPushModeProduction;
+#ifdef DEBUG
+    bdPushModel = BPushModeDevelopment;
+#endif
+    
+    [BPush registerChannel:launchOptions
+                    apiKey:serverInfo[@"baidu_api_key"]
+                  pushMode:bdPushModel
            withFirstAction:nil
           withSecondAction:nil
               withCategory:nil

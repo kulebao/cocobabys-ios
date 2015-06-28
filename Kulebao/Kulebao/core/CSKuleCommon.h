@@ -51,6 +51,7 @@ enum KuleModule {
     kKuleModuleAssess,      // 在园表现
     kKuleModuleHistory,     // 成长经历
     kKuleModuleCCTV,        // 看宝贝
+    kKuleModuleBus,         // 校车
     kKuleModuleSize,        // -模块数量-统计
 };
 

@@ -338,6 +338,18 @@
 		09434DC41B404DA300DFDC33 /* BaiduMapAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09434DC31B404DA300DFDC33 /* BaiduMapAPI.framework */; };
 		09434DC61B404DFA00DFDC33 /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 09434DC51B404DFA00DFDC33 /* mapapi.bundle */; };
 		09434DC81B404E3E00DFDC33 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09434DC71B404E3D00DFDC33 /* OpenGLES.framework */; };
+		09434DCD1B4058D500DFDC33 /* v2-btn_star_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 09434DC91B4058D500DFDC33 /* v2-btn_star_bg.png */; };
+		09434DCE1B4058D500DFDC33 /* v2-btn_star_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09434DCA1B4058D500DFDC33 /* v2-btn_star_bg@2x.png */; };
+		09434DCF1B4058D500DFDC33 /* v2-校车接送.png in Resources */ = {isa = PBXBuildFile; fileRef = 09434DCB1B4058D500DFDC33 /* v2-校车接送.png */; };
+		09434DD01B4058D500DFDC33 /* v2-校车接送@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09434DCC1B4058D500DFDC33 /* v2-校车接送@2x.png */; };
+		09434DD91B405FBC00DFDC33 /* v2-btn_star_0_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 09434DD11B405FBC00DFDC33 /* v2-btn_star_0_bg.png */; };
+		09434DDA1B405FBC00DFDC33 /* v2-btn_star_0_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09434DD21B405FBC00DFDC33 /* v2-btn_star_0_bg@2x.png */; };
+		09434DDB1B405FBC00DFDC33 /* v2-btn_star_1_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 09434DD31B405FBC00DFDC33 /* v2-btn_star_1_bg.png */; };
+		09434DDC1B405FBC00DFDC33 /* v2-btn_star_1_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09434DD41B405FBC00DFDC33 /* v2-btn_star_1_bg@2x.png */; };
+		09434DDD1B405FBC00DFDC33 /* v2-btn_star_2_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 09434DD51B405FBC00DFDC33 /* v2-btn_star_2_bg.png */; };
+		09434DDE1B405FBC00DFDC33 /* v2-btn_star_2_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09434DD61B405FBC00DFDC33 /* v2-btn_star_2_bg@2x.png */; };
+		09434DDF1B405FBC00DFDC33 /* v2-btn_star_3_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 09434DD71B405FBC00DFDC33 /* v2-btn_star_3_bg.png */; };
+		09434DE01B405FBC00DFDC33 /* v2-btn_star_3_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09434DD81B405FBC00DFDC33 /* v2-btn_star_3_bg@2x.png */; };
 		094373D4199D016A00EDD64C /* EntitySenderInfoHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 094373D3199D016A00EDD64C /* EntitySenderInfoHelper.m */; };
 		094373D7199D017B00EDD64C /* EntityHistoryInfoHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 094373D6199D017B00EDD64C /* EntityHistoryInfoHelper.m */; };
 		094373DA199D018900EDD64C /* EntityMediaInfoHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 094373D9199D018900EDD64C /* EntityMediaInfoHelper.m */; };
@@ -1234,6 +1246,18 @@
 		09434DC31B404DA300DFDC33 /* BaiduMapAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BaiduMapAPI.framework; sourceTree = "<group>"; };
 		09434DC51B404DFA00DFDC33 /* mapapi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = mapapi.bundle; sourceTree = "<group>"; };
 		09434DC71B404E3D00DFDC33 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		09434DC91B4058D500DFDC33 /* v2-btn_star_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-btn_star_bg.png"; sourceTree = "<group>"; };
+		09434DCA1B4058D500DFDC33 /* v2-btn_star_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-btn_star_bg@2x.png"; sourceTree = "<group>"; };
+		09434DCB1B4058D500DFDC33 /* v2-校车接送.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-校车接送.png"; sourceTree = "<group>"; };
+		09434DCC1B4058D500DFDC33 /* v2-校车接送@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-校车接送@2x.png"; sourceTree = "<group>"; };
+		09434DD11B405FBC00DFDC33 /* v2-btn_star_0_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-btn_star_0_bg.png"; sourceTree = "<group>"; };
+		09434DD21B405FBC00DFDC33 /* v2-btn_star_0_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-btn_star_0_bg@2x.png"; sourceTree = "<group>"; };
+		09434DD31B405FBC00DFDC33 /* v2-btn_star_1_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-btn_star_1_bg.png"; sourceTree = "<group>"; };
+		09434DD41B405FBC00DFDC33 /* v2-btn_star_1_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-btn_star_1_bg@2x.png"; sourceTree = "<group>"; };
+		09434DD51B405FBC00DFDC33 /* v2-btn_star_2_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-btn_star_2_bg.png"; sourceTree = "<group>"; };
+		09434DD61B405FBC00DFDC33 /* v2-btn_star_2_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-btn_star_2_bg@2x.png"; sourceTree = "<group>"; };
+		09434DD71B405FBC00DFDC33 /* v2-btn_star_3_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-btn_star_3_bg.png"; sourceTree = "<group>"; };
+		09434DD81B405FBC00DFDC33 /* v2-btn_star_3_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-btn_star_3_bg@2x.png"; sourceTree = "<group>"; };
 		094373D2199D016A00EDD64C /* EntitySenderInfoHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntitySenderInfoHelper.h; sourceTree = "<group>"; };
 		094373D3199D016A00EDD64C /* EntitySenderInfoHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntitySenderInfoHelper.m; sourceTree = "<group>"; };
 		094373D5199D017B00EDD64C /* EntityHistoryInfoHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityHistoryInfoHelper.h; sourceTree = "<group>"; };
@@ -2835,6 +2859,14 @@
 		09D9BB471AEE933D009456ED /* images */ = {
 			isa = PBXGroup;
 			children = (
+				09434DD11B405FBC00DFDC33 /* v2-btn_star_0_bg.png */,
+				09434DD21B405FBC00DFDC33 /* v2-btn_star_0_bg@2x.png */,
+				09434DD31B405FBC00DFDC33 /* v2-btn_star_1_bg.png */,
+				09434DD41B405FBC00DFDC33 /* v2-btn_star_1_bg@2x.png */,
+				09434DD51B405FBC00DFDC33 /* v2-btn_star_2_bg.png */,
+				09434DD61B405FBC00DFDC33 /* v2-btn_star_2_bg@2x.png */,
+				09434DD71B405FBC00DFDC33 /* v2-btn_star_3_bg.png */,
+				09434DD81B405FBC00DFDC33 /* v2-btn_star_3_bg@2x.png */,
 				09D9BB481AEE933D009456ED /* v2-ack.png */,
 				09D9BB491AEE933D009456ED /* v2-ack@2x.png */,
 				09D9BB4A1AEE933D009456ED /* v2-acr.png */,
@@ -2877,6 +2909,8 @@
 				09D9BB711AEE933D009456ED /* v2-btn_right@2x.png */,
 				09D9BB721AEE933D009456ED /* v2-btn_set.png */,
 				09D9BB731AEE933D009456ED /* v2-btn_set@2x.png */,
+				09434DC91B4058D500DFDC33 /* v2-btn_star_bg.png */,
+				09434DCA1B4058D500DFDC33 /* v2-btn_star_bg@2x.png */,
 				09D9BB761AEE933D009456ED /* v2-btn_star_off.png */,
 				09D9BB771AEE933D009456ED /* v2-btn_star_off@2x.png */,
 				09D9BB741AEE933D009456ED /* v2-btn_star.png */,
@@ -2929,6 +2963,8 @@
 				09D9BBA01AEE933D009456ED /* v2-接送消息@2x.png */,
 				09D9BBA11AEE933D009456ED /* v2-校园公告.png */,
 				09D9BBA21AEE933D009456ED /* v2-校园公告@2x.png */,
+				09434DCB1B4058D500DFDC33 /* v2-校车接送.png */,
+				09434DCC1B4058D500DFDC33 /* v2-校车接送@2x.png */,
 				09D9BBA31AEE933D009456ED /* v2-每周食谱.png */,
 				09D9BBA41AEE933D009456ED /* v2-每周食谱@2x.png */,
 				09D9BBA51AEE933D009456ED /* v2-游戏.png */,
@@ -3343,6 +3379,7 @@
 				09E7097B1AF393B000628FF9 /* v2-点击头像弹出框.png in Resources */,
 				09D9BBEB1AEE933D009456ED /* v2-btn_发送回执.png in Resources */,
 				0934F06B18BF5B0800E30ECA /* btn-settings@2x.png in Resources */,
+				09434DDA1B405FBC00DFDC33 /* v2-btn_star_0_bg@2x.png in Resources */,
 				09D9BBCF1AEE933D009456ED /* v2-btn_day.png in Resources */,
 				090C9EC918C84FC000883DE0 /* CSKuleChildCell.xib in Resources */,
 				0934F06518BF5B0800E30ECA /* btn-func-7@2x.png in Resources */,
@@ -3501,9 +3538,11 @@
 				09D9BC1D1AEE933D009456ED /* v2-自我服务@2x.png in Resources */,
 				0934F06A18BF5B0800E30ECA /* btn-settings.png in Resources */,
 				09D9BBDD1AEE933D009456ED /* v2-btn_picture.png in Resources */,
+				09434DD01B4058D500DFDC33 /* v2-校车接送@2x.png in Resources */,
 				09D9BBFB1AEE933D009456ED /* v2-input_login_bg.png in Resources */,
 				09FE659818E06FF5008A1ED6 /* chat_head_icon@2x.png in Resources */,
 				09D9BC1C1AEE933D009456ED /* v2-自我服务.png in Resources */,
+				09434DDB1B405FBC00DFDC33 /* v2-btn_star_1_bg.png in Resources */,
 				0914E334199FBD9E00276ABA /* mic_2.png in Resources */,
 				09D9BBD31AEE933D009456ED /* v2-btn_gray.png in Resources */,
 				0934F05518BF5B0800E30ECA /* btn-back-pressed@2x.png in Resources */,
@@ -3520,6 +3559,7 @@
 				09F74CB11997C4F3001555D0 /* refresh.png in Resources */,
 				09F74CB41997C4F3001555D0 /* self.png in Resources */,
 				0934F06718BF5B0800E30ECA /* btn-func-8@2x.png in Resources */,
+				09434DCD1B4058D500DFDC33 /* v2-btn_star_bg.png in Resources */,
 				09D9BBE51AEE933D009456ED /* v2-btn_star_off.png in Resources */,
 				09142E1718E2B9D800E5848F /* rating-3stars.png in Resources */,
 				09F74C7F1997C4F3001555D0 /* checkbox_selected.png in Resources */,
@@ -3533,6 +3573,7 @@
 				0934F07518BF5B0800E30ECA /* class-input-bg@2x.png in Resources */,
 				09D9BC021AEE933D009456ED /* v2-启动界面.png in Resources */,
 				09FEA72718DC9D9600513C87 /* news-bg@2x.png in Resources */,
+				09434DCF1B4058D500DFDC33 /* v2-校车接送.png in Resources */,
 				0934F06218BF5B0800E30ECA /* btn-func-6.png in Resources */,
 				0942B1651AE3E559008D3BDA /* ELCAssetPicker.xib in Resources */,
 				09142E1218E2B9D800E5848F /* comments-bg@2x.png in Resources */,
@@ -3584,6 +3625,7 @@
 				0942B1641AE3E559008D3BDA /* ELCAlbumPickerController.xib in Resources */,
 				094F994E18E02A6100ACD196 /* btn-nav-right-pressed@2x.png in Resources */,
 				0934F08518BF5B0800E30ECA /* schedule-bg@2x.png in Resources */,
+				09434DDE1B405FBC00DFDC33 /* v2-btn_star_2_bg@2x.png in Resources */,
 				09416C9D18E41BF600DFEA44 /* bg-input-normal.png in Resources */,
 				09D9BBF41AEE933D009456ED /* v2-foot@2x.png in Resources */,
 				0934F05C18BF5B0800E30ECA /* btn-func-3.png in Resources */,
@@ -3595,6 +3637,7 @@
 				0934F08B18BF5B0800E30ECA /* settings-icon-change-pswd@2x.png in Resources */,
 				09142E1518E2B9D800E5848F /* rating-2stars.png in Resources */,
 				09CB08C719B0169E00F57A07 /* chating_right_1.png in Resources */,
+				09434DCE1B4058D500DFDC33 /* v2-btn_star_bg@2x.png in Resources */,
 				09D9BBFA1AEE933D009456ED /* v2-input_login@2x.png in Resources */,
 				0934F08218BF5B0800E30ECA /* recipe-cell-bg.png in Resources */,
 				09D9BC201AEE933D009456ED /* v2-进餐.png in Resources */,
@@ -3668,6 +3711,7 @@
 				09FE1EE319B5D53F0073D9D4 /* v3_8@2x.png in Resources */,
 				09BA1BA918BB2AB400760182 /* Images.xcassets in Resources */,
 				09D9BBE11AEE933D009456ED /* v2-btn_set.png in Resources */,
+				09434DDC1B405FBC00DFDC33 /* v2-btn_star_1_bg@2x.png in Resources */,
 				09416C9F18E41BF600DFEA44 /* icon-checkin.png in Resources */,
 				09E7097A1AF393B000628FF9 /* v2-pic-default@2x.png in Resources */,
 				0934F06118BF5B0800E30ECA /* btn-func-5@2x.png in Resources */,
@@ -3716,6 +3760,7 @@
 				090468FB18C7007600D0846E /* input-bg-0@2x.png in Resources */,
 				0911B1E118E015E9006D0588 /* default_child_head_icon.png in Resources */,
 				0942B1681AE3E559008D3BDA /* Overlay@2x.png in Resources */,
+				09434DD91B405FBC00DFDC33 /* v2-btn_star_0_bg.png in Resources */,
 				0934F06418BF5B0800E30ECA /* btn-func-7.png in Resources */,
 				09142DDA18E27E7600E5848F /* bannerSuccess@2x.png in Resources */,
 				09E709851AF3E61A00628FF9 /* v2-课程表表格-1.png in Resources */,
@@ -3727,6 +3772,7 @@
 				09E709701AF36C9700628FF9 /* v2-line.png in Resources */,
 				09FEA72018DC9D9600513C87 /* chating-text.png in Resources */,
 				09D9BC0F1AEE933D009456ED /* v2-接送消息@2x.png in Resources */,
+				09434DE01B405FBC00DFDC33 /* v2-btn_star_3_bg@2x.png in Resources */,
 				09A9EBCF18C08C7D00D83119 /* toolbar-bg@2x.png in Resources */,
 				09F74C861997C4F3001555D0 /* dining.png in Resources */,
 				0934F06F18BF5B0800E30ECA /* btn-type1@2x.png in Resources */,
@@ -3741,6 +3787,7 @@
 				0934F04F18BF5B0800E30ECA /* app-bg-type1@2x.png in Resources */,
 				0934F08118BF5B0800E30ECA /* notice-cell-bg@2x.png in Resources */,
 				09AC5A3D1AACBB2200C88ECE /* video_icon@2x.png in Resources */,
+				09434DDD1B405FBC00DFDC33 /* v2-btn_star_2_bg.png in Resources */,
 				09142E2918E2DE1B00E5848F /* arrow-left-1@2x.png in Resources */,
 				09142E0918E2B9D800E5848F /* assess-game.png in Resources */,
 				09F74C981997C4F3001555D0 /* ic_launcher.png in Resources */,
@@ -3758,6 +3805,7 @@
 				09416CA018E41BF600DFEA44 /* icon-checkin@2x.png in Resources */,
 				09F74CB61997C4F3001555D0 /* setting.png in Resources */,
 				09D9BBDE1AEE933D009456ED /* v2-btn_picture@2x.png in Resources */,
+				09434DDF1B405FBC00DFDC33 /* v2-btn_star_3_bg.png in Resources */,
 				09D9BBB71AEE933D009456ED /* v2-ack.png in Resources */,
 				09BA1B9B18BB2AB300760182 /* InfoPlist.strings in Resources */,
 				0934EFF818BF559900E30ECA /* guide-3-568h.png in Resources */,

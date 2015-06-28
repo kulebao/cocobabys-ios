@@ -305,8 +305,11 @@
 
 - (UIImage*)ratingImage:(NSInteger)rate {
     UIImage* img = nil;
-    
-    NSArray* imgNames = @[@"rating-bg.png", @"rating-1star.png", @"rating-2stars.png", @"rating-3stars.png"];
+
+    NSArray* imgNames = @[@"v2-btn_star_0_bg.png",
+                          @"v2-btn_star_1_bg.png",
+                          @"v2-btn_star_2_bg.png",
+                          @"v2-btn_star_3_bg.png"];
     
     if (rate >=0 && rate < imgNames.count) {
         img = [UIImage imageNamed:imgNames[rate]];

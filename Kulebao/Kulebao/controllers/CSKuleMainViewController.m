@@ -311,29 +311,33 @@
 - (void)setupModules {
     if (_schoolInfo && [_schoolInfo hasProperty:@"hideVideo"]) {
         _moduleInfos = @[
-                         @[@"接送消息", @"v2-接送消息.png", @(kKuleModuleCheckin)],
                          @[@"校园公告", @"v2-校园公告.png", @(kKuleModuleNews)],
-                         @[@"在园表现", @"v2-在园表现.png", @(kKuleModuleAssess)],
-                         
+                         @[@"课程表",   @"v2-课程表.png", @(kKuleModuleSchedule)],
                          @[@"每周食谱", @"v2-每周食谱.png", @(kKuleModuleRecipe)],
-                         @[@"成长经历", @"v2-成长经历.png", @(kKuleModuleHistory)],
-                         //@[@"看宝宝", @"v2-看宝宝.png", @(kKuleModuleCCTV)],
                          
                          @[@"家园互动", @"v2-家园互动.png", @(kKuleModuleChating)],
-                         @[@"课程表",  @"v2-课程表.png", @(kKuleModuleSchedule)]];
+                         @[@"成长经历", @"v2-成长经历.png", @(kKuleModuleHistory)],
+                         @[@"接送消息", @"v2-接送消息.png", @(kKuleModuleCheckin)],
+                         
+                         @[@"在园表现",  @"v2-在园表现.png", @(kKuleModuleAssess)],
+                         @[@"校车接送",   @"v2-校车接送.png", @(kKuleModuleBus)],
+                         //@[@"看宝宝",   @"v2-看宝宝.png", @(kKuleModuleCCTV)]
+                         ];
     }
     else {
         _moduleInfos = @[
-                         @[@"接送消息", @"v2-接送消息.png", @(kKuleModuleCheckin)],
                          @[@"校园公告", @"v2-校园公告.png", @(kKuleModuleNews)],
-                         @[@"在园表现", @"v2-在园表现.png", @(kKuleModuleAssess)],
-                         
+                         @[@"课程表",   @"v2-课程表.png", @(kKuleModuleSchedule)],
                          @[@"每周食谱", @"v2-每周食谱.png", @(kKuleModuleRecipe)],
-                         @[@"成长经历", @"v2-成长经历.png", @(kKuleModuleHistory)],
-                         @[@"看宝宝", @"v2-看宝宝.png", @(kKuleModuleCCTV)],
                          
                          @[@"家园互动", @"v2-家园互动.png", @(kKuleModuleChating)],
-                         @[@"课程表",  @"v2-课程表.png", @(kKuleModuleSchedule)]];
+                         @[@"成长经历", @"v2-成长经历.png", @(kKuleModuleHistory)],
+                         @[@"接送消息", @"v2-接送消息.png", @(kKuleModuleCheckin)],
+                         
+                         @[@"在园表现",  @"v2-在园表现.png", @(kKuleModuleAssess)],
+                         @[@"校车接送",   @"v2-校车接送.png", @(kKuleModuleBus)],
+                         @[@"看宝宝",   @"v2-看宝宝.png", @(kKuleModuleCCTV)]
+                         ];
     }
     
     _badges = [NSMutableArray arrayWithCapacity:_moduleInfos.count];
@@ -425,7 +429,6 @@
         [self.imgChildPortrait  sd_setImageWithURL:qiniuImgUrl
                                   placeholderImage:placeholderImage
                                            options:options];
-        
     }
     else {
         [gApp alert:@"没有宝宝信息。"];
@@ -772,7 +775,7 @@
         @"segue.cctv",
     };
     
-    if (moduleType < kKuleModuleSize && moduleType < sizeof(segueNames)) {
+    if (moduleType < kKuleModuleSize && moduleType < (sizeof(segueNames)/sizeof(NSString*))) {
         if ([self checkModuleTypeForMemberStatus:moduleType]) {
             switch (moduleType) {
                 case kKuleModuleNews:
@@ -819,6 +822,9 @@
         else {
             //            [gApp alert:@"权限不足，请联系幼儿园开通权限，谢谢。"];
         }
+    }
+    else {
+        CSLog(@"未响应的模块%@", @(moduleType));
     }
 }
 

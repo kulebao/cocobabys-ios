@@ -335,6 +335,9 @@
 		0942B1661AE3E559008D3BDA /* ELCAssetTablePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0942B15A1AE3E559008D3BDA /* ELCAssetTablePicker.xib */; };
 		0942B1671AE3E559008D3BDA /* Overlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 0942B15B1AE3E559008D3BDA /* Overlay.png */; };
 		0942B1681AE3E559008D3BDA /* Overlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0942B15C1AE3E559008D3BDA /* Overlay@2x.png */; };
+		09434DC41B404DA300DFDC33 /* BaiduMapAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09434DC31B404DA300DFDC33 /* BaiduMapAPI.framework */; };
+		09434DC61B404DFA00DFDC33 /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 09434DC51B404DFA00DFDC33 /* mapapi.bundle */; };
+		09434DC81B404E3E00DFDC33 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09434DC71B404E3D00DFDC33 /* OpenGLES.framework */; };
 		094373D4199D016A00EDD64C /* EntitySenderInfoHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 094373D3199D016A00EDD64C /* EntitySenderInfoHelper.m */; };
 		094373D7199D017B00EDD64C /* EntityHistoryInfoHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 094373D6199D017B00EDD64C /* EntityHistoryInfoHelper.m */; };
 		094373DA199D018900EDD64C /* EntityMediaInfoHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 094373D9199D018900EDD64C /* EntityMediaInfoHelper.m */; };
@@ -1228,6 +1231,9 @@
 		0942B15A1AE3E559008D3BDA /* ELCAssetTablePicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ELCAssetTablePicker.xib; sourceTree = "<group>"; };
 		0942B15B1AE3E559008D3BDA /* Overlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Overlay.png; sourceTree = "<group>"; };
 		0942B15C1AE3E559008D3BDA /* Overlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Overlay@2x.png"; sourceTree = "<group>"; };
+		09434DC31B404DA300DFDC33 /* BaiduMapAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BaiduMapAPI.framework; sourceTree = "<group>"; };
+		09434DC51B404DFA00DFDC33 /* mapapi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = mapapi.bundle; sourceTree = "<group>"; };
+		09434DC71B404E3D00DFDC33 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		094373D2199D016A00EDD64C /* EntitySenderInfoHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntitySenderInfoHelper.h; sourceTree = "<group>"; };
 		094373D3199D016A00EDD64C /* EntitySenderInfoHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntitySenderInfoHelper.m; sourceTree = "<group>"; };
 		094373D5199D017B00EDD64C /* EntityHistoryInfoHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityHistoryInfoHelper.h; sourceTree = "<group>"; };
@@ -1698,6 +1704,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09434DC81B404E3E00DFDC33 /* OpenGLES.framework in Frameworks */,
 				092B86F51AAFF01200C9C4F0 /* libiconv.dylib in Frameworks */,
 				0979FE311AAF532D00B58F41 /* MediaPlayer.framework in Frameworks */,
 				0979FE2F1AAF532500B58F41 /* CoreMedia.framework in Frameworks */,
@@ -1712,6 +1719,7 @@
 				0902782818C9C060002B9644 /* MessageUI.framework in Frameworks */,
 				09F74CD21997D10C001555D0 /* libopencore-amrwb.a in Frameworks */,
 				09BA1C2E18BB412600760182 /* MobileCoreServices.framework in Frameworks */,
+				09434DC41B404DA300DFDC33 /* BaiduMapAPI.framework in Frameworks */,
 				09AC5A321AAC9BA200C88ECE /* libopencore-amrnb.a in Frameworks */,
 				09AC5A331AAC9BAA00C88ECE /* libHM_hmsdk.a in Frameworks */,
 				094591221B3F05D300EF4458 /* libBPush.a in Frameworks */,
@@ -2531,6 +2539,15 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		09434DC21B404D9300DFDC33 /* BaiduMap */ = {
+			isa = PBXGroup;
+			children = (
+				09434DC51B404DFA00DFDC33 /* mapapi.bundle */,
+				09434DC31B404DA300DFDC33 /* BaiduMapAPI.framework */,
+			);
+			path = BaiduMap;
+			sourceTree = "<group>";
+		};
 		0960BFDE19B05818008768A6 /* TSFileCache */ = {
 			isa = PBXGroup;
 			children = (
@@ -2572,6 +2589,7 @@
 		09BA1B8F18BB2AB300760182 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				09434DC71B404E3D00DFDC33 /* OpenGLES.framework */,
 				092B86F41AAFF01200C9C4F0 /* libiconv.dylib */,
 				0979FE301AAF532D00B58F41 /* MediaPlayer.framework */,
 				0979FE2E1AAF532500B58F41 /* CoreMedia.framework */,
@@ -2655,6 +2673,7 @@
 		09BA1BC918BB2FC700760182 /* Venders */ = {
 			isa = PBXGroup;
 			children = (
+				09434DC21B404D9300DFDC33 /* BaiduMap */,
 				0942B1451AE3E559008D3BDA /* ELCImagePicker */,
 				0901CDA11ABEFF070044838A /* EGOCache */,
 				0960CE7519B0B05700B3B51E /* BDMultiDownloader */,
@@ -3358,6 +3377,7 @@
 				09D9BC0D1AEE933D009456ED /* v2-成长经历@2x.png in Resources */,
 				09F74CBC1997C4F3001555D0 /* star_grey.png in Resources */,
 				09142E2F18E2DE1B00E5848F /* arrow-right@2x.png in Resources */,
+				09434DC61B404DFA00DFDC33 /* mapapi.bundle in Resources */,
 				09F74CBF1997C4F3001555D0 /* text_normal.9.png in Resources */,
 				09F74CBD1997C4F3001555D0 /* star_red.png in Resources */,
 				09E709791AF393B000628FF9 /* v2-pic-default.png in Resources */,
@@ -4133,6 +4153,10 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Venders/BaiduMap",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Kulebao/youlebao-Prefix.pch";
 				GCC_VERSION = "";
@@ -4163,6 +4187,10 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Venders/BaiduMap",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Kulebao/youlebao-Prefix.pch";
 				GCC_VERSION = "";

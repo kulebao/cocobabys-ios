@@ -20,6 +20,7 @@
 
 @interface CSKuleEngine() {
     NSMutableDictionary* _senderProfiles;
+    BMKMapManager* _mapManager;
 }
 
 @property (strong, nonatomic) CSHttpClient* httpClient;
@@ -64,6 +65,14 @@
     
     // 添加百度统计
     [self setupBaiduMobStat];
+    
+    // 添加百度地图
+    _mapManager = [[BMKMapManager alloc] init];
+    // 如果要关注网络及授权验证事件，请设定     generalDelegate参数
+    BOOL ret = [_mapManager start:@"oGpNadkf2d8od1xoFMUnnRmx"  generalDelegate:nil];
+    if (!ret) {
+        CSLog(@"BMKMapManager start failed!");
+    }
     
     // iOS8 下需要使用新的 API
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {

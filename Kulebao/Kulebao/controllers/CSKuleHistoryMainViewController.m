@@ -148,7 +148,7 @@
 #pragma mark - CSContentEditorViewControllerDelegate
 - (void)contentEditorViewController:(CSContentEditorViewController*)ctrl finishEditText:(NSString*)text withImages:(NSArray*)imageList {
     
-    _historyContent = text;
+    _historyContent = [text trim];
     _imageUrlList = [NSMutableArray array];
     _imageList = [NSMutableArray arrayWithArray:imageList];
     
@@ -156,14 +156,21 @@
         [self doUploadImage];
     }
     else {
-        [self doSendHistory];
+        if (_historyContent.length > 0) {
+            [self doSendHistory];
+        }
+        else {
+            [gApp shortAlert:@"发布内容不能为空"];
+        }
     }
 }
 
 - (void)contentEditorViewController:(CSContentEditorViewController*)ctrl
-                    finishWithVideo:(NSURL*)videoLocalUrl {
+                     finishEditText:(NSString*)text
+                          withVideo:(NSURL*)videoLocalUrl {
     _videoFileUrl = videoLocalUrl;
     _videoUrl = nil;
+    _historyContent = [text trim];
     
     if (_videoFileUrl) {
         [self doUploadVideo];

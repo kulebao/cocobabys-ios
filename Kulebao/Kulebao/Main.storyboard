@@ -1798,7 +1798,7 @@
                                     <outlet property="viewImageContainer" destination="d00-W6-3Pa" id="gBi-4y-sS1"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CSKuleHistoryVideoItemTableViewCell" rowHeight="200" id="mVv-K6-RyP" customClass="CSKuleHistoryVideoItemTableViewCell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CSKuleHistoryVideoItemTableViewCell" rowHeight="220" id="mVv-K6-RyP" customClass="CSKuleHistoryVideoItemTableViewCell">
                                 <rect key="frame" x="0.0" y="278" width="320" height="200"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mVv-K6-RyP" id="Z58-A0-Ef2">
@@ -1841,15 +1841,29 @@
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cjo-Yz-FHy">
+                                            <rect key="frame" x="244" y="187" width="64" height="24"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="24" id="BKW-RY-zVa"/>
+                                                <constraint firstAttribute="width" constant="64" id="ay2-73-dwU"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <state key="normal" title="分享">
+                                                <color key="titleColor" red="0.0039215688589999999" green="0.72156864399999998" blue="0.93725496529999996" alpha="1" colorSpace="deviceRGB"/>
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="xOG-6C-BGX" firstAttribute="top" secondItem="ygK-9y-L45" secondAttribute="bottom" constant="4" id="09l-s2-nN3"/>
                                         <constraint firstItem="td9-fo-PMn" firstAttribute="leading" secondItem="Z58-A0-Ef2" secondAttribute="leading" constant="8" id="2yK-no-O6Z"/>
+                                        <constraint firstAttribute="trailing" secondItem="Cjo-Yz-FHy" secondAttribute="trailing" constant="12" id="4s7-EL-Ass"/>
                                         <constraint firstItem="ygK-9y-L45" firstAttribute="leading" secondItem="Cw4-Go-aOl" secondAttribute="leading" id="6g6-CN-Upb"/>
                                         <constraint firstItem="ygK-9y-L45" firstAttribute="leading" secondItem="xOG-6C-BGX" secondAttribute="leading" id="9pn-ow-gls"/>
                                         <constraint firstItem="xOG-6C-BGX" firstAttribute="centerY" secondItem="Ii7-fW-vXv" secondAttribute="centerY" id="Ec5-Uj-HjT"/>
                                         <constraint firstItem="Cw4-Go-aOl" firstAttribute="top" secondItem="Z58-A0-Ef2" secondAttribute="top" constant="8" id="FbK-Lk-cfw"/>
                                         <constraint firstItem="td9-fo-PMn" firstAttribute="top" secondItem="Z58-A0-Ef2" secondAttribute="top" constant="8" id="Fy8-nD-sav"/>
+                                        <constraint firstItem="Cjo-Yz-FHy" firstAttribute="top" secondItem="xOG-6C-BGX" secondAttribute="bottom" constant="8" id="LNz-xw-b5E"/>
                                         <constraint firstAttribute="trailing" secondItem="Cw4-Go-aOl" secondAttribute="trailing" constant="8" id="NKT-gW-G9m"/>
                                         <constraint firstItem="ygK-9y-L45" firstAttribute="trailing" secondItem="Cw4-Go-aOl" secondAttribute="trailing" id="Xdc-5b-gxL"/>
                                         <constraint firstItem="Cw4-Go-aOl" firstAttribute="leading" secondItem="td9-fo-PMn" secondAttribute="trailing" constant="8" id="a0i-g9-pGd"/>

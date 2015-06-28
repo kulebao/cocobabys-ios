@@ -91,7 +91,7 @@
 }
 
 + (CGFloat)calcHeight:(EntityHistoryInfo*)historyInfo {
-    return 200;
+    return 220;
 }
 
 - (void)updateUI {

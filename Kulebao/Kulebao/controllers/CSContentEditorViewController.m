@@ -403,8 +403,10 @@
 }
 
 - (void)convertFinish:(NSURL*)mp4FileURL {
-    if ([_delegate respondsToSelector:@selector(contentEditorViewController:finishWithVideo:)] && mp4FileURL) {
-        [_delegate contentEditorViewController:self finishWithVideo:mp4FileURL];
+    if ([_delegate respondsToSelector:@selector(contentEditorViewController:finishEditText:withVideo:)] && mp4FileURL) {
+        [_delegate contentEditorViewController:self
+                                finishEditText:self.textContent.text
+                                     withVideo:mp4FileURL];
     }
 }
 

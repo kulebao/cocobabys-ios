@@ -20,7 +20,9 @@
 #import "MBProgressHUD.h"
 #import "AHAlertView.h"
 
-@interface CSKuleHistoryVideoItemTableViewCell() {
+#import <ShareSDK/ShareSDK.h>
+
+@interface CSKuleHistoryVideoItemTableViewCell()  <ISSShareViewDelegate> {
     NSURL* _videoURL;
 }
 
@@ -329,6 +331,58 @@
     [_playerItem seekToTime:kCMTimeZero];
     self.btnPlay.alpha = 1.0f;
     [self setNeedsDisplay];
+}
+
+#pragma mark - Share
+- (IBAction)onBtnShareClicked:(id)sender {
+    NSString *imagePath = nil;
+    
+    //构造分享内容
+    NSString* content = @"测试content";
+    id<ISSContent> publishContent = [ShareSDK content:content
+                                       defaultContent:@"分享defaultContent"
+                                                image:[ShareSDK imageWithPath:imagePath]
+                                                title:@"分享title"
+                                                  url:@"http://www.cocobabys.com"
+                                          description:@"分享description"
+                                            mediaType:SSPublishContentMediaTypeText];
+    
+    NSArray *shareList = [ShareSDK getShareListWithType:
+                          ShareTypeWeixiSession,
+                          ShareTypeWeixiTimeline,
+                          nil];
+    
+    id<ISSShareOptions> shareOptions = [ShareSDK defaultShareOptionsWithTitle:nil
+                                                              oneKeyShareList:shareList
+                                                               qqButtonHidden:YES
+                                                        wxSessionButtonHidden:YES
+                                                       wxTimelineButtonHidden:YES
+                                                         showKeyboardOnAppear:NO
+                                                            shareViewDelegate:self
+                                                          friendsViewDelegate:nil
+                                                        picViewerViewDelegate:nil];
+    
+    //弹出分享菜单
+    [ShareSDK showShareActionSheet:nil
+                         shareList:[shareOptions oneKeyShareList]
+                           content:publishContent
+                     statusBarTips:YES
+                       authOptions:nil
+                      shareOptions:shareOptions
+                            result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
+                                
+                                if (state == SSResponseStateSuccess) {
+                                    NSLog(NSLocalizedString(@"TEXT_ShARE_SUC", @"分享成功"));
+                                    
+                                }
+                                else if (state == SSResponseStateFail)
+                                {
+                                    NSLog(NSLocalizedString(@"TEXT_ShARE_FAI", @"分享失败,错误码:%d,错误描述:%@"), [error errorCode], [error errorDescription]);
+                                }
+                            }];
+}
+
+- (void)viewOnWillDisplay:(UIViewController *)viewController shareType:(ShareType)shareType{
 }
 
 @end

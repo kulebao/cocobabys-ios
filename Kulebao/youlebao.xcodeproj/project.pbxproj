@@ -424,6 +424,19 @@
 		09BA1C2A18BB3F8400760182 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 09BA1C2018BB3F8400760182 /* AFXMLRequestOperation.m */; };
 		09BA1C2E18BB412600760182 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09BA1C2D18BB412600760182 /* MobileCoreServices.framework */; };
 		09BA1C3318BB429100760182 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09BA1C3218BB429100760182 /* Main.storyboard */; };
+		09C00FA21B443DA400FC1474 /* WeChatConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C00F901B443DA400FC1474 /* WeChatConnection.framework */; };
+		09C00FA31B443DA400FC1474 /* AGCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C00F921B443DA400FC1474 /* AGCommon.framework */; };
+		09C00FA41B443DA400FC1474 /* ShareSDKLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 09C00F931B443DA400FC1474 /* ShareSDKLocalizable.strings */; };
+		09C00FA51B443DA400FC1474 /* Resource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 09C00F951B443DA400FC1474 /* Resource.bundle */; };
+		09C00FA61B443DA400FC1474 /* ShareSDKCoreService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C00F961B443DA400FC1474 /* ShareSDKCoreService.framework */; };
+		09C00FA71B443DA400FC1474 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C00F9A1B443DA400FC1474 /* libWeChatSDK.a */; };
+		09C00FA81B443DA400FC1474 /* ShareSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C00F9D1B443DA400FC1474 /* ShareSDK.framework */; };
+		09C00FA91B443DA400FC1474 /* ShareSDKFlatShareViewUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 09C00F9F1B443DA400FC1474 /* ShareSDKFlatShareViewUI.bundle */; };
+		09C00FAA1B443DA400FC1474 /* ShareSDKFlatShareViewUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C00FA01B443DA400FC1474 /* ShareSDKFlatShareViewUI.framework */; };
+		09C00FAB1B443DA400FC1474 /* ShareSDKShareActionSheet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C00FA11B443DA400FC1474 /* ShareSDKShareActionSheet.framework */; };
+		09C00FAD1B44407600FC1474 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C00FAC1B44407600FC1474 /* libicucore.dylib */; };
+		09C00FAF1B44408D00FC1474 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C00FAE1B44408C00FC1474 /* Security.framework */; };
+		09C00FB21B4454D500FC1474 /* CSKuleBusMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C00FB11B4454D500FC1474 /* CSKuleBusMainViewController.m */; };
 		09C1C75F18BD92990040B06D /* AFJSONRequestOperation+CSKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C1C75C18BD92990040B06D /* AFJSONRequestOperation+CSKit.m */; };
 		09C1C76018BD92990040B06D /* CSHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C1C75E18BD92990040B06D /* CSHttpClient.m */; };
 		09C1C76618BD973B0040B06D /* NSDictionary+CSKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C1C76518BD973B0040B06D /* NSDictionary+CSKit.m */; };
@@ -1365,6 +1378,23 @@
 		09BA1C3218BB429100760182 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		09BA1C3418BB43EC00760182 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		09BA1C3518BB43EC00760182 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		09C00F901B443DA400FC1474 /* WeChatConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WeChatConnection.framework; sourceTree = "<group>"; };
+		09C00F921B443DA400FC1474 /* AGCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AGCommon.framework; sourceTree = "<group>"; };
+		09C00F941B443DA400FC1474 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ShareSDKLocalizable.strings; sourceTree = "<group>"; };
+		09C00F951B443DA400FC1474 /* Resource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Resource.bundle; sourceTree = "<group>"; };
+		09C00F961B443DA400FC1474 /* ShareSDKCoreService.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKCoreService.framework; sourceTree = "<group>"; };
+		09C00F971B443DA400FC1474 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/ShareSDKLocalizable.strings"; sourceTree = "<group>"; };
+		09C00F9A1B443DA400FC1474 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		09C00F9B1B443DA400FC1474 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		09C00F9C1B443DA400FC1474 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		09C00F9D1B443DA400FC1474 /* ShareSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDK.framework; sourceTree = "<group>"; };
+		09C00F9F1B443DA400FC1474 /* ShareSDKFlatShareViewUI.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ShareSDKFlatShareViewUI.bundle; sourceTree = "<group>"; };
+		09C00FA01B443DA400FC1474 /* ShareSDKFlatShareViewUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKFlatShareViewUI.framework; sourceTree = "<group>"; };
+		09C00FA11B443DA400FC1474 /* ShareSDKShareActionSheet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKShareActionSheet.framework; sourceTree = "<group>"; };
+		09C00FAC1B44407600FC1474 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		09C00FAE1B44408C00FC1474 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		09C00FB01B4454D500FC1474 /* CSKuleBusMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleBusMainViewController.h; sourceTree = "<group>"; };
+		09C00FB11B4454D500FC1474 /* CSKuleBusMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleBusMainViewController.m; sourceTree = "<group>"; };
 		09C1C75B18BD92990040B06D /* AFJSONRequestOperation+CSKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AFJSONRequestOperation+CSKit.h"; sourceTree = "<group>"; };
 		09C1C75C18BD92990040B06D /* AFJSONRequestOperation+CSKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AFJSONRequestOperation+CSKit.m"; sourceTree = "<group>"; };
 		09C1C75D18BD92990040B06D /* CSHttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSHttpClient.h; sourceTree = "<group>"; };
@@ -1728,9 +1758,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09C00FAF1B44408D00FC1474 /* Security.framework in Frameworks */,
+				09C00FAD1B44407600FC1474 /* libicucore.dylib in Frameworks */,
+				09BA1C0418BB34B000760182 /* CoreTelephony.framework in Frameworks */,
 				09434DC81B404E3E00DFDC33 /* OpenGLES.framework in Frameworks */,
 				092B86F51AAFF01200C9C4F0 /* libiconv.dylib in Frameworks */,
 				0979FE311AAF532D00B58F41 /* MediaPlayer.framework in Frameworks */,
+				09C00FA81B443DA400FC1474 /* ShareSDK.framework in Frameworks */,
 				0979FE2F1AAF532500B58F41 /* CoreMedia.framework in Frameworks */,
 				09C3AC2C199E21D400A6251C /* libc++.dylib in Frameworks */,
 				09C3AC29199E148D00A6251C /* CFNetwork.framework in Frameworks */,
@@ -1738,18 +1772,23 @@
 				09F74CC51997CB1E001555D0 /* AVFoundation.framework in Frameworks */,
 				0902CAA818F4200A001901A8 /* AudioToolbox.framework in Frameworks */,
 				09142DBB18E274B400E5848F /* CoreLocation.framework in Frameworks */,
+				09C00FA61B443DA400FC1474 /* ShareSDKCoreService.framework in Frameworks */,
+				09C00FAA1B443DA400FC1474 /* ShareSDKFlatShareViewUI.framework in Frameworks */,
+				09C00FA21B443DA400FC1474 /* WeChatConnection.framework in Frameworks */,
 				09148E5418DAEED300D08F63 /* CoreData.framework in Frameworks */,
+				09C00FAB1B443DA400FC1474 /* ShareSDKShareActionSheet.framework in Frameworks */,
+				09C00FA31B443DA400FC1474 /* AGCommon.framework in Frameworks */,
 				090CC93218DA8A96007781CB /* CoreText.framework in Frameworks */,
 				0902782818C9C060002B9644 /* MessageUI.framework in Frameworks */,
 				09F74CD21997D10C001555D0 /* libopencore-amrwb.a in Frameworks */,
 				09BA1C2E18BB412600760182 /* MobileCoreServices.framework in Frameworks */,
+				09C00FA71B443DA400FC1474 /* libWeChatSDK.a in Frameworks */,
 				09434DC41B404DA300DFDC33 /* BaiduMapAPI.framework in Frameworks */,
 				09AC5A321AAC9BA200C88ECE /* libopencore-amrnb.a in Frameworks */,
 				09AC5A331AAC9BAA00C88ECE /* libHM_hmsdk.a in Frameworks */,
 				094591221B3F05D300EF4458 /* libBPush.a in Frameworks */,
 				09BA1C0818BB34BD00760182 /* SystemConfiguration.framework in Frameworks */,
 				09BA1C0618BB34B500760182 /* libz.dylib in Frameworks */,
-				09BA1C0418BB34B000760182 /* CoreTelephony.framework in Frameworks */,
 				09BA1BEA18BB2FE100760182 /* QuartzCore.framework in Frameworks */,
 				09142DAF18E2713C00E5848F /* libBaiduMobStat.a in Frameworks */,
 				09BA1B9318BB2AB300760182 /* CoreGraphics.framework in Frameworks */,
@@ -2488,6 +2527,8 @@
 				093FB8F21A83BD8500A589A8 /* CSKuleDevSettingsViewController.m */,
 				0932A67C1AFA870E00961861 /* CSKuleDeveloperSettingsViewController.h */,
 				0932A67D1AFA870E00961861 /* CSKuleDeveloperSettingsViewController.m */,
+				09C00FB01B4454D500FC1474 /* CSKuleBusMainViewController.h */,
+				09C00FB11B4454D500FC1474 /* CSKuleBusMainViewController.m */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -2613,6 +2654,8 @@
 		09BA1B8F18BB2AB300760182 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				09C00FAE1B44408C00FC1474 /* Security.framework */,
+				09C00FAC1B44407600FC1474 /* libicucore.dylib */,
 				09434DC71B404E3D00DFDC33 /* OpenGLES.framework */,
 				092B86F41AAFF01200C9C4F0 /* libiconv.dylib */,
 				0979FE301AAF532D00B58F41 /* MediaPlayer.framework */,
@@ -2697,6 +2740,7 @@
 		09BA1BC918BB2FC700760182 /* Venders */ = {
 			isa = PBXGroup;
 			children = (
+				09C00F8E1B443DA400FC1474 /* ShareSDK */,
 				09434DC21B404D9300DFDC33 /* BaiduMap */,
 				0942B1451AE3E559008D3BDA /* ELCImagePicker */,
 				0901CDA11ABEFF070044838A /* EGOCache */,
@@ -2803,6 +2847,65 @@
 				093CD6B518D9771D0025972C /* UIImageView+AFNetworking.m */,
 			);
 			path = AFNetworking;
+			sourceTree = "<group>";
+		};
+		09C00F8E1B443DA400FC1474 /* ShareSDK */ = {
+			isa = PBXGroup;
+			children = (
+				09C00F8F1B443DA400FC1474 /* Connection */,
+				09C00F911B443DA400FC1474 /* Core */,
+				09C00F981B443DA400FC1474 /* Extend */,
+				09C00F9D1B443DA400FC1474 /* ShareSDK.framework */,
+				09C00F9E1B443DA400FC1474 /* UI */,
+			);
+			path = ShareSDK;
+			sourceTree = "<group>";
+		};
+		09C00F8F1B443DA400FC1474 /* Connection */ = {
+			isa = PBXGroup;
+			children = (
+				09C00F901B443DA400FC1474 /* WeChatConnection.framework */,
+			);
+			path = Connection;
+			sourceTree = "<group>";
+		};
+		09C00F911B443DA400FC1474 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				09C00F921B443DA400FC1474 /* AGCommon.framework */,
+				09C00F931B443DA400FC1474 /* ShareSDKLocalizable.strings */,
+				09C00F951B443DA400FC1474 /* Resource.bundle */,
+				09C00F961B443DA400FC1474 /* ShareSDKCoreService.framework */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		09C00F981B443DA400FC1474 /* Extend */ = {
+			isa = PBXGroup;
+			children = (
+				09C00F991B443DA400FC1474 /* WeChatSDK */,
+			);
+			path = Extend;
+			sourceTree = "<group>";
+		};
+		09C00F991B443DA400FC1474 /* WeChatSDK */ = {
+			isa = PBXGroup;
+			children = (
+				09C00F9A1B443DA400FC1474 /* libWeChatSDK.a */,
+				09C00F9B1B443DA400FC1474 /* WXApi.h */,
+				09C00F9C1B443DA400FC1474 /* WXApiObject.h */,
+			);
+			path = WeChatSDK;
+			sourceTree = "<group>";
+		};
+		09C00F9E1B443DA400FC1474 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				09C00F9F1B443DA400FC1474 /* ShareSDKFlatShareViewUI.bundle */,
+				09C00FA01B443DA400FC1474 /* ShareSDKFlatShareViewUI.framework */,
+				09C00FA11B443DA400FC1474 /* ShareSDKShareActionSheet.framework */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 		09C1C75A18BD92020040B06D /* net */ = {
@@ -3361,6 +3464,7 @@
 				09D9BC091AEE933D009456ED /* v2-家园互动@2x.png in Resources */,
 				0934F05E18BF5B0800E30ECA /* btn-func-4.png in Resources */,
 				09D9BC1B1AEE933D009456ED /* v2-礼貌@2x.png in Resources */,
+				09C00FA91B443DA400FC1474 /* ShareSDKFlatShareViewUI.bundle in Resources */,
 				0934EFFC18BF559900E30ECA /* guide-4-568h.png in Resources */,
 				09142E0318E2B9D800E5848F /* assess-dining.png in Resources */,
 				09142E1818E2B9D800E5848F /* rating-3stars@2x.png in Resources */,
@@ -3612,6 +3716,7 @@
 				09D9BC061AEE933D009456ED /* v2-头像框.png in Resources */,
 				09416C9918E41BF600DFEA44 /* bg-2.png in Resources */,
 				09A9EBCA18C08C7D00D83119 /* img-tree-type2.png in Resources */,
+				09C00FA41B443DA400FC1474 /* ShareSDKLocalizable.strings in Resources */,
 				0914E337199FBD9E00276ABA /* mic_5.png in Resources */,
 				09D9BBD11AEE933D009456ED /* v2-btn_go.png in Resources */,
 				090C9ED018C8550500883DE0 /* img-icon@2x.png in Resources */,
@@ -3840,6 +3945,7 @@
 				0934EFF718BF559900E30ECA /* guide-2@2x.png in Resources */,
 				09E7097E1AF393B000628FF9 /* v2-食谱@2x.png in Resources */,
 				09F74CC31997C4F3001555D0 /* write_chat.png in Resources */,
+				09C00FA51B443DA400FC1474 /* Resource.bundle in Resources */,
 				09FE1ED919B5D53F0073D9D4 /* v3_3@2x.png in Resources */,
 				0934F06018BF5B0800E30ECA /* btn-func-5.png in Resources */,
 				09F74C961997C4F3001555D0 /* homework_item.png in Resources */,
@@ -3891,6 +3997,7 @@
 				0942B1601AE3E559008D3BDA /* ELCAssetTablePicker.m in Sources */,
 				09ED59BC18CDC5E800187585 /* CSKuleCookbookInfo.m in Sources */,
 				09FFB5F118D6B2E100F07B0A /* CSKuleWeekScheduleInfo.m in Sources */,
+				09C00FB21B4454D500FC1474 /* CSKuleBusMainViewController.m in Sources */,
 				0901207219338B3800CE506E /* UIImage+CSExtends.m in Sources */,
 				0904553219BDB8CA00FEF2C9 /* CSKuleVideoMember.m in Sources */,
 				090FC122199B3FC300C3A31A /* PaintingView.m in Sources */,
@@ -4119,6 +4226,15 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
+		09C00F931B443DA400FC1474 /* ShareSDKLocalizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				09C00F941B443DA400FC1474 /* en */,
+				09C00F971B443DA400FC1474 /* zh-Hans */,
+			);
+			name = ShareSDKLocalizable.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -4204,6 +4320,10 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Venders/BaiduMap",
+					"$(PROJECT_DIR)/Venders/ShareSDK/Connection",
+					"$(PROJECT_DIR)/Venders/ShareSDK/Core",
+					"$(PROJECT_DIR)/Venders/ShareSDK",
+					"$(PROJECT_DIR)/Venders/ShareSDK/UI",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Kulebao/youlebao-Prefix.pch";
@@ -4216,6 +4336,7 @@
 					"$(PROJECT_DIR)/Venders/libBPush",
 					"/Users/xinus/xin.github/Kulebao-iPhone/YouJiaoBao/Venders/opencore-amr-0.1.3/lib",
 					"/Users/xinus/xin.github/Kulebao-iPhone/Common/hmsdk-v2",
+					"$(PROJECT_DIR)/Venders/ShareSDK/Extend/WeChatSDK",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
@@ -4238,6 +4359,10 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Venders/BaiduMap",
+					"$(PROJECT_DIR)/Venders/ShareSDK/Connection",
+					"$(PROJECT_DIR)/Venders/ShareSDK/Core",
+					"$(PROJECT_DIR)/Venders/ShareSDK",
+					"$(PROJECT_DIR)/Venders/ShareSDK/UI",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Kulebao/youlebao-Prefix.pch";
@@ -4250,6 +4375,7 @@
 					"$(PROJECT_DIR)/Venders/libBPush",
 					"/Users/xinus/xin.github/Kulebao-iPhone/YouJiaoBao/Venders/opencore-amr-0.1.3/lib",
 					"/Users/xinus/xin.github/Kulebao-iPhone/Common/hmsdk-v2",
+					"$(PROJECT_DIR)/Venders/ShareSDK/Extend/WeChatSDK",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = youlebao;

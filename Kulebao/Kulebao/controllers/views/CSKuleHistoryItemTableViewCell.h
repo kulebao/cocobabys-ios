@@ -24,6 +24,7 @@
 @property (nonatomic, weak) id delegate;
 
 + (CGFloat)calcHeight:(EntityHistoryInfo*)historyInfo;
+- (IBAction)onBtnShareClicked:(id)sender;
 
 
 @end

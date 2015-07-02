@@ -8,8 +8,16 @@
 
 #import "CSKuleBusMainViewController.h"
 
-@interface CSKuleBusMainViewController ()
+@interface CSKuleBusMainViewController () {
+    NSInteger _positionType; // 0 default, 1 user, 2 bus
+}
 @property (weak, nonatomic) IBOutlet BMKMapView *mapView;
+@property (weak, nonatomic) IBOutlet UILabel *labAddess;
+@property (weak, nonatomic) IBOutlet UIButton *btnShowPosition;
+@property (weak, nonatomic) IBOutlet UILabel *labDistance;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segMapMode;
+- (IBAction)onSegMapModeValueChanged:(id)sender;
+- (IBAction)onBtnShowPositionClicked:(id)sender;
 
 @end
 
@@ -38,5 +46,33 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (IBAction)onSegMapModeValueChanged:(id)sender {
+    if (self.segMapMode.selectedSegmentIndex == 0) {
+        [self.mapView setMapType:BMKMapTypeStandard];
+    }
+    else {
+        [self.mapView setMapType:BMKMapTypeSatellite];
+    }
+}
+
+- (IBAction)onBtnShowPositionClicked:(id)sender {
+    if (_positionType == 1) {
+        [self.btnShowPosition setTitle:@"看校车的位置" forState:UIControlStateNormal];
+        _positionType = 2;
+    }
+    else {
+        [self.btnShowPosition setTitle:@"看自己的位置" forState:UIControlStateNormal];
+        _positionType = 1;
+    }
+}
+
+- (void)moveMapToUser {
+    
+}
+
+- (void)moveMapToBus {
+    
+}
 
 @end

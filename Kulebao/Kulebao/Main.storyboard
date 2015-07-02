@@ -74,18 +74,66 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="校车位置：" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xC0-3n-cWt">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="20"/>
+                                <color key="backgroundColor" red="0.86274509803921573" green="0.86274509803921573" blue="0.86274509803921573" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="BOC-fU-lOz">
+                                <rect key="frame" x="185" y="22" width="133" height="29"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <segments>
+                                    <segment title="地图模式"/>
+                                    <segment title="卫星模式"/>
+                                </segments>
+                                <connections>
+                                    <action selector="onSegMapModeValueChanged:" destination="RvD-CP-s52" eventType="valueChanged" id="YOX-8C-nkw"/>
+                                </connections>
+                            </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M0M-cQ-vcl">
+                                <rect key="frame" x="112" y="407" width="96" height="32"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="看自己的位置">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onBtnShowPositionClicked:" destination="RvD-CP-s52" eventType="touchUpInside" id="7Tg-H3-ekr"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="相距10米" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1kw-Rt-ss2">
+                                <rect key="frame" x="8" y="447" width="304" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="xC0-3n-cWt" firstAttribute="top" secondItem="Q2n-Nn-f7j" secondAttribute="bottom" id="4BL-WD-Isq"/>
+                            <constraint firstAttribute="trailing" secondItem="1kw-Rt-ss2" secondAttribute="trailing" constant="8" id="90T-bi-6PA"/>
                             <constraint firstAttribute="trailing" secondItem="9eZ-LV-ZHl" secondAttribute="trailing" id="9St-zG-Nnj"/>
                             <constraint firstItem="7dp-7i-5nD" firstAttribute="top" secondItem="9eZ-LV-ZHl" secondAttribute="bottom" id="HNQ-zV-ztY"/>
+                            <constraint firstAttribute="trailing" secondItem="BOC-fU-lOz" secondAttribute="trailing" constant="2" id="I3U-Ey-eKS"/>
+                            <constraint firstItem="1kw-Rt-ss2" firstAttribute="top" secondItem="M0M-cQ-vcl" secondAttribute="bottom" constant="8" id="Lba-7A-Wlq"/>
                             <constraint firstItem="9eZ-LV-ZHl" firstAttribute="leading" secondItem="ydi-59-jzG" secondAttribute="leading" id="f1m-d6-Kx7"/>
+                            <constraint firstItem="xC0-3n-cWt" firstAttribute="leading" secondItem="ydi-59-jzG" secondAttribute="leading" id="fmY-gY-X0W"/>
+                            <constraint firstAttribute="centerX" secondItem="M0M-cQ-vcl" secondAttribute="centerX" id="g5L-gr-9rE"/>
+                            <constraint firstItem="7dp-7i-5nD" firstAttribute="top" secondItem="1kw-Rt-ss2" secondAttribute="bottom" constant="40" id="m89-hV-uFy"/>
+                            <constraint firstItem="1kw-Rt-ss2" firstAttribute="leading" secondItem="ydi-59-jzG" secondAttribute="leading" constant="8" id="sV3-Pl-dAV"/>
+                            <constraint firstItem="BOC-fU-lOz" firstAttribute="top" secondItem="xC0-3n-cWt" secondAttribute="bottom" constant="2" id="wmZ-dm-AkE"/>
                             <constraint firstItem="9eZ-LV-ZHl" firstAttribute="top" secondItem="Q2n-Nn-f7j" secondAttribute="bottom" id="yBo-vR-VK6"/>
+                            <constraint firstAttribute="trailing" secondItem="xC0-3n-cWt" secondAttribute="trailing" id="ySN-ld-6jH"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="校车接送" id="7dw-nt-6re"/>
                     <connections>
+                        <outlet property="btnShowPosition" destination="M0M-cQ-vcl" id="Xjj-DI-CQo"/>
+                        <outlet property="labAddess" destination="xC0-3n-cWt" id="9h2-IB-YZc"/>
+                        <outlet property="labDistance" destination="1kw-Rt-ss2" id="uAZ-1q-2Of"/>
                         <outlet property="mapView" destination="9eZ-LV-ZHl" id="GNr-31-2Xu"/>
+                        <outlet property="segMapMode" destination="BOC-fU-lOz" id="CPI-aO-GoX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xeu-jw-Rd3" userLabel="First Responder" sceneMemberID="firstResponder"/>

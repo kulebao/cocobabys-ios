@@ -35,6 +35,8 @@
 
 @property (nonatomic, assign) server_id hmServerId;
 
+@property (nonatomic, strong) BMKLocationService* locService;
+
 #pragma mark - application
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
 - (void)applicationWillResignActive:(UIApplication *)application;
@@ -262,5 +264,10 @@
                                        byParent:(CSKuleParentInfo*)parentInfo
                                         success:(SuccessResponseHandler)success
                                         failure:(FailureResponseHandler)failure;
+
+- (AFHTTPRequestOperation*)reqGetBusLocationOfKindergarten:(NSInteger)kindergarten
+                                               withChildId:(NSString*)childId
+                                                   success:(SuccessResponseHandler)success
+                                                   failure:(FailureResponseHandler)failure;
 
 @end

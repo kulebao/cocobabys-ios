@@ -79,6 +79,7 @@
     if (!ret) {
         CSLog(@"BMKMapManager start failed!");
     }
+    self.locService = [[BMKLocationService alloc] init];
     
     // iOS8 下需要使用新的 API
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
@@ -1725,6 +1726,23 @@
                                    parameters:parameters
                                       success:success
                                       failure:failure];
+}
+
+- (AFHTTPRequestOperation*)reqGetBusLocationOfKindergarten:(NSInteger)kindergarten
+                                               withChildId:(NSString*)childId
+                                                   success:(SuccessResponseHandler)success
+                                                   failure:(FailureResponseHandler)failure {
+    
+    NSString* path = [NSString stringWithFormat:kBusLocationPathV2, @(kindergarten), childId];
+    NSString* method = @"GET";
+    NSMutableDictionary* parameters = nil;
+    
+    return [_httpClient httpRequestWithMethod:method
+                                  path:path
+                            parameters:parameters
+                               success:success
+                               failure:failure];
+    
 }
 
 @end

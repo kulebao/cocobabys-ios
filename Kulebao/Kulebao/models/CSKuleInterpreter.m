@@ -850,4 +850,50 @@
     return obj;
 }
 
++ (CSKuleBusLocationInfo*)decodeBusLocation:(NSDictionary*)dataJson {
+    /*
+     {
+     address = "\U56db\U5ddd\U7701\U6210\U90fd\U5e02\U53cc\U6d41\U53bf\U5143\U666f\U8def";
+     "child_id" = "2_9028_52049";
+     direction = "-1";
+     "driver_id" = "3_9028_1428477866424";
+     latitude = "30.53457";
+     longitude = "104.055455";
+     onBoard = 0;
+     radius = "62.91685485839844";
+     "school_id" = 9028;
+     status = 1;
+     timestamp = 1436106433250;
+     }
+     */
+    NSParameterAssert(dataJson);
+    
+    NSString* address = [dataJson valueForKeyNotNull:@"address"];
+    NSString* child_id = [dataJson valueForKeyNotNull:@"child_id"];
+    NSInteger direction = [[dataJson valueForKeyNotNull:@"direction"] integerValue];
+    NSString* driver_id = [dataJson valueForKeyNotNull:@"driver_id"];
+    CGFloat latitude = [[dataJson valueForKeyNotNull:@"latitude"] floatValue];
+    CGFloat longitude = [[dataJson valueForKeyNotNull:@"longitude"] floatValue];
+    NSInteger onBoard = [[dataJson valueForKeyNotNull:@"onBoard"] integerValue];
+    CGFloat radius = [[dataJson valueForKeyNotNull:@"radius"] floatValue];
+    NSInteger school_id = [[dataJson valueForKeyNotNull:@"school_id"] integerValue];
+    NSInteger status = [[dataJson valueForKeyNotNull:@"status"] integerValue];
+    double timestamp = [[dataJson valueForKeyNotNull:@"timestamp"] doubleValue];
+    
+    CSKuleBusLocationInfo* obj = [CSKuleBusLocationInfo new];
+    obj.address = address;
+    obj.childId = child_id;
+    obj.direction = direction;
+    obj.driverId = driver_id;
+    obj.latitude = latitude;
+    obj.longitude = longitude;
+    obj.onBoard = onBoard;
+    obj.radius = radius;
+    obj.schoolId = school_id;
+    obj.timestamp = timestamp / 1000.0;
+    obj.status = status;
+    
+    return obj;
+}
+
 @end

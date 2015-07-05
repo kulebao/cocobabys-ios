@@ -9,6 +9,7 @@
 #import "CSKuleBusMainViewController.h"
 #import "CSAppDelegate.h"
 #import "CSHttpClient.h"
+#import "CSKuleInterpreter.h"
 
 enum {
     kMaxTimeCount = 15, //15s
@@ -43,6 +44,9 @@ typedef enum : NSUInteger {
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segMapMode;
 @property (weak, nonatomic) IBOutlet UIStepper *stepperMapZoom;
 
+@property (nonatomic, strong) CSKuleBusLocationInfo* busLocationInfo;
+@property (nonatomic, strong) BMKPointAnnotation* busAnnotation;
+
 @property (nonatomic, weak) NSTimer* refreshTimer;
 
 - (IBAction)onSegMapModeValueChanged:(id)sender;
@@ -52,6 +56,7 @@ typedef enum : NSUInteger {
 @end
 
 @implementation CSKuleBusMainViewController
+@synthesize busLocationInfo = _busLocationInfo;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -160,17 +165,25 @@ typedef enum : NSUInteger {
 }
 
 - (void)moveMapToUser {
-    _enteryTimers = 0;
-    [self showLocationFirstTimer];
+    if (_locService.userLocation.location) {
+        [self.mapView setCenterCoordinate:_locService.userLocation.location.coordinate
+                                 animated:YES];
+    }
 }
 
 - (void)moveMapToBus {
-    
+    if (_busLocationInfo) {
+        //[self.mapView addAnnotation:self.busAnnotation];
+        [self.mapView setCenterCoordinate:self.busAnnotation.coordinate animated:YES];
+    }
+    else {
+        //[self.mapView removeAnnotation:self.busAnnotation];
+    }
 }
 
 - (void)doRefreshBusLocation {
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
-
+        self.busLocationInfo = [CSKuleInterpreter decodeBusLocation:dataJson];
     };
     
     FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -201,6 +214,42 @@ typedef enum : NSUInteger {
         [self.mapView setCenterCoordinate:_locService.userLocation.location.coordinate
                                  animated:animated];
     }
+
+    [self updateDisLabel];
+}
+
+- (void)setBusLocationInfo:(CSKuleBusLocationInfo *)busLocationInfo {
+    _busLocationInfo = busLocationInfo;
+    
+    if (_busLocationInfo) {
+        CLLocationCoordinate2D coor;
+        coor.longitude = _busLocationInfo.longitude;
+        coor.latitude = _busLocationInfo.latitude;
+        self.busAnnotation.coordinate = coor;
+        [self.mapView addAnnotation:self.busAnnotation];
+        
+        [self updateBusLocationLabel];
+    }
+    else {
+        
+        [self.mapView removeAnnotation:self.busAnnotation];
+    }
+    
+    [self updateDisLabel];
+}
+
+- (BMKPointAnnotation*)busAnnotation {
+    if (_busAnnotation == nil) {
+        _busAnnotation = [[BMKPointAnnotation alloc]init];
+        CLLocationCoordinate2D coor;
+        _busAnnotation.coordinate = coor;
+        _busAnnotation.title = @"校车";
+        _busAnnotation.subtitle = nil;
+        
+        [_mapView addAnnotation:_busAnnotation];
+    }
+    
+    return _busAnnotation;
 }
 
 #pragma mark - Timer
@@ -220,16 +269,39 @@ typedef enum : NSUInteger {
 }
 
 - (void)updateBusLocationLabel {
-    self.labAddess.text = @"校车还未出发";
+//    self.labAddess.text = @"校车还未出发";
+//    
+//    if (_busStatus == kBusStatusUnknown) {
+//        self.labAddess.text = @"校车还未出发";
+//    }
+//    else if (_busStatus == kBusStatusNotFound) {
+//        self.labAddess.text = @"校车还未出发";
+//    }
+//    else {
+//        self.labAddess.text = @"校车位置: xxx";
+//    }
     
-    if (_busStatus == kBusStatusUnknown) {
-        self.labAddess.text = @"校车还未出发";
-    }
-    else if (_busStatus == kBusStatusNotFound) {
-        self.labAddess.text = @"校车还未出发";
+    if (_busLocationInfo) {
+        self.labAddess.text = [NSString stringWithFormat:@"校车位置: %@", _busLocationInfo.address];
     }
     else {
-        self.labAddess.text = @"校车位置: xxx";
+        self.labAddess.text = @"校车还未出发";
+    }
+}
+
+- (void)updateDisLabel {
+    if (_locService.userLocation.location
+        && _busLocationInfo) {
+        CLLocationCoordinate2D busCoor;
+        busCoor.latitude = _busLocationInfo.latitude;
+        busCoor.longitude = _busLocationInfo.longitude;
+        BMKMapPoint userPoint = BMKMapPointForCoordinate(_locService.userLocation.location.coordinate);
+        BMKMapPoint busPoint = BMKMapPointForCoordinate(busCoor);
+        CLLocationDistance dis = BMKMetersBetweenMapPoints(userPoint, busPoint);
+        self.labDistance.text = [NSString stringWithFormat:@"相距%ld米", (NSInteger)dis];
+    }
+    else {
+        self.labDistance.text = nil;
     }
 }
 
@@ -278,5 +350,33 @@ typedef enum : NSUInteger {
     CSLog(@"location error");
 }
 
+#pragma mark implement BMKMapViewDelegate
+// 根据anntation生成对应的View
+- (BMKAnnotationView *)mapView:(BMKMapView *)mapView viewForAnnotation:(id <BMKAnnotation>)annotation {
+
+    //普通annotation
+    if (annotation == _busAnnotation) {
+        NSString *AnnotationViewID = @"renameMark";
+        BMKAnnotationView *annotationView = (BMKAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:AnnotationViewID];
+        if (annotationView == nil) {
+            annotationView = [[BMKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:AnnotationViewID];
+            // 设置颜色
+            //BMKAnnotationViewannotationView.pinColor = BMKPinAnnotationColorPurple;
+            // 从天上掉下效果
+            //annotationView.animatesDrop = NO;
+            // 设置可拖拽
+            //annotationView.draggable = YES;
+            annotationView.image = [UIImage imageNamed:@"v2-bus-pin.png"];
+        }
+        return annotationView;
+    }
+    
+    return nil;
+}
+
+// 当点击annotation view弹出的泡泡时，调用此接口
+- (void)mapView:(BMKMapView *)mapView annotationViewForBubble:(BMKAnnotationView *)view {
+    CSLog(@"paopaoclick");
+}
 
 @end

@@ -361,6 +361,7 @@
 		094F994E18E02A6100ACD196 /* btn-nav-right-pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 094F994A18E02A6100ACD196 /* btn-nav-right-pressed@2x.png */; };
 		094F994F18E02A6100ACD196 /* btn-nav-right.png in Resources */ = {isa = PBXBuildFile; fileRef = 094F994B18E02A6100ACD196 /* btn-nav-right.png */; };
 		094F995018E02A6100ACD196 /* btn-nav-right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 094F994C18E02A6100ACD196 /* btn-nav-right@2x.png */; };
+		09607BAF1B4977480047DB67 /* CSKuleBusLocationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09607BAE1B4977480047DB67 /* CSKuleBusLocationInfo.m */; };
 		0960BFE119B05818008768A6 /* TSFileCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0960BFE019B05818008768A6 /* TSFileCache.m */; };
 		0960CE7819B0B05700B3B51E /* BDMultiDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0960CE7719B0B05700B3B51E /* BDMultiDownloader.m */; };
 		0960CE7B19B0B19200B3B51E /* CSKuleURLDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0960CE7A19B0B19200B3B51E /* CSKuleURLDownloader.m */; };
@@ -1289,6 +1290,8 @@
 		094F994A18E02A6100ACD196 /* btn-nav-right-pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-nav-right-pressed@2x.png"; sourceTree = "<group>"; };
 		094F994B18E02A6100ACD196 /* btn-nav-right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-nav-right.png"; sourceTree = "<group>"; };
 		094F994C18E02A6100ACD196 /* btn-nav-right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-nav-right@2x.png"; sourceTree = "<group>"; };
+		09607BAD1B4977480047DB67 /* CSKuleBusLocationInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleBusLocationInfo.h; sourceTree = "<group>"; };
+		09607BAE1B4977480047DB67 /* CSKuleBusLocationInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleBusLocationInfo.m; sourceTree = "<group>"; };
 		0960BFDF19B05818008768A6 /* TSFileCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSFileCache.h; sourceTree = "<group>"; };
 		0960BFE019B05818008768A6 /* TSFileCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSFileCache.m; sourceTree = "<group>"; };
 		0960CE7619B0B05700B3B51E /* BDMultiDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDMultiDownloader.h; sourceTree = "<group>"; };
@@ -2204,6 +2207,8 @@
 				09FFB5F018D6B2E100F07B0A /* CSKuleWeekScheduleInfo.m */,
 				0904553019BDB8CA00FEF2C9 /* CSKuleVideoMember.h */,
 				0904553119BDB8CA00FEF2C9 /* CSKuleVideoMember.m */,
+				09607BAD1B4977480047DB67 /* CSKuleBusLocationInfo.h */,
+				09607BAE1B4977480047DB67 /* CSKuleBusLocationInfo.m */,
 				093CD69518D974930025972C /* Interpreter */,
 			);
 			path = models;
@@ -2744,35 +2749,35 @@
 		09BA1BC918BB2FC700760182 /* Venders */ = {
 			isa = PBXGroup;
 			children = (
-				09C00F8E1B443DA400FC1474 /* ShareSDK */,
-				09434DC21B404D9300DFDC33 /* BaiduMap */,
-				0942B1451AE3E559008D3BDA /* ELCImagePicker */,
-				0901CDA11ABEFF070044838A /* EGOCache */,
-				0960CE7519B0B05700B3B51E /* BDMultiDownloader */,
-				0960BFDE19B05818008768A6 /* TSFileCache */,
-				0914E36B199FCEBC00276ABA /* SDWebImage */,
-				0914E353199FCD7500276ABA /* MJPhotoBrowser */,
-				0914E339199FC61400276ABA /* GMGridView */,
-				093C20ED199915B400A12F1A /* hmsdk-v2 */,
-				09F74CDE1997D14D001555D0 /* Amr */,
-				09F74CC61997D10C001555D0 /* opencore-amr-0.1.3 */,
-				0901511E1939D4060066DEAB /* XHImageViewer */,
 				09BA1C0F18BB3F8400760182 /* AFNetworking */,
 				090C9EBC18C846B200883DE0 /* AHAlertView */,
 				09142DC018E27E7600E5848F /* ALAlertBanner */,
+				09F74CDE1997D14D001555D0 /* Amr */,
+				09434DC21B404D9300DFDC33 /* BaiduMap */,
 				09142D9318E2713C00E5848F /* BaiduMobStat */,
+				0960CE7519B0B05700B3B51E /* BDMultiDownloader */,
 				0934EFBE18BF3AF700E30ECA /* EAIntroView */,
+				0901CDA11ABEFF070044838A /* EGOCache */,
 				09BA1BCA18BB2FC700760182 /* EGOTableViewPullRefresh */,
+				0942B1451AE3E559008D3BDA /* ELCImagePicker */,
 				090CC92618DA88AF007781CB /* FTCoreText */,
+				0914E339199FC61400276ABA /* GMGridView */,
+				093C20ED199915B400A12F1A /* hmsdk-v2 */,
 				09142DDD18E28E6000E5848F /* JSBadgeView */,
 				090C9ED818C87AEA00883DE0 /* KxMenu */,
 				09BA1BED18BB334900760182 /* libBPush */,
 				09219A2E18C42AF800166228 /* MBProgressHUD */,
 				09F0BF9F18F1A1B7004629BA /* MHFBImageViewController */,
 				09F0BFA818F1C483004629BA /* MJModalViewController */,
+				0914E353199FCD7500276ABA /* MJPhotoBrowser */,
+				09F74CC61997D10C001555D0 /* opencore-amr-0.1.3 */,
+				0914E36B199FCEBC00276ABA /* SDWebImage */,
+				09C00F8E1B443DA400FC1474 /* ShareSDK */,
 				0934EFC518BF3D0600E30ECA /* SMPageControl */,
 				09219A4418C4878600166228 /* TPKeyboardAvoiding */,
+				0960BFDE19B05818008768A6 /* TSFileCache */,
 				091AE82218D820C800EBC927 /* VurigCalendar */,
+				0901511E1939D4060066DEAB /* XHImageViewer */,
 			);
 			path = Venders;
 			sourceTree = "<group>";
@@ -4088,6 +4093,7 @@
 				090CC92C18DA88AF007781CB /* FTCoreTextView.m in Sources */,
 				0934EFC418BF3AF700E30ECA /* EAIntroView.m in Sources */,
 				0919B7731929D41900810556 /* CSKuleTopicMsg.m in Sources */,
+				09607BAF1B4977480047DB67 /* CSKuleBusLocationInfo.m in Sources */,
 				09142E1F18E2BA2100E5848F /* CSKuleAssessInfo.m in Sources */,
 				091AE83018D820C800EBC927 /* UIView+convenience.m in Sources */,
 				0914E39C199FCEBC00276ABA /* UIView+WebCacheOperation.m in Sources */,

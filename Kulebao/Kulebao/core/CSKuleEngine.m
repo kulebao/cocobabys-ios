@@ -363,15 +363,13 @@
 - (NSURL*)urlFromPath:(NSString*)path {
     NSURL* url = nil;
     if (path.length > 0) {
-        if ([path hasPrefix:@"http"]) {
+        if ([path hasPrefix:@"http"]
+            || [path hasPrefix:@"https"]) {
             url = [NSURL URLWithString:path];
         }
         else {
             url = [NSURL URLWithString:path
-                         relativeToURL:[NSURL URLWithString:kServerHostForProd]];
-            if (_preferences.enabledTest) {
-                url = [NSURL URLWithString:kServerHostForTest];
-            }
+                         relativeToURL:_httpClient.baseURL];
         }
     }
     
@@ -1743,6 +1741,22 @@
                                success:success
                                failure:failure];
     
+}
+
+- (AFHTTPRequestOperation*)reqGetShareTokenOfKindergarten:(NSInteger)kindergarten
+                                              withChildId:(NSString*)childId
+                                             withRecordId:(NSInteger)recordId
+                                                  success:(SuccessResponseHandler)success
+                                                  failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kGetShareTokenV3, @(kindergarten), childId, @(recordId)];
+    NSString* method = @"POST";
+    NSMutableDictionary* parameters = nil;
+    
+    return [_httpClient httpRequestWithMethod:method
+                                         path:path
+                                   parameters:parameters
+                                      success:success
+                                      failure:failure];
 }
 
 @end

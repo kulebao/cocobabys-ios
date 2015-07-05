@@ -148,4 +148,7 @@
 // PATH: 查询校车
 #define kBusLocationPathV2        @"/api/v2/kindergarten/%@/last_bus_location/%@"
 
+#pragma mark - Share
+#define kGetShareTokenV3  @"/api/v3/kindergarten/%@/history/%@/record/%@/share"
+
 #endif

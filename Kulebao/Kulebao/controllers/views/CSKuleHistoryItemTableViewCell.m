@@ -17,7 +17,9 @@
 
 #import <ShareSDK/ShareSDK.h>
 
-@interface CSKuleHistoryItemTableViewCell() <ISSShareViewDelegate>
+@interface CSKuleHistoryItemTableViewCell() <ISSShareViewDelegate> {
+    NSString* _shareToken;
+}
 @property (weak, nonatomic) IBOutlet UIImageView *imgPortrait;
 @property (weak, nonatomic) IBOutlet UILabel *labName;
 @property (weak, nonatomic) IBOutlet UILabel *labDate;
@@ -67,6 +69,7 @@
 
 - (void)setHistoryInfo:(EntityHistoryInfo *)historyInfo {
     _historyInfo = historyInfo;
+    _shareToken = nil;
     
     if ([_historyInfo.sender.senderId isEqualToString:gApp.engine.currentRelationship.parent.parentId]) {
         self.longPressGes.enabled = YES;
@@ -262,17 +265,65 @@
 
 #pragma mark - Share
 - (IBAction)onBtnShareClicked:(id)sender {
-    NSString *imagePath = nil;
+    [self doGetShareToken];
+}
+
+- (void)doGetShareToken {
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+        if (dataJson) {
+            _shareToken = [dataJson objectForKey:@"token"];
+            if (_shareToken.length > 0) {
+                [self performSelector:@selector(doShare:) withObject:_shareToken afterDelay:0.1];
+            }
+        }
+        
+        [gApp hideAlert];
+    };
+    
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        CSLog(@"failure:%@", error);
+        [gApp alert:error.localizedDescription];
+    };
+    
+    [gApp waitingAlert:@"分享中" withTitle:@"请稍候"];
+    [gApp.engine reqGetShareTokenOfKindergarten:gApp.engine.loginInfo.schoolId
+                                    withChildId:gApp.engine.currentRelationship.child.childId
+                                   withRecordId:self.historyInfo.uid.integerValue
+                                        success:sucessHandler
+                                        failure:failureHandler];
+}
+
+- (void)doShare:(NSString*)shareToken {
+    NSString* sharePath = [NSString stringWithFormat:@"/s/%@/", shareToken];
+    NSURL* shareURL = [gApp.engine urlFromPath:sharePath];
+    
+    NSString* shareTitle = @"";
+    if (shareTitle.length == 0) {
+        shareTitle = @"[成长经历]分享";
+    }
+    NSString* shareContent = self.historyInfo.content;
+    NSString* shareImgPath = [[NSBundle mainBundle] pathForResource:@"v2-logo_weixin" ofType:@"png"];
+    id<ISSCAttachment> shareImage = [ShareSDK imageWithPath:shareImgPath];
+
+    for (CSKuleMediaInfo* media in _historyInfo.medium) {
+        if ([media.type isEqualToString:@"image"]) {
+            shareImage = [ShareSDK imageWithUrl:media.url];
+            break;
+        }
+        else if ([media.type isEqualToString:@"video"]) {
+            //shareImage = [ShareSDK imageWithUrl:media.url];
+            break;
+        }
+    }
     
     //构造分享内容
-    NSString* content = @"测试content";
-    id<ISSContent> publishContent = [ShareSDK content:content
-                                       defaultContent:@"分享defaultContent"
-                                                image:[ShareSDK imageWithPath:imagePath]
-                                                title:@"分享title"
-                                                  url:@"http://www.cocobabys.com"
-                                          description:@"分享description"
-                                            mediaType:SSPublishContentMediaTypeText];
+    id<ISSContent> publishContent = [ShareSDK content:shareContent
+                                       defaultContent:shareContent
+                                                image:shareImage
+                                                title:shareTitle
+                                                  url:[shareURL absoluteString]
+                                          description:shareContent
+                                            mediaType:SSPublishContentMediaTypeApp];
     
     NSArray *shareList = [ShareSDK getShareListWithType:
                           ShareTypeWeixiSession,
@@ -299,12 +350,12 @@
                             result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
                                 
                                 if (state == SSResponseStateSuccess) {
-                                    NSLog(NSLocalizedString(@"TEXT_ShARE_SUC", @"分享成功"));
+                                    CSLog(@"分享成功");
                                     
                                 }
                                 else if (state == SSResponseStateFail)
                                 {
-                                    NSLog(NSLocalizedString(@"TEXT_ShARE_FAI", @"分享失败,错误码:%d,错误描述:%@"), [error errorCode], [error errorDescription]);
+                                    CSLog(@"分享失败,错误码:%ld,错误描述:%@", [error errorCode], [error errorDescription]);
                                 }
                             }];
 }

@@ -270,4 +270,10 @@
                                                    success:(SuccessResponseHandler)success
                                                    failure:(FailureResponseHandler)failure;
 
+- (AFHTTPRequestOperation*)reqGetShareTokenOfKindergarten:(NSInteger)kindergarten
+                                              withChildId:(NSString*)childId
+                                             withRecordId:(NSInteger)recordId
+                                                  success:(SuccessResponseHandler)success
+                                                  failure:(FailureResponseHandler)failure;
+
 @end

@@ -353,6 +353,7 @@
 		094373D4199D016A00EDD64C /* EntitySenderInfoHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 094373D3199D016A00EDD64C /* EntitySenderInfoHelper.m */; };
 		094373D7199D017B00EDD64C /* EntityHistoryInfoHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 094373D6199D017B00EDD64C /* EntityHistoryInfoHelper.m */; };
 		094373DA199D018900EDD64C /* EntityMediaInfoHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 094373D9199D018900EDD64C /* EntityMediaInfoHelper.m */; };
+		09443A1B1B4A685900EE5986 /* v2-接送消息.png in Resources */ = {isa = PBXBuildFile; fileRef = 09443A1A1B4A685900EE5986 /* v2-接送消息.png */; };
 		094591221B3F05D300EF4458 /* libBPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 094591211B3F05D300EF4458 /* libBPush.a */; };
 		0948079D1B46B61700FB74B4 /* v2-bus-pin.png in Resources */ = {isa = PBXBuildFile; fileRef = 0948079B1B46B61700FB74B4 /* v2-bus-pin.png */; };
 		0948079E1B46B61700FB74B4 /* v2-bus-pin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0948079C1B46B61700FB74B4 /* v2-bus-pin@2x.png */; };
@@ -1282,6 +1283,7 @@
 		094373D6199D017B00EDD64C /* EntityHistoryInfoHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityHistoryInfoHelper.m; sourceTree = "<group>"; };
 		094373D8199D018900EDD64C /* EntityMediaInfoHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityMediaInfoHelper.h; sourceTree = "<group>"; };
 		094373D9199D018900EDD64C /* EntityMediaInfoHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityMediaInfoHelper.m; sourceTree = "<group>"; };
+		09443A1A1B4A685900EE5986 /* v2-接送消息.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-接送消息.png"; sourceTree = "<group>"; };
 		094591201B3F05D300EF4458 /* BPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPush.h; sourceTree = "<group>"; };
 		094591211B3F05D300EF4458 /* libBPush.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBPush.a; sourceTree = "<group>"; };
 		0948079B1B46B61700FB74B4 /* v2-bus-pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-bus-pin.png"; sourceTree = "<group>"; };
@@ -2975,18 +2977,6 @@
 		09D9BB471AEE933D009456ED /* images */ = {
 			isa = PBXGroup;
 			children = (
-				09607BB01B49888C0047DB67 /* v2-logo_weixin.png */,
-				09607BB11B49888C0047DB67 /* v2-logo_weixin@2x.png */,
-				0948079B1B46B61700FB74B4 /* v2-bus-pin.png */,
-				0948079C1B46B61700FB74B4 /* v2-bus-pin@2x.png */,
-				09434DD11B405FBC00DFDC33 /* v2-btn_star_0_bg.png */,
-				09434DD21B405FBC00DFDC33 /* v2-btn_star_0_bg@2x.png */,
-				09434DD31B405FBC00DFDC33 /* v2-btn_star_1_bg.png */,
-				09434DD41B405FBC00DFDC33 /* v2-btn_star_1_bg@2x.png */,
-				09434DD51B405FBC00DFDC33 /* v2-btn_star_2_bg.png */,
-				09434DD61B405FBC00DFDC33 /* v2-btn_star_2_bg@2x.png */,
-				09434DD71B405FBC00DFDC33 /* v2-btn_star_3_bg.png */,
-				09434DD81B405FBC00DFDC33 /* v2-btn_star_3_bg@2x.png */,
 				09D9BB481AEE933D009456ED /* v2-ack.png */,
 				09D9BB491AEE933D009456ED /* v2-ack@2x.png */,
 				09D9BB4A1AEE933D009456ED /* v2-acr.png */,
@@ -3029,6 +3019,14 @@
 				09D9BB711AEE933D009456ED /* v2-btn_right@2x.png */,
 				09D9BB721AEE933D009456ED /* v2-btn_set.png */,
 				09D9BB731AEE933D009456ED /* v2-btn_set@2x.png */,
+				09434DD11B405FBC00DFDC33 /* v2-btn_star_0_bg.png */,
+				09434DD21B405FBC00DFDC33 /* v2-btn_star_0_bg@2x.png */,
+				09434DD31B405FBC00DFDC33 /* v2-btn_star_1_bg.png */,
+				09434DD41B405FBC00DFDC33 /* v2-btn_star_1_bg@2x.png */,
+				09434DD51B405FBC00DFDC33 /* v2-btn_star_2_bg.png */,
+				09434DD61B405FBC00DFDC33 /* v2-btn_star_2_bg@2x.png */,
+				09434DD71B405FBC00DFDC33 /* v2-btn_star_3_bg.png */,
+				09434DD81B405FBC00DFDC33 /* v2-btn_star_3_bg@2x.png */,
 				09434DC91B4058D500DFDC33 /* v2-btn_star_bg.png */,
 				09434DCA1B4058D500DFDC33 /* v2-btn_star_bg@2x.png */,
 				09D9BB761AEE933D009456ED /* v2-btn_star_off.png */,
@@ -3049,6 +3047,8 @@
 				09D9BB831AEE933D009456ED /* v2-btn_请回执@2x.png */,
 				09D9BB561AEE933D009456ED /* v2-btn.png */,
 				09D9BB571AEE933D009456ED /* v2-btn@2x.png */,
+				0948079B1B46B61700FB74B4 /* v2-bus-pin.png */,
+				0948079C1B46B61700FB74B4 /* v2-bus-pin@2x.png */,
 				09D9BB841AEE933D009456ED /* v2-foot.png */,
 				09D9BB851AEE933D009456ED /* v2-foot@2x.png */,
 				09D9BB861AEE933D009456ED /* v2-head.png */,
@@ -3061,6 +3061,8 @@
 				09D9BB8B1AEE933D009456ED /* v2-input_login@2x.png */,
 				09E7096F1AF36C9700628FF9 /* v2-line.png */,
 				09D9BB8E1AEE933D009456ED /* v2-line@2x.png */,
+				09607BB01B49888C0047DB67 /* v2-logo_weixin.png */,
+				09607BB11B49888C0047DB67 /* v2-logo_weixin@2x.png */,
 				09D9BB8F1AEE933D009456ED /* v2-logo.png */,
 				09D9BB921AEE933D009456ED /* v2-logo@2x.png */,
 				09D9BB901AEE933D009456ED /* v2-logo2.png */,
@@ -3079,6 +3081,7 @@
 				09D9BB9C1AEE933D009456ED /* v2-情绪@2x.png */,
 				09D9BB9D1AEE933D009456ED /* v2-成长经历.png */,
 				09D9BB9E1AEE933D009456ED /* v2-成长经历@2x.png */,
+				09443A1A1B4A685900EE5986 /* v2-接送消息.png */,
 				09D9BB9F1AEE933D009456ED /* v2-接送消息.png */,
 				09D9BBA01AEE933D009456ED /* v2-接送消息@2x.png */,
 				09D9BBA11AEE933D009456ED /* v2-校园公告.png */,
@@ -3752,6 +3755,7 @@
 				0934F08518BF5B0800E30ECA /* schedule-bg@2x.png in Resources */,
 				09434DDE1B405FBC00DFDC33 /* v2-btn_star_2_bg@2x.png in Resources */,
 				0948079D1B46B61700FB74B4 /* v2-bus-pin.png in Resources */,
+				09443A1B1B4A685900EE5986 /* v2-接送消息.png in Resources */,
 				09416C9D18E41BF600DFEA44 /* bg-input-normal.png in Resources */,
 				09D9BBF41AEE933D009456ED /* v2-foot@2x.png in Resources */,
 				0934F05C18BF5B0800E30ECA /* btn-func-3.png in Resources */,

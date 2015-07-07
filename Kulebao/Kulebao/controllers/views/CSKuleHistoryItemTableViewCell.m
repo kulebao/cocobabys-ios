@@ -294,7 +294,7 @@
 }
 
 - (void)doShare:(NSString*)shareToken {
-    NSString* sharePath = [NSString stringWithFormat:@"/s/%@/", shareToken];
+    NSString* sharePath = [NSString stringWithFormat:@"/s/%@", shareToken];
     NSURL* shareURL = [gApp.engine urlFromPath:sharePath];
     NSString* shareUrlString = [shareURL absoluteString];
     shareUrlString = [shareUrlString stringByReplacingOccurrencesOfString:@"https" withString:@"http" options:0 range:NSMakeRange(0, 5)];

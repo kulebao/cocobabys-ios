@@ -147,10 +147,9 @@
         self.playerItem = [AVPlayerItem playerItemWithURL:_videoURL];
         self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
         self.playerLayer = [AVPlayerLayer playerLayerWithPlayer:self.player];
+        self.playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
         [self.viewVideoContainer.layer addSublayer:self.playerLayer];
         self.playerLayer.frame = self.viewVideoContainer.layer.bounds;
-        
-        
         self.viewVideoContainer.backgroundColor = [UIColor clearColor];
         self.viewVideoContainer.layer.borderWidth = 0;
         self.viewVideoContainer.layer.cornerRadius = 0.0;
@@ -387,7 +386,7 @@
 }
 
 - (void)doShare:(NSString*)shareToken {
-    NSString* sharePath = [NSString stringWithFormat:@"/s/%@/", shareToken];
+    NSString* sharePath = [NSString stringWithFormat:@"/s/%@", shareToken];
     NSURL* shareURL = [gApp.engine urlFromPath:sharePath];
     NSString* shareUrlString = [shareURL absoluteString];
     shareUrlString = [shareUrlString stringByReplacingOccurrencesOfString:@"https" withString:@"http" options:0 range:NSMakeRange(0, 5)];

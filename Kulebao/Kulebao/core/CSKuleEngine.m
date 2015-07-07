@@ -254,7 +254,6 @@
      连接微信应用以使用相关功能，此应用需要引用WeChatConnection.framework和微信官方SDK
      http://open.weixin.qq.com上注册应用，并将相关信息填写以下字段
      **/
-    //    [ShareSDK connectWeChatWithAppId:@"wx4868b35061f87885" wechatCls:[WXApi class]];
     [ShareSDK connectWeChatWithAppId:@"wxf3c9e8b20267320e"
                            appSecret:@"b8058fb1aac2bac635332ea20679861b"
                            wechatCls:[WXApi class]];

@@ -436,7 +436,7 @@
                                                 title:shareTitle
                                                   url:shareUrlString
                                           description:shareContent
-                                            mediaType:SSPublishContentMediaTypeApp];
+                                            mediaType:SSPublishContentMediaTypeNews];
     
     NSArray *shareList = [ShareSDK getShareListWithType:
                           ShareTypeWeixiSession,

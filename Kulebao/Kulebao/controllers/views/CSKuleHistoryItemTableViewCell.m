@@ -296,6 +296,8 @@
 - (void)doShare:(NSString*)shareToken {
     NSString* sharePath = [NSString stringWithFormat:@"/s/%@/", shareToken];
     NSURL* shareURL = [gApp.engine urlFromPath:sharePath];
+    NSString* shareUrlString = [shareURL absoluteString];
+    shareUrlString = [shareUrlString stringByReplacingOccurrencesOfString:@"https" withString:@"http" options:0 range:NSMakeRange(0, 5)];
     
     NSString* shareTitle = @"";
     if (shareTitle.length == 0) {
@@ -321,7 +323,7 @@
                                        defaultContent:shareContent
                                                 image:shareImage
                                                 title:shareTitle
-                                                  url:[shareURL absoluteString]
+                                                  url:shareUrlString
                                           description:shareContent
                                             mediaType:SSPublishContentMediaTypeApp];
     

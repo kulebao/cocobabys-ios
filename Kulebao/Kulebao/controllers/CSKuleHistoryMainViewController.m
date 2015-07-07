@@ -260,7 +260,6 @@
     };
     
     [gApp waitingAlert:@"提交数据中"];
-    
     [gApp.engine reqPostHistoryOfKindergarten:gApp.engine.loginInfo.schoolId
                                   withChildId:gApp.engine.currentRelationship.child.childId
                                   withContent:_historyContent

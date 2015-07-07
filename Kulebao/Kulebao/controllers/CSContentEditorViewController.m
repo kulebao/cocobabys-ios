@@ -332,17 +332,15 @@
 #pragma mark - ELCImagePickerControllerDelegate
 - (void)elcImagePickerController:(ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)infoList {
     if ([picker isEqual:_elcPicker]) {
+        [_imageList removeAllObjects];
         for (NSDictionary* info in infoList) {
             UIImage* img = info[UIImagePickerControllerOriginalImage];
             if (img) {
-                if (self.singleImage) {
-                    [_imageList removeAllObjects];
-                }
-                
                 [_imageList addObject:img];
-                [self.gmGridView reloadData];
             }
         }
+        
+        [self.gmGridView reloadData];
     }
     
     [picker dismissViewControllerAnimated:YES

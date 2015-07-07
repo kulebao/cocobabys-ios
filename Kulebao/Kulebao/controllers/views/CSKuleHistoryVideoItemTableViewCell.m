@@ -30,6 +30,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imgPortrait;
 @property (weak, nonatomic) IBOutlet UILabel *labName;
 @property (weak, nonatomic) IBOutlet UILabel *labDate;
+@property (weak, nonatomic) IBOutlet UILabel *labContent;
 @property (weak, nonatomic) IBOutlet UIView *viewVideoContainer;
 @property (weak, nonatomic) IBOutlet UIButton *btnPlay;
 - (IBAction)onBtnPlayClicked:(id)sender;
@@ -93,8 +94,21 @@
     [self updateUI];
 }
 
-+ (CGFloat)calcHeight:(EntityHistoryInfo*)historyInfo {
-    return 210;
++ (CGFloat)calcHeight:(EntityHistoryInfo*)historyInfo width:(CGFloat)width{
+    
+    CGFloat yy = 51;
+    //CGFloat xx = 70;
+    
+    const CGFloat kFixedWidth = width-64-8;
+    
+    CGSize sz = [historyInfo.content sizeWithFont:[UIFont systemFontOfSize:14.0]
+                                constrainedToSize:CGSizeMake(kFixedWidth, 9999)];
+    yy += sz.height + 4;
+    yy += 128; // video
+    yy += 4;
+    yy += 28; // share button
+    
+    return yy;
 }
 
 - (void)updateUI {
@@ -121,6 +135,7 @@
     }
     
     CSKuleMediaInfo* media = _historyInfo.medium.firstObject;
+    self.labContent.text = _historyInfo.content;
     
     //检查视频是否已经下载
     NSString* videoKey = media.url.MD5HashEx;

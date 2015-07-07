@@ -200,11 +200,11 @@
 
 }
 
-+ (CGFloat)calcHeight:(CSKuleHistoryInfo*)historyInfo {
-    CGFloat yy = 50;
++ (CGFloat)calcHeight:(CSKuleHistoryInfo*)historyInfo width:(CGFloat)width{
+    CGFloat yy = 51;
     //CGFloat xx = 70;
     
-    const CGFloat kFixedWidth = 230.0;
+    const CGFloat kFixedWidth = width-64-8;
     
     CGSize sz = [historyInfo.content sizeWithFont:[UIFont systemFontOfSize:14.0]
                                 constrainedToSize:CGSizeMake(kFixedWidth, 9999)];

@@ -126,10 +126,12 @@
     CGFloat height = 0;
     EntityHistoryInfo* historyInfo = [_frCtrl objectAtIndexPath:indexPath];
     if ([self isVideoItem:historyInfo]) {
-        height = [CSKuleHistoryVideoItemTableViewCell calcHeight:historyInfo];
+        height = [CSKuleHistoryVideoItemTableViewCell calcHeight:historyInfo
+                                                           width:tableView.bounds.size.width];
     }
     else {
-        height = [CSKuleHistoryItemTableViewCell calcHeight:historyInfo];
+        height = [CSKuleHistoryItemTableViewCell calcHeight:historyInfo
+                                                      width:tableView.bounds.size.width];
     }
     return height;
 }

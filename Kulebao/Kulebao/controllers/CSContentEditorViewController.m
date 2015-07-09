@@ -429,9 +429,10 @@
         cell.deleteButtonOffset = CGPointMake(-15, -15);
         
         UIImageView* imgView = [[UIImageView alloc] initWithFrame:cell.bounds];
-        imgView.contentMode = UIViewContentModeScaleAspectFit;
+        imgView.contentMode = UIViewContentModeScaleAspectFill;
         imgView.userInteractionEnabled = YES;
         imgView.tag = 0x1234;
+        imgView.clipsToBounds = YES;
         imgView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         //[cell addSubview:imgView];
         cell.contentView = imgView;

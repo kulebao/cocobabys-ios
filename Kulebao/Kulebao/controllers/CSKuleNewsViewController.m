@@ -13,6 +13,7 @@
 #import "CSAppDelegate.h"
 #import "UIImageView+WebCache.h"
 #import "CSKuleNewsTableViewCell.h"
+#import "EGOCache.h"
 
 @interface CSKuleNewsViewController () <UITableViewDataSource,
                                         UITableViewDelegate,
@@ -56,7 +57,45 @@
          forCellReuseIdentifier:@"CSKuleNewsTableViewCell"];
     
     _newsInfoList = [NSMutableArray array];
-    [self reloadNewsList];
+    
+    //Load from cacahe
+    EGOCache* cache = [EGOCache globalCache];
+    CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
+    NSInteger kindergarten = gApp.engine.loginInfo.schoolId;
+    NSString* path = [NSString stringWithFormat:kKindergartenNewsListPathV2, @(kindergarten)];
+    path = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", @(currentChild.classId)]];
+    id dataJson = [cache objectForKey:path];
+    if (dataJson) {
+        NSMutableArray* newsInfos = [NSMutableArray array];
+        for (id newsInfoJson in dataJson) {
+            CSKuleNewsInfo* newsInfo = [CSKuleInterpreter decodeNewsInfo:newsInfoJson];
+            [newsInfo reloadStatus];
+            [newsInfos addObject:newsInfo];
+        }
+        
+        @try {
+            [self.newsInfoList removeAllObjects];
+            [self.newsInfoList addObjectsFromArray:newsInfos];
+        }
+        @catch (NSException *exception) {
+            CSLog(@"exception:%@", exception);
+        }
+        @finally {
+            //
+        }
+        
+        if (_newsInfoList.count > 0) {
+            [gApp hideAlert];
+        }
+        else {
+            
+        }
+        [self.tableview reloadData];
+        [self reloadNewsList];
+    }
+    else {
+        [self reloadNewsList];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -254,6 +293,13 @@
             }
         }
         [gApp.engine.preferences setTimestamp:timestamp ofModule:kKuleModuleNews forChild:currentChild.childId];
+        
+        // Save to cache
+        EGOCache* cache = [EGOCache globalCache];
+        NSInteger kindergarten = gApp.engine.loginInfo.schoolId;
+        NSString* path = [NSString stringWithFormat:kKindergartenNewsListPathV2, @(kindergarten)];
+        path = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"%@", @(currentChild.classId)]];
+        [cache setObject:dataJson forKey:path];
         
         @try {
             [self.newsInfoList removeAllObjects];

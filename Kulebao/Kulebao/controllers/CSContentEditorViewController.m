@@ -14,6 +14,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "ELCImagePickerController.h"
+#import "CSAppDelegate.h"
 
 @interface CSContentEditorViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GMGridViewDataSource, GMGridViewSortingDelegate, GMGridViewTransformationDelegate, GMGridViewActionDelegate,
     UIActionSheetDelegate, ELCImagePickerControllerDelegate> {
@@ -102,6 +103,15 @@
     
 #if TARGET_IPHONE_SIMULATOR
 #else
+    if (self.singleImage) {
+    }
+    else {
+        if (_imageList.count >= 9) {
+            [gApp alert:@"最多只能选择9张图片"];
+            return;
+        }
+    }
+    
     _imgPicker = [[UIImagePickerController alloc] init];
     _imgPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
     _imgPicker.allowsEditing = NO;
@@ -302,6 +312,9 @@
     if ([mediaType isEqualToString:@"public.image"]) {
         UIImage* img = info[UIImagePickerControllerOriginalImage];
         if (img) {
+            if (self.singleImage) {
+                [_imageList removeObject:img];
+            }
             [_imageList addObject:img];
             [self.gmGridView reloadData];
         }

@@ -15,6 +15,7 @@
 #import "EntityHistoryInfoHelper.h"
 #import "CSKuleVideoPlayerViewController.h"
 #import <MediaPlayer/MediaPlayer.h>
+#import <objc/runtime.h>
 
 @interface CSKuleHistoryListTableViewController () <NSFetchedResultsControllerDelegate> {
     NSFetchedResultsController* _frCtrl;
@@ -355,12 +356,50 @@
 //                                                        name:MPMoviePlayerPlaybackDidFinishNotification
 //                                                      object:nil];
         
+        UIButton* btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [btn setTitle:@"保存" forState:UIControlStateNormal];
+        [btn setBackgroundImage:[UIImage imageNamed:@"v2-btn_blue.png"] forState:UIControlStateNormal];
+        [btn addTarget:self action:@selector(saveVideo:) forControlEvents:UIControlEventTouchUpInside];
+        
+        objc_setAssociatedObject(btn, "videoUrl", videoURL, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        objc_setAssociatedObject(btn, "playerCtrl", ctrl, OBJC_ASSOCIATION_ASSIGN);
+        
+        btn.frame = CGRectMake(0, 0, 70, 32);
+        btn.center = CGPointMake(self.view.bounds.size.width/2, 70);
+        [ctrl.view addSubview:btn];
         [self presentMoviePlayerViewControllerAnimated:ctrl];
     }
 }
 
 - (void)onNoti:(NSNotification*)noti {
     [self playFullScreen:noti.object];
+}
+
+- (void)saveVideo:(id)sender {
+    NSURL* videoURL = objc_getAssociatedObject(sender, "videoUrl");
+    MPMoviePlayerViewController* ctrl = objc_getAssociatedObject(sender, "playerCtrl");
+    BOOL ok = UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(videoURL.path);
+    if (videoURL && ok) {
+        [gApp waitingAlert:@"保存中，请稍候..."];
+        //[ctrl.moviePlayer pause];
+        UISaveVideoAtPathToSavedPhotosAlbum(videoURL.path,
+                                            self,
+                                            @selector(video:didFinishSavingWithError:contextInfo:),
+                                            nil);
+    }
+    else {
+        [gApp alert:@"无效的视频"];
+    }
+}
+
+// 视频保存回调
+- (void)video:(NSString *)videoPath didFinishSavingWithError:(NSError *)error contextInfo: (void *)contextInfo {
+    if (error) {
+        [gApp shortAlert:@"保存失败"];
+    }
+    else {
+        [gApp shortAlert:@"保存成功"];
+    }
 }
 
 @end

@@ -17,6 +17,7 @@
 #import "TSFileCache.h"
 #import "NSString+XHMD5.h"
 #import "EGOCache.h"
+#import "CSKuleHistoryVideoItemTableViewCell.h"
 
 @interface CSKuleHistoryMainViewController () <UICollectionViewDataSource, UICollectionViewDelegate> {
     NSInteger _year;
@@ -126,13 +127,30 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     CSKuleHistoryMonthCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CSKuleHistoryMonthCell" forIndexPath:indexPath];
     
-    cell.labTitle.text = [NSString stringWithFormat:@"%d月", indexPath.row+1];
+    cell.labTitle.text = [NSString stringWithFormat:@"%ld月", indexPath.row+1];
     CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
     
     EntityMediaInfo* mediaInfo = [EntityHistoryInfoHelper mediaWhereLatestImageOfYear:_year month:indexPath.row+1 topic:currentChild.childId];
     
-    [cell.imgIcon sd_setImageWithURL:[NSURL URLWithString:mediaInfo.url]
-                    placeholderImage:[UIImage imageNamed:@"exp_default.png"]];
+    if ([mediaInfo.type isEqualToString:@"image"]) {
+        [cell.imgIcon sd_setImageWithURL:[NSURL URLWithString:mediaInfo.url]
+                        placeholderImage:[UIImage imageNamed:@"exp_default.png"]];
+    }
+    else if ([mediaInfo.type isEqualToString:@"video"]) {
+        NSString* videoKey = mediaInfo.url.MD5HashEx;
+        EGOCache* cache = [EGOCache globalCache];
+        NSURL* videoURL = [cache localURLForKey:videoKey];
+        if (videoURL && videoURL.fileURL) {
+            UIImage* img = [CSKuleHistoryVideoItemTableViewCell thumbnailImageForVideo:videoURL atTime:0.1];
+            cell.imgIcon.image = img;
+        }
+        else {
+            cell.imgIcon.image = [UIImage imageNamed:@"exp_default.png"];
+        }
+    }
+    else {
+        cell.imgIcon.image = [UIImage imageNamed:@"exp_default.png"];
+    }
     
     return cell;
 }

@@ -10,6 +10,9 @@
 #import "CSCoreDataHelper.h"
 #import "EntitySenderInfoHelper.h"
 #import "EntityMediaInfoHelper.h"
+#import "CSKuleHistoryVideoItemTableViewCell.h"
+#import "EGOCache.h"
+#import "NSString+XHMD5.h"
 
 @implementation EntityHistoryInfoHelper
 /*
@@ -167,6 +170,19 @@
                 if ([media.type isEqualToString:@"image"]) {
                     returnEntity = media;
                     break;
+                }
+                else if ([media.type isEqualToString:@"video"]) {
+                    //检查视频是否已经下载
+                    NSString* videoKey = media.url.MD5HashEx;
+                    EGOCache* cache = [EGOCache globalCache];
+                    BOOL localExist = NO;
+                    if (media.url.length > 0) {
+                        localExist = [cache hasCacheForKey:videoKey];
+                        if (localExist) {
+                            returnEntity = media;
+                            break;
+                        }
+                    }
                 }
             }
             

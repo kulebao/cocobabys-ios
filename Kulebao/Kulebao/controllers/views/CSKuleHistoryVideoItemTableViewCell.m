@@ -348,7 +348,7 @@
     [self setNeedsDisplay];
 }
 
-- (UIImage*)thumbnailImageForVideo:(NSURL *)videoURL atTime:(NSTimeInterval)time {
++ (UIImage*)thumbnailImageForVideo:(NSURL *)videoURL atTime:(NSTimeInterval)time {
     AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:videoURL options:nil];
     NSParameterAssert(asset);
     AVAssetImageGenerator *assetImageGenerator =[[AVAssetImageGenerator alloc] initWithAsset:asset];
@@ -422,7 +422,7 @@
         else if ([media.type isEqualToString:@"video"]) {
             //shareImage = [ShareSDK imageWithUrl:media.url];
             if (_videoURL && _videoURL.fileURL) {
-                UIImage* img = [self thumbnailImageForVideo:_videoURL atTime:0.1];
+                UIImage* img = [self.class thumbnailImageForVideo:_videoURL atTime:0.1];
                 shareImage = [ShareSDK jpegImageWithImage:img quality:0.8];
             }
             break;

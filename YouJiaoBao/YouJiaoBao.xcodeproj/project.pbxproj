@@ -685,6 +685,10 @@
 		09CD6670197C0C2600CC08F1 /* CSRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09CD666E197C0C2600CC08F1 /* CSRootViewController.m */; };
 		09CD667E197C153C00CC08F1 /* CSStudentListMainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09CD667D197C153C00CC08F1 /* CSStudentListMainTableViewController.m */; };
 		09DF51D91A050FBF004D6A4E /* ModelAssessment.m in Sources */ = {isa = PBXBuildFile; fileRef = 09DF51D81A050FBF004D6A4E /* ModelAssessment.m */; };
+		09F59E411B55647500835163 /* v2-chat-session.png in Resources */ = {isa = PBXBuildFile; fileRef = 09F59E3D1B55647500835163 /* v2-chat-session.png */; };
+		09F59E421B55647500835163 /* v2-chat-session@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09F59E3E1B55647500835163 /* v2-chat-session@2x.png */; };
+		09F59E431B55647500835163 /* v2-input-assessment.png in Resources */ = {isa = PBXBuildFile; fileRef = 09F59E3F1B55647500835163 /* v2-input-assessment.png */; };
+		09F59E441B55647500835163 /* v2-input-assessment@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09F59E401B55647500835163 /* v2-input-assessment@2x.png */; };
 		09F74C011997ACD8001555D0 /* EntityAssignmentInfoHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 09F74C001997ACD8001555D0 /* EntityAssignmentInfoHelper.m */; };
 		09F74C041997ADC3001555D0 /* EntityAssignmentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09F74C031997ADC3001555D0 /* EntityAssignmentInfo.m */; };
 		09F74C071997B00D001555D0 /* CSAssignmentItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09F74C061997B00D001555D0 /* CSAssignmentItemTableViewCell.m */; };
@@ -1572,6 +1576,10 @@
 		09CD667D197C153C00CC08F1 /* CSStudentListMainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSStudentListMainTableViewController.m; sourceTree = "<group>"; };
 		09DF51D71A050FBF004D6A4E /* ModelAssessment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelAssessment.h; sourceTree = "<group>"; };
 		09DF51D81A050FBF004D6A4E /* ModelAssessment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelAssessment.m; sourceTree = "<group>"; };
+		09F59E3D1B55647500835163 /* v2-chat-session.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-chat-session.png"; sourceTree = "<group>"; };
+		09F59E3E1B55647500835163 /* v2-chat-session@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-chat-session@2x.png"; sourceTree = "<group>"; };
+		09F59E3F1B55647500835163 /* v2-input-assessment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-input-assessment.png"; sourceTree = "<group>"; };
+		09F59E401B55647500835163 /* v2-input-assessment@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-input-assessment@2x.png"; sourceTree = "<group>"; };
 		09F74BFF1997ACD8001555D0 /* EntityAssignmentInfoHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityAssignmentInfoHelper.h; sourceTree = "<group>"; };
 		09F74C001997ACD8001555D0 /* EntityAssignmentInfoHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityAssignmentInfoHelper.m; sourceTree = "<group>"; };
 		09F74C021997ADC3001555D0 /* EntityAssignmentInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityAssignmentInfo.h; sourceTree = "<group>"; };
@@ -1912,6 +1920,10 @@
 		093571BC1AFD13EE00134BBF /* v2 */ = {
 			isa = PBXGroup;
 			children = (
+				09F59E3D1B55647500835163 /* v2-chat-session.png */,
+				09F59E3E1B55647500835163 /* v2-chat-session@2x.png */,
+				09F59E3F1B55647500835163 /* v2-input-assessment.png */,
+				09F59E401B55647500835163 /* v2-input-assessment@2x.png */,
 				095EF4CB1AFFC4B200251886 /* v2-checkbox-checked.png */,
 				095EF4CC1AFFC4B200251886 /* v2-checkbox-checked@2x.png */,
 				095EF4CD1AFFC4B200251886 /* v2-checkbox-unchecked.png */,
@@ -3107,6 +3119,7 @@
 				095EF4D01AFFC4B200251886 /* v2-checkbox-checked@2x.png in Resources */,
 				098E3E61198B314500CB4F0B /* estimat_btn.9.png in Resources */,
 				093571971AFD128200134BBF /* schedule-bg@2x.png in Resources */,
+				09F59E411B55647500835163 /* v2-chat-session.png in Resources */,
 				098E3E9B198B317000CB4F0B /* logo-gray-big@2x.png in Resources */,
 				093572591AFD13EF00134BBF /* v2-logo.png in Resources */,
 				093571291AFD128200134BBF /* btn-func-5@2x.png in Resources */,
@@ -3285,6 +3298,7 @@
 				093572521AFD13EF00134BBF /* v2-head@2x.png in Resources */,
 				098E3E81198B314500CB4F0B /* phone.png in Resources */,
 				0901CE1C1ABF2FBB0044838A /* record_icon_hook_highlighted_bg.png in Resources */,
+				09F59E441B55647500835163 /* v2-input-assessment@2x.png in Resources */,
 				093572251AFD13EF00134BBF /* v2-box.png in Resources */,
 				093571311AFD128200134BBF /* btn-nav-right-pressed@2x.png in Resources */,
 				093572451AFD13EF00134BBF /* v2-btn_star.png in Resources */,
@@ -3346,6 +3360,7 @@
 				0935714F1AFD128200134BBF /* comments-bg@2x.png in Resources */,
 				093572281AFD13EF00134BBF /* v2-btn@2x.png in Resources */,
 				098E3E86198B314500CB4F0B /* rest.png in Resources */,
+				09F59E431B55647500835163 /* v2-input-assessment.png in Resources */,
 				098E3E84198B314500CB4F0B /* playing_3.png in Resources */,
 				098E3E6C198B314500CB4F0B /* homework_item.png in Resources */,
 				0982A79F19C6ED1C0036DEC1 /* EDStarRating.bundle in Resources */,
@@ -3400,6 +3415,7 @@
 				093572421AFD13EF00134BBF /* v2-btn_picture@2x.png in Resources */,
 				093572511AFD13EF00134BBF /* v2-head.png in Resources */,
 				0935725E1AFD13EF00134BBF /* v2-在园评价@2x.png in Resources */,
+				09F59E421B55647500835163 /* v2-chat-session@2x.png in Resources */,
 				0935725B1AFD13EF00134BBF /* v2-logo2@2x.png in Resources */,
 				093571671AFD128200134BBF /* guide-4@2x.png in Resources */,
 				093571881AFD128200134BBF /* rating-1star.png in Resources */,
@@ -3888,8 +3904,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Xinus Wang (MH48YP79V6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xinus Wang (MH48YP79V6)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "YouJiaoBao/YouJiaoBao-Prefix.pch";
 				INFOPLIST_FILE = "YouJiaoBao/YouJiaoBao-Info.plist";
@@ -3899,7 +3915,7 @@
 					"$(PROJECT_DIR)/Venders/opencore-amr-0.1.3/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7a85bde6-e196-4fb7-a757-6922f663790d";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -3909,8 +3925,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Chengdu Cocobabys Information Technology Co., Ltd. (J7M2ZSPTSZ)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Chengdu Cocobabys Information Technology Co., Ltd. (J7M2ZSPTSZ)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "YouJiaoBao/YouJiaoBao-Prefix.pch";
 				INFOPLIST_FILE = "YouJiaoBao/YouJiaoBao-Info.plist";
@@ -3920,7 +3936,7 @@
 					"$(PROJECT_DIR)/Venders/opencore-amr-0.1.3/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f3ad8114-8232-4e11-b549-5854484de2b7";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

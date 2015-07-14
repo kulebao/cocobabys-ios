@@ -63,6 +63,7 @@
         
         _opManager.requestSerializer = [AFJSONRequestSerializer serializerWithWritingOptions:0];
         [_opManager.requestSerializer setValue:@"ios" forHTTPHeaderField:@"source"];
+        _opManager.requestSerializer.cachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
         
         NSString* version = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
         [_opManager.requestSerializer setValue:version forHTTPHeaderField:@"versioncode"];
@@ -252,8 +253,7 @@
                                              withClassList:(NSArray*)classIdList
                                                    success:(SuccessResponseHandler)success
                                                    failure:(FailureResponseHandler)failure {
-    id parameters = @{@"class_id": [classIdList componentsJoinedByString:@","],
-                      @"connected" : @"true"};
+    id parameters = @{@"class_id": [classIdList componentsJoinedByString:@","]};
     
     NSString* apiUrl = [NSString stringWithFormat:kPathKindergartenDailylogList, @(schoolId)];
     

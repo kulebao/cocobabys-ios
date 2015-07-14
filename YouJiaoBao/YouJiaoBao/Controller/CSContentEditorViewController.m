@@ -392,8 +392,13 @@ enum {
     if([compatiblePresets containsObject:AVAssetExportPresetMediumQuality]) {
         AVAssetExportSession *exportSession = [[AVAssetExportSession alloc]initWithAsset:avAsset
                                                                               presetName:AVAssetExportPresetMediumQuality];
-        NSString* mp4Path = [movFileURL.absoluteString.stringByDeletingPathExtension stringByAppendingPathExtension:@"mp4"];
+        //NSString* mp4Path = [movFileURL.absoluteString.stringByDeletingPathExtension stringByAppendingPathExtension:@"mp4"];
+        //mp4Path = [NSTemporaryDirectory() stringByAppendingPathComponent:[mp4Path.pathComponents lastObject]];
+        NSString* mp4Path = @"cocobabys-tmp.mp4";
         mp4Path = [NSTemporaryDirectory() stringByAppendingPathComponent:[mp4Path.pathComponents lastObject]];
+        NSFileManager* fm = [NSFileManager defaultManager];
+        [fm removeItemAtPath:mp4Path error:nil];
+        
         exportSession.outputURL = [NSURL fileURLWithPath: mp4Path];
         exportSession.shouldOptimizeForNetworkUse = YES;
         exportSession.outputFileType = AVFileTypeMPEG4;

@@ -397,33 +397,56 @@ enum {
         exportSession.outputURL = [NSURL fileURLWithPath: mp4Path];
         exportSession.shouldOptimizeForNetworkUse = YES;
         exportSession.outputFileType = AVFileTypeMPEG4;
+        [gApp waitingAlert:@"处理视频中"];
         [exportSession exportAsynchronouslyWithCompletionHandler:^{
             switch ([exportSession status]) {
                 case AVAssetExportSessionStatusFailed:
                 {
                     CSLog(@"AVAssetExportSessionStatusFailed! %@", exportSession.error);
+                    [self performSelectorOnMainThread:@selector(showAlertOnMain:)
+                                           withObject:exportSession.error
+                                        waitUntilDone:NO];
                     break;
                 }
                     
                 case AVAssetExportSessionStatusCancelled:
                     CSLog(@"AVAssetExportSessionStatusCancelled!");
+                    [self performSelectorOnMainThread:@selector(showAlertOnMain:)
+                                           withObject:exportSession.error
+                                        waitUntilDone:NO];
                     break;
                 case AVAssetExportSessionStatusCompleted:
                     CSLog(@"AVAssetExportSessionStatusCompleted!");
+                    [self performSelectorOnMainThread:@selector(hideAlertOnMain)
+                                           withObject:nil
+                                        waitUntilDone:NO];
                     [self performSelectorOnMainThread:@selector(convertFinish:)
                                            withObject:exportSession.outputURL
                                         waitUntilDone:NO];
                     break;
                 default:
+                    [self performSelectorOnMainThread:@selector(hideAlertOnMain)
+                                           withObject:nil
+                                        waitUntilDone:NO];
                     break;
             }
         }];
     }
 }
 
+- (void)showAlertOnMain:(NSError*)error {
+    [gApp alert:error.localizedDescription withTitle:error.localizedFailureReason];
+}
+
+- (void)hideAlertOnMain {
+    [gApp hideAlert];
+}
+
 - (void)convertFinish:(NSURL*)mp4FileURL {
-    if ([_delegate respondsToSelector:@selector(contentEditorViewController:finishWithVideo:)] && mp4FileURL) {
-        [_delegate contentEditorViewController:self finishWithVideo:mp4FileURL];
+    if ([_delegate respondsToSelector:@selector(contentEditorViewController:finishEditText:withVideo:)] && mp4FileURL) {
+        [_delegate contentEditorViewController:self
+                                finishEditText:self.textContent.text
+                                     withVideo:mp4FileURL];
     }
 }
 

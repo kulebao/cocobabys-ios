@@ -455,7 +455,8 @@
 }
 
 - (void)convertFinish:(NSURL*)mp4FileURL {
-    if ([_delegate respondsToSelector:@selector(contentEditorViewController:finishWithVideo:)] && mp4FileURL) {
+    [gApp hideAlert];
+    if ([_delegate respondsToSelector:@selector(createNoticeViewController:finishWithVideo:)] && mp4FileURL) {
         [_delegate createNoticeViewController:self finishWithVideo:mp4FileURL];
     }
 }

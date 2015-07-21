@@ -19,6 +19,7 @@ typedef enum : NSUInteger {
     kBusStatusUnknown,
     kBusStatusNotFound,
     kBusStatusNormal,
+    kBusStatusOff,
 } BusStatus;
 
 typedef enum : NSUInteger {
@@ -191,7 +192,33 @@ typedef enum : NSUInteger {
         //[gApp alert:error.localizedDescription];
         
         if (operation.response.statusCode == 404) {
-            _busStatus = kBusStatusNotFound;
+            NSError* err = nil;
+            id dataJson = [NSJSONSerialization JSONObjectWithData:operation.responseData options:0 error:&err];
+            
+            if (dataJson) {
+                /*
+                 1表示未出发
+                 2表示上午下车
+                 4表示下午下车
+                 */
+                NSInteger error_code = [[dataJson objectForKey:@"error_code"] integerValue];
+                NSString* error_msg = [dataJson objectForKey:@"error_msg"];
+                
+                if (error_code == 1) {
+                    _busStatus = kBusStatusNotFound;
+                }
+                else if (error_code == 2 || error_code == 4) {
+                    _busStatus = kBusStatusOff;
+                }
+                else {
+                    _busStatus = kBusStatusUnknown;
+                }
+                
+            }
+            else {
+                _busStatus = kBusStatusNotFound;
+            }
+            
             [self updateBusLocationLabel];
         }
     };
@@ -269,24 +296,27 @@ typedef enum : NSUInteger {
 }
 
 - (void)updateBusLocationLabel {
-//    self.labAddess.text = @"校车还未出发";
-//    
-//    if (_busStatus == kBusStatusUnknown) {
-//        self.labAddess.text = @"校车还未出发";
-//    }
-//    else if (_busStatus == kBusStatusNotFound) {
-//        self.labAddess.text = @"校车还未出发";
-//    }
-//    else {
-//        self.labAddess.text = @"校车位置: xxx";
-//    }
+    self.labAddess.text = @"校车还未出发";
     
-    if (_busLocationInfo) {
-        self.labAddess.text = [NSString stringWithFormat:@"校车位置: %@", _busLocationInfo.address];
-    }
-    else {
+    if (_busStatus == kBusStatusUnknown) {
         self.labAddess.text = @"校车还未出发";
     }
+    else if (_busStatus == kBusStatusNotFound) {
+        self.labAddess.text = @"校车还未出发";
+    }
+    else if (_busStatus == kBusStatusOff) {
+        self.labAddess.text = @"小孩已下车";
+    }
+    else if (_busLocationInfo) {
+        self.labAddess.text = [NSString stringWithFormat:@"校车位置: %@", _busLocationInfo.address];
+    }
+    
+//    if (_busLocationInfo) {
+//        self.labAddess.text = [NSString stringWithFormat:@"校车位置: %@", _busLocationInfo.address];
+//    }
+//    else {
+//        self.labAddess.text = @"校车还未出发";
+//    }
 }
 
 - (void)updateDisLabel {

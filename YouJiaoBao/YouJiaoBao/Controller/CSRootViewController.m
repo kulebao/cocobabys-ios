@@ -50,6 +50,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onLoginSuccess:) name:kNotiLoginSuccess object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onLogoutSuccess:) name:kNotiLogoutSuccess object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUnauthorized:) name:kNotiUnauthorized object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onLoginView:) name:kNotiShowLogin object:nil];
     
     [self autoLogin];
 }
@@ -139,6 +140,10 @@
 - (void)onUnauthorized:(NSNotification*)noti {
     CSLog(@"Unauthorized Error : %@", noti.object);
     [[CSEngine sharedInstance] onLogin:nil];
+    [self showLoginView];
+}
+
+- (void)onLoginView:(NSNotification*)noti {
     [self showLoginView];
 }
 

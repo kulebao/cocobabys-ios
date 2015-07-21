@@ -13,6 +13,7 @@
 extern NSString* kNotiLoginSuccess;
 extern NSString* kNotiLogoutSuccess;
 extern NSString* kNotiUnauthorized;
+extern NSString* kNotiShowLogin;
 
 extern NSString* kAppleID;
 

@@ -404,6 +404,7 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
     char* pdata = NULL;			//数据区
     
     if (localVideoHandle == NULL) return;
+    UIApplication* app = [UIApplication sharedApplication];
     while (IsRunning)
     {
         nLen = 0;
@@ -421,7 +422,7 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
             YUV_PICTURE yuv_pic ;
             hm_video_get_yuv_data(yuv_h, &yuv_pic);
             
-            if ( PaintView != nil && IsRunning == YES)
+            if ( PaintView != nil && IsRunning == YES  && app.applicationState == UIApplicationStateActive)
             {
                 [videoLock lock];
                 [(PaintingView*)PaintView DisplayYUVdata:&yuv_pic];

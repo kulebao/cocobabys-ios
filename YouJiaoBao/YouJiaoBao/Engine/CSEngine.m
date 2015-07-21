@@ -13,6 +13,7 @@ NSString* kNotiLoginSuccess = @"noti.login.success";
 NSString* kNotiLogoutSuccess = @"noti.logout.success";
 NSString* kNotiUnauthorized = @"noti.unauthorized";
 NSString* kKeyLoginAccount = @"key.login.account";
+NSString* kNotiShowLogin = @"noti.login.view";
 
 NSString* kAppleID = @"917314512";
 

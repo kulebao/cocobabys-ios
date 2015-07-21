@@ -178,11 +178,27 @@
     sender.type = senderInfo.type;
     sender.senderId = senderInfo.senderId;
     
+    __block NSURL* qiniuImgUrl = nil;
+    __block NSString* senderName = nil;
+    
+    if (senderName.length == 0) {
+        if ([sender.senderId isEqualToString:gApp.engine.currentRelationship.parent.parentId]) {
+            senderName = @"我";
+        }
+        else if ([sender.type isEqualToString:@"t"]) {
+            senderName = @"教师";
+        }
+        else {
+            senderName = @"家长";
+        }
+    }
+    
+    self.imgPortrait.image = [UIImage imageNamed:@"chat_head_icon.png"];
+    self.labName.text = senderName;
+    
     [gApp.engine reqGetSenderProfileOfKindergarten:gApp.engine.loginInfo.schoolId
                                         withSender:sender
                                           complete:^(id obj) {
-                                              NSURL* qiniuImgUrl = nil;
-                                              NSString* senderName = nil;
                                               if ([obj isKindOfClass:[CSKuleEmployeeInfo class]]) {
                                                   CSKuleEmployeeInfo* employeeInfo = obj;
                                                   if (employeeInfo.portrait.length > 0) {

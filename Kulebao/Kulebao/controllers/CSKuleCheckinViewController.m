@@ -211,6 +211,15 @@
             else if (checkInOutLogInfo.noticeType == kKuleNoticeTypeCheckOut) {
                 tips.tips2 = [NSDate stringFromDate:date withFormat:@"HH:mm"];
             }
+            else if (checkInOutLogInfo.noticeType == kKuleNoticeTypeCheckInCarMorning
+                || checkInOutLogInfo.noticeType == kKuleNoticeTypeCheckOutCarMorning) {
+                tips.tips3 = [NSDate stringFromDate:date withFormat:@"HH:mm"];
+                tips.tips4 = nil;
+            }
+            else if (checkInOutLogInfo.noticeType == kKuleNoticeTypeCheckOut
+                     || checkInOutLogInfo.noticeType == kKuleNoticeTypeCheckOutCarAfternoon) {
+                tips.tips4 = [NSDate stringFromDate:date withFormat:@"HH:mm"];
+            }
             else {
                 CSLog(@"Unknown checkInOutLog: %@", checkInOutLogInfo);
             }
@@ -225,7 +234,7 @@
     
     for (NSInteger i=0; i<31; i++) {
         CSTipsInfo* tips = tipsList[i];
-        if (tips && (tips.tips1 || tips.tips2)) { // 排除校车的显示
+        if (tips && (tips.tips1 || tips.tips2 || tips.tips3 || tips.tips4)) { // 不排除校车的显示
             [dates addObject:@(i+1)];
             [tipInfos addObject:tips];
             
@@ -235,6 +244,14 @@
             
             if (!tips.tips2) {
                 tips.tips2 = @"未签退";
+            }
+            
+            if (!tips.tips3) {
+                tips.tips3 = @"未上车";
+            }
+            
+            if (!tips.tips4) {
+                tips.tips4 = @"未下车";
             }
         }
     }

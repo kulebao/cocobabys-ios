@@ -143,6 +143,14 @@
 }
 
 - (void)historyItemTableCellDidLongPress:(CSKuleHistoryItemTableViewCell*)cell {
+    [self showDeleteMenu:cell];
+}
+
+- (void)historyVideoItemTableCellDidLongPress:(CSKuleHistoryVideoItemTableViewCell*)cell {
+    [self showDeleteMenu:cell];
+}
+
+- (void)showDeleteMenu:(UITableViewCell*)cell {
     NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
     _denyIndexPath = indexPath;
     UIMenuItem *flag = [[UIMenuItem alloc] initWithTitle:@"删除" action:@selector(deleteCell:)];

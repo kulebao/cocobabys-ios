@@ -37,6 +37,11 @@
 
 @property (nonatomic, strong) BMKLocationService* locService;
 
+// For test only
+@property (nonatomic, strong, readonly) NSMutableArray* receivedNotifications;
+@property (nonatomic, strong) NSData* deviceToken;
+
+
 #pragma mark - application
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
 - (void)applicationWillResignActive:(UIApplication *)application;

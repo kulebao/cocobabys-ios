@@ -67,6 +67,7 @@ CSAppDelegate* gApp = nil;
 {
     // 打印到日志
     CSLog(@"backgroud : %@",userInfo);
+    [_engine.receivedNotifications addObject:userInfo];
     completionHandler(UIBackgroundFetchResultNewData);
 }
 

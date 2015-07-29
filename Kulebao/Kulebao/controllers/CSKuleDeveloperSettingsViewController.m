@@ -9,6 +9,8 @@
 #import "CSKuleDeveloperSettingsViewController.h"
 #import "BPush.h"
 #import "CSKulePreferences.h"
+#import "CSKuleEngine.h"
+#import "CSAppDelegate.h"
 
 @interface CSKuleDeveloperSettingsViewController ()
 @property (weak, nonatomic) IBOutlet UITextView *textLog;
@@ -35,12 +37,22 @@
     
     NSString* baiduPushLog = [NSString stringWithFormat:@"百度推送信息：\napi_key:%@\napp_id:%@\nuser_id:%@\nchannel_id:%@", baiduApiKey, [BPush getAppId], [BPush getUserId], [BPush getChannelId]];
     
-    NSArray* logList = @[serverInfoLog, baiduPushLog];
+    NSMutableArray* logList = [NSMutableArray arrayWithArray: @[serverInfoLog, baiduPushLog]];
     
+    if (gApp.engine.deviceToken) {
+        [logList addObject:[NSString stringWithFormat:@"DeviceToken: %@", gApp.engine.deviceToken]];
+    }
+    
+    if (gApp.engine.receivedNotifications.count > 0) {
+        [logList addObject:@"Push Notifications:\n"];
+        
+        for (NSDictionary* userInfo in gApp.engine.receivedNotifications) {
+            [logList addObject:[NSString stringWithFormat:@"%@", userInfo]];
+        }
+    }
     
     NSString* logText = [logList componentsJoinedByString:@"\n\n"];
     self.textLog.text = logText;
-    CSLog(@"%@", logText);
 }
 
 - (void)didReceiveMemoryWarning {

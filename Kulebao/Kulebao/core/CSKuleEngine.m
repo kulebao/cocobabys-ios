@@ -59,6 +59,7 @@
 @synthesize badgeOfAssess = _badgeOfAssess;
 
 @synthesize hmServerId = _hmServerId;
+@synthesize receivedNotifications = _receivedNotifications;
 
 #pragma mark - application
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -114,6 +115,8 @@
     if (userInfo) {
         CSLog(@"从消息启动:%@",userInfo);
         [BPush handleNotification:userInfo];
+        
+        [self.receivedNotifications addObject:userInfo];
     }
     
     //角标清0
@@ -189,6 +192,9 @@
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
+    CSLog(@"didRegisterForRemoteNotificationsWithDeviceToken:%@", deviceToken);
+    self.deviceToken = deviceToken;
+    
     // 必须
     [BPush registerDeviceToken:deviceToken];
     
@@ -236,6 +242,7 @@
     }
     
     [BPush handleNotification:userInfo];
+    [self.receivedNotifications addObject:userInfo];
 }
 
 #pragma mark - Getter & Setter
@@ -246,6 +253,14 @@
 
 - (UIApplication*)application {
     return [UIApplication sharedApplication];
+}
+
+- (NSMutableArray*)receivedNotifications {
+    if (_receivedNotifications == nil) {
+        _receivedNotifications = [NSMutableArray array];
+    }
+    
+    return _receivedNotifications;
 }
 
 #pragma mark - ShareSDK

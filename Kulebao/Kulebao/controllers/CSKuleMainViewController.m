@@ -20,6 +20,8 @@
 #import "UIImageView+WebCache.h"
 #import "CSKuleVideoMember.h"
 #import "CSKuleCCTVMainTableViewController.h"
+#import "CSKuleInterpreter.h"
+#import "CSKuleNewsDetailsViewController.h"
 
 @interface CSKuleMainViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
     UIImagePickerController* _imgPicker;
@@ -132,6 +134,11 @@
                      options:NSKeyValueObservingOptionNew
                      context:nil];
     
+    [gApp.engine addObserver:self
+                  forKeyPath:@"pendingNotificationInfo"
+                     options:NSKeyValueObservingOptionNew
+                     context:nil];
+    
     [self performSelector:@selector(getRelationshipInfos) withObject:nil afterDelay:0];
 }
 
@@ -154,7 +161,10 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     CSLog(@"%@ changed.", keyPath);
-    if ((object == gApp.engine) && [keyPath isEqualToString:@"currentRelationship"]) {
+    if ((object == gApp.engine) && [keyPath isEqualToString:@"pendingNotificationInfo"]) {
+        [self handlePendingNotification];
+    }
+    else if ((object == gApp.engine) && [keyPath isEqualToString:@"currentRelationship"]) {
         [self updateUI:YES];
         CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
         if (currentChild) {
@@ -885,6 +895,8 @@
         if(relationshipInfo) {
             gApp.engine.currentRelationship = relationshipInfo;
             [gApp hideAlert];
+            
+            [self handlePendingNotification];
         }
         else {
             [gApp alert:@"没有关联宝宝信息"];
@@ -997,6 +1009,41 @@
 #endif
     
     AudioServicesPlaySystemSound(1007);
+}
+
+- (void)handlePendingNotification {
+    if (gApp.engine.pendingNotificationInfo && gApp.engine.currentRelationship) {
+        // Handle
+        /*
+         {
+         ad = "\U5e7c\U4e50\U5b9d";
+         aps =     {
+         alert = "\U5e7c\U4e50\U5b9d\U63d0\U9192\U60a8\Uff1a\U60a8\U7684\U5b69\U5b50 \U7136\U7136 \U5df2\U4e8e 00:33:46 \U6253\U5361\U5165\U56ed\U3002";
+         badge = 1;
+         sound = "";
+         };
+         channelid = 5479041548038543311;
+         "child_id" = "2_8901_32570";
+         device = 4;
+         "notice_type" = 1;
+         "parent_name" = "\U738b\U5927\U987a";
+         pushid = 864122702946899280;
+         "record_url" = "https://dn-cocobabys.qbox.me/big_shots.jpg";
+         timestamp = 1438187626748;
+         }
+
+         */
+
+        NSDictionary* notiInfo = gApp.engine.pendingNotificationInfo;
+        gApp.engine.pendingNotificationInfo = nil;
+        CSKuleCheckInOutLogInfo* info = [CSKuleInterpreter decodeCheckInOutLogInfo:notiInfo];
+        if (info) {
+            CSKuleNewsDetailsViewController* ctrl = [self.storyboard instantiateViewControllerWithIdentifier:@"CSKuleNewsDetailsViewController"];
+            ctrl.navigationItem.title = @"刷卡信息";
+            ctrl.checkInOutLogInfo = info;
+            [self.navigationController pushViewController:ctrl animated:YES];
+        }
+    }
 }
 
 @end

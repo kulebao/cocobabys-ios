@@ -115,8 +115,8 @@
     if (userInfo) {
         CSLog(@"从消息启动:%@",userInfo);
         [BPush handleNotification:userInfo];
-        
         [self.receivedNotifications addObject:userInfo];
+        self.pendingNotificationInfo = userInfo;
     }
     
     //角标清0
@@ -239,6 +239,9 @@
         
         self.badgeOfCheckin = self.badgeOfCheckin + 1;
         [application setApplicationIconBadgeNumber:0];
+    }
+    else {
+        self.pendingNotificationInfo = userInfo;
     }
     
     [BPush handleNotification:userInfo];

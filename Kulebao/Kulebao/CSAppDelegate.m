@@ -67,6 +67,13 @@ CSAppDelegate* gApp = nil;
 {
     // 打印到日志
     CSLog(@"backgroud : %@",userInfo);
+    
+    if (application.applicationState == UIApplicationStateActive) {
+    }
+    else {
+        _engine.pendingNotificationInfo = userInfo;
+    }
+    
     [_engine.receivedNotifications addObject:userInfo];
     completionHandler(UIBackgroundFetchResultNewData);
 }

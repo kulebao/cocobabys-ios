@@ -40,6 +40,7 @@
 // For test only
 @property (nonatomic, strong, readonly) NSMutableArray* receivedNotifications;
 @property (nonatomic, strong) NSData* deviceToken;
+@property (nonatomic, strong) NSDictionary* pendingNotificationInfo;
 
 
 #pragma mark - application

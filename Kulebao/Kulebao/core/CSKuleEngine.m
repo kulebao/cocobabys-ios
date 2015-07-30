@@ -18,8 +18,12 @@
 #import "TSFileCache.h"
 #import "CSKit.h"
 
-@interface CSKuleEngine() <BPushDelegate> {
+#import <ShareSDK/ShareSDK.h>
+#import "WXApi.h"
+
+@interface CSKuleEngine() {
     NSMutableDictionary* _senderProfiles;
+    BMKMapManager* _mapManager;
 }
 
 @property (strong, nonatomic) CSHttpClient* httpClient;
@@ -55,6 +59,7 @@
 @synthesize badgeOfAssess = _badgeOfAssess;
 
 @synthesize hmServerId = _hmServerId;
+@synthesize receivedNotifications = _receivedNotifications;
 
 #pragma mark - application
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -65,38 +70,58 @@
     // 添加百度统计
     [self setupBaiduMobStat];
     
-#ifdef __IPHONE_8_0
-    if (IsAtLeastiOSVersion(@"8.0")) {
-        UIUserNotificationType myTypes =
-        UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+    // ShareSDK
+    [self setupShareSDK];
+    
+    // 添加百度地图
+    _mapManager = [[BMKMapManager alloc] init];
+    // 如果要关注网络及授权验证事件，请设定     generalDelegate参数
+    BOOL ret = [_mapManager start:@"oGpNadkf2d8od1xoFMUnnRmx"  generalDelegate:nil];
+    if (!ret) {
+        CSLog(@"BMKMapManager start failed!");
+    }
+    self.locService = [[BMKLocationService alloc] init];
+    
+    // iOS8 下需要使用新的 API
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
+        UIUserNotificationType myTypes = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+        
         UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:myTypes categories:nil];
         [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
     }else {
-        UIRemoteNotificationType myTypes =
-        UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound;
+        UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound;
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:myTypes];
     }
-#else
-    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:notificationTypes];
-#endif
-    
-    [BPush setDelegate:self];
     
     CSKulePreferences* preference = [CSKulePreferences defaultPreferences];
     NSDictionary* serverInfo = [preference getServerSettings];
+    
+    // 在 App 启动时注册百度云推送服务，需要提供 Apikey
+    NSInteger bdPushModel = BPushModeProduction;
+#ifdef DEBUG
+    bdPushModel = BPushModeDevelopment;
+#endif
+    
     [BPush registerChannel:launchOptions
                     apiKey:serverInfo[@"baidu_api_key"]
-                  pushMode:BPushModeProduction
+                  pushMode:bdPushModel
+           withFirstAction:nil
+          withSecondAction:nil
+              withCategory:nil
                    isDebug:NO];
 
-    // 设置 BPush 的回调 [BPush setDelegate:self];
-    // App 是⽤用户点击推送消息启动
+    // App 是用户点击推送消息启动
     NSDictionary *userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     if (userInfo) {
+        CSLog(@"从消息启动:%@",userInfo);
         [BPush handleNotification:userInfo];
+        [self.receivedNotifications addObject:userInfo];
+        self.pendingNotificationInfo = userInfo;
     }
     
-    [application setApplicationIconBadgeNumber:0];
+    //角标清0
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+
     return YES;
 }
 
@@ -104,6 +129,8 @@
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"app.applicationWillResignActive" object:nil];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
@@ -165,6 +192,9 @@
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
+    CSLog(@"didRegisterForRemoteNotificationsWithDeviceToken:%@", deviceToken);
+    self.deviceToken = deviceToken;
+    
     // 必须
     [BPush registerDeviceToken:deviceToken];
     
@@ -172,9 +202,27 @@
         _preferences.deviceToken = deviceToken;
     }
     
-    // 必须。可以在其它时机调用,只有在该方法返回(通过 onMethod:response:回调)绑定成功时,app 才能接收到 Push 消息。
     // 一个 app 绑定成功至少一次即可(如果 access token 变更请重新绑定)。
-    [BPush bindChannel];
+    [BPush bindChannelWithCompleteHandler:^(id result, NSError *error) {
+        CSLog(@"Method: %@\n%@", BPushRequestMethodBind, result);
+        
+        NSString *appid = [BPush getAppId];
+        NSString *userid = [BPush getUserId];
+        NSString *channelid = [BPush getChannelId];
+        
+        if (appid && userid && channelid) {
+            CSLog(@"BPushErrorCode_Success");
+            CSKuleBPushInfo* baiduPushInfo = [CSKuleBPushInfo new];
+            baiduPushInfo.appId = appid;
+            baiduPushInfo.userId = userid;
+            baiduPushInfo.channelId = channelid;
+            
+            _preferences.baiduPushInfo = baiduPushInfo;
+        }
+        else {
+            CSLog(@"BPushErrorCode_NOT_Success");
+        }
+    }];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
@@ -192,8 +240,12 @@
         self.badgeOfCheckin = self.badgeOfCheckin + 1;
         [application setApplicationIconBadgeNumber:0];
     }
+    else {
+        self.pendingNotificationInfo = userInfo;
+    }
     
     [BPush handleNotification:userInfo];
+    [self.receivedNotifications addObject:userInfo];
 }
 
 #pragma mark - Getter & Setter
@@ -204,6 +256,27 @@
 
 - (UIApplication*)application {
     return [UIApplication sharedApplication];
+}
+
+- (NSMutableArray*)receivedNotifications {
+    if (_receivedNotifications == nil) {
+        _receivedNotifications = [NSMutableArray array];
+    }
+    
+    return _receivedNotifications;
+}
+
+#pragma mark - ShareSDK
+- (void)setupShareSDK {
+    [ShareSDK registerApp:@"77da60e4dcd8"];
+    
+    /**
+     连接微信应用以使用相关功能，此应用需要引用WeChatConnection.framework和微信官方SDK
+     http://open.weixin.qq.com上注册应用，并将相关信息填写以下字段
+     **/
+    [ShareSDK connectWeChatWithAppId:@"wxf3c9e8b20267320e"
+                           appSecret:@"b8058fb1aac2bac635332ea20679861b"
+                           wechatCls:[WXApi class]];
 }
 
 #pragma mark - Setup
@@ -309,51 +382,49 @@
 - (NSURL*)urlFromPath:(NSString*)path {
     NSURL* url = nil;
     if (path.length > 0) {
-        if ([path hasPrefix:@"http"]) {
+        if ([path hasPrefix:@"http"]
+            || [path hasPrefix:@"https"]) {
             url = [NSURL URLWithString:path];
         }
         else {
             url = [NSURL URLWithString:path
-                         relativeToURL:[NSURL URLWithString:kServerHostForProd]];
-            if (_preferences.enabledTest) {
-                url = [NSURL URLWithString:kServerHostForTest];
-            }
+                         relativeToURL:_httpClient.baseURL];
         }
     }
     
     return url;
 }
 
-#pragma mark - BPushDelegate
-// 必须,如果正确调用了 setDelegate,在 bindChannel 之后,结果在这个回调中返回。若绑定失败,请进行重新绑定,确保至少绑定成功一次
-- (void)onMethod:(NSString*)method response:(NSDictionary*)data {
-    NSDictionary* res = [[NSDictionary alloc] initWithDictionary:data];
-    if ([BPushRequestMethodBind isEqualToString:method]) {
-        NSString *appid = [res valueForKey:BPushRequestAppIdKey];
-        NSString *userid = [res valueForKey:BPushRequestUserIdKey];
-        NSString *channelid = [res valueForKey:BPushRequestChannelIdKey];
-        //NSString *requestid = [res valueForKey:BPushRequestRequestIdKey];
-        int returnCode = [[res valueForKey:BPushRequestErrorCodeKey] intValue];
-        
-        if (returnCode == 0) {
-            CSLog(@"BPushErrorCode_Success");
-            CSKuleBPushInfo* baiduPushInfo = [CSKuleBPushInfo new];
-            baiduPushInfo.appId = appid;
-            baiduPushInfo.userId = userid;
-            baiduPushInfo.channelId = channelid;
-            
-            _preferences.baiduPushInfo = baiduPushInfo;
-        }
-        else {
-            CSLog(@"BPushErrorCode_NOT_Success");
-        }
-    } else if ([BPushRequestMethodUnbind isEqualToString:method]) {
-        int returnCode = [[res valueForKey:BPushRequestErrorCodeKey] intValue];
-        if (returnCode == 0) {
-            _preferences.baiduPushInfo = nil;
-        }
-    }
-}
+//#pragma mark - BPushDelegate
+//// 必须,如果正确调用了 setDelegate,在 bindChannel 之后,结果在这个回调中返回。若绑定失败,请进行重新绑定,确保至少绑定成功一次
+//- (void)onMethod:(NSString*)method response:(NSDictionary*)data {
+//    NSDictionary* res = [[NSDictionary alloc] initWithDictionary:data];
+//    if ([BPushRequestMethodBind isEqualToString:method]) {
+//        NSString *appid = [res valueForKey:BPushRequestAppIdKey];
+//        NSString *userid = [res valueForKey:BPushRequestUserIdKey];
+//        NSString *channelid = [res valueForKey:BPushRequestChannelIdKey];
+//        //NSString *requestid = [res valueForKey:BPushRequestRequestIdKey];
+//        int returnCode = [[res valueForKey:BPushRequestErrorCodeKey] intValue];
+//        
+//        if (returnCode == 0) {
+//            CSLog(@"BPushErrorCode_Success");
+//            CSKuleBPushInfo* baiduPushInfo = [CSKuleBPushInfo new];
+//            baiduPushInfo.appId = appid;
+//            baiduPushInfo.userId = userid;
+//            baiduPushInfo.channelId = channelid;
+//            
+//            _preferences.baiduPushInfo = baiduPushInfo;
+//        }
+//        else {
+//            CSLog(@"BPushErrorCode_NOT_Success");
+//        }
+//    } else if ([BPushRequestMethodUnbind isEqualToString:method]) {
+//        int returnCode = [[res valueForKey:BPushRequestErrorCodeKey] intValue];
+//        if (returnCode == 0) {
+//            _preferences.baiduPushInfo = nil;
+//        }
+//    }
+//}
 
 #pragma mark - Core Data
 -(NSManagedObjectModel *)managedObjectModel {
@@ -1666,6 +1737,39 @@
     
     NSString* method = @"GET";
     NSDictionary* parameters = nil;
+    
+    return [_httpClient httpRequestWithMethod:method
+                                         path:path
+                                   parameters:parameters
+                                      success:success
+                                      failure:failure];
+}
+
+- (AFHTTPRequestOperation*)reqGetBusLocationOfKindergarten:(NSInteger)kindergarten
+                                               withChildId:(NSString*)childId
+                                                   success:(SuccessResponseHandler)success
+                                                   failure:(FailureResponseHandler)failure {
+    
+    NSString* path = [NSString stringWithFormat:kBusLocationPathV2, @(kindergarten), childId];
+    NSString* method = @"GET";
+    NSMutableDictionary* parameters = nil;
+    
+    return [_httpClient httpRequestWithMethod:method
+                                  path:path
+                            parameters:parameters
+                               success:success
+                               failure:failure];
+    
+}
+
+- (AFHTTPRequestOperation*)reqGetShareTokenOfKindergarten:(NSInteger)kindergarten
+                                              withChildId:(NSString*)childId
+                                             withRecordId:(NSInteger)recordId
+                                                  success:(SuccessResponseHandler)success
+                                                  failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kGetShareTokenV3, @(kindergarten), childId, @(recordId)];
+    NSString* method = @"POST";
+    NSMutableDictionary* parameters = nil;
     
     return [_httpClient httpRequestWithMethod:method
                                          path:path

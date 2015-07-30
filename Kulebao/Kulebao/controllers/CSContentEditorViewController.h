@@ -23,6 +23,7 @@
                          withImages:(NSArray*)imageList;
 
 - (void)contentEditorViewController:(CSContentEditorViewController*)ctrl
-                     finishWithVideo:(NSURL*)videoLocalUrl;
+                     finishEditText:(NSString*)text
+                          withVideo:(NSURL*)videoLocalUrl;
 
 @end

@@ -455,7 +455,8 @@
 }
 
 - (void)convertFinish:(NSURL*)mp4FileURL {
-    if ([_delegate respondsToSelector:@selector(contentEditorViewController:finishWithVideo:)] && mp4FileURL) {
+    [gApp hideAlert];
+    if ([_delegate respondsToSelector:@selector(createNoticeViewController:finishWithVideo:)] && mp4FileURL) {
         [_delegate createNoticeViewController:self finishWithVideo:mp4FileURL];
     }
 }
@@ -481,7 +482,8 @@
         cell.deleteButtonOffset = CGPointMake(-15, -15);
         
         UIImageView* imgView = [[UIImageView alloc] initWithFrame:cell.bounds];
-        imgView.contentMode = UIViewContentModeScaleAspectFit;
+        imgView.contentMode = UIViewContentModeScaleAspectFill;
+        imgView.clipsToBounds = YES;
         imgView.userInteractionEnabled = YES;
         imgView.tag = 0x1234;
         imgView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;

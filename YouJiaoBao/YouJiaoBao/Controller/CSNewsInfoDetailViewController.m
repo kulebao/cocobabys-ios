@@ -62,7 +62,8 @@
 #pragma mark - Private
 - (NSString*)tagTitle {
     NSString* tTitle = @"园内公告";
-    if ([self.newsInfo.tags containsString:@"作业"]) {
+    NSRange range = [self.newsInfo.tags rangeOfString:@"作业"];
+    if (range.length > 0) {
         tTitle = @"亲子作业";
     }
     else if(self.newsInfo.classId.integerValue > 0) {

@@ -144,4 +144,11 @@
 // PATH: 查询幼儿园公告回执状态V2
 #define kKindergartenNewsMarkedStatusPathV2   @"/api/v2/kindergarten/%@/news/%@/reader/%@"
 
+#pragma mark - Bus
+// PATH: 查询校车
+#define kBusLocationPathV2        @"/api/v2/kindergarten/%@/last_bus_location/%@"
+
+#pragma mark - Share
+#define kGetShareTokenV3  @"/api/v3/kindergarten/%@/history/%@/record/%@/share"
+
 #endif

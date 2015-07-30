@@ -53,7 +53,7 @@ static NSInteger kRetryInterval = 120; // 秒
     UIImage* fieldBgImg = [[UIImage imageNamed:@"v2-input_login.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     self.imgFieldBg1.image = fieldBgImg;
     
-    _noticeTemp = @"尊敬的%@用户，您好！您的手机已通过验证。请注意查收验证码短信。";
+    _noticeTemp = @"尊敬的%@用户，您的手机已通过验证。请获取短信验证码并进行账号绑定，谢谢！";
     
     NSString* notice = [NSString stringWithFormat:_noticeTemp, _mobile];
     self.labNotice.text = notice;
@@ -219,12 +219,13 @@ static NSInteger kRetryInterval = 120; // 秒
             }
         }
         else {
-            if (error_msg.length > 0) {
-                [gApp alert:error_msg];
-            }
-            else {
-                [gApp alert:@"验证码错误，请确认输入是否正确，如果点击了重新获取验证码，请输入最后一次收到的验证码，谢谢"];
-            }
+//            if (error_msg.length > 0) {
+//                [gApp alert:error_msg];
+//            }
+//            else {
+//                [gApp alert:@"验证码错误，请重新输入，谢谢"];
+//            }
+            [gApp alert:@"验证码错误，请重新输入，谢谢"];
         }
     };
     

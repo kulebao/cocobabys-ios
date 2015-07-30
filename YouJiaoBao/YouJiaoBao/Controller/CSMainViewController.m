@@ -161,7 +161,7 @@
 - (void)contentEditorViewController:(CSContentEditorViewController*)ctrl
                      finishEditText:(NSString*)text
                          withImages:(NSArray*)imageList {
-    _textContent = text;
+    _textContent = [text trim];
     _imageUrlList = [NSMutableArray array];
     _imageList = [NSMutableArray arrayWithArray:imageList];
     _videoFileUrl = nil;
@@ -171,8 +171,9 @@
 }
 
 - (void)contentEditorViewController:(CSContentEditorViewController*)ctrl
-                    finishWithVideo:(NSURL*)videoLocalUrl {
-    _textContent = @"";
+                     finishEditText:(NSString*)text
+                          withVideo:(NSURL*)videoLocalUrl {
+    _textContent = [text trim];
     _imageUrlList = [NSMutableArray array];
     _imageList = [NSMutableArray array];
     _videoFileUrl = videoLocalUrl;

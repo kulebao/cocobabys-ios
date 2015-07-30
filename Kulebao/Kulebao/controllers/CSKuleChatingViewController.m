@@ -335,12 +335,29 @@
         }
     }
     
+    
+    __block NSURL* qiniuImgUrl = nil;
+    __block NSString* senderName = nil;
+    
+    if (senderName.length == 0) {
+        if ([msg.sender.senderId isEqualToString:gApp.engine.currentRelationship.parent.parentId]) {
+            senderName = @"我";
+        }
+        else if ([msg.sender.type isEqualToString:@"t"]) {
+            senderName = @"教师";
+        }
+        else {
+            senderName = @"家长";
+        }
+    }
+    
+    labMsgSender.text = senderName;
+    imgPortrait.image = [UIImage imageNamed:@"chat_head_icon.png"];
+    
     // Get Sender avatar and name.
     [gApp.engine reqGetSenderProfileOfKindergarten:gApp.engine.loginInfo.schoolId
                                         withSender:msg.sender
                                           complete:^(id obj) {
-                                              NSURL* qiniuImgUrl = nil;
-                                              NSString* senderName = nil;
                                               if ([obj isKindOfClass:[CSKuleEmployeeInfo class]]) {
                                                   CSKuleEmployeeInfo* employeeInfo = obj;
                                                   if (employeeInfo.portrait.length > 0) {

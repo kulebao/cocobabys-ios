@@ -23,6 +23,9 @@
 @property (nonatomic, strong) EntityHistoryInfo* historyInfo;
 @property (nonatomic, weak) id delegate;
 
-+ (CGFloat)calcHeight:(EntityHistoryInfo*)historyInfo;
++ (CGFloat)calcHeight:(EntityHistoryInfo*)historyInfo width:(CGFloat)width;;
+- (IBAction)onBtnShareClicked:(id)sender;
+
++ (UIImage*)thumbnailImageForVideo:(NSURL *)videoURL atTime:(NSTimeInterval)time;
 
 @end

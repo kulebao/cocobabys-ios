@@ -15,7 +15,11 @@
 #import "MJPhotoBrowser.h"
 #import "UIImageView+WebCache.h"
 
-@interface CSKuleHistoryItemTableViewCell()
+#import <ShareSDK/ShareSDK.h>
+
+@interface CSKuleHistoryItemTableViewCell() <ISSShareViewDelegate> {
+    NSString* _shareToken;
+}
 @property (weak, nonatomic) IBOutlet UIImageView *imgPortrait;
 @property (weak, nonatomic) IBOutlet UILabel *labName;
 @property (weak, nonatomic) IBOutlet UILabel *labDate;
@@ -65,6 +69,7 @@
 
 - (void)setHistoryInfo:(EntityHistoryInfo *)historyInfo {
     _historyInfo = historyInfo;
+    _shareToken = nil;
     
     if ([_historyInfo.sender.senderId isEqualToString:gApp.engine.currentRelationship.parent.parentId]) {
         self.longPressGes.enabled = YES;
@@ -146,11 +151,28 @@
     sender.type = senderInfo.type;
     sender.senderId = senderInfo.senderId;
     
+    
+    __block NSURL* qiniuImgUrl = nil;
+    __block NSString* senderName = nil;
+    
+    if (senderName.length == 0) {
+        if ([sender.senderId isEqualToString:gApp.engine.currentRelationship.parent.parentId]) {
+            senderName = @"我";
+        }
+        else if ([sender.type isEqualToString:@"t"]) {
+            senderName = @"教师";
+        }
+        else {
+            senderName = @"家长";
+        }
+    }
+    
+    self.imgPortrait.image = [UIImage imageNamed:@"chat_head_icon.png"];
+    self.labName.text = senderName;
+
     [gApp.engine reqGetSenderProfileOfKindergarten:gApp.engine.loginInfo.schoolId
                                         withSender:sender
                                           complete:^(id obj) {
-                                              NSURL* qiniuImgUrl = nil;
-                                              NSString* senderName = nil;
                                               if ([obj isKindOfClass:[CSKuleEmployeeInfo class]]) {
                                                   CSKuleEmployeeInfo* employeeInfo = obj;
                                                   if (employeeInfo.portrait.length > 0) {
@@ -195,11 +217,11 @@
 
 }
 
-+ (CGFloat)calcHeight:(CSKuleHistoryInfo*)historyInfo {
-    CGFloat yy = 50;
++ (CGFloat)calcHeight:(CSKuleHistoryInfo*)historyInfo width:(CGFloat)width{
+    CGFloat yy = 51;
     //CGFloat xx = 70;
     
-    const CGFloat kFixedWidth = 230.0;
+    const CGFloat kFixedWidth = width-64-8;
     
     CGSize sz = [historyInfo.content sizeWithFont:[UIFont systemFontOfSize:14.0]
                                 constrainedToSize:CGSizeMake(kFixedWidth, 9999)];
@@ -207,6 +229,8 @@
     yy += sz.height + 5;
     
     yy += ((historyInfo.medium.count + 2) / 3 ) * (64+10) + 2;
+    
+    yy += 28; // share button
     
     return yy;
 }
@@ -254,6 +278,109 @@
             [browser show];
         }
     }
+}
+
+#pragma mark - Share
+- (IBAction)onBtnShareClicked:(id)sender {
+    [self doGetShareToken];
+}
+
+- (void)doGetShareToken {
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+        if (dataJson) {
+            _shareToken = [dataJson objectForKey:@"token"];
+            if (_shareToken.length > 0) {
+                [self performSelector:@selector(doShare:) withObject:_shareToken afterDelay:0.1];
+            }
+        }
+        
+        [gApp hideAlert];
+    };
+    
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        CSLog(@"failure:%@", error);
+        [gApp alert:error.localizedDescription];
+    };
+    
+    [gApp waitingAlert:@"分享中" withTitle:@"请稍候"];
+    [gApp.engine reqGetShareTokenOfKindergarten:gApp.engine.loginInfo.schoolId
+                                    withChildId:gApp.engine.currentRelationship.child.childId
+                                   withRecordId:self.historyInfo.uid.integerValue
+                                        success:sucessHandler
+                                        failure:failureHandler];
+}
+
+- (void)doShare:(NSString*)shareToken {
+    NSString* sharePath = [NSString stringWithFormat:@"/s/%@", shareToken];
+    NSURL* shareURL = [gApp.engine urlFromPath:sharePath];
+    NSString* shareUrlString = [shareURL absoluteString];
+    shareUrlString = [shareUrlString stringByReplacingOccurrencesOfString:@"https" withString:@"http" options:0 range:NSMakeRange(0, 5)];
+    
+    NSString* shareTitle = @"";
+    if (shareTitle.length == 0) {
+        shareTitle = @"[成长经历]分享";
+    }
+    NSString* shareContent = self.historyInfo.content;
+    NSString* shareImgPath = [[NSBundle mainBundle] pathForResource:@"v2-logo_weixin" ofType:@"png"];
+    id<ISSCAttachment> shareImage = [ShareSDK imageWithPath:shareImgPath];
+
+    for (CSKuleMediaInfo* media in _historyInfo.medium) {
+        if ([media.type isEqualToString:@"image"]) {
+            shareImage = [ShareSDK imageWithUrl:media.url];
+            break;
+        }
+        else if ([media.type isEqualToString:@"video"]) {
+            //shareImage = [ShareSDK imageWithUrl:media.url];
+            break;
+        }
+    }
+    
+    //构造分享内容
+    id<ISSContent> publishContent = [ShareSDK content:shareContent
+                                       defaultContent:shareContent
+                                                image:shareImage
+                                                title:shareTitle
+                                                  url:shareUrlString
+                                          description:shareContent
+                                            mediaType:SSPublishContentMediaTypeNews];
+    
+    NSArray *shareList = [ShareSDK getShareListWithType:
+                          ShareTypeWeixiSession,
+                          ShareTypeWeixiTimeline,
+                          nil];
+    
+    id<ISSShareOptions> shareOptions = [ShareSDK defaultShareOptionsWithTitle:nil
+                                                              oneKeyShareList:shareList
+                                                               qqButtonHidden:YES
+                                                        wxSessionButtonHidden:YES
+                                                       wxTimelineButtonHidden:YES
+                                                         showKeyboardOnAppear:NO
+                                                            shareViewDelegate:self
+                                                          friendsViewDelegate:nil
+                                                        picViewerViewDelegate:nil];
+    
+    //弹出分享菜单
+    [ShareSDK showShareActionSheet:nil
+                         shareList:[shareOptions oneKeyShareList]
+                           content:publishContent
+                     statusBarTips:YES
+                       authOptions:nil
+                      shareOptions:shareOptions
+                            result:^(ShareType type, SSResponseState state, id<ISSPlatformShareInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
+                                
+                                if (state == SSResponseStateSuccess) {
+                                    CSLog(@"分享成功");
+                                    
+                                }
+                                else if (state == SSResponseStateFail)
+                                {
+                                    CSLog(@"分享失败,错误码:%ld,错误描述:%@", [error errorCode], [error errorDescription]);
+                                }
+                            }];
+}
+
+- (void)viewOnWillDisplay:(UIViewController *)viewController shareType:(ShareType)shareType{
+    //[AppAppearance setNavigationBar:viewController.navigationController.navigationBar];
 }
 
 @end

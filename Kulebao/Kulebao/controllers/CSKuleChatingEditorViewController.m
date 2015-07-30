@@ -60,6 +60,11 @@
     
     //[self.textMsgBody becomeFirstResponder];
     self.imgVoice.hidden = YES;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onApplicationWillResignActive:)
+                                                 name:@"app.applicationWillResignActive"
+                                               object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -68,8 +73,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)onApplicationWillResignActive:(NSNotification*)noti {
+    [self sendRecord];
+}
+
 - (void)dealloc {
     [_timer invalidate];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 /*
 #pragma mark - Navigation

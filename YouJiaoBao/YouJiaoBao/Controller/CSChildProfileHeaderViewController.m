@@ -37,7 +37,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
     self.imgPortrait.layer.borderColor = [[UIColor whiteColor] CGColor];
     self.imgPortrait.layer.borderWidth = 1;
     self.imgPortrait.clipsToBounds = YES;
@@ -46,6 +45,11 @@
                         placeholderImage:[UIImage imageNamed:@"default_icon.png"]];
     
     self.labName.text = self.childInfo.name;
+    
+    [self.btnSession setBackgroundImage:[[UIImage imageNamed:@"v2-chat-session.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(4, 4, 4, 4)]
+                               forState:UIControlStateNormal];
+    [self.btnAssessments setBackgroundImage:[[UIImage imageNamed:@"v2-input-assessment.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(4, 4, 4, 4)]
+                               forState:UIControlStateNormal];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

@@ -14,6 +14,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 #import "ELCImagePickerController.h"
+#import "CSAppDelegate.h"
 
 @interface CSContentEditorViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GMGridViewDataSource, GMGridViewSortingDelegate, GMGridViewTransformationDelegate, GMGridViewActionDelegate,
     UIActionSheetDelegate, ELCImagePickerControllerDelegate> {
@@ -102,6 +103,15 @@
     
 #if TARGET_IPHONE_SIMULATOR
 #else
+    if (self.singleImage) {
+    }
+    else {
+        if (_imageList.count >= 9) {
+            [gApp alert:@"最多只能选择9张图片"];
+            return;
+        }
+    }
+    
     _imgPicker = [[UIImagePickerController alloc] init];
     _imgPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
     _imgPicker.allowsEditing = NO;
@@ -302,6 +312,9 @@
     if ([mediaType isEqualToString:@"public.image"]) {
         UIImage* img = info[UIImagePickerControllerOriginalImage];
         if (img) {
+            if (self.singleImage) {
+                [_imageList removeObject:img];
+            }
             [_imageList addObject:img];
             [self.gmGridView reloadData];
         }
@@ -332,17 +345,15 @@
 #pragma mark - ELCImagePickerControllerDelegate
 - (void)elcImagePickerController:(ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)infoList {
     if ([picker isEqual:_elcPicker]) {
+        [_imageList removeAllObjects];
         for (NSDictionary* info in infoList) {
             UIImage* img = info[UIImagePickerControllerOriginalImage];
             if (img) {
-                if (self.singleImage) {
-                    [_imageList removeAllObjects];
-                }
-                
                 [_imageList addObject:img];
-                [self.gmGridView reloadData];
             }
         }
+        
+        [self.gmGridView reloadData];
     }
     
     [picker dismissViewControllerAnimated:YES
@@ -373,38 +384,66 @@
     if([compatiblePresets containsObject:AVAssetExportPresetMediumQuality]) {
         AVAssetExportSession *exportSession = [[AVAssetExportSession alloc]initWithAsset:avAsset
                                                                               presetName:AVAssetExportPresetMediumQuality];
-        NSString* mp4Path = [movFileURL.absoluteString.stringByDeletingPathExtension stringByAppendingPathExtension:@"mp4"];
+        //NSString* mp4Path = [movFileURL.absoluteString.stringByDeletingPathExtension stringByAppendingPathExtension:@"mp4"];
+        //mp4Path = [NSTemporaryDirectory() stringByAppendingPathComponent:[mp4Path.pathComponents lastObject]];
+        NSString* mp4Path = @"cocobabys-tmp.mp4";
         mp4Path = [NSTemporaryDirectory() stringByAppendingPathComponent:[mp4Path.pathComponents lastObject]];
+        NSFileManager* fm = [NSFileManager defaultManager];
+        [fm removeItemAtPath:mp4Path error:nil];
+        
         exportSession.outputURL = [NSURL fileURLWithPath: mp4Path];
         exportSession.shouldOptimizeForNetworkUse = YES;
         exportSession.outputFileType = AVFileTypeMPEG4;
+        [gApp waitingAlert:@"处理视频中"];
         [exportSession exportAsynchronouslyWithCompletionHandler:^{
             switch ([exportSession status]) {
                 case AVAssetExportSessionStatusFailed:
                 {
                     CSLog(@"AVAssetExportSessionStatusFailed! %@", exportSession.error);
+                    [self performSelectorOnMainThread:@selector(showAlertOnMain:)
+                                           withObject:exportSession.error
+                                        waitUntilDone:NO];
                     break;
                 }
                     
                 case AVAssetExportSessionStatusCancelled:
                     CSLog(@"AVAssetExportSessionStatusCancelled!");
+                    [self performSelectorOnMainThread:@selector(showAlertOnMain:)
+                                           withObject:exportSession.error
+                                        waitUntilDone:NO];
                     break;
                 case AVAssetExportSessionStatusCompleted:
                     CSLog(@"AVAssetExportSessionStatusCompleted!");
+                    [self performSelectorOnMainThread:@selector(hideAlertOnMain)
+                                           withObject:nil
+                                        waitUntilDone:NO];
                     [self performSelectorOnMainThread:@selector(convertFinish:)
                                            withObject:exportSession.outputURL
                                         waitUntilDone:NO];
                     break;
                 default:
+                    [self performSelectorOnMainThread:@selector(hideAlertOnMain)
+                                           withObject:nil
+                                        waitUntilDone:NO];
                     break;
             }
         }];
     }
 }
 
+- (void)showAlertOnMain:(NSError*)error {
+    [gApp alert:error.localizedDescription withTitle:error.localizedFailureReason];
+}
+
+- (void)hideAlertOnMain {
+    [gApp hideAlert];
+}
+
 - (void)convertFinish:(NSURL*)mp4FileURL {
-    if ([_delegate respondsToSelector:@selector(contentEditorViewController:finishWithVideo:)] && mp4FileURL) {
-        [_delegate contentEditorViewController:self finishWithVideo:mp4FileURL];
+    if ([_delegate respondsToSelector:@selector(contentEditorViewController:finishEditText:withVideo:)] && mp4FileURL) {
+        [_delegate contentEditorViewController:self
+                                finishEditText:self.textContent.text
+                                     withVideo:mp4FileURL];
     }
 }
 
@@ -429,9 +468,10 @@
         cell.deleteButtonOffset = CGPointMake(-15, -15);
         
         UIImageView* imgView = [[UIImageView alloc] initWithFrame:cell.bounds];
-        imgView.contentMode = UIViewContentModeScaleAspectFit;
+        imgView.contentMode = UIViewContentModeScaleAspectFill;
         imgView.userInteractionEnabled = YES;
         imgView.tag = 0x1234;
+        imgView.clipsToBounds = YES;
         imgView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         //[cell addSubview:imgView];
         cell.contentView = imgView;

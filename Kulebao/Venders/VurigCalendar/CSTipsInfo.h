@@ -12,5 +12,7 @@
 
 @property (nonatomic, strong) NSString* tips1;
 @property (nonatomic, strong) NSString* tips2;
+@property (nonatomic, strong) NSString* tips3;
+@property (nonatomic, strong) NSString* tips4;
 
 @end

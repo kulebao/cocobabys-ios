@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Unv-SB-3EC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Unv-SB-3EC">
     <dependencies>
         <deployment version="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
@@ -1323,11 +1323,11 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="87O-wC-41k">
-                                <rect key="frame" x="128" y="83" width="128" height="32"/>
+                                <rect key="frame" x="136" y="88" width="150" height="35"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="32" id="ZUw-Rt-b4b"/>
+                                    <constraint firstAttribute="height" constant="35" id="ZUw-Rt-b4b"/>
                                 </constraints>
-                                <state key="normal" backgroundImage="estimat_btn.9.png">
+                                <state key="normal" backgroundImage="v2-input-assessment.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -1339,11 +1339,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pbw-ao-dln">
-                                <rect key="frame" x="128" y="43" width="128" height="32"/>
+                                <rect key="frame" x="136" y="48" width="150" height="35"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="32" id="MoL-QX-0SJ"/>
+                                    <constraint firstAttribute="height" constant="35" id="MoL-QX-0SJ"/>
                                 </constraints>
-                                <state key="normal" backgroundImage="chat_btn.9.png">
+                                <state key="normal" backgroundImage="v2-chat-session.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -1355,10 +1355,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="姓名" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="160" translatesAutoresizingMaskIntoConstraints="NO" id="8bj-Q8-xCU">
-                                <rect key="frame" x="128" y="15" width="128" height="20"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="128" id="hiP-HG-KJI"/>
-                                </constraints>
+                                <rect key="frame" x="136" y="20" width="168" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" red="0.1215686275" green="0.52941176469999995" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1366,18 +1363,18 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="8bj-Q8-xCU" firstAttribute="leading" secondItem="eMe-BP-DQI" secondAttribute="trailing" constant="8" id="39T-Cu-4sm"/>
+                            <constraint firstItem="8bj-Q8-xCU" firstAttribute="leading" secondItem="eMe-BP-DQI" secondAttribute="trailing" constant="16" id="39T-Cu-4sm"/>
                             <constraint firstItem="87O-wC-41k" firstAttribute="leading" secondItem="Pbw-ao-dln" secondAttribute="leading" id="3FP-Sa-gdQ"/>
                             <constraint firstItem="87O-wC-41k" firstAttribute="leading" secondItem="8bj-Q8-xCU" secondAttribute="leading" id="Juf-aH-Rvy"/>
                             <constraint firstItem="Zh8-gs-gBB" firstAttribute="leading" secondItem="eMe-BP-DQI" secondAttribute="leading" constant="8" id="Ngo-Af-3l8"/>
-                            <constraint firstItem="87O-wC-41k" firstAttribute="top" secondItem="Pbw-ao-dln" secondAttribute="bottom" constant="8" id="Rfv-wX-XkT"/>
-                            <constraint firstItem="8bj-Q8-xCU" firstAttribute="top" secondItem="MV6-JZ-Sxf" secondAttribute="bottom" constant="15" id="SBP-wl-PSz"/>
-                            <constraint firstItem="87O-wC-41k" firstAttribute="trailing" secondItem="8bj-Q8-xCU" secondAttribute="trailing" id="Ss3-bG-eWG"/>
+                            <constraint firstItem="87O-wC-41k" firstAttribute="top" secondItem="Pbw-ao-dln" secondAttribute="bottom" constant="5" id="Rfv-wX-XkT"/>
+                            <constraint firstItem="8bj-Q8-xCU" firstAttribute="top" secondItem="MV6-JZ-Sxf" secondAttribute="bottom" constant="20" id="SBP-wl-PSz"/>
                             <constraint firstItem="eMe-BP-DQI" firstAttribute="leading" secondItem="Bkw-Qv-n9h" secondAttribute="leading" constant="20" id="TnX-QU-rWp"/>
                             <constraint firstItem="USZ-64-OAj" firstAttribute="top" secondItem="MV6-JZ-Sxf" secondAttribute="bottom" id="XJ4-Eg-wsQ"/>
                             <constraint firstItem="Zh8-gs-gBB" firstAttribute="top" secondItem="eMe-BP-DQI" secondAttribute="top" constant="8" id="ZNz-yt-OeI"/>
                             <constraint firstItem="87O-wC-41k" firstAttribute="trailing" secondItem="Pbw-ao-dln" secondAttribute="trailing" id="bG4-jT-o5f"/>
                             <constraint firstItem="Zh8-gs-gBB" firstAttribute="trailing" secondItem="eMe-BP-DQI" secondAttribute="trailing" constant="-8" id="bk9-pO-l2x"/>
+                            <constraint firstAttribute="trailing" secondItem="8bj-Q8-xCU" secondAttribute="trailing" constant="16" id="fY5-PI-rzn"/>
                             <constraint firstItem="Zh8-gs-gBB" firstAttribute="bottom" secondItem="eMe-BP-DQI" secondAttribute="bottom" constant="-8" id="gwU-Mo-o15"/>
                             <constraint firstAttribute="trailing" secondItem="USZ-64-OAj" secondAttribute="trailing" id="lVY-m4-Fgt"/>
                             <constraint firstItem="LNV-Ta-gaT" firstAttribute="top" secondItem="USZ-64-OAj" secondAttribute="bottom" id="lcS-OL-3PC"/>
@@ -2868,9 +2865,7 @@
         <image name="btn_auto_fit.9.png" width="82" height="31"/>
         <image name="btn_auto_fit_press.9.png" width="82" height="31"/>
         <image name="btn_click.png" width="600" height="83"/>
-        <image name="chat_btn.9.png" width="300" height="70"/>
         <image name="default_icon.png" width="400" height="400"/>
-        <image name="estimat_btn.9.png" width="300" height="70"/>
         <image name="exp_input.9.png" width="191" height="78"/>
         <image name="hasnew.png.9.png" width="30" height="30"/>
         <image name="icon-assignment.png" width="28" height="26"/>
@@ -2890,9 +2885,11 @@
         <image name="v2-btn_phone.png" width="22" height="27"/>
         <image name="v2-btn_picture.png" width="31" height="28"/>
         <image name="v2-btn_set.png" width="44" height="44"/>
+        <image name="v2-chat-session.png" width="150" height="35"/>
         <image name="v2-checkbox-checked.png" width="20" height="20"/>
         <image name="v2-checkbox-unchecked.png" width="20" height="20"/>
         <image name="v2-foot.png" width="320" height="44"/>
+        <image name="v2-input-assessment.png" width="150" height="35"/>
         <image name="v2-input_login.png" width="121" height="29"/>
         <image name="v2-logo.png" width="86" height="76"/>
         <image name="v2-logo2.png" width="78" height="76"/>

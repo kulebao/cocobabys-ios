@@ -13,5 +13,6 @@
 - (BOOL)isValidPswd;
 - (BOOL)isValidMobile;
 - (BOOL)isValidSmsCode;
+- (NSString*)trim;
 
 @end

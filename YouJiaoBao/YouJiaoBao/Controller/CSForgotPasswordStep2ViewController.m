@@ -97,10 +97,13 @@
             NSInteger error_code = [[responseObject valueForKeyNotNull:@"error_code"] integerValue];
             if (error_code == 0) {
                 [gApp alert:@"重置密码成功，请使用新密码登录，谢谢！"];
-                [self.navigationController popToRootViewControllerAnimated:YES];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:kNotiShowLogin
+                                                                    object:nil
+                                                                  userInfo:nil];
             }
             else {
-                CSLog(@"opResetPswdOfAccount error_code=%d", error_code);
+                CSLog(@"opResetPswdOfAccount error_code=%ld", error_code);
                 [gApp alert:@"重置密码失败！请确认用户名输入正确！"];
             }
         };

@@ -35,6 +35,14 @@
 
 @property (nonatomic, assign) server_id hmServerId;
 
+@property (nonatomic, strong) BMKLocationService* locService;
+
+// For test only
+@property (nonatomic, strong, readonly) NSMutableArray* receivedNotifications;
+@property (nonatomic, strong) NSData* deviceToken;
+@property (nonatomic, strong) NSDictionary* pendingNotificationInfo;
+
+
 #pragma mark - application
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
 - (void)applicationWillResignActive:(UIApplication *)application;
@@ -262,5 +270,16 @@
                                        byParent:(CSKuleParentInfo*)parentInfo
                                         success:(SuccessResponseHandler)success
                                         failure:(FailureResponseHandler)failure;
+
+- (AFHTTPRequestOperation*)reqGetBusLocationOfKindergarten:(NSInteger)kindergarten
+                                               withChildId:(NSString*)childId
+                                                   success:(SuccessResponseHandler)success
+                                                   failure:(FailureResponseHandler)failure;
+
+- (AFHTTPRequestOperation*)reqGetShareTokenOfKindergarten:(NSInteger)kindergarten
+                                              withChildId:(NSString*)childId
+                                             withRecordId:(NSInteger)recordId
+                                                  success:(SuccessResponseHandler)success
+                                                  failure:(FailureResponseHandler)failure;
 
 @end

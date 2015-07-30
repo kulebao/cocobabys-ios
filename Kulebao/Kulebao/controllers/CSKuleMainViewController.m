@@ -20,6 +20,8 @@
 #import "UIImageView+WebCache.h"
 #import "CSKuleVideoMember.h"
 #import "CSKuleCCTVMainTableViewController.h"
+#import "CSKuleInterpreter.h"
+#import "CSKuleNewsDetailsViewController.h"
 
 @interface CSKuleMainViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
     UIImagePickerController* _imgPicker;
@@ -72,8 +74,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationController.navigationBarHidden = NO;
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"v2-head.png"] forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:20], NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    
+    UINavigationBar* navigationBar = self.navigationController.navigationBar;
+    [navigationBar setBackgroundImage:[UIImage imageNamed:@"v2-head.png"] forBarMetrics:UIBarMetricsDefault];
+    [navigationBar setTitleTextAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:20], NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    navigationBar.tintColor = [UIColor whiteColor];
     
     self.labClassName.text = nil;
     self.labSchoolName.text = gApp.engine.loginInfo.schoolName;
@@ -129,6 +134,11 @@
                      options:NSKeyValueObservingOptionNew
                      context:nil];
     
+    [gApp.engine addObserver:self
+                  forKeyPath:@"pendingNotificationInfo"
+                     options:NSKeyValueObservingOptionNew
+                     context:nil];
+    
     [self performSelector:@selector(getRelationshipInfos) withObject:nil afterDelay:0];
 }
 
@@ -151,7 +161,10 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     CSLog(@"%@ changed.", keyPath);
-    if ((object == gApp.engine) && [keyPath isEqualToString:@"currentRelationship"]) {
+    if ((object == gApp.engine) && [keyPath isEqualToString:@"pendingNotificationInfo"]) {
+        [self handlePendingNotification];
+    }
+    else if ((object == gApp.engine) && [keyPath isEqualToString:@"currentRelationship"]) {
         [self updateUI:YES];
         CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
         if (currentChild) {
@@ -311,29 +324,33 @@
 - (void)setupModules {
     if (_schoolInfo && [_schoolInfo hasProperty:@"hideVideo"]) {
         _moduleInfos = @[
-                         @[@"接送消息", @"v2-接送消息.png", @(kKuleModuleCheckin)],
                          @[@"校园公告", @"v2-校园公告.png", @(kKuleModuleNews)],
-                         @[@"在园表现", @"v2-在园表现.png", @(kKuleModuleAssess)],
-                         
+                         @[@"课程表",   @"v2-课程表.png", @(kKuleModuleSchedule)],
                          @[@"每周食谱", @"v2-每周食谱.png", @(kKuleModuleRecipe)],
-                         @[@"成长经历", @"v2-成长经历.png", @(kKuleModuleHistory)],
-                         //@[@"看宝宝", @"v2-看宝宝.png", @(kKuleModuleCCTV)],
                          
                          @[@"家园互动", @"v2-家园互动.png", @(kKuleModuleChating)],
-                         @[@"课程表",  @"v2-课程表.png", @(kKuleModuleSchedule)]];
+                         @[@"成长经历", @"v2-成长经历.png", @(kKuleModuleHistory)],
+                         @[@"接送消息", @"v2-接送消息.png", @(kKuleModuleCheckin)],
+                         
+                         @[@"在园表现",  @"v2-在园表现.png", @(kKuleModuleAssess)],
+                         @[@"校车接送",   @"v2-校车接送.png", @(kKuleModuleBus)],
+                         //@[@"看宝宝",   @"v2-看宝宝.png", @(kKuleModuleCCTV)]
+                         ];
     }
     else {
         _moduleInfos = @[
-                         @[@"接送消息", @"v2-接送消息.png", @(kKuleModuleCheckin)],
                          @[@"校园公告", @"v2-校园公告.png", @(kKuleModuleNews)],
-                         @[@"在园表现", @"v2-在园表现.png", @(kKuleModuleAssess)],
-                         
+                         @[@"课程表",   @"v2-课程表.png", @(kKuleModuleSchedule)],
                          @[@"每周食谱", @"v2-每周食谱.png", @(kKuleModuleRecipe)],
-                         @[@"成长经历", @"v2-成长经历.png", @(kKuleModuleHistory)],
-                         @[@"看宝宝", @"v2-看宝宝.png", @(kKuleModuleCCTV)],
                          
                          @[@"家园互动", @"v2-家园互动.png", @(kKuleModuleChating)],
-                         @[@"课程表",  @"v2-课程表.png", @(kKuleModuleSchedule)]];
+                         @[@"成长经历", @"v2-成长经历.png", @(kKuleModuleHistory)],
+                         @[@"接送消息", @"v2-接送消息.png", @(kKuleModuleCheckin)],
+                         
+                         @[@"在园表现",  @"v2-在园表现.png", @(kKuleModuleAssess)],
+                         @[@"校车接送",   @"v2-校车接送.png", @(kKuleModuleBus)],
+                         @[@"看宝宝",   @"v2-看宝宝.png", @(kKuleModuleCCTV)]
+                         ];
     }
     
     _badges = [NSMutableArray arrayWithCapacity:_moduleInfos.count];
@@ -425,7 +442,6 @@
         [self.imgChildPortrait  sd_setImageWithURL:qiniuImgUrl
                                   placeholderImage:placeholderImage
                                            options:options];
-        
     }
     else {
         [gApp alert:@"没有宝宝信息。"];
@@ -770,9 +786,10 @@
         @"segue.assess",
         @"segue.history",
         @"segue.cctv",
+        @"segue.bus"
     };
     
-    if (moduleType < kKuleModuleSize && moduleType < sizeof(segueNames)) {
+    if (moduleType < kKuleModuleSize && moduleType < (sizeof(segueNames)/sizeof(NSString*))) {
         if ([self checkModuleTypeForMemberStatus:moduleType]) {
             switch (moduleType) {
                 case kKuleModuleNews:
@@ -819,6 +836,9 @@
         else {
             //            [gApp alert:@"权限不足，请联系幼儿园开通权限，谢谢。"];
         }
+    }
+    else {
+        CSLog(@"未响应的模块%@", @(moduleType));
     }
 }
 
@@ -875,6 +895,8 @@
         if(relationshipInfo) {
             gApp.engine.currentRelationship = relationshipInfo;
             [gApp hideAlert];
+            
+            [self handlePendingNotification];
         }
         else {
             [gApp alert:@"没有关联宝宝信息"];
@@ -987,6 +1009,41 @@
 #endif
     
     AudioServicesPlaySystemSound(1007);
+}
+
+- (void)handlePendingNotification {
+    if (gApp.engine.pendingNotificationInfo && gApp.engine.currentRelationship) {
+        // Handle
+        /*
+         {
+         ad = "\U5e7c\U4e50\U5b9d";
+         aps =     {
+         alert = "\U5e7c\U4e50\U5b9d\U63d0\U9192\U60a8\Uff1a\U60a8\U7684\U5b69\U5b50 \U7136\U7136 \U5df2\U4e8e 00:33:46 \U6253\U5361\U5165\U56ed\U3002";
+         badge = 1;
+         sound = "";
+         };
+         channelid = 5479041548038543311;
+         "child_id" = "2_8901_32570";
+         device = 4;
+         "notice_type" = 1;
+         "parent_name" = "\U738b\U5927\U987a";
+         pushid = 864122702946899280;
+         "record_url" = "https://dn-cocobabys.qbox.me/big_shots.jpg";
+         timestamp = 1438187626748;
+         }
+
+         */
+
+        NSDictionary* notiInfo = gApp.engine.pendingNotificationInfo;
+        gApp.engine.pendingNotificationInfo = nil;
+        CSKuleCheckInOutLogInfo* info = [CSKuleInterpreter decodeCheckInOutLogInfo:notiInfo];
+        if (info) {
+            CSKuleNewsDetailsViewController* ctrl = [self.storyboard instantiateViewControllerWithIdentifier:@"CSKuleNewsDetailsViewController"];
+            ctrl.navigationItem.title = @"刷卡信息";
+            ctrl.checkInOutLogInfo = info;
+            [self.navigationController pushViewController:ctrl animated:YES];
+        }
+    }
 }
 
 @end

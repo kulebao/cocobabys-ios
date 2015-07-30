@@ -23,6 +23,7 @@
 #import "CSKuleTopicMsg.h"
 #import "CSKuleHistoryInfo.h"
 #import "CSKuleVideoMember.h"
+#import "CSKuleBusLocationInfo.h"
 
 @interface CSKuleInterpreter : NSObject
 
@@ -61,5 +62,7 @@
 + (CSKuleEmployeeInfo*)decodeEmployeeInfo:(NSDictionary*)dataJson;
 
 + (CSKuleVideoMember*)decodeVideoMember:(NSDictionary*)dataJson;
+
++ (CSKuleBusLocationInfo*)decodeBusLocation:(NSDictionary*)dataJson;
 
 @end

@@ -184,6 +184,7 @@ typedef enum : NSUInteger {
 
 - (void)doRefreshBusLocation {
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+        _busStatus = kBusStatusNormal;
         self.busLocationInfo = [CSKuleInterpreter decodeBusLocation:dataJson];
     };
     
@@ -254,11 +255,9 @@ typedef enum : NSUInteger {
         coor.latitude = _busLocationInfo.latitude;
         self.busAnnotation.coordinate = coor;
         [self.mapView addAnnotation:self.busAnnotation];
-        
         [self updateBusLocationLabel];
     }
     else {
-        
         [self.mapView removeAnnotation:self.busAnnotation];
     }
     

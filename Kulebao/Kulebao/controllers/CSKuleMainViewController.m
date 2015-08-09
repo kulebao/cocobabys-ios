@@ -758,7 +758,7 @@
             case kKuleModuleHistory:     // 成长经历
                 [gApp alert:@"你想记录下宝贝在幼儿园的点点滴滴吗？赶快联系幼儿园开通此功能吧！"];
                 break;
-            case kKuleModuleCCTV:        // 看宝贝
+            case kKuleModuleCCTV:        // 看宝宝
                 [gApp alert:@"你想随时看到宝贝在做什么吗？赶快联系幼儿园开通此功能吧！"];
                 break;
             default:
@@ -950,7 +950,7 @@
     
     FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
         CSLog(@"failure:%@", error);
-        [gApp alert:@"还未开通看宝贝功能，该功能可以让家长通过视频，实时查看孩子在幼儿园的动态,如有需要请联系幼儿园开通。"];
+        [gApp alert:@"还未开通看宝宝功能，该功能可以让家长通过视频，实时查看孩子在幼儿园的动态,如有需要请联系幼儿园开通。"];
     };
     
     if(_actionToCCTV) {

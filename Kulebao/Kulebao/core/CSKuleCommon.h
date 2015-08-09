@@ -50,7 +50,7 @@ enum KuleModule {
     kKuleModuleChating,     // 家园互动
     kKuleModuleAssess,      // 在园表现
     kKuleModuleHistory,     // 成长经历
-    kKuleModuleCCTV,        // 看宝贝
+    kKuleModuleCCTV,        // 看宝宝
     kKuleModuleBus,         // 校车
     kKuleModuleSize,        // -模块数量-统计
 };

@@ -103,11 +103,15 @@
     
     CGSize sz = [historyInfo.content sizeWithFont:[UIFont systemFontOfSize:14.0]
                                 constrainedToSize:CGSizeMake(kFixedWidth, 9999)];
-    yy += sz.height + 4;
+    if (historyInfo.content.length > 0) {
+        yy += sz.height + 4 + 4 + 4;
+    }
+    else {
+        yy += sz.height;
+    }
     yy += 128; // video
-    yy += 4;
-    yy += 28; // share button
-    
+    yy += 24; // share button
+
     return yy;
 }
 

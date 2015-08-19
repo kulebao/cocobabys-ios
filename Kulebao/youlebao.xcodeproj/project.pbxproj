@@ -364,6 +364,9 @@
 		094F994E18E02A6100ACD196 /* btn-nav-right-pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 094F994A18E02A6100ACD196 /* btn-nav-right-pressed@2x.png */; };
 		094F994F18E02A6100ACD196 /* btn-nav-right.png in Resources */ = {isa = PBXBuildFile; fileRef = 094F994B18E02A6100ACD196 /* btn-nav-right.png */; };
 		094F995018E02A6100ACD196 /* btn-nav-right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 094F994C18E02A6100ACD196 /* btn-nav-right@2x.png */; };
+		09514FE71B84E714005217B7 /* Commercial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09514FE61B84E714005217B7 /* Commercial.storyboard */; };
+		09514FEA1B84E927005217B7 /* CBCommercialMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09514FE91B84E927005217B7 /* CBCommercialMainViewController.m */; };
+		09514FED1B84EDE5005217B7 /* CSJsonEntityData.m in Sources */ = {isa = PBXBuildFile; fileRef = 09514FEC1B84EDE5005217B7 /* CSJsonEntityData.m */; };
 		09607BAF1B4977480047DB67 /* CSKuleBusLocationInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09607BAE1B4977480047DB67 /* CSKuleBusLocationInfo.m */; };
 		09607BB21B49888C0047DB67 /* v2-logo_weixin.png in Resources */ = {isa = PBXBuildFile; fileRef = 09607BB01B49888C0047DB67 /* v2-logo_weixin.png */; };
 		09607BB31B49888C0047DB67 /* v2-logo_weixin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09607BB11B49888C0047DB67 /* v2-logo_weixin@2x.png */; };
@@ -1281,6 +1284,11 @@
 		094F994A18E02A6100ACD196 /* btn-nav-right-pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-nav-right-pressed@2x.png"; sourceTree = "<group>"; };
 		094F994B18E02A6100ACD196 /* btn-nav-right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-nav-right.png"; sourceTree = "<group>"; };
 		094F994C18E02A6100ACD196 /* btn-nav-right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn-nav-right@2x.png"; sourceTree = "<group>"; };
+		09514FE61B84E714005217B7 /* Commercial.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Commercial.storyboard; sourceTree = "<group>"; };
+		09514FE81B84E927005217B7 /* CBCommercialMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBCommercialMainViewController.h; sourceTree = "<group>"; };
+		09514FE91B84E927005217B7 /* CBCommercialMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBCommercialMainViewController.m; sourceTree = "<group>"; };
+		09514FEB1B84EDE5005217B7 /* CSJsonEntityData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSJsonEntityData.h; sourceTree = "<group>"; };
+		09514FEC1B84EDE5005217B7 /* CSJsonEntityData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSJsonEntityData.m; sourceTree = "<group>"; };
 		09607BAD1B4977480047DB67 /* CSKuleBusLocationInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleBusLocationInfo.h; sourceTree = "<group>"; };
 		09607BAE1B4977480047DB67 /* CSKuleBusLocationInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleBusLocationInfo.m; sourceTree = "<group>"; };
 		09607BB01B49888C0047DB67 /* v2-logo_weixin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-logo_weixin.png"; sourceTree = "<group>"; };
@@ -2601,6 +2609,9 @@
 		09514FE51B84E43C005217B7 /* commercial */ = {
 			isa = PBXGroup;
 			children = (
+				09514FE61B84E714005217B7 /* Commercial.storyboard */,
+				09514FE81B84E927005217B7 /* CBCommercialMainViewController.h */,
+				09514FE91B84E927005217B7 /* CBCommercialMainViewController.m */,
 			);
 			path = commercial;
 			sourceTree = "<group>";
@@ -2900,6 +2911,8 @@
 		09C1C76318BD973B0040B06D /* extends */ = {
 			isa = PBXGroup;
 			children = (
+				09514FEB1B84EDE5005217B7 /* CSJsonEntityData.h */,
+				09514FEC1B84EDE5005217B7 /* CSJsonEntityData.m */,
 				09A9EBB418C07E8800D83119 /* CSKit.h */,
 				09FE6AF418C5A53200A840BE /* CSTextFieldDelegate.h */,
 				09FE6AF518C5A53200A840BE /* CSTextFieldDelegate.m */,
@@ -3837,6 +3850,7 @@
 				0934F06F18BF5B0800E30ECA /* btn-type1@2x.png in Resources */,
 				09142E0A18E2B9D800E5848F /* assess-game@2x.png in Resources */,
 				09D9BBC81AEE933D009456ED /* v2-btn_back@2x.png in Resources */,
+				09514FE71B84E714005217B7 /* Commercial.storyboard in Resources */,
 				09416C9B18E41BF600DFEA44 /* bg-dialog.png in Resources */,
 				0934F04C18BF5B0800E30ECA /* alert-bg.png in Resources */,
 				09F74CAF1997C4F3001555D0 /* playing_2.png in Resources */,
@@ -3946,6 +3960,7 @@
 				09C00FB21B4454D500FC1474 /* CSKuleBusMainViewController.m in Sources */,
 				0901207219338B3800CE506E /* UIImage+CSExtends.m in Sources */,
 				0904553219BDB8CA00FEF2C9 /* CSKuleVideoMember.m in Sources */,
+				09514FED1B84EDE5005217B7 /* CSJsonEntityData.m in Sources */,
 				090FC122199B3FC300C3A31A /* PaintingView.m in Sources */,
 				091AE82F18D820C800EBC927 /* UIColor+expanded.m in Sources */,
 				09142DD118E27E7600E5848F /* ALAlertBanner.m in Sources */,
@@ -4006,6 +4021,7 @@
 				0917764718D0574D00D24F53 /* CSKuleAssignmentInfo.m in Sources */,
 				09142DB418E2713C00E5848F /* CJSONSerializedData.m in Sources */,
 				090FC11E199B3FC300C3A31A /* HMAudioRecorder.m in Sources */,
+				09514FEA1B84E927005217B7 /* CBCommercialMainViewController.m in Sources */,
 				09BA1C2718BB3F8400760182 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				0942B15F1AE3E559008D3BDA /* ELCAssetCell.m in Sources */,
 				091AE83118D820C800EBC927 /* VRGCalendarView.m in Sources */,

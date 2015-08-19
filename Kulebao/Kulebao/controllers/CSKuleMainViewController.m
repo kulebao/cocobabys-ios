@@ -87,7 +87,6 @@
     self.labChildSchool.text = nil;
     self.imgChildPortrait.layer.cornerRadius = 47.0;
     self.imgChildPortrait.clipsToBounds = YES;
-    self.btnClassInfo.userInteractionEnabled = NO;
     
     _nickFieldDelegate = [[CSTextFieldDelegate alloc] initWithType:kCSTextFieldDelegateNormal];
     _nickFieldDelegate.maxLength = kKuleNickMaxLength;
@@ -857,6 +856,17 @@
     }
 }
 
+
+- (IBAction)onBtnClassInfoClicked:(id)sender {
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Commercial" bundle:nil];
+    
+    [self presentViewController:storyboard.instantiateInitialViewController
+                       animated:YES
+                     completion:^{
+                         
+                     }];
+}
+
 - (void)checkCCTVShown {
     if (_schoolInfo) {
         [self doCheckCCTVShown];
@@ -874,8 +884,6 @@
     }
 }
 
-- (IBAction)onBtnClassInfoClicked:(id)sender {
-}
 
 #pragma mark - Private
 - (void)getRelationshipInfos {

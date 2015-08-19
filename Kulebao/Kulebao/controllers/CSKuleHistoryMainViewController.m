@@ -18,6 +18,8 @@
 #import "NSString+XHMD5.h"
 #import "EGOCache.h"
 #import "CSKuleHistoryVideoItemTableViewCell.h"
+#import "SDImageCache.h"
+#import "SDWebImageManager.h"
 
 @interface CSKuleHistoryMainViewController () <UICollectionViewDataSource, UICollectionViewDelegate> {
     NSInteger _year;
@@ -170,6 +172,9 @@
     _imageUrlList = [NSMutableArray array];
     _imageList = [NSMutableArray arrayWithArray:imageList];
     
+    _videoFileUrl = nil;
+    _videoUrl = nil;
+    
     if (_imageList.count > 0) {
         [self doUploadImage];
     }
@@ -186,9 +191,12 @@
 - (void)contentEditorViewController:(CSContentEditorViewController*)ctrl
                      finishEditText:(NSString*)text
                           withVideo:(NSURL*)videoLocalUrl {
+    _historyContent = [text trim];
+    _imageUrlList = nil;
+    _imageList = nil;
+    
     _videoFileUrl = videoLocalUrl;
     _videoUrl = nil;
-    _historyContent = [text trim];
     
     if (_videoFileUrl) {
         [self doUploadVideo];
@@ -209,10 +217,9 @@
             [_imageUrlList addObject:imgUrl];
             [_imageList removeObjectAtIndex:0];
             
-            TSFileCache* cache = [TSFileCache sharedInstance];
-            [cache storeData:imgData
-                      forKey:imgUrl.MD5Hash];
-
+            NSString * key = [[SDWebImageManager sharedManager] cacheKeyForURL:[NSURL URLWithString:imgUrl]];
+            [[SDImageCache sharedImageCache]  storeImage:img forKey:key toDisk:YES];
+            
             [self performSelectorInBackground:@selector(doUploadImage) withObject:nil];
         };
         

@@ -560,9 +560,10 @@
     
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         NSString* imgUrl = [NSString stringWithFormat:@"%@/%@", kQiniuDownloadServerHost, imgFileName];
-        TSFileCache* cache = [TSFileCache sharedInstance];
-        [cache storeData:imgData
-                  forKey:imgUrl.MD5Hash];
+
+        NSString * key = [[SDWebImageManager sharedManager] cacheKeyForURL:[NSURL URLWithString:imgUrl]];
+        [[SDImageCache sharedImageCache] storeImage:img forKey:key toDisk:YES];
+        
         [self doSendPicture:imgUrl];
     };
     

@@ -1617,7 +1617,7 @@
         [mediumList addObject:@{@"url": urlString, @"type": @"image"}];
     }
     
-    if (videoUrl.length > 0) {
+    if ((mediumList.count == 0) && videoUrl.length > 0) {
         [mediumList addObject:@{@"url": videoUrl, @"type": @"video"}];
     }
     

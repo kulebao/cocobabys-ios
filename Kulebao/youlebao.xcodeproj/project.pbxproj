@@ -355,7 +355,6 @@
 		09443A1B1B4A685900EE5986 /* v2-接送消息.png in Resources */ = {isa = PBXBuildFile; fileRef = 09443A1A1B4A685900EE5986 /* v2-接送消息.png */; };
 		094591221B3F05D300EF4458 /* libBPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 094591211B3F05D300EF4458 /* libBPush.a */; };
 		094710511B842E2D004EC56D /* BaiduMapAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09434DC31B404DA300DFDC33 /* BaiduMapAPI.framework */; };
-		094710521B842EC0004EC56D /* BaiduMapAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09434DC31B404DA300DFDC33 /* BaiduMapAPI.framework */; };
 		0948079D1B46B61700FB74B4 /* v2-bus-pin.png in Resources */ = {isa = PBXBuildFile; fileRef = 0948079B1B46B61700FB74B4 /* v2-bus-pin.png */; };
 		0948079E1B46B61700FB74B4 /* v2-bus-pin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0948079C1B46B61700FB74B4 /* v2-bus-pin@2x.png */; };
 		094D909D1B6A7E310045D0AB /* v2-app-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 094D909B1B6A7E310045D0AB /* v2-app-icon.png */; };
@@ -401,11 +400,6 @@
 		09BA1B9D18BB2AB300760182 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 09BA1B9C18BB2AB300760182 /* main.m */; };
 		09BA1BA118BB2AB400760182 /* CSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 09BA1BA018BB2AB400760182 /* CSAppDelegate.m */; };
 		09BA1BA918BB2AB400760182 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09BA1BA818BB2AB400760182 /* Images.xcassets */; };
-		09BA1BB018BB2AB600760182 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09BA1BAF18BB2AB600760182 /* XCTest.framework */; };
-		09BA1BB118BB2AB600760182 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09BA1B9018BB2AB300760182 /* Foundation.framework */; };
-		09BA1BB218BB2AB600760182 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09BA1B9418BB2AB300760182 /* UIKit.framework */; };
-		09BA1BBA18BB2AB600760182 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 09BA1BB818BB2AB600760182 /* InfoPlist.strings */; };
-		09BA1BBC18BB2AB600760182 /* KulebaoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 09BA1BBB18BB2AB600760182 /* KulebaoTests.m */; };
 		09BA1BDD18BB2FC700760182 /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09BA1BCD18BB2FC700760182 /* EGORefreshTableHeaderView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		09BA1BDE18BB2FC700760182 /* LoadMoreTableFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09BA1BCF18BB2FC700760182 /* LoadMoreTableFooterView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		09BA1BDF18BB2FC700760182 /* MessageInterceptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 09BA1BD118BB2FC700760182 /* MessageInterceptor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -759,18 +753,7 @@
 		09FFB5F118D6B2E100F07B0A /* CSKuleWeekScheduleInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FFB5F018D6B2E100F07B0A /* CSKuleWeekScheduleInfo.m */; };
 		09FFB5F418D6B2FA00F07B0A /* CSKuleDailyScheduleInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FFB5F318D6B2FA00F07B0A /* CSKuleDailyScheduleInfo.m */; };
 		09FFB5F718D6B46300F07B0A /* CSKuleScheduleInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FFB5F618D6B46300F07B0A /* CSKuleScheduleInfo.m */; };
-		368678A1EB064783BA5C4E89 /* CSKuleChildInfoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 36867D1C3A8F8C9E51F43CA6 /* CSKuleChildInfoTests.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		09BA1BB318BB2AB600760182 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 09BA1B8518BB2AB300760182 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 09BA1B8C18BB2AB300760182;
-			remoteInfo = Kulebao;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		0901207019338B3800CE506E /* UIImage+CSExtends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+CSExtends.h"; sourceTree = "<group>"; };
@@ -1348,11 +1331,7 @@
 		09BA1B9F18BB2AB400760182 /* CSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSAppDelegate.h; sourceTree = "<group>"; };
 		09BA1BA018BB2AB400760182 /* CSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CSAppDelegate.m; sourceTree = "<group>"; };
 		09BA1BA818BB2AB400760182 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		09BA1BAE18BB2AB600760182 /* youlebaoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = youlebaoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		09BA1BAF18BB2AB600760182 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		09BA1BB718BB2AB600760182 /* youlebaoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "youlebaoTests-Info.plist"; sourceTree = "<group>"; };
-		09BA1BB918BB2AB600760182 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		09BA1BBB18BB2AB600760182 /* KulebaoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KulebaoTests.m; sourceTree = "<group>"; };
 		09BA1BCC18BB2FC700760182 /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
 		09BA1BCD18BB2FC700760182 /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
 		09BA1BCE18BB2FC700760182 /* LoadMoreTableFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadMoreTableFooterView.h; sourceTree = "<group>"; };
@@ -1394,7 +1373,6 @@
 		09BA1C2D18BB412600760182 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		09BA1C3218BB429100760182 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		09BA1C3418BB43EC00760182 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		09BA1C3518BB43EC00760182 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		09C00F901B443DA400FC1474 /* WeChatConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WeChatConnection.framework; sourceTree = "<group>"; };
 		09C00F921B443DA400FC1474 /* AGCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AGCommon.framework; sourceTree = "<group>"; };
 		09C00F941B443DA400FC1474 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ShareSDKLocalizable.strings; sourceTree = "<group>"; };
@@ -1766,7 +1744,6 @@
 		09FFB5F318D6B2FA00F07B0A /* CSKuleDailyScheduleInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleDailyScheduleInfo.m; sourceTree = "<group>"; };
 		09FFB5F518D6B46300F07B0A /* CSKuleScheduleInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleScheduleInfo.h; sourceTree = "<group>"; };
 		09FFB5F618D6B46300F07B0A /* CSKuleScheduleInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleScheduleInfo.m; sourceTree = "<group>"; };
-		36867D1C3A8F8C9E51F43CA6 /* CSKuleChildInfoTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleChildInfoTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1810,17 +1787,6 @@
 				09BA1B9318BB2AB300760182 /* CoreGraphics.framework in Frameworks */,
 				09BA1B9518BB2AB300760182 /* UIKit.framework in Frameworks */,
 				09BA1B9118BB2AB300760182 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		09BA1BAB18BB2AB600760182 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				09BA1BB018BB2AB600760182 /* XCTest.framework in Frameworks */,
-				09BA1BB218BB2AB600760182 /* UIKit.framework in Frameworks */,
-				094710521B842EC0004EC56D /* BaiduMapAPI.framework in Frameworks */,
-				09BA1BB118BB2AB600760182 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2655,7 +2621,6 @@
 			children = (
 				09BA1BC918BB2FC700760182 /* Venders */,
 				09BA1B9618BB2AB300760182 /* Kulebao */,
-				09BA1BB518BB2AB600760182 /* KulebaoTests */,
 				09BA1B8F18BB2AB300760182 /* Frameworks */,
 				09BA1B8E18BB2AB300760182 /* Products */,
 			);
@@ -2665,7 +2630,6 @@
 			isa = PBXGroup;
 			children = (
 				09BA1B8D18BB2AB300760182 /* youlebao.app */,
-				09BA1BAE18BB2AB600760182 /* youlebaoTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2733,25 +2697,6 @@
 				09BA1B9F18BB2AB400760182 /* CSAppDelegate.h */,
 				09BA1BA018BB2AB400760182 /* CSAppDelegate.m */,
 				09BA1B9E18BB2AB300760182 /* youlebao-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		09BA1BB518BB2AB600760182 /* KulebaoTests */ = {
-			isa = PBXGroup;
-			children = (
-				09BA1BBB18BB2AB600760182 /* KulebaoTests.m */,
-				09BA1BB618BB2AB600760182 /* Supporting Files */,
-				36867A40AF1F2AF09F3E0047 /* models */,
-			);
-			path = KulebaoTests;
-			sourceTree = "<group>";
-		};
-		09BA1BB618BB2AB600760182 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				09BA1BB718BB2AB600760182 /* youlebaoTests-Info.plist */,
-				09BA1BB818BB2AB600760182 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -3386,14 +3331,6 @@
 			path = views;
 			sourceTree = "<group>";
 		};
-		36867A40AF1F2AF09F3E0047 /* models */ = {
-			isa = PBXGroup;
-			children = (
-				36867D1C3A8F8C9E51F43CA6 /* CSKuleChildInfoTests.m */,
-			);
-			path = models;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -3414,24 +3351,6 @@
 			productReference = 09BA1B8D18BB2AB300760182 /* youlebao.app */;
 			productType = "com.apple.product-type.application";
 		};
-		09BA1BAD18BB2AB600760182 /* youlebaoTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 09BA1BC218BB2AB600760182 /* Build configuration list for PBXNativeTarget "youlebaoTests" */;
-			buildPhases = (
-				09BA1BAA18BB2AB600760182 /* Sources */,
-				09BA1BAB18BB2AB600760182 /* Frameworks */,
-				09BA1BAC18BB2AB600760182 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				09BA1BB418BB2AB600760182 /* PBXTargetDependency */,
-			);
-			name = youlebaoTests;
-			productName = KulebaoTests;
-			productReference = 09BA1BAE18BB2AB600760182 /* youlebaoTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -3450,9 +3369,6 @@
 							};
 						};
 					};
-					09BA1BAD18BB2AB600760182 = {
-						TestTargetID = 09BA1B8C18BB2AB300760182;
-					};
 				};
 			};
 			buildConfigurationList = 09BA1B8818BB2AB300760182 /* Build configuration list for PBXProject "youlebao" */;
@@ -3470,7 +3386,6 @@
 			projectRoot = "";
 			targets = (
 				09BA1B8C18BB2AB300760182 /* youlebao */,
-				09BA1BAD18BB2AB600760182 /* youlebaoTests */,
 			);
 		};
 /* End PBXProject section */
@@ -4000,14 +3915,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		09BA1BAC18BB2AB600760182 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				09BA1BBA18BB2AB600760182 /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -4211,24 +4118,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		09BA1BAA18BB2AB600760182 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				09BA1BBC18BB2AB600760182 /* KulebaoTests.m in Sources */,
-				368678A1EB064783BA5C4E89 /* CSKuleChildInfoTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		09BA1BB418BB2AB600760182 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 09BA1B8C18BB2AB300760182 /* youlebao */;
-			targetProxy = 09BA1BB318BB2AB600760182 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		09A9EBB718C07F6F00D83119 /* Localizable.strings */ = {
@@ -4245,15 +4135,6 @@
 			children = (
 				09BA1B9A18BB2AB300760182 /* en */,
 				09BA1C3418BB43EC00760182 /* zh-Hans */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		09BA1BB818BB2AB600760182 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				09BA1BB918BB2AB600760182 /* en */,
-				09BA1C3518BB43EC00760182 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -4340,25 +4221,6 @@
 			};
 			name = Debug;
 		};
-		094710581B842F3F004EC56D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Kulebao.app/Kulebao";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(PROJECT_DIR)/Venders/BaiduMap",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Kulebao/youlebao-Prefix.pch";
-				INFOPLIST_FILE = "KulebaoTests/youlebaoTests-Info.plist";
-				PRODUCT_NAME = youlebaoTests;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
 		09BA1BBE18BB2AB600760182 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -4429,25 +4291,6 @@
 			};
 			name = Release;
 		};
-		09BA1BC418BB2AB600760182 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Kulebao.app/Kulebao";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(PROJECT_DIR)/Venders/BaiduMap",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Kulebao/youlebao-Prefix.pch";
-				INFOPLIST_FILE = "KulebaoTests/youlebaoTests-Info.plist";
-				PRODUCT_NAME = youlebaoTests;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -4465,15 +4308,6 @@
 			buildConfigurations = (
 				09BA1BC118BB2AB600760182 /* Release */,
 				094710571B842F3F004EC56D /* Debug */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
-		09BA1BC218BB2AB600760182 /* Build configuration list for PBXNativeTarget "youlebaoTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				09BA1BC418BB2AB600760182 /* Release */,
-				094710581B842F3F004EC56D /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

@@ -335,7 +335,6 @@
 		0942B1661AE3E559008D3BDA /* ELCAssetTablePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0942B15A1AE3E559008D3BDA /* ELCAssetTablePicker.xib */; };
 		0942B1671AE3E559008D3BDA /* Overlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 0942B15B1AE3E559008D3BDA /* Overlay.png */; };
 		0942B1681AE3E559008D3BDA /* Overlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0942B15C1AE3E559008D3BDA /* Overlay@2x.png */; };
-		09434DC41B404DA300DFDC33 /* BaiduMapAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09434DC31B404DA300DFDC33 /* BaiduMapAPI.framework */; };
 		09434DC61B404DFA00DFDC33 /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 09434DC51B404DFA00DFDC33 /* mapapi.bundle */; };
 		09434DC81B404E3E00DFDC33 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09434DC71B404E3D00DFDC33 /* OpenGLES.framework */; };
 		09434DCD1B4058D500DFDC33 /* v2-btn_star_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 09434DC91B4058D500DFDC33 /* v2-btn_star_bg.png */; };
@@ -355,6 +354,8 @@
 		094373DA199D018900EDD64C /* EntityMediaInfoHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 094373D9199D018900EDD64C /* EntityMediaInfoHelper.m */; };
 		09443A1B1B4A685900EE5986 /* v2-接送消息.png in Resources */ = {isa = PBXBuildFile; fileRef = 09443A1A1B4A685900EE5986 /* v2-接送消息.png */; };
 		094591221B3F05D300EF4458 /* libBPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 094591211B3F05D300EF4458 /* libBPush.a */; };
+		094710511B842E2D004EC56D /* BaiduMapAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09434DC31B404DA300DFDC33 /* BaiduMapAPI.framework */; };
+		094710521B842EC0004EC56D /* BaiduMapAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09434DC31B404DA300DFDC33 /* BaiduMapAPI.framework */; };
 		0948079D1B46B61700FB74B4 /* v2-bus-pin.png in Resources */ = {isa = PBXBuildFile; fileRef = 0948079B1B46B61700FB74B4 /* v2-bus-pin.png */; };
 		0948079E1B46B61700FB74B4 /* v2-bus-pin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0948079C1B46B61700FB74B4 /* v2-bus-pin@2x.png */; };
 		094D909D1B6A7E310045D0AB /* v2-app-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 094D909B1B6A7E310045D0AB /* v2-app-icon.png */; };
@@ -1787,6 +1788,7 @@
 				09F74CC51997CB1E001555D0 /* AVFoundation.framework in Frameworks */,
 				0902CAA818F4200A001901A8 /* AudioToolbox.framework in Frameworks */,
 				09142DBB18E274B400E5848F /* CoreLocation.framework in Frameworks */,
+				094710511B842E2D004EC56D /* BaiduMapAPI.framework in Frameworks */,
 				09C00FA61B443DA400FC1474 /* ShareSDKCoreService.framework in Frameworks */,
 				09C00FAA1B443DA400FC1474 /* ShareSDKFlatShareViewUI.framework in Frameworks */,
 				09C00FA21B443DA400FC1474 /* WeChatConnection.framework in Frameworks */,
@@ -1798,7 +1800,6 @@
 				09F74CD21997D10C001555D0 /* libopencore-amrwb.a in Frameworks */,
 				09BA1C2E18BB412600760182 /* MobileCoreServices.framework in Frameworks */,
 				09C00FA71B443DA400FC1474 /* libWeChatSDK.a in Frameworks */,
-				09434DC41B404DA300DFDC33 /* BaiduMapAPI.framework in Frameworks */,
 				09AC5A321AAC9BA200C88ECE /* libopencore-amrnb.a in Frameworks */,
 				09AC5A331AAC9BAA00C88ECE /* libHM_hmsdk.a in Frameworks */,
 				094591221B3F05D300EF4458 /* libBPush.a in Frameworks */,
@@ -1818,6 +1819,7 @@
 			files = (
 				09BA1BB018BB2AB600760182 /* XCTest.framework in Frameworks */,
 				09BA1BB218BB2AB600760182 /* UIKit.framework in Frameworks */,
+				094710521B842EC0004EC56D /* BaiduMapAPI.framework in Frameworks */,
 				09BA1BB118BB2AB600760182 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4268,7 +4270,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		09BA1BBD18BB2AB600760182 /* Debug */ = {
+		094710561B842F3F004EC56D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -4285,15 +4287,9 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -4301,8 +4297,65 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Debug;
+		};
+		094710571B842F3F004EC56D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Qin Suo (ZU5HVY57NS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Qin Suo (ZU5HVY57NS)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Venders/BaiduMap",
+					"$(PROJECT_DIR)/Venders/ShareSDK/Connection",
+					"$(PROJECT_DIR)/Venders/ShareSDK/Core",
+					"$(PROJECT_DIR)/Venders/ShareSDK",
+					"$(PROJECT_DIR)/Venders/ShareSDK/UI",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Kulebao/youlebao-Prefix.pch";
+				GCC_VERSION = "";
+				INFOPLIST_FILE = "Kulebao/youlebao-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Venders/BaiduMobStat",
+					"$(PROJECT_DIR)/Venders/libBPush",
+					"$(PROJECT_DIR)/../YouJiaoBao/Venders/opencore-amr-0.1.3/lib",
+					"$(PROJECT_DIR)/../Common/hmsdk-v2",
+					"$(PROJECT_DIR)/Venders/ShareSDK/Extend/WeChatSDK",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = youlebao;
+				PROVISIONING_PROFILE = "d04210c8-1bc8-43a9-a946-c5d9d8df6010";
+				TARGETED_DEVICE_FAMILY = 1;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		094710581B842F3F004EC56D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Kulebao.app/Kulebao";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(PROJECT_DIR)/Venders/BaiduMap",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Kulebao/youlebao-Prefix.pch";
+				INFOPLIST_FILE = "KulebaoTests/youlebaoTests-Info.plist";
+				PRODUCT_NAME = youlebaoTests;
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
 		};
@@ -4338,45 +4391,6 @@
 			};
 			name = Release;
 		};
-		09BA1BC018BB2AB600760182 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
-				CLANG_CXX_LIBRARY = "libc++";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Qin Suo (ZU5HVY57NS)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Qin Suo (ZU5HVY57NS)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Venders/BaiduMap",
-					"$(PROJECT_DIR)/Venders/ShareSDK/Connection",
-					"$(PROJECT_DIR)/Venders/ShareSDK/Core",
-					"$(PROJECT_DIR)/Venders/ShareSDK",
-					"$(PROJECT_DIR)/Venders/ShareSDK/UI",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Kulebao/youlebao-Prefix.pch";
-				GCC_VERSION = "";
-				INFOPLIST_FILE = "Kulebao/youlebao-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Venders/BaiduMobStat",
-					"$(PROJECT_DIR)/Venders/libBPush",
-					"/Users/xinus/xin.github/Kulebao-iPhone/YouJiaoBao/Venders/opencore-amr-0.1.3/lib",
-					"/Users/xinus/xin.github/Kulebao-iPhone/Common/hmsdk-v2",
-					"$(PROJECT_DIR)/Venders/ShareSDK/Extend/WeChatSDK",
-				);
-				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = youlebao;
-				PROVISIONING_PROFILE = "d04210c8-1bc8-43a9-a946-c5d9d8df6010";
-				TARGETED_DEVICE_FAMILY = 1;
-				WRAPPER_EXTENSION = app;
-			};
-			name = Debug;
-		};
 		09BA1BC118BB2AB600760182 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -4403,8 +4417,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Venders/BaiduMobStat",
 					"$(PROJECT_DIR)/Venders/libBPush",
-					"/Users/xinus/xin.github/Kulebao-iPhone/YouJiaoBao/Venders/opencore-amr-0.1.3/lib",
-					"/Users/xinus/xin.github/Kulebao-iPhone/Common/hmsdk-v2",
+					"$(PROJECT_DIR)/../YouJiaoBao/Venders/opencore-amr-0.1.3/lib",
+					"$(PROJECT_DIR)/../Common/hmsdk-v2",
 					"$(PROJECT_DIR)/Venders/ShareSDK/Extend/WeChatSDK",
 				);
 				OTHER_LDFLAGS = "-ObjC";
@@ -4415,28 +4429,6 @@
 			};
 			name = Release;
 		};
-		09BA1BC318BB2AB600760182 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Kulebao.app/Kulebao";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Kulebao/Kulebao-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "KulebaoTests/youlebaoTests-Info.plist";
-				PRODUCT_NAME = youlebaoTests;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
 		09BA1BC418BB2AB600760182 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -4445,9 +4437,10 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(PROJECT_DIR)/Venders/BaiduMap",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Kulebao/Kulebao-Prefix.pch";
+				GCC_PREFIX_HEADER = "Kulebao/youlebao-Prefix.pch";
 				INFOPLIST_FILE = "KulebaoTests/youlebaoTests-Info.plist";
 				PRODUCT_NAME = youlebaoTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
@@ -4461,29 +4454,29 @@
 		09BA1B8818BB2AB300760182 /* Build configuration list for PBXProject "youlebao" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				09BA1BBD18BB2AB600760182 /* Debug */,
 				09BA1BBE18BB2AB600760182 /* Release */,
+				094710561B842F3F004EC56D /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		09BA1BBF18BB2AB600760182 /* Build configuration list for PBXNativeTarget "youlebao" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				09BA1BC018BB2AB600760182 /* Debug */,
 				09BA1BC118BB2AB600760182 /* Release */,
+				094710571B842F3F004EC56D /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		09BA1BC218BB2AB600760182 /* Build configuration list for PBXNativeTarget "youlebaoTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				09BA1BC318BB2AB600760182 /* Debug */,
 				09BA1BC418BB2AB600760182 /* Release */,
+				094710581B842F3F004EC56D /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 

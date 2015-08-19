@@ -2598,6 +2598,13 @@
 			path = BaiduMap;
 			sourceTree = "<group>";
 		};
+		09514FE51B84E43C005217B7 /* commercial */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = commercial;
+			sourceTree = "<group>";
+		};
 		0960BFDE19B05818008768A6 /* TSFileCache */ = {
 			isa = PBXGroup;
 			children = (
@@ -2670,6 +2677,7 @@
 		09BA1B9618BB2AB300760182 /* Kulebao */ = {
 			isa = PBXGroup;
 			children = (
+				09514FE51B84E43C005217B7 /* commercial */,
 				09148E4F18DAEE5800D08F63 /* coredata */,
 				09219A3A18C4721F00166228 /* models */,
 				093904CC18BDD9F2006E8F82 /* controllers */,
@@ -3357,7 +3365,7 @@
 		09BA1B8518BB2AB300760182 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				CLASSPREFIX = CSKule;
+				CLASSPREFIX = CB;
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = Cocobabys;
 				TargetAttributes = {

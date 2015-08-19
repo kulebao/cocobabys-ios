@@ -254,8 +254,10 @@ typedef enum : NSUInteger {
         coor.longitude = _busLocationInfo.longitude;
         coor.latitude = _busLocationInfo.latitude;
         self.busAnnotation.coordinate = coor;
-        [self.mapView addAnnotation:self.busAnnotation];
         [self updateBusLocationLabel];
+        
+        [self.mapView removeAnnotation:self.busAnnotation];
+        [self.mapView addAnnotation:self.busAnnotation];
     }
     else {
         [self.mapView removeAnnotation:self.busAnnotation];

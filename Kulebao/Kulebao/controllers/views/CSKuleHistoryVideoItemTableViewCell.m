@@ -424,7 +424,7 @@
     
     NSString* shareTitle = @"";
     if (shareTitle.length == 0) {
-        shareTitle = @"[成长经历]分享";
+        shareTitle = @"【幼乐宝】宝宝成长记录";
     }
     NSString* shareContent = self.historyInfo.content;
     NSString* shareImgPath = [[NSBundle mainBundle] pathForResource:@"v2-logo_weixin" ofType:@"png"];

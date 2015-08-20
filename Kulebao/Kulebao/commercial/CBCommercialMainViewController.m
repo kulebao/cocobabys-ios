@@ -7,8 +7,15 @@
 //
 
 #import "CBCommercialMainViewController.h"
+#import "CBActivityMainViewController.h"
+#import "CBContractorMainViewController.h"
 
 @interface CBCommercialMainViewController ()
+
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segType;
+@property (nonatomic, strong) CBActivityMainViewController* activityMainViewCtrl;
+@property (nonatomic, strong) CBContractorMainViewController* contractorMainViewCtrl;
+- (IBAction)onSegTypeValueChanged:(id)sender;
 
 @end
 
@@ -29,6 +36,14 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    [self addChildViewController:self.activityMainViewCtrl];
+    [self addChildViewController:self.contractorMainViewCtrl];
+    
+    [self.view addSubview:self.activityMainViewCtrl.view];
+    [self.view addSubview:self.contractorMainViewCtrl.view];
+    
+    [self reloadViews];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,72 +51,45 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
-}
-
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+- (CBActivityMainViewController*) activityMainViewCtrl {
+    if (_activityMainViewCtrl == nil) {
+        _activityMainViewCtrl = [self.storyboard instantiateViewControllerWithIdentifier:@"CBActivityMainViewController"];
+    }
     
-    // Configure the cell...
+    return _activityMainViewCtrl;
+}
+
+- (CBContractorMainViewController*) contractorMainViewCtrl {
+    if (_contractorMainViewCtrl == nil) {
+        _contractorMainViewCtrl = [self.storyboard instantiateViewControllerWithIdentifier:@"CBContractorMainViewController"];
+    }
     
-    return cell;
+    return _contractorMainViewCtrl;
 }
-*/
+
+- (IBAction)onSegTypeValueChanged:(id)sender {
+    [self reloadViews];
+}
+
+- (void)reloadViews {
+    if (self.segType.selectedSegmentIndex == 0) {
+        [self.view bringSubviewToFront:self.activityMainViewCtrl.view];
+        [self.activityMainViewCtrl reloadData];
+    }
+    else {
+        [self.view bringSubviewToFront:self.contractorMainViewCtrl.view];
+        [self.contractorMainViewCtrl reloadData];
+    }
+}
 
 /*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

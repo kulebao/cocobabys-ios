@@ -282,4 +282,11 @@
                                                   success:(SuccessResponseHandler)success
                                                   failure:(FailureResponseHandler)failure;
 
+- (AFHTTPRequestOperation*)reqGetActivityListOfKindergarten:(NSInteger)kindergarten
+                                                       from:(long long)fromId
+                                                         to:(long long)toId
+                                                       most:(NSInteger)most
+                                                    success:(SuccessResponseHandler)success
+                                                    failure:(FailureResponseHandler)failure;
+
 @end

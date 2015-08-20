@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CBCommercialMainViewController : UITableViewController
+@interface CBCommercialMainViewController : UIViewController
 
 @end

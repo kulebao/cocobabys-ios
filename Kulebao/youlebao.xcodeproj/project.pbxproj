@@ -573,6 +573,8 @@
 		09DB73E918E0280B00121716 /* CSKuleChatMsg.m in Sources */ = {isa = PBXBuildFile; fileRef = 09DB73E818E0280B00121716 /* CSKuleChatMsg.m */; };
 		09DDA12C1ADA9FCA004BAAF5 /* CSKuleNewsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09DDA12A1ADA9FCA004BAAF5 /* CSKuleNewsTableViewCell.m */; };
 		09DDA12D1ADA9FCA004BAAF5 /* CSKuleNewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09DDA12B1ADA9FCA004BAAF5 /* CSKuleNewsTableViewCell.xib */; };
+		09E209E11B86E81F00059CC1 /* CBActivityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E209E01B86E81F00059CC1 /* CBActivityDetailViewController.m */; };
+		09E209E41B86E83C00059CC1 /* CBContractorDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E209E31B86E83C00059CC1 /* CBContractorDetailViewController.m */; };
 		09E709701AF36C9700628FF9 /* v2-line.png in Resources */ = {isa = PBXBuildFile; fileRef = 09E7096F1AF36C9700628FF9 /* v2-line.png */; };
 		09E709721AF38A9F00628FF9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09E709711AF38A9F00628FF9 /* LaunchScreen.xib */; };
 		09E709791AF393B000628FF9 /* v2-pic-default.png in Resources */ = {isa = PBXBuildFile; fileRef = 09E709731AF393B000628FF9 /* v2-pic-default.png */; };
@@ -1551,6 +1553,10 @@
 		09DDA1291ADA9FCA004BAAF5 /* CSKuleNewsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleNewsTableViewCell.h; sourceTree = "<group>"; };
 		09DDA12A1ADA9FCA004BAAF5 /* CSKuleNewsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleNewsTableViewCell.m; sourceTree = "<group>"; };
 		09DDA12B1ADA9FCA004BAAF5 /* CSKuleNewsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSKuleNewsTableViewCell.xib; sourceTree = "<group>"; };
+		09E209DF1B86E81F00059CC1 /* CBActivityDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBActivityDetailViewController.h; sourceTree = "<group>"; };
+		09E209E01B86E81F00059CC1 /* CBActivityDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBActivityDetailViewController.m; sourceTree = "<group>"; };
+		09E209E21B86E83C00059CC1 /* CBContractorDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBContractorDetailViewController.h; sourceTree = "<group>"; };
+		09E209E31B86E83C00059CC1 /* CBContractorDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBContractorDetailViewController.m; sourceTree = "<group>"; };
 		09E7096F1AF36C9700628FF9 /* v2-line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-line.png"; sourceTree = "<group>"; };
 		09E709711AF38A9F00628FF9 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		09E709731AF393B000628FF9 /* v2-pic-default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-pic-default.png"; sourceTree = "<group>"; };
@@ -2659,6 +2665,10 @@
 				09EEBA451B863E76006296F1 /* CBActivityItemCell.m */,
 				09EEBA471B863E88006296F1 /* CBContractorItemCell.h */,
 				09EEBA481B863E88006296F1 /* CBContractorItemCell.m */,
+				09E209DF1B86E81F00059CC1 /* CBActivityDetailViewController.h */,
+				09E209E01B86E81F00059CC1 /* CBActivityDetailViewController.m */,
+				09E209E21B86E83C00059CC1 /* CBContractorDetailViewController.h */,
+				09E209E31B86E83C00059CC1 /* CBContractorDetailViewController.m */,
 			);
 			path = commercial;
 			sourceTree = "<group>";
@@ -4062,6 +4072,7 @@
 				09219A5718C48A2100166228 /* CSKuleEngine.m in Sources */,
 				0914E39B199FCEBC00276ABA /* UIImageView+WebCache.m in Sources */,
 				0914E390199FCEBC00276ABA /* SDWebImageCompat.m in Sources */,
+				09E209E41B86E83C00059CC1 /* CBContractorDetailViewController.m in Sources */,
 				0914E32A199FBB5C00276ABA /* EntityHistoryInfo.m in Sources */,
 				090C9EB018C813BD00883DE0 /* CSKulePreferences.m in Sources */,
 				09219A3618C42AF800166228 /* MBProgressHUD.m in Sources */,
@@ -4195,6 +4206,7 @@
 				090151351939D4060066DEAB /* XHViewState.m in Sources */,
 				09C1C76018BD92990040B06D /* CSHttpClient.m in Sources */,
 				09142DB618E2713C00E5848F /* NSDictionary_JSONExtensions.m in Sources */,
+				09E209E11B86E81F00059CC1 /* CBActivityDetailViewController.m in Sources */,
 				090151361939D4060066DEAB /* XHZoomingImageView.m in Sources */,
 				09A9EBD218C090E200D83119 /* CSKuleAuthViewController.m in Sources */,
 				0914E368199FCD7500276ABA /* MJPhotoToolbar.m in Sources */,

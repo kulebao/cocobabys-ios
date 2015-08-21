@@ -9,6 +9,8 @@
 #import "CBCommercialMainViewController.h"
 #import "CBActivityMainViewController.h"
 #import "CBContractorMainViewController.h"
+#import "CBActivityDetailViewController.h"
+#import "CBContractorDetailViewController.h"
 
 @interface CBCommercialMainViewController ()
 
@@ -44,11 +46,25 @@
     [self.view addSubview:self.contractorMainViewCtrl.view];
     
     [self reloadViews];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onOpenActivity:)
+                                                 name:@"noti.open.activity"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onOpenContractor:)
+                                                 name:@"noti.open.contractor"
+                                               object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (CBActivityMainViewController*) activityMainViewCtrl {
@@ -82,14 +98,26 @@
     }
 }
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+- (void)onOpenActivity:(NSNotification*)noti {
+    [self performSegueWithIdentifier:@"segue.activity.detail" sender:noti.object];
+}
+
+- (void)onOpenContractor:(NSNotification*)noti {
+    [self performSegueWithIdentifier:@"segue.contractor.detail" sender:noti.object];
+}
+
+#pragma mark - Navigation
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"segue.activity.detail"]) {
+        CBActivityDetailViewController* ctrl = segue.destinationViewController;
+        ctrl.activityData = sender;
+    }
+    else if ([segue.identifier isEqualToString:@"segue.contractor.detail"]) {
+        CBContractorDetailViewController* ctrl = segue.destinationViewController;
+    }
+}
 
 @end

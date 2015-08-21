@@ -141,7 +141,7 @@
 
 #pragma mark - Private
 - (void)showDetails:(id)sender {
-    //[self performSegueWithIdentifier:@"segue.details" sender:sender];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"noti.open.activity" object:sender];
 }
 
 - (void)reloadCellItemDataList {

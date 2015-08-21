@@ -23,11 +23,20 @@
 
 - (void)loadItemData:(CBActivityData*)itemData {
     CBLogoData* logo = itemData.logos.firstObject;
-    [self.imgIcon sd_setImageWithURL:[NSURL URLWithString:logo.url]];
+    [self.imgIcon sd_setImageWithURL:[NSURL URLWithString:logo.url] placeholderImage:[UIImage imageNamed:@"v2-logo2.png"]];
     
     self.labTitle.text = itemData.title;
-    self.labOriginal.text = itemData.price.origin;
-    self.labDiscount.text = itemData.price.discounted;
+    
+    NSString* discounted = itemData.price.discounted;
+    NSString* origin = itemData.price.origin;
+    if (discounted.length == 0) {
+        discounted = @"0";
+    }
+    if (origin.length == 0) {
+        origin = @"0";
+    }
+    self.labOriginal.text = [NSString stringWithFormat:@"原价%@元", origin];
+    self.labDiscount.text = [NSString stringWithFormat:@"幼乐宝用户专享 %@元", discounted];
     self.labDesc.text = itemData.detail;
 }
 

@@ -309,15 +309,10 @@ typedef enum : NSUInteger {
         self.labAddess.text = @"小孩已下车";
     }
     else if (_busLocationInfo) {
-        self.labAddess.text = [NSString stringWithFormat:@"校车位置: %@", _busLocationInfo.address];
+        if (_busLocationInfo.address) {
+            self.labAddess.text = [NSString stringWithFormat:@"校车位置: %@", _busLocationInfo.address];
+        }
     }
-    
-//    if (_busLocationInfo) {
-//        self.labAddess.text = [NSString stringWithFormat:@"校车位置: %@", _busLocationInfo.address];
-//    }
-//    else {
-//        self.labAddess.text = @"校车还未出发";
-//    }
 }
 
 - (void)updateDisLabel {

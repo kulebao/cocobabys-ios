@@ -38,14 +38,7 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    [self addChildViewController:self.activityMainViewCtrl];
-    [self addChildViewController:self.contractorMainViewCtrl];
-    
-    [self.view addSubview:self.activityMainViewCtrl.view];
-    [self.view addSubview:self.contractorMainViewCtrl.view];
-    
-    [self reloadViews];
+
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(onOpenActivity:)
@@ -56,6 +49,9 @@
                                              selector:@selector(onOpenContractor:)
                                                  name:@"noti.open.contractor"
                                                object:nil];
+    
+    
+    [self reloadViews];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -70,6 +66,8 @@
 - (CBActivityMainViewController*) activityMainViewCtrl {
     if (_activityMainViewCtrl == nil) {
         _activityMainViewCtrl = [self.storyboard instantiateViewControllerWithIdentifier:@"CBActivityMainViewController"];
+        [self addChildViewController:_activityMainViewCtrl];
+        [self.view addSubview:_activityMainViewCtrl.view];
     }
     
     return _activityMainViewCtrl;
@@ -78,6 +76,8 @@
 - (CBContractorMainViewController*) contractorMainViewCtrl {
     if (_contractorMainViewCtrl == nil) {
         _contractorMainViewCtrl = [self.storyboard instantiateViewControllerWithIdentifier:@"CBContractorMainViewController"];
+        [self addChildViewController:_contractorMainViewCtrl];
+        [self.view addSubview:_contractorMainViewCtrl.view];
     }
     
     return _contractorMainViewCtrl;
@@ -117,6 +117,7 @@
     }
     else if ([segue.identifier isEqualToString:@"segue.contractor.detail"]) {
         CBContractorDetailViewController* ctrl = segue.destinationViewController;
+        ctrl.itemData = sender;
     }
 }
 

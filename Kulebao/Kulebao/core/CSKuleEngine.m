@@ -1807,4 +1807,38 @@
                                       failure:failure];
 }
 
+- (AFHTTPRequestOperation*)reqGetContractorListOfKindergarten:(NSInteger)kindergarten
+                                                 withCategory:(NSInteger)category
+                                                         from:(long long)fromId
+                                                           to:(long long)toId
+                                                         most:(NSInteger)most
+                                                      success:(SuccessResponseHandler)success
+                                                      failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kGetContractorListV4, @(kindergarten)];
+    NSString* method = @"GET";
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    
+    if (fromId >= 0) {
+        [parameters setObject:@(fromId) forKey:@"from"];
+    }
+    
+    if (toId >= 0) {
+        [parameters setObject:@(toId) forKey:@"to"];
+    }
+    
+    if (most >= 0) {
+        [parameters setObject:@(most) forKey:@"most"];
+    }
+    
+    if (category >= 0) {
+        [parameters setObject:@(category) forKey:@"category"];
+    }
+    
+    return [_httpClient httpRequestWithMethod:method
+                                         path:path
+                                   parameters:parameters
+                                      success:success
+                                      failure:failure];
+}
+
 @end

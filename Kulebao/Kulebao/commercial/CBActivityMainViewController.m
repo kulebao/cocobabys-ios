@@ -34,7 +34,7 @@
     self.tableview.pullArrowImage = [UIImage imageNamed:@"grayArrow.png"];
     
     self.tableview.tableFooterView = [[UIView alloc] initWithFrame:CGRectNull];
-    
+
     _cellItemDataList = [NSMutableArray array];
 }
 
@@ -69,7 +69,9 @@
 */
 
 - (void)reloadData {
-    [self reloadCellItemDataList];
+    if ([self isViewLoaded]) {
+        [self refreshTable];
+    }
 }
 
 #pragma mark - UITableViewDataSource
@@ -130,13 +132,20 @@
     [self loadMoreCellItemDataList];
 }
 
-#pragma mark - Segues
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"segue.details"]) {
-//        CSKuleNewsDetailsViewController* destCtrl = segue.destinationViewController;
-//        destCtrl.newsInfo = sender;
-//        destCtrl.navigationItem.title = [destCtrl.newsInfo tagTitle];
+- (CBActivityData*)fetchLastItemData {
+    CBActivityData* itemData = nil;
+    for (CBActivityData* item in _cellItemDataList) {
+        if (itemData == nil) {
+            itemData = item;
+        }
+        else {
+            if (itemData.uid < item.uid) {
+                itemData = item;
+            }
+        }
     }
+    
+    return itemData;
 }
 
 #pragma mark - Private
@@ -184,7 +193,7 @@
 }
 
 - (void)loadMoreCellItemDataList {
-    CBActivityData* lastItemData = self.cellItemDataList.lastObject;
+    CBActivityData* lastItemData = [self fetchLastItemData];
     if (lastItemData) {
         SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
             NSMutableArray* tmpItemDataList = [NSMutableArray array];

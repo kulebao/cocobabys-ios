@@ -575,6 +575,7 @@
 		09DDA12D1ADA9FCA004BAAF5 /* CSKuleNewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09DDA12B1ADA9FCA004BAAF5 /* CSKuleNewsTableViewCell.xib */; };
 		09E209E11B86E81F00059CC1 /* CBActivityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E209E01B86E81F00059CC1 /* CBActivityDetailViewController.m */; };
 		09E209E41B86E83C00059CC1 /* CBContractorDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E209E31B86E83C00059CC1 /* CBContractorDetailViewController.m */; };
+		09E209E71B8705D700059CC1 /* CBContractorData.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E209E61B8705D700059CC1 /* CBContractorData.m */; };
 		09E709701AF36C9700628FF9 /* v2-line.png in Resources */ = {isa = PBXBuildFile; fileRef = 09E7096F1AF36C9700628FF9 /* v2-line.png */; };
 		09E709721AF38A9F00628FF9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09E709711AF38A9F00628FF9 /* LaunchScreen.xib */; };
 		09E709791AF393B000628FF9 /* v2-pic-default.png in Resources */ = {isa = PBXBuildFile; fileRef = 09E709731AF393B000628FF9 /* v2-pic-default.png */; };
@@ -1557,6 +1558,8 @@
 		09E209E01B86E81F00059CC1 /* CBActivityDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBActivityDetailViewController.m; sourceTree = "<group>"; };
 		09E209E21B86E83C00059CC1 /* CBContractorDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBContractorDetailViewController.h; sourceTree = "<group>"; };
 		09E209E31B86E83C00059CC1 /* CBContractorDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBContractorDetailViewController.m; sourceTree = "<group>"; };
+		09E209E51B8705D700059CC1 /* CBContractorData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBContractorData.h; sourceTree = "<group>"; };
+		09E209E61B8705D700059CC1 /* CBContractorData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBContractorData.m; sourceTree = "<group>"; };
 		09E7096F1AF36C9700628FF9 /* v2-line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-line.png"; sourceTree = "<group>"; };
 		09E709711AF38A9F00628FF9 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		09E709731AF393B000628FF9 /* v2-pic-default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-pic-default.png"; sourceTree = "<group>"; };
@@ -3153,6 +3156,8 @@
 			children = (
 				09EEBA221B860681006296F1 /* CBActivityData.h */,
 				09EEBA231B860681006296F1 /* CBActivityData.m */,
+				09E209E51B8705D700059CC1 /* CBContractorData.h */,
+				09E209E61B8705D700059CC1 /* CBContractorData.m */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -4143,6 +4148,7 @@
 				0919B7731929D41900810556 /* CSKuleTopicMsg.m in Sources */,
 				09607BAF1B4977480047DB67 /* CSKuleBusLocationInfo.m in Sources */,
 				09142E1F18E2BA2100E5848F /* CSKuleAssessInfo.m in Sources */,
+				09E209E71B8705D700059CC1 /* CBContractorData.m in Sources */,
 				091AE83018D820C800EBC927 /* UIView+convenience.m in Sources */,
 				0914E39C199FCEBC00276ABA /* UIView+WebCacheOperation.m in Sources */,
 				090FC170199CA5A300C3A31A /* CSKuleHistoryInfo.m in Sources */,

@@ -289,4 +289,12 @@
                                                     success:(SuccessResponseHandler)success
                                                     failure:(FailureResponseHandler)failure;
 
+- (AFHTTPRequestOperation*)reqGetContractorListOfKindergarten:(NSInteger)kindergarten
+                                                 withCategory:(NSInteger)category
+                                                         from:(long long)fromId
+                                                           to:(long long)toId
+                                                         most:(NSInteger)most
+                                                      success:(SuccessResponseHandler)success
+                                                      failure:(FailureResponseHandler)failure;
+
 @end

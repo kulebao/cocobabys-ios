@@ -7,6 +7,7 @@
 //
 
 #import "CBContractorItemCell.h"
+#import "UIImageView+WebCache.h"
 
 @implementation CBContractorItemCell
 
@@ -18,6 +19,15 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)loadItemData:(CBContractorData*)itemData {
+    CBLogoData* logo = itemData.logos.firstObject;
+    [self.imgIcon sd_setImageWithURL:[NSURL URLWithString:logo.url] placeholderImage:[UIImage imageNamed:@"v2-logo2.png"]];
+    
+    self.labTitle.text = itemData.title;
+    self.labPhone.text = itemData.contact;
+    self.labDetail.text = itemData.detail;
 }
 
 @end

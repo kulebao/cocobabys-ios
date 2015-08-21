@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+
+#import "CBContractorData.h"
+
 @interface CBContractorDetailViewController : UIViewController
+
+@property (nonatomic, strong) CBContractorData* itemData;
 
 @end

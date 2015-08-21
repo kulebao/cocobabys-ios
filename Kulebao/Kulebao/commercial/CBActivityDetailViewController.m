@@ -8,6 +8,8 @@
 
 #import "CBActivityDetailViewController.h"
 #import "UIImageView+WebCache.h"
+#import "MJPhoto.h"
+#import "MJPhotoBrowser.h"
 
 @interface CBActivityDetailViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *imgIcon;
@@ -17,6 +19,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *labAddress;
 @property (weak, nonatomic) IBOutlet UITextView *textDetail;
 @property (weak, nonatomic) IBOutlet UIButton *btnJoin;
+
+@property (nonatomic, strong) UITapGestureRecognizer* tapGes;
+
 - (IBAction)onBtnCallClicked:(id)sender;
 - (IBAction)onBtnNaviClicked:(id)sender;
 - (IBAction)onBtnJoinClicked:(id)sender;
@@ -28,6 +33,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
+    [self.imgIcon addGestureRecognizer:self.tapGes];
+    self.imgIcon.userInteractionEnabled = YES;
     
     [self reloadData];
 }
@@ -82,4 +91,28 @@
 
 - (IBAction)onBtnJoinClicked:(id)sender {
 }
+
+- (void)onTap:(UITapGestureRecognizer*)ges {
+    if (ges.state == UIGestureRecognizerStateEnded) {
+        UIImageView* imgView = self.imgIcon;
+        
+        if (imgView && _activityData.logos.count>0) {
+            MJPhotoBrowser* browser = [[MJPhotoBrowser alloc] init];
+            
+            NSMutableArray* photoList = [NSMutableArray array];
+            for (CBLogoData* logoData in _activityData.logos) {
+                MJPhoto* photo = [MJPhoto new];
+                photo.srcImageView = nil;
+                photo.url = [NSURL URLWithString:logoData.url];
+                [photoList addObject:photo];
+            }
+            
+            browser.photos = photoList;
+            browser.currentPhotoIndex = 0;
+            
+            [browser show];
+        }
+    }
+}
+
 @end

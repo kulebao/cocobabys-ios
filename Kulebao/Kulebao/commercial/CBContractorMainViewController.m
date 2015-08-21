@@ -176,6 +176,10 @@
         
         [self.tableview reloadData];
         [gApp hideAlert];
+        
+        if (_cellItemDataList.count == 0) {
+            [gApp alert:@"没有商户数据"];
+        }
     };
     
     FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -196,7 +200,7 @@
                                                 failure:failureHandler];
     }
     else {
-        [gApp alert:@"没有活动数据"];
+        [gApp alert:@"没有商户数据"];
     }
 }
 

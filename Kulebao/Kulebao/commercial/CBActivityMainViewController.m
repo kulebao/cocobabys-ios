@@ -70,6 +70,7 @@
 
 - (void)reloadData {
     if ([self isViewLoaded]) {
+        self.tableview.pullTableIsRefreshing = YES;
         [self refreshTable];
     }
 }
@@ -169,6 +170,10 @@
         
         [self.tableview reloadData];
         [gApp hideAlert];
+        
+        if (_cellItemDataList.count == 0) {
+            [gApp alert:@"没有活动数据"];
+        }
     };
     
     FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {

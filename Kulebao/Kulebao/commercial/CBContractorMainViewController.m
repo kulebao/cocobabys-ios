@@ -178,7 +178,7 @@
         [gApp hideAlert];
         
         if (_cellItemDataList.count == 0) {
-            [gApp alert:@"没有商户数据"];
+            [gApp alert:@"没有更多商户了"];
         }
     };
     
@@ -200,7 +200,7 @@
                                                 failure:failureHandler];
     }
     else {
-        [gApp alert:@"没有商户数据"];
+        [gApp alert:@"没有更多商户了"];
     }
 }
 
@@ -221,7 +221,7 @@
                 [gApp hideAlert];
             }
             else {
-                [gApp alert:@"没有更多数据"];
+                [gApp alert:@"没有更多商户了"];
             }
             
             self.tableview.pullTableIsLoadingMore = NO;

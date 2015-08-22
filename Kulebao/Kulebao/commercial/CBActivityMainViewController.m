@@ -172,7 +172,7 @@
         [gApp hideAlert];
         
         if (_cellItemDataList.count == 0) {
-            [gApp alert:@"没有活动数据"];
+            [gApp alert:@"没有更多活动了"];
         }
     };
     
@@ -184,7 +184,6 @@
     
     CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
     if (currentChild) {
-        //[gApp waitingAlert:@"正在获取数据"];
         [gApp.engine reqGetActivityListOfKindergarten:gApp.engine.loginInfo.schoolId
                                                  from:-1
                                                    to:-1
@@ -193,7 +192,7 @@
                                               failure:failureHandler];
     }
     else {
-        [gApp alert:@"没有活动数据"];
+        [gApp alert:@"没有宝宝数据"];
     }
 }
 
@@ -214,7 +213,7 @@
                 [gApp hideAlert];
             }
             else {
-                [gApp alert:@"没有更多数据"];
+                [gApp alert:@"没有更多活动了"];
             }
             
             self.tableview.pullTableIsLoadingMore = NO;

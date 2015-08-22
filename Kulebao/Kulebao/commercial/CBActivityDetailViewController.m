@@ -87,7 +87,31 @@
     if (origin.length == 0) {
         origin = @"0";
     }
-    self.labPrice.text = [NSString stringWithFormat:@"%@ %@", discounted, origin];
+    
+    discounted = [NSString stringWithFormat:@"¥%@", discounted];
+    
+    //self.labPrice.text = [NSString stringWithFormat:@"%@ %@", discounted, origin];
+    
+    NSMutableAttributedString* attriDiscounted = [[NSMutableAttributedString alloc] initWithString:discounted];
+    [attriDiscounted addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(0, discounted.length)];
+    [attriDiscounted addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20] range:NSMakeRange(0, discounted.length)];
+    [attriDiscounted appendAttributedString:[[NSAttributedString alloc] initWithString:@" "]];
+    
+    NSMutableAttributedString* attriOrigin = [[NSMutableAttributedString alloc] initWithString:origin];
+    [attriOrigin addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, origin.length)];
+    [attriOrigin addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(0, origin.length)];
+    
+    [attriOrigin addAttribute:NSStrikethroughStyleAttributeName
+                        value:@(NSUnderlinePatternSolid | NSUnderlineStyleSingle)
+                        range:NSMakeRange(0, origin.length)];
+    
+    [attriOrigin addAttribute:NSStrikethroughColorAttributeName
+                        value:[UIColor grayColor]
+                        range:NSMakeRange(0, origin.length)];
+    [attriDiscounted appendAttributedString:attriOrigin];
+    
+    [self.labPrice setAttributedText:attriDiscounted];
+    
     self.labPhone.text = self.itemData.contact;
     self.labAddress.text = self.itemData.address;
     self.textDetail.text = self.itemData.detail;

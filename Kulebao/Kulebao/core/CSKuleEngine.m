@@ -1841,4 +1841,46 @@
                                       failure:failure];
 }
 
+- (AFHTTPRequestOperation*)reqGetEnrollmentOfKindergarten:(NSInteger)kindergarten
+                                             withActivity:(NSInteger)activityId
+                                                  success:(SuccessResponseHandler)success
+                                                  failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kGetEnrollmentV4,
+                      @(kindergarten),
+                      @(activityId),
+                      _currentRelationship.parent.parentId];
+    NSString* method = @"GET";
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    
+    return [_httpClient httpRequestWithMethod:method
+                                         path:path
+                                   parameters:parameters
+                                      success:success
+                                      failure:failure];
+    
+}
+
+- (AFHTTPRequestOperation*)reqPostEnrollmentOfKindergarten:(NSInteger)kindergarten
+                                              withActivity:(CBActivityData*)activity
+                                                   success:(SuccessResponseHandler)success
+                                                   failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kPostEnrollmentV4,
+                      @(kindergarten),
+                      @(activity.uid)];
+    NSString* method = @"POST";
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    [parameters setObject:@(activity.agent_id) forKey:@"agent_id"];
+    [parameters setObject:@(activity.uid) forKey:@"activity_id"];
+    [parameters setObject:@(_currentRelationship.parent.schoolId) forKey:@"school_id"];
+    [parameters setObject:SAFE_STRING(_currentRelationship.parent.parentId) forKey:@"parent_id"];
+    [parameters setObject:SAFE_STRING(_currentRelationship.parent.phone) forKey:@"contact"];
+    [parameters setObject:SAFE_STRING(_currentRelationship.parent.name) forKey:@"name"];
+    
+    return [_httpClient httpRequestWithMethod:method
+                                         path:path
+                                   parameters:parameters
+                                      success:success
+                                      failure:failure];
+}
+
 @end

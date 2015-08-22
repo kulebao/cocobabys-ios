@@ -113,7 +113,7 @@
     // Pass the selected object to the new view controller.
     if ([segue.identifier isEqualToString:@"segue.activity.detail"]) {
         CBActivityDetailViewController* ctrl = segue.destinationViewController;
-        ctrl.activityData = sender;
+        ctrl.itemData = sender;
     }
     else if ([segue.identifier isEqualToString:@"segue.contractor.detail"]) {
         CBContractorDetailViewController* ctrl = segue.destinationViewController;

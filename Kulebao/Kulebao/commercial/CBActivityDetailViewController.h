@@ -11,6 +11,6 @@
 
 @interface CBActivityDetailViewController : UIViewController
 
-@property (nonatomic, strong) CBActivityData* activityData;
+@property (nonatomic, strong) CBActivityData* itemData;
 
 @end

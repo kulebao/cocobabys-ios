@@ -15,6 +15,7 @@
 #import "CSKulePreferences.h"
 #import "CSKuleInterpreter.h"
 #import "hm_sdk.h"
+#import "CBActivityData.h"
 
 @interface CSKuleEngine : NSObject
 @property (strong, nonatomic) CSKulePreferences* preferences;
@@ -296,5 +297,15 @@
                                                          most:(NSInteger)most
                                                       success:(SuccessResponseHandler)success
                                                       failure:(FailureResponseHandler)failure;
+
+- (AFHTTPRequestOperation*)reqGetEnrollmentOfKindergarten:(NSInteger)kindergarten
+                                             withActivity:(NSInteger)activityId
+                                                  success:(SuccessResponseHandler)success
+                                                  failure:(FailureResponseHandler)failure;
+
+- (AFHTTPRequestOperation*)reqPostEnrollmentOfKindergarten:(NSInteger)kindergarten
+                                              withActivity:(CBActivityData*)activity
+                                                   success:(SuccessResponseHandler)success
+                                                   failure:(FailureResponseHandler)failure;
 
 @end

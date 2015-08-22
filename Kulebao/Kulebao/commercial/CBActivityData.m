@@ -24,6 +24,7 @@
         GET_LIST_OBJECT(dict[@"logos"], CBLogoData, _logos)
         _publishing = [CBPublishData instanceWithDictionary:dict[@"publishing"]];
         _price = [CBPriceData instanceWithDictionary:dict[@"price"]];
+        _location = [CBLocationData instanceWithDictionary:dict[@"location"]];
     }
     return self;
 }
@@ -60,4 +61,15 @@
     return self;
 }
 
+@end
+
+@implementation CBLocationData
+- (instancetype)initWithDictionary:(NSDictionary*)dict {
+    if (self = [super initWithDictionary:dict]) {
+        GET_DICT_FLOAT(dict, @"latitude", _latitude)
+        GET_DICT_FLOAT(dict, @"longitude", _longitude)
+        GET_DICT_STRING(dict, @"address", _address)
+    }
+    return self;
+}
 @end

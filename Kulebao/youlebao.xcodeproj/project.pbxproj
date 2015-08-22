@@ -576,6 +576,7 @@
 		09E209E11B86E81F00059CC1 /* CBActivityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E209E01B86E81F00059CC1 /* CBActivityDetailViewController.m */; };
 		09E209E41B86E83C00059CC1 /* CBContractorDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E209E31B86E83C00059CC1 /* CBContractorDetailViewController.m */; };
 		09E209E71B8705D700059CC1 /* CBContractorData.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E209E61B8705D700059CC1 /* CBContractorData.m */; };
+		09E209E91B88718700059CC1 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09E209E81B88718700059CC1 /* MapKit.framework */; };
 		09E709701AF36C9700628FF9 /* v2-line.png in Resources */ = {isa = PBXBuildFile; fileRef = 09E7096F1AF36C9700628FF9 /* v2-line.png */; };
 		09E709721AF38A9F00628FF9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09E709711AF38A9F00628FF9 /* LaunchScreen.xib */; };
 		09E709791AF393B000628FF9 /* v2-pic-default.png in Resources */ = {isa = PBXBuildFile; fileRef = 09E709731AF393B000628FF9 /* v2-pic-default.png */; };
@@ -1560,6 +1561,7 @@
 		09E209E31B86E83C00059CC1 /* CBContractorDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBContractorDetailViewController.m; sourceTree = "<group>"; };
 		09E209E51B8705D700059CC1 /* CBContractorData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBContractorData.h; sourceTree = "<group>"; };
 		09E209E61B8705D700059CC1 /* CBContractorData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBContractorData.m; sourceTree = "<group>"; };
+		09E209E81B88718700059CC1 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		09E7096F1AF36C9700628FF9 /* v2-line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-line.png"; sourceTree = "<group>"; };
 		09E709711AF38A9F00628FF9 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		09E709731AF393B000628FF9 /* v2-pic-default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-pic-default.png"; sourceTree = "<group>"; };
@@ -1805,6 +1807,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09E209E91B88718700059CC1 /* MapKit.framework in Frameworks */,
 				09C00FAF1B44408D00FC1474 /* Security.framework in Frameworks */,
 				09C00FAD1B44407600FC1474 /* libicucore.dylib in Frameworks */,
 				09BA1C0418BB34B000760182 /* CoreTelephony.framework in Frameworks */,
@@ -2715,6 +2718,7 @@
 		09BA1B8F18BB2AB300760182 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				09E209E81B88718700059CC1 /* MapKit.framework */,
 				09C00FAE1B44408C00FC1474 /* Security.framework */,
 				09C00FAC1B44407600FC1474 /* libicucore.dylib */,
 				09434DC71B404E3D00DFDC33 /* OpenGLES.framework */,

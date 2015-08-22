@@ -14,7 +14,7 @@
     if (self = [super initWithDictionary:dict]) {
         GET_DICT_INTEGER(dict, @"id", _uid)
         GET_DICT_INTEGER(dict, @"agent_id", _agent_id)
-        GET_DICT_INTEGER(dict, @"contractor_id", _contractor_id)
+        GET_DICT_STRING(dict, @"category", _category)
         GET_DICT_STRING(dict, @"title", _title)
         GET_DICT_STRING(dict, @"address", _address)
         GET_DICT_STRING(dict, @"contact", _contact)
@@ -24,7 +24,7 @@
         GET_DICT_INTEGER(dict, @"priority", _priority)
         GET_LIST_OBJECT(dict[@"logos"], CBLogoData, _logos)
         _publishing = [CBPublishData instanceWithDictionary:dict[@"publishing"]];
-        _price = [CBPriceData instanceWithDictionary:dict[@"price"]];
+        _location = [CBLocationData instanceWithDictionary:dict[@"location"]];
     }
     return self;
 }

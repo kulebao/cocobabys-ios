@@ -10,6 +10,8 @@
 #import "UIImageView+WebCache.h"
 #import "MJPhoto.h"
 #import "MJPhotoBrowser.h"
+#import "CSAppDelegate.h"
+#import <MapKit/MapKit.h>
 
 @interface CBContractorDetailViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *imgIcon;
@@ -71,9 +73,55 @@
 }
 
 - (IBAction)onBtnCallClicked:(id)sender {
+    BOOL ok = [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", self.itemData.contact]]];
+    if (!ok && self.itemData.contact.length > 0) {
+        [gApp alert:@"本设备不支持拨打电话"];
+    }
 }
 
 - (IBAction)onBtnNaviClicked:(id)sender {
+    if (self.itemData.location) {
+        //当前的位置
+        MKMapItem *currentLocation = [MKMapItem mapItemForCurrentLocation];
+        
+        //目的地的位置
+        CLLocationCoordinate2D coord = {self.itemData.location.latitude, self.itemData.location.longitude};
+        MKMapItem *toLocation = [[MKMapItem alloc] initWithPlacemark:[[MKPlacemark alloc] initWithCoordinate:coord
+                                                                                           addressDictionary:nil]];
+        toLocation.name = self.itemData.location.address;
+        NSArray *items = [NSArray arrayWithObjects:currentLocation, toLocation, nil];
+        
+        /*
+         //keys
+         MKLaunchOptionsMapCenterKey:地图中心的坐标(NSValue)
+         MKLaunchOptionsMapSpanKey:地图显示的范围(NSValue)
+         MKLaunchOptionsShowsTrafficKey:是否显示交通信息(boolean NSNumber)
+         
+         //MKLaunchOptionsDirectionsModeKey: 导航类型(NSString)
+         {
+         MKLaunchOptionsDirectionsModeDriving:驾车
+         MKLaunchOptionsDirectionsModeWalking:步行
+         }
+         
+         //MKLaunchOptionsMapTypeKey:地图类型(NSNumber)
+         enum {
+         MKMapTypeStandard = 0,
+         MKMapTypeSatellite,
+         MKMapTypeHybrid
+         };
+         */
+        NSDictionary *options = @{
+                                  MKLaunchOptionsDirectionsModeKey:MKLaunchOptionsDirectionsModeDriving,
+                                  MKLaunchOptionsMapTypeKey:
+                                      [NSNumber numberWithInteger:MKMapTypeStandard],
+                                  MKLaunchOptionsShowsTrafficKey:@YES
+                                  };
+        //打开苹果自身地图应用，并呈现特定的item
+        [MKMapItem openMapsWithItems:items launchOptions:options];
+    }
+    else {
+        [gApp alert:@"商户位置未提供，导航失败"];
+    }
 }
 
 - (void)onTap:(UITapGestureRecognizer*)ges {

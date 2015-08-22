@@ -32,6 +32,9 @@ if ([dict objectForKey:key]) { dest = [NSString stringWithFormat:@"%@",[dict obj
 #define GET_DICT_INTEGER(dict, key, dest) \
 if ([dict objectForKey:key]) { dest = [[dict objectForKey:key] integerValue]; }
 
+#define GET_DICT_FLOAT(dict, key, dest) \
+if ([dict objectForKey:key]) { dest = [[dict objectForKey:key] floatValue]; }
+
 #define GET_LIST_OBJECT(jsonList, className, objList) \
 if ([jsonList isKindOfClass:[NSArray class]]) { \
 NSMutableArray* tempList = [NSMutableArray array]; \

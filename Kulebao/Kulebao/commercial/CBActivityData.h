@@ -22,13 +22,15 @@
  "updated_at":1439476161096,
  "publishing":{"publish_status":4,"published_at":1439476023393},
  "price":{"origin":333.0,"discounted":222.0},
- "priority":0
+ "priority":0,
+ "location":{"latitude":104.0711850,"longitude":30.5959470,"address":""}
  }
  */
 
 @class CBLogoData;
 @class CBPublishData;
 @class CBPriceData;
+@class CBLocationData;
 
 @interface CBActivityData : CSJsonEntityData
 
@@ -45,6 +47,9 @@
 @property (nonatomic, strong) CBPublishData* publishing;
 @property (nonatomic, strong) CBPriceData* price;
 @property (nonatomic, assign) NSInteger priority;
+@property (nonatomic, strong) CBLocationData* location;
+
+@property (nonatomic, assign) BOOL joined;
 
 @end
 
@@ -63,5 +68,13 @@
 
 @property (nonatomic, strong) NSString* origin;
 @property (nonatomic, strong) NSString* discounted;
+
+@end
+
+@interface CBLocationData : CSJsonEntityData
+
+@property (nonatomic, assign) CGFloat latitude;
+@property (nonatomic, assign) CGFloat longitude;
+@property (nonatomic, strong) NSString* address;
 
 @end

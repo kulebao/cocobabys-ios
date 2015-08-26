@@ -263,6 +263,10 @@ typedef enum : NSUInteger {
     }
     
     [self updateDisLabel];
+    
+    if (_viewportType == kViewportViewportTypeBus) {
+        [self moveMapToBus];
+    }
 }
 
 - (BMKPointAnnotation*)busAnnotation {

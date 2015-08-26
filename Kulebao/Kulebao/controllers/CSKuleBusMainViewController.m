@@ -65,9 +65,8 @@ typedef enum : NSUInteger {
     [self customizeBackBarItem];
 
     //self.mapView.showsUserLocation = YES;
-    //self.mapView.showMapScaleBar = YES;
-
-    self.mapView.zoomLevel = 13;
+    self.mapView.showMapScaleBar = YES;
+    self.mapView.zoomLevel = 16;
     self.stepperMapZoom.value =  self.mapView.zoomLevel;
     self.stepperMapZoom.minimumValue =  self.mapView.minZoomLevel;
     self.stepperMapZoom.maximumValue =  self.mapView.maxZoomLevel;

@@ -307,25 +307,27 @@
      
      }
      */
-    
-    NSString* mediaType = info[UIImagePickerControllerMediaType];
-    if ([mediaType isEqualToString:@"public.image"]) {
-        UIImage* img = info[UIImagePickerControllerOriginalImage];
-        if (img) {
-            if (self.singleImage) {
-                [_imageList removeObject:img];
-            }
-            [_imageList addObject:img];
-            [self.gmGridView reloadData];
-        }
-    }
-    else if ([mediaType isEqualToString:@"public.movie"]) {
-        NSURL* fileURL = info[UIImagePickerControllerMediaURL];
-        [self performSelectorInBackground:@selector(doCompressMovFile:) withObject:fileURL];
-    }
-    
+
     [picker dismissViewControllerAnimated:YES
                                completion:^{
+                                   // To move code here to resolve a bug
+                                   // http://stackoverflow.com/questions/26562390/uistatusbar-become-red-after-using-avassetexportsession-for-uiimagepickercontrol
+                                   NSString* mediaType = info[UIImagePickerControllerMediaType];
+                                   if ([mediaType isEqualToString:@"public.image"]) {
+                                       UIImage* img = info[UIImagePickerControllerOriginalImage];
+                                       if (img) {
+                                           if (self.singleImage) {
+                                               [_imageList removeObject:img];
+                                           }
+                                           [_imageList addObject:img];
+                                           [self.gmGridView reloadData];
+                                       }
+                                   }
+                                   else if ([mediaType isEqualToString:@"public.movie"]) {
+                                       NSURL* fileURL = info[UIImagePickerControllerMediaURL];
+                                       [self performSelectorInBackground:@selector(doCompressMovFile:) withObject:fileURL];
+                                   }
+                                   
                                    if (picker == _imgPicker) {
                                        _imgPicker = nil;
                                    }

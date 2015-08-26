@@ -376,6 +376,7 @@
 		0979FE2F1AAF532500B58F41 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0979FE2E1AAF532500B58F41 /* CoreMedia.framework */; };
 		0979FE311AAF532D00B58F41 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0979FE301AAF532D00B58F41 /* MediaPlayer.framework */; };
 		097ED0BB18DAB4AB0057ECA0 /* CSKuleChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 097ED0BA18DAB4AB0057ECA0 /* CSKuleChangePasswordViewController.m */; };
+		098431001B8E0C98001F1629 /* CSFirImApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 098430FF1B8E0C98001F1629 /* CSFirImApi.m */; };
 		09A9EBB518C07F6F00D83119 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 09A9EBB718C07F6F00D83119 /* Localizable.strings */; };
 		09A9EBBB18C0830900D83119 /* CSKuleLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A9EBBA18C0830900D83119 /* CSKuleLoginViewController.m */; };
 		09A9EBC618C08C7D00D83119 /* app-bg-type3.png in Resources */ = {isa = PBXBuildFile; fileRef = 09A9EBBC18C08C7D00D83119 /* app-bg-type3.png */; };
@@ -1323,6 +1324,8 @@
 		0979FE301AAF532D00B58F41 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		097ED0B918DAB4AB0057ECA0 /* CSKuleChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleChangePasswordViewController.h; sourceTree = "<group>"; };
 		097ED0BA18DAB4AB0057ECA0 /* CSKuleChangePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleChangePasswordViewController.m; sourceTree = "<group>"; };
+		098430FE1B8E0C98001F1629 /* CSFirImApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSFirImApi.h; sourceTree = "<group>"; };
+		098430FF1B8E0C98001F1629 /* CSFirImApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSFirImApi.m; sourceTree = "<group>"; };
 		09A9EBB418C07E8800D83119 /* CSKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSKit.h; sourceTree = "<group>"; };
 		09A9EBB618C07F6F00D83119 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		09A9EBB818C07F8400D83119 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -2996,6 +2999,8 @@
 				09ED59B518CDBF3900187585 /* UIWebView+CSKit.m */,
 				092294E21AB9A7E600E40C84 /* CSVideoView.h */,
 				092294E31AB9A7E600E40C84 /* CSVideoView.m */,
+				098430FE1B8E0C98001F1629 /* CSFirImApi.h */,
+				098430FF1B8E0C98001F1629 /* CSFirImApi.m */,
 			);
 			path = extends;
 			sourceTree = "<group>";
@@ -4138,6 +4143,7 @@
 				092294E41AB9A7E600E40C84 /* CSVideoView.m in Sources */,
 				0914E366199FCD7500276ABA /* MJPhotoLoadingView.m in Sources */,
 				09142DB018E2713C00E5848F /* CDataScanner.m in Sources */,
+				098431001B8E0C98001F1629 /* CSFirImApi.m in Sources */,
 				0942B15E1AE3E559008D3BDA /* ELCAsset.m in Sources */,
 				0904690518C72E5000D0846E /* CSKuleParentInfo.m in Sources */,
 				09FE6AF618C5A53200A840BE /* CSTextFieldDelegate.m in Sources */,

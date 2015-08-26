@@ -9,7 +9,7 @@
 #import "CSKuleForgotPswdViewController.h"
 #import "CSAppDelegate.h"
 
-static NSInteger kRetryInterval = 600; // 秒
+static NSInteger kRetryInterval = 120; // 秒
 
 @interface CSKuleForgotPswdViewController () {
     NSTimer* _timer;

@@ -141,6 +141,7 @@
             
             browser.photos = photoList;
             browser.currentPhotoIndex = 0;
+            browser.hidenToolbar = YES;
             
             [browser show];
         }

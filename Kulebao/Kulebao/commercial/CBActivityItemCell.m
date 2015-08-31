@@ -40,7 +40,7 @@
     
     NSMutableAttributedString* attriOrigin = [[NSMutableAttributedString alloc] initWithString:origin];
     [attriOrigin addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, origin.length)];
-    [attriOrigin addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(0, origin.length)];
+    [attriOrigin addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(0, origin.length)];
     [attriOrigin addAttribute:NSStrikethroughStyleAttributeName
                         value:@(NSUnderlinePatternSolid | NSUnderlineStyleSingle)
                         range:NSMakeRange(0, origin.length)];
@@ -48,13 +48,13 @@
     discounted = [NSString stringWithFormat:@"幼乐宝用户专享 %@元", discounted];
     NSMutableAttributedString* attriDiscounted = [[NSMutableAttributedString alloc] initWithString:discounted];
     [attriDiscounted addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(0, 7)];
-    [attriDiscounted addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(0, 7)];
+    [attriDiscounted addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(0, 7)];
     [attriDiscounted addAttribute:NSForegroundColorAttributeName value:UIColorRGB(0, 164, 217) range:NSMakeRange(7, discounted.length - 7)];
-    [attriDiscounted addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:16] range:NSMakeRange(7, discounted.length - 7)];
+    [attriDiscounted addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(7, discounted.length - 7)];
     
     self.labOriginal.attributedText = attriOrigin;
     self.labDiscount.attributedText = attriDiscounted;
-    self.labDesc.text = itemData.detail;
+    //self.labDesc.text = itemData.detail;
 }
 
 @end

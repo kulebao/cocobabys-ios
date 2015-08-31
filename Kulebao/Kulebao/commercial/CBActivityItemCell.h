@@ -14,7 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *labTitle;
 @property (weak, nonatomic) IBOutlet UILabel *labOriginal;
 @property (weak, nonatomic) IBOutlet UILabel *labDiscount;
-@property (weak, nonatomic) IBOutlet UILabel *labDesc;
+//@property (weak, nonatomic) IBOutlet UILabel *labDesc;
 
 - (void)loadItemData:(CBActivityData*)itemData;
 

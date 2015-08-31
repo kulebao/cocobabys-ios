@@ -858,6 +858,7 @@
 
 
 - (IBAction)onBtnClassInfoClicked:(id)sender {
+#if COCOBABYS_FEATURE_COMMERCIAL
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Commercial" bundle:nil];
     
     [self presentViewController:storyboard.instantiateInitialViewController
@@ -865,6 +866,7 @@
                      completion:^{
                          
                      }];
+#endif
 }
 
 - (void)checkCCTVShown {

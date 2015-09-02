@@ -71,10 +71,18 @@ CSAppDelegate* gApp = nil;
     if (application.applicationState == UIApplicationStateActive) {
     }
     else {
-        _engine.pendingNotificationInfo = userInfo;
+        _engine.badgeOfCheckin = _engine.badgeOfCheckin + 1;
+        [application setApplicationIconBadgeNumber:0];
+        
+        if (userInfo) {
+            _engine.pendingNotificationInfo = userInfo;
+        }
     }
     
-    [_engine.receivedNotifications addObject:userInfo];
+    if (userInfo) {
+        [_engine.receivedNotifications addObject:userInfo];
+    }
+    
     completionHandler(UIBackgroundFetchResultNewData);
 }
 

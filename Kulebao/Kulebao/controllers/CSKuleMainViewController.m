@@ -156,6 +156,7 @@
     //[gApp.engine removeObserver:self forKeyPath:@"badgeOfAssignment"];
     [gApp.engine removeObserver:self forKeyPath:@"badgeOfChating"];
     [gApp.engine removeObserver:self forKeyPath:@"badgeOfAssess"];
+    [gApp.engine removeObserver:self forKeyPath:@"pendingNotificationInfo"];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -1022,29 +1023,10 @@
 }
 
 - (void)handlePendingNotification {
-    if (gApp.engine.pendingNotificationInfo && gApp.engine.currentRelationship) {
-        // Handle
-        /*
-         {
-         ad = "\U5e7c\U4e50\U5b9d";
-         aps =     {
-         alert = "\U5e7c\U4e50\U5b9d\U63d0\U9192\U60a8\Uff1a\U60a8\U7684\U5b69\U5b50 \U7136\U7136 \U5df2\U4e8e 00:33:46 \U6253\U5361\U5165\U56ed\U3002";
-         badge = 1;
-         sound = "";
-         };
-         channelid = 5479041548038543311;
-         "child_id" = "2_8901_32570";
-         device = 4;
-         "notice_type" = 1;
-         "parent_name" = "\U738b\U5927\U987a";
-         pushid = 864122702946899280;
-         "record_url" = "https://dn-cocobabys.qbox.me/big_shots.jpg";
-         timestamp = 1438187626748;
-         }
-
-         */
-
-        NSDictionary* notiInfo = gApp.engine.pendingNotificationInfo;
+    NSDictionary* notiInfo = gApp.engine.pendingNotificationInfo;
+    if (gApp.engine.pendingNotificationInfo
+        && gApp.engine.currentRelationship
+        && notiInfo) {
         gApp.engine.pendingNotificationInfo = nil;
         CSKuleCheckInOutLogInfo* info = [CSKuleInterpreter decodeCheckInOutLogInfo:notiInfo];
         if (info) {

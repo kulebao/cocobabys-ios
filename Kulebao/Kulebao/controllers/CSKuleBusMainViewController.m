@@ -300,8 +300,6 @@ typedef enum : NSUInteger {
 }
 
 - (void)updateBusLocationLabel {
-    self.labAddess.text = @"校车还未出发";
-    
     if (_busStatus == kBusStatusUnknown) {
         self.labAddess.text = @"校车还未出发";
     }
@@ -315,6 +313,12 @@ typedef enum : NSUInteger {
         if (_busLocationInfo.address) {
             self.labAddess.text = [NSString stringWithFormat:@"校车位置: %@", _busLocationInfo.address];
         }
+        else {
+            // DO NOTHING
+        }
+    }
+    else {
+        self.labAddess.text = @"获取位置中";
     }
 }
 

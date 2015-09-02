@@ -3483,6 +3483,9 @@
 					09BA1B8C18BB2AB300760182 = {
 						DevelopmentTeam = J7M2ZSPTSZ;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.iCloud = {
 								enabled = 0;
 							};

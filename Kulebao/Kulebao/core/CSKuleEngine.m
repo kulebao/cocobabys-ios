@@ -272,25 +272,21 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     CSLog(@"%@", @"Did receive a Remote Notification");
-    //NSString *alert = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
     if (application.applicationState == UIApplicationStateActive) {
-        // Nothing to do if applicationState is Inactive, the iOS already displayed an alert view.
-        //        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Did receive a Remote Notification"
-        //                                                            message:[NSString stringWithFormat:@"The application received this remote notification while it was running:\n%@", alert]
-        //                                                           delegate:self
-        //                                                  cancelButtonTitle:@"OK"
-        //                                                  otherButtonTitles:nil];
-        //        [alertView show];
-        
         self.badgeOfCheckin = self.badgeOfCheckin + 1;
         [application setApplicationIconBadgeNumber:0];
     }
     else {
-        self.pendingNotificationInfo = userInfo;
+        if (userInfo) {
+            self.pendingNotificationInfo = userInfo;
+        }
+    }
+    
+    if (userInfo) {
+        [self.receivedNotifications addObject:userInfo];
     }
     
     [BPush handleNotification:userInfo];
-    [self.receivedNotifications addObject:userInfo];
 }
 
 #pragma mark - Getter & Setter

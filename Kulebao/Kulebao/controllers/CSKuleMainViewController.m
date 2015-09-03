@@ -32,11 +32,7 @@
     BOOL _actionToCCTV;
 }
 
-@property (weak, nonatomic) IBOutlet UILabel *labSchoolName;
-@property (weak, nonatomic) IBOutlet UILabel *labClassName;
 @property (weak, nonatomic) IBOutlet UILabel *labChildNick;
-@property (weak, nonatomic) IBOutlet UILabel *labChildAge;
-@property (weak, nonatomic) IBOutlet UILabel *labChildSchool;
 @property (weak, nonatomic) IBOutlet UIImageView *imgChildPortrait;
 @property (weak, nonatomic) IBOutlet UIView *viewChildContainer;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollContent;
@@ -80,13 +76,20 @@
     [navigationBar setTitleTextAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:20], NSForegroundColorAttributeName:[UIColor whiteColor]}];
     navigationBar.tintColor = [UIColor whiteColor];
     
-    self.labClassName.text = nil;
-    self.labSchoolName.text = gApp.engine.loginInfo.schoolName;
+    NSString* schoolName = [gApp.engine.loginInfo.schoolName trim];
+    if ([schoolName length] <=0) {
+        schoolName = @"学校简介";
+    }
+    [self.btnSchoolInfo setTitle:schoolName
+                        forState:UIControlStateNormal];
+    [self.btnClassInfo setTitle:@"默认班级"
+                       forState:UIControlStateNormal];
     self.labChildNick.text = nil;
-    self.labChildAge.text = nil;
-    self.labChildSchool.text = nil;
     self.imgChildPortrait.layer.cornerRadius = 47.0;
     self.imgChildPortrait.clipsToBounds = YES;
+    self.btnClassInfo.titleLabel.numberOfLines = 2;
+    self.btnClassInfo.titleLabel.minimumScaleFactor = 0.7;
+    self.btnClassInfo.titleLabel.textAlignment = NSTextAlignmentCenter;
     
     _nickFieldDelegate = [[CSTextFieldDelegate alloc] initWithType:kCSTextFieldDelegateNormal];
     _nickFieldDelegate.maxLength = kKuleNickMaxLength;
@@ -420,11 +423,33 @@
     if (childInfo) {
         CSLog(@"childInfo:%@", childInfo);
         CSLog(@"parentInfo:%@", gApp.engine.currentRelationship.parent);
-        self.labClassName.text = childInfo.className;
-        self.labSchoolName.text = gApp.engine.loginInfo.schoolName;
-        self.labChildNick.text = childInfo.displayNick;
-        self.labChildAge.text = childInfo.displayAge;
-        self.labChildSchool.text = gApp.engine.loginInfo.schoolName;
+    
+        NSString* schoolName = [gApp.engine.loginInfo.schoolName trim];
+        if ([schoolName length] <=0) {
+            schoolName = @"学校简介";
+        }
+        [self.btnSchoolInfo setTitle:schoolName
+                            forState:UIControlStateNormal];
+        
+        NSString* className = [childInfo.className trim];
+        if ([className length] <=0) {
+            className = @"默认班级";
+        }
+        [self.btnClassInfo setTitle:className
+                            forState:UIControlStateNormal];
+        
+        
+        NSString* childInfoText = [NSString stringWithFormat:@"%@\r\n%@\r\n%@",
+                                   childInfo.displayNick,
+                                   childInfo.displayAge,
+                                   [gApp.engine.loginInfo.schoolName trim]];
+    
+        // 设置行间距
+        NSMutableParagraphStyle* ps = [[NSMutableParagraphStyle alloc] init];
+        ps.lineSpacing = 8;
+        NSMutableAttributedString* atrText = [[NSMutableAttributedString alloc] initWithString:childInfoText];
+        [atrText addAttribute:NSParagraphStyleAttributeName value:ps range:NSMakeRange(0, childInfoText.length)];
+        self.labChildNick.attributedText = atrText;
         
         NSURL* qiniuImgUrl = [gApp.engine urlFromPath:childInfo.portrait];
         qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/256/h/256"];

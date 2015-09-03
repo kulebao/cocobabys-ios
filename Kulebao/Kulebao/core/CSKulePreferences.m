@@ -18,6 +18,7 @@ static NSString* kKeyHistoryAccounts = @"com.cocobabys.Kulebao.Preferences.histo
 static NSString* kKeyTimestamps = @"com.cocobabys.Kulebao.Preferences.timestamps";
 static NSString* kKeyServerSettings = @"com.cocobabys.Kulebao.Preferences.serverSettings";
 static NSString* kKeyMarkedNews = @"com.cocobabys.Kulebao.Preferences.markedNews";
+static NSString* kKeyCommercial = @"com.cocobabys.Kulebao.Preferences.commercial";
 
 @implementation CSKulePreferences {
     NSUserDefaults* _config;
@@ -31,6 +32,7 @@ static NSString* kKeyMarkedNews = @"com.cocobabys.Kulebao.Preferences.markedNews
 @synthesize deviceToken = _deviceToken;
 @synthesize historyAccounts = _historyAccounts;
 @synthesize enabledTest = _enabledTest;
+@synthesize enabledCommercial = _enabledCommercial;
 
 + (id)defaultPreferences {
     static CSKulePreferences* s_preferences = nil;
@@ -54,6 +56,12 @@ static NSString* kKeyMarkedNews = @"com.cocobabys.Kulebao.Preferences.markedNews
     _defaultUsername = [_config objectForKey:kKeyDefaultUsername];
     _guideShown = [[_config objectForKey:kKeyGuideShown] boolValue];
     _enabledTest =  NO;//YES;// [[_config objectForKey:@"enabled_test"] boolValue];
+
+#if COCOBABYS_FEATURE_COMMERCIAL
+    _enabledCommercial = [[_config objectForKey:kKeyCommercial] boolValue];
+#else
+    _enabledCommercial = NO;
+#endif
     
     NSDictionary* loginInfoDict = [_config objectForKey:kKeyLoginInfo];
     CSKuleLoginInfo* loginInfo = [CSKuleLoginInfo new];
@@ -117,6 +125,10 @@ static NSString* kKeyMarkedNews = @"com.cocobabys.Kulebao.Preferences.markedNews
     }
     else {
         [_config removeObjectForKey:kKeyGuideShown];
+    }
+    
+    if (_enabledCommercial) {
+        [_config setObject:@(_enabledCommercial) forKey:kKeyCommercial];
     }
     
     if (_loginInfo && _loginInfo.accessToken && _loginInfo.accountName && _loginInfo.schoolName
@@ -205,6 +217,20 @@ static NSString* kKeyMarkedNews = @"com.cocobabys.Kulebao.Preferences.markedNews
         [_historyAccounts setObject:[NSDate date] forKey:account];
         [self savePreferences];
     }
+}
+
+- (void)setEnabledCommercial:(BOOL)enabledCommercial {
+#if COCOBABYS_FEATURE_COMMERCIAL
+    if (enabledCommercial) {
+        _enabledCommercial = enabledCommercial;
+        [self savePreferences];
+    }
+#endif
+}
+
+- (BOOL)enabledCommercial {
+    //return YES;
+    return _enabledCommercial;
 }
 
 - (NSTimeInterval)timestampOfModule:(NSInteger)moduleType forChild:(NSString*)childId {

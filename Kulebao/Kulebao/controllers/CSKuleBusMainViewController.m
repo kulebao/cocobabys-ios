@@ -65,9 +65,8 @@ typedef enum : NSUInteger {
     [self customizeBackBarItem];
 
     //self.mapView.showsUserLocation = YES;
-    //self.mapView.showMapScaleBar = YES;
-
-    self.mapView.zoomLevel = 13;
+    self.mapView.showMapScaleBar = YES;
+    self.mapView.zoomLevel = 16;
     self.stepperMapZoom.value =  self.mapView.zoomLevel;
     self.stepperMapZoom.minimumValue =  self.mapView.minZoomLevel;
     self.stepperMapZoom.maximumValue =  self.mapView.maxZoomLevel;
@@ -254,14 +253,20 @@ typedef enum : NSUInteger {
         coor.longitude = _busLocationInfo.longitude;
         coor.latitude = _busLocationInfo.latitude;
         self.busAnnotation.coordinate = coor;
-        [self.mapView addAnnotation:self.busAnnotation];
         [self updateBusLocationLabel];
+        
+        [self.mapView removeAnnotation:self.busAnnotation];
+        [self.mapView addAnnotation:self.busAnnotation];
     }
     else {
         [self.mapView removeAnnotation:self.busAnnotation];
     }
     
     [self updateDisLabel];
+    
+    if (_viewportType == kViewportViewportTypeBus) {
+        [self moveMapToBus];
+    }
 }
 
 - (BMKPointAnnotation*)busAnnotation {
@@ -295,8 +300,6 @@ typedef enum : NSUInteger {
 }
 
 - (void)updateBusLocationLabel {
-    self.labAddess.text = @"校车还未出发";
-    
     if (_busStatus == kBusStatusUnknown) {
         self.labAddess.text = @"校车还未出发";
     }
@@ -307,15 +310,16 @@ typedef enum : NSUInteger {
         self.labAddess.text = @"小孩已下车";
     }
     else if (_busLocationInfo) {
-        self.labAddess.text = [NSString stringWithFormat:@"校车位置: %@", _busLocationInfo.address];
+        if (_busLocationInfo.address) {
+            self.labAddess.text = [NSString stringWithFormat:@"校车位置: %@", _busLocationInfo.address];
+        }
+        else {
+            // DO NOTHING
+        }
     }
-    
-//    if (_busLocationInfo) {
-//        self.labAddess.text = [NSString stringWithFormat:@"校车位置: %@", _busLocationInfo.address];
-//    }
-//    else {
-//        self.labAddess.text = @"校车还未出发";
-//    }
+    else {
+        self.labAddess.text = @"获取位置中";
+    }
 }
 
 - (void)updateDisLabel {

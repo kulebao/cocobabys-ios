@@ -51,7 +51,7 @@
 
 - (NSString *)displayNick {
     NSString* trimmedNick = [_nick length]> kKuleNickMaxLength ? [_nick substringToIndex:kKuleNickMaxLength] : _nick;  
-    return trimmedNick;
+    return trimmedNick ? trimmedNick : @"";
 }
 
 - (NSString *)displayAge {

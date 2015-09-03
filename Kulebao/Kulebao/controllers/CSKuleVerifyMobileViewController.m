@@ -53,7 +53,7 @@ static NSInteger kRetryInterval = 120; // 秒
     UIImage* fieldBgImg = [[UIImage imageNamed:@"v2-input_login.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     self.imgFieldBg1.image = fieldBgImg;
     
-    _noticeTemp = @"尊敬的%@用户，您的手机已通过验证。请获取短信验证码并进行账号绑定，谢谢！";
+    _noticeTemp = @"    尊敬的%@用户，您的手机已通过验证。请获取短信验证码并进行账号绑定，谢谢！\r\n\r\n特别提示：\r\n    该验证码的有效时间为2分钟，请在2分钟内进行绑定操作。";
     
     NSString* notice = [NSString stringWithFormat:_noticeTemp, _mobile];
     self.labNotice.text = notice;
@@ -205,9 +205,6 @@ static NSInteger kRetryInterval = 120; // 秒
     NSString* authCode = self.fieldSmsCode.text;
     
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
-        /* {"error_code":0,"access_token":"1393763572585"} */
-        
-        //NSString* access_token = [dataJson valueForKeyNotNull:@"access_token"];
         NSInteger error_code = [[dataJson valueForKeyNotNull:@"error_code"] integerValue];
         NSString* error_msg = [dataJson valueForKeyNotNull:@"error_msg"];
         
@@ -219,12 +216,6 @@ static NSInteger kRetryInterval = 120; // 秒
             }
         }
         else {
-//            if (error_msg.length > 0) {
-//                [gApp alert:error_msg];
-//            }
-//            else {
-//                [gApp alert:@"验证码错误，请重新输入，谢谢"];
-//            }
             [gApp alert:@"验证码错误，请重新输入，谢谢"];
         }
     };
@@ -235,7 +226,7 @@ static NSInteger kRetryInterval = 120; // 秒
     };
     
     [gApp waitingAlert:@"正在发送请求..."];
-    
+#if COCOBABYS_DEV_MODEL
     if ([self.mobile isEqualToString:@"18782242007"] && [authCode isEqualToString:@"235235"]) {
         dispatch_after(1000, dispatch_get_main_queue(), ^{
             sucessHandler(nil, @{@"error_code":@(0), @"access_token":@"1393763572585"});
@@ -247,6 +238,12 @@ static NSInteger kRetryInterval = 120; // 秒
                           success:sucessHandler
                           failure:failureHandler];
     }
+#else
+    [gApp.engine reqBindPhone:_mobile
+                      smsCode:authCode
+                      success:sucessHandler
+                      failure:failureHandler];
+#endif
 }
 
 

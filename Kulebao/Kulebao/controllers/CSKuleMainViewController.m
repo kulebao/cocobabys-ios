@@ -22,6 +22,8 @@
 #import "CSKuleCCTVMainTableViewController.h"
 #import "CSKuleInterpreter.h"
 #import "CSKuleNewsDetailsViewController.h"
+#import "CBActivityData.h"
+#import "CBContractorData.h"
 
 @interface CSKuleMainViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
     UIImagePickerController* _imgPicker;
@@ -32,11 +34,7 @@
     BOOL _actionToCCTV;
 }
 
-@property (weak, nonatomic) IBOutlet UILabel *labSchoolName;
-@property (weak, nonatomic) IBOutlet UILabel *labClassName;
 @property (weak, nonatomic) IBOutlet UILabel *labChildNick;
-@property (weak, nonatomic) IBOutlet UILabel *labChildAge;
-@property (weak, nonatomic) IBOutlet UILabel *labChildSchool;
 @property (weak, nonatomic) IBOutlet UIImageView *imgChildPortrait;
 @property (weak, nonatomic) IBOutlet UIView *viewChildContainer;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollContent;
@@ -80,14 +78,16 @@
     [navigationBar setTitleTextAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:20], NSForegroundColorAttributeName:[UIColor whiteColor]}];
     navigationBar.tintColor = [UIColor whiteColor];
     
-    self.labClassName.text = nil;
-    self.labSchoolName.text = gApp.engine.loginInfo.schoolName;
     self.labChildNick.text = nil;
-    self.labChildAge.text = nil;
-    self.labChildSchool.text = nil;
     self.imgChildPortrait.layer.cornerRadius = 47.0;
     self.imgChildPortrait.clipsToBounds = YES;
-    self.btnClassInfo.userInteractionEnabled = NO;
+    
+    self.btnSchoolInfo.titleLabel.numberOfLines = 2;
+    self.btnSchoolInfo.titleLabel.minimumScaleFactor = 0.7;
+    self.btnSchoolInfo.titleLabel.textAlignment = NSTextAlignmentCenter;
+    self.btnClassInfo.titleLabel.numberOfLines = 2;
+    self.btnClassInfo.titleLabel.minimumScaleFactor = 0.7;
+    self.btnClassInfo.titleLabel.textAlignment = NSTextAlignmentCenter;
     
     _nickFieldDelegate = [[CSTextFieldDelegate alloc] initWithType:kCSTextFieldDelegateNormal];
     _nickFieldDelegate.maxLength = kKuleNickMaxLength;
@@ -140,6 +140,8 @@
                      context:nil];
     
     [self performSelector:@selector(getRelationshipInfos) withObject:nil afterDelay:0];
+    
+    [self updateUI:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -157,6 +159,7 @@
     //[gApp.engine removeObserver:self forKeyPath:@"badgeOfAssignment"];
     [gApp.engine removeObserver:self forKeyPath:@"badgeOfChating"];
     [gApp.engine removeObserver:self forKeyPath:@"badgeOfAssess"];
+    [gApp.engine removeObserver:self forKeyPath:@"pendingNotificationInfo"];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -293,6 +296,17 @@
     [[BaiduMobStat defaultStat] pageviewEndWithName:cName];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (!gApp.engine.preferences.enabledCommercial) {
+        [self performSelectorInBackground:@selector(reloadContractorItemDataList)
+                               withObject:nil];
+    }
+    else {
+        [self updateCommercialStatus];
+    }
+}
+
 #pragma mark - Segues
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"segue.aboutschool"]) {
@@ -321,6 +335,10 @@
 }
 
 #pragma mark - UI
+- (void)updateCommercialStatus {
+    [self updateUI:NO];
+}
+
 - (void)setupModules {
     if (_schoolInfo && [_schoolInfo hasProperty:@"hideVideo"]) {
         _moduleInfos = @[
@@ -417,14 +435,47 @@
 
 - (void)updateUI:(BOOL)reloadPortrait {
     CSKuleChildInfo* childInfo = gApp.engine.currentRelationship.child;
+    NSString* schoolName = [gApp.engine.loginInfo.schoolName trim];
+    if ([schoolName length] <=0) {
+        schoolName = @"学校简介";
+    }
+    [self.btnSchoolInfo setTitle:schoolName
+                        forState:UIControlStateNormal];
+    
+    BOOL enabledCommercial = gApp.engine.preferences.enabledCommercial;
+    
     if (childInfo) {
-        CSLog(@"childInfo:%@", childInfo);
-        CSLog(@"parentInfo:%@", gApp.engine.currentRelationship.parent);
-        self.labClassName.text = childInfo.className;
-        self.labSchoolName.text = gApp.engine.loginInfo.schoolName;
-        self.labChildNick.text = childInfo.displayNick;
-        self.labChildAge.text = childInfo.displayAge;
-        self.labChildSchool.text = gApp.engine.loginInfo.schoolName;
+        //CSLog(@"childInfo:%@", childInfo);
+        //CSLog(@"parentInfo:%@", gApp.engine.currentRelationship.parent);
+        
+        NSString* className = [childInfo.className trim];
+        if ([className length] <=0) {
+            className = @"默认班级";
+        }
+
+        NSString* childInfoText = [NSString stringWithFormat:@"%@\r\n%@",
+                                   childInfo.displayNick,
+                                   childInfo.displayAge];
+        
+        if (enabledCommercial) {
+            childInfoText = [NSString stringWithFormat:@"%@\r\n%@\r\n%@",
+                             childInfo.displayNick,
+                             childInfo.displayAge,
+                             className];
+            [self.btnClassInfo setTitle:@"亲子优惠"
+                               forState:UIControlStateNormal];
+        }
+        else {
+            [self.btnClassInfo setTitle:className
+                               forState:UIControlStateNormal];
+        }
+        
+        // 设置行间距
+        NSMutableParagraphStyle* ps = [[NSMutableParagraphStyle alloc] init];
+        ps.lineSpacing = 8;
+        NSMutableAttributedString* atrText = [[NSMutableAttributedString alloc] initWithString:childInfoText];
+        [atrText addAttribute:NSParagraphStyleAttributeName value:ps range:NSMakeRange(0, childInfoText.length)];
+        self.labChildNick.attributedText = atrText;
         
         NSURL* qiniuImgUrl = [gApp.engine urlFromPath:childInfo.portrait];
         qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/256/h/256"];
@@ -444,7 +495,18 @@
                                            options:options];
     }
     else {
-        [gApp alert:@"没有宝宝信息。"];
+        self.labChildNick.text = nil;
+        self.imgChildPortrait.image = nil;
+        NSString* className = @"默认班级";
+        if (enabledCommercial) {
+            [self.btnClassInfo setTitle:@"亲子优惠"
+                               forState:UIControlStateNormal];
+        }
+        else {
+            [self.btnClassInfo setTitle:className
+                               forState:UIControlStateNormal];
+        }
+        //[gApp alert:@"没有宝宝信息。"];
     }
 }
 
@@ -857,6 +919,22 @@
     }
 }
 
+
+- (IBAction)onBtnClassInfoClicked:(id)sender {
+#if COCOBABYS_FEATURE_COMMERCIAL
+    BOOL enabledCommercial = gApp.engine.preferences.enabledCommercial;
+    if (enabledCommercial) {
+        UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Commercial" bundle:nil];
+        
+        [self presentViewController:storyboard.instantiateInitialViewController
+                           animated:YES
+                         completion:^{
+                             
+                         }];
+    }
+#endif
+}
+
 - (void)checkCCTVShown {
     if (_schoolInfo) {
         [self doCheckCCTVShown];
@@ -874,8 +952,6 @@
     }
 }
 
-- (IBAction)onBtnClassInfoClicked:(id)sender {
-}
 
 #pragma mark - Private
 - (void)getRelationshipInfos {
@@ -1012,29 +1088,10 @@
 }
 
 - (void)handlePendingNotification {
-    if (gApp.engine.pendingNotificationInfo && gApp.engine.currentRelationship) {
-        // Handle
-        /*
-         {
-         ad = "\U5e7c\U4e50\U5b9d";
-         aps =     {
-         alert = "\U5e7c\U4e50\U5b9d\U63d0\U9192\U60a8\Uff1a\U60a8\U7684\U5b69\U5b50 \U7136\U7136 \U5df2\U4e8e 00:33:46 \U6253\U5361\U5165\U56ed\U3002";
-         badge = 1;
-         sound = "";
-         };
-         channelid = 5479041548038543311;
-         "child_id" = "2_8901_32570";
-         device = 4;
-         "notice_type" = 1;
-         "parent_name" = "\U738b\U5927\U987a";
-         pushid = 864122702946899280;
-         "record_url" = "https://dn-cocobabys.qbox.me/big_shots.jpg";
-         timestamp = 1438187626748;
-         }
-
-         */
-
-        NSDictionary* notiInfo = gApp.engine.pendingNotificationInfo;
+    NSDictionary* notiInfo = gApp.engine.pendingNotificationInfo;
+    if (gApp.engine.pendingNotificationInfo
+        && gApp.engine.currentRelationship
+        && notiInfo) {
         gApp.engine.pendingNotificationInfo = nil;
         CSKuleCheckInOutLogInfo* info = [CSKuleInterpreter decodeCheckInOutLogInfo:notiInfo];
         if (info) {
@@ -1043,6 +1100,59 @@
             ctrl.checkInOutLogInfo = info;
             [self.navigationController pushViewController:ctrl animated:YES];
         }
+    }
+}
+
+
+#pragma mark - Commercial
+- (void)reloadContractorItemDataList {
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+        if ([dataJson count] >= 5) {
+            [self performSelectorInBackground:@selector(reloadActivityItemDataList)
+                                   withObject:nil];
+        }
+        else {
+            CSLog(@"ContractorItemDataList count=%ld", [dataJson count]);
+        }
+    };
+    
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    };
+    
+    CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
+    if (currentChild) {
+        [gApp.engine reqGetContractorListOfKindergarten:gApp.engine.loginInfo.schoolId
+                                           withCategory:0
+                                                   from:-1
+                                                     to:-1
+                                                   most:-1
+                                                success:sucessHandler
+                                                failure:failureHandler];
+    }
+}
+
+- (void)reloadActivityItemDataList {
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+        if ([dataJson count] >= 5) {
+            gApp.engine.preferences.enabledCommercial = YES;
+            [self performSelectorOnMainThread:@selector(updateCommercialStatus) withObject:nil waitUntilDone:YES];
+        }
+        else {
+            CSLog(@"ActivityItemDataList count=%ld", [dataJson count]);
+        }
+    };
+    
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    };
+    
+    CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
+    if (currentChild) {
+        [gApp.engine reqGetActivityListOfKindergarten:gApp.engine.loginInfo.schoolId
+                                                 from:-1
+                                                   to:-1
+                                                 most:-1
+                                              success:sucessHandler
+                                              failure:failureHandler];
     }
 }
 

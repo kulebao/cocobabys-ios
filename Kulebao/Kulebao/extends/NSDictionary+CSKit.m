@@ -14,7 +14,7 @@
     id object = [self valueForKey:key];
     
     if ([object isKindOfClass:[NSNull class]]) {
-        return nil;
+        object = nil;
     }
     
     return object;

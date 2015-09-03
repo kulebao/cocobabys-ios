@@ -17,13 +17,19 @@
 #import "hm_sdk.h"
 #import "TSFileCache.h"
 #import "CSKit.h"
+#import <objc/runtime.h>
 
 #import <ShareSDK/ShareSDK.h>
 #import "WXApi.h"
 
-@interface CSKuleEngine() {
+#import "CSFirImApi.h"
+
+@interface CSKuleEngine() <UIAlertViewDelegate> {
     NSMutableDictionary* _senderProfiles;
     BMKMapManager* _mapManager;
+    
+    BOOL _checkUpdateDone;
+    UIAlertView* _alertUpdateInfo;
 }
 
 @property (strong, nonatomic) CSHttpClient* httpClient;
@@ -168,6 +174,45 @@
             [self checkUpdatesOfAssess];
         }
     }
+    
+#if COCOBABYS_CHECK_UPDATE_FROM_FIR
+    NSString* versionShort = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    NSString* build = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
+    [CSFirImApi getLatestAppInfo:@"540b29930a99448660000086"
+                        apiToken:@"f33fee2cc37b3ad7d6f787176893e89d" complete:^(FirImAppInfoData *appInfoData, NSError *error) {
+                            if (appInfoData && !error) {
+                                //appInfoData.versionShort = @"10.0.0";
+                                //appInfoData.build = @"180827";
+                                if (![appInfoData.versionShort isEqualToString:versionShort]
+                                    && appInfoData.build.integerValue > build.integerValue
+                                    && !_checkUpdateDone
+                                    && !_alertUpdateInfo) {
+                                    NSString* alertTitle = [[NSString alloc] initWithFormat:@"发现新内测版本 v%@", appInfoData.versionShort];
+                                    NSString* alertMsg = [NSString stringWithFormat:@"更新日志：\r\n%@", appInfoData.changelog];
+                                    _alertUpdateInfo = [[UIAlertView alloc] initWithTitle:alertTitle
+                                                                                    message:alertMsg
+                                                                                   delegate:self
+                                                                          cancelButtonTitle:@"知道了"
+                                                                          otherButtonTitles:@"去看看", nil];
+                                    objc_setAssociatedObject(_alertUpdateInfo, "FirImAppInfoData", appInfoData, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+                                    [_alertUpdateInfo show];
+                                }
+                            }
+                        }];
+#endif
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if ([_alertUpdateInfo isEqual:alertView]) {
+        if (buttonIndex==alertView.firstOtherButtonIndex) {
+            FirImAppInfoData* appInfo = objc_getAssociatedObject(alertView, "FirImAppInfoData");
+            objc_removeAssociatedObjects(alertView);
+            _checkUpdateDone = YES;
+            [self.application openURL:[NSURL URLWithString:appInfo.update_url]];
+        }
+
+        _alertUpdateInfo = nil;
+    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -227,25 +272,21 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     CSLog(@"%@", @"Did receive a Remote Notification");
-    //NSString *alert = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
     if (application.applicationState == UIApplicationStateActive) {
-        // Nothing to do if applicationState is Inactive, the iOS already displayed an alert view.
-        //        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Did receive a Remote Notification"
-        //                                                            message:[NSString stringWithFormat:@"The application received this remote notification while it was running:\n%@", alert]
-        //                                                           delegate:self
-        //                                                  cancelButtonTitle:@"OK"
-        //                                                  otherButtonTitles:nil];
-        //        [alertView show];
-        
         self.badgeOfCheckin = self.badgeOfCheckin + 1;
         [application setApplicationIconBadgeNumber:0];
     }
     else {
-        self.pendingNotificationInfo = userInfo;
+        if (userInfo) {
+            self.pendingNotificationInfo = userInfo;
+        }
+    }
+    
+    if (userInfo) {
+        [self.receivedNotifications addObject:userInfo];
     }
     
     [BPush handleNotification:userInfo];
-    [self.receivedNotifications addObject:userInfo];
 }
 
 #pragma mark - Getter & Setter
@@ -1617,7 +1658,7 @@
         [mediumList addObject:@{@"url": urlString, @"type": @"image"}];
     }
     
-    if (videoUrl.length > 0) {
+    if ((mediumList.count == 0) && videoUrl.length > 0) {
         [mediumList addObject:@{@"url": videoUrl, @"type": @"video"}];
     }
     
@@ -1770,6 +1811,111 @@
     NSString* path = [NSString stringWithFormat:kGetShareTokenV3, @(kindergarten), childId, @(recordId)];
     NSString* method = @"POST";
     NSMutableDictionary* parameters = nil;
+    
+    return [_httpClient httpRequestWithMethod:method
+                                         path:path
+                                   parameters:parameters
+                                      success:success
+                                      failure:failure];
+}
+
+- (AFHTTPRequestOperation*)reqGetActivityListOfKindergarten:(NSInteger)kindergarten
+                                                       from:(long long)fromId
+                                                         to:(long long)toId
+                                                       most:(NSInteger)most
+                                                    success:(SuccessResponseHandler)success
+                                                    failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kGetActivityListV4, @(kindergarten)];
+    NSString* method = @"GET";
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    
+    if (fromId >= 0) {
+        [parameters setObject:@(fromId) forKey:@"from"];
+    }
+    
+    if (toId >= 0) {
+        [parameters setObject:@(toId) forKey:@"to"];
+    }
+    
+    if (most >= 0) {
+        [parameters setObject:@(most) forKey:@"most"];
+    }
+    
+    return [_httpClient httpRequestWithMethod:method
+                                         path:path
+                                   parameters:parameters
+                                      success:success
+                                      failure:failure];
+}
+
+- (AFHTTPRequestOperation*)reqGetContractorListOfKindergarten:(NSInteger)kindergarten
+                                                 withCategory:(NSInteger)category
+                                                         from:(long long)fromId
+                                                           to:(long long)toId
+                                                         most:(NSInteger)most
+                                                      success:(SuccessResponseHandler)success
+                                                      failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kGetContractorListV4, @(kindergarten)];
+    NSString* method = @"GET";
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    
+    if (fromId >= 0) {
+        [parameters setObject:@(fromId) forKey:@"from"];
+    }
+    
+    if (toId >= 0) {
+        [parameters setObject:@(toId) forKey:@"to"];
+    }
+    
+    if (most >= 0) {
+        [parameters setObject:@(most) forKey:@"most"];
+    }
+    
+    if (category > 0) {
+        [parameters setObject:@(category) forKey:@"category"];
+    }
+    
+    return [_httpClient httpRequestWithMethod:method
+                                         path:path
+                                   parameters:parameters
+                                      success:success
+                                      failure:failure];
+}
+
+- (AFHTTPRequestOperation*)reqGetEnrollmentOfKindergarten:(NSInteger)kindergarten
+                                             withActivity:(NSInteger)activityId
+                                                  success:(SuccessResponseHandler)success
+                                                  failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kGetEnrollmentV4,
+                      @(kindergarten),
+                      @(activityId),
+                      _currentRelationship.parent.parentId];
+    NSString* method = @"GET";
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    
+    return [_httpClient httpRequestWithMethod:method
+                                         path:path
+                                   parameters:parameters
+                                      success:success
+                                      failure:failure];
+    
+}
+
+- (AFHTTPRequestOperation*)reqPostEnrollmentOfKindergarten:(NSInteger)kindergarten
+                                              withActivity:(CBActivityData*)activity
+                                                   success:(SuccessResponseHandler)success
+                                                   failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kPostEnrollmentV4,
+                      @(kindergarten),
+                      @(activity.uid)];
+    NSString* method = @"POST";
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    [parameters setObject:@(activity.agent_id) forKey:@"agent_id"];
+    [parameters setObject:@(activity.uid) forKey:@"activity_id"];
+    [parameters setObject:@(_currentRelationship.parent.schoolId) forKey:@"school_id"];
+    [parameters setObject:SAFE_STRING(_currentRelationship.parent.parentId) forKey:@"parent_id"];
+    [parameters setObject:SAFE_STRING(_currentRelationship.parent.phone) forKey:@"contact"];
+    [parameters setObject:SAFE_STRING(_currentRelationship.parent.name) forKey:@"name"];
     
     return [_httpClient httpRequestWithMethod:method
                                          path:path

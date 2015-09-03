@@ -103,11 +103,15 @@
     
     CGSize sz = [historyInfo.content sizeWithFont:[UIFont systemFontOfSize:14.0]
                                 constrainedToSize:CGSizeMake(kFixedWidth, 9999)];
-    yy += sz.height + 4;
+    if (historyInfo.content.length > 0) {
+        yy += sz.height + 4 + 4 + 4;
+    }
+    else {
+        yy += sz.height;
+    }
     yy += 128; // video
-    yy += 4;
-    yy += 28; // share button
-    
+    yy += 24; // share button
+
     return yy;
 }
 
@@ -424,7 +428,7 @@
     
     NSString* shareTitle = @"";
     if (shareTitle.length == 0) {
-        shareTitle = @"[成长经历]分享";
+        shareTitle = @"【幼乐宝】宝宝成长记录";
     }
     NSString* shareContent = self.historyInfo.content;
     NSString* shareImgPath = [[NSBundle mainBundle] pathForResource:@"v2-logo_weixin" ofType:@"png"];

@@ -63,7 +63,7 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 
@@ -97,32 +97,28 @@
     
     NSInteger index = 0;
     for (CSKuleMediaInfo* media in _historyInfo.medium) {
-        NSInteger vTag = 0x2000 + index;
-        UIImageView* imgView = (UIImageView*)[_viewImageContainer viewWithTag:vTag];
-        if (imgView == nil) {
-            imgView = [[UIImageView alloc] initWithFrame:CGRectNull];
-            imgView.tag = vTag;
-            [_viewImageContainer addSubview:imgView];
-        }
-        
-        imgView.backgroundColor = [UIColor clearColor];
-
         if ([media.type isEqualToString:@"image"]) {
+            NSInteger vTag = 0x2000 + index;
+            UIImageView* imgView = (UIImageView*)[_viewImageContainer viewWithTag:vTag];
+            if (imgView == nil) {
+                imgView = [[UIImageView alloc] initWithFrame:CGRectNull];
+                imgView.tag = vTag;
+                [_viewImageContainer addSubview:imgView];
+            }
+            
+            imgView.backgroundColor = [UIColor clearColor];
+            
             [imgView sd_setImageWithURL:[NSURL URLWithString:media.url]
-                    placeholderImage:[UIImage imageNamed:@"gallery.png"]];
+                       placeholderImage:[UIImage imageNamed:@"gallery.png"]];
+            
+            imgView.frame = CGRectMake((index%3)* (64+16), (index / 3) * (64+10), 64, 64);
+            imgView.hidden = NO;
+            
+            ++index;
         }
-//        else if([media.type isEqualToString:@"video"]) {
-//            imgView.backgroundColor = [UIColor blackColor];
-//            imgView.image = [UIImage imageNamed:@"video_icon.png"];
-//        }
         else {
             CSLog(@"%@", media.type);
         }
-        
-        imgView.frame = CGRectMake((index%3)* (64+16), (index / 3) * (64+10), 64, 64);
-        imgView.hidden = NO;
-        
-        ++index;
     }
     
     NSInteger kBaseTag = 0x2000 + index;
@@ -141,7 +137,7 @@
     }
     
     _viewImageContainer.frame = CGRectMake(70, 5+CGRectGetMaxY(self.labContent.frame), 230,
-                                           ((_historyInfo.medium.count + 2) / 3 ) * 70);
+                                           ((index + 2) / 3 ) * 70);
     
     
     
@@ -169,7 +165,7 @@
     
     self.imgPortrait.image = [UIImage imageNamed:@"chat_head_icon.png"];
     self.labName.text = senderName;
-
+    
     [gApp.engine reqGetSenderProfileOfKindergarten:gApp.engine.loginInfo.schoolId
                                         withSender:sender
                                           complete:^(id obj) {
@@ -204,9 +200,9 @@
                                                   [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
                                                   request.cachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
                                                   [self.imgPortrait setImageWithURLRequest:request
-                                                                     placeholderImage:[UIImage imageNamed:@"chat_head_icon.png"]
-                                                                              success:nil
-                                                                              failure:nil];
+                                                                          placeholderImage:[UIImage imageNamed:@"chat_head_icon.png"]
+                                                                                   success:nil
+                                                                                   failure:nil];
                                               }
                                               else {
                                                   self.imgPortrait.image = [UIImage imageNamed:@"chat_head_icon.png"];
@@ -214,7 +210,7 @@
                                               
                                               self.labName.text = senderName;
                                           }];
-
+    
 }
 
 + (CGFloat)calcHeight:(CSKuleHistoryInfo*)historyInfo width:(CGFloat)width{
@@ -264,13 +260,15 @@
             
             NSInteger index = 0;
             for (CSKuleMediaInfo* media in _historyInfo.medium) {
-                NSInteger vTag = 0x2000 + index;
-                UIImageView* imgView = (UIImageView*)[_viewImageContainer viewWithTag:vTag];
-                MJPhoto* photo = [MJPhoto new];
-                photo.srcImageView = imgView;
-                photo.url = [NSURL URLWithString:media.url];
-                
-                [photoList addObject:photo];
+                if ([media.type isEqualToString:@"image"]) {
+                    NSInteger vTag = 0x2000 + index;
+                    UIImageView* imgView = (UIImageView*)[_viewImageContainer viewWithTag:vTag];
+                    MJPhoto* photo = [MJPhoto new];
+                    photo.srcImageView = imgView;
+                    photo.url = [NSURL URLWithString:media.url];
+                    
+                    [photoList addObject:photo];
+                }
             }
             
             browser.photos = photoList;
@@ -318,12 +316,12 @@
     
     NSString* shareTitle = @"";
     if (shareTitle.length == 0) {
-        shareTitle = @"[成长经历]分享";
+        shareTitle = @"【幼乐宝】宝宝成长记录";
     }
     NSString* shareContent = self.historyInfo.content;
     NSString* shareImgPath = [[NSBundle mainBundle] pathForResource:@"v2-logo_weixin" ofType:@"png"];
     id<ISSCAttachment> shareImage = [ShareSDK imageWithPath:shareImgPath];
-
+    
     for (CSKuleMediaInfo* media in _historyInfo.medium) {
         if ([media.type isEqualToString:@"image"]) {
             shareImage = [ShareSDK imageWithUrl:media.url];

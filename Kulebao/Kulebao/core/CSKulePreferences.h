@@ -24,6 +24,8 @@
 
 @property (nonatomic, readonly) BOOL enabledTest;
 
+@property (nonatomic, assign) BOOL enabledCommercial;
+
 + (id)defaultPreferences;
 
 - (void)addHistoryAccount:(NSString*)account;

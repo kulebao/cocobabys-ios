@@ -22,6 +22,8 @@
 #import "CSKuleCCTVMainTableViewController.h"
 #import "CSKuleInterpreter.h"
 #import "CSKuleNewsDetailsViewController.h"
+#import "CBActivityData.h"
+#import "CBContractorData.h"
 
 @interface CSKuleMainViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
     UIImagePickerController* _imgPicker;
@@ -76,17 +78,13 @@
     [navigationBar setTitleTextAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:20], NSForegroundColorAttributeName:[UIColor whiteColor]}];
     navigationBar.tintColor = [UIColor whiteColor];
     
-    NSString* schoolName = [gApp.engine.loginInfo.schoolName trim];
-    if ([schoolName length] <=0) {
-        schoolName = @"学校简介";
-    }
-    [self.btnSchoolInfo setTitle:schoolName
-                        forState:UIControlStateNormal];
-    [self.btnClassInfo setTitle:@"默认班级"
-                       forState:UIControlStateNormal];
     self.labChildNick.text = nil;
     self.imgChildPortrait.layer.cornerRadius = 47.0;
     self.imgChildPortrait.clipsToBounds = YES;
+    
+    self.btnSchoolInfo.titleLabel.numberOfLines = 2;
+    self.btnSchoolInfo.titleLabel.minimumScaleFactor = 0.7;
+    self.btnSchoolInfo.titleLabel.textAlignment = NSTextAlignmentCenter;
     self.btnClassInfo.titleLabel.numberOfLines = 2;
     self.btnClassInfo.titleLabel.minimumScaleFactor = 0.7;
     self.btnClassInfo.titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -142,6 +140,8 @@
                      context:nil];
     
     [self performSelector:@selector(getRelationshipInfos) withObject:nil afterDelay:0];
+    
+    [self updateUI:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -296,6 +296,17 @@
     [[BaiduMobStat defaultStat] pageviewEndWithName:cName];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (!gApp.engine.preferences.enabledCommercial) {
+        [self performSelectorInBackground:@selector(reloadContractorItemDataList)
+                               withObject:nil];
+    }
+    else {
+        [self updateCommercialStatus];
+    }
+}
+
 #pragma mark - Segues
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"segue.aboutschool"]) {
@@ -324,6 +335,10 @@
 }
 
 #pragma mark - UI
+- (void)updateCommercialStatus {
+    [self updateUI:NO];
+}
+
 - (void)setupModules {
     if (_schoolInfo && [_schoolInfo hasProperty:@"hideVideo"]) {
         _moduleInfos = @[
@@ -420,30 +435,41 @@
 
 - (void)updateUI:(BOOL)reloadPortrait {
     CSKuleChildInfo* childInfo = gApp.engine.currentRelationship.child;
-    if (childInfo) {
-        CSLog(@"childInfo:%@", childInfo);
-        CSLog(@"parentInfo:%@", gApp.engine.currentRelationship.parent);
+    NSString* schoolName = [gApp.engine.loginInfo.schoolName trim];
+    if ([schoolName length] <=0) {
+        schoolName = @"学校简介";
+    }
+    [self.btnSchoolInfo setTitle:schoolName
+                        forState:UIControlStateNormal];
     
-        NSString* schoolName = [gApp.engine.loginInfo.schoolName trim];
-        if ([schoolName length] <=0) {
-            schoolName = @"学校简介";
-        }
-        [self.btnSchoolInfo setTitle:schoolName
-                            forState:UIControlStateNormal];
+    BOOL enabledCommercial = gApp.engine.preferences.enabledCommercial;
+    
+    if (childInfo) {
+        //CSLog(@"childInfo:%@", childInfo);
+        //CSLog(@"parentInfo:%@", gApp.engine.currentRelationship.parent);
         
         NSString* className = [childInfo.className trim];
         if ([className length] <=0) {
             className = @"默认班级";
         }
-        [self.btnClassInfo setTitle:className
-                            forState:UIControlStateNormal];
-        
-        
-        NSString* childInfoText = [NSString stringWithFormat:@"%@\r\n%@\r\n%@",
+
+        NSString* childInfoText = [NSString stringWithFormat:@"%@\r\n%@",
                                    childInfo.displayNick,
-                                   childInfo.displayAge,
-                                   [gApp.engine.loginInfo.schoolName trim]];
-    
+                                   childInfo.displayAge];
+        
+        if (enabledCommercial) {
+            childInfoText = [NSString stringWithFormat:@"%@\r\n%@\r\n%@",
+                             childInfo.displayNick,
+                             childInfo.displayAge,
+                             className];
+            [self.btnClassInfo setTitle:@"亲子优惠"
+                               forState:UIControlStateNormal];
+        }
+        else {
+            [self.btnClassInfo setTitle:className
+                               forState:UIControlStateNormal];
+        }
+        
         // 设置行间距
         NSMutableParagraphStyle* ps = [[NSMutableParagraphStyle alloc] init];
         ps.lineSpacing = 8;
@@ -469,7 +495,18 @@
                                            options:options];
     }
     else {
-        [gApp alert:@"没有宝宝信息。"];
+        self.labChildNick.text = nil;
+        self.imgChildPortrait.image = nil;
+        NSString* className = @"默认班级";
+        if (enabledCommercial) {
+            [self.btnClassInfo setTitle:@"亲子优惠"
+                               forState:UIControlStateNormal];
+        }
+        else {
+            [self.btnClassInfo setTitle:className
+                               forState:UIControlStateNormal];
+        }
+        //[gApp alert:@"没有宝宝信息。"];
     }
 }
 
@@ -885,13 +922,16 @@
 
 - (IBAction)onBtnClassInfoClicked:(id)sender {
 #if COCOBABYS_FEATURE_COMMERCIAL
-    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Commercial" bundle:nil];
-    
-    [self presentViewController:storyboard.instantiateInitialViewController
-                       animated:YES
-                     completion:^{
-                         
-                     }];
+    BOOL enabledCommercial = gApp.engine.preferences.enabledCommercial;
+    if (enabledCommercial) {
+        UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Commercial" bundle:nil];
+        
+        [self presentViewController:storyboard.instantiateInitialViewController
+                           animated:YES
+                         completion:^{
+                             
+                         }];
+    }
 #endif
 }
 
@@ -1060,6 +1100,59 @@
             ctrl.checkInOutLogInfo = info;
             [self.navigationController pushViewController:ctrl animated:YES];
         }
+    }
+}
+
+
+#pragma mark - Commercial
+- (void)reloadContractorItemDataList {
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+        if ([dataJson count] >= 5) {
+            [self performSelectorInBackground:@selector(reloadActivityItemDataList)
+                                   withObject:nil];
+        }
+        else {
+            CSLog(@"ContractorItemDataList count=%ld", [dataJson count]);
+        }
+    };
+    
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    };
+    
+    CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
+    if (currentChild) {
+        [gApp.engine reqGetContractorListOfKindergarten:gApp.engine.loginInfo.schoolId
+                                           withCategory:0
+                                                   from:-1
+                                                     to:-1
+                                                   most:-1
+                                                success:sucessHandler
+                                                failure:failureHandler];
+    }
+}
+
+- (void)reloadActivityItemDataList {
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+        if ([dataJson count] >= 5) {
+            gApp.engine.preferences.enabledCommercial = YES;
+            [self performSelectorOnMainThread:@selector(updateCommercialStatus) withObject:nil waitUntilDone:YES];
+        }
+        else {
+            CSLog(@"ActivityItemDataList count=%ld", [dataJson count]);
+        }
+    };
+    
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    };
+    
+    CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
+    if (currentChild) {
+        [gApp.engine reqGetActivityListOfKindergarten:gApp.engine.loginInfo.schoolId
+                                                 from:-1
+                                                   to:-1
+                                                 most:-1
+                                              success:sucessHandler
+                                              failure:failureHandler];
     }
 }
 

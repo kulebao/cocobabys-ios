@@ -78,6 +78,7 @@
     _toolbar.frame = CGRectMake(0, barY, self.view.frame.size.width, barHeight);
     _toolbar.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     _toolbar.photos = _photos;
+    [_toolbar setSaveBtnHidden:self.hidenSaveBtn];
     [self.view addSubview:_toolbar];
     
     [self updateTollbarState];

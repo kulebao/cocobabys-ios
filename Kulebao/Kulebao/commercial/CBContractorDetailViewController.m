@@ -143,14 +143,15 @@
             NSMutableArray* photoList = [NSMutableArray array];
             for (CBLogoData* logoData in _itemData.logos) {
                 MJPhoto* photo = [MJPhoto new];
-                photo.srcImageView = nil;
+                photo.srcImageView = self.imgIcon;
                 photo.url = [NSURL URLWithString:logoData.url];
                 [photoList addObject:photo];
             }
             
             browser.photos = photoList;
             browser.currentPhotoIndex = 0;
-            browser.hidenToolbar = YES;
+            browser.hidenToolbar = NO;
+            browser.hidenSaveBtn = YES;
             
             [browser show];
         }

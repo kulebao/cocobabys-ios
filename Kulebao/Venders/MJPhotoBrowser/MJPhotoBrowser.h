@@ -16,6 +16,7 @@
 @property (nonatomic, assign) NSUInteger currentPhotoIndex;
 
 @property (nonatomic, assign) BOOL hidenToolbar;
+@property (nonatomic, assign) BOOL hidenSaveBtn;
 
 // 显示
 - (void)show;

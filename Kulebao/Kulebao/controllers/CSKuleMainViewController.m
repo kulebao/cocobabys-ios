@@ -1127,7 +1127,7 @@
     CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
     if (currentChild) {
         [gApp.engine reqGetContractorListOfKindergarten:gApp.engine.loginInfo.schoolId
-                                           withCategory:0
+                                           withCategory:-1
                                                    from:-1
                                                      to:-1
                                                    most:-1

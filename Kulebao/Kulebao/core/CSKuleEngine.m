@@ -1871,7 +1871,7 @@
         [parameters setObject:@(most) forKey:@"most"];
     }
     
-    if (category > 0) {
+    if (category >= 0) {
         [parameters setObject:@(category) forKey:@"category"];
     }
     

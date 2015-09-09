@@ -71,11 +71,12 @@ typedef enum : NSUInteger {
     self.stepperMapZoom.minimumValue =  self.mapView.minZoomLevel;
     self.stepperMapZoom.maximumValue =  self.mapView.maxZoomLevel;
     
+    _viewportType = kViewportViewportTypeBus;
+    
     _counter = kMaxTimeCount;
     [self updateCountdownLabel];
     [self updateBusLocationLabel];
     [self doRefreshBusLocation];
-    
     
     _locService = gApp.engine.locService;
     [_locService startUserLocationService];
@@ -151,9 +152,11 @@ typedef enum : NSUInteger {
             [self.btnShowPosition setTitle:@"看自己的位置" forState:UIControlStateNormal];
             break;
         case kViewportViewportTypeBus:
-            _viewportType = kViewportViewportTypeUser;
             [self moveMapToUser];
-            [self.btnShowPosition setTitle:@"看校车的位置" forState:UIControlStateNormal];
+            if (self.busLocationInfo) {
+                _viewportType = kViewportViewportTypeUser;
+                [self.btnShowPosition setTitle:@"看校车的位置" forState:UIControlStateNormal];
+            }
             break;
         default:
             break;

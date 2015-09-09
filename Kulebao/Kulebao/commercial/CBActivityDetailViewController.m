@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *labAddress;
 @property (weak, nonatomic) IBOutlet UITextView *textDetail;
 @property (weak, nonatomic) IBOutlet UIButton *btnJoin;
+@property (weak, nonatomic) IBOutlet UILabel *labMorePics;
 
 @property (nonatomic, strong) UITapGestureRecognizer* tapGes;
 
@@ -40,6 +41,7 @@
     self.tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
     [self.imgIcon addGestureRecognizer:self.tapGes];
     self.imgIcon.userInteractionEnabled = YES;
+    self.labMorePics.text = nil;
     
     [self.btnJoin setBackgroundImage:[[UIImage imageNamed:@"v2-btn_gray.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)]
                             forState:UIControlStateDisabled];
@@ -115,6 +117,13 @@
     self.labPhone.text = self.itemData.contact;
     self.labAddress.text = self.itemData.address;
     self.textDetail.text = self.itemData.detail;
+    
+    if (logo) {
+        self.labMorePics.text = [NSString stringWithFormat:@"%ld张 >>", _itemData.logos.count];
+    }
+    else {
+        self.labMorePics.text = nil;
+    }
     
     [self updateJoinStatus];
 }

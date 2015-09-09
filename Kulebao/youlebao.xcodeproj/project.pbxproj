@@ -461,6 +461,10 @@
 		09CB08D519B01ABA00F57A07 /* voice_right_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09CB08D019B01ABA00F57A07 /* voice_right_2@2x.png */; };
 		09CB08D619B01ABA00F57A07 /* voice_right_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09CB08D119B01ABA00F57A07 /* voice_right_3@2x.png */; };
 		09D04E3918DFCB830093577D /* CSKuleCheckinLogListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09D04E3818DFCB830093577D /* CSKuleCheckinLogListViewController.m */; };
+		09D8590A1BA06B7000653613 /* v2-ios_btn_more.png in Resources */ = {isa = PBXBuildFile; fileRef = 09D859061BA06B7000653613 /* v2-ios_btn_more.png */; };
+		09D8590B1BA06B7000653613 /* v2-ios_btn_more@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09D859071BA06B7000653613 /* v2-ios_btn_more@2x.png */; };
+		09D8590C1BA06B7000653613 /* v2-ios-title-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 09D859081BA06B7000653613 /* v2-ios-title-bg.png */; };
+		09D8590D1BA06B7000653613 /* v2-ios-title-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09D859091BA06B7000653613 /* v2-ios-title-bg@2x.png */; };
 		09D9BBB71AEE933D009456ED /* v2-ack.png in Resources */ = {isa = PBXBuildFile; fileRef = 09D9BB481AEE933D009456ED /* v2-ack.png */; };
 		09D9BBB81AEE933D009456ED /* v2-ack@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09D9BB491AEE933D009456ED /* v2-ack@2x.png */; };
 		09D9BBB91AEE933D009456ED /* v2-acr.png in Resources */ = {isa = PBXBuildFile; fileRef = 09D9BB4A1AEE933D009456ED /* v2-acr.png */; };
@@ -1443,6 +1447,10 @@
 		09CB08D119B01ABA00F57A07 /* voice_right_3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "voice_right_3@2x.png"; sourceTree = "<group>"; };
 		09D04E3718DFCB830093577D /* CSKuleCheckinLogListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleCheckinLogListViewController.h; sourceTree = "<group>"; };
 		09D04E3818DFCB830093577D /* CSKuleCheckinLogListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleCheckinLogListViewController.m; sourceTree = "<group>"; };
+		09D859061BA06B7000653613 /* v2-ios_btn_more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-ios_btn_more.png"; sourceTree = "<group>"; };
+		09D859071BA06B7000653613 /* v2-ios_btn_more@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-ios_btn_more@2x.png"; sourceTree = "<group>"; };
+		09D859081BA06B7000653613 /* v2-ios-title-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-ios-title-bg.png"; sourceTree = "<group>"; };
+		09D859091BA06B7000653613 /* v2-ios-title-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-ios-title-bg@2x.png"; sourceTree = "<group>"; };
 		09D9BB481AEE933D009456ED /* v2-ack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-ack.png"; sourceTree = "<group>"; };
 		09D9BB491AEE933D009456ED /* v2-ack@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-ack@2x.png"; sourceTree = "<group>"; };
 		09D9BB4A1AEE933D009456ED /* v2-acr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-acr.png"; sourceTree = "<group>"; };
@@ -3174,6 +3182,10 @@
 		09EEBA2B1B863598006296F1 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				09D859061BA06B7000653613 /* v2-ios_btn_more.png */,
+				09D859071BA06B7000653613 /* v2-ios_btn_more@2x.png */,
+				09D859081BA06B7000653613 /* v2-ios-title-bg.png */,
+				09D859091BA06B7000653613 /* v2-ios-title-bg@2x.png */,
 				09EEBA2C1B8635B6006296F1 /* v2-go_btn.png */,
 				09EEBA2E1B8635B6006296F1 /* v2-pxjy_btn_0.png */,
 				09EEBA2F1B8635B6006296F1 /* v2-pxjy_btn_1.png */,
@@ -3578,6 +3590,7 @@
 				09F74C761997C4F3001555D0 /* btn_growth.png in Resources */,
 				09D9BBD21AEE933D009456ED /* v2-btn_go@2x.png in Resources */,
 				09D9BC0D1AEE933D009456ED /* v2-成长经历@2x.png in Resources */,
+				09D8590A1BA06B7000653613 /* v2-ios_btn_more.png in Resources */,
 				09F74CBC1997C4F3001555D0 /* star_grey.png in Resources */,
 				09142E2F18E2DE1B00E5848F /* arrow-right@2x.png in Resources */,
 				09434DC61B404DFA00DFDC33 /* mapapi.bundle in Resources */,
@@ -3697,6 +3710,7 @@
 				09D9BBFE1AEE933D009456ED /* v2-logo.png in Resources */,
 				09D9BBD01AEE933D009456ED /* v2-btn_day@2x.png in Resources */,
 				09D9BC1A1AEE933D009456ED /* v2-礼貌.png in Resources */,
+				09D8590B1BA06B7000653613 /* v2-ios_btn_more@2x.png in Resources */,
 				0934F07418BF5B0800E30ECA /* class-input-bg.png in Resources */,
 				09A9EBCD18C08C7D00D83119 /* titlebar-bg@2x.png in Resources */,
 				09F74C9D1997C4F3001555D0 /* left_arrow.png in Resources */,
@@ -3918,6 +3932,7 @@
 				09ED59A918CCA22700187585 /* titlebar-1-bg@2x.png in Resources */,
 				09F74CB51997C4F3001555D0 /* self_care.png in Resources */,
 				094F994F18E02A6100ACD196 /* btn-nav-right.png in Resources */,
+				09D8590C1BA06B7000653613 /* v2-ios-title-bg.png in Resources */,
 				09D9BBC61AEE933D009456ED /* v2-btn@2x.png in Resources */,
 				09FE1EDD19B5D53F0073D9D4 /* v3_5@2x.png in Resources */,
 				09F74CB31997C4F3001555D0 /* right_arrow.png in Resources */,
@@ -3936,6 +3951,7 @@
 				09D9BBD51AEE933D009456ED /* v2-btn_green.png in Resources */,
 				09F74CBE1997C4F3001555D0 /* swipe_calendar_title.png in Resources */,
 				0934F05218BF5B0800E30ECA /* avatar-bg.png in Resources */,
+				09D8590D1BA06B7000653613 /* v2-ios-title-bg@2x.png in Resources */,
 				09D9BBC71AEE933D009456ED /* v2-btn_back.png in Resources */,
 				0934F08D18BF5B0800E30ECA /* settings-icon-check-update@2x.png in Resources */,
 				09F74C931997C4F3001555D0 /* head_back.png in Resources */,

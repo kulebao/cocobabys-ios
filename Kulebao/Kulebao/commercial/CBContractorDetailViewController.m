@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *labPhone;
 @property (weak, nonatomic) IBOutlet UILabel *labAddress;
 @property (weak, nonatomic) IBOutlet UITextView *textDetail;
+@property (weak, nonatomic) IBOutlet UILabel *labMorePics;
 
 @property (nonatomic, strong) UITapGestureRecognizer* tapGes;
 
@@ -36,6 +37,7 @@
     self.tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
     [self.imgIcon addGestureRecognizer:self.tapGes];
     self.imgIcon.userInteractionEnabled = YES;
+    self.labMorePics.text = nil;
     
     [self reloadData];
 }
@@ -70,6 +72,13 @@
     self.labPhone.text = _itemData.contact;
     self.labAddress.text = _itemData.address;
     self.textDetail.text = _itemData.detail;
+    
+    if (logo) {
+        self.labMorePics.text = [NSString stringWithFormat:@"%ld张 >>", _itemData.logos.count];
+    }
+    else {
+        self.labMorePics.text = nil;
+    }
 }
 
 - (IBAction)onBtnCallClicked:(id)sender {

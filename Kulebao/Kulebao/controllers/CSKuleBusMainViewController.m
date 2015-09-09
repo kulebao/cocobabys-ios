@@ -247,19 +247,18 @@ typedef enum : NSUInteger {
 
 - (void)setBusLocationInfo:(CSKuleBusLocationInfo *)busLocationInfo {
     _busLocationInfo = busLocationInfo;
+    [self.mapView removeAnnotation:self.busAnnotation];
     
     if (_busLocationInfo) {
-        CLLocationCoordinate2D coor;
-        coor.longitude = _busLocationInfo.longitude;
-        coor.latitude = _busLocationInfo.latitude;
-        self.busAnnotation.coordinate = coor;
-        [self updateBusLocationLabel];
+        if (_busStatus == kBusStatusNormal) {
+            CLLocationCoordinate2D coor;
+            coor.longitude = _busLocationInfo.longitude;
+            coor.latitude = _busLocationInfo.latitude;
+            self.busAnnotation.coordinate = coor;
+            [self.mapView addAnnotation:self.busAnnotation];
+        }
         
-        [self.mapView removeAnnotation:self.busAnnotation];
-        [self.mapView addAnnotation:self.busAnnotation];
-    }
-    else {
-        [self.mapView removeAnnotation:self.busAnnotation];
+        [self updateBusLocationLabel];
     }
     
     [self updateDisLabel];
@@ -310,7 +309,7 @@ typedef enum : NSUInteger {
         self.labAddess.text = @"小孩已下车";
     }
     else if (_busLocationInfo) {
-        if (_busLocationInfo.address) {
+        if (_busLocationInfo.address.length > 0) {
             self.labAddess.text = [NSString stringWithFormat:@"校车位置: %@", _busLocationInfo.address];
         }
         else {

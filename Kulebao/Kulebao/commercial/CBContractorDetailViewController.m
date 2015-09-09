@@ -18,7 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *labTitle;
 @property (weak, nonatomic) IBOutlet UILabel *labPhone;
 @property (weak, nonatomic) IBOutlet UILabel *labAddress;
-@property (weak, nonatomic) IBOutlet UITextView *textDetail;
+@property (weak, nonatomic) IBOutlet UILabel *labDetail;
 @property (weak, nonatomic) IBOutlet UILabel *labMorePics;
 
 @property (nonatomic, strong) UITapGestureRecognizer* tapGes;
@@ -71,7 +71,7 @@
     self.labTitle.text = _itemData.title;
     self.labPhone.text = _itemData.contact;
     self.labAddress.text = _itemData.address;
-    self.textDetail.text = _itemData.detail;
+    self.labDetail.text = _itemData.detail;
     
     if (logo) {
         self.labMorePics.text = [NSString stringWithFormat:@"%ld张 >>", _itemData.logos.count];

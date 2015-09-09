@@ -20,7 +20,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *labPrice;
 @property (weak, nonatomic) IBOutlet UILabel *labPhone;
 @property (weak, nonatomic) IBOutlet UILabel *labAddress;
-@property (weak, nonatomic) IBOutlet UITextView *textDetail;
+@property (weak, nonatomic) IBOutlet UILabel *labDetail;
 @property (weak, nonatomic) IBOutlet UIButton *btnJoin;
 @property (weak, nonatomic) IBOutlet UILabel *labMorePics;
 
@@ -116,7 +116,7 @@
     
     self.labPhone.text = self.itemData.contact;
     self.labAddress.text = self.itemData.address;
-    self.textDetail.text = self.itemData.detail;
+    self.labDetail.text = self.itemData.detail;
     
     if (logo) {
         self.labMorePics.text = [NSString stringWithFormat:@"%ld张 >>", _itemData.logos.count];

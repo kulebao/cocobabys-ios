@@ -89,6 +89,9 @@
     self.btnClassInfo.titleLabel.minimumScaleFactor = 0.7;
     self.btnClassInfo.titleLabel.textAlignment = NSTextAlignmentCenter;
     
+    [self.btnSchoolInfo setTitle:@"学校简介"
+                        forState:UIControlStateNormal];
+    
     _nickFieldDelegate = [[CSTextFieldDelegate alloc] initWithType:kCSTextFieldDelegateNormal];
     _nickFieldDelegate.maxLength = kKuleNickMaxLength;
 
@@ -439,8 +442,10 @@
     if ([schoolName length] <=0) {
         schoolName = @"学校简介";
     }
+    /*
     [self.btnSchoolInfo setTitle:schoolName
                         forState:UIControlStateNormal];
+     */
     
     BOOL enabledCommercial = gApp.engine.preferences.enabledCommercial;
     

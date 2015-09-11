@@ -12,7 +12,7 @@
 #import "EntityMediaInfoHelper.h"
 #import "CSKuleHistoryVideoItemTableViewCell.h"
 #import "EGOCache.h"
-#import "NSString+XHMD5.h"
+#import "NSString+CSKit.h"
 
 @implementation EntityHistoryInfoHelper
 /*

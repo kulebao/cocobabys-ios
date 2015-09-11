@@ -8,7 +8,7 @@
 
 #import "CSKuleURLDownloader.h"
 #import "TSFileCache.h"
-#import "NSString+XHMD5.h"
+#import "NSString+CSKit.h"
 #import "amrFileCodec.h"
 #import "BDMultiDownloader.h"
 

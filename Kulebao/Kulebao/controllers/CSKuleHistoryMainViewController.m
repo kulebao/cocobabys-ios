@@ -15,7 +15,7 @@
 #import "UIImageView+WebCache.h"
 #import "CSContentEditorViewController.h"
 #import "TSFileCache.h"
-#import "NSString+XHMD5.h"
+#import "NSString+CSKit.h"
 #import "EGOCache.h"
 #import "CSKuleHistoryVideoItemTableViewCell.h"
 #import "SDImageCache.h"

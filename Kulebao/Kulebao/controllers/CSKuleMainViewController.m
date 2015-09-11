@@ -1079,7 +1079,6 @@
                                                   tappedBlock:^(ALAlertBanner *alertBanner) {
                                                       [alertBanner hide];
                                                   }];
-    
     banner.secondsToShow = 2;
     banner.showAnimationDuration = 0.3;
     banner.hideAnimationDuration = 0.3;

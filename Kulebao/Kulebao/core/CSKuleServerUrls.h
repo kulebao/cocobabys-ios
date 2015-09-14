@@ -152,9 +152,10 @@
 #define kGetShareTokenV3    @"/api/v3/kindergarten/%@/history/%@/record/%@/share"
 
 #pragma mark - Commercial
-#define kGetActivityListV4          @"/api/v4/kindergarten/%@/activity"
-#define kGetContractorListV4        @"/api/v4/kindergarten/%@/contractor"
-#define kPostEnrollmentV4           @"/api/v4/kindergarten/%@/activity/%@/enrollment"
-#define kGetEnrollmentV4            @"/api/v4/kindergarten/%@/activity/%@/parent/%@/enrollment"
+#define kGetActivityListV4              @"/api/v4/kindergarten/%@/activity"
+#define kGetContractorListV4            @"/api/v4/kindergarten/%@/contractor"
+#define kGetContractorActivityListV4    @"/api/v4/kindergarten/%@/contractor/%@/activity"
+#define kPostEnrollmentV4               @"/api/v4/kindergarten/%@/activity/%@/enrollment"
+#define kGetEnrollmentV4                @"/api/v4/kindergarten/%@/activity/%@/parent/%@/enrollment"
 
 #endif

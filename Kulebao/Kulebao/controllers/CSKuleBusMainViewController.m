@@ -71,11 +71,12 @@ typedef enum : NSUInteger {
     self.stepperMapZoom.minimumValue =  self.mapView.minZoomLevel;
     self.stepperMapZoom.maximumValue =  self.mapView.maxZoomLevel;
     
+    _viewportType = kViewportViewportTypeBus;
+    
     _counter = kMaxTimeCount;
     [self updateCountdownLabel];
     [self updateBusLocationLabel];
     [self doRefreshBusLocation];
-    
     
     _locService = gApp.engine.locService;
     [_locService startUserLocationService];
@@ -119,6 +120,19 @@ typedef enum : NSUInteger {
                                                         repeats:YES];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    NSString* cName = [NSString stringWithFormat:@"%@",  self.navigationItem.title, nil];
+    [[BaiduMobStat defaultStat] pageviewStartWithName:cName];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    NSString* cName = [NSString stringWithFormat:@"%@",  self.navigationItem.title, nil];
+    [[BaiduMobStat defaultStat] pageviewEndWithName:cName];
+}
+
 /*
 #pragma mark - Navigation
 
@@ -151,9 +165,11 @@ typedef enum : NSUInteger {
             [self.btnShowPosition setTitle:@"看自己的位置" forState:UIControlStateNormal];
             break;
         case kViewportViewportTypeBus:
-            _viewportType = kViewportViewportTypeUser;
             [self moveMapToUser];
-            [self.btnShowPosition setTitle:@"看校车的位置" forState:UIControlStateNormal];
+            if (self.busLocationInfo) {
+                _viewportType = kViewportViewportTypeUser;
+                [self.btnShowPosition setTitle:@"看校车的位置" forState:UIControlStateNormal];
+            }
             break;
         default:
             break;
@@ -247,19 +263,18 @@ typedef enum : NSUInteger {
 
 - (void)setBusLocationInfo:(CSKuleBusLocationInfo *)busLocationInfo {
     _busLocationInfo = busLocationInfo;
+    [self.mapView removeAnnotation:self.busAnnotation];
     
     if (_busLocationInfo) {
-        CLLocationCoordinate2D coor;
-        coor.longitude = _busLocationInfo.longitude;
-        coor.latitude = _busLocationInfo.latitude;
-        self.busAnnotation.coordinate = coor;
-        [self updateBusLocationLabel];
+        if (_busStatus == kBusStatusNormal) {
+            CLLocationCoordinate2D coor;
+            coor.longitude = _busLocationInfo.longitude;
+            coor.latitude = _busLocationInfo.latitude;
+            self.busAnnotation.coordinate = coor;
+            [self.mapView addAnnotation:self.busAnnotation];
+        }
         
-        [self.mapView removeAnnotation:self.busAnnotation];
-        [self.mapView addAnnotation:self.busAnnotation];
-    }
-    else {
-        [self.mapView removeAnnotation:self.busAnnotation];
+        [self updateBusLocationLabel];
     }
     
     [self updateDisLabel];
@@ -310,7 +325,7 @@ typedef enum : NSUInteger {
         self.labAddess.text = @"小孩已下车";
     }
     else if (_busLocationInfo) {
-        if (_busLocationInfo.address) {
+        if (_busLocationInfo.address.length > 0) {
             self.labAddess.text = [NSString stringWithFormat:@"校车位置: %@", _busLocationInfo.address];
         }
         else {

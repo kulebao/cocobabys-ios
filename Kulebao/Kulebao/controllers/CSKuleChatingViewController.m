@@ -18,7 +18,7 @@
 #import "amrFileCodec.h"
 #import "CSKuleChatingTableCell.h"
 #import "TSFileCache.h"
-#import "NSString+XHMD5.h"
+#import "NSString+CSKit.h"
 #import "CSKuleURLDownloader.h"
 
 @interface CSKuleChatingViewController () <UITableViewDataSource, UITableViewDelegate, PullTableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CSKuleChatingEditorViewControllerDelegate, AVAudioPlayerDelegate> {

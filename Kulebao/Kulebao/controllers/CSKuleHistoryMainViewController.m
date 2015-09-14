@@ -15,7 +15,7 @@
 #import "UIImageView+WebCache.h"
 #import "CSContentEditorViewController.h"
 #import "TSFileCache.h"
-#import "NSString+XHMD5.h"
+#import "NSString+CSKit.h"
 #import "EGOCache.h"
 #import "CSKuleHistoryVideoItemTableViewCell.h"
 #import "SDImageCache.h"
@@ -75,6 +75,15 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self doReloadHistory];
+    
+    NSString* cName = [NSString stringWithFormat:@"%@",  self.navigationItem.title, nil];
+    [[BaiduMobStat defaultStat] pageviewStartWithName:cName];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    NSString* cName = [NSString stringWithFormat:@"%@",  self.navigationItem.title, nil];
+    [[BaiduMobStat defaultStat] pageviewEndWithName:cName];
 }
 
 - (void)didReceiveMemoryWarning

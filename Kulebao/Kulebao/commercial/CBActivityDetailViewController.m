@@ -20,7 +20,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *labPrice;
 @property (weak, nonatomic) IBOutlet UILabel *labPhone;
 @property (weak, nonatomic) IBOutlet UILabel *labAddress;
-@property (weak, nonatomic) IBOutlet UITextView *textDetail;
+@property (weak, nonatomic) IBOutlet UILabel *labDetail;
 @property (weak, nonatomic) IBOutlet UIButton *btnJoin;
 @property (weak, nonatomic) IBOutlet UILabel *labMorePics;
 
@@ -56,6 +56,17 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [[BaiduMobStat defaultStat] pageviewStartWithName:@"亲子优惠活动详情"];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [[BaiduMobStat defaultStat] pageviewEndWithName:@"亲子优惠活动详情"];
 }
 
 /*
@@ -116,7 +127,14 @@
     
     self.labPhone.text = self.itemData.contact;
     self.labAddress.text = self.itemData.address;
-    self.textDetail.text = self.itemData.detail;
+    self.labDetail.text = self.itemData.detail;
+    
+    if (logo) {
+        self.labMorePics.text = [NSString stringWithFormat:@"%ld张 >>", _itemData.logos.count];
+    }
+    else {
+        self.labMorePics.text = nil;
+    }
     
     if (logo) {
         self.labMorePics.text = [NSString stringWithFormat:@"%ld张 >>", _itemData.logos.count];
@@ -131,7 +149,7 @@
 - (IBAction)onBtnCallClicked:(id)sender {
     BOOL ok = [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", self.itemData.contact]]];
     if (!ok && self.itemData.contact.length > 0) {
-        [gApp alert:@"本设备不支持拨打电话"];
+        [gApp alert:@"拨打电话失败"];
     }
 }
 
@@ -253,14 +271,15 @@
             NSMutableArray* photoList = [NSMutableArray array];
             for (CBLogoData* logoData in _itemData.logos) {
                 MJPhoto* photo = [MJPhoto new];
-                photo.srcImageView = nil;
+                photo.srcImageView = self.imgIcon;
                 photo.url = [NSURL URLWithString:logoData.url];
                 [photoList addObject:photo];
             }
             
             browser.photos = photoList;
             browser.currentPhotoIndex = 0;
-            browser.hidenToolbar = YES;
+            browser.hidenToolbar = NO;
+            browser.hidenSaveBtn = YES;
             
             [browser show];
         }

@@ -72,6 +72,19 @@ static NSInteger kRetryInterval = 120; // 秒
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    NSString* cName = [NSString stringWithFormat:@"%@",  self.navigationItem.title, nil];
+    [[BaiduMobStat defaultStat] pageviewStartWithName:cName];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    NSString* cName = [NSString stringWithFormat:@"%@",  self.navigationItem.title, nil];
+    [[BaiduMobStat defaultStat] pageviewEndWithName:cName];
+}
+
 /*
 #pragma mark - Navigation
 

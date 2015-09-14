@@ -83,7 +83,7 @@
 - (void)onBtnCallPhoneClicked:(id)sender {
     BOOL ok = [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", _schoolInfo.phone]]];
     if (!ok && _schoolInfo.phone) {
-        [gApp alert:@"本设备不支持拨打电话"];
+        [gApp alert:@"拨打电话失败"];
     }
 }
 

@@ -298,6 +298,14 @@
                                                       success:(SuccessResponseHandler)success
                                                       failure:(FailureResponseHandler)failure;
 
+- (AFHTTPRequestOperation*)reqGetActivityListOfKindergarten:(NSInteger)kindergarten
+                                           withContractorId:(NSInteger)contractorId
+                                                       from:(long long)fromId
+                                                         to:(long long)toId
+                                                       most:(NSInteger)most
+                                                    success:(SuccessResponseHandler)success
+                                                    failure:(FailureResponseHandler)failure;
+
 - (AFHTTPRequestOperation*)reqGetEnrollmentOfKindergarten:(NSInteger)kindergarten
                                              withActivity:(NSInteger)activityId
                                                   success:(SuccessResponseHandler)success

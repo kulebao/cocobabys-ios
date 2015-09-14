@@ -142,7 +142,7 @@
 - (IBAction)onBtnCallClicked:(id)sender {
     BOOL ok = [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", self.itemData.contact]]];
     if (!ok && self.itemData.contact.length > 0) {
-        [gApp alert:@"本设备不支持拨打电话"];
+        [gApp alert:@"拨打电话失败"];
     }
 }
 

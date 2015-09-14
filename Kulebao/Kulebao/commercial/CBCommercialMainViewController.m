@@ -11,6 +11,7 @@
 #import "CBContractorMainViewController.h"
 #import "CBActivityDetailViewController.h"
 #import "CBContractorDetailViewController.h"
+#import "CSAppDelegate.h"
 
 @interface CBCommercialMainViewController ()
 
@@ -62,6 +63,17 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+
+    [[BaiduMobStat defaultStat] pageviewStartWithName:@"亲子优惠"];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [[BaiduMobStat defaultStat] pageviewEndWithName:@"亲子优惠"];
 }
 
 - (CBActivityMainViewController*) activityMainViewCtrl {

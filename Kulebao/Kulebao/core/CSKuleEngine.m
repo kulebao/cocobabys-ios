@@ -324,7 +324,11 @@
 - (void)setupBaiduMobStat {
     BaiduMobStat* statTracker = [BaiduMobStat defaultStat];
     statTracker.enableExceptionLog = YES; // 是否允许截获并发送崩溃信息，请设置YES或者NO
+#if COCOBABYS_DEV_MODEL
     statTracker.channelId = @"ios-dev";//设置您的app的发布渠道
+#else
+    statTracker.channelId = @"ios-appstore";//设置您的app的发布渠道
+#endif
     statTracker.logStrategy = BaiduMobStatLogStrategyAppLaunch;//根据开发者设定的时间间隔接口发送 也可以使用启动时发送策略
     //statTracker.enableDebugOn = YES; //打开调试模式，发布时请去除此行代码或者设置为False即可。
     statTracker.logSendInterval = 1; //为1时表示发送日志的时间间隔为1小时,只有statTracker.logStrategy = BaiduMobStatLogStrategyAppLaunch这时才生效。

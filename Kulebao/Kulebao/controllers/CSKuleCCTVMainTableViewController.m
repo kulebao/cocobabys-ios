@@ -12,6 +12,7 @@
 #import "CSAppDelegate.h"
 #import "HMPlayerView.h"
 #import "CSKuleCCTVItemTableViewCell.h"
+#import "BaiduMobStat.h"
 
 @interface CSKuleCCTVMainTableViewController () {
     NSMutableArray* _deviceList;
@@ -74,6 +75,15 @@
     [super viewDidAppear:animated];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:animated];
     [self setNeedsStatusBarAppearanceUpdate];
+    
+    NSString* cName = [NSString stringWithFormat:@"%@",  self.navigationItem.title, nil];
+    [[BaiduMobStat defaultStat] pageviewStartWithName:cName];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    NSString* cName = [NSString stringWithFormat:@"%@",  self.navigationItem.title, nil];
+    [[BaiduMobStat defaultStat] pageviewEndWithName:cName];
 }
 
 - (void)didReceiveMemoryWarning

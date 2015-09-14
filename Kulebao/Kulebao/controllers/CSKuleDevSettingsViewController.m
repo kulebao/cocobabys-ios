@@ -8,6 +8,7 @@
 
 #import "CSKuleDevSettingsViewController.h"
 #import "CSKulePreferences.h"
+#import "CSAppDelegate.h"
 
 @interface CSKuleDevSettingsViewController () <UIActionSheetDelegate, UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *labServerName;
@@ -34,6 +35,20 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    NSString* cName = [NSString stringWithFormat:@"%@",  self.navigationItem.title, nil];
+    [[BaiduMobStat defaultStat] pageviewStartWithName:cName];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    NSString* cName = [NSString stringWithFormat:@"%@",  self.navigationItem.title, nil];
+    [[BaiduMobStat defaultStat] pageviewEndWithName:cName];
+}
+
 
 /*
 #pragma mark - Navigation

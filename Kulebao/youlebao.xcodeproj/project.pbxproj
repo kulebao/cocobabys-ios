@@ -858,6 +858,7 @@
 		09443A1A1B4A685900EE5986 /* v2-接送消息.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-接送消息.png"; sourceTree = "<group>"; };
 		094591201B3F05D300EF4458 /* BPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPush.h; sourceTree = "<group>"; };
 		094591211B3F05D300EF4458 /* libBPush.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBPush.a; sourceTree = "<group>"; };
+		094715601BAAC0D70021B2FF /* hm_sdk_vpu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hm_sdk_vpu.h; sourceTree = "<group>"; };
 		0948079B1B46B61700FB74B4 /* v2-bus-pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-bus-pin.png"; sourceTree = "<group>"; };
 		0948079C1B46B61700FB74B4 /* v2-bus-pin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-bus-pin@2x.png"; sourceTree = "<group>"; };
 		094D909B1B6A7E310045D0AB /* v2-app-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-app-icon.png"; sourceTree = "<group>"; };
@@ -1747,6 +1748,7 @@
 			children = (
 				090FC10F199B3FC300C3A31A /* HMplayer */,
 				093C20EE199915B400A12F1A /* hm_sdk.h */,
+				094715601BAAC0D70021B2FF /* hm_sdk_vpu.h */,
 				093C20EF199915B400A12F1A /* libHM_hmsdk.a */,
 				093C20F0199915B400A12F1A /* ShowDelay.h */,
 			);

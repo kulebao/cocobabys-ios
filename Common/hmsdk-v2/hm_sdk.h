@@ -1304,7 +1304,6 @@ typedef struct _LAN_DEVICE_RESET_IP
 } LAN_DEVICE_RESET_IP, *P_LAN_DEVICE_RESET_IP;
 
 typedef void (hm_call * cb_util_lan_device_search) (user_data data, LAN_DEVICE_SEARCH_RES ldsr, hm_result result);
-
 typedef struct _LAN_DEVICE_SEARCH_PARAM_INL
 {
     LAN_SEARCH_MODE  search_mode;
@@ -1601,7 +1600,6 @@ extern "C" {
     
     //	视频与图片下载
     HMCAPI hm_result hm_pu_open_get_file(user_id id, P_GET_FILE_PARAM param, P_GET_FILE_RES res, get_file_handle* handle);
-    HMCAPI hm_result hm_pu_set_get_file_callback(get_file_handle handle, cb_pu_data cb, user_data data);
     HMCAPI hm_result hm_pu_start_get_file(get_file_handle handle);
     HMCAPI hm_result hm_pu_cancel_get_file(get_file_handle handle);
     HMCAPI hm_result hm_pu_close_get_file(get_file_handle handle);
@@ -1682,6 +1680,7 @@ extern "C" {
     HMCAPI hm_result hm_server_get_firmware_version(node_handle device, cpchar* ver);
     HMCAPI hm_result hm_server_get_device_upgrade(node_handle device, int32* ug);
     HMCAPI hm_result hm_server_get_device_description(node_handle device, cpchar* desc);
+    HMCAPI hm_result hm_server_get_device_policy(node_handle device, int32* policy);
     HMCAPI hm_result hm_server_get_node_name(node_handle node, cpchar* name);
     HMCAPI hm_result hm_server_get_last_update(node_handle device, uint64* update);
     HMCAPI hm_result hm_server_update_device(server_id server, node_handle device);

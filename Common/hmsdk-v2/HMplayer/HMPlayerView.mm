@@ -19,6 +19,7 @@
 @implementation HMPlayerView
 @synthesize IsRunning;
 @synthesize videoLock = _videoLick;
+@synthesize curNode = my_node;
 
 NSArray* videoDataArr = nil;
 NSArray* audioDataArr = nil;
@@ -149,6 +150,12 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
     [self performSelectorInBackground:@selector(CloseAllForLogOutDev) withObject:nil];
 }
 
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self ConnectVideoBynode:my_node];
+}
+
+
 - (BOOL)shouldAutorotate {
     return NO;
 }
@@ -169,10 +176,7 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
     // Dispose of any resources that can be recreated.
 }
 
-- (void)ConnectVideoBynode:(node_handle)node
-{
-    my_node = node;
-    
+- (void)ConnectVideoBynode:(node_handle)node {
     NSString* name;
     cpchar cpname;
     hm_server_get_node_name(my_node,&cpname);

@@ -236,6 +236,7 @@
     serverinfo.user = account;
     serverinfo.password = password;
     serverinfo.keep_time = 60;
+//    serverinfo.user = "3132dba08c7d0861dadde3b7";
     
     /*
      账号为 cocbaby  , 密码为 13880498549
@@ -245,7 +246,7 @@
     //    serverinfo.user = "2222";
     //    serverinfo.password = "6yWw2D";
     
-    char err[128] = {0};
+    char err[512] = {0};
     
     [gApp waitingAlert:@"连接服务器"];
     // step 1: Connect the server.
@@ -256,7 +257,7 @@
     }
     
     server_id serverId = NULL;
-    result =  hm_server_connect(&serverinfo, &serverId, err, 128);
+    result =  hm_server_connect(&serverinfo, &serverId, err, 512);
     if (result == HMEC_OK) {
         gApp.engine.hmServerId = serverId;
         [self performSelector:@selector(hmGetDeviceList) withObject:nil afterDelay:0];

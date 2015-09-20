@@ -227,15 +227,16 @@ static NSInteger kRetryInterval = 120; // 秒
     
     [gApp waitingAlert:@"正在发送请求..."];
 #if COCOBABYS_USE_TEST_ACCOUNT
+    dispatch_time_t then = dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC);
  #ifdef DEBUG
     if ([authCode isEqualToString:@"235235"]) {
-        dispatch_after(1000, dispatch_get_main_queue(), ^{
+        dispatch_after(then, dispatch_get_main_queue(), ^{
             sucessHandler(nil, @{@"error_code":@(0), @"access_token":@"1393763572585"});
         });
     }
  #else
     if ([self.mobile isEqualToString:@"18782242007"] && [authCode isEqualToString:@"235235"]) {
-        dispatch_after(1000, dispatch_get_main_queue(), ^{
+        dispatch_after(then, dispatch_get_main_queue(), ^{
             sucessHandler(nil, @{@"error_code":@(0), @"access_token":@"1393763572585"});
         });
     }

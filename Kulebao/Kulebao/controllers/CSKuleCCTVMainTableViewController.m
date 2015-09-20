@@ -236,15 +236,6 @@
     serverinfo.user = account;
     serverinfo.password = password;
     serverinfo.keep_time = 60;
-//    serverinfo.user = "3132dba08c7d0861dadde3b7";
-    
-    /*
-     账号为 cocbaby  , 密码为 13880498549
-     测试账号：2222   测试密码：6yWw2D
-     test123 / 123456
-     */
-    //    serverinfo.user = "2222";
-    //    serverinfo.password = "6yWw2D";
     
     char err[512] = {0};
     

@@ -14,7 +14,7 @@
 #import "CSKuleCCTVItemTableViewCell.h"
 #import "BaiduMobStat.h"
 
-@interface CSKuleCCTVMainTableViewController () {
+@interface CSKuleCCTVMainTableViewController () <UIAlertViewDelegate> {
     NSMutableArray* _deviceList;
     P_USER_INFO _pUserInfo;
     
@@ -255,8 +255,14 @@
         
     }else{
         gApp.engine.hmServerId = NULL;
+        /*
         NSString* errorString = [[NSString alloc] initWithCString:err encoding:NSUTF8StringEncoding];
         [gApp alert:[NSString stringWithFormat:@"连接失败(%d): %@", result, errorString]];
+         */
+        [gApp hideAlert];
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"登录视频服务器失败，请稍后重试！" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确认", nil];
+        alert.tag = 1001;
+        [alert show];
     }
     
     return result;
@@ -337,6 +343,13 @@
     
     [self.tableView reloadData];
     return result;
+}
+
+#pragma mark - UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == 1001) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 @end

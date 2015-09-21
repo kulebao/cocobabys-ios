@@ -83,8 +83,6 @@
 
 - (void)addObjcTOVideoDataArray:(char*)data Len:(NSInteger)len;
 - (void)addObjcTOAudioDataArray:(char*)data Len:(NSInteger)len;
-
-//- (void)ConnectVideoBynode:(node_handle)node;
 - (void)setNavTitle:(NSString *)title;
 
 - (void)DirectConnectVideo:(NSArray*)array;

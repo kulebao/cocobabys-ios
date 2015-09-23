@@ -14,7 +14,7 @@
 #import "CSKuleCCTVItemTableViewCell.h"
 #import "BaiduMobStat.h"
 
-@interface CSKuleCCTVMainTableViewController () {
+@interface CSKuleCCTVMainTableViewController () <UIAlertViewDelegate> {
     NSMutableArray* _deviceList;
     P_USER_INFO _pUserInfo;
     
@@ -135,29 +135,33 @@
     
     node_handle cur_node = [deviceInfo[@"node_handle"] pointerValue];
     
-    bool isOnline = false;
-    hm_server_is_online(cur_node, &isOnline);
-    if (!isOnline) {
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil
-                                                        message:@"设备不在线"
-                                                       delegate:nil
-                                              cancelButtonTitle:nil
-                                              otherButtonTitles:@"确定", nil];
-        [alert show];
+    NODE_TYPE_INFO type;
+    hm_server_get_node_type(cur_node,&type);
+    
+    if(type == HME_NT_DEVICE) {
+        bool isOnline = false;
+        hm_server_is_online(cur_node, &isOnline);
+        if (!isOnline) {
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil
+                                                            message:@"设备不在线"
+                                                           delegate:nil
+                                                  cancelButtonTitle:nil
+                                                  otherButtonTitles:@"确定", nil];
+            [alert show];
+        }
+        else {
+            HMPlayerView* playerView = [[HMPlayerView alloc] initWithNibName:@"HMPlayerView" bundle:nil];
+            playerView.isTrail = self.isTrail;
+            playerView.curNode = cur_node;
+            
+            [self presentViewController:playerView
+                               animated:YES
+                             completion:^{
+                             }];
+        }
     }
     else {
-        HMPlayerView* playerView = [[HMPlayerView alloc] initWithNibName:@"HMPlayerView" bundle:nil];
-        playerView.isTrail = self.isTrail;
-        //[self.navigationController pushViewController:playerView animated:YES];
-        
-        [self presentViewController:playerView animated:YES
-                         completion:^{
-                             [playerView ConnectVideoBynode:cur_node];
-                             //[playerView setNavTitle:deviceInfo[@"name"]];
-                         }];
-        
-        
-        //[self performSegueWithIdentifier:@"segue.cctv.play" sender:deviceInfo];
+        CSLog(@"不支持的NODE_TYPE_INFO(%d)", type);
     }
 }
 /*
@@ -221,7 +225,7 @@
     serverinfo.ip = "www.seebaobei.com";
     serverinfo.port = 80;
     serverinfo.hard_ver = "iPhone";
-    serverinfo.soft_ver = "1.3";
+    serverinfo.soft_ver = "v2.4.x";
     serverinfo.plat_type = "ios";
 
     char account[128] = {0};
@@ -231,16 +235,9 @@
     [_videoMember.password getCString:password maxLength:128 encoding:NSUTF8StringEncoding];
     serverinfo.user = account;
     serverinfo.password = password;
+    serverinfo.keep_time = 60;
     
-    /*
-     账号为 cocbaby  , 密码为 13880498549
-     测试账号：2222   测试密码：6yWw2D
-     test123 / 123456
-     */
-    //    serverinfo.user = "2222";
-    //    serverinfo.password = "6yWw2D";
-    
-    char err[128] = {0};
+    char err[512] = {0};
     
     [gApp waitingAlert:@"连接服务器"];
     // step 1: Connect the server.
@@ -251,86 +248,108 @@
     }
     
     server_id serverId = NULL;
-    result =  hm_server_connect(&serverinfo, &serverId, err, 128);
-    gApp.engine.hmServerId = serverId;
-    
+    result =  hm_server_connect(&serverinfo, &serverId, err, 512);
     if (result == HMEC_OK) {
+        gApp.engine.hmServerId = serverId;
         [self performSelector:@selector(hmGetDeviceList) withObject:nil afterDelay:0];
         
     }else{
+        gApp.engine.hmServerId = NULL;
+        /*
         NSString* errorString = [[NSString alloc] initWithCString:err encoding:NSUTF8StringEncoding];
         [gApp alert:[NSString stringWithFormat:@"连接失败(%d): %@", result, errorString]];
+         */
+        [gApp hideAlert];
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"登录视频服务器失败，请稍后重试！" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确认", nil];
+        alert.tag = 1001;
+        [alert show];
     }
     
     return result;
 }
 
 - (hm_result)hmGetDeviceList {
-    hm_result result = HMEC_OK;
     [gApp waitingAlert:@"获取列表"];
-    result = hm_server_get_device_list(gApp.engine.hmServerId);
-    
+    hm_result result = hm_server_get_device_list(gApp.engine.hmServerId);
     if (result == HMEC_OK) {
-        // step 2: Get user information.
-        result = hm_server_get_user_info(gApp.engine.hmServerId, &_pUserInfo);
-        if (result == HMEC_OK) {
-            // step 3: Get transfer service.
-            if (_pUserInfo->use_transfer_service != HMEC_OK) {
-                [gApp waitingAlert:@"获取穿透信息"];
-                result = hm_server_get_transfer_info(gApp.engine.hmServerId);
-            }
-            
-            if (result == HMEC_OK) {
-                [gApp waitingAlert:@"获取列表"];
-                
-                if (_treeHandle!=NULL) {
-                    hm_server_release_tree(_treeHandle);
-                    _treeHandle = NULL;
+        //getTime
+        uint64 time;
+        hm_server_get_time(gApp.engine.hmServerId, &time);
+        if(time >= HMEC_OK) {
+            // step 2: Get user information.
+            result = hm_server_get_user_info(gApp.engine.hmServerId, &_pUserInfo);
+            if (result == HMEC_OK && _pUserInfo != NULL) {
+                // step 3: Get transfer service.
+                if (_pUserInfo->use_transfer_service != HMEC_OK) {
+                    [gApp waitingAlert:@"获取穿透信息"];
+                    result = hm_server_get_transfer_info(gApp.engine.hmServerId);
+                    if (result != HMEC_OK) {
+                        CSLog(@"获取穿透信息失败");
+                    }
+                    [gApp hideAlert];
                 }
                 
-                result = hm_server_get_tree(gApp.engine.hmServerId, &_treeHandle);
-                result = hm_server_get_root(_treeHandle, &_rootNodeHandle);
-                
-                int32 deviceCount = 0;
-                hm_server_get_all_device_count(_treeHandle, &deviceCount);
-                _deviceList = [NSMutableArray arrayWithCapacity:deviceCount];
-                
-                if (deviceCount == 0) {
-                    [gApp alert:@"没有设备"];
-                }
-                else {
-                    [gApp alert:@"获取成功"];
-                    for (int32 i =0; i<deviceCount; i++) {
-                        node_handle node = NULL;
-                        hm_server_get_all_device_at(_treeHandle, i, &node);
-                        if (node != NULL) {
-                            cpchar name = NULL;
-                            hm_server_get_node_name(node, &name);
-                            
-                            CSLog(@"device tree node %d: name:%@", i, @(name));
-                            
-                            [_deviceList addObject:@{@"name": @(name),
-                                                     @"node_handle": [NSValue valueWithPointer:node]
-                                                     }];
+                if (result == HMEC_OK) {
+                    [gApp waitingAlert:@"获取列表"];
+                    
+                    if (_treeHandle!=NULL) {
+                        hm_server_release_tree(_treeHandle);
+                        _treeHandle = NULL;
+                    }
+                    
+                    result = hm_server_get_tree(gApp.engine.hmServerId, &_treeHandle);
+                    result = hm_server_get_root(_treeHandle, &_rootNodeHandle);
+                    
+                    int32 deviceCount = 0;
+                    hm_server_get_all_device_count(_treeHandle, &deviceCount);
+                    _deviceList = [NSMutableArray arrayWithCapacity:deviceCount];
+                    
+                    if (deviceCount == 0) {
+                        [gApp alert:@"没有设备"];
+                    }
+                    else {
+                        [gApp alert:@"获取成功"];
+                        for (int32 i =0; i<deviceCount; i++) {
+                            node_handle node = NULL;
+                            hm_server_get_all_device_at(_treeHandle, i, &node);
+                            if (node != NULL) {
+                                cpchar name = NULL;
+                                hm_server_get_node_name(node, &name);
+                                
+                                CSLog(@"device tree node %d: name:%@", i, @(name));
+                                
+                                [_deviceList addObject:@{@"name": @(name),
+                                                         @"node_handle": [NSValue valueWithPointer:node]
+                                                         }];
+                            }
                         }
                     }
                 }
-                
-            }else {
-                [gApp alert:[NSString stringWithFormat:@"获取穿透信息失败(%d)", result]];
+                else {
+                    [gApp alert:[NSString stringWithFormat:@"获取穿透信息失败(%d)", result]];
+                }
+            }
+            else {
+                [gApp alert:[NSString stringWithFormat:@"获取用户信息失败(%d)", result]];
             }
         }
-        else {
-            [gApp alert:[NSString stringWithFormat:@"获取用户信息失败(%d)", result]];
+        else { // Get time
+            
         }
-    }else{
-        [gApp alert:[NSString stringWithFormat:@"获取列表(%d)", result]];
+    }
+    else{
+        [gApp alert:[NSString stringWithFormat:@"获取列表失败(%d)", result]];
     }
     
-    
     [self.tableView reloadData];
-    
     return result;
+}
+
+#pragma mark - UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == 1001) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 @end

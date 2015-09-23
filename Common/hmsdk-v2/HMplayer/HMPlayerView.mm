@@ -19,6 +19,7 @@
 @implementation HMPlayerView
 @synthesize IsRunning;
 @synthesize videoLock = _videoLick;
+@synthesize curNode = my_node;
 
 NSArray* videoDataArr = nil;
 NSArray* audioDataArr = nil;
@@ -149,6 +150,14 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
     [self performSelectorInBackground:@selector(CloseAllForLogOutDev) withObject:nil];
 }
 
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    [self performSelector:@selector(ConnectVideoBynode) withObject:nil afterDelay:0.1];
+    //[self ConnectVideoBynode];
+}
+
+
 - (BOOL)shouldAutorotate {
     return NO;
 }
@@ -169,10 +178,7 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
     // Dispose of any resources that can be recreated.
 }
 
-- (void)ConnectVideoBynode:(node_handle)node
-{
-    my_node = node;
-    
+- (void)ConnectVideoBynode {
     NSString* name;
     cpchar cpname;
     hm_server_get_node_name(my_node,&cpname);
@@ -180,7 +186,8 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
     else name = [[NSString alloc] initWithUTF8String:cpname];
     [self setTitle:name];
     
-    [self performSelectorInBackground:@selector(HandConnectVideBynode) withObject:nil];
+    //[self performSelectorInBackground:@selector(HandConnectVideBynode) withObject:nil];
+    [self HandConnectVideBynode];
 }
 
 - (void)setNavTitle:(NSString *)title {
@@ -199,9 +206,7 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
     
     hm_result result = hm_pu_login_ex(my_node, &connectInfo, &myID);
     
-    if (result == HMEC_OK)
-    {
-        
+    if (result == HMEC_OK) {
         if (localVideoHandle == NULL) {
             hm_video_init(HME_VE_H264, &localVideoHandle);  // 视频解码器初始化
         }
@@ -246,23 +251,26 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
             }
             else
             {
-                NSString* message= @"请求视频数据失败";
-                [self performSelectorOnMainThread:@selector(ConnectFailShowMessage:) withObject:message waitUntilDone:YES];
                 NSLog(@"请求视频数据失败");
+                NSString* message= @"请求视频数据失败";
+                //[self performSelectorOnMainThread:@selector(ConnectFailShowMessage:) withObject:message waitUntilDone:YES];
+                [self ConnectFailShowMessage:message];
             }
         }
         else
         {
-            NSString* message= @"开启视频失败";
-            [self performSelectorOnMainThread:@selector(ConnectFailShowMessage:) withObject:message waitUntilDone:YES];
             NSLog(@"开启视频失败");
+            NSString* message= @"开启视频失败";
+            //[self performSelectorOnMainThread:@selector(ConnectFailShowMessage:) withObject:message waitUntilDone:YES];
+            [self ConnectFailShowMessage:message];
         }
     }
-    else
-    {
-        NSString* message= @"连接视频失败";
-        [self performSelectorOnMainThread:@selector(ConnectFailShowMessage:) withObject:message waitUntilDone:YES];
+    else {
         NSLog(@"连接视频失败 result=0x%X", result);
+        [self dismissViewControllerAnimated:YES completion:^{
+            NSString* message= @"注册视频服务失败！";
+            [gApp shortAlert:message];
+        }];
     }
 }
 
@@ -321,7 +329,8 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
                     if (localAudioHandel == NULL) hm_audio_init(devInfo->channel_capacity[0]->audio_code_type, &localAudioHandel);
                 }
                 
-                [self performSelectorOnMainThread:@selector(HiddenCoverView) withObject:nil waitUntilDone:NO];
+                //[self performSelectorOnMainThread:@selector(HiddenCoverView) withObject:nil waitUntilDone:NO];
+                [self HiddenCoverView];
                 
                 IsRunning = YES;
                 rightBar.hidden = !IsRunning;
@@ -331,23 +340,25 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
                 //[queue release];
                 
             }
-            else
-            {
-                NSString* message= @"请求视频失败";
-                [self performSelectorOnMainThread:@selector(ConnectFailShowMessage:) withObject:message waitUntilDone:YES];
+            else {
                 NSLog(@"请求视频失败");
+                NSString* message= @"请求视频失败";
+                //[self performSelectorOnMainThread:@selector(ConnectFailShowMessage:) withObject:message waitUntilDone:YES];
+                [self ConnectFailShowMessage:message];
             }
         }
         else
         {
             NSString* message= @"连接失败";
-            [self performSelectorOnMainThread:@selector(ConnectFailShowMessage:) withObject:message waitUntilDone:YES];
+            //[self performSelectorOnMainThread:@selector(ConnectFailShowMessage:) withObject:message waitUntilDone:YES];
+            [self ConnectFailShowMessage:message];
         }
     }
     else
     {
         NSString* message= @"连接失败";
-        [self performSelectorOnMainThread:@selector(ConnectFailShowMessage:) withObject:message waitUntilDone:YES];
+        //[self performSelectorOnMainThread:@selector(ConnectFailShowMessage:) withObject:message waitUntilDone:YES];
+        [self ConnectFailShowMessage:message];
     }
 }
 
@@ -356,17 +367,26 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
     [CoverView setHidden:YES];
 }
 
+#pragma mark - UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == 1001) {
+        [self dismissViewControllerAnimated:YES completion:^{
+            
+        }];
+    }
+}
+
 #pragma mark - 连接失败提示
 - (void)ConnectFailShowMessage:(NSString*)message
 {
     [CoverView setHidden:YES];
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:nil
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"提示"
                                                     message:message
-                                                   delegate:nil
+                                                   delegate:self
                                           cancelButtonTitle:nil
                                           otherButtonTitles:@"确定", nil];
+    alert.tag = 1001;
     [alert show];
-   // [alert release];
 }
 
 

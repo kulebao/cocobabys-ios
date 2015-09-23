@@ -225,6 +225,7 @@
 		09A9EBD218C090E200D83119 /* CSKuleAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A9EBD118C090E200D83119 /* CSKuleAuthViewController.m */; };
 		09A9EBD518C0A01B00D83119 /* CSKuleMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A9EBD418C0A01B00D83119 /* CSKuleMainViewController.m */; };
 		09A9EBD818C0A02800D83119 /* CSKuleSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A9EBD718C0A02800D83119 /* CSKuleSettingsViewController.m */; };
+		09ABB1011BAF0F7900B9C887 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 09142DBC18E274EB00E5848F /* libstdc++.dylib */; };
 		09AC5A321AAC9BA200C88ECE /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09F74CCF1997D10C001555D0 /* libopencore-amrnb.a */; };
 		09AC5A331AAC9BAA00C88ECE /* libHM_hmsdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 093C20EF199915B400A12F1A /* libHM_hmsdk.a */; };
 		09AC5A3C1AACBB2200C88ECE /* video_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 09AC5A3A1AACBB2200C88ECE /* video_icon.png */; };
@@ -274,7 +275,6 @@
 		09C1C76618BD973B0040B06D /* NSDictionary+CSKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C1C76518BD973B0040B06D /* NSDictionary+CSKit.m */; };
 		09C3AC25199DAC8600A6251C /* CSContentEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C3AC23199DAC8600A6251C /* CSContentEditorViewController.m */; };
 		09C3AC29199E148D00A6251C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C3AC28199E148C00A6251C /* CFNetwork.framework */; };
-		09C3AC2C199E21D400A6251C /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 09142DBE18E2751000E5848F /* libc++.dylib */; };
 		09CB08C619B0169E00F57A07 /* chating_left_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 09CB08C319B0169E00F57A07 /* chating_left_1.png */; };
 		09CB08C719B0169E00F57A07 /* chating_right_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 09CB08C419B0169E00F57A07 /* chating_right_1.png */; };
 		09CB08C819B0169E00F57A07 /* voice_right_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 09CB08C519B0169E00F57A07 /* voice_right_1.png */; };
@@ -858,6 +858,7 @@
 		09443A1A1B4A685900EE5986 /* v2-接送消息.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-接送消息.png"; sourceTree = "<group>"; };
 		094591201B3F05D300EF4458 /* BPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPush.h; sourceTree = "<group>"; };
 		094591211B3F05D300EF4458 /* libBPush.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBPush.a; sourceTree = "<group>"; };
+		094715601BAAC0D70021B2FF /* hm_sdk_vpu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hm_sdk_vpu.h; sourceTree = "<group>"; };
 		0948079B1B46B61700FB74B4 /* v2-bus-pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-bus-pin.png"; sourceTree = "<group>"; };
 		0948079C1B46B61700FB74B4 /* v2-bus-pin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-bus-pin@2x.png"; sourceTree = "<group>"; };
 		094D909B1B6A7E310045D0AB /* v2-app-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-app-icon.png"; sourceTree = "<group>"; };
@@ -1323,6 +1324,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09ABB1011BAF0F7900B9C887 /* libstdc++.dylib in Frameworks */,
 				09E209E91B88718700059CC1 /* MapKit.framework in Frameworks */,
 				09C00FAF1B44408D00FC1474 /* Security.framework in Frameworks */,
 				09C00FAD1B44407600FC1474 /* libicucore.dylib in Frameworks */,
@@ -1332,7 +1334,6 @@
 				0979FE311AAF532D00B58F41 /* MediaPlayer.framework in Frameworks */,
 				09C00FA81B443DA400FC1474 /* ShareSDK.framework in Frameworks */,
 				0979FE2F1AAF532500B58F41 /* CoreMedia.framework in Frameworks */,
-				09C3AC2C199E21D400A6251C /* libc++.dylib in Frameworks */,
 				09C3AC29199E148D00A6251C /* CFNetwork.framework in Frameworks */,
 				093D89D4199A76B9006B013B /* GLKit.framework in Frameworks */,
 				09F74CC51997CB1E001555D0 /* AVFoundation.framework in Frameworks */,
@@ -1747,6 +1748,7 @@
 			children = (
 				090FC10F199B3FC300C3A31A /* HMplayer */,
 				093C20EE199915B400A12F1A /* hm_sdk.h */,
+				094715601BAAC0D70021B2FF /* hm_sdk_vpu.h */,
 				093C20EF199915B400A12F1A /* libHM_hmsdk.a */,
 				093C20F0199915B400A12F1A /* ShowDelay.h */,
 			);
@@ -3265,6 +3267,7 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Qin Suo (ZU5HVY57NS)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Qin Suo (ZU5HVY57NS)";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Venders/BaiduMap",
@@ -3336,6 +3339,7 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Chengdu Cocobabys Information Technology Co., Ltd. (J7M2ZSPTSZ)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Chengdu Cocobabys Information Technology Co., Ltd. (J7M2ZSPTSZ)";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Venders/BaiduMap",

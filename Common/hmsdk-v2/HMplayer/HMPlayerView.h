@@ -78,11 +78,11 @@
 @property (strong, nonatomic) NSLock*           videoLock;
 //@property (strong, nonatomic) NSLock*           audioLock;
 
+@property (assign, nonatomic) NSInteger channelID;
+@property (assign, nonatomic) node_handle curNode;
 
 - (void)addObjcTOVideoDataArray:(char*)data Len:(NSInteger)len;
 - (void)addObjcTOAudioDataArray:(char*)data Len:(NSInteger)len;
-
-- (void)ConnectVideoBynode:(node_handle)node;
 - (void)setNavTitle:(NSString *)title;
 
 - (void)DirectConnectVideo:(NSArray*)array;

@@ -342,16 +342,6 @@
 		094C29F81A067D28009BDC4E /* CSTextFieldDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 094C29F71A067D28009BDC4E /* CSTextFieldDelegate.m */; };
 		094C29FF1A068E89009BDC4E /* EntityAssessInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 094C29FE1A068E89009BDC4E /* EntityAssessInfo.m */; };
 		094C2A031A068EAA009BDC4E /* EntityAssessInfoHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 094C2A021A068EAA009BDC4E /* EntityAssessInfoHelper.m */; };
-		094F3E871B7797C300001A94 /* Icon-40.png in Resources */ = {isa = PBXBuildFile; fileRef = 094F3E7B1B7797C300001A94 /* Icon-40.png */; };
-		094F3E881B7797C300001A94 /* Icon-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 094F3E7C1B7797C300001A94 /* Icon-40@2x.png */; };
-		094F3E891B7797C300001A94 /* Icon-40@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 094F3E7D1B7797C300001A94 /* Icon-40@3x.png */; };
-		094F3E8A1B7797C300001A94 /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 094F3E7E1B7797C300001A94 /* Icon-60@2x.png */; };
-		094F3E8B1B7797C300001A94 /* Icon-60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 094F3E7F1B7797C300001A94 /* Icon-60@3x.png */; };
-		094F3E8C1B7797C300001A94 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 094F3E801B7797C300001A94 /* Icon-Small.png */; };
-		094F3E8D1B7797C300001A94 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 094F3E811B7797C300001A94 /* Icon-Small@2x.png */; };
-		094F3E8E1B7797C300001A94 /* Icon-Small@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 094F3E821B7797C300001A94 /* Icon-Small@3x.png */; };
-		094F3E8F1B7797C300001A94 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 094F3E831B7797C300001A94 /* Icon.png */; };
-		094F3E901B7797C300001A94 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 094F3E841B7797C300001A94 /* Icon@2x.png */; };
 		094F3E911B7797C300001A94 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 094F3E851B7797C300001A94 /* iTunesArtwork */; };
 		094F3E921B7797C300001A94 /* iTunesArtwork@2x in Resources */ = {isa = PBXBuildFile; fileRef = 094F3E861B7797C300001A94 /* iTunesArtwork@2x */; };
 		094F3E941B7797FE00001A94 /* v2-app-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 094F3E931B7797FE00001A94 /* v2-app-icon@2x.png */; };
@@ -3251,7 +3241,6 @@
 				093571911AFD128200134BBF /* recipe-cell-bg@2x.png in Resources */,
 				098E3E42198B314500CB4F0B /* bg_2.9.png in Resources */,
 				093571701AFD128200134BBF /* img-placeholder.png in Resources */,
-				094F3E8F1B7797C300001A94 /* Icon.png in Resources */,
 				093571481AFD128200134BBF /* chating-picture.png in Resources */,
 				093571921AFD128200134BBF /* resend_normal.png in Resources */,
 				093571A21AFD128200134BBF /* settings-icon-logout.png in Resources */,
@@ -3290,7 +3279,6 @@
 				09F59EF31B557FE200835163 /* v2-chat-session.png in Resources */,
 				0935716F1AFD128200134BBF /* img-icon@2x.png in Resources */,
 				095D858819C5DDA700F2F926 /* CSClassHeaderView.xib in Resources */,
-				094F3E891B7797C300001A94 /* Icon-40@3x.png in Resources */,
 				09F59F1D1B557FE200835163 /* v2-睡觉.png in Resources */,
 				098E3E76198B314500CB4F0B /* login_bg2.png in Resources */,
 				09F59ED81B557FE200835163 /* v2-btn_mic@2x.png in Resources */,
@@ -3303,7 +3291,6 @@
 				09F59F251B557FE200835163 /* v2-锻炼.png in Resources */,
 				0901CDFB1ABF2FBB0044838A /* CaptureViewController.xib in Resources */,
 				093570F81AFD128200134BBF /* arrow-left-1.png in Resources */,
-				094F3E901B7797C300001A94 /* Icon@2x.png in Resources */,
 				09F59F051B557FE200835163 /* v2-line_white@2x.png in Resources */,
 				090F41C41A04DBF800C593C2 /* star_red@2x.png in Resources */,
 				098E3E7F198B314500CB4F0B /* normal_btn_pressed.png in Resources */,
@@ -3600,7 +3587,6 @@
 				09F59EE81B557FE200835163 /* v2-btn_亲子作业@2x.png in Resources */,
 				093571861AFD128200134BBF /* notice-cell-bg.png in Resources */,
 				098E3E5F198B314500CB4F0B /* drawable_expand_open.9.png in Resources */,
-				094F3E881B7797C300001A94 /* Icon-40@2x.png in Resources */,
 				0935714D1AFD128200134BBF /* class-input-bg@2x.png in Resources */,
 				09F59F161B557FE200835163 /* v2-情绪@2x.png in Resources */,
 				09F59EFD1B557FE200835163 /* v2-input_bg_家园互动.png in Resources */,
@@ -3619,14 +3605,12 @@
 				09F59EBF1B557FE200835163 /* v2-bg.png in Resources */,
 				097415AC1A06AE4300DAF2F9 /* mic_2.png in Resources */,
 				0901CE2B1ABF2FBB0044838A /* record_tool_disable@2x.png in Resources */,
-				094F3E8C1B7797C300001A94 /* Icon-Small.png in Resources */,
 				0901CE201ABF2FBB0044838A /* record_icon_hook_normal_bg.png in Resources */,
 				093571051AFD128200134BBF /* assess-emotion@2x.png in Resources */,
 				09F59EBB1B557FE200835163 /* v2-bg_pull.png in Resources */,
 				098E3E78198B314500CB4F0B /* login_input_lock.png in Resources */,
 				0935710D1AFD128200134BBF /* assess-rest@2x.png in Resources */,
 				093571231AFD128200134BBF /* btn-func-2@2x.png in Resources */,
-				094F3E8D1B7797C300001A94 /* Icon-Small@2x.png in Resources */,
 				0935716A1AFD128200134BBF /* icon-checkin.png in Resources */,
 				09F59F261B557FE200835163 /* v2-锻炼@2x.png in Resources */,
 				093571B81AFD128200134BBF /* voice_right_3@2x.png in Resources */,
@@ -3636,16 +3620,13 @@
 				0935711B1AFD128200134BBF /* btn-back@2x.png in Resources */,
 				093571B01AFD128200134BBF /* titlebar-bg@2x.png in Resources */,
 				09F59ED61B557FE200835163 /* v2-btn_message@2x.png in Resources */,
-				094F3E8A1B7797C300001A94 /* Icon-60@2x.png in Resources */,
 				098E3E70198B314500CB4F0B /* input_d.9.png in Resources */,
 				093571A01AFD128200134BBF /* settings-icon-feedback.png in Resources */,
 				098E3E91198B314500CB4F0B /* star_red.png in Resources */,
 				093571B61AFD128200134BBF /* voice_right_2@2x.png in Resources */,
 				098E3E46198B314500CB4F0B /* btn.9.png in Resources */,
 				09A3C5EA19C47986001AFE8C /* close_x.png in Resources */,
-				094F3E8B1B7797C300001A94 /* Icon-60@3x.png in Resources */,
 				0901CE0E1ABF2FBB0044838A /* record_flashlight_highlighted.png in Resources */,
-				094F3E8E1B7797C300001A94 /* Icon-Small@3x.png in Resources */,
 				0935717C1AFD128200134BBF /* logo-1.png in Resources */,
 				093571181AFD128200134BBF /* btn-back-pressed.png in Resources */,
 				098E3E8D198B314500CB4F0B /* small_logo.png in Resources */,
@@ -3662,7 +3643,6 @@
 				0935710B1AFD128200134BBF /* assess-manner@2x.png in Resources */,
 				098E3E8C198B314500CB4F0B /* small_btn_pressed.png in Resources */,
 				09F59F0C1B557FE200835163 /* v2-启动界面@2x.png in Resources */,
-				094F3E871B7797C300001A94 /* Icon-40.png in Resources */,
 				097415AF1A06AE4300DAF2F9 /* mic_5.png in Resources */,
 				093571391AFD128200134BBF /* btn-start-pressed@2x.png in Resources */,
 				098E3E54198B314500CB4F0B /* chat_head_icon.gif in Resources */,

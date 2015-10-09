@@ -554,6 +554,8 @@
 		09A3E1081BC79D2500076198 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09A3E1071BC79D2500076198 /* SystemConfiguration.framework */; };
 		09A3E10B1BC7A47C00076198 /* v2-btn_check.png in Resources */ = {isa = PBXBuildFile; fileRef = 09A3E1091BC7A47C00076198 /* v2-btn_check.png */; settings = {ASSET_TAGS = (); }; };
 		09A3E10C1BC7A47C00076198 /* v2-btn_check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09A3E10A1BC7A47C00076198 /* v2-btn_check@2x.png */; settings = {ASSET_TAGS = (); }; };
+		09A3E10F1BC8233C00076198 /* CSNewsInfoReaderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A3E10E1BC8233C00076198 /* CSNewsInfoReaderTableViewController.m */; settings = {ASSET_TAGS = (); }; };
+		09A3E1121BC8328B00076198 /* CSNewsReaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A3E1111BC8328B00076198 /* CSNewsReaderTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		09B431B31994BCC300FF4071 /* EntityParentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09B431B21994BCC300FF4071 /* EntityParentInfo.m */; };
 		09B431B61994BCE900FF4071 /* EntityRelationshipInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09B431B51994BCE900FF4071 /* EntityRelationshipInfo.m */; };
 		09B431BA1994C1BF00FF4071 /* EntityRelationshipInfoHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 09B431B91994C1BF00FF4071 /* EntityRelationshipInfoHelper.m */; };
@@ -1435,6 +1437,10 @@
 		09A3E1071BC79D2500076198 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		09A3E1091BC7A47C00076198 /* v2-btn_check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-btn_check.png"; sourceTree = "<group>"; };
 		09A3E10A1BC7A47C00076198 /* v2-btn_check@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-btn_check@2x.png"; sourceTree = "<group>"; };
+		09A3E10D1BC8233C00076198 /* CSNewsInfoReaderTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNewsInfoReaderTableViewController.h; sourceTree = "<group>"; };
+		09A3E10E1BC8233C00076198 /* CSNewsInfoReaderTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNewsInfoReaderTableViewController.m; sourceTree = "<group>"; };
+		09A3E1101BC8328B00076198 /* CSNewsReaderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNewsReaderTableViewCell.h; sourceTree = "<group>"; };
+		09A3E1111BC8328B00076198 /* CSNewsReaderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNewsReaderTableViewCell.m; sourceTree = "<group>"; };
 		09B431B11994BCC300FF4071 /* EntityParentInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityParentInfo.h; sourceTree = "<group>"; };
 		09B431B21994BCC300FF4071 /* EntityParentInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityParentInfo.m; sourceTree = "<group>"; };
 		09B431B41994BCE900FF4071 /* EntityRelationshipInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityRelationshipInfo.h; sourceTree = "<group>"; };
@@ -1838,6 +1844,8 @@
 				0938DC5C1AFF1F0800883DD7 /* CSKuleNewsTableViewCell.h */,
 				0938DC5D1AFF1F0800883DD7 /* CSKuleNewsTableViewCell.m */,
 				0938DC5E1AFF1F0800883DD7 /* CSKuleNewsTableViewCell.xib */,
+				09A3E1101BC8328B00076198 /* CSNewsReaderTableViewCell.h */,
+				09A3E1111BC8328B00076198 /* CSNewsReaderTableViewCell.m */,
 				091EE4DB19E83A3A0050092E /* CSKuleChatingTableCell.h */,
 				091EE4DC19E83A3A0050092E /* CSKuleChatingTableCell.m */,
 				09327E281992233A0089C653 /* CSChildListItemTableViewCell.h */,
@@ -2998,6 +3006,8 @@
 				098E4030198B647000CB4F0B /* CSMainViewController.m */,
 				09FE720519965C66002E3ED4 /* CSNewsInfoDetailViewController.h */,
 				09FE720619965C66002E3ED4 /* CSNewsInfoDetailViewController.m */,
+				09A3E10D1BC8233C00076198 /* CSNewsInfoReaderTableViewController.h */,
+				09A3E10E1BC8233C00076198 /* CSNewsInfoReaderTableViewController.m */,
 				098E408A198B7B2C00CB4F0B /* CSNoticeTableViewController.h */,
 				098E408B198B7B2C00CB4F0B /* CSNoticeTableViewController.m */,
 				098E3EA3198B614400CB4F0B /* CSProfileHeaderViewController.h */,
@@ -3766,6 +3776,7 @@
 				09C2D4EF1969BCA000B8A895 /* UIButton+AFNetworking.m in Sources */,
 				09A3C5D819C47835001AFE8C /* CSContentEditorViewController.m in Sources */,
 				09A3C63819C479EC001AFE8C /* UIImage+MultiFormat.m in Sources */,
+				09A3E1121BC8328B00076198 /* CSNewsReaderTableViewCell.m in Sources */,
 				094C29FF1A068E89009BDC4E /* EntityAssessInfo.m in Sources */,
 				098E407A198B799000CB4F0B /* TPKeyboardAvoidingCollectionView.m in Sources */,
 				098E4065198B799000CB4F0B /* MessageInterceptor.m in Sources */,
@@ -3805,6 +3816,7 @@
 				09C2D4EC1969BCA000B8A895 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				0971C0CD1A0A80DC00A6F644 /* CSForgotPasswordStep2ViewController.m in Sources */,
 				0982A7BF19C8A2770036DEC1 /* EntityTopicMsgHelper.m in Sources */,
+				09A3E10F1BC8233C00076198 /* CSNewsInfoReaderTableViewController.m in Sources */,
 				090C63991993A0D400398B40 /* CSChildProfileHeaderViewController.m in Sources */,
 				09A3C63519C479EC001AFE8C /* SDWebImagePrefetcher.m in Sources */,
 				09A3C62E19C479EC001AFE8C /* NSData+ImageContentType.m in Sources */,

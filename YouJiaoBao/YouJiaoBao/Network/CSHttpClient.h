@@ -55,6 +55,11 @@ typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSErr
                                             success:(SuccessResponseHandler)success
                                             failure:(FailureResponseHandler)failure;
 
+- (AFHTTPRequestOperation*)opGetRelationshipOfClasses:(NSArray*)classIdList
+                                       inKindergarten:(NSInteger)schoolId
+                                              success:(SuccessResponseHandler)success
+                                              failure:(FailureResponseHandler)failure;
+
 - (AFHTTPRequestOperation*)opGetNewsOfClasses:(NSArray*)classIdList
                                inKindergarten:(NSInteger)schoolId
                                          from:(NSNumber*)from
@@ -181,5 +186,10 @@ typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSErr
 - (AFHTTPRequestOperation*)opGetSmsCode:(NSString*)phone
                                 success:(SuccessResponseHandler)success
                                 failure:(FailureResponseHandler)failure;
+
+- (AFHTTPRequestOperation*)opGetNewsReaders:(NSNumber*)newsId
+                             inKindergarten:(NSInteger)schoolId
+                                    success:(SuccessResponseHandler)success
+                                    failure:(FailureResponseHandler)failure;
 
 @end

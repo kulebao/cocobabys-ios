@@ -297,6 +297,25 @@
     
 }
 
+- (AFHTTPRequestOperation*)opGetRelationshipOfClasses:(NSArray*)classIdList
+                                       inKindergarten:(NSInteger)schoolId
+                                              success:(SuccessResponseHandler)success
+                                              failure:(FailureResponseHandler)failure {
+    id parameters = @{};
+    if (classIdList.count > 0) {
+        parameters = @{@"class_id": [classIdList componentsJoinedByString:@","]};
+    }
+    
+    NSString* apiUrl = [NSString stringWithFormat:kPathKindergartenRelationship, @(schoolId)];
+    
+    AFHTTPRequestOperation* op =[self.opManager GET:apiUrl
+                                         parameters:parameters
+                                            success:success
+                                            failure:failure];
+    return op;
+    
+}
+
 - (AFHTTPRequestOperation*)opGetNewsOfClasses:(NSArray*)classIdList
                                inKindergarten:(NSInteger)schoolId
                                          from:(NSNumber*)from
@@ -795,6 +814,21 @@
     
     NSDictionary* parameters = nil;
     
+    AFHTTPRequestOperation* op = [self.opManager GET:path
+                                          parameters:parameters
+                                             success:success
+                                             failure:failure];
+    return op;
+}
+
+- (AFHTTPRequestOperation*)opGetNewsReaders:(NSNumber*)newsId
+                             inKindergarten:(NSInteger)schoolId
+                                    success:(SuccessResponseHandler)success
+                                    failure:(FailureResponseHandler)failure {
+    NSParameterAssert(newsId);
+    
+    NSString* path = [NSString stringWithFormat:kKindergartenNewsMarkedPathV2, @(schoolId), newsId];
+    NSDictionary* parameters = nil;
     AFHTTPRequestOperation* op = [self.opManager GET:path
                                           parameters:parameters
                                              success:success

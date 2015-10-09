@@ -18,7 +18,21 @@
     #import "UIViewController+CSKit.h"
     #import "NSDictionary+CSKit.h"
     #import "NSString+CSKit.h"
+    #import "BaiduMobStat.h"
 #endif
 
 #define _AFNETWORKING_ALLOW_INVALID_SSL_CERTIFICATES_
+
 #define COCOBABYS_DEV_MODEL 1
+
+#if COCOBABYS_DEV_MODEL
+    #define COCOBABYS_CHECK_UPDATE_FROM_FIR 1
+    //#define COCOBABYS_FEATURE_COMMERCIAL    1
+    //#define COCOBABYS_USE_TEST_ACCOUNT      1
+    #define COCOBABYS_USE_ENV_PROD          1
+#else
+    #define COCOBABYS_CHECK_UPDATE_FROM_FIR 0
+    //#define COCOBABYS_FEATURE_COMMERCIAL    1
+    //#define COCOBABYS_USE_TEST_ACCOUNT      1
+    #define COCOBABYS_USE_ENV_PROD          1
+#endif

@@ -41,10 +41,10 @@
 #define kServerHostForProd              @"https://www.cocobabys.com"
 
 
-#if COCOBABYS_DEV_MODEL
-    #define kServerHostUsing                kServerHostForTest
-#else
+#if COCOBABYS_USE_ENV_PROD
     #define kServerHostUsing                kServerHostForProd
+#else
+    #define kServerHostUsing                kServerHostForTest
 #endif
 
 #define kPathEmployeeLogin              @"/employee_login.do"

@@ -15,6 +15,8 @@
 @interface CSNewsInfoDetailViewController () <UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *btnCheckList;
+- (IBAction)onBtnCheckListClicked:(id)sender;
 
 @end
 
@@ -35,6 +37,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self customizeBackBarItem];
+    
+    if (self.newsInfo.feedbackRequired.integerValue > 0) {
+    }
+    else {
+        self.navigationItem.rightBarButtonItem = nil;
+    }
     
     [self.webView hideGradientBackground];
     self.webView.delegate = self;
@@ -140,6 +148,11 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     [self.indicatorView stopAnimating];
+}
+
+#pragma mark - UI
+- (IBAction)onBtnCheckListClicked:(id)sender {
+    CSLog(@"%s", __FUNCTION__);
 }
 
 @end

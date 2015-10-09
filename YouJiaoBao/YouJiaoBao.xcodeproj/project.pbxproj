@@ -552,6 +552,8 @@
 		09A3E1041BC79D1600076198 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09A3E1031BC79D1600076198 /* CoreTelephony.framework */; };
 		09A3E1061BC79D1F00076198 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09A3E1051BC79D1F00076198 /* CoreLocation.framework */; };
 		09A3E1081BC79D2500076198 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09A3E1071BC79D2500076198 /* SystemConfiguration.framework */; };
+		09A3E10B1BC7A47C00076198 /* v2-btn_check.png in Resources */ = {isa = PBXBuildFile; fileRef = 09A3E1091BC7A47C00076198 /* v2-btn_check.png */; settings = {ASSET_TAGS = (); }; };
+		09A3E10C1BC7A47C00076198 /* v2-btn_check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09A3E10A1BC7A47C00076198 /* v2-btn_check@2x.png */; settings = {ASSET_TAGS = (); }; };
 		09B431B31994BCC300FF4071 /* EntityParentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09B431B21994BCC300FF4071 /* EntityParentInfo.m */; };
 		09B431B61994BCE900FF4071 /* EntityRelationshipInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09B431B51994BCE900FF4071 /* EntityRelationshipInfo.m */; };
 		09B431BA1994C1BF00FF4071 /* EntityRelationshipInfoHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 09B431B91994C1BF00FF4071 /* EntityRelationshipInfoHelper.m */; };
@@ -1431,6 +1433,8 @@
 		09A3E1031BC79D1600076198 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		09A3E1051BC79D1F00076198 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		09A3E1071BC79D2500076198 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		09A3E1091BC7A47C00076198 /* v2-btn_check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-btn_check.png"; sourceTree = "<group>"; };
+		09A3E10A1BC7A47C00076198 /* v2-btn_check@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-btn_check@2x.png"; sourceTree = "<group>"; };
 		09B431B11994BCC300FF4071 /* EntityParentInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityParentInfo.h; sourceTree = "<group>"; };
 		09B431B21994BCC300FF4071 /* EntityParentInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityParentInfo.m; sourceTree = "<group>"; };
 		09B431B41994BCE900FF4071 /* EntityRelationshipInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityRelationshipInfo.h; sourceTree = "<group>"; };
@@ -1976,6 +1980,8 @@
 				09F59E561B557FE200835163 /* v2-btn_blue@2x.png */,
 				09F59E571B557FE200835163 /* v2-btn_camera.png */,
 				09F59E581B557FE200835163 /* v2-btn_camera@2x.png */,
+				09A3E1091BC7A47C00076198 /* v2-btn_check.png */,
+				09A3E10A1BC7A47C00076198 /* v2-btn_check@2x.png */,
 				09F59E591B557FE200835163 /* v2-btn_expand.png */,
 				09F59E5A1B557FE200835163 /* v2-btn_expand@2x.png */,
 				09F59E5B1B557FE200835163 /* v2-btn_go.png */,
@@ -3398,6 +3404,7 @@
 				093571901AFD128200134BBF /* recipe-cell-bg.png in Resources */,
 				0935713D1AFD128200134BBF /* btn-type1-pressed@2x.png in Resources */,
 				0901CE181ABF2FBB0044838A /* record_focus_off.png in Resources */,
+				09A3E10C1BC7A47C00076198 /* v2-btn_check@2x.png in Resources */,
 				0935717A1AFD128200134BBF /* input-bg-2.png in Resources */,
 				093571651AFD128200134BBF /* guide-4-568h@2x.png in Resources */,
 				098E3E50198B314500CB4F0B /* chat.png in Resources */,
@@ -3508,6 +3515,7 @@
 				0935716E1AFD128200134BBF /* img-icon.png in Resources */,
 				098E3E94198B314500CB4F0B /* title_bar.9.png in Resources */,
 				098E3E5C198B314500CB4F0B /* dining.png in Resources */,
+				09A3E10B1BC7A47C00076198 /* v2-btn_check.png in Resources */,
 				0901CE021ABF2FBB0044838A /* record_close_highlighted.png in Resources */,
 				093571A31AFD128200134BBF /* settings-icon-logout@2x.png in Resources */,
 				093570FC1AFD128200134BBF /* arrow-right-1.png in Resources */,

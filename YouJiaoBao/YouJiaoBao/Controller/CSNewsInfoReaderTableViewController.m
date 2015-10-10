@@ -142,7 +142,7 @@
     
     if ([_childrenReaders containsObject:childInfo]) {
         cell.labStatus.text = @"已回执";
-        cell.labStatus.textColor = UIColorRGB(14, 188, 255);
+        cell.labStatus.textColor = UIColorRGB(10, 163, 221); //0x0aa3dd
         cell.viewMask.hidden = YES;
     }
     else {
@@ -341,6 +341,17 @@
         
         NSArray* classChildren = [childrenList filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"classId == %@", classInfo.classId]];
         
+        classChildren = [classChildren sortedArrayWithOptions:NSSortStable usingComparator:^NSComparisonResult(EntityClassInfo* obj1, EntityClassInfo* obj2) {
+            NSComparisonResult result = NSOrderedSame;
+            
+            NSNumber* v1 = [_childrenReaders containsObject:obj1] ? @(1) : @(-1);
+            NSNumber* v2 = [_childrenReaders containsObject:obj2] ? @(1) : @(-1);
+            
+            result = [v1 compare:v2];
+
+            return result;
+        }];
+        
         ModelReaderData* classData = [ModelReaderData new];
         classData.classInfo = classInfo;
         classData.childrenList = classChildren;
@@ -353,7 +364,6 @@
         
         [_classChildren addObject:classData];
     }
-    
 
     [self.tableView reloadData];
 }

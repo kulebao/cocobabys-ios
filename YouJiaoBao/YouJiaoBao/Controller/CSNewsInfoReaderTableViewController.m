@@ -17,11 +17,14 @@
 #import "ModelClassData.h"
 #import "NSDate+CSKit.h"
 #import "CSAppDelegate.h"
+#import "EntityRelationshipInfoHelper.h"
 
 @interface CSNewsInfoReaderTableViewController ()<NSFetchedResultsControllerDelegate> {
     NSMutableArray* _classChildren;
+    NSMutableSet* _childrenReaders;
     NSFetchedResultsController* _frClasses;
     NSFetchedResultsController* _frChildren;
+    NSFetchedResultsController* _frRelationship;
     
     AFHTTPRequestOperation* _opReloadClassList;
     AFHTTPRequestOperation* _opReloadChildList;
@@ -54,14 +57,21 @@
     NSError* error = nil;
     BOOL ok = [_frClasses performFetch:&error];
     if (!ok) {
-        CSLog(@"error: %@", error);
+        CSLog(@"1 error: %@", error);
     }
     
     _frChildren = [EntityChildInfoHelper frChildrenWithKindergarten:engine.loginInfo.schoolId.integerValue];
     _frChildren.delegate = self;
     ok = [_frChildren performFetch:&error];
     if (!ok) {
-        CSLog(@"error: %@", error);
+        CSLog(@"2 error: %@", error);
+    }
+    
+    _frRelationship = [EntityRelationshipInfoHelper frRelationshipOfKindergarten:engine.loginInfo.schoolId.integerValue];
+    _frRelationship.delegate = self;
+    ok = [_frRelationship performFetch:&error];
+    if (!ok) {
+        CSLog(@"3 error: %@", error);
     }
     
     [self updateTableView];
@@ -128,6 +138,15 @@
     cell.imgIcon.clipsToBounds = YES;
     
     cell.labName.text = childInfo.name;
+    
+    if ([_childrenReaders containsObject:childInfo]) {
+        cell.labStatus.text = @"已回执";
+        cell.labStatus.textColor = UIColorRGB(14, 188, 255);
+    }
+    else {
+        cell.labStatus.text = @"未回执";
+        cell.labStatus.textColor = [UIColor grayColor];
+    }
     
     return cell;
 }
@@ -300,6 +319,15 @@
 
 #pragma mark - Private
 - (void)updateTableView {
+    _childrenReaders = [NSMutableSet set];
+    for (EntityRelationshipInfo* relationship in _frRelationship.fetchedObjects) {
+        if ([self.readerList containsObject:relationship.parentInfo]) {
+            if (relationship.childInfo) {
+                [_childrenReaders addObject:relationship.childInfo];
+            }
+        }
+    }
+    
     _classChildren = [NSMutableArray array];
     NSArray* childrenList = _frChildren.fetchedObjects;
     
@@ -310,10 +338,12 @@
         
         NSArray* classChildren = [childrenList filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"classId == %@", classInfo.classId]];
         
-        ModelClassData* classData = [ModelClassData new];
+        ModelReaderData* classData = [ModelReaderData new];
         classData.classInfo = classInfo;
         classData.childrenList = classChildren;
+        classData.childrenReaders = _childrenReaders;
         classData.expand = NO;
+        
         classData.classHeaderView = [CSClassHeaderView defaultClassHeaderView];
         classData.classHeaderView.modelData = classData;
         classData.classHeaderView.delegate = self;
@@ -321,6 +351,7 @@
         [_classChildren addObject:classData];
     }
     
+
     [self.tableView reloadData];
 }
 

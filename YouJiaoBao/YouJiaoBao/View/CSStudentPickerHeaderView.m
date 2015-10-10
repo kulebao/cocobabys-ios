@@ -75,7 +75,7 @@
     }
 }
 
-- (void)setModelData:(ModelClassData *)modelData {
+- (void)setModelData:(ModelStudentPickerData *)modelData {
     _modelData = modelData;
     [self reloadData];
 }

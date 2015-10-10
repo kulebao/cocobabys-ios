@@ -135,6 +135,7 @@
     [cell.imgIcon sd_setImageWithURL:[NSURL URLWithString:childInfo.portrait]
                         placeholderImage:[UIImage imageNamed:@"default_icon.png"]];
     cell.imgIcon.layer.cornerRadius = 29;
+    cell.viewMask.layer.cornerRadius = cell.imgIcon.layer.cornerRadius;
     cell.imgIcon.clipsToBounds = YES;
     
     cell.labName.text = childInfo.name;
@@ -142,10 +143,12 @@
     if ([_childrenReaders containsObject:childInfo]) {
         cell.labStatus.text = @"已回执";
         cell.labStatus.textColor = UIColorRGB(14, 188, 255);
+        cell.viewMask.hidden = YES;
     }
     else {
         cell.labStatus.text = @"未回执";
         cell.labStatus.textColor = [UIColor grayColor];
+        cell.viewMask.hidden = NO;
     }
     
     return cell;

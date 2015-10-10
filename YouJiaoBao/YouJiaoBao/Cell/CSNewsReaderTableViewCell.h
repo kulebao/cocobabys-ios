@@ -12,5 +12,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imgIcon;
 @property (weak, nonatomic) IBOutlet UILabel *labName;
 @property (weak, nonatomic) IBOutlet UILabel *labStatus;
+@property (weak, nonatomic) IBOutlet UIView *viewMask;
 
 @end

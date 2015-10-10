@@ -1323,6 +1323,7 @@
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="v2-logo2.png" translatesAutoresizingMaskIntoConstraints="NO" id="hAV-2i-Xdq">
                                             <rect key="frame" x="15" y="6" width="51" height="51"/>
+                                            <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="hAV-2i-Xdq" secondAttribute="height" multiplier="1:1" id="8T4-PK-F3O"/>
                                             </constraints>
@@ -1339,12 +1340,20 @@
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0vn-pa-zg2">
+                                            <rect key="frame" x="15" y="6" width="51" height="51"/>
+                                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
+                                        </view>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="dXv-xJ-N0s" firstAttribute="leading" secondItem="hAV-2i-Xdq" secondAttribute="trailing" constant="8" id="051-RP-R2g"/>
                                         <constraint firstItem="hAV-2i-Xdq" firstAttribute="leading" secondItem="y0k-6c-9cy" secondAttribute="leading" constant="15" id="0Ja-hn-EZZ"/>
+                                        <constraint firstItem="0vn-pa-zg2" firstAttribute="top" secondItem="hAV-2i-Xdq" secondAttribute="top" id="L4u-Vp-69s"/>
+                                        <constraint firstItem="0vn-pa-zg2" firstAttribute="leading" secondItem="hAV-2i-Xdq" secondAttribute="leading" id="NCd-Gw-QIM"/>
                                         <constraint firstItem="dXv-xJ-N0s" firstAttribute="centerY" secondItem="y0k-6c-9cy" secondAttribute="centerY" id="NIx-M9-9oM"/>
                                         <constraint firstAttribute="trailing" secondItem="i9Q-e2-KLp" secondAttribute="trailing" constant="8" id="VPR-0m-8Jj"/>
+                                        <constraint firstItem="0vn-pa-zg2" firstAttribute="bottom" secondItem="hAV-2i-Xdq" secondAttribute="bottom" id="flt-D4-GxV"/>
+                                        <constraint firstItem="0vn-pa-zg2" firstAttribute="trailing" secondItem="hAV-2i-Xdq" secondAttribute="trailing" id="gii-Sd-ZLl"/>
                                         <constraint firstItem="i9Q-e2-KLp" firstAttribute="leading" secondItem="dXv-xJ-N0s" secondAttribute="trailing" constant="8" id="hjT-cK-j98"/>
                                         <constraint firstItem="hAV-2i-Xdq" firstAttribute="top" secondItem="y0k-6c-9cy" secondAttribute="top" constant="6" id="i7X-hL-qoG"/>
                                         <constraint firstAttribute="bottom" secondItem="hAV-2i-Xdq" secondAttribute="bottom" constant="6" id="tkk-JR-scU"/>
@@ -1355,6 +1364,7 @@
                                     <outlet property="imgIcon" destination="hAV-2i-Xdq" id="Hd3-y0-1tp"/>
                                     <outlet property="labName" destination="dXv-xJ-N0s" id="HUd-Wm-sD1"/>
                                     <outlet property="labStatus" destination="i9Q-e2-KLp" id="s4P-nc-n7g"/>
+                                    <outlet property="viewMask" destination="0vn-pa-zg2" id="KDq-aY-nfa"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

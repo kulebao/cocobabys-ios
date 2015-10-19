@@ -52,20 +52,23 @@
     [self.btnLogin setBackgroundImage:imgBtnGreenBg forState:UIControlStateNormal];
     
     self.labNote.text = nil;
+    
 #ifdef DEBUG
+#if COCOBABYS_USE_ENV_PROD
     //self.fieldUsername.text = @"wx001";
     //self.fieldPassword.text = @"123456";
     //self.fieldUsername.text = @"admin2007";
     //self.fieldPassword.text = @"18782242007";
     //self.fieldUsername.text = @"test15";
     //self.fieldPassword.text = @"13555555555";
-    
-    //TEST
-    self.fieldUsername.text = @"admin9028";
-    self.fieldPassword.text = @"82242007";
+    self.fieldUsername.text = @"panpan";
+    self.fieldPassword.text = @"28234717";
+#else
     //self.fieldUsername.text = @"Joe_tian";
     //self.fieldPassword.text = @"123456";
-    
+    self.fieldUsername.text = @"admin9028";
+    self.fieldPassword.text = @"82242007";
+#endif
 #endif
 }
 

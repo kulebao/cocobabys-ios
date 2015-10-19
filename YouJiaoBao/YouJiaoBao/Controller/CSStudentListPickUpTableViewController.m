@@ -110,7 +110,7 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    ModelClassData* classData = [_classChildren objectAtIndex:section];
+    ModelStudentPickerData* classData = [_classChildren objectAtIndex:section];
     [classData.studentPickerHeaderView reloadData];
     return classData.studentPickerHeaderView;
 }
@@ -152,7 +152,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    ModelClassData* classData = [_classChildren objectAtIndex:indexPath.section];
+    ModelStudentPickerData* classData = [_classChildren objectAtIndex:indexPath.section];
     NSArray* childrenList = classData.childrenList;
     EntityChildInfo* childInfo = [childrenList objectAtIndex:indexPath.row];
 
@@ -227,10 +227,11 @@
     for (EntityClassInfo* classInfo in _frClasses.fetchedObjects) {
         NSArray* classChildren = [childrenList filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"classId == %@", classInfo.classId]];
         
-        ModelClassData* classData = [ModelClassData new];
+        ModelStudentPickerData* classData = [ModelStudentPickerData new];
         classData.classInfo = classInfo;
         classData.childrenList = classChildren;
         classData.expand = NO;
+        
         classData.studentPickerHeaderView = [CSStudentPickerHeaderView defaultClassHeaderView];
         classData.studentPickerHeaderView.modelData = classData;
         classData.studentPickerHeaderView.delegate = self;

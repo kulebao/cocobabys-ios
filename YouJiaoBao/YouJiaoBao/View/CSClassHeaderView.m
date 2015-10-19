@@ -55,24 +55,16 @@
     }
 }
 
-- (void)setModelData:(ModelClassData *)modelData {
+- (void)setModelData:(ModelBaseData *)modelData {
     _modelData = modelData;
     [self reloadData];
 }
 
 - (void)reloadData {
     if (_modelData) {
-        NSInteger recordNum = 0;
-        for (EntityChildInfo* childInfo in _modelData.childrenList) {
-            if ([EntityDailylogHelper isDailylogOfToday:childInfo.dailylog] && childInfo.dailylog.noticeType.integerValue == kKuleNoticeTypeCheckIn) {
-                recordNum++;
-            }
-        }
-        
-        self.labTitle.text = [NSString stringWithFormat:@"%@", _modelData.classInfo.name];
-        self.labDetail.text = [NSString stringWithFormat:@"(实到%d人/应到%d人)", recordNum, _modelData.childrenList.count];
         self.imgIcon.highlighted = _modelData.expand;
+        self.labTitle.text = [_modelData title];
+        self.labDetail.text = [_modelData detail];
     }
 }
-
 @end

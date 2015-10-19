@@ -15,6 +15,8 @@
 #import "CSHttpUrls.h"
 #import "CSModuleCell.h"
 #import "CSStudentListPickUpTableViewController.h"
+#import "EntityClassInfo.h"
+#import "EntityRelationshipInfoHelper.h"
 
 #define kTestChildId    @"2_2088_900"
 
@@ -69,6 +71,7 @@
     self.collectionView.dataSource = self;
     
     [self reloadClassList];
+    [self reloadRelationships];
 }
 
 - (void)didReceiveMemoryWarning
@@ -155,6 +158,35 @@
                         withEmployeeId:engine.loginInfo.phone
                                success:success
                                failure:failure];
+}
+
+- (void)reloadRelationships {
+    CSHttpClient* http = [CSHttpClient sharedInstance];
+    CSEngine* engine = [CSEngine sharedInstance];
+    CSAppDelegate* app = [CSAppDelegate sharedInstance];
+    
+    id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSArray* relationships = [EntityRelationshipInfoHelper updateEntities:responseObject];
+        [app hideAlert];
+    };
+    
+    id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        [app hideAlert];
+    };
+    
+    [app waitingAlert:@"获取信息" withTitle:@"请稍候"];
+    
+    NSMutableArray* classIds = [NSMutableArray array];
+    for (EntityClassInfo* entity in engine.classInfoList) {
+        if (entity.classId) {
+            [classIds addObject:entity.classId.stringValue];
+        }
+    }
+    
+    [http opGetRelationshipOfClasses:nil
+                      inKindergarten:engine.loginInfo.schoolId.integerValue
+                             success:success
+                             failure:failure];
 }
 
 #pragma mark - CSContentEditorViewControllerDelegate

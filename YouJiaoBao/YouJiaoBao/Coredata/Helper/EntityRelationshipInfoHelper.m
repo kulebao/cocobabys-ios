@@ -75,4 +75,24 @@
     return returnObjectList;
 }
 
++ (NSFetchedResultsController*)frRelationshipOfKindergarten:(NSInteger)kindergartenId {
+    NSManagedObjectContext* context = [[CSCoreDataHelper sharedInstance] managedObjectContext];
+    
+    NSFetchRequest* fr = [[NSFetchRequest alloc] initWithEntityName:@"EntityRelationshipInfo"];
+    fr.resultType = NSManagedObjectResultType;
+    
+    [fr setPredicate:[NSPredicate predicateWithFormat:@"childInfo.schoolId == %d", kindergartenId]];
+    
+    NSSortDescriptor* sortDesc = [NSSortDescriptor sortDescriptorWithKey:@"uid" ascending:YES];
+    [fr setSortDescriptors:@[sortDesc]];
+    
+    NSString* cacheName = [NSString stringWithFormat:@"frRelationshipOfKindergarten%ld", (long)kindergartenId];
+    NSFetchedResultsController* frCtrl = [[NSFetchedResultsController alloc] initWithFetchRequest:fr
+                                                                             managedObjectContext:context
+                                                                               sectionNameKeyPath:nil
+                                                                                        cacheName:cacheName];
+    
+    return frCtrl;
+}
+
 @end

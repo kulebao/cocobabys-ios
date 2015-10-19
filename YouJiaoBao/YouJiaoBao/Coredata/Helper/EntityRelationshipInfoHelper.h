@@ -15,4 +15,6 @@
 
 + (NSArray*)updateEntities:(id)jsonObjectList;
 
++ (NSFetchedResultsController*)frRelationshipOfKindergarten:(NSInteger)kindergartenId;
+
 @end

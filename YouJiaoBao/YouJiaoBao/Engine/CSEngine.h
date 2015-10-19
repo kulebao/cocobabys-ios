@@ -25,6 +25,8 @@ extern NSString* kAppleID;
 
 - (void)setupAppearance;
 
+- (void)setupBaiduMobStat;
+
 - (void)onLogin:(EntityLoginInfo*)loginInfo;
 
 - (void)onLoadClassInfoList:(NSArray*)classInfoList;

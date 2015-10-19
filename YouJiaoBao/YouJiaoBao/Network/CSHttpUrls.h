@@ -41,10 +41,10 @@
 #define kServerHostForProd              @"https://www.cocobabys.com"
 
 
-#if COCOBABYS_DEV_MODEL
-    #define kServerHostUsing                kServerHostForTest
-#else
+#if COCOBABYS_USE_ENV_PROD
     #define kServerHostUsing                kServerHostForProd
+#else
+    #define kServerHostUsing                kServerHostForTest
 #endif
 
 #define kPathEmployeeLogin              @"/employee_login.do"
@@ -100,7 +100,7 @@
 // PATH: 幼儿园公告详情V2
 #define kKindergartenNewsDetailPathV2   @"/api/v2/kindergarten/%@/news/%@"
 
-// PATH: 幼儿园公告回执V2
+// PATH: 幼儿园公告回执V2 /api/v2/kindergarten/:kg/news/:newsId/reader 
 #define kKindergartenNewsMarkedPathV2   @"/api/v2/kindergarten/%@/news/%@/reader"
 
 // PATH: 查询幼儿园公告回执状态V2

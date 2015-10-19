@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@class ModelClassData;
+@class ModelBaseData;
 
 @interface CSClassHeaderView : UIView
 
-@property (nonatomic, strong) ModelClassData* modelData;
+@property (nonatomic, strong) ModelBaseData* modelData;
 @property (nonatomic, weak) id delegate;
 
 + (instancetype)defaultClassHeaderView;

@@ -13,13 +13,32 @@
 #import "CSClassHeaderView.h"
 #import "CSStudentPickerHeaderView.h"
 
-@interface ModelClassData : NSObject
+@interface ModelBaseData : NSObject
+@property (nonatomic, assign) BOOL expand;
 
+- (NSString*)title;
+- (NSString*)detail;
+
+@end
+
+@interface ModelClassData : ModelBaseData
 @property (nonatomic, strong) EntityClassInfo* classInfo;
 @property (nonatomic, strong) NSArray* childrenList;
 @property (nonatomic, strong) CSClassHeaderView* classHeaderView;
+
+@end
+
+@interface ModelStudentPickerData : ModelBaseData
+@property (nonatomic, strong) EntityClassInfo* classInfo;
+@property (nonatomic, strong) NSArray* childrenList;
 @property (nonatomic, strong) CSStudentPickerHeaderView* studentPickerHeaderView;
 
-@property (nonatomic, assign) BOOL expand;
+@end
+
+@interface ModelReaderData : ModelBaseData
+@property (nonatomic, strong) EntityClassInfo* classInfo;
+@property (nonatomic, strong) NSArray* childrenList;
+@property (nonatomic, strong) NSMutableSet* childrenReaders;
+@property (nonatomic, strong) CSClassHeaderView* classHeaderView;
 
 @end

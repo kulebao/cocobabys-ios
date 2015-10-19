@@ -11,10 +11,17 @@
 #import "UIWebView+CSKit.h"
 #import "CSUtils.h"
 #import "EntityClassInfoHelper.h"
+#import "CSHttpClient.h"
+#import "CSAppDelegate.h"
+#import "CSEngine.h"
+#import "EntityParentInfoHelper.h"
+#import "CSNewsInfoReaderTableViewController.h"
 
 @interface CSNewsInfoDetailViewController () <UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *btnCheckList;
+- (IBAction)onBtnCheckListClicked:(id)sender;
 
 @end
 
@@ -36,6 +43,12 @@
     // Do any additional setup after loading the view.
     [self customizeBackBarItem];
     
+    if (self.newsInfo.feedbackRequired.integerValue > 0) {
+    }
+    else {
+        self.navigationItem.rightBarButtonItem = nil;
+    }
+    
     [self.webView hideGradientBackground];
     self.webView.delegate = self;
     self.webView.scalesPageToFit = YES;
@@ -48,7 +61,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -56,8 +68,12 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"segue.news.reader"]) {
+        CSNewsInfoReaderTableViewController* ctrl = segue.destinationViewController;
+        ctrl.newsInfo = self.newsInfo;
+        ctrl.readerList = sender;
+    }
 }
-*/
 
 #pragma mark - Private
 - (NSString*)tagTitle {
@@ -140,6 +156,43 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     [self.indicatorView stopAnimating];
+}
+
+#pragma mark - UI
+- (IBAction)onBtnCheckListClicked:(id)sender {
+    CSLog(@"%s", __FUNCTION__);
+    
+//    if (self.newsInfo.classId.integerValue > 0) {
+//        CSLog(@"班级 %@", self.newsInfo.classId);
+//    }
+//    else {
+//        CSLog(@"全园");
+//    }
+    
+    CSHttpClient* http = [CSHttpClient sharedInstance];
+    CSEngine* engine = [CSEngine sharedInstance];
+    
+    id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
+        [gApp hideAlert];
+        
+        NSArray* readers = [EntityParentInfoHelper updateEntities:responseObject];
+        //CSLog(@"readers = %@", readers);
+        [self openReaderList:readers];
+    };
+    
+    id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        [gApp hideAlert];
+    };
+
+    [gApp waitingAlert:@"正在查询回执情况..."];
+    [http opGetNewsReaders:self.newsInfo.newsId
+            inKindergarten:engine.loginInfo.schoolId.integerValue
+                   success:success
+                   failure:failure];
+}
+
+- (void)openReaderList:(NSArray*)readerList {
+    [self performSegueWithIdentifier:@"segue.news.reader" sender:readerList];
 }
 
 @end

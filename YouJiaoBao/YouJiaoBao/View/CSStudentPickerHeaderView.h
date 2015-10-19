@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@class ModelClassData;
+@class ModelStudentPickerData;
 
 @interface CSStudentPickerHeaderView : UIView
 
-@property (nonatomic, strong) ModelClassData* modelData;
+@property (nonatomic, strong) ModelStudentPickerData* modelData;
 @property (nonatomic, weak)  NSMutableSet* sharedSelectedChildren;
 
 @property (nonatomic, weak) id delegate;

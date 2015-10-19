@@ -9,7 +9,7 @@
         <!--Navigation Controller-->
         <scene sceneID="jQf-Dy-DXn">
             <objects>
-                <navigationController id="Unv-SB-3EC" sceneMemberID="viewController">
+                <navigationController id="Unv-SB-3EC" customClass="CSNavigationController" sceneMemberID="viewController">
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="SYX-UE-ALg">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

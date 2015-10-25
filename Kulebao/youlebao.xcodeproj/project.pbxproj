@@ -123,7 +123,14 @@
 		09219A5718C48A2100166228 /* CSKuleEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 09219A5618C48A2100166228 /* CSKuleEngine.m */; };
 		09219A5A18C4999C00166228 /* CSKuleLoginInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09219A5918C4999B00166228 /* CSKuleLoginInfo.m */; };
 		092294E41AB9A7E600E40C84 /* CSVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 092294E31AB9A7E600E40C84 /* CSVideoView.m */; };
-		092B86F51AAFF01200C9C4F0 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 092B86F41AAFF01200C9C4F0 /* libiconv.dylib */; };
+		092513741BDD38B100E6CFEB /* CSKuleSettings2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 092513731BDD38B100E6CFEB /* CSKuleSettings2ViewController.m */; settings = {ASSET_TAGS = (); }; };
+		0925137E1BDD417400E6CFEB /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0925137D1BDD417300E6CFEB /* libstdc++.tbd */; };
+		092513801BDD418700E6CFEB /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0925137F1BDD418700E6CFEB /* libsqlite3.tbd */; };
+		092513821BDD41C200E6CFEB /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 092513811BDD41C200E6CFEB /* libz.tbd */; };
+		092513851BDD41DC00E6CFEB /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 092513831BDD41DC00E6CFEB /* libiconv.tbd */; };
+		092513861BDD41DC00E6CFEB /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 092513841BDD41DC00E6CFEB /* libicucore.tbd */; };
+		092513891BDD44E800E6CFEB /* BaiduMapAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 092513871BDD44E800E6CFEB /* BaiduMapAPI.framework */; settings = {ASSET_TAGS = (); }; };
+		0925138A1BDD44E800E6CFEB /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 092513881BDD44E800E6CFEB /* mapapi.bundle */; settings = {ASSET_TAGS = (); }; };
 		0932A67E1AFA870E00961861 /* CSKuleDeveloperSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0932A67D1AFA870E00961861 /* CSKuleDeveloperSettingsViewController.m */; };
 		0934EFEF18BF559900E30ECA /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 0934EFDB18BF559900E30ECA /* Default.png */; };
 		0934EFF018BF559900E30ECA /* guide-1-568h.png in Resources */ = {isa = PBXBuildFile; fileRef = 0934EFDC18BF559900E30ECA /* guide-1-568h.png */; };
@@ -177,7 +184,6 @@
 		0942B1661AE3E559008D3BDA /* ELCAssetTablePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0942B15A1AE3E559008D3BDA /* ELCAssetTablePicker.xib */; };
 		0942B1671AE3E559008D3BDA /* Overlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 0942B15B1AE3E559008D3BDA /* Overlay.png */; };
 		0942B1681AE3E559008D3BDA /* Overlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0942B15C1AE3E559008D3BDA /* Overlay@2x.png */; };
-		09434DC61B404DFA00DFDC33 /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 09434DC51B404DFA00DFDC33 /* mapapi.bundle */; };
 		09434DC81B404E3E00DFDC33 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09434DC71B404E3D00DFDC33 /* OpenGLES.framework */; };
 		09434DCD1B4058D500DFDC33 /* v2-btn_star_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 09434DC91B4058D500DFDC33 /* v2-btn_star_bg.png */; };
 		09434DCE1B4058D500DFDC33 /* v2-btn_star_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09434DCA1B4058D500DFDC33 /* v2-btn_star_bg@2x.png */; };
@@ -196,7 +202,6 @@
 		094373DA199D018900EDD64C /* EntityMediaInfoHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 094373D9199D018900EDD64C /* EntityMediaInfoHelper.m */; };
 		09443A1B1B4A685900EE5986 /* v2-接送消息.png in Resources */ = {isa = PBXBuildFile; fileRef = 09443A1A1B4A685900EE5986 /* v2-接送消息.png */; };
 		094591221B3F05D300EF4458 /* libBPush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 094591211B3F05D300EF4458 /* libBPush.a */; };
-		094710511B842E2D004EC56D /* BaiduMapAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09434DC31B404DA300DFDC33 /* BaiduMapAPI.framework */; };
 		0948079D1B46B61700FB74B4 /* v2-bus-pin.png in Resources */ = {isa = PBXBuildFile; fileRef = 0948079B1B46B61700FB74B4 /* v2-bus-pin.png */; };
 		0948079E1B46B61700FB74B4 /* v2-bus-pin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0948079C1B46B61700FB74B4 /* v2-bus-pin@2x.png */; };
 		094D909D1B6A7E310045D0AB /* v2-app-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 094D909B1B6A7E310045D0AB /* v2-app-icon.png */; };
@@ -225,7 +230,6 @@
 		09A9EBD218C090E200D83119 /* CSKuleAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A9EBD118C090E200D83119 /* CSKuleAuthViewController.m */; };
 		09A9EBD518C0A01B00D83119 /* CSKuleMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A9EBD418C0A01B00D83119 /* CSKuleMainViewController.m */; };
 		09A9EBD818C0A02800D83119 /* CSKuleSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A9EBD718C0A02800D83119 /* CSKuleSettingsViewController.m */; };
-		09ABB1011BAF0F7900B9C887 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 09142DBC18E274EB00E5848F /* libstdc++.dylib */; };
 		09AC5A321AAC9BA200C88ECE /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09F74CCF1997D10C001555D0 /* libopencore-amrnb.a */; };
 		09AC5A331AAC9BAA00C88ECE /* libHM_hmsdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 093C20EF199915B400A12F1A /* libHM_hmsdk.a */; };
 		09AC5A3C1AACBB2200C88ECE /* video_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 09AC5A3A1AACBB2200C88ECE /* video_icon.png */; };
@@ -252,7 +256,6 @@
 		09BA1BE818BB2FC700760182 /* whiteArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09BA1BDC18BB2FC700760182 /* whiteArrow@2x.png */; };
 		09BA1BEA18BB2FE100760182 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09BA1BE918BB2FE100760182 /* QuartzCore.framework */; };
 		09BA1C0418BB34B000760182 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09BA1C0318BB34B000760182 /* CoreTelephony.framework */; };
-		09BA1C0618BB34B500760182 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 09BA1C0518BB34B500760182 /* libz.dylib */; };
 		09BA1C0818BB34BD00760182 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09BA1C0718BB34BD00760182 /* SystemConfiguration.framework */; };
 		09BA1C0C18BB351700760182 /* PullTableViewLan.strings in Resources */ = {isa = PBXBuildFile; fileRef = 09BA1C0B18BB351700760182 /* PullTableViewLan.strings */; };
 		09BA1C2E18BB412600760182 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09BA1C2D18BB412600760182 /* MobileCoreServices.framework */; };
@@ -267,9 +270,8 @@
 		09C00FA91B443DA400FC1474 /* ShareSDKFlatShareViewUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 09C00F9F1B443DA400FC1474 /* ShareSDKFlatShareViewUI.bundle */; };
 		09C00FAA1B443DA400FC1474 /* ShareSDKFlatShareViewUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C00FA01B443DA400FC1474 /* ShareSDKFlatShareViewUI.framework */; };
 		09C00FAB1B443DA400FC1474 /* ShareSDKShareActionSheet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C00FA11B443DA400FC1474 /* ShareSDKShareActionSheet.framework */; };
-		09C00FAD1B44407600FC1474 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C00FAC1B44407600FC1474 /* libicucore.dylib */; };
 		09C00FAF1B44408D00FC1474 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C00FAE1B44408C00FC1474 /* Security.framework */; };
-		09C00FB21B4454D500FC1474 /* CSKuleBusMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C00FB11B4454D500FC1474 /* CSKuleBusMainViewController.m */; };
+		09C00FB21B4454D500FC1474 /* CSKuleBusMainViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 09C00FB11B4454D500FC1474 /* CSKuleBusMainViewController.mm */; };
 		09C1C75F18BD92990040B06D /* AFJSONRequestOperation+CSKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C1C75C18BD92990040B06D /* AFJSONRequestOperation+CSKit.m */; };
 		09C1C76018BD92990040B06D /* CSHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C1C75E18BD92990040B06D /* CSHttpClient.m */; };
 		09C1C76618BD973B0040B06D /* NSDictionary+CSKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C1C76518BD973B0040B06D /* NSDictionary+CSKit.m */; };
@@ -505,7 +507,6 @@
 		09F74CB41997C4F3001555D0 /* self.png in Resources */ = {isa = PBXBuildFile; fileRef = 09F74C581997C4F3001555D0 /* self.png */; };
 		09F74CB61997C4F3001555D0 /* setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 09F74C5A1997C4F3001555D0 /* setting.png */; };
 		09F74CBA1997C4F3001555D0 /* sms.png in Resources */ = {isa = PBXBuildFile; fileRef = 09F74C5E1997C4F3001555D0 /* sms.png */; };
-		09F74CBB1997C4F3001555D0 /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = 09F74C5F1997C4F3001555D0 /* star.png */; };
 		09F74CBC1997C4F3001555D0 /* star_grey.png in Resources */ = {isa = PBXBuildFile; fileRef = 09F74C601997C4F3001555D0 /* star_grey.png */; };
 		09F74CBD1997C4F3001555D0 /* star_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 09F74C611997C4F3001555D0 /* star_red.png */; };
 		09F74CBF1997C4F3001555D0 /* text_normal.9.png in Resources */ = {isa = PBXBuildFile; fileRef = 09F74C631997C4F3001555D0 /* text_normal.9.png */; };
@@ -756,6 +757,15 @@
 		09219A5918C4999B00166228 /* CSKuleLoginInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleLoginInfo.m; sourceTree = "<group>"; };
 		092294E21AB9A7E600E40C84 /* CSVideoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSVideoView.h; sourceTree = "<group>"; };
 		092294E31AB9A7E600E40C84 /* CSVideoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSVideoView.m; sourceTree = "<group>"; };
+		092513721BDD38B100E6CFEB /* CSKuleSettings2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleSettings2ViewController.h; sourceTree = "<group>"; };
+		092513731BDD38B100E6CFEB /* CSKuleSettings2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleSettings2ViewController.m; sourceTree = "<group>"; };
+		0925137D1BDD417300E6CFEB /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
+		0925137F1BDD418700E6CFEB /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		092513811BDD41C200E6CFEB /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		092513831BDD41DC00E6CFEB /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
+		092513841BDD41DC00E6CFEB /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
+		092513871BDD44E800E6CFEB /* BaiduMapAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BaiduMapAPI.framework; sourceTree = "<group>"; };
+		092513881BDD44E800E6CFEB /* mapapi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = mapapi.bundle; sourceTree = "<group>"; };
 		092B86F41AAFF01200C9C4F0 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
 		0932A67C1AFA870E00961861 /* CSKuleDeveloperSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleDeveloperSettingsViewController.h; sourceTree = "<group>"; };
 		0932A67D1AFA870E00961861 /* CSKuleDeveloperSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleDeveloperSettingsViewController.m; sourceTree = "<group>"; };
@@ -834,8 +844,6 @@
 		0942B15A1AE3E559008D3BDA /* ELCAssetTablePicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ELCAssetTablePicker.xib; sourceTree = "<group>"; };
 		0942B15B1AE3E559008D3BDA /* Overlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Overlay.png; sourceTree = "<group>"; };
 		0942B15C1AE3E559008D3BDA /* Overlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Overlay@2x.png"; sourceTree = "<group>"; };
-		09434DC31B404DA300DFDC33 /* BaiduMapAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BaiduMapAPI.framework; sourceTree = "<group>"; };
-		09434DC51B404DFA00DFDC33 /* mapapi.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = mapapi.bundle; sourceTree = "<group>"; };
 		09434DC71B404E3D00DFDC33 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		09434DC91B4058D500DFDC33 /* v2-btn_star_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-btn_star_bg.png"; sourceTree = "<group>"; };
 		09434DCA1B4058D500DFDC33 /* v2-btn_star_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-btn_star_bg@2x.png"; sourceTree = "<group>"; };
@@ -965,7 +973,7 @@
 		09C00FAC1B44407600FC1474 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		09C00FAE1B44408C00FC1474 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		09C00FB01B4454D500FC1474 /* CSKuleBusMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleBusMainViewController.h; sourceTree = "<group>"; };
-		09C00FB11B4454D500FC1474 /* CSKuleBusMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleBusMainViewController.m; sourceTree = "<group>"; };
+		09C00FB11B4454D500FC1474 /* CSKuleBusMainViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CSKuleBusMainViewController.mm; sourceTree = "<group>"; };
 		09C1C75B18BD92990040B06D /* AFJSONRequestOperation+CSKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AFJSONRequestOperation+CSKit.h"; sourceTree = "<group>"; };
 		09C1C75C18BD92990040B06D /* AFJSONRequestOperation+CSKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AFJSONRequestOperation+CSKit.m"; sourceTree = "<group>"; };
 		09C1C75D18BD92990040B06D /* CSHttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSHttpClient.h; sourceTree = "<group>"; };
@@ -1229,7 +1237,7 @@
 		09F74C581997C4F3001555D0 /* self.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = self.png; sourceTree = "<group>"; };
 		09F74C5A1997C4F3001555D0 /* setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting.png; sourceTree = "<group>"; };
 		09F74C5E1997C4F3001555D0 /* sms.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sms.png; sourceTree = "<group>"; };
-		09F74C5F1997C4F3001555D0 /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star.png; sourceTree = "<group>"; };
+		09F74C5F1997C4F3001555D0 /* star@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star@2x.png"; sourceTree = "<group>"; };
 		09F74C601997C4F3001555D0 /* star_grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star_grey.png; sourceTree = "<group>"; };
 		09F74C611997C4F3001555D0 /* star_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star_red.png; sourceTree = "<group>"; };
 		09F74C631997C4F3001555D0 /* text_normal.9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = text_normal.9.png; sourceTree = "<group>"; };
@@ -1324,13 +1332,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				09ABB1011BAF0F7900B9C887 /* libstdc++.dylib in Frameworks */,
+				092513851BDD41DC00E6CFEB /* libiconv.tbd in Frameworks */,
+				092513861BDD41DC00E6CFEB /* libicucore.tbd in Frameworks */,
+				092513821BDD41C200E6CFEB /* libz.tbd in Frameworks */,
+				092513801BDD418700E6CFEB /* libsqlite3.tbd in Frameworks */,
+				09BA1C0418BB34B000760182 /* CoreTelephony.framework in Frameworks */,
+				0925137E1BDD417400E6CFEB /* libstdc++.tbd in Frameworks */,
 				09E209E91B88718700059CC1 /* MapKit.framework in Frameworks */,
 				09C00FAF1B44408D00FC1474 /* Security.framework in Frameworks */,
-				09C00FAD1B44407600FC1474 /* libicucore.dylib in Frameworks */,
-				09BA1C0418BB34B000760182 /* CoreTelephony.framework in Frameworks */,
 				09434DC81B404E3E00DFDC33 /* OpenGLES.framework in Frameworks */,
-				092B86F51AAFF01200C9C4F0 /* libiconv.dylib in Frameworks */,
 				0979FE311AAF532D00B58F41 /* MediaPlayer.framework in Frameworks */,
 				09C00FA81B443DA400FC1474 /* ShareSDK.framework in Frameworks */,
 				0979FE2F1AAF532500B58F41 /* CoreMedia.framework in Frameworks */,
@@ -1339,12 +1349,12 @@
 				09F74CC51997CB1E001555D0 /* AVFoundation.framework in Frameworks */,
 				0902CAA818F4200A001901A8 /* AudioToolbox.framework in Frameworks */,
 				09142DBB18E274B400E5848F /* CoreLocation.framework in Frameworks */,
-				094710511B842E2D004EC56D /* BaiduMapAPI.framework in Frameworks */,
 				09C00FA61B443DA400FC1474 /* ShareSDKCoreService.framework in Frameworks */,
 				09C00FAA1B443DA400FC1474 /* ShareSDKFlatShareViewUI.framework in Frameworks */,
 				09C00FA21B443DA400FC1474 /* WeChatConnection.framework in Frameworks */,
 				09148E5418DAEED300D08F63 /* CoreData.framework in Frameworks */,
 				09C00FAB1B443DA400FC1474 /* ShareSDKShareActionSheet.framework in Frameworks */,
+				092513891BDD44E800E6CFEB /* BaiduMapAPI.framework in Frameworks */,
 				09C00FA31B443DA400FC1474 /* AGCommon.framework in Frameworks */,
 				090CC93218DA8A96007781CB /* CoreText.framework in Frameworks */,
 				0902782818C9C060002B9644 /* MessageUI.framework in Frameworks */,
@@ -1355,7 +1365,6 @@
 				09AC5A331AAC9BAA00C88ECE /* libHM_hmsdk.a in Frameworks */,
 				094591221B3F05D300EF4458 /* libBPush.a in Frameworks */,
 				09BA1C0818BB34BD00760182 /* SystemConfiguration.framework in Frameworks */,
-				09BA1C0618BB34B500760182 /* libz.dylib in Frameworks */,
 				09BA1BEA18BB2FE100760182 /* QuartzCore.framework in Frameworks */,
 				09142DAF18E2713C00E5848F /* libBaiduMobStat.a in Frameworks */,
 				09BA1B9318BB2AB300760182 /* CoreGraphics.framework in Frameworks */,
@@ -1713,6 +1722,8 @@
 				090C9EC318C84E9F00883DE0 /* CSKuleSelectChildViewController.m */,
 				09A9EBD618C0A02800D83119 /* CSKuleSettingsViewController.h */,
 				09A9EBD718C0A02800D83119 /* CSKuleSettingsViewController.m */,
+				092513721BDD38B100E6CFEB /* CSKuleSettings2ViewController.h */,
+				092513731BDD38B100E6CFEB /* CSKuleSettings2ViewController.m */,
 				0915662018ED92810073AE22 /* CSKuleVerifyMobileViewController.h */,
 				0915662118ED92810073AE22 /* CSKuleVerifyMobileViewController.m */,
 				09C3AC22199DAC8600A6251C /* CSContentEditorViewController.h */,
@@ -1725,7 +1736,7 @@
 				0932A67C1AFA870E00961861 /* CSKuleDeveloperSettingsViewController.h */,
 				0932A67D1AFA870E00961861 /* CSKuleDeveloperSettingsViewController.m */,
 				09C00FB01B4454D500FC1474 /* CSKuleBusMainViewController.h */,
-				09C00FB11B4454D500FC1474 /* CSKuleBusMainViewController.m */,
+				09C00FB11B4454D500FC1474 /* CSKuleBusMainViewController.mm */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -1805,8 +1816,8 @@
 		09434DC21B404D9300DFDC33 /* BaiduMap */ = {
 			isa = PBXGroup;
 			children = (
-				09434DC51B404DFA00DFDC33 /* mapapi.bundle */,
-				09434DC31B404DA300DFDC33 /* BaiduMapAPI.framework */,
+				092513871BDD44E800E6CFEB /* BaiduMapAPI.framework */,
+				092513881BDD44E800E6CFEB /* mapapi.bundle */,
 			);
 			path = BaiduMap;
 			sourceTree = "<group>";
@@ -1894,6 +1905,11 @@
 		09BA1B8F18BB2AB300760182 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				092513831BDD41DC00E6CFEB /* libiconv.tbd */,
+				092513841BDD41DC00E6CFEB /* libicucore.tbd */,
+				092513811BDD41C200E6CFEB /* libz.tbd */,
+				0925137F1BDD418700E6CFEB /* libsqlite3.tbd */,
+				0925137D1BDD417300E6CFEB /* libstdc++.tbd */,
 				09E209E81B88718700059CC1 /* MapKit.framework */,
 				09C00FAE1B44408C00FC1474 /* Security.framework */,
 				09C00FAC1B44407600FC1474 /* libicucore.dylib */,
@@ -2412,7 +2428,7 @@
 				09F74C581997C4F3001555D0 /* self.png */,
 				09F74C5A1997C4F3001555D0 /* setting.png */,
 				09F74C5E1997C4F3001555D0 /* sms.png */,
-				09F74C5F1997C4F3001555D0 /* star.png */,
+				09F74C5F1997C4F3001555D0 /* star@2x.png */,
 				09F74C601997C4F3001555D0 /* star_grey.png */,
 				09F74C611997C4F3001555D0 /* star_red.png */,
 				09F74C631997C4F3001555D0 /* text_normal.9.png */,
@@ -2630,7 +2646,6 @@
 				09F0BFB318F1C671004629BA /* CSKuleDatePickerViewController.xib in Resources */,
 				09D9BBEC1AEE933D009456ED /* v2-btn_发送回执@2x.png in Resources */,
 				09F74CBA1997C4F3001555D0 /* sms.png in Resources */,
-				09F74CBB1997C4F3001555D0 /* star.png in Resources */,
 				09F74C8D1997C4F3001555D0 /* exp_input.9.png in Resources */,
 				09D9BBDA1AEE933D009456ED /* v2-btn_mic@2x.png in Resources */,
 				09E7097B1AF393B000628FF9 /* v2-点击头像弹出框.png in Resources */,
@@ -2666,7 +2681,6 @@
 				09D8590A1BA06B7000653613 /* v2-ios_btn_more.png in Resources */,
 				09F74CBC1997C4F3001555D0 /* star_grey.png in Resources */,
 				09142E2F18E2DE1B00E5848F /* arrow-right@2x.png in Resources */,
-				09434DC61B404DFA00DFDC33 /* mapapi.bundle in Resources */,
 				09F74CBF1997C4F3001555D0 /* text_normal.9.png in Resources */,
 				09F74CBD1997C4F3001555D0 /* star_red.png in Resources */,
 				09E709791AF393B000628FF9 /* v2-pic-default.png in Resources */,
@@ -2984,6 +2998,7 @@
 				09E7097E1AF393B000628FF9 /* v2-食谱@2x.png in Resources */,
 				09F74CC31997C4F3001555D0 /* write_chat.png in Resources */,
 				09C00FA51B443DA400FC1474 /* Resource.bundle in Resources */,
+				0925138A1BDD44E800E6CFEB /* mapapi.bundle in Resources */,
 				09FE1ED919B5D53F0073D9D4 /* v3_3@2x.png in Resources */,
 				09F74C961997C4F3001555D0 /* homework_item.png in Resources */,
 				09FEA72618DC9D9600513C87 /* news-bg.png in Resources */,
@@ -3051,13 +3066,14 @@
 				096DC1C31BA33F4000661B61 /* UIGestureRecognizer+GMGridViewAdditions.m in Sources */,
 				09ED59BC18CDC5E800187585 /* CSKuleCookbookInfo.m in Sources */,
 				09FFB5F118D6B2E100F07B0A /* CSKuleWeekScheduleInfo.m in Sources */,
-				09C00FB21B4454D500FC1474 /* CSKuleBusMainViewController.m in Sources */,
+				09C00FB21B4454D500FC1474 /* CSKuleBusMainViewController.mm in Sources */,
 				0901207219338B3800CE506E /* UIImage+CSExtends.m in Sources */,
 				0904553219BDB8CA00FEF2C9 /* CSKuleVideoMember.m in Sources */,
 				09514FED1B84EDE5005217B7 /* CSJsonEntityData.m in Sources */,
 				096DC1C11BA33F4000661B61 /* GMGridViewCell.m in Sources */,
 				090FC122199B3FC300C3A31A /* PaintingView.m in Sources */,
 				091AE82F18D820C800EBC927 /* UIColor+expanded.m in Sources */,
+				092513741BDD38B100E6CFEB /* CSKuleSettings2ViewController.m in Sources */,
 				09FE6AF918C5B97100A840BE /* CSKuleRecipeCell.m in Sources */,
 				09BA1BE018BB2FC700760182 /* PullTableView.m in Sources */,
 				09F0BFAE18F1C483004629BA /* UIViewController+MJPopupViewController.m in Sources */,
@@ -3276,6 +3292,7 @@
 					"$(PROJECT_DIR)/Venders/ShareSDK",
 					"$(PROJECT_DIR)/Venders/ShareSDK/UI",
 				);
+				GCC_INPUT_FILETYPE = automatic;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Kulebao/youlebao-Prefix.pch";
@@ -3348,6 +3365,7 @@
 					"$(PROJECT_DIR)/Venders/ShareSDK",
 					"$(PROJECT_DIR)/Venders/ShareSDK/UI",
 				);
+				GCC_INPUT_FILETYPE = automatic;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Kulebao/youlebao-Prefix.pch";
 				GCC_VERSION = "";

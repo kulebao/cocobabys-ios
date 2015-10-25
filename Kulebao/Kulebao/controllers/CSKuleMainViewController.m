@@ -910,7 +910,7 @@
 }
 
 - (IBAction)onBtnSettingsClicked:(id)sender {
-    [self performSegueWithIdentifier:@"segue.settings" sender:nil];
+    [self performSegueWithIdentifier:@"segue.settings.new" sender:nil];
 }
 
 - (IBAction)onBtnSchoolInfoClicked:(id)sender {

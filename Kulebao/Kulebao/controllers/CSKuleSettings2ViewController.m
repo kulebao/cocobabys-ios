@@ -7,9 +7,15 @@
 //
 
 #import "CSKuleSettings2ViewController.h"
+#import "AHAlertView.h"
+#import "CSAppDelegate.h"
+#import "UIImageView+WebCache.h"
 
 @interface CSKuleSettings2ViewController ()
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellDev;
+@property (weak, nonatomic) IBOutlet UILabel *labName;
+@property (weak, nonatomic) IBOutlet UIImageView *imgPortrait;
+- (IBAction)onBtnPortraitClicked:(id)sender;
 
 @end
 
@@ -25,8 +31,16 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     [self customizeBackBarItem];
+    self.imgPortrait.layer.cornerRadius = self.imgPortrait.bounds.size.width/2.0;
+    self.imgPortrait.clipsToBounds = YES;
     
-    self.cellDev.hidden = YES;
+    self.labName.text = [NSString stringWithFormat:@"%@ %@\n%@", gApp.engine.currentRelationship.relationship, gApp.engine.currentRelationship.parent.name, gApp.engine.currentRelationship.parent.phone];
+    
+    NSURL* qiniuImgUrl = [gApp.engine urlFromPath:gApp.engine.currentRelationship.parent.portrait];
+    qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/256/h/256"];
+    
+    [self.imgPortrait sd_setImageWithURL:qiniuImgUrl
+                        placeholderImage:[UIImage imageNamed:@"v2-pic-default.png"]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,7 +49,11 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    NSInteger numberOfSections = 2;
+    if (COCOBABYS_DEV_MODEL) {
+        numberOfSections = 3;
+    }
+    return numberOfSections;
 }
 
 
@@ -107,4 +125,62 @@
 */
 
 #endif
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    NSInteger section = indexPath.section;
+    NSInteger row = indexPath.row;
+    if (section==1 && row==4) {
+        // Exit
+        [self onLogoutClicked];
+    }
+    else if (section==2 && row==0) {
+        // DEV
+    }
+}
+
+- (void)onLogoutClicked {
+    NSString *title = @"提示";
+    NSString *message = @"确定要退出登录？退出后无法接收任何消息！";
+    
+    AHAlertView *alert = [[AHAlertView alloc] initWithTitle:title message:message];
+    
+    [alert setCancelButtonTitle:@"取消" block:^{
+    }];
+    
+    [alert addButtonWithTitle:@"确定" block:^{
+        [self performSelector:@selector(doLogout) withObject:nil];
+    }];
+    
+    [alert show];
+}
+
+#pragma mark - Private
+- (void)doLogout {
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+        CSKuleBindInfo* bindInfo = [CSKuleInterpreter decodeBindInfo:dataJson];
+        if (bindInfo.errorCode == 0) {
+            [gApp hideAlert];
+        }
+        else {
+            CSLog(@"doReceiveBindInfo error_code=%d", bindInfo.errorCode);
+            [gApp alert:@"解除绑定失败。"];
+        }
+        
+        [gApp logout];
+    };
+    
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        CSLog(@"failure:%@", error);
+        [gApp alert:error.localizedDescription];
+        [gApp logout];
+    };
+    
+    [gApp waitingAlert:@"注销登录..."];
+    [gApp.engine reqUnbindWithSuccess:sucessHandler failure:failureHandler];
+}
+
+- (IBAction)onBtnPortraitClicked:(id)sender {
+}
 @end

@@ -10,7 +10,6 @@
 #import "CSAppDelegate.h"
 #import "BPush.h"
 
-
 @interface CSKuleRootViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *imgBg;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorLoading;

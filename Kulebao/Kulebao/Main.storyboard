@@ -20,7 +20,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="v2-启动界面.png" translatesAutoresizingMaskIntoConstraints="NO" id="JaV-fq-RO6">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="v2-启动界面-2208.png" translatesAutoresizingMaskIntoConstraints="NO" id="JaV-fq-RO6">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
                         </subviews>
@@ -1240,6 +1240,9 @@
                                             <state key="normal">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
+                                            <connections>
+                                                <action selector="onBtnPortraitClicked:" destination="fhk-xp-VBg" eventType="touchUpInside" id="UbE-lm-PoT"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1261,8 +1264,8 @@
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="妈妈 张小娴 13512341234" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bWp-Nk-jIy">
-                                    <rect key="frame" x="132" y="40" width="99" height="39"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <rect key="frame" x="132" y="38" width="111" height="43"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                     <color key="textColor" red="0.12549019610000001" green="0.56862745100000001" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -1469,7 +1472,7 @@
                                                     <rect key="frame" x="56" y="0.0" width="229" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.12549019610000001" green="0.56862745100000001" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="v2-update_logo" id="dpV-UX-WF5">
@@ -1478,6 +1481,7 @@
                                                 </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.90196078430000004" green="0.96470588239999999" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <segue destination="SFa-8h-5LP" kind="push" id="sqj-9c-7rO"/>
                                         </connections>
@@ -1493,11 +1497,13 @@
                     <navigationItem key="navigationItem" title="设置" id="1dA-aU-jl7"/>
                     <connections>
                         <outlet property="cellDev" destination="fBe-wC-5XQ" id="d8W-9f-FeG"/>
+                        <outlet property="imgPortrait" destination="yV8-1e-8NX" id="wGO-xy-6MI"/>
+                        <outlet property="labName" destination="bWp-Nk-jIy" id="NTk-bJ-czz"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kHh-XJ-KFX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1521" y="5137"/>
+            <point key="canvasLocation" x="-1517" y="4873"/>
         </scene>
         <!--校园公告-->
         <scene sceneID="jEC-2w-Oh7">
@@ -3562,7 +3568,7 @@
         <image name="v2-pic-default.png" width="41" height="41"/>
         <image name="v2-quit_logo" width="26" height="26"/>
         <image name="v2-update_logo" width="26" height="26"/>
-        <image name="v2-启动界面.png" width="320" height="548"/>
+        <image name="v2-启动界面-2208.png" width="621" height="1104"/>
         <image name="v2-头像框.png" width="110" height="110"/>
         <image name="v2-课程表表格-1.png" width="309" height="308"/>
         <image name="video_icon.png" width="37" height="37"/>

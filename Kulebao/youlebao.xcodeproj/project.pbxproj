@@ -25,6 +25,7 @@
 		0904FC9518F3A349001968D7 /* btn-start.png in Resources */ = {isa = PBXBuildFile; fileRef = 0904FC9118F3A349001968D7 /* btn-start.png */; };
 		0904FC9618F3A349001968D7 /* btn-start@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0904FC9218F3A349001968D7 /* btn-start@2x.png */; };
 		0904FC9918F3BDED001968D7 /* CSKuleEmployeeInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0904FC9818F3BDED001968D7 /* CSKuleEmployeeInfo.m */; };
+		090903581BDEA84300FDD2CE /* v2-启动界面-2208@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 090903571BDEA84300FDD2CE /* v2-启动界面-2208@2x.png */; settings = {ASSET_TAGS = (); }; };
 		090C9EB018C813BD00883DE0 /* CSKulePreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 090C9EAF18C813BD00883DE0 /* CSKulePreferences.m */; };
 		090C9EB318C81D7500883DE0 /* CSKuleInterpreter.m in Sources */ = {isa = PBXBuildFile; fileRef = 090C9EB218C81D7500883DE0 /* CSKuleInterpreter.m */; };
 		090C9EB818C83D2C00883DE0 /* msg-bg-from.png in Resources */ = {isa = PBXBuildFile; fileRef = 090C9EB418C83D2C00883DE0 /* msg-bg-from.png */; };
@@ -581,6 +582,7 @@
 		0904FC9818F3BDED001968D7 /* CSKuleEmployeeInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleEmployeeInfo.m; sourceTree = "<group>"; };
 		090903551BDE9E3300FDD2CE /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		090903561BDE9E3300FDD2CE /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iTunesArtwork@2x"; sourceTree = "<group>"; };
+		090903571BDEA84300FDD2CE /* v2-启动界面-2208@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-启动界面-2208@2x.png"; sourceTree = "<group>"; };
 		090C9EAE18C813BD00883DE0 /* CSKulePreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKulePreferences.h; sourceTree = "<group>"; };
 		090C9EAF18C813BD00883DE0 /* CSKulePreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKulePreferences.m; sourceTree = "<group>"; };
 		090C9EB118C81D7500883DE0 /* CSKuleInterpreter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleInterpreter.h; sourceTree = "<group>"; };
@@ -2091,6 +2093,7 @@
 		09D9BB471AEE933D009456ED /* images */ = {
 			isa = PBXGroup;
 			children = (
+				090903571BDEA84300FDD2CE /* v2-启动界面-2208@2x.png */,
 				094D909B1B6A7E310045D0AB /* v2-app-icon.png */,
 				094D909C1B6A7E310045D0AB /* v2-app-icon@2x.png */,
 				09D9BB481AEE933D009456ED /* v2-ack.png */,
@@ -2777,6 +2780,7 @@
 				09D9BC001AEE933D009456ED /* v2-logo2@2x.png in Resources */,
 				0904FC9318F3A349001968D7 /* btn-start-pressed.png in Resources */,
 				09D9BBF21AEE933D009456ED /* v2-btn_请回执@2x.png in Resources */,
+				090903581BDEA84300FDD2CE /* v2-启动界面-2208@2x.png in Resources */,
 				09D9BC211AEE933D009456ED /* v2-进餐@2x.png in Resources */,
 				09DDA12D1ADA9FCA004BAAF5 /* CSKuleNewsTableViewCell.xib in Resources */,
 				0911B1E718E015E9006D0588 /* star.png in Resources */,

@@ -24,6 +24,8 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    [self customizeBackBarItem];
+    
     self.cellDev.hidden = YES;
 }
 
@@ -31,6 +33,11 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
+}
+
 
 #if 0
 #pragma mark - Table view data source

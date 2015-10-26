@@ -11,7 +11,7 @@
 
 static NSString* kKeyDeviceToken = @"com.cocobabys.Kulebao.Preferences.deviceToken";
 static NSString* kKeyDefaultUsername = @"com.cocobabys.Kulebao.Preferences.defaultUsername";
-static NSString* kKeyGuideShown = @"com.cocobabys.Kulebao.Preferences.guideShown";
+static NSString* kKeyGuideShown = @"com.cocobabys.Kulebao.Preferences.guideShown_v2.6";
 static NSString* kKeyLoginInfo = @"com.cocobabys.Kulebao.Preferences.loginInfo";
 static NSString* kKeyBPushInfo = @"com.cocobabys.Kulebao.Preferences.baiduPushInfo";
 static NSString* kKeyHistoryAccounts = @"com.cocobabys.Kulebao.Preferences.historyAccounts";

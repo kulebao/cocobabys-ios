@@ -79,7 +79,7 @@
     navigationBar.tintColor = [UIColor whiteColor];
     
     self.labChildNick.text = nil;
-    self.imgChildPortrait.layer.cornerRadius = 47.0;
+    self.imgChildPortrait.layer.cornerRadius = self.imgChildPortrait.frame.size.width/2;
     self.imgChildPortrait.clipsToBounds = YES;
     
     self.btnSchoolInfo.titleLabel.numberOfLines = 2;
@@ -910,7 +910,7 @@
 }
 
 - (IBAction)onBtnSettingsClicked:(id)sender {
-    [self performSegueWithIdentifier:@"segue.settings.new" sender:nil];
+    [self performSegueWithIdentifier:@"segue.settings3" sender:nil];
 }
 
 - (IBAction)onBtnSchoolInfoClicked:(id)sender {

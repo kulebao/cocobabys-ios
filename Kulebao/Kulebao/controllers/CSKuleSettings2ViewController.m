@@ -33,19 +33,27 @@
     [self customizeBackBarItem];
     self.imgPortrait.layer.cornerRadius = self.imgPortrait.bounds.size.width/2.0;
     self.imgPortrait.clipsToBounds = YES;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
+    [self reloadData];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (void)reloadData {
     self.labName.text = [NSString stringWithFormat:@"%@ %@\n%@", gApp.engine.currentRelationship.relationship, gApp.engine.currentRelationship.parent.name, gApp.engine.currentRelationship.parent.phone];
     
     NSURL* qiniuImgUrl = [gApp.engine urlFromPath:gApp.engine.currentRelationship.parent.portrait];
     qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/256/h/256"];
     
     [self.imgPortrait sd_setImageWithURL:qiniuImgUrl
-                        placeholderImage:[UIImage imageNamed:@"v2-pic-default.png"]];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+                        placeholderImage:[UIImage imageNamed:@"chat_head_icon.gif"]];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

@@ -1212,6 +1212,54 @@
             </objects>
             <point key="canvasLocation" x="-1022" y="4873"/>
         </scene>
+        <!--接送卡管理-->
+        <scene sceneID="xea-wp-ovd">
+            <objects>
+                <viewController storyboardIdentifier="CBBindCardViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rq9-hq-N9B" customClass="CBBindCardViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2eX-fK-37f"/>
+                        <viewControllerLayoutGuide type="bottom" id="DS6-zw-4SJ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3C7-ji-vhf">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="接送卡管理" id="kAQ-QC-Z59"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vm4-fm-Gem" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2008" y="5402"/>
+        </scene>
+        <!--邀请家人-->
+        <scene sceneID="5FD-WP-iDo">
+            <objects>
+                <tableViewController storyboardIdentifier="CBCBFamilyAddViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bTW-4e-Vhn" customClass="CBCBFamilyAddViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Ook-fx-td9">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="xbL-jb-Xez">
+                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xbL-jb-Xez" id="REl-oY-FFc">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="bTW-4e-Vhn" id="4vL-Uh-Eqr"/>
+                            <outlet property="delegate" destination="bTW-4e-Vhn" id="elf-Sv-GEX"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="邀请家人" id="4ln-Be-GYd"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7sf-MO-UTy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2016" y="4706"/>
+        </scene>
         <!--设置-->
         <scene sceneID="xjP-sC-Iss">
             <objects>
@@ -1308,6 +1356,9 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.90196078430000004" green="0.96470588239999999" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <segue destination="bTW-4e-Vhn" kind="push" id="LKF-cw-Gn0"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="vxG-yB-MiB" imageView="QlR-5N-RzX" style="IBUITableViewCellStyleDefault" id="Z17-tO-eTX">
                                         <rect key="frame" x="0.0" y="180" width="320" height="44"/>
@@ -1330,6 +1381,9 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.90196078430000004" green="0.96470588239999999" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <segue destination="rq9-hq-N9B" kind="push" id="UHJ-h6-EiM"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>

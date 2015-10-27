@@ -12,6 +12,7 @@
 static NSString* kKeyDeviceToken = @"com.cocobabys.Kulebao.Preferences.deviceToken";
 static NSString* kKeyDefaultUsername = @"com.cocobabys.Kulebao.Preferences.defaultUsername";
 static NSString* kKeyGuideShown = @"com.cocobabys.Kulebao.Preferences.guideShown_v2.6";
+static NSString* kKeyGuideHomeShown = @"com.cocobabys.Kulebao.Preferences.guideHomeShown_v2.6";
 static NSString* kKeyLoginInfo = @"com.cocobabys.Kulebao.Preferences.loginInfo";
 static NSString* kKeyBPushInfo = @"com.cocobabys.Kulebao.Preferences.baiduPushInfo";
 static NSString* kKeyHistoryAccounts = @"com.cocobabys.Kulebao.Preferences.historyAccounts";
@@ -28,6 +29,7 @@ static NSString* kKeyCommercial = @"com.cocobabys.Kulebao.Preferences.commercial
 
 @synthesize defaultUsername = _defaultUsername;
 @synthesize guideShown = _guideShown;
+@synthesize guideHomeShown = _guideHomeShown;
 @synthesize loginInfo = _loginInfo;
 @synthesize deviceToken = _deviceToken;
 @synthesize historyAccounts = _historyAccounts;
@@ -55,6 +57,7 @@ static NSString* kKeyCommercial = @"com.cocobabys.Kulebao.Preferences.commercial
     _deviceToken = [_config objectForKey:kKeyDeviceToken];
     _defaultUsername = [_config objectForKey:kKeyDefaultUsername];
     _guideShown = [[_config objectForKey:kKeyGuideShown] boolValue];
+    _guideHomeShown = [[_config objectForKey:kKeyGuideHomeShown] boolValue];
     _enabledTest =  NO;//YES;// [[_config objectForKey:@"enabled_test"] boolValue];
 
 #if COCOBABYS_FEATURE_COMMERCIAL
@@ -127,6 +130,13 @@ static NSString* kKeyCommercial = @"com.cocobabys.Kulebao.Preferences.commercial
         [_config removeObjectForKey:kKeyGuideShown];
     }
     
+    if (_guideHomeShown) {
+        [_config setObject:@(_guideHomeShown) forKey:kKeyGuideHomeShown];
+    }
+    else {
+        [_config removeObjectForKey:kKeyGuideHomeShown];
+    }
+    
     if (_enabledCommercial) {
         [_config setObject:@(_enabledCommercial) forKey:kKeyCommercial];
     }
@@ -190,6 +200,11 @@ static NSString* kKeyCommercial = @"com.cocobabys.Kulebao.Preferences.commercial
 
 - (void)setGuideShown:(BOOL)guideShown {
     _guideShown = guideShown;
+    [self savePreferences];
+}
+
+- (void)setGuideHomeShown:(BOOL)guideHomeShown {
+    _guideHomeShown = guideHomeShown;
     [self savePreferences];
 }
 

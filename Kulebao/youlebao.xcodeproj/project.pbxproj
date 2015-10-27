@@ -26,6 +26,8 @@
 		0904FC9618F3A349001968D7 /* btn-start@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0904FC9218F3A349001968D7 /* btn-start@2x.png */; };
 		0904FC9918F3BDED001968D7 /* CSKuleEmployeeInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0904FC9818F3BDED001968D7 /* CSKuleEmployeeInfo.m */; };
 		090903581BDEA84300FDD2CE /* v2-启动界面-2208@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 090903571BDEA84300FDD2CE /* v2-启动界面-2208@2x.png */; settings = {ASSET_TAGS = (); }; };
+		0909035C1BDF19AB00FDD2CE /* CBBindCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0909035B1BDF19AB00FDD2CE /* CBBindCardViewController.m */; settings = {ASSET_TAGS = (); }; };
+		090903621BDF1BCD00FDD2CE /* CBCBFamilyAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 090903611BDF1BCD00FDD2CE /* CBCBFamilyAddViewController.m */; settings = {ASSET_TAGS = (); }; };
 		090C9EB018C813BD00883DE0 /* CSKulePreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 090C9EAF18C813BD00883DE0 /* CSKulePreferences.m */; };
 		090C9EB318C81D7500883DE0 /* CSKuleInterpreter.m in Sources */ = {isa = PBXBuildFile; fileRef = 090C9EB218C81D7500883DE0 /* CSKuleInterpreter.m */; };
 		090C9EB818C83D2C00883DE0 /* msg-bg-from.png in Resources */ = {isa = PBXBuildFile; fileRef = 090C9EB418C83D2C00883DE0 /* msg-bg-from.png */; };
@@ -583,6 +585,10 @@
 		090903551BDE9E3300FDD2CE /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		090903561BDE9E3300FDD2CE /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iTunesArtwork@2x"; sourceTree = "<group>"; };
 		090903571BDEA84300FDD2CE /* v2-启动界面-2208@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-启动界面-2208@2x.png"; sourceTree = "<group>"; };
+		0909035A1BDF19AB00FDD2CE /* CBBindCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBBindCardViewController.h; sourceTree = "<group>"; };
+		0909035B1BDF19AB00FDD2CE /* CBBindCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBBindCardViewController.m; sourceTree = "<group>"; };
+		090903601BDF1BCD00FDD2CE /* CBCBFamilyAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBCBFamilyAddViewController.h; sourceTree = "<group>"; };
+		090903611BDF1BCD00FDD2CE /* CBCBFamilyAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBCBFamilyAddViewController.m; sourceTree = "<group>"; };
 		090C9EAE18C813BD00883DE0 /* CSKulePreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKulePreferences.h; sourceTree = "<group>"; };
 		090C9EAF18C813BD00883DE0 /* CSKulePreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKulePreferences.m; sourceTree = "<group>"; };
 		090C9EB118C81D7500883DE0 /* CSKuleInterpreter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleInterpreter.h; sourceTree = "<group>"; };
@@ -1331,6 +1337,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		090903591BDF194D00FDD2CE /* cardmanager */ = {
+			isa = PBXGroup;
+			children = (
+				0909035A1BDF19AB00FDD2CE /* CBBindCardViewController.h */,
+				0909035B1BDF19AB00FDD2CE /* CBBindCardViewController.m */,
+				090903601BDF1BCD00FDD2CE /* CBCBFamilyAddViewController.h */,
+				090903611BDF1BCD00FDD2CE /* CBCBFamilyAddViewController.m */,
+			);
+			path = cardmanager;
+			sourceTree = "<group>";
+		};
 		090C9EBC18C846B200883DE0 /* AHAlertView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1869,6 +1886,7 @@
 		09BA1B9618BB2AB300760182 /* Kulebao */ = {
 			isa = PBXGroup;
 			children = (
+				090903591BDF194D00FDD2CE /* cardmanager */,
 				09514FE51B84E43C005217B7 /* commercial */,
 				09148E4F18DAEE5800D08F63 /* coredata */,
 				09219A3A18C4721F00166228 /* models */,
@@ -3044,6 +3062,7 @@
 				0914E365199FCD7500276ABA /* MJPhotoBrowser.m in Sources */,
 				0904690218C7117D00D0846E /* CSKuleChildInfo.m in Sources */,
 				09A9EBD818C0A02800D83119 /* CSKuleSettingsViewController.m in Sources */,
+				0909035C1BDF19AB00FDD2CE /* CBBindCardViewController.m in Sources */,
 				093D89C91999BF4D006B013B /* CSKuleHistoryMainViewController.m in Sources */,
 				09F0BF9E18F18EA5004629BA /* CSKuleFeedbackViewController.m in Sources */,
 				096DC1C01BA33F4000661B61 /* GMGridView.m in Sources */,
@@ -3060,6 +3079,7 @@
 				09ED59B218CDB01600187585 /* NSDate+CSKit.m in Sources */,
 				090E6BDC18EAFDA900F21BA7 /* NSURL+CSKit.m in Sources */,
 				0942B1631AE3E559008D3BDA /* ELCOverlayImageView.m in Sources */,
+				090903621BDF1BCD00FDD2CE /* CBCBFamilyAddViewController.m in Sources */,
 				096DC1C41BA33F4000661B61 /* UIView+GMGridViewAdditions.m in Sources */,
 				090468F518C6FE1000D0846E /* CSKuleBindInfo.m in Sources */,
 				09FE6B0718C5C23300A840BE /* CSKuleCheckinViewController.m in Sources */,

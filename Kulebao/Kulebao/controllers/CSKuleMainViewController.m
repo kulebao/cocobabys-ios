@@ -25,7 +25,10 @@
 #import "CBActivityData.h"
 #import "CBContractorData.h"
 
-@interface CSKuleMainViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
+#import "EAIntroPage.h"
+#import "EAIntroView.h"
+
+@interface CSKuleMainViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, EAIntroDelegate> {
     UIImagePickerController* _imgPicker;
     CSTextFieldDelegate* _nickFieldDelegate;
     NSMutableArray* _badges;
@@ -45,6 +48,8 @@
 @property (nonatomic, strong) CSKuleSchoolInfo* schoolInfo;
 @property (nonatomic, strong) CSKuleVideoMember* videoMember;
 @property (nonatomic, strong) CSKuleVideoMember* defaultVideoMember;
+
+@property (nonatomic, strong) UIButton* btnGuideHome;
 
 - (IBAction)onBtnShowChildMenuListClicked:(id)sender;
 - (IBAction)onBtnSettingsClicked:(id)sender;
@@ -145,6 +150,9 @@
     [self performSelector:@selector(getRelationshipInfos) withObject:nil afterDelay:0];
     
     [self updateUI:YES];
+    
+    //Guide
+    [self showIntroViewsIfNeeded];
 }
 
 - (void)didReceiveMemoryWarning
@@ -1158,6 +1166,72 @@
                                               success:sucessHandler
                                               failure:failureHandler];
     }
+}
+
+#pragma mark - Private
+- (void)showIntroViewsIfNeeded {
+    if (!gApp.engine.preferences.guideHomeShown) {
+        [self showIntroViews];
+    }
+    else {
+    }
+}
+
+-(void)showIntroViews {
+    //float systemVersion = [[[UIDevice currentDevice] systemVersion] floatValue];
+    /*
+     NSArray* introImageNames = @[@"guide-1.png", @"guide-2.png", @"guide-3.png", @"guide-4.png"];
+     if (!IS_IPHONE4) {
+     introImageNames = @[@"guide-1-568h.png", @"guide-2-568h.png", @"guide-3-568h.png", @"guide-4-568h.png"];
+     }
+     */
+    NSArray* introImageNames = @[@"v2-guide-home"];
+    
+    NSMutableArray* introPages = [NSMutableArray array];
+    for (NSString* imageName in introImageNames) {
+        EAIntroPage* page = [EAIntroPage page];
+        UIImageView* imageV = [[UIImageView alloc] initWithFrame:self.navigationController.view.bounds];
+        imageV.image = [UIImage imageNamed:imageName];
+        page.customView = imageV;
+        [introPages addObject:page];
+    }
+    
+    UIButton* skipButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    //[skipButton setBackgroundImage:[UIImage imageNamed:@"btn-start.png"] forState:UIControlStateNormal];
+    //[skipButton setBackgroundImage:[UIImage imageNamed:@"btn-start-pressed.png"] forState:UIControlStateHighlighted];
+    
+    CGSize viewSize = self.navigationController.view.bounds.size;
+    //skipButton.frame = CGRectMake((viewSize.width-126)/2, viewSize.height-90, 126, 27);
+    skipButton.frame = CGRectMake(0, 0, viewSize.width, viewSize.height);
+    
+    EAIntroView *intro = [[EAIntroView alloc] initWithFrame:self.navigationController.view.bounds
+                                                   andPages:introPages];
+    intro.skipButton = skipButton;
+    intro.backgroundColor = [UIColor clearColor];
+    intro.scrollView.bounces = NO;
+    intro.swipeToExit = NO;
+    intro.easeOutCrossDisolves = NO;
+    intro.showSkipButtonOnlyOnLastPage = YES;
+    intro.pageControl.hidden = YES;
+    [intro setDelegate:self];
+    [intro showInView:self.navigationController.view animateDuration:0];
+}
+
+#pragma mark - EAIntroDelegate
+- (void)introDidFinish:(EAIntroView *)introView {
+    gApp.engine.preferences.guideHomeShown = YES;
+}
+
+- (void)intro:(EAIntroView *)introView pageAppeared:(EAIntroPage *)page withIndex:(NSInteger)pageIndex {
+    
+}
+
+- (void)intro:(EAIntroView *)introView pageStartScrolling:(EAIntroPage *)page withIndex:(NSInteger)pageIndex {
+    
+}
+
+- (void)intro:(EAIntroView *)introView pageEndScrolling:(EAIntroPage *)page withIndex:(NSInteger)pageIndex {
+    
 }
 
 @end

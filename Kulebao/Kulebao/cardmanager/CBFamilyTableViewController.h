@@ -1,5 +1,5 @@
 //
-//  CBCBFamilyAddViewController.h
+//  CBFamilyTableViewController.h
 //  youlebao
 //
 //  Created by xin.c.wang on 10/27/15.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CBCBFamilyAddViewController : UITableViewController
+@interface CBFamilyTableViewController : UITableViewController
 
 @end

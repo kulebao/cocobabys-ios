@@ -10,11 +10,13 @@
 #import "AHAlertView.h"
 #import "CSAppDelegate.h"
 #import "UIImageView+WebCache.h"
+#import "KxMenu.h"
 
 @interface CSKuleSettings2ViewController ()
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellDev;
 @property (weak, nonatomic) IBOutlet UILabel *labName;
 @property (weak, nonatomic) IBOutlet UIImageView *imgPortrait;
+@property (weak, nonatomic) IBOutlet UIView *viewPortrait;
 - (IBAction)onBtnPortraitClicked:(id)sender;
 
 @end
@@ -47,7 +49,13 @@
 }
 
 - (void)reloadData {
-    self.labName.text = [NSString stringWithFormat:@"%@ %@\n%@", gApp.engine.currentRelationship.relationship, gApp.engine.currentRelationship.parent.name, gApp.engine.currentRelationship.parent.phone];
+    // 设置行间距
+    NSString* text = [NSString stringWithFormat:@"%@ %@\n%@", gApp.engine.currentRelationship.relationship, gApp.engine.currentRelationship.parent.name, gApp.engine.currentRelationship.parent.phone];
+    NSMutableParagraphStyle* ps = [[NSMutableParagraphStyle alloc] init];
+    ps.lineSpacing = 8;
+    NSMutableAttributedString* atrText = [[NSMutableAttributedString alloc] initWithString:text];
+    [atrText addAttribute:NSParagraphStyleAttributeName value:ps range:NSMakeRange(0, text.length)];
+    self.labName.attributedText = atrText;
     
     NSURL* qiniuImgUrl = [gApp.engine urlFromPath:gApp.engine.currentRelationship.parent.portrait];
     qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/256/h/256"];
@@ -64,6 +72,11 @@
     return numberOfSections;
 }
 
+- (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView* v = [[UIView alloc] initWithFrame:CGRectMake(0,0,360,20)];
+    v.backgroundColor = [UIColor whiteColor];
+    return v;
+}
 
 #if 0
 #pragma mark - Table view data source
@@ -190,5 +203,29 @@
 }
 
 - (IBAction)onBtnPortraitClicked:(id)sender {
+    KxMenuItem* item1 = [KxMenuItem menuItem:@"从相机拍摄头像"
+                                       image:nil
+                                      target:self
+                                      action:@selector(doChangePortraitFromCamera)];
+    
+    KxMenuItem* item2 = [KxMenuItem menuItem:@"从相册选择头像"
+                                       image:nil
+                                      target:self
+                                      action:@selector(doChangePortraitFromPhoto)];
+    
+    //[KxMenu setTintColor:UIColorRGB(0xCC, 0x66, 0x33)];
+    [KxMenu setTintColor:[UIColor colorWithRed:0.129f green:0.565f blue:0.839f alpha:1.0f]];
+    [KxMenu showMenuInView:self.view
+                  fromRect:self.viewPortrait.frame
+                 menuItems:@[item1, item2]];
 }
+
+- (void)doChangePortraitFromCamera {
+    
+}
+
+- (void)doChangePortraitFromPhoto {
+    
+}
+
 @end

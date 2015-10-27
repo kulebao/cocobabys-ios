@@ -7,8 +7,12 @@
 //
 
 #import "CBBindCardViewController.h"
+#import "CSAppDelegate.h"
 
 @interface CBBindCardViewController ()
+@property (weak, nonatomic) IBOutlet UITextField *fieldCardNo;
+@property (weak, nonatomic) IBOutlet UIButton *btnBindCard;
+- (IBAction)onBtnBindCardClicked:(id)sender;
 
 @end
 
@@ -17,6 +21,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self customizeBackBarItem];
+    
+    self.fieldCardNo.text = gApp.engine.currentRelationship.card;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,5 +40,9 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (IBAction)onBtnBindCardClicked:(id)sender {
+    [self.fieldCardNo resignFirstResponder];
+}
 
 @end

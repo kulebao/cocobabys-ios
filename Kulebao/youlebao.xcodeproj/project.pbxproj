@@ -27,7 +27,10 @@
 		0904FC9918F3BDED001968D7 /* CSKuleEmployeeInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0904FC9818F3BDED001968D7 /* CSKuleEmployeeInfo.m */; };
 		090903581BDEA84300FDD2CE /* v2-启动界面-2208@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 090903571BDEA84300FDD2CE /* v2-启动界面-2208@2x.png */; settings = {ASSET_TAGS = (); }; };
 		0909035C1BDF19AB00FDD2CE /* CBBindCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0909035B1BDF19AB00FDD2CE /* CBBindCardViewController.m */; settings = {ASSET_TAGS = (); }; };
-		090903621BDF1BCD00FDD2CE /* CBCBFamilyAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 090903611BDF1BCD00FDD2CE /* CBCBFamilyAddViewController.m */; settings = {ASSET_TAGS = (); }; };
+		090903651BDF2C4100FDD2CE /* CBTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 090903641BDF2C4100FDD2CE /* CBTextField.m */; settings = {ASSET_TAGS = (); }; };
+		090903681BDF455700FDD2CE /* CBFamilyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 090903671BDF455700FDD2CE /* CBFamilyTableViewController.m */; settings = {ASSET_TAGS = (); }; };
+		0909036B1BDF456F00FDD2CE /* CBAddFamilyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0909036A1BDF456F00FDD2CE /* CBAddFamilyViewController.m */; settings = {ASSET_TAGS = (); }; };
+		0909036E1BDF4CAF00FDD2CE /* CBFamilyItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0909036D1BDF4CAF00FDD2CE /* CBFamilyItemTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		090C9EB018C813BD00883DE0 /* CSKulePreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 090C9EAF18C813BD00883DE0 /* CSKulePreferences.m */; };
 		090C9EB318C81D7500883DE0 /* CSKuleInterpreter.m in Sources */ = {isa = PBXBuildFile; fileRef = 090C9EB218C81D7500883DE0 /* CSKuleInterpreter.m */; };
 		090C9EB818C83D2C00883DE0 /* msg-bg-from.png in Resources */ = {isa = PBXBuildFile; fileRef = 090C9EB418C83D2C00883DE0 /* msg-bg-from.png */; };
@@ -587,8 +590,14 @@
 		090903571BDEA84300FDD2CE /* v2-启动界面-2208@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-启动界面-2208@2x.png"; sourceTree = "<group>"; };
 		0909035A1BDF19AB00FDD2CE /* CBBindCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBBindCardViewController.h; sourceTree = "<group>"; };
 		0909035B1BDF19AB00FDD2CE /* CBBindCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBBindCardViewController.m; sourceTree = "<group>"; };
-		090903601BDF1BCD00FDD2CE /* CBCBFamilyAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBCBFamilyAddViewController.h; sourceTree = "<group>"; };
-		090903611BDF1BCD00FDD2CE /* CBCBFamilyAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBCBFamilyAddViewController.m; sourceTree = "<group>"; };
+		090903631BDF2C4100FDD2CE /* CBTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBTextField.h; sourceTree = "<group>"; };
+		090903641BDF2C4100FDD2CE /* CBTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBTextField.m; sourceTree = "<group>"; };
+		090903661BDF455600FDD2CE /* CBFamilyTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBFamilyTableViewController.h; sourceTree = "<group>"; };
+		090903671BDF455700FDD2CE /* CBFamilyTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBFamilyTableViewController.m; sourceTree = "<group>"; };
+		090903691BDF456F00FDD2CE /* CBAddFamilyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBAddFamilyViewController.h; sourceTree = "<group>"; };
+		0909036A1BDF456F00FDD2CE /* CBAddFamilyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBAddFamilyViewController.m; sourceTree = "<group>"; };
+		0909036C1BDF4CAF00FDD2CE /* CBFamilyItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBFamilyItemTableViewCell.h; sourceTree = "<group>"; };
+		0909036D1BDF4CAF00FDD2CE /* CBFamilyItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBFamilyItemTableViewCell.m; sourceTree = "<group>"; };
 		090C9EAE18C813BD00883DE0 /* CSKulePreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKulePreferences.h; sourceTree = "<group>"; };
 		090C9EAF18C813BD00883DE0 /* CSKulePreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKulePreferences.m; sourceTree = "<group>"; };
 		090C9EB118C81D7500883DE0 /* CSKuleInterpreter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleInterpreter.h; sourceTree = "<group>"; };
@@ -1342,8 +1351,14 @@
 			children = (
 				0909035A1BDF19AB00FDD2CE /* CBBindCardViewController.h */,
 				0909035B1BDF19AB00FDD2CE /* CBBindCardViewController.m */,
-				090903601BDF1BCD00FDD2CE /* CBCBFamilyAddViewController.h */,
-				090903611BDF1BCD00FDD2CE /* CBCBFamilyAddViewController.m */,
+				090903661BDF455600FDD2CE /* CBFamilyTableViewController.h */,
+				090903671BDF455700FDD2CE /* CBFamilyTableViewController.m */,
+				090903691BDF456F00FDD2CE /* CBAddFamilyViewController.h */,
+				0909036A1BDF456F00FDD2CE /* CBAddFamilyViewController.m */,
+				090903631BDF2C4100FDD2CE /* CBTextField.h */,
+				090903641BDF2C4100FDD2CE /* CBTextField.m */,
+				0909036C1BDF4CAF00FDD2CE /* CBFamilyItemTableViewCell.h */,
+				0909036D1BDF4CAF00FDD2CE /* CBFamilyItemTableViewCell.m */,
 			);
 			path = cardmanager;
 			sourceTree = "<group>";
@@ -3065,6 +3080,7 @@
 				0909035C1BDF19AB00FDD2CE /* CBBindCardViewController.m in Sources */,
 				093D89C91999BF4D006B013B /* CSKuleHistoryMainViewController.m in Sources */,
 				09F0BF9E18F18EA5004629BA /* CSKuleFeedbackViewController.m in Sources */,
+				090903681BDF455700FDD2CE /* CBFamilyTableViewController.m in Sources */,
 				096DC1C01BA33F4000661B61 /* GMGridView.m in Sources */,
 				0914E367199FCD7500276ABA /* MJPhotoProgressView.m in Sources */,
 				090C9EC018C846B200883DE0 /* AHAlertView.m in Sources */,
@@ -3079,7 +3095,6 @@
 				09ED59B218CDB01600187585 /* NSDate+CSKit.m in Sources */,
 				090E6BDC18EAFDA900F21BA7 /* NSURL+CSKit.m in Sources */,
 				0942B1631AE3E559008D3BDA /* ELCOverlayImageView.m in Sources */,
-				090903621BDF1BCD00FDD2CE /* CBCBFamilyAddViewController.m in Sources */,
 				096DC1C41BA33F4000661B61 /* UIView+GMGridViewAdditions.m in Sources */,
 				090468F518C6FE1000D0846E /* CSKuleBindInfo.m in Sources */,
 				09FE6B0718C5C23300A840BE /* CSKuleCheckinViewController.m in Sources */,
@@ -3090,6 +3105,7 @@
 				09A9EBBB18C0830900D83119 /* CSKuleLoginViewController.m in Sources */,
 				093D89CF1999C27E006B013B /* CSKuleHistoryMonthCell.m in Sources */,
 				0902458518EC41FA00579886 /* CSKuleURLCache.m in Sources */,
+				0909036B1BDF456F00FDD2CE /* CBAddFamilyViewController.m in Sources */,
 				0914E36A199FCD7500276ABA /* SDWebImageManager+MJ.m in Sources */,
 				090FC11F199B3FC300C3A31A /* HMPlayerView.mm in Sources */,
 				09219A5A18C4999C00166228 /* CSKuleLoginInfo.m in Sources */,
@@ -3100,6 +3116,7 @@
 				09C1C76018BD92990040B06D /* CSHttpClient.m in Sources */,
 				09E209E11B86E81F00059CC1 /* CBActivityDetailViewController.m in Sources */,
 				09A9EBD218C090E200D83119 /* CSKuleAuthViewController.m in Sources */,
+				0909036E1BDF4CAF00FDD2CE /* CBFamilyItemTableViewCell.m in Sources */,
 				0914E368199FCD7500276ABA /* MJPhotoToolbar.m in Sources */,
 				090C9EC718C84FB000883DE0 /* CSKuleChildCell.m in Sources */,
 				09D04E3918DFCB830093577D /* CSKuleCheckinLogListViewController.m in Sources */,
@@ -3110,6 +3127,7 @@
 				09FE6B0118C5BCFD00A840BE /* CSKuleAssignmentViewController.m in Sources */,
 				09ED59B918CDC5D800187585 /* CSKuleRecipeInfo.m in Sources */,
 				09148E5218DAEE8A00D08F63 /* Kulebao.xcdatamodeld in Sources */,
+				090903651BDF2C4100FDD2CE /* CBTextField.m in Sources */,
 				09C1C75F18BD92990040B06D /* AFJSONRequestOperation+CSKit.m in Sources */,
 				09C1C76618BD973B0040B06D /* NSDictionary+CSKit.m in Sources */,
 				094373D7199D017B00EDD64C /* EntityHistoryInfoHelper.m in Sources */,

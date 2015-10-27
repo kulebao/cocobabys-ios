@@ -1,18 +1,20 @@
 //
-//  CBCBFamilyAddViewController.m
+//  CBFamilyTableViewController.m
 //  youlebao
 //
 //  Created by xin.c.wang on 10/27/15.
 //  Copyright © 2015 Cocobabys. All rights reserved.
 //
 
-#import "CBCBFamilyAddViewController.h"
+#import "CBFamilyTableViewController.h"
+#import "CSAppDelegate.h"
+#import "CBFamilyItemTableViewCell.h"
 
-@interface CBCBFamilyAddViewController ()
+@interface CBFamilyTableViewController ()
 
 @end
 
-@implementation CBCBFamilyAddViewController
+@implementation CBFamilyTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -22,6 +24,8 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self customizeBackBarItem];
+    self.tableView.rowHeight = 54;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -30,26 +34,50 @@
 }
 
 #pragma mark - Table view data source
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+    NSInteger numberOfRows = 0;
+    if (section == 0) {
+        numberOfRows = 4;
+    }
+    else {
+        numberOfRows = 1;
+    }
+    return numberOfRows;
 }
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
     // Configure the cell...
+    NSInteger row = indexPath.row;
+    NSInteger section = indexPath.section;
+    CBFamilyItemTableViewCell* cell = nil;
+    if (section == 0) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"CBFamilyItemTableViewCell" forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    else {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"CBFamilyItemTableViewCell2" forIndexPath:indexPath];
+        cell.imgIcon.image = [UIImage imageNamed:@"v2-small"];
+        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+    }
     
     return cell;
 }
-*/
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    NSInteger section = indexPath.section;
+    //NSInteger row = indexPath.row;
+    if (section==0) {
+    }
+    else if (section==1) {
+        [self performSegueWithIdentifier:@"segue.addfamily" sender:nil];
+    }
+}
 
 /*
 // Override to support conditional editing of the table view.

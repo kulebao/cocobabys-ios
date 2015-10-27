@@ -44,7 +44,7 @@
 }
 
 - (void)customizeBackBarItem {
-    [self customizeBackBarItemWithTarget:self action:@selector(onBtnBackClicked_CSKit:)];
+    //[self customizeBackBarItemWithTarget:self action:@selector(onBtnBackClicked_CSKit:)];
 }
 
 - (void)customizeOkBarItemWithTarget:(id)target action:(SEL)action text:(NSString*)text {

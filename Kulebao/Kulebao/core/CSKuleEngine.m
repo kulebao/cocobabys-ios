@@ -1998,4 +1998,46 @@
                                       failure:failure];
 }
 
+- (AFHTTPRequestOperation*)reqCreateInvitationOfKindergarten:(NSInteger)kindergarten
+                                                       phone:(NSString*)phone
+                                                        name:(NSString*)name
+                                                relationship:(NSString*)relationship
+                                                    passcode:(NSString*)passcode
+                                                     success:(SuccessResponseHandler)success
+                                                     failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kCreateInvitation, @(kindergarten)];
+    NSString* method = @"POST";
+    
+    NSDictionary* parameters = @{@"from":@{
+                                            @"parent_id": gApp.engine.currentRelationship.parent.parentId,
+                                            @"school_id": @(kindergarten),
+                                            @"name": gApp.engine.currentRelationship.parent.name,
+                                            @"phone": gApp.engine.currentRelationship.parent.phone,
+                                            @"portrait": gApp.engine.currentRelationship.parent.portrait,
+                                            @"gender": @(0),
+                                            @"birthday": @"",
+                                            @"timestamp": @(gApp.engine.currentRelationship.parent.timestamp/1000),
+                                            @"member_status": @(gApp.engine.currentRelationship.parent.memberStatus),
+                                            @"status": @(1),
+                                            @"company": @"",
+                                            @"created_at": @(0),
+                                            @"id": @(0)
+                                         },
+                                 @"to":@{
+                                            @"phone": phone,
+                                            @"name": name,
+                                            @"relationship": relationship
+                                         },
+                                 @"code": @{
+                                            @"phone": phone,
+                                            @"code": passcode
+                                 }};
+    
+    return [_httpClient httpRequestWithMethod:method
+                                         path:path
+                                   parameters:parameters
+                                      success:success
+                                      failure:failure];
+}
+
 @end

@@ -326,4 +326,12 @@
                                              success:(SuccessResponseHandler)success
                                              failure:(FailureResponseHandler)failure;
 
+- (AFHTTPRequestOperation*)reqCreateInvitationOfKindergarten:(NSInteger)kindergarten
+                                                       phone:(NSString*)phone
+                                                        name:(NSString*)name
+                                                relationship:(NSString*)relationship
+                                                    passcode:(NSString*)passcode
+                                                     success:(SuccessResponseHandler)success
+                                                     failure:(FailureResponseHandler)failure;
+
 @end

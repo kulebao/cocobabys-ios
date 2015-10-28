@@ -161,4 +161,6 @@
 #pragma mark - Card Manager
 #define kBindCard           @"/kindergarten/%@/relationship/%@"
 #define kGetInviteCode      @"/api/v5/invitation_code/%@"
+#define kCreateInvitation   @"/api/v5/kindergarten/%@/invitation"
+
 #endif

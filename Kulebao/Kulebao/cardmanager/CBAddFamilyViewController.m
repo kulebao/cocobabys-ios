@@ -46,6 +46,8 @@
 
 - (IBAction)onBtnGetPasscodeClicked:(id)sender {
     [self closeKeyboard];
+    
+    [self onGetInviteCode];
 }
 
 - (IBAction)onBtnInviteClicked:(id)sender {
@@ -57,6 +59,24 @@
     [self.fieldPasscode resignFirstResponder];
     [self.fieldPhone resignFirstResponder];
     [self.fieldRelationship resignFirstResponder];
+}
+
+- (void)onGetInviteCode {
+    [gApp.engine reqGetInviteCodeWithHost:@"18782242007"
+                               andInvitee:@"18782242007"
+                                  success:^(AFHTTPRequestOperation *operation, id dataJson) {
+                                      /*
+                                       {
+                                       "error_code" = 4;
+                                       "error_msg" = "\U9a8c\U8bc1\U7801\U53d1\U9001\U5931\U8d25\U3002(sending error from sms server side)";
+                                       }
+                                       */
+                                      
+                                      CSLog(@"%@", dataJson);
+                                  }
+                                  failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                      CSLog(@"%@", error);
+                                  }];
 }
 
 @end

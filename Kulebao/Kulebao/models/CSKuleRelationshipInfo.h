@@ -16,5 +16,6 @@
 @property (nonatomic, strong) CSKuleChildInfo* child;
 @property (nonatomic, strong) NSString* card;
 @property (nonatomic, strong) NSString* relationship;
+@property (nonatomic, assign) NSInteger uid;
 
 @end

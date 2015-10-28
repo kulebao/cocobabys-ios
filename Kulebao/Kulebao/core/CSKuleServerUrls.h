@@ -158,4 +158,7 @@
 #define kPostEnrollmentV4               @"/api/v4/kindergarten/%@/activity/%@/enrollment"
 #define kGetEnrollmentV4                @"/api/v4/kindergarten/%@/activity/%@/parent/%@/enrollment"
 
+#pragma mark - Card Manager
+#define kBindCard           @"/kindergarten/%@/relationship/%@"
+#define kGetInviteCode      @"/api/v5/invitation_code/%@"
 #endif

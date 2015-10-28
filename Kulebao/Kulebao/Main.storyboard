@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="YlV-Z1-aZX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="YlV-Z1-aZX">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -1237,7 +1237,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QRM-aJ-Twq" userLabel="InputView">
                                         <rect key="frame" x="16" y="16" width="288" height="32"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="v2-input-2" highlightedImage="v2-input-1" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y78-iS-RGb">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="v2-input-1" translatesAutoresizingMaskIntoConstraints="NO" id="y78-iS-RGb">
                                                 <rect key="frame" x="0.0" y="28" width="288" height="4"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="4" id="ojX-J9-gzZ"/>
@@ -1331,7 +1331,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nyt-TN-4xd" userLabel="InputView">
                                         <rect key="frame" x="16" y="16" width="288" height="32"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="v2-input-2" highlightedImage="v2-input-1" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nRa-rX-ODn">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="v2-input-1" translatesAutoresizingMaskIntoConstraints="NO" id="nRa-rX-ODn">
                                                 <rect key="frame" x="0.0" y="28" width="288" height="4"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="4" id="dv9-eN-3SU"/>
@@ -1376,7 +1376,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ytf-Qc-PQX" userLabel="InputView">
                                         <rect key="frame" x="16" y="64" width="152" height="32"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="v2-input-2" highlightedImage="v2-input-1" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pbn-6h-kfz">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="v2-input-1" translatesAutoresizingMaskIntoConstraints="NO" id="pbn-6h-kfz">
                                                 <rect key="frame" x="0.0" y="28" width="152" height="4"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="4" id="kZ5-3L-3Bx"/>
@@ -1403,7 +1403,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1ve-08-8zn" userLabel="InputView">
                                         <rect key="frame" x="16" y="157" width="288" height="32"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="v2-input-2" highlightedImage="v2-input-1" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SX5-aw-EP4">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="v2-input-1" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SX5-aw-EP4">
                                                 <rect key="frame" x="0.0" y="28" width="288" height="4"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="4" id="yOY-ym-AxM"/>
@@ -1430,7 +1430,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8gN-Oo-zEJ" userLabel="InputView">
                                         <rect key="frame" x="16" y="205" width="288" height="32"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="v2-input-2" highlightedImage="v2-input-1" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gWM-XL-cNU">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="v2-input-1" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gWM-XL-cNU">
                                                 <rect key="frame" x="0.0" y="28" width="288" height="4"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="4" id="A0e-KO-BBE"/>
@@ -3994,7 +3994,6 @@
         <image name="v2-feedback_logo" width="26" height="26"/>
         <image name="v2-foot.png" width="320" height="44"/>
         <image name="v2-input-1" width="24" height="4"/>
-        <image name="v2-input-2" width="24" height="4"/>
         <image name="v2-input_bg_家园互动.png" width="52" height="36"/>
         <image name="v2-input_login.png" width="121" height="29"/>
         <image name="v2-input_login_bg.png" width="268" height="135"/>

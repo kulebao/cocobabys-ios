@@ -316,4 +316,14 @@
                                                    success:(SuccessResponseHandler)success
                                                    failure:(FailureResponseHandler)failure;
 
+- (AFHTTPRequestOperation*)reqGetInviteCodeWithHost:(NSString*)hostPhone
+                                         andInvitee:(NSString*)smsPhone
+                                            success:(SuccessResponseHandler)success
+                                            failure:(FailureResponseHandler)failure;
+
+- (AFHTTPRequestOperation*)reqBindCardOfKindergarten:(NSInteger)kindergarten
+                                         withCardNum:(NSString*)cardNum
+                                             success:(SuccessResponseHandler)success
+                                             failure:(FailureResponseHandler)failure;
+
 @end

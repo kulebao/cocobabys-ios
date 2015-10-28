@@ -108,6 +108,7 @@
     obj.card = card;
     obj.child = child;
     obj.parent = parent;
+    obj.uid = [[dataJson valueForKeyNotNull:@"id"] integerValue];
     
     return obj;
 }

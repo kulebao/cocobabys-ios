@@ -47,6 +47,10 @@
     //[self customizeBackBarItemWithTarget:self action:@selector(onBtnBackClicked_CSKit:)];
 }
 
+- (void)customizeBackBarItem2 {
+    [self customizeBackBarItemWithTarget:self action:@selector(onBtnBackClicked_CSKit:)];
+}
+
 - (void)customizeOkBarItemWithTarget:(id)target action:(SEL)action text:(NSString*)text {
     UIImage* imgNormal = nil;
     UIImage* imgHighlight = nil;

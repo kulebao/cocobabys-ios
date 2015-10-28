@@ -1958,4 +1958,44 @@
                                       failure:failure];
 }
 
+- (AFHTTPRequestOperation*)reqGetInviteCodeWithHost:(NSString*)hostPhone
+                                         andInvitee:(NSString*)smsPhone
+                                            success:(SuccessResponseHandler)success
+                                            failure:(FailureResponseHandler)failure{
+    NSString* path = [NSString stringWithFormat:kGetInviteCode, smsPhone];
+    NSString* method = @"POST";
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    [parameters setObject:hostPhone forKey:@"host"];
+    [parameters setObject:smsPhone forKey:@"invitee"];
+    
+    return [_httpClient httpRequestWithMethod:method
+                                         path:path
+                                   parameters:parameters
+                                      success:success
+                                      failure:failure];
+}
+
+- (AFHTTPRequestOperation*)reqBindCardOfKindergarten:(NSInteger)kindergarten
+                                         withCardNum:(NSString*)cardNum
+                                             success:(SuccessResponseHandler)success
+                                             failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kBindCard, @(kindergarten), cardNum];
+    NSString* method = @"POST";
+   
+    NSDictionary* parameters = @{@"relationship": gApp.engine.currentRelationship.relationship,
+                                 @"parent": @{
+                                         @"phone":  gApp.engine.currentRelationship.parent.phone
+                                     },
+                                 @"child": @{
+                                         @"child_id":  gApp.engine.currentRelationship.child.childId
+                                     },
+                                 @"id":@(gApp.engine.currentRelationship.uid)};
+    
+    return [_httpClient httpRequestWithMethod:method
+                                         path:path
+                                   parameters:parameters
+                                      success:success
+                                      failure:failure];
+}
+
 @end

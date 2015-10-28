@@ -31,6 +31,7 @@
 		090903681BDF455700FDD2CE /* CBFamilyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 090903671BDF455700FDD2CE /* CBFamilyTableViewController.m */; settings = {ASSET_TAGS = (); }; };
 		0909036B1BDF456F00FDD2CE /* CBAddFamilyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0909036A1BDF456F00FDD2CE /* CBAddFamilyViewController.m */; settings = {ASSET_TAGS = (); }; };
 		0909036E1BDF4CAF00FDD2CE /* CBFamilyItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0909036D1BDF4CAF00FDD2CE /* CBFamilyItemTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		0909037C1BDFD65E00FDD2CE /* CSJsonObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 0909037B1BDFD65E00FDD2CE /* CSJsonObject.m */; settings = {ASSET_TAGS = (); }; };
 		090C9EB018C813BD00883DE0 /* CSKulePreferences.m in Sources */ = {isa = PBXBuildFile; fileRef = 090C9EAF18C813BD00883DE0 /* CSKulePreferences.m */; };
 		090C9EB318C81D7500883DE0 /* CSKuleInterpreter.m in Sources */ = {isa = PBXBuildFile; fileRef = 090C9EB218C81D7500883DE0 /* CSKuleInterpreter.m */; };
 		090C9EB818C83D2C00883DE0 /* msg-bg-from.png in Resources */ = {isa = PBXBuildFile; fileRef = 090C9EB418C83D2C00883DE0 /* msg-bg-from.png */; };
@@ -598,6 +599,8 @@
 		0909036A1BDF456F00FDD2CE /* CBAddFamilyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBAddFamilyViewController.m; sourceTree = "<group>"; };
 		0909036C1BDF4CAF00FDD2CE /* CBFamilyItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBFamilyItemTableViewCell.h; sourceTree = "<group>"; };
 		0909036D1BDF4CAF00FDD2CE /* CBFamilyItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBFamilyItemTableViewCell.m; sourceTree = "<group>"; };
+		0909037A1BDFD65E00FDD2CE /* CSJsonObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSJsonObject.h; sourceTree = "<group>"; };
+		0909037B1BDFD65E00FDD2CE /* CSJsonObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSJsonObject.m; sourceTree = "<group>"; };
 		090C9EAE18C813BD00883DE0 /* CSKulePreferences.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKulePreferences.h; sourceTree = "<group>"; };
 		090C9EAF18C813BD00883DE0 /* CSKulePreferences.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKulePreferences.m; sourceTree = "<group>"; };
 		090C9EB118C81D7500883DE0 /* CSKuleInterpreter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleInterpreter.h; sourceTree = "<group>"; };
@@ -1363,6 +1366,22 @@
 			path = cardmanager;
 			sourceTree = "<group>";
 		};
+		090903791BDFD65200FDD2CE /* CSKit */ = {
+			isa = PBXGroup;
+			children = (
+				0909037A1BDFD65E00FDD2CE /* CSJsonObject.h */,
+				0909037B1BDFD65E00FDD2CE /* CSJsonObject.m */,
+			);
+			path = CSKit;
+			sourceTree = "<group>";
+		};
+		0909037D1BDFD69200FDD2CE /* jsonobjects */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = jsonobjects;
+			sourceTree = "<group>";
+		};
 		090C9EBC18C846B200883DE0 /* AHAlertView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1901,6 +1920,7 @@
 		09BA1B9618BB2AB300760182 /* Kulebao */ = {
 			isa = PBXGroup;
 			children = (
+				0909037D1BDFD69200FDD2CE /* jsonobjects */,
 				090903591BDF194D00FDD2CE /* cardmanager */,
 				09514FE51B84E43C005217B7 /* commercial */,
 				09148E4F18DAEE5800D08F63 /* coredata */,
@@ -1938,6 +1958,7 @@
 		09BA1BC918BB2FC700760182 /* Venders */ = {
 			isa = PBXGroup;
 			children = (
+				090903791BDFD65200FDD2CE /* CSKit */,
 				096DC1C81BA341A000661B61 /* EGOCache */,
 				096DC1B31BA33F4000661B61 /* GMGridView */,
 				090C9EBC18C846B200883DE0 /* AHAlertView */,
@@ -3024,6 +3045,7 @@
 				091AE82E18D820C800EBC927 /* NSMutableArray+convenience.m in Sources */,
 				09F0BFAD18F1C483004629BA /* MJPopupBackgroundView.m in Sources */,
 				091AE82D18D820C800EBC927 /* NSDate+convenience.m in Sources */,
+				0909037C1BDFD65E00FDD2CE /* CSJsonObject.m in Sources */,
 				09ED59AC18CD67FD00187585 /* CSKuleNewsInfo.m in Sources */,
 				09FEA72A18DCAA4D00513C87 /* CSTipsInfo.m in Sources */,
 				0901A96A18D95E38003BB152 /* CSKuleBPushInfo.m in Sources */,

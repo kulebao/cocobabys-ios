@@ -1090,6 +1090,33 @@
                                failure:failure];
 }
 
+- (void)reqUpdateParentInfo:(CSKuleParentInfo*)parentInfo
+             inKindergarten:(NSInteger)kindergarten
+                    success:(SuccessResponseHandler)success
+                    failure:(FailureResponseHandler)failure {
+    NSParameterAssert(parentInfo);
+    
+    NSString* path = [NSString stringWithFormat:kUpdateParentInfoPath, @(kindergarten)];
+    
+    NSString* method = @"POST";
+    
+    NSDictionary* parameters = @{
+                                 @"parent_id": parentInfo.parentId,
+                                 @"school_id": @(kindergarten),
+                                 @"name": parentInfo.name,
+                                 @"phone": parentInfo.phone,
+                                 @"portrait": parentInfo.portrait,
+                                 @"gender": @(parentInfo.gender),
+                                 @"birthday": parentInfo.birthday,
+                                 };
+    
+    [_httpClient httpRequestWithMethod:method
+                                  path:path
+                            parameters:parameters
+                               success:success
+                               failure:failure];
+}
+
 - (void)reqGetNewsOfKindergarten:(NSInteger)kindergarten
                      withClassId:(NSInteger)classId
                             from:(NSInteger)fromId

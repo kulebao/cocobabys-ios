@@ -11,8 +11,12 @@
 #import "CSAppDelegate.h"
 #import "UIImageView+WebCache.h"
 #import "KxMenu.h"
+#import "UIImage+CSExtends.h"
 
-@interface CSKuleSettings2ViewController ()
+@interface CSKuleSettings2ViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
+    UIImagePickerController* _imgPicker;
+}
+
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellDev;
 @property (weak, nonatomic) IBOutlet UILabel *labName;
 @property (weak, nonatomic) IBOutlet UIImageView *imgPortrait;
@@ -220,12 +224,117 @@
                  menuItems:@[item1, item2]];
 }
 
-- (void)doChangePortraitFromCamera {
-    
+- (void)doUpdateParentPortrait:(NSString*)portrait withImage:(UIImage*)img {
+    if (portrait.length > 0) {
+        CSKuleParentInfo* parentInfo = gApp.engine.currentRelationship.parent;
+        if (parentInfo) {
+            CSKuleParentInfo* cp = [parentInfo copy];
+            cp.portrait = portrait;
+            
+            SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+                CSLog(@"success.");
+                [gApp alert:@"更新成功"];
+                
+                CSKuleParentInfo* cc = [CSKuleInterpreter decodeParentInfo:dataJson];
+                parentInfo.portrait = cc.portrait;
+                
+                self.imgPortrait.image = img;
+                [self reloadData];
+            };
+            
+            FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+                CSLog(@"failure:%@", error);
+                [gApp alert:[error localizedDescription]];
+            };
+            
+            [gApp waitingAlert:@"更新家长头像中"];
+            [gApp.engine reqUpdateParentInfo:cp
+                              inKindergarten:gApp.engine.loginInfo.schoolId
+                                     success:sucessHandler
+                                     failure:failureHandler];
+            
+        }
+        else {
+            [gApp alert:@"没有家长信息"];
+        }
+    }
+    else {
+        [gApp alert:@"头像不存在"];
+    }
 }
 
 - (void)doChangePortraitFromPhoto {
+    _imgPicker = [[UIImagePickerController alloc] init];
+    _imgPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    _imgPicker.allowsEditing = YES;
+    _imgPicker.delegate = self;
+    [self presentViewController:_imgPicker animated:YES completion:^{
+        
+    }];
+}
+
+- (void)doChangePortraitFromCamera {
+#if TARGET_IPHONE_SIMULATOR
+#else
+    _imgPicker = [[UIImagePickerController alloc] init];
+    _imgPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    _imgPicker.allowsEditing = YES;
+    _imgPicker.delegate = self;
+    [self presentViewController:_imgPicker animated:YES completion:^{
+        
+    }];
+#endif
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    UIImage* img = info[UIImagePickerControllerEditedImage];
+    NSData* imgData = UIImageJPEGRepresentation(img, 0.8);
     
+    long long timestamp = [[NSDate date] timeIntervalSince1970] * 1000;
+    
+    NSString* imgFileName = [NSString stringWithFormat:@"parent_photo/%@/%@/%@_%@.jpg",
+                             @(gApp.engine.loginInfo.schoolId),
+                             gApp.engine.currentRelationship.parent.parentId,
+                             gApp.engine.currentRelationship.parent.parentId,
+                             @(timestamp)];
+    
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+        NSString* name = [dataJson valueForKeyNotNull:@"name"];
+        NSString* portrait = [NSString stringWithFormat:@"%@/%@", kQiniuDownloadServerHost, name];
+        //self.imgChildPortrait.image = img;
+        UIImage* cropImg = [img imageByScalingAndCroppingForSize:CGSizeMake(256, 256)];
+        [self doUpdateParentPortrait:portrait withImage:cropImg];
+    };
+    
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        CSLog(@"failure:%@", error);
+        [gApp alert:[error localizedDescription]];
+    };
+    
+    [gApp waitingAlert:@"上传家长头像中"];
+    [gApp.engine reqUploadToQiniu:imgData
+                          withKey:imgFileName
+                         withMime:@"image/jpeg"
+                          success:sucessHandler
+                          failure:failureHandler];
+    
+    [picker dismissViewControllerAnimated:YES
+                               completion:^{
+                                   if (picker == _imgPicker) {
+                                       _imgPicker = nil;
+                                   }
+                               }];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [picker dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+    
+    if (picker == _imgPicker) {
+        _imgPicker = nil;
+    }
 }
 
 @end

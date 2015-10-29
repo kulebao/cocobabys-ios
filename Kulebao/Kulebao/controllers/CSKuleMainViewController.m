@@ -939,12 +939,13 @@
     if (enabledCommercial) {
         UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Commercial" bundle:nil];
         
-        [self presentViewController:storyboard.instantiateInitialViewController
-                           animated:YES
-                         completion:^{
-                             
-                         }];
+//        [self presentViewController:storyboard.instantiateInitialViewController
+//                           animated:YES
+//                         completion:^{
+//                             
+//                         }];
         
+        [self.navigationController pushViewController:storyboard.instantiateInitialViewController animated:YES];
     }
 #endif
 }

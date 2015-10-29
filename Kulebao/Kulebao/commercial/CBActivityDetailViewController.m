@@ -205,7 +205,7 @@
         id dataJson = [NSJSONSerialization JSONObjectWithData:operation.responseData options:0 error:&err];
         if (dataJson && !err) {
             // {"error_msg":"不能重复报名同一活动。(duplicated enrollment)","error_code":3}
-            //error_msg = dataJson[@"error_msg"];
+            //error_msg = [dataJson objectForKey:@"error_msg"];
             error_msg = @"报名失败";
         }
         if (error_msg) {
@@ -239,7 +239,7 @@
         id dataJson = [NSJSONSerialization JSONObjectWithData:operation.responseData options:0 error:&err];
         if (dataJson && !err) {
             // {"error_msg":"不能重复报名同一活动。(duplicated enrollment)","error_code":3}
-            error_msg = dataJson[@"error_msg"];
+            error_msg = [dataJson objectForKey:@"error_msg"];
         }
         if (error_msg) {
             //[gApp alert:error_msg];

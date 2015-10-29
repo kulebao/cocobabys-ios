@@ -68,7 +68,7 @@ typedef enum : NSUInteger {
         [gApp.engine reqBindCardOfKindergarten:gApp.engine.loginInfo.schoolId
                                    withCardNum:cardNum
                                        success:^(AFHTTPRequestOperation *operation, id dataJson) {
-                                           NSInteger error_code = [dataJson[@"error_code"] integerValue];
+                                           NSInteger error_code = [[dataJson objectForKey:@"error_code"] integerValue];
                                            if (error_code == 0) {
                                                CSKuleRelationshipInfo* relationship = [CSKuleInterpreter decodeRelationshipInfo:dataJson];
                                                if (gApp.engine.currentRelationship.uid == relationship.uid) {

@@ -9,6 +9,7 @@
 #import "CBFamilyTableViewController.h"
 #import "CSAppDelegate.h"
 #import "CBFamilyItemTableViewCell.h"
+#import "UIImageView+WebCache.h"
 
 @interface CBFamilyTableViewController ()
 
@@ -30,12 +31,17 @@
     self.tableView.rowHeight = 54;
     
     self.relationships = [NSMutableArray array];
-    [self reloadChildRelationships];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self reloadChildRelationships];
 }
 
 #pragma mark - Table view data source
@@ -66,6 +72,13 @@
         CSKuleRelationshipInfo* relationshipInfo = [self.relationships objectAtIndex:row];
         cell.labName.text = [NSString stringWithFormat:@"%@ %@", relationshipInfo.relationship, relationshipInfo.parent.name];
         cell.labPhone.text = relationshipInfo.parent.phone;
+        
+        cell.imgIcon.layer.cornerRadius = cell.imgIcon.bounds.size.width/2;
+        
+        NSURL* qiniuImgUrl = [gApp.engine urlFromPath:gApp.engine.currentRelationship.parent.portrait];
+        qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/256/h/256"];
+        [cell.imgIcon sd_setImageWithURL:qiniuImgUrl
+                        placeholderImage:[UIImage imageNamed:@"v2-small"]];
     }
     else {
         cell = [tableView dequeueReusableCellWithIdentifier:@"CBFamilyItemTableViewCell2" forIndexPath:indexPath];
@@ -153,10 +166,10 @@
     };
     
     [gApp waitingAlert:@"获取家人信息"];
-    [gApp.engine reqGetFamilyRelationship:gApp.engine.loginInfo.accountName
-                           inKindergarten:gApp.engine.loginInfo.schoolId
-                                  success:sucessHandler
-                                  failure:failureHandler];
+    [gApp.engine reqGetChildRelationship:gApp.engine.currentRelationship.child.childId
+                          inKindergarten:gApp.engine.loginInfo.schoolId
+                                 success:sucessHandler
+                                 failure:failureHandler];
 }
 
 @end

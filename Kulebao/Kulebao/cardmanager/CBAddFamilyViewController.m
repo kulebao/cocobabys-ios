@@ -67,22 +67,30 @@
                                           relationship:relationship
                                               passcode:passcode
                                                success:^(AFHTTPRequestOperation *operation, id dataJson) {
-                                                   NSInteger error_code = [dataJson[@"error_code"] integerValue];
-                                                   NSString* error_msg = dataJson[@"error_msg"];
-                                                   if (error_code == 4) {
-                                                       // ERR_INVITEE_PHONE_INVALID
-                                                       [gApp alert:@"被邀请手机号码无效，请检查"];
+                                                   if ([dataJson isKindOfClass:[NSDictionary class]]) {
+                                                       NSInteger error_code = [[dataJson objectForKey:@"error_code"] integerValue];
+                                                       NSString* error_msg = [dataJson objectForKey:@"error_msg"];
+                                                       
+                                                       if (error_code == 4) {
+                                                           // ERR_INVITEE_PHONE_INVALID
+                                                           [gApp alert:@"被邀请手机号码无效，请检查"];
+                                                       }
+                                                       else {
+                                                           [gApp alert:@"邀请成功"];
+                                                           [self.navigationController popViewControllerAnimated:YES];
+                                                       }
                                                    }
                                                    else {
                                                        [gApp alert:@"邀请成功"];
+                                                       [self.navigationController popViewControllerAnimated:YES];
                                                    }
                                                }
                                                failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                                    NSError* err = nil;
                                                    id dataJson = [NSJSONSerialization JSONObjectWithData:operation.responseData options:0 error:&err];
                                                    if (dataJson && !err) {
-                                                       NSInteger error_code = [dataJson[@"error_code"] integerValue];
-                                                       NSString* error_msg = dataJson[@"error_msg"];
+                                                       NSInteger error_code = [[dataJson objectForKey:@"error_code"] integerValue];
+                                                       NSString* error_msg = [dataJson objectForKey:@"error_msg"];
                                                        if (error_code == 1) {
                                                            // AUTH_CODE_IS_INVALID
                                                            [gApp alert:@"验证码错误，请重新输入，谢谢！"];
@@ -155,8 +163,8 @@
         [gApp.engine reqGetInviteCodeWithHost:gApp.engine.currentRelationship.parent.phone
                                    andInvitee:phone
                                       success:^(AFHTTPRequestOperation *operation, id dataJson) {
-                                          NSInteger error_code = [dataJson[@"error_code"] integerValue];
-                                          NSString* error_msg = dataJson[@"error_msg"];
+                                          NSInteger error_code = [[dataJson objectForKey:@"error_code"] integerValue];
+                                          NSString* error_msg = [dataJson objectForKey:@"error_msg"];
                                           if (error_code == 4) {
                                               // INVITE_PHONE_INVALID
                                               [gApp alert:@"被邀请手机号码无效，请检查"];
@@ -180,8 +188,8 @@
                                           NSError* err = nil;
                                           id dataJson = [NSJSONSerialization JSONObjectWithData:operation.responseData options:0 error:&err];
                                           if (dataJson && !err) {
-                                              NSInteger error_code = [dataJson[@"error_code"] integerValue];
-                                              NSString* error_msg = dataJson[@"error_msg"];
+                                              NSInteger error_code = [[dataJson objectForKey:@"error_code"] integerValue];
+                                              NSString* error_msg = [dataJson objectForKey:@"error_msg"];
                                               if (error_code == 1) {
                                                   // GET_AUTH_CODE_TOO_OFTEN
                                                   [gApp alert:@"验证码获取过于频繁，请稍后再试"];

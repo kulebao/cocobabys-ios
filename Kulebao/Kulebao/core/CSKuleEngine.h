@@ -116,6 +116,11 @@
                              success:(SuccessResponseHandler)success
                              failure:(FailureResponseHandler)failure;
 
+- (void)reqGetChildRelationship:(NSString*)childId
+                 inKindergarten:(NSInteger)kindergarten
+                        success:(SuccessResponseHandler)success
+                        failure:(FailureResponseHandler)failure;
+
 - (void)reqUpdateChildInfo:(CSKuleChildInfo*)childInfo
             inKindergarten:(NSInteger)kindergarten
                    success:(SuccessResponseHandler)success

@@ -1064,6 +1064,25 @@
                                failure:failure];
 }
 
+- (void)reqGetChildRelationship:(NSString*)childId
+                 inKindergarten:(NSInteger)kindergarten
+                        success:(SuccessResponseHandler)success
+                        failure:(FailureResponseHandler)failure {
+    NSParameterAssert(childId);
+    
+    NSString* path = [NSString stringWithFormat:kGetFamilyRelationshipPath, @(kindergarten)];
+    
+    NSString* method = @"GET";
+    
+    NSDictionary* parameters = @{@"child": childId};
+    
+    [_httpClient httpRequestWithMethod:method
+                                  path:path
+                            parameters:parameters
+                               success:success
+                               failure:failure];
+}
+
 - (void)reqUpdateChildInfo:(CSKuleChildInfo*)childInfo
             inKindergarten:(NSInteger)kindergarten
                    success:(SuccessResponseHandler)success

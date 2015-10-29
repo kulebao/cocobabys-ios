@@ -12,6 +12,8 @@
 
 @interface CBFamilyTableViewController ()
 
+@property (nonatomic, strong) NSMutableArray* relationships;
+
 @end
 
 @implementation CBFamilyTableViewController
@@ -26,6 +28,9 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     [self customizeBackBarItem];
     self.tableView.rowHeight = 54;
+    
+    self.relationships = [NSMutableArray array];
+    [self reloadChildRelationships];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -41,7 +46,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSInteger numberOfRows = 0;
     if (section == 0) {
-        numberOfRows = 4;
+        numberOfRows = self.relationships.count;
     }
     else {
         numberOfRows = 1;
@@ -57,6 +62,10 @@
     if (section == 0) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"CBFamilyItemTableViewCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        CSKuleRelationshipInfo* relationshipInfo = [self.relationships objectAtIndex:row];
+        cell.labName.text = [NSString stringWithFormat:@"%@ %@", relationshipInfo.relationship, relationshipInfo.parent.name];
+        cell.labPhone.text = relationshipInfo.parent.phone;
     }
     else {
         cell = [tableView dequeueReusableCellWithIdentifier:@"CBFamilyItemTableViewCell2" forIndexPath:indexPath];
@@ -122,5 +131,32 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark - Network
+- (void)reloadChildRelationships {
+    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+        [self.relationships removeAllObjects];
+        for (id relationshipJson in dataJson) {
+            CSKuleRelationshipInfo* relationshipInfo = [CSKuleInterpreter decodeRelationshipInfo:relationshipJson];
+            if (relationshipInfo.parent && relationshipInfo.child) {
+                [self.relationships addObject:relationshipInfo];
+            }
+        }
+        
+        [gApp hideAlert];
+        [self.tableView reloadData];
+    };
+    
+    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        CSLog(@"failure:%@", error);
+        [gApp alert:[error localizedDescription]];
+    };
+    
+    [gApp waitingAlert:@"获取家人信息"];
+    [gApp.engine reqGetFamilyRelationship:gApp.engine.loginInfo.accountName
+                           inKindergarten:gApp.engine.loginInfo.schoolId
+                                  success:sucessHandler
+                                  failure:failureHandler];
+}
 
 @end

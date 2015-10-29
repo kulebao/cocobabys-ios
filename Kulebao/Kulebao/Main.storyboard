@@ -1361,7 +1361,7 @@
                                             <constraint firstAttribute="height" constant="32" id="Fmq-rE-lCI"/>
                                             <constraint firstAttribute="width" constant="120" id="ept-nI-acs"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <state key="normal" title="获取邀请码" backgroundImage="v2-btn_bg_blue"/>
                                         <connections>
                                             <action selector="onBtnGetPasscodeClicked:" destination="6HI-Ih-AKp" eventType="touchUpInside" id="dRG-8J-MU3"/>

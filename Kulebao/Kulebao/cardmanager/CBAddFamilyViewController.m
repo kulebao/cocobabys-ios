@@ -183,6 +183,7 @@
                                               [gApp alert:@"获取验证码成功，稍后会用短信将该验证码发送到您的手机上，谢谢"];
                                               
                                               [self.btnGetPasscode startTimer:120 callback:^(NSInteger i) {
+                                                  self.btnGetPasscode.enabled = YES;
                                                   [self.btnGetPasscode setTitle:[NSString stringWithFormat:@"重新获取%ld秒", i] forState:UIControlStateNormal];
                                                   self.btnGetPasscode.enabled = NO;
                                               } timeout:^{

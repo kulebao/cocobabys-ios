@@ -9,6 +9,7 @@
 #import "CBAddFamilyViewController.h"
 #import "CSAppDelegate.h"
 #import "UIButton+Countdown.h"
+#import "CSTextFieldDelegate.h"
 
 @interface CBAddFamilyViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *fieldPhone;
@@ -17,6 +18,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *fieldName;
 @property (weak, nonatomic) IBOutlet UITextField *fieldRelationship;
 @property (weak, nonatomic) IBOutlet UIButton *btnInvite;
+
+@property (nonatomic, strong) CSTextFieldDelegate* fieldDelegate;
+
 - (IBAction)onBtnGetPasscodeClicked:(id)sender;
 - (IBAction)onBtnInviteClicked:(id)sender;
 
@@ -28,6 +32,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self customizeBackBarItem];
+    
+    self.fieldDelegate = [[CSTextFieldDelegate alloc] initWithType:kCSTextFieldDelegateNormal];
+    self.fieldDelegate.maxLength = 20;
+    
+    self.fieldName.delegate = self.fieldDelegate;
+    self.fieldRelationship.delegate = self.fieldDelegate;
 }
 
 - (void)didReceiveMemoryWarning {

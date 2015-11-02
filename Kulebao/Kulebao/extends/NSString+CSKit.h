@@ -13,6 +13,7 @@
 - (BOOL)isValidPswd;
 - (BOOL)isValidMobile;
 - (BOOL)isValidSmsCode;
+- (BOOL)isValidCardNum;
 - (NSString*)trim;
 
 - (NSString *)MD5Hash;

@@ -27,13 +27,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self customizeBackBarItem];
+    //[self customizeBackBarItem2];
     
-    UINavigationBar* navigationBar = self.navigationController.navigationBar;
-    [navigationBar setBackgroundImage:[UIImage imageNamed:@"v2-head.png"] forBarMetrics:UIBarMetricsDefault];
-    [navigationBar setTitleTextAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:20], NSForegroundColorAttributeName:[UIColor whiteColor]}];
-    navigationBar.tintColor = [UIColor whiteColor];
-    navigationBar.translucent = NO;
+//    UINavigationBar* navigationBar = self.navigationController.navigationBar;
+//    [navigationBar setBackgroundImage:[UIImage imageNamed:@"v2-head.png"] forBarMetrics:UIBarMetricsDefault];
+//    [navigationBar setTitleTextAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:20], NSForegroundColorAttributeName:[UIColor whiteColor]}];
+//    navigationBar.tintColor = [UIColor whiteColor];
+//    navigationBar.translucent = NO;
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;

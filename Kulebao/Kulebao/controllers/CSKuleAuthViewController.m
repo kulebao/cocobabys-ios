@@ -7,13 +7,11 @@
 //
 
 #import "CSKuleAuthViewController.h"
-#import "EAIntroPage.h"
-#import "EAIntroView.h"
 #import "CSKuleLoginViewController.h"
 #import "CSAppDelegate.h"
 #import "CSKuleVerifyMobileViewController.h"
 
-@interface CSKuleAuthViewController () <EAIntroDelegate>
+@interface CSKuleAuthViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *labNotice;
 @property (weak, nonatomic) IBOutlet UITextField *fieldMobile;
 @property (weak, nonatomic) IBOutlet UIButton *btnDevSetting;
@@ -58,8 +56,6 @@
     }
     
     self.imgContentBg.image = [[UIImage imageNamed:@"v2-input_login_bg.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
-    
-    [self showIntroViewsIfNeeded];
 }
 
 - (void)didReceiveMemoryWarning
@@ -179,67 +175,6 @@
     [gApp alert:@"绑定手机成功。"];
     [self.navigationController popToViewController:self animated:NO];
     [self performSegueWithIdentifier:@"segue.login" sender:nil];
-}
-
-#pragma mark - Private
-- (void)showIntroViewsIfNeeded {
-    if (!gApp.engine.preferences.guideShown) {
-        [self showIntroViews];
-    }
-    else {
-    }
-}
-
--(void)showIntroViews {
-    //float systemVersion = [[[UIDevice currentDevice] systemVersion] floatValue];
-    NSArray* introImageNames = @[@"guide-1.png", @"guide-2.png", @"guide-3.png", @"guide-4.png"];
-    if (!IS_IPHONE4) {
-        introImageNames = @[@"guide-1-568h.png", @"guide-2-568h.png", @"guide-3-568h.png", @"guide-4-568h.png"];
-    }
-    
-    NSMutableArray* introPages = [NSMutableArray array];
-    for (NSString* imageName in introImageNames) {
-        EAIntroPage* page = [EAIntroPage page];
-        UIImageView* imageV = [[UIImageView alloc] initWithFrame:self.view.bounds];
-        imageV.image = [UIImage imageNamed:imageName];
-        page.customView = imageV;
-        [introPages addObject:page];
-    }
-    
-    UIButton* skipButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [skipButton setBackgroundImage:[UIImage imageNamed:@"btn-start.png"] forState:UIControlStateNormal];
-    [skipButton setBackgroundImage:[UIImage imageNamed:@"btn-start-pressed.png"] forState:UIControlStateHighlighted];
-    
-    CGSize viewSize = self.view.bounds.size;
-    skipButton.frame = CGRectMake((viewSize.width-126)/2, viewSize.height-90, 126, 27);
-    
-    EAIntroView *intro = [[EAIntroView alloc] initWithFrame:self.view.bounds
-                                                   andPages:introPages];
-    intro.skipButton = skipButton;
-    intro.backgroundColor = [UIColor whiteColor];
-    intro.scrollView.bounces = NO;
-    intro.swipeToExit = NO;
-    intro.easeOutCrossDisolves = NO;
-    intro.showSkipButtonOnlyOnLastPage = YES;
-    [intro setDelegate:self];
-    [intro showInView:self.view animateDuration:0];
-}
-
-#pragma mark - EAIntroDelegate
-- (void)introDidFinish:(EAIntroView *)introView {
-    gApp.engine.preferences.guideShown = YES;
-}
-
-- (void)intro:(EAIntroView *)introView pageAppeared:(EAIntroPage *)page withIndex:(NSInteger)pageIndex {
-    
-}
-
-- (void)intro:(EAIntroView *)introView pageStartScrolling:(EAIntroPage *)page withIndex:(NSInteger)pageIndex {
-    
-}
-
-- (void)intro:(EAIntroView *)introView pageEndScrolling:(EAIntroPage *)page withIndex:(NSInteger)pageIndex {
-    
 }
 
 @end

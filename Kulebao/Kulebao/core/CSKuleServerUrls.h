@@ -69,6 +69,9 @@
 // PATH: 小孩信息
 #define kChildInfoPath              @"/kindergarten/%@/child/%@"
 
+// PATH: 更新家长信息
+#define kUpdateParentInfoPath       @"/kindergarten/%@/parent"
+
 // PATH: 幼儿园公告列表
 #define kKindergartenNewsListPath   @"/kindergarten/%@/news"
 
@@ -157,5 +160,10 @@
 #define kGetContractorActivityListV4    @"/api/v4/kindergarten/%@/contractor/%@/activity"
 #define kPostEnrollmentV4               @"/api/v4/kindergarten/%@/activity/%@/enrollment"
 #define kGetEnrollmentV4                @"/api/v4/kindergarten/%@/activity/%@/parent/%@/enrollment"
+
+#pragma mark - Card Manager
+#define kBindCard           @"/kindergarten/%@/relationship/%@"
+#define kGetInviteCode      @"/api/v5/invitation_code/%@"
+#define kCreateInvitation   @"/api/v5/kindergarten/%@/invitation"
 
 #endif

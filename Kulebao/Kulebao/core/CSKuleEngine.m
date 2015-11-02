@@ -1064,6 +1064,25 @@
                                failure:failure];
 }
 
+- (void)reqGetChildRelationship:(NSString*)childId
+                 inKindergarten:(NSInteger)kindergarten
+                        success:(SuccessResponseHandler)success
+                        failure:(FailureResponseHandler)failure {
+    NSParameterAssert(childId);
+    
+    NSString* path = [NSString stringWithFormat:kGetFamilyRelationshipPath, @(kindergarten)];
+    
+    NSString* method = @"GET";
+    
+    NSDictionary* parameters = @{@"child": childId};
+    
+    [_httpClient httpRequestWithMethod:method
+                                  path:path
+                            parameters:parameters
+                               success:success
+                               failure:failure];
+}
+
 - (void)reqUpdateChildInfo:(CSKuleChildInfo*)childInfo
             inKindergarten:(NSInteger)kindergarten
                    success:(SuccessResponseHandler)success
@@ -1082,6 +1101,33 @@
                                  @"class_id": @(childInfo.classId),
                                  @"child_id": childInfo.childId,
                                  @"class_name": childInfo.className,};
+    
+    [_httpClient httpRequestWithMethod:method
+                                  path:path
+                            parameters:parameters
+                               success:success
+                               failure:failure];
+}
+
+- (void)reqUpdateParentInfo:(CSKuleParentInfo*)parentInfo
+             inKindergarten:(NSInteger)kindergarten
+                    success:(SuccessResponseHandler)success
+                    failure:(FailureResponseHandler)failure {
+    NSParameterAssert(parentInfo);
+    
+    NSString* path = [NSString stringWithFormat:kUpdateParentInfoPath, @(kindergarten)];
+    
+    NSString* method = @"POST";
+    
+    NSDictionary* parameters = @{
+                                 @"parent_id": parentInfo.parentId,
+                                 @"school_id": @(kindergarten),
+                                 @"name": parentInfo.name,
+                                 @"phone": parentInfo.phone,
+                                 @"portrait": parentInfo.portrait,
+                                 @"gender": @(parentInfo.gender),
+                                 @"birthday": parentInfo.birthday,
+                                 };
     
     [_httpClient httpRequestWithMethod:method
                                   path:path
@@ -1950,6 +1996,88 @@
     [parameters setObject:SAFE_STRING(_currentRelationship.parent.parentId) forKey:@"parent_id"];
     [parameters setObject:SAFE_STRING(_currentRelationship.parent.phone) forKey:@"contact"];
     [parameters setObject:SAFE_STRING(_currentRelationship.parent.name) forKey:@"name"];
+    
+    return [_httpClient httpRequestWithMethod:method
+                                         path:path
+                                   parameters:parameters
+                                      success:success
+                                      failure:failure];
+}
+
+- (AFHTTPRequestOperation*)reqGetInviteCodeWithHost:(NSString*)hostPhone
+                                         andInvitee:(NSString*)smsPhone
+                                            success:(SuccessResponseHandler)success
+                                            failure:(FailureResponseHandler)failure{
+    NSString* path = [NSString stringWithFormat:kGetInviteCode, smsPhone];
+    NSString* method = @"POST";
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    [parameters setObject:hostPhone forKey:@"host"];
+    [parameters setObject:smsPhone forKey:@"invitee"];
+    
+    return [_httpClient httpRequestWithMethod:method
+                                         path:path
+                                   parameters:parameters
+                                      success:success
+                                      failure:failure];
+}
+
+- (AFHTTPRequestOperation*)reqBindCardOfKindergarten:(NSInteger)kindergarten
+                                         withCardNum:(NSString*)cardNum
+                                             success:(SuccessResponseHandler)success
+                                             failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kBindCard, @(kindergarten), cardNum];
+    NSString* method = @"POST";
+   
+    NSDictionary* parameters = @{@"relationship": gApp.engine.currentRelationship.relationship,
+                                 @"parent": @{
+                                         @"phone":  gApp.engine.currentRelationship.parent.phone
+                                     },
+                                 @"child": @{
+                                         @"child_id":  gApp.engine.currentRelationship.child.childId
+                                     },
+                                 @"id":@(gApp.engine.currentRelationship.uid)};
+    
+    return [_httpClient httpRequestWithMethod:method
+                                         path:path
+                                   parameters:parameters
+                                      success:success
+                                      failure:failure];
+}
+
+- (AFHTTPRequestOperation*)reqCreateInvitationOfKindergarten:(NSInteger)kindergarten
+                                                       phone:(NSString*)phone
+                                                        name:(NSString*)name
+                                                relationship:(NSString*)relationship
+                                                    passcode:(NSString*)passcode
+                                                     success:(SuccessResponseHandler)success
+                                                     failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kCreateInvitation, @(kindergarten)];
+    NSString* method = @"POST";
+    
+    NSDictionary* parameters = @{@"from":@{
+                                            @"parent_id": gApp.engine.currentRelationship.parent.parentId,
+                                            @"school_id": @(kindergarten),
+                                            @"name": gApp.engine.currentRelationship.parent.name,
+                                            @"phone": gApp.engine.currentRelationship.parent.phone,
+                                            @"portrait": gApp.engine.currentRelationship.parent.portrait,
+                                            @"gender": @(0),
+                                            @"birthday": @"",
+                                            @"timestamp": @(gApp.engine.currentRelationship.parent.timestamp/1000),
+                                            @"member_status": @(gApp.engine.currentRelationship.parent.memberStatus),
+                                            @"status": @(1),
+                                            @"company": @"",
+                                            @"created_at": @(0),
+                                            @"id": @(0)
+                                         },
+                                 @"to":@{
+                                            @"phone": phone,
+                                            @"name": name,
+                                            @"relationship": relationship
+                                         },
+                                 @"code": @{
+                                            @"phone": phone,
+                                            @"code": passcode
+                                 }};
     
     return [_httpClient httpRequestWithMethod:method
                                          path:path

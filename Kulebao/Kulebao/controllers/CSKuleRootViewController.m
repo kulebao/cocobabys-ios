@@ -7,7 +7,7 @@
 //
 
 #import "CSKuleRootViewController.h"
-#include "CSAppDelegate.h"
+#import "CSAppDelegate.h"
 #import "BPush.h"
 
 @interface CSKuleRootViewController ()

@@ -44,6 +44,10 @@
 }
 
 - (void)customizeBackBarItem {
+    //[self customizeBackBarItemWithTarget:self action:@selector(onBtnBackClicked_CSKit:)];
+}
+
+- (void)customizeBackBarItem2 {
     [self customizeBackBarItemWithTarget:self action:@selector(onBtnBackClicked_CSKit:)];
 }
 

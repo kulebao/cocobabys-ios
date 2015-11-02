@@ -116,10 +116,20 @@
                              success:(SuccessResponseHandler)success
                              failure:(FailureResponseHandler)failure;
 
+- (void)reqGetChildRelationship:(NSString*)childId
+                 inKindergarten:(NSInteger)kindergarten
+                        success:(SuccessResponseHandler)success
+                        failure:(FailureResponseHandler)failure;
+
 - (void)reqUpdateChildInfo:(CSKuleChildInfo*)childInfo
             inKindergarten:(NSInteger)kindergarten
                    success:(SuccessResponseHandler)success
                    failure:(FailureResponseHandler)failure;
+
+- (void)reqUpdateParentInfo:(CSKuleParentInfo*)parentInfo
+             inKindergarten:(NSInteger)kindergarten
+                    success:(SuccessResponseHandler)success
+                    failure:(FailureResponseHandler)failure;
 
 - (void)reqGetNewsOfKindergarten:(NSInteger)kindergarten
                      withClassId:(NSInteger)classId
@@ -315,5 +325,23 @@
                                               withActivity:(CBActivityData*)activity
                                                    success:(SuccessResponseHandler)success
                                                    failure:(FailureResponseHandler)failure;
+
+- (AFHTTPRequestOperation*)reqGetInviteCodeWithHost:(NSString*)hostPhone
+                                         andInvitee:(NSString*)smsPhone
+                                            success:(SuccessResponseHandler)success
+                                            failure:(FailureResponseHandler)failure;
+
+- (AFHTTPRequestOperation*)reqBindCardOfKindergarten:(NSInteger)kindergarten
+                                         withCardNum:(NSString*)cardNum
+                                             success:(SuccessResponseHandler)success
+                                             failure:(FailureResponseHandler)failure;
+
+- (AFHTTPRequestOperation*)reqCreateInvitationOfKindergarten:(NSInteger)kindergarten
+                                                       phone:(NSString*)phone
+                                                        name:(NSString*)name
+                                                relationship:(NSString*)relationship
+                                                    passcode:(NSString*)passcode
+                                                     success:(SuccessResponseHandler)success
+                                                     failure:(FailureResponseHandler)failure;
 
 @end

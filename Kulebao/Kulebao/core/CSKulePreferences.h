@@ -17,6 +17,7 @@
 
 @property (nonatomic, strong) NSString* defaultUsername;
 @property (nonatomic, assign) BOOL guideShown;
+@property (nonatomic, assign) BOOL guideHomeShown;
 
 @property (nonatomic, strong) CSKuleBPushInfo* baiduPushInfo;
 @property (nonatomic, strong) CSKuleLoginInfo* loginInfo;

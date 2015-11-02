@@ -16,6 +16,7 @@
 
 - (void)customizeBackBarItemWithTarget:(id)target action:(SEL)action;
 - (void)customizeBackBarItem;
+- (void)customizeBackBarItem2;
 
 - (void)customizeOkBarItemWithTarget:(id)target action:(SEL)action text:(NSString*)text;
 

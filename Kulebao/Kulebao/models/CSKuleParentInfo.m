@@ -21,6 +21,24 @@
 @synthesize status = _status;
 @synthesize company = _company;
 
+- (id)copyWithZone:(NSZone *)zone {
+    CSKuleParentInfo* newObj =  [[[self class] allocWithZone:zone] init];
+    
+    newObj.parentId = self.parentId;
+    newObj.schoolId = self.schoolId;
+    newObj.name = self.name;
+    newObj.phone = self.phone;
+    newObj.portrait = self.portrait;
+    newObj.gender = self.gender;
+    newObj.birthday = self.birthday;
+    newObj.timestamp = self.timestamp;
+    newObj.memberStatus = self.memberStatus;
+    newObj.status = self.status;
+    newObj.company = self.company;
+    
+    return newObj;
+}
+
 - (NSString*)description {
     NSDictionary* meta = @{@"parentId": _parentId,
                            @"schoolId": @(_schoolId),

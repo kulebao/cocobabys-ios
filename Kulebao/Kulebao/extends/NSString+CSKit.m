@@ -11,6 +11,7 @@
 
 @implementation NSString (CSKit)
 
+// 检查密码格式是否正确,6-16位，数字或英文字母
 - (BOOL)isValidPswd {
     NSString *regex =@"^[a-zA-Z0-9]{6,16}$";
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
@@ -18,6 +19,8 @@
     return ret;
 }
 
+// 简单判断一下是否是手机号码
+// 判断依据，1开头的11位数字
 - (BOOL)isValidMobile {
     NSString *regex =@"^((\\+86)|(86))?(1)\\d{10}$";
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
@@ -25,8 +28,19 @@
     return ret;
 }
 
+// 判断验证码是否合法，6位数字
 - (BOOL)isValidSmsCode {
     NSString *regex =@"^\\d{6}$";
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    BOOL ret = [predicate evaluateWithObject:self];
+    return ret;
+}
+
+
+// 简单判断一下是否是合法卡号
+// 判断依据，10位数字
+- (BOOL)isValidCardNum {
+    NSString *regex =@"^\\d{10}$";
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
     BOOL ret = [predicate evaluateWithObject:self];
     return ret;

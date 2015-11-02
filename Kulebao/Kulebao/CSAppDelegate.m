@@ -8,7 +8,14 @@
 
 #import "CSAppDelegate.h"
 #import "BPush.h"
+#import "EAIntroPage.h"
+#import "EAIntroView.h"
+
 CSAppDelegate* gApp = nil;
+
+@interface CSAppDelegate () <EAIntroDelegate>
+
+@end
 
 @implementation CSAppDelegate
 @synthesize engine = _engine;
@@ -108,12 +115,16 @@ CSAppDelegate* gApp = nil;
     UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     id ctrl = [mainStoryboard instantiateViewControllerWithIdentifier:@"CSLoginNavigationController"];
     gApp.window.rootViewController = ctrl;
+    
+    [self showIntroViewsIfNeeded];
 }
 
 - (void)gotoMainProcess {
     UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     id ctrl = [mainStoryboard instantiateViewControllerWithIdentifier:@"CSMainNavigationController"];
     gApp.window.rootViewController = ctrl;
+    
+    [self showIntroViewsIfNeeded];
 }
 
 - (void)logout {
@@ -191,5 +202,71 @@ CSAppDelegate* gApp = nil;
 - (void)hideAlertAfterDelay:(NSTimeInterval)delay {
     [NSObject cancelPreviousPerformRequestsWithTarget:self.hud];
     [self.hud hide:YES afterDelay:delay];
+}
+
+#pragma mark - Private
+- (void)showIntroViewsIfNeeded {
+    if (!gApp.engine.preferences.guideShown) {
+        [self showIntroViews];
+    }
+    else {
+    }
+}
+
+-(void)showIntroViews {
+    //float systemVersion = [[[UIDevice currentDevice] systemVersion] floatValue];
+    /*
+     NSArray* introImageNames = @[@"guide-1.png", @"guide-2.png", @"guide-3.png", @"guide-4.png"];
+     if (!IS_IPHONE4) {
+     introImageNames = @[@"guide-1-568h.png", @"guide-2-568h.png", @"guide-3-568h.png", @"guide-4-568h.png"];
+     }
+     */
+    NSArray* introImageNames = @[@"v2-guide5", @"v2-guide6"];
+    
+    NSMutableArray* introPages = [NSMutableArray array];
+    for (NSString* imageName in introImageNames) {
+        EAIntroPage* page = [EAIntroPage page];
+        UIImageView* imageV = [[UIImageView alloc] initWithFrame:self.window.rootViewController.view.bounds];
+        imageV.image = [UIImage imageNamed:imageName];
+        page.customView = imageV;
+        [introPages addObject:page];
+    }
+    
+    UIButton* skipButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    //[skipButton setBackgroundImage:[UIImage imageNamed:@"btn-start.png"] forState:UIControlStateNormal];
+    //[skipButton setBackgroundImage:[UIImage imageNamed:@"btn-start-pressed.png"] forState:UIControlStateHighlighted];
+    
+    CGSize viewSize = self.window.rootViewController.view.bounds.size;
+    //skipButton.frame = CGRectMake((viewSize.width-126)/2, viewSize.height-90, 126, 27);
+    skipButton.frame = CGRectMake(0, 0, viewSize.width, viewSize.height);
+    
+    EAIntroView *intro = [[EAIntroView alloc] initWithFrame:self.window.rootViewController.view.bounds
+                                                   andPages:introPages];
+    intro.skipButton = skipButton;
+    intro.backgroundColor = [UIColor whiteColor];
+    intro.scrollView.bounces = NO;
+    intro.swipeToExit = NO;
+    intro.easeOutCrossDisolves = NO;
+    intro.showSkipButtonOnlyOnLastPage = YES;
+    intro.pageControl.hidden = YES;
+    [intro setDelegate:self];
+    [intro showInView:self.window.rootViewController.view animateDuration:0];
+}
+
+#pragma mark - EAIntroDelegate
+- (void)introDidFinish:(EAIntroView *)introView {
+    gApp.engine.preferences.guideShown = YES;
+}
+
+- (void)intro:(EAIntroView *)introView pageAppeared:(EAIntroPage *)page withIndex:(NSInteger)pageIndex {
+    
+}
+
+- (void)intro:(EAIntroView *)introView pageStartScrolling:(EAIntroPage *)page withIndex:(NSInteger)pageIndex {
+    
+}
+
+- (void)intro:(EAIntroView *)introView pageEndScrolling:(EAIntroPage *)page withIndex:(NSInteger)pageIndex {
+    
 }
 @end

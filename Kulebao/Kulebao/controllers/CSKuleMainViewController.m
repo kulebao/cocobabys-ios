@@ -816,25 +816,28 @@
                 ok = YES;
                 break;
             case kKuleModuleRecipe:     // 每周食谱
-                [gApp alert:@"你想知道宝贝每天的膳食吗？赶快联系幼儿园开通此功能吧！"];
+                [gApp alert:@"您想知道宝贝每天的膳食吗？赶快联系幼儿园开通此功能吧！"];
                 break;
             case kKuleModuleSchedule:    // 课程表
-                [gApp alert:@"你想知道宝贝每天的学习内容吗？赶快联系幼儿园开通此功能吧！"];
+                [gApp alert:@"您想知道宝贝每天的学习内容吗？赶快联系幼儿园开通此功能吧！"];
                 break;
             case kKuleModuleAssignment:  // 亲子作业
-                [gApp alert:@"你想看看老师布置了什么亲子作业吗？赶快联系幼儿园开通此功能吧！"];
+                [gApp alert:@"您想看看老师布置了什么亲子作业吗？赶快联系幼儿园开通此功能吧！"];
                 break;
             case kKuleModuleChating:     // 家园互动
-                [gApp alert:@"你想随时和老师零距离沟通吗？赶快联系幼儿园开通此功能吧！"];
+                [gApp alert:@"您想随时和老师零距离沟通吗？赶快联系幼儿园开通此功能吧！"];
                 break;
             case kKuleModuleAssess:      // 在园表现
-                [gApp alert:@"你想看看老师对宝贝在幼儿园的表现有什么评价吗？赶快联系幼儿园开通此功能吧！"];
+                [gApp alert:@"您想看看老师对宝贝在幼儿园的表现有什么评价吗？赶快联系幼儿园开通此功能吧！"];
                 break;
             case kKuleModuleHistory:     // 成长经历
-                [gApp alert:@"你想记录下宝贝在幼儿园的点点滴滴吗？赶快联系幼儿园开通此功能吧！"];
+                [gApp alert:@"您想记录下宝贝在幼儿园的点点滴滴吗？赶快联系幼儿园开通此功能吧！"];
                 break;
             case kKuleModuleCCTV:        // 看宝宝
-                [gApp alert:@"你想随时看到宝贝在做什么吗？赶快联系幼儿园开通此功能吧！"];
+                [gApp alert:@"您想随时看到宝贝在做什么吗？赶快联系幼儿园开通此功能吧！"];
+                break;
+            case kKuleModuleBus:         // 校车
+                [gApp alert:@"您想查看校车的行驶情况吗？赶快联系幼儿园开通此功能吧！"];
                 break;
             default:
                 ok = NO;

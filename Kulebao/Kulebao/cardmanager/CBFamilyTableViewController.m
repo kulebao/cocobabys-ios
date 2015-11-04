@@ -75,7 +75,7 @@
         
         cell.imgIcon.layer.cornerRadius = cell.imgIcon.bounds.size.width/2;
         
-        NSURL* qiniuImgUrl = [gApp.engine urlFromPath:gApp.engine.currentRelationship.parent.portrait];
+        NSURL* qiniuImgUrl = [gApp.engine urlFromPath:relationshipInfo.parent.portrait];
         qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/256/h/256"];
         [cell.imgIcon sd_setImageWithURL:qiniuImgUrl
                         placeholderImage:[UIImage imageNamed:@"v2-small"]];
@@ -165,7 +165,7 @@
         [gApp alert:[error localizedDescription]];
     };
     
-    [gApp waitingAlert:@"获取家人信息"];
+    //[gApp waitingAlert:@"获取家人信息"];
     [gApp.engine reqGetChildRelationship:gApp.engine.currentRelationship.child.childId
                           inKindergarten:gApp.engine.loginInfo.schoolId
                                  success:sucessHandler

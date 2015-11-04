@@ -316,6 +316,8 @@
     else {
         [self updateCommercialStatus];
     }
+    
+    [self updateUI:YES];
 }
 
 #pragma mark - Segues
@@ -495,14 +497,18 @@
         
         SDWebImageOptions options = SDWebImageRetryFailed | SDWebImageLowPriority |SDWebImageAllowInvalidSSLCertificates;
         
+        UIImage* placeholderImage = [UIImage imageNamed:@"default_child_head_icon.png"];
+ 
+        
         if (reloadPortrait) {
             options = options | SDWebImageRefreshCached;
         }
-        
-        UIImage* placeholderImage = [UIImage imageNamed:@"default_child_head_icon.png"];
-        if (self.imgChildPortrait.image) {
-            placeholderImage = self.imgChildPortrait.image;
+        else {
+            if (self.imgChildPortrait.image) {
+                placeholderImage = self.imgChildPortrait.image;
+            }
         }
+
         [self.imgChildPortrait  sd_setImageWithURL:qiniuImgUrl
                                   placeholderImage:placeholderImage
                                            options:options];

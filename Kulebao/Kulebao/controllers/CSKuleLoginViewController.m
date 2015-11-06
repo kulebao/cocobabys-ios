@@ -107,7 +107,6 @@
         [gApp alert:@"无效的手机号码，请退出重试。"];
     }
 }
-
 - (void)doLogin {
     NSString* pswd = self.fieldPassword.text;
     if (pswd.length > 0 && self.mobile.length > 0) {

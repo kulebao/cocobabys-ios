@@ -10,6 +10,7 @@
 #import "CSAppDelegate.h"
 #import "UIButton+Countdown.h"
 #import "CSTextFieldDelegate.h"
+#import "CBShareIntroView.h"
 
 @interface CBAddFamilyViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *fieldPhone;
@@ -20,9 +21,11 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnInvite;
 
 @property (nonatomic, strong) CSTextFieldDelegate* fieldDelegate;
+@property (nonatomic, strong) CBShareIntroView* shareIntroView;
 
 - (IBAction)onBtnGetPasscodeClicked:(id)sender;
 - (IBAction)onBtnInviteClicked:(id)sender;
+- (IBAction)onBtnShareClicked:(id)sender;
 
 @end
 
@@ -61,6 +64,10 @@
     [self onGetInviteCode];
 }
 
+- (IBAction)onBtnShareClicked:(id)sender {
+    [self showIntroViews];
+}
+
 - (IBAction)onBtnInviteClicked:(id)sender {
     [self closeKeyboard];
     
@@ -87,12 +94,12 @@
                                                        }
                                                        else {
                                                            [gApp alert:@"邀请成功"];
-                                                           [self.navigationController popViewControllerAnimated:YES];
+                                                           [self showIntroViews];
                                                        }
                                                    }
                                                    else {
                                                        [gApp alert:@"邀请成功"];
-                                                       [self.navigationController popViewControllerAnimated:YES];
+                                                       [self showIntroViews];
                                                    }
                                                }
                                                failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -163,6 +170,18 @@
     [self.fieldRelationship resignFirstResponder];
 }
 
+- (CBShareIntroView*)shareIntroView {
+    if (_shareIntroView == nil) {
+        _shareIntroView = [CBShareIntroView instance];
+    }
+    
+    return _shareIntroView;
+}
+
+-(void)showIntroViews {
+    [self.shareIntroView showInView:self.navigationController.view];
+}
+
 - (void)onGetInviteCode {
     NSString* phone = [self.fieldPhone.text trim];
     self.fieldPhone.text = phone;
@@ -204,6 +223,9 @@
                                               if (error_code == 1) {
                                                   // GET_AUTH_CODE_TOO_OFTEN
                                                   [gApp alert:@"验证码获取过于频繁，请稍后再试"];
+                                              }
+                                              else if (error_code == 8) {
+                                                  [gApp alert:@"被邀请人已经在幼乐宝注册"];
                                               }
                                               else {
                                                   // GET_AUTH_CODE_FAIL

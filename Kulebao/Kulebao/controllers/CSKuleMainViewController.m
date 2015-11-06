@@ -1208,11 +1208,7 @@
     }
     
     UIButton* skipButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    //[skipButton setBackgroundImage:[UIImage imageNamed:@"btn-start.png"] forState:UIControlStateNormal];
-    //[skipButton setBackgroundImage:[UIImage imageNamed:@"btn-start-pressed.png"] forState:UIControlStateHighlighted];
-    
     CGSize viewSize = self.navigationController.view.bounds.size;
-    //skipButton.frame = CGRectMake((viewSize.width-126)/2, viewSize.height-90, 126, 27);
     skipButton.frame = CGRectMake(0, 0, viewSize.width, viewSize.height);
     
     EAIntroView *intro = [[EAIntroView alloc] initWithFrame:self.navigationController.view.bounds

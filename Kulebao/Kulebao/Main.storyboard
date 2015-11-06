@@ -1210,7 +1210,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jte-4h-vNX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1022" y="4873"/>
+            <point key="canvasLocation" x="-998" y="4873"/>
         </scene>
         <!--接送卡管理-->
         <scene sceneID="xea-wp-ovd">
@@ -1304,7 +1304,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vm4-fm-Gem" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2008" y="5402"/>
+            <point key="canvasLocation" x="-1952" y="6042"/>
         </scene>
         <!--邀请家人-->
         <scene sceneID="8Ao-6E-3bV">
@@ -1503,7 +1503,19 @@
                             <constraint firstItem="DCU-eX-8vq" firstAttribute="width" secondItem="oPt-S4-XvR" secondAttribute="width" id="zxO-j9-d83"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="邀请家人" id="Q6J-pV-2bz"/>
+                    <navigationItem key="navigationItem" title="邀请家人" id="Q6J-pV-2bz">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="Heh-M3-tQl">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="XCC-SZ-BP9">
+                                <rect key="frame" x="224" y="11" width="80" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="分享下载" image="v2-btn-share"/>
+                                <connections>
+                                    <action selector="onBtnShareClicked:" destination="6HI-Ih-AKp" eventType="touchUpInside" id="P2l-Bm-7IN"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="btnGetPasscode" destination="MGj-Wc-tHt" id="ljE-lD-tdv"/>
                         <outlet property="btnInvite" destination="UiI-2w-qBI" id="UdX-78-iPx"/>
@@ -1515,7 +1527,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CPq-LZ-dSU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2492" y="4904"/>
+            <point key="canvasLocation" x="-2530" y="4873"/>
         </scene>
         <!--邀请家人-->
         <scene sceneID="5FD-WP-iDo">
@@ -1624,14 +1636,26 @@
                             <outlet property="delegate" destination="bTW-4e-Vhn" id="elf-Sv-GEX"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="邀请家人" id="4ln-Be-GYd"/>
+                    <navigationItem key="navigationItem" title="邀请家人" id="4ln-Be-GYd">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="Uh1-5y-c39">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="rbE-br-buo">
+                                <rect key="frame" x="224" y="11" width="80" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="分享下载" image="v2-btn-share"/>
+                                <connections>
+                                    <action selector="onBtnShareClicked:" destination="bTW-4e-Vhn" eventType="touchUpInside" id="OFb-h1-O2k"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="6HI-Ih-AKp" kind="push" identifier="segue.addfamily" id="Sum-uc-kbz"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7sf-MO-UTy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2016" y="4706"/>
+            <point key="canvasLocation" x="-2025" y="4873"/>
         </scene>
         <!--设置-->
         <scene sceneID="xjP-sC-Iss">
@@ -2532,7 +2556,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3MP-OV-LR6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1436" y="6037"/>
+            <point key="canvasLocation" x="-1466" y="6037"/>
         </scene>
         <!--2014-08-->
         <scene sceneID="fMx-37-P99">
@@ -2796,7 +2820,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H6B-zg-WlL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1008" y="7009"/>
+            <point key="canvasLocation" x="-998" y="6859"/>
         </scene>
         <!--反馈-->
         <scene sceneID="1UR-IV-3Lr">
@@ -3223,7 +3247,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9VN-gQ-u2c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1436" y="6853"/>
+            <point key="canvasLocation" x="-1466" y="6859"/>
         </scene>
         <!--刷卡记录-->
         <scene sceneID="99u-Vz-cU0">
@@ -3975,6 +3999,7 @@
         <image name="v2-bg_1.png" width="320" height="139"/>
         <image name="v2-bg_set.png" width="15" height="14"/>
         <image name="v2-box_看宝宝.png" width="20" height="20"/>
+        <image name="v2-btn-share" width="17" height="21"/>
         <image name="v2-btn_bg_blue" width="14" height="14"/>
         <image name="v2-btn_blue.png" width="75" height="29"/>
         <image name="v2-btn_camera.png" width="28" height="25"/>
@@ -4011,11 +4036,11 @@
         <image name="video_icon.png" width="37" height="37"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="oJS-Dt-pBw"/>
+        <segue reference="fSQ-gh-Ltp"/>
+        <segue reference="zOI-Zr-bNp"/>
+        <segue reference="SDD-Kf-gHh"/>
+        <segue reference="Sgw-CB-atc"/>
         <segue reference="qNJ-JJ-pfw"/>
-        <segue reference="sqj-9c-7rO"/>
-        <segue reference="yoV-np-veT"/>
-        <segue reference="dPL-GX-L4g"/>
-        <segue reference="eD5-bt-hK4"/>
-        <segue reference="ZnR-hq-gnJ"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -10,10 +10,14 @@
 #import "CSAppDelegate.h"
 #import "CBFamilyItemTableViewCell.h"
 #import "UIImageView+WebCache.h"
+#import "CBShareIntroView.h"
 
 @interface CBFamilyTableViewController ()
 
 @property (nonatomic, strong) NSMutableArray* relationships;
+- (IBAction)onBtnShareClicked:(id)sender;
+
+@property (nonatomic, strong) CBShareIntroView* shareIntroView;
 
 @end
 
@@ -170,6 +174,22 @@
                           inKindergarten:gApp.engine.loginInfo.schoolId
                                  success:sucessHandler
                                  failure:failureHandler];
+}
+
+- (IBAction)onBtnShareClicked:(id)sender {
+    [self showIntroViews];
+}
+
+- (CBShareIntroView*)shareIntroView {
+    if (_shareIntroView == nil) {
+        _shareIntroView = [CBShareIntroView instance];
+    }
+    
+    return _shareIntroView;
+}
+
+-(void)showIntroViews {
+    [self.shareIntroView showInView:self.navigationController.view];
 }
 
 @end

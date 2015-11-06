@@ -3257,8 +3257,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchScreen;
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "libc++";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Qin Suo (ZU5HVY57NS)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Qin Suo (ZU5HVY57NS)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3284,7 +3284,7 @@
 					"$(PROJECT_DIR)/Venders/ShareSDK/Extend/WeChatSDK",
 				);
 				PRODUCT_NAME = youlebao;
-				PROVISIONING_PROFILE = "d04210c8-1bc8-43a9-a946-c5d9d8df6010";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

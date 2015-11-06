@@ -27,7 +27,7 @@
                         <action selector="onBtnBgClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="wUx-4x-7Xe"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="thT-JN-kpS">
+                <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="755" verticalCompressionResistancePriority="755" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="thT-JN-kpS">
                     <rect key="frame" x="53" y="448" width="214" height="44"/>
                     <state key="normal" backgroundImage="v2-btn-share-send"/>
                     <connections>
@@ -60,6 +60,6 @@
     <resources>
         <image name="v2-bg-share" width="42" height="42"/>
         <image name="v2-btn-share-send" width="214" height="44"/>
-        <image name="v2-qrcode-share" width="328" height="392"/>
+        <image name="v2-qrcode-share" width="344" height="392"/>
     </resources>
 </document>

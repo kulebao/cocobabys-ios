@@ -170,7 +170,7 @@
     };
     
     //[gApp waitingAlert:@"获取家人信息"];
-    [gApp.engine reqGetChildRelationship:gApp.engine.currentRelationship.child.childId
+    [gApp.engine.httpClient reqGetChildRelationship:gApp.engine.currentRelationship.child.childId
                           inKindergarten:gApp.engine.loginInfo.schoolId
                                  success:sucessHandler
                                  failure:failureHandler];

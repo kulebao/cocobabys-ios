@@ -203,7 +203,7 @@
     };
     
     [gApp waitingAlert:@"注销登录..."];
-    [gApp.engine reqUnbindWithSuccess:sucessHandler failure:failureHandler];
+    [gApp.engine.httpClient reqUnbindWithSuccess:sucessHandler failure:failureHandler];
 }
 
 - (IBAction)onBtnPortraitClicked:(id)sender {
@@ -252,7 +252,7 @@
             };
             
             [gApp waitingAlert:@"更新家长头像中"];
-            [gApp.engine reqUpdateParentInfo:cp
+            [gApp.engine.httpClient reqUpdateParentInfo:cp
                               inKindergarten:gApp.engine.loginInfo.schoolId
                                      success:sucessHandler
                                      failure:failureHandler];
@@ -317,7 +317,7 @@
     };
     
     [gApp waitingAlert:@"上传家长头像中"];
-    [gApp.engine reqUploadToQiniu:imgData
+    [gApp.engine.httpClient reqUploadToQiniu:imgData
                           withKey:imgFileName
                          withMime:@"image/jpeg"
                           success:sucessHandler

@@ -145,7 +145,7 @@
         };
         
         [gApp waitingAlert:@"正在校验手机号码，请稍候..."];
-        [gApp.engine reqCheckPhoneNum:mobile
+        [gApp.engine.httpClient reqCheckPhoneNum:mobile
                               success:sucessHandler
                               failure:failureHandler];
     }

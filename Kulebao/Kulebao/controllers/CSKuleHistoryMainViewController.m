@@ -240,7 +240,7 @@
         };
         
         [gApp waitingAlert:@"上传图片中"];
-        [gApp.engine reqUploadToQiniu:imgData
+        [gApp.engine.httpClient reqUploadToQiniu:imgData
                               withKey:imgFileName
                              withMime:@"image/jpeg"
                               success:sucessHandler
@@ -277,7 +277,7 @@
     };
     
     [gApp waitingAlert:@"上传视频中"];
-    [gApp.engine reqUploadToQiniu:videoData
+    [gApp.engine.httpClient reqUploadToQiniu:videoData
                           withKey:videoFileName
                          withMime:@""
                           success:sucessHandler
@@ -297,7 +297,7 @@
     };
     
     [gApp waitingAlert:@"提交数据中"];
-    [gApp.engine reqPostHistoryOfKindergarten:gApp.engine.loginInfo.schoolId
+    [gApp.engine.httpClient reqPostHistoryOfKindergarten:gApp.engine.loginInfo.schoolId
                                   withChildId:gApp.engine.currentRelationship.child.childId
                                   withContent:_historyContent
                              withImageUrlList:_imageUrlList

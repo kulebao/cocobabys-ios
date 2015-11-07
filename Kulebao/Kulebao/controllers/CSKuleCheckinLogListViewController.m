@@ -111,7 +111,7 @@
                            placeholderImage:[UIImage imageNamed:@"img-placeholder.png"]];
     }
     else {
-        [cell.imgPhoto cancelImageRequestOperation];
+        [cell.imgPhoto sd_cancelCurrentImageLoad];
         cell.imgPhoto.image = [UIImage imageNamed:@"img-placeholder.png"];
     }
     cell.imgPhoto.clipsToBounds = YES;

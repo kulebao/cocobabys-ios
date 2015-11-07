@@ -98,7 +98,7 @@
     };
     
     [gApp waitingAlert:@"获取绑定信息..."];
-    [gApp.engine reqReceiveBindInfo:gApp.engine.loginInfo.accountName
+    [gApp.engine.httpClient reqReceiveBindInfo:gApp.engine.loginInfo.accountName
                             success:sucessHandler
                             failure:failureHandler];
 }

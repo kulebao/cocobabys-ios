@@ -254,6 +254,6 @@
 - (void)dealloc
 {
     // 取消请求
-    [_imageView setImageWithURL:[NSURL URLWithString:@"file:///abc"]];
+    [_imageView sd_setImageWithURL:[NSURL URLWithString:@"file:///abc"]];
 }
 @end

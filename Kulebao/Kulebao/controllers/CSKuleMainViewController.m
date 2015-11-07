@@ -584,7 +584,7 @@
             [gApp waitingAlert:@"修改宝宝生日..."];
             CSKuleChildInfo* cp = [childInfo copy];
             cp.birthday = [ctrl.date isoDateString];
-            [gApp.engine reqUpdateChildInfo:cp
+            [gApp.engine.httpClient reqUpdateChildInfo:cp
                              inKindergarten:gApp.engine.loginInfo.schoolId
                                     success:sucessHandler
                                     failure:failureHandler];
@@ -619,7 +619,7 @@
             };
             
             [gApp waitingAlert:@"修改宝宝昵称中，请稍候"];
-            [gApp.engine reqUpdateChildInfo:cp
+            [gApp.engine.httpClient reqUpdateChildInfo:cp
                              inKindergarten:gApp.engine.loginInfo.schoolId
                                     success:sucessHandler
                                     failure:failureHandler];
@@ -659,7 +659,7 @@
             };
             
             [gApp waitingAlert:@"更新宝宝头像中"];
-            [gApp.engine reqUpdateChildInfo:cp
+            [gApp.engine.httpClient reqUpdateChildInfo:cp
                              inKindergarten:gApp.engine.loginInfo.schoolId
                                     success:sucessHandler
                                     failure:failureHandler];
@@ -726,7 +726,7 @@
     };
     
     [gApp waitingAlert:@"获取信息中..."];
-    [gApp.engine reqGetSchoolInfoOfKindergarten:gApp.engine.loginInfo.schoolId
+    [gApp.engine.httpClient reqGetSchoolInfoOfKindergarten:gApp.engine.loginInfo.schoolId
                                         success:sucessHandler
                                         failure:failureHandler];
 }
@@ -759,7 +759,7 @@
     };
     
     [gApp waitingAlert:@"上传宝宝头像中"];
-    [gApp.engine reqUploadToQiniu:imgData
+    [gApp.engine.httpClient reqUploadToQiniu:imgData
                           withKey:imgFileName
                          withMime:@"image/jpeg"
                           success:sucessHandler
@@ -1009,7 +1009,7 @@
     };
     
     [gApp waitingAlert:@"获取宝宝信息"];
-    [gApp.engine reqGetFamilyRelationship:gApp.engine.loginInfo.accountName
+    [gApp.engine.httpClient reqGetFamilyRelationship:gApp.engine.loginInfo.accountName
                            inKindergarten:gApp.engine.loginInfo.schoolId
                                   success:sucessHandler
                                   failure:failureHandler];
@@ -1033,7 +1033,7 @@
     if(_actionToCCTV) {
         [gApp waitingAlert:@"请求数据中"];
     }
-    [gApp.engine reqGetVideoMemberOfKindergarten:gApp.engine.loginInfo.schoolId
+    [gApp.engine.httpClient reqGetVideoMemberOfKindergarten:gApp.engine.loginInfo.schoolId
                                     withParentId:gApp.engine.currentRelationship.parent.parentId
                                          success:sucessHandler
                                          failure:failureHandler];
@@ -1056,7 +1056,7 @@
     if(_actionToCCTV) {
         [gApp waitingAlert:@"请求数据中"];
     }
-    [gApp.engine reqGetDefaultVideoMemberOfKindergarten:gApp.engine.loginInfo.schoolId
+    [gApp.engine.httpClient reqGetDefaultVideoMemberOfKindergarten:gApp.engine.loginInfo.schoolId
                                                 success:sucessHandler
                                                 failure:failureHandler];
 }
@@ -1080,7 +1080,7 @@
 //    };
 //
 //    [gApp waitingAlert:@"获取信息..."];
-//    [gApp.engine reqGetEmployeeListOfKindergarten:gApp.engine.loginInfo.schoolId
+//    [gApp.engine.httpClient reqGetEmployeeListOfKindergarten:gApp.engine.loginInfo.schoolId
 //                                          success:sucessHandler
 //                                          failure:failureHandler];
 //}
@@ -1144,7 +1144,7 @@
     
     CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
     if (currentChild) {
-        [gApp.engine reqGetContractorListOfKindergarten:gApp.engine.loginInfo.schoolId
+        [gApp.engine.httpClient reqGetContractorListOfKindergarten:gApp.engine.loginInfo.schoolId
                                            withCategory:-1
                                                    from:-1
                                                      to:-1
@@ -1170,7 +1170,7 @@
     
     CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
     if (currentChild) {
-        [gApp.engine reqGetActivityListOfKindergarten:gApp.engine.loginInfo.schoolId
+        [gApp.engine.httpClient reqGetActivityListOfKindergarten:gApp.engine.loginInfo.schoolId
                                                  from:-1
                                                    to:-1
                                                  most:-1

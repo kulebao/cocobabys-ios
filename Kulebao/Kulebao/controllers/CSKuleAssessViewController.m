@@ -245,7 +245,7 @@
         };
         
         [gApp waitingAlert:@"获取评价中"];
-        [gApp.engine reqGetAssessesOfChild:currentChild
+        [gApp.engine.httpClient reqGetAssessesOfChild:currentChild
                             inKindergarten:gApp.engine.loginInfo.schoolId
                                       from:-1
                                         to:-1

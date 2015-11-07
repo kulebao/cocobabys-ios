@@ -99,7 +99,7 @@
     if (self.opMark) {
         [self.opMark cancel];
     }
-    self.opMark = [gApp.engine reqMarkAsRead:self
+    self.opMark = [gApp.engine.httpClient reqMarkAsRead:self
                                     byParent:gApp.engine.currentRelationship.parent
                                      success:sucessHandler
                                      failure:failureHandler];
@@ -137,7 +137,7 @@
     if (self.opQuery) {
         [self.opQuery cancel];
     }
-    self.opQuery = [gApp.engine reqQueryReadStatusOf:self
+    self.opQuery = [gApp.engine.httpClient reqQueryReadStatusOf:self
                                             byParent:gApp.engine.currentRelationship.parent
                                              success:sucessHandler
                                              failure:failureHandler];

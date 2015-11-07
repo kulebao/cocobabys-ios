@@ -221,7 +221,7 @@ static NSInteger kRetryInterval = 120; // 秒
         };
         
         [gApp waitingAlert:@"正在发送请求..."];
-        [gApp.engine reqGetSmsCode:_mobile
+        [gApp.engine.httpClient reqGetSmsCode:_mobile
                       success:sucessHandler
                       failure:failureHandler];
     }
@@ -264,7 +264,7 @@ static NSInteger kRetryInterval = 120; // 秒
     };
     
     [gApp waitingAlert:@"正在发送请求..."];
-    [gApp.engine reqResetPswd:_mobile
+    [gApp.engine.httpClient reqResetPswd:_mobile
                       smsCode:authCode
                   withNewPswd:newPswd
                       success:sucessHandler

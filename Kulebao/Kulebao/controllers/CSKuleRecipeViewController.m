@@ -221,7 +221,7 @@
     };
     
     [gApp waitingAlert:@"正在获取数据"];
-    [gApp.engine reqGetCookbooksOfKindergarten:gApp.engine.loginInfo.schoolId
+    [gApp.engine.httpClient reqGetCookbooksOfKindergarten:gApp.engine.loginInfo.schoolId
                                        success:sucessHandler
                                        failure:failureHandler];
 }

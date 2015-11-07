@@ -78,7 +78,7 @@
         NSString* relationship = [self.fieldRelationship.text trim];
         
         [gApp waitingAlert:@"正在发送邀请"];
-        [gApp.engine reqCreateInvitationOfKindergarten:gApp.engine.loginInfo.schoolId
+        [gApp.engine.httpClient reqCreateInvitationOfKindergarten:gApp.engine.loginInfo.schoolId
                                                  phone:phone
                                                   name:name
                                           relationship:relationship
@@ -189,7 +189,7 @@
         [gApp alert:@"无效手机号码，请检查后重新输入，谢谢!"];
     }
     else {
-        [gApp.engine reqGetInviteCodeWithHost:gApp.engine.currentRelationship.parent.phone
+        [gApp.engine.httpClient reqGetInviteCodeWithHost:gApp.engine.currentRelationship.parent.phone
                                    andInvitee:phone
                                       success:^(AFHTTPRequestOperation *operation, id dataJson) {
                                           NSInteger error_code = [[dataJson objectForKey:@"error_code"] integerValue];

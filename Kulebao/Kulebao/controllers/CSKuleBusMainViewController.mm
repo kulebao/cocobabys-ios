@@ -8,7 +8,6 @@
 
 #import "CSKuleBusMainViewController.h"
 #import "CSAppDelegate.h"
-#import "CSHttpClient.h"
 #import "CSKuleInterpreter.h"
 
 enum {
@@ -240,7 +239,7 @@ typedef enum : NSUInteger {
     };
     
     //[gApp waitingAlert:@"获取数据中" withTitle:@"请稍候"];
-    [gApp.engine reqGetBusLocationOfKindergarten:gApp.engine.loginInfo.schoolId
+    [gApp.engine.httpClient reqGetBusLocationOfKindergarten:gApp.engine.loginInfo.schoolId
                                      withChildId:gApp.engine.currentRelationship.child.childId
                                          success:sucessHandler
                                          failure:failureHandler];

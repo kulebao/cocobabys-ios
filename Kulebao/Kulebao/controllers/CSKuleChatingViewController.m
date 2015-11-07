@@ -355,7 +355,7 @@
     imgPortrait.image = [UIImage imageNamed:@"chat_head_icon.png"];
     
     // Get Sender avatar and name.
-    [gApp.engine reqGetSenderProfileOfKindergarten:gApp.engine.loginInfo.schoolId
+    [gApp.engine.httpClient reqGetSenderProfileOfKindergarten:gApp.engine.loginInfo.schoolId
                                         withSender:msg.sender
                                           complete:^(id obj) {
                                               if ([obj isKindOfClass:[CSKuleEmployeeInfo class]]) {
@@ -573,7 +573,7 @@
     };
     
     [gApp waitingAlert:@"上传图片中"];
-    [gApp.engine reqUploadToQiniu:imgData
+    [gApp.engine.httpClient reqUploadToQiniu:imgData
                           withKey:imgFileName
                          withMime:@"image/jpeg"
                           success:sucessHandler
@@ -670,7 +670,7 @@
     }
     
     [gApp waitingAlert:@"发送中..."];
-    [gApp.engine reqSendTopicMsg:msgBody
+    [gApp.engine.httpClient reqSendTopicMsg:msgBody
                     withMediaUrl:mediaUrl ofMediaType:mediaType
                   toKindergarten:gApp.engine.loginInfo.schoolId
                     retrieveFrom:retrieveFrom
@@ -746,7 +746,7 @@
     };
     
     [gApp waitingAlert:@"获取信息中..."];
-    [gApp.engine reqGetTopicMsgsOfKindergarten:gApp.engine.loginInfo.schoolId
+    [gApp.engine.httpClient reqGetTopicMsgsOfKindergarten:gApp.engine.loginInfo.schoolId
                                           from:fromId
                                             to:toId
                                           most:most
@@ -786,7 +786,7 @@
     };
     
     [gApp waitingAlert:@"上传语音中"];
-    [gApp.engine reqUploadToQiniu:amrData
+    [gApp.engine.httpClient reqUploadToQiniu:amrData
                           withKey:voiceFileName
                          withMime:@"image/jpeg"
                           success:sucessHandler
@@ -939,7 +939,7 @@
             };
             
             [gApp waitingAlert:@"请稍等"];
-            [gApp.engine reqDeleteTopicMsgsOfKindergarten:gApp.engine.loginInfo.schoolId
+            [gApp.engine.httpClient reqDeleteTopicMsgsOfKindergarten:gApp.engine.loginInfo.schoolId
                                                  recordId:msg.msgId
                                                   success:sucessHandler
                                                   failure:failureHandler];

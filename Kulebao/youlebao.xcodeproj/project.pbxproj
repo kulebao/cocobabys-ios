@@ -69,7 +69,6 @@
 		0911B1E718E015E9006D0588 /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = 0911B1DF18E015E9006D0588 /* star.png */; };
 		0911B1E818E015E9006D0588 /* star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0911B1E018E015E9006D0588 /* star@2x.png */; };
 		0912DCDF18ED35D600016868 /* CSKuleForgotPswdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0912DCDE18ED35D600016868 /* CSKuleForgotPswdViewController.m */; };
-		0913745C18CEE48800ED7CD7 /* CSKuleQiniuUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0913745B18CEE48800ED7CD7 /* CSKuleQiniuUploader.m */; };
 		09142DAF18E2713C00E5848F /* libBaiduMobStat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09142D9518E2713C00E5848F /* libBaiduMobStat.a */; };
 		09142DBB18E274B400E5848F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09142DBA18E274B400E5848F /* CoreLocation.framework */; };
 		09142E1318E2B9D800E5848F /* rating-1star.png in Resources */ = {isa = PBXBuildFile; fileRef = 09142DF718E2B9D800E5848F /* rating-1star.png */; };
@@ -260,7 +259,6 @@
 		09C00FAF1B44408D00FC1474 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C00FAE1B44408C00FC1474 /* Security.framework */; };
 		09C00FB21B4454D500FC1474 /* CSKuleBusMainViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 09C00FB11B4454D500FC1474 /* CSKuleBusMainViewController.mm */; };
 		09C1C75F18BD92990040B06D /* AFJSONRequestOperation+CSKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C1C75C18BD92990040B06D /* AFJSONRequestOperation+CSKit.m */; };
-		09C1C76018BD92990040B06D /* CSHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C1C75E18BD92990040B06D /* CSHttpClient.m */; };
 		09C1C76618BD973B0040B06D /* NSDictionary+CSKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C1C76518BD973B0040B06D /* NSDictionary+CSKit.m */; };
 		09C3AC25199DAC8600A6251C /* CSContentEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C3AC23199DAC8600A6251C /* CSContentEditorViewController.m */; };
 		09C3AC29199E148D00A6251C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C3AC28199E148C00A6251C /* CFNetwork.framework */; };
@@ -555,6 +553,7 @@
 		09FFB5F118D6B2E100F07B0A /* CSKuleWeekScheduleInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FFB5F018D6B2E100F07B0A /* CSKuleWeekScheduleInfo.m */; };
 		09FFB5F418D6B2FA00F07B0A /* CSKuleDailyScheduleInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FFB5F318D6B2FA00F07B0A /* CSKuleDailyScheduleInfo.m */; };
 		09FFB5F718D6B46300F07B0A /* CSKuleScheduleInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FFB5F618D6B46300F07B0A /* CSKuleScheduleInfo.m */; };
+		22DD5F781BEE674700DD62D4 /* CBHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DD5F771BEE674700DD62D4 /* CBHttpClient.m */; };
 		8152322DCFF3BB1C65A4D1C9 /* libPods-youlebao.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61B7205DB96DCB8B5DB32FD2 /* libPods-youlebao.a */; };
 /* End PBXBuildFile section */
 
@@ -662,8 +661,6 @@
 		0911B1E018E015E9006D0588 /* star@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star@2x.png"; sourceTree = "<group>"; };
 		0912DCDD18ED35D500016868 /* CSKuleForgotPswdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleForgotPswdViewController.h; sourceTree = "<group>"; };
 		0912DCDE18ED35D600016868 /* CSKuleForgotPswdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleForgotPswdViewController.m; sourceTree = "<group>"; };
-		0913745A18CEE48800ED7CD7 /* CSKuleQiniuUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleQiniuUploader.h; sourceTree = "<group>"; };
-		0913745B18CEE48800ED7CD7 /* CSKuleQiniuUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleQiniuUploader.m; sourceTree = "<group>"; };
 		09142D9418E2713C00E5848F /* BaiduMobStat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduMobStat.h; sourceTree = "<group>"; };
 		09142D9518E2713C00E5848F /* libBaiduMobStat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBaiduMobStat.a; sourceTree = "<group>"; };
 		09142DBA18E274B400E5848F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -957,8 +954,6 @@
 		09C00FB11B4454D500FC1474 /* CSKuleBusMainViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CSKuleBusMainViewController.mm; sourceTree = "<group>"; };
 		09C1C75B18BD92990040B06D /* AFJSONRequestOperation+CSKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AFJSONRequestOperation+CSKit.h"; sourceTree = "<group>"; };
 		09C1C75C18BD92990040B06D /* AFJSONRequestOperation+CSKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AFJSONRequestOperation+CSKit.m"; sourceTree = "<group>"; };
-		09C1C75D18BD92990040B06D /* CSHttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSHttpClient.h; sourceTree = "<group>"; };
-		09C1C75E18BD92990040B06D /* CSHttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSHttpClient.m; sourceTree = "<group>"; };
 		09C1C76418BD973B0040B06D /* NSDictionary+CSKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+CSKit.h"; sourceTree = "<group>"; };
 		09C1C76518BD973B0040B06D /* NSDictionary+CSKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+CSKit.m"; sourceTree = "<group>"; };
 		09C3AC22199DAC8600A6251C /* CSContentEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSContentEditorViewController.h; sourceTree = "<group>"; };
@@ -1302,6 +1297,8 @@
 		09FFB5F318D6B2FA00F07B0A /* CSKuleDailyScheduleInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleDailyScheduleInfo.m; sourceTree = "<group>"; };
 		09FFB5F518D6B46300F07B0A /* CSKuleScheduleInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleScheduleInfo.h; sourceTree = "<group>"; };
 		09FFB5F618D6B46300F07B0A /* CSKuleScheduleInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleScheduleInfo.m; sourceTree = "<group>"; };
+		22DD5F761BEE674700DD62D4 /* CBHttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBHttpClient.h; sourceTree = "<group>"; };
+		22DD5F771BEE674700DD62D4 /* CBHttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBHttpClient.m; sourceTree = "<group>"; };
 		2A1725B451DDE4D50114E918 /* Pods-youlebao.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-youlebao.release.xcconfig"; path = "Pods/Target Support Files/Pods-youlebao/Pods-youlebao.release.xcconfig"; sourceTree = "<group>"; };
 		61B7205DB96DCB8B5DB32FD2 /* libPods-youlebao.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-youlebao.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2155CA5ADD408811BB351AB /* Pods-youlebao.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-youlebao.debug.xcconfig"; path = "Pods/Target Support Files/Pods-youlebao/Pods-youlebao.debug.xcconfig"; sourceTree = "<group>"; };
@@ -2107,10 +2104,8 @@
 			children = (
 				09C1C75B18BD92990040B06D /* AFJSONRequestOperation+CSKit.h */,
 				09C1C75C18BD92990040B06D /* AFJSONRequestOperation+CSKit.m */,
-				09C1C75D18BD92990040B06D /* CSHttpClient.h */,
-				09C1C75E18BD92990040B06D /* CSHttpClient.m */,
-				0913745A18CEE48800ED7CD7 /* CSKuleQiniuUploader.h */,
-				0913745B18CEE48800ED7CD7 /* CSKuleQiniuUploader.m */,
+				22DD5F761BEE674700DD62D4 /* CBHttpClient.h */,
+				22DD5F771BEE674700DD62D4 /* CBHttpClient.m */,
 				0902458318EC41FA00579886 /* CSKuleURLCache.h */,
 				0902458418EC41FA00579886 /* CSKuleURLCache.m */,
 				0960CE7919B0B19200B3B51E /* CSKuleURLDownloader.h */,
@@ -2569,6 +2564,7 @@
 				09BA1B8A18BB2AB300760182 /* Frameworks */,
 				09BA1B8B18BB2AB300760182 /* Resources */,
 				84EC31AB459433FCD29E992A /* Copy Pods Resources */,
+				0A0945D4BA4F14C8BC93882F /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2987,6 +2983,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0A0945D4BA4F14C8BC93882F /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-youlebao/Pods-youlebao-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		84EC31AB459433FCD29E992A /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -3072,7 +3083,6 @@
 				097ED0BB18DAB4AB0057ECA0 /* CSKuleChangePasswordViewController.m in Sources */,
 				09FE6B0A18C5C34F00A840BE /* CSKuleChatingViewController.m in Sources */,
 				09F74CE01997D14D001555D0 /* VoiceConverter.m in Sources */,
-				0913745C18CEE48800ED7CD7 /* CSKuleQiniuUploader.m in Sources */,
 				091AE82118D7E4E700EBC927 /* CSKuleAboutSchoolViewController.m in Sources */,
 				09B8FB971AB0B89400123378 /* CSKuleHistoryVideoItemTableViewCell.m in Sources */,
 				0960CE7B19B0B19200B3B51E /* CSKuleURLDownloader.m in Sources */,
@@ -3105,6 +3115,7 @@
 				0919B7731929D41900810556 /* CSKuleTopicMsg.m in Sources */,
 				09607BAF1B4977480047DB67 /* CSKuleBusLocationInfo.m in Sources */,
 				09142E1F18E2BA2100E5848F /* CSKuleAssessInfo.m in Sources */,
+				22DD5F781BEE674700DD62D4 /* CBHttpClient.m in Sources */,
 				09E209E71B8705D700059CC1 /* CBContractorData.m in Sources */,
 				091AE83018D820C800EBC927 /* UIView+convenience.m in Sources */,
 				090FC170199CA5A300C3A31A /* CSKuleHistoryInfo.m in Sources */,
@@ -3151,7 +3162,6 @@
 				090C9EDC18C87AEA00883DE0 /* KxMenu.m in Sources */,
 				0932A67E1AFA870E00961861 /* CSKuleDeveloperSettingsViewController.m in Sources */,
 				093D89D7199A76E1006B013B /* CSKuleCCTVPlayViewController.m in Sources */,
-				09C1C76018BD92990040B06D /* CSHttpClient.m in Sources */,
 				09E209E11B86E81F00059CC1 /* CBActivityDetailViewController.m in Sources */,
 				09A9EBD218C090E200D83119 /* CSKuleAuthViewController.m in Sources */,
 				0909036E1BDF4CAF00FDD2CE /* CBFamilyItemTableViewCell.m in Sources */,

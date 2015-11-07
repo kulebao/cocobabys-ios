@@ -310,7 +310,7 @@
         [self.tableInfo reloadData];
     };
     
-    [gApp.engine reqGetActivityListOfKindergarten:gApp.engine.loginInfo.schoolId
+    [gApp.engine.httpClient reqGetActivityListOfKindergarten:gApp.engine.loginInfo.schoolId
                                  withContractorId:self.itemData.uid
                                              from:-1
                                                to:-1

@@ -236,7 +236,11 @@
                 [gApp alert:@"更新成功"];
                 
                 CSKuleParentInfo* cc = [CSKuleInterpreter decodeParentInfo:dataJson];
-                parentInfo.portrait = cc.portrait;
+                for (CSKuleRelationshipInfo* relationship in gApp.engine.relationships) {
+                    if ([relationship.parent.parentId isEqualToString:cc.parentId]) {
+                        relationship.parent.portrait = cc.portrait;
+                    }
+                }
                 
                 self.imgPortrait.image = img;
                 [self reloadData];

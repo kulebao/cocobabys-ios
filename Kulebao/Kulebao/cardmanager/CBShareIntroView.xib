@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CBShareIntroView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="v2-bg-share" translatesAutoresizingMaskIntoConstraints="NO" id="gIH-NP-Rdj">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="v2-qrcode-share" translatesAutoresizingMaskIntoConstraints="NO" id="K9M-9H-kTL">
+                    <rect key="frame" x="0.0" y="50" width="320" height="382"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="K9M-9H-kTL" secondAttribute="height" multiplier="41:49" id="iCd-Ga-tJp"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5AY-yo-B0C">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <connections>
+                        <action selector="onBtnBgClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="wUx-4x-7Xe"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="755" verticalCompressionResistancePriority="755" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="thT-JN-kpS">
+                    <rect key="frame" x="53" y="448" width="214" height="44"/>
+                    <state key="normal" backgroundImage="v2-btn-share-send"/>
+                    <connections>
+                        <action selector="onBtnShareClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="K4W-KH-9El"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="thT-JN-kpS" firstAttribute="top" secondItem="K9M-9H-kTL" secondAttribute="bottom" constant="16" id="8P6-Fo-zrR"/>
+                <constraint firstItem="gIH-NP-Rdj" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ARx-G9-oIW"/>
+                <constraint firstItem="K9M-9H-kTL" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="G9q-th-nN3"/>
+                <constraint firstAttribute="bottom" secondItem="gIH-NP-Rdj" secondAttribute="bottom" id="IfG-Cu-3DW"/>
+                <constraint firstAttribute="trailing" secondItem="gIH-NP-Rdj" secondAttribute="trailing" id="Igv-Su-tpW"/>
+                <constraint firstItem="K9M-9H-kTL" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="abX-4q-YWV"/>
+                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="thT-JN-kpS" secondAttribute="bottom" constant="16" id="afh-sE-50d"/>
+                <constraint firstItem="5AY-yo-B0C" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="cgO-5S-ME7"/>
+                <constraint firstItem="5AY-yo-B0C" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="eMP-vE-LCH"/>
+                <constraint firstAttribute="trailing" secondItem="K9M-9H-kTL" secondAttribute="trailing" id="gre-xj-7jd"/>
+                <constraint firstAttribute="bottom" secondItem="5AY-yo-B0C" secondAttribute="bottom" id="ksI-hG-FwX"/>
+                <constraint firstAttribute="trailing" secondItem="5AY-yo-B0C" secondAttribute="trailing" id="lue-D0-Rgf"/>
+                <constraint firstItem="thT-JN-kpS" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="rbd-hQ-Zt2"/>
+                <constraint firstItem="K9M-9H-kTL" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" priority="750" constant="50" id="sqD-Eh-dNJ"/>
+                <constraint firstItem="gIH-NP-Rdj" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="umw-FK-8pY"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <point key="canvasLocation" x="354" y="219"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="v2-bg-share" width="42" height="42"/>
+        <image name="v2-btn-share-send" width="214" height="44"/>
+        <image name="v2-qrcode-share" width="344" height="392"/>
+    </resources>
+</document>

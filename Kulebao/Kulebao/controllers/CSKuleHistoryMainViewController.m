@@ -216,10 +216,12 @@
     UIImage* img = [_imageList firstObject];
     if (img) {
         NSData* imgData = UIImageJPEGRepresentation(img, 0.8);
-        NSString* imgFileName = [NSString stringWithFormat:@"history_img/%@/topic_%@/%@.jpg",
+        static int num = 0;
+        NSString* imgFileName = [NSString stringWithFormat:@"history_img/%@/topic_%@/%@-%@.jpg",
                                  @(gApp.engine.loginInfo.schoolId),
                                  gApp.engine.currentRelationship.child.childId,
-                                 @((long long)[[NSDate date] timeIntervalSince1970]*1000)];
+                                 @((long long)[[NSDate date] timeIntervalSince1970]*1000),
+                                 @(++num)];
         
         SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
             NSString* imgUrl = [NSString stringWithFormat:@"%@/%@", kQiniuDownloadServerHost, imgFileName];
@@ -251,11 +253,12 @@
 
 - (void)doUploadVideo {
     NSData* videoData = [NSData dataWithContentsOfURL:_videoFileUrl];
-    
-    NSString* videoFileName = [NSString stringWithFormat:@"history_video/%@/topic_%@/%@.mp4",
+    static int num = 0;
+    NSString* videoFileName = [NSString stringWithFormat:@"history_video/%@/topic_%@/%@-%@.mp4",
                              @(gApp.engine.loginInfo.schoolId),
                              gApp.engine.currentRelationship.child.childId,
-                             @((long long)[[NSDate date] timeIntervalSince1970]*1000)];
+                             @((long long)[[NSDate date] timeIntervalSince1970]*1000),
+                             @(++num)];
     
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         _videoUrl = [NSString stringWithFormat:@"%@/%@", kQiniuDownloadServerHost, videoFileName];

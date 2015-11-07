@@ -10,10 +10,14 @@
 #import "CSAppDelegate.h"
 #import "CBFamilyItemTableViewCell.h"
 #import "UIImageView+WebCache.h"
+#import "CBShareIntroView.h"
 
 @interface CBFamilyTableViewController ()
 
 @property (nonatomic, strong) NSMutableArray* relationships;
+- (IBAction)onBtnShareClicked:(id)sender;
+
+@property (nonatomic, strong) CBShareIntroView* shareIntroView;
 
 @end
 
@@ -75,7 +79,7 @@
         
         cell.imgIcon.layer.cornerRadius = cell.imgIcon.bounds.size.width/2;
         
-        NSURL* qiniuImgUrl = [gApp.engine urlFromPath:gApp.engine.currentRelationship.parent.portrait];
+        NSURL* qiniuImgUrl = [gApp.engine urlFromPath:relationshipInfo.parent.portrait];
         qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/256/h/256"];
         [cell.imgIcon sd_setImageWithURL:qiniuImgUrl
                         placeholderImage:[UIImage imageNamed:@"v2-small"]];
@@ -165,11 +169,27 @@
         [gApp alert:[error localizedDescription]];
     };
     
-    [gApp waitingAlert:@"获取家人信息"];
+    //[gApp waitingAlert:@"获取家人信息"];
     [gApp.engine reqGetChildRelationship:gApp.engine.currentRelationship.child.childId
                           inKindergarten:gApp.engine.loginInfo.schoolId
                                  success:sucessHandler
                                  failure:failureHandler];
+}
+
+- (IBAction)onBtnShareClicked:(id)sender {
+    [self showIntroViews];
+}
+
+- (CBShareIntroView*)shareIntroView {
+    if (_shareIntroView == nil) {
+        _shareIntroView = [CBShareIntroView instance];
+    }
+    
+    return _shareIntroView;
+}
+
+-(void)showIntroViews {
+    [self.shareIntroView showInView:self.navigationController.view];
 }
 
 @end

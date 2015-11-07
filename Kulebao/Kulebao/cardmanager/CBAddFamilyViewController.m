@@ -189,6 +189,7 @@
         [gApp alert:@"无效手机号码，请检查后重新输入，谢谢!"];
     }
     else {
+        [gApp waitingAlert:@"获取邀请码中..."];
         [gApp.engine.httpClient reqGetInviteCodeWithHost:gApp.engine.currentRelationship.parent.phone
                                    andInvitee:phone
                                       success:^(AFHTTPRequestOperation *operation, id dataJson) {

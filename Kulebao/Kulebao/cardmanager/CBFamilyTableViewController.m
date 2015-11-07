@@ -80,7 +80,8 @@
         cell.imgIcon.layer.cornerRadius = cell.imgIcon.bounds.size.width/2;
         
         NSURL* qiniuImgUrl = [gApp.engine urlFromPath:relationshipInfo.parent.portrait];
-        qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/256/h/256"];
+        qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/128/h/128"];
+        [cell.imgIcon sd_cancelCurrentImageLoad];
         [cell.imgIcon sd_setImageWithURL:qiniuImgUrl
                         placeholderImage:[UIImage imageNamed:@"v2-small"]];
     }

@@ -191,7 +191,7 @@
     CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
     if (currentChild) {
         //[gApp waitingAlert:@"正在获取数据"];
-        [gApp.engine reqGetContractorListOfKindergarten:gApp.engine.loginInfo.schoolId
+        [gApp.engine.httpClient reqGetContractorListOfKindergarten:gApp.engine.loginInfo.schoolId
                                            withCategory:self.category
                                                    from:-1
                                                      to:-1
@@ -234,7 +234,7 @@
             [gApp alert:[error localizedDescription]];
         };
         
-        [gApp.engine reqGetContractorListOfKindergarten:gApp.engine.loginInfo.schoolId
+        [gApp.engine.httpClient reqGetContractorListOfKindergarten:gApp.engine.loginInfo.schoolId
                                            withCategory:self.category
                                                    from:lastItemData.uid
                                                      to:-1

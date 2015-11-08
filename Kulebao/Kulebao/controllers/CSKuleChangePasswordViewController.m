@@ -136,7 +136,7 @@
     };
     
     [gApp waitingAlert:@"修改密码中..."];
-    [gApp.engine reqChangePassword:newPswd
+    [gApp.engine.httpClient reqChangePassword:newPswd
                        withOldPswd:oldPswd
                            success:sucessHandler
                            failure:failureHandler];

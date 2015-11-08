@@ -19,6 +19,7 @@
 #import "BDMultiDownloader.h"
 #import "MBProgressHUD.h"
 #import "AHAlertView.h"
+#import "UIImageView+WebCache.h"
 
 #import <ShareSDK/ShareSDK.h>
 
@@ -200,7 +201,7 @@
     self.imgPortrait.image = [UIImage imageNamed:@"chat_head_icon.png"];
     self.labName.text = senderName;
     
-    [gApp.engine reqGetSenderProfileOfKindergarten:gApp.engine.loginInfo.schoolId
+    [gApp.engine.httpClient reqGetSenderProfileOfKindergarten:gApp.engine.loginInfo.schoolId
                                         withSender:sender
                                           complete:^(id obj) {
                                               if ([obj isKindOfClass:[CSKuleEmployeeInfo class]]) {
@@ -230,13 +231,10 @@
                                               
                                               if (qiniuImgUrl) {
                                                   qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/1/w/64/h/64"];
-                                                  NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:qiniuImgUrl];
-                                                  [request addValue:@"image/*" forHTTPHeaderField:@"Accept"];
-                                                  request.cachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
-                                                  [self.imgPortrait setImageWithURLRequest:request
-                                                                          placeholderImage:[UIImage imageNamed:@"chat_head_icon.png"]
-                                                                                   success:nil
-                                                                                   failure:nil];
+                                                  
+                                                  [self.imgPortrait sd_setImageWithURL:qiniuImgUrl
+                                                                      placeholderImage:[UIImage imageNamed:@"chat_head_icon.png"]
+                                                                               options:SDWebImageRetryFailed|SDWebImageRefreshCached|SDWebImageAllowInvalidSSLCertificates];
                                               }
                                               else {
                                                   self.imgPortrait.image = [UIImage imageNamed:@"chat_head_icon.png"];
@@ -413,7 +411,7 @@
     };
     
     [gApp waitingAlert:@"分享中" withTitle:@"请稍候"];
-    [gApp.engine reqGetShareTokenOfKindergarten:gApp.engine.loginInfo.schoolId
+    [gApp.engine.httpClient reqGetShareTokenOfKindergarten:gApp.engine.loginInfo.schoolId
                                     withChildId:gApp.engine.currentRelationship.child.childId
                                    withRecordId:self.historyInfo.uid.integerValue
                                         success:sucessHandler

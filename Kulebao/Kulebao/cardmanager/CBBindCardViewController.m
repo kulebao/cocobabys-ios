@@ -65,7 +65,7 @@ typedef enum : NSUInteger {
     
     if ([cardNum isValidCardNum]) {
         [gApp waitingAlert:@"绑定中，请稍候..."];
-        [gApp.engine reqBindCardOfKindergarten:gApp.engine.loginInfo.schoolId
+        [gApp.engine.httpClient reqBindCardOfKindergarten:gApp.engine.loginInfo.schoolId
                                    withCardNum:cardNum
                                        success:^(AFHTTPRequestOperation *operation, id dataJson) {
                                            NSInteger error_code = [[dataJson objectForKey:@"error_code"] integerValue];

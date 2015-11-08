@@ -185,7 +185,7 @@
         };
         
         [gApp waitingAlert:@"请稍等"];
-        [gApp.engine reqDeleteHistoryOfKindergarten:gApp.engine.loginInfo.schoolId
+        [gApp.engine.httpClient reqDeleteHistoryOfKindergarten:gApp.engine.loginInfo.schoolId
                                         withChildId:gApp.engine.currentRelationship.child.childId
                                            recordId:historyInfo.uid.longLongValue
                                             success:sucessHandler
@@ -286,7 +286,7 @@
     
     [gApp waitingAlert:@"获取数据中" withTitle:@"请稍候"];
     
-    [gApp.engine reqGetHistoryListOfKindergarten:gApp.engine.loginInfo.schoolId
+    [gApp.engine.httpClient reqGetHistoryListOfKindergarten:gApp.engine.loginInfo.schoolId
                                      withChildId:gApp.engine.currentRelationship.child.childId
                                         fromDate:fromDate
                                           toDate:toDate

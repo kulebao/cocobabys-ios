@@ -157,7 +157,7 @@
         cell.iconWidth.constant = 60;
     }
     else {
-        [cell.imgAttachment cancelImageRequestOperation];
+        [cell.imgAttachment sd_cancelCurrentImageLoad];
         cell.imgAttachment.image = nil;
         cell.imgAttachment.hidden = YES;
         cell.iconWidth.constant = 0;
@@ -334,7 +334,7 @@
     CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
     if (currentChild) {
         [gApp waitingAlert:@"正在获取数据"];
-        [gApp.engine reqGetNewsOfKindergarten:gApp.engine.loginInfo.schoolId
+        [gApp.engine.httpClient reqGetNewsOfKindergarten:gApp.engine.loginInfo.schoolId
                                   withClassId:currentChild.classId
                                          from:-1
                                            to:-1
@@ -383,7 +383,7 @@
         
         CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
         if (currentChild) {
-            [gApp.engine reqGetNewsOfKindergarten:gApp.engine.loginInfo.schoolId
+            [gApp.engine.httpClient reqGetNewsOfKindergarten:gApp.engine.loginInfo.schoolId
                                       withClassId:currentChild.classId
                                              from:1
                                                to:lastNewsInfo.newsId

@@ -165,7 +165,7 @@
     CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
     if (currentChild) {
         [gApp waitingAlert:@"正在获取签到信息..."];
-        [gApp.engine reqGetCheckInOutLogOfChild:currentChild
+        [gApp.engine.httpClient reqGetCheckInOutLogOfChild:currentChild
                                  inKindergarten:gApp.engine.loginInfo.schoolId
                                            from:beginTimestamp
                                              to:endTimestamp

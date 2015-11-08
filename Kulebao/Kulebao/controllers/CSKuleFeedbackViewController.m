@@ -108,7 +108,7 @@
      };
     
     [gApp waitingAlert:@"正在提交反馈..."];
-    [gApp.engine reqSendFeedback:gApp.engine.loginInfo.accountName
+    [gApp.engine.httpClient reqSendFeedback:gApp.engine.loginInfo.accountName
                      withContent:msgBody
                          success:sucessHandler
                          failure:failureHandler];

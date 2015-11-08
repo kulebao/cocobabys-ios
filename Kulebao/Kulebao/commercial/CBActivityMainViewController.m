@@ -184,7 +184,7 @@
     
     CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
     if (currentChild) {
-        [gApp.engine reqGetActivityListOfKindergarten:gApp.engine.loginInfo.schoolId
+        [gApp.engine.httpClient reqGetActivityListOfKindergarten:gApp.engine.loginInfo.schoolId
                                                  from:-1
                                                    to:-1
                                                  most:-1
@@ -226,7 +226,7 @@
             [gApp alert:[error localizedDescription]];
         };
         
-        [gApp.engine reqGetActivityListOfKindergarten:gApp.engine.loginInfo.schoolId
+        [gApp.engine.httpClient reqGetActivityListOfKindergarten:gApp.engine.loginInfo.schoolId
                                                  from:lastItemData.uid
                                                    to:-1
                                                  most:25

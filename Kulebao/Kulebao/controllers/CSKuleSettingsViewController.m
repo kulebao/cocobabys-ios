@@ -11,7 +11,6 @@
 #import "CSAppDelegate.h"
 
 @interface CSKuleSettingsViewController () {
-    CSHttpClient* _iTunesHttpClient;
 }
 @property (weak, nonatomic) IBOutlet UIButton *btnDevSettings;
 - (IBAction)onBtnCheckUpdatesClicked:(id)sender;
@@ -39,8 +38,6 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     [self customizeBackBarItem];
-    
-    _iTunesHttpClient = [CSHttpClient httpClientWithHost:[NSURL URLWithString:@"http://itunes.apple.com"]];
     
     if (COCOBABYS_DEV_MODEL) {
         self.btnDevSettings.hidden = NO;
@@ -130,7 +127,7 @@
     };
     
     [gApp waitingAlert:@"注销登录..."];
-    [gApp.engine reqUnbindWithSuccess:sucessHandler failure:failureHandler];
+    [gApp.engine.httpClient reqUnbindWithSuccess:sucessHandler failure:failureHandler];
 }
 
 - (void)doCheckUpdates {
@@ -176,15 +173,7 @@
     };
     
     [gApp waitingAlert:@"正在检查更新..."];
-    
-    NSString* path = @"/lookup";
-    NSString* method = @"POST";
-    NSDictionary* parameters = @{@"id": kKuleAppleID};
-    [_iTunesHttpClient httpRequestWithMethod:method
-                                  path:path
-                            parameters:parameters
-                               success:sucessHandler
-                               failure:failureHandler];
+    [gApp.engine.httpClient reqCheckITunesUpdates:kKuleAppleID success:sucessHandler failure:failureHandler];
 }
 
 @end

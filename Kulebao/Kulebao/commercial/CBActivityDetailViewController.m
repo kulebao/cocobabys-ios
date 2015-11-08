@@ -11,7 +11,6 @@
 #import "MJPhoto.h"
 #import "MJPhotoBrowser.h"
 #import "CSAppDelegate.h"
-#import "CSHttpClient.h"
 #import <MapKit/MapKit.h>
 
 @interface CBActivityDetailViewController ()
@@ -224,7 +223,7 @@
     };
     
     [gApp waitingAlert:@"报名中，请稍候..."];
-    [gApp.engine reqPostEnrollmentOfKindergarten:gApp.engine.loginInfo.schoolId
+    [gApp.engine.httpClient reqPostEnrollmentOfKindergarten:gApp.engine.loginInfo.schoolId
                                     withActivity:self.itemData
                                          success:sucessHandler
                                          failure:failureHandler];
@@ -256,7 +255,7 @@
         }
     };
     
-    [gApp.engine reqGetEnrollmentOfKindergarten:gApp.engine.loginInfo.schoolId
+    [gApp.engine.httpClient reqGetEnrollmentOfKindergarten:gApp.engine.loginInfo.schoolId
                                    withActivity:self.itemData.uid
                                         success:sucessHandler
                                         failure:failureHandler];

@@ -100,15 +100,16 @@
         [_photoLoadingView showLoading];
         [self addSubview:_photoLoadingView];
         
-        __unsafe_unretained MJPhotoView *photoView = self;
-        __unsafe_unretained MJPhotoLoadingView *loading = _photoLoadingView;
-        [_imageView setImageWithURL:_photo.url placeholderImage:_photo.srcImageView.image options:SDWebImageRetryFailed|SDWebImageLowPriority progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+//        __unsafe_unretained MJPhotoView *photoView = self;
+//        __unsafe_unretained MJPhotoLoadingView *loading = _photoLoadingView;
+        [_imageView sd_setImageWithURL:_photo.url placeholderImage:_photo.srcImageView.image options:SDWebImageRetryFailed|SDWebImageLowPriority progress:^(NSInteger receivedSize, NSInteger expectedSize) {
             if (receivedSize > kMinProgress) {
-                loading.progress = (float)receivedSize/expectedSize;
+                _photoLoadingView.progress = (float)receivedSize/expectedSize;
             }
-        } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-            [photoView photoDidFinishLoadWithImage:image];
+        } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [self photoDidFinishLoadWithImage:image];
         }];
+        
     }
 }
 
@@ -200,6 +201,7 @@
     if (_doubleTap) return;
     
     // 移除进度条
+    CSLog(@"%s", __FUNCTION__);
     [_photoLoadingView removeFromSuperview];
     self.contentOffset = CGPointZero;
     
@@ -232,10 +234,13 @@
             [self.photoViewDelegate photoViewDidEndZoom:self];
         }
     }];
+    
+    [_imageView sd_cancelCurrentImageLoad];
 }
 
 - (void)reset
 {
+     [_imageView sd_cancelCurrentImageLoad];
     _imageView.image = _photo.capture;
     _imageView.contentMode = UIViewContentModeScaleToFill;
 }
@@ -254,6 +259,6 @@
 - (void)dealloc
 {
     // 取消请求
-    [_imageView setImageWithURL:[NSURL URLWithString:@"file:///abc"]];
+    [_imageView sd_setImageWithURL:[NSURL URLWithString:@"file:///abc"]];
 }
 @end

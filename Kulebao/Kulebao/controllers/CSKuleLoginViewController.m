@@ -130,7 +130,7 @@
         };
         
         [gApp waitingAlert:@"正在登录..."];
-        [gApp.engine reqLogin:self.mobile
+        [gApp.engine.httpClient reqLogin:self.mobile
                      withPswd:pswd
                       success:sucessHandler
                       failure:failureHandler];
@@ -186,7 +186,7 @@
     };
 
     [gApp waitingAlert:@"获取绑定信息..."];
-    [gApp.engine reqReceiveBindInfo:gApp.engine.loginInfo.accountName
+    [gApp.engine.httpClient reqReceiveBindInfo:gApp.engine.loginInfo.accountName
                             success:sucessHandler
                             failure:failureHandler];
     

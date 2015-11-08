@@ -99,7 +99,7 @@
     CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
     if (currentChild) {
         [gApp waitingAlert:@"获取信息中..."];
-        [gApp.engine reqGetSchedulesOfKindergarten:gApp.engine.loginInfo.schoolId
+        [gApp.engine.httpClient reqGetSchedulesOfKindergarten:gApp.engine.loginInfo.schoolId
                                        withClassId:currentChild.classId
                                            success:sucessHandler
                                            failure:failureHandler];

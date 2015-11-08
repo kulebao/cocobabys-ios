@@ -105,7 +105,7 @@
                            placeholderImage:[UIImage imageNamed:@"img-placeholder.png"]];
     }
     else {
-        [cell.imgAttachment cancelImageRequestOperation];
+        [cell.imgAttachment sd_cancelCurrentImageLoad];
         cell.imgAttachment.image = nil;
     }
     cell.imgAttachment.clipsToBounds = YES;
@@ -209,7 +209,7 @@
         [gApp alert:[error localizedDescription]];
     };
     
-    [gApp.engine reqGetAssignmentsOfKindergarten:gApp.engine.loginInfo.schoolId
+    [gApp.engine.httpClient reqGetAssignmentsOfKindergarten:gApp.engine.loginInfo.schoolId
                                      withClassId:currentChild.classId
                                             from:-1
                                               to:-1
@@ -260,7 +260,7 @@
             [gApp alert:[error localizedDescription]];
         };
         
-        [gApp.engine reqGetAssignmentsOfKindergarten:gApp.engine.loginInfo.schoolId
+        [gApp.engine.httpClient reqGetAssignmentsOfKindergarten:gApp.engine.loginInfo.schoolId
                                          withClassId:currentChild.classId
                                          from:1
                                            to:lastAssignmentInfo.assignmentId

@@ -11,12 +11,13 @@
 #import "CSKulePreferences.h"
 #import "BPush.h"
 #import "CSAppDelegate.h"
+#import "CBHTTPRequestOperationManager.h"
 
 @interface CBHttpClient () {
     NSMutableDictionary* _senderProfiles;
 }
 
-@property (nonatomic, strong) AFHTTPRequestOperationManager* httpCobabys;
+@property (nonatomic, strong) CBHTTPRequestOperationManager* httpCobabys;
 @property (nonatomic, strong) AFHTTPRequestOperationManager* httpQiniu;
 @property (nonatomic, strong) AFHTTPRequestOperationManager* httpITunes;
 
@@ -74,7 +75,7 @@
     }
     
     if (_httpCobabys == nil) {
-        _httpCobabys = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:cobabysUrlString]];
+        _httpCobabys = [[CBHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:cobabysUrlString]];
     }
     _httpCobabys.securityPolicy.allowInvalidCertificates = YES;
     _httpCobabys.securityPolicy.validatesDomainName = NO;

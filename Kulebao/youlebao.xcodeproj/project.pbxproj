@@ -553,6 +553,7 @@
 		09FFB5F118D6B2E100F07B0A /* CSKuleWeekScheduleInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FFB5F018D6B2E100F07B0A /* CSKuleWeekScheduleInfo.m */; };
 		09FFB5F418D6B2FA00F07B0A /* CSKuleDailyScheduleInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FFB5F318D6B2FA00F07B0A /* CSKuleDailyScheduleInfo.m */; };
 		09FFB5F718D6B46300F07B0A /* CSKuleScheduleInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FFB5F618D6B46300F07B0A /* CSKuleScheduleInfo.m */; };
+		221858CE1BEF9EDC005C4281 /* CBHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 221858CD1BEF9EDC005C4281 /* CBHTTPRequestOperationManager.m */; };
 		22DD5F781BEE674700DD62D4 /* CBHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DD5F771BEE674700DD62D4 /* CBHttpClient.m */; };
 		8152322DCFF3BB1C65A4D1C9 /* libPods-youlebao.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61B7205DB96DCB8B5DB32FD2 /* libPods-youlebao.a */; };
 /* End PBXBuildFile section */
@@ -1297,6 +1298,8 @@
 		09FFB5F318D6B2FA00F07B0A /* CSKuleDailyScheduleInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleDailyScheduleInfo.m; sourceTree = "<group>"; };
 		09FFB5F518D6B46300F07B0A /* CSKuleScheduleInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleScheduleInfo.h; sourceTree = "<group>"; };
 		09FFB5F618D6B46300F07B0A /* CSKuleScheduleInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleScheduleInfo.m; sourceTree = "<group>"; };
+		221858CC1BEF9EDC005C4281 /* CBHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBHTTPRequestOperationManager.h; sourceTree = "<group>"; };
+		221858CD1BEF9EDC005C4281 /* CBHTTPRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBHTTPRequestOperationManager.m; sourceTree = "<group>"; };
 		22DD5F761BEE674700DD62D4 /* CBHttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBHttpClient.h; sourceTree = "<group>"; };
 		22DD5F771BEE674700DD62D4 /* CBHttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBHttpClient.m; sourceTree = "<group>"; };
 		2A1725B451DDE4D50114E918 /* Pods-youlebao.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-youlebao.release.xcconfig"; path = "Pods/Target Support Files/Pods-youlebao/Pods-youlebao.release.xcconfig"; sourceTree = "<group>"; };
@@ -2104,6 +2107,8 @@
 			children = (
 				09C1C75B18BD92990040B06D /* AFJSONRequestOperation+CSKit.h */,
 				09C1C75C18BD92990040B06D /* AFJSONRequestOperation+CSKit.m */,
+				221858CC1BEF9EDC005C4281 /* CBHTTPRequestOperationManager.h */,
+				221858CD1BEF9EDC005C4281 /* CBHTTPRequestOperationManager.m */,
 				22DD5F761BEE674700DD62D4 /* CBHttpClient.h */,
 				22DD5F771BEE674700DD62D4 /* CBHttpClient.m */,
 				0902458318EC41FA00579886 /* CSKuleURLCache.h */,
@@ -3065,6 +3070,7 @@
 				09219A5718C48A2100166228 /* CSKuleEngine.m in Sources */,
 				09E209E41B86E83C00059CC1 /* CBContractorDetailViewController.m in Sources */,
 				0914E32A199FBB5C00276ABA /* EntityHistoryInfo.m in Sources */,
+				221858CE1BEF9EDC005C4281 /* CBHTTPRequestOperationManager.m in Sources */,
 				090C9EB018C813BD00883DE0 /* CSKulePreferences.m in Sources */,
 				0902CAAE18F4359D001901A8 /* NSString+CSKit.m in Sources */,
 				091AE82E18D820C800EBC927 /* NSMutableArray+convenience.m in Sources */,
@@ -3366,7 +3372,7 @@
 					"$(PROJECT_DIR)/Venders/ShareSDK/Extend/WeChatSDK",
 				);
 				PRODUCT_NAME = youlebao;
-				PROVISIONING_PROFILE = "d0eb3d9d-9b14-4f6a-be6e-d1b1fd8e465a";
+				PROVISIONING_PROFILE = "c85b74b6-22eb-430f-b3d4-9a2a33477a7b";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

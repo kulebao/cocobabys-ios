@@ -189,7 +189,7 @@
         [gApp alert:@"无效手机号码，请检查后重新输入，谢谢!"];
     }
     else {
-        [gApp waitingAlert:@"获取邀请码中..."];
+        [gApp waitingAlert:@"正在向被邀请人发送邀请码"];
         [gApp.engine.httpClient reqGetInviteCodeWithHost:gApp.engine.currentRelationship.parent.phone
                                    andInvitee:phone
                                       success:^(AFHTTPRequestOperation *operation, id dataJson) {
@@ -200,7 +200,7 @@
                                               [gApp alert:@"被邀请手机号码无效，请检查"];
                                           }
                                           else {
-                                              [gApp alert:@"获取验证码成功，稍后会用短信将该验证码发送到您的手机上，谢谢"];
+                                              [gApp alert:@"邀请码发送成功，请在20分钟内向被邀请人索取，谢谢！"];
                                               
                                               [self.btnGetPasscode startTimer:120 callback:^(NSInteger i) {
                                                   self.btnGetPasscode.enabled = YES;
@@ -226,7 +226,7 @@
                                                   [gApp alert:@"验证码获取过于频繁，请稍后再试"];
                                               }
                                               else if (error_code == 8) {
-                                                  [gApp alert:@"被邀请人已经在幼乐宝注册"];
+                                                  [gApp alert:@"获取邀请码失败，被邀请人已经在幼乐宝注册"];
                                               }
                                               else {
                                                   // GET_AUTH_CODE_FAIL

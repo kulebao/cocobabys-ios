@@ -11,21 +11,26 @@
 #import "UIButton+Countdown.h"
 #import "CSTextFieldDelegate.h"
 #import "CBShareIntroView.h"
+#import <AddressBook/AddressBook.h>
+#import <AddressBookUI/AddressBookUI.h>
 
-@interface CBAddFamilyViewController ()
+@interface CBAddFamilyViewController () <ABPeoplePickerNavigationControllerDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *fieldPhone;
 @property (weak, nonatomic) IBOutlet UITextField *fieldPasscode;
 @property (weak, nonatomic) IBOutlet UIButton *btnGetPasscode;
 @property (weak, nonatomic) IBOutlet UITextField *fieldName;
 @property (weak, nonatomic) IBOutlet UITextField *fieldRelationship;
 @property (weak, nonatomic) IBOutlet UIButton *btnInvite;
+@property (weak, nonatomic) IBOutlet UIButton *btnPickContact;
 
 @property (nonatomic, strong) CSTextFieldDelegate* fieldDelegate;
 @property (nonatomic, strong) CBShareIntroView* shareIntroView;
+@property (nonatomic, strong) ABPeoplePickerNavigationController* peoplePicker;
 
 - (IBAction)onBtnGetPasscodeClicked:(id)sender;
 - (IBAction)onBtnInviteClicked:(id)sender;
 - (IBAction)onBtnShareClicked:(id)sender;
+- (IBAction)onBtnPickContactClicked:(id)sender;
 
 @end
 
@@ -60,12 +65,51 @@
 
 - (IBAction)onBtnGetPasscodeClicked:(id)sender {
     [self closeKeyboard];
-    
     [self onGetInviteCode];
 }
 
 - (IBAction)onBtnShareClicked:(id)sender {
+    [self closeKeyboard];
     [self showIntroViews];
+}
+
+- (IBAction)onBtnPickContactClicked:(id)sender {
+    [self closeKeyboard];
+    ABAddressBookRef addressBook = nil;
+    addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
+    //等待同意后向下执行
+    dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+    
+    __block BOOL allowed = NO;
+    ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error)
+                                             {
+                                                 allowed = granted;
+                                                 dispatch_semaphore_signal(sema);
+                                             });
+    dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+    
+    if (allowed) {
+        self.peoplePicker = [[ABPeoplePickerNavigationController alloc] init];
+        self.peoplePicker.peoplePickerDelegate = self;
+        self.peoplePicker.delegate = self;
+        self.peoplePicker.displayedProperties = @[@(kABPersonPhoneProperty)];
+        
+        if([[UIDevice currentDevice].systemVersion floatValue] >= 8.0){
+            self.peoplePicker.predicateForSelectionOfPerson = [NSPredicate predicateWithValue:NO];
+        }
+        
+        [self presentViewController:self.peoplePicker animated:YES completion:^{
+            
+        }];
+    }
+    else {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"未授权通讯录"
+                                                            message:@"请修改手机设置，允许[幼乐宝]访问通讯录：打开[设置]进入[隐私]选项，选择[通讯录]，打开[幼乐宝]的通讯录权限。"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"确定"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+    }
 }
 
 - (IBAction)onBtnInviteClicked:(id)sender {
@@ -238,6 +282,79 @@
                                           }
                                       }];
     }
+}
+
+#pragma mark - ABPeoplePickerNavigationControllerDelegate
+// Called after a person has been selected by the user. // IOS8
+- (void)peoplePickerNavigationController:(ABPeoplePickerNavigationController*)peoplePicker didSelectPerson:(ABRecordRef)person {
+
+}
+
+// Called after a property has been selected by the user. // IOS8
+- (void)peoplePickerNavigationController:(ABPeoplePickerNavigationController*)peoplePicker didSelectPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier {
+    ABMultiValueRef phone = ABRecordCopyValue(person, kABPersonPhoneProperty);
+    long index = ABMultiValueGetIndexForIdentifier(phone, identifier);
+    NSString *phoneNO = (__bridge NSString *)ABMultiValueCopyValueAtIndex(phone, index);
+    phoneNO = [phoneNO stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    phoneNO = [phoneNO stringByReplacingOccurrencesOfString:@" " withString:@""];
+    CSLog(@"Select -> %@", phoneNO);
+    if ([phoneNO isValidMobile]) {
+        self.fieldPhone.text = phoneNO;
+        //if ([self.fieldName.text trim].length == 0) {
+            self.fieldName.text = (__bridge NSString*)ABRecordCopyCompositeName(person);
+        //}
+    }
+    else{
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"无效手机号码"
+                                                            message:@"请选择正确手机号"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"确定"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+    }
+}
+
+// Called after the user has pressed cancel.
+- (void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker {
+    [peoplePicker dismissViewControllerAnimated:YES completion:nil];
+}
+
+// Deprecated, use predicateForSelectionOfPerson and/or -peoplePickerNavigationController:didSelectPerson: instead.
+- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person {
+    return YES;
+}
+
+// Deprecated, use predicateForSelectionOfProperty and/or -peoplePickerNavigationController:didSelectPerson:property:identifier: instead.
+- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier {
+    
+    ABMultiValueRef phone = ABRecordCopyValue(person, kABPersonPhoneProperty);
+    long index = ABMultiValueGetIndexForIdentifier(phone, identifier);
+    NSString *phoneNO = (__bridge NSString *)ABMultiValueCopyValueAtIndex(phone, index);
+    phoneNO = [phoneNO stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    phoneNO = [phoneNO stringByReplacingOccurrencesOfString:@" " withString:@""];
+    CSLog(@"Select -> %@", phoneNO);
+    
+    BOOL continueAction = YES;
+    if ([phoneNO isValidMobile]) {
+        self.fieldPhone.text = phoneNO;
+        //if ([self.fieldName.text trim].length == 0) {
+        self.fieldName.text = (__bridge NSString*)ABRecordCopyCompositeName(person);
+        //}
+        
+        continueAction = NO;
+        [peoplePicker dismissViewControllerAnimated:YES completion:nil];
+    }
+    else{
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"无效手机号码"
+                                                            message:@"请选择正确手机号"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"确定"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+        continueAction = NO;
+    }
+    
+    return continueAction;
 }
 
 @end

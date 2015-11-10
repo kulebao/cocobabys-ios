@@ -54,7 +54,10 @@
 
 - (void)reloadData {
     // 设置行间距
-    NSString* text = [NSString stringWithFormat:@"%@ %@\n%@", gApp.engine.currentRelationship.relationship, gApp.engine.currentRelationship.parent.name, gApp.engine.currentRelationship.parent.phone];
+    NSString* text = [NSString stringWithFormat:@"%@ %@\n%@",
+                      SAFE_STRING(gApp.engine.currentRelationship.relationship),
+                      SAFE_STRING(gApp.engine.currentRelationship.parent.name),
+                      SAFE_STRING(gApp.engine.currentRelationship.parent.phone)];
     NSMutableParagraphStyle* ps = [[NSMutableParagraphStyle alloc] init];
     ps.lineSpacing = 8;
     NSMutableAttributedString* atrText = [[NSMutableAttributedString alloc] initWithString:text];

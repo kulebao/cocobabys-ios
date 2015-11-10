@@ -34,6 +34,15 @@
 }
 */
 
+- (NSDate*)timerDate {
+    NSDate* c = objc_getAssociatedObject(self, @selector(timerDate));
+    return c;
+}
+
+- (void)setTimerDate:(NSDate*)date {
+    objc_setAssociatedObject(self, @selector(timerDate), date, OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
+
 - (NSInteger)counter {
     NSNumber* c = objc_getAssociatedObject(self, @selector(counter));
     return c.integerValue;
@@ -81,7 +90,9 @@
 }
 
 - (void)onTimer:(NSTimer*)timer {
-    self.counter -= 1;
+    NSTimeInterval duration = [self.timerDate timeIntervalSinceNow];
+    
+    NSInteger left = round(self.counter + duration);
     
     void(^timerHandler)(NSInteger);
     void(^completeHandler)(void);
@@ -90,11 +101,13 @@
     completeHandler = self.completeHandler;
     
     if (timerHandler) {
-        timerHandler(self.counter);
+        timerHandler(left);
     }
     
-    if (self.counter <=0 && completeHandler) {
+    if (left <=0 && completeHandler) {
         [timer invalidate];
+        self.timerDate = nil;
+        self.timer = nil;
         completeHandler();
     }
 }
@@ -105,6 +118,7 @@
     self.counter = count;
     self.completeHandler = complete;
     self.timerHandler = hander;
+    self.timerDate = [NSDate date];
     
     NSTimer* timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(onTimer:) userInfo:nil repeats:YES];
     self.timer = timer;

@@ -1328,16 +1328,16 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nyt-TN-4xd" userLabel="InputView">
-                                        <rect key="frame" x="16" y="16" width="288" height="32"/>
+                                        <rect key="frame" x="16" y="16" width="180" height="32"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="v2-input-1" translatesAutoresizingMaskIntoConstraints="NO" id="nRa-rX-ODn">
-                                                <rect key="frame" x="0.0" y="28" width="288" height="4"/>
+                                                <rect key="frame" x="0.0" y="28" width="180" height="4"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="4" id="dv9-eN-3SU"/>
                                                 </constraints>
                                             </imageView>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入您要邀请的手机号码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UoG-7F-fEf">
-                                                <rect key="frame" x="4" y="4" width="280" height="28"/>
+                                                <rect key="frame" x="4" y="4" width="172" height="28"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                             </textField>
@@ -1355,12 +1355,12 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MGj-Wc-tHt">
-                                        <rect key="frame" x="184" y="64" width="120" height="32"/>
+                                        <rect key="frame" x="204" y="64" width="100" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="32" id="Fmq-rE-lCI"/>
-                                            <constraint firstAttribute="width" constant="120" id="ept-nI-acs"/>
+                                            <constraint firstAttribute="width" constant="100" id="ept-nI-acs"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <state key="normal" title="获取邀请码" backgroundImage="v2-btn_bg_blue"/>
                                         <connections>
                                             <action selector="onBtnGetPasscodeClicked:" destination="6HI-Ih-AKp" eventType="touchUpInside" id="dRG-8J-MU3"/>
@@ -1373,16 +1373,16 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ytf-Qc-PQX" userLabel="InputView">
-                                        <rect key="frame" x="16" y="64" width="152" height="32"/>
+                                        <rect key="frame" x="16" y="64" width="180" height="32"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="v2-input-1" translatesAutoresizingMaskIntoConstraints="NO" id="pbn-6h-kfz">
-                                                <rect key="frame" x="0.0" y="28" width="152" height="4"/>
+                                                <rect key="frame" x="0.0" y="28" width="180" height="4"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="4" id="kZ5-3L-3Bx"/>
                                                 </constraints>
                                             </imageView>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入邀请码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c5h-Y8-IVf">
-                                                <rect key="frame" x="4" y="4" width="144" height="28"/>
+                                                <rect key="frame" x="4" y="4" width="172" height="28"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                             </textField>
@@ -1464,6 +1464,17 @@
                                             <action selector="onBtnInviteClicked:" destination="6HI-Ih-AKp" eventType="touchUpInside" id="kdZ-Em-Tnq"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fdq-7e-1On">
+                                        <rect key="frame" x="204" y="16" width="100" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="32" id="1hL-bA-bR2"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <state key="normal" title="从通讯录获取" backgroundImage="v2-btn_bg_blue"/>
+                                        <connections>
+                                            <action selector="onBtnPickContactClicked:" destination="6HI-Ih-AKp" eventType="touchUpInside" id="nPw-Wo-58O"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="nyt-TN-4xd" firstAttribute="leading" secondItem="hn9-EV-9hb" secondAttribute="leading" constant="16" id="2Da-a6-kIn"/>
@@ -1473,20 +1484,24 @@
                                     <constraint firstItem="1ve-08-8zn" firstAttribute="top" secondItem="gfE-P1-wcC" secondAttribute="bottom" constant="16" id="FTX-hV-gdN"/>
                                     <constraint firstItem="gfE-P1-wcC" firstAttribute="top" secondItem="Ytf-Qc-PQX" secondAttribute="bottom" constant="16" id="L7b-J2-3g8"/>
                                     <constraint firstItem="MGj-Wc-tHt" firstAttribute="top" secondItem="nyt-TN-4xd" secondAttribute="bottom" constant="16" id="MnO-Ty-E75"/>
+                                    <constraint firstItem="Fdq-7e-1On" firstAttribute="bottom" secondItem="nyt-TN-4xd" secondAttribute="bottom" id="Q33-ce-pJE"/>
                                     <constraint firstItem="UiI-2w-qBI" firstAttribute="top" secondItem="8gN-Oo-zEJ" secondAttribute="bottom" constant="16" id="QRQ-5k-Wll"/>
+                                    <constraint firstItem="MGj-Wc-tHt" firstAttribute="trailing" secondItem="Fdq-7e-1On" secondAttribute="trailing" id="Wd5-LN-3bv"/>
                                     <constraint firstAttribute="trailing" secondItem="8gN-Oo-zEJ" secondAttribute="trailing" constant="16" id="WqH-UF-I9t"/>
-                                    <constraint firstAttribute="trailing" secondItem="nyt-TN-4xd" secondAttribute="trailing" constant="16" id="YlM-M8-bBv"/>
                                     <constraint firstItem="8gN-Oo-zEJ" firstAttribute="leading" secondItem="hn9-EV-9hb" secondAttribute="leading" constant="16" id="Yob-xa-e5a"/>
                                     <constraint firstItem="8gN-Oo-zEJ" firstAttribute="top" secondItem="1ve-08-8zn" secondAttribute="bottom" constant="16" id="bCU-Kh-Vwh"/>
+                                    <constraint firstItem="MGj-Wc-tHt" firstAttribute="leading" secondItem="Fdq-7e-1On" secondAttribute="leading" id="cAM-bP-Y4h"/>
                                     <constraint firstItem="Ytf-Qc-PQX" firstAttribute="leading" secondItem="hn9-EV-9hb" secondAttribute="leading" constant="16" id="dUZ-1D-Vnn"/>
                                     <constraint firstItem="nyt-TN-4xd" firstAttribute="top" secondItem="DCU-eX-8vq" secondAttribute="bottom" constant="16" id="df5-CV-tgX"/>
                                     <constraint firstItem="1ve-08-8zn" firstAttribute="leading" secondItem="hn9-EV-9hb" secondAttribute="leading" constant="16" id="gSP-cr-VXq"/>
                                     <constraint firstAttribute="trailing" secondItem="1ve-08-8zn" secondAttribute="trailing" constant="16" id="hyG-P3-n06"/>
                                     <constraint firstAttribute="trailing" secondItem="gfE-P1-wcC" secondAttribute="trailing" constant="16" id="jSe-bI-59g"/>
-                                    <constraint firstItem="MGj-Wc-tHt" firstAttribute="leading" secondItem="Ytf-Qc-PQX" secondAttribute="trailing" constant="16" id="kKv-0z-ljp"/>
+                                    <constraint firstItem="Fdq-7e-1On" firstAttribute="top" secondItem="nyt-TN-4xd" secondAttribute="top" id="k5f-7A-1tb"/>
+                                    <constraint firstItem="MGj-Wc-tHt" firstAttribute="leading" secondItem="Ytf-Qc-PQX" secondAttribute="trailing" constant="8" id="kKv-0z-ljp"/>
                                     <constraint firstItem="UiI-2w-qBI" firstAttribute="leading" secondItem="hn9-EV-9hb" secondAttribute="leading" constant="16" id="kUn-PT-VT1"/>
                                     <constraint firstAttribute="trailing" secondItem="MGj-Wc-tHt" secondAttribute="trailing" constant="16" id="luB-yH-bT6"/>
                                     <constraint firstItem="DCU-eX-8vq" firstAttribute="top" secondItem="hn9-EV-9hb" secondAttribute="top" id="pVN-2t-STR"/>
+                                    <constraint firstItem="Ytf-Qc-PQX" firstAttribute="trailing" secondItem="nyt-TN-4xd" secondAttribute="trailing" id="qAO-zL-1bb"/>
                                     <constraint firstItem="DCU-eX-8vq" firstAttribute="leading" secondItem="hn9-EV-9hb" secondAttribute="leading" id="tld-gZ-nJz"/>
                                     <constraint firstItem="gfE-P1-wcC" firstAttribute="leading" secondItem="hn9-EV-9hb" secondAttribute="leading" constant="16" id="xkV-dI-c9Y"/>
                                     <constraint firstAttribute="trailing" secondItem="UiI-2w-qBI" secondAttribute="trailing" constant="16" id="ywH-hd-Y6a"/>
@@ -1518,6 +1533,7 @@
                     <connections>
                         <outlet property="btnGetPasscode" destination="MGj-Wc-tHt" id="ljE-lD-tdv"/>
                         <outlet property="btnInvite" destination="UiI-2w-qBI" id="UdX-78-iPx"/>
+                        <outlet property="btnPickContact" destination="Fdq-7e-1On" id="x7T-w2-GNY"/>
                         <outlet property="fieldName" destination="71N-rE-3xr" id="AKS-1C-oK9"/>
                         <outlet property="fieldPasscode" destination="c5h-Y8-IVf" id="EM2-fJ-xm2"/>
                         <outlet property="fieldPhone" destination="UoG-7F-fEf" id="8Da-el-7d2"/>

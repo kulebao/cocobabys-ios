@@ -141,7 +141,7 @@ static NSInteger kRetryInterval = 120; // 秒
 
 - (void)doCounting {
     NSTimeInterval counter = [_counterStart timeIntervalSinceNow];
-    NSInteger retrySecond = counter + kRetryInterval;
+    NSInteger retrySecond = round(counter + kRetryInterval);
     
     if (retrySecond > 0) {
         NSString* title = [NSString stringWithFormat:@"(%@)秒", @(retrySecond)];

@@ -554,6 +554,8 @@
 		09FFB5F418D6B2FA00F07B0A /* CSKuleDailyScheduleInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FFB5F318D6B2FA00F07B0A /* CSKuleDailyScheduleInfo.m */; };
 		09FFB5F718D6B46300F07B0A /* CSKuleScheduleInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FFB5F618D6B46300F07B0A /* CSKuleScheduleInfo.m */; };
 		221858CE1BEF9EDC005C4281 /* CBHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 221858CD1BEF9EDC005C4281 /* CBHTTPRequestOperationManager.m */; };
+		22D679801BF1AF5700831F7A /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D6797E1BF1AF5700831F7A /* AddressBook.framework */; };
+		22D679811BF1AF5700831F7A /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D6797F1BF1AF5700831F7A /* AddressBookUI.framework */; };
 		22DD5F781BEE674700DD62D4 /* CBHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DD5F771BEE674700DD62D4 /* CBHttpClient.m */; };
 		8152322DCFF3BB1C65A4D1C9 /* libPods-youlebao.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61B7205DB96DCB8B5DB32FD2 /* libPods-youlebao.a */; };
 /* End PBXBuildFile section */
@@ -1300,6 +1302,10 @@
 		09FFB5F618D6B46300F07B0A /* CSKuleScheduleInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleScheduleInfo.m; sourceTree = "<group>"; };
 		221858CC1BEF9EDC005C4281 /* CBHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBHTTPRequestOperationManager.h; sourceTree = "<group>"; };
 		221858CD1BEF9EDC005C4281 /* CBHTTPRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBHTTPRequestOperationManager.m; sourceTree = "<group>"; };
+		22D6797E1BF1AF5700831F7A /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		22D6797F1BF1AF5700831F7A /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		22D679821BF1B3BD00831F7A /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
+		22D679831BF1B3BD00831F7A /* ContactsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ContactsUI.framework; path = System/Library/Frameworks/ContactsUI.framework; sourceTree = SDKROOT; };
 		22DD5F761BEE674700DD62D4 /* CBHttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBHttpClient.h; sourceTree = "<group>"; };
 		22DD5F771BEE674700DD62D4 /* CBHttpClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBHttpClient.m; sourceTree = "<group>"; };
 		2A1725B451DDE4D50114E918 /* Pods-youlebao.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-youlebao.release.xcconfig"; path = "Pods/Target Support Files/Pods-youlebao/Pods-youlebao.release.xcconfig"; sourceTree = "<group>"; };
@@ -1312,6 +1318,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22D679801BF1AF5700831F7A /* AddressBook.framework in Frameworks */,
+				22D679811BF1AF5700831F7A /* AddressBookUI.framework in Frameworks */,
 				092513851BDD41DC00E6CFEB /* libiconv.tbd in Frameworks */,
 				092513861BDD41DC00E6CFEB /* libicucore.tbd in Frameworks */,
 				092513821BDD41C200E6CFEB /* libz.tbd in Frameworks */,
@@ -1893,6 +1901,10 @@
 		09BA1B8F18BB2AB300760182 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				22D679821BF1B3BD00831F7A /* Contacts.framework */,
+				22D679831BF1B3BD00831F7A /* ContactsUI.framework */,
+				22D6797E1BF1AF5700831F7A /* AddressBook.framework */,
+				22D6797F1BF1AF5700831F7A /* AddressBookUI.framework */,
 				092513831BDD41DC00E6CFEB /* libiconv.tbd */,
 				092513841BDD41DC00E6CFEB /* libicucore.tbd */,
 				092513811BDD41C200E6CFEB /* libz.tbd */,

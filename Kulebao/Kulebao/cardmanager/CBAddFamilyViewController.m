@@ -65,15 +65,16 @@
 
 - (IBAction)onBtnGetPasscodeClicked:(id)sender {
     [self closeKeyboard];
-    
     [self onGetInviteCode];
 }
 
 - (IBAction)onBtnShareClicked:(id)sender {
+    [self closeKeyboard];
     [self showIntroViews];
 }
 
 - (IBAction)onBtnPickContactClicked:(id)sender {
+    [self closeKeyboard];
     ABAddressBookRef addressBook = nil;
     addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
     //等待同意后向下执行
@@ -315,7 +316,7 @@
 
 // Called after the user has pressed cancel.
 - (void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker {
-    
+    [peoplePicker dismissViewControllerAnimated:YES completion:nil];
 }
 
 // Deprecated, use predicateForSelectionOfPerson and/or -peoplePickerNavigationController:didSelectPerson: instead.
@@ -341,6 +342,7 @@
         //}
         
         continueAction = NO;
+        [peoplePicker dismissViewControllerAnimated:YES completion:nil];
     }
     else{
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"无效手机号码"
@@ -349,6 +351,7 @@
                                                   cancelButtonTitle:@"确定"
                                                   otherButtonTitles:nil];
         [alertView show];
+        continueAction = NO;
     }
     
     return continueAction;

@@ -18,7 +18,6 @@
 #import "TSFileCache.h"
 #import "CSKit.h"
 #import <objc/runtime.h>
-#import <AVFoundation/AVFoundation.h>
 
 #import <ShareSDK/ShareSDK.h>
 #import "WXApi.h"
@@ -379,15 +378,6 @@
     
     // 加载HM_SDK
     [self setupHMSDK];
-    
-    NSError *setCategoryErr = nil;
-    NSError *activationErr  = nil;
-    [[AVAudioSession sharedInstance]
-     setCategory: AVAudioSessionCategoryPlayback
-     error: &setCategoryErr];
-    [[AVAudioSession sharedInstance]
-     setActive: YES
-     error: &activationErr];
 }
 
 - (void)setupHMSDK {

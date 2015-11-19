@@ -30,7 +30,7 @@
     btn.frame = CGRectMake(0, 0, 44, 24);
     [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem* btnItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
-    btn.titleLabel.font = [UIFont systemFontOfSize:16.0];
+    btn.titleLabel.font = [UIFont systemFontOfSize:17.0];
     [btn sizeToFit];
     self.navigationItem.rightBarButtonItem = btnItem;
 }

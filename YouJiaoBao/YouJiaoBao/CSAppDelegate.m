@@ -27,6 +27,8 @@ CSAppDelegate* gApp = nil;
 {
     // Override point for customization after application launch.
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
+    
+    //[[CrashReporter sharedInstance] enableLog:YES];
     [[CrashReporter sharedInstance] installWithAppId:@"900013150"];
     
     [[CSEngine sharedInstance] setupAppearance];

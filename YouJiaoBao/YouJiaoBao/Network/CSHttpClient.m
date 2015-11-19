@@ -792,7 +792,6 @@
     NSParameterAssert(accountName && newPswd && authCode);
     
     NSString* apiUrl = kResetPswd;
-    
     NSDictionary* parameters = @{@"account_name": accountName,
                                  @"authcode": authCode,
                                  @"new_password": newPswd};
@@ -810,8 +809,6 @@
     NSParameterAssert(phone);
     
     NSString* path = [NSString stringWithFormat:kGetSmsCodePath, phone];
-    
-    
     NSDictionary* parameters = nil;
     
     AFHTTPRequestOperation* op = [self.opManager GET:path
@@ -828,6 +825,35 @@
     NSParameterAssert(newsId);
     
     NSString* path = [NSString stringWithFormat:kKindergartenNewsMarkedPathV2, @(schoolId), newsId];
+    NSDictionary* parameters = nil;
+    AFHTTPRequestOperation* op = [self.opManager GET:path
+                                          parameters:parameters
+                                             success:success
+                                             failure:failure];
+    return op;
+}
+
+- (AFHTTPRequestOperation*)opDeleteNews:(NSNumber*)newsId
+                         inKindergarten:(NSInteger)schoolId
+                                success:(SuccessResponseHandler)success
+                                failure:(FailureResponseHandler)failure {
+    NSParameterAssert(newsId);
+    
+    CSEngine* engine = [CSEngine sharedInstance];
+    NSString* path = [NSString stringWithFormat:kDeleteNewsPath, @(schoolId), engine.loginInfo.uid, newsId];
+    NSDictionary* parameters = nil;
+    AFHTTPRequestOperation* op = [self.opManager DELETE:path
+                                             parameters:parameters
+                                                success:success
+                                                failure:failure];
+    return op;
+}
+
+- (AFHTTPRequestOperation*)opGetIneligibleClassOfKindergarten:(NSInteger)kindergarten
+                                                 withSenderId:(NSString*)senderId
+                                                      success:(SuccessResponseHandler)success
+                                                      failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kKindergartenIneligibleClassPathV3, @(kindergarten), senderId];
     NSDictionary* parameters = nil;
     AFHTTPRequestOperation* op = [self.opManager GET:path
                                           parameters:parameters

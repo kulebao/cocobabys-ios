@@ -4,6 +4,7 @@
         <deployment version="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -1286,15 +1287,24 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="公告详情" id="Lt3-AH-aWm">
-                        <barButtonItem key="rightBarButtonItem" image="v2-btn_check.png" id="dzn-PH-uer">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <action selector="onBtnCheckListClicked:" destination="sKh-e5-I66" id="00c-Ow-K7q"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem image="v2-btn_check.png" id="dzn-PH-uer">
+                                <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="onBtnCheckListClicked:" destination="sKh-e5-I66" id="00c-Ow-K7q"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="v3-btn-del" id="O4W-UW-M2s">
+                                <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="onBtnDelClicked:" destination="sKh-e5-I66" id="9n2-fv-TGy"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="btnCheckList" destination="dzn-PH-uer" id="z5n-h8-SxZ"/>
+                        <outlet property="btnDel" destination="O4W-UW-M2s" id="7XT-vT-Gfr"/>
                         <outlet property="indicatorView" destination="kHp-MW-Ih9" id="zMS-gE-4JO"/>
                         <outlet property="webView" destination="YyM-X5-AAN" id="BVr-AV-bjD"/>
                         <segue destination="fTv-GI-Gzv" kind="push" identifier="segue.news.reader" id="mWX-II-ciT"/>
@@ -2988,6 +2998,7 @@
         <image name="v2-进餐.png" width="64" height="64"/>
         <image name="v2-锻炼.png" width="64" height="64"/>
         <image name="v2-集体活动.png" width="64" height="64"/>
+        <image name="v3-btn-del" width="22" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="4dZ-qf-s5s"/>

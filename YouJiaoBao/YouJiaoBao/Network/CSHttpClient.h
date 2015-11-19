@@ -192,4 +192,14 @@ typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSErr
                                     success:(SuccessResponseHandler)success
                                     failure:(FailureResponseHandler)failure;
 
+- (AFHTTPRequestOperation*)opDeleteNews:(NSNumber*)newsId
+                         inKindergarten:(NSInteger)schoolId
+                                success:(SuccessResponseHandler)success
+                                failure:(FailureResponseHandler)failure;
+
+- (AFHTTPRequestOperation*)opGetIneligibleClassOfKindergarten:(NSInteger)kindergarten
+                                                 withSenderId:(NSString*)senderId
+                                                      success:(SuccessResponseHandler)success
+                                                      failure:(FailureResponseHandler)failure;
+
 @end

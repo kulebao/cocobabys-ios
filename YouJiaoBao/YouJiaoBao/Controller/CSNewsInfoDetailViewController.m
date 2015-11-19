@@ -16,12 +16,15 @@
 #import "CSEngine.h"
 #import "EntityParentInfoHelper.h"
 #import "CSNewsInfoReaderTableViewController.h"
+#import "EntityNewsInfoHelper.h"
 
-@interface CSNewsInfoDetailViewController () <UIWebViewDelegate>
+@interface CSNewsInfoDetailViewController () <UIWebViewDelegate, UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnCheckList;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *btnDel;
 - (IBAction)onBtnCheckListClicked:(id)sender;
+- (IBAction)onBtnDelClicked:(id)sender;
 
 @end
 
@@ -42,6 +45,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     //[self customizeBackBarItem];
+    
+    self.btnCheckList.tintColor = [UIColor whiteColor];
+    self.btnDel.tintColor = [UIColor whiteColor];
     
     if (self.newsInfo.feedbackRequired.integerValue > 0) {
     }
@@ -162,12 +168,12 @@
 - (IBAction)onBtnCheckListClicked:(id)sender {
     CSLog(@"%s", __FUNCTION__);
     
-//    if (self.newsInfo.classId.integerValue > 0) {
-//        CSLog(@"班级 %@", self.newsInfo.classId);
-//    }
-//    else {
-//        CSLog(@"全园");
-//    }
+    //    if (self.newsInfo.classId.integerValue > 0) {
+    //        CSLog(@"班级 %@", self.newsInfo.classId);
+    //    }
+    //    else {
+    //        CSLog(@"全园");
+    //    }
     
     CSHttpClient* http = [CSHttpClient sharedInstance];
     CSEngine* engine = [CSEngine sharedInstance];
@@ -183,7 +189,7 @@
     id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
         [gApp hideAlert];
     };
-
+    
     [gApp waitingAlert:@"正在查询回执情况..."];
     [http opGetNewsReaders:self.newsInfo.newsId
             inKindergarten:engine.loginInfo.schoolId.integerValue
@@ -191,8 +197,78 @@
                    failure:failure];
 }
 
+- (IBAction)onBtnDelClicked:(id)sender {
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                    message:@"确定删除本文？删除后不可恢复！"
+                                                   delegate:self
+                                          cancelButtonTitle:@"取消"
+                                          otherButtonTitles:@"删除", nil];
+    alert.delegate = self;
+    [alert show];
+}
+
 - (void)openReaderList:(NSArray*)readerList {
     [self performSegueWithIdentifier:@"segue.news.reader" sender:readerList];
+}
+
+- (void)doDeleteNews {
+    CSHttpClient* http = [CSHttpClient sharedInstance];
+    CSEngine* engine = [CSEngine sharedInstance];
+    
+    id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
+        [gApp hideAlert];
+        
+        NSInteger error_code = 0;
+        
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            error_code = [[responseObject objectForKey:@"error_code"] integerValue];
+        }
+        
+        if (error_code == 0) {
+            [EntityNewsInfoHelper deleteEntity:self.newsInfo];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        else {
+            NSString* msg = [NSString stringWithFormat:@"权限不足，删除失败，无法删除%@", [self tagTitle]];
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                            message:msg
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"确认"
+                                                  otherButtonTitles:nil];
+            [alert show];
+        }
+    };
+    
+    id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        [gApp hideAlert];
+        
+        if (operation.response.statusCode == 403) {
+            NSString* msg = [NSString stringWithFormat:@"权限不足，删除失败，无法删除%@", [self tagTitle]];
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                            message:msg
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"确认"
+                                                  otherButtonTitles:nil];
+            [alert show];
+        }
+        else {
+            [gApp alert:[NSString stringWithFormat:@"删除失败(%ld)", operation.response.statusCode]];
+        }
+    };
+    
+    [gApp waitingAlert:@"正在删除数据"];
+    [http opDeleteNews:self.newsInfo.newsId
+        inKindergarten:engine.loginInfo.schoolId.integerValue
+               success:success
+               failure:failure];
+}
+
+
+#pragma mark - UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == alertView.firstOtherButtonIndex) {
+        [self doDeleteNews];
+    }
 }
 
 @end

@@ -104,6 +104,12 @@
 #define kKindergartenNewsMarkedPathV2   @"/api/v2/kindergarten/%@/news/%@/reader"
 
 // PATH: 查询幼儿园公告回执状态V2
-#define kKindergartenNewsMarkedStatusPathV2   @"/api/v2/kindergarten/%@/news/%@/reader/%@"
+#define kKindergartenNewsMarkedStatusPathV2     @"/api/v2/kindergarten/%@/news/%@/reader/%@"
+
+// PATH: 查询无资格管理的班级
+#define kKindergartenIneligibleClassPathV3      @"/api/v3/kindergarten/%@/employee/%@/ineligible_class"
+
+// PATH: 删除公告
+#define kDeleteNewsPath                 @"/kindergarten/%@/admin/%@/news/%@"
 
 #endif

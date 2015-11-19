@@ -30,6 +30,7 @@ CSAppDelegate* gApp = nil;
     
     //[[CrashReporter sharedInstance] enableLog:YES];
     [[CrashReporter sharedInstance] installWithAppId:@"900013150"];
+    //[self performSelector:@selector(crash) withObject:nil afterDelay:3.0];
     
     [[CSEngine sharedInstance] setupAppearance];
     

@@ -66,6 +66,10 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "ALAlertBanner/ALAlertBanner/Images/bannerNotify@2x.png"
   install_resource "ALAlertBanner/ALAlertBanner/Images/bannerSuccess.png"
   install_resource "ALAlertBanner/ALAlertBanner/Images/bannerSuccess@2x.png"
+  install_resource "RongCloudIMKit/Rong_Cloud_iOS_SDK_v2_3_8_stable/RongCloud.bundle"
+  install_resource "RongCloudIMKit/Rong_Cloud_iOS_SDK_v2_3_8_stable/en.lproj"
+  install_resource "RongCloudIMKit/Rong_Cloud_iOS_SDK_v2_3_8_stable/zh-Hans.lproj"
+  install_resource "RongCloudIMKit/Rong_Cloud_iOS_SDK_v2_3_8_stable/Emoji.plist"
 fi
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "ALAlertBanner/ALAlertBanner/Images/bannerAlert.png"
@@ -76,6 +80,10 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "ALAlertBanner/ALAlertBanner/Images/bannerNotify@2x.png"
   install_resource "ALAlertBanner/ALAlertBanner/Images/bannerSuccess.png"
   install_resource "ALAlertBanner/ALAlertBanner/Images/bannerSuccess@2x.png"
+  install_resource "RongCloudIMKit/Rong_Cloud_iOS_SDK_v2_3_8_stable/RongCloud.bundle"
+  install_resource "RongCloudIMKit/Rong_Cloud_iOS_SDK_v2_3_8_stable/en.lproj"
+  install_resource "RongCloudIMKit/Rong_Cloud_iOS_SDK_v2_3_8_stable/zh-Hans.lproj"
+  install_resource "RongCloudIMKit/Rong_Cloud_iOS_SDK_v2_3_8_stable/Emoji.plist"
 fi
 
 mkdir -p "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"

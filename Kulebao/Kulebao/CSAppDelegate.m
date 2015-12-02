@@ -10,6 +10,7 @@
 #import "BPush.h"
 #import "EAIntroPage.h"
 #import "EAIntroView.h"
+#import <Bugly/CrashReporter.h>
 
 CSAppDelegate* gApp = nil;
 
@@ -26,6 +27,11 @@ CSAppDelegate* gApp = nil;
 {
     // Override point for customization after application launch.
     gApp = self;
+    
+//    [[CrashReporter sharedInstance] enableLog:YES];
+    [[CrashReporter sharedInstance] installWithAppId:@"900013148"];
+//    [self performSelector:@selector(crash) withObject:nil afterDelay:3.0];
+    
     _engine = [[CSKuleEngine alloc] init];
     [_engine setupEngine];
     

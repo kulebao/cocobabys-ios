@@ -337,7 +337,7 @@
 #pragma mark - Setup
 - (void)setupBaiduMobStat {
     BaiduMobStat* statTracker = [BaiduMobStat defaultStat];
-    statTracker.enableExceptionLog = YES; // 是否允许截获并发送崩溃信息，请设置YES或者NO
+    statTracker.enableExceptionLog = NO; // 是否允许截获并发送崩溃信息，请设置YES或者NO
 #if COCOBABYS_DEV_MODEL
     statTracker.channelId = @"ios-dev";//设置您的app的发布渠道
 #else

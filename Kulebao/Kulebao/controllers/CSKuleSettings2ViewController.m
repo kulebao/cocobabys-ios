@@ -192,7 +192,7 @@
             [gApp hideAlert];
         }
         else {
-            CSLog(@"doReceiveBindInfo error_code=%d", bindInfo.errorCode);
+            CSLog(@"[4]doReceiveBindInfo error_code=%ld", bindInfo.errorCode);
             [gApp alert:@"解除绑定失败。"];
         }
         

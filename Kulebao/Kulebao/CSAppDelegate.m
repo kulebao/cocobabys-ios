@@ -12,6 +12,8 @@
 #import "EAIntroView.h"
 #import <Bugly/CrashReporter.h>
 
+#define RONGCLOUD_IM_APPKEY @"0vnjpoadnwk0z"
+
 CSAppDelegate* gApp = nil;
 
 @interface CSAppDelegate () <EAIntroDelegate>
@@ -28,9 +30,13 @@ CSAppDelegate* gApp = nil;
     // Override point for customization after application launch.
     gApp = self;
     
-//    [[CrashReporter sharedInstance] enableLog:YES];
+    // 初始化Bugly
+    // [[CrashReporter sharedInstance] enableLog:YES];
     [[CrashReporter sharedInstance] installWithAppId:@"900013148"];
-//    [self performSelector:@selector(crash) withObject:nil afterDelay:3.0];
+    // [self performSelector:@selector(crash) withObject:nil afterDelay:3.0];
+    
+    // 初始化融云
+    [[RCIM sharedRCIM] initWithAppKey:RONGCLOUD_IM_APPKEY];
     
     _engine = [[CSKuleEngine alloc] init];
     [_engine setupEngine];
@@ -101,8 +107,13 @@ CSAppDelegate* gApp = nil;
 
 #endif
 
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
-{
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    NSString *token = [[[[deviceToken description] stringByReplacingOccurrencesOfString:@"<" withString:@""]
+                        stringByReplacingOccurrencesOfString:@">" withString:@""]
+                       stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    [[RCIMClient sharedRCIMClient] setDeviceToken:token];
+    
     [_engine application:application didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
 }
 
@@ -130,6 +141,21 @@ CSAppDelegate* gApp = nil;
     id ctrl = [mainStoryboard instantiateViewControllerWithIdentifier:@"CSMainNavigationController"];
     gApp.window.rootViewController = ctrl;
     
+    if (gApp.engine.loginInfo.imToken) {
+        // 快速集成第二步，连接融云服务器
+        [[RCIM sharedRCIM] connectWithToken:gApp.engine.loginInfo.imToken.token
+                                    success:^(NSString *userId) {
+                                        // Connect 成功
+                                        CSLog(@"[RCIM] connect success.");
+                                    } error:^(RCConnectErrorCode status) {
+                                        // Connect 失败
+                                        CSLog(@"[RCIM] connect error.");
+                                    } tokenIncorrect:^() {
+                                        // Token 失效的状态处理
+                                        CSLog(@"[RCIM] connect tokenIncorrect.");
+                                    }];
+    }
+    
     [self showIntroViewsIfNeeded];
 }
 
@@ -138,6 +164,8 @@ CSAppDelegate* gApp = nil;
     self.engine.relationships = nil;
     self.engine.currentRelationship = nil;
     self.engine.preferences.loginInfo = nil;
+    
+    [[RCIM sharedRCIM] disconnect:NO];
     
     [self gotoLoginProcess];
 }

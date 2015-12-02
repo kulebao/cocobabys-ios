@@ -29,4 +29,6 @@
 - (void)updateObject:(NSObject*)value forKey:(NSString*)key;
 - (void)updateObjectsFromDictionary:(NSDictionary*)dict;
 
+- (NSDictionary*)dictionary;
+
 @end

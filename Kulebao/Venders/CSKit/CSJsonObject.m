@@ -32,6 +32,10 @@
 @implementation CSJsonObject
 @synthesize rawDict = _rawDict;
 
+- (NSString*)description {
+    return [NSString stringWithFormat:@"[%@] -> %@", NSStringFromClass(self.class), _rawDict];
+}
+
 + (instancetype)instanceWithDictionary:(NSDictionary*)dict {
     id object = [[self alloc] initWithDictionary:dict];
     return object;
@@ -89,6 +93,10 @@
     NSDictionary* dictData = [aDecoder decodeObjectForKey:@"_rawDict"];
     self = [self initWithDictionary:dictData];
     return self;
+}
+
+- (NSDictionary*)dictionary {
+    return [NSDictionary dictionaryWithDictionary:(self.rawDict ? self.rawDict : @{})];
 }
 
 @end

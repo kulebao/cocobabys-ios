@@ -506,6 +506,7 @@
             _loginInfo.username = bindInfo.username;
             _loginInfo.schoolName = bindInfo.schoolName;
             _loginInfo.memberStatus = bindInfo.memberStatus;
+            _loginInfo.imToken = bindInfo.imToken;
             
             _preferences.loginInfo = _loginInfo;
             [gApp hideAlert];
@@ -514,7 +515,7 @@
             //[_httpClient enqueueHTTPRequestOperation:operation];
         }
         else {
-            CSLog(@"doReceiveBindInfo error_code=%d", bindInfo.errorCode);
+            CSLog(@"[3]doReceiveBindInfo error_code=%ld", bindInfo.errorCode);
             [gApp gotoLoginProcess];
             [gApp alert:@"获取信息失败，请重新登录。"];
         }

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CBIMTokenData.h"
 
 @interface CSKuleBindInfo : NSObject
 @property (nonatomic, strong) NSString* accessToken;
@@ -16,5 +17,6 @@
 @property (nonatomic, assign) NSInteger schoolId;
 @property (nonatomic, assign) NSInteger errorCode;
 @property (nonatomic, strong) NSString* memberStatus;
+@property (nonatomic, strong) CBIMTokenData* imToken;
 
 @end

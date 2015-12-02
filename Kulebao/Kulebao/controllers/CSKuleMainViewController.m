@@ -24,6 +24,7 @@
 #import "CSKuleNewsDetailsViewController.h"
 #import "CBActivityData.h"
 #import "CBContractorData.h"
+#import "CBChatListViewController.h"
 
 #import "EAIntroPage.h"
 #import "EAIntroView.h"
@@ -915,7 +916,21 @@
                     break;
             }
             
+#if COCOBABYS_USE_IM
+            if (moduleType == kKuleModuleChating) {
+                NSArray* arr1 = @[@(ConversationType_PRIVATE),@(ConversationType_DISCUSSION), @(ConversationType_APPSERVICE), @(ConversationType_PUBLICSERVICE),@(ConversationType_GROUP),@(ConversationType_SYSTEM)];
+                NSArray* arr2 = @[@(ConversationType_GROUP),@(ConversationType_DISCUSSION)];
+            
+                CBChatListViewController* ctrl = [[CBChatListViewController alloc] initWithDisplayConversationTypes:arr1
+                                                                                         collectionConversationType:arr2];
+                [self.navigationController pushViewController:ctrl animated:YES];
+            }
+            else {
+                [self performSegueWithIdentifier:segueNames[moduleType] sender:nil];
+            }
+#else
             [self performSegueWithIdentifier:segueNames[moduleType] sender:nil];
+#endif
         }
         else {
             //            [gApp alert:@"权限不足，请联系幼儿园开通权限，谢谢。"];

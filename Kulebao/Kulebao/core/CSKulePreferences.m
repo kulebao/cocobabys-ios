@@ -76,6 +76,7 @@ static NSString* kKeyCommercial = @"com.cocobabys.Kulebao.Preferences.commercial
     loginInfo.schoolId = [[loginInfoDict valueForKeyNotNull:@"schoolId"] integerValue];
     loginInfo.errorCode = [[loginInfoDict valueForKeyNotNull:@"errorCode"] integerValue];
     loginInfo.memberStatus = [loginInfoDict valueForKeyNotNull:@"memberStatus"];
+    loginInfo.imToken = [CBIMTokenData instanceWithDictionary:[loginInfoDict valueForKeyNotNull:@"imToken"]];
     
     if (loginInfo.accessToken && loginInfo.accountName && loginInfo.schoolName
         && loginInfo.username && loginInfo.schoolId!=0 && loginInfo.errorCode == 0) {
@@ -149,7 +150,8 @@ static NSString* kKeyCommercial = @"com.cocobabys.Kulebao.Preferences.commercial
                                         @"username": _loginInfo.username,
                                         @"schoolId": @(_loginInfo.schoolId),
                                         @"errorCode": @(_loginInfo.errorCode),
-                                        @"memberStatus": _loginInfo.memberStatus};
+                                        @"memberStatus": _loginInfo.memberStatus,
+                                        @"imToken": [_loginInfo.imToken dictionary]};
 
         [_config setObject:loginInfoDict forKey:kKeyLoginInfo];
     }
@@ -253,7 +255,7 @@ static NSString* kKeyCommercial = @"com.cocobabys.Kulebao.Preferences.commercial
     if (childId.length > 0) {
         NSDictionary* childDict = [_timestampDict objectForKey:childId];
         if (childDict) {
-            NSString* moduleName = [NSString stringWithFormat:@"Module_%d", moduleType];
+            NSString* moduleName = [NSString stringWithFormat:@"Module_%ld", moduleType];
             NSNumber* value = [childDict objectForKey:moduleName];
             ret = [value doubleValue];
         }

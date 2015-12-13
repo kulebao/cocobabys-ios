@@ -1,5 +1,5 @@
 //
-//  CBChatListViewController.h
+//  CBIMChatViewController.h
 //  youlebao
 //
 //  Created by WangXin on 12/3/15.
@@ -8,6 +8,6 @@
 
 #import <RongIMKit/RongIMKit.h>
 
-@interface CBChatListViewController : RCConversationListViewController
+@interface CBIMChatViewController : RCConversationViewController
 
 @end

@@ -49,7 +49,7 @@
             for (NSString* key in self.rawDict) {
                 @try {
                     if ([key isEqualToString:@"id"]) {
-                        [self setValue:self.rawDict[key] forKey:@"uid"];
+                        [self setValue:self.rawDict[key] forKey:@"ssid"];
                     }
                     else {
                         [self setValue:self.rawDict[key] forKey:key];

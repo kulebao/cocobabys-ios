@@ -1303,4 +1303,43 @@
                       failure:failure];
 }
 
+- (AFHTTPRequestOperation*)reqGetClassesOfKindergarten:(NSInteger)kindergarten
+                                               success:(SuccessResponseHandler)success
+                                               failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kCBClassesURL, @(kindergarten)];
+    
+    NSMutableDictionary* parameters = nil;
+    
+    return [_httpCobabys GET:path
+                  parameters:parameters
+                     success:success
+                     failure:failure];
+}
+
+- (AFHTTPRequestOperation*)reqGetParentsOfKindergarten:(NSInteger)kindergarten
+                                               success:(SuccessResponseHandler)success
+                                               failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kCBParentsURL, @(kindergarten)];
+    
+    NSMutableDictionary* parameters = nil;
+    
+    return [_httpCobabys GET:path
+                  parameters:parameters
+                     success:success
+                     failure:failure];
+}
+
+- (AFHTTPRequestOperation*)reqGetTeachersOfKindergarten:(NSInteger)kindergarten
+                                                success:(SuccessResponseHandler)success
+                                                failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kCBTeachersURL, @(kindergarten)];
+    
+    NSMutableDictionary* parameters = nil;
+    
+    return [_httpCobabys GET:path
+                  parameters:parameters
+                     success:success
+                     failure:failure];
+}
+
 @end

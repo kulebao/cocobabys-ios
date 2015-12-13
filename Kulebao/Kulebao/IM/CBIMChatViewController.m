@@ -1,24 +1,26 @@
 //
-//  CBChatListViewController.m
+//  CBIMChatViewController.m
 //  youlebao
 //
 //  Created by WangXin on 12/3/15.
 //  Copyright © 2015 Cocobabys. All rights reserved.
 //
 
-#import "CBChatListViewController.h"
-#import "CSAppDelegate.h"
+#import "CBIMChatViewController.h"
+#import "CBChatViewSettingsViewController.h"
 
-@interface CBChatListViewController ()
+@interface CBIMChatViewController ()
 
 @end
 
-@implementation CBChatListViewController
+@implementation CBIMChatViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationItem.title = gApp.engine.currentRelationship.child.className;
+    
+    
+    [self customizeOkBarItemWithTarget:self action:@selector(onRightNaviItemClicked:) text:@"群组成员"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,5 +37,11 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (void)onRightNaviItemClicked:(id)sender {
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"IM" bundle:nil];
+    CBChatViewSettingsViewController* ctrl = [storyboard instantiateViewControllerWithIdentifier:@"CBChatViewSettingsViewController"];
+    [self.navigationController pushViewController:ctrl animated:YES];
+}
 
 @end

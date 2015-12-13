@@ -11,6 +11,7 @@
 #import "EAIntroPage.h"
 #import "EAIntroView.h"
 #import <Bugly/CrashReporter.h>
+#import "CBIMDataSource.h"
 
 #define RONGCLOUD_IM_APPKEY @"0vnjpoadnwk0z"
 
@@ -37,6 +38,9 @@ CSAppDelegate* gApp = nil;
     
     // 初始化融云
     [[RCIM sharedRCIM] initWithAppKey:RONGCLOUD_IM_APPKEY];
+    [[RCIM sharedRCIM] setGroupInfoDataSource:[CBIMDataSource sharedInstance]];
+    [[RCIM sharedRCIM] setUserInfoDataSource:[CBIMDataSource sharedInstance]];
+    [[RCIM sharedRCIM] setGroupUserInfoDataSource:[CBIMDataSource sharedInstance]];
     
     _engine = [[CSKuleEngine alloc] init];
     [_engine setupEngine];
@@ -155,6 +159,9 @@ CSAppDelegate* gApp = nil;
                                         CSLog(@"[RCIM] connect tokenIncorrect.");
                                     }];
     }
+    
+    [[CBIMDataSource sharedInstance] reloadParents];
+    [[CBIMDataSource sharedInstance] reloadTeachers];
     
     [self showIntroViewsIfNeeded];
 }

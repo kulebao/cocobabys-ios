@@ -24,7 +24,7 @@
 #import "CSKuleNewsDetailsViewController.h"
 #import "CBActivityData.h"
 #import "CBContractorData.h"
-#import "CBChatListViewController.h"
+#import "CBIMChatListViewController.h"
 
 #import "EAIntroPage.h"
 #import "EAIntroView.h"
@@ -918,10 +918,11 @@
             
 #if COCOBABYS_USE_IM
             if (moduleType == kKuleModuleChating) {
-                NSArray* arr1 = @[@(ConversationType_PRIVATE),@(ConversationType_DISCUSSION), @(ConversationType_APPSERVICE), @(ConversationType_PUBLICSERVICE),@(ConversationType_GROUP),@(ConversationType_SYSTEM)];
-                NSArray* arr2 = @[@(ConversationType_GROUP),@(ConversationType_DISCUSSION)];
-            
-                CBChatListViewController* ctrl = [[CBChatListViewController alloc] initWithDisplayConversationTypes:arr1
+//                NSArray* arr1 = @[@(ConversationType_PRIVATE),@(ConversationType_DISCUSSION), @(ConversationType_APPSERVICE), @(ConversationType_PUBLICSERVICE),@(ConversationType_GROUP),@(ConversationType_SYSTEM)];
+//                NSArray* arr2 = @[@(ConversationType_GROUP),@(ConversationType_DISCUSSION)];
+                NSArray* arr1 = @[@(ConversationType_PRIVATE),@(ConversationType_DISCUSSION), @(ConversationType_GROUP),@(ConversationType_SYSTEM)];
+                NSArray* arr2 = nil;
+                CBIMChatListViewController* ctrl = [[CBIMChatListViewController alloc] initWithDisplayConversationTypes:arr1
                                                                                          collectionConversationType:arr2];
                 [self.navigationController pushViewController:ctrl animated:YES];
             }

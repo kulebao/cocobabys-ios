@@ -31,4 +31,5 @@
  *  @param  portraitUri 群头像URI
  */
 - (instancetype)initWithGroupId:(NSString *)groupId groupName:(NSString *)groupName portraitUri:(NSString *)portraitUri;
+
 @end

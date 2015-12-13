@@ -555,7 +555,14 @@
 		09FFB5F718D6B46300F07B0A /* CSKuleScheduleInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FFB5F618D6B46300F07B0A /* CSKuleScheduleInfo.m */; };
 		221858CE1BEF9EDC005C4281 /* CBHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 221858CD1BEF9EDC005C4281 /* CBHTTPRequestOperationManager.m */; };
 		228C885E1C0F4F25003D9EA2 /* CBIMTokenData.m in Sources */ = {isa = PBXBuildFile; fileRef = 228C885D1C0F4F25003D9EA2 /* CBIMTokenData.m */; };
-		228C88621C0F58DC003D9EA2 /* CBChatListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 228C88611C0F58DC003D9EA2 /* CBChatListViewController.m */; };
+		228C88621C0F58DC003D9EA2 /* CBIMChatListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 228C88611C0F58DC003D9EA2 /* CBIMChatListViewController.m */; };
+		228C88651C0FF045003D9EA2 /* CBIMDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 228C88641C0FF045003D9EA2 /* CBIMDataSource.m */; };
+		228C88681C100A4A003D9EA2 /* CBIMChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 228C88671C100A4A003D9EA2 /* CBIMChatViewController.m */; };
+		228C88711C153ECF003D9EA2 /* CBClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 228C88701C153ECF003D9EA2 /* CBClassInfo.m */; };
+		228C88781C1546A5003D9EA2 /* CBChatViewSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 228C88761C1546A5003D9EA2 /* CBChatViewSettingsViewController.m */; };
+		228C887B1C1546EF003D9EA2 /* IM.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 228C887A1C1546EF003D9EA2 /* IM.storyboard */; };
+		22BC05551C1DCD8200B8D076 /* CBParentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 22BC05541C1DCD8200B8D076 /* CBParentInfo.m */; };
+		22BC05581C1DCD9100B8D076 /* CBTeacherInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 22BC05571C1DCD9100B8D076 /* CBTeacherInfo.m */; };
 		22D679801BF1AF5700831F7A /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D6797E1BF1AF5700831F7A /* AddressBook.framework */; };
 		22D679811BF1AF5700831F7A /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D6797F1BF1AF5700831F7A /* AddressBookUI.framework */; };
 		22DD5F781BEE674700DD62D4 /* CBHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DD5F771BEE674700DD62D4 /* CBHttpClient.m */; };
@@ -1306,8 +1313,21 @@
 		221858CD1BEF9EDC005C4281 /* CBHTTPRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBHTTPRequestOperationManager.m; sourceTree = "<group>"; };
 		228C885C1C0F4F25003D9EA2 /* CBIMTokenData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBIMTokenData.h; sourceTree = "<group>"; };
 		228C885D1C0F4F25003D9EA2 /* CBIMTokenData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBIMTokenData.m; sourceTree = "<group>"; };
-		228C88601C0F58DC003D9EA2 /* CBChatListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBChatListViewController.h; sourceTree = "<group>"; };
-		228C88611C0F58DC003D9EA2 /* CBChatListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBChatListViewController.m; sourceTree = "<group>"; };
+		228C88601C0F58DC003D9EA2 /* CBIMChatListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBIMChatListViewController.h; sourceTree = "<group>"; };
+		228C88611C0F58DC003D9EA2 /* CBIMChatListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBIMChatListViewController.m; sourceTree = "<group>"; };
+		228C88631C0FF045003D9EA2 /* CBIMDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBIMDataSource.h; sourceTree = "<group>"; };
+		228C88641C0FF045003D9EA2 /* CBIMDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBIMDataSource.m; sourceTree = "<group>"; };
+		228C88661C100A4A003D9EA2 /* CBIMChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBIMChatViewController.h; sourceTree = "<group>"; };
+		228C88671C100A4A003D9EA2 /* CBIMChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBIMChatViewController.m; sourceTree = "<group>"; };
+		228C886F1C153ECF003D9EA2 /* CBClassInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBClassInfo.h; sourceTree = "<group>"; };
+		228C88701C153ECF003D9EA2 /* CBClassInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBClassInfo.m; sourceTree = "<group>"; };
+		228C88751C1546A4003D9EA2 /* CBChatViewSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBChatViewSettingsViewController.h; sourceTree = "<group>"; };
+		228C88761C1546A5003D9EA2 /* CBChatViewSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBChatViewSettingsViewController.m; sourceTree = "<group>"; };
+		228C887A1C1546EF003D9EA2 /* IM.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = IM.storyboard; sourceTree = "<group>"; };
+		22BC05531C1DCD8200B8D076 /* CBParentInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBParentInfo.h; sourceTree = "<group>"; };
+		22BC05541C1DCD8200B8D076 /* CBParentInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBParentInfo.m; sourceTree = "<group>"; };
+		22BC05561C1DCD9100B8D076 /* CBTeacherInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBTeacherInfo.h; sourceTree = "<group>"; };
+		22BC05571C1DCD9100B8D076 /* CBTeacherInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBTeacherInfo.m; sourceTree = "<group>"; };
 		22D6797E1BF1AF5700831F7A /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		22D6797F1BF1AF5700831F7A /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		22D679821BF1B3BD00831F7A /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
@@ -2581,8 +2601,21 @@
 		228C885F1C0F58B9003D9EA2 /* IM */ = {
 			isa = PBXGroup;
 			children = (
-				228C88601C0F58DC003D9EA2 /* CBChatListViewController.h */,
-				228C88611C0F58DC003D9EA2 /* CBChatListViewController.m */,
+				228C88601C0F58DC003D9EA2 /* CBIMChatListViewController.h */,
+				228C88611C0F58DC003D9EA2 /* CBIMChatListViewController.m */,
+				228C88661C100A4A003D9EA2 /* CBIMChatViewController.h */,
+				228C88671C100A4A003D9EA2 /* CBIMChatViewController.m */,
+				228C88751C1546A4003D9EA2 /* CBChatViewSettingsViewController.h */,
+				228C88761C1546A5003D9EA2 /* CBChatViewSettingsViewController.m */,
+				228C88631C0FF045003D9EA2 /* CBIMDataSource.h */,
+				228C88641C0FF045003D9EA2 /* CBIMDataSource.m */,
+				228C886F1C153ECF003D9EA2 /* CBClassInfo.h */,
+				228C88701C153ECF003D9EA2 /* CBClassInfo.m */,
+				22BC05531C1DCD8200B8D076 /* CBParentInfo.h */,
+				22BC05541C1DCD8200B8D076 /* CBParentInfo.m */,
+				22BC05561C1DCD9100B8D076 /* CBTeacherInfo.h */,
+				22BC05571C1DCD9100B8D076 /* CBTeacherInfo.m */,
+				228C887A1C1546EF003D9EA2 /* IM.storyboard */,
 			);
 			path = IM;
 			sourceTree = "<group>";
@@ -2663,6 +2696,7 @@
 				09D9BC1B1AEE933D009456ED /* v2-礼貌@2x.png in Resources */,
 				09C00FA91B443DA400FC1474 /* ShareSDKFlatShareViewUI.bundle in Resources */,
 				09142E1818E2B9D800E5848F /* rating-3stars@2x.png in Resources */,
+				228C887B1C1546EF003D9EA2 /* IM.storyboard in Resources */,
 				090FC165199C8EE900C3A31A /* exp_back.png in Resources */,
 				09F0BFB318F1C671004629BA /* CSKuleDatePickerViewController.xib in Resources */,
 				09D9BBEC1AEE933D009456ED /* v2-btn_发送回执@2x.png in Resources */,
@@ -3085,6 +3119,7 @@
 				0904553219BDB8CA00FEF2C9 /* CSKuleVideoMember.m in Sources */,
 				09514FED1B84EDE5005217B7 /* CSJsonEntityData.m in Sources */,
 				096DC1C11BA33F4000661B61 /* GMGridViewCell.m in Sources */,
+				228C88711C153ECF003D9EA2 /* CBClassInfo.m in Sources */,
 				090FC122199B3FC300C3A31A /* PaintingView.m in Sources */,
 				091AE82F18D820C800EBC927 /* UIColor+expanded.m in Sources */,
 				092513741BDD38B100E6CFEB /* CSKuleSettings2ViewController.m in Sources */,
@@ -3118,6 +3153,7 @@
 				094E14E3199CF6DD00945B06 /* CSCoreDataHelper.m in Sources */,
 				097ED0BB18DAB4AB0057ECA0 /* CSKuleChangePasswordViewController.m in Sources */,
 				09FE6B0A18C5C34F00A840BE /* CSKuleChatingViewController.m in Sources */,
+				22BC05581C1DCD9100B8D076 /* CBTeacherInfo.m in Sources */,
 				09F74CE01997D14D001555D0 /* VoiceConverter.m in Sources */,
 				091AE82118D7E4E700EBC927 /* CSKuleAboutSchoolViewController.m in Sources */,
 				09B8FB971AB0B89400123378 /* CSKuleHistoryVideoItemTableViewCell.m in Sources */,
@@ -3175,6 +3211,7 @@
 				09BA1B9D18BB2AB300760182 /* main.m in Sources */,
 				0915662218ED92810073AE22 /* CSKuleVerifyMobileViewController.m in Sources */,
 				09F0BFB218F1C671004629BA /* CSKuleDatePickerViewController.m in Sources */,
+				228C88651C0FF045003D9EA2 /* CBIMDataSource.m in Sources */,
 				09BA1BDF18BB2FC700760182 /* MessageInterceptor.m in Sources */,
 				09BA1BDE18BB2FC700760182 /* LoadMoreTableFooterView.m in Sources */,
 				09EEBA461B863E76006296F1 /* CBActivityItemCell.m in Sources */,
@@ -3190,20 +3227,23 @@
 				090C9EB318C81D7500883DE0 /* CSKuleInterpreter.m in Sources */,
 				09A9EBBB18C0830900D83119 /* CSKuleLoginViewController.m in Sources */,
 				093D89CF1999C27E006B013B /* CSKuleHistoryMonthCell.m in Sources */,
+				228C88781C1546A5003D9EA2 /* CBChatViewSettingsViewController.m in Sources */,
 				0902458518EC41FA00579886 /* CSKuleURLCache.m in Sources */,
 				0909036B1BDF456F00FDD2CE /* CBAddFamilyViewController.m in Sources */,
 				0914E36A199FCD7500276ABA /* SDWebImageManager+MJ.m in Sources */,
 				090FC11F199B3FC300C3A31A /* HMPlayerView.mm in Sources */,
+				228C88681C100A4A003D9EA2 /* CBIMChatViewController.m in Sources */,
 				09219A5A18C4999C00166228 /* CSKuleLoginInfo.m in Sources */,
 				0914E369199FCD7500276ABA /* MJPhotoView.m in Sources */,
 				090C9EDC18C87AEA00883DE0 /* KxMenu.m in Sources */,
 				0932A67E1AFA870E00961861 /* CSKuleDeveloperSettingsViewController.m in Sources */,
-				228C88621C0F58DC003D9EA2 /* CBChatListViewController.m in Sources */,
+				228C88621C0F58DC003D9EA2 /* CBIMChatListViewController.m in Sources */,
 				093D89D7199A76E1006B013B /* CSKuleCCTVPlayViewController.m in Sources */,
 				09E209E11B86E81F00059CC1 /* CBActivityDetailViewController.m in Sources */,
 				09A9EBD218C090E200D83119 /* CSKuleAuthViewController.m in Sources */,
 				0909036E1BDF4CAF00FDD2CE /* CBFamilyItemTableViewCell.m in Sources */,
 				0914E368199FCD7500276ABA /* MJPhotoToolbar.m in Sources */,
+				22BC05551C1DCD8200B8D076 /* CBParentInfo.m in Sources */,
 				090C9EC718C84FB000883DE0 /* CSKuleChildCell.m in Sources */,
 				09D04E3918DFCB830093577D /* CSKuleCheckinLogListViewController.m in Sources */,
 				0904FC9918F3BDED001968D7 /* CSKuleEmployeeInfo.m in Sources */,

@@ -1320,7 +1320,13 @@
                                             withClassId:(NSInteger)classId
                                                 success:(SuccessResponseHandler)success
                                                 failure:(FailureResponseHandler)failure {
-    NSString* path = [NSString stringWithFormat:kCBTeachersURL, @(kindergarten), @(classId)];
+    NSString* path = nil;
+    if (classId > 0) {
+        path = [NSString stringWithFormat:kCBTeachersURL, @(kindergarten), @(classId)];
+    }
+    else {
+        path = [NSString stringWithFormat:kCBEmployeesURL, @(kindergarten)];
+    }
     
     NSMutableDictionary* parameters = nil;
     

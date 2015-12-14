@@ -23,7 +23,12 @@
     // Do any additional setup after loading the view.
     
     if (self.conversationType == ConversationType_GROUP) {
-        [self customizeOkBarItemWithTarget:self action:@selector(onRightNaviItemClicked:) text:@"群组成员"];
+        //[self customizeOkBarItemWithTarget:self action:@selector(onRightNaviItemClicked:) text:@"群组成员"];
+        
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"v2-im-groupmembers"]
+                                                                                  style:UIBarButtonItemStyleBordered
+                                                                                 target:self
+                                                                                 action:@selector(onRightNaviItemClicked:)];
     }
 }
 

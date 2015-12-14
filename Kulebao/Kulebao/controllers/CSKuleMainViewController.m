@@ -135,11 +135,13 @@
                      options:NSKeyValueObservingOptionNew
                      context:nil];
      */
-    
+    /*
     [gApp.engine addObserver:self
                   forKeyPath:@"badgeOfChating"
                      options:NSKeyValueObservingOptionNew
                      context:nil];
+     */
+    
     [gApp.engine addObserver:self
                   forKeyPath:@"badgeOfAssess"
                      options:NSKeyValueObservingOptionNew
@@ -171,7 +173,7 @@
     [gApp.engine removeObserver:self forKeyPath:@"badgeOfCheckin"];
     [gApp.engine removeObserver:self forKeyPath:@"badgeOfSchedule"];
     //[gApp.engine removeObserver:self forKeyPath:@"badgeOfAssignment"];
-    [gApp.engine removeObserver:self forKeyPath:@"badgeOfChating"];
+    //[gApp.engine removeObserver:self forKeyPath:@"badgeOfChating"];
     [gApp.engine removeObserver:self forKeyPath:@"badgeOfAssess"];
     [gApp.engine removeObserver:self forKeyPath:@"pendingNotificationInfo"];
 }

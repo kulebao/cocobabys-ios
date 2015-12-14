@@ -15,11 +15,6 @@
 
 @interface CBIMDataSource ()
 
-@property (nonatomic, strong) NSMutableArray* classInfoList;
-@property (nonatomic, strong) NSMutableArray* relationshipInfoList;
-@property (nonatomic, strong) NSMutableArray* teacherInfoList;
-
-
 @end
 
 @implementation CBIMDataSource
@@ -39,9 +34,9 @@
 
 - (id)init {
     if (self = [super init]) {
-        self.classInfoList = [NSMutableArray array];
-        self.relationshipInfoList = [NSMutableArray array];
-        self.teacherInfoList = [NSMutableArray array];
+        _classInfoList = [NSMutableArray array];
+        _relationshipInfoList = [NSMutableArray array];
+        _teacherInfoList = [NSMutableArray array];
     }
     return self;
 }
@@ -135,9 +130,12 @@
         for (CBRelationshipInfo* relation in _relationshipInfoList) {
             if ([classlId isEqualToString:relation.child.class_id.stringValue]
                 && [schoolId isEqualToString:relation.child.school_id.stringValue]) {
+                
+                NSURL* portrait = [[NSBundle mainBundle] URLForResource:@"v2-im-group@2x" withExtension:@"png"];
+                
                 groupObj = [[RCGroup alloc] initWithGroupId:groupId
                                                   groupName:SAFE_STRING(relation.child.class_name)
-                                                portraitUri:nil];
+                                                portraitUri:portrait.absoluteString];
                 break;
             }
         }
@@ -231,7 +229,7 @@
     
     CBHttpClient* http = [CBHttpClient sharedInstance];
     [http reqGetTeachersOfKindergarten:gApp.engine.currentRelationship.parent.schoolId
-                           withClassId:gApp.engine.currentRelationship.child.classId
+                           withClassId:0 //gApp.engine.currentRelationship.child.classId
                                success:^(AFHTTPRequestOperation *operation, id dataJson) {
                                    for (NSDictionary* json in dataJson) {
                                        CBTeacherInfo* newObj = [CBTeacherInfo instanceWithDictionary:json];
@@ -249,6 +247,7 @@
                                    }
                                    
                                    [self store];
+                                   [[RCIM sharedRCIM] clearUserInfoCache];
                                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                    
                                }];
@@ -274,6 +273,8 @@
                                         }
                                         
                                         [self store];
+                                        [[RCIM sharedRCIM] clearUserInfoCache];
+                                        [[RCIM sharedRCIM] clearGroupInfoCache];
                                     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                         
                                     }];

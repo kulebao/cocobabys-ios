@@ -184,7 +184,7 @@
             [self checkUpdatesOfCheckin];
             [self checkUpdatesOfSchedule];
             //[self checkUpdatesOfAssignment];
-            [self checkUpdatesOfChating];
+            //[self checkUpdatesOfChating];
             [self checkUpdatesOfAssess];
         }
     }

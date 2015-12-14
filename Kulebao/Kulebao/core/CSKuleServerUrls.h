@@ -169,6 +169,6 @@
 #pragma mark - IM
 #define kCBClassesURL           @"/kindergarten/%@/class"
 #define kCBTeachersURL          @"/kindergarten/%@/class/%@/manager"
-
+#define kCBEmployeesURL         @"/kindergarten/%@/employee"
 
 #endif

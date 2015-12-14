@@ -144,14 +144,14 @@ static NSString* kKeyCommercial = @"com.cocobabys.Kulebao.Preferences.commercial
     
     if (_loginInfo && _loginInfo.accessToken && _loginInfo.accountName && _loginInfo.schoolName
         && _loginInfo.username && _loginInfo.schoolId!=0 && _loginInfo.errorCode == 0) {
-        NSDictionary* loginInfoDict = @{@"accessToken": _loginInfo.accessToken,
-                                        @"accountName": _loginInfo.accountName,
-                                        @"schoolName": _loginInfo.schoolName,
-                                        @"username": _loginInfo.username,
+        NSDictionary* loginInfoDict = @{@"accessToken": SAFE_STRING(_loginInfo.accessToken),
+                                        @"accountName": SAFE_STRING(_loginInfo.accountName),
+                                        @"schoolName": SAFE_STRING(_loginInfo.schoolName),
+                                        @"username": SAFE_STRING(_loginInfo.username),
                                         @"schoolId": @(_loginInfo.schoolId),
                                         @"errorCode": @(_loginInfo.errorCode),
                                         @"memberStatus": _loginInfo.memberStatus,
-                                        @"imToken": [_loginInfo.imToken dictionary]};
+                                        @"imToken": (_loginInfo.imToken ? [_loginInfo.imToken dictionary] : @{})};
 
         [_config setObject:loginInfoDict forKey:kKeyLoginInfo];
     }

@@ -565,6 +565,8 @@
 		22BC05581C1DCD9100B8D076 /* CBTeacherInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 22BC05571C1DCD9100B8D076 /* CBTeacherInfo.m */; };
 		22BC055B1C1EF46300B8D076 /* CBChildInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 22BC055A1C1EF46300B8D076 /* CBChildInfo.m */; };
 		22BC055E1C1EF48900B8D076 /* CBRelationshipInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 22BC055D1C1EF48900B8D076 /* CBRelationshipInfo.m */; };
+		22BC05611C1F157800B8D076 /* CBIMGroupMembersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22BC05601C1F157800B8D076 /* CBIMGroupMembersViewController.m */; };
+		22BC05631C1F19B200B8D076 /* v2-im-group@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 22BC05621C1F19B200B8D076 /* v2-im-group@2x.png */; };
 		22D679801BF1AF5700831F7A /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D6797E1BF1AF5700831F7A /* AddressBook.framework */; };
 		22D679811BF1AF5700831F7A /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D6797F1BF1AF5700831F7A /* AddressBookUI.framework */; };
 		22DD5F781BEE674700DD62D4 /* CBHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DD5F771BEE674700DD62D4 /* CBHttpClient.m */; };
@@ -1334,6 +1336,9 @@
 		22BC055A1C1EF46300B8D076 /* CBChildInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBChildInfo.m; sourceTree = "<group>"; };
 		22BC055C1C1EF48900B8D076 /* CBRelationshipInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBRelationshipInfo.h; sourceTree = "<group>"; };
 		22BC055D1C1EF48900B8D076 /* CBRelationshipInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBRelationshipInfo.m; sourceTree = "<group>"; };
+		22BC055F1C1F157800B8D076 /* CBIMGroupMembersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBIMGroupMembersViewController.h; sourceTree = "<group>"; };
+		22BC05601C1F157800B8D076 /* CBIMGroupMembersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBIMGroupMembersViewController.m; sourceTree = "<group>"; };
+		22BC05621C1F19B200B8D076 /* v2-im-group@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-im-group@2x.png"; sourceTree = "<group>"; };
 		22D6797E1BF1AF5700831F7A /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		22D6797F1BF1AF5700831F7A /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		22D679821BF1B3BD00831F7A /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
@@ -2207,6 +2212,7 @@
 		09D9BB471AEE933D009456ED /* images */ = {
 			isa = PBXGroup;
 			children = (
+				22BC05621C1F19B200B8D076 /* v2-im-group@2x.png */,
 				090903571BDEA84300FDD2CE /* v2-启动界面-2208@2x.png */,
 				094D909B1B6A7E310045D0AB /* v2-app-icon.png */,
 				094D909C1B6A7E310045D0AB /* v2-app-icon@2x.png */,
@@ -2613,6 +2619,8 @@
 				228C88671C100A4A003D9EA2 /* CBIMChatViewController.m */,
 				228C88751C1546A4003D9EA2 /* CBChatViewSettingsViewController.h */,
 				228C88761C1546A5003D9EA2 /* CBChatViewSettingsViewController.m */,
+				22BC055F1C1F157800B8D076 /* CBIMGroupMembersViewController.h */,
+				22BC05601C1F157800B8D076 /* CBIMGroupMembersViewController.m */,
 				228C88631C0FF045003D9EA2 /* CBIMDataSource.h */,
 				228C88641C0FF045003D9EA2 /* CBIMDataSource.m */,
 				228C886F1C153ECF003D9EA2 /* CBClassInfo.h */,
@@ -3045,6 +3053,7 @@
 				09C00FA51B443DA400FC1474 /* Resource.bundle in Resources */,
 				0925138A1BDD44E800E6CFEB /* mapapi.bundle in Resources */,
 				09FE1ED919B5D53F0073D9D4 /* v3_3@2x.png in Resources */,
+				22BC05631C1F19B200B8D076 /* v2-im-group@2x.png in Resources */,
 				09F74C961997C4F3001555D0 /* homework_item.png in Resources */,
 				09FEA72618DC9D9600513C87 /* news-bg.png in Resources */,
 				09D9BBEF1AEE933D009456ED /* v2-btn_班级通知.png in Resources */,
@@ -3118,6 +3127,7 @@
 				0914E327199FBB5B00276ABA /* EntitySenderInfo.m in Sources */,
 				22BC055E1C1EF48900B8D076 /* CBRelationshipInfo.m in Sources */,
 				09A9EBD518C0A01B00D83119 /* CSKuleMainViewController.m in Sources */,
+				22BC05611C1F157800B8D076 /* CBIMGroupMembersViewController.m in Sources */,
 				093D89CC1999C242006B013B /* CSKuleCCTVMainTableViewController.m in Sources */,
 				09FFB5F718D6B46300F07B0A /* CSKuleScheduleInfo.m in Sources */,
 				09C3AC25199DAC8600A6251C /* CSContentEditorViewController.m in Sources */,

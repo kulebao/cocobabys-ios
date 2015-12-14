@@ -17,6 +17,8 @@
 @implementation CBIMChatListViewController
 
 - (void)viewDidLoad {
+    [self setConversationAvatarStyle:RC_USER_AVATAR_CYCLE];
+    
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     //self.navigationItem.title = gApp.engine.currentRelationship.child.className;

@@ -12,7 +12,7 @@
 
 + (instancetype)sharedInstance;
 
-- (void)reloadParents;
+- (void)reloadRelationships;
 - (void)reloadTeachers;
 
 @end

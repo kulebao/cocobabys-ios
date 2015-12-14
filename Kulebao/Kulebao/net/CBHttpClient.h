@@ -289,12 +289,15 @@ typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSErr
                                                success:(SuccessResponseHandler)success
                                                failure:(FailureResponseHandler)failure;
 
-- (AFHTTPRequestOperation*)reqGetParentsOfKindergarten:(NSInteger)kindergarten
-                                               success:(SuccessResponseHandler)success
-                                               failure:(FailureResponseHandler)failure;
 
 - (AFHTTPRequestOperation*)reqGetTeachersOfKindergarten:(NSInteger)kindergarten
+                                            withClassId:(NSInteger)classId
                                                 success:(SuccessResponseHandler)success
                                                 failure:(FailureResponseHandler)failure;
+
+- (AFHTTPRequestOperation*)reqGetRelationshipsOfKindergarten:(NSInteger)kindergarten
+                                                 withClassId:(NSInteger)classId
+                                                     success:(SuccessResponseHandler)success
+                                                     failure:(FailureResponseHandler)failure;
 
 @end

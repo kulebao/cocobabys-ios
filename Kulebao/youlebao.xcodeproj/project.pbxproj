@@ -563,6 +563,8 @@
 		228C887B1C1546EF003D9EA2 /* IM.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 228C887A1C1546EF003D9EA2 /* IM.storyboard */; };
 		22BC05551C1DCD8200B8D076 /* CBParentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 22BC05541C1DCD8200B8D076 /* CBParentInfo.m */; };
 		22BC05581C1DCD9100B8D076 /* CBTeacherInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 22BC05571C1DCD9100B8D076 /* CBTeacherInfo.m */; };
+		22BC055B1C1EF46300B8D076 /* CBChildInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 22BC055A1C1EF46300B8D076 /* CBChildInfo.m */; };
+		22BC055E1C1EF48900B8D076 /* CBRelationshipInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 22BC055D1C1EF48900B8D076 /* CBRelationshipInfo.m */; };
 		22D679801BF1AF5700831F7A /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D6797E1BF1AF5700831F7A /* AddressBook.framework */; };
 		22D679811BF1AF5700831F7A /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D6797F1BF1AF5700831F7A /* AddressBookUI.framework */; };
 		22DD5F781BEE674700DD62D4 /* CBHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DD5F771BEE674700DD62D4 /* CBHttpClient.m */; };
@@ -1328,6 +1330,10 @@
 		22BC05541C1DCD8200B8D076 /* CBParentInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBParentInfo.m; sourceTree = "<group>"; };
 		22BC05561C1DCD9100B8D076 /* CBTeacherInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBTeacherInfo.h; sourceTree = "<group>"; };
 		22BC05571C1DCD9100B8D076 /* CBTeacherInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBTeacherInfo.m; sourceTree = "<group>"; };
+		22BC05591C1EF46300B8D076 /* CBChildInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBChildInfo.h; sourceTree = "<group>"; };
+		22BC055A1C1EF46300B8D076 /* CBChildInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBChildInfo.m; sourceTree = "<group>"; };
+		22BC055C1C1EF48900B8D076 /* CBRelationshipInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBRelationshipInfo.h; sourceTree = "<group>"; };
+		22BC055D1C1EF48900B8D076 /* CBRelationshipInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBRelationshipInfo.m; sourceTree = "<group>"; };
 		22D6797E1BF1AF5700831F7A /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		22D6797F1BF1AF5700831F7A /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		22D679821BF1B3BD00831F7A /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
@@ -2613,6 +2619,10 @@
 				228C88701C153ECF003D9EA2 /* CBClassInfo.m */,
 				22BC05531C1DCD8200B8D076 /* CBParentInfo.h */,
 				22BC05541C1DCD8200B8D076 /* CBParentInfo.m */,
+				22BC05591C1EF46300B8D076 /* CBChildInfo.h */,
+				22BC055A1C1EF46300B8D076 /* CBChildInfo.m */,
+				22BC055C1C1EF48900B8D076 /* CBRelationshipInfo.h */,
+				22BC055D1C1EF48900B8D076 /* CBRelationshipInfo.m */,
 				22BC05561C1DCD9100B8D076 /* CBTeacherInfo.h */,
 				22BC05571C1DCD9100B8D076 /* CBTeacherInfo.m */,
 				228C887A1C1546EF003D9EA2 /* IM.storyboard */,
@@ -3106,6 +3116,7 @@
 			files = (
 				090FC11D199B3FC300C3A31A /* HMAudioPlayer.m in Sources */,
 				0914E327199FBB5B00276ABA /* EntitySenderInfo.m in Sources */,
+				22BC055E1C1EF48900B8D076 /* CBRelationshipInfo.m in Sources */,
 				09A9EBD518C0A01B00D83119 /* CSKuleMainViewController.m in Sources */,
 				093D89CC1999C242006B013B /* CSKuleCCTVMainTableViewController.m in Sources */,
 				09FFB5F718D6B46300F07B0A /* CSKuleScheduleInfo.m in Sources */,
@@ -3125,6 +3136,7 @@
 				092513741BDD38B100E6CFEB /* CSKuleSettings2ViewController.m in Sources */,
 				09FE6AF918C5B97100A840BE /* CSKuleRecipeCell.m in Sources */,
 				09BA1BE018BB2FC700760182 /* PullTableView.m in Sources */,
+				22BC055B1C1EF46300B8D076 /* CBChildInfo.m in Sources */,
 				09F0BFAE18F1C483004629BA /* UIViewController+MJPopupViewController.m in Sources */,
 				09DB73E918E0280B00121716 /* CSKuleChatMsg.m in Sources */,
 				09ED59B618CDBF3900187585 /* UIWebView+CSKit.m in Sources */,

@@ -28,7 +28,7 @@
 @interface CBTeacherInfo : CSJsonObject
 
 
-@property (nonatomic, strong) NSString* ssid;
+@property (nonatomic, strong) NSString* _id;
 @property (nonatomic, strong) NSNumber* uid;
 @property (nonatomic, strong) NSString* name;
 @property (nonatomic, strong) NSString* phone;
@@ -37,7 +37,7 @@
 @property (nonatomic, strong) NSString* workduty;
 @property (nonatomic, strong) NSString* portrait;
 @property (nonatomic, strong) NSString* birthday;
-@property (nonatomic, strong) NSString* school_id;
+@property (nonatomic, strong) NSNumber* school_id;
 @property (nonatomic, strong) NSString* login_name;
 @property (nonatomic, strong) NSNumber* timestamp;
 @property (nonatomic, strong) NSNumber* status;

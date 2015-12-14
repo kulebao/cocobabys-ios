@@ -1316,10 +1316,11 @@
                      failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqGetParentsOfKindergarten:(NSInteger)kindergarten
-                                               success:(SuccessResponseHandler)success
-                                               failure:(FailureResponseHandler)failure {
-    NSString* path = [NSString stringWithFormat:kCBParentsURL, @(kindergarten)];
+- (AFHTTPRequestOperation*)reqGetTeachersOfKindergarten:(NSInteger)kindergarten
+                                            withClassId:(NSInteger)classId
+                                                success:(SuccessResponseHandler)success
+                                                failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kCBTeachersURL, @(kindergarten), @(classId)];
     
     NSMutableDictionary* parameters = nil;
     
@@ -1329,12 +1330,16 @@
                      failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqGetTeachersOfKindergarten:(NSInteger)kindergarten
-                                                success:(SuccessResponseHandler)success
-                                                failure:(FailureResponseHandler)failure {
-    NSString* path = [NSString stringWithFormat:kCBTeachersURL, @(kindergarten)];
+- (AFHTTPRequestOperation*)reqGetRelationshipsOfKindergarten:(NSInteger)kindergarten
+                                                 withClassId:(NSInteger)classId
+                                                     success:(SuccessResponseHandler)success
+                                                     failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kGetFamilyRelationshipPath, @(kindergarten)];
     
-    NSMutableDictionary* parameters = nil;
+    NSDictionary* parameters = @{};
+    if (classId > 0) {
+        parameters = @{@"class_id": @(classId)};
+    }
     
     return [_httpCobabys GET:path
                   parameters:parameters

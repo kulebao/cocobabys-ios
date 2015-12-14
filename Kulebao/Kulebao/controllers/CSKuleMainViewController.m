@@ -29,6 +29,8 @@
 #import "EAIntroPage.h"
 #import "EAIntroView.h"
 
+#import "CBIMDataSource.h"
+
 @interface CSKuleMainViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, EAIntroDelegate> {
     UIImagePickerController* _imgPicker;
     CSTextFieldDelegate* _nickFieldDelegate;
@@ -1013,6 +1015,11 @@
             [gApp hideAlert];
             
             [self handlePendingNotification];
+            
+            //
+            
+            [[CBIMDataSource sharedInstance] reloadRelationships];
+            [[CBIMDataSource sharedInstance] reloadTeachers];
         }
         else {
             [gApp alert:@"没有关联宝宝信息"];

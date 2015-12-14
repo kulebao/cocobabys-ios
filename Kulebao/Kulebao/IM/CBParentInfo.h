@@ -26,7 +26,7 @@
 @interface CBParentInfo : CSJsonObject
 
 @property (nonatomic, strong) NSString* parent_id;
-@property (nonatomic, strong) NSString* school_id;
+@property (nonatomic, strong) NSNumber* school_id;
 @property (nonatomic, strong) NSString* name;
 @property (nonatomic, strong) NSString* phone;
 @property (nonatomic, strong) NSString* portrait;
@@ -37,6 +37,6 @@
 @property (nonatomic, strong) NSNumber* status;
 @property (nonatomic, strong) NSString* company;
 @property (nonatomic, strong) NSNumber* created_at;
-@property (nonatomic, strong) NSNumber* ssid;
+@property (nonatomic, strong) NSNumber* _id;
 
 @end

@@ -10,4 +10,6 @@
 
 @interface CBChatViewSettingsViewController : UITableViewController
 
+@property(nonatomic, strong) NSString *targetId;
+
 @end

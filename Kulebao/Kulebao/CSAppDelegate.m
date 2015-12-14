@@ -160,9 +160,6 @@ CSAppDelegate* gApp = nil;
                                     }];
     }
     
-    [[CBIMDataSource sharedInstance] reloadParents];
-    [[CBIMDataSource sharedInstance] reloadTeachers];
-    
     [self showIntroViewsIfNeeded];
 }
 

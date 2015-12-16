@@ -567,6 +567,7 @@
 		22BC055E1C1EF48900B8D076 /* CBRelationshipInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 22BC055D1C1EF48900B8D076 /* CBRelationshipInfo.m */; };
 		22BC05611C1F157800B8D076 /* CBIMGroupMembersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22BC05601C1F157800B8D076 /* CBIMGroupMembersViewController.m */; };
 		22BC05631C1F19B200B8D076 /* v2-im-group@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 22BC05621C1F19B200B8D076 /* v2-im-group@2x.png */; };
+		22C4ACA91C21BA610079FB3E /* CBIMGroupTeacherTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C4ACA81C21BA610079FB3E /* CBIMGroupTeacherTableViewCell.m */; };
 		22D679801BF1AF5700831F7A /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D6797E1BF1AF5700831F7A /* AddressBook.framework */; };
 		22D679811BF1AF5700831F7A /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D6797F1BF1AF5700831F7A /* AddressBookUI.framework */; };
 		22DD5F781BEE674700DD62D4 /* CBHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DD5F771BEE674700DD62D4 /* CBHttpClient.m */; };
@@ -1339,6 +1340,8 @@
 		22BC055F1C1F157800B8D076 /* CBIMGroupMembersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBIMGroupMembersViewController.h; sourceTree = "<group>"; };
 		22BC05601C1F157800B8D076 /* CBIMGroupMembersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBIMGroupMembersViewController.m; sourceTree = "<group>"; };
 		22BC05621C1F19B200B8D076 /* v2-im-group@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-im-group@2x.png"; sourceTree = "<group>"; };
+		22C4ACA71C21BA610079FB3E /* CBIMGroupTeacherTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBIMGroupTeacherTableViewCell.h; sourceTree = "<group>"; };
+		22C4ACA81C21BA610079FB3E /* CBIMGroupTeacherTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBIMGroupTeacherTableViewCell.m; sourceTree = "<group>"; };
 		22D6797E1BF1AF5700831F7A /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		22D6797F1BF1AF5700831F7A /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		22D679821BF1B3BD00831F7A /* Contacts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Contacts.framework; path = System/Library/Frameworks/Contacts.framework; sourceTree = SDKROOT; };
@@ -2633,6 +2636,8 @@
 				22BC055D1C1EF48900B8D076 /* CBRelationshipInfo.m */,
 				22BC05561C1DCD9100B8D076 /* CBTeacherInfo.h */,
 				22BC05571C1DCD9100B8D076 /* CBTeacherInfo.m */,
+				22C4ACA71C21BA610079FB3E /* CBIMGroupTeacherTableViewCell.h */,
+				22C4ACA81C21BA610079FB3E /* CBIMGroupTeacherTableViewCell.m */,
 				228C887A1C1546EF003D9EA2 /* IM.storyboard */,
 			);
 			path = IM;
@@ -3275,6 +3280,7 @@
 				09FE6B0118C5BCFD00A840BE /* CSKuleAssignmentViewController.m in Sources */,
 				09ED59B918CDC5D800187585 /* CSKuleRecipeInfo.m in Sources */,
 				09148E5218DAEE8A00D08F63 /* Kulebao.xcdatamodeld in Sources */,
+				22C4ACA91C21BA610079FB3E /* CBIMGroupTeacherTableViewCell.m in Sources */,
 				090903651BDF2C4100FDD2CE /* CBTextField.m in Sources */,
 				09C1C75F18BD92990040B06D /* AFJSONRequestOperation+CSKit.m in Sources */,
 				09C1C76618BD973B0040B06D /* NSDictionary+CSKit.m in Sources */,

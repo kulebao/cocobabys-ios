@@ -132,6 +132,7 @@
     // Pass the selected object to the new view controller.
     if ([segue.identifier isEqualToString:@"segue.im.groupmembers"]) {
         CBIMGroupMembersViewController* ctrl = segue.destinationViewController;
+        ctrl.targetId = self.targetId;
     }
 }
 

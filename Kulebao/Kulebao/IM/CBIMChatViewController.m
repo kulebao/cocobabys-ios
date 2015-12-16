@@ -70,7 +70,6 @@
         
         [self.navigationController pushViewController:conversationVC animated:YES];
     }];
-    
 }
 
 @end

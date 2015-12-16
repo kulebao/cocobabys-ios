@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface CBIMGroupMembersViewController : UITableViewController
-
+@property(nonatomic, strong) NSString *targetId;
 @end

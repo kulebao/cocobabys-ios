@@ -30,6 +30,7 @@
 #import "EAIntroView.h"
 
 #import "CBIMDataSource.h"
+#import "UIActionSheet+BlocksKit.h"
 
 @interface CSKuleMainViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, EAIntroDelegate> {
     UIImagePickerController* _imgPicker;
@@ -537,18 +538,20 @@
 }
 
 - (void)doChangeChildNick {
-    NSString *title = @"设置宝宝昵称";
-    NSString *message = @"";
+    NSString *title = @"设置宝贝昵称";
+    NSString *message = [NSString stringWithFormat:@"您最多可以输入%d个字", kKuleNickMaxLength];
     
     AHAlertView *alert = [[AHAlertView alloc] initWithTitle:title message:message];
     alert.alertViewStyle = AHAlertViewStylePlainTextInput;
+    alert.messageTextAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:14]};
     
     UITextField* field = [alert textFieldAtIndex:0];
-    field.placeholder = @"请输入宝宝的昵称";
+    field.placeholder = @"请输入宝贝昵称";
     field.text = gApp.engine.currentRelationship.child.nick;
     field.keyboardAppearance = UIKeyboardAppearanceDefault;
-    field.background = [[UIImage imageNamed:@"input-bg-0.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 50, 10, 10)];
-    field.borderStyle = UITextBorderStyleBezel;
+    //field.background = [[UIImage imageNamed:@"input-bg-0.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 50, 10, 10)];
+    //field.borderStyle = UITextBorderStyleBezel;
+    field.borderStyle = UITextBorderStyleRoundedRect;
     field.backgroundColor = [UIColor clearColor];
     field.font = [UIFont systemFontOfSize:14];
     field.delegate = _nickFieldDelegate;
@@ -704,6 +707,19 @@
 #endif
 }
 
+- (void)doChangePortrait {
+    UIActionSheet* sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:nil];
+    [sheet bk_addButtonWithTitle:@"拍照" handler:^{
+        [self doChangePortraitFromCamera];
+    }];
+    
+    [sheet bk_addButtonWithTitle:@"从相册选择" handler:^{
+        [self doChangePortraitFromPhoto];
+    }];
+    
+    [sheet showInView:self.view];
+}
+
 - (void)doGetSchoolInfo:(void(^)())completion {
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         id schoolInfoJson = [dataJson valueForKeyNotNull:@"school_info"];
@@ -802,21 +818,26 @@
                                       target:self
                                       action:@selector(doChangeChildBirthday)];
     
-    KxMenuItem* item3 = [KxMenuItem menuItem:@"从相机拍摄头像"
-                                       image:nil
-                                      target:self
-                                      action:@selector(doChangePortraitFromCamera)];
+//    KxMenuItem* item3 = [KxMenuItem menuItem:@"从相机拍摄头像"
+//                                       image:nil
+//                                      target:self
+//                                      action:@selector(doChangePortraitFromCamera)];
+//    
+//    KxMenuItem* item4 = [KxMenuItem menuItem:@"从相册选择头像"
+//                                       image:nil
+//                                      target:self
+//                                      action:@selector(doChangePortraitFromPhoto)];
     
-    KxMenuItem* item4 = [KxMenuItem menuItem:@"从相册选择头像"
+    KxMenuItem* item3 = [KxMenuItem menuItem:@"设置宝贝头像"
                                        image:nil
                                       target:self
-                                      action:@selector(doChangePortraitFromPhoto)];
+                                      action:@selector(doChangePortrait)];
     
     //[KxMenu setTintColor:UIColorRGB(0xCC, 0x66, 0x33)];
     [KxMenu setTintColor:[UIColor colorWithRed:0.129f green:0.565f blue:0.839f alpha:1.0f]];
     [KxMenu showMenuInView:self.view
                   fromRect:self.viewChildContainer.frame
-                 menuItems:@[item1, item2, item3, item4]];
+                 menuItems:@[item1, item2, item3]];
 }
 
 #pragma mark - UI Actions

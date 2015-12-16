@@ -45,25 +45,30 @@
 
 #pragma mark - UITextFieldDelegate
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    BOOL ret = YES;
+    BOOL ok = YES;
     switch (_type) {
         case kCSTextFieldDelegateNumberOnly:
-            ret = [self isNumber:string];
+            ok = [self isNumber:string];
             break;
         case kCSTextFieldDelegateNationalID:
-            ret = [self isNationalID:string];
+            ok = [self isNationalID:string];
             break;
         case kCSTextFieldDelegateNormal:
             break;
         default:
             break;
     }
-    
-    if (self.maxLength >=0 && string.length>0) {
-        ret = (textField.text.length < self.maxLength);
+
+    if (self.maxLength > 0 && string.length>0) {
+        NSString* oldText = textField.text;
+        NSString* newText = [oldText stringByReplacingCharactersInRange:range withString:string];
+        ok = (newText.length < self.maxLength);
+        if (!ok) {
+            textField.text = [newText substringWithRange:NSMakeRange(0, self.maxLength)];
+        }
     }
     
-    return ret;
+    return ok;
 }
 
 @end

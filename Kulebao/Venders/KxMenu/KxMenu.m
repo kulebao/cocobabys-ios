@@ -593,16 +593,17 @@ typedef enum {
 
 + (UIImage *) gradientLine: (CGSize) size
 {
-    const CGFloat locations[5] = {0,0.2,0.5,0.8,1};
+    const CGFloat locations[5] = {0,0.3,0.5,0.7,1};
     
-    const CGFloat R = 0.64f, G = 0.64f, B = 0.64f;
+    //const CGFloat R = 0.64f, G = 0.64f, B = 0.64f;
+    const CGFloat R = 1.0, G = 1.0, B = 1.0;
         
     const CGFloat components[20] = {
-        R,G,B,0.1,
-        R,G,B,0.4,
         R,G,B,0.7,
-        R,G,B,0.4,
-        R,G,B,0.1
+        R,G,B,0.8,
+        R,G,B,0.9,
+        R,G,B,0.8,
+        R,G,B,0.7
     };
     
     return [self gradientImageWithSize:size locations:locations components:components count:5];
@@ -617,7 +618,7 @@ typedef enum {
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-    CGGradientRef colorGradient = CGGradientCreateWithColorComponents(colorSpace, components, locations, 2);
+    CGGradientRef colorGradient = CGGradientCreateWithColorComponents(colorSpace, components, locations, count);
     CGColorSpaceRelease(colorSpace);
     CGContextDrawLinearGradient(context, colorGradient, (CGPoint){0, 0}, (CGPoint){size.width, 0}, 0);
     CGGradientRelease(colorGradient);
@@ -638,8 +639,10 @@ typedef enum {
 {
 //    CGFloat R0 = 0.267, G0 = 0.303, B0 = 0.335;
 //    CGFloat R1 = 0.040, G1 = 0.040, B1 = 0.040;
-    CGFloat R0 = 39/255.0, G0 = 144/255.0, B0 = 214/255.0;
-    CGFloat R1 = 39/255.0, G1 = 144/255.0, B1 = 214/255.0;
+//    CGFloat R0 = 39/255.0, G0 = 144/255.0, B0 = 214/255.0;
+//    CGFloat R1 = 39/255.0, G1 = 144/255.0, B1 = 214/255.0;
+    CGFloat R0 = 0/255.0, G0 = 164/255.0, B0 = 217/255.0;
+    CGFloat R1 = 0/255.0, G1 = 164/255.0, B1 = 217/255.0;
     
     UIColor *tintColor = [KxMenu tintColor];
     if (tintColor) {

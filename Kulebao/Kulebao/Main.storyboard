@@ -310,7 +310,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </scrollView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="松鼠宝宝" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PrA-3R-D0Z">
-                                <rect key="frame" x="140" y="57" width="172" height="21"/>
+                                <rect key="frame" x="144" y="57" width="168" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.12941176470588237" green="0.56862745098039214" blue="0.83921568627450982" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -332,7 +332,7 @@
                             <constraint firstItem="UZY-LS-vXO" firstAttribute="leading" secondItem="K2n-R8-5AY" secondAttribute="leading" constant="32" id="epy-pT-ONQ"/>
                             <constraint firstItem="Bg4-Db-29J" firstAttribute="top" secondItem="STu-Mz-Pf6" secondAttribute="bottom" id="t0Q-yB-aL9"/>
                             <constraint firstAttribute="trailing" secondItem="owY-A5-r0J" secondAttribute="trailing" id="vzb-qz-4zF"/>
-                            <constraint firstItem="PrA-3R-D0Z" firstAttribute="leading" secondItem="UZY-LS-vXO" secondAttribute="trailing" constant="8" id="xMp-gh-eMH"/>
+                            <constraint firstItem="PrA-3R-D0Z" firstAttribute="leading" secondItem="UZY-LS-vXO" secondAttribute="trailing" constant="12" id="xMp-gh-eMH"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
@@ -1691,7 +1691,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QNz-WW-MvW" userLabel="View - Photo">
-                                    <rect key="frame" x="30" y="10" width="100" height="100"/>
+                                    <rect key="frame" x="32" y="10" width="100" height="100"/>
                                     <subviews>
                                         <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="v2-头像框.png" translatesAutoresizingMaskIntoConstraints="NO" id="Qn4-HE-SXa">
                                             <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
@@ -1734,7 +1734,7 @@
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="妈妈 张小娴 13512341234" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bWp-Nk-jIy">
-                                    <rect key="frame" x="142" y="38" width="111" height="43"/>
+                                    <rect key="frame" x="144" y="38" width="111" height="43"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                     <color key="textColor" red="0.12549019610000001" green="0.56862745100000001" blue="0.83921568629999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -1743,7 +1743,7 @@
                             <color key="backgroundColor" red="0.90196078430000004" green="0.96470588239999999" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstItem="bWp-Nk-jIy" firstAttribute="leading" secondItem="QNz-WW-MvW" secondAttribute="trailing" constant="12" id="NBk-3g-Bw2"/>
-                                <constraint firstItem="QNz-WW-MvW" firstAttribute="leading" secondItem="wnS-jO-ITk" secondAttribute="leading" constant="30" id="Rne-Pa-40Q"/>
+                                <constraint firstItem="QNz-WW-MvW" firstAttribute="leading" secondItem="wnS-jO-ITk" secondAttribute="leading" constant="32" id="Rne-Pa-40Q"/>
                                 <constraint firstItem="bWp-Nk-jIy" firstAttribute="centerY" secondItem="wnS-jO-ITk" secondAttribute="centerY" id="bth-e9-B8G"/>
                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="bWp-Nk-jIy" secondAttribute="trailing" constant="16" id="uZp-66-PLw"/>
                                 <constraint firstItem="QNz-WW-MvW" firstAttribute="centerY" secondItem="wnS-jO-ITk" secondAttribute="centerY" id="zSO-1W-E9d"/>

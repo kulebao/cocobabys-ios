@@ -42,7 +42,7 @@
     [self customizeBackBarItem];
     
     self.fieldDelegate = [[CSTextFieldDelegate alloc] initWithType:kCSTextFieldDelegateNormal];
-    self.fieldDelegate.maxLength = 20;
+    self.fieldDelegate.maxLength = kKuleRelationshipMaxLength;
     
     self.fieldName.delegate = self.fieldDelegate;
     self.fieldRelationship.delegate = self.fieldDelegate;

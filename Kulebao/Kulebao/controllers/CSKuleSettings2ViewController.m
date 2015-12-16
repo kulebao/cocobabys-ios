@@ -39,6 +39,8 @@
     [self customizeBackBarItem];
     self.imgPortrait.layer.cornerRadius = self.imgPortrait.bounds.size.width/2.0;
     self.imgPortrait.clipsToBounds = YES;
+    self.imgPortrait.layer.borderColor = [[UIColor whiteColor] CGColor];
+    self.imgPortrait.layer.borderWidth = 2;
 }
 
 - (void)viewWillAppear:(BOOL)animated {

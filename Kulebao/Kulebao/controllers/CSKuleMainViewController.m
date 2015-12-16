@@ -89,6 +89,8 @@
     self.labChildNick.text = nil;
     self.imgChildPortrait.layer.cornerRadius = self.imgChildPortrait.frame.size.width/2;
     self.imgChildPortrait.clipsToBounds = YES;
+    self.imgChildPortrait.layer.borderColor = [[UIColor whiteColor] CGColor];
+    self.imgChildPortrait.layer.borderWidth = 2;
     
     self.btnSchoolInfo.titleLabel.numberOfLines = 2;
     self.btnSchoolInfo.titleLabel.minimumScaleFactor = 0.7;

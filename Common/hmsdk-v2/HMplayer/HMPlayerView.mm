@@ -128,7 +128,7 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
 //    [btnListen setEnabled:YES];
 //    [btnListenStop setEnabled:NO];
     
-    btnListen.hidden = NO;
+    btnListen.hidden = YES;
     btnListenStop.hidden = YES;
     
     rightBar.hidden = !IsRunning;

@@ -111,58 +111,58 @@
 }
 
 /*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
-}
-*/
+ - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+ UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+ 
+ // Configure the cell...
+ 
+ return cell;
+ }
+ */
 
 /*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
+ // Override to support conditional editing of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+ // Return NO if you do not want the specified item to be editable.
+ return YES;
+ }
+ */
 
 /*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
+ // Override to support editing the table view.
+ - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+ if (editingStyle == UITableViewCellEditingStyleDelete) {
+ // Delete the row from the data source
+ [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+ } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+ // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+ }
+ }
+ */
 
 /*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
+ // Override to support rearranging the table view.
+ - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+ }
+ */
 
 /*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
+ // Override to support conditional rearranging of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+ // Return NO if you do not want the item to be re-orderable.
+ return YES;
+ }
+ */
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 #endif
 
@@ -234,15 +234,15 @@
 }
 
 - (IBAction)onBtnPortraitClicked:(id)sender {
-//    KxMenuItem* item1 = [KxMenuItem menuItem:@"从相机拍摄头像"
-//                                       image:nil
-//                                      target:self
-//                                      action:@selector(doChangePortraitFromCamera)];
-//    
-//    KxMenuItem* item2 = [KxMenuItem menuItem:@"从相册选择头像"
-//                                       image:nil
-//                                      target:self
-//                                      action:@selector(doChangePortraitFromPhoto)];
+    //    KxMenuItem* item1 = [KxMenuItem menuItem:@"从相机拍摄头像"
+    //                                       image:nil
+    //                                      target:self
+    //                                      action:@selector(doChangePortraitFromCamera)];
+    //
+    //    KxMenuItem* item2 = [KxMenuItem menuItem:@"从相册选择头像"
+    //                                       image:nil
+    //                                      target:self
+    //                                      action:@selector(doChangePortraitFromPhoto)];
     
     KxMenuItem* item1 = [KxMenuItem menuItem:@"设置家长姓名"
                                        image:nil
@@ -294,9 +294,9 @@
             
             [gApp waitingAlert:@"更新家长头像中"];
             [gApp.engine.httpClient reqUpdateParentInfo:cp
-                              inKindergarten:gApp.engine.loginInfo.schoolId
-                                     success:sucessHandler
-                                     failure:failureHandler];
+                                         inKindergarten:gApp.engine.loginInfo.schoolId
+                                                success:sucessHandler
+                                                failure:failureHandler];
             
         }
         else {
@@ -305,6 +305,48 @@
     }
     else {
         [gApp alert:@"头像不存在"];
+    }
+}
+
+- (void)doUpdateParentName:(NSString*)newName {
+    if (newName.length > 0) {
+        CSKuleParentInfo* parentInfo = gApp.engine.currentRelationship.parent;
+        if (parentInfo) {
+            CSKuleParentInfo* cp = [parentInfo copy];
+            cp.name = newName;
+            
+            SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+                CSLog(@"success.");
+                [gApp alert:@"更新成功"];
+                
+                CSKuleParentInfo* cc = [CSKuleInterpreter decodeParentInfo:dataJson];
+                for (CSKuleRelationshipInfo* relationship in gApp.engine.relationships) {
+                    if ([relationship.parent.parentId isEqualToString:cc.parentId]) {
+                        relationship.parent.name = cc.name;
+                    }
+                }
+                
+                [self reloadData];
+            };
+            
+            FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+                CSLog(@"failure:%@", error);
+                [gApp alert:[error localizedDescription]];
+            };
+            
+            [gApp waitingAlert:@"更新家长姓名中"];
+            [gApp.engine.httpClient reqUpdateParentInfo:cp
+                                         inKindergarten:gApp.engine.loginInfo.schoolId
+                                                success:sucessHandler
+                                                failure:failureHandler];
+            
+        }
+        else {
+            [gApp alert:@"没有家长信息"];
+        }
+    }
+    else {
+        [gApp alert:@"输入错误"];
     }
 }
 
@@ -356,7 +398,9 @@
     }];
     
     [alert addButtonWithTitle:@"确定" block:^{
-//        [self doUpdateChildNick:field.text];
+        if ([[field.text trim] length] > 0) {
+            [self doUpdateParentName:[field.text trim]];
+        }
     }];
     
     [alert show];
@@ -387,9 +431,53 @@
     
     [alert addButtonWithTitle:@"确定" block:^{
         //        [self doUpdateChildNick:field.text];
+        if ([[field.text trim] length] > 0) {
+            [self doUpdateRelationship:[field.text trim]];
+        }
     }];
     
     [alert show];
+}
+
+- (void)doUpdateRelationship:(NSString*)relationship {
+    if (relationship.length > 0) {
+        NSString* card = gApp.engine.currentRelationship.card;
+        if (card.length > 0) {
+            SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+                CSLog(@"success.");
+                [gApp alert:@"更新成功"];
+                
+                CSKuleRelationshipInfo* cc = [CSKuleInterpreter decodeRelationshipInfo:dataJson];
+                
+                for (CSKuleRelationshipInfo* relationship in gApp.engine.relationships) {
+                    if (relationship.uid ==cc.uid) {
+                        relationship.relationship = cc.relationship;
+                    }
+                }
+                
+                [self reloadData];
+            };
+            
+            FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+                CSLog(@"failure:%@", error);
+                [gApp alert:[error localizedDescription]];
+            };
+            
+            [gApp waitingAlert:@"更新亲属关系中"];
+            [gApp.engine.httpClient reqUpdateCard:card
+                                 withRelationship:relationship
+                                   inKindergarten:gApp.engine.loginInfo.schoolId
+                                          success:sucessHandler
+                                          failure:failureHandler];
+            
+        }
+        else {
+            [gApp alert:@"无效卡信息"];
+        }
+    }
+    else {
+        [gApp alert:@"输入错误"];
+    }
 }
 
 - (void)doChangePortraitFromCamera {
@@ -433,10 +521,10 @@
     
     [gApp waitingAlert:@"上传家长头像中"];
     [gApp.engine.httpClient reqUploadToQiniu:imgData
-                          withKey:imgFileName
-                         withMime:@"image/jpeg"
-                          success:sucessHandler
-                          failure:failureHandler];
+                                     withKey:imgFileName
+                                    withMime:@"image/jpeg"
+                                     success:sucessHandler
+                                     failure:failureHandler];
     
     [picker dismissViewControllerAnimated:YES
                                completion:^{

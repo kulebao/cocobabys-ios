@@ -1352,4 +1352,27 @@
                      failure:failure];
 }
 
+- (AFHTTPRequestOperation*)reqUpdateCard:(NSString*)cardNum
+                        withRelationship:(NSString*)relationship
+                          inKindergarten:(NSInteger)kindergarten
+                                 success:(SuccessResponseHandler)success
+                                 failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kBindCard, @(kindergarten), cardNum];
+    
+    
+    NSDictionary* parameters = @{@"relationship": SAFE_STRING(relationship),
+                                 @"parent": @{
+                                         @"phone":  gApp.engine.currentRelationship.parent.phone
+                                         },
+                                 @"child": @{
+                                         @"child_id":  gApp.engine.currentRelationship.child.childId
+                                         },
+                                 @"id":@(gApp.engine.currentRelationship.uid)};
+    
+    return [_httpCobabys POST:path
+                   parameters:parameters
+                      success:success
+                      failure:failure];
+}
+
 @end

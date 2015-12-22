@@ -36,9 +36,9 @@ enum KuleNoticeType {
 
 // 其他
 enum {
-    kKuleNickMaxLength = 4,     // 宝宝昵称长度
-    kKuleParentNameMaxLength = 10, // 家长姓名长度
-    kKuleRelationshipMaxLength = kKuleParentNameMaxLength, // 关系
+    kKuleNickMaxLength = 4,             // 宝宝昵称长度
+    kKuleParentNameMaxLength = 12,      // 家长姓名长度
+    kKuleRelationshipMaxLength = 12,    // 关系长度
 };
 
 // 模块类别

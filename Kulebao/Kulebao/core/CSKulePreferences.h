@@ -29,6 +29,7 @@
 @property (nonatomic, strong) NSString* configTag;
 
 + (id)defaultPreferences;
+- (void)savePreferences;
 
 - (void)addHistoryAccount:(NSString*)account;
 

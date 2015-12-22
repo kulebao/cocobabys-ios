@@ -52,5 +52,29 @@
     [self.navigationController pushViewController:conversationVC animated:YES];
 }
 
+/**
+ *  将要加载table数据
+ *
+ *  @param dataSource 数据源数组
+ *
+ *  @return 数据源数组，可以添加自己定义的数据源item
+ */
+- (NSMutableArray *)willReloadTableData:(NSMutableArray *)dataSource {
+
+    NSMutableArray* newDataSource = [NSMutableArray array];
+    for (RCConversationModel* m in dataSource) {
+        if (m.conversationType == ConversationType_PRIVATE) {
+            [newDataSource addObject:m];
+        }
+        else if (m.conversationType == ConversationType_GROUP) {
+            [newDataSource addObject:m];
+        }
+        else {
+            [newDataSource addObject:m];
+        }
+    }
+    
+    return newDataSource;
+}
 
 @end

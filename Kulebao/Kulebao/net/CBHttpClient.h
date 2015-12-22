@@ -300,4 +300,10 @@ typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSErr
                                                      success:(SuccessResponseHandler)success
                                                      failure:(FailureResponseHandler)failure;
 
+- (AFHTTPRequestOperation*)reqUpdateCard:(NSString*)cardNum
+                        withRelationship:(NSString*)relationship
+                          inKindergarten:(NSInteger)kindergarten
+                                 success:(SuccessResponseHandler)success
+                                 failure:(FailureResponseHandler)failure;
+
 @end

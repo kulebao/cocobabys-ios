@@ -37,7 +37,9 @@ CSAppDelegate* gApp = nil;
     // [self performSelector:@selector(crash) withObject:nil afterDelay:3.0];
     
     // 初始化融云
-    [[RCIM sharedRCIM] initWithAppKey:RONGCLOUD_IM_APPKEY];
+    CSKulePreferences* preference = [CSKulePreferences defaultPreferences];
+    NSDictionary* configInfo = [preference getServerSettings];
+    [[RCIM sharedRCIM] initWithAppKey:configInfo[@"rongyun_app_id"]];
     [[RCIM sharedRCIM] setGroupInfoDataSource:[CBIMDataSource sharedInstance]];
     [[RCIM sharedRCIM] setUserInfoDataSource:[CBIMDataSource sharedInstance]];
     [[RCIM sharedRCIM] setGroupUserInfoDataSource:[CBIMDataSource sharedInstance]];

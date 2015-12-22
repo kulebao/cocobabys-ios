@@ -24,8 +24,9 @@
 @property (nonatomic, strong, readonly) NSMutableDictionary* historyAccounts; // {mobile:date,}
 
 @property (nonatomic, readonly) BOOL enabledTest;
-
 @property (nonatomic, assign) BOOL enabledCommercial;
+
+@property (nonatomic, strong) NSString* configTag;
 
 + (id)defaultPreferences;
 
@@ -35,7 +36,7 @@
 
 - (void)setTimestamp:(NSTimeInterval)timestamp ofModule:(NSInteger)moduleType forChild:(NSString*)childId;
 
-- (void)setServerSettings:(NSDictionary*)settings;
+//- (void)setServerSettings:(NSDictionary*)settings;
 - (NSDictionary*)getServerSettings;
 - (NSArray*)getSupportServerSettingsList;
 

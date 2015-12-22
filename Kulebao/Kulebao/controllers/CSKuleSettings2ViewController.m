@@ -13,6 +13,7 @@
 #import "KxMenu.h"
 #import "UIImage+CSExtends.h"
 #import "UIActionSheet+BlocksKit.h"
+#import "CBIMChatViewController.h"
 
 @interface CSKuleSettings2ViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
     UIImagePickerController* _imgPicker;
@@ -176,6 +177,18 @@
     }
     else if (section==2 && row==0) {
         // DEV
+    }
+    else if (section == 1 && row==0) {
+        // Feedback
+        CSKulePreferences* preference = [CSKulePreferences defaultPreferences];
+        NSDictionary* configInfo = [preference getServerSettings];
+        
+        RCPublicServiceChatViewController *conversationVC = [[RCPublicServiceChatViewController alloc]init];
+        conversationVC.conversationType = ConversationType_APPSERVICE;
+        conversationVC.targetId = configInfo[@"rongyun_service_user_id"];
+        conversationVC.userName = nil;
+        conversationVC.title = @"客服";
+        [self.navigationController pushViewController:conversationVC animated:YES];
     }
 }
 

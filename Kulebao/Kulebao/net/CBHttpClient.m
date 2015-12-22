@@ -67,7 +67,6 @@
     
     CSKulePreferences* preferences = [CSKulePreferences defaultPreferences];
     
-    
     NSDictionary* serverInfo = [preferences getServerSettings];
     NSString* cobabysUrlString = serverInfo[@"url"];
     if(cobabysUrlString.length == 0) {

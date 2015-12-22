@@ -1832,9 +1832,6 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.90196078430000004" green="0.96470588239999999" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <segue destination="cLJ-mi-FQf" kind="push" id="yoV-np-veT"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="ZNc-5T-WZi" imageView="UBx-YL-hpW" style="IBUITableViewCellStyleDefault" id="2BU-bT-sNN">
                                         <rect key="frame" x="0.0" y="284" width="320" height="44"/>
@@ -4061,11 +4058,10 @@
         <image name="video_icon.png" width="37" height="37"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dPL-GX-L4g"/>
         <segue reference="qNJ-JJ-pfw"/>
-        <segue reference="eD5-bt-hK4"/>
-        <segue reference="ZnR-hq-gnJ"/>
         <segue reference="sqj-9c-7rO"/>
-        <segue reference="yoV-np-veT"/>
+        <segue reference="dPL-GX-L4g"/>
+        <segue reference="ZnR-hq-gnJ"/>
+        <segue reference="eD5-bt-hK4"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -18,6 +18,7 @@ static NSString* kKeyBPushInfo = @"com.cocobabys.Kulebao.Preferences.baiduPushIn
 static NSString* kKeyHistoryAccounts = @"com.cocobabys.Kulebao.Preferences.historyAccounts";
 static NSString* kKeyTimestamps = @"com.cocobabys.Kulebao.Preferences.timestamps";
 static NSString* kKeyServerSettings = @"com.cocobabys.Kulebao.Preferences.serverSettings";
+static NSString* kKeyServerSettingsV2 = @"com.cocobabys.Kulebao.Preferences.serverSettings.v2";
 static NSString* kKeyMarkedNews = @"com.cocobabys.Kulebao.Preferences.markedNews";
 static NSString* kKeyCommercial = @"com.cocobabys.Kulebao.Preferences.commercial";
 
@@ -35,6 +36,7 @@ static NSString* kKeyCommercial = @"com.cocobabys.Kulebao.Preferences.commercial
 @synthesize historyAccounts = _historyAccounts;
 @synthesize enabledTest = _enabledTest;
 @synthesize enabledCommercial = _enabledCommercial;
+@synthesize configTag = _configTag;
 
 + (id)defaultPreferences {
     static CSKulePreferences* s_preferences = nil;
@@ -59,6 +61,7 @@ static NSString* kKeyCommercial = @"com.cocobabys.Kulebao.Preferences.commercial
     _guideShown = [[_config objectForKey:kKeyGuideShown] boolValue];
     _guideHomeShown = [[_config objectForKey:kKeyGuideHomeShown] boolValue];
     _enabledTest =  NO;//YES;// [[_config objectForKey:@"enabled_test"] boolValue];
+    _configTag = [_config objectForKey:kKeyServerSettingsV2];
 
 #if COCOBABYS_FEATURE_COMMERCIAL
     _enabledCommercial = [[_config objectForKey:kKeyCommercial] boolValue];
@@ -190,11 +193,27 @@ static NSString* kKeyCommercial = @"com.cocobabys.Kulebao.Preferences.commercial
     else {
         [_config removeObjectForKey:kKeyMarkedNews];
     }
-
+    
+    if (_configTag) {
+        [_config setObject:_configTag forKey:kKeyServerSettingsV2];
+    }
+    else {
+        [_config removeObjectForKey:kKeyServerSettingsV2];
+    }
+    
     [_config synchronize];
 }
 
 #pragma mark - Setters
+- (void)setConfigTag:(NSString *)configTag {
+    _configTag = configTag;
+    [self savePreferences];
+}
+
+- (NSString*)configTag {
+    return _configTag;
+}
+
 - (void)setDefaultUsername:(NSString *)defaultUsername {
     _defaultUsername = defaultUsername;
     [self savePreferences];
@@ -267,43 +286,66 @@ static NSString* kKeyCommercial = @"com.cocobabys.Kulebao.Preferences.commercial
     if (childId.length > 0) {
         NSDictionary* childDict = [_timestampDict objectForKey:childId];
         NSMutableDictionary* childMutDict = [NSMutableDictionary dictionaryWithDictionary:childDict];
-        NSString* moduleName = [NSString stringWithFormat:@"Module_%d", moduleType];
+        NSString* moduleName = [NSString stringWithFormat:@"Module_%@", @(moduleType)];
         [childMutDict setObject:@(timestamp) forKey:moduleName];
         [_timestampDict setObject:childMutDict forKey:childId];
         [self savePreferences];
     }
 }
 
-- (void)setServerSettings:(NSDictionary*)settings {
-    if (settings) {
-        [_config setObject:settings forKey:kKeyServerSettings];
-        [_config synchronize];
-    }
-    else {
-        [_config removeObjectForKey:kKeyServerSettings];
-        [_config synchronize];
-    }
-}
+//- (void)setServerSettings:(NSDictionary*)settings {
+//    if (settings) {
+//        [_config setObject:settings forKey:kKeyServerSettings];
+//        [_config synchronize];
+//    }
+//    else {
+//        [_config removeObjectForKey:kKeyServerSettings];
+//        [_config synchronize];
+//    }
+//}
+
+//- (NSDictionary*)getServerSettings {
+//    NSDictionary* settings = [_config objectForKey:kKeyServerSettings];
+//    if (settings == nil) {
+//        NSArray* serverList = [self getSupportServerSettingsList];
+//        settings = serverList[0];
+//    }
+//    return settings;
+//}
 
 - (NSDictionary*)getServerSettings {
-    NSDictionary* settings = [_config objectForKey:kKeyServerSettings];
-    if (settings == nil) {
-        NSArray* serverList = [self getSupportServerSettingsList];
-        settings = serverList[0];
+    NSArray* serverList = [self getSupportServerSettingsList];
+    NSDictionary* settings = serverList.firstObject;
+    
+#if COCOBABYS_DEV_MODEL
+    for (NSDictionary* s in serverList) {
+        if ([_configTag isEqualToString:s[@"tag"]]) {
+            settings = s;
+            break;
+        }
     }
+#endif
+    
     return settings;
 }
+
 
 - (NSArray*)getSupportServerSettingsList {
     //kangaroo103     coco999
     //dev: 9mzy6mOGMormOggT67K3jqBg
     //prod: O7Xwbt4DWOzsji57xybprqUc
     NSArray* serverList = @[@{@"name": @"产品服务器",
+                              @"tag": @"prod",
                               @"url":@"https://www.cocobabys.com",
-                              @"baidu_api_key":@"O7Xwbt4DWOzsji57xybprqUc"},
+                              @"baidu_api_key":@"O7Xwbt4DWOzsji57xybprqUc",
+                              @"rongyun_app_id":@"8w7jv4qb7tbqy",
+                              @"rongyun_service_user_id": @"KEFU145027362547939"},
                             @{@"name": @"测试服务器",
+                              @"tag": @"dev",
                               @"url":@"https://stage.cocobabys.com",
-                              @"baidu_api_key":@"9mzy6mOGMormOggT67K3jqBg"}];
+                              @"baidu_api_key":@"9mzy6mOGMormOggT67K3jqBg",
+                              @"rongyun_app_id":@"0vnjpoadnwk0z",
+                              @"rongyun_service_user_id": @"KEFU144879042344018"}];
     return serverList;
 }
 

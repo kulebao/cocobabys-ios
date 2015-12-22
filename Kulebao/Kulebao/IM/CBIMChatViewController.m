@@ -61,15 +61,19 @@
 }
 
 - (void)didTapCellPortrait:(NSString *)userId {
-    [[CBIMDataSource sharedInstance] getUserInfoWithUserId:userId completion:^(RCUserInfo *userInfo) {
-        CBIMChatViewController *conversationVC = [[CBIMChatViewController alloc]init];
-        conversationVC.conversationType = ConversationType_PRIVATE;
-        conversationVC.targetId = userId;
-        conversationVC.userName = userInfo.name;
-        conversationVC.title = userInfo.name;
-        
-        [self.navigationController pushViewController:conversationVC animated:YES];
-    }];
+    if (self.conversationType == ConversationType_GROUP
+        || self.conversationType == ConversationType_DISCUSSION
+        || self.conversationType == ConversationType_CHATROOM) {
+        [[CBIMDataSource sharedInstance] getUserInfoWithUserId:userId completion:^(RCUserInfo *userInfo) {
+            CBIMChatViewController *conversationVC = [[CBIMChatViewController alloc]init];
+            conversationVC.conversationType = ConversationType_PRIVATE;
+            conversationVC.targetId = userId;
+            conversationVC.userName = userInfo.name;
+            conversationVC.title = userInfo.name;
+            
+            [self.navigationController pushViewController:conversationVC animated:YES];
+        }];
+    }
 }
 
 @end

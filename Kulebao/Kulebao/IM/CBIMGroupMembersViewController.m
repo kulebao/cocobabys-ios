@@ -263,11 +263,12 @@
         NSString* userId = [NSString stringWithFormat:@"p_%@_Some(%@)_%@", @(_schoolId), cellData.parent._id, cellData.parent.phone];
         
         [[CBIMDataSource sharedInstance] getUserInfoWithUserId:userId completion:^(RCUserInfo *userInfo) {
+            NSString* nickname = [NSString stringWithFormat:@"%@%@", [cellData.child displayNick], cellData.relationship];
             CBIMChatViewController *conversationVC = [[CBIMChatViewController alloc]init];
             conversationVC.conversationType = ConversationType_PRIVATE;
             conversationVC.targetId = userId;
-            conversationVC.userName = userInfo.name;
-            conversationVC.title = userInfo.name;
+            conversationVC.userName = nickname;
+            conversationVC.title = nickname;
             
             [self.navigationController pushViewController:conversationVC animated:YES];
         }];

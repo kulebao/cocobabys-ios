@@ -53,6 +53,8 @@
 @property (nonatomic, strong) CSKuleVideoMember* videoMember;
 @property (nonatomic, strong) CSKuleVideoMember* defaultVideoMember;
 
+@property (nonatomic, strong) JSBadgeView* badgeCommercial;
+
 @property (nonatomic, strong) UIButton* btnGuideHome;
 
 - (IBAction)onBtnShowChildMenuListClicked:(id)sender;
@@ -105,6 +107,12 @@
     
     _nickFieldDelegate = [[CSTextFieldDelegate alloc] initWithType:kCSTextFieldDelegateNormal];
     _nickFieldDelegate.maxLength = kKuleNickMaxLength;
+    
+    //
+    self.badgeCommercial = [[JSBadgeView alloc] initWithParentView:self.btnClassInfo
+                                                         alignment:JSBadgeViewAlignmentTopRight];
+    self.badgeCommercial.badgeText = @"新";
+    self.badgeCommercial.badgePositionAdjustment = CGPointMake(-10, 10);
 
     //[self setupModules];
     [self doGetSchoolInfo:^{
@@ -158,6 +166,8 @@
     [self performSelector:@selector(getRelationshipInfos) withObject:nil afterDelay:0];
     
     [self updateUI:YES];
+    
+
     
     //Guide
     [self showIntroViewsIfNeeded];
@@ -487,10 +497,12 @@
                              className];
             [self.btnClassInfo setTitle:@"亲子优惠"
                                forState:UIControlStateNormal];
+            self.badgeCommercial.hidden = NO;
         }
         else {
             [self.btnClassInfo setTitle:className
                                forState:UIControlStateNormal];
+            self.badgeCommercial.hidden = YES;
         }
         
         // 设置行间距
@@ -990,14 +1002,8 @@
     BOOL enabledCommercial = gApp.engine.preferences.enabledCommercial;
     if (enabledCommercial) {
         UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Commercial" bundle:nil];
-        
-//        [self presentViewController:storyboard.instantiateInitialViewController
-//                           animated:YES
-//                         completion:^{
-//                             
-//                         }];
-        
         [self.navigationController pushViewController:storyboard.instantiateInitialViewController animated:YES];
+        self.badgeCommercial.badgeText = nil;
     }
 #endif
 }

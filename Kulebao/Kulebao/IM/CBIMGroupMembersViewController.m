@@ -48,6 +48,13 @@
     _imgvCall = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
     _imgvCall.image = [UIImage imageNamed:@"v2-btn_phone"];
     
+//    self.tableView registerClass:<#(nullable Class)#> forHeaderFooterViewReuseIdentifier:<#(nonnull NSString *)#>
+    
+    self.tableView.sectionHeaderHeight = 0;
+    self.tableView.sectionFooterHeight = 0;
+    self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 0.01)];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 0.01)];
+    
     CBIMDataSource* imDS = [CBIMDataSource sharedInstance];
     self.teacherList = [NSMutableArray array];
     self.relationshipGroupList = [NSMutableArray array];
@@ -108,12 +115,27 @@
                                             withClassId:_classId
                                                 success:^(AFHTTPRequestOperation *operation, id dataJson) {
                                                     [gApp hideAlert];
+                                                    
+                                                    NSMutableDictionary* groupedDict = [NSMutableDictionary dictionary];
                                                     for (NSDictionary* json in dataJson) {
                                                         CBRelationshipInfo* newObj = [CBRelationshipInfo instanceWithDictionary:json];
-                                                        if (newObj) {
-                                                            [self.relationshipGroupList addObject:newObj];
+                                                        NSMutableArray* childRelationships = [groupedDict objectForKey:newObj.child.child_id];
+                                                        if (childRelationships == nil) {
+                                                            childRelationships = [NSMutableArray array];
+                                                            [groupedDict setObject:childRelationships forKey:newObj.child.child_id];
+                                                        }
+                                                        [childRelationships addObject:newObj];
+                                                    }
+                                                    
+                                                    [self.relationshipGroupList removeAllObjects];
+                                                    
+                                                    for (NSNumber* dictKey in groupedDict) {
+                                                        NSMutableArray* childRelationships = [groupedDict objectForKey:dictKey];
+                                                        if (childRelationships) {
+                                                            [self.relationshipGroupList addObject:childRelationships];
                                                         }
                                                     }
+                                                    
                                                     [self reloadUI];
                                                     
                                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -141,7 +163,7 @@
         numberOfSections = 1;
     }
     else if (self.segMemberType.selectedSegmentIndex == 1) {
-        numberOfSections = 1;
+        numberOfSections = self.relationshipGroupList.count;
     }
     return numberOfSections;
 }
@@ -152,7 +174,8 @@
         numberOfRows = self.teacherList.count;
     }
     else if (self.segMemberType.selectedSegmentIndex == 1) {
-        numberOfRows = self.relationshipGroupList.count;
+        NSMutableArray* arr = [self.relationshipGroupList objectAtIndex:section];
+        numberOfRows = arr.count;
     }
     return numberOfRows;
 }
@@ -168,7 +191,8 @@
         cell.labTitle.text = [NSString stringWithFormat:@"%@老师", cellData.name];
     }
     else if (self.segMemberType.selectedSegmentIndex == 1) {
-        CBRelationshipInfo* cellData = [self.relationshipGroupList objectAtIndex:indexPath.row];
+        NSMutableArray* arr = [self.relationshipGroupList objectAtIndex:indexPath.section];
+        CBRelationshipInfo* cellData = [arr objectAtIndex:indexPath.row];
         [cell.imgIcon sd_setImageWithURL:[NSURL URLWithString:cellData.parent.portrait]
                         placeholderImage:_defaultPortrait];
         cell.labTitle.text = [NSString stringWithFormat:@"%@%@", [cellData.child displayNick], cellData.relationship];
@@ -189,6 +213,32 @@
 
 }
 
+- (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UITableViewCell* cellHeader = nil;
+    if (self.segMemberType.selectedSegmentIndex == 0) {
+    }
+    else if (self.segMemberType.selectedSegmentIndex == 1) {
+        cellHeader = [tableView dequeueReusableCellWithIdentifier:@"CBGroupMemberCellHeader"];
+        UILabel* labName = [cellHeader.contentView viewWithTag:100];
+        
+        NSMutableArray* arr = [self.relationshipGroupList objectAtIndex:section];
+        CBRelationshipInfo* cellData = arr.firstObject;
+        labName.text = [cellData.child displayNick];
+    }
+    return cellHeader;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    CGFloat height = 0;
+    if (self.segMemberType.selectedSegmentIndex == 0) {
+        height = 0;
+    }
+    else if (self.segMemberType.selectedSegmentIndex == 1) {
+        height = 28;
+    }
+    return height;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
@@ -207,7 +257,9 @@
         }];
     }
     else if (self.segMemberType.selectedSegmentIndex == 1) {
-        CBRelationshipInfo* cellData = [self.relationshipGroupList objectAtIndex:indexPath.row];
+        NSMutableArray* arr = [self.relationshipGroupList objectAtIndex:indexPath.section];
+        CBRelationshipInfo* cellData = [arr objectAtIndex:indexPath.row];
+        
         NSString* userId = [NSString stringWithFormat:@"p_%@_Some(%@)_%@", @(_schoolId), cellData.parent._id, cellData.parent.phone];
         
         [[CBIMDataSource sharedInstance] getUserInfoWithUserId:userId completion:^(RCUserInfo *userInfo) {

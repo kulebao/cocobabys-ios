@@ -9,6 +9,8 @@
 #import "CBIMChatListViewController.h"
 #import "CSAppDelegate.h"
 #import "CBIMChatViewController.h"
+#import "UIActionSheet+BlocksKit.h"
+#import "CBIMGroupMembersViewController.h"
 
 @interface CBIMChatListViewController ()
 
@@ -24,11 +26,36 @@
     //self.navigationItem.title = gApp.engine.currentRelationship.child.className;
     self.navigationItem.title = @"会话列表";
     
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"v2-im-groupmembers"]
+                                                                              style:UIBarButtonItemStyleBordered
+                                                                             target:self
+                                                                             action:@selector(onRightNaviItemClicked:)];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)onRightNaviItemClicked:(id)sender {
+    UIActionSheet* sheet = [UIActionSheet bk_actionSheetWithTitle:@"请选择一个班级"];
+    
+    for (CSKuleRelationshipInfo* relationship in gApp.engine.relationships) {
+        [sheet bk_addButtonWithTitle:relationship.child.className handler:^{
+            UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"IM" bundle:nil];
+            
+            NSString* targetId = [NSString stringWithFormat:@"%@_%@", @(relationship.parent.schoolId), @(relationship.child.classId)];
+            CBIMGroupMembersViewController* ctrl = [storyboard instantiateViewControllerWithIdentifier:@"CBIMGroupMembersViewController"];
+            ctrl.targetId = targetId;
+            [self.navigationController pushViewController:ctrl animated:YES];
+        }];
+    }
+    
+    [sheet bk_setCancelButtonWithTitle:@"取消" handler:^{
+        
+    }];
+    
+    [sheet showInView:self.view];
 }
 
 /*
@@ -60,7 +87,16 @@
  *  @return 数据源数组，可以添加自己定义的数据源item
  */
 - (NSMutableArray *)willReloadTableData:(NSMutableArray *)dataSource {
-
+    
+    NSMutableSet* targerIdSet = [NSMutableSet set];
+    
+    for (CSKuleRelationshipInfo* relationship in gApp.engine.relationships) {
+        if (relationship.parent.schoolId>0 && relationship.child.classId>0) {
+            NSString* targetId = [NSString stringWithFormat:@"%@_%@", @(relationship.parent.schoolId), @(relationship.child.classId)];
+            [targerIdSet addObject:targetId];
+        }
+    }
+    
     NSMutableArray* newDataSource = [NSMutableArray array];
     for (RCConversationModel* m in dataSource) {
         if (m.conversationType == ConversationType_PRIVATE) {
@@ -68,10 +104,24 @@
         }
         else if (m.conversationType == ConversationType_GROUP) {
             [newDataSource addObject:m];
+            m.isTop = YES;
         }
         else {
             [newDataSource addObject:m];
         }
+        
+        [targerIdSet removeObject:m.targetId];
+    }
+    
+    for (NSString* targetId in targerIdSet) {
+        RCConversation* conv = [[RCConversation alloc] init];
+        conv.targetId = targetId;
+        conv.conversationType = ConversationType_GROUP;
+        RCConversationModel* newModel = [[RCConversationModel alloc] init:RC_CONVERSATION_MODEL_TYPE_NORMAL conversation:conv extend:nil];
+        [newDataSource addObject:newModel];
+        newModel.receivedTime = [[NSDate date] timeIntervalSince1970]*1000;
+        newModel.sentTime = [[NSDate date] timeIntervalSince1970]*1000;
+        newModel.isTop = YES;
     }
     
     return newDataSource;

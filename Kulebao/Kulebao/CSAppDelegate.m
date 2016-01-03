@@ -261,7 +261,7 @@ CSAppDelegate* gApp = nil;
      introImageNames = @[@"guide-1-568h.png", @"guide-2-568h.png", @"guide-3-568h.png", @"guide-4-568h.png"];
      }
      */
-    NSArray* introImageNames = @[@"v2-guide5", @"v2-guide6"];
+    NSArray* introImageNames = @[@"v2.8-guide-1", @"v2.8-guide-2"];
     
     NSMutableArray* introPages = [NSMutableArray array];
     for (NSString* imageName in introImageNames) {

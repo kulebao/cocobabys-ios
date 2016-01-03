@@ -1250,7 +1250,7 @@
      introImageNames = @[@"guide-1-568h.png", @"guide-2-568h.png", @"guide-3-568h.png", @"guide-4-568h.png"];
      }
      */
-    NSArray* introImageNames = @[@"v2-guide-home"];
+    NSArray* introImageNames = @[@"v2.8-guide-home"];
     
     NSMutableArray* introPages = [NSMutableArray array];
     for (NSString* imageName in introImageNames) {

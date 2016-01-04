@@ -8,8 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+@class CBChatViewSettingsViewController;
+
+@protocol CBChatViewSettingsViewControllerDelegate <NSObject>
+
+@optional
+- (void)chatViewSettingsViewControllerDidClearMsg:(CBChatViewSettingsViewController*)ctrl;
+
+@end
+
 @interface CBChatViewSettingsViewController : UITableViewController
 
 @property(nonatomic, strong) NSString *targetId;
+@property(nonatomic, weak) id<CBChatViewSettingsViewControllerDelegate> delegate;
 
 @end

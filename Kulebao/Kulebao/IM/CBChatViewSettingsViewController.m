@@ -122,6 +122,17 @@
     
     // Push the view controller.
     //[self.navigationController pushViewController:detailViewController animated:YES];
+    
+    if(0 == indexPath.section && 3 == indexPath.row) {
+        //清除缓存
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                            message:@"清空群组消息？"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"取消"
+                                                  otherButtonTitles:@"确定", nil];
+        alertView.tag = 1011;
+        [alertView show];
+    }
 }
 
 #pragma mark - Navigation
@@ -133,6 +144,51 @@
     if ([segue.identifier isEqualToString:@"segue.im.groupmembers"]) {
         CBIMGroupMembersViewController* ctrl = segue.destinationViewController;
         ctrl.targetId = self.targetId;
+    }
+}
+
+#pragma mark - UIAlertView Delegate
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1 && alertView.tag == 1011) {
+        [self clearCache];
+    }
+}
+
+//清理缓存
+-(void) clearCache {
+    dispatch_async(
+                   dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                       
+#if 0
+                       NSString *cachPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+                       NSArray *files = [[NSFileManager defaultManager] subpathsAtPath:cachPath];
+                       
+                       for (NSString *p in files) {
+                           NSError *error;
+                           NSString *path = [cachPath stringByAppendingPathComponent:p];
+                           if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+                               [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
+                           }
+                       }
+                       [self performSelectorOnMainThread:@selector(clearCacheSuccess)
+                                              withObject:nil waitUntilDone:YES];
+#else
+      
+                       RCIMClient* im = [RCIMClient sharedRCIMClient];
+                       [im clearMessages:ConversationType_GROUP targetId:self.targetId];
+                       [self performSelectorOnMainThread:@selector(clearCacheSuccess)
+                                              withObject:nil
+                                           waitUntilDone:YES];
+                        
+#endif
+                   });
+}
+
+-(void)clearCacheSuccess {
+    [gApp alert:@"清除成功"];
+    if ([self.delegate respondsToSelector:@selector(chatViewSettingsViewControllerDidClearMsg:)]) {
+        [self.delegate chatViewSettingsViewControllerDidClearMsg:self];
     }
 }
 

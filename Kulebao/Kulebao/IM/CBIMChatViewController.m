@@ -10,7 +10,7 @@
 #import "CBChatViewSettingsViewController.h"
 #import "CBIMDataSource.h"
 
-@interface CBIMChatViewController ()
+@interface CBIMChatViewController ()  <CBChatViewSettingsViewControllerDelegate>
 
 @end
 
@@ -37,7 +37,10 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+}
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -45,13 +48,13 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
-*/
 
 - (void)onRightNaviItemClicked:(id)sender {
 #if 1
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"IM" bundle:nil];
     CBChatViewSettingsViewController* ctrl = [storyboard instantiateViewControllerWithIdentifier:@"CBChatViewSettingsViewController"];
     ctrl.targetId = self.targetId;
+    ctrl.delegate = self;
     [self.navigationController pushViewController:ctrl animated:YES];
 #else
     RCConversationSettingTableViewController* ctrl = [[RCConversationSettingTableViewController alloc] initWithStyle:UITableViewStylePlain];
@@ -74,6 +77,12 @@
             [self.navigationController pushViewController:conversationVC animated:YES];
         }];
     }
+}
+
+#pragma mark - CBChatViewSettingsViewControllerDelegate
+- (void)chatViewSettingsViewControllerDidClearMsg:(CBChatViewSettingsViewController*)ctrl {
+    [self.conversationDataRepository removeAllObjects];
+    [self.conversationMessageCollectionView reloadData];
 }
 
 @end

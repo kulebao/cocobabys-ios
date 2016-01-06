@@ -189,6 +189,10 @@
         [cell.imgIcon sd_setImageWithURL:[NSURL URLWithString:cellData.portrait]
                         placeholderImage:_defaultPortrait];
         cell.labTitle.text = [NSString stringWithFormat:@"%@老师", cellData.name];
+        cell.relationshipInfo = nil;
+        cell.teacherInfo = cellData;
+        
+        cell.btnCall.hidden = (cellData.phone.length == 0);
     }
     else if (self.segMemberType.selectedSegmentIndex == 1) {
         NSMutableArray* arr = [self.relationshipGroupList objectAtIndex:indexPath.section];
@@ -196,8 +200,12 @@
         [cell.imgIcon sd_setImageWithURL:[NSURL URLWithString:cellData.parent.portrait]
                         placeholderImage:_defaultPortrait];
         cell.labTitle.text = [NSString stringWithFormat:@"%@%@", [cellData.child displayNick], cellData.relationship];
+        cell.relationshipInfo = cellData;
+        cell.teacherInfo = nil;
+        
+        cell.btnCall.hidden = (cellData.parent.phone.length == 0);
     }
-    
+
     return cell;
 }
 

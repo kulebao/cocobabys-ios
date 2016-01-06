@@ -83,7 +83,7 @@ typedef enum : NSUInteger {
                                                [gApp alert:@"绑定失败,卡未授权"];
                                            }
                                            else if (kBindCardAlreadyUsed == error_code || kBindCardDuplicated == error_code) {
-                                               [gApp alert:@"绑定失败，卡号已被其他家长绑定"];
+                                               [gApp alert:@"绑定失败，该卡号已被占用"];
                                            }
                                            else {
                                                [gApp alert:@"绑定失败"];

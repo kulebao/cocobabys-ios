@@ -169,23 +169,37 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vJi-IK-OpL">
-                                            <rect key="frame" x="58" y="11" width="254" height="21"/>
+                                            <rect key="frame" x="58" y="11" width="219" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Lr-Vi-aYA">
+                                            <rect key="frame" x="281" y="4" width="35" height="35"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="2Lr-Vi-aYA" secondAttribute="height" multiplier="1:1" id="Qtf-Hp-C9E"/>
+                                            </constraints>
+                                            <state key="normal" image="v2-btn_phone"/>
+                                            <connections>
+                                                <action selector="onBtnCallClickced:" destination="Ip4-xT-RHh" eventType="touchUpInside" id="ryk-jr-KQm"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="HX4-Jd-OgC" firstAttribute="centerY" secondItem="l1l-v5-d49" secondAttribute="centerY" id="5bA-vr-bjN"/>
-                                        <constraint firstAttribute="trailing" secondItem="vJi-IK-OpL" secondAttribute="trailing" constant="8" id="7vl-1T-kub"/>
                                         <constraint firstItem="HX4-Jd-OgC" firstAttribute="top" secondItem="l1l-v5-d49" secondAttribute="top" constant="4" id="8A7-ah-dFU"/>
                                         <constraint firstItem="HX4-Jd-OgC" firstAttribute="leading" secondItem="l1l-v5-d49" secondAttribute="leading" constant="15" id="CqF-1D-YZr"/>
                                         <constraint firstItem="vJi-IK-OpL" firstAttribute="centerY" secondItem="l1l-v5-d49" secondAttribute="centerY" id="Im1-Ou-AEH"/>
+                                        <constraint firstAttribute="trailing" secondItem="2Lr-Vi-aYA" secondAttribute="trailing" constant="4" id="M4x-AU-tQc"/>
+                                        <constraint firstItem="2Lr-Vi-aYA" firstAttribute="top" secondItem="l1l-v5-d49" secondAttribute="top" constant="4" id="c6H-nK-byf"/>
+                                        <constraint firstItem="2Lr-Vi-aYA" firstAttribute="leading" secondItem="vJi-IK-OpL" secondAttribute="trailing" constant="4" id="hAj-eP-caJ"/>
+                                        <constraint firstAttribute="bottom" secondItem="2Lr-Vi-aYA" secondAttribute="bottom" constant="4" id="j1t-3F-Sd0"/>
                                         <constraint firstItem="vJi-IK-OpL" firstAttribute="leading" secondItem="HX4-Jd-OgC" secondAttribute="trailing" constant="8" id="jLf-N1-ndf"/>
                                         <constraint firstAttribute="bottom" secondItem="HX4-Jd-OgC" secondAttribute="bottom" constant="4" id="yuo-I7-ZOX"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="btnCall" destination="2Lr-Vi-aYA" id="opN-1f-bzb"/>
                                     <outlet property="imgIcon" destination="HX4-Jd-OgC" id="Sd8-uy-3WK"/>
                                     <outlet property="labTitle" destination="vJi-IK-OpL" id="rZa-Vp-eAI"/>
                                 </connections>
@@ -266,6 +280,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="v2-btn_phone" width="22" height="27"/>
         <image name="v2-im-group" width="72" height="72"/>
     </resources>
 </document>

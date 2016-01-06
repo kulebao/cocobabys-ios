@@ -957,13 +957,7 @@
             
 #if COCOBABYS_USE_IM
             if (moduleType == kKuleModuleChating) {
-//                NSArray* arr1 = @[@(ConversationType_PRIVATE),@(ConversationType_DISCUSSION), @(ConversationType_APPSERVICE), @(ConversationType_PUBLICSERVICE),@(ConversationType_GROUP),@(ConversationType_SYSTEM)];
-//                NSArray* arr2 = @[@(ConversationType_GROUP),@(ConversationType_DISCUSSION)];
-                NSArray* arr1 = @[@(ConversationType_PRIVATE),@(ConversationType_DISCUSSION), @(ConversationType_GROUP),@(ConversationType_SYSTEM)];
-                NSArray* arr2 = nil;
-                CBIMChatListViewController* ctrl = [[CBIMChatListViewController alloc] initWithDisplayConversationTypes:arr1
-                                                                                         collectionConversationType:arr2];
-                [self.navigationController pushViewController:ctrl animated:YES];
+                [self openRCIM];
             }
             else {
                 [self performSegueWithIdentifier:segueNames[moduleType] sender:nil];
@@ -996,6 +990,13 @@
     }
 }
 
+- (void)openRCIM {
+    NSArray* arr1 = @[@(ConversationType_PRIVATE),@(ConversationType_DISCUSSION), @(ConversationType_GROUP),@(ConversationType_SYSTEM)];
+    NSArray* arr2 = nil;
+    CBIMChatListViewController* ctrl = [[CBIMChatListViewController alloc] initWithDisplayConversationTypes:arr1
+                                                                                 collectionConversationType:arr2];
+    [self.navigationController pushViewController:ctrl animated:YES];
+}
 
 - (IBAction)onBtnClassInfoClicked:(id)sender {
 #if COCOBABYS_FEATURE_COMMERCIAL
@@ -1170,12 +1171,25 @@
         && gApp.engine.currentRelationship
         && notiInfo) {
         gApp.engine.pendingNotificationInfo = nil;
-        CSKuleCheckInOutLogInfo* info = [CSKuleInterpreter decodeCheckInOutLogInfo:notiInfo];
-        if (info) {
-            CSKuleNewsDetailsViewController* ctrl = [self.storyboard instantiateViewControllerWithIdentifier:@"CSKuleNewsDetailsViewController"];
-            ctrl.navigationItem.title = @"刷卡信息";
-            ctrl.checkInOutLogInfo = info;
-            [self.navigationController pushViewController:ctrl animated:YES];
+        
+        NSDictionary *pushServiceData = [[RCIMClient sharedRCIMClient] getPushExtraFromRemoteNotification:notiInfo];
+        if (pushServiceData) {
+            CSLog(@"该远程推送包含来自融云的推送服务");
+            for (id key in [pushServiceData allKeys]) {
+                CSLog(@"key = %@, value = %@", key, pushServiceData[key]);
+            }
+            
+            [self openRCIM];
+        } else {
+            CSLog(@"该远程推送不包含来自融云的推送服务");
+            
+            CSKuleCheckInOutLogInfo* info = [CSKuleInterpreter decodeCheckInOutLogInfo:notiInfo];
+            if (info) {
+                CSKuleNewsDetailsViewController* ctrl = [self.storyboard instantiateViewControllerWithIdentifier:@"CSKuleNewsDetailsViewController"];
+                ctrl.navigationItem.title = @"刷卡信息";
+                ctrl.checkInOutLogInfo = info;
+                [self.navigationController pushViewController:ctrl animated:YES];
+            }
         }
     }
 }

@@ -153,6 +153,11 @@
     completion(groupObj);
 }
 
+#pragma mark - RCIMClientReceiveMessageDelegate
+- (void)onReceived:(RCMessage *)message left:(int)nLeft object:(id)object {
+    
+}
+
 #pragma mark - RCIMGroupUserInfoDataSource
 /**
  *  获取用户在群组中的用户信息。

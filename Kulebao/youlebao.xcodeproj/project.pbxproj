@@ -561,6 +561,7 @@
 		228C88711C153ECF003D9EA2 /* CBClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 228C88701C153ECF003D9EA2 /* CBClassInfo.m */; };
 		228C88781C1546A5003D9EA2 /* CBChatViewSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 228C88761C1546A5003D9EA2 /* CBChatViewSettingsViewController.m */; };
 		228C887B1C1546EF003D9EA2 /* IM.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 228C887A1C1546EF003D9EA2 /* IM.storyboard */; };
+		229538891C3CC5C700D22278 /* CBIMSettingsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 229538881C3CC5C700D22278 /* CBIMSettingsModel.m */; };
 		22BC05551C1DCD8200B8D076 /* CBParentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 22BC05541C1DCD8200B8D076 /* CBParentInfo.m */; };
 		22BC05581C1DCD9100B8D076 /* CBTeacherInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 22BC05571C1DCD9100B8D076 /* CBTeacherInfo.m */; };
 		22BC055B1C1EF46300B8D076 /* CBChildInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 22BC055A1C1EF46300B8D076 /* CBChildInfo.m */; };
@@ -1329,6 +1330,8 @@
 		228C88751C1546A4003D9EA2 /* CBChatViewSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBChatViewSettingsViewController.h; sourceTree = "<group>"; };
 		228C88761C1546A5003D9EA2 /* CBChatViewSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBChatViewSettingsViewController.m; sourceTree = "<group>"; };
 		228C887A1C1546EF003D9EA2 /* IM.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = IM.storyboard; sourceTree = "<group>"; };
+		229538871C3CC5C700D22278 /* CBIMSettingsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBIMSettingsModel.h; sourceTree = "<group>"; };
+		229538881C3CC5C700D22278 /* CBIMSettingsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBIMSettingsModel.m; sourceTree = "<group>"; };
 		22BC05531C1DCD8200B8D076 /* CBParentInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBParentInfo.h; sourceTree = "<group>"; };
 		22BC05541C1DCD8200B8D076 /* CBParentInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBParentInfo.m; sourceTree = "<group>"; };
 		22BC05561C1DCD9100B8D076 /* CBTeacherInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBTeacherInfo.h; sourceTree = "<group>"; };
@@ -2638,6 +2641,8 @@
 				22BC05571C1DCD9100B8D076 /* CBTeacherInfo.m */,
 				22C4ACA71C21BA610079FB3E /* CBIMGroupTeacherTableViewCell.h */,
 				22C4ACA81C21BA610079FB3E /* CBIMGroupTeacherTableViewCell.m */,
+				229538871C3CC5C700D22278 /* CBIMSettingsModel.h */,
+				229538881C3CC5C700D22278 /* CBIMSettingsModel.m */,
 				228C887A1C1546EF003D9EA2 /* IM.storyboard */,
 			);
 			path = IM;
@@ -3136,6 +3141,7 @@
 				093D89CC1999C242006B013B /* CSKuleCCTVMainTableViewController.m in Sources */,
 				09FFB5F718D6B46300F07B0A /* CSKuleScheduleInfo.m in Sources */,
 				09C3AC25199DAC8600A6251C /* CSContentEditorViewController.m in Sources */,
+				229538891C3CC5C700D22278 /* CBIMSettingsModel.m in Sources */,
 				0942B1601AE3E559008D3BDA /* ELCAssetTablePicker.m in Sources */,
 				096DC1C31BA33F4000661B61 /* UIGestureRecognizer+GMGridViewAdditions.m in Sources */,
 				09ED59BC18CDC5E800187585 /* CSKuleCookbookInfo.m in Sources */,

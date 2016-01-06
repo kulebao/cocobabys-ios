@@ -90,6 +90,9 @@
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="lcp-cn-oj8">
                                                     <rect key="frame" x="256" y="6" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="onSwitchDistribuValueChanged:" destination="Zii-5P-5Ft" eventType="valueChanged" id="xjp-a4-mhL"/>
+                                                    </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="群组消息免打扰" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QEU-st-kk7">
                                                     <rect key="frame" x="15" y="12" width="112" height="20"/>
@@ -136,6 +139,7 @@
                         <outlet property="imgIcon" destination="IPf-ai-mfO" id="5gV-5N-pj8"/>
                         <outlet property="labClassName" destination="JZp-0w-HdP" id="kjb-ci-MMg"/>
                         <outlet property="labSchoolName" destination="nR5-nd-NQP" id="7uT-2k-k5m"/>
+                        <outlet property="switchDistribu" destination="lcp-cn-oj8" id="Y4z-Iy-sh4"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8pb-ZN-VE0" userLabel="First Responder" sceneMemberID="firstResponder"/>

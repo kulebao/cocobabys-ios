@@ -12,11 +12,14 @@
 #import "CBRelationshipInfo.h"
 #import "CBIMDataSource.h"
 #import "UIImageView+WebCache.h"
+#import "CBIMSettingsModel.h"
 
 @interface CBChatViewSettingsViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *labSchoolName;
 @property (weak, nonatomic) IBOutlet UILabel *labClassName;
 @property (weak, nonatomic) IBOutlet UIImageView *imgIcon;
+@property (weak, nonatomic) IBOutlet UISwitch *switchDistribu;
+- (IBAction)onSwitchDistribuValueChanged:(id)sender;
 
 @end
 
@@ -49,6 +52,24 @@
         [self.imgIcon sd_setImageWithURL:[NSURL URLWithString:groupInfo.portraitUri]
                         placeholderImage:[UIImage imageNamed:@"v2-im-group"]];
     }];
+    
+    CBIMSettingsModel* model = [CBIMSettingsModel sharedInstance];
+    self.switchDistribu.on = [model getGroupDistrubEnabled:self.targetId];
+    
+    RCIMClient* im = [RCIMClient sharedRCIMClient];
+    [im getConversationNotificationStatus:ConversationType_GROUP
+                                 targetId:self.targetId
+                                  success:^(RCConversationNotificationStatus nStatus) {
+                                      self.switchDistribu.on = (DO_NOT_DISTURB == nStatus);
+                                  } error:^(RCErrorCode status) {
+                                      
+                                  }];
+    
+    [self reloadUI];
+}
+
+- (void)reloadUI {
+
 }
 
 #if 0
@@ -190,6 +211,20 @@
     if ([self.delegate respondsToSelector:@selector(chatViewSettingsViewControllerDidClearMsg:)]) {
         [self.delegate chatViewSettingsViewControllerDidClearMsg:self];
     }
+}
+
+- (IBAction)onSwitchDistribuValueChanged:(id)sender {
+    CBIMSettingsModel* model = [CBIMSettingsModel sharedInstance];
+    [model setGroup:self.targetId disturb:self.switchDistribu.on];
+    
+    RCIMClient* im = [RCIMClient sharedRCIMClient];
+    [im setConversationNotificationStatus:ConversationType_GROUP
+                                 targetId:self.targetId
+                                isBlocked:self.switchDistribu.on
+                                  success:^(RCConversationNotificationStatus nStatus) {
+                                  } error:^(RCErrorCode status) {
+                                      
+                                  }];
 }
 
 @end

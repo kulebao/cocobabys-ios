@@ -203,7 +203,13 @@
         cell.relationshipInfo = cellData;
         cell.teacherInfo = nil;
         
-        cell.btnCall.hidden = (cellData.parent.phone.length == 0);
+        cell.btnCall.hidden = YES;
+        for (CSKuleRelationshipInfo* klRelationships in gApp.engine.relationships) {
+            if ([klRelationships.child.childId isEqualToString:cellData.child.child_id]) {
+                cell.btnCall.hidden = (cellData.parent.phone.length == 0);
+                break;
+            }
+        }
     }
 
     return cell;

@@ -17,6 +17,8 @@
 
 + (void)markAsRead:(EntityNewsInfo*)entity;
 
++ (void)deleteEntity:(EntityNewsInfo*)entity;
+
 + (NSFetchedResultsController*)frNewsWithClassList:(NSArray*)classIdList
                                     ofKindergarten:(NSInteger)kindergartenId;
 

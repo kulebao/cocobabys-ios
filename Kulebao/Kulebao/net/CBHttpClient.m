@@ -67,7 +67,6 @@
     
     CSKulePreferences* preferences = [CSKulePreferences defaultPreferences];
     
-    
     NSDictionary* serverInfo = [preferences getServerSettings];
     NSString* cobabysUrlString = serverInfo[@"url"];
     if(cobabysUrlString.length == 0) {
@@ -1296,6 +1295,79 @@
                                          @"phone": phone,
                                          @"code": passcode
                                          }};
+    
+    return [_httpCobabys POST:path
+                   parameters:parameters
+                      success:success
+                      failure:failure];
+}
+
+- (AFHTTPRequestOperation*)reqGetClassesOfKindergarten:(NSInteger)kindergarten
+                                               success:(SuccessResponseHandler)success
+                                               failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kCBClassesURL, @(kindergarten)];
+    
+    NSMutableDictionary* parameters = nil;
+    
+    return [_httpCobabys GET:path
+                  parameters:parameters
+                     success:success
+                     failure:failure];
+}
+
+- (AFHTTPRequestOperation*)reqGetTeachersOfKindergarten:(NSInteger)kindergarten
+                                            withClassId:(NSInteger)classId
+                                                success:(SuccessResponseHandler)success
+                                                failure:(FailureResponseHandler)failure {
+    NSString* path = nil;
+    if (classId > 0) {
+        path = [NSString stringWithFormat:kCBTeachersURL, @(kindergarten), @(classId)];
+    }
+    else {
+        path = [NSString stringWithFormat:kCBEmployeesURL, @(kindergarten)];
+    }
+    
+    NSMutableDictionary* parameters = nil;
+    
+    return [_httpCobabys GET:path
+                  parameters:parameters
+                     success:success
+                     failure:failure];
+}
+
+- (AFHTTPRequestOperation*)reqGetRelationshipsOfKindergarten:(NSInteger)kindergarten
+                                                 withClassId:(NSInteger)classId
+                                                     success:(SuccessResponseHandler)success
+                                                     failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kGetFamilyRelationshipPath, @(kindergarten)];
+    
+    NSDictionary* parameters = @{};
+    if (classId > 0) {
+        parameters = @{@"class_id": @(classId)};
+    }
+    
+    return [_httpCobabys GET:path
+                  parameters:parameters
+                     success:success
+                     failure:failure];
+}
+
+- (AFHTTPRequestOperation*)reqUpdateCard:(NSString*)cardNum
+                        withRelationship:(NSString*)relationship
+                          inKindergarten:(NSInteger)kindergarten
+                                 success:(SuccessResponseHandler)success
+                                 failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kBindCard, @(kindergarten), cardNum];
+    
+    
+    NSDictionary* parameters = @{@"relationship": SAFE_STRING(relationship),
+                                 @"parent": @{
+                                         @"phone":  gApp.engine.currentRelationship.parent.phone
+                                         },
+                                 @"child": @{
+                                         @"child_id":  gApp.engine.currentRelationship.child.childId
+                                         },
+                                 @"id":@(gApp.engine.currentRelationship.uid)};
     
     return [_httpCobabys POST:path
                    parameters:parameters

@@ -42,7 +42,7 @@
     self.tableview.pullDelegate = self;
     self.tableview.backgroundColor = [UIColor clearColor];
     self.tableview.pullBackgroundColor = [UIColor clearColor];
-    self.tableview.pullTextColor = UIColorRGB(0xCC, 0x66, 0x33);
+    self.tableview.pullTextColor = UIColorRGB(0x99, 0x99, 0x99);
     self.tableview.pullArrowImage = [UIImage imageNamed:@"grayArrow.png"];
     
     _assignmentInfoList = [NSMutableArray array];

@@ -59,7 +59,7 @@
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         
         CSKuleBindInfo* bindInfo = [CSKuleInterpreter decodeBindInfo:dataJson];
-        CSLog(@"doReceiveBindInfo error_code=%ld", (long)bindInfo.errorCode);
+        CSLog(@"[2]doReceiveBindInfo error_code=%ld", (long)bindInfo.errorCode);
         if (bindInfo.errorCode == 0) {
             gApp.engine.loginInfo.schoolId = bindInfo.schoolId;
             gApp.engine.loginInfo.accessToken = bindInfo.accessToken;
@@ -67,6 +67,7 @@
             gApp.engine.loginInfo.username = bindInfo.username;
             gApp.engine.loginInfo.schoolName = bindInfo.schoolName;
             gApp.engine.loginInfo.memberStatus = bindInfo.memberStatus;
+            gApp.engine.loginInfo.imToken = bindInfo.imToken;
             
             gApp.engine.preferences.loginInfo = gApp.engine.loginInfo;
             

@@ -34,7 +34,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [self customizeBackBarItem];
+    //[self customizeBackBarItem];
     self.view.backgroundColor = [UIColor whiteColor];
     
     CGRect bounds = self.view.bounds;

@@ -26,6 +26,7 @@
     [self.imgIcon sd_setImageWithURL:[NSURL URLWithString:logo.url] placeholderImage:[UIImage imageNamed:@"v2-logo2.png"]];
     
     self.labTitle.text = itemData.title;
+    self.labDistance.text = nil;
     
     NSString* discounted = itemData.price.discounted;
     NSString* origin = itemData.price.origin;
@@ -36,24 +37,29 @@
         origin = @"0";
     }
     
-    origin = [NSString stringWithFormat:@"原价%@元", origin];
+    origin = [NSString stringWithFormat:@"%@", origin];
     
     NSMutableAttributedString* attriOrigin = [[NSMutableAttributedString alloc] initWithString:origin];
     [attriOrigin addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, origin.length)];
-    [attriOrigin addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(0, origin.length)];
+    [attriOrigin addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:11] range:NSMakeRange(0, origin.length)];
     [attriOrigin addAttribute:NSStrikethroughStyleAttributeName
                         value:@(NSUnderlinePatternSolid | NSUnderlineStyleSingle)
                         range:NSMakeRange(0, origin.length)];
     
-    discounted = [NSString stringWithFormat:@"幼乐宝用户专享 %@元", discounted];
+    discounted = [NSString stringWithFormat:@"幼乐宝用户专享:￥%@ ", discounted];
     NSMutableAttributedString* attriDiscounted = [[NSMutableAttributedString alloc] initWithString:discounted];
-    [attriDiscounted addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(0, 7)];
-    [attriDiscounted addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(0, 7)];
-    [attriDiscounted addAttribute:NSForegroundColorAttributeName value:UIColorRGB(0, 164, 217) range:NSMakeRange(7, discounted.length - 7)];
-    [attriDiscounted addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(7, discounted.length - 7)];
+    [attriDiscounted addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, 8)];
+    [attriDiscounted addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(0, 8)];
+    [attriDiscounted addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(8, discounted.length - 8)];
+    [attriDiscounted addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(8, discounted.length - 8)];
     
-    self.labOriginal.attributedText = attriOrigin;
-    self.labDiscount.attributedText = attriDiscounted;
+    [attriDiscounted appendAttributedString:attriOrigin];
+    
+    self.labPrice.attributedText = attriDiscounted;
+    self.labDistance.text = @"距离0km";
+    
+    //self.labOriginal.attributedText = attriOrigin;
+    //self.labDiscount.attributedText = attriDiscounted;
     //self.labDesc.text = itemData.detail;
 }
 

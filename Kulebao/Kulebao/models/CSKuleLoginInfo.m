@@ -25,7 +25,8 @@
                            @"username": _username,
                            @"schoolId": @(_schoolId),
                            @"errorCode": @(_errorCode),
-                           @"memberStatus": _memberStatus ? _memberStatus : @""};
+                           @"memberStatus": _memberStatus ? _memberStatus : @"",
+                           @"imToken": SAFE_STRING(_imToken)};
     
     NSString* desc = [NSString stringWithFormat:@"%@", meta];
     return desc;

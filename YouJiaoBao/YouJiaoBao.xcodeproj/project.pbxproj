@@ -543,19 +543,18 @@
 		09A3C63B19C479EC001AFE8C /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A3C62A19C479EC001AFE8C /* UIImageView+WebCache.m */; };
 		09A3C63C19C479EC001AFE8C /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A3C62C19C479EC001AFE8C /* UIView+WebCacheOperation.m */; };
 		09A3C64219C4B40D001AFE8C /* CSModuleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A3C64119C4B40D001AFE8C /* CSModuleCell.m */; };
-		09A3E0F51BC7940E00076198 /* CSFirImApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A3E0F41BC7940E00076198 /* CSFirImApi.m */; settings = {ASSET_TAGS = (); }; };
-		09A3E0F81BC7991E00076198 /* CSJsonEntityData.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A3E0F71BC7991E00076198 /* CSJsonEntityData.m */; settings = {ASSET_TAGS = (); }; };
-		09A3E0FC1BC79A3C00076198 /* libBaiduMobStat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09A3E0FB1BC79A3C00076198 /* libBaiduMobStat.a */; settings = {ASSET_TAGS = (); }; };
+		09A3E0F51BC7940E00076198 /* CSFirImApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A3E0F41BC7940E00076198 /* CSFirImApi.m */; };
+		09A3E0F81BC7991E00076198 /* CSJsonEntityData.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A3E0F71BC7991E00076198 /* CSJsonEntityData.m */; };
+		09A3E0FC1BC79A3C00076198 /* libBaiduMobStat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09A3E0FB1BC79A3C00076198 /* libBaiduMobStat.a */; };
 		09A3E0FE1BC79CF300076198 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 09A3E0FD1BC79CF300076198 /* libz.tbd */; };
 		09A3E1001BC79D0400076198 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09A3E0FF1BC79D0400076198 /* Security.framework */; };
-		09A3E1021BC79D0A00076198 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 09A3E1011BC79D0A00076198 /* libstdc++.tbd */; };
 		09A3E1041BC79D1600076198 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09A3E1031BC79D1600076198 /* CoreTelephony.framework */; };
 		09A3E1061BC79D1F00076198 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09A3E1051BC79D1F00076198 /* CoreLocation.framework */; };
 		09A3E1081BC79D2500076198 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09A3E1071BC79D2500076198 /* SystemConfiguration.framework */; };
-		09A3E10B1BC7A47C00076198 /* v2-btn_check.png in Resources */ = {isa = PBXBuildFile; fileRef = 09A3E1091BC7A47C00076198 /* v2-btn_check.png */; settings = {ASSET_TAGS = (); }; };
-		09A3E10C1BC7A47C00076198 /* v2-btn_check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09A3E10A1BC7A47C00076198 /* v2-btn_check@2x.png */; settings = {ASSET_TAGS = (); }; };
-		09A3E10F1BC8233C00076198 /* CSNewsInfoReaderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A3E10E1BC8233C00076198 /* CSNewsInfoReaderTableViewController.m */; settings = {ASSET_TAGS = (); }; };
-		09A3E1121BC8328B00076198 /* CSNewsReaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A3E1111BC8328B00076198 /* CSNewsReaderTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		09A3E10B1BC7A47C00076198 /* v2-btn_check.png in Resources */ = {isa = PBXBuildFile; fileRef = 09A3E1091BC7A47C00076198 /* v2-btn_check.png */; };
+		09A3E10C1BC7A47C00076198 /* v2-btn_check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09A3E10A1BC7A47C00076198 /* v2-btn_check@2x.png */; };
+		09A3E10F1BC8233C00076198 /* CSNewsInfoReaderTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A3E10E1BC8233C00076198 /* CSNewsInfoReaderTableViewController.m */; };
+		09A3E1121BC8328B00076198 /* CSNewsReaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A3E1111BC8328B00076198 /* CSNewsReaderTableViewCell.m */; };
 		09B431B31994BCC300FF4071 /* EntityParentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09B431B21994BCC300FF4071 /* EntityParentInfo.m */; };
 		09B431B61994BCE900FF4071 /* EntityRelationshipInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09B431B51994BCE900FF4071 /* EntityRelationshipInfo.m */; };
 		09B431BA1994C1BF00FF4071 /* EntityRelationshipInfoHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 09B431B91994C1BF00FF4071 /* EntityRelationshipInfoHelper.m */; };
@@ -585,7 +584,7 @@
 		09CD666F197C0C2600CC08F1 /* CSLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09CD666C197C0C2600CC08F1 /* CSLoginViewController.m */; };
 		09CD6670197C0C2600CC08F1 /* CSRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09CD666E197C0C2600CC08F1 /* CSRootViewController.m */; };
 		09CD667E197C153C00CC08F1 /* CSStudentListMainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09CD667D197C153C00CC08F1 /* CSStudentListMainTableViewController.m */; };
-		09DC40DB1BD55DAC001FBB69 /* CSNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09DC40DA1BD55DAC001FBB69 /* CSNavigationController.m */; settings = {ASSET_TAGS = (); }; };
+		09DC40DB1BD55DAC001FBB69 /* CSNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09DC40DA1BD55DAC001FBB69 /* CSNavigationController.m */; };
 		09DF51D91A050FBF004D6A4E /* ModelAssessment.m in Sources */ = {isa = PBXBuildFile; fileRef = 09DF51D81A050FBF004D6A4E /* ModelAssessment.m */; };
 		09F59EB71B557FE200835163 /* v2-bg_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 09F59E451B557FE200835163 /* v2-bg_1.png */; };
 		09F59EB81B557FE200835163 /* v2-bg_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09F59E461B557FE200835163 /* v2-bg_1@2x.png */; };
@@ -712,6 +711,8 @@
 		09FE720719965C66002E3ED4 /* CSNewsInfoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE720619965C66002E3ED4 /* CSNewsInfoDetailViewController.m */; };
 		09FE720D199660D0002E3ED4 /* CSUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE720C199660D0002E3ED4 /* CSUtils.m */; };
 		09FE721019966801002E3ED4 /* CSCreateNoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE720F19966801002E3ED4 /* CSCreateNoticeViewController.m */; };
+		22BC1E8D1BFE256500DF6834 /* Bugly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22BC1E8C1BFE256500DF6834 /* Bugly.framework */; };
+		22BC1E8F1BFE26A900DF6834 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 09A3E1011BC79D0A00076198 /* libstdc++.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1642,6 +1643,7 @@
 		09FE720C199660D0002E3ED4 /* CSUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSUtils.m; sourceTree = "<group>"; };
 		09FE720E19966801002E3ED4 /* CSCreateNoticeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSCreateNoticeViewController.h; sourceTree = "<group>"; };
 		09FE720F19966801002E3ED4 /* CSCreateNoticeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSCreateNoticeViewController.m; sourceTree = "<group>"; };
+		22BC1E8C1BFE256500DF6834 /* Bugly.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bugly.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1649,10 +1651,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22BC1E8F1BFE26A900DF6834 /* libstdc++.tbd in Frameworks */,
 				09A3E1081BC79D2500076198 /* SystemConfiguration.framework in Frameworks */,
 				09A3E1061BC79D1F00076198 /* CoreLocation.framework in Frameworks */,
+				22BC1E8D1BFE256500DF6834 /* Bugly.framework in Frameworks */,
 				09A3E1041BC79D1600076198 /* CoreTelephony.framework in Frameworks */,
-				09A3E1021BC79D0A00076198 /* libstdc++.tbd in Frameworks */,
 				09A3E1001BC79D0400076198 /* Security.framework in Frameworks */,
 				09A3E0FE1BC79CF300076198 /* libz.tbd in Frameworks */,
 				0901CE431ABF2FF40044838A /* MediaPlayer.framework in Frameworks */,
@@ -2281,6 +2284,7 @@
 		095F13B91967CC9D008CF3BE /* Venders */ = {
 			isa = PBXGroup;
 			children = (
+				22BC1E8A1BFE256500DF6834 /* Bugly-v1.4.3 */,
 				09A3E0F91BC79A3C00076198 /* BaiduMobStat */,
 				0901CDA71ABF2FBB0044838A /* SBVideoCaptureDemo */,
 				0914BBFD1A431E6F00779F2E /* ELCImagePicker */,
@@ -3067,6 +3071,22 @@
 				09F74CD71997D137001555D0 /* VoiceConverter.m */,
 			);
 			path = Amr;
+			sourceTree = "<group>";
+		};
+		22BC1E8A1BFE256500DF6834 /* Bugly-v1.4.3 */ = {
+			isa = PBXGroup;
+			children = (
+				22BC1E8B1BFE256500DF6834 /* libc++ */,
+			);
+			path = "Bugly-v1.4.3";
+			sourceTree = "<group>";
+		};
+		22BC1E8B1BFE256500DF6834 /* libc++ */ = {
+			isa = PBXGroup;
+			children = (
+				22BC1E8C1BFE256500DF6834 /* Bugly.framework */,
+			);
+			path = "libc++";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -4003,6 +4023,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Venders/Bugly-v1.4.3/libc++",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "YouJiaoBao/YouJiaoBao-Prefix.pch";
 				INFOPLIST_FILE = "YouJiaoBao/YouJiaoBao-Info.plist";
@@ -4026,6 +4050,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Venders/Bugly-v1.4.3/libc++",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "YouJiaoBao/YouJiaoBao-Prefix.pch";
 				INFOPLIST_FILE = "YouJiaoBao/YouJiaoBao-Info.plist";

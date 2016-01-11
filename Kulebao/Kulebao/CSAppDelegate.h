@@ -10,6 +10,7 @@
 #import "CSKuleEngine.h"
 #import "MBProgressHUD.h"
 #import "BaiduMobStat.h"
+#import <RongIMKit/RongIMKit.h>
 
 @interface CSAppDelegate : UIResponder <UIApplicationDelegate>
 @property (strong, nonatomic) UIWindow *window;

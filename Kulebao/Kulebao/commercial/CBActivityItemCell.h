@@ -12,9 +12,8 @@
 @interface CBActivityItemCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *imgIcon;
 @property (weak, nonatomic) IBOutlet UILabel *labTitle;
-@property (weak, nonatomic) IBOutlet UILabel *labOriginal;
-@property (weak, nonatomic) IBOutlet UILabel *labDiscount;
-//@property (weak, nonatomic) IBOutlet UILabel *labDesc;
+@property (weak, nonatomic) IBOutlet UILabel *labPrice;
+@property (weak, nonatomic) IBOutlet UILabel *labDistance;
 
 - (void)loadItemData:(CBActivityData*)itemData;
 

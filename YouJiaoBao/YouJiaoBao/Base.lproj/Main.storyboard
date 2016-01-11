@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Unv-SB-3EC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Unv-SB-3EC">
     <dependencies>
         <deployment version="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -14,7 +15,6 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="SYX-UE-ALg">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </navigationBar>
                     <connections>
                         <segue destination="pMD-1c-TKG" kind="relationship" relationship="rootViewController" id="CQL-pg-KH6"/>
@@ -1287,15 +1287,24 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="公告详情" id="Lt3-AH-aWm">
-                        <barButtonItem key="rightBarButtonItem" image="v2-btn_check.png" id="dzn-PH-uer">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <action selector="onBtnCheckListClicked:" destination="sKh-e5-I66" id="00c-Ow-K7q"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem image="v2-btn_check.png" id="dzn-PH-uer">
+                                <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="onBtnCheckListClicked:" destination="sKh-e5-I66" id="00c-Ow-K7q"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="v3-btn-del" id="O4W-UW-M2s">
+                                <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="onBtnDelClicked:" destination="sKh-e5-I66" id="9n2-fv-TGy"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="btnCheckList" destination="dzn-PH-uer" id="z5n-h8-SxZ"/>
+                        <outlet property="btnDel" destination="O4W-UW-M2s" id="7XT-vT-Gfr"/>
                         <outlet property="indicatorView" destination="kHp-MW-Ih9" id="zMS-gE-4JO"/>
                         <outlet property="webView" destination="YyM-X5-AAN" id="BVr-AV-bjD"/>
                         <segue destination="fTv-GI-Gzv" kind="push" identifier="segue.news.reader" id="mWX-II-ciT"/>
@@ -1331,7 +1340,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="宝贝名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dXv-xJ-N0s">
                                             <rect key="frame" x="74" y="21" width="155" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="255" verticalHuggingPriority="251" text="未回执" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i9Q-e2-KLp">
@@ -2989,6 +2998,7 @@
         <image name="v2-进餐.png" width="64" height="64"/>
         <image name="v2-锻炼.png" width="64" height="64"/>
         <image name="v2-集体活动.png" width="64" height="64"/>
+        <image name="v3-btn-del" width="22" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="4dZ-qf-s5s"/>

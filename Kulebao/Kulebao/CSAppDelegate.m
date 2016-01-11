@@ -10,6 +10,10 @@
 #import "BPush.h"
 #import "EAIntroPage.h"
 #import "EAIntroView.h"
+#import <Bugly/CrashReporter.h>
+#import "CBIMDataSource.h"
+
+#define RONGCLOUD_IM_APPKEY @"0vnjpoadnwk0z"
 
 CSAppDelegate* gApp = nil;
 
@@ -26,6 +30,22 @@ CSAppDelegate* gApp = nil;
 {
     // Override point for customization after application launch.
     gApp = self;
+    
+    // 初始化Bugly
+    // [[CrashReporter sharedInstance] enableLog:YES];
+    [[CrashReporter sharedInstance] installWithAppId:@"900013148"];
+    // [self performSelector:@selector(crash) withObject:nil afterDelay:3.0];
+    
+    // 初始化融云
+    CSKulePreferences* preference = [CSKulePreferences defaultPreferences];
+    NSDictionary* configInfo = [preference getServerSettings];
+    [[RCIM sharedRCIM] initWithAppKey:configInfo[@"rongyun_app_id"]];
+    [[RCIM sharedRCIM] setGroupInfoDataSource:[CBIMDataSource sharedInstance]];
+    [[RCIM sharedRCIM] setUserInfoDataSource:[CBIMDataSource sharedInstance]];
+    [[RCIM sharedRCIM] setGroupUserInfoDataSource:[CBIMDataSource sharedInstance]];
+    
+    //[[RCIMClient sharedRCIMClient] setReceiveMessageDelegate:[CBIMDataSource sharedInstance] object:nil];
+    
     _engine = [[CSKuleEngine alloc] init];
     [_engine setupEngine];
     
@@ -95,8 +115,13 @@ CSAppDelegate* gApp = nil;
 
 #endif
 
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
-{
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    NSString *token = [[[[deviceToken description] stringByReplacingOccurrencesOfString:@"<" withString:@""]
+                        stringByReplacingOccurrencesOfString:@">" withString:@""]
+                       stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    [[RCIMClient sharedRCIMClient] setDeviceToken:token];
+    
     [_engine application:application didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
 }
 
@@ -124,6 +149,21 @@ CSAppDelegate* gApp = nil;
     id ctrl = [mainStoryboard instantiateViewControllerWithIdentifier:@"CSMainNavigationController"];
     gApp.window.rootViewController = ctrl;
     
+    if (gApp.engine.loginInfo.imToken) {
+        // 快速集成第二步，连接融云服务器
+        [[RCIM sharedRCIM] connectWithToken:gApp.engine.loginInfo.imToken.token
+                                    success:^(NSString *userId) {
+                                        // Connect 成功
+                                        CSLog(@"[RCIM] connect success.");
+                                    } error:^(RCConnectErrorCode status) {
+                                        // Connect 失败
+                                        CSLog(@"[RCIM] connect error.");
+                                    } tokenIncorrect:^() {
+                                        // Token 失效的状态处理
+                                        CSLog(@"[RCIM] connect tokenIncorrect.");
+                                    }];
+    }
+    
     [self showIntroViewsIfNeeded];
 }
 
@@ -132,6 +172,8 @@ CSAppDelegate* gApp = nil;
     self.engine.relationships = nil;
     self.engine.currentRelationship = nil;
     self.engine.preferences.loginInfo = nil;
+    
+    [[RCIM sharedRCIM] disconnect:NO];
     
     [self gotoLoginProcess];
 }
@@ -221,7 +263,7 @@ CSAppDelegate* gApp = nil;
      introImageNames = @[@"guide-1-568h.png", @"guide-2-568h.png", @"guide-3-568h.png", @"guide-4-568h.png"];
      }
      */
-    NSArray* introImageNames = @[@"v2-guide5", @"v2-guide6"];
+    NSArray* introImageNames = @[@"v2.8-guide-1", @"v2.8-guide-2"];
     
     NSMutableArray* introPages = [NSMutableArray array];
     for (NSString* imageName in introImageNames) {

@@ -142,18 +142,16 @@
 
 - (void)doReceiveBindInfo {
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
-
         CSKuleBindInfo* bindInfo = [CSKuleInterpreter decodeBindInfo:dataJson];
-        CSLog(@"doReceiveBindInfo error_code=%d", bindInfo.errorCode);
+        CSLog(@"[1]doReceiveBindInfo error_code=%ld", bindInfo.errorCode);
         if (bindInfo.errorCode == 0) {
             gApp.engine.loginInfo.schoolId = bindInfo.schoolId;
             gApp.engine.loginInfo.accessToken = bindInfo.accessToken;
             gApp.engine.loginInfo.accountName = bindInfo.accountName;
             gApp.engine.loginInfo.username = bindInfo.username;
             gApp.engine.loginInfo.schoolName = bindInfo.schoolName;
-            
             gApp.engine.loginInfo.memberStatus = bindInfo.memberStatus;
-            
+            gApp.engine.loginInfo.imToken = bindInfo.imToken;
             gApp.engine.preferences.loginInfo = gApp.engine.loginInfo;
             
             [gApp.engine.preferences addHistoryAccount:gApp.engine.loginInfo.accountName];
@@ -189,7 +187,6 @@
     [gApp.engine.httpClient reqReceiveBindInfo:gApp.engine.loginInfo.accountName
                             success:sucessHandler
                             failure:failureHandler];
-    
 }
 
 @end

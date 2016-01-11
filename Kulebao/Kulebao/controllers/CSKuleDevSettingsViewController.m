@@ -105,7 +105,8 @@
     NSDictionary* oldServerInfo = [preference getServerSettings];
     for (NSDictionary* serverInfo in self.serverList) {
         if ([serverInfo[@"name"] isEqualToString:btnTitle]) {
-            [preference setServerSettings:serverInfo];
+            //[preference setServerSettings:serverInfo];
+            preference.configTag = serverInfo[@"tag"];
             [self updateContent];
             
             if (![oldServerInfo isEqualToDictionary:serverInfo]) {

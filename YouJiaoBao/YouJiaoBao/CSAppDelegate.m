@@ -12,6 +12,7 @@
 #import "CSEngine.h"
 #import "CSFirImApi.h"
 #import <objc/runtime.h>
+#import <Bugly/CrashReporter.h>
 
 CSAppDelegate* gApp = nil;
 
@@ -26,6 +27,11 @@ CSAppDelegate* gApp = nil;
 {
     // Override point for customization after application launch.
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
+    
+    //[[CrashReporter sharedInstance] enableLog:YES];
+    [[CrashReporter sharedInstance] installWithAppId:@"900013150"];
+    //[self performSelector:@selector(crash) withObject:nil afterDelay:3.0];
+    
     [[CSEngine sharedInstance] setupAppearance];
     
     gApp = self;

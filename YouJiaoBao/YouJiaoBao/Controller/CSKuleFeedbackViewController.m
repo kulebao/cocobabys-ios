@@ -35,7 +35,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self customizeBackBarItem];
+    //[self customizeBackBarItem];
     [self customizeOkBarItemWithTarget:self
                                 action:@selector(onBtnSendClicked:)
                                   text:@"发送"];

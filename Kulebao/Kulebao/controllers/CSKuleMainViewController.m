@@ -24,9 +24,13 @@
 #import "CSKuleNewsDetailsViewController.h"
 #import "CBActivityData.h"
 #import "CBContractorData.h"
+#import "CBIMChatListViewController.h"
 
 #import "EAIntroPage.h"
 #import "EAIntroView.h"
+
+#import "CBIMDataSource.h"
+#import "UIActionSheet+BlocksKit.h"
 
 @interface CSKuleMainViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, EAIntroDelegate> {
     UIImagePickerController* _imgPicker;
@@ -48,6 +52,8 @@
 @property (nonatomic, strong) CSKuleSchoolInfo* schoolInfo;
 @property (nonatomic, strong) CSKuleVideoMember* videoMember;
 @property (nonatomic, strong) CSKuleVideoMember* defaultVideoMember;
+
+@property (nonatomic, strong) JSBadgeView* badgeCommercial;
 
 @property (nonatomic, strong) UIButton* btnGuideHome;
 
@@ -86,6 +92,8 @@
     self.labChildNick.text = nil;
     self.imgChildPortrait.layer.cornerRadius = self.imgChildPortrait.frame.size.width/2;
     self.imgChildPortrait.clipsToBounds = YES;
+    self.imgChildPortrait.layer.borderColor = [[UIColor whiteColor] CGColor];
+    self.imgChildPortrait.layer.borderWidth = 2;
     
     self.btnSchoolInfo.titleLabel.numberOfLines = 2;
     self.btnSchoolInfo.titleLabel.minimumScaleFactor = 0.7;
@@ -99,6 +107,12 @@
     
     _nickFieldDelegate = [[CSTextFieldDelegate alloc] initWithType:kCSTextFieldDelegateNormal];
     _nickFieldDelegate.maxLength = kKuleNickMaxLength;
+    
+    //
+    self.badgeCommercial = [[JSBadgeView alloc] initWithParentView:self.btnClassInfo
+                                                         alignment:JSBadgeViewAlignmentTopRight];
+    self.badgeCommercial.badgeText = @"新";
+    self.badgeCommercial.badgePositionAdjustment = CGPointMake(-10, 10);
 
     //[self setupModules];
     [self doGetSchoolInfo:^{
@@ -132,11 +146,13 @@
                      options:NSKeyValueObservingOptionNew
                      context:nil];
      */
-    
+    /*
     [gApp.engine addObserver:self
                   forKeyPath:@"badgeOfChating"
                      options:NSKeyValueObservingOptionNew
                      context:nil];
+     */
+    
     [gApp.engine addObserver:self
                   forKeyPath:@"badgeOfAssess"
                      options:NSKeyValueObservingOptionNew
@@ -150,6 +166,8 @@
     [self performSelector:@selector(getRelationshipInfos) withObject:nil afterDelay:0];
     
     [self updateUI:YES];
+    
+
     
     //Guide
     [self showIntroViewsIfNeeded];
@@ -168,7 +186,7 @@
     [gApp.engine removeObserver:self forKeyPath:@"badgeOfCheckin"];
     [gApp.engine removeObserver:self forKeyPath:@"badgeOfSchedule"];
     //[gApp.engine removeObserver:self forKeyPath:@"badgeOfAssignment"];
-    [gApp.engine removeObserver:self forKeyPath:@"badgeOfChating"];
+    //[gApp.engine removeObserver:self forKeyPath:@"badgeOfChating"];
     [gApp.engine removeObserver:self forKeyPath:@"badgeOfAssess"];
     [gApp.engine removeObserver:self forKeyPath:@"pendingNotificationInfo"];
 }
@@ -479,10 +497,12 @@
                              className];
             [self.btnClassInfo setTitle:@"亲子优惠"
                                forState:UIControlStateNormal];
+            self.badgeCommercial.hidden = NO;
         }
         else {
             [self.btnClassInfo setTitle:className
                                forState:UIControlStateNormal];
+            self.badgeCommercial.hidden = YES;
         }
         
         // 设置行间距
@@ -530,18 +550,20 @@
 }
 
 - (void)doChangeChildNick {
-    NSString *title = @"设置宝宝昵称";
-    NSString *message = @"";
+    NSString *title = @"设置宝贝昵称";
+    NSString *message = [NSString stringWithFormat:@"您最多可以输入%d个字", kKuleNickMaxLength];
     
     AHAlertView *alert = [[AHAlertView alloc] initWithTitle:title message:message];
     alert.alertViewStyle = AHAlertViewStylePlainTextInput;
+    alert.messageTextAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:14]};
     
     UITextField* field = [alert textFieldAtIndex:0];
-    field.placeholder = @"请输入宝宝的昵称";
+    field.placeholder = @"请输入宝贝昵称";
     field.text = gApp.engine.currentRelationship.child.nick;
     field.keyboardAppearance = UIKeyboardAppearanceDefault;
-    field.background = [[UIImage imageNamed:@"input-bg-0.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 50, 10, 10)];
-    field.borderStyle = UITextBorderStyleBezel;
+    //field.background = [[UIImage imageNamed:@"input-bg-0.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 50, 10, 10)];
+    //field.borderStyle = UITextBorderStyleBezel;
+    field.borderStyle = UITextBorderStyleRoundedRect;
     field.backgroundColor = [UIColor clearColor];
     field.font = [UIFont systemFontOfSize:14];
     field.delegate = _nickFieldDelegate;
@@ -697,6 +719,19 @@
 #endif
 }
 
+- (void)doChangePortrait {
+    UIActionSheet* sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:nil];
+    [sheet bk_addButtonWithTitle:@"拍照" handler:^{
+        [self doChangePortraitFromCamera];
+    }];
+    
+    [sheet bk_addButtonWithTitle:@"从相册选择" handler:^{
+        [self doChangePortraitFromPhoto];
+    }];
+    
+    [sheet showInView:self.view];
+}
+
 - (void)doGetSchoolInfo:(void(^)())completion {
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         id schoolInfoJson = [dataJson valueForKeyNotNull:@"school_info"];
@@ -795,21 +830,26 @@
                                       target:self
                                       action:@selector(doChangeChildBirthday)];
     
-    KxMenuItem* item3 = [KxMenuItem menuItem:@"从相机拍摄头像"
-                                       image:nil
-                                      target:self
-                                      action:@selector(doChangePortraitFromCamera)];
+//    KxMenuItem* item3 = [KxMenuItem menuItem:@"从相机拍摄头像"
+//                                       image:nil
+//                                      target:self
+//                                      action:@selector(doChangePortraitFromCamera)];
+//    
+//    KxMenuItem* item4 = [KxMenuItem menuItem:@"从相册选择头像"
+//                                       image:nil
+//                                      target:self
+//                                      action:@selector(doChangePortraitFromPhoto)];
     
-    KxMenuItem* item4 = [KxMenuItem menuItem:@"从相册选择头像"
+    KxMenuItem* item3 = [KxMenuItem menuItem:@"设置宝贝头像"
                                        image:nil
                                       target:self
-                                      action:@selector(doChangePortraitFromPhoto)];
+                                      action:@selector(doChangePortrait)];
     
     //[KxMenu setTintColor:UIColorRGB(0xCC, 0x66, 0x33)];
     [KxMenu setTintColor:[UIColor colorWithRed:0.129f green:0.565f blue:0.839f alpha:1.0f]];
     [KxMenu showMenuInView:self.view
                   fromRect:self.viewChildContainer.frame
-                 menuItems:@[item1, item2, item3, item4]];
+                 menuItems:@[item1, item2, item3]];
 }
 
 #pragma mark - UI Actions
@@ -915,7 +955,16 @@
                     break;
             }
             
+#if COCOBABYS_USE_IM
+            if (moduleType == kKuleModuleChating) {
+                [self openRCIM];
+            }
+            else {
+                [self performSegueWithIdentifier:segueNames[moduleType] sender:nil];
+            }
+#else
             [self performSegueWithIdentifier:segueNames[moduleType] sender:nil];
+#endif
         }
         else {
             //            [gApp alert:@"权限不足，请联系幼儿园开通权限，谢谢。"];
@@ -941,20 +990,21 @@
     }
 }
 
+- (void)openRCIM {
+    NSArray* arr1 = @[@(ConversationType_PRIVATE),@(ConversationType_DISCUSSION), @(ConversationType_GROUP),@(ConversationType_SYSTEM)];
+    NSArray* arr2 = nil;
+    CBIMChatListViewController* ctrl = [[CBIMChatListViewController alloc] initWithDisplayConversationTypes:arr1
+                                                                                 collectionConversationType:arr2];
+    [self.navigationController pushViewController:ctrl animated:YES];
+}
 
 - (IBAction)onBtnClassInfoClicked:(id)sender {
 #if COCOBABYS_FEATURE_COMMERCIAL
     BOOL enabledCommercial = gApp.engine.preferences.enabledCommercial;
     if (enabledCommercial) {
         UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Commercial" bundle:nil];
-        
-//        [self presentViewController:storyboard.instantiateInitialViewController
-//                           animated:YES
-//                         completion:^{
-//                             
-//                         }];
-        
         [self.navigationController pushViewController:storyboard.instantiateInitialViewController animated:YES];
+        self.badgeCommercial.badgeText = nil;
     }
 #endif
 }
@@ -997,6 +1047,11 @@
             [gApp hideAlert];
             
             [self handlePendingNotification];
+            
+            //
+            
+            [[CBIMDataSource sharedInstance] reloadRelationships];
+            [[CBIMDataSource sharedInstance] reloadTeachers];
         }
         else {
             [gApp alert:@"没有关联宝宝信息"];
@@ -1116,12 +1171,25 @@
         && gApp.engine.currentRelationship
         && notiInfo) {
         gApp.engine.pendingNotificationInfo = nil;
-        CSKuleCheckInOutLogInfo* info = [CSKuleInterpreter decodeCheckInOutLogInfo:notiInfo];
-        if (info) {
-            CSKuleNewsDetailsViewController* ctrl = [self.storyboard instantiateViewControllerWithIdentifier:@"CSKuleNewsDetailsViewController"];
-            ctrl.navigationItem.title = @"刷卡信息";
-            ctrl.checkInOutLogInfo = info;
-            [self.navigationController pushViewController:ctrl animated:YES];
+        
+        NSDictionary *pushServiceData = [[RCIMClient sharedRCIMClient] getPushExtraFromRemoteNotification:notiInfo];
+        if (pushServiceData) {
+            CSLog(@"该远程推送包含来自融云的推送服务");
+            for (id key in [pushServiceData allKeys]) {
+                CSLog(@"key = %@, value = %@", key, pushServiceData[key]);
+            }
+            
+            [self openRCIM];
+        } else {
+            CSLog(@"该远程推送不包含来自融云的推送服务");
+            
+            CSKuleCheckInOutLogInfo* info = [CSKuleInterpreter decodeCheckInOutLogInfo:notiInfo];
+            if (info) {
+                CSKuleNewsDetailsViewController* ctrl = [self.storyboard instantiateViewControllerWithIdentifier:@"CSKuleNewsDetailsViewController"];
+                ctrl.navigationItem.title = @"刷卡信息";
+                ctrl.checkInOutLogInfo = info;
+                [self.navigationController pushViewController:ctrl animated:YES];
+            }
         }
     }
 }
@@ -1196,7 +1264,7 @@
      introImageNames = @[@"guide-1-568h.png", @"guide-2-568h.png", @"guide-3-568h.png", @"guide-4-568h.png"];
      }
      */
-    NSArray* introImageNames = @[@"v2-guide-home"];
+    NSArray* introImageNames = @[@"v2.8-guide-home"];
     
     NSMutableArray* introPages = [NSMutableArray array];
     for (NSString* imageName in introImageNames) {

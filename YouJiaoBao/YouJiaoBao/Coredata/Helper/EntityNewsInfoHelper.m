@@ -121,4 +121,11 @@
     return frCtrl;
 }
 
++ (void)deleteEntity:(EntityNewsInfo*)entity {
+    NSManagedObjectContext* context = [[CSCoreDataHelper sharedInstance] managedObjectContext];
+    [context deleteObject:entity];
+    NSError* error = nil;
+    [context save:&error];
+}
+
 @end

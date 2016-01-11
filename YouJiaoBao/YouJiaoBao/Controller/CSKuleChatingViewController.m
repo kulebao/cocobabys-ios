@@ -64,7 +64,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [self customizeBackBarItem];
+    //[self customizeBackBarItem];
     
     NSString* cachesDirectory = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0];
     

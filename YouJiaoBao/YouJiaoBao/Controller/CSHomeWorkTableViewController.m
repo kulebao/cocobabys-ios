@@ -57,7 +57,7 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    [self customizeBackBarItem];
+    //[self customizeBackBarItem];
     [self customizeOkBarItemWithTarget:self action:@selector(onCreateAssignment:) text:@"发布"];
     
     self.popCtrl = [CSPopupController popupControllerWithView:gApp.window];

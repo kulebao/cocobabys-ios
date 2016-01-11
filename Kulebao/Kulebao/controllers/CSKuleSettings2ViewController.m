@@ -12,9 +12,13 @@
 #import "UIImageView+WebCache.h"
 #import "KxMenu.h"
 #import "UIImage+CSExtends.h"
+#import "UIActionSheet+BlocksKit.h"
+#import "CBIMChatViewController.h"
 
 @interface CSKuleSettings2ViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
     UIImagePickerController* _imgPicker;
+    CSTextFieldDelegate* _nickFieldDelegate;
+    CSTextFieldDelegate* _relationshipFieldDelegate;
 }
 
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellDev;
@@ -39,6 +43,14 @@
     [self customizeBackBarItem];
     self.imgPortrait.layer.cornerRadius = self.imgPortrait.bounds.size.width/2.0;
     self.imgPortrait.clipsToBounds = YES;
+    self.imgPortrait.layer.borderColor = [[UIColor whiteColor] CGColor];
+    self.imgPortrait.layer.borderWidth = 2;
+    
+    _nickFieldDelegate = [[CSTextFieldDelegate alloc] initWithType:kCSTextFieldDelegateNormal];
+    _nickFieldDelegate.maxLength = kKuleParentNameMaxLength;
+    
+    _relationshipFieldDelegate = [[CSTextFieldDelegate alloc] initWithType:kCSTextFieldDelegateNormal];
+    _relationshipFieldDelegate.maxLength = kKuleRelationshipMaxLength;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -99,58 +111,58 @@
 }
 
 /*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
-}
-*/
+ - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+ UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+ 
+ // Configure the cell...
+ 
+ return cell;
+ }
+ */
 
 /*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
+ // Override to support conditional editing of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+ // Return NO if you do not want the specified item to be editable.
+ return YES;
+ }
+ */
 
 /*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
+ // Override to support editing the table view.
+ - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+ if (editingStyle == UITableViewCellEditingStyleDelete) {
+ // Delete the row from the data source
+ [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+ } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+ // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+ }
+ }
+ */
 
 /*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
+ // Override to support rearranging the table view.
+ - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+ }
+ */
 
 /*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
+ // Override to support conditional rearranging of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+ // Return NO if you do not want the item to be re-orderable.
+ return YES;
+ }
+ */
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 #endif
 
@@ -165,6 +177,18 @@
     }
     else if (section==2 && row==0) {
         // DEV
+    }
+    else if (section == 1 && row==0) {
+        // Feedback
+        CSKulePreferences* preference = [CSKulePreferences defaultPreferences];
+        NSDictionary* configInfo = [preference getServerSettings];
+        
+        RCPublicServiceChatViewController *conversationVC = [[RCPublicServiceChatViewController alloc]init];
+        conversationVC.conversationType = ConversationType_APPSERVICE;
+        conversationVC.targetId = configInfo[@"rongyun_service_user_id"];
+        conversationVC.userName = nil;
+        conversationVC.title = @"客服";
+        [self.navigationController pushViewController:conversationVC animated:YES];
     }
 }
 
@@ -192,7 +216,7 @@
             [gApp hideAlert];
         }
         else {
-            CSLog(@"doReceiveBindInfo error_code=%d", bindInfo.errorCode);
+            CSLog(@"[4]doReceiveBindInfo error_code=%ld", bindInfo.errorCode);
             [gApp alert:@"解除绑定失败。"];
         }
         
@@ -210,21 +234,35 @@
 }
 
 - (IBAction)onBtnPortraitClicked:(id)sender {
-    KxMenuItem* item1 = [KxMenuItem menuItem:@"从相机拍摄头像"
+    //    KxMenuItem* item1 = [KxMenuItem menuItem:@"从相机拍摄头像"
+    //                                       image:nil
+    //                                      target:self
+    //                                      action:@selector(doChangePortraitFromCamera)];
+    //
+    //    KxMenuItem* item2 = [KxMenuItem menuItem:@"从相册选择头像"
+    //                                       image:nil
+    //                                      target:self
+    //                                      action:@selector(doChangePortraitFromPhoto)];
+    
+    KxMenuItem* item1 = [KxMenuItem menuItem:@"设置家长姓名"
                                        image:nil
                                       target:self
-                                      action:@selector(doChangePortraitFromCamera)];
+                                      action:@selector(doChangeName)];
     
-    KxMenuItem* item2 = [KxMenuItem menuItem:@"从相册选择头像"
+    KxMenuItem* item2 = [KxMenuItem menuItem:@"设置亲属关系"
                                        image:nil
                                       target:self
-                                      action:@selector(doChangePortraitFromPhoto)];
+                                      action:@selector(doChangeRelationship)];
     
-    //[KxMenu setTintColor:UIColorRGB(0xCC, 0x66, 0x33)];
+    KxMenuItem* item3 = [KxMenuItem menuItem:@"设置家长头像"
+                                       image:nil
+                                      target:self
+                                      action:@selector(doChangePortrait)];
+    
     [KxMenu setTintColor:[UIColor colorWithRed:0.129f green:0.565f blue:0.839f alpha:1.0f]];
     [KxMenu showMenuInView:self.view
                   fromRect:self.viewPortrait.frame
-                 menuItems:@[item1, item2]];
+                 menuItems:@[item1, item2, item3]];
 }
 
 - (void)doUpdateParentPortrait:(NSString*)portrait withImage:(UIImage*)img {
@@ -256,9 +294,9 @@
             
             [gApp waitingAlert:@"更新家长头像中"];
             [gApp.engine.httpClient reqUpdateParentInfo:cp
-                              inKindergarten:gApp.engine.loginInfo.schoolId
-                                     success:sucessHandler
-                                     failure:failureHandler];
+                                         inKindergarten:gApp.engine.loginInfo.schoolId
+                                                success:sucessHandler
+                                                failure:failureHandler];
             
         }
         else {
@@ -270,6 +308,48 @@
     }
 }
 
+- (void)doUpdateParentName:(NSString*)newName {
+    if (newName.length > 0) {
+        CSKuleParentInfo* parentInfo = gApp.engine.currentRelationship.parent;
+        if (parentInfo) {
+            CSKuleParentInfo* cp = [parentInfo copy];
+            cp.name = newName;
+            
+            SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+                CSLog(@"success.");
+                [gApp alert:@"更新成功"];
+                
+                CSKuleParentInfo* cc = [CSKuleInterpreter decodeParentInfo:dataJson];
+                for (CSKuleRelationshipInfo* relationship in gApp.engine.relationships) {
+                    if ([relationship.parent.parentId isEqualToString:cc.parentId]) {
+                        relationship.parent.name = cc.name;
+                    }
+                }
+                
+                [self reloadData];
+            };
+            
+            FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+                CSLog(@"failure:%@", error);
+                [gApp alert:[error localizedDescription]];
+            };
+            
+            [gApp waitingAlert:@"更新家长姓名中"];
+            [gApp.engine.httpClient reqUpdateParentInfo:cp
+                                         inKindergarten:gApp.engine.loginInfo.schoolId
+                                                success:sucessHandler
+                                                failure:failureHandler];
+            
+        }
+        else {
+            [gApp alert:@"没有家长信息"];
+        }
+    }
+    else {
+        [gApp alert:@"输入错误"];
+    }
+}
+
 - (void)doChangePortraitFromPhoto {
     _imgPicker = [[UIImagePickerController alloc] init];
     _imgPicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
@@ -278,6 +358,126 @@
     [self presentViewController:_imgPicker animated:YES completion:^{
         
     }];
+}
+
+- (void)doChangePortrait {
+    UIActionSheet* sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:nil cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:nil];
+    [sheet bk_addButtonWithTitle:@"拍照" handler:^{
+        [self doChangePortraitFromCamera];
+    }];
+    
+    [sheet bk_addButtonWithTitle:@"从相册选择" handler:^{
+        [self doChangePortraitFromPhoto];
+    }];
+    
+    [sheet showInView:self.view];
+}
+
+
+- (void)doChangeName {
+    NSString *title = @"设置家长姓名";
+    NSString *message = [NSString stringWithFormat:@"您最多可以输入%d个字", kKuleParentNameMaxLength];
+    
+    AHAlertView *alert = [[AHAlertView alloc] initWithTitle:title message:message];
+    alert.alertViewStyle = AHAlertViewStylePlainTextInput;
+    alert.messageTextAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:14]};
+    
+    UITextField* field = [alert textFieldAtIndex:0];
+    field.placeholder = @"请输入家长姓名";
+    field.text = gApp.engine.currentRelationship.parent.name;
+    field.keyboardAppearance = UIKeyboardAppearanceDefault;
+    //field.background = [[UIImage imageNamed:@"input-bg-0.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 50, 10, 10)];
+    //field.borderStyle = UITextBorderStyleBezel;
+    field.borderStyle = UITextBorderStyleRoundedRect;
+    field.backgroundColor = [UIColor clearColor];
+    field.font = [UIFont systemFontOfSize:14];
+    field.delegate = _nickFieldDelegate;
+    
+    [alert setCancelButtonTitle:@"取消" block:^{
+        
+    }];
+    
+    [alert addButtonWithTitle:@"确定" block:^{
+        if ([[field.text trim] length] > 0) {
+            [self doUpdateParentName:[field.text trim]];
+        }
+    }];
+    
+    [alert show];
+}
+
+- (void)doChangeRelationship {
+    NSString *title = @"设置亲属关系";
+    NSString *message = [NSString stringWithFormat:@"您最多可以输入%d个字", kKuleRelationshipMaxLength];
+    
+    AHAlertView *alert = [[AHAlertView alloc] initWithTitle:title message:message];
+    alert.alertViewStyle = AHAlertViewStylePlainTextInput;
+    alert.messageTextAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:14]};
+    
+    UITextField* field = [alert textFieldAtIndex:0];
+    field.placeholder = @"请输入亲属关系";
+    field.text = gApp.engine.currentRelationship.relationship;
+    field.keyboardAppearance = UIKeyboardAppearanceDefault;
+    //field.background = [[UIImage imageNamed:@"input-bg-0.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 50, 10, 10)];
+    //field.borderStyle = UITextBorderStyleBezel;
+    field.borderStyle = UITextBorderStyleRoundedRect;
+    field.backgroundColor = [UIColor clearColor];
+    field.font = [UIFont systemFontOfSize:14];
+    field.delegate = _relationshipFieldDelegate;
+    
+    [alert setCancelButtonTitle:@"取消" block:^{
+        
+    }];
+    
+    [alert addButtonWithTitle:@"确定" block:^{
+        //        [self doUpdateChildNick:field.text];
+        if ([[field.text trim] length] > 0) {
+            [self doUpdateRelationship:[field.text trim]];
+        }
+    }];
+    
+    [alert show];
+}
+
+- (void)doUpdateRelationship:(NSString*)relationship {
+    if (relationship.length > 0) {
+        NSString* card = gApp.engine.currentRelationship.card;
+        if (card.length > 0) {
+            SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+                CSLog(@"success.");
+                [gApp alert:@"更新成功"];
+                
+                CSKuleRelationshipInfo* cc = [CSKuleInterpreter decodeRelationshipInfo:dataJson];
+                
+                for (CSKuleRelationshipInfo* relationship in gApp.engine.relationships) {
+                    if (relationship.uid ==cc.uid) {
+                        relationship.relationship = cc.relationship;
+                    }
+                }
+                
+                [self reloadData];
+            };
+            
+            FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+                CSLog(@"failure:%@", error);
+                [gApp alert:[error localizedDescription]];
+            };
+            
+            [gApp waitingAlert:@"更新亲属关系中"];
+            [gApp.engine.httpClient reqUpdateCard:card
+                                 withRelationship:relationship
+                                   inKindergarten:gApp.engine.loginInfo.schoolId
+                                          success:sucessHandler
+                                          failure:failureHandler];
+            
+        }
+        else {
+            [gApp alert:@"无效卡信息"];
+        }
+    }
+    else {
+        [gApp alert:@"输入错误"];
+    }
 }
 
 - (void)doChangePortraitFromCamera {
@@ -321,10 +521,10 @@
     
     [gApp waitingAlert:@"上传家长头像中"];
     [gApp.engine.httpClient reqUploadToQiniu:imgData
-                          withKey:imgFileName
-                         withMime:@"image/jpeg"
-                          success:sucessHandler
-                          failure:failureHandler];
+                                     withKey:imgFileName
+                                    withMime:@"image/jpeg"
+                                     success:sucessHandler
+                                     failure:failureHandler];
     
     [picker dismissViewControllerAnimated:YES
                                completion:^{

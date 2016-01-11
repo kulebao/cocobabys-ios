@@ -11,11 +11,16 @@
 #import "CSAppDelegate.h"
 #import "CBActivityItemCell.h"
 #import "CBActivityData.h"
+#import <CoreLocation/CoreLocation.h>
 
-@interface CBActivityMainViewController () <UITableViewDataSource, UITableViewDelegate, PullTableViewDelegate>
+@interface CBActivityMainViewController () <UITableViewDataSource, UITableViewDelegate, PullTableViewDelegate, CLLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet PullTableView *tableview;
 @property (nonatomic, strong) NSMutableArray* cellItemDataList;
+
+@property (retain, nonatomic) CLLocationManager* locManager;
+
+@property (nonatomic, strong) CLLocation* userLocation;
 
 @end
 
@@ -30,17 +35,36 @@
     
     self.tableview.pullDelegate = self;
     self.tableview.pullBackgroundColor = [UIColor clearColor];
-    self.tableview.pullTextColor = UIColorRGB(0xCC, 0x66, 0x33);
+    self.tableview.pullTextColor = UIColorRGB(0x99, 0x99, 0x99);
     self.tableview.pullArrowImage = [UIImage imageNamed:@"grayArrow.png"];
+    
+    if ([self.tableview respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableview setSeparatorInset:UIEdgeInsetsZero];
+    }
     
     self.tableview.tableFooterView = [[UIView alloc] initWithFrame:CGRectNull];
 
     _cellItemDataList = [NSMutableArray array];
+    
+    //初始化位置管理器
+    self.locManager = [[CLLocationManager alloc]init];
+    //设置代理
+    self.locManager.delegate = self;
+    //设置位置经度
+    self.locManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
+    //设置每隔100米更新位置
+    self.locManager.distanceFilter = 100;
+    //开始定位服务
+    [self.locManager startUpdatingLocation];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc {
+    [self.locManager stopUpdatingLocation];
 }
 
 #pragma mark - View lifecycle
@@ -84,12 +108,31 @@
     CBActivityItemCell* cell = [tableView dequeueReusableCellWithIdentifier:@"CBActivityItemCell"];
     CBActivityData* itemData = [self.cellItemDataList objectAtIndex:indexPath.row];
     [cell loadItemData:itemData];
+    
+    if (itemData.location && self.userLocation) {
+        CLLocation* loc = [[CLLocation alloc] initWithLatitude:itemData.location.latitude longitude:itemData.location.longitude];
+        
+        CLLocationDistance distance = [self.userLocation distanceFromLocation:loc];
+        if (distance < 50) {
+            cell.labDistance.text = @"距离<50m";
+        }
+        else if (distance < 1000) {
+            cell.labDistance.text = [NSString stringWithFormat:@"距离%.1fm", distance];
+        }
+        else {
+            cell.labDistance.text = [NSString stringWithFormat:@"距离%.1fkm", distance/1000.0];
+        }
+    }
+    else {
+        cell.labDistance.text = nil;
+    }
+    
     return cell;
 }
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 82;
+    return 76;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -236,6 +279,14 @@
     else {
         [self reloadCellItemDataList];
     }
+}
+
+#pragma mark -  CLLocationManagerDelegate
+- (void)locationManager:(CLLocationManager *)manager
+     didUpdateLocations:(NSArray<CLLocation *> *)locations {
+    self.userLocation = locations.firstObject;
+    
+    [self.tableview reloadData];
 }
 
 @end

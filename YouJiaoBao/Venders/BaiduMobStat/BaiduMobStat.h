@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @class UIViewController;
 
@@ -14,15 +15,26 @@
  *  日志发送策略
  */
 typedef enum _BaiduMobStatLogStrategy {
-    BaiduMobStatLogStrategyAppLaunch = 0, //每次程序启动时发送（默认策略，推荐使用!）
-    BaiduMobStatLogStrategyDay = 1, //每天的程序第一次进入启动
-    BaiduMobStatLogStrategyCustom = 2, //根据设定的时间间隔发送
+    BaiduMobStatLogStrategyAppLaunch = 0,   //每次程序启动时发送（默认策略，推荐使用!）
+    BaiduMobStatLogStrategyDay = 1,         //每天的程序第一次进入启动
+    BaiduMobStatLogStrategyCustom = 2,      //根据设定的时间间隔发送
 } BaiduMobStatLogStrategy;
 
+/**
+ *  自动监控策略
+ *  启动自动监控策略后，原先相应调用Api手动埋点的代码需要删除，避免重复统计！！
+ *  举例：启动BaiduMobStatMonitorStrategyPageView策略，则不需要调用pageviewStartWithName等接口进行页面统计。
+ */
+typedef enum _BaiduMobStatMonitorStrategy {
+    BaiduMobStatMonitorStrategyNone = 0,        //不启用自动监控
+    BaiduMobStatMonitorStrategyPageView = 1,    //只启动页面统计自动监控
+    BaiduMobStatMonitorStrategyButton = 2,      //只启动button统计自动监控
+    BaiduMobStatMonitorStrategyAll = 3,         //启动页面统计与button统计自动监控
+} BaiduMobStatMonitorStrategy;
 
 /**
  *  百度移动应用统计接口
- *  当前版本 V3.5.1
+ *  当前版本 V3.6.1
  */
 @interface BaiduMobStat : NSObject
 
@@ -88,6 +100,12 @@ typedef enum _BaiduMobStatLogStrategy {
  *  默认值 空字符串:@""
  */
 @property (nonatomic, copy) NSString *adid;
+
+/**
+ *  设置自动监控策略
+ *  默认值 BaiduMobStatMonitorStrategyNone 不启动自动监控
+ */
+@property (nonatomic, assign) BaiduMobStatMonitorStrategy monitorStrategy;
 
 /**
  *  获取统计对象的实例
@@ -172,3 +190,23 @@ typedef enum _BaiduMobStatLogStrategy {
 - (NSString *)getDeviceCuid;
 
 @end
+
+/**
+ *  Category 声明
+ */
+#define BAIDU_MOB_STAT_DEFINE_CATEGORY \
+@interface UIViewController (BaiduMobStatViewController) \
+@property (nonatomic, assign) BOOL baiduMobStatHandleRecord; \
+@property (nonatomic, strong) NSString *titleForBaiduMobStat; \
+@end \
+@interface UIWindow (BaiduMobStatWindow) \
+@end \
+@interface UIButton (BaiduMobStatButton) \
+@property (nonatomic, assign) BOOL baiduMobStatHandleRecord; \
+@property (nonatomic, strong) NSString *titleForBaiduMobStat; \
+@property (nonatomic, strong) NSString *labelForBaiduMobStat; \
+@end
+
+BAIDU_MOB_STAT_DEFINE_CATEGORY
+
+

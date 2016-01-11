@@ -166,4 +166,9 @@
 #define kGetInviteCode      @"/api/v5/invitation_code/%@"
 #define kCreateInvitation   @"/api/v5/kindergarten/%@/invitation"
 
+#pragma mark - IM
+#define kCBClassesURL           @"/kindergarten/%@/class"
+#define kCBTeachersURL          @"/kindergarten/%@/class/%@/manager"
+#define kCBEmployeesURL         @"/kindergarten/%@/employee"
+
 #endif

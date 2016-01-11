@@ -56,7 +56,7 @@ enum {
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self customizeBackBarItem];
+    //[self customizeBackBarItem];
     
     _nickFieldDelegate = [[CSTextFieldDelegate alloc] initWithType:kCSTextFieldDelegateNormal];
     

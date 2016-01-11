@@ -50,7 +50,12 @@
      "account_name" : "13408654680",
      "school_id" : 93740362,
      "school_name" : "天之骄子幼儿园",
-     "member_status":"free"
+     "member_status":"free",
+     "im_token" =     {
+     source = db;
+     token = "9YG/W9G5Lbp22JfU5qhO0ss8c+62KOdje+2Xo/9p21sVElVu7QBMFQF1v7nNTtxUORuWt30JHu72PVzAPWSP7Hn7m3YilJJ19jxWixZT/zxLLzOxwaIezGJa73m3bFGj";
+     "user_id" = "p_8901_Some(9331)_18782242007";
+     };
      }
      */
     
@@ -64,6 +69,9 @@
     NSInteger error_code = [[dataJson valueForKeyNotNull:@"error_code"] integerValue];
     NSString* member_status = [dataJson valueForKeyNotNull:@"member_status"];
     
+    NSDictionary* im_token = [dataJson valueForKeyNotNull:@"im_token"];
+    
+    
     CSKuleBindInfo* obj = [CSKuleBindInfo new];
     obj.accessToken = access_token;
     obj.accountName = account_name;
@@ -72,6 +80,7 @@
     obj.schoolId = school_id;
     obj.errorCode = error_code;
     obj.memberStatus = member_status;
+    obj.imToken = [CBIMTokenData instanceWithDictionary:im_token];
     
     return obj;
 }

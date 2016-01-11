@@ -17,12 +17,13 @@
 #import "hm_sdk.h"
 #import "TSFileCache.h"
 #import "CSKit.h"
-#import <objc/runtime.h>
+#import "CSKulePreferences.h"
 
+#import <objc/runtime.h>
 #import <ShareSDK/ShareSDK.h>
 #import "WXApi.h"
-
 #import "CSFirImApi.h"
+
 
 @interface CSKuleEngine() <UIAlertViewDelegate> {
     NSMutableDictionary* _senderProfiles;
@@ -130,6 +131,7 @@
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    [[CSKulePreferences defaultPreferences] savePreferences];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"app.applicationWillResignActive" object:nil];
 }
@@ -184,7 +186,7 @@
             [self checkUpdatesOfCheckin];
             [self checkUpdatesOfSchedule];
             //[self checkUpdatesOfAssignment];
-            [self checkUpdatesOfChating];
+            //[self checkUpdatesOfChating];
             [self checkUpdatesOfAssess];
         }
     }
@@ -337,7 +339,7 @@
 #pragma mark - Setup
 - (void)setupBaiduMobStat {
     BaiduMobStat* statTracker = [BaiduMobStat defaultStat];
-    statTracker.enableExceptionLog = YES; // 是否允许截获并发送崩溃信息，请设置YES或者NO
+    statTracker.enableExceptionLog = NO; // 是否允许截获并发送崩溃信息，请设置YES或者NO
 #if COCOBABYS_DEV_MODEL
     statTracker.channelId = @"ios-dev";//设置您的app的发布渠道
 #else
@@ -506,6 +508,7 @@
             _loginInfo.username = bindInfo.username;
             _loginInfo.schoolName = bindInfo.schoolName;
             _loginInfo.memberStatus = bindInfo.memberStatus;
+            _loginInfo.imToken = bindInfo.imToken;
             
             _preferences.loginInfo = _loginInfo;
             [gApp hideAlert];
@@ -514,7 +517,7 @@
             //[_httpClient enqueueHTTPRequestOperation:operation];
         }
         else {
-            CSLog(@"doReceiveBindInfo error_code=%d", bindInfo.errorCode);
+            CSLog(@"[3]doReceiveBindInfo error_code=%ld", bindInfo.errorCode);
             [gApp gotoLoginProcess];
             [gApp alert:@"获取信息失败，请重新登录。"];
         }

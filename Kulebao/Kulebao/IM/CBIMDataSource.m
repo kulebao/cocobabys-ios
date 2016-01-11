@@ -172,17 +172,29 @@
     
     RCUserInfo* userObj = nil;
     
+    NSString* group_school_id = nil;
+    NSString* group_class_id = nil;
+    
+    NSArray* components = [groupId componentsSeparatedByString:@"_"];
+    if (components.count == 2) {
+        group_school_id = components[0];
+        group_class_id = components[1];
+    }
+    
     if ([userId isEqualToString:@"im_system_admin"]) {
         userObj = [[RCUserInfo alloc] initWithUserId:userId name:@"系统管理员" portrait:nil];
     }
     else {
         NSError* error = nil;
         // p_8901_Some(9331)_18762242606
-        NSString* pattern = @"\\w+_Some\\((.*)\\)_\\w+";
+        // t_8901_Some(1361)_221919
+        NSString* pattern = @"\\w+_(.*)_Some\\((.*)\\)_(.*)$";
         NSRegularExpression* regex = [NSRegularExpression regularExpressionWithPattern:pattern options:NSRegularExpressionCaseInsensitive error:&error];
         NSTextCheckingResult* result = [regex firstMatchInString:userId options:0 range:NSMakeRange(0, userId.length)];
-        if (result && result.numberOfRanges>1) {
-            NSString* user_id = [userId substringWithRange:[result rangeAtIndex:1]];
+        if (result && result.numberOfRanges>3) {
+            NSString* school_id = [userId substringWithRange:[result rangeAtIndex:1]];
+            NSString* user_id = [userId substringWithRange:[result rangeAtIndex:2]];
+            NSString* login_name = [userId substringWithRange:[result rangeAtIndex:3]];
             
             //CSLog(@"user_id=%@, full_userId=%@", user_id, userId);
             
@@ -191,11 +203,23 @@
                 
                 // NSArray* objList = [_relationshipInfoList filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"parent._id == %@",user_id]];
                 for (CBRelationshipInfo* relation in _relationshipInfoList) {
-                    if ([user_id isEqualToString:relation.parent._id.stringValue]) {
-                        userObj = [[RCUserInfo alloc] initWithUserId:userId
-                                                                name:[NSString stringWithFormat:@"%@%@", [relation.child displayNick], relation.relationship]
-                                                            portrait:relation.parent.portrait];
-                        break;
+                    if ([user_id isEqualToString:relation.parent._id.stringValue]
+                        && relation.parent.school_id.integerValue == [school_id integerValue]) {
+                        
+                        if (group_class_id) {
+                            if ([group_class_id isEqualToString:relation.child.class_id.stringValue]) {
+                                userObj = [[RCUserInfo alloc] initWithUserId:userId
+                                                                        name:[NSString stringWithFormat:@"%@%@", [relation.child displayNick], relation.relationship]
+                                                                    portrait:relation.parent.portrait];
+                                break;
+                            }
+                        }
+                        else {
+                            userObj = [[RCUserInfo alloc] initWithUserId:userId
+                                                                    name:[NSString stringWithFormat:@"%@%@", [relation.child displayNick], relation.relationship]
+                                                                portrait:relation.parent.portrait];
+                            break;
+                        }
                     }
                 }
             }
@@ -204,7 +228,8 @@
                 // NSArray* objList = [_teacherInfoList filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"uid==%@",user_id]];
                 
                 for (CBTeacherInfo* teacherInfo in _teacherInfoList) {
-                    if ([user_id isEqualToString:teacherInfo.uid.stringValue]) {
+                    if ([user_id isEqualToString:teacherInfo.uid.stringValue]
+                        && teacherInfo.school_id.integerValue == [school_id integerValue]) {
                         userObj = [[RCUserInfo alloc] initWithUserId:userId
                                                                 name:[NSString stringWithFormat:@"%@老师", teacherInfo.name]
                                                             portrait:teacherInfo.portrait];

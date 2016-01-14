@@ -201,27 +201,53 @@
             if ([userId hasPrefix:@"p_"]) {
                 // https://stage2.cocobabys.com/kindergarten/8901/relationship?class_id=20001
                 
-                // NSArray* objList = [_relationshipInfoList filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"parent._id == %@",user_id]];
-                for (CBRelationshipInfo* relation in _relationshipInfoList) {
-                    if ([user_id isEqualToString:relation.parent._id.stringValue]
-                        && relation.parent.school_id.integerValue == [school_id integerValue]) {
-                        
-                        if (group_class_id) {
+                NSString* im_name = @"家长";
+                NSString* im_portrait = nil;
+                
+                if (group_class_id) {
+                    for (CBRelationshipInfo* relation in _relationshipInfoList) {
+                        if ([user_id isEqualToString:relation.parent._id.stringValue]
+                            && relation.parent.school_id.integerValue == [school_id integerValue]) {
                             if ([group_class_id isEqualToString:relation.child.class_id.stringValue]) {
-                                userObj = [[RCUserInfo alloc] initWithUserId:userId
-                                                                        name:[NSString stringWithFormat:@"%@%@", [relation.child displayNick], relation.relationship]
-                                                                    portrait:relation.parent.portrait];
+                                im_name = [NSString stringWithFormat:@"%@%@", [relation.child displayNick], relation.relationship];
+                                im_portrait = relation.parent.portrait;
                                 break;
                             }
                         }
-                        else {
-                            userObj = [[RCUserInfo alloc] initWithUserId:userId
-                                                                    name:[NSString stringWithFormat:@"%@%@", [relation.child displayNick], relation.relationship]
-                                                                portrait:relation.parent.portrait];
-                            break;
+                    }
+                }
+                else {
+                    
+                    NSMutableArray* im_relationships = [NSMutableArray array];
+                    for (CBRelationshipInfo* relation in _relationshipInfoList) {
+                        if ([user_id isEqualToString:relation.parent._id.stringValue]
+                            && relation.parent.school_id.integerValue == [school_id integerValue]) {
+                            [im_relationships addObject:relation];
+                        }
+                    }
+                    
+                    if (im_relationships.count > 1) {
+                        NSMutableArray* im_name_list = [NSMutableArray array];
+                        for (CBRelationshipInfo* relation in im_relationships) {
+                            //[im_name_list addObject:[NSString stringWithFormat:@"%@%@", [relation.child displayNick], relation.relationship]];
+                            [im_name_list addObject:[relation.child displayNick]];
+                            im_portrait = relation.parent.portrait;
+                        }
+                        
+                        im_name = [NSString stringWithFormat:@"%@的亲属", [im_name_list componentsJoinedByString:@","]];
+                    }
+                    else {
+                        CBRelationshipInfo* relation = im_relationships.firstObject;
+                        if (relation) {
+                            im_name = [NSString stringWithFormat:@"%@%@", [relation.child displayNick], relation.relationship];
+                            im_portrait = relation.parent.portrait;
                         }
                     }
                 }
+                
+                userObj = [[RCUserInfo alloc] initWithUserId:userId
+                                                        name:im_name
+                                                    portrait:im_portrait];
             }
             else if ([userId hasPrefix:@"t_"]) {
                 // https://stage2.cocobabys.com/kindergarten/8901/class/20001/manager

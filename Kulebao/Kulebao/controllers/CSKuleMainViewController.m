@@ -84,11 +84,6 @@
     // Do any additional setup after loading the view.
     self.navigationController.navigationBarHidden = NO;
     
-    UINavigationBar* navigationBar = self.navigationController.navigationBar;
-    [navigationBar setBackgroundImage:[UIImage imageNamed:@"v2-head.png"] forBarMetrics:UIBarMetricsDefault];
-    [navigationBar setTitleTextAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:20], NSForegroundColorAttributeName:[UIColor whiteColor]}];
-    navigationBar.tintColor = [UIColor whiteColor];
-    
     self.labChildNick.text = nil;
     self.imgChildPortrait.layer.cornerRadius = self.imgChildPortrait.frame.size.width/2;
     self.imgChildPortrait.clipsToBounds = YES;
@@ -1264,7 +1259,7 @@
      introImageNames = @[@"guide-1-568h.png", @"guide-2-568h.png", @"guide-3-568h.png", @"guide-4-568h.png"];
      }
      */
-    NSArray* introImageNames = @[@"v2.8-guide-home"];
+    NSArray* introImageNames = @[@"v2_8-guide-home"];
     
     NSMutableArray* introPages = [NSMutableArray array];
     for (NSString* imageName in introImageNames) {

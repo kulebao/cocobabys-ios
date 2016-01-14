@@ -413,6 +413,17 @@
     [alertAppearance setButtonBackgroundImage:imgBtnOkBg forState:UIControlStateNormal];
     [alertAppearance setCancelButtonBackgroundImage:imgBtnCancelBg forState:UIControlStateNormal];
     [alertAppearance setContentInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
+    
+    //
+    id naviAppearance = [UINavigationBar appearance];
+    [naviAppearance setBackgroundImage:[UIImage imageNamed:@"v2-head.png"] forBarMetrics:UIBarMetricsDefault];
+    [naviAppearance setTitleTextAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:20], NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    //naviAppearance.tintColor = [UIColor whiteColor];
+    [naviAppearance setBarTintColor:[UIColor whiteColor]];
+    [naviAppearance setTintColor:[UIColor whiteColor]];
+    
+    //
+    [[UIBarButtonItem appearance] setTintColor:[UIColor whiteColor]];
 }
 
 #pragma mark - URL

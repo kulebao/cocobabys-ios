@@ -399,6 +399,16 @@
     self.httpClient = [CBHttpClient sharedInstance];
 }
 
+- (void)setCurrentRelationship:(CSKuleRelationshipInfo *)currentRelationship {
+    _currentRelationship = currentRelationship;
+    if (_currentRelationship) {
+        _preferences.currentRelationshipUid = _currentRelationship.uid;
+    }
+    else {
+        _preferences.currentRelationshipUid = 0;
+    }
+}
+
 - (void)setupAppearance {
     UIImage* imgAlertBg = [UIImage imageNamed:@"alert-bg.png"];
     UIImage* imgBtnCancelBg = [[UIImage imageNamed:@"v2-btn_gray.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(8, 8, 8, 8)];

@@ -28,6 +28,8 @@
 
 @property (nonatomic, strong) NSString* configTag;
 
+@property (nonatomic, assign) NSInteger currentRelationshipUid;
+
 + (id)defaultPreferences;
 - (void)savePreferences;
 

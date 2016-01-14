@@ -1037,6 +1037,16 @@
         gApp.engine.relationships = [NSArray arrayWithArray:relationships];
         
         CSKuleRelationshipInfo* relationshipInfo = [gApp.engine.relationships firstObject];
+        
+        if (gApp.engine.preferences.currentRelationshipUid > 0) {
+            for (CSKuleRelationshipInfo* r in gApp.engine.relationships) {
+                if (r.uid == gApp.engine.preferences.currentRelationshipUid) {
+                    relationshipInfo = r;
+                    break;
+                }
+            }
+        }
+        
         if(relationshipInfo) {
             gApp.engine.currentRelationship = relationshipInfo;
             [gApp hideAlert];

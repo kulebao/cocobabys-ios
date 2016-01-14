@@ -115,10 +115,13 @@
     // App 是用户点击推送消息启动
     NSDictionary *userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     if (userInfo) {
-        CSLog(@"从消息启动:%@",userInfo);
-        [BPush handleNotification:userInfo];
-        [self.receivedNotifications addObject:userInfo];
-        self.pendingNotificationInfo = userInfo;
+        [self onRemotePushNotification:userInfo launching:YES];
+    }
+    
+    // 本地通知的内容
+    UILocalNotification *localNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    if (localNotification) {
+        [self onLocalNotification:localNotification launching:YES];
     }
     
     //角标清0
@@ -288,21 +291,53 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     CSLog(@"%@", @"Did receive a Remote Notification");
-    if (application.applicationState == UIApplicationStateActive) {
-        self.badgeOfCheckin = self.badgeOfCheckin + 1;
-        [application setApplicationIconBadgeNumber:0];
+    [self onRemotePushNotification:userInfo launching:NO];
+}
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    [self onLocalNotification:notification launching:NO];
+}
+
+#pragma mark - Remote/Local Notification
+- (void)onRemotePushNotification:(NSDictionary*)userInfo launching:(BOOL)yes {
+    if (yes) {
+        CSLog(@"从推送消息启动:%@", userInfo);
+        [BPush handleNotification:userInfo];
+        [self.receivedNotifications addObject:userInfo];
+        self.pendingNotificationInfo = userInfo;
     }
     else {
-        if (userInfo) {
-            self.pendingNotificationInfo = userInfo;
-        }
-    }
+        CSLog(@"收到推送消息:%@", userInfo);
+
+            if (self.application.applicationState == UIApplicationStateActive) {
+                NSDictionary * rcData = [[RCIMClient sharedRCIMClient] getPushExtraFromRemoteNotification:userInfo];
+                if (rcData == nil) {
+                    self.badgeOfCheckin = self.badgeOfCheckin + 1;
+                    [self.application setApplicationIconBadgeNumber:0];
+                }
+            }
+            else {
+                if (userInfo) {
+                    self.pendingNotificationInfo = userInfo;
+                }
+            }
+            
+            if (userInfo) {
+                [self.receivedNotifications addObject:userInfo];
+            }
+            
+            [BPush handleNotification:userInfo];
     
-    if (userInfo) {
-        [self.receivedNotifications addObject:userInfo];
     }
-    
-    [BPush handleNotification:userInfo];
+}
+
+- (void)onLocalNotification:(UILocalNotification*)notification launching:(BOOL)yes {
+    if (yes) {
+        CSLog(@"从本地消息启动:%@", notification);
+    }
+    else {
+        CSLog(@"收到本地消息:%@", notification);
+    }
 }
 
 #pragma mark - Getter & Setter

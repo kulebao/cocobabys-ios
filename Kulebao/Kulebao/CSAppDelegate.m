@@ -129,6 +129,10 @@ CSAppDelegate* gApp = nil;
     [_engine application:application didReceiveRemoteNotification:userInfo];
 }
 
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    [_engine application:application didReceiveLocalNotification:notification];
+}
+
 // 当 DeviceToken 获取失败时,系统会回调此⽅方法
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
 {

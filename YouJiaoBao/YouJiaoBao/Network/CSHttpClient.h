@@ -35,6 +35,10 @@ typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSErr
                                                 success:(SuccessResponseHandler)success
                                                 failure:(FailureResponseHandler)failure;
 
+- (AFHTTPRequestOperation*)opGetSchoolInfo:(NSInteger)schoolId
+                                   success:(SuccessResponseHandler)success
+                                   failure:(FailureResponseHandler)failure;
+
 - (AFHTTPRequestOperation*)opGetChildListOfKindergarten:(NSInteger)schoolId
                                           withClassList:(NSArray*)classIdList
                                                 success:(SuccessResponseHandler)success

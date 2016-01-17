@@ -124,5 +124,6 @@
 
 // PATH: 获取家庭关系
 #define kGetFamilyRelationshipPath  @"/kindergarten/%@/relationship"
+#define kGetSchoolInfoPath          @"/kindergarten/%@"
 
 #endif

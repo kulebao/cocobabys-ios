@@ -15,6 +15,7 @@
 #import <Bugly/CrashReporter.h>
 #import <RongIMKit/RongIMKit.h>
 #import "CBIMDataSource.h"
+#import "CBIMChatViewController.h"
 
 CSAppDelegate* gApp = nil;
 
@@ -256,7 +257,11 @@ CSAppDelegate* gApp = nil;
     }
     else {
         CSLog(@"收到本地消息:%@", notification);
+        NSDictionary *pushServiceData = [[RCIMClient sharedRCIMClient] getPushExtraFromRemoteNotification:notification.userInfo];
+        if (pushServiceData) {
+        }
     }
+    _pendingNotificationInfo = notification.userInfo;
 }
 
 @end

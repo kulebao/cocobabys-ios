@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "EntityLoginInfo.h"
 #import "ModelAccount.h"
+#import "CBSchoolInfo.h"
 
 extern NSString* kNotiLoginSuccess;
 extern NSString* kNotiLogoutSuccess;
@@ -20,6 +21,7 @@ extern NSString* kAppleID;
 @interface CSEngine : NSObject
 @property (nonatomic, strong, readonly) EntityLoginInfo* loginInfo;
 @property (nonatomic, strong, readonly) NSArray* classInfoList;
+@property (nonatomic, strong) CBSchoolInfo* schoolInfo;
 
 + (id)sharedInstance;
 
@@ -36,5 +38,8 @@ extern NSString* kAppleID;
 - (ModelAccount*)decryptAccount;
 
 - (BOOL)clearAccount;
+
+- (void)reloadSchoolInfo;
+
 
 @end

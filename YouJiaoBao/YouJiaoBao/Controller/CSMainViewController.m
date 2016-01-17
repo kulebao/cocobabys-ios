@@ -90,6 +90,11 @@
     CGFloat cellWidth = floor((self.view.bounds.size.width - 40) / 3.0);
     self.layoutCollectionView.itemSize = CGSizeMake(cellWidth, cellWidth);
     [self.collectionView reloadData];
+    
+    CSEngine* engine = [CSEngine sharedInstance];
+    if (engine.schoolInfo == nil) {
+        [engine reloadSchoolInfo];
+    }
 }
 
 #pragma mark - Navigation

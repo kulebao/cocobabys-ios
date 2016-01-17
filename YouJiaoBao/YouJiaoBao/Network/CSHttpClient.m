@@ -234,6 +234,21 @@
     return op;
 }
 
+- (AFHTTPRequestOperation*)opGetSchoolInfo:(NSInteger)schoolId
+                                   success:(SuccessResponseHandler)success
+                                   failure:(FailureResponseHandler)failure; {
+    id parameters = @{};
+    
+    NSString* apiUrl = [NSString stringWithFormat:kGetSchoolInfoPath, @(schoolId)];
+    
+    AFHTTPRequestOperation* op =[self.opManager GET:apiUrl
+                                         parameters:parameters
+                                            success:success
+                                            failure:failure];
+    
+    return op;
+}
+
 - (AFHTTPRequestOperation*)opGetChildListOfKindergarten:(NSInteger)schoolId
                                           withClassList:(NSArray*)classIdList
                                                 success:(SuccessResponseHandler)success

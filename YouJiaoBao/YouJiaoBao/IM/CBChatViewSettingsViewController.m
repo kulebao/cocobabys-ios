@@ -45,7 +45,12 @@
 
 - (void)reloadData {
     CSEngine* engine = [CSEngine sharedInstance];
-    self.labSchoolName.text = @"";
+    if (engine.schoolInfo) {
+        self.labSchoolName.text = engine.schoolInfo.name;
+    }
+    else {
+        self.labSchoolName.text = @"幼儿园";
+    }
     
     CBIMDataSource* imDS = [CBIMDataSource sharedInstance];
     

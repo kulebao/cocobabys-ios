@@ -14,6 +14,8 @@
 #import "CSChildRelationshipItemTableViewCell.h"
 #import "CSAssessmentEditorViewController.h"
 #import "CSKuleChatingViewController.h"
+#import "CBIMDataSource.h"
+#import "CBIMChatViewController.h"
 
 @interface CSChildProfileViewController () <UITableViewDataSource, UITableViewDelegate, CSChildProfileHeaderViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -179,7 +181,7 @@
 
 #pragma mark - CSChildProfileHeaderViewControllerDelegate
 - (void)childProfileHeaderViewControllerShowChating:(CSChildProfileHeaderViewController*)ctrl {
-    [self performSegueWithIdentifier:@"segue.childprofile.chating" sender:nil];
+    //[self performSegueWithIdentifier:@"segue.childprofile.chating" sender:nil];
 }
 
 - (void)childProfileHeaderViewControllerShowAssessment:(CSChildProfileHeaderViewController*)ctrl {

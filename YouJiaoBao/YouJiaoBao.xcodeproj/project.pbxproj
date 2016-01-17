@@ -678,6 +678,7 @@
 		221BAFC91C4B85F600593559 /* EntityAssessInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 221BAFB11C4B85F600593559 /* EntityAssessInfo.m */; };
 		221BAFCA1C4B85F600593559 /* EntityRelationshipInfo+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 221BAFB31C4B85F600593559 /* EntityRelationshipInfo+CoreDataProperties.m */; };
 		221BAFCB1C4B85F600593559 /* EntityRelationshipInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 221BAFB51C4B85F600593559 /* EntityRelationshipInfo.m */; };
+		221BAFCE1C4B8DE900593559 /* CBSchoolInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 221BAFCD1C4B8DE900593559 /* CBSchoolInfo.m */; };
 		229033D41C4B3FB0008A94DF /* CBChatViewSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 229033BC1C4B3FB0008A94DF /* CBChatViewSettingsViewController.m */; };
 		229033D51C4B3FB0008A94DF /* CBChildInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 229033BE1C4B3FB0008A94DF /* CBChildInfo.m */; };
 		229033D61C4B3FB0008A94DF /* CBClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 229033C01C4B3FB0008A94DF /* CBClassInfo.m */; };
@@ -693,6 +694,7 @@
 		229033E01C4B3FB0008A94DF /* IM.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 229033D31C4B3FB0008A94DF /* IM.storyboard */; };
 		229033E31C4B4007008A94DF /* CSJsonObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 229033E21C4B4007008A94DF /* CSJsonObject.m */; };
 		22BC1E8F1BFE26A900DF6834 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 09A3E1011BC79D0A00076198 /* libstdc++.tbd */; };
+		22C64A0C1C4B92770008529B /* v2-im-group@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 22C64A0B1C4B92770008529B /* v2-im-group@2x.png */; };
 		5C8CEB50FBB46A0F11F5CC76 /* libPods-YouJiaoBao.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95C1D92135E08602A4FD4B63 /* libPods-YouJiaoBao.a */; };
 /* End PBXBuildFile section */
 
@@ -1550,6 +1552,8 @@
 		221BAFB31C4B85F600593559 /* EntityRelationshipInfo+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EntityRelationshipInfo+CoreDataProperties.m"; sourceTree = "<group>"; };
 		221BAFB41C4B85F600593559 /* EntityRelationshipInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityRelationshipInfo.h; sourceTree = "<group>"; };
 		221BAFB51C4B85F600593559 /* EntityRelationshipInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityRelationshipInfo.m; sourceTree = "<group>"; };
+		221BAFCC1C4B8DE900593559 /* CBSchoolInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBSchoolInfo.h; sourceTree = "<group>"; };
+		221BAFCD1C4B8DE900593559 /* CBSchoolInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBSchoolInfo.m; sourceTree = "<group>"; };
 		229033BB1C4B3FB0008A94DF /* CBChatViewSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBChatViewSettingsViewController.h; sourceTree = "<group>"; };
 		229033BC1C4B3FB0008A94DF /* CBChatViewSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBChatViewSettingsViewController.m; sourceTree = "<group>"; };
 		229033BD1C4B3FB0008A94DF /* CBChildInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBChildInfo.h; sourceTree = "<group>"; };
@@ -1578,6 +1582,7 @@
 		229033E11C4B4007008A94DF /* CSJsonObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSJsonObject.h; sourceTree = "<group>"; };
 		229033E21C4B4007008A94DF /* CSJsonObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSJsonObject.m; sourceTree = "<group>"; };
 		229033E41C4B404A008A94DF /* CSKuleCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSKuleCommon.h; sourceTree = "<group>"; };
+		22C64A0B1C4B92770008529B /* v2-im-group@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-im-group@2x.png"; sourceTree = "<group>"; };
 		37124C63E09C739A3FC178B4 /* Pods-YouJiaoBao.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YouJiaoBao.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YouJiaoBao/Pods-YouJiaoBao.debug.xcconfig"; sourceTree = "<group>"; };
 		95C1D92135E08602A4FD4B63 /* libPods-YouJiaoBao.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YouJiaoBao.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE5A1805FA68D27CBDEAC531 /* Pods-YouJiaoBao.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YouJiaoBao.release.xcconfig"; path = "Pods/Target Support Files/Pods-YouJiaoBao/Pods-YouJiaoBao.release.xcconfig"; sourceTree = "<group>"; };
@@ -2850,6 +2855,7 @@
 		09CD6674197C112100CC08F1 /* Res */ = {
 			isa = PBXGroup;
 			children = (
+				22C64A0A1C4B92770008529B /* im */,
 				094F3E7A1B7797C300001A94 /* icons */,
 				091760F419C0909A006FE2FB /* texts */,
 				098E3DE3198B314400CB4F0B /* v1 */,
@@ -2896,9 +2902,19 @@
 				229033D01C4B3FB0008A94DF /* CBRelationshipInfo.m */,
 				229033D11C4B3FB0008A94DF /* CBTeacherInfo.h */,
 				229033D21C4B3FB0008A94DF /* CBTeacherInfo.m */,
+				221BAFCC1C4B8DE900593559 /* CBSchoolInfo.h */,
+				221BAFCD1C4B8DE900593559 /* CBSchoolInfo.m */,
 				229033D31C4B3FB0008A94DF /* IM.storyboard */,
 			);
 			path = IM;
+			sourceTree = "<group>";
+		};
+		22C64A0A1C4B92770008529B /* im */ = {
+			isa = PBXGroup;
+			children = (
+				22C64A0B1C4B92770008529B /* v2-im-group@2x.png */,
+			);
+			path = im;
 			sourceTree = "<group>";
 		};
 		E94432057A93D9C3C090D835 /* Pods */ = {
@@ -3209,6 +3225,7 @@
 				09F59F111B557FE200835163 /* v2-宝宝列表.png in Resources */,
 				09F59F0B1B557FE200835163 /* v2-启动界面.png in Resources */,
 				098E3E8A198B314500CB4F0B /* setting.png in Resources */,
+				22C64A0C1C4B92770008529B /* v2-im-group@2x.png in Resources */,
 				0901CE0F1ABF2FBB0044838A /* record_flashlight_highlighted@2x.png in Resources */,
 				09F59F171B557FE200835163 /* v2-成长经历.png in Resources */,
 				0901CE2A1ABF2FBB0044838A /* record_tool_disable.png in Resources */,
@@ -3598,6 +3615,7 @@
 				221BAFC71C4B85F600593559 /* EntityChildInfo.m in Sources */,
 				090C639619939D5500398B40 /* CSChildProfileViewController.m in Sources */,
 				0901CDFC1ABF2FBB0044838A /* DeleteButton.m in Sources */,
+				221BAFCE1C4B8DE900593559 /* CBSchoolInfo.m in Sources */,
 				221BAFB81C4B85F600593559 /* EntityClassInfo+CoreDataProperties.m in Sources */,
 				095D857719C5CD5F00F2F926 /* AHAlertView.m in Sources */,
 				221BAFC21C4B85F600593559 /* EntityNewsInfo+CoreDataProperties.m in Sources */,

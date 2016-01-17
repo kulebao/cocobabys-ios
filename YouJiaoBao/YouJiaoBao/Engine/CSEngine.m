@@ -9,6 +9,7 @@
 #import "CSEngine.h"
 #import "AHAlertView.h"
 #import "BaiduMobStat.h"
+#import "CSHttpClient.h"
 
 NSString* kNotiLoginSuccess = @"noti.login.success";
 NSString* kNotiLogoutSuccess = @"noti.logout.success";
@@ -95,6 +96,19 @@ NSString* kAppleID = @"917314512";
     [conf removeObjectForKey:kKeyLoginAccount];
     
     return [conf synchronize];
+}
+
+- (void)reloadSchoolInfo {
+    CSHttpClient* http = [CSHttpClient sharedInstance];
+    if (_loginInfo) {
+        [http opGetSchoolInfo:_loginInfo.schoolId.integerValue
+                      success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                          _schoolInfo = [CBSchoolInfo instanceWithDictionary:responseObject];
+                          
+                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                          
+                      }];
+    }
 }
 
 @end

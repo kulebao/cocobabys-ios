@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Unv-SB-3EC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Unv-SB-3EC">
     <dependencies>
         <deployment version="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
@@ -1417,8 +1417,14 @@
                                 <rect key="frame" x="28" y="28" width="84" height="84"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="姓名" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="160" translatesAutoresizingMaskIntoConstraints="NO" id="8bj-Q8-xCU">
+                                <rect key="frame" x="136" y="20" width="168" height="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.1215686275" green="0.52941176469999995" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="87O-wC-41k">
-                                <rect key="frame" x="136" y="88" width="150" height="35"/>
+                                <rect key="frame" x="136" y="56" width="150" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="ZUw-Rt-b4b"/>
                                 </constraints>
@@ -1433,41 +1439,17 @@
                                     <action selector="onBtnAssessmentsClicked:" destination="I8c-cN-zLf" eventType="touchUpInside" id="JMv-RQ-yG8"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pbw-ao-dln">
-                                <rect key="frame" x="136" y="48" width="150" height="35"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="MoL-QX-0SJ"/>
-                                </constraints>
-                                <state key="normal" backgroundImage="v2-chat-session.png">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="onBtnSessionClicked:" destination="I8c-cN-zLf" eventType="touchUpInside" id="6NU-i3-VsN"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="姓名" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="160" translatesAutoresizingMaskIntoConstraints="NO" id="8bj-Q8-xCU">
-                                <rect key="frame" x="136" y="20" width="168" height="20"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" red="0.1215686275" green="0.52941176469999995" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="8bj-Q8-xCU" firstAttribute="leading" secondItem="eMe-BP-DQI" secondAttribute="trailing" constant="16" id="39T-Cu-4sm"/>
-                            <constraint firstItem="87O-wC-41k" firstAttribute="leading" secondItem="Pbw-ao-dln" secondAttribute="leading" id="3FP-Sa-gdQ"/>
+                            <constraint firstItem="87O-wC-41k" firstAttribute="top" secondItem="8bj-Q8-xCU" secondAttribute="bottom" constant="16" id="Hmq-GI-RAs"/>
                             <constraint firstItem="87O-wC-41k" firstAttribute="leading" secondItem="8bj-Q8-xCU" secondAttribute="leading" id="Juf-aH-Rvy"/>
                             <constraint firstItem="Zh8-gs-gBB" firstAttribute="leading" secondItem="eMe-BP-DQI" secondAttribute="leading" constant="8" id="Ngo-Af-3l8"/>
-                            <constraint firstItem="87O-wC-41k" firstAttribute="top" secondItem="Pbw-ao-dln" secondAttribute="bottom" constant="5" id="Rfv-wX-XkT"/>
                             <constraint firstItem="8bj-Q8-xCU" firstAttribute="top" secondItem="MV6-JZ-Sxf" secondAttribute="bottom" constant="20" id="SBP-wl-PSz"/>
                             <constraint firstItem="eMe-BP-DQI" firstAttribute="leading" secondItem="Bkw-Qv-n9h" secondAttribute="leading" constant="20" id="TnX-QU-rWp"/>
                             <constraint firstItem="USZ-64-OAj" firstAttribute="top" secondItem="MV6-JZ-Sxf" secondAttribute="bottom" id="XJ4-Eg-wsQ"/>
                             <constraint firstItem="Zh8-gs-gBB" firstAttribute="top" secondItem="eMe-BP-DQI" secondAttribute="top" constant="8" id="ZNz-yt-OeI"/>
-                            <constraint firstItem="87O-wC-41k" firstAttribute="trailing" secondItem="Pbw-ao-dln" secondAttribute="trailing" id="bG4-jT-o5f"/>
                             <constraint firstItem="Zh8-gs-gBB" firstAttribute="trailing" secondItem="eMe-BP-DQI" secondAttribute="trailing" constant="-8" id="bk9-pO-l2x"/>
                             <constraint firstAttribute="trailing" secondItem="8bj-Q8-xCU" secondAttribute="trailing" constant="16" id="fY5-PI-rzn"/>
                             <constraint firstItem="Zh8-gs-gBB" firstAttribute="bottom" secondItem="eMe-BP-DQI" secondAttribute="bottom" constant="-8" id="gwU-Mo-o15"/>
@@ -1475,13 +1457,11 @@
                             <constraint firstItem="LNV-Ta-gaT" firstAttribute="top" secondItem="USZ-64-OAj" secondAttribute="bottom" id="lcS-OL-3PC"/>
                             <constraint firstAttribute="centerY" secondItem="eMe-BP-DQI" secondAttribute="centerY" id="nG7-Fp-5ut"/>
                             <constraint firstItem="USZ-64-OAj" firstAttribute="leading" secondItem="Bkw-Qv-n9h" secondAttribute="leading" id="qas-Md-anX"/>
-                            <constraint firstItem="Pbw-ao-dln" firstAttribute="top" secondItem="8bj-Q8-xCU" secondAttribute="bottom" constant="8" id="wvs-91-K79"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
                     <connections>
                         <outlet property="btnAssessments" destination="87O-wC-41k" id="IVH-QQ-ojr"/>
-                        <outlet property="btnSession" destination="Pbw-ao-dln" id="m9d-wz-Y7Q"/>
                         <outlet property="imgPortrait" destination="Zh8-gs-gBB" id="GqV-lb-1FX"/>
                         <outlet property="labName" destination="8bj-Q8-xCU" id="CGp-KX-O9e"/>
                     </connections>
@@ -2981,7 +2961,6 @@
         <image name="v2-btn_phone.png" width="22" height="27"/>
         <image name="v2-btn_picture.png" width="31" height="28"/>
         <image name="v2-btn_set.png" width="44" height="44"/>
-        <image name="v2-chat-session.png" width="150" height="35"/>
         <image name="v2-checkbox-checked.png" width="20" height="20"/>
         <image name="v2-checkbox-unchecked.png" width="20" height="20"/>
         <image name="v2-foot.png" width="320" height="44"/>

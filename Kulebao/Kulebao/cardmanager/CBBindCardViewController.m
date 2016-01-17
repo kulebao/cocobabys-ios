@@ -90,7 +90,7 @@ typedef enum : NSUInteger {
                                            }
                                        }
                                        failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                           [gApp alert:@"绑定失败"];
+                                           [gApp alert:@"绑定失败，该卡号已被占用"];
                                        }];
     }
     else {

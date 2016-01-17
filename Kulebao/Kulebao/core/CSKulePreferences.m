@@ -21,6 +21,7 @@ static NSString* kKeyServerSettings = @"com.cocobabys.Kulebao.Preferences.server
 static NSString* kKeyServerSettingsV2 = @"com.cocobabys.Kulebao.Preferences.serverSettings.v2";
 static NSString* kKeyMarkedNews = @"com.cocobabys.Kulebao.Preferences.markedNews";
 static NSString* kKeyCommercial = @"com.cocobabys.Kulebao.Preferences.commercial";
+static NSString* kKeyRelationshipUID = @"com.cocobabys.Kulebao.Preferences.relationshipUID";
 
 @implementation CSKulePreferences {
     NSUserDefaults* _config;
@@ -62,6 +63,7 @@ static NSString* kKeyCommercial = @"com.cocobabys.Kulebao.Preferences.commercial
     _guideHomeShown = [[_config objectForKey:kKeyGuideHomeShown] boolValue];
     _enabledTest =  NO;//YES;// [[_config objectForKey:@"enabled_test"] boolValue];
     _configTag = [_config objectForKey:kKeyServerSettingsV2];
+    _currentRelationshipUid = [[_config objectForKey:kKeyRelationshipUID] integerValue];
 
 #if COCOBABYS_FEATURE_COMMERCIAL
     _enabledCommercial = [[_config objectForKey:kKeyCommercial] boolValue];
@@ -201,10 +203,17 @@ static NSString* kKeyCommercial = @"com.cocobabys.Kulebao.Preferences.commercial
         [_config removeObjectForKey:kKeyServerSettingsV2];
     }
     
+    [_config setObject:@(_currentRelationshipUid) forKey:kKeyRelationshipUID];
+    
     [_config synchronize];
 }
 
 #pragma mark - Setters
+- (void)setCurrentRelationshipUid:(NSInteger)currentRelationshipUid {
+    _currentRelationshipUid = currentRelationshipUid;
+    [self savePreferences];
+}
+
 - (void)setConfigTag:(NSString *)configTag {
     _configTag = configTag;
     [self savePreferences];

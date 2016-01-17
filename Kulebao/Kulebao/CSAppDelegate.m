@@ -129,6 +129,10 @@ CSAppDelegate* gApp = nil;
     [_engine application:application didReceiveRemoteNotification:userInfo];
 }
 
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    [_engine application:application didReceiveLocalNotification:notification];
+}
+
 // 当 DeviceToken 获取失败时,系统会回调此⽅方法
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
 {
@@ -263,36 +267,44 @@ CSAppDelegate* gApp = nil;
      introImageNames = @[@"guide-1-568h.png", @"guide-2-568h.png", @"guide-3-568h.png", @"guide-4-568h.png"];
      }
      */
-    NSArray* introImageNames = @[@"v2.8-guide-1", @"v2.8-guide-2"];
+    NSArray* introImageNames = @[@"v2_8-guide-1", @"v2_8-guide-2"];
     
     NSMutableArray* introPages = [NSMutableArray array];
     for (NSString* imageName in introImageNames) {
-        EAIntroPage* page = [EAIntroPage page];
-        UIImageView* imageV = [[UIImageView alloc] initWithFrame:self.window.rootViewController.view.bounds];
-        imageV.image = [UIImage imageNamed:imageName];
-        page.customView = imageV;
-        [introPages addObject:page];
+        UIImage* img = [UIImage imageNamed:imageName];
+        if (img) {
+            EAIntroPage* page = [EAIntroPage page];
+            UIImageView* imageV = [[UIImageView alloc] initWithFrame:self.window.rootViewController.view.bounds];
+            imageV.image = img;
+            page.customView = imageV;
+            [introPages addObject:page];
+        }
+        else {
+            CSLog(@"Load Image Failed: %@", imageName);
+        }
     }
     
-    UIButton* skipButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    //[skipButton setBackgroundImage:[UIImage imageNamed:@"btn-start.png"] forState:UIControlStateNormal];
-    //[skipButton setBackgroundImage:[UIImage imageNamed:@"btn-start-pressed.png"] forState:UIControlStateHighlighted];
-    
-    CGSize viewSize = self.window.rootViewController.view.bounds.size;
-    //skipButton.frame = CGRectMake((viewSize.width-126)/2, viewSize.height-90, 126, 27);
-    skipButton.frame = CGRectMake(0, 0, viewSize.width, viewSize.height);
-    
-    EAIntroView *intro = [[EAIntroView alloc] initWithFrame:self.window.rootViewController.view.bounds
-                                                   andPages:introPages];
-    intro.skipButton = skipButton;
-    intro.backgroundColor = [UIColor whiteColor];
-    intro.scrollView.bounces = NO;
-    intro.swipeToExit = NO;
-    intro.easeOutCrossDisolves = NO;
-    intro.showSkipButtonOnlyOnLastPage = YES;
-    intro.pageControl.hidden = YES;
-    [intro setDelegate:self];
-    [intro showInView:self.window.rootViewController.view animateDuration:0];
+    if (introPages.count > 0) {
+        UIButton* skipButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        //[skipButton setBackgroundImage:[UIImage imageNamed:@"btn-start.png"] forState:UIControlStateNormal];
+        //[skipButton setBackgroundImage:[UIImage imageNamed:@"btn-start-pressed.png"] forState:UIControlStateHighlighted];
+        
+        CGSize viewSize = self.window.rootViewController.view.bounds.size;
+        //skipButton.frame = CGRectMake((viewSize.width-126)/2, viewSize.height-90, 126, 27);
+        skipButton.frame = CGRectMake(0, 0, viewSize.width, viewSize.height);
+        
+        EAIntroView *intro = [[EAIntroView alloc] initWithFrame:self.window.rootViewController.view.bounds
+                                                       andPages:introPages];
+        intro.skipButton = skipButton;
+        intro.backgroundColor = [UIColor whiteColor];
+        intro.scrollView.bounces = NO;
+        intro.swipeToExit = NO;
+        intro.easeOutCrossDisolves = NO;
+        intro.showSkipButtonOnlyOnLastPage = YES;
+        intro.pageControl.hidden = YES;
+        [intro setDelegate:self];
+        [intro showInView:self.window.rootViewController.view animateDuration:0];
+    }
 }
 
 #pragma mark - EAIntroDelegate

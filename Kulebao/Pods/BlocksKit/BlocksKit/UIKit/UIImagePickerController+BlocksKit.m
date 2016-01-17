@@ -45,9 +45,12 @@
 + (void)load
 {
 	@autoreleasepool {
+        /*
+         // http://support.rongcloud.cn/kb/MzI1
 		[self bk_registerDynamicDelegate];
 		[self bk_linkDelegateMethods:@{ @"bk_didFinishPickingMediaBlock": @"imagePickerController:didFinishPickingMediaWithInfo:",
                                         @"bk_didCancelBlock": @"imagePickerControllerDidCancel:" }];
+         */
 	}
 }
 

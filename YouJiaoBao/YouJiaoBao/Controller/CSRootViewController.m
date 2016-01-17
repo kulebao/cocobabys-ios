@@ -14,6 +14,8 @@
 #import "CSMainViewController.h"
 #import "CSLoginViewController.h"
 
+#import <RongIMKit/RongIMKit.h>
+
 @interface CSRootViewController () <UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imgBg;
 
@@ -98,6 +100,21 @@
         id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
             EntityLoginInfo* loginInfo = [EntityLoginInfoHelper updateEntity:responseObject];
             if (loginInfo != nil) {
+                if (loginInfo.im_token) {
+                    // 快速集成第二步，连接融云服务器
+                    [[RCIM sharedRCIM] connectWithToken:loginInfo.im_token
+                                                success:^(NSString *userId) {
+                                                    // Connect 成功
+                                                    CSLog(@"[RCIM] connect success.");
+                                                } error:^(RCConnectErrorCode status) {
+                                                    // Connect 失败
+                                                    CSLog(@"[RCIM] connect error.");
+                                                } tokenIncorrect:^() {
+                                                    // Token 失效的状态处理
+                                                    CSLog(@"[RCIM] connect tokenIncorrect.");
+                                                }];
+                }
+                
                 [[NSNotificationCenter defaultCenter] postNotificationName:kNotiLoginSuccess object:loginInfo userInfo:nil];
             }
             else {

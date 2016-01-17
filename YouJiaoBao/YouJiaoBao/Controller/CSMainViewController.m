@@ -17,6 +17,7 @@
 #import "CSStudentListPickUpTableViewController.h"
 #import "EntityClassInfo.h"
 #import "EntityRelationshipInfoHelper.h"
+#import "CBIMChatListViewController.h"
 
 #define kTestChildId    @"2_2088_900"
 
@@ -64,6 +65,9 @@
                  @{@"icon": [UIImage imageNamed:@"v2-成长经历.png"],
                    @"segue": @"segue.main.growexp",
                    @"name": @"成长经历"},
+                 @{@"icon": [UIImage imageNamed:@"v2-家园互动"],
+                   @"segue": @"segue.main.im",
+                   @"name": @"家园互动"},
                  ];
     
     
@@ -125,8 +129,13 @@
     
     NSDictionary* module = [_modules objectAtIndex:indexPath.row];
     NSString* segueName = [module objectForKey:@"segue"];
-    
-    [self performSegueWithIdentifier:segueName sender:nil];
+    NSString* moduleName = [module objectForKey:@"name"];
+    if ([moduleName isEqualToString:@"家园互动"]) {
+        [self openRCIM];
+    }
+    else {
+        [self performSegueWithIdentifier:segueName sender:nil];
+    }
 }
 
 #pragma mark - private
@@ -337,6 +346,14 @@
 
 - (IBAction)onBtnSettingsClicked:(id)sender {
     [self performSegueWithIdentifier:@"segue.main.setting" sender:nil];
+}
+
+- (void)openRCIM {
+    NSArray* arr1 = @[@(ConversationType_PRIVATE),@(ConversationType_DISCUSSION), @(ConversationType_GROUP),@(ConversationType_SYSTEM)];
+    NSArray* arr2 = nil;
+    CBIMChatListViewController* ctrl = [[CBIMChatListViewController alloc] initWithDisplayConversationTypes:arr1
+                                                                                 collectionConversationType:arr2];
+    [self.navigationController pushViewController:ctrl animated:YES];
 }
 
 @end

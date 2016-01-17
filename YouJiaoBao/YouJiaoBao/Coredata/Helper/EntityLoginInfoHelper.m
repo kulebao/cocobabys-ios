@@ -53,8 +53,19 @@
             entity.loginName = [jsonObject objectForKey:@"login_name"];
         }
         
-        entity.loginDate = [NSDate date];
+        NSDictionary* imDict = [jsonObject valueForKeyNotNull:@"im_token"];
+        if (imDict) {
+            entity.im_token = [imDict valueForKeyNotNull:@"token"];;
+            entity.im_user_id = [imDict valueForKeyNotNull:@"user_id"];
+            entity.im_source = [imDict valueForKeyNotNull:@"source"];
+        }
+        else {
+            entity.im_token = nil;
+            entity.im_user_id = nil;
+            entity.im_source = nil;
+        }
         
+        entity.loginDate = [NSDate date];
         [context save:&error];
     }
     

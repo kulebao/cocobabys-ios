@@ -42,4 +42,9 @@
 #define IS_IPHONE5 (([[UIScreen mainScreen] bounds].size.height-568) ? NO : YES)
 #define IS_IPHONE4 (([[UIScreen mainScreen] bounds].size.height-480)>0 ? NO : YES)
 
+#define SAFE_STRING(str)  (str ? str : @"")
+#define SAFE_OBJECT(obj)  (obj ? obj : [NSNull null])
+
+#import "NSDate+CSKit.h"
+
 #endif

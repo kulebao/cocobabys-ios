@@ -2,23 +2,14 @@
 //  EntityAssignmentInfo.m
 //  YouJiaoBao
 //
-//  Created by xin.c.wang on 14-8-10.
-//  Copyright (c) 2014年 Codingsoft. All rights reserved.
+//  Created by WangXin on 1/17/16.
+//  Copyright © 2016 Codingsoft. All rights reserved.
 //
 
 #import "EntityAssignmentInfo.h"
 
-
 @implementation EntityAssignmentInfo
 
-@dynamic uid;
-@dynamic timestamp;
-@dynamic title;
-@dynamic content;
-@dynamic publisher;
-@dynamic iconUrl;
-@dynamic classId;
-@dynamic schoolId;
-@dynamic read;
+// Insert code here to add functionality to your managed object subclass
 
 @end

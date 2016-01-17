@@ -75,6 +75,7 @@
         _opManager.responseSerializer = responseSerializer;
         
         _opManager.securityPolicy.allowInvalidCertificates = YES;
+        _opManager.securityPolicy.validatesDomainName = NO;
     }
     
     return _opManager;
@@ -92,6 +93,7 @@
         _opQiniuManager.responseSerializer = responseSerializer;
         
         _opQiniuManager.securityPolicy.allowInvalidCertificates = YES;
+        _opQiniuManager.securityPolicy.validatesDomainName = NO;
     }
     
     return _opQiniuManager;
@@ -860,6 +862,56 @@
                                              success:success
                                              failure:failure];
     return op;
+}
+
+- (AFHTTPRequestOperation*)reqGetClassesOfKindergarten:(NSInteger)kindergarten
+                                               success:(SuccessResponseHandler)success
+                                               failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kCBClassesURL, @(kindergarten)];
+    
+    NSMutableDictionary* parameters = nil;
+    
+    return [self.opManager GET:path
+                  parameters:parameters
+                     success:success
+                     failure:failure];
+}
+
+- (AFHTTPRequestOperation*)reqGetTeachersOfKindergarten:(NSInteger)kindergarten
+                                            withClassId:(NSInteger)classId
+                                                success:(SuccessResponseHandler)success
+                                                failure:(FailureResponseHandler)failure {
+    NSString* path = nil;
+    if (classId > 0) {
+        path = [NSString stringWithFormat:kCBTeachersURL, @(kindergarten), @(classId)];
+    }
+    else {
+        path = [NSString stringWithFormat:kCBEmployeesURL, @(kindergarten)];
+    }
+    
+    NSMutableDictionary* parameters = nil;
+    
+    return [self.opManager GET:path
+                  parameters:parameters
+                     success:success
+                     failure:failure];
+}
+
+- (AFHTTPRequestOperation*)reqGetRelationshipsOfKindergarten:(NSInteger)kindergarten
+                                                 withClassId:(NSInteger)classId
+                                                     success:(SuccessResponseHandler)success
+                                                     failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kGetFamilyRelationshipPath, @(kindergarten)];
+    
+    NSDictionary* parameters = @{};
+    if (classId > 0) {
+        parameters = @{@"class_id": @(classId)};
+    }
+    
+    return [self.opManager GET:path
+                  parameters:parameters
+                     success:success
+                     failure:failure];
 }
 
 @end

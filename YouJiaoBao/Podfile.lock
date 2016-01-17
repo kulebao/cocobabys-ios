@@ -1,0 +1,94 @@
+PODS:
+  - AFNetworking (2.6.3):
+    - AFNetworking/NSURLConnection (= 2.6.3)
+    - AFNetworking/NSURLSession (= 2.6.3)
+    - AFNetworking/Reachability (= 2.6.3)
+    - AFNetworking/Security (= 2.6.3)
+    - AFNetworking/Serialization (= 2.6.3)
+    - AFNetworking/UIKit (= 2.6.3)
+  - AFNetworking/NSURLConnection (2.6.3):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.6.3):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.6.3)
+  - AFNetworking/Security (2.6.3)
+  - AFNetworking/Serialization (2.6.3)
+  - AFNetworking/UIKit (2.6.3):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+  - ALAlertBanner (0.3.1)
+  - BlocksKit (2.2.5):
+    - BlocksKit/All (= 2.2.5)
+  - BlocksKit/All (2.2.5):
+    - BlocksKit/Core
+    - BlocksKit/DynamicDelegate
+    - BlocksKit/MessageUI
+    - BlocksKit/UIKit
+  - BlocksKit/Core (2.2.5)
+  - BlocksKit/DynamicDelegate (2.2.5)
+  - BlocksKit/MessageUI (2.2.5):
+    - BlocksKit/Core
+    - BlocksKit/DynamicDelegate
+  - BlocksKit/UIKit (2.2.5):
+    - BlocksKit/Core
+    - BlocksKit/DynamicDelegate
+  - Bugly (1.4.3)
+  - EAIntroView (2.6.4)
+  - FTCoreText (1.0.1)
+  - iCarousel (1.8.2)
+  - InputValidators (0.3.3)
+  - JSBadgeView (1.3.2)
+  - MBProgressHUD (0.9.1)
+  - NSURL+QueryDictionary (1.1.0)
+  - RongCloudIMKit (2.3.8)
+  - SDWebImage (3.7.3):
+    - SDWebImage/Core (= 3.7.3)
+  - SDWebImage/Core (3.7.3)
+  - TPKeyboardAvoiding (1.2.11)
+  - TSFileCache (1.0.4)
+  - UITableView+FDTemplateLayoutCell (1.3)
+  - UITextView+Placeholder (1.0.9)
+
+DEPENDENCIES:
+  - AFNetworking (~> 2.0)
+  - ALAlertBanner (~> 0.3.1)
+  - BlocksKit (~> 2.2.5)
+  - Bugly
+  - EAIntroView (~> 2.6.4)
+  - FTCoreText (~> 1.0.1)
+  - iCarousel (~> 1.8.1)
+  - InputValidators (~> 0.3.2)
+  - JSBadgeView (~> 1.3.2)
+  - MBProgressHUD (~> 0.9)
+  - NSURL+QueryDictionary (~> 1.1.0)
+  - RongCloudIMKit (~> 2.3.8)
+  - SDWebImage (~> 3.7.3)
+  - TPKeyboardAvoiding (~> 1.2.4)
+  - TSFileCache (~> 1.0.4)
+  - UITableView+FDTemplateLayoutCell (~> 1.3)
+  - UITextView+Placeholder (~> 1.0.8)
+
+SPEC CHECKSUMS:
+  AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
+  ALAlertBanner: 08d82be509cd9b70c4ac0ee1e7ac250003a8b34b
+  BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
+  Bugly: b8d350be5047a468adf037cb016ab22762bc287c
+  EAIntroView: df7dc18da73e1831d06878b9c0e13da78e6bb3ce
+  FTCoreText: 7bc3eb236f5eee4bcd33486d693376c04b08a3d4
+  iCarousel: 67c8a43da5a46795b56aadfc96cd36a16f6149b2
+  InputValidators: 6d7808cc68e8ea73effee72fe353b95bf8ba46b8
+  JSBadgeView: 08284afc9d0eb60069674e517cac2d37d4319208
+  MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
+  NSURL+QueryDictionary: dd0a5fec689a9b4780b6fa0e0225c01ca3ea653e
+  RongCloudIMKit: 58feb4bce6a8b545598b872d51deab8b1264e2a3
+  SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
+  TPKeyboardAvoiding: e5ce146b313de063957bfa75a13f1e9b0ff18ab7
+  TSFileCache: 62805070280a56193f2b7adb6099c6a74b94fab0
+  UITableView+FDTemplateLayoutCell: d5be6056b5060313f5955a2590ecd33142ad713d
+  UITextView+Placeholder: 83895056749372c96febfb43f536c9b1aae3e08e
+
+COCOAPODS: 0.39.0

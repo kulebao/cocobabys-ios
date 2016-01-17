@@ -11,6 +11,8 @@
 #import "EntityLoginInfoHelper.h"
 #import "CSEngine.h"
 #import "CSAppDelegate.h"
+#import <RongIMKit/RongIMKit.h>
+#import "CBIMDataSource.h"
 
 @interface CSLoginViewController () {
     ModelAccount* _loginAccount;
@@ -55,13 +57,11 @@
     
 #ifdef DEBUG
 #if COCOBABYS_USE_ENV_PROD
-    self.fieldUsername.text = @"panpan";
-    self.fieldPassword.text = @"28234717";
+    self.fieldUsername.text = @"Joe_tian";
+    self.fieldPassword.text = @"89898989";
 #else
-    self.fieldUsername.text = @"221919";
-    self.fieldPassword.text = @"66198091";
-//    self.fieldUsername.text = @"admin8901";
-//    self.fieldPassword.text = @"654321";
+    self.fieldUsername.text = @"Joe_tian";
+    self.fieldPassword.text = @"89898989";
 #endif
 #endif
 }
@@ -107,6 +107,24 @@
                 [gApp alert:@"登录成功"];
                 [[CSEngine sharedInstance] encryptAccount:_loginAccount];
                 [[NSNotificationCenter defaultCenter] postNotificationName:kNotiLoginSuccess object:loginInfo userInfo:nil];
+                
+                [[CBIMDataSource sharedInstance] reloadRelationships];
+                [[CBIMDataSource sharedInstance] reloadTeachers];
+                
+                if (loginInfo.im_token) {
+                    // 快速集成第二步，连接融云服务器
+                    [[RCIM sharedRCIM] connectWithToken:loginInfo.im_token
+                                                success:^(NSString *userId) {
+                                                    // Connect 成功
+                                                    CSLog(@"[RCIM] connect success.");
+                                                } error:^(RCConnectErrorCode status) {
+                                                    // Connect 失败
+                                                    CSLog(@"[RCIM] connect error.");
+                                                } tokenIncorrect:^() {
+                                                    // Token 失效的状态处理
+                                                    CSLog(@"[RCIM] connect tokenIncorrect.");
+                                                }];
+                }
             }
             else {
 //                self.labNote.text = @"用户名或密码错误";

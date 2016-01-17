@@ -18,6 +18,7 @@
 #import "EntityChildInfoHelper.h"
 #import "UIImage+CSKit.h"
 #import "EntityLoginInfoHelper.h"
+#import <RongIMKit/RongIMKit.h>
 
 enum {
     // 昵称长度
@@ -31,6 +32,7 @@ enum {
 
 - (IBAction)onBtnLogoutClicked:(id)sender;
 - (IBAction)onBtnCheckUpdatesClicked:(id)sender;
+- (IBAction)onBtnFeedbackClicked:(id)sender;
 
 @property (nonatomic, strong) CSPopupController* popCtrl;
 @property (nonatomic, strong) CSUserOptionMenuView* userOptionMenuView;
@@ -123,6 +125,16 @@ enum {
 
 - (IBAction)onBtnCheckUpdatesClicked:(id)sender {
     [self doCheckUpdates];
+}
+
+- (IBAction)onBtnFeedbackClicked:(id)sender {
+    // Feedback
+    RCPublicServiceChatViewController *conversationVC = [[RCPublicServiceChatViewController alloc]init];
+    conversationVC.conversationType = ConversationType_APPSERVICE;
+    conversationVC.targetId = COCOBABYS_IM_SERVICE_ID;
+    conversationVC.userName = nil;
+    conversationVC.title = @"客服";
+    [self.navigationController pushViewController:conversationVC animated:YES];
 }
 
 - (void)doLogout {

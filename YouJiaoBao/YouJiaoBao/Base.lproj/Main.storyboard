@@ -779,24 +779,6 @@
                                     <segue destination="jU7-Ep-U1e" kind="embed" identifier="segue.settings.profileHeader" id="19H-fG-dXX"/>
                                 </connections>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="khJ-Ic-bgf">
-                                <rect key="frame" x="30" y="130" width="260" height="29"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="29" id="MSQ-Qj-qFP"/>
-                                    <constraint firstAttribute="width" constant="260" id="QIo-zo-cL2"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <state key="normal" title="用户反馈" backgroundImage="v2-bg_set.png">
-                                    <color key="titleColor" red="0.1215686275" green="0.52941176469999995" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="mWh-Zn-TQh" kind="push" id="HlD-Ot-8NQ"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gXS-oN-1mK">
                                 <rect key="frame" x="30" y="169" width="260" height="29"/>
                                 <constraints>
@@ -849,6 +831,24 @@
                                 </state>
                                 <connections>
                                     <action selector="onBtnLogoutClicked:" destination="8kA-hd-XTO" eventType="touchUpInside" id="SC1-VN-sGQ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="khJ-Ic-bgf">
+                                <rect key="frame" x="30" y="130" width="260" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="29" id="MSQ-Qj-qFP"/>
+                                    <constraint firstAttribute="width" constant="260" id="QIo-zo-cL2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="用户反馈" backgroundImage="v2-bg_set.png">
+                                    <color key="titleColor" red="0.1215686275" green="0.52941176469999995" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onBtnFeedbackClicked:" destination="8kA-hd-XTO" eventType="touchUpInside" id="l1c-CG-d2U"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1499,11 +1499,11 @@
                         <viewControllerLayoutGuide type="bottom" id="IpD-Wn-MKE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ngi-aw-jCg">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C2y-3m-0W8" customClass="TPKeyboardAvoidingScrollView">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f2Y-oY-KWe" userLabel="View - Content">
                                         <rect key="frame" x="10" y="20" width="300" height="160"/>
@@ -2980,7 +2980,7 @@
         <image name="v3-btn-del" width="22" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="4dZ-qf-s5s"/>
+        <segue reference="19H-fG-dXX"/>
         <segue reference="Bea-XH-lHk"/>
     </inferredMetricsTieBreakers>
 </document>

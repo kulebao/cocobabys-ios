@@ -14,7 +14,6 @@
 #import "EntityMediaInfoHelper.h"
 #import "UIImageView+WebCache.h"
 #import "CSContentEditorViewController.h"
-#import "TSFileCache.h"
 #import "NSString+CSKit.h"
 #import "EGOCache.h"
 #import "CSKuleHistoryVideoItemTableViewCell.h"

@@ -350,7 +350,6 @@
                         <segue destination="iCB-cn-3Ye" kind="push" identifier="segue.assignment" id="sUy-LL-kbD"/>
                         <segue destination="Vta-Cg-yNO" kind="push" identifier="segue.schedule" id="gpQ-i9-RXP"/>
                         <segue destination="1UC-eH-jjs" kind="push" identifier="segue.checkin" id="RuD-l7-P3j"/>
-                        <segue destination="Oe0-Pk-5G3" kind="push" identifier="segue.chating" id="cmA-aq-eJf"/>
                         <segue destination="5Eq-sp-dh6" kind="push" identifier="segue.aboutschool" id="ybz-8o-Uy1"/>
                         <segue destination="9Fo-0X-dxb" kind="push" identifier="segue.assess" id="Vfg-Yf-SWW"/>
                         <segue destination="SQ3-hE-aqT" kind="push" identifier="segue.cctv" id="J7D-47-8FC"/>
@@ -2418,106 +2417,6 @@
             </objects>
             <point key="canvasLocation" x="174" y="1377"/>
         </scene>
-        <!--家园互动-->
-        <scene sceneID="iHg-u8-ESX">
-            <objects>
-                <viewController storyboardIdentifier="CSKuleChatingViewController" id="Oe0-Pk-5G3" customClass="CSKuleChatingViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="DwM-qF-p8K"/>
-                        <viewControllerLayoutGuide type="bottom" id="KB3-oK-mQ2"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="LgS-Gx-ocx">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="0Hj-bz-6lH" customClass="PullTableView">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="euk-ol-oW3" userLabel="Toolbar">
-                                <rect key="frame" x="0.0" y="460" width="320" height="44"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="v2-foot.png" translatesAutoresizingMaskIntoConstraints="NO" id="ZVG-qM-Ni4">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IdN-bW-YZn">
-                                        <rect key="frame" x="146" y="9" width="28" height="25"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="28" id="KP6-g7-PuW"/>
-                                            <constraint firstAttribute="height" constant="25" id="XKG-g4-lY7"/>
-                                        </constraints>
-                                        <state key="normal" backgroundImage="v2-btn_camera.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="onBtnCameraClicked:" destination="Oe0-Pk-5G3" eventType="touchUpInside" id="O07-AF-BfE"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UfI-fq-Irp">
-                                        <rect key="frame" x="20" y="8" width="31" height="28"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="31" id="MsR-Cw-uLf"/>
-                                            <constraint firstAttribute="height" constant="28" id="T1P-M5-4zt"/>
-                                        </constraints>
-                                        <state key="normal" image="v2-btn_p.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="onBtnEditorClicked:" destination="Oe0-Pk-5G3" eventType="touchUpInside" id="qza-Qz-bhK"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zI8-pA-i77">
-                                        <rect key="frame" x="269" y="8" width="31" height="28"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="28" id="sog-Ef-ePf"/>
-                                            <constraint firstAttribute="width" constant="31" id="xEC-Bf-EwL"/>
-                                        </constraints>
-                                        <state key="normal" backgroundImage="v2-btn_picture.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="onBtnPhotosClicked:" destination="Oe0-Pk-5G3" eventType="touchUpInside" id="8SA-DZ-X1f"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="centerY" secondItem="UfI-fq-Irp" secondAttribute="centerY" id="5In-yK-nKi"/>
-                                    <constraint firstAttribute="trailing" secondItem="zI8-pA-i77" secondAttribute="trailing" constant="20" id="DIM-N0-XLV"/>
-                                    <constraint firstItem="UfI-fq-Irp" firstAttribute="leading" secondItem="euk-ol-oW3" secondAttribute="leading" constant="20" id="DbK-up-OMM"/>
-                                    <constraint firstAttribute="bottom" secondItem="ZVG-qM-Ni4" secondAttribute="bottom" id="Dgj-WQ-CNu"/>
-                                    <constraint firstItem="ZVG-qM-Ni4" firstAttribute="top" secondItem="euk-ol-oW3" secondAttribute="top" id="GSH-z7-OXu"/>
-                                    <constraint firstItem="ZVG-qM-Ni4" firstAttribute="leading" secondItem="euk-ol-oW3" secondAttribute="leading" id="Gx9-qw-LPa"/>
-                                    <constraint firstAttribute="centerY" secondItem="IdN-bW-YZn" secondAttribute="centerY" id="KcP-SG-5tu"/>
-                                    <constraint firstAttribute="trailing" secondItem="ZVG-qM-Ni4" secondAttribute="trailing" id="Ku7-0E-g2n"/>
-                                    <constraint firstAttribute="centerX" secondItem="IdN-bW-YZn" secondAttribute="centerX" id="PDV-Dv-nTx"/>
-                                    <constraint firstAttribute="centerY" secondItem="zI8-pA-i77" secondAttribute="centerY" id="dyg-Kb-Q5B"/>
-                                    <constraint firstAttribute="height" constant="44" id="yG2-YG-9xK"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="0Hj-bz-6lH" firstAttribute="top" secondItem="DwM-qF-p8K" secondAttribute="bottom" id="3Ao-Cr-yRS"/>
-                            <constraint firstAttribute="trailing" secondItem="euk-ol-oW3" secondAttribute="trailing" id="8Fx-hw-BtK"/>
-                            <constraint firstItem="euk-ol-oW3" firstAttribute="top" secondItem="0Hj-bz-6lH" secondAttribute="bottom" id="PrV-IJ-5sv"/>
-                            <constraint firstItem="euk-ol-oW3" firstAttribute="leading" secondItem="LgS-Gx-ocx" secondAttribute="leading" id="QFW-cm-7ZD"/>
-                            <constraint firstItem="KB3-oK-mQ2" firstAttribute="top" secondItem="euk-ol-oW3" secondAttribute="bottom" id="U9t-c2-8sy"/>
-                            <constraint firstItem="0Hj-bz-6lH" firstAttribute="leading" secondItem="LgS-Gx-ocx" secondAttribute="leading" id="UIC-hL-kEP"/>
-                            <constraint firstAttribute="trailing" secondItem="0Hj-bz-6lH" secondAttribute="trailing" id="sZa-hK-eye"/>
-                        </constraints>
-                    </view>
-                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" title="家园互动" id="jG4-FR-qt8"/>
-                    <connections>
-                        <outlet property="tableview" destination="0Hj-bz-6lH" id="DZD-9w-hGz"/>
-                        <segue destination="g0W-Gr-GbE" kind="push" identifier="segue.chatingEditor" id="DSk-vc-DTQ"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="F8P-dj-nLx" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="174" y="3381"/>
-        </scene>
         <!--选择宝宝-->
         <scene sceneID="HI3-MM-NYt">
             <objects>
@@ -3381,106 +3280,6 @@
             </objects>
             <point key="canvasLocation" x="720" y="1377"/>
         </scene>
-        <!--编辑内容-->
-        <scene sceneID="Cqc-rK-mFX">
-            <objects>
-                <viewController storyboardIdentifier="CSKuleChatingEditorViewController" id="g0W-Gr-GbE" customClass="CSKuleChatingEditorViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="tD4-eA-uKg"/>
-                        <viewControllerLayoutGuide type="bottom" id="wvj-pt-nbe"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="e8p-8i-tZn">
-                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SIH-wO-v5f" customClass="TPKeyboardAvoidingScrollView">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zyb-vC-3QW" userLabel="View - Content">
-                                        <rect key="frame" x="10" y="10" width="300" height="160"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="v2-input_bg_家园互动.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ydk-jV-DGL">
-                                                <rect key="frame" x="0.0" y="0.0" width="300" height="160"/>
-                                            </imageView>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NRw-Hp-xCB">
-                                                <rect key="frame" x="0.0" y="0.0" width="300" height="160"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                            </textView>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstItem="NRw-Hp-xCB" firstAttribute="top" secondItem="zyb-vC-3QW" secondAttribute="top" id="AZU-T7-Rfi"/>
-                                            <constraint firstAttribute="bottom" secondItem="NRw-Hp-xCB" secondAttribute="bottom" id="G3Z-vv-Ybt"/>
-                                            <constraint firstAttribute="trailing" secondItem="NRw-Hp-xCB" secondAttribute="trailing" id="JZa-66-dXf"/>
-                                            <constraint firstItem="NRw-Hp-xCB" firstAttribute="leading" secondItem="zyb-vC-3QW" secondAttribute="leading" id="ZOC-Un-NgG"/>
-                                            <constraint firstAttribute="trailing" secondItem="Ydk-jV-DGL" secondAttribute="trailing" id="dMZ-Sn-ny5"/>
-                                            <constraint firstAttribute="bottom" secondItem="Ydk-jV-DGL" secondAttribute="bottom" id="fC4-fW-cxw"/>
-                                            <constraint firstItem="Ydk-jV-DGL" firstAttribute="leading" secondItem="zyb-vC-3QW" secondAttribute="leading" id="lYF-1o-Eo1"/>
-                                            <constraint firstItem="Ydk-jV-DGL" firstAttribute="top" secondItem="zyb-vC-3QW" secondAttribute="top" id="s1J-iu-iJi"/>
-                                            <constraint firstAttribute="width" secondItem="zyb-vC-3QW" secondAttribute="height" multiplier="15:8" id="ysl-0g-i4c"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="zyb-vC-3QW" firstAttribute="leading" secondItem="SIH-wO-v5f" secondAttribute="leading" priority="900" constant="10" id="DO1-n2-LbT"/>
-                                    <constraint firstAttribute="trailing" secondItem="zyb-vC-3QW" secondAttribute="trailing" priority="900" constant="10" id="HpK-9x-0fN"/>
-                                    <constraint firstItem="zyb-vC-3QW" firstAttribute="top" secondItem="SIH-wO-v5f" secondAttribute="top" constant="10" id="Rge-0E-g2N"/>
-                                    <constraint firstAttribute="bottom" secondItem="zyb-vC-3QW" secondAttribute="bottom" constant="334" id="fRb-aE-Gup"/>
-                                    <constraint firstAttribute="centerX" secondItem="zyb-vC-3QW" secondAttribute="centerX" id="zPF-en-uRo"/>
-                                </constraints>
-                            </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o5Z-7A-xaA">
-                                <rect key="frame" x="61" y="463" width="199" height="29"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="29" id="1q3-Rt-u17"/>
-                                    <constraint firstAttribute="width" constant="199" id="Fef-FZ-aio"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                <state key="normal" title="发送语音" backgroundImage="v2-btn_green.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="onBtnSendVocieTouchDown:" destination="g0W-Gr-GbE" eventType="touchDown" id="be9-yM-6Ez"/>
-                                    <action selector="onBtnSendVoiceTouchDragOutside:" destination="g0W-Gr-GbE" eventType="touchDragOutside" id="SD9-UT-2yS"/>
-                                    <action selector="onBtnSendVoiceTouchUpInside:" destination="g0W-Gr-GbE" eventType="touchUpInside" id="CNk-zX-BXk"/>
-                                </connections>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mic_1.png" translatesAutoresizingMaskIntoConstraints="NO" id="0Vg-R3-yfc">
-                                <rect key="frame" x="80" y="243" width="160" height="160"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="160" id="VWr-4n-EHn"/>
-                                    <constraint firstAttribute="height" constant="160" id="kNY-Yy-hFm"/>
-                                </constraints>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="centerX" secondItem="o5Z-7A-xaA" secondAttribute="centerX" id="K9F-4B-Vhl"/>
-                            <constraint firstAttribute="trailing" secondItem="SIH-wO-v5f" secondAttribute="trailing" id="PHw-Kz-qgC"/>
-                            <constraint firstItem="SIH-wO-v5f" firstAttribute="top" secondItem="tD4-eA-uKg" secondAttribute="bottom" id="Vt8-yU-hNx"/>
-                            <constraint firstAttribute="centerX" secondItem="0Vg-R3-yfc" secondAttribute="centerX" id="Zid-Wm-5b3"/>
-                            <constraint firstItem="wvj-pt-nbe" firstAttribute="top" secondItem="o5Z-7A-xaA" secondAttribute="bottom" constant="12" id="f0H-1E-BDf"/>
-                            <constraint firstItem="SIH-wO-v5f" firstAttribute="leading" secondItem="e8p-8i-tZn" secondAttribute="leading" id="h57-38-JlO"/>
-                            <constraint firstItem="o5Z-7A-xaA" firstAttribute="top" secondItem="0Vg-R3-yfc" secondAttribute="bottom" constant="60" id="k8k-Kk-jj4"/>
-                            <constraint firstItem="wvj-pt-nbe" firstAttribute="top" secondItem="SIH-wO-v5f" secondAttribute="bottom" id="kmj-9K-cSg"/>
-                            <constraint firstItem="zyb-vC-3QW" firstAttribute="width" secondItem="e8p-8i-tZn" secondAttribute="height" multiplier="25:42" id="qCX-3b-US0"/>
-                        </constraints>
-                    </view>
-                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" title="编辑内容" id="LfB-EJ-RnF"/>
-                    <connections>
-                        <outlet property="btnSendVoice" destination="o5Z-7A-xaA" id="0Up-cU-WH5"/>
-                        <outlet property="imgContentBg" destination="Ydk-jV-DGL" id="aXk-cV-VjT"/>
-                        <outlet property="imgVoice" destination="0Vg-R3-yfc" id="uJI-g6-IWA"/>
-                        <outlet property="textMsgBody" destination="NRw-Hp-xCB" id="4b6-sA-eUq"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ABR-s8-mKf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="664" y="3381"/>
-        </scene>
         <!--Kule Forgot Pswd View Controller-->
         <scene sceneID="D1o-k1-sTd">
             <objects>
@@ -4014,7 +3813,6 @@
         <image name="chat_head_icon.gif" width="50" height="50"/>
         <image name="exp_back.png" width="100" height="100"/>
         <image name="exp_default.png" width="80" height="60"/>
-        <image name="mic_1.png" width="375" height="375"/>
         <image name="v2-about_logo" width="26" height="26"/>
         <image name="v2-bg.png" width="320" height="548"/>
         <image name="v2-bg_1.png" width="320" height="139"/>
@@ -4024,14 +3822,11 @@
         <image name="v2-btn_bg_blue" width="14" height="14"/>
         <image name="v2-btn_blue.png" width="75" height="29"/>
         <image name="v2-btn_camera" width="24" height="18"/>
-        <image name="v2-btn_camera.png" width="28" height="25"/>
         <image name="v2-btn_day.png" width="20" height="21"/>
         <image name="v2-btn_go.png" width="7" height="11"/>
         <image name="v2-btn_gray.png" width="75" height="29"/>
         <image name="v2-btn_green.png" width="75" height="29"/>
         <image name="v2-btn_left.png" width="20" height="21"/>
-        <image name="v2-btn_p.png" width="23" height="28"/>
-        <image name="v2-btn_picture.png" width="31" height="28"/>
         <image name="v2-btn_right.png" width="20" height="21"/>
         <image name="v2-btn_set.png" width="44" height="44"/>
         <image name="v2-btn_video.png" width="20" height="20"/>

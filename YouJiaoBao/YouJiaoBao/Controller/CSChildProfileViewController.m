@@ -13,7 +13,6 @@
 #import "EntityRelationshipInfoHelper.h"
 #import "CSChildRelationshipItemTableViewCell.h"
 #import "CSAssessmentEditorViewController.h"
-#import "CSKuleChatingViewController.h"
 #import "CBIMDataSource.h"
 #import "CBIMChatViewController.h"
 
@@ -74,8 +73,6 @@
         ctrl.childInfo = self.childInfo;
     }
     else if ([segue.identifier isEqualToString:@"segue.childprofile.chating"]) {
-        CSKuleChatingViewController* ctrl = [segue destinationViewController];
-        ctrl.childInfo = self.childInfo;
     }
 }
 

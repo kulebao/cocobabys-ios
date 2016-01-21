@@ -84,8 +84,8 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:animated];
-    [self setNeedsStatusBarAppearanceUpdate];
+    //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:animated];
+    //[self setNeedsStatusBarAppearanceUpdate];
 }
 
 - (void)didReceiveMemoryWarning

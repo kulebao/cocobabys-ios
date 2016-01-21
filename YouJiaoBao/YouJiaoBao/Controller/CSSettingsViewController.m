@@ -12,13 +12,12 @@
 #import "CSHttpClient.h"
 #import "CSAppDelegate.h"
 #import "CSProfileHeaderViewController.h"
-#import "CSPopupController.h"
-#import "CSUserOptionMenuView.h"
 #import "CSTextFieldDelegate.h"
 #import "EntityChildInfoHelper.h"
 #import "UIImage+CSKit.h"
 #import "EntityLoginInfoHelper.h"
 #import <RongIMKit/RongIMKit.h>
+#import "KxMenu.h"
 
 enum {
     // 昵称长度
@@ -34,16 +33,11 @@ enum {
 - (IBAction)onBtnCheckUpdatesClicked:(id)sender;
 - (IBAction)onBtnFeedbackClicked:(id)sender;
 
-@property (nonatomic, strong) CSPopupController* popCtrl;
-@property (nonatomic, strong) CSUserOptionMenuView* userOptionMenuView;
-
 @property (nonatomic, weak) CSProfileHeaderViewController* profileHeaderViewCtrl;
 
 @end
 
 @implementation CSSettingsViewController
-@synthesize popCtrl = _popCtrl;
-@synthesize userOptionMenuView = _userOptionMenuView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -59,10 +53,7 @@ enum {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     //[self customizeBackBarItem];
-    
     _nickFieldDelegate = [[CSTextFieldDelegate alloc] initWithType:kCSTextFieldDelegateNormal];
-    
-
     _nickFieldDelegate.maxLength = kKuleNickMaxLength;
 }
 
@@ -71,26 +62,6 @@ enum {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-- (CSPopupController*)popCtrl {
-    if (_popCtrl == nil) {
-        _popCtrl = [CSPopupController popupControllerWithView:self.view];
-    }
-    
-    return _popCtrl;
-}
-
-- (CSUserOptionMenuView*)userOptionMenuView {
-    if (_userOptionMenuView == nil) {
-        _userOptionMenuView = [CSUserOptionMenuView userOptionMenuView];
-        _userOptionMenuView.delegate = self;
-        _userOptionMenuView.center = CGPointMake(self.view.bounds.size.width/2,
-                                                 self.view.bounds.size.height/2);
-    }
-    
-    return  _userOptionMenuView;
-}
-
 
 #pragma mark - Navigation
 
@@ -191,24 +162,26 @@ enum {
 
 #pragma mark - CSProfileHeaderViewControllerDelegate
 - (void)profileHeaderViewControllerWillUpdateProfile:(CSProfileHeaderViewController*)ctrl {
-    [self.popCtrl presentView:self.userOptionMenuView animated:NO completion:^{
-        
-    }];
-}
-
-#pragma mark - CSUserOptionMenuViewDelegate
-- (void)userOptionMenuView:(CSUserOptionMenuView*)view selectedMenuAtIndex:(NSUInteger)index {
-    [self.popCtrl dismiss];
+    KxMenuItem* item1 = [KxMenuItem menuItem:@"修改昵称"
+                                       image:nil
+                                      target:self
+                                      action:@selector(doChangeProfileNick)];
     
-    if (index == 0) {
-        [self doChangeProfileNick];
-    }
-    else if (index == 1) {
-        [self doChangePortraitFromCamera];
-    }
-    else if (index == 2) {
-        [self doChangePortraitFromPhoto];
-    }
+    KxMenuItem* item2 = [KxMenuItem menuItem:@"从相机拍摄头像"
+                                       image:nil
+                                      target:self
+                                      action:@selector(doChangePortraitFromCamera)];
+    
+    KxMenuItem* item3 = [KxMenuItem menuItem:@"从相册选择头像"
+                                       image:nil
+                                      target:self
+                                      action:@selector(doChangePortraitFromPhoto)];
+    
+    [KxMenu setTintColor:[UIColor colorWithRed:0.129f green:0.565f blue:0.839f alpha:1.0f]];
+    
+    [KxMenu showMenuInView:self.view
+                  fromRect:[self.view convertRect:ctrl.btnAvatar.frame fromView:ctrl.view]
+                 menuItems:@[item1, item2, item3]];
 }
 
 #pragma mark - 

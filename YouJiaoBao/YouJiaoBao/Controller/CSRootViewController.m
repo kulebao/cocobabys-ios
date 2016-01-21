@@ -39,9 +39,6 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.delegate =self;
     self.navigationController.navigationBarHidden = YES;
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"v2-head.png"] forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:20], NSForegroundColorAttributeName:[UIColor whiteColor]}];
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 
     if (!IS_IPHONE4) {
         self.imgBg.image = [UIImage imageNamed:@"v2-启动界面.png"];

@@ -15,6 +15,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="SYX-UE-ALg">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.14901960784313725" green="0.5607843137254902" blue="0.83529411764705885" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="pMD-1c-TKG" kind="relationship" relationship="rootViewController" id="CQL-pg-KH6"/>
@@ -49,13 +50,12 @@
                             <constraint firstItem="NdG-g4-QgJ" firstAttribute="top" secondItem="Ywi-Gx-0a9" secondAttribute="bottom" constant="90" id="5Nq-VH-06P"/>
                             <constraint firstAttribute="trailing" secondItem="uXm-87-VfK" secondAttribute="trailing" id="6t9-pd-uj5"/>
                             <constraint firstItem="NdG-g4-QgJ" firstAttribute="top" secondItem="uXm-87-VfK" secondAttribute="bottom" id="OXD-IA-ceQ"/>
-                            <constraint firstItem="uXm-87-VfK" firstAttribute="top" secondItem="DVT-Ho-630" secondAttribute="bottom" id="ldr-dW-X6i"/>
+                            <constraint firstItem="uXm-87-VfK" firstAttribute="top" secondItem="DVT-Ho-630" secondAttribute="bottom" id="cgR-Zf-Gud"/>
                             <constraint firstItem="uXm-87-VfK" firstAttribute="leading" secondItem="K0t-aM-bbE" secondAttribute="leading" id="lrF-Fy-3Aw"/>
                             <constraint firstAttribute="centerX" secondItem="Ywi-Gx-0a9" secondAttribute="centerX" id="v0z-go-QuW"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="jkE-G7-8qe"/>
-                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="imgBg" destination="uXm-87-VfK" id="eW1-mc-iAa"/>
                         <segue destination="12u-db-u5J" kind="push" identifier="segue.root.login" id="9hF-8q-RvA"/>
@@ -213,7 +213,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="登录" id="DZD-gW-55O"/>
-                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="btnForgotPassword" destination="vua-sP-Vwk" id="oUB-Xj-IV2"/>
@@ -998,7 +997,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="忘记密码" id="KtS-6p-B0R"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="btnGetVerifyCode" destination="evi-4u-bcm" id="hhQ-n7-j7W"/>
                         <outlet property="btnNext" destination="9DU-en-0U9" id="rdA-vQ-bqA"/>
@@ -1247,6 +1245,7 @@
                     </view>
                     <toolbarItems/>
                     <connections>
+                        <outlet property="btnAvatar" destination="DtJ-pu-njE" id="cu6-Cf-rdY"/>
                         <outlet property="imgPortrait" destination="cH2-Bt-U91" id="ped-DA-sPp"/>
                         <outlet property="labUsername" destination="4hq-b5-HXR" id="RMN-WR-acG"/>
                     </connections>
@@ -2767,7 +2766,7 @@
         <image name="v3-btn-del" width="22" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="19H-fG-dXX"/>
+        <segue reference="4dZ-qf-s5s"/>
         <segue reference="Bea-XH-lHk"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -119,7 +119,7 @@
         }
         else if (m.conversationType == ConversationType_GROUP) {
             [newDataSource addObject:m];
-            m.isTop = YES;
+            //m.isTop = YES;
         }
         else {
             [newDataSource addObject:m];

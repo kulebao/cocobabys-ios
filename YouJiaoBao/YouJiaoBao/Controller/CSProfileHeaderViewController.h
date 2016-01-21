@@ -19,8 +19,8 @@
 
 @interface CSProfileHeaderViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UIButton *btnAvatar;
 @property (nonatomic, weak) id delegate;
-
 @property (nonatomic, assign) BOOL moreDetails;
 
 - (void)reloadData;

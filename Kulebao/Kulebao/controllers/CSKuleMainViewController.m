@@ -302,8 +302,8 @@
 #pragma mark - View lifecycle
 -(void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:animated];
-    [self setNeedsStatusBarAppearanceUpdate];
+    //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:animated];
+    //[self setNeedsStatusBarAppearanceUpdate];
     [_scrollContent flashScrollIndicators];
     NSString* cName = [NSString stringWithFormat:@"%@",  self.navigationItem.title, nil];
     [[BaiduMobStat defaultStat] pageviewStartWithName:cName];

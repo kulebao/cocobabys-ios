@@ -454,10 +454,10 @@
     
     //
     id naviAppearance = [UINavigationBar appearance];
-    [naviAppearance setBackgroundImage:[UIImage imageNamed:@"v2-head.png"] forBarMetrics:UIBarMetricsDefault];
+    //[naviAppearance setBackgroundImage:[UIImage imageNamed:@"v2-head.png"] forBarMetrics:UIBarMetricsDefault];
+    [naviAppearance setBarTintColor:UIColorRGB(0, 164, 217)];
     [naviAppearance setTitleTextAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:20], NSForegroundColorAttributeName:[UIColor whiteColor]}];
     //naviAppearance.tintColor = [UIColor whiteColor];
-    [naviAppearance setBarTintColor:[UIColor whiteColor]];
     [naviAppearance setTintColor:[UIColor whiteColor]];
     
     //

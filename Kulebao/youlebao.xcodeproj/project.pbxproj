@@ -374,6 +374,7 @@
 		09FFB5F418D6B2FA00F07B0A /* CSKuleDailyScheduleInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FFB5F318D6B2FA00F07B0A /* CSKuleDailyScheduleInfo.m */; };
 		09FFB5F718D6B46300F07B0A /* CSKuleScheduleInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FFB5F618D6B46300F07B0A /* CSKuleScheduleInfo.m */; };
 		221858CE1BEF9EDC005C4281 /* CBHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 221858CD1BEF9EDC005C4281 /* CBHTTPRequestOperationManager.m */; };
+		224B441A1C51088100982E15 /* appicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 224B44191C51088100982E15 /* appicon@2x.png */; };
 		228C885E1C0F4F25003D9EA2 /* CBIMTokenData.m in Sources */ = {isa = PBXBuildFile; fileRef = 228C885D1C0F4F25003D9EA2 /* CBIMTokenData.m */; };
 		228C88621C0F58DC003D9EA2 /* CBIMChatListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 228C88611C0F58DC003D9EA2 /* CBIMChatListViewController.m */; };
 		228C88651C0FF045003D9EA2 /* CBIMDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 228C88641C0FF045003D9EA2 /* CBIMDataSource.m */; };
@@ -945,6 +946,7 @@
 		09FFB5F618D6B46300F07B0A /* CSKuleScheduleInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleScheduleInfo.m; sourceTree = "<group>"; };
 		221858CC1BEF9EDC005C4281 /* CBHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBHTTPRequestOperationManager.h; sourceTree = "<group>"; };
 		221858CD1BEF9EDC005C4281 /* CBHTTPRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBHTTPRequestOperationManager.m; sourceTree = "<group>"; };
+		224B44191C51088100982E15 /* appicon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "appicon@2x.png"; sourceTree = "<group>"; };
 		228C885C1C0F4F25003D9EA2 /* CBIMTokenData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBIMTokenData.h; sourceTree = "<group>"; };
 		228C885D1C0F4F25003D9EA2 /* CBIMTokenData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBIMTokenData.m; sourceTree = "<group>"; };
 		228C88601C0F58DC003D9EA2 /* CBIMChatListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBIMChatListViewController.h; sourceTree = "<group>"; };
@@ -1789,6 +1791,7 @@
 		09D9BB471AEE933D009456ED /* images */ = {
 			isa = PBXGroup;
 			children = (
+				224B44191C51088100982E15 /* appicon@2x.png */,
 				22BC05621C1F19B200B8D076 /* v2-im-group@2x.png */,
 				090903571BDEA84300FDD2CE /* v2-启动界面-2208@2x.png */,
 				09D9BB4E1AEE933D009456ED /* v2-bg_1.png */,
@@ -2152,6 +2155,7 @@
 				09D9BBC41AEE933D009456ED /* v2-box_看宝宝@2x.png in Resources */,
 				09D9BBF51AEE933D009456ED /* v2-head.png in Resources */,
 				09F74C7E1997C4F3001555D0 /* chat_head_icon.gif in Resources */,
+				224B441A1C51088100982E15 /* appicon@2x.png in Resources */,
 				09D9BBCC1AEE933D009456ED /* v2-btn_blue_s@2x.png in Resources */,
 				09D9BC231AEE933D009456ED /* v2-锻炼@2x.png in Resources */,
 				09F74C8E1997C4F3001555D0 /* gallery.png in Resources */,

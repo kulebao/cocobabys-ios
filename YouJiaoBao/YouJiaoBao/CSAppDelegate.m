@@ -47,6 +47,14 @@ CSAppDelegate* gApp = nil;
     [[RCIM sharedRCIM] setUserInfoDataSource:[CBIMDataSource sharedInstance]];
     [[RCIM sharedRCIM] setGroupUserInfoDataSource:[CBIMDataSource sharedInstance]];
     
+    //
+    id naviAppearance = [UINavigationBar appearance];
+    //[naviAppearance setBackgroundImage:[UIImage imageNamed:@"v2-head.png"] forBarMetrics:UIBarMetricsDefault];
+    [naviAppearance setBarTintColor:UIColorRGB(0, 164, 217)];
+    [naviAppearance setTitleTextAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:20], NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    //naviAppearance.tintColor = [UIColor whiteColor];
+    [naviAppearance setTintColor:[UIColor whiteColor]];
+    
     _receivedNotifications = [NSMutableArray array];
     // iOS8 下需要使用新的 API
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {

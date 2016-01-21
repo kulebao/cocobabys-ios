@@ -45,9 +45,9 @@
 + (void)load
 {
 	@autoreleasepool {
-		[self bk_registerDynamicDelegate];
-		[self bk_linkDelegateMethods:@{ @"bk_didFinishPickingMediaBlock": @"imagePickerController:didFinishPickingMediaWithInfo:",
-                                        @"bk_didCancelBlock": @"imagePickerControllerDidCancel:" }];
+		//[self bk_registerDynamicDelegate];
+		//[self bk_linkDelegateMethods:@{ @"bk_didFinishPickingMediaBlock": @"imagePickerController:didFinishPickingMediaWithInfo:",
+        //                                @"bk_didCancelBlock": @"imagePickerControllerDidCancel:" }];
 	}
 }
 

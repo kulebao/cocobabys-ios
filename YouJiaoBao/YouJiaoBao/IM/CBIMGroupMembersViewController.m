@@ -15,6 +15,7 @@
 #import "CBIMGroupTeacherTableViewCell.h"
 #import "UIImageView+WebCache.h"
 #import "CBIMChatViewController.h"
+#import "CSEngine.h"
 
 @interface CBIMGroupMembersViewController () {
     NSInteger _schoolId;
@@ -184,6 +185,7 @@
     CBIMGroupTeacherTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CBIMGroupTeacherTableViewCell" forIndexPath:indexPath];
     
     // Configure the cell...
+    CSEngine* engine = [CSEngine sharedInstance];
     if (self.segMemberType.selectedSegmentIndex == 0) {
         CBTeacherInfo* cellData = [self.teacherList objectAtIndex:indexPath.row];
         [cell.imgIcon sd_setImageWithURL:[NSURL URLWithString:cellData.portrait]
@@ -193,6 +195,10 @@
         cell.teacherInfo = cellData;
         
         cell.btnCall.hidden = (cellData.phone.length == 0);
+        
+        if ([cellData._id isEqualToString:engine.loginInfo.uid]) {
+            cell.btnCall.hidden = YES;
+        }
     }
     else if (self.segMemberType.selectedSegmentIndex == 1) {
         NSMutableArray* arr = [self.relationshipGroupList objectAtIndex:indexPath.section];

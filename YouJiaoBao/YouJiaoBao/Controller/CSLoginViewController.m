@@ -134,7 +134,12 @@
         
         id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
 //            self.labNote.text = @"用户名或密码错误";
-            [gApp alert:@"用户名或密码错误"];
+            if (operation.response) {
+                [gApp alert:@"用户名或密码错误"];
+            }
+            else {
+                [gApp alert:error.localizedDescription];
+            }
         };
         
         _loginAccount = [ModelAccount accountWithUsername:username andPswd:password];

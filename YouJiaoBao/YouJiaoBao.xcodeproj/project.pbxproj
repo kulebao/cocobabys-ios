@@ -375,6 +375,9 @@
 		22A09EA91C5109D100D39C46 /* appicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 22A09EA81C5109D100D39C46 /* appicon@2x.png */; };
 		22BC1E8F1BFE26A900DF6834 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 09A3E1011BC79D0A00076198 /* libstdc++.tbd */; };
 		22C64A0C1C4B92770008529B /* v2-im-group@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 22C64A0B1C4B92770008529B /* v2-im-group@2x.png */; };
+		22F682FA1C566F79005C6040 /* CBIMBanListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F682F91C566F79005C6040 /* CBIMBanListViewController.m */; };
+		22F682FE1C566FD2005C6040 /* CBIMBanTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F682FD1C566FD2005C6040 /* CBIMBanTableViewCell.m */; };
+		22F683041C567053005C6040 /* CBIMBanInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F683031C567053005C6040 /* CBIMBanInfo.m */; };
 		5C8CEB50FBB46A0F11F5CC76 /* libPods-YouJiaoBao.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95C1D92135E08602A4FD4B63 /* libPods-YouJiaoBao.a */; };
 /* End PBXBuildFile section */
 
@@ -933,6 +936,12 @@
 		229033E41C4B404A008A94DF /* CSKuleCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSKuleCommon.h; sourceTree = "<group>"; };
 		22A09EA81C5109D100D39C46 /* appicon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "appicon@2x.png"; sourceTree = "<group>"; };
 		22C64A0B1C4B92770008529B /* v2-im-group@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-im-group@2x.png"; sourceTree = "<group>"; };
+		22F682F81C566F79005C6040 /* CBIMBanListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBIMBanListViewController.h; sourceTree = "<group>"; };
+		22F682F91C566F79005C6040 /* CBIMBanListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBIMBanListViewController.m; sourceTree = "<group>"; };
+		22F682FC1C566FD2005C6040 /* CBIMBanTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBIMBanTableViewCell.h; sourceTree = "<group>"; };
+		22F682FD1C566FD2005C6040 /* CBIMBanTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBIMBanTableViewCell.m; sourceTree = "<group>"; };
+		22F683021C567053005C6040 /* CBIMBanInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBIMBanInfo.h; sourceTree = "<group>"; };
+		22F683031C567053005C6040 /* CBIMBanInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBIMBanInfo.m; sourceTree = "<group>"; };
 		37124C63E09C739A3FC178B4 /* Pods-YouJiaoBao.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YouJiaoBao.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YouJiaoBao/Pods-YouJiaoBao.debug.xcconfig"; sourceTree = "<group>"; };
 		95C1D92135E08602A4FD4B63 /* libPods-YouJiaoBao.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YouJiaoBao.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE5A1805FA68D27CBDEAC531 /* Pods-YouJiaoBao.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YouJiaoBao.release.xcconfig"; path = "Pods/Target Support Files/Pods-YouJiaoBao/Pods-YouJiaoBao.release.xcconfig"; sourceTree = "<group>"; };
@@ -1856,32 +1865,10 @@
 		229033BA1C4B3FB0008A94DF /* IM */ = {
 			isa = PBXGroup;
 			children = (
-				229033BB1C4B3FB0008A94DF /* CBChatViewSettingsViewController.h */,
-				229033BC1C4B3FB0008A94DF /* CBChatViewSettingsViewController.m */,
-				229033BD1C4B3FB0008A94DF /* CBChildInfo.h */,
-				229033BE1C4B3FB0008A94DF /* CBChildInfo.m */,
-				229033BF1C4B3FB0008A94DF /* CBClassInfo.h */,
-				229033C01C4B3FB0008A94DF /* CBClassInfo.m */,
-				229033C11C4B3FB0008A94DF /* CBIMChatListViewController.h */,
-				229033C21C4B3FB0008A94DF /* CBIMChatListViewController.m */,
-				229033C31C4B3FB0008A94DF /* CBIMChatViewController.h */,
-				229033C41C4B3FB0008A94DF /* CBIMChatViewController.m */,
-				229033C51C4B3FB0008A94DF /* CBIMDataSource.h */,
-				229033C61C4B3FB0008A94DF /* CBIMDataSource.m */,
-				229033C71C4B3FB0008A94DF /* CBIMGroupMembersViewController.h */,
-				229033C81C4B3FB0008A94DF /* CBIMGroupMembersViewController.m */,
-				229033C91C4B3FB0008A94DF /* CBIMGroupTeacherTableViewCell.h */,
-				229033CA1C4B3FB0008A94DF /* CBIMGroupTeacherTableViewCell.m */,
-				229033CB1C4B3FB0008A94DF /* CBIMSettingsModel.h */,
-				229033CC1C4B3FB0008A94DF /* CBIMSettingsModel.m */,
-				229033CD1C4B3FB0008A94DF /* CBParentInfo.h */,
-				229033CE1C4B3FB0008A94DF /* CBParentInfo.m */,
-				229033CF1C4B3FB0008A94DF /* CBRelationshipInfo.h */,
-				229033D01C4B3FB0008A94DF /* CBRelationshipInfo.m */,
-				229033D11C4B3FB0008A94DF /* CBTeacherInfo.h */,
-				229033D21C4B3FB0008A94DF /* CBTeacherInfo.m */,
-				221BAFCC1C4B8DE900593559 /* CBSchoolInfo.h */,
-				221BAFCD1C4B8DE900593559 /* CBSchoolInfo.m */,
+				22F683051C56705B005C6040 /* Network */,
+				22F682FF1C567005005C6040 /* JsonObjects */,
+				22F683001C567027005C6040 /* ViewContollers */,
+				22F683011C567037005C6040 /* Models */,
 				229033D31C4B3FB0008A94DF /* IM.storyboard */,
 			);
 			path = IM;
@@ -1893,6 +1880,66 @@
 				22C64A0B1C4B92770008529B /* v2-im-group@2x.png */,
 			);
 			path = im;
+			sourceTree = "<group>";
+		};
+		22F682FF1C567005005C6040 /* JsonObjects */ = {
+			isa = PBXGroup;
+			children = (
+				229033CF1C4B3FB0008A94DF /* CBRelationshipInfo.h */,
+				229033D01C4B3FB0008A94DF /* CBRelationshipInfo.m */,
+				229033BD1C4B3FB0008A94DF /* CBChildInfo.h */,
+				229033BE1C4B3FB0008A94DF /* CBChildInfo.m */,
+				229033BF1C4B3FB0008A94DF /* CBClassInfo.h */,
+				229033C01C4B3FB0008A94DF /* CBClassInfo.m */,
+				229033CD1C4B3FB0008A94DF /* CBParentInfo.h */,
+				229033CE1C4B3FB0008A94DF /* CBParentInfo.m */,
+				229033D11C4B3FB0008A94DF /* CBTeacherInfo.h */,
+				229033D21C4B3FB0008A94DF /* CBTeacherInfo.m */,
+				221BAFCC1C4B8DE900593559 /* CBSchoolInfo.h */,
+				221BAFCD1C4B8DE900593559 /* CBSchoolInfo.m */,
+				22F683021C567053005C6040 /* CBIMBanInfo.h */,
+				22F683031C567053005C6040 /* CBIMBanInfo.m */,
+			);
+			name = JsonObjects;
+			sourceTree = "<group>";
+		};
+		22F683001C567027005C6040 /* ViewContollers */ = {
+			isa = PBXGroup;
+			children = (
+				229033BB1C4B3FB0008A94DF /* CBChatViewSettingsViewController.h */,
+				229033BC1C4B3FB0008A94DF /* CBChatViewSettingsViewController.m */,
+				229033C11C4B3FB0008A94DF /* CBIMChatListViewController.h */,
+				229033C21C4B3FB0008A94DF /* CBIMChatListViewController.m */,
+				229033C31C4B3FB0008A94DF /* CBIMChatViewController.h */,
+				229033C41C4B3FB0008A94DF /* CBIMChatViewController.m */,
+				229033C71C4B3FB0008A94DF /* CBIMGroupMembersViewController.h */,
+				229033C81C4B3FB0008A94DF /* CBIMGroupMembersViewController.m */,
+				229033C91C4B3FB0008A94DF /* CBIMGroupTeacherTableViewCell.h */,
+				229033CA1C4B3FB0008A94DF /* CBIMGroupTeacherTableViewCell.m */,
+				22F682F81C566F79005C6040 /* CBIMBanListViewController.h */,
+				22F682F91C566F79005C6040 /* CBIMBanListViewController.m */,
+				22F682FC1C566FD2005C6040 /* CBIMBanTableViewCell.h */,
+				22F682FD1C566FD2005C6040 /* CBIMBanTableViewCell.m */,
+			);
+			name = ViewContollers;
+			sourceTree = "<group>";
+		};
+		22F683011C567037005C6040 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				229033C51C4B3FB0008A94DF /* CBIMDataSource.h */,
+				229033C61C4B3FB0008A94DF /* CBIMDataSource.m */,
+				229033CB1C4B3FB0008A94DF /* CBIMSettingsModel.h */,
+				229033CC1C4B3FB0008A94DF /* CBIMSettingsModel.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		22F683051C56705B005C6040 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Network;
 			sourceTree = "<group>";
 		};
 		E94432057A93D9C3C090D835 /* Pods */ = {
@@ -2308,6 +2355,7 @@
 				221BAFBD1C4B85F600593559 /* EntityLoginInfo.m in Sources */,
 				221BAFCA1C4B85F600593559 /* EntityRelationshipInfo+CoreDataProperties.m in Sources */,
 				091EE50719E83F820050092E /* XHImageViewer.m in Sources */,
+				22F683041C567053005C6040 /* CBIMBanInfo.m in Sources */,
 				09A3C60919C479C7001AFE8C /* MJPhotoView.m in Sources */,
 				229033DD1C4B3FB0008A94DF /* CBParentInfo.m in Sources */,
 				0938DC5F1AFF1F0800883DD7 /* CSKuleNewsTableViewCell.m in Sources */,
@@ -2362,6 +2410,7 @@
 				221BAFC31C4B85F600593559 /* EntityNewsInfo.m in Sources */,
 				0917610419C093CA006FE2FB /* CSKuleFeedbackViewController.m in Sources */,
 				094C29F81A067D28009BDC4E /* CSTextFieldDelegate.m in Sources */,
+				22F682FA1C566F79005C6040 /* CBIMBanListViewController.m in Sources */,
 				221BAFB71C4B85F600593559 /* EntityAssignmentInfo.m in Sources */,
 				09FE720D199660D0002E3ED4 /* CSUtils.m in Sources */,
 				221BAFCB1C4B85F600593559 /* EntityRelationshipInfo.m in Sources */,
@@ -2412,6 +2461,7 @@
 				221BAFB91C4B85F600593559 /* EntityClassInfo.m in Sources */,
 				091EE50519E83F820050092E /* XHCacheManager.m in Sources */,
 				0901CDFD1ABF2FBB0044838A /* ProgressBar.m in Sources */,
+				22F682FE1C566FD2005C6040 /* CBIMBanTableViewCell.m in Sources */,
 				091EE50619E83F820050092E /* XHFileAttribute.m in Sources */,
 				0917610719C093E5006FE2FB /* CSKuleChangePasswordViewController.m in Sources */,
 				09A3E0F51BC7940E00076198 /* CSFirImApi.m in Sources */,

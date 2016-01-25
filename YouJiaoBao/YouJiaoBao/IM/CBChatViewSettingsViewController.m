@@ -14,6 +14,8 @@
 #import "UIImageView+WebCache.h"
 #import "CBIMSettingsModel.h"
 #import "CSEngine.h"
+#import "CBIMBanListViewController.h"
+#import "CSHttpClient.h"
 
 @interface CBChatViewSettingsViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *labSchoolName;
@@ -151,7 +153,7 @@
     // Push the view controller.
     //[self.navigationController pushViewController:detailViewController animated:YES];
     
-    if(0 == indexPath.section && 3 == indexPath.row) {
+    if(0 == indexPath.section && 4 == indexPath.row) {
         //清除缓存
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示"
                                                             message:@"清空群组消息？"
@@ -171,6 +173,10 @@
     // Pass the selected object to the new view controller.
     if ([segue.identifier isEqualToString:@"segue.im.groupmembers"]) {
         CBIMGroupMembersViewController* ctrl = segue.destinationViewController;
+        ctrl.targetId = self.targetId;
+    }
+    else if ([segue.identifier isEqualToString:@"segue.im.banlist"]) {
+        CBIMBanListViewController* ctrl = segue.destinationViewController;
         ctrl.targetId = self.targetId;
     }
 }

@@ -221,4 +221,21 @@ typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSErr
                                                      success:(SuccessResponseHandler)success
                                                      failure:(FailureResponseHandler)failure;
 
+- (AFHTTPRequestOperation*)reqGetBandListOfKindergarten:(NSInteger)kindergarten
+                                            withClassId:(NSInteger)classId
+                                                success:(SuccessResponseHandler)success
+                                                failure:(FailureResponseHandler)failure;
+
+- (AFHTTPRequestOperation*)reqAddBandUser:(NSString*)imUser
+                           inKindergarten:(NSInteger)kindergarten
+                              withClassId:(NSInteger)classId
+                                  success:(SuccessResponseHandler)success
+                                  failure:(FailureResponseHandler)failure;
+
+- (AFHTTPRequestOperation*)reqDeleteBandUser:(NSString*)imUser
+                              inKindergarten:(NSInteger)kindergarten
+                                 withClassId:(NSInteger)classId
+                                     success:(SuccessResponseHandler)success
+                                     failure:(FailureResponseHandler)failure;
+
 @end

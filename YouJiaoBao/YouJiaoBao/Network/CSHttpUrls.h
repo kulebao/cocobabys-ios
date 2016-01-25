@@ -126,4 +126,7 @@
 #define kGetFamilyRelationshipPath  @"/kindergarten/%@/relationship"
 #define kGetSchoolInfoPath          @"/kindergarten/%@"
 
+#define kIMBanURL               @"/api/v7/kindergarten/%@/classimgroup/%@/ban"
+#define kIMBanIdURL             @"/api/v7/kindergarten/%@/classimgroup/%@/ban/%@"
+
 #endif

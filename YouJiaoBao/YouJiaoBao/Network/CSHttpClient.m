@@ -929,4 +929,50 @@
                      failure:failure];
 }
 
+- (AFHTTPRequestOperation*)reqGetBandListOfKindergarten:(NSInteger)kindergarten
+                                            withClassId:(NSInteger)classId
+                                                success:(SuccessResponseHandler)success
+                                                failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kIMBanURL, @(kindergarten), @(classId)];
+    
+    NSDictionary* parameters = @{};
+
+    return [self.opManager GET:path
+                    parameters:parameters
+                       success:success
+                       failure:failure];
+}
+
+- (AFHTTPRequestOperation*)reqAddBandUser:(NSString*)imUser
+                           inKindergarten:(NSInteger)kindergarten
+                              withClassId:(NSInteger)classId
+                                  success:(SuccessResponseHandler)success
+                                  failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kIMBanURL, @(kindergarten), @(classId)];
+    
+    NSDictionary* parameters = @{@"id":SAFE_STRING(imUser),
+                                 @"minute":@(99999)};
+    
+    return [self.opManager POST:path
+                     parameters:parameters
+                        success:success
+                        failure:failure];
+    
+}
+
+- (AFHTTPRequestOperation*)reqDeleteBandUser:(NSString*)imUser
+                              inKindergarten:(NSInteger)kindergarten
+                                 withClassId:(NSInteger)classId
+                                     success:(SuccessResponseHandler)success
+                                     failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kIMBanIdURL, @(kindergarten), @(classId), SAFE_STRING(imUser)];
+    
+    NSDictionary* parameters = @{};
+    
+    return [self.opManager DELETE:path
+                     parameters:parameters
+                        success:success
+                        failure:failure];
+}
+
 @end

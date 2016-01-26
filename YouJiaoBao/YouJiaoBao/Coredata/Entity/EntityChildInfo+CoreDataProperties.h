@@ -2,7 +2,7 @@
 //  EntityChildInfo+CoreDataProperties.h
 //  YouJiaoBao
 //
-//  Created by WangXin on 1/17/16.
+//  Created by WangXin on 1/26/16.
 //  Copyright © 2016 Codingsoft. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -29,7 +29,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSNumber *timestamp;
 @property (nullable, nonatomic, retain) EntityClassInfo *classInfo;
 @property (nullable, nonatomic, retain) EntityDailylog *dailylog;
-@property (nullable, nonatomic, retain) EntityTopicMsg *lastTopicMsg;
 
 @end
 

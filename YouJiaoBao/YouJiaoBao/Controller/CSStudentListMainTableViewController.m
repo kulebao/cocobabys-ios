@@ -12,7 +12,6 @@
 #import "EntityClassInfoHelper.h"
 #import "EntityChildInfoHelper.h"
 #import "EntityDailylogHelper.h"
-#import "EntityTopicMsgHelper.h"
 #import "CSChildListItemTableViewCell.h"
 #import "UIImageView+WebCache.h"
 #import "CSChildProfileViewController.h"
@@ -28,7 +27,6 @@
     AFHTTPRequestOperation* _opReloadClassList;
     AFHTTPRequestOperation* _opReloadChildList;
     AFHTTPRequestOperation* _opReloadDailylogList;
-    AFHTTPRequestOperation* _opReloadSessionList;
 }
 
 @end
@@ -168,24 +166,8 @@
         cell.labNotification.text = @"未刷卡";
     }
     
-    EntityTopicMsg* topicMsg = childInfo.lastTopicMsg;
-    if (topicMsg) {
-        if ([topicMsg.mediaType isEqualToString:@"image"]) {
-            cell.labMessage.text = @"[图片]";
-        }
-        else if ([topicMsg.mediaType isEqualToString:@"voice"]) {
-            cell.labMessage.text = @"[语言]";
-        }
-        else {
-            cell.labMessage.text = topicMsg.content;
-        }
-        
-        cell.imgNewMsg.hidden = (topicMsg.read.integerValue > 0);
-    }
-    else {
-        cell.labMessage.text = @"";
-        cell.imgNewMsg.hidden = YES;
-    }
+    cell.labMessage.text = @"";
+    cell.imgNewMsg.hidden = YES;
     
     return cell;
 }
@@ -265,7 +247,6 @@
 - (void)doRefresh2 {
     [self reloadChildList];
     [self reloadDailylogList];
-    [self reloadSessionList];
 }
 
 - (void)reloadClassList {
@@ -372,44 +353,10 @@
                                                           failure:failure];
 }
 
-- (void)reloadSessionList{
-    CSEngine* engine = [CSEngine sharedInstance];
-    NSArray* classInfoList = engine.classInfoList;
-    
-    NSMutableArray* classIdList = [NSMutableArray array];
-    for (EntityClassInfo* classInfo in classInfoList) {
-        [classIdList addObject:classInfo.classId.stringValue];
-    }
-    
-    CSHttpClient* http = [CSHttpClient sharedInstance];
-    
-    id success = ^(AFHTTPRequestOperation *operation, id jsonObjectList) {
-        [EntityTopicMsgHelper updateEntities:jsonObjectList];
-        [self.tableView reloadData];
-        _opReloadSessionList = nil;
-        [self hideWaitingAlertIfNeeded];
-    };
-    
-    id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
-        _opReloadSessionList = nil;
-        [self hideWaitingAlertIfNeeded];
-    };
-    
-    if (_opReloadSessionList) {
-        [_opReloadSessionList cancel];
-    }
-    [gApp waitingAlert:@"获取信息" withTitle:@"请稍候"];
-    _opReloadSessionList = [http opGetSessionListOfKindergarten:engine.loginInfo.schoolId.integerValue
-                                                  withClassList:classIdList
-                                                        success:success
-                                                        failure:failure];
-}
-
 - (void)hideWaitingAlertIfNeeded {
     if (_opReloadClassList == nil
         && _opReloadChildList == nil
-        && _opReloadDailylogList == nil
-        && _opReloadSessionList == nil) {
+        && _opReloadDailylogList == nil) {
         [gApp hideAlert];
     }
 }

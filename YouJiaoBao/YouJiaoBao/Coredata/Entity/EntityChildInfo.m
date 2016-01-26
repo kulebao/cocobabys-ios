@@ -9,7 +9,6 @@
 #import "EntityChildInfo.h"
 #import "EntityClassInfo.h"
 #import "EntityDailylog.h"
-#import "EntityTopicMsg.h"
 
 @implementation EntityChildInfo
 

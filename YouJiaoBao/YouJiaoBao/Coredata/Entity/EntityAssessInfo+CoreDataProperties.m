@@ -2,7 +2,7 @@
 //  EntityAssessInfo+CoreDataProperties.m
 //  YouJiaoBao
 //
-//  Created by WangXin on 1/17/16.
+//  Created by WangXin on 1/26/16.
 //  Copyright © 2016 Codingsoft. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu

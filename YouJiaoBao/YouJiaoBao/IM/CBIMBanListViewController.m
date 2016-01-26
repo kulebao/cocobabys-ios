@@ -51,6 +51,9 @@
         _classId = [components[1] integerValue];
     }
     
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onBanSwitchChanged:) name:@"noti.im.ban.changed" object:nil];
+    
     [self reloadData];
 }
 
@@ -60,62 +63,70 @@
 }
 
 - (void)reloadData {
+    [self reloadParentList];
+    [self reloadBandList];
+}
+
+- (void)reloadParentList {
     CSHttpClient* http = [CSHttpClient sharedInstance];
     if (self.relationshipGroupList.count > 0) {
         [self reloadUI];
     }
-    else {
-        if (_schoolId >0 && _classId>0) {
-            [gApp waitingAlert:@"正在获取数据"];
-            [http reqGetRelationshipsOfKindergarten:_schoolId
-                                        withClassId:_classId
-                                            success:^(AFHTTPRequestOperation *operation, id dataJson) {
-                                                [gApp hideAlert];
-                                                
-                                                NSMutableDictionary* groupedDict = [NSMutableDictionary dictionary];
-                                                for (NSDictionary* json in dataJson) {
-                                                    CBRelationshipInfo* newObj = [CBRelationshipInfo instanceWithDictionary:json];
-                                                    NSMutableArray* childRelationships = [groupedDict objectForKey:newObj.child.child_id];
-                                                    if (childRelationships == nil) {
-                                                        childRelationships = [NSMutableArray array];
-                                                        [groupedDict setObject:childRelationships forKey:newObj.child.child_id];
-                                                    }
-                                                    [childRelationships addObject:newObj];
+    else if (_schoolId >0 && _classId>0) {
+        [gApp waitingAlert:@"正在获取数据"];
+        [http reqGetRelationshipsOfKindergarten:_schoolId
+                                    withClassId:_classId
+                                        success:^(AFHTTPRequestOperation *operation, id dataJson) {
+                                            [gApp hideAlert];
+                                            
+                                            NSMutableDictionary* groupedDict = [NSMutableDictionary dictionary];
+                                            for (NSDictionary* json in dataJson) {
+                                                CBRelationshipInfo* newObj = [CBRelationshipInfo instanceWithDictionary:json];
+                                                NSMutableArray* childRelationships = [groupedDict objectForKey:newObj.child.child_id];
+                                                if (childRelationships == nil) {
+                                                    childRelationships = [NSMutableArray array];
+                                                    [groupedDict setObject:childRelationships forKey:newObj.child.child_id];
                                                 }
-                                                
-                                                [self.relationshipGroupList removeAllObjects];
-                                                
-                                                for (NSNumber* dictKey in groupedDict) {
-                                                    NSMutableArray* childRelationships = [groupedDict objectForKey:dictKey];
-                                                    if (childRelationships) {
-                                                        [self.relationshipGroupList addObject:childRelationships];
-                                                    }
+                                                [childRelationships addObject:newObj];
+                                            }
+                                            
+                                            [self.relationshipGroupList removeAllObjects];
+                                            
+                                            for (NSNumber* dictKey in groupedDict) {
+                                                NSMutableArray* childRelationships = [groupedDict objectForKey:dictKey];
+                                                if (childRelationships) {
+                                                    [self.relationshipGroupList addObject:childRelationships];
                                                 }
-                                                
-                                                [self reloadUI];
-                                                
-                                            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                                [gApp hideAlert];
-                                            }];
-        }
-        else {
-            CSLog(@"ERR-1:%s", __FUNCTION__);
-        }
+                                            }
+                                            
+                                            [self reloadUI];
+                                            
+                                        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                            [gApp hideAlert];
+                                        }];
     }
-    
-    [http reqGetBandListOfKindergarten:_schoolId
-                           withClassId:_classId
-                               success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                   [self.bandInfoList removeAllObjects];
-                                   for (NSDictionary* json in responseObject) {
-                                       CBIMBanInfo* banInfo = [CBIMBanInfo instanceWithDictionary:json];
-                                       [self.bandInfoList addObject:banInfo];
-                                   }
-                                   [self reloadUI];
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    else {
+        CSLog(@"ERR-1:%s", __FUNCTION__);
+    }
+}
 
-    }];
+- (void)reloadBandList {
+    if (_schoolId >0 && _classId>0) {
+        CSHttpClient* http = [CSHttpClient sharedInstance];
+        [http reqGetBandListOfKindergarten:_schoolId
+                               withClassId:_classId
+                                   success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                       [self.bandInfoList removeAllObjects];
+                                       for (NSDictionary* json in responseObject) {
+                                           CBIMBanInfo* banInfo = [CBIMBanInfo instanceWithDictionary:json];
+                                           [self.bandInfoList addObject:banInfo];
+                                       }
+                                       [self reloadUI];
+                                       
+                                   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                       [gApp hideAlert];
+                                   }];
+    }
 }
 
 - (void)reloadUI {
@@ -129,15 +140,15 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     NSInteger numberOfSections = 0;
-        numberOfSections = self.relationshipGroupList.count;
+    numberOfSections = self.relationshipGroupList.count;
     return numberOfSections;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSInteger numberOfRows = 0;
-
-        NSMutableArray* arr = [self.relationshipGroupList objectAtIndex:section];
-        numberOfRows = arr.count;
+    
+    NSMutableArray* arr = [self.relationshipGroupList objectAtIndex:section];
+    numberOfRows = arr.count;
     return numberOfRows;
 }
 
@@ -150,6 +161,18 @@
     CBRelationshipInfo* cellData = [arr objectAtIndex:indexPath.row];
     cell.labName.text = [NSString stringWithFormat:@"%@%@", [cellData.child displayNick], cellData.relationship];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    // imUserId=p_2041_Some(20001)_13018217525
+    NSString* imUserId = [NSString stringWithFormat:@"p_%@_Some(%@)_%@", cellData.parent.school_id, cellData.parent._id, cellData.parent.phone];
+    NSArray* matched = [self.bandInfoList filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"_id == %@", imUserId]];
+    
+    cell.switchBan.on = (matched.count>0);
+    
+    cell.schoolId = _schoolId;
+    cell.classId = _classId;
+    cell.imUserId = imUserId;
+    
+    CSLog(@"imUserId=%@", imUserId);
     
     return cell;
 }
@@ -191,5 +214,40 @@
  // Pass the selected object to the new view controller.
  }
  */
+
+- (void)onBanSwitchChanged:(NSNotification*)noti {
+    CBIMBanTableViewCell* cell = noti.object;
+    if (cell) {
+        CSHttpClient* http = [CSHttpClient sharedInstance];
+        if (cell.switchBan.on) {
+            [gApp waitingAlert:@"禁言用户"];
+            [http reqAddBandUser:cell.imUserId
+                  inKindergarten:cell.schoolId
+                     withClassId:cell.classId
+                         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                             [gApp alert:@"禁言用户成功"];
+                             [self reloadBandList];
+                         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                             [gApp alert:@"禁言用户失败"];
+                             CSLog(@"reqAddBandUser err:%@", error);
+                             [self reloadBandList];
+                         }];
+        }
+        else {
+            [gApp waitingAlert:@"解除禁言"];
+            [http reqDeleteBandUser:cell.imUserId
+                     inKindergarten:cell.schoolId
+                        withClassId:cell.classId
+                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                [gApp alert:@"解除禁言成功"];
+                                [self reloadBandList];
+                            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                [gApp alert:@"解除禁言失败"];
+                                CSLog(@"reqDeleteBandUser err:%@", error);
+                                [self reloadBandList];
+                            }];
+        }
+    }
+}
 
 @end

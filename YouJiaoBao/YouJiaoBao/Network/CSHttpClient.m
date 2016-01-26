@@ -954,7 +954,7 @@
                                  @"minute":@(99999)};
     
     return [self.opManager POST:path
-                     parameters:parameters
+                     parameters:@[parameters]
                         success:success
                         failure:failure];
     

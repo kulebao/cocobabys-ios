@@ -10,4 +10,7 @@
 
 @interface CBIMBanInfo : CSJsonObject
 
+@property (nonatomic, strong) NSString* _id;
+@property (nonatomic, strong) NSString* time;
+
 @end

@@ -21,5 +21,7 @@
 }
 
 - (IBAction)onSwitchValueChanged:(id)sender {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"noti.im.ban.changed" object:self];
 }
+
 @end

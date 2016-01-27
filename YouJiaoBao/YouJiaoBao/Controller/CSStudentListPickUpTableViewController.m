@@ -48,7 +48,7 @@
     
     CSEngine* engine = [CSEngine sharedInstance];
     
-    _frClasses = [EntityClassInfoHelper frClassesWithEmployee:engine.loginInfo.uid ofKindergarten:engine.loginInfo.schoolId.integerValue];
+    _frClasses = [EntityClassInfoHelper frClassesWithEmployee:engine.loginInfo.o_id ofKindergarten:engine.loginInfo.schoolId.integerValue];
     _frClasses.delegate = self;
     
     NSError* error = nil;

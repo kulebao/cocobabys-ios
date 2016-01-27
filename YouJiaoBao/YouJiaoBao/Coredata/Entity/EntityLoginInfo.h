@@ -15,6 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 // Insert code here to declare functionality of your managed object subclass
 
+@property (nonatomic, strong) NSArray* ineligibleClassList;
+@property (nonatomic, assign, readonly) BOOL allowToSendAll;
+
 @end
 
 NS_ASSUME_NONNULL_END

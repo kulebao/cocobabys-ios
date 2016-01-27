@@ -239,7 +239,7 @@
         NSData* imgData = UIImageJPEGRepresentation(img, 0.8);
         NSString* imgFileName = [NSString stringWithFormat:@"homework_img/%@/t_%@/%@.jpg",
                                  engine.loginInfo.schoolId,
-                                 engine.loginInfo.uid,
+                                 engine.loginInfo.o_id,
                                  @((long long)[[NSDate date] timeIntervalSince1970]*1000)];
         
         SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {

@@ -360,7 +360,7 @@
     CSEngine* engine = [CSEngine sharedInstance];
     NSString* apiUrl = [NSString stringWithFormat:kPathKindergartenPostNewsV2,
                         @(schoolId),
-                        engine.loginInfo.uid];
+                        engine.loginInfo.o_id];
     
     AFHTTPRequestOperation* op =[self.opManager GET:apiUrl
                                          parameters:parameters
@@ -414,7 +414,7 @@
     
     NSString* apiUrl = [NSString stringWithFormat:kChangePasswordPath, loginInfo.schoolId, loginInfo.phone];
     
-    NSDictionary* parameters = @{@"employee_id": loginInfo.uid,
+    NSDictionary* parameters = @{@"employee_id": loginInfo.o_id,
                                  @"school_id" : loginInfo.schoolId,
                                  @"phone" : loginInfo.phone,
                                  @"login_name" : loginInfo.loginName,
@@ -522,7 +522,7 @@
                                withRequriedFeedback:(BOOL)requriedFeedback
                                             success:(SuccessResponseHandler)success
                                             failure:(FailureResponseHandler)failure {
-    NSString* apiUrl = [NSString stringWithFormat:kPathKindergartenPostNewsV2, @(kindergarten), senderInfo.uid];
+    NSString* apiUrl = [NSString stringWithFormat:kPathKindergartenPostNewsV2, @(kindergarten), senderInfo.o_id];
     
     NSString* imgUrl = [imgUrlList firstObject];
     
@@ -531,7 +531,7 @@
                                  @"title": title ? title : @"",
                                  @"published" : @(YES),
                                  @"class_id" : classId,
-                                 @"publisher_id": senderInfo.uid,
+                                 @"publisher_id": senderInfo.o_id,
                                  @"image" : imgUrl ? imgUrl : @"",
                                  @"tags": tags ? tags : @[],
                                  @"feedback_required" : @(requriedFeedback)};
@@ -559,7 +559,7 @@
                                  @"title": title ? title : @"",
                                  @"class_id" : classId,
                                  @"publisher": senderInfo.name,
-                                 @"publisher_id" : senderInfo.uid,
+                                 @"publisher_id" : senderInfo.o_id,
                                  @"icon_url" : imgUrl ? imgUrl : @""};
     
     AFHTTPRequestOperation* op = [self.opManager POST:apiUrl
@@ -669,7 +669,7 @@
                      @"type": mediaType};
     }
     
-    id msgSender = @{@"id": senderInfo.uid,
+    id msgSender = @{@"id": senderInfo.o_id,
                      @"type": @"t"};
     
     NSDictionary* parameters = @{@"topic": childId,
@@ -748,7 +748,7 @@
     NSString* apiUrl = [NSString stringWithFormat:kPathEmployeeProfile, loginInfo.schoolId, loginInfo.phone];
     
     NSDictionary* profile = @{
-                              @"id":loginInfo.uid,
+                              @"id":loginInfo.o_id,
                               @"name":loginInfo.name,
                               @"phone":loginInfo.phone,
                               @"portrait":loginInfo.portrait,
@@ -857,7 +857,7 @@
     NSParameterAssert(newsId);
     
     CSEngine* engine = [CSEngine sharedInstance];
-    NSString* path = [NSString stringWithFormat:kDeleteNewsPath, @(schoolId), engine.loginInfo.uid, newsId];
+    NSString* path = [NSString stringWithFormat:kDeleteNewsPath, @(schoolId), engine.loginInfo.o_id, newsId];
     NSDictionary* parameters = nil;
     AFHTTPRequestOperation* op = [self.opManager DELETE:path
                                              parameters:parameters
@@ -973,6 +973,20 @@
                      parameters:parameters
                         success:success
                         failure:failure];
+}
+
+- (AFHTTPRequestOperation*)reqGetiIneligibleClass:(NSInteger)employeeId
+                                   inKindergarten:(NSInteger)kindergarten
+                                          success:(SuccessResponseHandler)success
+                                          failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kKindergartenIneligibleClassPathV3, @(kindergarten), @(employeeId)];
+    
+    NSDictionary* parameters = @{};
+    
+    return [self.opManager GET:path
+                    parameters:parameters
+                       success:success
+                       failure:failure];
 }
 
 @end

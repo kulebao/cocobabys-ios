@@ -2,7 +2,7 @@
 //  EntityLoginInfo+CoreDataProperties.h
 //  YouJiaoBao
 //
-//  Created by WangXin on 1/26/16.
+//  Created by WangXin on 1/27/16.
 //  Copyright © 2016 Codingsoft. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -28,9 +28,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSNumber *schoolId;
 @property (nullable, nonatomic, retain) NSNumber *status;
 @property (nullable, nonatomic, retain) NSNumber *timestamp;
-@property (nullable, nonatomic, retain) NSString *uid;
+@property (nullable, nonatomic, retain) NSString *o_id;
 @property (nullable, nonatomic, retain) NSString *workduty;
 @property (nullable, nonatomic, retain) NSString *workgroup;
+@property (nullable, nonatomic, retain) NSNumber *uid;
 
 @end
 

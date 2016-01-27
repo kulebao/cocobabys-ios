@@ -225,7 +225,7 @@
     [http opSendAssessment:@[assessment]
             inKindergarten:engine.loginInfo.schoolId.integerValue
                 fromSender:engine.loginInfo.name
-              withSenderId:engine.loginInfo.uid
+              withSenderId:engine.loginInfo.o_id
                    success:success
                    failure:failure];
 }

@@ -238,4 +238,9 @@ typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSErr
                                      success:(SuccessResponseHandler)success
                                      failure:(FailureResponseHandler)failure;
 
+- (AFHTTPRequestOperation*)reqGetiIneligibleClass:(NSInteger)employeeId
+                                   inKindergarten:(NSInteger)kindergarten
+                                          success:(SuccessResponseHandler)success
+                                          failure:(FailureResponseHandler)failure;
+
 @end

@@ -44,7 +44,7 @@
     
     CSEngine* engine = [CSEngine sharedInstance];
     
-    NSFetchedResultsController* fr = [EntityClassInfoHelper frClassesWithEmployee:engine.loginInfo.uid ofKindergarten:engine.loginInfo.schoolId.integerValue];
+    NSFetchedResultsController* fr = [EntityClassInfoHelper frClassesWithEmployee:engine.loginInfo.o_id ofKindergarten:engine.loginInfo.schoolId.integerValue];
     
     if ([fr performFetch:nil]) {
         
@@ -101,7 +101,7 @@
     
     CSEngine* engine = [CSEngine sharedInstance];
     
-    NSFetchedResultsController* fr = [EntityClassInfoHelper frClassesWithEmployee:engine.loginInfo.uid ofKindergarten:engine.loginInfo.schoolId.integerValue];
+    NSFetchedResultsController* fr = [EntityClassInfoHelper frClassesWithEmployee:engine.loginInfo.o_id ofKindergarten:engine.loginInfo.schoolId.integerValue];
     
     if ([fr performFetch:nil]) {
         for (EntityClassInfo* clasInfo in fr.fetchedObjects) {

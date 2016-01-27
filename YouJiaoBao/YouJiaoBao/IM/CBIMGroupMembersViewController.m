@@ -196,7 +196,7 @@
         
         cell.btnCall.hidden = (cellData.phone.length == 0);
         
-        if ([cellData._id isEqualToString:engine.loginInfo.uid]) {
+        if ([cellData._id isEqualToString:engine.loginInfo.o_id]) {
             cell.btnCall.hidden = YES;
         }
     }

@@ -320,7 +320,7 @@ enum {
     
     NSString* imgFileName = [NSString stringWithFormat:@"employee_photo/%@/%@/%@_%@.jpg",
                              engine.loginInfo.schoolId,
-                             engine.loginInfo.uid,
+                             engine.loginInfo.o_id,
                              engine.loginInfo.loginName,
                              @(timestamp)];
     

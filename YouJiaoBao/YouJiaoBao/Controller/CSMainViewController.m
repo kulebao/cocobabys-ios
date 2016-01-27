@@ -76,6 +76,7 @@
     
     [self reloadClassList];
     [self reloadRelationships];
+    [self reloadIneligibleClass];
 }
 
 - (void)didReceiveMemoryWarning
@@ -151,7 +152,7 @@
     
     id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
         NSArray* classInfoList = [EntityClassInfoHelper updateEntities:responseObject
-                                                           forEmployee:engine.loginInfo.uid
+                                                           forEmployee:engine.loginInfo.o_id
                                                         ofKindergarten:engine.loginInfo.schoolId.integerValue];
         [engine onLoadClassInfoList:classInfoList];
         
@@ -201,6 +202,25 @@
                       inKindergarten:engine.loginInfo.schoolId.integerValue
                              success:success
                              failure:failure];
+}
+
+- (void)reloadIneligibleClass {
+    CSHttpClient* http = [CSHttpClient sharedInstance];
+    CSEngine* engine = [CSEngine sharedInstance];
+    //CSAppDelegate* app = [CSAppDelegate sharedInstance];
+    if (engine.loginInfo) {
+        [http reqGetiIneligibleClass:engine.loginInfo.uid.integerValue
+                      inKindergarten:engine.loginInfo.schoolId.integerValue
+                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                 if ([responseObject isKindOfClass:[NSArray class]]) {
+                                     engine.loginInfo.ineligibleClassList = responseObject;
+                                 }
+                             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(60 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                                     [self reloadIneligibleClass];
+                                 });
+                             }];
+    }
 }
 
 #pragma mark - CSContentEditorViewControllerDelegate
@@ -318,7 +338,7 @@
     if (childIdList.count > 0) {
         [gApp waitingAlert:@"提交数据中"];
         [http opPostHistoryOfKindergarten:engine.loginInfo.schoolId.integerValue
-                             withSenderId:engine.loginInfo.uid
+                             withSenderId:engine.loginInfo.o_id
                           withChildIdList:childIdList
                               withContent:_textContent
                          withImageUrlList:_imageUrlList

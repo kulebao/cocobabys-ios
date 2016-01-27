@@ -2,7 +2,7 @@
 //  EntityLoginInfo+CoreDataProperties.m
 //  YouJiaoBao
 //
-//  Created by WangXin on 1/26/16.
+//  Created by WangXin on 1/27/16.
 //  Copyright © 2016 Codingsoft. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -26,8 +26,9 @@
 @dynamic schoolId;
 @dynamic status;
 @dynamic timestamp;
-@dynamic uid;
+@dynamic o_id;
 @dynamic workduty;
 @dynamic workgroup;
+@dynamic uid;
 
 @end

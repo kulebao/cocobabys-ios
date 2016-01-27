@@ -9,7 +9,17 @@
 #import "EntityLoginInfo.h"
 
 @implementation EntityLoginInfo
+@synthesize ineligibleClassList;
 
 // Insert code here to add functionality to your managed object subclass
+
+- (BOOL)allowToSendAll {
+    BOOL ok = NO;
+    if (self.ineligibleClassList && self.ineligibleClassList.count == 0) {
+        ok = YES;
+    }
+    
+    return ok;
+}
 
 @end

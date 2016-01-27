@@ -136,7 +136,7 @@
         [newDataSource addObject:newModel];
         newModel.receivedTime = [[NSDate date] timeIntervalSince1970]*1000;
         newModel.sentTime = [[NSDate date] timeIntervalSince1970]*1000;
-        newModel.isTop = YES;
+        //newModel.isTop = YES;
         //
         //        RCIMClient* im = [RCIMClient sharedRCIMClient];
         //        RCTextMessage* msgContent = [RCTextMessage new];

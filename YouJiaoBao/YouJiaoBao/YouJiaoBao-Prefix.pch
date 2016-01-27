@@ -23,16 +23,20 @@
 
 //#define _AFNETWORKING_ALLOW_INVALID_SSL_CERTIFICATES_
 
-#define COCOBABYS_DEV_MODEL 0
+#define COCOBABYS_DEV_MODEL 1
 
 #if COCOBABYS_DEV_MODEL
     #define COCOBABYS_CHECK_UPDATE_FROM_FIR 1
-    #define COCOBABYS_USE_ENV_PROD          0
-    #define COCOBABYS_IM_APP_ID             @"0vnjpoadnwk0z"
-    #define COCOBABYS_IM_SERVICE_ID         @"KEFU144879042344018"
+    #define COCOBABYS_USE_ENV_PROD          1
 #else
     #define COCOBABYS_CHECK_UPDATE_FROM_FIR 0
     #define COCOBABYS_USE_ENV_PROD          1
+#endif
+
+#if COCOBABYS_USE_ENV_PROD
     #define COCOBABYS_IM_APP_ID             @"8w7jv4qb7tbqy"
     #define COCOBABYS_IM_SERVICE_ID         @"KEFU145027362547939"
+#else
+    #define COCOBABYS_IM_APP_ID             @"0vnjpoadnwk0z"
+    #define COCOBABYS_IM_SERVICE_ID         @"KEFU144879042344018"
 #endif

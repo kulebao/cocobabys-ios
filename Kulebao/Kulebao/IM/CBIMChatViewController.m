@@ -69,7 +69,8 @@
         || self.conversationType == ConversationType_CHATROOM) {
         
         RCUserInfo* me = [[RCIMClient sharedRCIMClient] currentUserInfo];
-        if ([me.userId isEqualToString:userId]) {
+        if ([me.userId isEqualToString:userId]
+            ||[userId isEqualToString:@"im_system_admin"]) {
             
         }
         else {

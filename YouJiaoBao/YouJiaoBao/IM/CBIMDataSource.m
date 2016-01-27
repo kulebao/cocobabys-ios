@@ -13,6 +13,7 @@
 #import "CBTeacherInfo.h"
 #import "CBRelationshipInfo.h"
 #import "CSEngine.h"
+#import "EntityClassInfo.h"
 
 @interface CBIMDataSource ()
 
@@ -35,7 +36,6 @@
 
 - (id)init {
     if (self = [super init]) {
-        _classInfoList = [NSMutableArray array];
         _relationshipInfoList = [NSMutableArray array];
         _teacherInfoList = [NSMutableArray array];
     }
@@ -44,13 +44,11 @@
 
 #pragma mark - NSCoding
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-    [aCoder encodeObject:_classInfoList forKey:@"_classInfoList"];
     [aCoder encodeObject:_relationshipInfoList forKey:@"_relationshipInfoList"];
     [aCoder encodeObject:_teacherInfoList forKey:@"_teacherInfoList"];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
-    _classInfoList = [NSMutableArray arrayWithArray:[aDecoder decodeObjectForKey:@"_classInfoList"]];
     _relationshipInfoList = [NSMutableArray arrayWithArray:[aDecoder decodeObjectForKey:@"_relationshipInfoList"]];
     _teacherInfoList = [NSMutableArray arrayWithArray:[aDecoder decodeObjectForKey:@"_teacherInfoList"]];
     
@@ -128,18 +126,29 @@
         NSString* schoolId = components[0];
         NSString* classlId = components[1];
         
-        for (CBRelationshipInfo* relation in _relationshipInfoList) {
-            if ([classlId isEqualToString:relation.child.class_id.stringValue]
-                && [schoolId isEqualToString:relation.child.school_id.stringValue]) {
-                
-                NSURL* portrait = [[NSBundle mainBundle] URLForResource:@"v2-im-group@2x" withExtension:@"png"];
-                
+        CSEngine* engine = [CSEngine sharedInstance];
+        for (EntityClassInfo* classInfo in engine.classInfoList) {
+            NSURL* portrait = [[NSBundle mainBundle] URLForResource:@"v2-im-group@2x" withExtension:@"png"];
+            if (classInfo.classId.integerValue == classlId.integerValue) {
                 groupObj = [[RCGroup alloc] initWithGroupId:groupId
-                                                  groupName:SAFE_STRING(relation.child.class_name)
+                                                  groupName:SAFE_STRING(classInfo.name)
                                                 portraitUri:portrait.absoluteString];
                 break;
             }
+            
         }
+//        for (CBRelationshipInfo* relation in _relationshipInfoList) {
+//            if ([classlId isEqualToString:relation.child.class_id.stringValue]
+//                && [schoolId isEqualToString:relation.child.school_id.stringValue]) {
+//                
+//                NSURL* portrait = [[NSBundle mainBundle] URLForResource:@"v2-im-group@2x" withExtension:@"png"];
+//                
+//                groupObj = [[RCGroup alloc] initWithGroupId:groupId
+//                                                  groupName:SAFE_STRING(relation.child.class_name)
+//                                                portraitUri:portrait.absoluteString];
+//                break;
+//            }
+//        }
     }
     else {
         

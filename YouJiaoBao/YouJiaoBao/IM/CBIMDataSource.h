@@ -10,7 +10,6 @@
 
 @interface CBIMDataSource : NSObject <NSCoding, RCIMUserInfoDataSource, RCIMGroupInfoDataSource, RCIMGroupUserInfoDataSource, RCIMClientReceiveMessageDelegate>
 
-@property (nonatomic, strong, readonly) NSMutableArray* classInfoList;
 @property (nonatomic, strong, readonly) NSMutableArray* relationshipInfoList;
 @property (nonatomic, strong, readonly) NSMutableArray* teacherInfoList;
 

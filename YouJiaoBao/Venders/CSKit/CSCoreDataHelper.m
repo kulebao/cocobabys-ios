@@ -23,6 +23,7 @@
 
 #import "CSCoreDataHelper.h"
 #import <CoreData/CoreData.h>
+#import <BlocksKit/UIAlertView+BlocksKit.h>
 
 @implementation CSCoreDataHelper
 @synthesize managedObjectContext = _managedObjectContext;
@@ -119,7 +120,14 @@
          */
         CSLog(@"Persistent Store Error %@, %@", error, [error userInfo]);
         [[NSFileManager defaultManager] removeItemAtURL:storeURL error:nil];
-        abort();
+        
+        [UIAlertView bk_showAlertViewWithTitle:@"提示"
+                                       message:@"数据已处理完毕，请重新打开幼教宝"
+                             cancelButtonTitle:@"好"
+                             otherButtonTitles:nil
+                                       handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+            abort();
+        }];
     }
     
     return _persistentStoreCoordinator;

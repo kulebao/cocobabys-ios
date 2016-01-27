@@ -258,34 +258,43 @@
     
     if (self.segMemberType.selectedSegmentIndex == 0) {
         CBTeacherInfo* cellData = [self.teacherList objectAtIndex:indexPath.row];
-        NSString* userId = [NSString stringWithFormat:@"t_%@_Some(%@)_%@", @(_schoolId), cellData.uid, cellData.phone];
+        NSString* userId = [NSString stringWithFormat:@"t_%@_Some(%@)_%@", @(_schoolId), cellData.uid, cellData.login_name];
         
-        [[CBIMDataSource sharedInstance] getUserInfoWithUserId:userId completion:^(RCUserInfo *userInfo) {
-            CBIMChatViewController *conversationVC = [[CBIMChatViewController alloc]init];
-            conversationVC.conversationType = ConversationType_PRIVATE;
-            conversationVC.targetId = userId;
-            conversationVC.userName = userInfo.name;
-            conversationVC.title = userInfo.name;
+        if([[[[RCIMClient sharedRCIMClient] currentUserInfo] userId] isEqualToString:userId]) {
             
-            [self.navigationController pushViewController:conversationVC animated:YES];
-        }];
+        }
+        else {
+            [[CBIMDataSource sharedInstance] getUserInfoWithUserId:userId completion:^(RCUserInfo *userInfo) {
+                CBIMChatViewController *conversationVC = [[CBIMChatViewController alloc]init];
+                conversationVC.conversationType = ConversationType_PRIVATE;
+                conversationVC.targetId = userId;
+                conversationVC.userName = userInfo.name;
+                conversationVC.title = userInfo.name;
+                
+                [self.navigationController pushViewController:conversationVC animated:YES];
+            }];
+        }
     }
     else if (self.segMemberType.selectedSegmentIndex == 1) {
         NSMutableArray* arr = [self.relationshipGroupList objectAtIndex:indexPath.section];
         CBRelationshipInfo* cellData = [arr objectAtIndex:indexPath.row];
         
         NSString* userId = [NSString stringWithFormat:@"p_%@_Some(%@)_%@", @(_schoolId), cellData.parent._id, cellData.parent.phone];
-        
-        [[CBIMDataSource sharedInstance] getUserInfoWithUserId:userId completion:^(RCUserInfo *userInfo) {
-            NSString* nickname = [NSString stringWithFormat:@"%@%@", [cellData.child displayNick], cellData.relationship];
-            CBIMChatViewController *conversationVC = [[CBIMChatViewController alloc]init];
-            conversationVC.conversationType = ConversationType_PRIVATE;
-            conversationVC.targetId = userId;
-            conversationVC.userName = nickname;
-            conversationVC.title = nickname;
+        if([[[[RCIMClient sharedRCIMClient] currentUserInfo] userId] isEqualToString:userId]) {
             
-            [self.navigationController pushViewController:conversationVC animated:YES];
-        }];
+        }
+        else {
+            [[CBIMDataSource sharedInstance] getUserInfoWithUserId:userId completion:^(RCUserInfo *userInfo) {
+                NSString* nickname = [NSString stringWithFormat:@"%@%@", [cellData.child displayNick], cellData.relationship];
+                CBIMChatViewController *conversationVC = [[CBIMChatViewController alloc]init];
+                conversationVC.conversationType = ConversationType_PRIVATE;
+                conversationVC.targetId = userId;
+                conversationVC.userName = nickname;
+                conversationVC.title = nickname;
+                
+                [self.navigationController pushViewController:conversationVC animated:YES];
+            }];
+        }
     }
 }
 

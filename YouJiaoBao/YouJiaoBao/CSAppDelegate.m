@@ -16,6 +16,7 @@
 #import <RongIMKit/RongIMKit.h>
 #import "CBIMDataSource.h"
 #import "CBIMChatViewController.h"
+#import <BlocksKit/BlocksKit.h>
 
 CSAppDelegate* gApp = nil;
 

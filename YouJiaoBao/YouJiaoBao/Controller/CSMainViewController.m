@@ -256,7 +256,7 @@
     
     NSString* videoFileName = [NSString stringWithFormat:@"history_video/%@/topic_%@/%@.mp4",
                                engine.loginInfo.schoolId,
-                               kTestChildId,
+                               engine.loginInfo.o_id,
                                @((long long)[[NSDate date] timeIntervalSince1970]*1000)];
     
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
@@ -286,7 +286,7 @@
         NSData* imgData = UIImageJPEGRepresentation(img, 0.8);
         NSString* imgFileName = [NSString stringWithFormat:@"history_img/%@/topic_%@/%@.jpg",
                                  engine.loginInfo.schoolId,
-                                 kTestChildId,
+                                 engine.loginInfo.o_id,
                                  @((long long)[[NSDate date] timeIntervalSince1970]*1000)];
         
         SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {

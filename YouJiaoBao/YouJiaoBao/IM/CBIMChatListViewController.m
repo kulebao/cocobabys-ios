@@ -13,6 +13,7 @@
 #import "CBIMGroupMembersViewController.h"
 #import "CSEngine.h"
 #import "EntityClassInfoHelper.h"
+#import "CSHttpClient.h"
 
 @interface CBIMChatListViewController ()
 
@@ -83,7 +84,6 @@
     CBIMChatViewController *conversationVC = [[CBIMChatViewController alloc]init];
     conversationVC.conversationType =model.conversationType;
     conversationVC.targetId = model.targetId;
-    conversationVC.userName =model.conversationTitle;
     conversationVC.title = model.conversationTitle;
     [self.navigationController pushViewController:conversationVC animated:YES];
 }
@@ -100,15 +100,10 @@
     NSMutableSet* targerIdSet = [NSMutableSet set];
     
     CSEngine* engine = [CSEngine sharedInstance];
-    
-    NSFetchedResultsController* fr = [EntityClassInfoHelper frClassesWithEmployee:engine.loginInfo.o_id ofKindergarten:engine.loginInfo.schoolId.integerValue];
-    
-    if ([fr performFetch:nil]) {
-        for (EntityClassInfo* clasInfo in fr.fetchedObjects) {
-            if (clasInfo.schoolId.integerValue>0 && clasInfo.classId.integerValue>0) {
-                NSString* targetId = [NSString stringWithFormat:@"%@_%@", clasInfo.schoolId, clasInfo.classId];
-                [targerIdSet addObject:targetId];
-            }
+    for (EntityClassInfo* clasInfo in engine.classInfoList) {
+        if (clasInfo.schoolId.integerValue>0 && clasInfo.classId.integerValue>0) {
+            NSString* targetId = [NSString stringWithFormat:@"%@_%@", clasInfo.schoolId, clasInfo.classId];
+            [targerIdSet addObject:targetId];
         }
     }
     

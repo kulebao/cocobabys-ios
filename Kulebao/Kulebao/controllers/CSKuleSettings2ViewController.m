@@ -186,7 +186,6 @@
         RCPublicServiceChatViewController *conversationVC = [[RCPublicServiceChatViewController alloc]init];
         conversationVC.conversationType = ConversationType_APPSERVICE;
         conversationVC.targetId = configInfo[@"rongyun_service_user_id"];
-        conversationVC.userName = nil;
         conversationVC.title = @"客服";
         [self.navigationController pushViewController:conversationVC animated:YES];
     }

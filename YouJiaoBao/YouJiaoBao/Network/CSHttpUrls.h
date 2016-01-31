@@ -128,5 +128,6 @@
 
 #define kIMBanURL               @"/api/v7/kindergarten/%@/class_im_group/%@/ban"
 #define kIMBanIdURL             @"/api/v7/kindergarten/%@/class_im_group/%@/ban/%@"
+#define kIMGroupURL             @"/api/v7/kindergarten/%@/class_im_group/%@/user"
 
 #endif

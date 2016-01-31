@@ -59,6 +59,10 @@
 #if COCOBABYS_USE_ENV_PROD
     self.fieldUsername.text = @"Joe_tian";
     self.fieldPassword.text = @"89898989";
+    self.fieldUsername.text = @"204170";
+    self.fieldPassword.text = @"10236578412";
+    //self.fieldUsername.text = @"e27359";
+    //self.fieldPassword.text = @"15902330116";
 #else
     self.fieldUsername.text = @"Joe_tian";
     self.fieldPassword.text = @"89898989";

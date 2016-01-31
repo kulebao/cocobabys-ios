@@ -74,7 +74,6 @@
     CBIMChatViewController *conversationVC = [[CBIMChatViewController alloc]init];
     conversationVC.conversationType =model.conversationType;
     conversationVC.targetId = model.targetId;
-    conversationVC.userName =model.conversationTitle;
     conversationVC.title = model.conversationTitle;
     [self.navigationController pushViewController:conversationVC animated:YES];
 }

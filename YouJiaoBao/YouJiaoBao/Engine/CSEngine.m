@@ -10,6 +10,7 @@
 #import "AHAlertView.h"
 #import "BaiduMobStat.h"
 #import "CSHttpClient.h"
+#import "EntityClassInfo.h"
 
 NSString* kNotiLoginSuccess = @"noti.login.success";
 NSString* kNotiLogoutSuccess = @"noti.logout.success";
@@ -69,6 +70,22 @@ NSString* kAppleID = @"917314512";
 
 - (void)onLoadClassInfoList:(NSArray*)classInfoList {
     _classInfoList = classInfoList;
+    
+    for (EntityClassInfo* clasInfo in _classInfoList) {
+        if (clasInfo.schoolId.integerValue>0 && clasInfo.classId.integerValue>0) {            
+            [self joinGroup:clasInfo.schoolId.integerValue classId:clasInfo.classId.integerValue];
+        }
+    }
+}
+
+
+- (void)joinGroup:(NSInteger)schoolId classId:(NSInteger)classId {
+    CSHttpClient* http = [CSHttpClient sharedInstance];
+    [http reqIMJoinGroupOfKindergarten:schoolId withClassId:classId success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
 }
 
 - (BOOL)encryptAccount:(ModelAccount*)account {

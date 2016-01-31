@@ -204,13 +204,10 @@
         cell.teacherInfo = nil;
         
         cell.btnCall.hidden = YES;
-        for (CSKuleRelationshipInfo* klRelationships in gApp.engine.relationships) {
-            if ([klRelationships.child.childId isEqualToString:cellData.child.child_id]) {
-                cell.btnCall.hidden = (cellData.parent.phone.length == 0);
-                if ([gApp.engine.currentRelationship.parent.parentId isEqualToString:klRelationships.parent.parentId]) {
-                    cell.btnCall.hidden = YES;
-                }
-                break;
+        if (![gApp.engine.currentRelationship.parent.parentId isEqualToString:cellData.parent.parent_id]) {
+            for (CSKuleRelationshipInfo* klRelationships in gApp.engine.relationships) {
+                if ([klRelationships.child.childId isEqualToString:cellData.child.child_id]) {
+                    cell.btnCall.hidden = (cellData.parent.phone.length == 0);                }
             }
         }
     }

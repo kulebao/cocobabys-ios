@@ -12,6 +12,7 @@
 #import "EAIntroView.h"
 #import <Bugly/CrashReporter.h>
 #import "CBIMDataSource.h"
+#import "CBSessionDataModel.h"
 
 #define RONGCLOUD_IM_APPKEY @"0vnjpoadnwk0z"
 
@@ -56,6 +57,9 @@ CSAppDelegate* gApp = nil;
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
+    [session store];
     
     [_engine applicationWillResignActive:application];
 }
@@ -145,30 +149,41 @@ CSAppDelegate* gApp = nil;
     id ctrl = [mainStoryboard instantiateViewControllerWithIdentifier:@"CSLoginNavigationController"];
     gApp.window.rootViewController = ctrl;
     
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
+    [session invalidate];
+    
     [self showIntroViewsIfNeeded];
 }
 
 - (void)gotoMainProcess {
-    UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    id ctrl = [mainStoryboard instantiateViewControllerWithIdentifier:@"CSMainNavigationController"];
-    gApp.window.rootViewController = ctrl;
-    
-    if (gApp.engine.loginInfo.imToken) {
-        // 快速集成第二步，连接融云服务器
-        [[RCIM sharedRCIM] connectWithToken:gApp.engine.loginInfo.imToken.token
-                                    success:^(NSString *userId) {
-                                        // Connect 成功
-                                        CSLog(@"[RCIM] connect success.");
-                                    } error:^(RCConnectErrorCode status) {
-                                        // Connect 失败
-                                        CSLog(@"[RCIM] connect error.");
-                                    } tokenIncorrect:^() {
-                                        // Token 失效的状态处理
-                                        CSLog(@"[RCIM] connect tokenIncorrect.");
-                                    }];
+    if (gApp.engine.loginInfo) {
+        NSDictionary* serverInfo = [gApp.engine.preferences getServerSettings];
+        [CBSessionDataModel session:gApp.engine.loginInfo.accountName withTag:serverInfo[@"tag"]];
+        
+        if (gApp.engine.loginInfo.imToken) {
+            // 快速集成第二步，连接融云服务器
+            [[RCIM sharedRCIM] connectWithToken:gApp.engine.loginInfo.imToken.token
+                                        success:^(NSString *userId) {
+                                            // Connect 成功
+                                            CSLog(@"[RCIM] connect success.");
+                                        } error:^(RCConnectErrorCode status) {
+                                            // Connect 失败
+                                            CSLog(@"[RCIM] connect error.");
+                                        } tokenIncorrect:^() {
+                                            // Token 失效的状态处理
+                                            CSLog(@"[RCIM] connect tokenIncorrect.");
+                                        }];
+        }
+        
+        UIStoryboard* mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        id ctrl = [mainStoryboard instantiateViewControllerWithIdentifier:@"CSMainNavigationController"];
+        gApp.window.rootViewController = ctrl;
+        [self showIntroViewsIfNeeded];
     }
-    
-    [self showIntroViewsIfNeeded];
+    else {
+        CBSessionDataModel* session = [CBSessionDataModel thisSession];
+        [session invalidate];
+    }
 }
 
 - (void)logout {

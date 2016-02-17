@@ -1375,4 +1375,18 @@
                       failure:failure];
 }
 
+- (AFHTTPRequestOperation*)reqIMJoinGroupOfKindergarten:(NSInteger)kindergarten
+                                            withClassId:(NSInteger)classId
+                                                success:(SuccessResponseHandler)success
+                                                failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kIMGroupURL, @(kindergarten), @(classId)];
+    
+    NSDictionary* parameters = @{};
+    
+    return [_httpCobabys POST:path
+                   parameters:parameters
+                      success:success
+                      failure:failure];
+}
+
 @end

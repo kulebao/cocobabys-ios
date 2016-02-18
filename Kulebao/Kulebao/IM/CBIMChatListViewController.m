@@ -11,8 +11,11 @@
 #import "CBIMChatViewController.h"
 #import "UIActionSheet+BlocksKit.h"
 #import "CBIMGroupMembersViewController.h"
+#import "CBIMDataSource.h"
 
-@interface CBIMChatListViewController ()
+@interface CBIMChatListViewController () {
+    CBIMNotificationUserInfo* _rcUserInfo;
+}
 
 @end
 
@@ -30,6 +33,13 @@
                                                                               style:UIBarButtonItemStyleBordered
                                                                              target:self
                                                                              action:@selector(onRightNaviItemClicked:)];
+    
+    if (_rcUserInfo) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self doOpenChat:_rcUserInfo];
+            _rcUserInfo = nil;
+        });
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -140,6 +150,48 @@
     }
     
     return newDataSource;
+}
+
+- (void)openChat:(CBIMNotificationUserInfo*)rcUserInfo {
+    if ([self isViewLoaded]) {
+        [self doOpenChat:rcUserInfo];
+    }
+    else {
+        _rcUserInfo = rcUserInfo;
+    }
+}
+
+- (void)doOpenChat:(CBIMNotificationUserInfo*)rcUserInfo {
+    CSLog(@"%s, rcUserInfo=%@", __FUNCTION__, rcUserInfo);
+    /*
+     rc =     {
+     cType = GRP;
+     fId = "t_2041_Some(2187)_Joe_tian";
+     oName = "RC:TxtMsg";
+     tId = "2041_20001";
+     };
+     */
+#if CB_ENABLE_OPEN_CHAT
+    CBIMChatViewController *conversationVC = [[CBIMChatViewController alloc]init];
+
+    if ([rcUserInfo.cType isEqualToString:@"GRP"]) {
+        [[CBIMDataSource sharedInstance] getGroupInfoWithGroupId:rcUserInfo.tId completion:^(RCGroup *groupInfo) {
+            conversationVC.conversationType = ConversationType_GROUP;
+            conversationVC.targetId = rcUserInfo.tId;
+            conversationVC.title = groupInfo.groupName;
+            [self.navigationController pushViewController:conversationVC animated:YES];
+        }];
+    }
+    else {
+        [[CBIMDataSource sharedInstance] getUserInfoWithUserId:rcUserInfo.fId completion:^(RCUserInfo *userInfo) {
+            conversationVC.conversationType = ConversationType_PRIVATE;
+            conversationVC.targetId = rcUserInfo.fId;
+            conversationVC.title = userInfo.name;
+            [self.navigationController pushViewController:conversationVC animated:YES];
+        }];
+    }
+#endif
+    
 }
 
 @end

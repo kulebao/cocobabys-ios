@@ -309,7 +309,7 @@
         CSLog(@"收到推送消息:%@", userInfo);
 
             if (self.application.applicationState == UIApplicationStateActive) {
-                NSDictionary * rcData = [[RCIMClient sharedRCIMClient] getPushExtraFromRemoteNotification:userInfo];
+                NSDictionary * rcData = userInfo[@"rc"];
                 if (rcData == nil) {
                     self.badgeOfCheckin = self.badgeOfCheckin + 1;
                     [self.application setApplicationIconBadgeNumber:0];
@@ -337,6 +337,9 @@
     else {
         CSLog(@"收到本地消息:%@", notification);
     }
+    
+    [self.receivedNotifications addObject:notification.userInfo];
+    self.pendingNotificationInfo = notification.userInfo;
 }
 
 #pragma mark - Getter & Setter

@@ -266,8 +266,11 @@ CSAppDelegate* gApp = nil;
     }
     else {
         CSLog(@"收到本地消息:%@", notification);
-        NSDictionary *pushServiceData = [[RCIMClient sharedRCIMClient] getPushExtraFromRemoteNotification:notification.userInfo];
+        NSDictionary *pushServiceData = [notification.userInfo objectForKey:@"rc"];
         if (pushServiceData) {
+        }
+        else {
+            
         }
     }
     _pendingNotificationInfo = notification.userInfo;

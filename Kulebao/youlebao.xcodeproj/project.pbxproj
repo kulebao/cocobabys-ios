@@ -375,6 +375,7 @@
 		09FFB5F718D6B46300F07B0A /* CSKuleScheduleInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FFB5F618D6B46300F07B0A /* CSKuleScheduleInfo.m */; };
 		221858CE1BEF9EDC005C4281 /* CBHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 221858CD1BEF9EDC005C4281 /* CBHTTPRequestOperationManager.m */; };
 		223962CB1C7412A3004E3E32 /* CBSessionDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 223962CA1C7412A3004E3E32 /* CBSessionDataModel.m */; };
+		223962CF1C757650004E3E32 /* CBIMNotificationUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 223962CE1C757650004E3E32 /* CBIMNotificationUserInfo.m */; };
 		224B441A1C51088100982E15 /* appicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 224B44191C51088100982E15 /* appicon@2x.png */; };
 		228C885E1C0F4F25003D9EA2 /* CBIMTokenData.m in Sources */ = {isa = PBXBuildFile; fileRef = 228C885D1C0F4F25003D9EA2 /* CBIMTokenData.m */; };
 		228C88621C0F58DC003D9EA2 /* CBIMChatListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 228C88611C0F58DC003D9EA2 /* CBIMChatListViewController.m */; };
@@ -949,6 +950,8 @@
 		221858CD1BEF9EDC005C4281 /* CBHTTPRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBHTTPRequestOperationManager.m; sourceTree = "<group>"; };
 		223962C91C7412A3004E3E32 /* CBSessionDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBSessionDataModel.h; sourceTree = "<group>"; };
 		223962CA1C7412A3004E3E32 /* CBSessionDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBSessionDataModel.m; sourceTree = "<group>"; };
+		223962CD1C757650004E3E32 /* CBIMNotificationUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBIMNotificationUserInfo.h; sourceTree = "<group>"; };
+		223962CE1C757650004E3E32 /* CBIMNotificationUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBIMNotificationUserInfo.m; sourceTree = "<group>"; };
 		224B44191C51088100982E15 /* appicon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "appicon@2x.png"; sourceTree = "<group>"; };
 		228C885C1C0F4F25003D9EA2 /* CBIMTokenData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBIMTokenData.h; sourceTree = "<group>"; };
 		228C885D1C0F4F25003D9EA2 /* CBIMTokenData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBIMTokenData.m; sourceTree = "<group>"; };
@@ -1075,6 +1078,8 @@
 			children = (
 				228C885C1C0F4F25003D9EA2 /* CBIMTokenData.h */,
 				228C885D1C0F4F25003D9EA2 /* CBIMTokenData.m */,
+				223962CD1C757650004E3E32 /* CBIMNotificationUserInfo.h */,
+				223962CE1C757650004E3E32 /* CBIMNotificationUserInfo.m */,
 			);
 			path = jsonobjects;
 			sourceTree = "<group>";
@@ -2367,6 +2372,7 @@
 				0942B1601AE3E559008D3BDA /* ELCAssetTablePicker.m in Sources */,
 				096DC1C31BA33F4000661B61 /* UIGestureRecognizer+GMGridViewAdditions.m in Sources */,
 				09ED59BC18CDC5E800187585 /* CSKuleCookbookInfo.m in Sources */,
+				223962CF1C757650004E3E32 /* CBIMNotificationUserInfo.m in Sources */,
 				09FFB5F118D6B2E100F07B0A /* CSKuleWeekScheduleInfo.m in Sources */,
 				09C00FB21B4454D500FC1474 /* CSKuleBusMainViewController.mm in Sources */,
 				0901207219338B3800CE506E /* UIImage+CSExtends.m in Sources */,

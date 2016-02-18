@@ -32,6 +32,7 @@
 #import "CBIMDataSource.h"
 #import "UIActionSheet+BlocksKit.h"
 #import "CBSessionDataModel.h"
+#import "CBIMNotificationUserInfo.h"
 
 @interface CSKuleMainViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, EAIntroDelegate> {
     UIImagePickerController* _imgPicker;
@@ -953,7 +954,7 @@
             
 #if COCOBABYS_USE_IM
             if (moduleType == kKuleModuleChating) {
-                [self openRCIM];
+                [self openRCIM:nil];
             }
             else {
                 [self performSegueWithIdentifier:segueNames[moduleType] sender:nil];
@@ -986,12 +987,28 @@
     }
 }
 
-- (void)openRCIM {
-    NSArray* arr1 = @[@(ConversationType_PRIVATE),@(ConversationType_DISCUSSION), @(ConversationType_GROUP),@(ConversationType_SYSTEM)];
-    NSArray* arr2 = nil;
-    CBIMChatListViewController* ctrl = [[CBIMChatListViewController alloc] initWithDisplayConversationTypes:arr1
-                                                                                 collectionConversationType:arr2];
-    [self.navigationController pushViewController:ctrl animated:YES];
+- (void)openRCIM:(CBIMNotificationUserInfo*)rcUserInfo {
+    CBIMChatListViewController* imListCtrl = nil;
+    
+    for (UIViewController* ctrl in self.navigationController.viewControllers) {
+        if ([ctrl isKindOfClass:[CBIMChatListViewController class]]) {
+            imListCtrl = (CBIMChatListViewController*)ctrl;
+            [self.navigationController popToViewController:ctrl animated:YES];
+            break;
+        }
+    }
+    
+    if (imListCtrl == nil) {
+        NSArray* arr1 = @[@(ConversationType_PRIVATE),@(ConversationType_DISCUSSION), @(ConversationType_GROUP),@(ConversationType_SYSTEM)];
+        NSArray* arr2 = nil;
+        imListCtrl = [[CBIMChatListViewController alloc] initWithDisplayConversationTypes:arr1
+                                                               collectionConversationType:arr2];
+        [self.navigationController pushViewController:imListCtrl animated:YES];
+    }
+    
+    if (rcUserInfo) {
+        [imListCtrl openChat:rcUserInfo];
+    }
 }
 
 - (IBAction)onBtnClassInfoClicked:(id)sender {
@@ -1194,15 +1211,13 @@
         && gApp.engine.currentRelationship
         && notiInfo) {
         gApp.engine.pendingNotificationInfo = nil;
-        
-        NSDictionary *pushServiceData = [[RCIMClient sharedRCIMClient] getPushExtraFromRemoteNotification:notiInfo];
+        NSDictionary *pushServiceData = notiInfo[@"rc"];
         if (pushServiceData) {
             CSLog(@"该远程推送包含来自融云的推送服务");
             for (id key in [pushServiceData allKeys]) {
                 CSLog(@"key = %@, value = %@", key, pushServiceData[key]);
             }
-            
-            [self openRCIM];
+            [self openRCIM:[CBIMNotificationUserInfo instanceWithDictionary:pushServiceData]];
         } else {
             CSLog(@"该远程推送不包含来自融云的推送服务");
             

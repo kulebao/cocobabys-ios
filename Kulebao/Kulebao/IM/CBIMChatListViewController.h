@@ -7,7 +7,11 @@
 //
 
 #import <RongIMKit/RongIMKit.h>
+#import "CBIMNotificationUserInfo.h"
 
 @interface CBIMChatListViewController : RCConversationListViewController
+
+
+- (void)openChat:(CBIMNotificationUserInfo*)rcUserInfo;
 
 @end

@@ -31,6 +31,7 @@
 
 #import "CBIMDataSource.h"
 #import "UIActionSheet+BlocksKit.h"
+#import "CBSessionDataModel.h"
 
 @interface CSKuleMainViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, EAIntroDelegate> {
     UIImagePickerController* _imgPicker;
@@ -302,8 +303,8 @@
 #pragma mark - View lifecycle
 -(void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:animated];
-    [self setNeedsStatusBarAppearanceUpdate];
+    //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:animated];
+    //[self setNeedsStatusBarAppearanceUpdate];
     [_scrollContent flashScrollIndicators];
     NSString* cName = [NSString stringWithFormat:@"%@",  self.navigationItem.title, nil];
     [[BaiduMobStat defaultStat] pageviewStartWithName:cName];
@@ -1023,14 +1024,31 @@
 
 
 #pragma mark - Private
+- (void)joinGroup:(NSInteger)schoolId classId:(NSInteger)classId {
+    NSString* imGroupTag = [NSString stringWithFormat:@"%@:%@", @(schoolId), @(classId)];
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
+    if ([session.imGroupTags containsObject:imGroupTag]) {
+        
+    }
+    else {
+        CBHttpClient* http = gApp.engine.httpClient;
+        [http reqIMJoinGroupOfKindergarten:schoolId withClassId:classId
+                                   success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                       [session.imGroupTags addObject:imGroupTag];
+                                   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                       
+                                   }];
+    }
+}
+
 - (void)getRelationshipInfos {
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         NSMutableArray* relationships = [NSMutableArray array];
-        
         for (id relationshipJson in dataJson) {
             CSKuleRelationshipInfo* relationshipInfo = [CSKuleInterpreter decodeRelationshipInfo:relationshipJson];
             if (relationshipInfo.parent && relationshipInfo.child) {
                 [relationships addObject:relationshipInfo];
+                [self joinGroup:relationshipInfo.parent.schoolId classId:relationshipInfo.child.classId];
             }
         }
         

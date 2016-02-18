@@ -1,0 +1,28 @@
+# Uncomment this line to define a global platform for your project
+platform :ios, '7.0'
+
+target 'YouJiaoBao' do
+pod 'AFNetworking', '~> 2.0'
+pod 'TPKeyboardAvoiding', '~> 1.2.4'
+pod 'EAIntroView', '~> 2.6.4'
+pod 'MBProgressHUD', '~> 0.9'
+pod 'iCarousel', '~> 1.8.1'
+pod 'JSBadgeView', '~> 1.3.2'
+pod 'NSURL+QueryDictionary', '~> 1.1.0'
+pod 'UITextView+Placeholder', '~> 1.0.8'
+pod 'UITableView+FDTemplateLayoutCell', '~> 1.3'
+pod 'InputValidators', '~> 0.3.2'
+#pod 'EGOCache', '~> 2.1.3'
+pod 'FTCoreText', '~> 1.0.1'
+pod 'SDWebImage', '~> 3.7.3'
+#pod 'TSFileCache', '~> 1.0.4'
+pod 'ALAlertBanner', '~> 0.3.1'
+#pod 'GMGridView', '~> 1.1.1'
+# - `AFNetworking (~> 2.0)` required by `Qiniu (7.0.0)`
+#pod "Qiniu", "~> 7.0"
+pod 'Bugly'
+pod 'RongCloudIMKit', '~> 2.3.8'
+pod 'BlocksKit', '~> 2.2.5'
+
+end
+

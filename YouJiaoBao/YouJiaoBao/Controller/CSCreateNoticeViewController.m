@@ -99,8 +99,8 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:animated];
-    [self setNeedsStatusBarAppearanceUpdate];
+    //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:animated];
+    //[self setNeedsStatusBarAppearanceUpdate];
 }
 
 - (void)didReceiveMemoryWarning
@@ -554,6 +554,9 @@
 }
 
 - (IBAction)onBtnSelectorClicked:(id)sender {
+    [self.fieldTitle resignFirstResponder];
+    [self.textContent resignFirstResponder];
+
     _typeSelectorActionSheet = [[UIActionSheet alloc] initWithTitle:nil
                                                 delegate:self
                                        cancelButtonTitle:@"取消"

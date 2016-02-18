@@ -13,13 +13,23 @@
 #import "CSFirImApi.h"
 #import <objc/runtime.h>
 #import <Bugly/CrashReporter.h>
+#import <RongIMKit/RongIMKit.h>
+#import "CBIMDataSource.h"
+#import "CBIMChatViewController.h"
+#import <BlocksKit/BlocksKit.h>
 
 CSAppDelegate* gApp = nil;
 
 @implementation CSAppDelegate {
     BOOL _checkUpdateDone;
     UIAlertView* _alertUpdateInfo;
+    
+    NSMutableArray* _receivedNotifications;
+    NSData* _deviceToken;
+    NSDictionary* _pendingNotificationInfo;
 }
+
+
 
 @synthesize hud = _hud;
 
@@ -32,10 +42,49 @@ CSAppDelegate* gApp = nil;
     [[CrashReporter sharedInstance] installWithAppId:@"900013150"];
     //[self performSelector:@selector(crash) withObject:nil afterDelay:3.0];
     
+    // 初始化融云
+    [[RCIM sharedRCIM] initWithAppKey:COCOBABYS_IM_APP_ID];
+    [[RCIM sharedRCIM] setGroupInfoDataSource:[CBIMDataSource sharedInstance]];
+    [[RCIM sharedRCIM] setUserInfoDataSource:[CBIMDataSource sharedInstance]];
+    [[RCIM sharedRCIM] setGroupUserInfoDataSource:[CBIMDataSource sharedInstance]];
+    
+    //
+    id naviAppearance = [UINavigationBar appearance];
+    //[naviAppearance setBackgroundImage:[UIImage imageNamed:@"v2-head.png"] forBarMetrics:UIBarMetricsDefault];
+    [naviAppearance setBarTintColor:UIColorRGB(0, 164, 217)];
+    [naviAppearance setTitleTextAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:20], NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    //naviAppearance.tintColor = [UIColor whiteColor];
+    [naviAppearance setTintColor:[UIColor whiteColor]];
+    
+    _receivedNotifications = [NSMutableArray array];
+    // iOS8 下需要使用新的 API
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
+        UIUserNotificationType myTypes = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+        
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:myTypes categories:nil];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    }else {
+        UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound;
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:myTypes];
+    }
+
+    // App 是用户点击推送消息启动
+    NSDictionary *userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    if (userInfo) {
+        [self application:application onRemotePushNotification:userInfo launching:YES];
+    }
+    
+    // 本地通知的内容
+    UILocalNotification *localNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    if (localNotification) {
+        [self application:application onLocalNotification:localNotification launching:YES];
+    }
+    
+    //角标清0
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
     [[CSEngine sharedInstance] setupAppearance];
     
     gApp = self;
-    
     return YES;
 }
 							
@@ -91,6 +140,21 @@ CSAppDelegate* gApp = nil;
 {
     // Saves changes in the application's managed object context before the application terminates.
     [[CSCoreDataHelper sharedInstance] saveContext];
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    CSLog(@"didRegisterForRemoteNotificationsWithDeviceToken:%@", deviceToken);
+    _deviceToken = deviceToken;
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    CSLog(@"%@", @"Did receive a Remote Notification");
+    [self application:application onRemotePushNotification:userInfo launching:NO];
+}
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    [self application:application onLocalNotification:notification launching:NO];
 }
 
 #pragma mark - Instance
@@ -166,6 +230,47 @@ CSAppDelegate* gApp = nil;
         
         _alertUpdateInfo = nil;
     }
+}
+
+#pragma mark - Remote/Local Notification
+- (void)application:(UIApplication *)application onRemotePushNotification:(NSDictionary*)userInfo launching:(BOOL)yes {
+    if (yes) {
+        CSLog(@"从推送消息启动:%@", userInfo);
+        [_receivedNotifications addObject:userInfo];
+        _pendingNotificationInfo = userInfo;
+    }
+    else {
+        CSLog(@"收到推送消息:%@", userInfo);
+        
+        if (application.applicationState == UIApplicationStateActive) {
+            NSDictionary * rcData = [[RCIMClient sharedRCIMClient] getPushExtraFromRemoteNotification:userInfo];
+            if (rcData == nil) {
+                [application setApplicationIconBadgeNumber:0];
+            }
+        }
+        else {
+            if (userInfo) {
+                _pendingNotificationInfo = userInfo;
+            }
+        }
+        
+        if (userInfo) {
+            [_receivedNotifications addObject:userInfo];
+        }
+    }
+}
+
+- (void)application:(UIApplication *)application onLocalNotification:(UILocalNotification*)notification launching:(BOOL)yes {
+    if (yes) {
+        CSLog(@"从本地消息启动:%@", notification);
+    }
+    else {
+        CSLog(@"收到本地消息:%@", notification);
+        NSDictionary *pushServiceData = [[RCIMClient sharedRCIMClient] getPushExtraFromRemoteNotification:notification.userInfo];
+        if (pushServiceData) {
+        }
+    }
+    _pendingNotificationInfo = notification.userInfo;
 }
 
 @end

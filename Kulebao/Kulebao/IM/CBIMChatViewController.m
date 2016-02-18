@@ -69,7 +69,8 @@
         || self.conversationType == ConversationType_CHATROOM) {
         
         RCUserInfo* me = [[RCIMClient sharedRCIMClient] currentUserInfo];
-        if ([me.userId isEqualToString:userId]) {
+        if ([me.userId isEqualToString:userId]
+            ||[userId isEqualToString:@"im_system_admin"]) {
             
         }
         else {
@@ -77,7 +78,6 @@
                 CBIMChatViewController *conversationVC = [[CBIMChatViewController alloc]init];
                 conversationVC.conversationType = ConversationType_PRIVATE;
                 conversationVC.targetId = userId;
-                conversationVC.userName = userInfo.name;
                 conversationVC.title = userInfo.name;
                 
                 [self.navigationController pushViewController:conversationVC animated:YES];

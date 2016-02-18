@@ -51,7 +51,7 @@
     
     CSEngine* engine = [CSEngine sharedInstance];
     
-    _frClasses = [EntityClassInfoHelper frClassesWithEmployee:engine.loginInfo.uid ofKindergarten:engine.loginInfo.schoolId.integerValue];
+    _frClasses = [EntityClassInfoHelper frClassesWithEmployee:engine.loginInfo.o_id ofKindergarten:engine.loginInfo.schoolId.integerValue];
     _frClasses.delegate = self;
     
     NSError* error = nil;
@@ -236,7 +236,7 @@
     
     id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
         NSArray* classInfoList = [EntityClassInfoHelper updateEntities:responseObject
-                                                           forEmployee:engine.loginInfo.uid
+                                                           forEmployee:engine.loginInfo.o_id
                                                         ofKindergarten:engine.loginInfo.schoolId.integerValue];
         [engine onLoadClassInfoList:classInfoList];
         

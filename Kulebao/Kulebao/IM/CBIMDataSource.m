@@ -58,7 +58,7 @@
 
 #pragma mark - Persistent data
 + (NSString*)dataFileName{
-    return @"CBIMDataSource.dat";
+    return @"CBIMDataSource.cbar";
 }
 
 - (NSString*)dataFileName{

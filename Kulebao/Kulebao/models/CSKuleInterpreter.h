@@ -17,7 +17,6 @@
 #import "CSKuleScheduleInfo.h"
 #import "CSKuleSchoolInfo.h"
 #import "CSKuleCheckInOutLogInfo.h"
-#import "CSKuleChatMsg.h"
 #import "CSKuleAssessInfo.h"
 #import "CSKuleEmployeeInfo.h"
 #import "CSKuleTopicMsg.h"
@@ -50,8 +49,6 @@
 + (CSKuleSchoolInfo*)decodeSchoolInfo:(NSDictionary*)dataJson;
 
 + (CSKuleCheckInOutLogInfo*)decodeCheckInOutLogInfo:(NSDictionary*)dataJson;
-
-+ (CSKuleChatMsg*)decodeChatMsg:(NSDictionary*)dataJson;
 
 + (CSKuleTopicMsg*)decodeTopicMsg:(NSDictionary*)dataJson;
 

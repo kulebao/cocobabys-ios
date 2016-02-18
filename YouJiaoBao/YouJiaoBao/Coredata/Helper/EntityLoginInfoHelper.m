@@ -16,10 +16,10 @@
     NSManagedObjectContext* context = [[CSCoreDataHelper sharedInstance] managedObjectContext];
     
     if ([jsonObject isKindOfClass:[NSDictionary class]]) {
-        NSString* uid = [jsonObject objectForKey:@"id"];
+        NSString* o_id = [jsonObject objectForKey:@"id"];
         
         NSFetchRequest* fr = [[NSFetchRequest alloc] initWithEntityName:@"EntityLoginInfo"];
-        [fr setPredicate:[NSPredicate predicateWithFormat:@"uid == %@", uid]];
+        [fr setPredicate:[NSPredicate predicateWithFormat:@"o_id == %@", o_id]];
         fr.returnsDistinctResults = YES;
         fr.fetchLimit = 20;
         fr.resultType = NSManagedObjectResultType;
@@ -32,7 +32,7 @@
         NSNumber* timestamp = [jsonObject objectForKey:@"timestamp"];
         if (entity == nil) {
             entity = [NSEntityDescription insertNewObjectForEntityForName:@"EntityLoginInfo" inManagedObjectContext:context];
-            entity.uid = uid;
+            entity.o_id = o_id;
             needUpdate = YES;
         }
         else {
@@ -51,10 +51,23 @@
             entity.workgroup = [jsonObject objectForKey:@"workgroup"];
             entity.birthday = [jsonObject objectForKey:@"birthday"];
             entity.loginName = [jsonObject objectForKey:@"login_name"];
+            entity.uid = [jsonObject objectForKey:@"uid"];
+
+        }
+        
+        NSDictionary* imDict = [jsonObject valueForKeyNotNull:@"im_token"];
+        if (imDict) {
+            entity.im_token = [imDict valueForKeyNotNull:@"token"];;
+            entity.im_user_id = [imDict valueForKeyNotNull:@"user_id"];
+            entity.im_source = [imDict valueForKeyNotNull:@"source"];
+        }
+        else {
+            entity.im_token = nil;
+            entity.im_user_id = nil;
+            entity.im_source = nil;
         }
         
         entity.loginDate = [NSDate date];
-        
         [context save:&error];
     }
     

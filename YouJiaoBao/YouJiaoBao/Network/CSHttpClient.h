@@ -35,6 +35,10 @@ typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSErr
                                                 success:(SuccessResponseHandler)success
                                                 failure:(FailureResponseHandler)failure;
 
+- (AFHTTPRequestOperation*)opGetSchoolInfo:(NSInteger)schoolId
+                                   success:(SuccessResponseHandler)success
+                                   failure:(FailureResponseHandler)failure;
+
 - (AFHTTPRequestOperation*)opGetChildListOfKindergarten:(NSInteger)schoolId
                                           withClassList:(NSArray*)classIdList
                                                 success:(SuccessResponseHandler)success
@@ -201,5 +205,49 @@ typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSErr
                                                  withSenderId:(NSString*)senderId
                                                       success:(SuccessResponseHandler)success
                                                       failure:(FailureResponseHandler)failure;
+
+- (AFHTTPRequestOperation*)reqGetClassesOfKindergarten:(NSInteger)kindergarten
+                                               success:(SuccessResponseHandler)success
+                                               failure:(FailureResponseHandler)failure;
+
+
+- (AFHTTPRequestOperation*)reqGetTeachersOfKindergarten:(NSInteger)kindergarten
+                                            withClassId:(NSInteger)classId
+                                                success:(SuccessResponseHandler)success
+                                                failure:(FailureResponseHandler)failure;
+
+- (AFHTTPRequestOperation*)reqGetRelationshipsOfKindergarten:(NSInteger)kindergarten
+                                                 withClassId:(NSInteger)classId
+                                                     success:(SuccessResponseHandler)success
+                                                     failure:(FailureResponseHandler)failure;
+
+- (AFHTTPRequestOperation*)reqGetBandListOfKindergarten:(NSInteger)kindergarten
+                                            withClassId:(NSInteger)classId
+                                                success:(SuccessResponseHandler)success
+                                                failure:(FailureResponseHandler)failure;
+
+- (AFHTTPRequestOperation*)reqAddBandUser:(NSString*)imUser
+                           inKindergarten:(NSInteger)kindergarten
+                              withClassId:(NSInteger)classId
+                                  success:(SuccessResponseHandler)success
+                                  failure:(FailureResponseHandler)failure;
+
+- (AFHTTPRequestOperation*)reqDeleteBandUser:(NSString*)imUser
+                              inKindergarten:(NSInteger)kindergarten
+                                 withClassId:(NSInteger)classId
+                                     success:(SuccessResponseHandler)success
+                                     failure:(FailureResponseHandler)failure;
+
+- (AFHTTPRequestOperation*)reqGetiIneligibleClass:(NSInteger)employeeId
+                                   inKindergarten:(NSInteger)kindergarten
+                                          success:(SuccessResponseHandler)success
+                                          failure:(FailureResponseHandler)failure;
+
+- (AFHTTPRequestOperation*)reqIMJoinGroupOfKindergarten:(NSInteger)kindergarten
+                                            withClassId:(NSInteger)classId
+                                                success:(SuccessResponseHandler)success
+                                                failure:(FailureResponseHandler)failure;
+
+
 
 @end

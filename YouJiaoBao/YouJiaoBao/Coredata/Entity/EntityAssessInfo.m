@@ -2,28 +2,14 @@
 //  EntityAssessInfo.m
 //  YouJiaoBao
 //
-//  Created by xin.c.wang on 14-11-3.
-//  Copyright (c) 2014年 Codingsoft. All rights reserved.
+//  Created by WangXin on 1/17/16.
+//  Copyright © 2016 Codingsoft. All rights reserved.
 //
 
 #import "EntityAssessInfo.h"
 
-
 @implementation EntityAssessInfo
 
-@dynamic publisher;
-@dynamic comments;
-@dynamic dining;
-@dynamic emotion;
-@dynamic rest;
-@dynamic activity;
-@dynamic game;
-@dynamic exercise;
-@dynamic selfCare;
-@dynamic manner;
-@dynamic timestamp;
-@dynamic childId;
-@dynamic schoolId;
-@dynamic uid;
+// Insert code here to add functionality to your managed object subclass
 
 @end

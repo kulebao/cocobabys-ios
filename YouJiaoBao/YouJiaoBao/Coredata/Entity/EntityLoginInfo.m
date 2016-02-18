@@ -2,27 +2,24 @@
 //  EntityLoginInfo.m
 //  YouJiaoBao
 //
-//  Created by xin.c.wang on 14-7-21.
-//  Copyright (c) 2014年 Codingsoft. All rights reserved.
+//  Created by WangXin on 1/17/16.
+//  Copyright © 2016 Codingsoft. All rights reserved.
 //
 
 #import "EntityLoginInfo.h"
 
-
 @implementation EntityLoginInfo
+@synthesize ineligibleClassList;
 
-@dynamic birthday;
-@dynamic gender;
-@dynamic loginName;
-@dynamic name;
-@dynamic phone;
-@dynamic portrait;
-@dynamic schoolId;
-@dynamic status;
-@dynamic timestamp;
-@dynamic uid;
-@dynamic workduty;
-@dynamic workgroup;
-@dynamic loginDate;
+// Insert code here to add functionality to your managed object subclass
+
+- (BOOL)allowToSendAll {
+    BOOL ok = NO;
+    if (self.ineligibleClassList && self.ineligibleClassList.count == 0) {
+        ok = YES;
+    }
+    
+    return ok;
+}
 
 @end

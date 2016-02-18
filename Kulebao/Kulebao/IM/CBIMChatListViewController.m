@@ -74,7 +74,6 @@
     CBIMChatViewController *conversationVC = [[CBIMChatViewController alloc]init];
     conversationVC.conversationType =model.conversationType;
     conversationVC.targetId = model.targetId;
-    conversationVC.userName =model.conversationTitle;
     conversationVC.title = model.conversationTitle;
     [self.navigationController pushViewController:conversationVC animated:YES];
 }
@@ -104,7 +103,7 @@
         }
         else if (m.conversationType == ConversationType_GROUP) {
             [newDataSource addObject:m];
-            m.isTop = YES;
+            //m.isTop = YES;
         }
         else {
             [newDataSource addObject:m];
@@ -121,7 +120,7 @@
         [newDataSource addObject:newModel];
         newModel.receivedTime = [[NSDate date] timeIntervalSince1970]*1000;
         newModel.sentTime = [[NSDate date] timeIntervalSince1970]*1000;
-        newModel.isTop = YES;
+        //newModel.isTop = YES;
         //
         //        RCIMClient* im = [RCIMClient sharedRCIMClient];
         //        RCTextMessage* msgContent = [RCTextMessage new];

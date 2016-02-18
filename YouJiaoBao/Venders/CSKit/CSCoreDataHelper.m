@@ -23,6 +23,7 @@
 
 #import "CSCoreDataHelper.h"
 #import <CoreData/CoreData.h>
+#import <BlocksKit/UIAlertView+BlocksKit.h>
 
 @implementation CSCoreDataHelper
 @synthesize managedObjectContext = _managedObjectContext;
@@ -92,7 +93,8 @@
     
     NSError *error = nil;
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
+    NSDictionary* options = @{NSMigratePersistentStoresAutomaticallyOption:@YES, NSInferMappingModelAutomaticallyOption:@YES};
+    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error]) {
         /*
          Replace this implementation with code to handle the error appropriately.
          
@@ -116,9 +118,16 @@
          Lightweight migration will only work for a limited set of schema changes; consult "Core Data Model Versioning and Data Migration Programming Guide" for details.
          
          */
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        CSLog(@"Persistent Store Error %@, %@", error, [error userInfo]);
         [[NSFileManager defaultManager] removeItemAtURL:storeURL error:nil];
-        abort();
+        
+        [UIAlertView bk_showAlertViewWithTitle:@"提示"
+                                       message:@"数据已处理完毕，请重新打开幼教宝"
+                             cancelButtonTitle:@"好"
+                             otherButtonTitles:nil
+                                       handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+            abort();
+        }];
     }
     
     return _persistentStoreCoordinator;

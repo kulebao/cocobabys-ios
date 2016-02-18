@@ -62,12 +62,13 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     //[self customizeBackBarItem];
     [self customizeOkBarItemWithTarget:self action:@selector(onSendNotice:) text:@"发布"];
+    CSEngine* engine = [CSEngine sharedInstance];
     
     self.popCtrl = [CSPopupController popupControllerWithView:gApp.window];
     
     self.classPickerView = [CSClassPickerView defaultClassPickerView];
     self.classPickerView.delegate = self;
-    self.classPickerView.canSelectAll = YES;
+    self.classPickerView.canSelectAll = engine.loginInfo.allowToSendAll;
     
     self.pullTableView.pullDelegate = self;
     self.pullTableView.pullBackgroundColor = [UIColor clearColor];
@@ -77,7 +78,7 @@
     [self.pullTableView registerNib:[UINib nibWithNibName:@"CSKuleNewsTableViewCell" bundle:nil]
          forCellReuseIdentifier:@"CSKuleNewsTableViewCell"];
     
-    CSEngine* engine = [CSEngine sharedInstance];
+
     NSArray* classInfoList = engine.classInfoList;
     
     NSMutableArray* classIdList = [NSMutableArray array];
@@ -253,7 +254,7 @@
         NSData* imgData = UIImageJPEGRepresentation(img, 0.8);
         NSString* imgFileName = [NSString stringWithFormat:@"news_img/%@/t_%@/%@.jpg",
                                  engine.loginInfo.schoolId,
-                                 engine.loginInfo.uid,
+                                 engine.loginInfo.o_id,
                                  @((long long)[[NSDate date] timeIntervalSince1970]*1000)];
         
         SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {

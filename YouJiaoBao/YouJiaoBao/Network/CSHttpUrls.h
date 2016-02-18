@@ -112,4 +112,22 @@
 // PATH: 删除公告
 #define kDeleteNewsPath                 @"/kindergarten/%@/admin/%@/news/%@"
 
+#pragma mark - Card Manager
+#define kBindCard           @"/kindergarten/%@/relationship/%@"
+#define kGetInviteCode      @"/api/v5/invitation_code/%@"
+#define kCreateInvitation   @"/api/v5/kindergarten/%@/invitation"
+
+#pragma mark - IM
+#define kCBClassesURL           @"/kindergarten/%@/class"
+#define kCBTeachersURL          @"/kindergarten/%@/class/%@/manager"
+#define kCBEmployeesURL         @"/kindergarten/%@/employee"
+
+// PATH: 获取家庭关系
+#define kGetFamilyRelationshipPath  @"/kindergarten/%@/relationship"
+#define kGetSchoolInfoPath          @"/kindergarten/%@"
+
+#define kIMBanURL               @"/api/v7/kindergarten/%@/class_im_group/%@/ban"
+#define kIMBanIdURL             @"/api/v7/kindergarten/%@/class_im_group/%@/ban/%@"
+#define kIMGroupURL             @"/api/v7/kindergarten/%@/class_im_group/%@/user"
+
 #endif

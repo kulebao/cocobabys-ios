@@ -17,6 +17,7 @@
 #import "CSStudentListPickUpTableViewController.h"
 #import "EntityClassInfo.h"
 #import "EntityRelationshipInfoHelper.h"
+#import "CBIMChatListViewController.h"
 
 #define kTestChildId    @"2_2088_900"
 
@@ -64,6 +65,9 @@
                  @{@"icon": [UIImage imageNamed:@"v2-成长经历.png"],
                    @"segue": @"segue.main.growexp",
                    @"name": @"成长经历"},
+                 @{@"icon": [UIImage imageNamed:@"v2-家园互动"],
+                   @"segue": @"segue.main.im",
+                   @"name": @"家园互动"},
                  ];
     
     
@@ -72,6 +76,7 @@
     
     [self reloadClassList];
     [self reloadRelationships];
+    [self reloadIneligibleClass];
 }
 
 - (void)didReceiveMemoryWarning
@@ -86,6 +91,11 @@
     CGFloat cellWidth = floor((self.view.bounds.size.width - 40) / 3.0);
     self.layoutCollectionView.itemSize = CGSizeMake(cellWidth, cellWidth);
     [self.collectionView reloadData];
+    
+    CSEngine* engine = [CSEngine sharedInstance];
+    if (engine.schoolInfo == nil) {
+        [engine reloadSchoolInfo];
+    }
 }
 
 #pragma mark - Navigation
@@ -125,8 +135,13 @@
     
     NSDictionary* module = [_modules objectAtIndex:indexPath.row];
     NSString* segueName = [module objectForKey:@"segue"];
-    
-    [self performSegueWithIdentifier:segueName sender:nil];
+    NSString* moduleName = [module objectForKey:@"name"];
+    if ([moduleName isEqualToString:@"家园互动"]) {
+        [self openRCIM];
+    }
+    else {
+        [self performSegueWithIdentifier:segueName sender:nil];
+    }
 }
 
 #pragma mark - private
@@ -137,7 +152,7 @@
     
     id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
         NSArray* classInfoList = [EntityClassInfoHelper updateEntities:responseObject
-                                                           forEmployee:engine.loginInfo.uid
+                                                           forEmployee:engine.loginInfo.o_id
                                                         ofKindergarten:engine.loginInfo.schoolId.integerValue];
         [engine onLoadClassInfoList:classInfoList];
         
@@ -189,6 +204,25 @@
                              failure:failure];
 }
 
+- (void)reloadIneligibleClass {
+    CSHttpClient* http = [CSHttpClient sharedInstance];
+    CSEngine* engine = [CSEngine sharedInstance];
+    //CSAppDelegate* app = [CSAppDelegate sharedInstance];
+    if (engine.loginInfo) {
+        [http reqGetiIneligibleClass:engine.loginInfo.uid.integerValue
+                      inKindergarten:engine.loginInfo.schoolId.integerValue
+                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                 if ([responseObject isKindOfClass:[NSArray class]]) {
+                                     engine.loginInfo.ineligibleClassList = responseObject;
+                                 }
+                             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(60 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                                     [self reloadIneligibleClass];
+                                 });
+                             }];
+    }
+}
+
 #pragma mark - CSContentEditorViewControllerDelegate
 - (void)contentEditorViewController:(CSContentEditorViewController*)ctrl
                      finishEditText:(NSString*)text
@@ -222,7 +256,7 @@
     
     NSString* videoFileName = [NSString stringWithFormat:@"history_video/%@/topic_%@/%@.mp4",
                                engine.loginInfo.schoolId,
-                               kTestChildId,
+                               engine.loginInfo.o_id,
                                @((long long)[[NSDate date] timeIntervalSince1970]*1000)];
     
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
@@ -252,7 +286,7 @@
         NSData* imgData = UIImageJPEGRepresentation(img, 0.8);
         NSString* imgFileName = [NSString stringWithFormat:@"history_img/%@/topic_%@/%@.jpg",
                                  engine.loginInfo.schoolId,
-                                 kTestChildId,
+                                 engine.loginInfo.o_id,
                                  @((long long)[[NSDate date] timeIntervalSince1970]*1000)];
         
         SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
@@ -304,7 +338,7 @@
     if (childIdList.count > 0) {
         [gApp waitingAlert:@"提交数据中"];
         [http opPostHistoryOfKindergarten:engine.loginInfo.schoolId.integerValue
-                             withSenderId:engine.loginInfo.uid
+                             withSenderId:engine.loginInfo.o_id
                           withChildIdList:childIdList
                               withContent:_textContent
                          withImageUrlList:_imageUrlList
@@ -337,6 +371,14 @@
 
 - (IBAction)onBtnSettingsClicked:(id)sender {
     [self performSegueWithIdentifier:@"segue.main.setting" sender:nil];
+}
+
+- (void)openRCIM {
+    NSArray* arr1 = @[@(ConversationType_PRIVATE),@(ConversationType_DISCUSSION), @(ConversationType_GROUP),@(ConversationType_SYSTEM)];
+    NSArray* arr2 = nil;
+    CBIMChatListViewController* ctrl = [[CBIMChatListViewController alloc] initWithDisplayConversationTypes:arr1
+                                                                                 collectionConversationType:arr2];
+    [self.navigationController pushViewController:ctrl animated:YES];
 }
 
 @end

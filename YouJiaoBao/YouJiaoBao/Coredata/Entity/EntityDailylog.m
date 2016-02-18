@@ -2,21 +2,15 @@
 //  EntityDailylog.m
 //  YouJiaoBao
 //
-//  Created by xin.c.wang on 14-9-17.
-//  Copyright (c) 2014年 Codingsoft. All rights reserved.
+//  Created by WangXin on 1/17/16.
+//  Copyright © 2016 Codingsoft. All rights reserved.
 //
 
 #import "EntityDailylog.h"
 #import "EntityChildInfo.h"
 
-
 @implementation EntityDailylog
 
-@dynamic childId;
-@dynamic noticeType;
-@dynamic parentName;
-@dynamic recordUrl;
-@dynamic timestamp;
-@dynamic childInfo;
+// Insert code here to add functionality to your managed object subclass
 
 @end

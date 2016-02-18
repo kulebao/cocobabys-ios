@@ -2,8 +2,8 @@
 //  EntityRelationshipInfo.h
 //  YouJiaoBao
 //
-//  Created by xin.c.wang on 14-8-8.
-//  Copyright (c) 2014年 Codingsoft. All rights reserved.
+//  Created by WangXin on 1/17/16.
+//  Copyright © 2016 Codingsoft. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -11,12 +11,14 @@
 
 @class EntityChildInfo, EntityParentInfo;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface EntityRelationshipInfo : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * uid;
-@property (nonatomic, retain) NSString * card;
-@property (nonatomic, retain) NSString * relationship;
-@property (nonatomic, retain) EntityChildInfo *childInfo;
-@property (nonatomic, retain) EntityParentInfo *parentInfo;
+// Insert code here to declare functionality of your managed object subclass
 
 @end
+
+NS_ASSUME_NONNULL_END
+
+#import "EntityRelationshipInfo+CoreDataProperties.h"

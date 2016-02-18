@@ -10,6 +10,7 @@
 #import "CSAppDelegate.h"
 #import "BPush.h"
 #import "CSKuleForgotPswdViewController.h"
+#import "CBSessionDataModel.h"
 
 @interface CSKuleLoginViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *labNotice;

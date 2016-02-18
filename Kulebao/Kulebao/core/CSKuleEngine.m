@@ -15,7 +15,6 @@
 #import "ALAlertBannerManager.h"
 #import "ALAlertBanner+Private.h"
 #import "hm_sdk.h"
-#import "TSFileCache.h"
 #import "CSKit.h"
 #import "CSKulePreferences.h"
 
@@ -391,12 +390,6 @@
 - (void)setupEngine {
     
     //NSString* cachesDirectory = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0];
-    NSString* homeDir = NSHomeDirectory();
-    NSString* cachesDirectory = [homeDir stringByAppendingPathComponent:@"Documents/File-Cache"];
-    TSFileCache* fileCache = [TSFileCache cacheForURL:[NSURL fileURLWithPath:cachesDirectory isDirectory:YES]];
-    [fileCache prepare:nil];
-    [TSFileCache setSharedInstance:fileCache];
-    
     if (_senderProfiles == nil) {
         _senderProfiles = [NSMutableDictionary dictionary];
     }
@@ -461,10 +454,10 @@
     
     //
     id naviAppearance = [UINavigationBar appearance];
-    [naviAppearance setBackgroundImage:[UIImage imageNamed:@"v2-head.png"] forBarMetrics:UIBarMetricsDefault];
+    //[naviAppearance setBackgroundImage:[UIImage imageNamed:@"v2-head.png"] forBarMetrics:UIBarMetricsDefault];
+    [naviAppearance setBarTintColor:UIColorRGB(0, 164, 217)];
     [naviAppearance setTitleTextAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:20], NSForegroundColorAttributeName:[UIColor whiteColor]}];
     //naviAppearance.tintColor = [UIColor whiteColor];
-    [naviAppearance setBarTintColor:[UIColor whiteColor]];
     [naviAppearance setTintColor:[UIColor whiteColor]];
     
     //

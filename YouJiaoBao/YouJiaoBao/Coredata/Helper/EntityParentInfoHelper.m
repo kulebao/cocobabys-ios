@@ -64,6 +64,7 @@
                 entity.memberStatus = [jsonObject objectForKey:@"member_status"];
                 entity.phone = [jsonObject objectForKey:@"phone"];
             }
+            entity.uid = [jsonObject objectForKey:@"id"];
             
             [returnObjectList addObject:entity];
         }

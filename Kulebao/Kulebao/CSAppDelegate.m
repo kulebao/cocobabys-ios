@@ -265,6 +265,10 @@ CSAppDelegate* gApp = nil;
     [self.hud hide:YES afterDelay:delay];
 }
 
+- (void)alertNoChild {
+    [gApp alert:@"获取幼儿信息失败，请联系幼儿园确认幼儿信息已经绑定，且网络正常后，重新启动应用！"];
+}
+
 #pragma mark - Private
 - (void)showIntroViewsIfNeeded {
     if (!gApp.engine.preferences.guideShown) {

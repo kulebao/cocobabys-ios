@@ -35,6 +35,8 @@
 - (void)hideAlert;
 - (void)hideAlertAfterDelay:(NSTimeInterval)delay;
 
+- (void)alertNoChild;
+
 @end
 
 

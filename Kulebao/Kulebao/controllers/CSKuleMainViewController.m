@@ -164,6 +164,10 @@
     
     [self updateUI:YES];
     
+    if(gApp.engine.currentRelationship.child == nil) {
+        self.viewChildContainer.hidden = YES;
+        self.badgeCommercial.hidden = YES;
+    }
 
     
     //Guide
@@ -212,6 +216,10 @@
                 
                 [self performSelector:@selector(reloadVideoMember) withObject:nil afterDelay:0];
             }
+            self.viewChildContainer.hidden = NO;
+        }
+        else {
+            self.viewChildContainer.hidden = YES;
         }
     }
     else if((object == gApp.engine) && [keyPath isEqualToString:@"badgeOfNews"]) {
@@ -494,7 +502,13 @@
                              className];
             [self.btnClassInfo setTitle:@"亲子优惠"
                                forState:UIControlStateNormal];
-            self.badgeCommercial.hidden = NO;
+            
+            if (gApp.engine.currentRelationship.child) {
+                self.badgeCommercial.hidden = NO;
+            }
+            else {
+                self.badgeCommercial.hidden = YES;
+            }
         }
         else {
             [self.btnClassInfo setTitle:className
@@ -910,7 +924,10 @@
         @"segue.bus"
     };
     
-    if (moduleType < kKuleModuleSize && moduleType < (sizeof(segueNames)/sizeof(NSString*))) {
+    if (gApp.engine.currentRelationship == nil) {
+        [gApp alertNoChild];
+    }
+    else if (moduleType < kKuleModuleSize && moduleType < (sizeof(segueNames)/sizeof(NSString*))) {
         if ([self checkModuleTypeForMemberStatus:moduleType]) {
             switch (moduleType) {
                 case kKuleModuleNews:
@@ -973,7 +990,12 @@
 }
 
 - (IBAction)onBtnSettingsClicked:(id)sender {
-    [self performSegueWithIdentifier:@"segue.settings3" sender:nil];
+    if (gApp.engine.currentRelationship.child) {
+        [self performSegueWithIdentifier:@"segue.settings3" sender:nil];
+    }
+    else {
+        [gApp alertNoChild];
+    }
 }
 
 - (IBAction)onBtnSchoolInfoClicked:(id)sender {
@@ -1015,9 +1037,15 @@
 #if COCOBABYS_FEATURE_COMMERCIAL
     BOOL enabledCommercial = gApp.engine.preferences.enabledCommercial;
     if (enabledCommercial) {
-        UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Commercial" bundle:nil];
-        [self.navigationController pushViewController:storyboard.instantiateInitialViewController animated:YES];
-        self.badgeCommercial.badgeText = nil;
+        
+        if (gApp.engine.currentRelationship.child) {
+            UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Commercial" bundle:nil];
+            [self.navigationController pushViewController:storyboard.instantiateInitialViewController animated:YES];
+            self.badgeCommercial.badgeText = nil;
+        }
+        else {
+            [gApp alertNoChild];
+        }
     }
 #endif
 }

@@ -153,9 +153,9 @@
     completion(groupObj);
 }
 
-#pragma mark - RCIMClientReceiveMessageDelegate
-- (void)onReceived:(RCMessage *)message left:(int)nLeft object:(id)object {
-    
+#pragma mark - RCIMReceiveMessageDelegate
+- (void)onRCIMReceiveMessage:(RCMessage *)message left:(int)left {
+    //gApp.engine.badgeOfChating = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
 }
 
 #pragma mark - RCIMGroupUserInfoDataSource

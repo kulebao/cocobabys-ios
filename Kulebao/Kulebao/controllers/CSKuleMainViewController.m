@@ -34,6 +34,8 @@
 #import "CBSessionDataModel.h"
 #import "CBIMNotificationUserInfo.h"
 
+#import <RongIMKit/RongIMKit.h>
+
 @interface CSKuleMainViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, EAIntroDelegate> {
     UIImagePickerController* _imgPicker;
     CSTextFieldDelegate* _nickFieldDelegate;
@@ -143,12 +145,11 @@
                      options:NSKeyValueObservingOptionNew
                      context:nil];
      */
-    /*
+    
     [gApp.engine addObserver:self
                   forKeyPath:@"badgeOfChating"
                      options:NSKeyValueObservingOptionNew
                      context:nil];
-     */
     
     [gApp.engine addObserver:self
                   forKeyPath:@"badgeOfAssess"
@@ -172,6 +173,12 @@
     
     //Guide
     [self showIntroViewsIfNeeded];
+    
+    // Noti
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(appWillEnterForeground:)
+                                                 name:UIApplicationWillEnterForegroundNotification
+                                               object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -181,15 +188,21 @@
 }
 
 - (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
     [gApp.engine removeObserver:self forKeyPath:@"currentRelationship"];
     [gApp.engine removeObserver:self forKeyPath:@"badgeOfNews"];
     [gApp.engine removeObserver:self forKeyPath:@"badgeOfRecipe"];
     [gApp.engine removeObserver:self forKeyPath:@"badgeOfCheckin"];
     [gApp.engine removeObserver:self forKeyPath:@"badgeOfSchedule"];
     //[gApp.engine removeObserver:self forKeyPath:@"badgeOfAssignment"];
-    //[gApp.engine removeObserver:self forKeyPath:@"badgeOfChating"];
+    [gApp.engine removeObserver:self forKeyPath:@"badgeOfChating"];
     [gApp.engine removeObserver:self forKeyPath:@"badgeOfAssess"];
     [gApp.engine removeObserver:self forKeyPath:@"pendingNotificationInfo"];
+}
+
+- (void)appWillEnterForeground:(NSNotification*)noti {
+    [self updateUI:YES];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -273,6 +286,7 @@
         }
     }
     else if((object == gApp.engine) && [keyPath isEqualToString:@"badgeOfChating"]) {
+#if 0
         JSBadgeView* badgeView = [self badgeViewForModule:kKuleModuleChating];
         if (badgeView && gApp.engine.badgeOfChating > 0) {
             badgeView.badgeText = @"新";
@@ -281,6 +295,7 @@
         else {
             badgeView.badgeText = nil;
         }
+#endif
     }
     else if((object == gApp.engine) && [keyPath isEqualToString:@"badgeOfAssess"]) {
         JSBadgeView* badgeView = [self badgeViewForModule:kKuleModuleAssess];
@@ -557,6 +572,14 @@
                                forState:UIControlStateNormal];
         }
         //[gApp alert:@"没有宝宝信息。"];
+    }
+    
+    JSBadgeView* badgeView = [self badgeViewForModule:kKuleModuleChating];
+    if([[RCIMClient sharedRCIMClient] getTotalUnreadCount] > 0) {
+        badgeView.badgeText = @"新";
+    }
+    else {
+        badgeView.badgeText = nil;
     }
 }
 
@@ -946,7 +969,7 @@
                     gApp.engine.badgeOfAssignment = 0;
                     break;
                 case kKuleModuleChating:
-                    gApp.engine.badgeOfChating = 0;
+                    //gApp.engine.badgeOfChating = 0;
                     break;
                 case kKuleModuleAssess:
                     gApp.engine.badgeOfAssess = 0;

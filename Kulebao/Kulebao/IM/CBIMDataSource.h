@@ -8,7 +8,7 @@
 
 #import <RongIMKit/RongIMKit.h>
 
-@interface CBIMDataSource : NSObject <NSCoding, RCIMUserInfoDataSource, RCIMGroupInfoDataSource, RCIMGroupUserInfoDataSource, RCIMClientReceiveMessageDelegate>
+@interface CBIMDataSource : NSObject <NSCoding, RCIMUserInfoDataSource, RCIMGroupInfoDataSource, RCIMGroupUserInfoDataSource, RCIMReceiveMessageDelegate>
 
 @property (nonatomic, strong, readonly) NSMutableArray* classInfoList;
 @property (nonatomic, strong, readonly) NSMutableArray* relationshipInfoList;

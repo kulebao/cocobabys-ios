@@ -197,7 +197,7 @@
             // exception:cameraCaptureMode 1 not available because mediaTypes does contain public.movie
             // _imgPicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureModeVideo;
             _imgPicker.mediaTypes = @[(NSString *)kUTTypeMovie];
-            _imgPicker.videoMaximumDuration = 30; // 30s
+            _imgPicker.videoMaximumDuration = 90; // 90s
             _imgPicker.videoQuality = UIImagePickerControllerQualityTypeMedium;
         }
         @catch(NSException *exception) {
@@ -217,7 +217,7 @@
         _imgPicker.delegate = self;
         _imgPicker.sourceType = UIImagePickerControllerSourceTypeCamera;
         _imgPicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureModeVideo;
-        _imgPicker.videoMaximumDuration = 30; // 30s
+        _imgPicker.videoMaximumDuration = 90; // 90s
         _imgPicker.videoQuality = UIImagePickerControllerQualityType640x480;
         _imgPicker.allowsEditing = NO;
         [self presentViewController:_imgPicker animated:YES completion:^{
@@ -231,7 +231,7 @@
         _imgPicker = [[UIImagePickerController alloc] init];
         _imgPicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
         _imgPicker.mediaTypes = @[(NSString *)kUTTypeMovie, (NSString *)kUTTypeVideo];
-        _imgPicker.videoMaximumDuration = 30; // 30s
+        _imgPicker.videoMaximumDuration = 90; // 90s
         _imgPicker.videoQuality = UIImagePickerControllerQualityType640x480;
         _imgPicker.allowsEditing = NO;
         _imgPicker.delegate = self;

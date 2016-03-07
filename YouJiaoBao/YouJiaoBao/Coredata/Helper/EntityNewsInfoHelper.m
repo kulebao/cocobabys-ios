@@ -30,6 +30,64 @@
     return entity;
 }
 
++ (NSArray*)reloadEntities:(id)jsonObjectList {
+    NSMutableArray* returnObjectList = [NSMutableArray array];
+    
+    NSManagedObjectContext* context = [[CSCoreDataHelper sharedInstance] managedObjectContext];
+    NSFetchRequest* fr = [[NSFetchRequest alloc] initWithEntityName:@"EntityNewsInfo"];
+    fr.returnsDistinctResults = YES;
+    fr.resultType = NSManagedObjectResultType;
+    NSError* error = nil;
+    NSArray* results = [context executeFetchRequest:fr error:&error];
+    NSMutableArray* willDeleteObjs = [NSMutableArray arrayWithArray:results];
+    
+    for (NSDictionary* jsonObject in jsonObjectList) {
+        NSNumber* newsId = [jsonObject objectForKey:@"news_id"];
+        if (newsId.integerValue > 0) {
+            EntityNewsInfo* entity = [self queryEntityWithNewsId:newsId];
+            BOOL updated = NO;
+            if (entity == nil) {
+                entity = [NSEntityDescription insertNewObjectForEntityForName:@"EntityNewsInfo" inManagedObjectContext:context];
+                entity.newsId = newsId;
+                updated = YES;
+            }
+            else {
+                NSPredicate* pre = [NSPredicate predicateWithFormat:@"newsId == %@", newsId];
+                NSArray* arr1 = [willDeleteObjs filteredArrayUsingPredicate:pre];
+                [willDeleteObjs removeObjectsInArray:arr1];
+                
+                NSNumber* timestamp = [jsonObject objectForKey:@"timestamp"];
+                if (![timestamp isEqualToNumber:entity.timestamp]) {
+                    updated = YES;
+                }
+            }
+            
+            if (updated) {
+                entity.classId = [jsonObject objectForKey:@"class_id"];
+                entity.content = [jsonObject objectForKey:@"content"];
+                entity.image = [jsonObject objectForKey:@"image"];
+                entity.published = [jsonObject objectForKey:@"published"];
+                entity.publisherId = [jsonObject objectForKey:@"publisher_id"];
+                entity.title = [jsonObject objectForKey:@"title"];
+                entity.schoolId = [jsonObject objectForKey:@"school_id"];
+                entity.noticeType = [jsonObject objectForKey:@"notice_type"];
+                entity.timestamp = [jsonObject objectForKey:@"timestamp"];
+                entity.read = @(0);
+                entity.feedbackRequired = [jsonObject objectForKey:@"feedback_required"];
+                entity.tags = [[jsonObject objectForKey:@"tags"] componentsJoinedByString:@","];
+                [returnObjectList addObject:entity];
+            }
+        }
+    }
+    
+    for (NSManagedObject* obj in willDeleteObjs) {
+        [context deleteObject:obj];
+    }
+    
+    [context save:&error];
+    return returnObjectList;
+}
+
 + (NSArray*)updateEntities:(id)jsonObjectList {
     NSMutableArray* returnObjectList = [NSMutableArray array];
     

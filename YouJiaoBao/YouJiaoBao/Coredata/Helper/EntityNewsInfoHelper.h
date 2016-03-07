@@ -15,6 +15,8 @@
 
 + (NSArray*)updateEntities:(id)jsonObjectList;
 
++ (NSArray*)reloadEntities:(id)jsonObjectList;
+
 + (void)markAsRead:(EntityNewsInfo*)entity;
 
 + (void)deleteEntity:(EntityNewsInfo*)entity;

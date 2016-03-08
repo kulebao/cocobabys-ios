@@ -248,6 +248,14 @@ typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSErr
                                                 success:(SuccessResponseHandler)success
                                                 failure:(FailureResponseHandler)failure;
 
+- (AFHTTPRequestOperation*)reqGetHistoryList:(NSString*)employeeId
+                              inKindergarten:(NSInteger)kindergarten
+                                        from:(NSNumber*)from
+                                          to:(NSNumber*)to
+                                        most:(NSNumber*)most
+                                     success:(SuccessResponseHandler)success
+                                     failure:(FailureResponseHandler)failure;
+
 
 
 @end

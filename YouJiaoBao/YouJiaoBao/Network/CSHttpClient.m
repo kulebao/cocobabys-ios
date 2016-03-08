@@ -1003,4 +1003,37 @@
                         failure:failure];
 }
 
+- (AFHTTPRequestOperation*)reqGetHistoryList:(NSString*)employeeId
+                              inKindergarten:(NSInteger)kindergarten
+                                        from:(NSNumber*)from
+                                          to:(NSNumber*)to
+                                        most:(NSNumber*)most
+                                     success:(SuccessResponseHandler)success
+                                     failure:(FailureResponseHandler)failure {
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    if (from) {
+        [parameters setObject:from forKey:@"from"];
+    }
+    
+    if (to) {
+        [parameters setObject:to forKey:@"to"];
+    }
+    
+    if (most) {
+        [parameters setObject:most forKey:@"most"];
+    }
+    
+    NSString* apiUrl = [NSString stringWithFormat:kGetHistoryListURL,
+                        @(kindergarten),
+                        employeeId];
+    
+    AFHTTPRequestOperation* op =[self.opManager GET:apiUrl
+                                         parameters:parameters
+                                            success:success
+                                            failure:failure];
+    return op;
+    
+    
+}
+
 @end

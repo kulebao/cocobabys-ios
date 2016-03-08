@@ -11,10 +11,10 @@
 #import "CSHttpClient.h"
 #import "CSEngine.h"
 #import "CSAppDelegate.h"
-#import "CSContentEditorViewController.h"
 #import "CSHttpUrls.h"
 #import "CSModuleCell.h"
 #import "CSStudentListPickUpTableViewController.h"
+#import "CSContentEditorViewController.h"
 #import "EntityClassInfo.h"
 #import "EntityRelationshipInfoHelper.h"
 #import "CBIMChatListViewController.h"
@@ -23,13 +23,6 @@
 
 @interface CSMainViewController () <UICollectionViewDataSource, UICollectionViewDelegate> {
     NSArray* _modules;
-    
-    NSMutableArray* _imageUrlList;
-    NSMutableArray* _imageList;
-    NSString* _videoUrl;
-    NSURL* _videoFileUrl;
-    NSString* _textContent;
-    NSArray* _childList;
 }
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UICollectionViewFlowLayout *layoutCollectionView;
@@ -63,7 +56,7 @@
                    @"name": @"宝宝列表"},
                  
                  @{@"icon": [UIImage imageNamed:@"v2-成长经历.png"],
-                   @"segue": @"segue.main.growexp",
+                   @"segue": @"segue.main.growexpmain",
                    @"name": @"成长经历"},
                  @{@"icon": [UIImage imageNamed:@"v2-家园互动"],
                    @"segue": @"segue.main.im",
@@ -223,151 +216,7 @@
     }
 }
 
-#pragma mark - CSContentEditorViewControllerDelegate
-- (void)contentEditorViewController:(CSContentEditorViewController*)ctrl
-                     finishEditText:(NSString*)text
-                         withImages:(NSArray*)imageList {
-    _textContent = [text trim];
-    _imageUrlList = [NSMutableArray array];
-    _imageList = [NSMutableArray arrayWithArray:imageList];
-    _videoFileUrl = nil;
-    _videoUrl = nil;
-    
-    [self performSegueWithIdentifier:@"segue.main.studentpickup" sender:nil];
-}
 
-- (void)contentEditorViewController:(CSContentEditorViewController*)ctrl
-                     finishEditText:(NSString*)text
-                          withVideo:(NSURL*)videoLocalUrl {
-    _textContent = [text trim];
-    _imageUrlList = [NSMutableArray array];
-    _imageList = [NSMutableArray array];
-    _videoFileUrl = videoLocalUrl;
-    _videoUrl = nil;
-    
-    [self performSegueWithIdentifier:@"segue.main.studentpickup" sender:nil];
-}
-
-- (void)doUploadVideo {
-    CSHttpClient* http = [CSHttpClient sharedInstance];
-    CSEngine* engine = [CSEngine sharedInstance];
-    
-    NSData* videoData = [NSData dataWithContentsOfURL:_videoFileUrl];
-    
-    NSString* videoFileName = [NSString stringWithFormat:@"history_video/%@/topic_%@/%@.mp4",
-                               engine.loginInfo.schoolId,
-                               engine.loginInfo.o_id,
-                               @((long long)[[NSDate date] timeIntervalSince1970]*1000)];
-    
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
-        _videoUrl = [NSString stringWithFormat:@"%@/%@", kQiniuDownloadServerHost, videoFileName];
-        [self doSendHistory];
-    };
-    
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
-        CSLog(@"failure:%@", error);
-        [gApp alert:[error localizedDescription]];
-    };
-    
-    [gApp waitingAlert:@"上传视频中"];
-    [http opUploadToQiniu:videoData
-                  withKey:videoFileName
-                 withMime:@""
-                  success:sucessHandler
-                  failure:failureHandler];
-}
-
-- (void)doUploadImage {
-    CSHttpClient* http = [CSHttpClient sharedInstance];
-    CSEngine* engine = [CSEngine sharedInstance];
-    
-    UIImage* img = [_imageList firstObject];
-    if (img) {
-        NSData* imgData = UIImageJPEGRepresentation(img, 0.8);
-        NSString* imgFileName = [NSString stringWithFormat:@"history_img/%@/topic_%@/%@.jpg",
-                                 engine.loginInfo.schoolId,
-                                 engine.loginInfo.o_id,
-                                 @((long long)[[NSDate date] timeIntervalSince1970]*1000)];
-        
-        SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
-            NSString* imgUrl = [NSString stringWithFormat:@"%@/%@", kQiniuDownloadServerHost, imgFileName];
-            CSLog(@"Uploaded:%@", imgUrl);
-            [_imageUrlList addObject:imgUrl];
-            [_imageList removeObjectAtIndex:0];
-            
-            [self performSelectorInBackground:@selector(doUploadImage) withObject:nil];
-        };
-        
-        FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
-            CSLog(@"failure:%@", error);
-            [gApp alert:[error localizedDescription]];
-        };
-        
-        [gApp waitingAlert:@"上传图片中"];
-        
-        [http opUploadToQiniu:imgData
-                      withKey:imgFileName
-                     withMime:@"image/jpeg"
-                      success:sucessHandler
-                      failure:failureHandler];
-    }
-    else {
-        [self doSendHistory];
-    }
-}
-
-- (void)doSendHistory {
-    CSHttpClient* http = [CSHttpClient sharedInstance];
-    CSEngine* engine = [CSEngine sharedInstance];
-    
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
-        [gApp alert:@"提交成功"];
-        [self.navigationController popToViewController:self animated:YES];
-    };
-    
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
-        CSLog(@"failure:%@", error);
-        [gApp alert:[error localizedDescription]];
-    };
-    
-    NSMutableArray* childIdList = [NSMutableArray array];
-    for (EntityChildInfo* childInfo in _childList) {
-        [childIdList addObject:childInfo.childId];
-    }
-    
-    if (childIdList.count > 0) {
-        [gApp waitingAlert:@"提交数据中"];
-        [http opPostHistoryOfKindergarten:engine.loginInfo.schoolId.integerValue
-                             withSenderId:engine.loginInfo.o_id
-                          withChildIdList:childIdList
-                              withContent:_textContent
-                         withImageUrlList:_imageUrlList
-                             withVideoUrl:_videoUrl
-                                  success:sucessHandler
-                                  failure:failureHandler];
-    }
-    else {
-        [gApp alert:@"请选择发布对象"];
-    }
-}
-
-#pragma mark - CSStudentListPickUpTableViewControllerDelegate
-- (void)studentListPickUpTableViewController:(CSStudentListPickUpTableViewController*)ctrl
-                                   didPickUp:(NSArray*)childList {
-    _childList = childList;
-    if (_childList.count == 0) {
-        [gApp alert:@"必须选择至少一个小孩"];
-    }
-    else if (_videoFileUrl) {
-        [self doUploadVideo];
-    }
-    else if (_imageList.count > 0) {
-        [self doUploadImage];
-    }
-    else {
-        [self doSendHistory];
-    }
-}
 
 - (IBAction)onBtnSettingsClicked:(id)sender {
     [self performSegueWithIdentifier:@"segue.main.setting" sender:nil];

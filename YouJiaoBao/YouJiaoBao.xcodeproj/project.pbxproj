@@ -369,6 +369,22 @@
 		22A09EA91C5109D100D39C46 /* appicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 22A09EA81C5109D100D39C46 /* appicon@2x.png */; };
 		22BC1E8F1BFE26A900DF6834 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 09A3E1011BC79D0A00076198 /* libstdc++.tbd */; };
 		22C64A0C1C4B92770008529B /* v2-im-group@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 22C64A0B1C4B92770008529B /* v2-im-group@2x.png */; };
+		22E146C11C8DAA1300528FA6 /* CSKuleHistoryListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E146C01C8DAA1300528FA6 /* CSKuleHistoryListTableViewController.m */; };
+		22E146C71C8DAA3A00528FA6 /* CSKuleHistoryItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E146C41C8DAA3A00528FA6 /* CSKuleHistoryItemTableViewCell.m */; };
+		22E146C81C8DAA3A00528FA6 /* CSKuleHistoryVideoItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E146C61C8DAA3A00528FA6 /* CSKuleHistoryVideoItemTableViewCell.m */; };
+		22E146E21C8DABF700528FA6 /* EntityHistoryInfo+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E146DD1C8DABF700528FA6 /* EntityHistoryInfo+CoreDataProperties.m */; };
+		22E146E31C8DABF700528FA6 /* EntityMediaInfo+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E146DF1C8DABF700528FA6 /* EntityMediaInfo+CoreDataProperties.m */; };
+		22E146E41C8DABF700528FA6 /* EntitySenderInfo+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E146E11C8DABF700528FA6 /* EntitySenderInfo+CoreDataProperties.m */; };
+		22E146EB1C8DAC2D00528FA6 /* EntityMediaInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E146E61C8DAC2D00528FA6 /* EntityMediaInfo.m */; };
+		22E146EC1C8DAC2D00528FA6 /* EntitySenderInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E146E81C8DAC2D00528FA6 /* EntitySenderInfo.m */; };
+		22E146ED1C8DAC2D00528FA6 /* EntityHistoryInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E146EA1C8DAC2D00528FA6 /* EntityHistoryInfo.m */; };
+		22E146F11C8DAC5C00528FA6 /* EGOCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E146F01C8DAC5C00528FA6 /* EGOCache.m */; };
+		22E146FE1C8DAEC300528FA6 /* EntityHistoryInfoHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E146F91C8DAEC300528FA6 /* EntityHistoryInfoHelper.m */; };
+		22E146FF1C8DAEC300528FA6 /* EntityMediaInfoHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E146FB1C8DAEC300528FA6 /* EntityMediaInfoHelper.m */; };
+		22E147001C8DAEC300528FA6 /* EntitySenderInfoHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E146FD1C8DAEC300528FA6 /* EntitySenderInfoHelper.m */; };
+		22E147071C8E00A600528FA6 /* CBHistoryInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E147061C8E00A600528FA6 /* CBHistoryInfo.m */; };
+		22E1470A1C8E011A00528FA6 /* CBSenderInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E147091C8E011A00528FA6 /* CBSenderInfo.m */; };
+		22E1470D1C8E014700528FA6 /* CBMediaInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E1470C1C8E014700528FA6 /* CBMediaInfo.m */; };
 		22F682FA1C566F79005C6040 /* CBIMBanListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F682F91C566F79005C6040 /* CBIMBanListViewController.m */; };
 		22F682FE1C566FD2005C6040 /* CBIMBanTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F682FD1C566FD2005C6040 /* CBIMBanTableViewCell.m */; };
 		22F683041C567053005C6040 /* CBIMBanInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F683031C567053005C6040 /* CBIMBanInfo.m */; };
@@ -918,6 +934,39 @@
 		229033E41C4B404A008A94DF /* CSKuleCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSKuleCommon.h; sourceTree = "<group>"; };
 		22A09EA81C5109D100D39C46 /* appicon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "appicon@2x.png"; sourceTree = "<group>"; };
 		22C64A0B1C4B92770008529B /* v2-im-group@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-im-group@2x.png"; sourceTree = "<group>"; };
+		22E146BF1C8DAA1300528FA6 /* CSKuleHistoryListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleHistoryListTableViewController.h; sourceTree = "<group>"; };
+		22E146C01C8DAA1300528FA6 /* CSKuleHistoryListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleHistoryListTableViewController.m; sourceTree = "<group>"; };
+		22E146C31C8DAA3A00528FA6 /* CSKuleHistoryItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleHistoryItemTableViewCell.h; sourceTree = "<group>"; };
+		22E146C41C8DAA3A00528FA6 /* CSKuleHistoryItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleHistoryItemTableViewCell.m; sourceTree = "<group>"; };
+		22E146C51C8DAA3A00528FA6 /* CSKuleHistoryVideoItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleHistoryVideoItemTableViewCell.h; sourceTree = "<group>"; };
+		22E146C61C8DAA3A00528FA6 /* CSKuleHistoryVideoItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleHistoryVideoItemTableViewCell.m; sourceTree = "<group>"; };
+		22E146C91C8DAB0100528FA6 /* v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = v2.xcdatamodel; sourceTree = "<group>"; };
+		22E146DC1C8DABF700528FA6 /* EntityHistoryInfo+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EntityHistoryInfo+CoreDataProperties.h"; sourceTree = "<group>"; };
+		22E146DD1C8DABF700528FA6 /* EntityHistoryInfo+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EntityHistoryInfo+CoreDataProperties.m"; sourceTree = "<group>"; };
+		22E146DE1C8DABF700528FA6 /* EntityMediaInfo+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EntityMediaInfo+CoreDataProperties.h"; sourceTree = "<group>"; };
+		22E146DF1C8DABF700528FA6 /* EntityMediaInfo+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EntityMediaInfo+CoreDataProperties.m"; sourceTree = "<group>"; };
+		22E146E01C8DABF700528FA6 /* EntitySenderInfo+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EntitySenderInfo+CoreDataProperties.h"; sourceTree = "<group>"; };
+		22E146E11C8DABF700528FA6 /* EntitySenderInfo+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EntitySenderInfo+CoreDataProperties.m"; sourceTree = "<group>"; };
+		22E146E51C8DAC2D00528FA6 /* EntityMediaInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityMediaInfo.h; sourceTree = "<group>"; };
+		22E146E61C8DAC2D00528FA6 /* EntityMediaInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityMediaInfo.m; sourceTree = "<group>"; };
+		22E146E71C8DAC2D00528FA6 /* EntitySenderInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntitySenderInfo.h; sourceTree = "<group>"; };
+		22E146E81C8DAC2D00528FA6 /* EntitySenderInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntitySenderInfo.m; sourceTree = "<group>"; };
+		22E146E91C8DAC2D00528FA6 /* EntityHistoryInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityHistoryInfo.h; sourceTree = "<group>"; };
+		22E146EA1C8DAC2D00528FA6 /* EntityHistoryInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityHistoryInfo.m; sourceTree = "<group>"; };
+		22E146EF1C8DAC5C00528FA6 /* EGOCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOCache.h; sourceTree = "<group>"; };
+		22E146F01C8DAC5C00528FA6 /* EGOCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOCache.m; sourceTree = "<group>"; };
+		22E146F81C8DAEC300528FA6 /* EntityHistoryInfoHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityHistoryInfoHelper.h; sourceTree = "<group>"; };
+		22E146F91C8DAEC300528FA6 /* EntityHistoryInfoHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityHistoryInfoHelper.m; sourceTree = "<group>"; };
+		22E146FA1C8DAEC300528FA6 /* EntityMediaInfoHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityMediaInfoHelper.h; sourceTree = "<group>"; };
+		22E146FB1C8DAEC300528FA6 /* EntityMediaInfoHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityMediaInfoHelper.m; sourceTree = "<group>"; };
+		22E146FC1C8DAEC300528FA6 /* EntitySenderInfoHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntitySenderInfoHelper.h; sourceTree = "<group>"; };
+		22E146FD1C8DAEC300528FA6 /* EntitySenderInfoHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntitySenderInfoHelper.m; sourceTree = "<group>"; };
+		22E147051C8E00A600528FA6 /* CBHistoryInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBHistoryInfo.h; sourceTree = "<group>"; };
+		22E147061C8E00A600528FA6 /* CBHistoryInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBHistoryInfo.m; sourceTree = "<group>"; };
+		22E147081C8E011A00528FA6 /* CBSenderInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBSenderInfo.h; sourceTree = "<group>"; };
+		22E147091C8E011A00528FA6 /* CBSenderInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBSenderInfo.m; sourceTree = "<group>"; };
+		22E1470B1C8E014700528FA6 /* CBMediaInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBMediaInfo.h; sourceTree = "<group>"; };
+		22E1470C1C8E014700528FA6 /* CBMediaInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBMediaInfo.m; sourceTree = "<group>"; };
 		22F682F81C566F79005C6040 /* CBIMBanListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBIMBanListViewController.h; sourceTree = "<group>"; };
 		22F682F91C566F79005C6040 /* CBIMBanListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBIMBanListViewController.m; sourceTree = "<group>"; };
 		22F682FC1C566FD2005C6040 /* CBIMBanTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBIMBanTableViewCell.h; sourceTree = "<group>"; };
@@ -1108,6 +1157,10 @@
 		0907CE4D198FD2F500B13202 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				22E146C31C8DAA3A00528FA6 /* CSKuleHistoryItemTableViewCell.h */,
+				22E146C41C8DAA3A00528FA6 /* CSKuleHistoryItemTableViewCell.m */,
+				22E146C51C8DAA3A00528FA6 /* CSKuleHistoryVideoItemTableViewCell.h */,
+				22E146C61C8DAA3A00528FA6 /* CSKuleHistoryVideoItemTableViewCell.m */,
 				0938DC5C1AFF1F0800883DD7 /* CSKuleNewsTableViewCell.h */,
 				0938DC5D1AFF1F0800883DD7 /* CSKuleNewsTableViewCell.m */,
 				0938DC5E1AFF1F0800883DD7 /* CSKuleNewsTableViewCell.xib */,
@@ -1390,6 +1443,7 @@
 		095F137F1967C309008CF3BE /* YouJiaoBao */ = {
 			isa = PBXGroup;
 			children = (
+				22E147041C8E009300528FA6 /* JsonObjects */,
 				229033BA1C4B3FB0008A94DF /* IM */,
 				095D858319C5DD7D00F2F926 /* View */,
 				0907CE4D198FD2F500B13202 /* Cell */,
@@ -1444,6 +1498,7 @@
 		095F13B91967CC9D008CF3BE /* Venders */ = {
 			isa = PBXGroup;
 			children = (
+				22E146EE1C8DAC5C00528FA6 /* EGOCache */,
 				224B44101C5100D300982E15 /* KxMenu */,
 				09A3E0F91BC79A3C00076198 /* BaiduMobStat */,
 				0901CDA71ABF2FBB0044838A /* SBVideoCaptureDemo */,
@@ -1678,6 +1733,18 @@
 		09CD665B197BF9FA00CC08F1 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				22E146E51C8DAC2D00528FA6 /* EntityMediaInfo.h */,
+				22E146E61C8DAC2D00528FA6 /* EntityMediaInfo.m */,
+				22E146E71C8DAC2D00528FA6 /* EntitySenderInfo.h */,
+				22E146E81C8DAC2D00528FA6 /* EntitySenderInfo.m */,
+				22E146E91C8DAC2D00528FA6 /* EntityHistoryInfo.h */,
+				22E146EA1C8DAC2D00528FA6 /* EntityHistoryInfo.m */,
+				22E146DC1C8DABF700528FA6 /* EntityHistoryInfo+CoreDataProperties.h */,
+				22E146DD1C8DABF700528FA6 /* EntityHistoryInfo+CoreDataProperties.m */,
+				22E146DE1C8DABF700528FA6 /* EntityMediaInfo+CoreDataProperties.h */,
+				22E146DF1C8DABF700528FA6 /* EntityMediaInfo+CoreDataProperties.m */,
+				22E146E01C8DABF700528FA6 /* EntitySenderInfo+CoreDataProperties.h */,
+				22E146E11C8DABF700528FA6 /* EntitySenderInfo+CoreDataProperties.m */,
 				221BAF8A1C4B85F600593559 /* EntityAssignmentInfo+CoreDataProperties.h */,
 				221BAF8B1C4B85F600593559 /* EntityAssignmentInfo+CoreDataProperties.m */,
 				221BAF8C1C4B85F600593559 /* EntityAssignmentInfo.h */,
@@ -1722,6 +1789,12 @@
 		09CD665C197BF9FA00CC08F1 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				22E146F81C8DAEC300528FA6 /* EntityHistoryInfoHelper.h */,
+				22E146F91C8DAEC300528FA6 /* EntityHistoryInfoHelper.m */,
+				22E146FA1C8DAEC300528FA6 /* EntityMediaInfoHelper.h */,
+				22E146FB1C8DAEC300528FA6 /* EntityMediaInfoHelper.m */,
+				22E146FC1C8DAEC300528FA6 /* EntitySenderInfoHelper.h */,
+				22E146FD1C8DAEC300528FA6 /* EntitySenderInfoHelper.m */,
 				094C2A011A068EAA009BDC4E /* EntityAssessInfoHelper.h */,
 				094C2A021A068EAA009BDC4E /* EntityAssessInfoHelper.m */,
 				09F74BFF1997ACD8001555D0 /* EntityAssignmentInfoHelper.h */,
@@ -1760,6 +1833,8 @@
 		09CD666A197C0C0400CC08F1 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				22E146BF1C8DAA1300528FA6 /* CSKuleHistoryListTableViewController.h */,
+				22E146C01C8DAA1300528FA6 /* CSKuleHistoryListTableViewController.m */,
 				09F74C081997B214001555D0 /* CSAssignmentInfoDetailViewController.h */,
 				09F74C091997B214001555D0 /* CSAssignmentInfoDetailViewController.m */,
 				090C63971993A0D400398B40 /* CSChildProfileHeaderViewController.h */,
@@ -1850,6 +1925,28 @@
 				22C64A0B1C4B92770008529B /* v2-im-group@2x.png */,
 			);
 			path = im;
+			sourceTree = "<group>";
+		};
+		22E146EE1C8DAC5C00528FA6 /* EGOCache */ = {
+			isa = PBXGroup;
+			children = (
+				22E146EF1C8DAC5C00528FA6 /* EGOCache.h */,
+				22E146F01C8DAC5C00528FA6 /* EGOCache.m */,
+			);
+			path = EGOCache;
+			sourceTree = "<group>";
+		};
+		22E147041C8E009300528FA6 /* JsonObjects */ = {
+			isa = PBXGroup;
+			children = (
+				22E147051C8E00A600528FA6 /* CBHistoryInfo.h */,
+				22E147061C8E00A600528FA6 /* CBHistoryInfo.m */,
+				22E147081C8E011A00528FA6 /* CBSenderInfo.h */,
+				22E147091C8E011A00528FA6 /* CBSenderInfo.m */,
+				22E1470B1C8E014700528FA6 /* CBMediaInfo.h */,
+				22E1470C1C8E014700528FA6 /* CBMediaInfo.m */,
+			);
+			path = JsonObjects;
 			sourceTree = "<group>";
 		};
 		22F682FF1C567005005C6040 /* JsonObjects */ = {
@@ -1968,9 +2065,9 @@
 		095F136C1967C309008CF3BE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				CLASSPREFIX = CS;
+				CLASSPREFIX = CB;
 				LastUpgradeCheck = 0510;
-				ORGANIZATIONNAME = Codingsoft;
+				ORGANIZATIONNAME = Cocobabys;
 				TargetAttributes = {
 					095F13731967C309008CF3BE = {
 						DevelopmentTeam = J7M2ZSPTSZ;
@@ -2293,6 +2390,7 @@
 				229033D91C4B3FB0008A94DF /* CBIMDataSource.m in Sources */,
 				09A3C60719C479C7001AFE8C /* MJPhotoProgressView.m in Sources */,
 				09A3C60319C479C7001AFE8C /* MJPhoto.m in Sources */,
+				22E146C81C8DAA3A00528FA6 /* CSKuleHistoryVideoItemTableViewCell.m in Sources */,
 				221BAFC71C4B85F600593559 /* EntityChildInfo.m in Sources */,
 				090C639619939D5500398B40 /* CSChildProfileViewController.m in Sources */,
 				0901CDFC1ABF2FBB0044838A /* DeleteButton.m in Sources */,
@@ -2300,9 +2398,11 @@
 				221BAFB81C4B85F600593559 /* EntityClassInfo+CoreDataProperties.m in Sources */,
 				095D857719C5CD5F00F2F926 /* AHAlertView.m in Sources */,
 				221BAFC21C4B85F600593559 /* EntityNewsInfo+CoreDataProperties.m in Sources */,
+				22E147071C8E00A600528FA6 /* CBHistoryInfo.m in Sources */,
 				0982A7AE19C8265E0036DEC1 /* NSDate+CSKit.m in Sources */,
 				0936DD5D1A0BD3DC006B7E89 /* CSStudentListPickUpTableViewController.m in Sources */,
 				09A3C5EF19C47986001AFE8C /* UIView+GMGridViewAdditions.m in Sources */,
+				22E1470A1C8E011A00528FA6 /* CBSenderInfo.m in Sources */,
 				095D858C19C5ECB700F2F926 /* CSPopupController.m in Sources */,
 				0914BC1B1A431E6F00779F2E /* ELCOverlayImageView.m in Sources */,
 				221BAFC91C4B85F600593559 /* EntityAssessInfo.m in Sources */,
@@ -2341,6 +2441,7 @@
 				221BAFC51C4B85F600593559 /* EntityParentInfo.m in Sources */,
 				229033D81C4B3FB0008A94DF /* CBIMChatViewController.m in Sources */,
 				098E4083198B7ABC00CB4F0B /* CSGrowExpViewController.m in Sources */,
+				22E146EB1C8DAC2D00528FA6 /* EntityMediaInfo.m in Sources */,
 				09CD6670197C0C2600CC08F1 /* CSRootViewController.m in Sources */,
 				0914BC151A431E6F00779F2E /* ELCAlbumPickerController.m in Sources */,
 				09B431C01994D2BF00FF4071 /* CSChildRelationshipItemTableViewCell.m in Sources */,
@@ -2354,6 +2455,7 @@
 				09CD6662197BFA6600CC08F1 /* EntityLoginInfoHelper.m in Sources */,
 				0914BC171A431E6F00779F2E /* ELCAssetCell.m in Sources */,
 				098E3E9E198B31AC00CB4F0B /* CSCoreDataHelper.m in Sources */,
+				22E146E41C8DABF700528FA6 /* EntitySenderInfo+CoreDataProperties.m in Sources */,
 				0901CE3C1ABF2FBB0044838A /* SBCaptureToolKit.m in Sources */,
 				224B44151C5100D300982E15 /* README.md in Sources */,
 				09A3C5EB19C47986001AFE8C /* GMGridView.m in Sources */,
@@ -2369,14 +2471,17 @@
 				09A3E1121BC8328B00076198 /* CSNewsReaderTableViewCell.m in Sources */,
 				098E4065198B799000CB4F0B /* MessageInterceptor.m in Sources */,
 				09A3C60A19C479C7001AFE8C /* SDWebImageManager+MJ.m in Sources */,
+				22E146FE1C8DAEC300528FA6 /* EntityHistoryInfoHelper.m in Sources */,
 				095F138A1967C30A008CF3BE /* CSAppDelegate.m in Sources */,
 				091EE51919E850890050092E /* NSURL+CSKit.m in Sources */,
 				09FE720719965C66002E3ED4 /* CSNewsInfoDetailViewController.m in Sources */,
 				09F74C011997ACD8001555D0 /* EntityAssignmentInfoHelper.m in Sources */,
 				0914BC191A431E6F00779F2E /* ELCConsole.m in Sources */,
+				22E146FF1C8DAEC300528FA6 /* EntityMediaInfoHelper.m in Sources */,
 				0982A7A019C6ED1C0036DEC1 /* EDStarRating.m in Sources */,
 				221BAFC31C4B85F600593559 /* EntityNewsInfo.m in Sources */,
 				0917610419C093CA006FE2FB /* CSKuleFeedbackViewController.m in Sources */,
+				22E146F11C8DAC5C00528FA6 /* EGOCache.m in Sources */,
 				094C29F81A067D28009BDC4E /* CSTextFieldDelegate.m in Sources */,
 				22F682FA1C566F79005C6040 /* CBIMBanListViewController.m in Sources */,
 				221BAFB71C4B85F600593559 /* EntityAssignmentInfo.m in Sources */,
@@ -2391,18 +2496,23 @@
 				091EE50219E83F820050092E /* NSString+XHMD5.m in Sources */,
 				09A3C5EE19C47986001AFE8C /* UIGestureRecognizer+GMGridViewAdditions.m in Sources */,
 				0971C0C91A0A7B4000A6F644 /* CSForgotPasswordStep1ViewController.m in Sources */,
+				22E146E31C8DABF700528FA6 /* EntityMediaInfo+CoreDataProperties.m in Sources */,
 				0907CE4C198FCC8700B13202 /* EntityChildInfoHelper.m in Sources */,
 				09B431C4199519DC00FF4071 /* ModelAccount.m in Sources */,
 				091EE50319E83F820050092E /* UIImage+Utility.m in Sources */,
 				09A3C60819C479C7001AFE8C /* MJPhotoToolbar.m in Sources */,
 				09A3C5ED19C47986001AFE8C /* GMGridViewLayoutStrategies.m in Sources */,
+				22E147001C8DAEC300528FA6 /* EntitySenderInfoHelper.m in Sources */,
 				0971C0CD1A0A80DC00A6F644 /* CSForgotPasswordStep2ViewController.m in Sources */,
 				09A3E10F1BC8233C00076198 /* CSNewsInfoReaderTableViewController.m in Sources */,
+				22E146C11C8DAA1300528FA6 /* CSKuleHistoryListTableViewController.m in Sources */,
+				22E1470D1C8E014700528FA6 /* CBMediaInfo.m in Sources */,
 				221BAFC41C4B85F600593559 /* EntityParentInfo+CoreDataProperties.m in Sources */,
 				221BAFBB1C4B85F600593559 /* EntityDailylog.m in Sources */,
 				090C63991993A0D400398B40 /* CSChildProfileHeaderViewController.m in Sources */,
 				098E4089198B7B1F00CB4F0B /* CSHomeWorkTableViewController.m in Sources */,
 				098E408C198B7B2C00CB4F0B /* CSNoticeTableViewController.m in Sources */,
+				22E146EC1C8DAC2D00528FA6 /* EntitySenderInfo.m in Sources */,
 				095D859019C5ED1900F2F926 /* CSClassPickerView.m in Sources */,
 				0901CE3D1ABF2FBB0044838A /* SBVideoRecorder.m in Sources */,
 				09CD666F197C0C2600CC08F1 /* CSLoginViewController.m in Sources */,
@@ -2418,13 +2528,16 @@
 				095F13861967C30A008CF3BE /* main.m in Sources */,
 				09B431BA1994C1BF00FF4071 /* EntityRelationshipInfoHelper.m in Sources */,
 				095F13901967C30B008CF3BE /* YouJiaoBao.xcdatamodeld in Sources */,
+				22E146E21C8DABF700528FA6 /* EntityHistoryInfo+CoreDataProperties.m in Sources */,
 				221BAFC61C4B85F600593559 /* EntityChildInfo+CoreDataProperties.m in Sources */,
 				098E4034198B6A0500CB4F0B /* CSSettingsViewController.m in Sources */,
 				0914BBFA1A430C0200779F2E /* UIWebView+CSKit.m in Sources */,
+				22E146C71C8DAA3A00528FA6 /* CSKuleHistoryItemTableViewCell.m in Sources */,
 				091EE51019E83FE50050092E /* BDMultiDownloader.m in Sources */,
 				221BAFB91C4B85F600593559 /* EntityClassInfo.m in Sources */,
 				091EE50519E83F820050092E /* XHCacheManager.m in Sources */,
 				0901CDFD1ABF2FBB0044838A /* ProgressBar.m in Sources */,
+				22E146ED1C8DAC2D00528FA6 /* EntityHistoryInfo.m in Sources */,
 				22F682FE1C566FD2005C6040 /* CBIMBanTableViewCell.m in Sources */,
 				091EE50619E83F820050092E /* XHFileAttribute.m in Sources */,
 				0917610719C093E5006FE2FB /* CSKuleChangePasswordViewController.m in Sources */,
@@ -2692,6 +2805,7 @@
 		095F138E1967C30B008CF3BE /* YouJiaoBao.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				22E146C91C8DAB0100528FA6 /* v2.xcdatamodel */,
 				095F138F1967C30B008CF3BE /* YouJiaoBao.xcdatamodel */,
 			);
 			currentVersion = 095F138F1967C30B008CF3BE /* YouJiaoBao.xcdatamodel */;

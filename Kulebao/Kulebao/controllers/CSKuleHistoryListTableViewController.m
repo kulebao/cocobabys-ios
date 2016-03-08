@@ -13,7 +13,6 @@
 #import "EntityHistoryInfoHelper.h"
 #import "EntitySenderInfo.h"
 #import "EntityHistoryInfoHelper.h"
-#import "CSKuleVideoPlayerViewController.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import <objc/runtime.h>
 
@@ -241,10 +240,6 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    if ([segue.identifier isEqualToString:@"segue.video.player"]) {
-        CSKuleVideoPlayerViewController* ctrl = segue.destinationViewController;
-        ctrl.videoURL = sender;
-    }
 }
 
 - (void)onBtnRefreshClicked:(id)sender {
@@ -355,15 +350,8 @@
 
 - (void)playFullScreen:(NSURL*)videoURL {
     if (videoURL) {
-        //[self performSegueWithIdentifier:@"segue.video.player" sender:videoURL];
-        //PlayViewController* ctrl = [[PlayViewController alloc] initWithNibName:@"PlayViewController" bundle:nil withVideoFileURL:videoURL];
-        
         MPMoviePlayerViewController* ctrl = [[MPMoviePlayerViewController alloc] initWithContentURL:videoURL];
-        
-//        [[NSNotificationCenter defaultCenter] removeObserver:ctrl
-//                                                        name:MPMoviePlayerPlaybackDidFinishNotification
-//                                                      object:nil];
-        
+
         UIButton* btn = [UIButton buttonWithType:UIButtonTypeCustom];
         [btn setTitle:@"保存" forState:UIControlStateNormal];
         [btn setBackgroundImage:[UIImage imageNamed:@"v2-btn_blue.png"] forState:UIControlStateNormal];
@@ -389,7 +377,6 @@
     BOOL ok = UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(videoURL.path);
     if (videoURL && ok) {
         [gApp waitingAlert:@"保存中，请稍候..."];
-        //[ctrl.moviePlayer pause];
         UISaveVideoAtPathToSavedPhotosAlbum(videoURL.path,
                                             self,
                                             @selector(video:didFinishSavingWithError:contextInfo:),

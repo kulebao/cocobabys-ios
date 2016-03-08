@@ -346,7 +346,6 @@
 		09F74C8E1997C4F3001555D0 /* gallery.png in Resources */ = {isa = PBXBuildFile; fileRef = 09F74C321997C4F3001555D0 /* gallery.png */; };
 		09F74CAD1997C4F3001555D0 /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 09F74C511997C4F3001555D0 /* phone.png */; };
 		09F74CC51997CB1E001555D0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09F74CC41997CB1E001555D0 /* AVFoundation.framework */; };
-		09FA71E11ABB32B5009D5BBB /* CSKuleVideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FA71E01ABB32B5009D5BBB /* CSKuleVideoPlayerViewController.m */; };
 		09FE1ED619B5D53E0073D9D4 /* v3_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 09FE1EC619B5D53E0073D9D4 /* v3_2.png */; };
 		09FE1ED719B5D53E0073D9D4 /* v3_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09FE1EC719B5D53E0073D9D4 /* v3_2@2x.png */; };
 		09FE1EDC19B5D53F0073D9D4 /* v3_5.png in Resources */ = {isa = PBXBuildFile; fileRef = 09FE1ECC19B5D53E0073D9D4 /* v3_5.png */; };
@@ -906,8 +905,6 @@
 		09F74C321997C4F3001555D0 /* gallery.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gallery.png; sourceTree = "<group>"; };
 		09F74C511997C4F3001555D0 /* phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phone.png; sourceTree = "<group>"; };
 		09F74CC41997CB1E001555D0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		09FA71DF1ABB32B5009D5BBB /* CSKuleVideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSKuleVideoPlayerViewController.h; path = views/CSKuleVideoPlayerViewController.h; sourceTree = "<group>"; };
-		09FA71E01ABB32B5009D5BBB /* CSKuleVideoPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSKuleVideoPlayerViewController.m; path = views/CSKuleVideoPlayerViewController.m; sourceTree = "<group>"; };
 		09FE1EC619B5D53E0073D9D4 /* v3_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = v3_2.png; sourceTree = "<group>"; };
 		09FE1EC719B5D53E0073D9D4 /* v3_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v3_2@2x.png"; sourceTree = "<group>"; };
 		09FE1ECC19B5D53E0073D9D4 /* v3_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = v3_5.png; sourceTree = "<group>"; };
@@ -1354,8 +1351,6 @@
 				0915662118ED92810073AE22 /* CSKuleVerifyMobileViewController.m */,
 				09C3AC22199DAC8600A6251C /* CSContentEditorViewController.h */,
 				09C3AC23199DAC8600A6251C /* CSContentEditorViewController.m */,
-				09FA71DF1ABB32B5009D5BBB /* CSKuleVideoPlayerViewController.h */,
-				09FA71E01ABB32B5009D5BBB /* CSKuleVideoPlayerViewController.m */,
 				09FE6AEB18C5722500A840BE /* views */,
 				093FB8F11A83BD8500A589A8 /* CSKuleDevSettingsViewController.h */,
 				093FB8F21A83BD8500A589A8 /* CSKuleDevSettingsViewController.m */,
@@ -2428,7 +2423,6 @@
 				0942B15F1AE3E559008D3BDA /* ELCAssetCell.m in Sources */,
 				091AE83118D820C800EBC927 /* VRGCalendarView.m in Sources */,
 				090FC173199CAB5600C3A31A /* CSKuleHistoryItemTableViewCell.m in Sources */,
-				09FA71E11ABB32B5009D5BBB /* CSKuleVideoPlayerViewController.m in Sources */,
 				091AE81E18D7DC6A00EBC927 /* CSKuleSchoolInfo.m in Sources */,
 				096DC1CB1BA341A000661B61 /* EGOCache.m in Sources */,
 				092294E41AB9A7E600E40C84 /* CSVideoView.m in Sources */,

@@ -238,7 +238,6 @@
 		09CD666F197C0C2600CC08F1 /* CSLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09CD666C197C0C2600CC08F1 /* CSLoginViewController.m */; };
 		09CD6670197C0C2600CC08F1 /* CSRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09CD666E197C0C2600CC08F1 /* CSRootViewController.m */; };
 		09CD667E197C153C00CC08F1 /* CSStudentListMainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09CD667D197C153C00CC08F1 /* CSStudentListMainTableViewController.m */; };
-		09DC40DB1BD55DAC001FBB69 /* CSNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09DC40DA1BD55DAC001FBB69 /* CSNavigationController.m */; };
 		09DF51D91A050FBF004D6A4E /* ModelAssessment.m in Sources */ = {isa = PBXBuildFile; fileRef = 09DF51D81A050FBF004D6A4E /* ModelAssessment.m */; };
 		09F59EB71B557FE200835163 /* v2-bg_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 09F59E451B557FE200835163 /* v2-bg_1.png */; };
 		09F59EB81B557FE200835163 /* v2-bg_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09F59E461B557FE200835163 /* v2-bg_1@2x.png */; };
@@ -762,8 +761,6 @@
 		09CD666E197C0C2600CC08F1 /* CSRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSRootViewController.m; sourceTree = "<group>"; };
 		09CD667C197C153C00CC08F1 /* CSStudentListMainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSStudentListMainTableViewController.h; sourceTree = "<group>"; };
 		09CD667D197C153C00CC08F1 /* CSStudentListMainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSStudentListMainTableViewController.m; sourceTree = "<group>"; };
-		09DC40D91BD55DAC001FBB69 /* CSNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNavigationController.h; sourceTree = "<group>"; };
-		09DC40DA1BD55DAC001FBB69 /* CSNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNavigationController.m; sourceTree = "<group>"; };
 		09DF51D71A050FBF004D6A4E /* ModelAssessment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelAssessment.h; sourceTree = "<group>"; };
 		09DF51D81A050FBF004D6A4E /* ModelAssessment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelAssessment.m; sourceTree = "<group>"; };
 		09F59E451B557FE200835163 /* v2-bg_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-bg_1.png"; sourceTree = "<group>"; };
@@ -1461,8 +1458,6 @@
 				0906A83219757DEE007F25BE /* Network */,
 				095F13881967C30A008CF3BE /* CSAppDelegate.h */,
 				095F13891967C30A008CF3BE /* CSAppDelegate.m */,
-				09DC40D91BD55DAC001FBB69 /* CSNavigationController.h */,
-				09DC40DA1BD55DAC001FBB69 /* CSNavigationController.m */,
 				095F13971967C30C008CF3BE /* Images.xcassets */,
 				095F138B1967C30A008CF3BE /* Main.storyboard */,
 				095F13801967C309008CF3BE /* Supporting Files */,
@@ -2459,7 +2454,6 @@
 				091EE50419E83F820050092E /* UIImageView+XHURLDownload.m in Sources */,
 				091760F319C09070006FE2FB /* CSKuleAboutViewController.m in Sources */,
 				0982A7A419C6EFD20036DEC1 /* CSAssessmentEditorViewController.m in Sources */,
-				09DC40DB1BD55DAC001FBB69 /* CSNavigationController.m in Sources */,
 				229033DF1C4B3FB0008A94DF /* CBTeacherInfo.m in Sources */,
 				095D858219C5D92900F2F926 /* ModelClassData.m in Sources */,
 				09CD6662197BFA6600CC08F1 /* EntityLoginInfoHelper.m in Sources */,

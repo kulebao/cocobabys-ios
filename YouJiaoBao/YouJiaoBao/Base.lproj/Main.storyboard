@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Unv-SB-3EC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="uS1-gQ-hox">
     <dependencies>
         <deployment version="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
@@ -7,28 +7,10 @@
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
-        <scene sceneID="jQf-Dy-DXn">
-            <objects>
-                <navigationController id="Unv-SB-3EC" customClass="CSNavigationController" sceneMemberID="viewController">
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="SYX-UE-ALg">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.14901960784313725" green="0.5607843137254902" blue="0.83529411764705885" alpha="1" colorSpace="calibratedRGB"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="pMD-1c-TKG" kind="relationship" relationship="rootViewController" id="CQL-pg-KH6"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dvC-ke-SDs" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1959" y="353"/>
-        </scene>
-        <!--Root View Controller-->
+        <!--View Controller-->
         <scene sceneID="irH-mv-fFa">
             <objects>
-                <viewController id="pMD-1c-TKG" customClass="CSRootViewController" sceneMemberID="viewController">
+                <viewController id="pMD-1c-TKG" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="DVT-Ho-630"/>
                         <viewControllerLayoutGuide type="bottom" id="NdG-g4-QgJ"/>
@@ -37,39 +19,54 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="Ywi-Gx-0a9">
-                                <rect key="frame" x="150" y="394" width="20" height="20"/>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="Ywi-Gx-0a9">
+                                <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
                                 <color key="color" red="0.96078437569999997" green="0.73725491759999995" blue="0.270588249" alpha="1" colorSpace="deviceRGB"/>
                             </activityIndicatorView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uXm-87-VfK">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="v2-启动界面.png" translatesAutoresizingMaskIntoConstraints="NO" id="uXm-87-VfK">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="NdG-g4-QgJ" firstAttribute="top" secondItem="Ywi-Gx-0a9" secondAttribute="bottom" constant="90" id="5Nq-VH-06P"/>
-                            <constraint firstAttribute="trailing" secondItem="uXm-87-VfK" secondAttribute="trailing" id="6t9-pd-uj5"/>
-                            <constraint firstItem="NdG-g4-QgJ" firstAttribute="top" secondItem="uXm-87-VfK" secondAttribute="bottom" id="OXD-IA-ceQ"/>
-                            <constraint firstItem="uXm-87-VfK" firstAttribute="top" secondItem="DVT-Ho-630" secondAttribute="bottom" id="cgR-Zf-Gud"/>
-                            <constraint firstItem="uXm-87-VfK" firstAttribute="leading" secondItem="K0t-aM-bbE" secondAttribute="leading" id="lrF-Fy-3Aw"/>
-                            <constraint firstAttribute="centerX" secondItem="Ywi-Gx-0a9" secondAttribute="centerX" id="v0z-go-QuW"/>
+                            <constraint firstAttribute="trailing" secondItem="uXm-87-VfK" secondAttribute="trailing" id="6a4-6A-nNb"/>
+                            <constraint firstItem="NdG-g4-QgJ" firstAttribute="top" secondItem="uXm-87-VfK" secondAttribute="bottom" id="8Hw-ff-bKi"/>
+                            <constraint firstItem="uXm-87-VfK" firstAttribute="top" secondItem="K0t-aM-bbE" secondAttribute="top" id="ECz-oD-Z4R"/>
+                            <constraint firstItem="uXm-87-VfK" firstAttribute="leading" secondItem="K0t-aM-bbE" secondAttribute="leading" id="cg8-JM-iz3"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="jkE-G7-8qe"/>
                     <connections>
-                        <outlet property="imgBg" destination="uXm-87-VfK" id="eW1-mc-iAa"/>
-                        <segue destination="12u-db-u5J" kind="push" identifier="segue.root.login" id="9hF-8q-RvA"/>
-                        <segue destination="N8T-jo-lRC" kind="push" identifier="segue.root.main" id="bjC-jK-9fQ"/>
+                        <segue destination="N8T-jo-lRC" kind="push" identifier="segue.root.main" id="4Rn-iA-J01"/>
+                        <segue destination="12u-db-u5J" kind="push" identifier="segue.root.login" id="F16-jy-fff"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ovN-cV-8Ki" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1497" y="361"/>
+            <point key="canvasLocation" x="-1371" y="191"/>
+        </scene>
+        <!--Root View Controller-->
+        <scene sceneID="obg-Ul-sJG">
+            <objects>
+                <navigationController id="uS1-gQ-hox" customClass="CSRootViewController" sceneMemberID="viewController">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="0CB-cm-xdW">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.14901960780000001" green="0.56078431370000004" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="pMD-1c-TKG" kind="relationship" relationship="rootViewController" id="kkB-IN-Gsf"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ODa-2Z-CoX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1835" y="191"/>
         </scene>
         <!--登录-->
         <scene sceneID="omZ-5k-K70">
             <objects>
-                <viewController id="12u-db-u5J" customClass="CSLoginViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CSLoginViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="12u-db-u5J" customClass="CSLoginViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FYx-cc-NT6"/>
                         <viewControllerLayoutGuide type="bottom" id="3AS-MQ-yHX"/>
@@ -230,7 +227,7 @@
         <!--幼教宝-->
         <scene sceneID="c2a-ft-Msw">
             <objects>
-                <viewController id="N8T-jo-lRC" customClass="CSMainViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CSMainViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="N8T-jo-lRC" customClass="CSMainViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Htk-Aa-Bad"/>
                         <viewControllerLayoutGuide type="bottom" id="RQM-ed-c3e"/>
@@ -388,7 +385,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wSt-dj-TfE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-108" y="1671"/>
+            <point key="canvasLocation" x="-436" y="615"/>
         </scene>
         <!--宝宝列表-->
         <scene sceneID="u7x-qo-6Nr">
@@ -2959,6 +2956,7 @@
         <image name="v2-input_login.png" width="121" height="29"/>
         <image name="v2-logo.png" width="86" height="76"/>
         <image name="v2-logo2.png" width="78" height="76"/>
+        <image name="v2-启动界面.png" width="320" height="548"/>
         <image name="v2-头像框.png" width="110" height="110"/>
         <image name="v2-情绪.png" width="64" height="64"/>
         <image name="v2-游戏.png" width="64" height="64"/>
@@ -2972,9 +2970,9 @@
         <image name="video_icon.png" width="37" height="37"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="SRv-kS-rup"/>
-        <segue reference="4dZ-qf-s5s"/>
         <segue reference="Bea-XH-lHk"/>
-        <segue reference="IAH-Lo-qUC"/>
+        <segue reference="Yul-RT-MWR"/>
+        <segue reference="yHN-tG-lCD"/>
+        <segue reference="4dZ-qf-s5s"/>
     </inferredMetricsTieBreakers>
 </document>

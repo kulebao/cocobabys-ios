@@ -17,7 +17,6 @@
 #import <RongIMKit/RongIMKit.h>
 
 @interface CSRootViewController () <UINavigationControllerDelegate>
-@property (weak, nonatomic) IBOutlet UIImageView *imgBg;
 
 @end
 
@@ -37,15 +36,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationController.delegate =self;
-    self.navigationController.navigationBarHidden = YES;
-
-    if (!IS_IPHONE4) {
-        self.imgBg.image = [UIImage imageNamed:@"v2-启动界面.png"];
-    }
-    else {
-        self.imgBg.image = [UIImage imageNamed:@"v2-启动界面.png"];
-    }
+    self.delegate =self;
+    self.navigationBarHidden = YES;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onLoginSuccess:) name:kNotiLoginSuccess object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onLogoutSuccess:) name:kNotiLogoutSuccess object:nil];
@@ -65,16 +57,19 @@
 
 }
 
-/*
 #pragma mark - Navigation
-
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"segue.root.login"]) {
+        
+    }
+    else if ([segue.identifier isEqualToString:@"segue.root.main"]) {
+        
+    }
 }
-*/
 
 - (void)checkLocalData {
     NSFetchedResultsController* frCtrl = [EntityLoginInfoHelper frRecentLoginUser];
@@ -134,12 +129,17 @@
 }
 
 - (void)showLoginView {
-    [self.navigationController popToRootViewControllerAnimated:NO];
-    [self performSegueWithIdentifier:@"segue.root.login" sender:nil];
+    //[self performSegueWithIdentifier:@"segue.root.login" sender:nil];
+    CSLoginViewController* ctrl = [self.storyboard instantiateViewControllerWithIdentifier:@"CSLoginViewController"];
+    [self setViewControllers:@[ctrl] animated:YES];
+    [self setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)showMainView {
-    [self performSegueWithIdentifier:@"segue.root.main" sender:nil];
+    //[self performSegueWithIdentifier:@"segue.root.main" sender:nil];
+    CSMainViewController* ctrl = [self.storyboard instantiateViewControllerWithIdentifier:@"CSMainViewController"];
+    [self setViewControllers:@[ctrl] animated:YES];
+    [self setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)onLoginSuccess:(NSNotification*)noti {

@@ -261,7 +261,12 @@
                                                                     object:_videoURL];
             }
             else if (_videoURL) {
-                [self queryToDownload];
+                if ([[AFNetworkReachabilityManager sharedManager] isReachableViaWiFi]) {
+                    [self performSelector:@selector(startDownloader) withObject:nil];
+                }
+                else {
+                    [self queryToDownload];
+                }
             }
         }
     }

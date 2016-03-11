@@ -17,6 +17,7 @@
 #import "CBIMDataSource.h"
 #import "CBIMChatViewController.h"
 #import <BlocksKit/BlocksKit.h>
+#import "AFNetworkReachabilityManager.h"
 
 CSAppDelegate* gApp = nil;
 
@@ -37,6 +38,7 @@ CSAppDelegate* gApp = nil;
 {
     // Override point for customization after application launch.
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     
     //[[CrashReporter sharedInstance] enableLog:YES];
     [[CrashReporter sharedInstance] installWithAppId:@"900013150"];

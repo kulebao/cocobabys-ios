@@ -17,6 +17,7 @@
 #import "AHAlertView.h"
 #import "UIImageView+WebCache.h"
 #import "CSEngine.h"
+#import "AFNetworkReachabilityManager.h"
 
 @interface CSKuleHistoryVideoItemTableViewCell() {
     NSURL* _videoURL;
@@ -201,7 +202,12 @@
                                                                     object:_videoURL];
             }
             else if (_videoURL) {
-                [self queryToDownload];
+                if ([[AFNetworkReachabilityManager sharedManager] isReachableViaWiFi]) {
+                    [self performSelector:@selector(startDownloader) withObject:nil];
+                }
+                else {
+                    [self queryToDownload];
+                }
             }
         }
     }

@@ -18,6 +18,7 @@
 #import "PullTableView.h"
 #import "CSStudentListPickUpTableViewController.h"
 #import "CSContentEditorViewController.h"
+#import "EGOCache.h"
 
 @interface CSKuleHistoryListTableViewController () <NSFetchedResultsControllerDelegate, PullTableViewDelegate> {
     NSIndexPath* _denyIndexPath;
@@ -556,6 +557,13 @@
     
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         _videoUrl = [NSString stringWithFormat:@"%@/%@", kQiniuDownloadServerHost, videoFileName];
+        [[EGOCache globalCache] setData:videoData
+                                 forKey:_videoUrl.MD5HashEx
+                             completion:^(BOOL ok) {
+                                 CSLog(@"Cached video as key %@", _videoUrl.MD5HashEx);
+                                 [self doSendHistory];
+                             }];
+        
         [self doSendHistory];
     };
     

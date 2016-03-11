@@ -13,8 +13,8 @@
 #import <Bugly/CrashReporter.h>
 #import "CBIMDataSource.h"
 #import "CBSessionDataModel.h"
-
-#define RONGCLOUD_IM_APPKEY @"0vnjpoadnwk0z"
+#import "AFNetworkReachabilityManager.h"
+#import "AFNetworkActivityIndicatorManager.h"
 
 CSAppDelegate* gApp = nil;
 
@@ -30,6 +30,9 @@ CSAppDelegate* gApp = nil;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+    [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
+    
     gApp = self;
     
     // 初始化Bugly

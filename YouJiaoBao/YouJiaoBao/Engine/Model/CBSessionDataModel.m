@@ -7,7 +7,7 @@
 //
 
 #import "CBSessionDataModel.h"
-#import "CBHttpClient.h"
+#import "CSHttpClient.h"
 
 static CBSessionDataModel* s_instance = NULL;
 
@@ -71,7 +71,7 @@ static CBSessionDataModel* s_instance = NULL;
 }
 
 - (void)updateSchoolConfig:(NSInteger)schoolId{
-    CBHttpClient* http = [CBHttpClient sharedInstance];
+    CSHttpClient* http = [CSHttpClient sharedInstance];
     [http reqGetConfigOfKindergarten:schoolId
                              success:^(AFHTTPRequestOperation *operation, id dataJson) {
                                  self.schoolConfig = [CBSchoolConfigData instanceWithDictionary:dataJson];

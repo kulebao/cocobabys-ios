@@ -132,4 +132,7 @@
 
 #define kGetHistoryListURL      @"/api/v3/kindergarten/%@/employee/%@/history"
 
+// PATH: 获取学校配置
+#define kGetKindergartenConfigurePath  @"/api/v2/school_config/%@"
+
 #endif

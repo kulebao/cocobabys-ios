@@ -157,7 +157,8 @@ CSAppDelegate* gApp = nil;
 - (void)gotoMainProcess {
     if (gApp.engine.loginInfo) {
         NSDictionary* serverInfo = [gApp.engine.preferences getServerSettings];
-        [CBSessionDataModel session:gApp.engine.loginInfo.accountName withTag:serverInfo[@"tag"]];
+        CBSessionDataModel* session = [CBSessionDataModel session:gApp.engine.loginInfo.accountName withTag:serverInfo[@"tag"]];
+        [session updateSchoolConfig:gApp.engine.loginInfo.schoolId];
         
         if (gApp.engine.loginInfo.imToken) {
             // 快速集成第二步，连接融云服务器

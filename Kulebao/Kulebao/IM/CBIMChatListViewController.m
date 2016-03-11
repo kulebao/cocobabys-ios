@@ -12,6 +12,7 @@
 #import "UIActionSheet+BlocksKit.h"
 #import "CBIMGroupMembersViewController.h"
 #import "CBIMDataSource.h"
+#import "CBSessionDataModel.h"
 
 @interface CBIMChatListViewController () {
     CBIMNotificationUserInfo* _rcUserInfo;
@@ -106,13 +107,17 @@
         }
     }
     
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
+    
     NSMutableArray* newDataSource = [NSMutableArray array];
     for (RCConversationModel* m in dataSource) {
         if (m.conversationType == ConversationType_PRIVATE) {
             [newDataSource addObject:m];
         }
         else if (m.conversationType == ConversationType_GROUP) {
-            [newDataSource addObject:m];
+            if (session.schoolConfig.schoolGroupChat) {
+                [newDataSource addObject:m];
+            }
             //m.isTop = YES;
         }
         else {

@@ -13,6 +13,7 @@
 #import "CSAppDelegate.h"
 #import <RongIMKit/RongIMKit.h>
 #import "CBIMDataSource.h"
+#import "CBSessionDataModel.h"
 
 @interface CSLoginViewController () {
     ModelAccount* _loginAccount;
@@ -106,6 +107,8 @@
         id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
             EntityLoginInfo* loginInfo = [EntityLoginInfoHelper updateEntity:responseObject];
             if (loginInfo != nil) {
+                CBSessionDataModel* session = [CBSessionDataModel session:loginInfo.phone];
+                [session updateSchoolConfig:loginInfo.schoolId.integerValue];
                 [gApp alert:@"登录成功"];
                 [[CSEngine sharedInstance] encryptAccount:_loginAccount];
                 [[NSNotificationCenter defaultCenter] postNotificationName:kNotiLoginSuccess object:loginInfo userInfo:nil];

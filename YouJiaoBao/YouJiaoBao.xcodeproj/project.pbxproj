@@ -352,6 +352,8 @@
 		221BAFCE1C4B8DE900593559 /* CBSchoolInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 221BAFCD1C4B8DE900593559 /* CBSchoolInfo.m */; };
 		224B44141C5100D300982E15 /* KxMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 224B44121C5100D300982E15 /* KxMenu.m */; };
 		224B44151C5100D300982E15 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 224B44131C5100D300982E15 /* README.md */; };
+		227A9D291C92EA1100FE19D9 /* CBSchoolConfigData.m in Sources */ = {isa = PBXBuildFile; fileRef = 227A9D281C92EA1100FE19D9 /* CBSchoolConfigData.m */; };
+		227A9D2D1C92EA7200FE19D9 /* CBSessionDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 227A9D2C1C92EA7200FE19D9 /* CBSessionDataModel.m */; };
 		229033D41C4B3FB0008A94DF /* CBChatViewSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 229033BC1C4B3FB0008A94DF /* CBChatViewSettingsViewController.m */; };
 		229033D51C4B3FB0008A94DF /* CBChildInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 229033BE1C4B3FB0008A94DF /* CBChildInfo.m */; };
 		229033D61C4B3FB0008A94DF /* CBClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 229033C01C4B3FB0008A94DF /* CBClassInfo.m */; };
@@ -904,6 +906,10 @@
 		224B44111C5100D300982E15 /* KxMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KxMenu.h; sourceTree = "<group>"; };
 		224B44121C5100D300982E15 /* KxMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KxMenu.m; sourceTree = "<group>"; };
 		224B44131C5100D300982E15 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		227A9D271C92EA1100FE19D9 /* CBSchoolConfigData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBSchoolConfigData.h; sourceTree = "<group>"; };
+		227A9D281C92EA1100FE19D9 /* CBSchoolConfigData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBSchoolConfigData.m; sourceTree = "<group>"; };
+		227A9D2B1C92EA7200FE19D9 /* CBSessionDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBSessionDataModel.h; sourceTree = "<group>"; };
+		227A9D2C1C92EA7200FE19D9 /* CBSessionDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBSessionDataModel.m; sourceTree = "<group>"; };
 		229033BB1C4B3FB0008A94DF /* CBChatViewSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBChatViewSettingsViewController.h; sourceTree = "<group>"; };
 		229033BC1C4B3FB0008A94DF /* CBChatViewSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBChatViewSettingsViewController.m; sourceTree = "<group>"; };
 		229033BD1C4B3FB0008A94DF /* CBChildInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBChildInfo.h; sourceTree = "<group>"; };
@@ -1711,6 +1717,8 @@
 		09B431C11995199A00FF4071 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				227A9D2B1C92EA7200FE19D9 /* CBSessionDataModel.h */,
+				227A9D2C1C92EA7200FE19D9 /* CBSessionDataModel.m */,
 				09B431C2199519DC00FF4071 /* ModelAccount.h */,
 				09B431C3199519DC00FF4071 /* ModelAccount.m */,
 				095D858019C5D92900F2F926 /* ModelClassData.h */,
@@ -1939,6 +1947,8 @@
 		22E147041C8E009300528FA6 /* JsonObjects */ = {
 			isa = PBXGroup;
 			children = (
+				227A9D271C92EA1100FE19D9 /* CBSchoolConfigData.h */,
+				227A9D281C92EA1100FE19D9 /* CBSchoolConfigData.m */,
 				22E147051C8E00A600528FA6 /* CBHistoryInfo.h */,
 				22E147061C8E00A600528FA6 /* CBHistoryInfo.m */,
 				22E147081C8E011A00528FA6 /* CBSenderInfo.h */,
@@ -2462,6 +2472,7 @@
 				0901CDFE1ABF2FBB0044838A /* PlayViewController.m in Sources */,
 				09A3C60519C479C7001AFE8C /* MJPhotoBrowser.m in Sources */,
 				098E4037198B6B3A00CB4F0B /* UIViewController+CSKit.m in Sources */,
+				227A9D291C92EA1100FE19D9 /* CBSchoolConfigData.m in Sources */,
 				091EE50819E83F820050092E /* XHViewState.m in Sources */,
 				229033DE1C4B3FB0008A94DF /* CBRelationshipInfo.m in Sources */,
 				098E4064198B799000CB4F0B /* LoadMoreTableFooterView.m in Sources */,
@@ -2501,6 +2512,7 @@
 				09B431C4199519DC00FF4071 /* ModelAccount.m in Sources */,
 				091EE50319E83F820050092E /* UIImage+Utility.m in Sources */,
 				09A3C60819C479C7001AFE8C /* MJPhotoToolbar.m in Sources */,
+				227A9D2D1C92EA7200FE19D9 /* CBSessionDataModel.m in Sources */,
 				09A3C5ED19C47986001AFE8C /* GMGridViewLayoutStrategies.m in Sources */,
 				22E147001C8DAEC300528FA6 /* EntitySenderInfoHelper.m in Sources */,
 				0971C0CD1A0A80DC00A6F644 /* CSForgotPasswordStep2ViewController.m in Sources */,

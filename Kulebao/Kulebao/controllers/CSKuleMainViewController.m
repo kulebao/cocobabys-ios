@@ -34,6 +34,7 @@
 #import "CBSessionDataModel.h"
 #import "CBIMNotificationUserInfo.h"
 
+#import "CBSessionDataModel.h"
 #import <RongIMKit/RongIMKit.h>
 
 @interface CSKuleMainViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, EAIntroDelegate> {
@@ -1116,7 +1117,10 @@
             CSKuleRelationshipInfo* relationshipInfo = [CSKuleInterpreter decodeRelationshipInfo:relationshipJson];
             if (relationshipInfo.parent && relationshipInfo.child) {
                 [relationships addObject:relationshipInfo];
-                [self joinGroup:relationshipInfo.parent.schoolId classId:relationshipInfo.child.classId];
+                
+                if ([CBSessionDataModel thisSession].schoolConfig.schoolGroupChat) {
+                    [self joinGroup:relationshipInfo.parent.schoolId classId:relationshipInfo.child.classId];
+                }
             }
         }
         

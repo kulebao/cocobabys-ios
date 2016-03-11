@@ -13,6 +13,7 @@
 
 #import "CSMainViewController.h"
 #import "CSLoginViewController.h"
+#import "CBSessionDataModel.h"
 
 #import <RongIMKit/RongIMKit.h>
 
@@ -92,6 +93,9 @@
         id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
             EntityLoginInfo* loginInfo = [EntityLoginInfoHelper updateEntity:responseObject];
             if (loginInfo != nil) {
+                CBSessionDataModel* session = [CBSessionDataModel session:loginInfo.phone];
+                [session updateSchoolConfig:loginInfo.schoolId.integerValue];
+                
                 if (loginInfo.im_token) {
                     // 快速集成第二步，连接融云服务器
                     [[RCIM sharedRCIM] connectWithToken:loginInfo.im_token

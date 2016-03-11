@@ -8,6 +8,7 @@
 
 #import "CBSessionDataModel.h"
 #import "CSHttpClient.h"
+#import <RongIMKit/RongIMKit.h>
 
 static CBSessionDataModel* s_instance = NULL;
 
@@ -75,6 +76,7 @@ static CBSessionDataModel* s_instance = NULL;
     [http reqGetConfigOfKindergarten:schoolId
                              success:^(AFHTTPRequestOperation *operation, id dataJson) {
                                  self.schoolConfig = [CBSchoolConfigData instanceWithDictionary:dataJson];
+                                 [self processConfig];
                              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                  
                              }];
@@ -83,6 +85,17 @@ static CBSessionDataModel* s_instance = NULL;
 - (void)invalidate {
     if ([self isEqual:s_instance]) {
         s_instance = nil;
+    }
+}
+
+- (void)processConfig {
+    if (!self.schoolConfig.schoolGroupChat) {
+        [[RCIMClient sharedRCIMClient] setConversationNotificationStatus:ConversationType_GROUP targetId:nil isBlocked:YES
+                                                                 success:^(RCConversationNotificationStatus nStatus) {
+                                                                     
+                                                                 } error:^(RCErrorCode status) {
+                                                                     
+                                                                 }];
     }
 }
 

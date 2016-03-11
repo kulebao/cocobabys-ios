@@ -47,7 +47,7 @@ CSAppDelegate* gApp = nil;
     [[RCIM sharedRCIM] setGroupInfoDataSource:[CBIMDataSource sharedInstance]];
     [[RCIM sharedRCIM] setUserInfoDataSource:[CBIMDataSource sharedInstance]];
     [[RCIM sharedRCIM] setGroupUserInfoDataSource:[CBIMDataSource sharedInstance]];
-    // [[RCIM sharedRCIM] setReceiveMessageDelegate:[CBIMDataSource sharedInstance]];
+    [[RCIM sharedRCIM] setReceiveMessageDelegate:[CBIMDataSource sharedInstance]];
     
     _engine = [[CSKuleEngine alloc] init];
     [_engine setupEngine];

@@ -158,7 +158,8 @@
 - (void)onRCIMReceiveMessage:(RCMessage *)message left:(int)left {
     CBSessionDataModel* session = [CBSessionDataModel thisSession];
     if (!session.schoolConfig.schoolGroupChat && message.conversationType == ConversationType_GROUP) {
-        [[RCIMClient sharedRCIMClient] clearMessagesUnreadStatus:message.conversationType targetId:message.targetId];
+        //[[RCIMClient sharedRCIMClient] clearMessagesUnreadStatus:message.conversationType targetId:message.targetId];
+        [[RCIMClient sharedRCIMClient] clearMessages:message.conversationType targetId:message.targetId];
     }
 }
 

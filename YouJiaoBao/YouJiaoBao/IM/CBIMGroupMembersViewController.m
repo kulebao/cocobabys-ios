@@ -41,6 +41,7 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.navigationItem.title = @"群成员";
     
     NSString* imgBundlePath = [[NSBundle mainBundle] pathForResource:@"RongCloud" ofType:@"bundle"];
     NSString* imgPath = [[NSBundle bundleWithPath:imgBundlePath] pathForResource:@"default_portrait_msg@2x" ofType:@"png"];

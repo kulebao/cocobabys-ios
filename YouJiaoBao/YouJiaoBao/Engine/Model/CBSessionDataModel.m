@@ -90,12 +90,18 @@ static CBSessionDataModel* s_instance = NULL;
 
 - (void)processConfig {
     if (!self.schoolConfig.schoolGroupChat) {
-        [[RCIMClient sharedRCIMClient] setConversationNotificationStatus:ConversationType_GROUP targetId:nil isBlocked:YES
-                                                                 success:^(RCConversationNotificationStatus nStatus) {
-                                                                     
-                                                                 } error:^(RCErrorCode status) {
-                                                                     
-                                                                 }];
+        NSArray* conns = [[RCIMClient sharedRCIMClient] getConversationList:@[@(ConversationType_GROUP)]];
+        for (RCConversation* con in conns) {
+            [[RCIMClient sharedRCIMClient] clearMessages:con.conversationType targetId:con.targetId];
+            [[RCIMClient sharedRCIMClient] setConversationNotificationStatus:con.conversationType
+                                                                    targetId:con.targetId
+                                                                   isBlocked:!self.schoolConfig.schoolGroupChat
+                                                                     success:^(RCConversationNotificationStatus nStatus) {
+                                                                         
+                                                                     } error:^(RCErrorCode status) {
+                                                                         
+                                                                     }];
+        }
     }
 }
 

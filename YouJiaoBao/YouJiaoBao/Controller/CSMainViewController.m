@@ -18,6 +18,7 @@
 #import "EntityClassInfo.h"
 #import "EntityRelationshipInfoHelper.h"
 #import "CBIMChatListViewController.h"
+#import "CBSessionDataModel.h"
 
 #define kTestChildId    @"2_2088_900"
 
@@ -223,8 +224,16 @@
 }
 
 - (void)openRCIM {
-    NSArray* arr1 = @[@(ConversationType_PRIVATE),@(ConversationType_DISCUSSION), @(ConversationType_GROUP),@(ConversationType_SYSTEM)];
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
+    
+    NSArray* arr1 = @[@(ConversationType_PRIVATE),@(ConversationType_SYSTEM)];
+    if (session.schoolConfig.schoolGroupChat) {
+        arr1 = @[@(ConversationType_PRIVATE),@(ConversationType_DISCUSSION), @(ConversationType_GROUP),@(ConversationType_SYSTEM)];
+    }
+    
     NSArray* arr2 = nil;
+
+    
     CBIMChatListViewController* ctrl = [[CBIMChatListViewController alloc] initWithDisplayConversationTypes:arr1
                                                                                  collectionConversationType:arr2];
     [self.navigationController pushViewController:ctrl animated:YES];

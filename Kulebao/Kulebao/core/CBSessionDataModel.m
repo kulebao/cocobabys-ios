@@ -8,6 +8,7 @@
 
 #import "CBSessionDataModel.h"
 #import "CBHttpClient.h"
+#import <RongIMKit/RongIMKit.h>
 
 static CBSessionDataModel* s_instance = NULL;
 
@@ -75,6 +76,21 @@ static CBSessionDataModel* s_instance = NULL;
     [http reqGetConfigOfKindergarten:schoolId
                              success:^(AFHTTPRequestOperation *operation, id dataJson) {
                                  self.schoolConfig = [CBSchoolConfigData instanceWithDictionary:dataJson];
+                                 if (!self.schoolConfig.schoolGroupChat) {
+                                     NSArray* conns = [[RCIMClient sharedRCIMClient] getConversationList:@[@(ConversationType_GROUP)]];
+                                     for (RCConversation* con in conns) {
+                                         [[RCIMClient sharedRCIMClient] clearMessages:con.conversationType targetId:con.targetId];
+                                         [[RCIMClient sharedRCIMClient] setConversationNotificationStatus:con.conversationType
+                                                                                                 targetId:con.targetId
+                                                                                                isBlocked:!self.schoolConfig.schoolGroupChat
+                                                                                                  success:^(RCConversationNotificationStatus nStatus) {
+                                                                                                      
+                                                                                                  } error:^(RCErrorCode status) {
+                                                                                                      
+                                                                                                  }];
+                                     }
+                                 }
+                                
                              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                  
                              }];

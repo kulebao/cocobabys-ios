@@ -11,6 +11,7 @@
 #import "BaiduMobStat.h"
 #import "CSHttpClient.h"
 #import "EntityClassInfo.h"
+#import "CBSessionDataModel.h"
 
 NSString* kNotiLoginSuccess = @"noti.login.success";
 NSString* kNotiLogoutSuccess = @"noti.logout.success";
@@ -71,9 +72,12 @@ NSString* kAppleID = @"917314512";
 - (void)onLoadClassInfoList:(NSArray*)classInfoList {
     _classInfoList = classInfoList;
     
-    for (EntityClassInfo* clasInfo in _classInfoList) {
-        if (clasInfo.schoolId.integerValue>0 && clasInfo.classId.integerValue>0) {            
-            [self joinGroup:clasInfo.schoolId.integerValue classId:clasInfo.classId.integerValue];
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
+    if (session.schoolConfig.schoolGroupChat) {
+        for (EntityClassInfo* clasInfo in _classInfoList) {
+            if (clasInfo.schoolId.integerValue>0 && clasInfo.classId.integerValue>0) {
+                [self joinGroup:clasInfo.schoolId.integerValue classId:clasInfo.classId.integerValue];
+            }
         }
     }
 }

@@ -1045,7 +1045,13 @@
     }
     
     if (imListCtrl == nil) {
-        NSArray* arr1 = @[@(ConversationType_PRIVATE),@(ConversationType_DISCUSSION), @(ConversationType_GROUP),@(ConversationType_SYSTEM)];
+        CBSessionDataModel* session = [CBSessionDataModel thisSession];
+        
+        NSArray* arr1 = @[@(ConversationType_PRIVATE),@(ConversationType_SYSTEM)];
+        if (session.schoolConfig.schoolGroupChat) {
+            arr1 = @[@(ConversationType_PRIVATE),@(ConversationType_DISCUSSION), @(ConversationType_GROUP),@(ConversationType_SYSTEM)];
+        }
+        
         NSArray* arr2 = nil;
         imListCtrl = [[CBIMChatListViewController alloc] initWithDisplayConversationTypes:arr1
                                                                collectionConversationType:arr2];

@@ -18,6 +18,7 @@
 #import "EntityLoginInfoHelper.h"
 #import <RongIMKit/RongIMKit.h>
 #import "KxMenu.h"
+#import "CBSessionDataModel.h"
 
 enum {
     // 昵称长度
@@ -109,6 +110,8 @@ enum {
 }
 
 - (void)doLogout {
+    [[CBSessionDataModel thisSession] invalidate];
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotiLogoutSuccess object:nil userInfo:nil];
 }
 

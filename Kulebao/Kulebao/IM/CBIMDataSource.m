@@ -12,6 +12,7 @@
 #import "CSAppDelegate.h"
 #import "CBTeacherInfo.h"
 #import "CBRelationshipInfo.h"
+#import "CBSessionDataModel.h"
 
 @interface CBIMDataSource ()
 
@@ -153,9 +154,13 @@
     completion(groupObj);
 }
 
-#pragma mark - RCIMClientReceiveMessageDelegate
-- (void)onReceived:(RCMessage *)message left:(int)nLeft object:(id)object {
-    
+#pragma mark - RCIMReceiveMessageDelegate
+- (void)onRCIMReceiveMessage:(RCMessage *)message left:(int)left {
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
+    if (!session.schoolConfig.schoolGroupChat && message.conversationType == ConversationType_GROUP) {
+        //[[RCIMClient sharedRCIMClient] clearMessagesUnreadStatus:message.conversationType targetId:message.targetId];
+        [[RCIMClient sharedRCIMClient] clearMessages:message.conversationType targetId:message.targetId];
+    }
 }
 
 #pragma mark - RCIMGroupUserInfoDataSource

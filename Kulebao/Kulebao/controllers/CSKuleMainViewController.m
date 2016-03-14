@@ -32,6 +32,10 @@
 #import "CBIMDataSource.h"
 #import "UIActionSheet+BlocksKit.h"
 #import "CBSessionDataModel.h"
+#import "CBIMNotificationUserInfo.h"
+
+#import "CBSessionDataModel.h"
+#import <RongIMKit/RongIMKit.h>
 
 @interface CSKuleMainViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, EAIntroDelegate> {
     UIImagePickerController* _imgPicker;
@@ -142,12 +146,11 @@
                      options:NSKeyValueObservingOptionNew
                      context:nil];
      */
-    /*
+    
     [gApp.engine addObserver:self
                   forKeyPath:@"badgeOfChating"
                      options:NSKeyValueObservingOptionNew
                      context:nil];
-     */
     
     [gApp.engine addObserver:self
                   forKeyPath:@"badgeOfAssess"
@@ -163,10 +166,20 @@
     
     [self updateUI:YES];
     
+    if(gApp.engine.currentRelationship.child == nil) {
+        self.viewChildContainer.hidden = YES;
+        self.badgeCommercial.hidden = YES;
+    }
 
     
     //Guide
     [self showIntroViewsIfNeeded];
+    
+    // Noti
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(appWillEnterForeground:)
+                                                 name:UIApplicationWillEnterForegroundNotification
+                                               object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -176,15 +189,21 @@
 }
 
 - (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
     [gApp.engine removeObserver:self forKeyPath:@"currentRelationship"];
     [gApp.engine removeObserver:self forKeyPath:@"badgeOfNews"];
     [gApp.engine removeObserver:self forKeyPath:@"badgeOfRecipe"];
     [gApp.engine removeObserver:self forKeyPath:@"badgeOfCheckin"];
     [gApp.engine removeObserver:self forKeyPath:@"badgeOfSchedule"];
     //[gApp.engine removeObserver:self forKeyPath:@"badgeOfAssignment"];
-    //[gApp.engine removeObserver:self forKeyPath:@"badgeOfChating"];
+    [gApp.engine removeObserver:self forKeyPath:@"badgeOfChating"];
     [gApp.engine removeObserver:self forKeyPath:@"badgeOfAssess"];
     [gApp.engine removeObserver:self forKeyPath:@"pendingNotificationInfo"];
+}
+
+- (void)appWillEnterForeground:(NSNotification*)noti {
+    [self updateUI:YES];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -211,6 +230,10 @@
                 
                 [self performSelector:@selector(reloadVideoMember) withObject:nil afterDelay:0];
             }
+            self.viewChildContainer.hidden = NO;
+        }
+        else {
+            self.viewChildContainer.hidden = YES;
         }
     }
     else if((object == gApp.engine) && [keyPath isEqualToString:@"badgeOfNews"]) {
@@ -264,6 +287,7 @@
         }
     }
     else if((object == gApp.engine) && [keyPath isEqualToString:@"badgeOfChating"]) {
+#if 0
         JSBadgeView* badgeView = [self badgeViewForModule:kKuleModuleChating];
         if (badgeView && gApp.engine.badgeOfChating > 0) {
             badgeView.badgeText = @"新";
@@ -272,6 +296,7 @@
         else {
             badgeView.badgeText = nil;
         }
+#endif
     }
     else if((object == gApp.engine) && [keyPath isEqualToString:@"badgeOfAssess"]) {
         JSBadgeView* badgeView = [self badgeViewForModule:kKuleModuleAssess];
@@ -493,7 +518,13 @@
                              className];
             [self.btnClassInfo setTitle:@"亲子优惠"
                                forState:UIControlStateNormal];
-            self.badgeCommercial.hidden = NO;
+            
+            if (gApp.engine.currentRelationship.child) {
+                self.badgeCommercial.hidden = NO;
+            }
+            else {
+                self.badgeCommercial.hidden = YES;
+            }
         }
         else {
             [self.btnClassInfo setTitle:className
@@ -542,6 +573,14 @@
                                forState:UIControlStateNormal];
         }
         //[gApp alert:@"没有宝宝信息。"];
+    }
+    
+    JSBadgeView* badgeView = [self badgeViewForModule:kKuleModuleChating];
+    if([[RCIMClient sharedRCIMClient] getTotalUnreadCount] > 0) {
+        badgeView.badgeText = @"新";
+    }
+    else {
+        badgeView.badgeText = nil;
     }
 }
 
@@ -909,7 +948,10 @@
         @"segue.bus"
     };
     
-    if (moduleType < kKuleModuleSize && moduleType < (sizeof(segueNames)/sizeof(NSString*))) {
+    if (gApp.engine.currentRelationship == nil) {
+        [gApp alertNoChild];
+    }
+    else if (moduleType < kKuleModuleSize && moduleType < (sizeof(segueNames)/sizeof(NSString*))) {
         if ([self checkModuleTypeForMemberStatus:moduleType]) {
             switch (moduleType) {
                 case kKuleModuleNews:
@@ -928,7 +970,7 @@
                     gApp.engine.badgeOfAssignment = 0;
                     break;
                 case kKuleModuleChating:
-                    gApp.engine.badgeOfChating = 0;
+                    //gApp.engine.badgeOfChating = 0;
                     break;
                 case kKuleModuleAssess:
                     gApp.engine.badgeOfAssess = 0;
@@ -953,7 +995,7 @@
             
 #if COCOBABYS_USE_IM
             if (moduleType == kKuleModuleChating) {
-                [self openRCIM];
+                [self openRCIM:nil];
             }
             else {
                 [self performSegueWithIdentifier:segueNames[moduleType] sender:nil];
@@ -972,7 +1014,12 @@
 }
 
 - (IBAction)onBtnSettingsClicked:(id)sender {
-    [self performSegueWithIdentifier:@"segue.settings3" sender:nil];
+    if (gApp.engine.currentRelationship.child) {
+        [self performSegueWithIdentifier:@"segue.settings3" sender:nil];
+    }
+    else {
+        [gApp alertNoChild];
+    }
 }
 
 - (IBAction)onBtnSchoolInfoClicked:(id)sender {
@@ -986,21 +1033,49 @@
     }
 }
 
-- (void)openRCIM {
-    NSArray* arr1 = @[@(ConversationType_PRIVATE),@(ConversationType_DISCUSSION), @(ConversationType_GROUP),@(ConversationType_SYSTEM)];
-    NSArray* arr2 = nil;
-    CBIMChatListViewController* ctrl = [[CBIMChatListViewController alloc] initWithDisplayConversationTypes:arr1
-                                                                                 collectionConversationType:arr2];
-    [self.navigationController pushViewController:ctrl animated:YES];
+- (void)openRCIM:(CBIMNotificationUserInfo*)rcUserInfo {
+    CBIMChatListViewController* imListCtrl = nil;
+    
+    for (UIViewController* ctrl in self.navigationController.viewControllers) {
+        if ([ctrl isKindOfClass:[CBIMChatListViewController class]]) {
+            imListCtrl = (CBIMChatListViewController*)ctrl;
+            [self.navigationController popToViewController:ctrl animated:YES];
+            break;
+        }
+    }
+    
+    if (imListCtrl == nil) {
+        CBSessionDataModel* session = [CBSessionDataModel thisSession];
+        
+        NSArray* arr1 = @[@(ConversationType_PRIVATE),@(ConversationType_SYSTEM)];
+        if (session.schoolConfig.schoolGroupChat) {
+            arr1 = @[@(ConversationType_PRIVATE),@(ConversationType_DISCUSSION), @(ConversationType_GROUP),@(ConversationType_SYSTEM)];
+        }
+        
+        NSArray* arr2 = nil;
+        imListCtrl = [[CBIMChatListViewController alloc] initWithDisplayConversationTypes:arr1
+                                                               collectionConversationType:arr2];
+        [self.navigationController pushViewController:imListCtrl animated:YES];
+    }
+    
+    if (rcUserInfo) {
+        [imListCtrl openChat:rcUserInfo];
+    }
 }
 
 - (IBAction)onBtnClassInfoClicked:(id)sender {
 #if COCOBABYS_FEATURE_COMMERCIAL
     BOOL enabledCommercial = gApp.engine.preferences.enabledCommercial;
     if (enabledCommercial) {
-        UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Commercial" bundle:nil];
-        [self.navigationController pushViewController:storyboard.instantiateInitialViewController animated:YES];
-        self.badgeCommercial.badgeText = nil;
+        
+        if (gApp.engine.currentRelationship.child) {
+            UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Commercial" bundle:nil];
+            [self.navigationController pushViewController:storyboard.instantiateInitialViewController animated:YES];
+            self.badgeCommercial.badgeText = nil;
+        }
+        else {
+            [gApp alertNoChild];
+        }
     }
 #endif
 }
@@ -1048,7 +1123,10 @@
             CSKuleRelationshipInfo* relationshipInfo = [CSKuleInterpreter decodeRelationshipInfo:relationshipJson];
             if (relationshipInfo.parent && relationshipInfo.child) {
                 [relationships addObject:relationshipInfo];
-                [self joinGroup:relationshipInfo.parent.schoolId classId:relationshipInfo.child.classId];
+                
+                if ([CBSessionDataModel thisSession].schoolConfig.schoolGroupChat) {
+                    [self joinGroup:relationshipInfo.parent.schoolId classId:relationshipInfo.child.classId];
+                }
             }
         }
         
@@ -1194,15 +1272,13 @@
         && gApp.engine.currentRelationship
         && notiInfo) {
         gApp.engine.pendingNotificationInfo = nil;
-        
-        NSDictionary *pushServiceData = [[RCIMClient sharedRCIMClient] getPushExtraFromRemoteNotification:notiInfo];
+        NSDictionary *pushServiceData = notiInfo[@"rc"];
         if (pushServiceData) {
             CSLog(@"该远程推送包含来自融云的推送服务");
             for (id key in [pushServiceData allKeys]) {
                 CSLog(@"key = %@, value = %@", key, pushServiceData[key]);
             }
-            
-            [self openRCIM];
+            [self openRCIM:[CBIMNotificationUserInfo instanceWithDictionary:pushServiceData]];
         } else {
             CSLog(@"该远程推送不包含来自融云的推送服务");
             

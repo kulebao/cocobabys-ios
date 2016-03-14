@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="14F1021" minimumToolsVersion="Automatic">
+    <entity name="EntityAssessInfo" representedClassName="EntityAssessInfo" syncable="YES">
+        <attribute name="activity" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="childId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comments" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dining" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="emotion" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="exercise" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="game" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="manner" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="publisher" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="rest" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="schoolId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="selfCare" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="timestamp" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="uid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="EntityAssignmentInfo" representedClassName="EntityAssignmentInfo" syncable="YES">
+        <attribute name="classId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="iconUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="publisher" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="read" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="schoolId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="timestamp" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="EntityChildInfo" representedClassName="EntityChildInfo" syncable="YES">
+        <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="birthday" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="childId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="classId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="classname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="gender" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nick" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="portrait" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="schoolId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="timestamp" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <relationship name="classInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EntityClassInfo" inverseName="childrenList" inverseEntity="EntityClassInfo" syncable="YES"/>
+        <relationship name="dailylog" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EntityDailylog" inverseName="childInfo" inverseEntity="EntityDailylog" syncable="YES"/>
+    </entity>
+    <entity name="EntityClassInfo" representedClassName="EntityClassInfo" syncable="YES">
+        <attribute name="classId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="employeeId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="schoolId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="timestamp" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <relationship name="childrenList" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="EntityChildInfo" inverseName="classInfo" inverseEntity="EntityChildInfo" syncable="YES"/>
+    </entity>
+    <entity name="EntityDailylog" representedClassName="EntityDailylog" syncable="YES">
+        <attribute name="childId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="noticeType" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="parentName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="recordUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="timestamp" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <relationship name="childInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EntityChildInfo" inverseName="dailylog" inverseEntity="EntityChildInfo" syncable="YES"/>
+    </entity>
+    <entity name="EntityHistoryInfo" representedClassName="EntityHistoryInfo" syncable="YES">
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="timestamp" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="topic" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="medium" optional="YES" toMany="YES" deletionRule="No Action" ordered="YES" destinationEntity="EntityMediaInfo" syncable="YES"/>
+        <relationship name="sender" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="EntitySenderInfo" syncable="YES"/>
+        <fetchedProperty name="fetchedProperty" optional="YES" transient="YES" syncable="YES">
+            <fetchRequest name="fetchedPropertyFetchRequest" entity="EntityHistoryInfo"/>
+        </fetchedProperty>
+    </entity>
+    <entity name="EntityLoginInfo" representedClassName="EntityLoginInfo" syncable="YES">
+        <attribute name="birthday" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="gender" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="im_source" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="im_token" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="im_user_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="loginDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="loginName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="o_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="portrait" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="schoolId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="timestamp" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="uid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="workduty" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="workgroup" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="EntityMediaInfo" representedClassName="EntityMediaInfo" syncable="YES">
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="historyInfo" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="EntityHistoryInfo" syncable="YES"/>
+    </entity>
+    <entity name="EntityNewsInfo" representedClassName="EntityNewsInfo" syncable="YES">
+        <attribute name="classId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="feedbackRequired" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="newsId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="noticeType" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="published" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="publisherId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="read" optional="YES" attributeType="Integer 32" syncable="YES"/>
+        <attribute name="schoolId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="tags" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="timestamp" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="EntityParentInfo" representedClassName="EntityParentInfo" syncable="YES">
+        <attribute name="birthday" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="company" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="gender" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="memberStatus" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="parentId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="portrait" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="schoolId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="timestamp" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="uid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="EntityRelationshipInfo" representedClassName="EntityRelationshipInfo" syncable="YES">
+        <attribute name="card" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="relationship" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="childInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EntityChildInfo" syncable="YES"/>
+        <relationship name="parentInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EntityParentInfo" syncable="YES"/>
+    </entity>
+    <entity name="EntitySenderInfo" representedClassName="EntitySenderInfo" syncable="YES">
+        <attribute name="senderId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="historyInfo" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="EntityHistoryInfo" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="EntityAssessInfo" positionX="270" positionY="351" width="128" height="253"/>
+        <element name="EntityAssignmentInfo" positionX="261" positionY="351" width="128" height="178"/>
+        <element name="EntityChildInfo" positionX="261" positionY="306" width="128" height="255"/>
+        <element name="EntityClassInfo" positionX="261" positionY="297" width="128" height="133"/>
+        <element name="EntityDailylog" positionX="270" positionY="351" width="128" height="133"/>
+        <element name="EntityLoginInfo" positionX="261" positionY="198" width="128" height="300"/>
+        <element name="EntityNewsInfo" positionX="261" positionY="351" width="128" height="240"/>
+        <element name="EntityParentInfo" positionX="261" positionY="342" width="128" height="225"/>
+        <element name="EntityRelationshipInfo" positionX="270" positionY="360" width="128" height="118"/>
+        <element name="EntityMediaInfo" positionX="279" positionY="360" width="128" height="90"/>
+        <element name="EntitySenderInfo" positionX="288" positionY="369" width="128" height="90"/>
+        <element name="EntityHistoryInfo" positionX="297" positionY="378" width="128" height="164"/>
+    </elements>
+</model>

@@ -311,4 +311,8 @@ typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSErr
                                                 success:(SuccessResponseHandler)success
                                                 failure:(FailureResponseHandler)failure;
 
+- (AFHTTPRequestOperation*)reqGetConfigOfKindergarten:(NSInteger)kindergarten
+                                              success:(SuccessResponseHandler)success
+                                              failure:(FailureResponseHandler)failure;
+
 @end

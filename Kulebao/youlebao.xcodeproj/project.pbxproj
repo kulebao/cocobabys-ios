@@ -346,7 +346,6 @@
 		09F74C8E1997C4F3001555D0 /* gallery.png in Resources */ = {isa = PBXBuildFile; fileRef = 09F74C321997C4F3001555D0 /* gallery.png */; };
 		09F74CAD1997C4F3001555D0 /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 09F74C511997C4F3001555D0 /* phone.png */; };
 		09F74CC51997CB1E001555D0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09F74CC41997CB1E001555D0 /* AVFoundation.framework */; };
-		09FA71E11ABB32B5009D5BBB /* CSKuleVideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FA71E01ABB32B5009D5BBB /* CSKuleVideoPlayerViewController.m */; };
 		09FE1ED619B5D53E0073D9D4 /* v3_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 09FE1EC619B5D53E0073D9D4 /* v3_2.png */; };
 		09FE1ED719B5D53E0073D9D4 /* v3_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09FE1EC719B5D53E0073D9D4 /* v3_2@2x.png */; };
 		09FE1EDC19B5D53F0073D9D4 /* v3_5.png in Resources */ = {isa = PBXBuildFile; fileRef = 09FE1ECC19B5D53E0073D9D4 /* v3_5.png */; };
@@ -375,7 +374,9 @@
 		09FFB5F718D6B46300F07B0A /* CSKuleScheduleInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FFB5F618D6B46300F07B0A /* CSKuleScheduleInfo.m */; };
 		221858CE1BEF9EDC005C4281 /* CBHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 221858CD1BEF9EDC005C4281 /* CBHTTPRequestOperationManager.m */; };
 		223962CB1C7412A3004E3E32 /* CBSessionDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 223962CA1C7412A3004E3E32 /* CBSessionDataModel.m */; };
+		223962CF1C757650004E3E32 /* CBIMNotificationUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 223962CE1C757650004E3E32 /* CBIMNotificationUserInfo.m */; };
 		224B441A1C51088100982E15 /* appicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 224B44191C51088100982E15 /* appicon@2x.png */; };
+		227A9D251C92A2A300FE19D9 /* CBSchoolConfigData.m in Sources */ = {isa = PBXBuildFile; fileRef = 227A9D241C92A2A300FE19D9 /* CBSchoolConfigData.m */; };
 		228C885E1C0F4F25003D9EA2 /* CBIMTokenData.m in Sources */ = {isa = PBXBuildFile; fileRef = 228C885D1C0F4F25003D9EA2 /* CBIMTokenData.m */; };
 		228C88621C0F58DC003D9EA2 /* CBIMChatListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 228C88611C0F58DC003D9EA2 /* CBIMChatListViewController.m */; };
 		228C88651C0FF045003D9EA2 /* CBIMDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 228C88641C0FF045003D9EA2 /* CBIMDataSource.m */; };
@@ -905,8 +906,6 @@
 		09F74C321997C4F3001555D0 /* gallery.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gallery.png; sourceTree = "<group>"; };
 		09F74C511997C4F3001555D0 /* phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phone.png; sourceTree = "<group>"; };
 		09F74CC41997CB1E001555D0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		09FA71DF1ABB32B5009D5BBB /* CSKuleVideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSKuleVideoPlayerViewController.h; path = views/CSKuleVideoPlayerViewController.h; sourceTree = "<group>"; };
-		09FA71E01ABB32B5009D5BBB /* CSKuleVideoPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSKuleVideoPlayerViewController.m; path = views/CSKuleVideoPlayerViewController.m; sourceTree = "<group>"; };
 		09FE1EC619B5D53E0073D9D4 /* v3_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = v3_2.png; sourceTree = "<group>"; };
 		09FE1EC719B5D53E0073D9D4 /* v3_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v3_2@2x.png"; sourceTree = "<group>"; };
 		09FE1ECC19B5D53E0073D9D4 /* v3_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = v3_5.png; sourceTree = "<group>"; };
@@ -949,7 +948,11 @@
 		221858CD1BEF9EDC005C4281 /* CBHTTPRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBHTTPRequestOperationManager.m; sourceTree = "<group>"; };
 		223962C91C7412A3004E3E32 /* CBSessionDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBSessionDataModel.h; sourceTree = "<group>"; };
 		223962CA1C7412A3004E3E32 /* CBSessionDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBSessionDataModel.m; sourceTree = "<group>"; };
+		223962CD1C757650004E3E32 /* CBIMNotificationUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBIMNotificationUserInfo.h; sourceTree = "<group>"; };
+		223962CE1C757650004E3E32 /* CBIMNotificationUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBIMNotificationUserInfo.m; sourceTree = "<group>"; };
 		224B44191C51088100982E15 /* appicon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "appicon@2x.png"; sourceTree = "<group>"; };
+		227A9D231C92A2A300FE19D9 /* CBSchoolConfigData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBSchoolConfigData.h; sourceTree = "<group>"; };
+		227A9D241C92A2A300FE19D9 /* CBSchoolConfigData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBSchoolConfigData.m; sourceTree = "<group>"; };
 		228C885C1C0F4F25003D9EA2 /* CBIMTokenData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBIMTokenData.h; sourceTree = "<group>"; };
 		228C885D1C0F4F25003D9EA2 /* CBIMTokenData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBIMTokenData.m; sourceTree = "<group>"; };
 		228C88601C0F58DC003D9EA2 /* CBIMChatListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBIMChatListViewController.h; sourceTree = "<group>"; };
@@ -1075,6 +1078,10 @@
 			children = (
 				228C885C1C0F4F25003D9EA2 /* CBIMTokenData.h */,
 				228C885D1C0F4F25003D9EA2 /* CBIMTokenData.m */,
+				223962CD1C757650004E3E32 /* CBIMNotificationUserInfo.h */,
+				223962CE1C757650004E3E32 /* CBIMNotificationUserInfo.m */,
+				227A9D231C92A2A300FE19D9 /* CBSchoolConfigData.h */,
+				227A9D241C92A2A300FE19D9 /* CBSchoolConfigData.m */,
 			);
 			path = jsonobjects;
 			sourceTree = "<group>";
@@ -1349,8 +1356,6 @@
 				0915662118ED92810073AE22 /* CSKuleVerifyMobileViewController.m */,
 				09C3AC22199DAC8600A6251C /* CSContentEditorViewController.h */,
 				09C3AC23199DAC8600A6251C /* CSContentEditorViewController.m */,
-				09FA71DF1ABB32B5009D5BBB /* CSKuleVideoPlayerViewController.h */,
-				09FA71E01ABB32B5009D5BBB /* CSKuleVideoPlayerViewController.m */,
 				09FE6AEB18C5722500A840BE /* views */,
 				093FB8F11A83BD8500A589A8 /* CSKuleDevSettingsViewController.h */,
 				093FB8F21A83BD8500A589A8 /* CSKuleDevSettingsViewController.m */,
@@ -2367,6 +2372,7 @@
 				0942B1601AE3E559008D3BDA /* ELCAssetTablePicker.m in Sources */,
 				096DC1C31BA33F4000661B61 /* UIGestureRecognizer+GMGridViewAdditions.m in Sources */,
 				09ED59BC18CDC5E800187585 /* CSKuleCookbookInfo.m in Sources */,
+				223962CF1C757650004E3E32 /* CBIMNotificationUserInfo.m in Sources */,
 				09FFB5F118D6B2E100F07B0A /* CSKuleWeekScheduleInfo.m in Sources */,
 				09C00FB21B4454D500FC1474 /* CSKuleBusMainViewController.mm in Sources */,
 				0901207219338B3800CE506E /* UIImage+CSExtends.m in Sources */,
@@ -2422,7 +2428,6 @@
 				0942B15F1AE3E559008D3BDA /* ELCAssetCell.m in Sources */,
 				091AE83118D820C800EBC927 /* VRGCalendarView.m in Sources */,
 				090FC173199CAB5600C3A31A /* CSKuleHistoryItemTableViewCell.m in Sources */,
-				09FA71E11ABB32B5009D5BBB /* CSKuleVideoPlayerViewController.m in Sources */,
 				091AE81E18D7DC6A00EBC927 /* CSKuleSchoolInfo.m in Sources */,
 				096DC1CB1BA341A000661B61 /* EGOCache.m in Sources */,
 				092294E41AB9A7E600E40C84 /* CSVideoView.m in Sources */,
@@ -2434,6 +2439,7 @@
 				0914E363199FCD7500276ABA /* MJPhoto.m in Sources */,
 				0914E3A219A05A0800276ABA /* CSKuleCCTVItemTableViewCell.m in Sources */,
 				09EEBA2A1B8632E0006296F1 /* CBContractorMainViewController.m in Sources */,
+				227A9D251C92A2A300FE19D9 /* CBSchoolConfigData.m in Sources */,
 				0919B7731929D41900810556 /* CSKuleTopicMsg.m in Sources */,
 				09607BAF1B4977480047DB67 /* CSKuleBusLocationInfo.m in Sources */,
 				09142E1F18E2BA2100E5848F /* CSKuleAssessInfo.m in Sources */,

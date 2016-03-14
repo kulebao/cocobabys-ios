@@ -1389,4 +1389,17 @@
                       failure:failure];
 }
 
+- (AFHTTPRequestOperation*)reqGetConfigOfKindergarten:(NSInteger)kindergarten
+                                              success:(SuccessResponseHandler)success
+                                              failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kGetKindergartenConfigurePath, @(kindergarten)];
+    
+    NSDictionary* parameters = @{};
+    
+    return [_httpCobabys GET:path
+                  parameters:parameters
+                     success:success
+                     failure:failure];
+}
+
 @end

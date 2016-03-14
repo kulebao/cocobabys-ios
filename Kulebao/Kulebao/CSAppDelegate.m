@@ -13,8 +13,8 @@
 #import <Bugly/CrashReporter.h>
 #import "CBIMDataSource.h"
 #import "CBSessionDataModel.h"
-
-#define RONGCLOUD_IM_APPKEY @"0vnjpoadnwk0z"
+#import "AFNetworkReachabilityManager.h"
+#import "AFNetworkActivityIndicatorManager.h"
 
 CSAppDelegate* gApp = nil;
 
@@ -30,6 +30,9 @@ CSAppDelegate* gApp = nil;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+    [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
+    
     gApp = self;
     
     // 初始化Bugly
@@ -44,8 +47,7 @@ CSAppDelegate* gApp = nil;
     [[RCIM sharedRCIM] setGroupInfoDataSource:[CBIMDataSource sharedInstance]];
     [[RCIM sharedRCIM] setUserInfoDataSource:[CBIMDataSource sharedInstance]];
     [[RCIM sharedRCIM] setGroupUserInfoDataSource:[CBIMDataSource sharedInstance]];
-    
-    //[[RCIMClient sharedRCIMClient] setReceiveMessageDelegate:[CBIMDataSource sharedInstance] object:nil];
+    [[RCIM sharedRCIM] setReceiveMessageDelegate:[CBIMDataSource sharedInstance]];
     
     _engine = [[CSKuleEngine alloc] init];
     [_engine setupEngine];
@@ -158,7 +160,8 @@ CSAppDelegate* gApp = nil;
 - (void)gotoMainProcess {
     if (gApp.engine.loginInfo) {
         NSDictionary* serverInfo = [gApp.engine.preferences getServerSettings];
-        [CBSessionDataModel session:gApp.engine.loginInfo.accountName withTag:serverInfo[@"tag"]];
+        CBSessionDataModel* session = [CBSessionDataModel session:gApp.engine.loginInfo.accountName withTag:serverInfo[@"tag"]];
+        [session updateSchoolConfig:gApp.engine.loginInfo.schoolId];
         
         if (gApp.engine.loginInfo.imToken) {
             // 快速集成第二步，连接融云服务器
@@ -263,6 +266,10 @@ CSAppDelegate* gApp = nil;
 - (void)hideAlertAfterDelay:(NSTimeInterval)delay {
     [NSObject cancelPreviousPerformRequestsWithTarget:self.hud];
     [self.hud hide:YES afterDelay:delay];
+}
+
+- (void)alertNoChild {
+    [gApp alert:@"获取幼儿信息失败，请联系幼儿园确认幼儿信息已经绑定，且网络正常后，重新启动应用！"];
 }
 
 #pragma mark - Private

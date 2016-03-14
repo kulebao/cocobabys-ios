@@ -7,6 +7,8 @@
 //
 
 #import "CBSessionDataModel.h"
+#import "CBHttpClient.h"
+#import <RongIMKit/RongIMKit.h>
 
 static CBSessionDataModel* s_instance = NULL;
 
@@ -69,6 +71,31 @@ static CBSessionDataModel* s_instance = NULL;
     return YES;
 }
 
+- (void)updateSchoolConfig:(NSInteger)schoolId{
+    CBHttpClient* http = [CBHttpClient sharedInstance];
+    [http reqGetConfigOfKindergarten:schoolId
+                             success:^(AFHTTPRequestOperation *operation, id dataJson) {
+                                 self.schoolConfig = [CBSchoolConfigData instanceWithDictionary:dataJson];
+                                 if (!self.schoolConfig.schoolGroupChat) {
+                                     NSArray* conns = [[RCIMClient sharedRCIMClient] getConversationList:@[@(ConversationType_GROUP)]];
+                                     for (RCConversation* con in conns) {
+                                         [[RCIMClient sharedRCIMClient] clearMessages:con.conversationType targetId:con.targetId];
+                                         [[RCIMClient sharedRCIMClient] setConversationNotificationStatus:con.conversationType
+                                                                                                 targetId:con.targetId
+                                                                                                isBlocked:!self.schoolConfig.schoolGroupChat
+                                                                                                  success:^(RCConversationNotificationStatus nStatus) {
+                                                                                                      
+                                                                                                  } error:^(RCErrorCode status) {
+                                                                                                      
+                                                                                                  }];
+                                     }
+                                 }
+                                
+                             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                 
+                             }];
+}
+
 - (void)invalidate {
     if ([self isEqual:s_instance]) {
         s_instance = nil;
@@ -80,12 +107,14 @@ static CBSessionDataModel* s_instance = NULL;
     [aCoder encodeObject:_username forKey:@"_username"];
     [aCoder encodeObject:_tag forKey:@"_tag"];
     [aCoder encodeObject:_imGroupTags forKey:@"_imGroupTags"];
+    [aCoder encodeObject:_schoolConfig forKey:@"_schoolConfig"];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     _username = [aDecoder decodeObjectForKey:@"_username"];
     _tag = [aDecoder decodeObjectForKey:@"_tag"];
     _imGroupTags = [NSMutableSet setWithSet:[aDecoder decodeObjectForKey:@"_imGroupTags"]];
+    _schoolConfig = [aDecoder decodeObjectForKey:@"_schoolConfig"];
     
     [self setup];
     return self;

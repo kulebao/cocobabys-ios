@@ -105,6 +105,7 @@
         <attribute name="schoolId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="status" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="timestamp" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="uid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
     <entity name="EntityRelationshipInfo" representedClassName="EntityRelationshipInfo" syncable="YES">
         <attribute name="card" optional="YES" attributeType="String" syncable="YES"/>
@@ -121,7 +122,7 @@
         <element name="EntityDailylog" positionX="270" positionY="351" width="128" height="133"/>
         <element name="EntityLoginInfo" positionX="261" positionY="198" width="128" height="300"/>
         <element name="EntityNewsInfo" positionX="261" positionY="351" width="128" height="240"/>
-        <element name="EntityParentInfo" positionX="261" positionY="342" width="128" height="210"/>
+        <element name="EntityParentInfo" positionX="261" positionY="342" width="128" height="225"/>
         <element name="EntityRelationshipInfo" positionX="270" positionY="360" width="128" height="118"/>
     </elements>
 </model>

@@ -130,4 +130,9 @@
 #define kIMBanIdURL             @"/api/v7/kindergarten/%@/class_im_group/%@/ban/%@"
 #define kIMGroupURL             @"/api/v7/kindergarten/%@/class_im_group/%@/user"
 
+#define kGetHistoryListURL      @"/api/v3/kindergarten/%@/employee/%@/history"
+
+// PATH: 获取学校配置
+#define kGetKindergartenConfigurePath  @"/api/v2/school_config/%@"
+
 #endif

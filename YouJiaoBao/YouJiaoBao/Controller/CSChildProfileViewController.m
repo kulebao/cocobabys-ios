@@ -15,6 +15,7 @@
 #import "CSAssessmentEditorViewController.h"
 #import "CBIMDataSource.h"
 #import "CBIMChatViewController.h"
+#import "EntityParentInfo.h"
 
 @interface CSChildProfileViewController () <UITableViewDataSource, UITableViewDelegate, CSChildProfileHeaderViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -136,6 +137,25 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    EntityRelationshipInfo* relationship = [_childRelationships objectAtIndex:indexPath.row];
+    
+    NSString* userId = [NSString stringWithFormat:@"p_%@_Some(%@)_%@", relationship.childInfo.schoolId, relationship.parentInfo.uid, relationship.parentInfo.phone];
+    if([[[[RCIMClient sharedRCIMClient] currentUserInfo] userId] isEqualToString:userId]) {
+        
+    }
+    else {
+        [[CBIMDataSource sharedInstance] getUserInfoWithUserId:userId completion:^(RCUserInfo *userInfo) {
+            NSString* nickname = [NSString stringWithFormat:@"%@%@", [_childInfo name], relationship.relationship];
+            CBIMChatViewController *conversationVC = [[CBIMChatViewController alloc]init];
+            conversationVC.conversationType = ConversationType_PRIVATE;
+            conversationVC.targetId = userId;
+            conversationVC.title = nickname;
+            
+            [self.navigationController pushViewController:conversationVC animated:YES];
+        }];
+    }
+
 }
 
 /*

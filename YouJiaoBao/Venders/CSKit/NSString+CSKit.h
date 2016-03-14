@@ -15,4 +15,8 @@
 - (BOOL)isValidSmsCode;
 - (NSString*)trim;
 
+
+- (NSString *)MD5Hash;
+- (NSString *)MD5HashEx;
+
 @end

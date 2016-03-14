@@ -17,6 +17,8 @@
 #import "CBIMDataSource.h"
 #import "CBIMChatViewController.h"
 #import <BlocksKit/BlocksKit.h>
+#import "AFNetworkReachabilityManager.h"
+#import "CBSessionDataModel.h"
 
 CSAppDelegate* gApp = nil;
 
@@ -37,6 +39,7 @@ CSAppDelegate* gApp = nil;
 {
     // Override point for customization after application launch.
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     
     //[[CrashReporter sharedInstance] enableLog:YES];
     [[CrashReporter sharedInstance] installWithAppId:@"900013150"];
@@ -47,6 +50,7 @@ CSAppDelegate* gApp = nil;
     [[RCIM sharedRCIM] setGroupInfoDataSource:[CBIMDataSource sharedInstance]];
     [[RCIM sharedRCIM] setUserInfoDataSource:[CBIMDataSource sharedInstance]];
     [[RCIM sharedRCIM] setGroupUserInfoDataSource:[CBIMDataSource sharedInstance]];
+    [[RCIM sharedRCIM] setReceiveMessageDelegate:[CBIMDataSource sharedInstance]];
     
     //
     id naviAppearance = [UINavigationBar appearance];
@@ -92,7 +96,9 @@ CSAppDelegate* gApp = nil;
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"app.applicationWillResignActive" object:nil];
+    
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
+    [session store];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
@@ -266,8 +272,11 @@ CSAppDelegate* gApp = nil;
     }
     else {
         CSLog(@"收到本地消息:%@", notification);
-        NSDictionary *pushServiceData = [[RCIMClient sharedRCIMClient] getPushExtraFromRemoteNotification:notification.userInfo];
+        NSDictionary *pushServiceData = [notification.userInfo objectForKey:@"rc"];
         if (pushServiceData) {
+        }
+        else {
+            
         }
     }
     _pendingNotificationInfo = notification.userInfo;

@@ -14,6 +14,7 @@
 #import "CSEngine.h"
 #import "EntityClassInfoHelper.h"
 #import "CSHttpClient.h"
+#import "CBSessionDataModel.h"
 
 @interface CBIMChatListViewController ()
 
@@ -107,14 +108,26 @@
         }
     }
     
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
+    
     NSMutableArray* newDataSource = [NSMutableArray array];
     for (RCConversationModel* m in dataSource) {
         if (m.conversationType == ConversationType_PRIVATE) {
             [newDataSource addObject:m];
         }
         else if (m.conversationType == ConversationType_GROUP) {
-            [newDataSource addObject:m];
-            //m.isTop = YES;
+            if (session.schoolConfig.schoolGroupChat) {
+                [newDataSource addObject:m];
+            }
+            else {
+                /*
+                NSArray* msgList = [[RCIMClient sharedRCIMClient] getLatestMessages:ConversationType_GROUP targetId:m.targetId count:999];
+                for (RCMessage* msg in msgList) {
+                    [[RCIMClient sharedRCIMClient] setMessageReceivedStatus:msg.messageId receivedStatus:ReceivedStatus_READ];
+                }
+                 */
+                [[RCIMClient sharedRCIMClient] clearMessagesUnreadStatus:ConversationType_GROUP targetId:m.targetId];
+            }
         }
         else {
             [newDataSource addObject:m];
@@ -123,31 +136,28 @@
         [targerIdSet removeObject:m.targetId];
     }
     
-    for (NSString* targetId in targerIdSet) {
-        RCConversation* conv = [[RCConversation alloc] init];
-        conv.targetId = targetId;
-        conv.conversationType = ConversationType_GROUP;
-        RCConversationModel* newModel = [[RCConversationModel alloc] init:RC_CONVERSATION_MODEL_TYPE_NORMAL conversation:conv extend:nil];
-        [newDataSource addObject:newModel];
-        newModel.receivedTime = [[NSDate date] timeIntervalSince1970]*1000;
-        newModel.sentTime = [[NSDate date] timeIntervalSince1970]*1000;
-        //newModel.isTop = YES;
-        //
-        //        RCIMClient* im = [RCIMClient sharedRCIMClient];
-        //        RCTextMessage* msgContent = [RCTextMessage new];
-        //        msgContent.content = @"点击开始会话";
-        //        [im insertMessage:ConversationType_GROUP targetId:targetId senderUserId:@"im_system_admin" sendStatus:SentStatus_RECEIVED content:msgContent];
-        
-        RCInformationNotificationMessage* warningMessage = [RCInformationNotificationMessage notificationWithMessage:@"点击开始会话" extra:nil];
-        RCMessage* insertMessage =[[RCMessage alloc] initWithType:ConversationType_GROUP
-                                                         targetId:targetId
-                                                        direction:MessageDirection_SEND
-                                                        messageId:-1
-                                                          content:warningMessage];
-        
-        
-        newModel.lastestMessage = insertMessage.content;
-        newModel.lastestMessageId = -1;
+    
+    if (session.schoolConfig.schoolGroupChat) {
+        for (NSString* targetId in targerIdSet) {
+            RCConversation* conv = [[RCConversation alloc] init];
+            conv.targetId = targetId;
+            conv.conversationType = ConversationType_GROUP;
+            RCConversationModel* newModel = [[RCConversationModel alloc] init:RC_CONVERSATION_MODEL_TYPE_NORMAL conversation:conv extend:nil];
+            [newDataSource addObject:newModel];
+            newModel.receivedTime = [[NSDate date] timeIntervalSince1970]*1000;
+            newModel.sentTime = [[NSDate date] timeIntervalSince1970]*1000;
+            
+            RCInformationNotificationMessage* warningMessage = [RCInformationNotificationMessage notificationWithMessage:@"点击开始会话" extra:nil];
+            RCMessage* insertMessage =[[RCMessage alloc] initWithType:ConversationType_GROUP
+                                                             targetId:targetId
+                                                            direction:MessageDirection_SEND
+                                                            messageId:-1
+                                                              content:warningMessage];
+            
+            
+            newModel.lastestMessage = insertMessage.content;
+            newModel.lastestMessageId = -1;
+        }
     }
     
     return newDataSource;

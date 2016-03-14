@@ -13,6 +13,7 @@
 #import "CSAppDelegate.h"
 #import <RongIMKit/RongIMKit.h>
 #import "CBIMDataSource.h"
+#import "CBSessionDataModel.h"
 
 @interface CSLoginViewController () {
     ModelAccount* _loginAccount;
@@ -59,12 +60,8 @@
 #if COCOBABYS_USE_ENV_PROD
     self.fieldUsername.text = @"Joe_tian";
     self.fieldPassword.text = @"89898989";
-    self.fieldUsername.text = @"204170";
-    self.fieldPassword.text = @"10236578412";
-    //self.fieldUsername.text = @"e27359";
-    //self.fieldPassword.text = @"15902330116";
 #else
-    self.fieldUsername.text = @"Joe_tian";
+    self.fieldUsername.text = @"admin8901";
     self.fieldPassword.text = @"89898989";
 #endif
 #endif
@@ -108,6 +105,8 @@
         id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
             EntityLoginInfo* loginInfo = [EntityLoginInfoHelper updateEntity:responseObject];
             if (loginInfo != nil) {
+                CBSessionDataModel* session = [CBSessionDataModel session:loginInfo.phone];
+                [session updateSchoolConfig:loginInfo.schoolId.integerValue];
                 [gApp alert:@"登录成功"];
                 [[CSEngine sharedInstance] encryptAccount:_loginAccount];
                 [[NSNotificationCenter defaultCenter] postNotificationName:kNotiLoginSuccess object:loginInfo userInfo:nil];

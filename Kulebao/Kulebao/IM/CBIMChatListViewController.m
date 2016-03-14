@@ -11,8 +11,12 @@
 #import "CBIMChatViewController.h"
 #import "UIActionSheet+BlocksKit.h"
 #import "CBIMGroupMembersViewController.h"
+#import "CBIMDataSource.h"
+#import "CBSessionDataModel.h"
 
-@interface CBIMChatListViewController ()
+@interface CBIMChatListViewController () {
+    CBIMNotificationUserInfo* _rcUserInfo;
+}
 
 @end
 
@@ -30,6 +34,13 @@
                                                                               style:UIBarButtonItemStyleBordered
                                                                              target:self
                                                                              action:@selector(onRightNaviItemClicked:)];
+    
+    if (_rcUserInfo) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self doOpenChat:_rcUserInfo];
+            _rcUserInfo = nil;
+        });
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -96,14 +107,26 @@
         }
     }
     
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
+    
     NSMutableArray* newDataSource = [NSMutableArray array];
     for (RCConversationModel* m in dataSource) {
         if (m.conversationType == ConversationType_PRIVATE) {
             [newDataSource addObject:m];
         }
         else if (m.conversationType == ConversationType_GROUP) {
-            [newDataSource addObject:m];
-            //m.isTop = YES;
+            if (session.schoolConfig.schoolGroupChat) {
+                [newDataSource addObject:m];
+            }
+            else {
+                /*
+                NSArray* msgList = [[RCIMClient sharedRCIMClient] getLatestMessages:ConversationType_GROUP targetId:m.targetId count:999];
+                for (RCMessage* msg in msgList) {
+                    [[RCIMClient sharedRCIMClient] setMessageReceivedStatus:msg.messageId receivedStatus:ReceivedStatus_READ];
+                }
+                 */
+                [[RCIMClient sharedRCIMClient] clearMessagesUnreadStatus:ConversationType_GROUP targetId:m.targetId];
+            }
         }
         else {
             [newDataSource addObject:m];
@@ -112,34 +135,72 @@
         [targerIdSet removeObject:m.targetId];
     }
     
-    for (NSString* targetId in targerIdSet) {
-        RCConversation* conv = [[RCConversation alloc] init];
-        conv.targetId = targetId;
-        conv.conversationType = ConversationType_GROUP;
-        RCConversationModel* newModel = [[RCConversationModel alloc] init:RC_CONVERSATION_MODEL_TYPE_NORMAL conversation:conv extend:nil];
-        [newDataSource addObject:newModel];
-        newModel.receivedTime = [[NSDate date] timeIntervalSince1970]*1000;
-        newModel.sentTime = [[NSDate date] timeIntervalSince1970]*1000;
-        //newModel.isTop = YES;
-        //
-        //        RCIMClient* im = [RCIMClient sharedRCIMClient];
-        //        RCTextMessage* msgContent = [RCTextMessage new];
-        //        msgContent.content = @"点击开始会话";
-        //        [im insertMessage:ConversationType_GROUP targetId:targetId senderUserId:@"im_system_admin" sendStatus:SentStatus_RECEIVED content:msgContent];
-        
-        RCInformationNotificationMessage* warningMessage = [RCInformationNotificationMessage notificationWithMessage:@"点击开始会话" extra:nil];
-        RCMessage* insertMessage =[[RCMessage alloc] initWithType:ConversationType_GROUP
-                                                         targetId:targetId
-                                                        direction:MessageDirection_SEND
-                                                        messageId:-1
-                                                          content:warningMessage];
-        
-        
-        newModel.lastestMessage = insertMessage.content;
-        newModel.lastestMessageId = -1;
+    if (session.schoolConfig.schoolGroupChat) {
+        for (NSString* targetId in targerIdSet) {
+            RCConversation* conv = [[RCConversation alloc] init];
+            conv.targetId = targetId;
+            conv.conversationType = ConversationType_GROUP;
+            RCConversationModel* newModel = [[RCConversationModel alloc] init:RC_CONVERSATION_MODEL_TYPE_NORMAL conversation:conv extend:nil];
+            [newDataSource addObject:newModel];
+            newModel.receivedTime = [[NSDate date] timeIntervalSince1970]*1000;
+            newModel.sentTime = [[NSDate date] timeIntervalSince1970]*1000;
+
+            RCInformationNotificationMessage* warningMessage = [RCInformationNotificationMessage notificationWithMessage:@"点击开始会话" extra:nil];
+            RCMessage* insertMessage =[[RCMessage alloc] initWithType:ConversationType_GROUP
+                                                             targetId:targetId
+                                                            direction:MessageDirection_SEND
+                                                            messageId:-1
+                                                              content:warningMessage];
+            
+            
+            newModel.lastestMessage = insertMessage.content;
+            newModel.lastestMessageId = -1;
+        }
     }
     
     return newDataSource;
+}
+
+- (void)openChat:(CBIMNotificationUserInfo*)rcUserInfo {
+    if ([self isViewLoaded]) {
+        [self doOpenChat:rcUserInfo];
+    }
+    else {
+        _rcUserInfo = rcUserInfo;
+    }
+}
+
+- (void)doOpenChat:(CBIMNotificationUserInfo*)rcUserInfo {
+    CSLog(@"%s, rcUserInfo=%@", __FUNCTION__, rcUserInfo);
+    /*
+     rc =     {
+     cType = GRP;
+     fId = "t_2041_Some(2187)_Joe_tian";
+     oName = "RC:TxtMsg";
+     tId = "2041_20001";
+     };
+     */
+#if CB_ENABLE_OPEN_CHAT
+    CBIMChatViewController *conversationVC = [[CBIMChatViewController alloc]init];
+
+    if ([rcUserInfo.cType isEqualToString:@"GRP"]) {
+        [[CBIMDataSource sharedInstance] getGroupInfoWithGroupId:rcUserInfo.tId completion:^(RCGroup *groupInfo) {
+            conversationVC.conversationType = ConversationType_GROUP;
+            conversationVC.targetId = rcUserInfo.tId;
+            conversationVC.title = groupInfo.groupName;
+            [self.navigationController pushViewController:conversationVC animated:YES];
+        }];
+    }
+    else {
+        [[CBIMDataSource sharedInstance] getUserInfoWithUserId:rcUserInfo.fId completion:^(RCUserInfo *userInfo) {
+            conversationVC.conversationType = ConversationType_PRIVATE;
+            conversationVC.targetId = rcUserInfo.fId;
+            conversationVC.title = userInfo.name;
+            [self.navigationController pushViewController:conversationVC animated:YES];
+        }];
+    }
+#endif
+    
 }
 
 @end

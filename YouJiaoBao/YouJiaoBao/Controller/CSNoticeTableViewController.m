@@ -95,7 +95,7 @@
         CSLog(@"frNewsWithClassList Error: %@", error);
     }
     
-    [self reloadNewsList];
+    [self reloadAllNewsList];
 }
 
 - (void)didReceiveMemoryWarning
@@ -349,6 +349,49 @@
 }
 
 #pragma mark - Private
+- (void)reloadAllNewsList {
+    CSHttpClient* http = [CSHttpClient sharedInstance];
+    CSEngine* engine = [CSEngine sharedInstance];
+    CSAppDelegate* app = [CSAppDelegate sharedInstance];
+    NSArray* classInfoList = engine.classInfoList;
+    
+    NSMutableArray* classIdList = [NSMutableArray array];
+    for (EntityClassInfo* classInfo in classInfoList) {
+        [classIdList addObject:classInfo.classId.stringValue];
+    }
+    
+    id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSArray* list = [EntityNewsInfoHelper reloadEntities: responseObject];
+        self.pullTableView.pullLastRefreshDate = [NSDate date];
+        self.pullTableView.pullTableIsRefreshing = NO;
+        
+        if (list.count == 0) {
+            //[app alert:@"已是最新"];
+        }
+        else {
+            NSError* error = nil;
+            if (![_frCtrl performFetch:&error]) {
+                CSLog(@"frNewsWithClassList Error: %@", error);
+            }
+            
+            [self.pullTableView reloadData];
+        }
+    };
+    
+    id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        self.pullTableView.pullLastRefreshDate = [NSDate date];
+        self.pullTableView.pullTableIsRefreshing = NO;
+    };
+    
+    [http opGetNewsOfClasses:classIdList
+              inKindergarten:engine.loginInfo.schoolId.integerValue
+                        from:nil
+                          to:nil
+                        most:@(50)
+                     success:success
+                     failure:failure];
+}
+
 - (void)reloadNewsList {
     CSHttpClient* http = [CSHttpClient sharedInstance];
     CSEngine* engine = [CSEngine sharedInstance];

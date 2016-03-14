@@ -52,7 +52,6 @@
             entity.birthday = [jsonObject objectForKey:@"birthday"];
             entity.loginName = [jsonObject objectForKey:@"login_name"];
             entity.uid = [jsonObject objectForKey:@"uid"];
-
         }
         
         NSDictionary* imDict = [jsonObject valueForKeyNotNull:@"im_token"];
@@ -68,6 +67,7 @@
         }
         
         entity.loginDate = [NSDate date];
+        entity.o_id = o_id;
         [context save:&error];
     }
     

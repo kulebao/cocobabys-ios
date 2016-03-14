@@ -14,6 +14,7 @@
 #import "CBRelationshipInfo.h"
 #import "CSEngine.h"
 #import "EntityClassInfo.h"
+#import "CBSessionDataModel.h"
 
 @interface CBIMDataSource ()
 
@@ -95,6 +96,15 @@
     }
     else {
         CSLog(@"Write %@ failed.", [filePath lastPathComponent]);
+    }
+}
+
+#pragma mark - RCIMReceiveMessageDelegate
+- (void)onRCIMReceiveMessage:(RCMessage *)message left:(int)left {
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
+    if (!session.schoolConfig.schoolGroupChat && message.conversationType == ConversationType_GROUP) {
+        //[[RCIMClient sharedRCIMClient] clearMessagesUnreadStatus:message.conversationType targetId:message.targetId];
+        [[RCIMClient sharedRCIMClient] clearMessages:message.conversationType targetId:message.targetId];
     }
 }
 

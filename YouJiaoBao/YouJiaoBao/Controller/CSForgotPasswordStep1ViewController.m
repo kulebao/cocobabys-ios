@@ -126,7 +126,7 @@
         SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
             /* {"error_msg":"请求太频繁。","error_code":1} */
             
-            NSString* error_msg = [dataJson valueForKeyNotNull:@"error_msg"];
+            //NSString* error_msg = [dataJson valueForKeyNotNull:@"error_msg"];
             NSInteger error_code = [[dataJson valueForKeyNotNull:@"error_code"] integerValue];
             
             if (error_code == 0) {

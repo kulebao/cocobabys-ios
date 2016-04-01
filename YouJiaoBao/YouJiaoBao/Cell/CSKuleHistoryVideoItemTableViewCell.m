@@ -18,6 +18,7 @@
 #import "UIImageView+WebCache.h"
 #import "CSEngine.h"
 #import "AFNetworkReachabilityManager.h"
+#import "CBSessionDataModel.h"
 
 @interface CSKuleHistoryVideoItemTableViewCell() {
     NSURL* _videoURL;
@@ -177,10 +178,10 @@
     
     self.btnPlay.alpha = 1.0f;
     
-    CSEngine* engine = [CSEngine sharedInstance];
-    [self.imgPortrait sd_setImageWithURL:[NSURL URLWithString:engine.loginInfo.portrait]
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
+    [self.imgPortrait sd_setImageWithURL:[NSURL URLWithString:session.loginInfo.portrait]
                         placeholderImage:[UIImage imageNamed:@"chat_head_icon.gif"]];
-    self.labName.text = engine.loginInfo.name;
+    self.labName.text = session.loginInfo.name;
 }
 
 - (void)onLongPress:(UILongPressGestureRecognizer*)ges {

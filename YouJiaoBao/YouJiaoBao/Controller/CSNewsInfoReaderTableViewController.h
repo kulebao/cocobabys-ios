@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "EntityNewsInfo.h"
+
+@class CBNewsInfo;
 
 @interface CSNewsInfoReaderTableViewController : UITableViewController
 
-@property (nonatomic, strong) EntityNewsInfo* newsInfo;
+@property (nonatomic, strong) CBNewsInfo* newsInfo;
 @property (nonatomic, strong) NSArray* readerList;
 
 @end

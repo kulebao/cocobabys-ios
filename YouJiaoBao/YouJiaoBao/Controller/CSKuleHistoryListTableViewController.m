@@ -182,6 +182,8 @@
 
 - (void)deleteCell:(id)sender {
     if (_denyIndexPath) {
+        
+        /*
         CBHistoryInfo* historyInfo = [self.historyList objectAtIndex:_denyIndexPath.row];
         SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
             NSInteger error_code = [[dataJson valueForKeyNotNull:@"error_code"] integerValue];
@@ -202,11 +204,10 @@
             CSLog(@"failure:%@", error);
             [gApp hideAlert];
         };
-        
-        /*
+
         [gApp waitingAlert:@"请稍等"];
         CSHttpClient* http = [CSHttpClient sharedInstance];
-        [gApp.engine.httpClient reqDeleteHistoryOfKindergarten:gApp.engine.loginInfo.schoolId
+        [gApp.engine.httpClient reqDeleteHistoryOfKindergarten:gApp.session.loginInfo.school_id
                                         withChildId:gApp.engine.currentRelationship.child.childId
                                            recordId:historyInfo.uid.longLongValue
                                             success:sucessHandler
@@ -302,10 +303,10 @@
     
     [gApp waitingAlert:@"获取数据中" withTitle:@"请稍候"];
     CSHttpClient* http = [CSHttpClient sharedInstance];
-    CSEngine* engine = [CSEngine sharedInstance];
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
     
-    [http reqGetHistoryList:engine.loginInfo.o_id
-             inKindergarten:engine.loginInfo.schoolId.integerValue
+    [http reqGetHistoryList:session.loginInfo._id
+             inKindergarten:session.loginInfo.school_id.integerValue
                        from:nil
                          to:nil
                        most:nil
@@ -348,7 +349,7 @@
 
 - (void)saveVideo:(id)sender {
     NSURL* videoURL = objc_getAssociatedObject(sender, "videoUrl");
-    MPMoviePlayerViewController* ctrl = objc_getAssociatedObject(sender, "playerCtrl");
+    //MPMoviePlayerViewController* ctrl = objc_getAssociatedObject(sender, "playerCtrl");
     BOOL ok = UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(videoURL.path);
     if (videoURL && ok) {
         [gApp waitingAlert:@"保存中，请稍候..."];
@@ -412,8 +413,7 @@
 
 - (void)reloadDataList {
     CSHttpClient* http = [CSHttpClient sharedInstance];
-    CSEngine* engine = [CSEngine sharedInstance];
-    CSAppDelegate* app = [CSAppDelegate sharedInstance];
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
     
     id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
         self.pullTableView.pullLastRefreshDate = [NSDate date];
@@ -445,8 +445,8 @@
     
     CBHistoryInfo* first = self.historyList.lastObject;
     
-    [http reqGetHistoryList:engine.loginInfo.o_id
-             inKindergarten:engine.loginInfo.schoolId.integerValue
+    [http reqGetHistoryList:session.loginInfo._id
+             inKindergarten:session.loginInfo.school_id.integerValue
                        from:first.timestamp
                          to:nil
                        most:@(50)
@@ -456,8 +456,7 @@
 
 - (void)loadMoreDataList {
     CSHttpClient* http = [CSHttpClient sharedInstance];
-    CSEngine* engine = [CSEngine sharedInstance];
-    CSAppDelegate* app = [CSAppDelegate sharedInstance];
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
     
     id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
         self.pullTableView.pullTableIsLoadingMore = NO;
@@ -486,8 +485,8 @@
     
     CBHistoryInfo* last = self.historyList.lastObject;
     
-    [http reqGetHistoryList:engine.loginInfo.o_id
-             inKindergarten:engine.loginInfo.schoolId.integerValue
+    [http reqGetHistoryList:session.loginInfo._id
+             inKindergarten:session.loginInfo.school_id.integerValue
                        from:nil
                          to:last.timestamp
                        most:@(50)
@@ -546,13 +545,13 @@
 
 - (void)doUploadVideo {
     CSHttpClient* http = [CSHttpClient sharedInstance];
-    CSEngine* engine = [CSEngine sharedInstance];
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
     
     NSData* videoData = [NSData dataWithContentsOfURL:_videoFileUrl];
     
     NSString* videoFileName = [NSString stringWithFormat:@"history_video/%@/topic_%@/%@.mp4",
-                               engine.loginInfo.schoolId,
-                               engine.loginInfo.o_id,
+                               session.loginInfo.school_id,
+                               session.loginInfo._id,
                                @((long long)[[NSDate date] timeIntervalSince1970]*1000)];
     
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
@@ -582,14 +581,14 @@
 
 - (void)doUploadImage {
     CSHttpClient* http = [CSHttpClient sharedInstance];
-    CSEngine* engine = [CSEngine sharedInstance];
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
     
     UIImage* img = [_imageList firstObject];
     if (img) {
         NSData* imgData = UIImageJPEGRepresentation(img, 0.8);
         NSString* imgFileName = [NSString stringWithFormat:@"history_img/%@/topic_%@/%@.jpg",
-                                 engine.loginInfo.schoolId,
-                                 engine.loginInfo.o_id,
+                                 session.loginInfo.school_id,
+                                 session.loginInfo._id,
                                  @((long long)[[NSDate date] timeIntervalSince1970]*1000)];
         
         SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
@@ -621,7 +620,7 @@
 
 - (void)doSendHistory {
     CSHttpClient* http = [CSHttpClient sharedInstance];
-    CSEngine* engine = [CSEngine sharedInstance];
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
     
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         [gApp alert:@"提交成功"];
@@ -635,14 +634,14 @@
     };
     
     NSMutableArray* childIdList = [NSMutableArray array];
-    for (EntityChildInfo* childInfo in _childList) {
-        [childIdList addObject:childInfo.childId];
+    for (CBChildInfo* childInfo in _childList) {
+        [childIdList addObject:childInfo.child_id];
     }
     
     if (childIdList.count > 0) {
         [gApp waitingAlert:@"提交数据中"];
-        [http opPostHistoryOfKindergarten:engine.loginInfo.schoolId.integerValue
-                             withSenderId:engine.loginInfo.o_id
+        [http opPostHistoryOfKindergarten:session.loginInfo.school_id.integerValue
+                             withSenderId:session.loginInfo._id
                           withChildIdList:childIdList
                               withContent:_textContent
                          withImageUrlList:_imageUrlList

@@ -10,12 +10,10 @@
 #import "CSChildProfileHeaderViewController.h"
 #import "CSHttpClient.h"
 #import "CSEngine.h"
-#import "EntityRelationshipInfoHelper.h"
 #import "CSChildRelationshipItemTableViewCell.h"
 #import "CSAssessmentEditorViewController.h"
-#import "CBIMDataSource.h"
+#import "CBSessionDataModel.h"
 #import "CBIMChatViewController.h"
-#import "EntityParentInfo.h"
 
 @interface CSChildProfileViewController () <UITableViewDataSource, UITableViewDelegate, CSChildProfileHeaderViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -41,19 +39,21 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     //[self customizeBackBarItem];
-    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectNull];
-    
-    [self reloadRelationships];
+    [self reloadData];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self reloadRelationships];
 }
 
 
@@ -80,18 +80,20 @@
 #pragma mark - Private
 - (void)reloadRelationships {
     CSHttpClient* http = [CSHttpClient sharedInstance];
+    CBSessionDataModel* sesson = [CBSessionDataModel thisSession];
     //CSEngine* engine = [CSEngine sharedInstance];
     
     id success = ^(AFHTTPRequestOperation *operation, id jsonObjectList) {
-        self.childRelationships = [EntityRelationshipInfoHelper updateEntities: jsonObjectList];
+        [sesson updateRelationshipsByJsonObject:jsonObjectList];
+        [self reloadData];
     };
     
     id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
         
     };
     
-    [http opGetRelationshipOfChild:self.childInfo.childId
-                    inKindergarten:self.childInfo.schoolId.integerValue
+    [http opGetRelationshipOfChild:self.childInfo.child_id
+                    inKindergarten:self.childInfo.school_id.integerValue
                            success:success
                            failure:failure];
 
@@ -103,6 +105,21 @@
     if ([self isViewLoaded]) {
         [self.tableView reloadData];
     }
+}
+
+- (void)reloadData {
+    CBSessionDataModel* sesson = [CBSessionDataModel thisSession];
+    NSMutableArray* relations = [NSMutableArray array];
+    
+    for (CBRelationshipInfo* o in sesson.relationshipInfoList) {
+        if ([o.child.child_id isEqualToString:self.childInfo.child_id]
+            && [o.child.school_id isEqualToNumber:self.childInfo.school_id]) {
+            [relations addObject:o];
+        }
+    }
+    
+    self.childRelationships = [relations copy];
+    [self.tableView reloadData];
 }
 
 #pragma mark - UITableViewDataSource & UITableViewDelegate
@@ -126,7 +143,7 @@
     CSChildRelationshipItemTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CSChildRelationshipItemTableViewCell" forIndexPath:indexPath];
     
     // Configure the cell...
-    EntityRelationshipInfo* relationship = [_childRelationships objectAtIndex:indexPath.row];
+    CBRelationshipInfo* relationship = [_childRelationships objectAtIndex:indexPath.row];
     cell.relationship = relationship;
     
     return cell;
@@ -138,14 +155,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    EntityRelationshipInfo* relationship = [_childRelationships objectAtIndex:indexPath.row];
+    CBRelationshipInfo* relationship = [_childRelationships objectAtIndex:indexPath.row];
     
-    NSString* userId = [NSString stringWithFormat:@"p_%@_Some(%@)_%@", relationship.childInfo.schoolId, relationship.parentInfo.uid, relationship.parentInfo.phone];
+    NSString* userId = [NSString stringWithFormat:@"p_%@_Some(%@)_%@",relationship.child.school_id, relationship.parent._id, relationship.parent.phone];
     if([[[[RCIMClient sharedRCIMClient] currentUserInfo] userId] isEqualToString:userId]) {
         
     }
     else {
-        [[CBIMDataSource sharedInstance] getUserInfoWithUserId:userId completion:^(RCUserInfo *userInfo) {
+        CBSessionDataModel* session = [CBSessionDataModel thisSession];
+        [session getUserInfoWithUserId:userId completion:^(RCUserInfo *userInfo) {
             NSString* nickname = [NSString stringWithFormat:@"%@%@", [_childInfo name], relationship.relationship];
             CBIMChatViewController *conversationVC = [[CBIMChatViewController alloc]init];
             conversationVC.conversationType = ConversationType_PRIVATE;
@@ -197,10 +215,6 @@
  */
 
 #pragma mark - CSChildProfileHeaderViewControllerDelegate
-- (void)childProfileHeaderViewControllerShowChating:(CSChildProfileHeaderViewController*)ctrl {
-    //[self performSegueWithIdentifier:@"segue.childprofile.chating" sender:nil];
-}
-
 - (void)childProfileHeaderViewControllerShowAssessment:(CSChildProfileHeaderViewController*)ctrl {
     [self performSegueWithIdentifier:@"segue.childprofile.assessment" sender:nil];
 }

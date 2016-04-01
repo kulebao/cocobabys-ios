@@ -9,9 +9,6 @@
 #import "CSStudentListMainTableViewController.h"
 #import "CSHttpClient.h"
 #import "CSEngine.h"
-#import "EntityClassInfoHelper.h"
-#import "EntityChildInfoHelper.h"
-#import "EntityDailylogHelper.h"
 #import "CSChildListItemTableViewCell.h"
 #import "UIImageView+WebCache.h"
 #import "CSChildProfileViewController.h"
@@ -21,9 +18,6 @@
 
 @interface CSStudentListMainTableViewController () <NSFetchedResultsControllerDelegate> {
     NSMutableArray* _classChildren;
-    NSFetchedResultsController* _frClasses;
-    NSFetchedResultsController* _frChildren;
-    
     AFHTTPRequestOperation* _opReloadClassList;
     AFHTTPRequestOperation* _opReloadChildList;
     AFHTTPRequestOperation* _opReloadDailylogList;
@@ -54,25 +48,7 @@
     //[self customizeBackBarItem];
     [self customizeOkBarItemWithTarget:self action:@selector(onBtnRefreshClicked:) text:@"刷新"];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectNull];
-    
-    CSEngine* engine = [CSEngine sharedInstance];
-    
-    _frClasses = [EntityClassInfoHelper frClassesWithEmployee:engine.loginInfo.o_id ofKindergarten:engine.loginInfo.schoolId.integerValue];
-    _frClasses.delegate = self;
-    
-    NSError* error = nil;
-    BOOL ok = [_frClasses performFetch:&error];
-    if (!ok) {
-        CSLog(@"error: %@", error);
-    }
-    
-    _frChildren = [EntityChildInfoHelper frChildrenWithKindergarten:engine.loginInfo.schoolId.integerValue];
-    _frChildren.delegate = self;
-    ok = [_frChildren performFetch:&error];
-    if (!ok) {
-        CSLog(@"error: %@", error);
-    }
-    
+
     [self updateTableView];
     [self doRefresh];
 }
@@ -127,9 +103,11 @@
     CSChildListItemTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CSChildListItemTableViewCell" forIndexPath:indexPath];
     
     // Configure the cell...
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
+    
     ModelClassData* classData = [_classChildren objectAtIndex:indexPath.section];
     NSArray* childrenList = classData.childrenList;
-    EntityChildInfo* childInfo = [childrenList objectAtIndex:indexPath.row];
+    CBChildInfo* childInfo = [childrenList objectAtIndex:indexPath.row];
     
     [cell.imgPortrait sd_setImageWithURL:[NSURL URLWithString:childInfo.portrait]
                         placeholderImage:[UIImage imageNamed:@"default_icon.png"]];
@@ -138,26 +116,26 @@
     
     cell.labName.text = childInfo.name;
     
-    EntityDailylog* dailyLog = childInfo.dailylog;
-    if (dailyLog && [EntityDailylogHelper isDailylogOfToday:dailyLog]) {
+    CBDailylogInfo* dailyLog = [session getDailylogInfoByChildId:childInfo.child_id];
+    if ([dailyLog isToday]) {
         NSString* timestampString = [[NSDate dateWithTimeIntervalSince1970:dailyLog.timestamp.longLongValue/1000.0] isoDateTimeString];
         NSString* body = @"";
-        if (dailyLog.noticeType.integerValue == kKuleNoticeTypeCheckIn) {
-            body = [NSString stringWithFormat:@"由 %@ 于 %@ 刷卡入园。", dailyLog.parentName, timestampString];
+        if (dailyLog.notice_type.integerValue == kKuleNoticeTypeCheckIn) {
+            body = [NSString stringWithFormat:@"由 %@ 于 %@ 刷卡入园。", dailyLog.parent_name, timestampString];
         }
-        else if (dailyLog.noticeType.integerValue == kKuleNoticeTypeCheckOut){
-            body = [NSString stringWithFormat:@"由 %@ 于 %@ 刷卡离园。", dailyLog.parentName, timestampString];
+        else if (dailyLog.notice_type.integerValue == kKuleNoticeTypeCheckOut){
+            body = [NSString stringWithFormat:@"由 %@ 于 %@ 刷卡离园。", dailyLog.parent_name, timestampString];
         }
-        else if (dailyLog.noticeType.integerValue == kKuleNoticeTypeCheckInCarMorning
-                 || dailyLog.noticeType.integerValue == kKuleNoticeTypeCheckInCarAfternoon){
-            body = [NSString stringWithFormat:@"由 %@ 于 %@ 刷卡坐上校车。", dailyLog.parentName, timestampString];
+        else if (dailyLog.notice_type.integerValue == kKuleNoticeTypeCheckInCarMorning
+                 || dailyLog.notice_type.integerValue == kKuleNoticeTypeCheckInCarAfternoon){
+            body = [NSString stringWithFormat:@"由 %@ 于 %@ 刷卡坐上校车。", dailyLog.parent_name, timestampString];
         }
-        else if (dailyLog.noticeType.integerValue == kKuleNoticeTypeCheckOutCarMorning
-                 || dailyLog.noticeType.integerValue == kKuleNoticeTypeCheckOutCarAfternoon){
-            body = [NSString stringWithFormat:@"由 %@ 于 %@ 刷卡离开校车。", dailyLog.parentName, timestampString];
+        else if (dailyLog.notice_type.integerValue == kKuleNoticeTypeCheckOutCarMorning
+                 || dailyLog.notice_type.integerValue == kKuleNoticeTypeCheckOutCarAfternoon){
+            body = [NSString stringWithFormat:@"由 %@ 于 %@ 刷卡离开校车。", dailyLog.parent_name, timestampString];
         }
         else {
-            body = [NSString stringWithFormat:@"由 %@ 于 %@ 刷卡(type:%@)。", dailyLog.parentName, timestampString, dailyLog.noticeType];
+            body = [NSString stringWithFormat:@"由 %@ 于 %@ 刷卡(type:%@)。", dailyLog.parent_name, timestampString, dailyLog.notice_type];
         }
         
         cell.labNotification.text = body;
@@ -180,9 +158,9 @@
     
     ModelClassData* classData = [_classChildren objectAtIndex:indexPath.section];
     NSArray* childrenList = classData.childrenList;
-    EntityChildInfo* childInfo = [childrenList objectAtIndex:indexPath.row];
+    CBChildInfo* childInfo = [childrenList objectAtIndex:indexPath.row];
     
-    CSLog(@"child:%@", childInfo);
+    CSLog(@"Select Child:%@", childInfo);
     
     [self performSegueWithIdentifier:@"segue.babylist.childprofile" sender:childInfo];
 }
@@ -252,12 +230,11 @@
 - (void)reloadClassList {
     CSHttpClient* http = [CSHttpClient sharedInstance];
     CSEngine* engine = [CSEngine sharedInstance];
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
     
     id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSArray* classInfoList = [EntityClassInfoHelper updateEntities:responseObject
-                                                           forEmployee:engine.loginInfo.o_id
-                                                        ofKindergarten:engine.loginInfo.schoolId.integerValue];
-        [engine onLoadClassInfoList:classInfoList];
+        [session updateClassInfosByJsonObject:responseObject];
+        [engine onLoadClassInfoList:session.classInfoList];
         
         [self doRefresh2];
         _opReloadClassList = nil;
@@ -282,25 +259,25 @@
     }
     
     [gApp waitingAlert:@"获取信息" withTitle:@"请稍候"];
-    _opReloadClassList = [http opGetClassListOfKindergarten:engine.loginInfo.schoolId.integerValue
-                                             withEmployeeId:engine.loginInfo.phone
+    _opReloadClassList = [http opGetClassListOfKindergarten:session.loginInfo.school_id.integerValue
+                                             withEmployeeId:session.loginInfo.phone
                                                     success:success
                                                     failure:failure];
 }
 
 - (void)reloadChildList {
-    CSEngine* engine = [CSEngine sharedInstance];
-    NSArray* classInfoList = engine.classInfoList;
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
+    NSArray* classInfoList = session.classInfoList;
     
     NSMutableArray* classIdList = [NSMutableArray array];
-    for (EntityClassInfo* classInfo in classInfoList) {
-        [classIdList addObject:classInfo.classId.stringValue];
+    for (CBClassInfo* classInfo in classInfoList) {
+        [classIdList addObject:[@(classInfo.class_id) stringValue]];
     }
     
     CSHttpClient* http = [CSHttpClient sharedInstance];
     
     id success = ^(AFHTTPRequestOperation *operation, id jsonObjectList) {
-        [EntityChildInfoHelper updateEntities:jsonObjectList];
+        [session updateChildInfosByJsonObject:jsonObjectList];
         _opReloadChildList = nil;
         [self hideWaitingAlertIfNeeded];
     };
@@ -314,25 +291,25 @@
         [_opReloadChildList cancel];
     }
     [gApp waitingAlert:@"获取信息" withTitle:@"请稍候"];
-    _opReloadChildList = [http opGetChildListOfKindergarten:engine.loginInfo.schoolId.integerValue
+    _opReloadChildList = [http opGetChildListOfKindergarten:session.loginInfo.school_id.integerValue
                                               withClassList:classIdList
                                                     success:success
                                                     failure:failure];
 }
 
 - (void)reloadDailylogList{
-    CSEngine* engine = [CSEngine sharedInstance];
-    NSArray* classInfoList = engine.classInfoList;
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
+    NSArray* classInfoList = session.classInfoList;
     
     NSMutableArray* classIdList = [NSMutableArray array];
-    for (EntityClassInfo* classInfo in classInfoList) {
-        [classIdList addObject:classInfo.classId.stringValue];
+    for (CBClassInfo* classInfo in classInfoList) {
+        [classIdList addObject:[@(classInfo.class_id) stringValue]];
     }
     
     CSHttpClient* http = [CSHttpClient sharedInstance];
     
     id success = ^(AFHTTPRequestOperation *operation, id jsonObjectList) {
-        [EntityDailylogHelper updateEntities:jsonObjectList];
+        [session updateDailylogsByJsonObject:jsonObjectList];
         [self.tableView reloadData];
         _opReloadDailylogList = nil;
         [self hideWaitingAlertIfNeeded];
@@ -347,7 +324,7 @@
         [_opReloadDailylogList cancel];
     }
     [gApp waitingAlert:@"获取信息" withTitle:@"请稍候"];
-    _opReloadDailylogList = [http opGetDailyLogListOfKindergarten:engine.loginInfo.schoolId.integerValue
+    _opReloadDailylogList = [http opGetDailyLogListOfKindergarten:session.loginInfo.school_id.integerValue
                                                     withClassList:classIdList
                                                           success:success
                                                           failure:failure];
@@ -361,23 +338,14 @@
     }
 }
 
-#pragma mark - NSFetchedResultsControllerDelegate
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    if ([controller isEqual:_frClasses]) {
-        [self updateTableView];
-    }
-    else if ([controller isEqual:_frChildren]) {
-        [self updateTableView];
-    }
-}
-
 #pragma mark - Private
 - (void)updateTableView {
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
     _classChildren = [NSMutableArray array];
-    NSArray* childrenList = _frChildren.fetchedObjects;
+    NSArray* childrenList = session.childInfoList;
     
-    for (EntityClassInfo* classInfo in _frClasses.fetchedObjects) {
-        NSArray* classChildren = [childrenList filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"classId == %@", classInfo.classId]];
+    for (CBClassInfo* classInfo in session.classInfoList) {
+        NSArray* classChildren = [childrenList filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"class_id == %ld", classInfo.class_id]];
         
         ModelClassData* classData = [ModelClassData new];
         classData.classInfo = classInfo;

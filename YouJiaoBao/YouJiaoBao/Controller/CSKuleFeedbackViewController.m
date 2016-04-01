@@ -98,10 +98,10 @@
      };
     
     CSHttpClient* http = [CSHttpClient sharedInstance];
-    CSEngine* engine = [CSEngine sharedInstance];
-    
+    //CSEngine* engine = [CSEngine sharedInstance];
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
     [gApp waitingAlert:@"正在提交反馈..."];
-    [http opSendFeedback:engine.loginInfo.phone
+    [http opSendFeedback:session.loginInfo.phone
              withContent:msgBody
                  success:sucessHandler
                  failure:failureHandler];

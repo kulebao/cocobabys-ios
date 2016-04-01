@@ -11,8 +11,6 @@
 #import "CSEngine.h"
 #import "CSHttpClient.h"
 #import "CSStudentPickerHeaderView.h"
-#import "EntityClassInfoHelper.h"
-#import "EntityChildInfoHelper.h"
 #import "ModelClassData.h"
 #import "CSChildListItemTableViewCell.h"
 #import "UIImageView+WebCache.h"
@@ -20,9 +18,6 @@
 
 @interface CSStudentListPickUpTableViewController () <NSFetchedResultsControllerDelegate> {
     NSMutableArray* _classChildren;
-    NSFetchedResultsController* _frClasses;
-    NSFetchedResultsController* _frChildren;
-    
     NSMutableSet* _selectedChildren;
 }
 
@@ -43,30 +38,11 @@
     //[self customizeBackBarItem];
     [self customizeOkBarItemWithTarget:self action:@selector(onBtnSendClicked:) text:@"发布"];
     self.navigationItem.title = @"请选择";
-    
-    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectNull];
-    
-    CSEngine* engine = [CSEngine sharedInstance];
-    
-    _frClasses = [EntityClassInfoHelper frClassesWithEmployee:engine.loginInfo.o_id ofKindergarten:engine.loginInfo.schoolId.integerValue];
-    _frClasses.delegate = self;
-    
-    NSError* error = nil;
-    BOOL ok = [_frClasses performFetch:&error];
-    if (!ok) {
-        CSLog(@"error: %@", error);
-    }
-    
-    _frChildren = [EntityChildInfoHelper frChildrenWithKindergarten:engine.loginInfo.schoolId.integerValue];
-    _frChildren.delegate = self;
-    ok = [_frChildren performFetch:&error];
-    if (!ok) {
-        CSLog(@"error: %@", error);
-    }
+        self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectNull];
     
     _selectedChildren = [NSMutableSet set];
     
-    [self updateTableView];
+    [self reloadData];
     [self doRefresh];
 }
 
@@ -119,14 +95,13 @@
     return 44.f;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CSChildListItemTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CSChildListItemTableViewCell" forIndexPath:indexPath];
     
     // Configure the cell...
     ModelClassData* classData = [_classChildren objectAtIndex:indexPath.section];
     NSArray* childrenList = classData.childrenList;
-    EntityChildInfo* childInfo = [childrenList objectAtIndex:indexPath.row];
+    CBChildInfo* childInfo = [childrenList objectAtIndex:indexPath.row];
     
     [cell.imgPortrait sd_setImageWithURL:[NSURL URLWithString:childInfo.portrait]
                         placeholderImage:[UIImage imageNamed:@"default_icon.png"]];
@@ -154,7 +129,7 @@
     
     ModelStudentPickerData* classData = [_classChildren objectAtIndex:indexPath.section];
     NSArray* childrenList = classData.childrenList;
-    EntityChildInfo* childInfo = [childrenList objectAtIndex:indexPath.row];
+    CBChildInfo* childInfo = [childrenList objectAtIndex:indexPath.row];
 
     if ([_selectedChildren containsObject:childInfo]) {
         [_selectedChildren removeObject:childInfo];
@@ -185,47 +160,38 @@
 }
 
 - (void)reloadChildList {
-    CSEngine* engine = [CSEngine sharedInstance];
-    NSArray* classInfoList = engine.classInfoList;
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
+    NSArray* classInfoList = session.classInfoList;
     
     NSMutableArray* classIdList = [NSMutableArray array];
-    for (EntityClassInfo* classInfo in classInfoList) {
-        [classIdList addObject:classInfo.classId.stringValue];
+    for (CBClassInfo* classInfo in classInfoList) {
+        [classIdList addObject:[@(classInfo.class_id) stringValue]];
     }
     
     CSHttpClient* http = [CSHttpClient sharedInstance];
     
     id success = ^(AFHTTPRequestOperation *operation, id jsonObjectList) {
-        [EntityChildInfoHelper updateEntities:jsonObjectList];
+        [session updateChildInfosByJsonObject:jsonObjectList];
     };
     
     id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
         
     };
     
-    [http opGetChildListOfKindergarten:engine.loginInfo.schoolId.integerValue
+    [http opGetChildListOfKindergarten:session.loginInfo.school_id.integerValue
                          withClassList:classIdList
                                success:success
                                failure:failure];
 }
 
-#pragma mark - NSFetchedResultsControllerDelegate
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    if ([controller isEqual:_frClasses]) {
-        [self updateTableView];
-    }
-    else if ([controller isEqual:_frChildren]) {
-        [self updateTableView];
-    }
-}
-
 #pragma mark - Private
-- (void)updateTableView {
+- (void)reloadData {
     _classChildren = [NSMutableArray array];
-    NSArray* childrenList = _frChildren.fetchedObjects;
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
+    NSArray* childrenList = session.childInfoList;
     
-    for (EntityClassInfo* classInfo in _frClasses.fetchedObjects) {
-        NSArray* classChildren = [childrenList filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"classId == %@", classInfo.classId]];
+    for (CBClassInfo* classInfo in session.classInfoList) {
+        NSArray* classChildren = [childrenList filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"class_id == %ld", classInfo.class_id]];
         
         ModelStudentPickerData* classData = [ModelStudentPickerData new];
         classData.classInfo = classInfo;

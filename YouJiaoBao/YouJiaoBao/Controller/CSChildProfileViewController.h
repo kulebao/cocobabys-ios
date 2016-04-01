@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "EntityChildInfoHelper.h"
+
+@class CBChildInfo;
 
 @interface CSChildProfileViewController : UIViewController
 
-@property (nonatomic, strong) EntityChildInfo* childInfo;
+@property (nonatomic, strong) CBChildInfo* childInfo;
 
 @end

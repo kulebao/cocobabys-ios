@@ -7,13 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "EntityChildInfoHelper.h"
+
+@class CBChildInfo;
 
 @interface CSChildProfileHeaderViewController : UIViewController
-
 @property (nonatomic, weak) id delegate;
-
-@property (nonatomic, strong) EntityChildInfo* childInfo;
+@property (nonatomic, strong) CBChildInfo* childInfo;
 
 @end
 
@@ -21,7 +20,6 @@
 @protocol CSChildProfileHeaderViewControllerDelegate <NSObject>
 
 @optional
-- (void)childProfileHeaderViewControllerShowChating:(CSChildProfileHeaderViewController*)ctrl;
 - (void)childProfileHeaderViewControllerShowAssessment:(CSChildProfileHeaderViewController*)ctrl;
 
 @end

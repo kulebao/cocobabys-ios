@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "EntityNewsInfo.h"
+
+@class CBNewsInfo;
 
 @interface CSKuleNewsTableViewCell : UITableViewCell
 
@@ -22,7 +23,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *iconWidth;
 
 - (IBAction)onBtnMarkClicked:(id)sender;
-- (void)loadNewsInfo:(EntityNewsInfo*)newsInfo;
+- (void)loadNewsInfo:(CBNewsInfo*)newsInfo;
 
 - (void)refresh;
 

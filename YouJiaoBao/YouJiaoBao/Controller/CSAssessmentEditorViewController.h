@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "EntityChildInfo.h"
+
+@class CBChildInfo;
 
 @interface CSAssessmentEditorViewController : UIViewController
-
-@property (nonatomic, strong) EntityChildInfo* childInfo;
+@property (nonatomic, strong) CBChildInfo* childInfo;
 
 @end

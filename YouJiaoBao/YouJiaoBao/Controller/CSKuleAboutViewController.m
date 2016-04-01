@@ -88,12 +88,12 @@
 #pragma mark - View lifecycle
 -(void) viewDidAppear:(BOOL)animated
 {
-    NSString* cName = [NSString stringWithFormat:@"%@",  self.navigationItem.title, nil];
+    //NSString* cName = [NSString stringWithFormat:@"%@",  self.navigationItem.title, nil];
 }
 
 -(void) viewDidDisappear:(BOOL)animated
 {
-    NSString* cName = [NSString stringWithFormat:@"%@", self.navigationItem.title, nil];
+    //NSString* cName = [NSString stringWithFormat:@"%@", self.navigationItem.title, nil];
 }
 
 #pragma mark - Load Static Content

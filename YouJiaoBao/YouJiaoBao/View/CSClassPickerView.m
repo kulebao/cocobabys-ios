@@ -8,7 +8,6 @@
 
 #import "CSClassPickerView.h"
 #import "CSEngine.h"
-#import "EntityClassInfo.h"
 #import "CSSelectableTableViewCell.h"
 
 @interface CSClassPickerView () <UITableViewDataSource, UITableViewDelegate>
@@ -67,7 +66,8 @@
         numberOfRows = 1;
     }
     else if (section == 1) {
-        numberOfRows = [[[CSEngine sharedInstance] classInfoList] count];
+        CBSessionDataModel* session = [CBSessionDataModel thisSession];
+        numberOfRows = session.classInfoList.count;
     }
     return numberOfRows;
 }
@@ -84,8 +84,9 @@
         cell.textLabel.text = @"全校范围";
     }
     else if (section == 1) {
-        NSArray* classInfoList = [[CSEngine sharedInstance] classInfoList];
-        EntityClassInfo* classInfo = [classInfoList objectAtIndex:indexPath.row];
+        CBSessionDataModel* session = [CBSessionDataModel thisSession];
+        NSArray* classInfoList = session.classInfoList;
+        CBClassInfo* classInfo = [classInfoList objectAtIndex:indexPath.row];
         cell.textLabel.text = classInfo.name;
         
     }
@@ -107,7 +108,8 @@
 
 - (IBAction)onBtnOkClicked:(id)sender {
     if ([_delegate respondsToSelector:@selector(classPickerViewDidOk:withClassId:)]) {
-        NSArray* classInfoList = [[CSEngine sharedInstance] classInfoList];
+        CBSessionDataModel* session = [CBSessionDataModel thisSession];
+        NSArray* classInfoList = session.classInfoList;
         NSIndexPath* indexPath = [self.tableView indexPathForSelectedRow];
         NSInteger section = indexPath.section;
         NSNumber* classId = nil;
@@ -115,9 +117,9 @@
             classId = @(0);
         }
         else {
-            EntityClassInfo* classInfo = [classInfoList objectAtIndex:indexPath.row];
+            CBClassInfo* classInfo = [classInfoList objectAtIndex:indexPath.row];
             if (classInfo) {
-                classId = classInfo.classId;
+                classId = @(classInfo.class_id);
             }
         }
         

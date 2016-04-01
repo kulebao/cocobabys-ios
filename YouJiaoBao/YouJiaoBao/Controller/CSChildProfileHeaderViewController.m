@@ -9,13 +9,12 @@
 #import "CSChildProfileHeaderViewController.h"
 #import "UIImageView+WebCache.h"
 #import <QuartzCore/QuartzCore.h>
+#import "CBSessionDataModel.h"
 
 @interface CSChildProfileHeaderViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *imgPortrait;
 @property (weak, nonatomic) IBOutlet UILabel *labName;
 @property (weak, nonatomic) IBOutlet UIButton *btnAssessments;
-@property (weak, nonatomic) IBOutlet UIButton *btnSession;
-- (IBAction)onBtnSessionClicked:(id)sender;
 - (IBAction)onBtnAssessmentsClicked:(id)sender;
 
 @end
@@ -45,11 +44,6 @@
                         placeholderImage:[UIImage imageNamed:@"default_icon.png"]];
     
     self.labName.text = self.childInfo.name;
-    
-    [self.btnSession setBackgroundImage:[[UIImage imageNamed:@"v2-chat-session.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(4, 4, 4, 4)]
-                               forState:UIControlStateNormal];
-    [self.btnAssessments setBackgroundImage:[[UIImage imageNamed:@"v2-input-assessment.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(4, 4, 4, 4)]
-                               forState:UIControlStateNormal];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -73,12 +67,6 @@
     // Pass the selected object to the new view controller.
 }
 */
-
-- (IBAction)onBtnSessionClicked:(id)sender {
-    if ([_delegate respondsToSelector:@selector(childProfileHeaderViewControllerShowChating:)]) {
-        [_delegate childProfileHeaderViewControllerShowChating:self];
-    }
-}
 
 - (IBAction)onBtnAssessmentsClicked:(id)sender {
     if ([_delegate respondsToSelector:@selector(childProfileHeaderViewControllerShowAssessment:)]) {

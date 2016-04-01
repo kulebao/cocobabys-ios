@@ -10,13 +10,10 @@
 #import "UIWebView+AFNetworking.h"
 #import "UIWebView+CSKit.h"
 #import "CSUtils.h"
-#import "EntityClassInfoHelper.h"
 #import "CSHttpClient.h"
 #import "CSAppDelegate.h"
 #import "CSEngine.h"
-#import "EntityParentInfoHelper.h"
 #import "CSNewsInfoReaderTableViewController.h"
-#import "EntityNewsInfoHelper.h"
 
 @interface CSNewsInfoDetailViewController () <UIWebViewDelegate, UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
@@ -49,7 +46,7 @@
     self.btnCheckList.tintColor = [UIColor whiteColor];
     self.btnDel.tintColor = [UIColor whiteColor];
     
-    if (self.newsInfo.feedbackRequired.integerValue > 0) {
+    if (self.newsInfo.feedback_required.integerValue > 0) {
     }
     else {
         self.navigationItem.rightBarButtonItem = nil;
@@ -84,11 +81,12 @@
 #pragma mark - Private
 - (NSString*)tagTitle {
     NSString* tTitle = @"园内公告";
-    NSRange range = [self.newsInfo.tags rangeOfString:@"作业"];
+    NSString* tags = [self.newsInfo.tags componentsJoinedByString:@" "];
+    NSRange range = [tags rangeOfString:@"作业"];
     if (range.length > 0) {
         tTitle = @"亲子作业";
     }
-    else if(self.newsInfo.classId.integerValue > 0) {
+    else if(self.newsInfo.class_id.integerValue > 0) {
         tTitle = @"班级通知";
     }
     
@@ -103,12 +101,12 @@
     }
 }
 
-- (void)setNewsInfo:(EntityNewsInfo *)newsInfo {
+- (void)setNewsInfo:(CBNewsInfo *)newsInfo {
     _newsInfo = newsInfo;
     [self reloadWebView];
 }
 
-- (NSString*)htmlWithNewsInfo:(EntityNewsInfo*)newsInfo{
+- (NSString*)htmlWithNewsInfo:(CBNewsInfo*)newsInfo{
     static NSString* htmlTemp =
     @"<html>\
     <head>\
@@ -129,8 +127,9 @@
     NSString* timestampString = [CSUtils stringFromDateStyle1:[NSDate dateWithTimeIntervalSince1970:newsInfo.timestamp.doubleValue/1000.0]];
     
     NSString* publiser = @"";
-    if (newsInfo.classId.integerValue > 0) {
-        EntityClassInfo* classInfo = [EntityClassInfoHelper queryEntityWithClassId:newsInfo.classId.integerValue];
+    if (newsInfo.class_id.integerValue > 0) {
+        CBSessionDataModel* session = [CBSessionDataModel thisSession];
+        CBClassInfo* classInfo = [session getClassInfoByClassId:newsInfo.class_id.integerValue];
         if (classInfo.name.length > 0) {
             publiser = classInfo.name;
         }
@@ -176,12 +175,12 @@
     //    }
     
     CSHttpClient* http = [CSHttpClient sharedInstance];
-    CSEngine* engine = [CSEngine sharedInstance];
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
     
     id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
         [gApp hideAlert];
         
-        NSArray* readers = [EntityParentInfoHelper updateEntities:responseObject];
+        NSArray* readers = [session updateParentInfosByJsonObject:responseObject];
         //CSLog(@"readers = %@", readers);
         [self openReaderList:readers];
     };
@@ -191,8 +190,8 @@
     };
     
     [gApp waitingAlert:@"正在查询回执情况..."];
-    [http opGetNewsReaders:self.newsInfo.newsId
-            inKindergarten:engine.loginInfo.schoolId.integerValue
+    [http opGetNewsReaders:self.newsInfo.news_id
+            inKindergarten:session.loginInfo.school_id.integerValue
                    success:success
                    failure:failure];
 }
@@ -213,7 +212,7 @@
 
 - (void)doDeleteNews {
     CSHttpClient* http = [CSHttpClient sharedInstance];
-    CSEngine* engine = [CSEngine sharedInstance];
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
     
     id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
         [gApp hideAlert];
@@ -225,7 +224,7 @@
         }
         
         if (error_code == 0) {
-            [EntityNewsInfoHelper deleteEntity:self.newsInfo];
+            [session.newsInfoList removeObject:self.newsInfo];
             [self.navigationController popViewControllerAnimated:YES];
         }
         else {
@@ -257,8 +256,8 @@
     };
     
     [gApp waitingAlert:@"正在删除数据"];
-    [http opDeleteNews:self.newsInfo.newsId
-        inKindergarten:engine.loginInfo.schoolId.integerValue
+    [http opDeleteNews:self.newsInfo.news_id
+        inKindergarten:session.loginInfo.school_id.integerValue
                success:success
                failure:failure];
 }

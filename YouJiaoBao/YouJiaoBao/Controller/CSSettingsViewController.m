@@ -13,9 +13,7 @@
 #import "CSAppDelegate.h"
 #import "CSProfileHeaderViewController.h"
 #import "CSTextFieldDelegate.h"
-#import "EntityChildInfoHelper.h"
 #import "UIImage+CSKit.h"
-#import "EntityLoginInfoHelper.h"
 #import <RongIMKit/RongIMKit.h>
 #import "KxMenu.h"
 #import "CBSessionDataModel.h"
@@ -104,7 +102,6 @@ enum {
     RCPublicServiceChatViewController *conversationVC = [[RCPublicServiceChatViewController alloc]init];
     conversationVC.conversationType = ConversationType_APPSERVICE;
     conversationVC.targetId = COCOBABYS_IM_SERVICE_ID;
-    conversationVC.userName = nil;
     conversationVC.title = @"客服";
     [self.navigationController pushViewController:conversationVC animated:YES];
 }
@@ -192,14 +189,14 @@ enum {
     NSString *title = @"请输入新昵称";
     NSString *message = @"";
     
-    CSEngine* engine = [CSEngine sharedInstance];
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
     
     AHAlertView *alert = [[AHAlertView alloc] initWithTitle:title message:message];
     alert.alertViewStyle = AHAlertViewStylePlainTextInput;
     
     UITextField* field = [alert textFieldAtIndex:0];
     field.placeholder = @"请输入新昵称";
-    field.text = engine.loginInfo.name;
+    field.text = session.loginInfo.name;
     
     field.keyboardAppearance = UIKeyboardAppearanceDefault;
     field.background = [[UIImage imageNamed:@"input-bg-0.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 50, 10, 10)];
@@ -226,14 +223,14 @@ enum {
     nick = [nick stringByReplacingOccurrencesOfString:@" " withString:@""];
     
     if (nick.length > 0) {
-        CSEngine* engine = [CSEngine sharedInstance];
         CSHttpClient* http = [CSHttpClient sharedInstance];
+        CBSessionDataModel* session = [CBSessionDataModel thisSession];
         
-        if (engine.loginInfo) {
+        if (session.loginInfo) {
             SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
                 CSLog(@"success.");
                 [gApp alert:@"修改成功"];
-                [EntityLoginInfoHelper updateEntity:dataJson];
+                [session.loginInfo updateObjectsFromDictionary:dataJson];
                 [self.profileHeaderViewCtrl reloadData];
             };
             
@@ -244,7 +241,7 @@ enum {
             
             [gApp waitingAlert:@"修改昵称中，请稍候"];
             [http opUpdateProfile:@{@"name": nick}
-                         ofSender:engine.loginInfo
+                         ofSender:session.loginInfo
                           success:sucessHandler
                           failure:failureHandler];
         }
@@ -259,13 +256,14 @@ enum {
 
 - (void)doUpdateChildPortrait:(NSString*)portrait withImage:(UIImage*)img {
     if (portrait.length > 0) {
-        CSEngine* engine = [CSEngine sharedInstance];
         CSHttpClient* http = [CSHttpClient sharedInstance];
-        if (engine.loginInfo) {
+        CBSessionDataModel* session = [CBSessionDataModel thisSession];
+        
+        if (session.loginInfo) {
             SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
                 CSLog(@"success.");
                 [gApp alert:@"修改成功"];
-                [EntityLoginInfoHelper updateEntity:dataJson];
+                [session.loginInfo updateObjectsFromDictionary:dataJson];
                 [self.profileHeaderViewCtrl reloadData];
             };
             
@@ -276,7 +274,7 @@ enum {
             
             [gApp waitingAlert:@"修改头像中，请稍候"];
             [http opUpdateProfile:@{@"portrait": portrait}
-                         ofSender:engine.loginInfo
+                         ofSender:session.loginInfo
                           success:sucessHandler
                           failure:failureHandler];
         }
@@ -315,16 +313,16 @@ enum {
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     UIImage* img = info[UIImagePickerControllerEditedImage];
     NSData* imgData = UIImageJPEGRepresentation(img, 0.8);
-    
-    CSEngine* engine = [CSEngine sharedInstance];
+
     CSHttpClient* http = [CSHttpClient sharedInstance];
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
     
     long long timestamp = [[NSDate date] timeIntervalSince1970] * 1000;
     
     NSString* imgFileName = [NSString stringWithFormat:@"employee_photo/%@/%@/%@_%@.jpg",
-                             engine.loginInfo.schoolId,
-                             engine.loginInfo.o_id,
-                             engine.loginInfo.loginName,
+                             session.loginInfo.school_id,
+                             session.loginInfo._id,
+                             session.loginInfo.login_name,
                              @(timestamp)];
     
     

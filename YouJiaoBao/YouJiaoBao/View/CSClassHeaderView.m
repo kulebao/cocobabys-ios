@@ -8,7 +8,6 @@
 
 #import "CSClassHeaderView.h"
 #import "ModelClassData.h"
-#import "EntityDailylogHelper.h"
 
 @interface CSClassHeaderView ()
 @property (weak, nonatomic) IBOutlet UIImageView *imgIcon;

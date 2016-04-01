@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
-#import "EntityLoginInfo.h"
 #import "CSHttpUrls.h"
-#import "EntityChildInfo.h"
+
+@class CBLoginInfo;
 
 typedef void (^SuccessResponseHandler) (AFHTTPRequestOperation *operation, id responseObject);
 typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSError *error);
@@ -82,7 +82,7 @@ typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSErr
 
 - (AFHTTPRequestOperation*)opChangePassword:(NSString*)newPswd
                                 withOldPswd:(NSString*)oldPswd
-                                 forAccount:(EntityLoginInfo*)loginInfo
+                                 forAccount:(CBLoginInfo*)loginInfo
                                     success:(SuccessResponseHandler)success
                                     failure:(FailureResponseHandler)failure;
 
@@ -109,7 +109,7 @@ typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSErr
                                                failure:(FailureResponseHandler)failure;
 //tags : 作业、备忘、活动 （校园公告即没有tag)
 - (AFHTTPRequestOperation*)opPostNewsOfKindergarten:(NSInteger)kindergarten
-                                         withSender:(EntityLoginInfo*)senderInfo
+                                         withSender:(CBLoginInfo*)senderInfo
                                         withClassId:(NSNumber*)classId
                                         withContent:(NSString*)content
                                           withTitle:(NSString*)title
@@ -120,7 +120,7 @@ typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSErr
                                             failure:(FailureResponseHandler)failure;
 
 - (AFHTTPRequestOperation*)opPostAssignmentOfKindergarten:(NSInteger)kindergarten
-                                               withSender:(EntityLoginInfo*)senderInfo
+                                               withSender:(CBLoginInfo*)senderInfo
                                               withClassId:(NSNumber*)classId
                                               withContent:(NSString*)content
                                                 withTitle:(NSString*)title
@@ -147,7 +147,7 @@ typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSErr
                                      failure:(FailureResponseHandler)failure;
 
 - (AFHTTPRequestOperation*)opSendTopicMsg:(NSString*)msgBody
-                               withSender:(EntityLoginInfo*)senderInfo
+                               withSender:(CBLoginInfo*)senderInfo
                              withMediaUrl:(NSString*)mediaUrl
                               ofMediaType:(NSString*)mediaType
                                   ofChild:(NSString*)childId
@@ -170,11 +170,12 @@ typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSErr
                                     failure:(FailureResponseHandler)failure;
 
 - (AFHTTPRequestOperation*)opUpdateProfile:(NSDictionary*)newProfile
-                                  ofSender:(EntityLoginInfo*)loginInfo
+                                  ofSender:(CBLoginInfo*)loginInfo
                                    success:(SuccessResponseHandler)success
                                    failure:(FailureResponseHandler)failure;
 
-- (AFHTTPRequestOperation*)opGetAssessmentsOfChild:(EntityChildInfo*)childInfo
+- (AFHTTPRequestOperation*)opGetAssessmentsOfChild:(NSString*)childId
+                                    inKindergarten:(NSInteger)kindergarten
                                               from:(long long)fromId
                                                 to:(long long)toId
                                               most:(NSInteger)most

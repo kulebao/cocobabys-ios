@@ -7,7 +7,7 @@
 //
 
 #import "ModelClassData.h"
-#import "EntityDailylogHelper.h"
+#import "CBSessionDataModel.h"
 
 @implementation ModelBaseData
 
@@ -41,8 +41,11 @@
 
 - (NSString*)detail {
     NSInteger recordNum = 0;
-    for (EntityChildInfo* childInfo in self.childrenList) {
-        if ([EntityDailylogHelper isDailylogOfToday:childInfo.dailylog] && childInfo.dailylog.noticeType.integerValue == kKuleNoticeTypeCheckIn) {
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
+    for (CBChildInfo* childInfo in self.childrenList) {
+        
+        CBDailylogInfo* dailyLog = [session getDailylogInfoByChildId:childInfo.child_id];
+        if ([dailyLog isToday] && dailyLog.notice_type.integerValue == kKuleNoticeTypeCheckIn) {
             recordNum++;
         }
     }
@@ -84,7 +87,7 @@
 
 - (NSString*)detail {
     NSInteger recordNum = 0;
-    for (EntityChildInfo* childInfo in self.childrenList) {
+    for (CBChildInfo* childInfo in self.childrenList) {
         if ([self.childrenReaders containsObject:childInfo]) {
             recordNum++;
         }

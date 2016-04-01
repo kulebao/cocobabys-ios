@@ -7,7 +7,6 @@
 //
 
 #import "CSMainViewController.h"
-#import "EntityClassInfoHelper.h"
 #import "CSHttpClient.h"
 #import "CSEngine.h"
 #import "CSAppDelegate.h"
@@ -15,8 +14,6 @@
 #import "CSModuleCell.h"
 #import "CSStudentListPickUpTableViewController.h"
 #import "CSContentEditorViewController.h"
-#import "EntityClassInfo.h"
-#import "EntityRelationshipInfoHelper.h"
 #import "CBIMChatListViewController.h"
 #import "CBSessionDataModel.h"
 
@@ -86,9 +83,10 @@
     self.layoutCollectionView.itemSize = CGSizeMake(cellWidth, cellWidth);
     [self.collectionView reloadData];
     
-    CSEngine* engine = [CSEngine sharedInstance];
-    if (engine.schoolInfo == nil) {
-        [engine reloadSchoolInfo];
+    //CSEngine* engine = [CSEngine sharedInstance];
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
+    if (session.schoolInfo == nil) {
+        [session reloadSchoolInfo];
     }
 }
 
@@ -143,12 +141,11 @@
     CSHttpClient* http = [CSHttpClient sharedInstance];
     CSEngine* engine = [CSEngine sharedInstance];
     CSAppDelegate* app = [CSAppDelegate sharedInstance];
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
     
     id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSArray* classInfoList = [EntityClassInfoHelper updateEntities:responseObject
-                                                           forEmployee:engine.loginInfo.o_id
-                                                        ofKindergarten:engine.loginInfo.schoolId.integerValue];
-        [engine onLoadClassInfoList:classInfoList];
+        [session updateClassInfosByJsonObject:responseObject];
+        [engine onLoadClassInfoList:session.classInfoList];
         
         [app hideAlert];
     };
@@ -163,19 +160,19 @@
     };
     
     [app waitingAlert:@"获取信息" withTitle:@"请稍候"];
-    [http opGetClassListOfKindergarten:engine.loginInfo.schoolId.integerValue
-                        withEmployeeId:engine.loginInfo.phone
+    [http opGetClassListOfKindergarten:session.loginInfo.school_id.integerValue
+                        withEmployeeId:session.loginInfo.phone
                                success:success
                                failure:failure];
 }
 
 - (void)reloadRelationships {
     CSHttpClient* http = [CSHttpClient sharedInstance];
-    CSEngine* engine = [CSEngine sharedInstance];
     CSAppDelegate* app = [CSAppDelegate sharedInstance];
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
     
     id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSArray* relationships = [EntityRelationshipInfoHelper updateEntities:responseObject];
+        [session updateRelationshipsByJsonObject:responseObject];
         [app hideAlert];
     };
     
@@ -186,28 +183,28 @@
     [app waitingAlert:@"获取信息" withTitle:@"请稍候"];
     
     NSMutableArray* classIds = [NSMutableArray array];
-    for (EntityClassInfo* entity in engine.classInfoList) {
-        if (entity.classId) {
-            [classIds addObject:entity.classId.stringValue];
-        }
+    NSArray* classInfoList = session.classInfoList;
+    for (CBClassInfo* classInfo in classInfoList) {
+        [classIds addObject:[@(classInfo.class_id) stringValue]];
     }
     
     [http opGetRelationshipOfClasses:nil
-                      inKindergarten:engine.loginInfo.schoolId.integerValue
+                      inKindergarten:session.loginInfo.school_id.integerValue
                              success:success
                              failure:failure];
 }
 
 - (void)reloadIneligibleClass {
     CSHttpClient* http = [CSHttpClient sharedInstance];
-    CSEngine* engine = [CSEngine sharedInstance];
+    //CSEngine* engine = [CSEngine sharedInstance];
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
     //CSAppDelegate* app = [CSAppDelegate sharedInstance];
-    if (engine.loginInfo) {
-        [http reqGetiIneligibleClass:engine.loginInfo.uid.integerValue
-                      inKindergarten:engine.loginInfo.schoolId.integerValue
+    if (session.loginInfo) {
+        [http reqGetiIneligibleClass:session.loginInfo.uid.integerValue
+                      inKindergarten:session.loginInfo.school_id.integerValue
                              success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                  if ([responseObject isKindOfClass:[NSArray class]]) {
-                                     engine.loginInfo.ineligibleClassList = responseObject;
+                                     session.ineligibleClassList = responseObject;
                                  }
                              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                  dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(60 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

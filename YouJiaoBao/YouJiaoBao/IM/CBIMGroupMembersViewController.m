@@ -7,7 +7,7 @@
 //
 
 #import "CBIMGroupMembersViewController.h"
-#import "CBIMDataSource.h"
+#import "CBSessionDataModel.h"
 #import "CBTeacherInfo.h"
 #import "CBRelationshipInfo.h"
 #import "CSAppDelegate.h"
@@ -50,14 +50,13 @@
     _imgvCall = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
     _imgvCall.image = [UIImage imageNamed:@"v2-btn_phone"];
     
-//    self.tableView registerClass:<#(nullable Class)#> forHeaderFooterViewReuseIdentifier:<#(nonnull NSString *)#>
+    //    self.tableView registerClass:<#(nullable Class)#> forHeaderFooterViewReuseIdentifier:<#(nonnull NSString *)#>
     
     self.tableView.sectionHeaderHeight = 0;
     self.tableView.sectionFooterHeight = 0;
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 0.01)];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 0.01)];
     
-    CBIMDataSource* imDS = [CBIMDataSource sharedInstance];
     self.teacherList = [NSMutableArray array];
     self.relationshipGroupList = [NSMutableArray array];
     
@@ -186,7 +185,9 @@
     CBIMGroupTeacherTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CBIMGroupTeacherTableViewCell" forIndexPath:indexPath];
     
     // Configure the cell...
-    CSEngine* engine = [CSEngine sharedInstance];
+    //CSEngine* engine = [CSEngine sharedInstance];
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
+    
     if (self.segMemberType.selectedSegmentIndex == 0) {
         CBTeacherInfo* cellData = [self.teacherList objectAtIndex:indexPath.row];
         [cell.imgIcon sd_setImageWithURL:[NSURL URLWithString:cellData.portrait]
@@ -197,7 +198,7 @@
         
         cell.btnCall.hidden = (cellData.phone.length == 0);
         
-        if ([cellData._id isEqualToString:engine.loginInfo.o_id]) {
+        if ([cellData._id isEqualToString:session.loginInfo._id]) {
             cell.btnCall.hidden = YES;
         }
     }
@@ -212,7 +213,7 @@
         
         cell.btnCall.hidden = (cellData.parent.phone.length == 0);
     }
-
+    
     return cell;
 }
 
@@ -225,7 +226,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath*)indexPath {
-
+    
 }
 
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -257,6 +258,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
+    
     if (self.segMemberType.selectedSegmentIndex == 0) {
         CBTeacherInfo* cellData = [self.teacherList objectAtIndex:indexPath.row];
         NSString* userId = [NSString stringWithFormat:@"t_%@_Some(%@)_%@", @(_schoolId), cellData.uid, cellData.login_name];
@@ -265,7 +268,7 @@
             
         }
         else {
-            [[CBIMDataSource sharedInstance] getUserInfoWithUserId:userId completion:^(RCUserInfo *userInfo) {
+            [session getUserInfoWithUserId:userId completion:^(RCUserInfo *userInfo) {
                 CBIMChatViewController *conversationVC = [[CBIMChatViewController alloc]init];
                 conversationVC.conversationType = ConversationType_PRIVATE;
                 conversationVC.targetId = userId;
@@ -284,7 +287,7 @@
             
         }
         else {
-            [[CBIMDataSource sharedInstance] getUserInfoWithUserId:userId completion:^(RCUserInfo *userInfo) {
+            [session getUserInfoWithUserId:userId completion:^(RCUserInfo *userInfo) {
                 NSString* nickname = [NSString stringWithFormat:@"%@%@", [cellData.child displayNick], cellData.relationship];
                 CBIMChatViewController *conversationVC = [[CBIMChatViewController alloc]init];
                 conversationVC.conversationType = ConversationType_PRIVATE;
@@ -298,38 +301,38 @@
 }
 
 /*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
+ // Override to support conditional editing of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+ // Return NO if you do not want the specified item to be editable.
+ return YES;
+ }
+ */
 
 /*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
+ // Override to support editing the table view.
+ - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+ if (editingStyle == UITableViewCellEditingStyleDelete) {
+ // Delete the row from the data source
+ [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+ } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+ // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+ }
+ }
+ */
 
 /*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
+ // Override to support rearranging the table view.
+ - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+ }
+ */
 
 /*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
+ // Override to support conditional rearranging of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+ // Return NO if you do not want the item to be re-orderable.
+ return YES;
+ }
+ */
 
 
 #pragma mark - Navigation

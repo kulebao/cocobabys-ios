@@ -8,7 +8,6 @@
 
 #import "CSRootViewController.h"
 #import "CSEngine.h"
-#import "EntityLoginInfoHelper.h"
 #import "CSHttpClient.h"
 
 #import "CSMainViewController.h"
@@ -73,16 +72,16 @@
 }
 
 - (void)checkLocalData {
-    NSFetchedResultsController* frCtrl = [EntityLoginInfoHelper frRecentLoginUser];
-    NSError* error = nil;
-    BOOL ok = [frCtrl performFetch:&error];
-    if (ok && frCtrl.fetchedObjects.count > 0) {
-        [[CSEngine sharedInstance] onLogin:frCtrl.fetchedObjects.lastObject];
-        [self showMainView];
-    }
-    else {
-        [self showLoginView];
-    }
+//    NSFetchedResultsController* frCtrl = [EntityLoginInfoHelper frRecentLoginUser];
+//    NSError* error = nil;
+//    BOOL ok = [frCtrl performFetch:&error];
+//    if (ok && frCtrl.fetchedObjects.count > 0) {
+//        [[CSEngine sharedInstance] onLogin:frCtrl.fetchedObjects.lastObject];
+//        [self showMainView];
+//    }
+//    else {
+//        [self showLoginView];
+//    }
 }
 
 - (void)autoLogin {
@@ -91,14 +90,18 @@
         CSHttpClient* http = [CSHttpClient sharedInstance];
         
         id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
-            EntityLoginInfo* loginInfo = [EntityLoginInfoHelper updateEntity:responseObject];
+            CBLoginInfo* loginInfo = [CBLoginInfo instanceWithDictionary:responseObject];
             if (loginInfo != nil) {
                 CBSessionDataModel* session = [CBSessionDataModel session:loginInfo.phone];
-                [session updateSchoolConfig:loginInfo.schoolId.integerValue];
+                session.loginInfo = loginInfo;
+                [session updateSchoolConfig:loginInfo.school_id.integerValue];
+                
+                [session reloadRelationships];
+                [session reloadTeachers];
                 
                 if (loginInfo.im_token) {
                     // 快速集成第二步，连接融云服务器
-                    [[RCIM sharedRCIM] connectWithToken:loginInfo.im_token
+                    [[RCIM sharedRCIM] connectWithToken:loginInfo.im_token.token
                                                 success:^(NSString *userId) {
                                                     // Connect 成功
                                                     CSLog(@"[RCIM] connect success.");
@@ -147,7 +150,6 @@
 }
 
 - (void)onLoginSuccess:(NSNotification*)noti {
-    [[CSEngine sharedInstance] onLogin:noti.object];
     [self showMainView];
 }
 
@@ -158,7 +160,6 @@
 
 - (void)onUnauthorized:(NSNotification*)noti {
     CSLog(@"Unauthorized Error : %@", noti.object);
-    [[CSEngine sharedInstance] onLogin:nil];
     [self showLoginView];
 }
 

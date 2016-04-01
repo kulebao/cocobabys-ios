@@ -8,7 +8,7 @@
 
 #import "CBIMChatViewController.h"
 #import "CBChatViewSettingsViewController.h"
-#import "CBIMDataSource.h"
+#import "CBSessionDataModel.h"
 
 @interface CBIMChatViewController ()  <CBChatViewSettingsViewControllerDelegate>
 
@@ -74,7 +74,8 @@
             
         }
         else {
-            [[CBIMDataSource sharedInstance] getUserInfoWithUserId:userId completion:^(RCUserInfo *userInfo) {
+            CBSessionDataModel* session = [CBSessionDataModel thisSession];
+            [session getUserInfoWithUserId:userId completion:^(RCUserInfo *userInfo) {
                 CBIMChatViewController *conversationVC = [[CBIMChatViewController alloc]init];
                 conversationVC.conversationType = ConversationType_PRIVATE;
                 conversationVC.targetId = userId;

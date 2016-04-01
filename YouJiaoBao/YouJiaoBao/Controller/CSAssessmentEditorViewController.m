@@ -13,7 +13,6 @@
 #import "ModelAssessment.h"
 #import "CSHttpClient.h"
 #import "CSEngine.h"
-#import "EntityAssessInfoHelper.h"
 #import "NSDate+CSKit.h"
 
 @interface CSAssessmentEditorViewController () <EDStarRatingProtocol>
@@ -33,13 +32,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnSubmit;
 - (IBAction)onBtnSendClicked:(id)sender;
 
-@property (nonatomic, strong) EntityAssessInfo* lastAssessInfo;
-
 @end
 
 @implementation CSAssessmentEditorViewController
 @synthesize childInfo = _childInfo;
-@synthesize lastAssessInfo = _lastAssessInfo;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -102,21 +98,13 @@
 }
 
 - (void)reloadData {
-    EntityAssessInfo* assessInfo = [EntityAssessInfoHelper lastEntityOfChild:self.childInfo.childId];
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
+    CBAssessInfo* assessInfo = [session getLatestAssessInfoByChildId:self.childInfo.child_id];
     if (assessInfo) {
-//        self.starRating0.rating = assessInfo.emotion.integerValue;
-//        self.starRating1.rating = assessInfo.dining.integerValue;
-//        self.starRating2.rating = assessInfo.rest.integerValue;
-//        self.starRating3.rating = assessInfo.activity.integerValue;
-//        self.starRating4.rating = assessInfo.game.integerValue;
-//        self.starRating5.rating = assessInfo.exercise.integerValue;
-//        self.starRating6.rating = assessInfo.selfCare.integerValue;
-//        self.starRating7.rating = assessInfo.manner.integerValue;
-        
         NSString* timestampString = [[NSDate dateWithTimeIntervalSince1970:(assessInfo.timestamp.longLongValue)/1000.0] isoDateTimeString];
         NSString* content = [NSString stringWithFormat:@"情绪:%@  进餐:%@  睡觉:%@  集体活动:%@ \n游戏:%@  锻炼:%@  自我服务:%@  礼貌:%@",
                              assessInfo.emotion, assessInfo.dining, assessInfo.rest, assessInfo.activity,
-                             assessInfo.game, assessInfo.exercise, assessInfo.selfCare, assessInfo.manner];
+                             assessInfo.game, assessInfo.exercise, assessInfo.self_care, assessInfo.manner];
         
         NSString* text = [NSString stringWithFormat:@"%@\n%@:%@\n%@",
                           timestampString,
@@ -128,22 +116,17 @@
     }
     else {
         self.textView1.text = @"无";
+        [gApp alert:@"没有历史评价"];
     }
 }
 
 - (void)refreshAssess {
     CSHttpClient* http = [CSHttpClient sharedInstance];
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
     
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
-        CSLog(@"success.");
-        [EntityAssessInfoHelper updateEntities:dataJson];
+        [session updateAssessInfosByJsonObject:dataJson];
         [self reloadData];
-        
-        EntityAssessInfo* assessInfo = [EntityAssessInfoHelper lastEntityOfChild:self.childInfo.childId];
-        [self reloadData];
-        if (assessInfo == nil) {
-            [gApp alert:@"没有历史评价"];
-        }
     };
     
     FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -155,12 +138,13 @@
     long long toId = -1;
     NSInteger most = 25;
     
-    EntityAssessInfo* assessInfo = [EntityAssessInfoHelper lastEntityOfChild:self.childInfo.childId];
+    CBAssessInfo* assessInfo = [session getLatestAssessInfoByChildId:self.childInfo.child_id];
     if (assessInfo) {
-        fromId = assessInfo.uid.integerValue;
+        fromId = assessInfo._id.integerValue;
     }
 
-    [http opGetAssessmentsOfChild:self.childInfo
+    [http opGetAssessmentsOfChild:self.childInfo.child_id
+                   inKindergarten:self.childInfo.school_id.integerValue
                              from:fromId
                                to:toId
                              most:most
@@ -191,7 +175,8 @@
 
 - (void)doSend {
     CSHttpClient* http = [CSHttpClient sharedInstance];
-    CSEngine* engine = [CSEngine sharedInstance];
+    //CSEngine* engine = [CSEngine sharedInstance];
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
     
     id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
         NSInteger error_code = [[responseObject valueForKeyNotNull:@"error_code"] integerValue];
@@ -200,7 +185,7 @@
             [self.navigationController popViewControllerAnimated:YES];
         }
         else {
-            CSLog(@"doChangePswd error_code=%d", error_code);
+            CSLog(@"doChangePswd error_code=%ld", (long)error_code);
             [gApp alert:@"发布失败。"];
         }
     };
@@ -210,22 +195,27 @@
     };
     
     ModelAssessment* assessment = [ModelAssessment new];
-    assessment.emotion = self.starRating2.rating;
+    
+    // assessInfo.emotion, assessInfo.dining, assessInfo.rest, assessInfo.activity,
+    // assessInfo.game, assessInfo.exercise, assessInfo.self_care, assessInfo.manner
+    assessment.emotion = self.starRating0.rating;
     assessment.dining = self.starRating1.rating;
-    assessment.rest = self.starRating5.rating;
-    assessment.activity = self.starRating0.rating;
-    assessment.game = self.starRating3.rating;
-    assessment.exercise = self.starRating7.rating;
+    assessment.rest = self.starRating2.rating;
+    assessment.activity = self.starRating3.rating;
+    
+    assessment.game = self.starRating4.rating;
+    assessment.exercise = self.starRating5.rating;
     assessment.selfCare = self.starRating6.rating;
-    assessment.manner = self.starRating4.rating;
-    assessment.childId = self.childInfo.childId;
+    assessment.manner = self.starRating7.rating;
+    
+    assessment.childId = self.childInfo.child_id;
     assessment.comments = self.textView2.text;
     
     [gApp waitingAlert:@"发送中..."];
     [http opSendAssessment:@[assessment]
-            inKindergarten:engine.loginInfo.schoolId.integerValue
-                fromSender:engine.loginInfo.name
-              withSenderId:engine.loginInfo.o_id
+            inKindergarten:session.loginInfo.school_id.integerValue
+                fromSender:session.loginInfo.name
+              withSenderId:session.loginInfo._id
                    success:success
                    failure:failure];
 }

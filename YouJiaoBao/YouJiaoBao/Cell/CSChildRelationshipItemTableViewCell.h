@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "EntityRelationshipInfo.h"
+
+@class CBRelationshipInfo;
 
 @interface CSChildRelationshipItemTableViewCell : UITableViewCell
 
-@property (nonatomic, strong) EntityRelationshipInfo* relationship;
+@property (nonatomic, strong) CBRelationshipInfo* relationship;
 
 @end

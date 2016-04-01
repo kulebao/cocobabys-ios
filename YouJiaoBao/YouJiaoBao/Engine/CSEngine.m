@@ -10,7 +10,6 @@
 #import "AHAlertView.h"
 #import "BaiduMobStat.h"
 #import "CSHttpClient.h"
-#import "EntityClassInfo.h"
 #import "CBSessionDataModel.h"
 
 NSString* kNotiLoginSuccess = @"noti.login.success";
@@ -22,7 +21,6 @@ NSString* kNotiShowLogin = @"noti.login.view";
 NSString* kAppleID = @"917314512";
 
 @implementation CSEngine
-@synthesize loginInfo = _loginInfo;
 
 + (id)sharedInstance {
     static CSEngine* s_instance = nil;
@@ -65,18 +63,12 @@ NSString* kAppleID = @"917314512";
     [statTracker startWithAppId:@"9fbb516d10"];//设置您在mtj网站上添加的app的appkey
 }
 
-- (void)onLogin:(EntityLoginInfo*)loginInfo {
-    _loginInfo = loginInfo;
-}
-
 - (void)onLoadClassInfoList:(NSArray*)classInfoList {
-    _classInfoList = classInfoList;
-    
     CBSessionDataModel* session = [CBSessionDataModel thisSession];
     if (session.schoolConfig.schoolGroupChat) {
-        for (EntityClassInfo* clasInfo in _classInfoList) {
-            if (clasInfo.schoolId.integerValue>0 && clasInfo.classId.integerValue>0) {
-                [self joinGroup:clasInfo.schoolId.integerValue classId:clasInfo.classId.integerValue];
+        for (CBClassInfo* classInfo in session.classInfoList) {
+            if (classInfo.school_id>0 && classInfo.class_id>0) {
+                [self joinGroup:classInfo.school_id classId:classInfo.class_id];
             }
         }
     }
@@ -108,28 +100,13 @@ NSString* kAppleID = @"917314512";
 - (ModelAccount*)decryptAccount {
     NSUserDefaults* conf = [NSUserDefaults standardUserDefaults];
     NSData* data = [conf objectForKey:kKeyLoginAccount];
-    
     return [NSKeyedUnarchiver unarchiveObjectWithData:data];
 }
 
 - (BOOL)clearAccount {
     NSUserDefaults* conf = [NSUserDefaults standardUserDefaults];
     [conf removeObjectForKey:kKeyLoginAccount];
-    
     return [conf synchronize];
-}
-
-- (void)reloadSchoolInfo {
-    CSHttpClient* http = [CSHttpClient sharedInstance];
-    if (_loginInfo) {
-        [http opGetSchoolInfo:_loginInfo.schoolId.integerValue
-                      success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                          _schoolInfo = [CBSchoolInfo instanceWithDictionary:responseObject];
-                          
-                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                          
-                      }];
-    }
 }
 
 @end

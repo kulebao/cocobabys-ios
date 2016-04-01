@@ -12,11 +12,12 @@
 #import "UIImageView+WebCache.h"
 #import "NSDate+CSKit.h"
 #import "UIImageView+AFNetworking.h"
-#import "EntityClassInfoHelper.h"
+#import "CBSessionDataModel.h"
+#import "CBNewsInfo.h"
 
 @interface CSKuleNewsTableViewCell ()
 
-@property (nonatomic, weak) EntityNewsInfo* newsInfo;
+@property (nonatomic, weak) CBNewsInfo* newsInfo;
 
 @end
 
@@ -36,15 +37,16 @@
 
 }
 
-- (void)loadNewsInfo:(EntityNewsInfo*)newsInfo {
+- (void)loadNewsInfo:(CBNewsInfo*)newsInfo {
     self.newsInfo = newsInfo;
     
     self.labTitle.text = newsInfo.title;
     self.labContent.text = newsInfo.content;
     
     NSString* publiser = @"";
-    if (newsInfo.classId.integerValue > 0) {
-        EntityClassInfo* classInfo = [EntityClassInfoHelper queryEntityWithClassId:newsInfo.classId.integerValue];
+    if (newsInfo.class_id.integerValue > 0) {
+        CBSessionDataModel* session = [CBSessionDataModel thisSession];
+        CBClassInfo* classInfo = [session getClassInfoByClassId:newsInfo.class_id.integerValue];
         if (classInfo.name.length > 0) {
             publiser = classInfo.name;
         }
@@ -52,7 +54,7 @@
     
     if (newsInfo.image.length > 0) {
         NSURL* qiniuImgUrl = [NSURL URLWithString:newsInfo.image];
-        qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/0/w/60/h/60"];
+        qiniuImgUrl = [qiniuImgUrl URLByQiniuImageView:@"/0/w/128/h/128"];
         [self.imgAttachment setImageWithURL:qiniuImgUrl
                               placeholderImage:[UIImage imageNamed:@"img-placeholder.png"]];
         self.imgAttachment.hidden = NO;
@@ -78,11 +80,12 @@
 
 - (NSString*)tagTitle {
     NSString* tTitle = @"园内公告";
-    NSRange range = [self.newsInfo.tags rangeOfString:@"作业"];
+    NSString* tags = [self.newsInfo.tags componentsJoinedByString:@" "];
+    NSRange range = [tags rangeOfString:@"作业"];
     if (range.length > 0) {
         tTitle = @"亲子作业";
     }
-    else if(self.newsInfo.classId.integerValue > 0) {
+    else if(self.newsInfo.class_id.integerValue > 0) {
         tTitle = @"班级通知";
     }
     
@@ -95,7 +98,7 @@
         self.imgTagBg.image = [[UIImage imageNamed:@"v2-btn_亲子作业.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(4, 4, 4, 4)];
     }
     else {
-        if (self.newsInfo.classId.integerValue > 0) {
+        if (self.newsInfo.class_id.integerValue > 0) {
             tagTitle = @"班级通知";
             self.imgTagBg.image = [[UIImage imageNamed:@"v2-btn_班级通知.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(4, 4, 4, 4)];
         }
@@ -106,7 +109,7 @@
     }
     self.labTag.text = tagTitle;
     
-    if (self.newsInfo.feedbackRequired.integerValue > 0) {
+    if (self.newsInfo.feedback_required.integerValue > 0) {
         [self.btnMark setTitle:@"需回执" forState:UIControlStateNormal];
         self.imgMarkBg.image = [[UIImage imageNamed:@"v2-btn_需回执.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(4, 4, 4, 4)];
         
@@ -124,7 +127,7 @@
 
 
 #pragma mark - CSKuleNewsInfoDelegate
-- (void)newsInfoDataUpdated:(EntityNewsInfo*)newsInfo {
+- (void)newsInfoDataUpdated:(CBNewsInfo*)newsInfo {
     [self refresh];
 }
 

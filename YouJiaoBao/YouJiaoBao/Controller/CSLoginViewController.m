@@ -8,11 +8,9 @@
 
 #import "CSLoginViewController.h"
 #import "CSHttpClient.h"
-#import "EntityLoginInfoHelper.h"
 #import "CSEngine.h"
 #import "CSAppDelegate.h"
 #import <RongIMKit/RongIMKit.h>
-#import "CBIMDataSource.h"
 #import "CBSessionDataModel.h"
 
 @interface CSLoginViewController () {
@@ -103,20 +101,21 @@
         CSHttpClient* http = [CSHttpClient sharedInstance];
         
         id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
-            EntityLoginInfo* loginInfo = [EntityLoginInfoHelper updateEntity:responseObject];
+            CBLoginInfo* loginInfo = [CBLoginInfo instanceWithDictionary:responseObject];
             if (loginInfo != nil) {
                 CBSessionDataModel* session = [CBSessionDataModel session:loginInfo.phone];
-                [session updateSchoolConfig:loginInfo.schoolId.integerValue];
+                session.loginInfo = loginInfo;
+                [session updateSchoolConfig:loginInfo.school_id.integerValue];
                 [gApp alert:@"登录成功"];
                 [[CSEngine sharedInstance] encryptAccount:_loginAccount];
                 [[NSNotificationCenter defaultCenter] postNotificationName:kNotiLoginSuccess object:loginInfo userInfo:nil];
                 
-                [[CBIMDataSource sharedInstance] reloadRelationships];
-                [[CBIMDataSource sharedInstance] reloadTeachers];
+                [session reloadRelationships];
+                [session reloadTeachers];
                 
                 if (loginInfo.im_token) {
                     // 快速集成第二步，连接融云服务器
-                    [[RCIM sharedRCIM] connectWithToken:loginInfo.im_token
+                    [[RCIM sharedRCIM] connectWithToken:loginInfo.im_token.token
                                                 success:^(NSString *userId) {
                                                     // Connect 成功
                                                     CSLog(@"[RCIM] connect success.");

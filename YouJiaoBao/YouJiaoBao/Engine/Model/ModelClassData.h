@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-#import "EntityClassInfo.h"
-#import "EntityChildInfo.h"
 #import "CSClassHeaderView.h"
 #import "CSStudentPickerHeaderView.h"
+#import "CBChildInfo.h"
+#import "CBClassInfo.h"
 
 @interface ModelBaseData : NSObject
 @property (nonatomic, assign) BOOL expand;
@@ -22,21 +22,21 @@
 @end
 
 @interface ModelClassData : ModelBaseData
-@property (nonatomic, strong) EntityClassInfo* classInfo;
+@property (nonatomic, strong) CBClassInfo* classInfo;
 @property (nonatomic, strong) NSArray* childrenList;
 @property (nonatomic, strong) CSClassHeaderView* classHeaderView;
 
 @end
 
 @interface ModelStudentPickerData : ModelBaseData
-@property (nonatomic, strong) EntityClassInfo* classInfo;
+@property (nonatomic, strong) CBClassInfo* classInfo;
 @property (nonatomic, strong) NSArray* childrenList;
 @property (nonatomic, strong) CSStudentPickerHeaderView* studentPickerHeaderView;
 
 @end
 
 @interface ModelReaderData : ModelBaseData
-@property (nonatomic, strong) EntityClassInfo* classInfo;
+@property (nonatomic, strong) CBClassInfo* classInfo;
 @property (nonatomic, strong) NSArray* childrenList;
 @property (nonatomic, strong) NSMutableSet* childrenReaders;
 @property (nonatomic, strong) CSClassHeaderView* classHeaderView;

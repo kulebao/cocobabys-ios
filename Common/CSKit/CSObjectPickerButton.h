@@ -1,4 +1,4 @@
-// NSString+CSKit.h
+// CSObjectPickerButton.h
 //
 // Copyright (c) 2014-2016 Xinus Wang. All rights reserved.
 // https://github.com/xinus/CSKit
@@ -21,17 +21,24 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-@interface NSString (CSKit)
+@class CSObjectPickerButton;
+@protocol CSObjectPickerButtonDelegate <NSObject>
+@optional
+- (void)objectPickerButton:(CSObjectPickerButton*)btn didSelectedItemChanged:(NSInteger)index;
 
-- (BOOL)isValidPswd;
-- (BOOL)isValidMobile;
-- (BOOL)isValidSmsCode;
-- (BOOL)isValidCardNum;
-- (NSString*)trim;
+@end
 
-- (NSString *)MD5Hash;
-- (NSString *)MD5HashEx;
+@interface CSObjectPickerButton : UIButton
+
+@property (nonatomic, weak) id delegate;
+
+@property (nonatomic, strong) NSString* defaultLabelText;
+// id<CSPickerItemProtocol> or NSString
+@property (nonatomic, strong) id currentItem;
+@property (nonatomic, strong) NSArray * pickerItems;
+
+- (void)updateLabels;
 
 @end

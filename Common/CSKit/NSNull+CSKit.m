@@ -1,4 +1,4 @@
-// NSString+CSKit.h
+// NSNull+CSKit.m
 //
 // Copyright (c) 2014-2016 Xinus Wang. All rights reserved.
 // https://github.com/xinus/CSKit
@@ -21,17 +21,24 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
+#import "NSNull+CSKit.h"
 
-@interface NSString (CSKit)
+@implementation NSNull (CSKit)
 
-- (BOOL)isValidPswd;
-- (BOOL)isValidMobile;
-- (BOOL)isValidSmsCode;
-- (BOOL)isValidCardNum;
-- (NSString*)trim;
+- (void)forwardInvocation:(NSInvocation *)invocation
+{
+    if ([self respondsToSelector:[invocation selector]]) {
+        [invocation invokeWithTarget:self];
+    }
+}
 
-- (NSString *)MD5Hash;
-- (NSString *)MD5HashEx;
+- (NSMethodSignature *)methodSignatureForSelector:(SEL)selector
+{
+    NSMethodSignature *sig = [[NSNull class] instanceMethodSignatureForSelector:selector];
+    if(sig == nil) {
+        sig = [NSMethodSignature signatureWithObjCTypes:"@^v^c"];
+    }
+    return sig;
+}
 
 @end

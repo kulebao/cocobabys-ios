@@ -1,6 +1,6 @@
 // CSTextFieldDelegate.h
 //
-// Copyright (c) 2014 Xinus Wang. All rights reserved.
+// Copyright (c) 2014-2016 Xinus Wang. All rights reserved.
 // https://github.com/xinus/CSKit
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,7 +21,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 enum CSTextFieldDelegateType {
     kCSTextFieldDelegateNormal = 0,

@@ -1,6 +1,6 @@
 // CSJsonEntityData.m
 //
-// Copyright (c) 2014-2015 Xinus Wang. All rights reserved.
+// Copyright (c) 2014-2016 Xinus Wang. All rights reserved.
 // https://github.com/xinus/CSKit
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy

@@ -1,6 +1,6 @@
-// CSCoreDataHelper.h
+// CSURLCache.m
 //
-// Copyright (c) 2014 Xinus Wang. All rights reserved.
+// Copyright (c) 2014-2016 Xinus Wang. All rights reserved.
 // https://github.com/xinus/CSKit
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,17 +21,19 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
+#import "CSURLCache.h"
 
-@interface CSCoreDataHelper : NSObject
+@implementation CSURLCache
 
-+ (id)sharedInstance;
+- (NSCachedURLResponse *)cachedResponseForRequest:(NSURLRequest *)request {
+    //CSLog(@"%s", __FUNCTION__);
+    NSCachedURLResponse* res = [super cachedResponseForRequest:request];
+    return res;
+}
 
-@property (readonly, strong, nonatomic) NSManagedObjectContext* managedObjectContext;
-@property (readonly, strong, nonatomic) NSManagedObjectModel* managedObjectModel;
-@property (readonly, strong, nonatomic) NSPersistentStoreCoordinator* persistentStoreCoordinator;
-
-- (void)saveContext;
-- (NSURL*)applicationDocumentsDirectory;
+- (void)storeCachedResponse:(NSCachedURLResponse *)cachedResponse forRequest:(NSURLRequest *)request {
+    //CSLog(@"%s", __FUNCTION__);
+    [super storeCachedResponse:cachedResponse forRequest:request];
+}
 
 @end

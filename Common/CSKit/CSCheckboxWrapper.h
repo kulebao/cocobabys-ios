@@ -1,4 +1,4 @@
-// NSString+CSKit.h
+// CSCheckboxWrapper.h
 //
 // Copyright (c) 2014-2016 Xinus Wang. All rights reserved.
 // https://github.com/xinus/CSKit
@@ -22,16 +22,10 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIButton.h>
 
-@interface NSString (CSKit)
+@interface CSCheckboxWrapper : NSObject
 
-- (BOOL)isValidPswd;
-- (BOOL)isValidMobile;
-- (BOOL)isValidSmsCode;
-- (BOOL)isValidCardNum;
-- (NSString*)trim;
-
-- (NSString *)MD5Hash;
-- (NSString *)MD5HashEx;
+- (id)initWithUIButton:(UIButton*)btn;
 
 @end

@@ -1,4 +1,4 @@
-// NSString+CSKit.h
+// CSCheckboxWrapper.m
 //
 // Copyright (c) 2014-2016 Xinus Wang. All rights reserved.
 // https://github.com/xinus/CSKit
@@ -21,17 +21,33 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
+#import "CSCheckboxWrapper.h"
 
-@interface NSString (CSKit)
+@interface CSCheckboxWrapper ()
 
-- (BOOL)isValidPswd;
-- (BOOL)isValidMobile;
-- (BOOL)isValidSmsCode;
-- (BOOL)isValidCardNum;
-- (NSString*)trim;
+@property (nonatomic, weak) UIButton* btn;
 
-- (NSString *)MD5Hash;
-- (NSString *)MD5HashEx;
+@end
+
+@implementation CSCheckboxWrapper
+
+- (id)initWithUIButton:(UIButton*)btn {
+    if (self = [super init]) {
+        self.btn = btn;
+        if (self.btn) {
+            [self.btn addTarget:self
+                         action:@selector(onBtnClicked:)
+               forControlEvents:UIControlEventTouchUpInside];
+        }
+    }
+    
+    return self;
+}
+
+- (void)onBtnClicked:(id)sender {
+    if ([sender isEqual:self.btn]) {
+        self.btn.selected = !self.btn.selected;
+    }
+}
 
 @end

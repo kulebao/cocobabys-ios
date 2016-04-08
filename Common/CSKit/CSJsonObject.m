@@ -1,6 +1,6 @@
 // CSJsonObject.m
 //
-// Copyright (c) 2014-2015 Xinus Wang. All rights reserved.
+// Copyright (c) 2014-2016 Xinus Wang. All rights reserved.
 // https://github.com/xinus/CSKit
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -45,6 +45,23 @@
     if (self = [self init]) {
         if ([dict isKindOfClass:[NSDictionary class]]) {
             self.rawDict = [NSMutableDictionary dictionaryWithDictionary:dict];
+            
+            for (NSString* key in self.rawDict) {
+                @try {
+                    if ([key isEqualToString:@"id"]) {
+                        [self setValue:self.rawDict[key] forKey:@"_id"];
+                    }
+                    else {
+                        [self setValue:self.rawDict[key] forKey:key];
+                    }
+                }
+                @catch (NSException *exception) {
+                    NSLog(@"ERR: Unknown '%@' in %@", key, NSStringFromClass(self.class));
+                }
+                @finally {
+                    
+                }
+            }
         }
         else {
             self.rawDict = nil;
@@ -65,31 +82,6 @@
 
 - (void)updateObjectsFromDictionary:(NSDictionary*)dict {
     [self.rawDict addEntriesFromDictionary:dict];
-    [self reloadData];
-}
-
-- (void)setRawDict:(NSMutableDictionary *)rawDict {
-    _rawDict = rawDict;
-    [self reloadData];
-}
-
-- (void)reloadData {
-    for (NSString* key in self.rawDict) {
-        @try {
-            if ([key isEqualToString:@"id"]) {
-                [self setValue:self.rawDict[key] forKey:@"_id"];
-            }
-            else {
-                [self setValue:self.rawDict[key] forKey:key];
-            }
-        }
-        @catch (NSException *exception) {
-            NSLog(@"ERR: Unknown '%@' in %@", key, NSStringFromClass(self.class));
-        }
-        @finally {
-            
-        }
-    }
 }
 
 #pragma mark - NSCoding

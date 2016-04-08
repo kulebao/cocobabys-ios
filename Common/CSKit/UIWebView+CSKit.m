@@ -1,6 +1,6 @@
 // UIWebView+CSKit.m
 //
-// Copyright (c) 2014 Xinus Wang. All rights reserved.
+// Copyright (c) 2014-2016 Xinus Wang. All rights reserved.
 // https://github.com/xinus/CSKit
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -22,12 +22,12 @@
 // THE SOFTWARE.
 
 #import "UIWebView+CSKit.h"
-#import <UIKit/UIKit.h>
 
 @implementation UIWebView (CSKit)
 
 - (void)hideGradientBackground {
     self.opaque = NO;
+    
     self.backgroundColor = [UIColor clearColor];
     
     for (UIView *subView in [self subviews]) {

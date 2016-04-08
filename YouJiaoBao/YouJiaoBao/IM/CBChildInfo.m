@@ -8,6 +8,7 @@
 
 #import "CBChildInfo.h"
 #import "CSKuleCommon.h"
+#import "NSDate+CSKit.h"
 
 @implementation CBChildInfo
 

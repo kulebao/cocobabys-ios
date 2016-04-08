@@ -1,4 +1,4 @@
-// NSString+CSKit.h
+// CSButtonGroup.h
 //
 // Copyright (c) 2014-2016 Xinus Wang. All rights reserved.
 // https://github.com/xinus/CSKit
@@ -22,16 +22,30 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-@interface NSString (CSKit)
+@class CSButtonGroup;
 
-- (BOOL)isValidPswd;
-- (BOOL)isValidMobile;
-- (BOOL)isValidSmsCode;
-- (BOOL)isValidCardNum;
-- (NSString*)trim;
+@protocol CSButtonGroupDelegate <NSObject>
 
-- (NSString *)MD5Hash;
-- (NSString *)MD5HashEx;
+@optional
+- (void)buttonGroup:(CSButtonGroup*)btnGroup didSelectButtonAtIndex:(NSInteger)selectedIndex;
+- (BOOL)buttonGroup:(CSButtonGroup*)btnGroup shouldSelectButtonAtIndex:(NSInteger)index;
 
 @end
+
+
+@interface CSButtonGroup : NSObject
+@property (nonatomic, weak) id<CSButtonGroupDelegate> delegate;
+@property (nonatomic, assign, readonly) NSInteger selectedIndex;
+
+- (void)addButton:(UIButton*)btn;
+- (void)addButtonsFromArray:(NSArray *)array;
+- (void)insertButton:(UIButton*)btn atIndex:(NSInteger)index;
+- (void)setSelectedIndex:(NSInteger)selectedIndex;
+- (UIButton*)buttonAtIndex:(NSInteger)index;
+- (void)clear;
+- (NSArray*)buttons;
+
+@end
+

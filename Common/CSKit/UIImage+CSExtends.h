@@ -1,4 +1,4 @@
-// NSString+CSKit.h
+// UIImage+CSExtends.h
 //
 // Copyright (c) 2014-2016 Xinus Wang. All rights reserved.
 // https://github.com/xinus/CSKit
@@ -20,18 +20,10 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
+#import <UIKit/UIKit.h>
 
-#import <Foundation/Foundation.h>
-
-@interface NSString (CSKit)
-
-- (BOOL)isValidPswd;
-- (BOOL)isValidMobile;
-- (BOOL)isValidSmsCode;
-- (BOOL)isValidCardNum;
-- (NSString*)trim;
-
-- (NSString *)MD5Hash;
-- (NSString *)MD5HashEx;
+@interface UIImage (CSExtends)
+- (UIImage *)scaleToSize:(CGSize)size;
+- (UIImage*)imageByScalingAndCroppingForSize:(CGSize)targetSize;
 
 @end

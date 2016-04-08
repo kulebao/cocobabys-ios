@@ -1,6 +1,6 @@
 // UIWebView+CSKit.h
 //
-// Copyright (c) 2014 Xinus Wang. All rights reserved.
+// Copyright (c) 2014-2016 Xinus Wang. All rights reserved.
 // https://github.com/xinus/CSKit
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -20,8 +20,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-
-#import <UIKit/UIWebView.h>
+#import <UIKit/UIKit.h>
 
 @interface UIWebView (CSKit)
 

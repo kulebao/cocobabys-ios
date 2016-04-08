@@ -1,6 +1,6 @@
-// UIButton+Countdown.h
+// CSKit.h
 //
-// Copyright (c) 2014-2015 Xinus Wang. All rights reserved.
+// Copyright (c) 2014-2016 Xinus Wang. All rights reserved.
 // https://github.com/xinus/CSKit
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -20,18 +20,26 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-//
 
-#import <UIKit/UIKit.h>
+#ifndef _CSKIT_
+#define _CSKIT_
 
-@interface UIButton(Countdown)
+#import "NSObject+CSKit.h"
+#import "CSButtonGroup.h"
+#import "CSCheckboxWrapper.h"
+#import "CSCoreDataHelper.h"
+#import "CSPopupController.h"
+#import "CSTextChecker.h"
+#import "CSTextField.h"
+#import "CSTextFieldDelegate.h"
+#import "CSURLCache.h"
+#import "NSDate+CSKit.h"
+#import "NSDictionary+CSKit.h"
+#import "NSNull+CSKit.h"
+#import "NSString+CSKit.h"
+#import "NSURL+CSKit.h"
+#import "UIImage+CSKit.h"
+#import "UIViewController+CSKit.h"
+#import "UIWebView+CSKit.h"
 
-@property (nonatomic, assign) NSInteger counter;
-
-- (void)startTimer:(NSInteger)count
-          callback:(void(^)(NSInteger))hander
-           timeout:(void(^)(void))complete;
-
-- (void)stopTimer;
-
-@end
+#endif

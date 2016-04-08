@@ -1,4 +1,4 @@
-// NSString+CSKit.h
+// CSTextField.m
 //
 // Copyright (c) 2014-2016 Xinus Wang. All rights reserved.
 // https://github.com/xinus/CSKit
@@ -21,17 +21,47 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
+#import "CSTextField.h"
 
-@interface NSString (CSKit)
+@implementation CSTextField
 
-- (BOOL)isValidPswd;
-- (BOOL)isValidMobile;
-- (BOOL)isValidSmsCode;
-- (BOOL)isValidCardNum;
-- (NSString*)trim;
+/*
+// Only override drawRect: if you perform custom drawing.
+// An empty implementation adversely affects performance during animation.
+- (void)drawRect:(CGRect)rect {
+    // Drawing code
+}
+*/
 
-- (NSString *)MD5Hash;
-- (NSString *)MD5HashEx;
+- (CGRect)borderRectForBounds:(CGRect)bounds {
+    return [super borderRectForBounds:bounds];
+}
+
+- (CGRect)textRectForBounds:(CGRect)bounds {
+    CGRect superRect = [super textRectForBounds:bounds];
+    return UIEdgeInsetsInsetRect(superRect, self.textInsets);
+}
+
+- (CGRect)placeholderRectForBounds:(CGRect)bounds {
+    CGRect superRect = [super placeholderRectForBounds:bounds];
+    return superRect;
+}
+
+- (CGRect)editingRectForBounds:(CGRect)bounds {
+    CGRect superRect = [super editingRectForBounds:bounds];
+    return UIEdgeInsetsInsetRect(superRect, self.textInsets);
+}
+
+- (CGRect)clearButtonRectForBounds:(CGRect)bounds {
+    return [super clearButtonRectForBounds:bounds];
+}
+
+- (CGRect)leftViewRectForBounds:(CGRect)bounds {
+    return [super leftViewRectForBounds:bounds];
+}
+
+- (CGRect)rightViewRectForBounds:(CGRect)bounds {
+    return [super rightViewRectForBounds:bounds];
+}
 
 @end

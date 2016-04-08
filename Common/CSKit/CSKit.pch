@@ -1,6 +1,6 @@
 // CSKit.pch
 //
-// Copyright (c) 2014 Xinus Wang. All rights reserved.
+// Copyright (c) 2014-2016 Xinus Wang. All rights reserved.
 // https://github.com/xinus/CSKit
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -27,11 +27,8 @@
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 
-#define UIColorRGBA(r, g, b, a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a/255.0]
-#define UIColorRGB(r, g, b)     UIColorRGBA(r, g, b, 255)
-
-#define UIColorRGBAf(rf, gf, bf, af)    [UIColor colorWithRed:rf green:gf blue:bf alpha:af]
-#define UIColorRGBf(rf, gf, bf)         UIColorRGBA(rf, gf, bf, 1.0)
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 #ifdef DEBUG
 #define CSLog NSLog
@@ -39,12 +36,21 @@
 #define CSLog (void)
 #endif
 
-#define IS_IPHONE5 (([[UIScreen mainScreen] bounds].size.height-568) ? NO : YES)
-#define IS_IPHONE4 (([[UIScreen mainScreen] bounds].size.height-480)>0 ? NO : YES)
+#define UIColorRGBA(r, g, b, a)         [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a/255.0]
+#define UIColorRGB(r, g, b)             UIColorRGBA(r, g, b, 255)
+#define UIColorRGBAf(rf, gf, bf, af)    [UIColor colorWithRed:rf green:gf blue:bf alpha:af]
+#define UIColorRGBf(rf, gf, bf)         UIColorRGBA(rf, gf, bf, 1.0)
+
+/*
+ Returns YES if it is at least version specified as NSString(X)
+ Usage:
+ if (IsAtLeastiOSVersion(@"5.1")) {
+ // do something for iOS 5.1 or greater
+ }
+ */
+#define IsAtLeastiOSVersion(X) ([[[UIDevice currentDevice] systemVersion] compare:X options:NSNumericSearch] != NSOrderedAscending)
 
 #define SAFE_STRING(str)  (str ? str : @"")
 #define SAFE_OBJECT(obj)  (obj ? obj : [NSNull null])
-
-#import "NSDate+CSKit.h"
 
 #endif

@@ -14,6 +14,7 @@
 #import "CSAppDelegate.h"
 #import "CSEngine.h"
 #import "CSNewsInfoReaderTableViewController.h"
+#import "CSUtils.h"
 
 @interface CSNewsInfoDetailViewController () <UIWebViewDelegate, UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *webView;

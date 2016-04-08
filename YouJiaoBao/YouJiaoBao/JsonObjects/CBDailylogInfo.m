@@ -7,6 +7,7 @@
 //
 
 #import "CBDailylogInfo.h"
+#import "NSDate+CSKit.h"
 
 @implementation CBDailylogInfo
 

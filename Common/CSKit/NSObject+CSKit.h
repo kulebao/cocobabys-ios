@@ -1,4 +1,4 @@
-// NSString+CSKit.h
+// NSObject+CSKit.h
 //
 // Copyright (c) 2014-2016 Xinus Wang. All rights reserved.
 // https://github.com/xinus/CSKit
@@ -23,15 +23,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSString (CSKit)
+@interface NSObject(CSKit)
 
-- (BOOL)isValidPswd;
-- (BOOL)isValidMobile;
-- (BOOL)isValidSmsCode;
-- (BOOL)isValidCardNum;
-- (NSString*)trim;
-
-- (NSString *)MD5Hash;
-- (NSString *)MD5HashEx;
++ (id)safeObject:(id)object;
 
 @end

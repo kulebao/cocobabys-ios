@@ -251,6 +251,20 @@
 		228740B41CB7EB77002815E5 /* UIImage+CSKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 228740A51CB7EB77002815E5 /* UIImage+CSKit.m */; };
 		228740B51CB7EB77002815E5 /* UIViewController+CSKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 228740A71CB7EB77002815E5 /* UIViewController+CSKit.m */; };
 		228740B61CB7EB77002815E5 /* UIWebView+CSKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 228740A91CB7EB77002815E5 /* UIWebView+CSKit.m */; };
+		228740EC1CB7F831002815E5 /* UIButton+Countdown.m in Sources */ = {isa = PBXBuildFile; fileRef = 228740E91CB7F831002815E5 /* UIButton+Countdown.m */; };
+		228740ED1CB7F831002815E5 /* UIImage+CSExtends.m in Sources */ = {isa = PBXBuildFile; fileRef = 228740EB1CB7F831002815E5 /* UIImage+CSExtends.m */; };
+		2287412A1CB7FA88002815E5 /* CSButtonGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 228741131CB7FA88002815E5 /* CSButtonGroup.m */; };
+		2287412B1CB7FA88002815E5 /* CSCheckboxWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 228741151CB7FA88002815E5 /* CSCheckboxWrapper.m */; };
+		2287412C1CB7FA88002815E5 /* CSDatePickerButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 228741171CB7FA88002815E5 /* CSDatePickerButton.m */; };
+		2287412D1CB7FA88002815E5 /* CSInputAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 228741191CB7FA88002815E5 /* CSInputAccessoryView.m */; };
+		2287412E1CB7FA88002815E5 /* CSKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 2287411A1CB7FA88002815E5 /* CSKit.m */; };
+		2287412F1CB7FA88002815E5 /* CSObjectPickerButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2287411C1CB7FA88002815E5 /* CSObjectPickerButton.m */; };
+		228741301CB7FA88002815E5 /* CSTextChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 2287411F1CB7FA88002815E5 /* CSTextChecker.m */; };
+		228741311CB7FA88002815E5 /* CSTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 228741211CB7FA88002815E5 /* CSTextField.m */; };
+		228741321CB7FA88002815E5 /* CSURLCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 228741231CB7FA88002815E5 /* CSURLCache.m */; };
+		228741341CB7FA88002815E5 /* NSNull+CSKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 228741271CB7FA88002815E5 /* NSNull+CSKit.m */; };
+		228741351CB7FA88002815E5 /* UIColor+CSKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 228741291CB7FA88002815E5 /* UIColor+CSKit.m */; };
+		2287413E1CB7FE4F002815E5 /* NSObject+CSKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 2287413D1CB7FE4F002815E5 /* NSObject+CSKit.m */; };
 		229033D41C4B3FB0008A94DF /* CBChatViewSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 229033BC1C4B3FB0008A94DF /* CBChatViewSettingsViewController.m */; };
 		229033D51C4B3FB0008A94DF /* CBChildInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 229033BE1C4B3FB0008A94DF /* CBChildInfo.m */; };
 		229033D61C4B3FB0008A94DF /* CBClassInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 229033C01C4B3FB0008A94DF /* CBClassInfo.m */; };
@@ -643,6 +657,35 @@
 		228740A71CB7EB77002815E5 /* UIViewController+CSKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CSKit.m"; sourceTree = "<group>"; };
 		228740A81CB7EB77002815E5 /* UIWebView+CSKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+CSKit.h"; sourceTree = "<group>"; };
 		228740A91CB7EB77002815E5 /* UIWebView+CSKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+CSKit.m"; sourceTree = "<group>"; };
+		228740E71CB7F831002815E5 /* CSKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKit.h; sourceTree = "<group>"; };
+		228740E81CB7F831002815E5 /* UIButton+Countdown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Countdown.h"; sourceTree = "<group>"; };
+		228740E91CB7F831002815E5 /* UIButton+Countdown.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Countdown.m"; sourceTree = "<group>"; };
+		228740EA1CB7F831002815E5 /* UIImage+CSExtends.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+CSExtends.h"; sourceTree = "<group>"; };
+		228740EB1CB7F831002815E5 /* UIImage+CSExtends.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CSExtends.m"; sourceTree = "<group>"; };
+		228741121CB7FA88002815E5 /* CSButtonGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSButtonGroup.h; sourceTree = "<group>"; };
+		228741131CB7FA88002815E5 /* CSButtonGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSButtonGroup.m; sourceTree = "<group>"; };
+		228741141CB7FA88002815E5 /* CSCheckboxWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSCheckboxWrapper.h; sourceTree = "<group>"; };
+		228741151CB7FA88002815E5 /* CSCheckboxWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSCheckboxWrapper.m; sourceTree = "<group>"; };
+		228741161CB7FA88002815E5 /* CSDatePickerButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSDatePickerButton.h; sourceTree = "<group>"; };
+		228741171CB7FA88002815E5 /* CSDatePickerButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSDatePickerButton.m; sourceTree = "<group>"; };
+		228741181CB7FA88002815E5 /* CSInputAccessoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSInputAccessoryView.h; sourceTree = "<group>"; };
+		228741191CB7FA88002815E5 /* CSInputAccessoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSInputAccessoryView.m; sourceTree = "<group>"; };
+		2287411A1CB7FA88002815E5 /* CSKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKit.m; sourceTree = "<group>"; };
+		2287411B1CB7FA88002815E5 /* CSObjectPickerButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSObjectPickerButton.h; sourceTree = "<group>"; };
+		2287411C1CB7FA88002815E5 /* CSObjectPickerButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSObjectPickerButton.m; sourceTree = "<group>"; };
+		2287411D1CB7FA88002815E5 /* CSPickerItemProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSPickerItemProtocol.h; sourceTree = "<group>"; };
+		2287411E1CB7FA88002815E5 /* CSTextChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSTextChecker.h; sourceTree = "<group>"; };
+		2287411F1CB7FA88002815E5 /* CSTextChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSTextChecker.m; sourceTree = "<group>"; };
+		228741201CB7FA88002815E5 /* CSTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSTextField.h; sourceTree = "<group>"; };
+		228741211CB7FA88002815E5 /* CSTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSTextField.m; sourceTree = "<group>"; };
+		228741221CB7FA88002815E5 /* CSURLCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSURLCache.h; sourceTree = "<group>"; };
+		228741231CB7FA88002815E5 /* CSURLCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSURLCache.m; sourceTree = "<group>"; };
+		228741261CB7FA88002815E5 /* NSNull+CSKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNull+CSKit.h"; sourceTree = "<group>"; };
+		228741271CB7FA88002815E5 /* NSNull+CSKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNull+CSKit.m"; sourceTree = "<group>"; };
+		228741281CB7FA88002815E5 /* UIColor+CSKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+CSKit.h"; sourceTree = "<group>"; };
+		228741291CB7FA88002815E5 /* UIColor+CSKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+CSKit.m"; sourceTree = "<group>"; };
+		2287413C1CB7FE4F002815E5 /* NSObject+CSKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+CSKit.h"; sourceTree = "<group>"; };
+		2287413D1CB7FE4F002815E5 /* NSObject+CSKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+CSKit.m"; sourceTree = "<group>"; };
 		229033BB1C4B3FB0008A94DF /* CBChatViewSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBChatViewSettingsViewController.h; sourceTree = "<group>"; };
 		229033BC1C4B3FB0008A94DF /* CBChatViewSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBChatViewSettingsViewController.m; sourceTree = "<group>"; };
 		229033BD1C4B3FB0008A94DF /* CBChildInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CBChildInfo.h; path = ../IM/CBChildInfo.h; sourceTree = "<group>"; };
@@ -1323,27 +1366,56 @@
 		2287408E1CB7EB77002815E5 /* CSKit */ = {
 			isa = PBXGroup;
 			children = (
+				228741121CB7FA88002815E5 /* CSButtonGroup.h */,
+				228741131CB7FA88002815E5 /* CSButtonGroup.m */,
+				228741141CB7FA88002815E5 /* CSCheckboxWrapper.h */,
+				228741151CB7FA88002815E5 /* CSCheckboxWrapper.m */,
 				2287408F1CB7EB77002815E5 /* CSCoreDataHelper.h */,
 				228740901CB7EB77002815E5 /* CSCoreDataHelper.m */,
+				228741161CB7FA88002815E5 /* CSDatePickerButton.h */,
+				228741171CB7FA88002815E5 /* CSDatePickerButton.m */,
 				228740911CB7EB77002815E5 /* CSFirImApi.h */,
 				228740921CB7EB77002815E5 /* CSFirImApi.m */,
+				228741181CB7FA88002815E5 /* CSInputAccessoryView.h */,
+				228741191CB7FA88002815E5 /* CSInputAccessoryView.m */,
 				228740931CB7EB77002815E5 /* CSJsonEntityData.h */,
 				228740941CB7EB77002815E5 /* CSJsonEntityData.m */,
 				228740951CB7EB77002815E5 /* CSJsonObject.h */,
 				228740961CB7EB77002815E5 /* CSJsonObject.m */,
+				228740E71CB7F831002815E5 /* CSKit.h */,
+				2287411A1CB7FA88002815E5 /* CSKit.m */,
 				228740971CB7EB77002815E5 /* CSKit.pch */,
+				2287411B1CB7FA88002815E5 /* CSObjectPickerButton.h */,
+				2287411C1CB7FA88002815E5 /* CSObjectPickerButton.m */,
+				2287411D1CB7FA88002815E5 /* CSPickerItemProtocol.h */,
 				228740981CB7EB77002815E5 /* CSPopupController.h */,
 				228740991CB7EB77002815E5 /* CSPopupController.m */,
+				2287411E1CB7FA88002815E5 /* CSTextChecker.h */,
+				2287411F1CB7FA88002815E5 /* CSTextChecker.m */,
+				228741201CB7FA88002815E5 /* CSTextField.h */,
+				228741211CB7FA88002815E5 /* CSTextField.m */,
 				2287409A1CB7EB77002815E5 /* CSTextFieldDelegate.h */,
 				2287409B1CB7EB77002815E5 /* CSTextFieldDelegate.m */,
+				228741221CB7FA88002815E5 /* CSURLCache.h */,
+				228741231CB7FA88002815E5 /* CSURLCache.m */,
 				2287409C1CB7EB77002815E5 /* NSDate+CSKit.h */,
 				2287409D1CB7EB77002815E5 /* NSDate+CSKit.m */,
 				2287409E1CB7EB77002815E5 /* NSDictionary+CSKit.h */,
 				2287409F1CB7EB77002815E5 /* NSDictionary+CSKit.m */,
+				228741261CB7FA88002815E5 /* NSNull+CSKit.h */,
+				228741271CB7FA88002815E5 /* NSNull+CSKit.m */,
+				2287413C1CB7FE4F002815E5 /* NSObject+CSKit.h */,
+				2287413D1CB7FE4F002815E5 /* NSObject+CSKit.m */,
 				228740A01CB7EB77002815E5 /* NSString+CSKit.h */,
 				228740A11CB7EB77002815E5 /* NSString+CSKit.m */,
 				228740A21CB7EB77002815E5 /* NSURL+CSKit.h */,
 				228740A31CB7EB77002815E5 /* NSURL+CSKit.m */,
+				228740E81CB7F831002815E5 /* UIButton+Countdown.h */,
+				228740E91CB7F831002815E5 /* UIButton+Countdown.m */,
+				228741281CB7FA88002815E5 /* UIColor+CSKit.h */,
+				228741291CB7FA88002815E5 /* UIColor+CSKit.m */,
+				228740EA1CB7F831002815E5 /* UIImage+CSExtends.h */,
+				228740EB1CB7F831002815E5 /* UIImage+CSExtends.m */,
 				228740A41CB7EB77002815E5 /* UIImage+CSKit.h */,
 				228740A51CB7EB77002815E5 /* UIImage+CSKit.m */,
 				228740A61CB7EB77002815E5 /* UIViewController+CSKit.h */,
@@ -1787,8 +1859,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				228741321CB7FA88002815E5 /* CSURLCache.m in Sources */,
 				228740AF1CB7EB77002815E5 /* CSTextFieldDelegate.m in Sources */,
 				09A3C60719C479C7001AFE8C /* MJPhotoProgressView.m in Sources */,
+				2287412F1CB7FA88002815E5 /* CSObjectPickerButton.m in Sources */,
 				09A3C60319C479C7001AFE8C /* MJPhoto.m in Sources */,
 				228740B11CB7EB77002815E5 /* NSDictionary+CSKit.m in Sources */,
 				22E146C81C8DAA3A00528FA6 /* CSKuleHistoryVideoItemTableViewCell.m in Sources */,
@@ -1805,8 +1879,11 @@
 				09A3C5EF19C47986001AFE8C /* UIView+GMGridViewAdditions.m in Sources */,
 				22E1470A1C8E011A00528FA6 /* CBSenderInfo.m in Sources */,
 				09A3C5EC19C47986001AFE8C /* GMGridViewCell.m in Sources */,
+				228741301CB7FA88002815E5 /* CSTextChecker.m in Sources */,
 				229033DB1C4B3FB0008A94DF /* CBIMGroupTeacherTableViewCell.m in Sources */,
 				229033D61C4B3FB0008A94DF /* CBClassInfo.m in Sources */,
+				2287412B1CB7FA88002815E5 /* CSCheckboxWrapper.m in Sources */,
+				228741311CB7FA88002815E5 /* CSTextField.m in Sources */,
 				09CD667E197C153C00CC08F1 /* CSStudentListMainTableViewController.m in Sources */,
 				09A3C60619C479C7001AFE8C /* MJPhotoLoadingView.m in Sources */,
 				229033D41C4B3FB0008A94DF /* CBChatViewSettingsViewController.m in Sources */,
@@ -1836,6 +1913,7 @@
 				228740B61CB7EB77002815E5 /* UIWebView+CSKit.m in Sources */,
 				09A3C5EB19C47986001AFE8C /* GMGridView.m in Sources */,
 				22A306FB1CAE5486005F57F5 /* CBIMInfo.m in Sources */,
+				2287412D1CB7FA88002815E5 /* CSInputAccessoryView.m in Sources */,
 				09A3C60519C479C7001AFE8C /* MJPhotoBrowser.m in Sources */,
 				227A9D291C92EA1100FE19D9 /* CBSchoolConfigData.m in Sources */,
 				22A306F81CAE53F0005F57F5 /* CBLoginInfo.m in Sources */,
@@ -1846,15 +1924,18 @@
 				09A3E1121BC8328B00076198 /* CSNewsReaderTableViewCell.m in Sources */,
 				098E4065198B799000CB4F0B /* MessageInterceptor.m in Sources */,
 				09A3C60A19C479C7001AFE8C /* SDWebImageManager+MJ.m in Sources */,
+				228740ED1CB7F831002815E5 /* UIImage+CSExtends.m in Sources */,
 				095F138A1967C30A008CF3BE /* CSAppDelegate.m in Sources */,
 				09FE720719965C66002E3ED4 /* CSNewsInfoDetailViewController.m in Sources */,
 				0982A7A019C6ED1C0036DEC1 /* EDStarRating.m in Sources */,
 				0917610419C093CA006FE2FB /* CSKuleFeedbackViewController.m in Sources */,
 				22E146F11C8DAC5C00528FA6 /* EGOCache.m in Sources */,
+				2287412C1CB7FA88002815E5 /* CSDatePickerButton.m in Sources */,
 				22F682FA1C566F79005C6040 /* CBIMBanListViewController.m in Sources */,
 				09FE720D199660D0002E3ED4 /* CSUtils.m in Sources */,
 				095D858619C5DD9400F2F926 /* CSClassHeaderView.m in Sources */,
 				0906A83A19758727007F25BE /* CSRootSegue.m in Sources */,
+				2287413E1CB7FE4F002815E5 /* NSObject+CSKit.m in Sources */,
 				224B44141C5100D300982E15 /* KxMenu.m in Sources */,
 				098E3EA5198B614400CB4F0B /* CSProfileHeaderViewController.m in Sources */,
 				09327E2A1992233B0089C653 /* CSChildListItemTableViewCell.m in Sources */,
@@ -1867,9 +1948,12 @@
 				09A3C5ED19C47986001AFE8C /* GMGridViewLayoutStrategies.m in Sources */,
 				228740AD1CB7EB77002815E5 /* CSJsonObject.m in Sources */,
 				0971C0CD1A0A80DC00A6F644 /* CSForgotPasswordStep2ViewController.m in Sources */,
+				2287412E1CB7FA88002815E5 /* CSKit.m in Sources */,
 				09A3E10F1BC8233C00076198 /* CSNewsInfoReaderTableViewController.m in Sources */,
 				22E146C11C8DAA1300528FA6 /* CSKuleHistoryListTableViewController.m in Sources */,
+				228740EC1CB7F831002815E5 /* UIButton+Countdown.m in Sources */,
 				22E1470D1C8E014700528FA6 /* CBMediaInfo.m in Sources */,
+				2287412A1CB7FA88002815E5 /* CSButtonGroup.m in Sources */,
 				090C63991993A0D400398B40 /* CSChildProfileHeaderViewController.m in Sources */,
 				098E408C198B7B2C00CB4F0B /* CSNoticeTableViewController.m in Sources */,
 				095D859019C5ED1900F2F926 /* CSClassPickerView.m in Sources */,
@@ -1879,9 +1963,11 @@
 				229033DA1C4B3FB0008A94DF /* CBIMGroupMembersViewController.m in Sources */,
 				228740AE1CB7EB77002815E5 /* CSPopupController.m in Sources */,
 				095F13861967C30A008CF3BE /* main.m in Sources */,
+				228741341CB7FA88002815E5 /* NSNull+CSKit.m in Sources */,
 				095F13901967C30B008CF3BE /* YouJiaoBao.xcdatamodeld in Sources */,
 				098E4034198B6A0500CB4F0B /* CSSettingsViewController.m in Sources */,
 				22E146C71C8DAA3A00528FA6 /* CSKuleHistoryItemTableViewCell.m in Sources */,
+				228741351CB7FA88002815E5 /* UIColor+CSKit.m in Sources */,
 				091EE51019E83FE50050092E /* BDMultiDownloader.m in Sources */,
 				22A307161CAECDDE005F57F5 /* CBAssessInfo.m in Sources */,
 				22A307011CAE9B85005F57F5 /* CBNewsInfo.m in Sources */,

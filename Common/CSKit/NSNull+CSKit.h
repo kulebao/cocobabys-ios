@@ -1,6 +1,6 @@
-// CSJsonObject.h
+// NSNull+CSKit.h
 //
-// Copyright (c) 2014-2015 Xinus Wang. All rights reserved.
+// Copyright (c) 2014-2016 Xinus Wang. All rights reserved.
 // https://github.com/xinus/CSKit
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,12 +23,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CSJsonObject : NSObject<NSCoding>
-+(instancetype)instanceWithDictionary:(NSDictionary*)dict;
-- (instancetype)initWithDictionary:(NSDictionary*)dict;
-- (void)updateObject:(NSObject*)value forKey:(NSString*)key;
-- (void)updateObjectsFromDictionary:(NSDictionary*)dict;
-
-- (NSDictionary*)dictionary;
+@interface NSNull (CSKit)
 
 @end

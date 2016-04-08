@@ -1,4 +1,4 @@
-// NSString+CSKit.h
+// UIButton+Countdown.h
 //
 // Copyright (c) 2014-2016 Xinus Wang. All rights reserved.
 // https://github.com/xinus/CSKit
@@ -20,18 +20,18 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
+//
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-@interface NSString (CSKit)
+@interface UIButton(Countdown)
 
-- (BOOL)isValidPswd;
-- (BOOL)isValidMobile;
-- (BOOL)isValidSmsCode;
-- (BOOL)isValidCardNum;
-- (NSString*)trim;
+@property (nonatomic, assign) NSInteger counter;
 
-- (NSString *)MD5Hash;
-- (NSString *)MD5HashEx;
+- (void)startTimer:(NSInteger)count
+          callback:(void(^)(NSInteger))hander
+           timeout:(void(^)(void))complete;
+
+- (void)stopTimer;
 
 @end

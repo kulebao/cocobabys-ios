@@ -1,6 +1,6 @@
 // CSCoreDataHelper.m
 //
-// Copyright (c) 2014 Xinus Wang. All rights reserved.
+// Copyright (c) 2014-2016 Xinus Wang. All rights reserved.
 // https://github.com/xinus/CSKit
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -22,10 +22,14 @@
 // THE SOFTWARE.
 
 #import "CSCoreDataHelper.h"
-#import <CoreData/CoreData.h>
-//#import <BlocksKit/UIAlertView+BlocksKit.h>
+
+@interface CSCoreDataHelper()
+@property (nonatomic, strong) NSString* momdName;
+
+@end
 
 @implementation CSCoreDataHelper
+@synthesize momdName = _momdName;
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
@@ -37,6 +41,15 @@
     }
     
     return s_instance;
+}
+
+- (void)initWithMomdName:(NSString*)momdName {
+    if (momdName.length > 0) {
+        self.momdName = momdName;
+    }
+    else {
+        self.momdName = @"CSKit_momd";
+    }
 }
 
 - (void)saveContext {
@@ -53,7 +66,6 @@
 }
 
 #pragma mark - Core Data stack
-
 // Returns the managed object context for the application.
 // If the context doesn't already exist, it is created and bound to the persistent store coordinator for the application.
 - (NSManagedObjectContext *)managedObjectContext {
@@ -65,7 +77,6 @@
     if (coordinator != nil) {
         _managedObjectContext = [[NSManagedObjectContext alloc] init];
         [_managedObjectContext setPersistentStoreCoordinator:coordinator];
-        _managedObjectContext.retainsRegisteredObjects = YES;
     }
     return _managedObjectContext;
 }
@@ -76,8 +87,7 @@
     if (_managedObjectModel != nil) {
         return _managedObjectModel;
     }
-    
-    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"YouJiaoBao" withExtension:@"momd"];
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:self.momdName withExtension:@"momd"];
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
     return _managedObjectModel;
 }
@@ -88,13 +98,12 @@
     if (_persistentStoreCoordinator != nil) {
         return _persistentStoreCoordinator;
     }
-    
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"YouJiaoBao.sqlite"];
+    NSString* pathComponent = [self.momdName stringByAppendingString:@".sqlite"];
+    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:pathComponent];
     
     NSError *error = nil;
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    NSDictionary* options = @{NSMigratePersistentStoresAutomaticallyOption:@YES, NSInferMappingModelAutomaticallyOption:@YES};
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error]) {
+    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
         /*
          Replace this implementation with code to handle the error appropriately.
          
@@ -118,25 +127,15 @@
          Lightweight migration will only work for a limited set of schema changes; consult "Core Data Model Versioning and Data Migration Programming Guide" for details.
          
          */
-        CSLog(@"Persistent Store Error %@, %@", error, [error userInfo]);
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         [[NSFileManager defaultManager] removeItemAtURL:storeURL error:nil];
-        
         abort();
-
-//        [UIAlertView bk_showAlertViewWithTitle:@"提示"
-//                                       message:@"数据已处理完毕，请重新打开幼教宝"
-//                             cancelButtonTitle:@"好"
-//                             otherButtonTitles:nil
-//                                       handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
-//            abort();
-//        }];
     }
     
     return _persistentStoreCoordinator;
 }
 
 #pragma mark - Application's Documents directory
-
 // Returns the URL to the application's Documents directory.
 - (NSURL *)applicationDocumentsDirectory {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];

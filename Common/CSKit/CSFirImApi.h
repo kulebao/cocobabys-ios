@@ -1,6 +1,6 @@
 // CSFirImApi.h
 //
-// Copyright (c) 2014-2015 Xinus Wang. All rights reserved.
+// Copyright (c) 2014-2016 Xinus Wang. All rights reserved.
 // https://github.com/xinus/CSKit
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -41,9 +41,6 @@
 
 @end
 
-/*
- {"name":"youlebao","version":"150822","changelog":"新增商户模块；\r\n修复成长经历发布视频时会上传上次发布的照片的问题，处理同时包含视频和照片的成长经历时，过滤掉视频；\r\n优化性能，对发布的图片直接缓存；\r\n修改分享标题；\r\n修复校车位置不移动的问题；","updated_at":1440243334,"versionShort":"2.3.0","build":"150822","installUrl":"https://download.fir.im/v2/app/install/540b29930a99448660000086?download_token=7b52fe853dfe4376d70e8973a4fec57b","install_url":"https://download.fir.im/v2/app/install/540b29930a99448660000086?download_token=7b52fe853dfe4376d70e8973a4fec57b","update_url":"http://fir.im/ylbao","binary":{"fsize":27368487}}
- */
 @class FirImAppBinaryInfoData;
 @interface FirImAppInfoData : CSJsonEntityData
 @property (nonatomic, strong) NSString* name;

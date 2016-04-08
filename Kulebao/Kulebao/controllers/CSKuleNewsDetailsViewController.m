@@ -33,7 +33,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [self customizeBackBarItem];
+    
     [self.webView hideGradientBackground];
     self.webView.delegate = self;
     self.webView.scalesPageToFit = YES;

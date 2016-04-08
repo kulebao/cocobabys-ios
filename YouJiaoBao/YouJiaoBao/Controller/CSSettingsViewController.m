@@ -51,7 +51,7 @@ enum {
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    //[self customizeBackBarItem];
+    //
     _nickFieldDelegate = [[CSTextFieldDelegate alloc] initWithType:kCSTextFieldDelegateNormal];
     _nickFieldDelegate.maxLength = kKuleNickMaxLength;
 }

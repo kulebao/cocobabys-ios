@@ -45,7 +45,7 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     
-    //[self customizeBackBarItem];
+    //
     [self customizeOkBarItemWithTarget:self action:@selector(onBtnRefreshClicked:) text:@"刷新"];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectNull];
 

@@ -37,7 +37,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [self customizeBackBarItem];
+    
     
     if (COCOBABYS_DEV_MODEL) {
         self.btnDevSettings.hidden = NO;

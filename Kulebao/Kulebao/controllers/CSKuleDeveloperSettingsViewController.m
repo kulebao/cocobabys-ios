@@ -22,7 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self customizeBackBarItem];
+    
     
     CSKulePreferences* preference = [CSKulePreferences defaultPreferences];
     NSDictionary* serverInfo = [preference getServerSettings];

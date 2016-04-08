@@ -61,7 +61,7 @@ typedef enum : NSUInteger {
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self customizeBackBarItem];
+    
 
     //self.mapView.showsUserLocation = YES;
     self.mapView.showMapScaleBar = YES;

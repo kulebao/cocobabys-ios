@@ -109,7 +109,7 @@ static void data_callback(user_data data, P_FRAME_DATA frame, hm_result result)
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self customizeBackBarItem];
+    
 
     ((PaintingView*)PaintView).videoPlayerDelegate = self;
     

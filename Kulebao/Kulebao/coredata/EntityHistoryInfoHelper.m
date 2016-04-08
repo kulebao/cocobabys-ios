@@ -7,7 +7,7 @@
 //
 
 #import "EntityHistoryInfoHelper.h"
-#import "CSCoreDataHelper.h"
+#import "CBCoreDataHelper.h"
 #import "EntitySenderInfoHelper.h"
 #import "EntityMediaInfoHelper.h"
 #import "CSKuleHistoryVideoItemTableViewCell.h"
@@ -41,7 +41,7 @@
 + (EntityHistoryInfo*)queryEntityWithUid:(NSNumber*)uid {
     EntityHistoryInfo* entity = nil;
     if (uid) {
-        NSManagedObjectContext* context = [[CSCoreDataHelper sharedInstance] managedObjectContext];
+        NSManagedObjectContext* context = [[CBCoreDataHelper sharedInstance] managedObjectContext];
         
         NSFetchRequest* fr = [[NSFetchRequest alloc] initWithEntityName:@"EntityHistoryInfo"];
         [fr setPredicate:[NSPredicate predicateWithFormat:@"uid == %@", uid]];
@@ -60,7 +60,7 @@
 + (NSArray*)updateEntities:(id)jsonObjectList {
     NSMutableArray* returnObjectList = [NSMutableArray array];
     
-    NSManagedObjectContext* context = [[CSCoreDataHelper sharedInstance] managedObjectContext];
+    NSManagedObjectContext* context = [[CBCoreDataHelper sharedInstance] managedObjectContext];
     
     for (NSDictionary* jsonObject in jsonObjectList) {
         NSNumber* uid = [jsonObject objectForKey:@"id"];
@@ -117,7 +117,7 @@
 }
 
 + (NSFetchedResultsController*)frCtrlForYear:(NSInteger)year month:(NSInteger)month topic:(NSString*)topic{
-    NSManagedObjectContext* context = [[CSCoreDataHelper sharedInstance] managedObjectContext];
+    NSManagedObjectContext* context = [[CBCoreDataHelper sharedInstance] managedObjectContext];
     NSFetchRequest* fr = [[NSFetchRequest alloc] initWithEntityName:@"EntityHistoryInfo"];
     fr.resultType = NSManagedObjectResultType;
     
@@ -197,7 +197,7 @@
 
 + (void)deleteEntity:(EntityHistoryInfo*)entity {
     if (entity) {
-        NSManagedObjectContext* context = [[CSCoreDataHelper sharedInstance] managedObjectContext];
+        NSManagedObjectContext* context = [[CBCoreDataHelper sharedInstance] managedObjectContext];
         [context deleteObject:entity];
         NSError* error = nil;
         [context save:&error];

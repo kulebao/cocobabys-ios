@@ -56,7 +56,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self customizeBackBarItem];
+    
     [self customizeOkBarItemWithTarget:self action:@selector(onBtnCreateNewClicked:) text:@"发布"];
     
     self.collectionView.delegate = self;

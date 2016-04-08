@@ -52,7 +52,7 @@ static void pCall (user_data data, P_FRAME_DATA frame, hm_result result) {
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self customizeBackBarItem];
+    
     self.delegate = self;
     
     self.navigationItem.title = _deviceMeta[@"name"];

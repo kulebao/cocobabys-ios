@@ -7,13 +7,13 @@
 //
 
 #import "EntityMediaInfoHelper.h"
-#import "CSCoreDataHelper.h"
+#import "CBCoreDataHelper.h"
 
 @implementation EntityMediaInfoHelper
 
 + (NSArray*)updateEntities:(id)jsonObjectList {
     NSMutableArray* returnObjectList = [NSMutableArray array];
-    NSManagedObjectContext* context = [[CSCoreDataHelper sharedInstance] managedObjectContext];
+    NSManagedObjectContext* context = [[CBCoreDataHelper sharedInstance] managedObjectContext];
     
     for (NSDictionary* jsonObject in jsonObjectList) {
         EntityMediaInfo* entity = [NSEntityDescription insertNewObjectForEntityForName:@"EntityMediaInfo"

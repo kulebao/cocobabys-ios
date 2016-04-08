@@ -32,7 +32,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self customizeBackBarItem];
+    
     
     self.navigationItem.title = @"学校简介";
 }

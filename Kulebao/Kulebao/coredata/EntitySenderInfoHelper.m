@@ -7,13 +7,13 @@
 //
 
 #import "EntitySenderInfoHelper.h"
-#import "CSCoreDataHelper.h"
+#import "CBCoreDataHelper.h"
 
 @implementation EntitySenderInfoHelper
 
 + (NSArray*)updateEntities:(id)jsonObjectList {
     NSMutableArray* returnObjectList = [NSMutableArray array];
-    NSManagedObjectContext* context = [[CSCoreDataHelper sharedInstance] managedObjectContext];
+    NSManagedObjectContext* context = [[CBCoreDataHelper sharedInstance] managedObjectContext];
     
     for (NSDictionary* jsonObject in jsonObjectList) {
         EntitySenderInfo* entity = [NSEntityDescription insertNewObjectForEntityForName:@"EntitySenderInfo"

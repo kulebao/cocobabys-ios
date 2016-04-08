@@ -109,18 +109,6 @@
 		093D89D4199A76B9006B013B /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 093D89D3199A76B9006B013B /* GLKit.framework */; };
 		093D89D7199A76E1006B013B /* CSKuleCCTVPlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 093D89D6199A76E1006B013B /* CSKuleCCTVPlayViewController.m */; };
 		093FB8F31A83BD8500A589A8 /* CSKuleDevSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 093FB8F21A83BD8500A589A8 /* CSKuleDevSettingsViewController.m */; };
-		0942B15D1AE3E559008D3BDA /* ELCAlbumPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0942B1471AE3E559008D3BDA /* ELCAlbumPickerController.m */; };
-		0942B15E1AE3E559008D3BDA /* ELCAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 0942B1491AE3E559008D3BDA /* ELCAsset.m */; };
-		0942B15F1AE3E559008D3BDA /* ELCAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0942B14B1AE3E559008D3BDA /* ELCAssetCell.m */; };
-		0942B1601AE3E559008D3BDA /* ELCAssetTablePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 0942B14F1AE3E559008D3BDA /* ELCAssetTablePicker.m */; };
-		0942B1611AE3E559008D3BDA /* ELCConsole.m in Sources */ = {isa = PBXBuildFile; fileRef = 0942B1511AE3E559008D3BDA /* ELCConsole.m */; };
-		0942B1621AE3E559008D3BDA /* ELCImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0942B1531AE3E559008D3BDA /* ELCImagePickerController.m */; };
-		0942B1631AE3E559008D3BDA /* ELCOverlayImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0942B1561AE3E559008D3BDA /* ELCOverlayImageView.m */; };
-		0942B1641AE3E559008D3BDA /* ELCAlbumPickerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0942B1581AE3E559008D3BDA /* ELCAlbumPickerController.xib */; };
-		0942B1651AE3E559008D3BDA /* ELCAssetPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0942B1591AE3E559008D3BDA /* ELCAssetPicker.xib */; };
-		0942B1661AE3E559008D3BDA /* ELCAssetTablePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0942B15A1AE3E559008D3BDA /* ELCAssetTablePicker.xib */; };
-		0942B1671AE3E559008D3BDA /* Overlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 0942B15B1AE3E559008D3BDA /* Overlay.png */; };
-		0942B1681AE3E559008D3BDA /* Overlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0942B15C1AE3E559008D3BDA /* Overlay@2x.png */; };
 		09434DC81B404E3E00DFDC33 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09434DC71B404E3D00DFDC33 /* OpenGLES.framework */; };
 		09434DCF1B4058D500DFDC33 /* v2-校车接送.png in Resources */ = {isa = PBXBuildFile; fileRef = 09434DCB1B4058D500DFDC33 /* v2-校车接送.png */; };
 		09434DD01B4058D500DFDC33 /* v2-校车接送@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 09434DCC1B4058D500DFDC33 /* v2-校车接送@2x.png */; };
@@ -589,28 +577,6 @@
 		093D89D6199A76E1006B013B /* CSKuleCCTVPlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleCCTVPlayViewController.m; sourceTree = "<group>"; };
 		093FB8F11A83BD8500A589A8 /* CSKuleDevSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleDevSettingsViewController.h; sourceTree = "<group>"; };
 		093FB8F21A83BD8500A589A8 /* CSKuleDevSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSKuleDevSettingsViewController.m; sourceTree = "<group>"; };
-		0942B1461AE3E559008D3BDA /* ELCAlbumPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAlbumPickerController.h; sourceTree = "<group>"; };
-		0942B1471AE3E559008D3BDA /* ELCAlbumPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCAlbumPickerController.m; sourceTree = "<group>"; };
-		0942B1481AE3E559008D3BDA /* ELCAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAsset.h; sourceTree = "<group>"; };
-		0942B1491AE3E559008D3BDA /* ELCAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCAsset.m; sourceTree = "<group>"; };
-		0942B14A1AE3E559008D3BDA /* ELCAssetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAssetCell.h; sourceTree = "<group>"; };
-		0942B14B1AE3E559008D3BDA /* ELCAssetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCAssetCell.m; sourceTree = "<group>"; };
-		0942B14C1AE3E559008D3BDA /* ELCAssetPickerFilterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAssetPickerFilterDelegate.h; sourceTree = "<group>"; };
-		0942B14D1AE3E559008D3BDA /* ELCAssetSelectionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAssetSelectionDelegate.h; sourceTree = "<group>"; };
-		0942B14E1AE3E559008D3BDA /* ELCAssetTablePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAssetTablePicker.h; sourceTree = "<group>"; };
-		0942B14F1AE3E559008D3BDA /* ELCAssetTablePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCAssetTablePicker.m; sourceTree = "<group>"; };
-		0942B1501AE3E559008D3BDA /* ELCConsole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCConsole.h; sourceTree = "<group>"; };
-		0942B1511AE3E559008D3BDA /* ELCConsole.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCConsole.m; sourceTree = "<group>"; };
-		0942B1521AE3E559008D3BDA /* ELCImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCImagePickerController.h; sourceTree = "<group>"; };
-		0942B1531AE3E559008D3BDA /* ELCImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCImagePickerController.m; sourceTree = "<group>"; };
-		0942B1541AE3E559008D3BDA /* ELCImagePickerHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCImagePickerHeader.h; sourceTree = "<group>"; };
-		0942B1551AE3E559008D3BDA /* ELCOverlayImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCOverlayImageView.h; sourceTree = "<group>"; };
-		0942B1561AE3E559008D3BDA /* ELCOverlayImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCOverlayImageView.m; sourceTree = "<group>"; };
-		0942B1581AE3E559008D3BDA /* ELCAlbumPickerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ELCAlbumPickerController.xib; sourceTree = "<group>"; };
-		0942B1591AE3E559008D3BDA /* ELCAssetPicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ELCAssetPicker.xib; sourceTree = "<group>"; };
-		0942B15A1AE3E559008D3BDA /* ELCAssetTablePicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ELCAssetTablePicker.xib; sourceTree = "<group>"; };
-		0942B15B1AE3E559008D3BDA /* Overlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Overlay.png; sourceTree = "<group>"; };
-		0942B15C1AE3E559008D3BDA /* Overlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Overlay@2x.png"; sourceTree = "<group>"; };
 		09434DC71B404E3D00DFDC33 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		09434DCB1B4058D500DFDC33 /* v2-校车接送.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-校车接送.png"; sourceTree = "<group>"; };
 		09434DCC1B4058D500DFDC33 /* v2-校车接送@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "v2-校车接送@2x.png"; sourceTree = "<group>"; };
@@ -1404,43 +1370,6 @@
 			name = Interpreter;
 			sourceTree = "<group>";
 		};
-		0942B1451AE3E559008D3BDA /* ELCImagePicker */ = {
-			isa = PBXGroup;
-			children = (
-				0942B1461AE3E559008D3BDA /* ELCAlbumPickerController.h */,
-				0942B1471AE3E559008D3BDA /* ELCAlbumPickerController.m */,
-				0942B1481AE3E559008D3BDA /* ELCAsset.h */,
-				0942B1491AE3E559008D3BDA /* ELCAsset.m */,
-				0942B14A1AE3E559008D3BDA /* ELCAssetCell.h */,
-				0942B14B1AE3E559008D3BDA /* ELCAssetCell.m */,
-				0942B14C1AE3E559008D3BDA /* ELCAssetPickerFilterDelegate.h */,
-				0942B14D1AE3E559008D3BDA /* ELCAssetSelectionDelegate.h */,
-				0942B14E1AE3E559008D3BDA /* ELCAssetTablePicker.h */,
-				0942B14F1AE3E559008D3BDA /* ELCAssetTablePicker.m */,
-				0942B1501AE3E559008D3BDA /* ELCConsole.h */,
-				0942B1511AE3E559008D3BDA /* ELCConsole.m */,
-				0942B1521AE3E559008D3BDA /* ELCImagePickerController.h */,
-				0942B1531AE3E559008D3BDA /* ELCImagePickerController.m */,
-				0942B1541AE3E559008D3BDA /* ELCImagePickerHeader.h */,
-				0942B1551AE3E559008D3BDA /* ELCOverlayImageView.h */,
-				0942B1561AE3E559008D3BDA /* ELCOverlayImageView.m */,
-				0942B1571AE3E559008D3BDA /* Resources */,
-			);
-			path = ELCImagePicker;
-			sourceTree = "<group>";
-		};
-		0942B1571AE3E559008D3BDA /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				0942B1581AE3E559008D3BDA /* ELCAlbumPickerController.xib */,
-				0942B1591AE3E559008D3BDA /* ELCAssetPicker.xib */,
-				0942B15A1AE3E559008D3BDA /* ELCAssetTablePicker.xib */,
-				0942B15B1AE3E559008D3BDA /* Overlay.png */,
-				0942B15C1AE3E559008D3BDA /* Overlay@2x.png */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 		09434DC21B404D9300DFDC33 /* BaiduMap */ = {
 			isa = PBXGroup;
 			children = (
@@ -1624,7 +1553,6 @@
 				09142D9318E2713C00E5848F /* BaiduMobStat */,
 				0960CE7519B0B05700B3B51E /* BDMultiDownloader */,
 				09BA1BCA18BB2FC700760182 /* EGOTableViewPullRefresh */,
-				0942B1451AE3E559008D3BDA /* ELCImagePicker */,
 				093C20ED199915B400A12F1A /* hmsdk-v2 */,
 				090C9ED818C87AEA00883DE0 /* KxMenu */,
 				09BA1BED18BB334900760182 /* libBPush */,
@@ -2129,7 +2057,6 @@
 				09A9EBB518C07F6F00D83119 /* Localizable.strings in Resources */,
 				09D9BC051AEE933D009456ED /* v2-在园表现@2x.png in Resources */,
 				09D9BC0C1AEE933D009456ED /* v2-成长经历.png in Resources */,
-				0942B1671AE3E559008D3BDA /* Overlay.png in Resources */,
 				09D9BBE21AEE933D009456ED /* v2-btn_set@2x.png in Resources */,
 				09D9BBD21AEE933D009456ED /* v2-btn_go@2x.png in Resources */,
 				09D9BC0D1AEE933D009456ED /* v2-成长经历@2x.png in Resources */,
@@ -2137,7 +2064,6 @@
 				0904FC9518F3A349001968D7 /* btn-start.png in Resources */,
 				09D9BBEE1AEE933D009456ED /* v2-btn_已回执@2x.png in Resources */,
 				09D9BBFC1AEE933D009456ED /* v2-input_login_bg@2x.png in Resources */,
-				0942B1661AE3E559008D3BDA /* ELCAssetTablePicker.xib in Resources */,
 				09BA1BE718BB2FC700760182 /* whiteArrow.png in Resources */,
 				09607BB31B49888C0047DB67 /* v2-logo_weixin@2x.png in Resources */,
 				09D9BBE91AEE933D009456ED /* v2-btn_亲子作业.png in Resources */,
@@ -2192,7 +2118,6 @@
 				09D9BC241AEE933D009456ED /* v2-集体活动.png in Resources */,
 				09FEA72718DC9D9600513C87 /* news-bg@2x.png in Resources */,
 				09434DCF1B4058D500DFDC33 /* v2-校车接送.png in Resources */,
-				0942B1651AE3E559008D3BDA /* ELCAssetPicker.xib in Resources */,
 				0914E364199FCD7500276ABA /* MJPhotoBrowser.bundle in Resources */,
 				09FE1EDC19B5D53F0073D9D4 /* v3_5.png in Resources */,
 				09D9BBFF1AEE933D009456ED /* v2-logo2.png in Resources */,
@@ -2205,7 +2130,6 @@
 				09C00FA41B443DA400FC1474 /* ShareSDKLocalizable.strings in Resources */,
 				09D9BBD11AEE933D009456ED /* v2-btn_go.png in Resources */,
 				09FEA72518DC9D9600513C87 /* icon-news@2x.png in Resources */,
-				0942B1641AE3E559008D3BDA /* ELCAlbumPickerController.xib in Resources */,
 				09434DDE1B405FBC00DFDC33 /* v2-btn_star_2_bg@2x.png in Resources */,
 				0948079D1B46B61700FB74B4 /* v2-bus-pin.png in Resources */,
 				09443A1B1B4A685900EE5986 /* v2-接送消息.png in Resources */,
@@ -2258,7 +2182,6 @@
 				09D8590D1BA06B7000653613 /* v2-ios-title-bg@2x.png in Resources */,
 				09D9BBC71AEE933D009456ED /* v2-btn_back.png in Resources */,
 				0911B1E118E015E9006D0588 /* default_child_head_icon.png in Resources */,
-				0942B1681AE3E559008D3BDA /* Overlay@2x.png in Resources */,
 				09434DD91B405FBC00DFDC33 /* v2-btn_star_0_bg.png in Resources */,
 				09E709851AF3E61A00628FF9 /* v2-课程表表格-1.png in Resources */,
 				09FE6AF018C572A500A840BE /* CSKuleNoticeCell.xib in Resources */,
@@ -2369,7 +2292,6 @@
 				09FFB5F718D6B46300F07B0A /* CSKuleScheduleInfo.m in Sources */,
 				09C3AC25199DAC8600A6251C /* CSContentEditorViewController.m in Sources */,
 				229538891C3CC5C700D22278 /* CBIMSettingsModel.m in Sources */,
-				0942B1601AE3E559008D3BDA /* ELCAssetTablePicker.m in Sources */,
 				096DC1C31BA33F4000661B61 /* UIGestureRecognizer+GMGridViewAdditions.m in Sources */,
 				09ED59BC18CDC5E800187585 /* CSKuleCookbookInfo.m in Sources */,
 				223962CF1C757650004E3E32 /* CBIMNotificationUserInfo.m in Sources */,
@@ -2390,7 +2312,6 @@
 				09ED59B618CDBF3900187585 /* UIWebView+CSKit.m in Sources */,
 				090FC121199B3FC300C3A31A /* NSCyscleBuffer.m in Sources */,
 				09EEBA271B8632C3006296F1 /* CBActivityMainViewController.m in Sources */,
-				0942B1611AE3E559008D3BDA /* ELCConsole.m in Sources */,
 				09FE6AFE18C5BB5600A840BE /* CSKuleRecipeViewController.m in Sources */,
 				09219A5718C48A2100166228 /* CSKuleEngine.m in Sources */,
 				09E209E41B86E83C00059CC1 /* CBContractorDetailViewController.m in Sources */,
@@ -2425,7 +2346,6 @@
 				0917764718D0574D00D24F53 /* CSKuleAssignmentInfo.m in Sources */,
 				090FC11E199B3FC300C3A31A /* HMAudioRecorder.m in Sources */,
 				09514FEA1B84E927005217B7 /* CBCommercialMainViewController.m in Sources */,
-				0942B15F1AE3E559008D3BDA /* ELCAssetCell.m in Sources */,
 				091AE83118D820C800EBC927 /* VRGCalendarView.m in Sources */,
 				090FC173199CAB5600C3A31A /* CSKuleHistoryItemTableViewCell.m in Sources */,
 				091AE81E18D7DC6A00EBC927 /* CSKuleSchoolInfo.m in Sources */,
@@ -2433,7 +2353,6 @@
 				092294E41AB9A7E600E40C84 /* CSVideoView.m in Sources */,
 				0914E366199FCD7500276ABA /* MJPhotoLoadingView.m in Sources */,
 				098431001B8E0C98001F1629 /* CSFirImApi.m in Sources */,
-				0942B15E1AE3E559008D3BDA /* ELCAsset.m in Sources */,
 				0904690518C72E5000D0846E /* CSKuleParentInfo.m in Sources */,
 				09FE6AF618C5A53200A840BE /* CSTextFieldDelegate.m in Sources */,
 				0914E363199FCD7500276ABA /* MJPhoto.m in Sources */,
@@ -2472,11 +2391,9 @@
 				09EEBA461B863E76006296F1 /* CBActivityItemCell.m in Sources */,
 				09ED59B218CDB01600187585 /* NSDate+CSKit.m in Sources */,
 				090E6BDC18EAFDA900F21BA7 /* NSURL+CSKit.m in Sources */,
-				0942B1631AE3E559008D3BDA /* ELCOverlayImageView.m in Sources */,
 				096DC1C41BA33F4000661B61 /* UIView+GMGridViewAdditions.m in Sources */,
 				090468F518C6FE1000D0846E /* CSKuleBindInfo.m in Sources */,
 				09FE6B0718C5C23300A840BE /* CSKuleCheckinViewController.m in Sources */,
-				0942B15D1AE3E559008D3BDA /* ELCAlbumPickerController.m in Sources */,
 				096DC1C21BA33F4000661B61 /* GMGridViewLayoutStrategies.m in Sources */,
 				09FE6AEE18C5729500A840BE /* CSKuleNoticeCell.m in Sources */,
 				090C9EB318C81D7500883DE0 /* CSKuleInterpreter.m in Sources */,
@@ -2515,7 +2432,6 @@
 				094373D7199D017B00EDD64C /* EntityHistoryInfoHelper.m in Sources */,
 				09FFB5F418D6B2FA00F07B0A /* CSKuleDailyScheduleInfo.m in Sources */,
 				09FE6AF318C5762600A840BE /* CSKuleNewsViewController.m in Sources */,
-				0942B1621AE3E559008D3BDA /* ELCImagePickerController.m in Sources */,
 				0914E32D199FBB5C00276ABA /* EntityMediaInfo.m in Sources */,
 				093FB8F31A83BD8500A589A8 /* CSKuleDevSettingsViewController.m in Sources */,
 				0919B7791929D6B200810556 /* CSKuleSenderInfo.m in Sources */,
@@ -2621,7 +2537,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Venders/BaiduMobStat",
 					"$(PROJECT_DIR)/Venders/libBPush",
-					"$(PROJECT_DIR)/../YouJiaoBao/Venders/opencore-amr-0.1.3/lib",
 					"$(PROJECT_DIR)/../Common/hmsdk-v2",
 					"$(PROJECT_DIR)/Venders/ShareSDK/Extend/WeChatSDK",
 				);
@@ -2691,7 +2606,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Venders/BaiduMobStat",
 					"$(PROJECT_DIR)/Venders/libBPush",
-					"$(PROJECT_DIR)/../YouJiaoBao/Venders/opencore-amr-0.1.3/lib",
 					"$(PROJECT_DIR)/../Common/hmsdk-v2",
 					"$(PROJECT_DIR)/Venders/ShareSDK/Extend/WeChatSDK",
 				);

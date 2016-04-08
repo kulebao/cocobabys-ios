@@ -287,7 +287,7 @@
             continue;
         }
         
-        NSArray* classChildren = [childrenList filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"classId == %ld", classInfo.class_id]];
+        NSArray* classChildren = [childrenList filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"class_id == %ld", classInfo.class_id]];
         
         classChildren = [classChildren sortedArrayWithOptions:NSSortStable usingComparator:^NSComparisonResult(CBClassInfo* obj1, CBClassInfo* obj2) {
             NSComparisonResult result = NSOrderedSame;

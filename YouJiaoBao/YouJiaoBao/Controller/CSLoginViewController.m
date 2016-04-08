@@ -57,7 +57,7 @@
 #ifdef DEBUG
 #if COCOBABYS_USE_ENV_PROD
     self.fieldUsername.text = @"Joe_tian";
-    self.fieldPassword.text = @"89898989";
+    self.fieldPassword.text = @"123456";
 #else
     self.fieldUsername.text = @"admin8901";
     self.fieldPassword.text = @"89898989";

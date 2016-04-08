@@ -50,7 +50,7 @@
         }
     }
     
-    return [NSString stringWithFormat:@"(实到%ld人/应到%ld人)", recordNum, self.childrenList.count];
+    return [NSString stringWithFormat:@"(在园%ld人/应到%ld人)", recordNum, self.childrenList.count];
 }
 
 @end

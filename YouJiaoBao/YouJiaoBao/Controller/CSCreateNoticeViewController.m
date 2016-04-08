@@ -13,16 +13,16 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import <AVFoundation/AVFoundation.h>
 #import <MobileCoreServices/MobileCoreServices.h>
-#import "ELCImagePickerController.h"
+#import "TZImagePickerController.h"
 #import "NSString+CSKit.h"
 #import "CSAppDelegate.h"
 
 @interface CSCreateNoticeViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GMGridViewDataSource, GMGridViewSortingDelegate, GMGridViewTransformationDelegate, GMGridViewActionDelegate,
-    UIActionSheetDelegate, ELCImagePickerControllerDelegate> {
+    UIActionSheetDelegate, TZImagePickerControllerDelegate> {
     
         NSMutableArray* _imageList;
         UIImagePickerController* _imgPicker;
-        ELCImagePickerController* _elcPicker;
+        TZImagePickerController* _elcPicker;
         NSInteger _lastDeleteItemIndexAsked;
         NSString* _tag;
         UIActionSheet* _typeSelectorActionSheet;
@@ -139,24 +139,22 @@
         
     }];
 #else
-    _elcPicker = [[ELCImagePickerController alloc] initImagePicker];
+    const NSInteger kPictureMaxCount = 9;
+    
+    _elcPicker = [[TZImagePickerController alloc] initWithMaxImagesCount:kPictureMaxCount
+                                                                delegate:self];
+    _elcPicker.allowPickingOriginalPhoto = NO;
     
     if (self.singleImage) {
         //Set the maximum number of images to select, defaults to 4
-        _elcPicker.maximumImagesCount = 1;
+        _elcPicker.maxImagesCount = 1;
         //For multiple image selection, display and return selected order of images
-        _elcPicker.onOrder = NO;
     }
     else {
         //Set the maximum number of images to select, defaults to 4
-        _elcPicker.maximumImagesCount = 9;
+        _elcPicker.maxImagesCount = kPictureMaxCount;
         //For multiple image selection, display and return selected order of images
-        _elcPicker.onOrder = YES;
     }
-    
-    _elcPicker.returnsOriginalImage = NO; //Only return the fullScreenImage, not the fullResolutionImage
-    _elcPicker.returnsImage = YES; //Return UIimage if YES. If NO, only return asset location information
-    _elcPicker.imagePickerDelegate = self;
     
     //Present modally
     [self presentViewController:_elcPicker animated:YES completion:nil];
@@ -172,16 +170,6 @@
                                             destructiveButtonTitle:nil
                                                  otherButtonTitles:@"录像", @"选择视频文件", nil];
     [_videoActionSheet showInView:self.view];
-    
-    /*
-     UINavigationController *navCon = [[UINavigationController alloc] init];
-     navCon.navigationBarHidden = YES;
-     
-     CaptureViewController *captureViewCon = [[CaptureViewController alloc] initWithNibName:@"CaptureViewController" bundle:nil];
-     captureViewCon.delegate = self;
-     [navCon pushViewController:captureViewCon animated:NO];
-     [self presentViewController:navCon animated:YES completion:nil];
-     */
 }
 
 #pragma mark - UIActionSheetDelegate
@@ -381,34 +369,18 @@
     }
 }
 
-#pragma mark - ELCImagePickerControllerDelegate
-- (void)elcImagePickerController:(ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)infoList {
+#pragma mark - TZImagePickerControllerDelegate
+/// User finish picking photo，if assets are not empty, user picking original photo.
+/// 用户选择好了图片，如果assets非空，则用户选择了原图。
+- (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingPhotos:(NSArray *)photos sourceAssets:(NSArray *)assets {
     if ([picker isEqual:_elcPicker]) {
-        for (NSDictionary* info in infoList) {
-            UIImage* img = info[UIImagePickerControllerOriginalImage];
-            if (img) {
-                if (self.singleImage) {
-                    [_imageList removeAllObjects];
-                }
-                
-                [_imageList addObject:img];
-                [self.gmGridView reloadData];
-            }
+        if (self.singleImage) {
+            [_imageList removeAllObjects];
         }
-    }
-    
-    [picker dismissViewControllerAnimated:YES
-                               completion:^{
-                                   if (picker == _elcPicker) {
-                                       _elcPicker = nil;
-                                   }
-                               }];
-}
-
-- (void)elcImagePickerControllerDidCancel:(ELCImagePickerController *)picker {
-    [picker dismissViewControllerAnimated:YES completion:^{
         
-    }];
+        [_imageList addObjectsFromArray:photos];
+        [self.gmGridView reloadData];
+    }
     
     if (picker == _elcPicker) {
         _elcPicker = nil;

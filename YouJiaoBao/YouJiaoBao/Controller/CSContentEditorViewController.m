@@ -13,7 +13,7 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import <AVFoundation/AVFoundation.h>
 #import <MobileCoreServices/MobileCoreServices.h>
-#import "ELCImagePickerController.h"
+#import "TZImagePickerController.h"
 #import "CSAppDelegate.h"
 
 enum {
@@ -21,10 +21,10 @@ enum {
 };
 
 @interface CSContentEditorViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GMGridViewDataSource, GMGridViewSortingDelegate, GMGridViewTransformationDelegate, GMGridViewActionDelegate,
-    UIActionSheetDelegate, ELCImagePickerControllerDelegate> {
+    UIActionSheetDelegate, TZImagePickerControllerDelegate> {
     NSMutableArray* _imageList;
     UIImagePickerController* _imgPicker;
-    ELCImagePickerController* _elcPicker;
+    TZImagePickerController* _elcPicker;
     NSInteger _lastDeleteItemIndexAsked;
 }
 
@@ -133,26 +133,21 @@ enum {
         
     }];
 #else
-    
     if (_elcPicker == nil) {
-        _elcPicker = [[ELCImagePickerController alloc] initImagePicker];
+        _elcPicker = [[TZImagePickerController alloc] initWithMaxImagesCount:kPictureMaxCount
+                                                                    delegate:self];
+        _elcPicker.allowPickingOriginalPhoto = NO;
         
         if (self.singleImage) {
             //Set the maximum number of images to select, defaults to 4
-            _elcPicker.maximumImagesCount = 1;
+            _elcPicker.maxImagesCount = 1;
             //For multiple image selection, display and return selected order of images
-            _elcPicker.onOrder = NO;
         }
         else {
             //Set the maximum number of images to select, defaults to 4
-            _elcPicker.maximumImagesCount = kPictureMaxCount;
+            _elcPicker.maxImagesCount = kPictureMaxCount;
             //For multiple image selection, display and return selected order of images
-            _elcPicker.onOrder = YES;
         }
-        
-        _elcPicker.returnsOriginalImage = NO; //Only return the fullScreenImage, not the fullResolutionImage
-        _elcPicker.returnsImage = YES; //Return UIimage if YES. If NO, only return asset location information
-        _elcPicker.imagePickerDelegate = self;
     }
     
     //Present modally
@@ -170,22 +165,12 @@ enum {
                                                  otherButtonTitles:@"录像", @"选择视频文件", nil];
     [actSheet showInView:self.view];
     
-    /*
-    UINavigationController *navCon = [[UINavigationController alloc] init];
-    navCon.navigationBarHidden = YES;
-    
-    CaptureViewController *captureViewCon = [[CaptureViewController alloc] initWithNibName:@"CaptureViewController" bundle:nil];
-    captureViewCon.delegate = self;
-    [navCon pushViewController:captureViewCon animated:NO];
-    [self presentViewController:navCon animated:YES completion:nil];
-     */
 }
 
 #pragma mark - UIActionSheetDelegate
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == actionSheet.firstOtherButtonIndex) {
         //录像
-        
         //检查相机模式是否可用
         if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
             NSLog(@"sorry, no camera or camera is unavailable!!!");
@@ -342,44 +327,37 @@ enum {
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-    [picker dismissViewControllerAnimated:YES completion:^{
-        
-    }];
-    
     if (picker == _imgPicker) {
         _imgPicker = nil;
     }
+    else {
+        [picker dismissViewControllerAnimated:YES completion:^{
+            
+        }];
+    }
 }
 
-#pragma mark - ELCImagePickerControllerDelegate
-- (void)elcImagePickerController:(ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)infoList {
+#pragma mark - TZImagePickerControllerDelegate
+/// User finish picking photo，if assets are not empty, user picking original photo.
+/// 用户选择好了图片，如果assets非空，则用户选择了原图。
+- (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingPhotos:(NSArray *)photos sourceAssets:(NSArray *)assets{
     if ([picker isEqual:_elcPicker]) {
         [_imageList removeAllObjects];
-        for (NSDictionary* info in infoList) {
-            UIImage* img = info[UIImagePickerControllerOriginalImage];
-            if (img) {
-                [_imageList addObject:img];
-                [self.gmGridView reloadData];
-            }
-        }
+        [_imageList addObjectsFromArray:photos];
+        [self.gmGridView reloadData];
     }
     
     [picker dismissViewControllerAnimated:YES
                                completion:^{
                                    if (picker == _elcPicker) {
-                                       //_elcPicker = nil;
+                                       _elcPicker = nil;
                                    }
                                }];
 }
 
-- (void)elcImagePickerControllerDidCancel:(ELCImagePickerController *)picker {
-    [picker dismissViewControllerAnimated:YES completion:^{
-        
-    }];
-    
-    if (picker == _elcPicker) {
-        //_elcPicker = nil;
-    }
+/// User finish picking video,
+/// 用户选择好了视频
+- (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingVideo:(UIImage *)coverImage sourceAssets:(id)asset {
 }
 
 #pragma mark - 
@@ -472,8 +450,8 @@ enum {
     if (!cell)
     {
         cell = [[GMGridViewCell alloc] init];
-        cell.deleteButtonIcon = [UIImage imageNamed:@"close_x.png"];
-        cell.deleteButtonOffset = CGPointMake(-15, -15);
+        cell.deleteButtonIcon = [UIImage imageNamed:@"delete_cell"];
+        cell.deleteButtonOffset = CGPointMake(-10, -10);
         
         UIImageView* imgView = [[UIImageView alloc] initWithFrame:cell.bounds];
         imgView.contentMode = UIViewContentModeScaleAspectFill;

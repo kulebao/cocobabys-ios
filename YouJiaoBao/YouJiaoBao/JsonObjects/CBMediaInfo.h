@@ -3,7 +3,7 @@
 //  YouJiaoBao
 //
 //  Created by WangXin on 3/8/16.
-//  Copyright © 2016 Codingsoft. All rights reserved.
+//  Copyright © 2016 Cocobabys. All rights reserved.
 //
 
 #import "CSJsonObject.h"

@@ -3,7 +3,7 @@
 //  Kulebao
 //
 //  Created by xin.c.wang on 14-3-18.
-//  Copyright (c) 2014年 Cocobabys. All rights reserved.
+//  Copyright (c) 2014-2016 Cocobabys. All rights reserved.
 //
 
 #import "CSKuleAboutSchoolViewController.h"

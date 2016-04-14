@@ -3,7 +3,7 @@
 //  youlebao
 //
 //  Created by xin.c.wang on 8/21/15.
-//  Copyright (c) 2015 Cocobabys. All rights reserved.
+//  Copyright (c) 2015-2016 Cocobabys. All rights reserved.
 //
 
 #import "CBContractorData.h"

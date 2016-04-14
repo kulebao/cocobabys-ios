@@ -34,9 +34,8 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"发布" style:UIBarButtonItemStylePlain target:self action:@selector(onBtnSendClicked:)];
     
-    //
-    [self customizeOkBarItemWithTarget:self action:@selector(onBtnSendClicked:) text:@"发布"];
     self.navigationItem.title = @"请选择";
         self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectNull];
     

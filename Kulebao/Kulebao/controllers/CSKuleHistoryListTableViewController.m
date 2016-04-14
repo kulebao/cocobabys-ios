@@ -46,7 +46,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    [self customizeOkBarItemWithTarget:self action:@selector(onBtnRefreshClicked:) text:@"刷新"];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"刷新" style:UIBarButtonItemStylePlain target:self action:@selector(onBtnRefreshClicked:)];
     
     CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
     _frCtrl = [EntityHistoryInfoHelper frCtrlForYear:_year month:_month topic:currentChild.childId];

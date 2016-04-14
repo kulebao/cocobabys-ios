@@ -32,7 +32,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    // Do any additional setup after loading the view.
     
     [self.webView hideGradientBackground];
     self.webView.delegate = self;
@@ -81,10 +81,11 @@
         else if(self.newsInfo.status == kNewsStatusRead) {
             self.navigationItem.rightBarButtonItems = nil;
             [gApp hideAlert];
-            [self customizeOkBarItemWithTarget:nil action:nil text:@"已回执"];
+            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"已回执" style:UIBarButtonItemStylePlain target:nil action:nil];
         }
         else {
-            [self customizeOkBarItemWithTarget:self action:@selector(onMarkNews) text:@"发送回执"];
+            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"发送回执" style:UIBarButtonItemStylePlain target:self action:@selector(onMarkNews)];
+            
         }
     }
 }
@@ -123,7 +124,7 @@
     _checkInOutLogInfo = checkInOutLogInfo;
     _assignmentInfo = nil;
     _newsInfo = nil;
-
+    
     if ([self isViewLoaded]) {
         [self reloadWebView];
     }
@@ -135,7 +136,7 @@
 
 #pragma mark - UIWebViewDelegate
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-
+    
     return YES;
 }
 
@@ -162,15 +163,15 @@
     static NSString* htmlTemp =
     @"<html>\
     <head>\
-        <title>%@</title>\
-        <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;' name='viewport' >\
+    <title>%@</title>\
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;' name='viewport' >\
     </head>\
     <body>\
-        <div style='text-align:center;font-size:14pt;font-weight:bold'>%@</div>\
-        <div style='text-align:center;font-size:10pt;'>%@ %@</div>\
-        <p>\
-        <div style='word-break:break-all;width:100%%;font-size:12pt'>%@</div>\
-        %@\
+    <div style='text-align:center;font-size:14pt;font-weight:bold'>%@</div>\
+    <div style='text-align:center;font-size:10pt;'>%@ %@</div>\
+    <p>\
+    <div style='word-break:break-all;width:100%%;font-size:12pt'>%@</div>\
+    %@\
     </body>\
     </html>";
     

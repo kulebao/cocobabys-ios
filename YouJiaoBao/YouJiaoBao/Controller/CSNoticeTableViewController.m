@@ -57,8 +57,8 @@
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-
-    [self customizeOkBarItemWithTarget:self action:@selector(onSendNotice:) text:@"发布"];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"发布" style:UIBarButtonItemStylePlain target:self action:@selector(onSendNotice:)];
+    
     CBSessionDataModel* session = [CBSessionDataModel thisSession];
     
     self.popCtrl = [CSPopupController popupControllerWithView:gApp.window];

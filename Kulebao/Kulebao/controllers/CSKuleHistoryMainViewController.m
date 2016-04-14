@@ -56,8 +56,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    [self customizeOkBarItemWithTarget:self action:@selector(onBtnCreateNewClicked:) text:@"发布"];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"发布" style:UIBarButtonItemStylePlain target:self action:@selector(onBtnCreateNewClicked:)];
     
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
@@ -68,7 +67,7 @@
     NSDateComponents* components = [self.calendar components:NSCalendarUnitYear fromDate:now];
     
     _year = components.year;
-    self.labTitle.text = [NSString stringWithFormat:@"%d", _year];
+    self.labTitle.text = [NSString stringWithFormat:@"%ld", (long)_year];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

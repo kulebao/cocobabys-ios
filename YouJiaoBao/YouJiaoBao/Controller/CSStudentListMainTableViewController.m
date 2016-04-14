@@ -44,9 +44,9 @@
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"刷新" style:UIBarButtonItemStylePlain target:self action:@selector(onBtnRefreshClicked:)];
     
-    //
-    [self customizeOkBarItemWithTarget:self action:@selector(onBtnRefreshClicked:) text:@"刷新"];
+    
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectNull];
 
     [self updateTableView];

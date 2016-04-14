@@ -125,14 +125,14 @@
                     
                 case PHONE_NUM_IS_INVALID:
                 {
-                    [gApp alert:@"账号未激活或已过期，请联系幼儿园处理，谢谢。"
+                    [gApp alert:@"手机号尚未在幼儿园注册，请联系幼儿园注册，谢谢！"
                       withTitle:@"提示"];
                     
                 }
                     break;
                 default:
                 {
-                    [gApp alert:@"账号未激活或已过期，请联系幼儿园处理，谢谢。"
+                    [gApp alert:@"手机号尚未在幼儿园注册，请联系幼儿园注册，谢谢！。"
                       withTitle:@"提示"];
                 }
                     break;

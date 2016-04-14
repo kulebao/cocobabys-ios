@@ -43,7 +43,11 @@ static CBSessionDataModel* s_instance = NULL;
 }
 
 + (instancetype)session:(NSString*)username {
-    return [self session:username withTag:@"none"];
+#if COCOBABYS_USE_ENV_PROD
+    return [self session:username withTag:@"prod"];
+#else
+    return [self session:username withTag:@"stage"];
+#endif
 }
 
 + (instancetype)session:(NSString*)username withTag:(NSString*)tag {

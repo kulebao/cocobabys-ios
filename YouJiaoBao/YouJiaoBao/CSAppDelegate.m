@@ -11,7 +11,7 @@
 #import "CSEngine.h"
 #import "CSFirImApi.h"
 #import <objc/runtime.h>
-#import <Bugly/CrashReporter.h>
+#import <Bugly/Bugly.h>
 #import <RongIMKit/RongIMKit.h>
 #import "CBSessionDataModel.h"
 #import "CBIMChatViewController.h"
@@ -40,9 +40,8 @@ CSAppDelegate* gApp = nil;
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     
-    //[[CrashReporter sharedInstance] enableLog:YES];
-    [[CrashReporter sharedInstance] installWithAppId:@"900013150"];
-    //[self performSelector:@selector(crash) withObject:nil afterDelay:3.0];
+    [Bugly startWithAppId:@"900013150"];
+    // [self performSelector:@selector(crash) withObject:nil afterDelay:3.0];
     
     // 初始化融云
     [[RCIM sharedRCIM] initWithAppKey:COCOBABYS_IM_APP_ID];

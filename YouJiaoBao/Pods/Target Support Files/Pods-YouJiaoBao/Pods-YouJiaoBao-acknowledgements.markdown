@@ -66,7 +66,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ## Bugly
 
-Copyright 2015 tencent.com. All rights reserved.
+Copyright 2016 tencent.com. All rights reserved.
 
 
 ## EAIntroView

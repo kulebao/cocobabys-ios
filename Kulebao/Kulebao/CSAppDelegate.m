@@ -10,7 +10,7 @@
 #import "BPush.h"
 #import "EAIntroPage.h"
 #import "EAIntroView.h"
-#import <Bugly/CrashReporter.h>
+#import <Bugly/Bugly.h>
 #import "CBIMDataSource.h"
 #import "CBSessionDataModel.h"
 #import "AFNetworkReachabilityManager.h"
@@ -36,8 +36,7 @@ CSAppDelegate* gApp = nil;
     gApp = self;
     
     // 初始化Bugly
-    // [[CrashReporter sharedInstance] enableLog:YES];
-    [[CrashReporter sharedInstance] installWithAppId:@"900013148"];
+    [Bugly startWithAppId:@"900013148"];
     // [self performSelector:@selector(crash) withObject:nil afterDelay:3.0];
     
     // 初始化融云

@@ -37,6 +37,8 @@ CSAppDelegate* gApp = nil;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    gApp = self;
+    
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     
@@ -87,7 +89,6 @@ CSAppDelegate* gApp = nil;
     [[CSEngine sharedInstance] setupAppearance];
     [[CSEngine sharedInstance] setupBaiduMobStat];
     
-    gApp = self;
     return YES;
 }
 							

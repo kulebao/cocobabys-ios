@@ -14,7 +14,7 @@
 #import "EGOCache.h"
 #import "BDMultiDownloader.h"
 #import "MBProgressHUD.h"
-#import "AHAlertView.h"
+#import <UIAlertView+BlocksKit.h>
 #import "UIImageView+WebCache.h"
 #import "CSEngine.h"
 #import "AFNetworkReachabilityManager.h"
@@ -226,12 +226,13 @@
     NSString *title = @"提示";
     NSString *message = @"是否下载视频？建议在Wifi下进行下载。";
     
-    AHAlertView *alert = [[AHAlertView alloc] initWithTitle:title message:message];
+    UIAlertView* alert = [UIAlertView bk_alertViewWithTitle:title message:message];
     
-    [alert setCancelButtonTitle:@"取消" block:^{
+    [alert bk_setCancelButtonWithTitle:@"取消" handler:^{
+        
     }];
     
-    [alert addButtonWithTitle:@"确定" block:^{
+    [alert bk_addButtonWithTitle:@"确定" handler:^{
         [self performSelector:@selector(startDownloader) withObject:nil];
     }];
     

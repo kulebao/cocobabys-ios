@@ -214,8 +214,6 @@
 		09FE720D199660D0002E3ED4 /* CSUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE720C199660D0002E3ED4 /* CSUtils.m */; };
 		09FE721019966801002E3ED4 /* CSCreateNoticeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09FE720F19966801002E3ED4 /* CSCreateNoticeViewController.m */; };
 		221BAFCE1C4B8DE900593559 /* CBSchoolInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 221BAFCD1C4B8DE900593559 /* CBSchoolInfo.m */; };
-		2244AD781CB8013600EA92FB /* AHAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2244AD371CB8013600EA92FB /* AHAlertView.m */; };
-		2244AD791CB8013600EA92FB /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 2244AD381CB8013600EA92FB /* README.md */; };
 		2244AD7A1CB8013600EA92FB /* libBaiduMobStat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2244AD3B1CB8013600EA92FB /* libBaiduMobStat.a */; };
 		2244AD7B1CB8013600EA92FB /* BDMultiDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2244AD3E1CB8013600EA92FB /* BDMultiDownloader.m */; };
 		2244ADC01CB8015100EA92FB /* EGOCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 2244AD991CB8015100EA92FB /* EGOCache.m */; };
@@ -581,9 +579,6 @@
 		09FE720F19966801002E3ED4 /* CSCreateNoticeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSCreateNoticeViewController.m; sourceTree = "<group>"; };
 		221BAFCC1C4B8DE900593559 /* CBSchoolInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CBSchoolInfo.h; path = ../IM/CBSchoolInfo.h; sourceTree = "<group>"; };
 		221BAFCD1C4B8DE900593559 /* CBSchoolInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CBSchoolInfo.m; path = ../IM/CBSchoolInfo.m; sourceTree = "<group>"; };
-		2244AD361CB8013600EA92FB /* AHAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHAlertView.h; sourceTree = "<group>"; };
-		2244AD371CB8013600EA92FB /* AHAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHAlertView.m; sourceTree = "<group>"; };
-		2244AD381CB8013600EA92FB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		2244AD3A1CB8013600EA92FB /* BaiduMobStat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduMobStat.h; sourceTree = "<group>"; };
 		2244AD3B1CB8013600EA92FB /* libBaiduMobStat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBaiduMobStat.a; sourceTree = "<group>"; };
 		2244AD3D1CB8013600EA92FB /* BDMultiDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDMultiDownloader.h; sourceTree = "<group>"; };
@@ -1251,23 +1246,11 @@
 				2244AD9A1CB8015100EA92FB /* EGOTableViewPullRefresh */,
 				2244ADAF1CB8015100EA92FB /* GMGridView */,
 				2244ADBC1CB8015100EA92FB /* KxMenu */,
-				2244AD351CB8013600EA92FB /* AHAlertView */,
 				2244AD391CB8013600EA92FB /* BaiduMobStat */,
 				2244AD3C1CB8013600EA92FB /* BDMultiDownloader */,
 				2287408E1CB7EB77002815E5 /* CSKit */,
 			);
 			name = .Shared;
-			sourceTree = "<group>";
-		};
-		2244AD351CB8013600EA92FB /* AHAlertView */ = {
-			isa = PBXGroup;
-			children = (
-				2244AD361CB8013600EA92FB /* AHAlertView.h */,
-				2244AD371CB8013600EA92FB /* AHAlertView.m */,
-				2244AD381CB8013600EA92FB /* README.md */,
-			);
-			name = AHAlertView;
-			path = ../../Common/AHAlertView;
 			sourceTree = "<group>";
 		};
 		2244AD391CB8013600EA92FB /* BaiduMobStat */ = {
@@ -1881,7 +1864,6 @@
 				229033DB1C4B3FB0008A94DF /* CBIMGroupTeacherTableViewCell.m in Sources */,
 				229033D61C4B3FB0008A94DF /* CBClassInfo.m in Sources */,
 				2287412B1CB7FA88002815E5 /* CSCheckboxWrapper.m in Sources */,
-				2244AD791CB8013600EA92FB /* README.md in Sources */,
 				228741311CB7FA88002815E5 /* CSTextField.m in Sources */,
 				09CD667E197C153C00CC08F1 /* CSStudentListMainTableViewController.m in Sources */,
 				09A3C60619C479C7001AFE8C /* MJPhotoLoadingView.m in Sources */,
@@ -1897,7 +1879,6 @@
 				098E4031198B647000CB4F0B /* CSMainViewController.m in Sources */,
 				0936DD601A0BE070006B7E89 /* CSStudentPickerHeaderView.m in Sources */,
 				2244ADD51CB8015100EA92FB /* README.md in Sources */,
-				2244AD781CB8013600EA92FB /* AHAlertView.m in Sources */,
 				09CD6669197BFD3600CC08F1 /* CSEngine.m in Sources */,
 				2244ADC31CB8015100EA92FB /* MessageInterceptor.m in Sources */,
 				229033D81C4B3FB0008A94DF /* CBIMChatViewController.m in Sources */,

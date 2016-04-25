@@ -326,8 +326,6 @@
 		221858CE1BEF9EDC005C4281 /* CBHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 221858CD1BEF9EDC005C4281 /* CBHTTPRequestOperationManager.m */; };
 		223962CB1C7412A3004E3E32 /* CBSessionDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 223962CA1C7412A3004E3E32 /* CBSessionDataModel.m */; };
 		223962CF1C757650004E3E32 /* CBIMNotificationUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 223962CE1C757650004E3E32 /* CBIMNotificationUserInfo.m */; };
-		2244AD1B1CB8011900EA92FB /* AHAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2244ACEA1CB8011900EA92FB /* AHAlertView.m */; };
-		2244AD1C1CB8011900EA92FB /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 2244ACEB1CB8011900EA92FB /* README.md */; };
 		2244AD1D1CB8011900EA92FB /* libBaiduMobStat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2244ACEE1CB8011900EA92FB /* libBaiduMobStat.a */; };
 		2244AD1E1CB8011900EA92FB /* BDMultiDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2244ACF11CB8011900EA92FB /* BDMultiDownloader.m */; };
 		2244AD1F1CB8011900EA92FB /* EGOCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 2244ACF41CB8011900EA92FB /* EGOCache.m */; };
@@ -863,9 +861,6 @@
 		223962CA1C7412A3004E3E32 /* CBSessionDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBSessionDataModel.m; sourceTree = "<group>"; };
 		223962CD1C757650004E3E32 /* CBIMNotificationUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBIMNotificationUserInfo.h; sourceTree = "<group>"; };
 		223962CE1C757650004E3E32 /* CBIMNotificationUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBIMNotificationUserInfo.m; sourceTree = "<group>"; };
-		2244ACE91CB8011900EA92FB /* AHAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AHAlertView.h; sourceTree = "<group>"; };
-		2244ACEA1CB8011900EA92FB /* AHAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AHAlertView.m; sourceTree = "<group>"; };
-		2244ACEB1CB8011900EA92FB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		2244ACED1CB8011900EA92FB /* BaiduMobStat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduMobStat.h; sourceTree = "<group>"; };
 		2244ACEE1CB8011900EA92FB /* libBaiduMobStat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBaiduMobStat.a; sourceTree = "<group>"; };
 		2244ACF01CB8011900EA92FB /* BDMultiDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDMultiDownloader.h; sourceTree = "<group>"; };
@@ -1837,7 +1832,6 @@
 			isa = PBXGroup;
 			children = (
 				2244ADD61CB8029900EA92FB /* libBPush */,
-				2244ACE81CB8011900EA92FB /* AHAlertView */,
 				2244ACEC1CB8011900EA92FB /* BaiduMobStat */,
 				2244ACEF1CB8011900EA92FB /* BDMultiDownloader */,
 				2244ACF21CB8011900EA92FB /* EGOCache */,
@@ -1848,17 +1842,6 @@
 				228740B71CB7ECCE002815E5 /* CSKit */,
 			);
 			name = .Shared;
-			sourceTree = "<group>";
-		};
-		2244ACE81CB8011900EA92FB /* AHAlertView */ = {
-			isa = PBXGroup;
-			children = (
-				2244ACE91CB8011900EA92FB /* AHAlertView.h */,
-				2244ACEA1CB8011900EA92FB /* AHAlertView.m */,
-				2244ACEB1CB8011900EA92FB /* README.md */,
-			);
-			name = AHAlertView;
-			path = ../../Common/AHAlertView;
 			sourceTree = "<group>";
 		};
 		2244ACEC1CB8011900EA92FB /* BaiduMobStat */ = {
@@ -2406,7 +2389,6 @@
 				09C3AC25199DAC8600A6251C /* CSContentEditorViewController.m in Sources */,
 				2287417C1CB7FEA0002815E5 /* CSInputAccessoryView.m in Sources */,
 				229538891C3CC5C700D22278 /* CBIMSettingsModel.m in Sources */,
-				2244AD1C1CB8011900EA92FB /* README.md in Sources */,
 				09ED59BC18CDC5E800187585 /* CSKuleCookbookInfo.m in Sources */,
 				223962CF1C757650004E3E32 /* CBIMNotificationUserInfo.m in Sources */,
 				228741871CB7FEA0002815E5 /* NSDictionary+CSKit.m in Sources */,
@@ -2546,7 +2528,6 @@
 				2287418D1CB7FEA0002815E5 /* UIColor+CSKit.m in Sources */,
 				22BC05551C1DCD8200B8D076 /* CBParentInfo.m in Sources */,
 				090C9EC718C84FB000883DE0 /* CSKuleChildCell.m in Sources */,
-				2244AD1B1CB8011900EA92FB /* AHAlertView.m in Sources */,
 				09D04E3918DFCB830093577D /* CSKuleCheckinLogListViewController.m in Sources */,
 				0904FC9918F3BDED001968D7 /* CSKuleEmployeeInfo.m in Sources */,
 				0904690818C72E6C00D0846E /* CSKuleRelationshipInfo.m in Sources */,

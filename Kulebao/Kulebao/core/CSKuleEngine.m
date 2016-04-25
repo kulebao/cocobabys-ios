@@ -441,19 +441,19 @@
 }
 
 - (void)setupAppearance {
-    UIImage* imgAlertBg = [UIImage imageNamed:@"alert-bg.png"];
-    UIImage* imgBtnCancelBg = [[UIImage imageNamed:@"v2-btn_gray.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
-    UIImage* imgBtnOkBg = [[UIImage imageNamed:@"v2-btn_green.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
+//    UIImage* imgAlertBg = [UIImage imageNamed:@"alert-bg.png"];
+//    UIImage* imgBtnCancelBg = [[UIImage imageNamed:@"v2-btn_gray.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
+//    UIImage* imgBtnOkBg = [[UIImage imageNamed:@"v2-btn_green.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
+//    
+//    imgAlertBg = [imgAlertBg resizableImageWithCapInsets:UIEdgeInsetsMake(100, 50, 10, 50)];
     
-    imgAlertBg = [imgAlertBg resizableImageWithCapInsets:UIEdgeInsetsMake(100, 50, 10, 50)];
-    
-    id alertAppearance = [AHAlertView appearance];
-    [alertAppearance setBackgroundImage:imgAlertBg];
-    [alertAppearance setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
-    [alertAppearance setMessageTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
-    [alertAppearance setButtonBackgroundImage:imgBtnOkBg forState:UIControlStateNormal];
-    [alertAppearance setCancelButtonBackgroundImage:imgBtnCancelBg forState:UIControlStateNormal];
-    [alertAppearance setContentInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
+//    id alertAppearance = [AHAlertView appearance];
+//    [alertAppearance setBackgroundImage:imgAlertBg];
+//    [alertAppearance setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
+//    [alertAppearance setMessageTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
+//    [alertAppearance setButtonBackgroundImage:imgBtnOkBg forState:UIControlStateNormal];
+//    [alertAppearance setCancelButtonBackgroundImage:imgBtnCancelBg forState:UIControlStateNormal];
+//    [alertAppearance setContentInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
     
     //
     id naviAppearance = [UINavigationBar appearance];

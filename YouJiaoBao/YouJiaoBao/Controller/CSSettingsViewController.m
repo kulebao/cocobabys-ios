@@ -7,7 +7,7 @@
 //
 
 #import "CSSettingsViewController.h"
-#import "AHAlertView.h"
+#import <UIAlertView+BlocksKit.h>
 #import "CSEngine.h"
 #import "CSHttpClient.h"
 #import "CSAppDelegate.h"
@@ -80,15 +80,16 @@ enum {
 - (IBAction)onBtnLogoutClicked:(id)sender {
     NSString *title = @"提示";
 	NSString *message = @"确定要退出登录？";
-	
-	AHAlertView *alert = [[AHAlertView alloc] initWithTitle:title message:message];
     
-    [alert setCancelButtonTitle:@"取消" block:^{
-	}];
+    UIAlertView* alert = [UIAlertView bk_alertViewWithTitle:title message:message];
     
-	[alert addButtonWithTitle:@"确定" block:^{
+    [alert bk_setCancelButtonWithTitle:@"取消" handler:^{
+        
+    }];
+    
+    [alert bk_addButtonWithTitle:@"确定" handler:^{
         [self performSelector:@selector(doLogout) withObject:nil];
-	}];
+    }];
     
 	[alert show];
 }
@@ -131,16 +132,15 @@ enum {
             else {
                 NSString *title = @"新版本";
                 NSString *message = @"发现新版本，是否前去更新？";
-                AHAlertView *alert = [[AHAlertView alloc] initWithTitle:title message:message];
+                UIAlertView* alert = [UIAlertView bk_alertViewWithTitle:title message:message];
                 
-                [alert setCancelButtonTitle:@"取消" block:^{
+                [alert bk_setCancelButtonWithTitle:@"取消" handler:^{
+                    
                 }];
                 
-                [alert addButtonWithTitle:@"确定" block:^{
+                [alert bk_addButtonWithTitle:@"确定" handler:^{
                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:newURL]];
                 }];
-                
-                [alert show];
             }
         }
         else {
@@ -191,8 +191,8 @@ enum {
     
     CBSessionDataModel* session = [CBSessionDataModel thisSession];
     
-    AHAlertView *alert = [[AHAlertView alloc] initWithTitle:title message:message];
-    alert.alertViewStyle = AHAlertViewStylePlainTextInput;
+    UIAlertView* alert = [UIAlertView bk_alertViewWithTitle:title message:message];
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
     
     UITextField* field = [alert textFieldAtIndex:0];
     field.placeholder = @"请输入新昵称";
@@ -205,11 +205,11 @@ enum {
     field.font = [UIFont systemFontOfSize:14];
     field.delegate = _nickFieldDelegate;
     
-    [alert setCancelButtonTitle:@"取消" block:^{
+    [alert bk_setCancelButtonWithTitle:@"取消" handler:^{
         
     }];
     
-    [alert addButtonWithTitle:@"确定" block:^{
+    [alert bk_addButtonWithTitle:@"确定" handler:^{
         [self doUpdateChildNick:field.text];
     }];
     

@@ -1181,7 +1181,7 @@
     };
     
     FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
-        CSLog(@"failure:%@", error);
+        //CSLog(@"failure:%@", error);
         [gApp hideAlert];
         [self performSelector:@selector(reloadDefaultVideoMember) withObject:nil afterDelay:0];
     };

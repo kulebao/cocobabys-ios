@@ -158,9 +158,15 @@ CSAppDelegate* gApp = nil;
 
 - (void)gotoMainProcess {
     if (gApp.engine.loginInfo) {
+        
         NSDictionary* serverInfo = [gApp.engine.preferences getServerSettings];
         CBSessionDataModel* session = [CBSessionDataModel session:gApp.engine.loginInfo.accountName withTag:serverInfo[@"tag"]];
         [session updateSchoolConfig:gApp.engine.loginInfo.schoolId];
+        
+        
+        [Bugly setUserValue:gApp.engine.loginInfo.accountName forKey:@"cb_user_name"];
+        [Bugly setUserValue:[NSString stringWithFormat:@"%ld", gApp.engine.loginInfo.schoolId] forKey:@"cb_user_school_id"];
+        [Bugly setUserValue:serverInfo[@"tag"] forKey:@"cb_env"];
         
         if (gApp.engine.loginInfo.imToken) {
             // 快速集成第二步，连接融云服务器

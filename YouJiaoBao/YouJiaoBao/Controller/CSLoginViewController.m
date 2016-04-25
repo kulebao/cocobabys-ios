@@ -12,6 +12,7 @@
 #import "CSAppDelegate.h"
 #import <RongIMKit/RongIMKit.h>
 #import "CBSessionDataModel.h"
+#import <Bugly/Bugly.h>
 
 @interface CSLoginViewController () {
     ModelAccount* _loginAccount;
@@ -103,6 +104,15 @@
         id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
             CBLoginInfo* loginInfo = [CBLoginInfo instanceWithDictionary:responseObject];
             if (loginInfo != nil) {
+                [Bugly setUserValue:loginInfo.login_name forKey:@"cb_user_name"];
+                [Bugly setUserValue:loginInfo.phone forKey:@"cb_user_phone"];
+                [Bugly setUserValue:loginInfo.school_id.stringValue forKey:@"cb_user_school_id"];
+#if COCOBABYS_USE_ENV_PROD
+                [Bugly setUserValue:@"prod" forKey:@"cb_env"];
+#else
+                [Bugly setUserValue:@"stage" forKey:@"cb_env"];
+#endif
+                
                 CBSessionDataModel* session = [CBSessionDataModel session:loginInfo.phone];
                 session.loginInfo = loginInfo;
                 [session updateSchoolConfig:loginInfo.school_id.integerValue];

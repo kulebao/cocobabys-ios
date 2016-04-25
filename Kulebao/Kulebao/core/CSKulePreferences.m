@@ -11,6 +11,7 @@
 
 static NSString* kKeyDeviceToken = @"com.cocobabys.Kulebao.Preferences.deviceToken";
 static NSString* kKeyDefaultUsername = @"com.cocobabys.Kulebao.Preferences.defaultUsername";
+static NSString* kKeyLocalPswd = @"com.cocobabys.Kulebao.Preferences.localPswd";
 static NSString* kKeyGuideShown = @"com.cocobabys.Kulebao.Preferences.guideShown_v2.8";
 static NSString* kKeyGuideHomeShown = @"com.cocobabys.Kulebao.Preferences.guideHomeShown_v2.8";
 static NSString* kKeyLoginInfo = @"com.cocobabys.Kulebao.Preferences.loginInfo";
@@ -38,6 +39,7 @@ static NSString* kKeyRelationshipUID = @"com.cocobabys.Kulebao.Preferences.relat
 @synthesize enabledTest = _enabledTest;
 @synthesize enabledCommercial = _enabledCommercial;
 @synthesize configTag = _configTag;
+@synthesize localPswd = _localPswd;
 
 + (id)defaultPreferences {
     static CSKulePreferences* s_preferences = nil;
@@ -59,6 +61,7 @@ static NSString* kKeyRelationshipUID = @"com.cocobabys.Kulebao.Preferences.relat
 - (void)loadPreferences {
     _deviceToken = [_config objectForKey:kKeyDeviceToken];
     _defaultUsername = [_config objectForKey:kKeyDefaultUsername];
+    _localPswd = [_config objectForKey:kKeyLocalPswd];
     _guideShown = [[_config objectForKey:kKeyGuideShown] boolValue];
     _guideHomeShown = [[_config objectForKey:kKeyGuideHomeShown] boolValue];
     _enabledTest =  NO;//YES;// [[_config objectForKey:@"enabled_test"] boolValue];
@@ -127,6 +130,13 @@ static NSString* kKeyRelationshipUID = @"com.cocobabys.Kulebao.Preferences.relat
     }
     else {
         [_config removeObjectForKey:kKeyDefaultUsername];
+    }
+    
+    if (_localPswd) {
+        [_config setObject:_localPswd forKey:kKeyLocalPswd];
+    }
+    else {
+        [_config removeObjectForKey:kKeyLocalPswd];
     }
     
     if (_guideShown) {
@@ -225,6 +235,11 @@ static NSString* kKeyRelationshipUID = @"com.cocobabys.Kulebao.Preferences.relat
 
 - (void)setDefaultUsername:(NSString *)defaultUsername {
     _defaultUsername = defaultUsername;
+    [self savePreferences];
+}
+
+- (void)setLocalPswd:(NSString *)localPswd {
+    _localPswd = localPswd;
     [self savePreferences];
 }
 

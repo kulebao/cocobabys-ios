@@ -116,6 +116,7 @@
             if (loginInfo.errorCode == 0) {
                 gApp.engine.loginInfo = loginInfo;
                 gApp.engine.preferences.loginInfo = loginInfo;
+                gApp.engine.preferences.localPswd = [pswd MD5Hash];
                 [self performSelector:@selector(doReceiveBindInfo)
                            withObject:nil
                            afterDelay:0];

@@ -14,6 +14,8 @@
 @property (nonatomic, readonly, strong) NSString* username;
 @property (nonatomic, readonly, strong) NSString* tag;
 
+@property (nonatomic, strong) NSString* pswd; // NO USED
+
 @property (nonatomic, readonly, strong) NSMutableSet* imGroupTags;
 @property (nonatomic, strong) CBSchoolConfigData* schoolConfig;
 

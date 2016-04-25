@@ -8,6 +8,7 @@
 
 #import "CSKuleChangePasswordViewController.h"
 #import "CSAppDelegate.h"
+#import <UIAlertView+BlocksKit.h>
 
 @interface CSKuleChangePasswordViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *fieldOldPswd;
@@ -86,22 +87,33 @@
     NSString* newPswdAgain = self.fieldNewPswdAgain.text;
     
     if (oldPswd.length == 0) {
+        [self.fieldOldPswd becomeFirstResponder];
         [gApp alert:@"请输入旧密码"];
     }
     else if (newPswd.length == 0) {
+        [self.fieldNewPswd becomeFirstResponder];
         [gApp alert:@"请输入新密码，密码由数字或英文组成，长度是6-16位。"];
     }
     else if (![newPswd isValidPswd]) {
+        [self.fieldNewPswd becomeFirstResponder];
         [gApp alert:@"密码格式有误，请重新输入，谢谢。\n密码由数字或英文组成，长度是6-16位。"];
     }
     else if (newPswdAgain.length == 0) {
+        [self.fieldNewPswdAgain becomeFirstResponder];
         [gApp alert:@"请再次输入新密码，密码由数字或英文组成，长度是6-16位。"];
     }
     else if (![newPswdAgain isValidPswd]) {
+        [self.fieldNewPswdAgain becomeFirstResponder];
         [gApp alert:@"密码格式有误，请重新输入，谢谢。 \n密码由数字或英文组成，长度是6-16位。"];
     }
     else if (![newPswdAgain isEqualToString:newPswd]) {
+        [self.fieldNewPswdAgain becomeFirstResponder];
         [gApp alert:@"两次输入的新密码不一致"];
+    }
+    else if (gApp.engine.preferences.localPswd &&
+             ![gApp.engine.preferences.localPswd isEqualToString:[oldPswd MD5Hash]]) {
+        [self.fieldOldPswd becomeFirstResponder];
+        [gApp alert:@"修改密码失败"];
     }
     else {
         [self hideKeyboard];
@@ -121,12 +133,11 @@
             gApp.engine.loginInfo.accessToken = access_token;
             gApp.engine.preferences.loginInfo = gApp.engine.loginInfo;
             
-            [gApp alert:@"修改成功。"];
-            [self.navigationController popViewControllerAnimated:YES];
+            [self performSelectorOnMainThread:@selector(doChangePswdSuccess) withObject:nil waitUntilDone:NO];
         }
         else {
-            CSLog(@"doChangePswd error_code=%d", error_code);
-            [gApp alert:@"修改密码失败。"];
+            CSLog(@"doChangePswd error_code=%ld", (long)error_code);
+            [gApp alert:@"修改密码失败"];
         }
     };
     
@@ -140,6 +151,18 @@
                        withOldPswd:oldPswd
                            success:sucessHandler
                            failure:failureHandler];
+}
+
+- (void)doChangePswdSuccess {
+    UIAlertView* alert = [UIAlertView bk_alertViewWithTitle:@"修改成功" message:@"密码已修改，需要重新登录"];
+    [alert bk_addButtonWithTitle:@"好的" handler:^{
+        [gApp gotoLoginProcess];
+    }];
+    
+    [alert show];
+    
+//    [gApp alert:@"修改成功。"];
+//    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)hideKeyboard {

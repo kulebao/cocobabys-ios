@@ -199,6 +199,7 @@ CSAppDelegate* gApp = nil;
     self.engine.relationships = nil;
     self.engine.currentRelationship = nil;
     self.engine.preferences.loginInfo = nil;
+    self.engine.preferences.localPswd = nil;
     
     [[RCIM sharedRCIM] disconnect:NO];
     

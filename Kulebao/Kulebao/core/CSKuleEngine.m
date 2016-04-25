@@ -8,7 +8,6 @@
 
 #import "CSKuleEngine.h"
 #import "CSAppDelegate.h"
-#import "AHAlertView.h"
 #import "BPush.h"
 #import "BaiduMobStat.h"
 #import "CSKuleURLCache.h"

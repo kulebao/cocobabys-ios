@@ -44,8 +44,6 @@
     UIActionSheet* sheet = [UIActionSheet bk_actionSheetWithTitle:@"请选择一个班级"];
     CBSessionDataModel* session = [CBSessionDataModel thisSession];
     
-    
-    
     for (CBClassInfo* clasInfo in session.classInfoList) {
         [sheet bk_addButtonWithTitle:clasInfo.name handler:^{
             UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"IM" bundle:nil];

@@ -68,6 +68,7 @@
     [self reloadClassList];
     [self reloadRelationships];
     [self reloadIneligibleClass];
+    [self reloadTeachers];
 }
 
 - (void)didReceiveMemoryWarning
@@ -86,7 +87,9 @@
     //CSEngine* engine = [CSEngine sharedInstance];
     CBSessionDataModel* session = [CBSessionDataModel thisSession];
     if (session.schoolInfo == nil) {
-        [session reloadSchoolInfo];
+        [session reloadSchoolInfo:^(NSError *error) {
+            
+        }];
     }
 }
 
@@ -136,88 +139,51 @@
     }
 }
 
+#pragma mark - UI
+- (IBAction)onBtnSettingsClicked:(id)sender {
+    [self performSegueWithIdentifier:@"segue.main.setting" sender:nil];
+}
+
 #pragma mark - private
 - (void)reloadClassList {
-    CSHttpClient* http = [CSHttpClient sharedInstance];
-    CSEngine* engine = [CSEngine sharedInstance];
-    CSAppDelegate* app = [CSAppDelegate sharedInstance];
+    //CSAppDelegate* app = [CSAppDelegate sharedInstance];
     CBSessionDataModel* session = [CBSessionDataModel thisSession];
     
-    id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
-        [session updateClassInfosByJsonObject:responseObject];
-        [engine onLoadClassInfoList:session.classInfoList];
-        
-        [app hideAlert];
-    };
-    
-    id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
-        [app hideAlert];
-        if (operation.response.statusCode == 401) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:kNotiUnauthorized
-                                                                object:error
-                                                              userInfo:nil];
-        }
-    };
-    
-    [app waitingAlert:@"获取信息" withTitle:@"请稍候"];
-    [http opGetClassListOfKindergarten:session.loginInfo.school_id.integerValue
-                        withEmployeeId:session.loginInfo.phone
-                               success:success
-                               failure:failure];
+    //[app waitingAlert:@"获取信息" withTitle:@"请稍候"];
+    [session reloadClassList:^(NSError *error) {
+        //[app hideAlert];
+    }];
 }
 
 - (void)reloadRelationships {
-    CSHttpClient* http = [CSHttpClient sharedInstance];
     CSAppDelegate* app = [CSAppDelegate sharedInstance];
     CBSessionDataModel* session = [CBSessionDataModel thisSession];
     
-    id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
-        [session updateRelationshipsByJsonObject:responseObject];
-        [app hideAlert];
-    };
-    
-    id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
-        [app hideAlert];
-    };
-    
+    CSLog(@"reloadRelationships start.");
     [app waitingAlert:@"获取信息" withTitle:@"请稍候"];
-    
-    NSMutableArray* classIds = [NSMutableArray array];
-    NSArray* classInfoList = session.classInfoList;
-    for (CBClassInfo* classInfo in classInfoList) {
-        [classIds addObject:[@(classInfo.class_id) stringValue]];
-    }
-    
-    [http opGetRelationshipOfClasses:nil
-                      inKindergarten:session.loginInfo.school_id.integerValue
-                             success:success
-                             failure:failure];
+    [session reloadRelationships:^(NSError *error) {
+        [app hideAlert];
+        if (error) {
+            CSLog(@"reloadRelationships failure.");
+        }
+        else {
+            CSLog(@"reloadRelationships success.");
+        }
+    }];
 }
 
 - (void)reloadIneligibleClass {
-    CSHttpClient* http = [CSHttpClient sharedInstance];
-    //CSEngine* engine = [CSEngine sharedInstance];
     CBSessionDataModel* session = [CBSessionDataModel thisSession];
-    //CSAppDelegate* app = [CSAppDelegate sharedInstance];
-    if (session.loginInfo) {
-        [http reqGetiIneligibleClass:session.loginInfo.uid.integerValue
-                      inKindergarten:session.loginInfo.school_id.integerValue
-                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                 if ([responseObject isKindOfClass:[NSArray class]]) {
-                                     session.ineligibleClassList = responseObject;
-                                 }
-                             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(60 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                                     [self reloadIneligibleClass];
-                                 });
-                             }];
-    }
+    [session reloadIneligibleClass:^(NSError *error) {
+        
+    }];
 }
 
-
-
-- (IBAction)onBtnSettingsClicked:(id)sender {
-    [self performSegueWithIdentifier:@"segue.main.setting" sender:nil];
+- (void)reloadTeachers {
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
+    [session reloadTeachers:^(NSError *error) {
+        
+    }];
 }
 
 - (void)openRCIM {

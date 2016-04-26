@@ -272,7 +272,8 @@
     _childrenReaders = [NSMutableSet set];
     CBSessionDataModel* session = [CBSessionDataModel thisSession];
     for (CBRelationshipInfo* relationship in session.relationshipInfoList) {
-        if ([self.readerList containsObject:relationship.parent]) {
+        NSArray* arr = [self.readerList filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"parent_id == %@", relationship.parent.parent_id]];
+        if (arr.count > 0) {
             if (relationship.child) {
                 [_childrenReaders addObject:relationship.child];
             }

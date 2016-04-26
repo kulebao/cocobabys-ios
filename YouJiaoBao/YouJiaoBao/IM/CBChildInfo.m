@@ -25,4 +25,17 @@
     return [NSString stringWithFormat:@"%@岁%@个月", @([ageComponents year]), @([ageComponents month])];
 }
 
+- (BOOL)isEqual:(id)object {
+    BOOL ok = NO;
+    if ([object isKindOfClass:[CBChildInfo class]]) {
+        CBChildInfo* nObj = object;
+        ok = [self.child_id isEqualToString:nObj.child_id] && [self.school_id isEqualToNumber:nObj.school_id] && [self.class_id isEqualToNumber:nObj.class_id];
+    }
+    else {
+        ok = [super isEqual:object];
+    }
+    
+    return ok;
+}
+
 @end

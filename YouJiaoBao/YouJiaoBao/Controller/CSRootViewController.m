@@ -106,9 +106,6 @@
                 session.loginInfo = loginInfo;
                 [session updateSchoolConfig:loginInfo.school_id.integerValue];
                 
-                [session reloadRelationships];
-                [session reloadTeachers];
-                
                 if (loginInfo.im_token) {
                     // 快速集成第二步，连接融云服务器
                     [[RCIM sharedRCIM] connectWithToken:loginInfo.im_token.token

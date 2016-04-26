@@ -74,13 +74,7 @@
 
     [self.pullTableView registerNib:[UINib nibWithNibName:@"CSKuleNewsTableViewCell" bundle:nil]
          forCellReuseIdentifier:@"CSKuleNewsTableViewCell"];
-    NSArray* classInfoList = session.classInfoList;
     
-    NSMutableArray* classIdList = [NSMutableArray array];
-    for (CBClassInfo* classInfo in classInfoList) {
-        [classIdList addObject:[@(classInfo.class_id) stringValue]];
-    }
-
     [self reloadAllNewsList];
 }
 

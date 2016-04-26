@@ -22,6 +22,7 @@
 // THE SOFTWARE.
 
 #import "CSJsonObject.h"
+#import <objc/runtime.h>
 
 @interface CSJsonObject ()
 
@@ -56,7 +57,7 @@
                     }
                 }
                 @catch (NSException *exception) {
-                    NSLog(@"ERR: Unknown '%@' in %@", key, NSStringFromClass(self.class));
+                    NSLog(@"ERR: Unknown '%@' in %@, value=%@", key, NSStringFromClass(self.class), self.rawDict[key]);
                 }
                 @finally {
                     

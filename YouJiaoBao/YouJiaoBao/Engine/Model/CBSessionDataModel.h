@@ -65,8 +65,10 @@
 - (CBDailylogInfo*)getDailylogInfoByChildId:(NSString*)child_id;
 - (CBAssessInfo*)getLatestAssessInfoByChildId:(NSString*)child_id;
 
-- (void)reloadRelationships;
-- (void)reloadTeachers;
-- (void)reloadSchoolInfo;
+- (void)reloadRelationships:(void (^)(NSError *error))complete;
+- (void)reloadTeachers:(void (^)(NSError *error))complete;
+- (void)reloadSchoolInfo:(void (^)(NSError *error))complete;
+- (void)reloadIneligibleClass:(void (^)(NSError *error))complete;
+- (void)reloadClassList:(void (^)(NSError *error))complete;
 
 @end

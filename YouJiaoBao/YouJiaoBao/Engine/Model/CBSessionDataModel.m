@@ -17,7 +17,10 @@
 
 static CBSessionDataModel* s_instance = NULL;
 
-@interface CBSessionDataModel()
+@interface CBSessionDataModel() {
+    AFHTTPRequestOperation* _opReloadClassList;
+}
+
 @end
 
 @implementation CBSessionDataModel
@@ -141,7 +144,7 @@ static CBSessionDataModel* s_instance = NULL;
     [aCoder encodeObject:_ineligibleClassList forKey:@"_ineligibleClassList"];
     [aCoder encodeObject:_newsInfoList forKey:@"_newsInfoList"];
     [aCoder encodeObject:_dailylogInfoList forKey:@"_dailylogInfoList"];
-    [aCoder encodeObject:_assessInfoList forKey:@"_dailylogInfoList"];
+    [aCoder encodeObject:_assessInfoList forKey:@"_assessInfoList"];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
@@ -756,47 +759,142 @@ static CBSessionDataModel* s_instance = NULL;
 }
 
 #pragma mark - Network
-- (void)reloadTeachers {
+- (void)reloadTeachers:(void (^)(NSError *error))complete {
+    CSLog(@"[Call] %s", __FUNCTION__);
     CSHttpClient* http = [CSHttpClient sharedInstance];
     //CSEngine* engine = [CSEngine sharedInstance];
     CBSessionDataModel* session = [CBSessionDataModel thisSession];
     [http reqGetTeachersOfKindergarten:session.loginInfo.school_id.integerValue
                            withClassId:0 //gApp.engine.currentRelationship.child.classId
                                success:^(AFHTTPRequestOperation *operation, id dataJson) {
+                                   CSLog(@"[Success Start] %s", __FUNCTION__);
                                    [self updateTeacherInfosByJsonObject:dataJson];
                                    [self store];
                                    [[RCIM sharedRCIM] clearUserInfoCache];
+                                   CSLog(@"[Success End] %s", __FUNCTION__);
+                                   if (complete) {
+                                       complete(nil);
+                                   }
                                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                   
+                                   CSLog(@"[Failure] %s", __FUNCTION__);
+                                   if (complete) {
+                                       complete(error);
+                                   }
                                }];
 }
 
-- (void)reloadRelationships {
+- (void)reloadRelationships:(void (^)(NSError *error))complete {
+    CSLog(@"[Call] %s", __FUNCTION__);
     CSHttpClient* http = [CSHttpClient sharedInstance];
     //CSEngine* engine = [CSEngine sharedInstance];
     CBSessionDataModel* session = [CBSessionDataModel thisSession];
     [http reqGetRelationshipsOfKindergarten:session.loginInfo.school_id.integerValue
                                 withClassId:0 //gApp.engine.currentRelationship.child.classId
-                                    success:^(AFHTTPRequestOperation *operation, id dataJson) {
+                                    success:^(AFHTTPRequestOperation *operation, id dataJson) {                                        CSLog(@"[Success Start] %s", __FUNCTION__);
                                         [self updateRelationshipsByJsonObject:dataJson];
                                         [self store];
                                         [[RCIM sharedRCIM] clearUserInfoCache];
                                         [[RCIM sharedRCIM] clearGroupInfoCache];
+                                        CSLog(@"[Success End] %s", __FUNCTION__);
+                                        if (complete) {
+                                            complete(nil);
+                                        }
                                     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                        
+                                        CSLog(@"[Failure] %s", __FUNCTION__);
+                                        if (complete) {
+                                            complete(error);
+                                        }
                                     }];
 }
 
-- (void)reloadSchoolInfo {
+- (void)reloadSchoolInfo:(void (^)(NSError *error))complete {
     CSHttpClient* http = [CSHttpClient sharedInstance];
     if (_loginInfo) {
         [http opGetSchoolInfo:_loginInfo.school_id.integerValue
                       success:^(AFHTTPRequestOperation *operation, id responseObject) {
                           _schoolInfo = [CBSchoolInfo instanceWithDictionary:responseObject];
+                          if (complete) {
+                              complete(nil);
+                          }
                           
                       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                          
+                          if (complete) {
+                              complete(error);
+                          }
                       }];
+    }
+    else if (complete) {
+        complete([NSError errorWithDomain:@"com.cocobabys" code:401 userInfo:@{NSLocalizedDescriptionKey:@"Unauthorized"}]);
+    }
+}
+
+- (void)reloadIneligibleClass:(void (^)(NSError *error))complete {
+    CSHttpClient* http = [CSHttpClient sharedInstance];
+    if (_loginInfo) {
+        CSLog(@"reloadIneligibleClass start.");
+        [http reqGetiIneligibleClass:_loginInfo.uid.integerValue
+                      inKindergarten:_loginInfo.school_id.integerValue
+                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                 CSLog(@"reloadIneligibleClass success.");
+                                 if ([responseObject isKindOfClass:[NSArray class]]) {
+                                     _ineligibleClassList = responseObject;
+                                 }
+                                 
+                                 if (complete) {
+                                     complete(nil);
+                                 }
+                             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                 CSLog(@"reloadIneligibleClass failure.");
+                                 if (complete) {
+                                     complete(error);
+                                 }
+//                                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(60 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                                     [self reloadIneligibleClass];
+//                                 });
+                             }];
+    }
+    else if (complete) {
+        complete([NSError errorWithDomain:@"com.cocobabys" code:401 userInfo:@{NSLocalizedDescriptionKey:@"Unauthorized"}]);
+    }
+}
+
+- (void)reloadClassList:(void (^)(NSError *error))complete {
+    if (_loginInfo) {
+        CSHttpClient* http = [CSHttpClient sharedInstance];
+        CSEngine* engine = [CSEngine sharedInstance];
+        
+        id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
+            [self updateClassInfosByJsonObject:responseObject];
+            [engine onLoadClassInfoList:_classInfoList];
+            _opReloadClassList = nil;
+            if (complete) {
+                complete(nil);
+            }
+        };
+        
+        id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
+            if (operation.response.statusCode == 401) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:kNotiUnauthorized
+                                                                    object:error
+                                                                  userInfo:nil];
+            }
+            _opReloadClassList = nil;
+            if (complete) {
+                complete(error);
+            }
+        };
+        
+        if (_opReloadClassList) {
+            [_opReloadClassList cancel];
+        }
+        
+        _opReloadClassList = [http opGetClassListOfKindergarten:_loginInfo.school_id.integerValue
+                                                 withEmployeeId:_loginInfo.phone
+                                                        success:success
+                                                        failure:failure];
+    }
+    else if (complete) {
+        complete([NSError errorWithDomain:@"com.cocobabys" code:401 userInfo:@{NSLocalizedDescriptionKey:@"Unauthorized"}]);
     }
 }
 

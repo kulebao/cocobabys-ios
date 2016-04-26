@@ -20,5 +20,6 @@
 @property (nonatomic, strong) NSString* address;
 @property (nonatomic, strong) NSNumber* created_at;
 @property (nonatomic, strong) NSString* full_name;
+@property (nonatomic, strong) NSArray* properties;
 
 @end

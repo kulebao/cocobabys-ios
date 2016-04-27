@@ -53,13 +53,13 @@
             ctrl.targetId = targetId;
             [self.navigationController pushViewController:ctrl animated:YES];
         }];
-        
-        [sheet bk_setCancelButtonWithTitle:@"取消" handler:^{
-            
-        }];
-        
-        [sheet showInView:self.view];
     }
+    
+    [sheet bk_setCancelButtonWithTitle:@"取消" handler:^{
+        
+    }];
+    
+    [sheet showInView:self.view];
 }
 
 /*

@@ -136,7 +136,8 @@
         }
     }
     
-    NSString* body = newsInfo.content;
+    NSString* body = [newsInfo.content stringByReplacingOccurrencesOfString:@" " withString:@"&nbsp;"];
+    body = [body stringByReplacingOccurrencesOfString:@"\n" withString:@"<br />"];
     
     NSString* divImage = @"";
     if (newsInfo.image.length > 0) {

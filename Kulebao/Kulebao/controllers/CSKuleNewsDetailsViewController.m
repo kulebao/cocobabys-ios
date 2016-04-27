@@ -184,7 +184,8 @@
         publiser = [publiser stringByAppendingString:gApp.engine.currentRelationship.child.className];
     }
     
-    NSString* body = newsInfo.content;
+    NSString* body = [newsInfo.content stringByReplacingOccurrencesOfString:@" " withString:@"&nbsp;"];
+    body = [body stringByReplacingOccurrencesOfString:@"\n" withString:@"<br />"];
     
     NSString* divImage = @"";
     if (newsInfo.image.length > 0) {
@@ -224,7 +225,8 @@
         publiser = [publiser stringByAppendingString:gApp.engine.currentRelationship.child.className];
     }
     
-    NSString* body = assignmentInfo.content;
+    NSString* body = [assignmentInfo.content stringByReplacingOccurrencesOfString:@" " withString:@"&nbsp;"];
+    body = [body stringByReplacingOccurrencesOfString:@"\n" withString:@"<br />"];
     
     NSString* divImage = @"";
     if (assignmentInfo.iconUrl.length > 0) {

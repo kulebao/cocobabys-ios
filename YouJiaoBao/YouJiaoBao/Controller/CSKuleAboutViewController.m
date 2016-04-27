@@ -103,9 +103,11 @@
     
     NSString* version = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
     NSString* build = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
-//    if (gApp.engine.preferences.enabledTest) {
-//        build = [build stringByAppendingString:@" stage"];
-//    }
+
+#if !COCOBABYS_USE_ENV_PROD
+    build = [build stringByAppendingString:@" stage"];
+#endif
+    
     about = [about stringByReplacingOccurrencesOfString:@"%version%" withString:version];
     about = [about stringByReplacingOccurrencesOfString:@"%build%" withString:build];
     

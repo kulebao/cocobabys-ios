@@ -283,6 +283,13 @@ static CBSessionDataModel* s_instance = NULL;
     [self updateParentAndChild];
 }
 
+- (void)reloadRelationshipsByJsonObject:(id)jsonObject {
+    [self.relationshipInfoList removeAllObjects];
+    [self updateParentAndChild];
+    
+    [self updateRelationshipsByJsonObject:jsonObject];
+}
+
 - (void)_updateRelationshipsByJsonObject:(NSDictionary*)dictObject {
     CBRelationshipInfo* obj = [CBRelationshipInfo instanceWithDictionary:dictObject];
 
@@ -791,7 +798,7 @@ static CBSessionDataModel* s_instance = NULL;
     [http reqGetRelationshipsOfKindergarten:session.loginInfo.school_id.integerValue
                                 withClassId:0 //gApp.engine.currentRelationship.child.classId
                                     success:^(AFHTTPRequestOperation *operation, id dataJson) {                                        CSLog(@"[Success Start] %s", __FUNCTION__);
-                                        [self updateRelationshipsByJsonObject:dataJson];
+                                        [self reloadRelationshipsByJsonObject:dataJson];
                                         [self store];
                                         [[RCIM sharedRCIM] clearUserInfoCache];
                                         [[RCIM sharedRCIM] clearGroupInfoCache];

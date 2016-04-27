@@ -18,8 +18,6 @@
 
 @interface CSStudentListMainTableViewController () <NSFetchedResultsControllerDelegate> {
     NSMutableArray* _classChildren;
-    AFHTTPRequestOperation* _opReloadClassList;
-    AFHTTPRequestOperation* _opReloadChildList;
     AFHTTPRequestOperation* _opReloadDailylogList;
 }
 
@@ -50,7 +48,7 @@
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectNull];
 
     [self updateTableView];
-    [self doRefresh];
+    //[self doRefresh];
 }
 
 - (void)didReceiveMemoryWarning
@@ -222,79 +220,23 @@
     [self reloadClassList];
 }
 
-- (void)doRefresh2 {
-    [self reloadChildList];
-    [self reloadDailylogList];
-}
-
 - (void)reloadClassList {
-    CSHttpClient* http = [CSHttpClient sharedInstance];
     CSEngine* engine = [CSEngine sharedInstance];
     CBSessionDataModel* session = [CBSessionDataModel thisSession];
     
-    id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
-        [session updateClassInfosByJsonObject:responseObject];
-        [engine onLoadClassInfoList:session.classInfoList];
-        
-        [self doRefresh2];
-        _opReloadClassList = nil;
-        [self hideWaitingAlertIfNeeded];
-    };
-    
-    id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
-        if (operation.response.statusCode == 401) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:kNotiUnauthorized
-                                                                object:error
-                                                              userInfo:nil];
-        }
-        else {
-            [self doRefresh2];
-        }
-        _opReloadClassList = nil;
-        [self hideWaitingAlertIfNeeded];
-    };
-    
-    if (_opReloadClassList) {
-        [_opReloadClassList cancel];
-    }
-    
     [gApp waitingAlert:@"获取信息" withTitle:@"请稍候"];
-    _opReloadClassList = [http opGetClassListOfKindergarten:session.loginInfo.school_id.integerValue
-                                             withEmployeeId:session.loginInfo.phone
-                                                    success:success
-                                                    failure:failure];
+    [session reloadClassList:^(NSError *error) {
+        [engine onLoadClassInfoList:session.classInfoList];
+        [self reloadChildList];
+    }];
 }
 
 - (void)reloadChildList {
     CBSessionDataModel* session = [CBSessionDataModel thisSession];
-    NSArray* classInfoList = session.classInfoList;
-    
-    NSMutableArray* classIdList = [NSMutableArray array];
-    for (CBClassInfo* classInfo in classInfoList) {
-        [classIdList addObject:[@(classInfo.class_id) stringValue]];
-    }
-    
-    CSHttpClient* http = [CSHttpClient sharedInstance];
-    
-    id success = ^(AFHTTPRequestOperation *operation, id jsonObjectList) {
-        [session updateChildInfosByJsonObject:jsonObjectList];
-        _opReloadChildList = nil;
-        [self hideWaitingAlertIfNeeded];
-    };
-    
-    id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
-        _opReloadChildList = nil;
-        [self hideWaitingAlertIfNeeded];
-    };
-    
-    if (_opReloadChildList) {
-        [_opReloadChildList cancel];
-    }
     [gApp waitingAlert:@"获取信息" withTitle:@"请稍候"];
-    _opReloadChildList = [http opGetChildListOfKindergarten:session.loginInfo.school_id.integerValue
-                                              withClassList:classIdList
-                                                    success:success
-                                                    failure:failure];
+    [session reloadRelationships:^(NSError *error) {
+        [self reloadDailylogList];
+    }];
 }
 
 - (void)reloadDailylogList{
@@ -310,14 +252,14 @@
     
     id success = ^(AFHTTPRequestOperation *operation, id jsonObjectList) {
         [session updateDailylogsByJsonObject:jsonObjectList];
-        [self.tableView reloadData];
-        _opReloadDailylogList = nil;
-        [self hideWaitingAlertIfNeeded];
+        [self updateTableView];
+        [gApp hideAlert];
     };
     
     id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
         _opReloadDailylogList = nil;
-        [self hideWaitingAlertIfNeeded];
+        [self updateTableView];
+        [gApp hideAlert];
     };
     
     if (_opReloadDailylogList) {
@@ -328,14 +270,6 @@
                                                     withClassList:classIdList
                                                           success:success
                                                           failure:failure];
-}
-
-- (void)hideWaitingAlertIfNeeded {
-    if (_opReloadClassList == nil
-        && _opReloadChildList == nil
-        && _opReloadDailylogList == nil) {
-        [gApp hideAlert];
-    }
 }
 
 #pragma mark - Private

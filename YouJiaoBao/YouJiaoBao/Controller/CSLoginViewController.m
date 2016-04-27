@@ -62,6 +62,8 @@
 #else
     self.fieldUsername.text = @"admin8901";
     self.fieldPassword.text = @"89898989";
+    //self.fieldUsername.text = @"t19000000001";
+    //self.fieldPassword.text = @"19000000001";
 #endif
 #endif
 }

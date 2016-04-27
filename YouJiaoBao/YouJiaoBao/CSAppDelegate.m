@@ -215,7 +215,7 @@ CSAppDelegate* gApp = nil;
 }
 
 - (void)hideAlert {
-    [self hideAlertAfterDelay:0.3];
+    [self hideAlertAfterDelay:0.1];
 }
 
 - (void)hideAlertAfterDelay:(NSTimeInterval)delay {

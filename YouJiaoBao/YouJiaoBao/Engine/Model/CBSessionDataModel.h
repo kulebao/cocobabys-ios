@@ -50,6 +50,8 @@
 - (void)store;
 
 - (void)updateRelationshipsByJsonObject:(id)jsonObject;
+- (void)reloadRelationshipsByJsonObject:(id)jsonObject;
+
 - (void)updateTeacherInfosByJsonObject:(id)jsonObject;
 - (void)updateClassInfosByJsonObject:(id)jsonObject;
 - (void)updateDailylogsByJsonObject:(id)jsonObject;
@@ -70,5 +72,4 @@
 - (void)reloadSchoolInfo:(void (^)(NSError *error))complete;
 - (void)reloadIneligibleClass:(void (^)(NSError *error))complete;
 - (void)reloadClassList:(void (^)(NSError *error))complete;
-
 @end

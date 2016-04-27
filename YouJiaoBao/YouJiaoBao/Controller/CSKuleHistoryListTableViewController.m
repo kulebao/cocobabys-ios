@@ -406,9 +406,6 @@
 }
 
 #pragma mark - Private
-- (void)reloadAllDataList {
-}
-
 - (void)reloadDataList {
     CSHttpClient* http = [CSHttpClient sharedInstance];
     CBSessionDataModel* session = [CBSessionDataModel thisSession];
@@ -542,6 +539,8 @@
 }
 
 - (void)doUploadVideo {
+    CSLog(@"%s", __FUNCTION__);
+
     CSHttpClient* http = [CSHttpClient sharedInstance];
     CBSessionDataModel* session = [CBSessionDataModel thisSession];
     
@@ -560,8 +559,6 @@
                                  CSLog(@"Cached video as key %@", _videoUrl.MD5HashEx);
                                  [self doSendHistory];
                              }];
-        
-        [self doSendHistory];
     };
     
     FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -631,16 +628,16 @@
         [gApp alert:[error localizedDescription]];
     };
     
-    NSMutableArray* childIdList = [NSMutableArray array];
+    NSMutableSet* childIdSet = [NSMutableSet set];
     for (CBChildInfo* childInfo in _childList) {
-        [childIdList addObject:childInfo.child_id];
+        [childIdSet addObject:childInfo.child_id];
     }
     
-    if (childIdList.count > 0) {
+    if (childIdSet.count > 0) {
         [gApp waitingAlert:@"提交数据中"];
         [http opPostHistoryOfKindergarten:session.loginInfo.school_id.integerValue
                              withSenderId:session.loginInfo._id
-                          withChildIdList:childIdList
+                          withChildIdList:[childIdSet allObjects]
                               withContent:_textContent
                          withImageUrlList:_imageUrlList
                              withVideoUrl:_videoUrl

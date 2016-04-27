@@ -20,6 +20,7 @@ static CBSessionDataModel* s_instance = NULL;
 @synthesize username = _username;
 @synthesize tag = _tag;
 @synthesize imGroupTags = _imGroupTags;
+@synthesize pswd = _pswd;
 
 - (NSMutableSet*)imGroupTags {
     if (_imGroupTags == nil) {
@@ -108,10 +109,12 @@ static CBSessionDataModel* s_instance = NULL;
     [aCoder encodeObject:_tag forKey:@"_tag"];
     [aCoder encodeObject:_imGroupTags forKey:@"_imGroupTags"];
     [aCoder encodeObject:_schoolConfig forKey:@"_schoolConfig"];
+    [aCoder encodeObject:_pswd forKey:@"_pswd"];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     _username = [aDecoder decodeObjectForKey:@"_username"];
+    _pswd = [aDecoder decodeObjectForKey:@"_pswd"];
     _tag = [aDecoder decodeObjectForKey:@"_tag"];
     _imGroupTags = [NSMutableSet setWithSet:[aDecoder decodeObjectForKey:@"_imGroupTags"]];
     _schoolConfig = [aDecoder decodeObjectForKey:@"_schoolConfig"];

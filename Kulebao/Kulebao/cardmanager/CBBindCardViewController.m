@@ -29,7 +29,7 @@ typedef enum : NSUInteger {
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self customizeBackBarItem];
+    
     
     if ([gApp.engine.currentRelationship.card isValidCardNum]) {
         self.fieldCardNo.text = gApp.engine.currentRelationship.card;

@@ -3,7 +3,7 @@
 //  youlebao
 //
 //  Created by xin.c.wang on 14-8-15.
-//  Copyright (c) 2014年 Cocobabys. All rights reserved.
+//  Copyright (c) 2014-2016 Cocobabys. All rights reserved.
 //
 
 #import "CSContentEditorViewController.h"
@@ -13,14 +13,14 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import <AVFoundation/AVFoundation.h>
 #import <MobileCoreServices/MobileCoreServices.h>
-#import "ELCImagePickerController.h"
+#import "TZImagePickerController.h"
 #import "CSAppDelegate.h"
 
 @interface CSContentEditorViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GMGridViewDataSource, GMGridViewSortingDelegate, GMGridViewTransformationDelegate, GMGridViewActionDelegate,
-    UIActionSheetDelegate, ELCImagePickerControllerDelegate> {
+    UIActionSheetDelegate, TZImagePickerControllerDelegate> {
     NSMutableArray* _imageList;
     UIImagePickerController* _imgPicker;
-    ELCImagePickerController* _elcPicker;
+    TZImagePickerController* _elcPicker;
     NSInteger _lastDeleteItemIndexAsked;
 }
 
@@ -58,7 +58,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self customizeBackBarItem];
+    
 
     self.imgContentBg.image = [[UIImage imageNamed:@"v2-input_bg_家园互动.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     
@@ -133,24 +133,23 @@
         
     }];
 #else
-    _elcPicker = [[ELCImagePickerController alloc] initImagePicker];
-    
-    if (self.singleImage) {
-        //Set the maximum number of images to select, defaults to 4
-        _elcPicker.maximumImagesCount = 1;
-        //For multiple image selection, display and return selected order of images
-        _elcPicker.onOrder = NO;
+    const NSInteger kPictureMaxCount = 9;
+    if (_elcPicker == nil) {
+        _elcPicker = [[TZImagePickerController alloc] initWithMaxImagesCount:kPictureMaxCount
+                                                                    delegate:self];
+        _elcPicker.allowPickingOriginalPhoto = NO;
+        
+        if (self.singleImage) {
+            //Set the maximum number of images to select, defaults to 4
+            _elcPicker.maxImagesCount = 1;
+            //For multiple image selection, display and return selected order of images
+        }
+        else {
+            //Set the maximum number of images to select, defaults to 4
+            _elcPicker.maxImagesCount = kPictureMaxCount;
+            //For multiple image selection, display and return selected order of images
+        }
     }
-    else {
-        //Set the maximum number of images to select, defaults to 4
-        _elcPicker.maximumImagesCount = 9;
-        //For multiple image selection, display and return selected order of images
-        _elcPicker.onOrder = YES;
-    }
-    
-    _elcPicker.returnsOriginalImage = NO; //Only return the fullScreenImage, not the fullResolutionImage
-    _elcPicker.returnsImage = YES; //Return UIimage if YES. If NO, only return asset location information
-    _elcPicker.imagePickerDelegate = self;
     
     //Present modally
     [self presentViewController:_elcPicker animated:YES completion:nil];
@@ -335,26 +334,23 @@
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-    [picker dismissViewControllerAnimated:YES completion:^{
-        
-    }];
-    
     if (picker == _imgPicker) {
         _imgPicker = nil;
     }
+    else {
+        [picker dismissViewControllerAnimated:YES completion:^{
+            
+        }];
+    }
 }
 
-#pragma mark - ELCImagePickerControllerDelegate
-- (void)elcImagePickerController:(ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)infoList {
+#pragma mark - TZImagePickerControllerDelegate
+/// User finish picking photo，if assets are not empty, user picking original photo.
+/// 用户选择好了图片，如果assets非空，则用户选择了原图。
+- (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingPhotos:(NSArray *)photos sourceAssets:(NSArray *)assets{
     if ([picker isEqual:_elcPicker]) {
         [_imageList removeAllObjects];
-        for (NSDictionary* info in infoList) {
-            UIImage* img = info[UIImagePickerControllerOriginalImage];
-            if (img) {
-                [_imageList addObject:img];
-            }
-        }
-        
+        [_imageList addObjectsFromArray:photos];
         [self.gmGridView reloadData];
     }
     
@@ -366,14 +362,9 @@
                                }];
 }
 
-- (void)elcImagePickerControllerDidCancel:(ELCImagePickerController *)picker {
-    [picker dismissViewControllerAnimated:YES completion:^{
-        
-    }];
-    
-    if (picker == _elcPicker) {
-        _elcPicker = nil;
-    }
+/// User finish picking video,
+/// 用户选择好了视频
+- (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingVideo:(UIImage *)coverImage sourceAssets:(id)asset {
 }
 
 #pragma mark - 
@@ -466,8 +457,8 @@
     if (!cell)
     {
         cell = [[GMGridViewCell alloc] init];
-        cell.deleteButtonIcon = [UIImage imageNamed:@"close_x.png"];
-        cell.deleteButtonOffset = CGPointMake(-15, -15);
+        cell.deleteButtonIcon = [UIImage imageNamed:@"delete_cell"];
+        cell.deleteButtonOffset = CGPointMake(-10, -10);
         
         UIImageView* imgView = [[UIImageView alloc] initWithFrame:cell.bounds];
         imgView.contentMode = UIViewContentModeScaleAspectFill;

@@ -3,7 +3,7 @@
 //  Kulebao
 //
 //  Created by xin.c.wang on 14-3-4.
-//  Copyright (c) 2014年 Cocobabys. All rights reserved.
+//  Copyright (c) 2014-2016 Cocobabys. All rights reserved.
 //
 
 #import "CSKuleScheduleViewController.h"
@@ -38,7 +38,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [self customizeBackBarItem];
+    
     
     [self updateScheduleInfo:nil];
     [self reloadSchedules];

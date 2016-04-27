@@ -3,18 +3,17 @@
 //  YouJiaoBao
 //
 //  Created by xin.c.wang on 14-7-5.
-//  Copyright (c) 2014年 Codingsoft. All rights reserved.
+//  Copyright (c) 2014-2016 Cocobabys. All rights reserved.
 //
 
 #import "CSAppDelegate.h"
 #import "AFNetworkActivityIndicatorManager.h"
-#import "CSCoreDataHelper.h"
 #import "CSEngine.h"
 #import "CSFirImApi.h"
 #import <objc/runtime.h>
-#import <Bugly/CrashReporter.h>
+#import <Bugly/Bugly.h>
 #import <RongIMKit/RongIMKit.h>
-#import "CBIMDataSource.h"
+#import "CBSessionDataModel.h"
 #import "CBIMChatViewController.h"
 #import <BlocksKit/BlocksKit.h>
 #import "AFNetworkReachabilityManager.h"
@@ -38,19 +37,20 @@ CSAppDelegate* gApp = nil;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    gApp = self;
+    
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     
-    //[[CrashReporter sharedInstance] enableLog:YES];
-    [[CrashReporter sharedInstance] installWithAppId:@"900013150"];
-    //[self performSelector:@selector(crash) withObject:nil afterDelay:3.0];
+    [Bugly startWithAppId:@"900013150"];
+    // [self performSelector:@selector(crash) withObject:nil afterDelay:3.0];
     
     // 初始化融云
     [[RCIM sharedRCIM] initWithAppKey:COCOBABYS_IM_APP_ID];
-    [[RCIM sharedRCIM] setGroupInfoDataSource:[CBIMDataSource sharedInstance]];
-    [[RCIM sharedRCIM] setUserInfoDataSource:[CBIMDataSource sharedInstance]];
-    [[RCIM sharedRCIM] setGroupUserInfoDataSource:[CBIMDataSource sharedInstance]];
-    [[RCIM sharedRCIM] setReceiveMessageDelegate:[CBIMDataSource sharedInstance]];
+//    [[RCIM sharedRCIM] setGroupInfoDataSource:[CBIMDataSource sharedInstance]];
+//    [[RCIM sharedRCIM] setUserInfoDataSource:[CBIMDataSource sharedInstance]];
+//    [[RCIM sharedRCIM] setGroupUserInfoDataSource:[CBIMDataSource sharedInstance]];
+//    [[RCIM sharedRCIM] setReceiveMessageDelegate:[CBIMDataSource sharedInstance]];
     
     //
     id naviAppearance = [UINavigationBar appearance];
@@ -87,8 +87,8 @@ CSAppDelegate* gApp = nil;
     //角标清0
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
     [[CSEngine sharedInstance] setupAppearance];
+    [[CSEngine sharedInstance] setupBaiduMobStat];
     
-    gApp = self;
     return YES;
 }
 							
@@ -145,7 +145,6 @@ CSAppDelegate* gApp = nil;
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Saves changes in the application's managed object context before the application terminates.
-    [[CSCoreDataHelper sharedInstance] saveContext];
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
@@ -216,7 +215,7 @@ CSAppDelegate* gApp = nil;
 }
 
 - (void)hideAlert {
-    [self hideAlertAfterDelay:0.3];
+    [self hideAlertAfterDelay:0.1];
 }
 
 - (void)hideAlertAfterDelay:(NSTimeInterval)delay {

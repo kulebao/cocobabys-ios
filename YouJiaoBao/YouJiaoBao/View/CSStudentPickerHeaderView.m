@@ -3,12 +3,11 @@
 //  YouJiaoBao
 //
 //  Created by xin.c.wang on 14-11-7.
-//  Copyright (c) 2014年 Codingsoft. All rights reserved.
+//  Copyright (c) 2014-2016 Cocobabys. All rights reserved.
 //
 
 #import "CSStudentPickerHeaderView.h"
 #import "ModelClassData.h"
-#import "EntityDailylogHelper.h"
 
 @interface CSStudentPickerHeaderView()
 
@@ -61,7 +60,7 @@
 
 - (IBAction)onBtnCheckClicked:(id)sender {
     self.btnCheck.selected = !self.btnCheck.selected;
-    for (EntityChildInfo* childInfo in _modelData.childrenList) {
+    for (CBChildInfo* childInfo in _modelData.childrenList) {
         if (self.btnCheck.selected) {
             [_sharedSelectedChildren addObject:childInfo];
         }
@@ -83,13 +82,13 @@
 - (void)reloadData {
     if (_modelData) {
         NSInteger recordNum = 0;
-        for (EntityChildInfo* childInfo in _modelData.childrenList) {
+        for (CBChildInfo* childInfo in _modelData.childrenList) {
             if ([_sharedSelectedChildren containsObject:childInfo]) {
                 recordNum++;
             }
         }
         
-        self.labTitle.text = [NSString stringWithFormat:@"%@ (选中%d人/共%d人)", _modelData.classInfo.name, recordNum, _modelData.childrenList.count];
+        self.labTitle.text = [NSString stringWithFormat:@"%@ (选中%ld人/共%ld人)", _modelData.classInfo.name, recordNum, _modelData.childrenList.count];
         self.labDetail.text = nil;
         self.imgIcon.highlighted = _modelData.expand;
         

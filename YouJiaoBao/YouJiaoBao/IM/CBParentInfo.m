@@ -10,4 +10,17 @@
 
 @implementation CBParentInfo
 
+- (BOOL)isEqual:(id)object {
+    BOOL ok = NO;
+    if ([object isKindOfClass:[CBParentInfo class]]) {
+        CBParentInfo* nObj = object;
+        ok = [self.parent_id isEqualToString:nObj.parent_id] && [self.school_id isEqualToNumber:nObj.school_id];
+    }
+    else {
+        ok = [super isEqual:object];
+    }
+    
+    return ok;
+}
+
 @end

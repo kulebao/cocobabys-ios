@@ -3,11 +3,11 @@
 //  YouJiaoBao
 //
 //  Created by WangXin on 1/25/16.
-//  Copyright © 2016 Codingsoft. All rights reserved.
+//  Copyright © 2016 Cocobabys. All rights reserved.
 //
 
 #import "CBIMBanListViewController.h"
-#import "CBIMDataSource.h"
+#import "CBSessionDataModel.h"
 #import "CBTeacherInfo.h"
 #import "CBRelationshipInfo.h"
 #import "CSAppDelegate.h"
@@ -16,6 +16,7 @@
 #import "CSEngine.h"
 #import "CBIMBanTableViewCell.h"
 #import "CBIMBanInfo.h"
+#import "CBSessionDataModel.h"
 
 @interface CBIMBanListViewController () {
     NSInteger _schoolId;
@@ -41,7 +42,6 @@
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 0.01)];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 0.01)];
     
-    CBIMDataSource* imDS = [CBIMDataSource sharedInstance];
     self.relationshipGroupList = [NSMutableArray array];
     self.bandInfoList = [NSMutableArray array];
     
@@ -156,7 +156,7 @@
     CBIMBanTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CBIMBanTableViewCell" forIndexPath:indexPath];
     
     // Configure the cell...
-    CSEngine* engine = [CSEngine sharedInstance];
+    //CSEngine* engine = [CSEngine sharedInstance];
     NSMutableArray* arr = [self.relationshipGroupList objectAtIndex:indexPath.section];
     CBRelationshipInfo* cellData = [arr objectAtIndex:indexPath.row];
     cell.labName.text = [NSString stringWithFormat:@"%@%@", [cellData.child displayNick], cellData.relationship];

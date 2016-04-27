@@ -3,7 +3,7 @@
 //  YouJiaoBao
 //
 //  Created by xin.c.wang on 14-11-5.
-//  Copyright (c) 2014年 Codingsoft. All rights reserved.
+//  Copyright (c) 2014-2016 Cocobabys. All rights reserved.
 //
 
 #import "CSForgotPasswordStep2ViewController.h"
@@ -36,7 +36,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    //[self customizeBackBarItem];
+    //
     UIImage* fieldBgImg = [[UIImage imageNamed:@"v2-input_login.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     self.imgFieldBg1.image = fieldBgImg;
     self.imgFieldBg2.image = fieldBgImg;

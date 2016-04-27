@@ -3,7 +3,7 @@
 //  YouJiaoBao
 //
 //  Created by WangXin on 1/17/16.
-//  Copyright © 2016 Codingsoft. All rights reserved.
+//  Copyright © 2016 Cocobabys. All rights reserved.
 //
 
 #import "CSJsonObject.h"
@@ -20,5 +20,6 @@
 @property (nonatomic, strong) NSString* address;
 @property (nonatomic, strong) NSNumber* created_at;
 @property (nonatomic, strong) NSString* full_name;
+@property (nonatomic, strong) NSArray* properties;
 
 @end

@@ -35,10 +35,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    //[self customizeBackBarItem];
-    [self customizeOkBarItemWithTarget:self
-                                action:@selector(onBtnSendClicked:)
-                                  text:@"发送"];
+    //
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"发送" style:UIBarButtonItemStylePlain target:self action:@selector(onBtnSendClicked:)];
     
     self.imgContentBg.image = [[UIImage imageNamed:@"v2-input_bg_家园互动.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     
@@ -98,10 +96,10 @@
      };
     
     CSHttpClient* http = [CSHttpClient sharedInstance];
-    CSEngine* engine = [CSEngine sharedInstance];
-    
+    //CSEngine* engine = [CSEngine sharedInstance];
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
     [gApp waitingAlert:@"正在提交反馈..."];
-    [http opSendFeedback:engine.loginInfo.phone
+    [http opSendFeedback:session.loginInfo.phone
              withContent:msgBody
                  success:sucessHandler
                  failure:failureHandler];

@@ -3,7 +3,7 @@
 //  YouJiaoBao
 //
 //  Created by xin.c.wang on 14-11-5.
-//  Copyright (c) 2014年 Codingsoft. All rights reserved.
+//  Copyright (c) 2014-2016 Cocobabys. All rights reserved.
 //
 
 #import "CSForgotPasswordStep1ViewController.h"
@@ -32,7 +32,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    //[self customizeBackBarItem];
+    //
     
     UIImage* fieldBgImg = [[UIImage imageNamed:@"v2-input_login.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     self.imgFieldBg1.image = fieldBgImg;
@@ -126,7 +126,7 @@
         SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
             /* {"error_msg":"请求太频繁。","error_code":1} */
             
-            NSString* error_msg = [dataJson valueForKeyNotNull:@"error_msg"];
+            //NSString* error_msg = [dataJson valueForKeyNotNull:@"error_msg"];
             NSInteger error_code = [[dataJson valueForKeyNotNull:@"error_code"] integerValue];
             
             if (error_code == 0) {

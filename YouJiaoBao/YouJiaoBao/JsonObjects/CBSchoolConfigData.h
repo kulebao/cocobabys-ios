@@ -10,6 +10,7 @@
 
 @interface CBConfigData : CSJsonObject
 
+@property (nonatomic, strong) NSString* category;
 @property (nonatomic, strong) NSString* name;
 @property (nonatomic, strong) NSString* value;
 
@@ -19,6 +20,7 @@
 
 @property (nonatomic, assign) NSInteger school_id;
 @property (nonatomic, strong) NSArray* config;
+@property (nonatomic, assign) NSArray* school_customized;
 
 @property (nonatomic, assign, readonly) BOOL enableHealthRecordManagement;
 @property (nonatomic, assign, readonly) BOOL enableFinancialManagement;

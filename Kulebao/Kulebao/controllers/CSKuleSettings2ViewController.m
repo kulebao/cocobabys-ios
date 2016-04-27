@@ -7,7 +7,7 @@
 //
 
 #import "CSKuleSettings2ViewController.h"
-#import "AHAlertView.h"
+#import <UIAlertView+BlocksKit.h>
 #import "CSAppDelegate.h"
 #import "UIImageView+WebCache.h"
 #import "KxMenu.h"
@@ -40,7 +40,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    [self customizeBackBarItem];
+    
     self.imgPortrait.layer.cornerRadius = self.imgPortrait.bounds.size.width/2.0;
     self.imgPortrait.clipsToBounds = YES;
     self.imgPortrait.layer.borderColor = [[UIColor whiteColor] CGColor];
@@ -195,12 +195,13 @@
     NSString *title = @"提示";
     NSString *message = @"确定要退出登录？退出后无法接收任何消息！";
     
-    AHAlertView *alert = [[AHAlertView alloc] initWithTitle:title message:message];
+    UIAlertView* alert = [UIAlertView bk_alertViewWithTitle:title message:message];
     
-    [alert setCancelButtonTitle:@"取消" block:^{
+    [alert bk_setCancelButtonWithTitle:@"取消" handler:^{
+        
     }];
     
-    [alert addButtonWithTitle:@"确定" block:^{
+    [alert bk_addButtonWithTitle:@"确定" handler:^{
         [self performSelector:@selector(doLogout) withObject:nil];
     }];
     
@@ -377,9 +378,8 @@
     NSString *title = @"设置家长姓名";
     NSString *message = [NSString stringWithFormat:@"您最多可以输入%d个字", kKuleParentNameMaxLength];
     
-    AHAlertView *alert = [[AHAlertView alloc] initWithTitle:title message:message];
-    alert.alertViewStyle = AHAlertViewStylePlainTextInput;
-    alert.messageTextAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:14]};
+    UIAlertView* alert = [UIAlertView bk_alertViewWithTitle:title message:message];
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
     
     UITextField* field = [alert textFieldAtIndex:0];
     field.placeholder = @"请输入家长姓名";
@@ -387,16 +387,16 @@
     field.keyboardAppearance = UIKeyboardAppearanceDefault;
     //field.background = [[UIImage imageNamed:@"input-bg-0.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 50, 10, 10)];
     //field.borderStyle = UITextBorderStyleBezel;
-    field.borderStyle = UITextBorderStyleRoundedRect;
+    //field.borderStyle = UITextBorderStyleRoundedRect;
     field.backgroundColor = [UIColor clearColor];
     field.font = [UIFont systemFontOfSize:14];
     field.delegate = _nickFieldDelegate;
     
-    [alert setCancelButtonTitle:@"取消" block:^{
+    [alert bk_setCancelButtonWithTitle:@"取消" handler:^{
         
     }];
     
-    [alert addButtonWithTitle:@"确定" block:^{
+    [alert bk_addButtonWithTitle:@"确定" handler:^{
         if ([[field.text trim] length] > 0) {
             [self doUpdateParentName:[field.text trim]];
         }
@@ -409,9 +409,9 @@
     NSString *title = @"设置亲属关系";
     NSString *message = [NSString stringWithFormat:@"您最多可以输入%d个字", kKuleRelationshipMaxLength];
     
-    AHAlertView *alert = [[AHAlertView alloc] initWithTitle:title message:message];
-    alert.alertViewStyle = AHAlertViewStylePlainTextInput;
-    alert.messageTextAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:14]};
+    UIAlertView* alert = [UIAlertView bk_alertViewWithTitle:title message:message];
+    
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
     
     UITextField* field = [alert textFieldAtIndex:0];
     field.placeholder = @"请输入亲属关系";
@@ -419,16 +419,16 @@
     field.keyboardAppearance = UIKeyboardAppearanceDefault;
     //field.background = [[UIImage imageNamed:@"input-bg-0.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 50, 10, 10)];
     //field.borderStyle = UITextBorderStyleBezel;
-    field.borderStyle = UITextBorderStyleRoundedRect;
+    //field.borderStyle = UITextBorderStyleRoundedRect;
     field.backgroundColor = [UIColor clearColor];
     field.font = [UIFont systemFontOfSize:14];
     field.delegate = _relationshipFieldDelegate;
     
-    [alert setCancelButtonTitle:@"取消" block:^{
+    [alert bk_setCancelButtonWithTitle:@"取消" handler:^{
         
     }];
     
-    [alert addButtonWithTitle:@"确定" block:^{
+    [alert bk_addButtonWithTitle:@"确定" handler:^{
         //        [self doUpdateChildNick:field.text];
         if ([[field.text trim] length] > 0) {
             [self doUpdateRelationship:[field.text trim]];

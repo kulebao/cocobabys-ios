@@ -3,7 +3,7 @@
 //  YouJiaoBao
 //
 //  Created by xin.c.wang on 14-8-1.
-//  Copyright (c) 2014年 Codingsoft. All rights reserved.
+//  Copyright (c) 2014-2016 Cocobabys. All rights reserved.
 //
 
 #import "CSNoticeTableViewController.h"
@@ -12,16 +12,13 @@
 #import "CSAppDelegate.h"
 #import "CSHttpClient.h"
 #import "CSEngine.h"
-#import "EntityClassInfo.h"
-#import "EntityNewsInfoHelper.h"
 #import "CSNewsInfoDetailViewController.h"
 #import "UIViewController+CSKit.h"
 #import "CSPopupController.h"
 #import "CSClassPickerView.h"
 #import "CSCreateNoticeViewController.h"
 
-@interface CSNoticeTableViewController () <PullTableViewDelegate, NSFetchedResultsControllerDelegate, CSCreateNoticeViewControllerDelegate> {
-    NSFetchedResultsController* _frCtrl;
+@interface CSNoticeTableViewController () <PullTableViewDelegate, CSCreateNoticeViewControllerDelegate > {
     
     NSMutableArray* _imageUrlList;
     NSMutableArray* _imageList;
@@ -29,8 +26,9 @@
     NSString* _textTitle;
     BOOL _requriedFeedback;
     NSArray* _tags;
-    
     NSNumber* _classId;
+    
+    NSArray* _newsInfoList;
 }
 
 @property (strong, nonatomic) IBOutlet PullTableView *pullTableView;
@@ -59,16 +57,15 @@
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    //[self customizeBackBarItem];
-    [self customizeOkBarItemWithTarget:self action:@selector(onSendNotice:) text:@"发布"];
-    CSEngine* engine = [CSEngine sharedInstance];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"发布" style:UIBarButtonItemStylePlain target:self action:@selector(onSendNotice:)];
+    
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
     
     self.popCtrl = [CSPopupController popupControllerWithView:gApp.window];
     
     self.classPickerView = [CSClassPickerView defaultClassPickerView];
     self.classPickerView.delegate = self;
-    self.classPickerView.canSelectAll = engine.loginInfo.allowToSendAll;
+    self.classPickerView.canSelectAll = session.allowToSendAll;
     
     self.pullTableView.pullDelegate = self;
     self.pullTableView.pullBackgroundColor = [UIColor clearColor];
@@ -77,23 +74,6 @@
 
     [self.pullTableView registerNib:[UINib nibWithNibName:@"CSKuleNewsTableViewCell" bundle:nil]
          forCellReuseIdentifier:@"CSKuleNewsTableViewCell"];
-    
-
-    NSArray* classInfoList = engine.classInfoList;
-    
-    NSMutableArray* classIdList = [NSMutableArray array];
-    for (EntityClassInfo* classInfo in classInfoList) {
-        [classIdList addObject:classInfo.classId.stringValue];
-    }
-    
-    _frCtrl = [EntityNewsInfoHelper frNewsWithClassList:classIdList
-                                         ofKindergarten:engine.loginInfo.schoolId.integerValue];
-    _frCtrl.delegate = self;
-    
-    NSError* error = nil;
-    if (![_frCtrl performFetch:&error]) {
-        CSLog(@"frNewsWithClassList Error: %@", error);
-    }
     
     [self reloadAllNewsList];
 }
@@ -108,6 +88,13 @@
     [self performSegueWithIdentifier:@"segue.createnotice" sender:nil];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
+    _newsInfoList = [session.newsInfoList copy];
+    [self.tableView reloadData];
+}
+
 #pragma mark - UITableViewDelegate & UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -118,7 +105,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return _frCtrl.fetchedObjects.count;
+    return _newsInfoList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -126,7 +113,7 @@
     CSKuleNewsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CSKuleNewsTableViewCell" forIndexPath:indexPath];
     
     // Configure the cell...
-    EntityNewsInfo* newsInfo = [_frCtrl objectAtIndexPath:indexPath];
+    CBNewsInfo* newsInfo = [_newsInfoList objectAtIndex:indexPath.row];
     [cell loadNewsInfo:newsInfo];
     
     return cell;
@@ -139,7 +126,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    EntityNewsInfo* newsInfo = [_frCtrl objectAtIndexPath:indexPath];
+    CBNewsInfo* newsInfo = [_newsInfoList objectAtIndex:indexPath.row];
     [self performSegueWithIdentifier:@"segue.news.detail" sender:newsInfo];
 }
 
@@ -247,14 +234,14 @@
 
 - (void)doUploadImage {
     CSHttpClient* http = [CSHttpClient sharedInstance];
-    CSEngine* engine = [CSEngine sharedInstance];
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
     
     UIImage* img = [_imageList firstObject];
     if (img) {
         NSData* imgData = UIImageJPEGRepresentation(img, 0.8);
         NSString* imgFileName = [NSString stringWithFormat:@"news_img/%@/t_%@/%@.jpg",
-                                 engine.loginInfo.schoolId,
-                                 engine.loginInfo.o_id,
+                                 session.loginInfo.school_id,
+                                 session.loginInfo._id,
                                  @((long long)[[NSDate date] timeIntervalSince1970]*1000)];
         
         SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
@@ -286,7 +273,7 @@
 
 - (void)doSendSubmit {
     CSHttpClient* http = [CSHttpClient sharedInstance];
-    CSEngine* engine = [CSEngine sharedInstance];
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
     
     SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
         [gApp alert:@"提交成功"];
@@ -302,8 +289,8 @@
     
     [gApp waitingAlert:@"提交数据中"];
     
-    [http opPostNewsOfKindergarten:engine.loginInfo.schoolId.integerValue
-                        withSender:engine.loginInfo
+    [http opPostNewsOfKindergarten:session.loginInfo.school_id.integerValue
+                        withSender:session.loginInfo
                        withClassId:_classId
                        withContent:_textContent
                          withTitle:_textTitle
@@ -351,29 +338,24 @@
 #pragma mark - Private
 - (void)reloadAllNewsList {
     CSHttpClient* http = [CSHttpClient sharedInstance];
-    CSEngine* engine = [CSEngine sharedInstance];
-    CSAppDelegate* app = [CSAppDelegate sharedInstance];
-    NSArray* classInfoList = engine.classInfoList;
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
+    NSArray* classInfoList = session.classInfoList;
     
     NSMutableArray* classIdList = [NSMutableArray array];
-    for (EntityClassInfo* classInfo in classInfoList) {
-        [classIdList addObject:classInfo.classId.stringValue];
+    for (CBClassInfo* classInfo in classInfoList) {
+        [classIdList addObject:[@(classInfo.class_id) stringValue]];
     }
     
     id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSArray* list = [EntityNewsInfoHelper reloadEntities: responseObject];
+        [session reloadNewsInfosByJsonObject:responseObject];
+        _newsInfoList = [session.newsInfoList copy];
         self.pullTableView.pullLastRefreshDate = [NSDate date];
         self.pullTableView.pullTableIsRefreshing = NO;
         
-        if (list.count == 0) {
+        if ([responseObject count] == 0) {
             //[app alert:@"已是最新"];
         }
         else {
-            NSError* error = nil;
-            if (![_frCtrl performFetch:&error]) {
-                CSLog(@"frNewsWithClassList Error: %@", error);
-            }
-            
             [self.pullTableView reloadData];
         }
     };
@@ -384,7 +366,7 @@
     };
     
     [http opGetNewsOfClasses:classIdList
-              inKindergarten:engine.loginInfo.schoolId.integerValue
+              inKindergarten:session.loginInfo.school_id.integerValue
                         from:nil
                           to:nil
                         most:@(50)
@@ -394,29 +376,25 @@
 
 - (void)reloadNewsList {
     CSHttpClient* http = [CSHttpClient sharedInstance];
-    CSEngine* engine = [CSEngine sharedInstance];
     CSAppDelegate* app = [CSAppDelegate sharedInstance];
-    NSArray* classInfoList = engine.classInfoList;
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
+    NSArray* classInfoList = session.classInfoList;
     
     NSMutableArray* classIdList = [NSMutableArray array];
-    for (EntityClassInfo* classInfo in classInfoList) {
-        [classIdList addObject:classInfo.classId.stringValue];
+    for (CBClassInfo* classInfo in classInfoList) {
+        [classIdList addObject:[@(classInfo.class_id) stringValue]];
     }
     
     id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSArray* list = [EntityNewsInfoHelper updateEntities: responseObject];
+        [session updateNewsInfosByJsonObject:responseObject];
+        _newsInfoList = [session.newsInfoList copy];
         self.pullTableView.pullLastRefreshDate = [NSDate date];
         self.pullTableView.pullTableIsRefreshing = NO;
         
-        if (list.count == 0) {
+        if ([responseObject count] == 0) {
             [app alert:@"已是最新"];
         }
         else {
-            NSError* error = nil;
-            if (![_frCtrl performFetch:&error]) {
-                CSLog(@"frNewsWithClassList Error: %@", error);
-            }
-            
             [self.pullTableView reloadData];
         }
     };
@@ -426,10 +404,9 @@
         self.pullTableView.pullTableIsRefreshing = NO;
     };
     
-    EntityNewsInfo* lastestNewsInfo = [_frCtrl.fetchedObjects firstObject];
-    
+    CBNewsInfo* lastestNewsInfo = session.newsInfoList.firstObject;
     [http opGetNewsOfClasses:classIdList
-              inKindergarten:engine.loginInfo.schoolId.integerValue
+              inKindergarten:session.loginInfo.school_id.integerValue
                         from:lastestNewsInfo.timestamp
                           to:nil
                         most:nil
@@ -439,21 +416,20 @@
 
 - (void)loadMoreNewsList {
     CSHttpClient* http = [CSHttpClient sharedInstance];
-    CSEngine* engine = [CSEngine sharedInstance];
     CSAppDelegate* app = [CSAppDelegate sharedInstance];
-    NSArray* classInfoList = engine.classInfoList;
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
+    NSArray* classInfoList = session.classInfoList;
     
     NSMutableArray* classIdList = [NSMutableArray array];
-    for (EntityClassInfo* classInfo in classInfoList) {
-        [classIdList addObject:classInfo.classId.stringValue];
+    for (CBClassInfo* classInfo in classInfoList) {
+        [classIdList addObject:[@(classInfo.class_id) stringValue]];
     }
     
     id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSArray* list = [EntityNewsInfoHelper updateEntities: responseObject];
-        
+        [session updateNewsInfosByJsonObject:responseObject];
         self.pullTableView.pullTableIsLoadingMore = NO;
         
-        if (list.count == 0) {
+        if ([responseObject count] == 0) {
             [app alert:@"没有更多公告了"];
         }
     };
@@ -463,10 +439,10 @@
         self.pullTableView.pullTableIsLoadingMore = NO;
     };
     
-    EntityNewsInfo* earliestNewsInfo = [_frCtrl.fetchedObjects lastObject];
+    CBNewsInfo* earliestNewsInfo = session.newsInfoList.lastObject;
     
     [http opGetNewsOfClasses:classIdList
-              inKindergarten:engine.loginInfo.schoolId.integerValue
+              inKindergarten:session.loginInfo.school_id.integerValue
                         from:nil
                           to:earliestNewsInfo.timestamp
                         most:nil

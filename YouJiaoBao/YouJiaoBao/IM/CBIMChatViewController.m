@@ -8,7 +8,7 @@
 
 #import "CBIMChatViewController.h"
 #import "CBChatViewSettingsViewController.h"
-#import "CBIMDataSource.h"
+#import "CBSessionDataModel.h"
 
 @interface CBIMChatViewController ()  <CBChatViewSettingsViewControllerDelegate>
 
@@ -23,8 +23,6 @@
     // Do any additional setup after loading the view.
     
     if (self.conversationType == ConversationType_GROUP) {
-        //[self customizeOkBarItemWithTarget:self action:@selector(onRightNaviItemClicked:) text:@"群组成员"];
-        
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"v2-im-groupmembers"]
                                                                                   style:UIBarButtonItemStyleBordered
                                                                                  target:self
@@ -74,7 +72,8 @@
             
         }
         else {
-            [[CBIMDataSource sharedInstance] getUserInfoWithUserId:userId completion:^(RCUserInfo *userInfo) {
+            CBSessionDataModel* session = [CBSessionDataModel thisSession];
+            [session getUserInfoWithUserId:userId completion:^(RCUserInfo *userInfo) {
                 CBIMChatViewController *conversationVC = [[CBIMChatViewController alloc]init];
                 conversationVC.conversationType = ConversationType_PRIVATE;
                 conversationVC.targetId = userId;

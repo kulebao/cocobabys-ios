@@ -3,7 +3,7 @@
 //  YouJiaoBao
 //
 //  Created by xin.c.wang on 14-8-1.
-//  Copyright (c) 2014年 Codingsoft. All rights reserved.
+//  Copyright (c) 2014-2016 Cocobabys. All rights reserved.
 //
 
 #import "CSProfileHeaderViewController.h"
@@ -53,19 +53,19 @@
 }
 
 - (void)reloadData {
-    
-    CSEngine* engine = [CSEngine sharedInstance];
-    if (engine.loginInfo) {
-        self.labUsername.text = [NSString stringWithFormat:@"登录名: %@", engine.loginInfo.loginName];
+    //CSEngine* engine = [CSEngine sharedInstance];
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
+    if (session.loginInfo) {
+        self.labUsername.text = [NSString stringWithFormat:@"登录名: %@", session.loginInfo.login_name];
         
         if (self.moreDetails) {
-            self.labUsername.text = [NSString stringWithFormat:@"登录名: %@\n昵称: %@", engine.loginInfo.loginName, engine.loginInfo.name];
+            self.labUsername.text = [NSString stringWithFormat:@"登录名: %@\n昵称: %@", session.loginInfo.login_name, session.loginInfo.name];
         }
         else {
-            self.labUsername.text = engine.loginInfo.name;
+            self.labUsername.text = session.loginInfo.name;
         }
         
-        [self.imgPortrait sd_setImageWithURL:[NSURL URLWithString:engine.loginInfo.portrait]
+        [self.imgPortrait sd_setImageWithURL:[NSURL URLWithString:session.loginInfo.portrait]
                             placeholderImage:[UIImage imageNamed:@"chat_head_icon.gif"]];
     }
     else {
@@ -86,8 +86,9 @@
 */
 
 - (IBAction)onBtnPhotoClicked:(id)sender {
-    CSEngine* engine = [CSEngine sharedInstance];
-    if (engine.loginInfo && [_delegate respondsToSelector:@selector(profileHeaderViewControllerWillUpdateProfile:)]) {
+    //CSEngine* engine = [CSEngine sharedInstance];
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
+    if (session.loginInfo && [_delegate respondsToSelector:@selector(profileHeaderViewControllerWillUpdateProfile:)]) {
         [_delegate profileHeaderViewControllerWillUpdateProfile:self];
     }
 }

@@ -3,13 +3,12 @@
 //  YouJiaoBao
 //
 //  Created by xin.c.wang on 14-7-20.
-//  Copyright (c) 2014年 Codingsoft. All rights reserved.
+//  Copyright (c) 2014-2016 Cocobabys. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "EntityLoginInfo.h"
 #import "ModelAccount.h"
-#import "CBSchoolInfo.h"
+#import "CBSessionDataModel.h"
 
 extern NSString* kNotiLoginSuccess;
 extern NSString* kNotiLogoutSuccess;
@@ -19,27 +18,14 @@ extern NSString* kNotiShowLogin;
 extern NSString* kAppleID;
 
 @interface CSEngine : NSObject
-@property (nonatomic, strong, readonly) EntityLoginInfo* loginInfo;
-@property (nonatomic, strong, readonly) NSArray* classInfoList;
-@property (nonatomic, strong) CBSchoolInfo* schoolInfo;
 
 + (id)sharedInstance;
 
 - (void)setupAppearance;
-
 - (void)setupBaiduMobStat;
-
-- (void)onLogin:(EntityLoginInfo*)loginInfo;
-
 - (void)onLoadClassInfoList:(NSArray*)classInfoList;
-
 - (BOOL)encryptAccount:(ModelAccount*)account;
-
 - (ModelAccount*)decryptAccount;
-
 - (BOOL)clearAccount;
-
-- (void)reloadSchoolInfo;
-
 
 @end

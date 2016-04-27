@@ -3,7 +3,7 @@
 //  youlebao
 //
 //  Created by xin.c.wang on 14-8-12.
-//  Copyright (c) 2014年 Cocobabys. All rights reserved.
+//  Copyright (c) 2014-2016 Cocobabys. All rights reserved.
 //
 
 #import "CSKuleHistoryMainViewController.h"
@@ -56,8 +56,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self customizeBackBarItem];
-    [self customizeOkBarItemWithTarget:self action:@selector(onBtnCreateNewClicked:) text:@"发布"];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"发布" style:UIBarButtonItemStylePlain target:self action:@selector(onBtnCreateNewClicked:)];
     
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
@@ -68,7 +67,7 @@
     NSDateComponents* components = [self.calendar components:NSCalendarUnitYear fromDate:now];
     
     _year = components.year;
-    self.labTitle.text = [NSString stringWithFormat:@"%d", _year];
+    self.labTitle.text = [NSString stringWithFormat:@"%ld", (long)_year];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

@@ -3,13 +3,12 @@
 //  YouJiaoBao
 //
 //  Created by xin.c.wang on 14-8-8.
-//  Copyright (c) 2014年 Codingsoft. All rights reserved.
+//  Copyright (c) 2014-2016 Cocobabys. All rights reserved.
 //
 
 #import "CSChildRelationshipItemTableViewCell.h"
-#import "EntityParentInfo.h"
-#import "EntityChildInfoHelper.h"
 #import "CSAppDelegate.h"
+#import "CBRelationshipInfo.h"
 
 @interface CSChildRelationshipItemTableViewCell ()
 @property (weak, nonatomic) IBOutlet UILabel *labName;
@@ -48,7 +47,7 @@
 - (IBAction)onBtnMakeCallClicked:(id)sender {
     CSAppDelegate* app = [CSAppDelegate sharedInstance];
     
-    NSString* action = [NSString stringWithFormat:@"tel://%@", _relationship.parentInfo.phone];
+    NSString* action = [NSString stringWithFormat:@"tel://%@", _relationship.parent.phone];
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:action]]) {
         if (![[UIApplication sharedApplication] openURL:[NSURL URLWithString:action]]) {
             [app alert:@"无法拨打此号码。"];
@@ -63,7 +62,7 @@
 - (IBAction)onBtnSendSmsClicked:(id)sender {
     CSAppDelegate* app = [CSAppDelegate sharedInstance];
     
-    NSString* action = [NSString stringWithFormat:@"sms://%@", _relationship.parentInfo.phone];
+    NSString* action = [NSString stringWithFormat:@"sms://%@", _relationship.parent.phone];
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:action]]) {
         if (![[UIApplication sharedApplication] openURL:[NSURL URLWithString:action]]) {
             [app alert:@"无法向此号码发送短信。"];
@@ -75,13 +74,11 @@
     }
 }
 
-- (void)setRelationship:(EntityRelationshipInfo *)relationship {
+- (void)setRelationship:(CBRelationshipInfo *)relationship {
     _relationship = relationship;
-    
 //    self.labName.text =  [NSString stringWithFormat:@"%@ %@", relationship.parentInfo.name, relationship.relationship];
-    
     NSMutableAttributedString* mutableAttrString = [[NSMutableAttributedString alloc] init];
-    NSAttributedString* name = [[NSAttributedString alloc] initWithString:relationship.parentInfo.name attributes:@{NSForegroundColorAttributeName: [UIColor blackColor],NSFontAttributeName:[UIFont systemFontOfSize:16.0]}];
+    NSAttributedString* name = [[NSAttributedString alloc] initWithString:relationship.parent.name attributes:@{NSForegroundColorAttributeName: [UIColor blackColor],NSFontAttributeName:[UIFont systemFontOfSize:16.0]}];
     [mutableAttrString appendAttributedString:name];
     
     [mutableAttrString appendAttributedString:[[NSAttributedString alloc] initWithString:@"  "]];
@@ -91,9 +88,9 @@
     
     self.labName.attributedText = mutableAttrString;
     
-    self.labPhone.text = relationship.parentInfo.phone;
+    self.labPhone.text = relationship.parent.phone;
     
-    if (relationship.parentInfo.phone.length > 0) {
+    if (relationship.parent.phone.length > 0) {
         self.btnMakeCall.hidden = NO;
         self.btnSendSms.hidden = NO;
     }

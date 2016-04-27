@@ -10,12 +10,13 @@
 #import "CBIMGroupMembersViewController.h"
 #import "CSAppDelegate.h"
 #import "CBRelationshipInfo.h"
-#import "CBIMDataSource.h"
+#import "CBSessionDataModel.h"
 #import "UIImageView+WebCache.h"
 #import "CBIMSettingsModel.h"
 #import "CSEngine.h"
 #import "CBIMBanListViewController.h"
 #import "CSHttpClient.h"
+#import "CBSessionDataModel.h"
 
 @interface CBChatViewSettingsViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *labSchoolName;
@@ -46,17 +47,14 @@
 }
 
 - (void)reloadData {
-    CSEngine* engine = [CSEngine sharedInstance];
-    if (engine.schoolInfo) {
-        self.labSchoolName.text = engine.schoolInfo.name;
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
+    if (session.schoolInfo) {
+        self.labSchoolName.text = session.schoolInfo.name;
     }
     else {
         self.labSchoolName.text = @"幼儿园";
     }
-    
-    CBIMDataSource* imDS = [CBIMDataSource sharedInstance];
-    
-    [imDS getGroupInfoWithGroupId:self.targetId completion:^(RCGroup *groupInfo) {
+    [session getGroupInfoWithGroupId:self.targetId completion:^(RCGroup *groupInfo) {
         self.labClassName.text = SAFE_STRING(groupInfo.groupName);
         [self.imgIcon sd_setImageWithURL:[NSURL URLWithString:groupInfo.portraitUri]
                         placeholderImage:[UIImage imageNamed:@"v2-im-group"]];

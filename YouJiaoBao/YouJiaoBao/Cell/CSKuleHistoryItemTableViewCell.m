@@ -133,11 +133,11 @@
                                            ((index + 2) / 3 ) * 70);
     
     
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
     
-    CSEngine* engine = [CSEngine sharedInstance];
-    [self.imgPortrait sd_setImageWithURL:[NSURL URLWithString:engine.loginInfo.portrait]
+    [self.imgPortrait sd_setImageWithURL:[NSURL URLWithString:session.loginInfo.portrait]
                         placeholderImage:[UIImage imageNamed:@"chat_head_icon.gif"]];
-    self.labName.text = engine.loginInfo.name;
+    self.labName.text = session.loginInfo.name;
     
 }
 

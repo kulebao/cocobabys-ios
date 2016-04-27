@@ -36,19 +36,28 @@ PODS:
   - BlocksKit/UIKit (2.2.5):
     - BlocksKit/Core
     - BlocksKit/DynamicDelegate
-  - Bugly (1.4.3)
+  - Bugly (2.1)
   - EAIntroView (2.6.4)
   - FTCoreText (1.0.1)
+  - HappyDNS (0.2.3)
   - iCarousel (1.8.2)
   - InputValidators (0.3.2)
   - JSBadgeView (1.3.2)
+  - JSPatch (1.0):
+    - JSPatch/Core (= 1.0)
+  - JSPatch/Core (1.0)
   - MBProgressHUD (0.9.1)
   - NSURL+QueryDictionary (1.1.0)
-  - RongCloudIMKit (2.3.8)
+  - PINCache (2.2.2)
+  - Qiniu (7.0.17):
+    - AFNetworking (~> 2.0)
+    - HappyDNS (~> 0.2)
+  - RongCloudIMKit (2.5.0)
   - SDWebImage (3.7.3):
     - SDWebImage/Core (= 3.7.3)
   - SDWebImage/Core (3.7.3)
-  - TPKeyboardAvoiding (1.2.9)
+  - TPKeyboardAvoiding (1.3)
+  - TZImagePickerController (1.1.3)
   - UITableView+FDTemplateLayoutCell (1.3)
   - UITextView+Placeholder (1.0.9)
 
@@ -56,17 +65,21 @@ DEPENDENCIES:
   - AFNetworking (~> 2.0)
   - ALAlertBanner (~> 0.3.1)
   - BlocksKit (~> 2.2.5)
-  - Bugly
+  - Bugly (~> 2.1)
   - EAIntroView (~> 2.6.4)
   - FTCoreText (~> 1.0.1)
   - iCarousel (~> 1.8.1)
   - InputValidators (~> 0.3.2)
   - JSBadgeView (~> 1.3.2)
+  - JSPatch
   - MBProgressHUD (~> 0.9)
   - NSURL+QueryDictionary (~> 1.1.0)
-  - RongCloudIMKit (~> 2.3.8)
+  - PINCache
+  - Qiniu
+  - RongCloudIMKit (~> 2.5.0)
   - SDWebImage (~> 3.7.3)
-  - TPKeyboardAvoiding (~> 1.2.4)
+  - TPKeyboardAvoiding (~> 1.3)
+  - TZImagePickerController (~> 1.1.3)
   - UITableView+FDTemplateLayoutCell (~> 1.3)
   - UITextView+Placeholder (~> 1.0.8)
 
@@ -74,17 +87,22 @@ SPEC CHECKSUMS:
   AFNetworking: 7f317038a9710cabfa43ec56396b307b45df72ab
   ALAlertBanner: 08d82be509cd9b70c4ac0ee1e7ac250003a8b34b
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
-  Bugly: b8d350be5047a468adf037cb016ab22762bc287c
+  Bugly: bea72755cea96604658cc480b4efe85576c8aa2c
   EAIntroView: df7dc18da73e1831d06878b9c0e13da78e6bb3ce
   FTCoreText: 7bc3eb236f5eee4bcd33486d693376c04b08a3d4
+  HappyDNS: 6d85942e64c28b4fa61f8c76580398f52d6d1d11
   iCarousel: 67c8a43da5a46795b56aadfc96cd36a16f6149b2
   InputValidators: 62bcbecb129636922b031e767458aff36d2c52e4
   JSBadgeView: 08284afc9d0eb60069674e517cac2d37d4319208
+  JSPatch: c689ea4dde17441f2f4a95d40dfedb8900c20099
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
   NSURL+QueryDictionary: dd0a5fec689a9b4780b6fa0e0225c01ca3ea653e
-  RongCloudIMKit: 58feb4bce6a8b545598b872d51deab8b1264e2a3
+  PINCache: 078426d356ab95ef875e9e62e5c35a2ea3333c28
+  Qiniu: 2c05af1f9d580c036b18faf832cc98e98bfb21bc
+  RongCloudIMKit: 3d8473f022c7588db80ef81caf0208e5c2fa4789
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
-  TPKeyboardAvoiding: ff1ee4e5a5a0c119b965552af8f183868ea20207
+  TPKeyboardAvoiding: a5138f318c06fb3e151f886e18ce4a72695d9cbe
+  TZImagePickerController: f1105f36559852405fc93e16803430c25d7f7ea5
   UITableView+FDTemplateLayoutCell: d5be6056b5060313f5955a2590ecd33142ad713d
   UITextView+Placeholder: 83895056749372c96febfb43f536c9b1aae3e08e
 

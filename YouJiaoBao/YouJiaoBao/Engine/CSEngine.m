@@ -3,14 +3,12 @@
 //  YouJiaoBao
 //
 //  Created by xin.c.wang on 14-7-20.
-//  Copyright (c) 2014年 Codingsoft. All rights reserved.
+//  Copyright (c) 2014-2016 Cocobabys. All rights reserved.
 //
 
 #import "CSEngine.h"
-#import "AHAlertView.h"
 #import "BaiduMobStat.h"
 #import "CSHttpClient.h"
-#import "EntityClassInfo.h"
 #import "CBSessionDataModel.h"
 
 NSString* kNotiLoginSuccess = @"noti.login.success";
@@ -22,7 +20,6 @@ NSString* kNotiShowLogin = @"noti.login.view";
 NSString* kAppleID = @"917314512";
 
 @implementation CSEngine
-@synthesize loginInfo = _loginInfo;
 
 + (id)sharedInstance {
     static CSEngine* s_instance = nil;
@@ -34,19 +31,19 @@ NSString* kAppleID = @"917314512";
 }
 
 - (void)setupAppearance {
-    UIImage* imgAlertBg = [UIImage imageNamed:@"alert-bg.png"];
-    UIImage* imgBtnCancelBg = [[UIImage imageNamed:@"v2-btn_gray.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
-    UIImage* imgBtnOkBg = [[UIImage imageNamed:@"v2-btn_green.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
-    
-    imgAlertBg = [imgAlertBg resizableImageWithCapInsets:UIEdgeInsetsMake(100, 50, 10, 50)];
-    
-    id alertAppearance = [AHAlertView appearance];
-    [alertAppearance setBackgroundImage:imgAlertBg];
-    [alertAppearance setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
-    [alertAppearance setMessageTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
-    [alertAppearance setButtonBackgroundImage:imgBtnOkBg forState:UIControlStateNormal];
-    [alertAppearance setCancelButtonBackgroundImage:imgBtnCancelBg forState:UIControlStateNormal];
-    [alertAppearance setContentInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
+//    UIImage* imgAlertBg = [UIImage imageNamed:@"alert-bg.png"];
+//    UIImage* imgBtnCancelBg = [[UIImage imageNamed:@"v2-btn_gray.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
+//    UIImage* imgBtnOkBg = [[UIImage imageNamed:@"v2-btn_green.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
+//    
+//    imgAlertBg = [imgAlertBg resizableImageWithCapInsets:UIEdgeInsetsMake(100, 50, 10, 50)];
+//    
+//    id alertAppearance = [AHAlertView appearance];
+//    [alertAppearance setBackgroundImage:imgAlertBg];
+//    [alertAppearance setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
+//    [alertAppearance setMessageTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
+//    [alertAppearance setButtonBackgroundImage:imgBtnOkBg forState:UIControlStateNormal];
+//    [alertAppearance setCancelButtonBackgroundImage:imgBtnCancelBg forState:UIControlStateNormal];
+//    [alertAppearance setContentInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
 }
 
 - (void)setupBaiduMobStat {
@@ -65,18 +62,12 @@ NSString* kAppleID = @"917314512";
     [statTracker startWithAppId:@"9fbb516d10"];//设置您在mtj网站上添加的app的appkey
 }
 
-- (void)onLogin:(EntityLoginInfo*)loginInfo {
-    _loginInfo = loginInfo;
-}
-
 - (void)onLoadClassInfoList:(NSArray*)classInfoList {
-    _classInfoList = classInfoList;
-    
     CBSessionDataModel* session = [CBSessionDataModel thisSession];
     if (session.schoolConfig.schoolGroupChat) {
-        for (EntityClassInfo* clasInfo in _classInfoList) {
-            if (clasInfo.schoolId.integerValue>0 && clasInfo.classId.integerValue>0) {
-                [self joinGroup:clasInfo.schoolId.integerValue classId:clasInfo.classId.integerValue];
+        for (CBClassInfo* classInfo in session.classInfoList) {
+            if (classInfo.school_id>0 && classInfo.class_id>0) {
+                [self joinGroup:classInfo.school_id classId:classInfo.class_id];
             }
         }
     }
@@ -108,28 +99,13 @@ NSString* kAppleID = @"917314512";
 - (ModelAccount*)decryptAccount {
     NSUserDefaults* conf = [NSUserDefaults standardUserDefaults];
     NSData* data = [conf objectForKey:kKeyLoginAccount];
-    
     return [NSKeyedUnarchiver unarchiveObjectWithData:data];
 }
 
 - (BOOL)clearAccount {
     NSUserDefaults* conf = [NSUserDefaults standardUserDefaults];
     [conf removeObjectForKey:kKeyLoginAccount];
-    
     return [conf synchronize];
-}
-
-- (void)reloadSchoolInfo {
-    CSHttpClient* http = [CSHttpClient sharedInstance];
-    if (_loginInfo) {
-        [http opGetSchoolInfo:_loginInfo.schoolId.integerValue
-                      success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                          _schoolInfo = [CBSchoolInfo instanceWithDictionary:responseObject];
-                          
-                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                          
-                      }];
-    }
 }
 
 @end

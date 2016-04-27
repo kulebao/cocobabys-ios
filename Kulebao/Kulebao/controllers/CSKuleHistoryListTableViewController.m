@@ -3,7 +3,7 @@
 //  youlebao
 //
 //  Created by xin.c.wang on 14-8-12.
-//  Copyright (c) 2014年 Cocobabys. All rights reserved.
+//  Copyright (c) 2014-2016 Cocobabys. All rights reserved.
 //
 
 #import "CSKuleHistoryListTableViewController.h"
@@ -45,8 +45,8 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    [self customizeBackBarItem];
-    [self customizeOkBarItemWithTarget:self action:@selector(onBtnRefreshClicked:) text:@"刷新"];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"刷新" style:UIBarButtonItemStylePlain target:self action:@selector(onBtnRefreshClicked:)];
     
     CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
     _frCtrl = [EntityHistoryInfoHelper frCtrlForYear:_year month:_month topic:currentChild.childId];

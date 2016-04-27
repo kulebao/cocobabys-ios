@@ -3,14 +3,15 @@
 //  YouJiaoBao
 //
 //  Created by xin.c.wang on 14-8-9.
-//  Copyright (c) 2014年 Codingsoft. All rights reserved.
+//  Copyright (c) 2014-2016 Cocobabys. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import "EntityNewsInfo.h"
+
+@class CBNewsInfo;
 
 @interface CSNewsInfoDetailViewController : UIViewController
 
-@property (nonatomic, strong) EntityNewsInfo* newsInfo;
+@property (nonatomic, strong) CBNewsInfo* newsInfo;
 
 @end

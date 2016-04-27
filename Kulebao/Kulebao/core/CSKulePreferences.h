@@ -3,7 +3,7 @@
 //  Kulebao
 //
 //  Created by xin.c.wang on 14-3-6.
-//  Copyright (c) 2014年 Cocobabys. All rights reserved.
+//  Copyright (c) 2014-2016 Cocobabys. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -16,6 +16,7 @@
 @property (nonatomic, strong) NSData* deviceToken;
 
 @property (nonatomic, strong) NSString* defaultUsername;
+@property (nonatomic, strong) NSString* localPswd;
 @property (nonatomic, assign) BOOL guideShown;
 @property (nonatomic, assign) BOOL guideHomeShown;
 

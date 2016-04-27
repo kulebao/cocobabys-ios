@@ -3,7 +3,7 @@
 //  youlebao
 //
 //  Created by xin.c.wang on 14-8-13.
-//  Copyright (c) 2014年 Cocobabys. All rights reserved.
+//  Copyright (c) 2014-2016 Cocobabys. All rights reserved.
 //
 
 #import "CSKuleCCTVPlayViewController.h"
@@ -52,7 +52,7 @@ static void pCall (user_data data, P_FRAME_DATA frame, hm_result result) {
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self customizeBackBarItem];
+    
     self.delegate = self;
     
     self.navigationItem.title = _deviceMeta[@"name"];

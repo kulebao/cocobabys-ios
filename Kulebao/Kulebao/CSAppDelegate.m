@@ -3,14 +3,14 @@
 //  Kulebao
 //
 //  Created by xin.c.wang on 14-2-24.
-//  Copyright (c) 2014年 Cocobabys. All rights reserved.
+//  Copyright (c) 2014-2016 Cocobabys. All rights reserved.
 //
 
 #import "CSAppDelegate.h"
 #import "BPush.h"
 #import "EAIntroPage.h"
 #import "EAIntroView.h"
-#import <Bugly/CrashReporter.h>
+#import <Bugly/Bugly.h>
 #import "CBIMDataSource.h"
 #import "CBSessionDataModel.h"
 #import "AFNetworkReachabilityManager.h"
@@ -36,14 +36,14 @@ CSAppDelegate* gApp = nil;
     gApp = self;
     
     // 初始化Bugly
-    // [[CrashReporter sharedInstance] enableLog:YES];
-    [[CrashReporter sharedInstance] installWithAppId:@"900013148"];
+    [Bugly startWithAppId:@"900013148"];
     // [self performSelector:@selector(crash) withObject:nil afterDelay:3.0];
     
     // 初始化融云
     CSKulePreferences* preference = [CSKulePreferences defaultPreferences];
     NSDictionary* configInfo = [preference getServerSettings];
-    [[RCIM sharedRCIM] initWithAppKey:configInfo[@"rongyun_app_id"]];
+    NSString* rongyun_app_id = configInfo[@"rongyun_app_id"];
+    [[RCIM sharedRCIM] initWithAppKey:rongyun_app_id];
     [[RCIM sharedRCIM] setGroupInfoDataSource:[CBIMDataSource sharedInstance]];
     [[RCIM sharedRCIM] setUserInfoDataSource:[CBIMDataSource sharedInstance]];
     [[RCIM sharedRCIM] setGroupUserInfoDataSource:[CBIMDataSource sharedInstance]];
@@ -159,9 +159,15 @@ CSAppDelegate* gApp = nil;
 
 - (void)gotoMainProcess {
     if (gApp.engine.loginInfo) {
+        
         NSDictionary* serverInfo = [gApp.engine.preferences getServerSettings];
         CBSessionDataModel* session = [CBSessionDataModel session:gApp.engine.loginInfo.accountName withTag:serverInfo[@"tag"]];
         [session updateSchoolConfig:gApp.engine.loginInfo.schoolId];
+        
+        
+        [Bugly setUserValue:gApp.engine.loginInfo.accountName forKey:@"cb_user_name"];
+        [Bugly setUserValue:[NSString stringWithFormat:@"%ld", gApp.engine.loginInfo.schoolId] forKey:@"cb_user_school_id"];
+        [Bugly setUserValue:serverInfo[@"tag"] forKey:@"cb_env"];
         
         if (gApp.engine.loginInfo.imToken) {
             // 快速集成第二步，连接融云服务器
@@ -194,6 +200,7 @@ CSAppDelegate* gApp = nil;
     self.engine.relationships = nil;
     self.engine.currentRelationship = nil;
     self.engine.preferences.loginInfo = nil;
+    self.engine.preferences.localPswd = nil;
     
     [[RCIM sharedRCIM] disconnect:NO];
     

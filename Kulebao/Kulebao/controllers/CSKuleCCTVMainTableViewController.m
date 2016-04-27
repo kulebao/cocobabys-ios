@@ -3,7 +3,7 @@
 //  youlebao
 //
 //  Created by xin.c.wang on 14-8-12.
-//  Copyright (c) 2014年 Cocobabys. All rights reserved.
+//  Copyright (c) 2014-2016 Cocobabys. All rights reserved.
 //
 
 #import "CSKuleCCTVMainTableViewController.h"
@@ -46,7 +46,7 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    [self customizeBackBarItem];
+    
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectNull];
     
     if(self.isTrail) {

@@ -3,17 +3,17 @@
 //  youlebao
 //
 //  Created by xin.c.wang on 14-8-14.
-//  Copyright (c) 2014年 Cocobabys. All rights reserved.
+//  Copyright (c) 2014-2016 Cocobabys. All rights reserved.
 //
 
 #import "EntitySenderInfoHelper.h"
-#import "CSCoreDataHelper.h"
+#import "CBCoreDataHelper.h"
 
 @implementation EntitySenderInfoHelper
 
 + (NSArray*)updateEntities:(id)jsonObjectList {
     NSMutableArray* returnObjectList = [NSMutableArray array];
-    NSManagedObjectContext* context = [[CSCoreDataHelper sharedInstance] managedObjectContext];
+    NSManagedObjectContext* context = [[CBCoreDataHelper sharedInstance] managedObjectContext];
     
     for (NSDictionary* jsonObject in jsonObjectList) {
         EntitySenderInfo* entity = [NSEntityDescription insertNewObjectForEntityForName:@"EntitySenderInfo"

@@ -3,7 +3,7 @@
 //  youlebao
 //
 //  Created by xin.c.wang on 15/3/12.
-//  Copyright (c) 2015年 Cocobabys. All rights reserved.
+//  Copyright (c) 2015-2016 Cocobabys. All rights reserved.
 //
 
 #import "CSKuleHistoryVideoItemTableViewCell.h"
@@ -15,9 +15,8 @@
 #import "EGOCache.h"
 #import "BDMultiDownloader.h"
 #import "MBProgressHUD.h"
-#import "AHAlertView.h"
 #import "UIImageView+WebCache.h"
-
+#import <UIAlertView+BlocksKit.h>
 #import <ShareSDK/ShareSDK.h>
 
 @interface CSKuleHistoryVideoItemTableViewCell()  <ISSShareViewDelegate> {
@@ -284,12 +283,13 @@
     NSString *title = @"提示";
     NSString *message = @"是否下载视频？建议在Wifi下进行下载。";
     
-    AHAlertView *alert = [[AHAlertView alloc] initWithTitle:title message:message];
+    UIAlertView* alert = [UIAlertView bk_alertViewWithTitle:title message:message];
     
-    [alert setCancelButtonTitle:@"取消" block:^{
+    [alert bk_setCancelButtonWithTitle:@"取消" handler:^{
+        
     }];
     
-    [alert addButtonWithTitle:@"确定" block:^{
+    [alert bk_addButtonWithTitle:@"确定" handler:^{
         [self performSelector:@selector(startDownloader) withObject:nil];
     }];
     

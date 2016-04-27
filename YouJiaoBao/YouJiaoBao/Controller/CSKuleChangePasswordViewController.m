@@ -11,7 +11,6 @@
 #import "NSString+CSKit.h"
 #import "CSHttpClient.h"
 #import "CSEngine.h"
-#import "EntityLoginInfo.h"
 
 @interface CSKuleChangePasswordViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *fieldOldPswd;
@@ -41,7 +40,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    //[self customizeBackBarItem];
+    //
     UIImage* fieldBgImg = [[UIImage imageNamed:@"v2-input_login.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     self.imgFieldBg1.image = fieldBgImg;
     self.imgFieldBg2.image = fieldBgImg;
@@ -115,7 +114,7 @@
     NSParameterAssert(oldPswd);
     
     CSHttpClient* http = [CSHttpClient sharedInstance];
-    CSEngine* engine = [CSEngine sharedInstance];
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
     
     id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
 //        NSString* access_token = [responseObject valueForKeyNotNull:@"access_token"];
@@ -125,7 +124,7 @@
             [self.navigationController popViewControllerAnimated:YES];
         }
         else {
-            CSLog(@"doChangePswd error_code=%d", error_code);
+            CSLog(@"doChangePswd error_code=%ld", (long)error_code);
             [gApp alert:@"修改密码失败。"];
         }
     };
@@ -137,7 +136,7 @@
     [gApp waitingAlert:@"修改密码中..."];
     [http opChangePassword:newPswd
                withOldPswd:oldPswd
-            forAccount:engine.loginInfo
+            forAccount:session.loginInfo
                    success:success
                    failure:failure];
 }

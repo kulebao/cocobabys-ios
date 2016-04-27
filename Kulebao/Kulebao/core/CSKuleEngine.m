@@ -3,12 +3,11 @@
 //  Kulebao
 //
 //  Created by xin.c.wang on 14-3-3.
-//  Copyright (c) 2014年 Cocobabys. All rights reserved.
+//  Copyright (c) 2014-2016 Cocobabys. All rights reserved.
 //
 
 #import "CSKuleEngine.h"
 #import "CSAppDelegate.h"
-#import "AHAlertView.h"
 #import "BPush.h"
 #import "BaiduMobStat.h"
 #import "CSKuleURLCache.h"
@@ -345,7 +344,7 @@
 #pragma mark - Getter & Setter
 - (void)setLoginInfo:(CSKuleLoginInfo *)loginInfo {
     _loginInfo = loginInfo;
-    CSLog(@"%s\n%@", __FUNCTION__, _loginInfo);
+    //CSLog(@"%s\n%@", __FUNCTION__, _loginInfo);
 }
 
 - (UIApplication*)application {
@@ -441,19 +440,19 @@
 }
 
 - (void)setupAppearance {
-    UIImage* imgAlertBg = [UIImage imageNamed:@"alert-bg.png"];
-    UIImage* imgBtnCancelBg = [[UIImage imageNamed:@"v2-btn_gray.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
-    UIImage* imgBtnOkBg = [[UIImage imageNamed:@"v2-btn_green.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
+//    UIImage* imgAlertBg = [UIImage imageNamed:@"alert-bg.png"];
+//    UIImage* imgBtnCancelBg = [[UIImage imageNamed:@"v2-btn_gray.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
+//    UIImage* imgBtnOkBg = [[UIImage imageNamed:@"v2-btn_green.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
+//    
+//    imgAlertBg = [imgAlertBg resizableImageWithCapInsets:UIEdgeInsetsMake(100, 50, 10, 50)];
     
-    imgAlertBg = [imgAlertBg resizableImageWithCapInsets:UIEdgeInsetsMake(100, 50, 10, 50)];
-    
-    id alertAppearance = [AHAlertView appearance];
-    [alertAppearance setBackgroundImage:imgAlertBg];
-    [alertAppearance setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
-    [alertAppearance setMessageTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
-    [alertAppearance setButtonBackgroundImage:imgBtnOkBg forState:UIControlStateNormal];
-    [alertAppearance setCancelButtonBackgroundImage:imgBtnCancelBg forState:UIControlStateNormal];
-    [alertAppearance setContentInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
+//    id alertAppearance = [AHAlertView appearance];
+//    [alertAppearance setBackgroundImage:imgAlertBg];
+//    [alertAppearance setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
+//    [alertAppearance setMessageTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
+//    [alertAppearance setButtonBackgroundImage:imgBtnOkBg forState:UIControlStateNormal];
+//    [alertAppearance setCancelButtonBackgroundImage:imgBtnCancelBg forState:UIControlStateNormal];
+//    [alertAppearance setContentInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
     
     //
     id naviAppearance = [UINavigationBar appearance];

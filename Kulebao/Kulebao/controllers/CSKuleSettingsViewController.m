@@ -3,11 +3,11 @@
 //  Kulebao
 //
 //  Created by xin.c.wang on 14-2-28.
-//  Copyright (c) 2014年 Cocobabys. All rights reserved.
+//  Copyright (c) 2014-2016 Cocobabys. All rights reserved.
 //
 
 #import "CSKuleSettingsViewController.h"
-#import "AHAlertView.h"
+#import <UIAlertView+BlocksKit.h>
 #import "CSAppDelegate.h"
 
 @interface CSKuleSettingsViewController () {
@@ -37,7 +37,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    [self customizeBackBarItem];
+    
     
     if (COCOBABYS_DEV_MODEL) {
         self.btnDevSettings.hidden = NO;
@@ -93,16 +93,17 @@
     NSString *title = @"提示";
 	NSString *message = @"确定要退出登录？退出后无法接收任何消息！";
 	
-	AHAlertView *alert = [[AHAlertView alloc] initWithTitle:title message:message];
+    UIAlertView* alert = [UIAlertView bk_alertViewWithTitle:title message:message];
     
-    [alert setCancelButtonTitle:@"取消" block:^{
-	}];
+    [alert bk_setCancelButtonWithTitle:@"取消" handler:^{
+        
+    }];
     
-	[alert addButtonWithTitle:@"确定" block:^{
+    [alert bk_addButtonWithTitle:@"确定" handler:^{
         [self performSelector:@selector(doLogout) withObject:nil];
-	}];
+    }];
     
-	[alert show];
+    [alert show];
 }
 
 #pragma mark - Private
@@ -149,16 +150,16 @@
             else {
                 NSString *title = @"新版本";
                 NSString *message = @"发现新版本，是否前去更新？";
-                AHAlertView *alert = [[AHAlertView alloc] initWithTitle:title message:message];
                 
-                [alert setCancelButtonTitle:@"取消" block:^{
+                UIAlertView* alert = [UIAlertView bk_alertViewWithTitle:title message:message];
+                
+                [alert bk_setCancelButtonWithTitle:@"取消" handler:^{
+                    
                 }];
                 
-                [alert addButtonWithTitle:@"确定" block:^{
+                [alert bk_addButtonWithTitle:@"确定" handler:^{
                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:newURL]];
                 }];
-                
-                [alert show];
             }
         }
         else {

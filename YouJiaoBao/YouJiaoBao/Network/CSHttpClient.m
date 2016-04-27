@@ -3,7 +3,7 @@
 //  YouJiaoBao
 //
 //  Created by xin.c.wang on 14-7-15.
-//  Copyright (c) 2014年 Codingsoft. All rights reserved.
+//  Copyright (c) 2014-2016 Cocobabys. All rights reserved.
 //
 
 #import "CSHttpClient.h"
@@ -357,10 +357,11 @@
         [parameters setObject:most forKey:@"most"];
     }
     
-    CSEngine* engine = [CSEngine sharedInstance];
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
+    
     NSString* apiUrl = [NSString stringWithFormat:kPathKindergartenPostNewsV2,
                         @(schoolId),
-                        engine.loginInfo.o_id];
+                        session.loginInfo._id];
     
     AFHTTPRequestOperation* op =[self.opManager GET:apiUrl
                                          parameters:parameters
@@ -405,19 +406,19 @@
 
 - (AFHTTPRequestOperation*)opChangePassword:(NSString*)newPswd
                                 withOldPswd:(NSString*)oldPswd
-                                 forAccount:(EntityLoginInfo*)loginInfo
+                                 forAccount:(CBLoginInfo*)loginInfo
                                     success:(SuccessResponseHandler)success
                                     failure:(FailureResponseHandler)failure {
     NSParameterAssert(newPswd);
     NSParameterAssert(oldPswd);
     NSParameterAssert(loginInfo);
     
-    NSString* apiUrl = [NSString stringWithFormat:kChangePasswordPath, loginInfo.schoolId, loginInfo.phone];
+    NSString* apiUrl = [NSString stringWithFormat:kChangePasswordPath, loginInfo.school_id, loginInfo.phone];
     
-    NSDictionary* parameters = @{@"employee_id": loginInfo.o_id,
-                                 @"school_id" : loginInfo.schoolId,
+    NSDictionary* parameters = @{@"employee_id": loginInfo._id,
+                                 @"school_id" : loginInfo.school_id,
                                  @"phone" : loginInfo.phone,
-                                 @"login_name" : loginInfo.loginName,
+                                 @"login_name" : loginInfo.login_name,
                                  @"old_password": oldPswd,
                                  @"new_password": newPswd};
     
@@ -513,7 +514,7 @@
 }
 
 - (AFHTTPRequestOperation*)opPostNewsOfKindergarten:(NSInteger)kindergarten
-                                         withSender:(EntityLoginInfo*)senderInfo
+                                         withSender:(CBLoginInfo*)senderInfo
                                         withClassId:(NSNumber*)classId
                                         withContent:(NSString*)content
                                           withTitle:(NSString*)title
@@ -522,7 +523,7 @@
                                withRequriedFeedback:(BOOL)requriedFeedback
                                             success:(SuccessResponseHandler)success
                                             failure:(FailureResponseHandler)failure {
-    NSString* apiUrl = [NSString stringWithFormat:kPathKindergartenPostNewsV2, @(kindergarten), senderInfo.o_id];
+    NSString* apiUrl = [NSString stringWithFormat:kPathKindergartenPostNewsV2, @(kindergarten), senderInfo._id];
     
     NSString* imgUrl = [imgUrlList firstObject];
     
@@ -531,7 +532,7 @@
                                  @"title": title ? title : @"",
                                  @"published" : @(YES),
                                  @"class_id" : classId,
-                                 @"publisher_id": senderInfo.o_id,
+                                 @"publisher_id": senderInfo._id,
                                  @"image" : imgUrl ? imgUrl : @"",
                                  @"tags": tags ? tags : @[],
                                  @"feedback_required" : @(requriedFeedback)};
@@ -544,7 +545,7 @@
 }
 
 - (AFHTTPRequestOperation*)opPostAssignmentOfKindergarten:(NSInteger)kindergarten
-                                               withSender:(EntityLoginInfo*)senderInfo
+                                               withSender:(CBLoginInfo*)senderInfo
                                               withClassId:(NSNumber*)classId
                                               withContent:(NSString*)content
                                                 withTitle:(NSString*)title
@@ -559,7 +560,7 @@
                                  @"title": title ? title : @"",
                                  @"class_id" : classId,
                                  @"publisher": senderInfo.name,
-                                 @"publisher_id" : senderInfo.o_id,
+                                 @"publisher_id" : senderInfo._id,
                                  @"icon_url" : imgUrl ? imgUrl : @""};
     
     AFHTTPRequestOperation* op = [self.opManager POST:apiUrl
@@ -634,7 +635,7 @@
 }
 
 - (AFHTTPRequestOperation*)opSendTopicMsg:(NSString*)msgBody
-                               withSender:(EntityLoginInfo*)senderInfo
+                               withSender:(CBLoginInfo*)senderInfo
                              withMediaUrl:(NSString*)mediaUrl
                               ofMediaType:(NSString*)mediaType
                                   ofChild:(NSString*)childId
@@ -669,7 +670,7 @@
                      @"type": mediaType};
     }
     
-    id msgSender = @{@"id": senderInfo.o_id,
+    id msgSender = @{@"id": senderInfo._id,
                      @"type": @"t"};
     
     NSDictionary* parameters = @{@"topic": childId,
@@ -741,14 +742,14 @@
 }
 
 - (AFHTTPRequestOperation*)opUpdateProfile:(NSDictionary*)newProfile
-                                  ofSender:(EntityLoginInfo*)loginInfo
+                                  ofSender:(CBLoginInfo*)loginInfo
                                    success:(SuccessResponseHandler)success
                                    failure:(FailureResponseHandler)failure {
     
-    NSString* apiUrl = [NSString stringWithFormat:kPathEmployeeProfile, loginInfo.schoolId, loginInfo.phone];
+    NSString* apiUrl = [NSString stringWithFormat:kPathEmployeeProfile, loginInfo.school_id, loginInfo.phone];
     
     NSDictionary* profile = @{
-                              @"id":loginInfo.o_id,
+                              @"id":loginInfo._id,
                               @"name":loginInfo.name,
                               @"phone":loginInfo.phone,
                               @"portrait":loginInfo.portrait,
@@ -756,8 +757,8 @@
                               @"workgroup":loginInfo.workgroup,
                               @"workduty":loginInfo.workduty,
                               @"birthday":loginInfo.birthday,
-                              @"school_id":loginInfo.schoolId,
-                              @"login_name":loginInfo.loginName,
+                              @"school_id":loginInfo.school_id,
+                              @"login_name":loginInfo.login_name,
                               };
     
     NSMutableDictionary* parameters = [NSMutableDictionary dictionaryWithDictionary:profile];
@@ -771,14 +772,15 @@
     return op;
 }
 
-- (AFHTTPRequestOperation*)opGetAssessmentsOfChild:(EntityChildInfo*)childInfo
+- (AFHTTPRequestOperation*)opGetAssessmentsOfChild:(NSString*)childId
+                                    inKindergarten:(NSInteger)kindergarten
                                               from:(long long)fromId
                                                 to:(long long)toId
                                               most:(NSInteger)most
                                            success:(SuccessResponseHandler)success
                                            failure:(FailureResponseHandler)failure {
-    NSParameterAssert(childInfo);
-    NSString* apiUrl = [NSString stringWithFormat:kPathChildAssess, childInfo.schoolId, childInfo.childId];
+    NSParameterAssert(childId);
+    NSString* apiUrl = [NSString stringWithFormat:kPathChildAssess, @(kindergarten), SAFE_STRING(childId)];
     
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
     
@@ -856,8 +858,9 @@
                                 failure:(FailureResponseHandler)failure {
     NSParameterAssert(newsId);
     
-    CSEngine* engine = [CSEngine sharedInstance];
-    NSString* path = [NSString stringWithFormat:kDeleteNewsPath, @(schoolId), engine.loginInfo.o_id, newsId];
+    //CSEngine* engine = [CSEngine sharedInstance];
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
+    NSString* path = [NSString stringWithFormat:kDeleteNewsPath, @(schoolId), session.loginInfo._id, newsId];
     NSDictionary* parameters = nil;
     AFHTTPRequestOperation* op = [self.opManager DELETE:path
                                              parameters:parameters

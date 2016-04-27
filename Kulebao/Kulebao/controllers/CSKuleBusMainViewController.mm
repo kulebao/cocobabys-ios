@@ -3,7 +3,7 @@
 //  youlebao
 //
 //  Created by xin.c.wang on 15/7/2.
-//  Copyright (c) 2015年 Cocobabys. All rights reserved.
+//  Copyright (c) 2015-2016 Cocobabys. All rights reserved.
 //
 
 #import "CSKuleBusMainViewController.h"
@@ -61,7 +61,7 @@ typedef enum : NSUInteger {
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self customizeBackBarItem];
+    
 
     //self.mapView.showsUserLocation = YES;
     self.mapView.showMapScaleBar = YES;

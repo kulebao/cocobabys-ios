@@ -3,7 +3,7 @@
 //  youlebao
 //
 //  Created by xin.c.wang on 15/5/7.
-//  Copyright (c) 2015年 Cocobabys. All rights reserved.
+//  Copyright (c) 2015-2016 Cocobabys. All rights reserved.
 //
 
 #import "CSKuleDeveloperSettingsViewController.h"
@@ -22,7 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self customizeBackBarItem];
+    
     
     CSKulePreferences* preference = [CSKulePreferences defaultPreferences];
     NSDictionary* serverInfo = [preference getServerSettings];

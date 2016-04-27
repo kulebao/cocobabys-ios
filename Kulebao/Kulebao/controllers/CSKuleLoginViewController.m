@@ -3,7 +3,7 @@
 //  Kulebao
 //
 //  Created by xin.c.wang on 14-2-28.
-//  Copyright (c) 2014年 Cocobabys. All rights reserved.
+//  Copyright (c) 2014-2016 Cocobabys. All rights reserved.
 //
 
 #import "CSKuleLoginViewController.h"
@@ -116,6 +116,7 @@
             if (loginInfo.errorCode == 0) {
                 gApp.engine.loginInfo = loginInfo;
                 gApp.engine.preferences.loginInfo = loginInfo;
+                gApp.engine.preferences.localPswd = [pswd MD5Hash];
                 [self performSelector:@selector(doReceiveBindInfo)
                            withObject:nil
                            afterDelay:0];
@@ -166,7 +167,7 @@
         }
         else if (bindInfo.errorCode == 2) {
             [gApp logout];
-            [gApp alert:@"账号未激活或已过期，请联系幼儿园处理，谢谢。"];
+            [gApp alert:@"手机号尚未在幼儿园注册，请联系幼儿园注册，谢谢！"];
         }
         else if (bindInfo.errorCode == 3) {
             [gApp logout];

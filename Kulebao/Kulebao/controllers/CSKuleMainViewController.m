@@ -3,13 +3,13 @@
 //  Kulebao
 //
 //  Created by xin.c.wang on 14-2-28.
-//  Copyright (c) 2014年 Cocobabys. All rights reserved.
+//  Copyright (c) 2014-2016 Cocobabys. All rights reserved.
 //
 
 #import "CSKuleMainViewController.h"
 #import "CSAppDelegate.h"
 #import "KxMenu.h"
-#import "AHAlertView.h"
+#import <UIAlertView+BlocksKit.h>
 #import "CSKuleAboutSchoolViewController.h"
 #import "ALAlertBanner.h"
 #import "JSBadgeView.h"
@@ -588,9 +588,8 @@
     NSString *title = @"设置宝贝昵称";
     NSString *message = [NSString stringWithFormat:@"您最多可以输入%d个字", kKuleNickMaxLength];
     
-    AHAlertView *alert = [[AHAlertView alloc] initWithTitle:title message:message];
-    alert.alertViewStyle = AHAlertViewStylePlainTextInput;
-    alert.messageTextAttributes = @{NSFontAttributeName:[UIFont systemFontOfSize:14]};
+    UIAlertView* alert = [UIAlertView bk_alertViewWithTitle:title message:message];
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
     
     UITextField* field = [alert textFieldAtIndex:0];
     field.placeholder = @"请输入宝贝昵称";
@@ -598,16 +597,16 @@
     field.keyboardAppearance = UIKeyboardAppearanceDefault;
     //field.background = [[UIImage imageNamed:@"input-bg-0.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(10, 50, 10, 10)];
     //field.borderStyle = UITextBorderStyleBezel;
-    field.borderStyle = UITextBorderStyleRoundedRect;
+    //field.borderStyle = UITextBorderStyleRoundedRect;
     field.backgroundColor = [UIColor clearColor];
     field.font = [UIFont systemFontOfSize:14];
     field.delegate = _nickFieldDelegate;
     
-    [alert setCancelButtonTitle:@"取消" block:^{
+    [alert bk_setCancelButtonWithTitle:@"取消" handler:^{
         
     }];
     
-    [alert addButtonWithTitle:@"确定" block:^{
+    [alert bk_addButtonWithTitle:@"确定" handler:^{
         [self doUpdateChildNick:field.text];
     }];
     
@@ -1181,7 +1180,7 @@
     };
     
     FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
-        CSLog(@"failure:%@", error);
+        //CSLog(@"failure:%@", error);
         [gApp hideAlert];
         [self performSelector:@selector(reloadDefaultVideoMember) withObject:nil afterDelay:0];
     };

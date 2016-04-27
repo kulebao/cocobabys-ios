@@ -12,7 +12,6 @@
 #import "UIActionSheet+BlocksKit.h"
 #import "CBIMGroupMembersViewController.h"
 #import "CSEngine.h"
-#import "EntityClassInfoHelper.h"
 #import "CSHttpClient.h"
 #import "CBSessionDataModel.h"
 
@@ -43,30 +42,24 @@
 
 - (void)onRightNaviItemClicked:(id)sender {
     UIActionSheet* sheet = [UIActionSheet bk_actionSheetWithTitle:@"请选择一个班级"];
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
     
-    CSEngine* engine = [CSEngine sharedInstance];
-    
-    NSFetchedResultsController* fr = [EntityClassInfoHelper frClassesWithEmployee:engine.loginInfo.o_id ofKindergarten:engine.loginInfo.schoolId.integerValue];
-    
-    if ([fr performFetch:nil]) {
-        
-        for (EntityClassInfo* clasInfo in fr.fetchedObjects) {
-            [sheet bk_addButtonWithTitle:clasInfo.name handler:^{
-                UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"IM" bundle:nil];
-                
-                NSString* targetId = [NSString stringWithFormat:@"%@_%@", clasInfo.schoolId, clasInfo.classId];
-                CBIMGroupMembersViewController* ctrl = [storyboard instantiateViewControllerWithIdentifier:@"CBIMGroupMembersViewController"];
-                ctrl.targetId = targetId;
-                [self.navigationController pushViewController:ctrl animated:YES];
-            }];
-        }
-        
-        [sheet bk_setCancelButtonWithTitle:@"取消" handler:^{
+    for (CBClassInfo* clasInfo in session.classInfoList) {
+        [sheet bk_addButtonWithTitle:clasInfo.name handler:^{
+            UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"IM" bundle:nil];
             
+            NSString* targetId = [NSString stringWithFormat:@"%ld_%ld", clasInfo.school_id, clasInfo.class_id];
+            CBIMGroupMembersViewController* ctrl = [storyboard instantiateViewControllerWithIdentifier:@"CBIMGroupMembersViewController"];
+            ctrl.targetId = targetId;
+            [self.navigationController pushViewController:ctrl animated:YES];
         }];
-        
-        [sheet showInView:self.view];
     }
+    
+    [sheet bk_setCancelButtonWithTitle:@"取消" handler:^{
+        
+    }];
+    
+    [sheet showInView:self.view];
 }
 
 /*
@@ -100,15 +93,15 @@
     
     NSMutableSet* targerIdSet = [NSMutableSet set];
     
-    CSEngine* engine = [CSEngine sharedInstance];
-    for (EntityClassInfo* clasInfo in engine.classInfoList) {
-        if (clasInfo.schoolId.integerValue>0 && clasInfo.classId.integerValue>0) {
-            NSString* targetId = [NSString stringWithFormat:@"%@_%@", clasInfo.schoolId, clasInfo.classId];
+    //CSEngine* engine = [CSEngine sharedInstance];
+    CBSessionDataModel* session = [CBSessionDataModel thisSession];
+    NSArray* classInfoList = session.classInfoList;
+    for (CBClassInfo* clasInfo in classInfoList) {
+        if (clasInfo.school_id>0 && clasInfo.class_id>0) {
+            NSString* targetId = [NSString stringWithFormat:@"%@_%@", @(clasInfo.school_id), @(clasInfo.class_id)];
             [targerIdSet addObject:targetId];
         }
     }
-    
-    CBSessionDataModel* session = [CBSessionDataModel thisSession];
     
     NSMutableArray* newDataSource = [NSMutableArray array];
     for (RCConversationModel* m in dataSource) {

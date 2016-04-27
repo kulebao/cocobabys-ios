@@ -344,7 +344,7 @@
 #pragma mark - Getter & Setter
 - (void)setLoginInfo:(CSKuleLoginInfo *)loginInfo {
     _loginInfo = loginInfo;
-    CSLog(@"%s\n%@", __FUNCTION__, _loginInfo);
+    //CSLog(@"%s\n%@", __FUNCTION__, _loginInfo);
 }
 
 - (UIApplication*)application {

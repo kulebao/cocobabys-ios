@@ -42,7 +42,8 @@ CSAppDelegate* gApp = nil;
     // 初始化融云
     CSKulePreferences* preference = [CSKulePreferences defaultPreferences];
     NSDictionary* configInfo = [preference getServerSettings];
-    [[RCIM sharedRCIM] initWithAppKey:configInfo[@"rongyun_app_id"]];
+    NSString* rongyun_app_id = configInfo[@"rongyun_app_id"];
+    [[RCIM sharedRCIM] initWithAppKey:rongyun_app_id];
     [[RCIM sharedRCIM] setGroupInfoDataSource:[CBIMDataSource sharedInstance]];
     [[RCIM sharedRCIM] setUserInfoDataSource:[CBIMDataSource sharedInstance]];
     [[RCIM sharedRCIM] setGroupUserInfoDataSource:[CBIMDataSource sharedInstance]];

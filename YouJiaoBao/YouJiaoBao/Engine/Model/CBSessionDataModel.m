@@ -326,6 +326,10 @@ static CBSessionDataModel* s_instance = NULL;
     _childInfoList = [cInfoList copy];
 }
 
+- (void)reloadTeacherInfosByJsonObject:(id)jsonObject {
+    [self.teacherInfoList removeAllObjects];
+    [self updateTeacherInfosByJsonObject:jsonObject];
+}
 - (void)updateTeacherInfosByJsonObject:(id)jsonObject {
     if ([jsonObject isKindOfClass:[NSDictionary class]]) {
         [self _updateTeacherInfosByJsonObject:jsonObject];
@@ -352,6 +356,11 @@ static CBSessionDataModel* s_instance = NULL;
     else {
         [self.teacherInfoList addObject:obj];
     }
+}
+
+- (void)reloadClassInfosByJsonObject:(id)jsonObject {
+    [self.classInfoList removeAllObjects];
+    [self updateClassInfosByJsonObject:jsonObject];
 }
 
 - (void)updateClassInfosByJsonObject:(id)jsonObject {
@@ -775,7 +784,7 @@ static CBSessionDataModel* s_instance = NULL;
                            withClassId:0 //gApp.engine.currentRelationship.child.classId
                                success:^(AFHTTPRequestOperation *operation, id dataJson) {
                                    CSLog(@"[Success Start] %s", __FUNCTION__);
-                                   [self updateTeacherInfosByJsonObject:dataJson];
+                                   [self reloadTeacherInfosByJsonObject:dataJson];
                                    [self store];
                                    [[RCIM sharedRCIM] clearUserInfoCache];
                                    CSLog(@"[Success End] %s", __FUNCTION__);
@@ -871,7 +880,7 @@ static CBSessionDataModel* s_instance = NULL;
         CSEngine* engine = [CSEngine sharedInstance];
         
         id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
-            [self updateClassInfosByJsonObject:responseObject];
+            [self reloadClassInfosByJsonObject:responseObject];
             [engine onLoadClassInfoList:_classInfoList];
             _opReloadClassList = nil;
             if (complete) {

@@ -197,23 +197,24 @@ typedef enum : NSUInteger {
 }
 
 - (void)doRefreshBusLocation {
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
         _busStatus = kBusStatusNormal;
         self.busLocationInfo = [CSKuleInterpreter decodeBusLocation:dataJson];
     };
     
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
         CSLog(@"failure:%@", error);
         //[gApp alert:error.localizedDescription];
-        
-        if (operation.response.statusCode == 404) {
+        NSHTTPURLResponse* response = (NSHTTPURLResponse*)task.response;
+        if (response.statusCode == 404) {
             NSError* err = nil;
-            id dataJson = [NSJSONSerialization JSONObjectWithData:operation.responseData options:0 error:&err];
+            NSData* responseData = [error.userInfo objectForKey:AFNetworkingOperationFailingURLResponseDataErrorKey];
+            id dataJson = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&err];
             
             if (dataJson) {
                 /*
                  1表示未出发
-                 2表示上午下车
+                 2表示上午下车NSURLSessionDownloadDelegate
                  4表示下午下车
                  */
                 NSInteger error_code = [[dataJson objectForKey:@"error_code"] integerValue];

@@ -76,9 +76,9 @@ NSString* kAppleID = @"917314512";
 
 - (void)joinGroup:(NSInteger)schoolId classId:(NSInteger)classId {
     CSHttpClient* http = [CSHttpClient sharedInstance];
-    [http reqIMJoinGroupOfKindergarten:schoolId withClassId:classId success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [http reqIMJoinGroupOfKindergarten:schoolId withClassId:classId success:^(NSURLSessionDataTask *task, id responseObject) {
         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
     }];
 }

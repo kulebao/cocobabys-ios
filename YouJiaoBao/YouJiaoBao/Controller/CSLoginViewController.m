@@ -103,7 +103,7 @@
     else {
         CSHttpClient* http = [CSHttpClient sharedInstance];
         
-        id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
+        id success = ^(NSURLSessionDataTask *task, id responseObject) {
             CBLoginInfo* loginInfo = [CBLoginInfo instanceWithDictionary:responseObject];
             if (loginInfo != nil) {
                 [Bugly setUserValue:loginInfo.login_name forKey:@"cb_user_name"];
@@ -143,9 +143,10 @@
             }
         };
         
-        id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
-//            self.labNote.text = @"用户名或密码错误";
-            if (operation.response) {
+        id failure = ^(NSURLSessionDataTask *task, NSError *error) {
+//          self.labNote.text = @"用户名或密码错误";
+            NSHTTPURLResponse* response = (NSHTTPURLResponse*)task.response;
+            if (response) {
                 [gApp alert:@"用户名或密码错误"];
             }
             else {

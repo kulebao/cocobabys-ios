@@ -18,8 +18,8 @@
 }
 
 @property (nonatomic, strong) CBHTTPRequestOperationManager* httpCobabys;
-@property (nonatomic, strong) AFHTTPRequestOperationManager* httpQiniu;
-@property (nonatomic, strong) AFHTTPRequestOperationManager* httpITunes;
+@property (nonatomic, strong) AFHTTPSessionManager* httpQiniu;
+@property (nonatomic, strong) AFHTTPSessionManager* httpITunes;
 
 @property (nonatomic, strong, readonly) CSKuleLoginInfo* loginInfo;
 
@@ -94,7 +94,7 @@
     
     if (_httpQiniu == nil) {
         NSURL* qiniuBaseUrl = [NSURL URLWithString:kQiniuUploadServerHost];
-        _httpQiniu = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:qiniuBaseUrl];
+        _httpQiniu = [[AFHTTPSessionManager alloc] initWithBaseURL:qiniuBaseUrl];
         _httpQiniu.securityPolicy.allowInvalidCertificates = YES;
         _httpQiniu.securityPolicy.validatesDomainName = NO;
     }
@@ -113,7 +113,7 @@
     
     if (_httpITunes == nil) {
         NSURL* qiniuBaseUrl = [NSURL URLWithString:@"http://itunes.apple.com"];
-        _httpITunes = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:qiniuBaseUrl];
+        _httpITunes = [[AFHTTPSessionManager alloc] initWithBaseURL:qiniuBaseUrl];
         _httpITunes.securityPolicy.allowInvalidCertificates = YES;
         _httpITunes.securityPolicy.validatesDomainName = NO;
     }
@@ -149,7 +149,7 @@
 }
 
 #pragma mark - Uploader
-- (AFHTTPRequestOperation*)reqUploadToQiniu:(NSData*)data
+- (NSURLSessionDataTask*)reqUploadToQiniu:(NSData*)data
                                     withKey:(NSString*)key
                                    withMime:(NSString*)mime
                                     success:(SuccessResponseHandler)success
@@ -158,7 +158,7 @@
     NSParameterAssert(key);
     NSParameterAssert(mime);
     
-    return [self reqGetUploadTokenWithKey:key success:^(AFHTTPRequestOperation *operation, id dataJson) {
+    return [self reqGetUploadTokenWithKey:key success:^(NSURLSessionDataTask *task, id dataJson) {
         NSString* token = [dataJson valueForKeyNotNull:@"token"];
         
         if (token) {
@@ -174,24 +174,28 @@
                                                  code:-8888
                                              userInfo: @{NSLocalizedDescriptionKey:@"Invalid Token."}];
             
-            failure(operation, error);
+            failure(task, error);
         }
         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        failure(operation, error);
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        failure(task, error);
     }];
 }
 
 #pragma mark - Check update on iTunes
-- (AFHTTPRequestOperation*)reqCheckITunesUpdates:(NSString*)appId
+- (NSURLSessionDataTask*)reqCheckITunesUpdates:(NSString*)appId
                                          success:(SuccessResponseHandler)success
                                          failure:(FailureResponseHandler)failure {
     NSString* path = @"/lookup";
     NSDictionary* parameters = @{@"id": appId};
-    return [_httpITunes POST:path parameters:parameters success:success failure:success];
+    return [_httpITunes POST:path
+                  parameters:parameters
+                    progress:nil
+                     success:success
+                     failure:success];
 }
 
-- (AFHTTPRequestOperation*)reqGetUploadTokenWithKey:(NSString*)key
+- (NSURLSessionDataTask*)reqGetUploadTokenWithKey:(NSString*)key
                                             success:(SuccessResponseHandler)success
                                             failure:(FailureResponseHandler)failure {
     NSParameterAssert(key);
@@ -202,26 +206,32 @@
     
     return [_httpCobabys GET:path
                   parameters:parameters
-                     success:success
+                     progress:nil
+                      success:success
                      failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqUploadQiniuWithData:(NSData*)data
+- (NSURLSessionDataTask*)reqUploadQiniuWithData:(NSData*)data
                                         withToken:(NSString*)token
                                            andKey:(NSString*)key
                                           andMime:(NSString*)mime
                                           success:(SuccessResponseHandler)success
                                           failure:(FailureResponseHandler)failure {
     
-    return [_httpQiniu POST:@"/" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        [formData appendPartWithFileData:data name:@"file" fileName:key mimeType:mime];
-        [formData appendPartWithFormData:[key dataUsingEncoding:NSUTF8StringEncoding] name:@"key"];
-        [formData appendPartWithFormData:[token dataUsingEncoding:NSUTF8StringEncoding] name:@"token"];
-    } success:success failure:failure];
+    return [_httpQiniu POST:@"/"
+                 parameters:nil
+  constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+      [formData appendPartWithFileData:data name:@"file" fileName:key mimeType:mime];
+      [formData appendPartWithFormData:[key dataUsingEncoding:NSUTF8StringEncoding] name:@"key"];
+      [formData appendPartWithFormData:[token dataUsingEncoding:NSUTF8StringEncoding] name:@"token"];
+  }
+                   progress:nil
+                    success:success
+                    failure:failure];
 }
 
 #pragma mark - HTTP Request
-- (AFHTTPRequestOperation*)reqCheckPhoneNum:(NSString*)mobile
+- (NSURLSessionDataTask*)reqCheckPhoneNum:(NSString*)mobile
                                     success:(SuccessResponseHandler)success
                                     failure:(FailureResponseHandler)failure {
     NSString* path = kCheckPhoneNumPath;
@@ -232,11 +242,12 @@
     
     return [_httpCobabys POST:path
                    parameters:parameters
+                     progress:nil
                       success:success
                       failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqLogin:(NSString*)mobile
+- (NSURLSessionDataTask*)reqLogin:(NSString*)mobile
                            withPswd:(NSString*)password
                             success:(SuccessResponseHandler)success
                             failure:(FailureResponseHandler)failure {
@@ -252,11 +263,12 @@
     
     return [_httpCobabys POST:path
                    parameters:parameters
+                     progress:nil
                       success:success
                       failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqReceiveBindInfo:(NSString*)mobile
+- (NSURLSessionDataTask*)reqReceiveBindInfo:(NSString*)mobile
                                       success:(SuccessResponseHandler)success
                                       failure:(FailureResponseHandler)failure {
     NSParameterAssert(mobile);
@@ -285,11 +297,12 @@
     
     return [_httpCobabys POST:path
                    parameters:parameters
+                     progress:nil
                       success:success
                       failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqUnbindWithSuccess:(SuccessResponseHandler)success
+- (NSURLSessionDataTask*)reqUnbindWithSuccess:(SuccessResponseHandler)success
                                         failure:(FailureResponseHandler)failure {
     NSString* path = kReceiveBindInfoPath;
     
@@ -305,12 +318,13 @@
     
     return [_httpCobabys POST:path
                    parameters:parameters
+                     progress:nil
                       success:success
                       failure:failure];
     
 }
 
-- (AFHTTPRequestOperation*)reqChangePassword:(NSString*)newPswd
+- (NSURLSessionDataTask*)reqChangePassword:(NSString*)newPswd
                                  withOldPswd:(NSString*)oldPswd
                                      success:(SuccessResponseHandler)success
                                      failure:(FailureResponseHandler)failure {
@@ -327,11 +341,12 @@
     
     return [_httpCobabys POST:path
                    parameters:parameters
+                     progress:nil
                       success:success
                       failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqGetFamilyRelationship:(NSString*)mobile
+- (NSURLSessionDataTask*)reqGetFamilyRelationship:(NSString*)mobile
                                      inKindergarten:(NSInteger)kindergarten
                                             success:(SuccessResponseHandler)success
                                             failure:(FailureResponseHandler)failure {
@@ -345,11 +360,12 @@
     
     return [_httpCobabys GET:path
                   parameters:parameters
-                     success:success
+                     progress:nil
+                      success:success
                      failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqGetChildRelationship:(NSString*)childId
+- (NSURLSessionDataTask*)reqGetChildRelationship:(NSString*)childId
                                     inKindergarten:(NSInteger)kindergarten
                                            success:(SuccessResponseHandler)success
                                            failure:(FailureResponseHandler)failure {
@@ -363,11 +379,12 @@
     
     return [_httpCobabys GET:path
                   parameters:parameters
-                     success:success
+                     progress:nil
+                      success:success
                      failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqUpdateChildInfo:(CSKuleChildInfo*)childInfo
+- (NSURLSessionDataTask*)reqUpdateChildInfo:(CSKuleChildInfo*)childInfo
                                inKindergarten:(NSInteger)kindergarten
                                       success:(SuccessResponseHandler)success
                                       failure:(FailureResponseHandler)failure {
@@ -388,11 +405,12 @@
     
     return [_httpCobabys POST:path
                    parameters:parameters
+                     progress:nil
                       success:success
                       failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqUpdateParentInfo:(CSKuleParentInfo*)parentInfo
+- (NSURLSessionDataTask*)reqUpdateParentInfo:(CSKuleParentInfo*)parentInfo
                                 inKindergarten:(NSInteger)kindergarten
                                        success:(SuccessResponseHandler)success
                                        failure:(FailureResponseHandler)failure {
@@ -414,11 +432,12 @@
     
     return [_httpCobabys POST:path
                    parameters:parameters
+                     progress:nil
                       success:success
                       failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqGetNewsOfKindergarten:(NSInteger)kindergarten
+- (NSURLSessionDataTask*)reqGetNewsOfKindergarten:(NSInteger)kindergarten
                                         withClassId:(NSInteger)classId
                                                from:(NSInteger)fromId
                                                  to:(NSInteger)toId
@@ -451,11 +470,12 @@
     
     return [_httpCobabys GET:path
                   parameters:parameters
-                     success:success
+                     progress:nil
+                      success:success
                      failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqGetCookbooksOfKindergarten:(NSInteger)kindergarten
+- (NSURLSessionDataTask*)reqGetCookbooksOfKindergarten:(NSInteger)kindergarten
                                                  success:(SuccessResponseHandler)success
                                                  failure:(FailureResponseHandler)failure {
     NSString* path = [NSString stringWithFormat:kKindergartenCookbooksPath, @(kindergarten)];
@@ -466,11 +486,12 @@
     
     return [_httpCobabys GET:path
                   parameters:parameters
-                     success:success
+                     progress:nil
+                      success:success
                      failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqGetAssignmentsOfKindergarten:(NSInteger)kindergarten
+- (NSURLSessionDataTask*)reqGetAssignmentsOfKindergarten:(NSInteger)kindergarten
                                                withClassId:(NSInteger)classId
                                                       from:(NSInteger)fromId
                                                         to:(NSInteger)toId
@@ -501,11 +522,12 @@
     
     return [_httpCobabys GET:path
                   parameters:parameters
-                     success:success
+                     progress:nil
+                      success:success
                      failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqGetSchedulesOfKindergarten:(NSInteger)kindergarten
+- (NSURLSessionDataTask*)reqGetSchedulesOfKindergarten:(NSInteger)kindergarten
                                              withClassId:(NSInteger)classId
                                                  success:(SuccessResponseHandler)success
                                                  failure:(FailureResponseHandler)failure {
@@ -518,12 +540,13 @@
     
     return [_httpCobabys GET:path
                   parameters:parameters
-                     success:success
+                     progress:nil
+                      success:success
                      failure:failure];
     
 }
 
-- (AFHTTPRequestOperation*)reqGetSchoolInfoOfKindergarten:(NSInteger)kindergarten
+- (NSURLSessionDataTask*)reqGetSchoolInfoOfKindergarten:(NSInteger)kindergarten
                                                   success:(SuccessResponseHandler)success
                                                   failure:(FailureResponseHandler)failure {
     
@@ -535,12 +558,13 @@
     
     return [_httpCobabys GET:path
                   parameters:parameters
-                     success:success
+                     progress:nil
+                      success:success
                      failure:failure];
     
 }
 
-- (AFHTTPRequestOperation*)reqGetCheckInOutLogOfChild:(CSKuleChildInfo*)childInfo
+- (NSURLSessionDataTask*)reqGetCheckInOutLogOfChild:(CSKuleChildInfo*)childInfo
                                        inKindergarten:(NSInteger)kindergarten
                                                  from:(NSTimeInterval)fromTimestamp
                                                    to:(NSTimeInterval)toTimestamp
@@ -569,11 +593,12 @@
     
     return [_httpCobabys GET:path
                   parameters:parameters
-                     success:success
+                     progress:nil
+                      success:success
                      failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqSendChatingMsg:(NSString*)msgBody
+- (NSURLSessionDataTask*)reqSendChatingMsg:(NSString*)msgBody
                                    withImage:(NSString*)imgUrl
                               toKindergarten:(NSInteger)kindergarten
                                 retrieveFrom:(long long)fromId
@@ -609,11 +634,12 @@
     
     return [_httpCobabys POST:path
                    parameters:parameters
+                     progress:nil
                       success:success
                       failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqGetTopicMsgsOfKindergarten:(NSInteger)kindergarten
+- (NSURLSessionDataTask*)reqGetTopicMsgsOfKindergarten:(NSInteger)kindergarten
                                                     from:(long long)fromId
                                                       to:(long long)toId
                                                     most:(NSInteger)most
@@ -644,11 +670,12 @@
     
     return [_httpCobabys GET:path
                   parameters:parameters
-                     success:success
+                     progress:nil
+                      success:success
                      failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqDeleteTopicMsgsOfKindergarten:(NSInteger)kindergarten
+- (NSURLSessionDataTask*)reqDeleteTopicMsgsOfKindergarten:(NSInteger)kindergarten
                                                    recordId:(long long)msgId
                                                     success:(SuccessResponseHandler)success
                                                     failure:(FailureResponseHandler)failure {
@@ -664,7 +691,7 @@
                         failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqSendTopicMsg:(NSString*)msgBody
+- (NSURLSessionDataTask*)reqSendTopicMsg:(NSString*)msgBody
                               withMediaUrl:(NSString*)mediaUrl
                                ofMediaType:(NSString*)mediaType
                             toKindergarten:(NSInteger)kindergarten
@@ -711,11 +738,12 @@
     
     return [_httpCobabys POST:path
                    parameters:parameters
+                     progress:nil
                       success:success
                       failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqGetAssessesOfChild:(CSKuleChildInfo*)childInfo
+- (NSURLSessionDataTask*)reqGetAssessesOfChild:(CSKuleChildInfo*)childInfo
                                   inKindergarten:(NSInteger)kindergarten
                                             from:(NSInteger)fromId
                                               to:(NSInteger)toId
@@ -745,11 +773,12 @@
     
     return [_httpCobabys GET:path
                   parameters:parameters
-                     success:success
+                     progress:nil
+                      success:success
                      failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqGetSmsCode:(NSString*)phone
+- (NSURLSessionDataTask*)reqGetSmsCode:(NSString*)phone
                                  success:(SuccessResponseHandler)success
                                  failure:(FailureResponseHandler)failure {
     NSParameterAssert(phone);
@@ -762,11 +791,12 @@
     
     return [_httpCobabys GET:path
                   parameters:parameters
-                     success:success
+                     progress:nil
+                      success:success
                      failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqBindPhone:(NSString*)phone
+- (NSURLSessionDataTask*)reqBindPhone:(NSString*)phone
                                 smsCode:(NSString*)authcode
                                 success:(SuccessResponseHandler)success
                                 failure:(FailureResponseHandler)failure {
@@ -779,11 +809,12 @@
     
     return [_httpCobabys POST:path
                    parameters:parameters
+                     progress:nil
                       success:success
                       failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqResetPswd:(NSString*)account
+- (NSURLSessionDataTask*)reqResetPswd:(NSString*)account
                                 smsCode:(NSString*)authcode
                             withNewPswd:(NSString*)newPswd
                                 success:(SuccessResponseHandler)success
@@ -803,12 +834,13 @@
     
     return [_httpCobabys POST:path
                    parameters:parameters
+                     progress:nil
                       success:success
                       failure:failure];
     
 }
 
-- (AFHTTPRequestOperation*)reqSendFeedback:(NSString*)account
+- (NSURLSessionDataTask*)reqSendFeedback:(NSString*)account
                                withContent:(NSString*)msgContent
                                    success:(SuccessResponseHandler)success
                                    failure:(FailureResponseHandler)failure {
@@ -825,11 +857,12 @@
     
     return [_httpCobabys POST:path
                    parameters:parameters
+                     progress:nil
                       success:success
                       failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqGetEmployeeListOfKindergarten:(NSInteger)kindergarten
+- (NSURLSessionDataTask*)reqGetEmployeeListOfKindergarten:(NSInteger)kindergarten
                                                     success:(SuccessResponseHandler)success
                                                     failure:(FailureResponseHandler)failure {
     NSString* path = [NSString stringWithFormat:kGetEmployeeInfoPath, @(kindergarten)];
@@ -840,12 +873,13 @@
     
     return [_httpCobabys GET:path
                   parameters:parameters
-                     success:success
+                     progress:nil
+                      success:success
                      failure:failure];
     
 }
 
-- (AFHTTPRequestOperation*)reqGetSenderProfileOfKindergarten:(NSInteger)kindergarten
+- (NSURLSessionDataTask*)reqGetSenderProfileOfKindergarten:(NSInteger)kindergarten
                                                   withSender:(CSKuleSenderInfo*)senderInfo
                                                     complete:(void (^)(id obj))complete {
     if (senderInfo.senderId.length > 0) {
@@ -861,7 +895,7 @@
                 
                 NSDictionary* parameters = @{@"type": senderInfo.type};
                 
-                id success = ^(AFHTTPRequestOperation *operation, id dataJson) {
+                id success = ^(NSURLSessionDataTask *task, id dataJson) {
                     id profile = nil;
                     if ([senderInfo.type isEqualToString:@"t"]) {
                         profile = [CSKuleInterpreter decodeEmployeeInfo:dataJson];
@@ -879,12 +913,13 @@
                     }
                 };
                 
-                id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
+                id failure = ^(NSURLSessionDataTask *task, NSError *error) {
                     
                 };
                 
                 return [_httpCobabys GET:path
                               parameters:parameters
+                                progress:nil
                                  success:success
                                  failure:failure];
             }
@@ -895,7 +930,7 @@
 }
 
 
-- (AFHTTPRequestOperation*)reqGetHistoryListOfKindergarten:(NSInteger)kindergarten
+- (NSURLSessionDataTask*)reqGetHistoryListOfKindergarten:(NSInteger)kindergarten
                                                withChildId:(NSString*)childId
                                                   fromDate:(NSDate*)fromDate
                                                     toDate:(NSDate*)toDate
@@ -918,11 +953,12 @@
     
     return [_httpCobabys GET:path
                   parameters:parameters
-                     success:success
+                     progress:nil
+                      success:success
                      failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqPostHistoryOfKindergarten:(NSInteger)kindergarten
+- (NSURLSessionDataTask*)reqPostHistoryOfKindergarten:(NSInteger)kindergarten
                                             withChildId:(NSString*)childId
                                             withContent:(NSString*)content
                                        withImageUrlList:(NSArray*)imgUrlList
@@ -952,11 +988,12 @@
     
     return [_httpCobabys POST:path
                    parameters:parameters
+                     progress:nil
                       success:success
                       failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqDeleteHistoryOfKindergarten:(NSInteger)kindergarten
+- (NSURLSessionDataTask*)reqDeleteHistoryOfKindergarten:(NSInteger)kindergarten
                                               withChildId:(NSString*)childId
                                                  recordId:(long long)msgId
                                                   success:(SuccessResponseHandler)success
@@ -971,7 +1008,7 @@
                         failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqGetVideoMemberListOfKindergarten:(NSInteger)kindergarten
+- (NSURLSessionDataTask*)reqGetVideoMemberListOfKindergarten:(NSInteger)kindergarten
                                                        success:(SuccessResponseHandler)success
                                                        failure:(FailureResponseHandler)failure {
     
@@ -981,12 +1018,13 @@
     
     return [_httpCobabys GET:path
                   parameters:parameters
-                     success:success
+                     progress:nil
+                      success:success
                      failure:failure];
     
 }
 
-- (AFHTTPRequestOperation*)reqGetVideoMemberOfKindergarten:(NSInteger)kindergarten
+- (NSURLSessionDataTask*)reqGetVideoMemberOfKindergarten:(NSInteger)kindergarten
                                               withParentId:(NSString*)parentId
                                                    success:(SuccessResponseHandler)success
                                                    failure:(FailureResponseHandler)failure {
@@ -996,11 +1034,12 @@
     
     return [_httpCobabys GET:path
                   parameters:parameters
-                     success:success
+                     progress:nil
+                      success:success
                      failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqGetDefaultVideoMemberOfKindergarten:(NSInteger)kindergarten
+- (NSURLSessionDataTask*)reqGetDefaultVideoMemberOfKindergarten:(NSInteger)kindergarten
                                                           success:(SuccessResponseHandler)success
                                                           failure:(FailureResponseHandler)failure {
     NSString* path = [NSString stringWithFormat:kGetDefaultVideoMemberPath, @(kindergarten)];
@@ -1009,11 +1048,12 @@
     
     return [_httpCobabys GET:path
                   parameters:parameters
-                     success:success
+                     progress:nil
+                      success:success
                      failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqMarkAsRead:(CSKuleNewsInfo*)newsInfo
+- (NSURLSessionDataTask*)reqMarkAsRead:(CSKuleNewsInfo*)newsInfo
                                 byParent:(CSKuleParentInfo*)parentInfo
                                  success:(SuccessResponseHandler)success
                                  failure:(FailureResponseHandler)failure {
@@ -1037,11 +1077,12 @@
     
     return [_httpCobabys POST:path
                    parameters:parameters
+                     progress:nil
                       success:success
                       failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqQueryReadStatusOf:(CSKuleNewsInfo*)newsInfo
+- (NSURLSessionDataTask*)reqQueryReadStatusOf:(CSKuleNewsInfo*)newsInfo
                                        byParent:(CSKuleParentInfo*)parentInfo
                                         success:(SuccessResponseHandler)success
                                         failure:(FailureResponseHandler)failure {
@@ -1058,11 +1099,12 @@
     
     return [_httpCobabys GET:path
                   parameters:parameters
-                     success:success
+                     progress:nil
+                      success:success
                      failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqGetBusLocationOfKindergarten:(NSInteger)kindergarten
+- (NSURLSessionDataTask*)reqGetBusLocationOfKindergarten:(NSInteger)kindergarten
                                                withChildId:(NSString*)childId
                                                    success:(SuccessResponseHandler)success
                                                    failure:(FailureResponseHandler)failure {
@@ -1073,12 +1115,13 @@
     
     return [_httpCobabys GET:path
                   parameters:parameters
-                     success:success
+                     progress:nil
+                      success:success
                      failure:failure];
     
 }
 
-- (AFHTTPRequestOperation*)reqGetShareTokenOfKindergarten:(NSInteger)kindergarten
+- (NSURLSessionDataTask*)reqGetShareTokenOfKindergarten:(NSInteger)kindergarten
                                               withChildId:(NSString*)childId
                                              withRecordId:(NSInteger)recordId
                                                   success:(SuccessResponseHandler)success
@@ -1089,11 +1132,12 @@
     
     return [_httpCobabys POST:path
                    parameters:parameters
+                     progress:nil
                       success:success
                       failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqGetActivityListOfKindergarten:(NSInteger)kindergarten
+- (NSURLSessionDataTask*)reqGetActivityListOfKindergarten:(NSInteger)kindergarten
                                                        from:(long long)fromId
                                                          to:(long long)toId
                                                        most:(NSInteger)most
@@ -1117,11 +1161,12 @@
     
     return [_httpCobabys GET:path
                   parameters:parameters
-                     success:success
+                     progress:nil
+                      success:success
                      failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqGetContractorListOfKindergarten:(NSInteger)kindergarten
+- (NSURLSessionDataTask*)reqGetContractorListOfKindergarten:(NSInteger)kindergarten
                                                  withCategory:(NSInteger)category
                                                          from:(long long)fromId
                                                            to:(long long)toId
@@ -1150,11 +1195,12 @@
     
     return [_httpCobabys GET:path
                   parameters:parameters
-                     success:success
+                     progress:nil
+                      success:success
                      failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqGetActivityListOfKindergarten:(NSInteger)kindergarten
+- (NSURLSessionDataTask*)reqGetActivityListOfKindergarten:(NSInteger)kindergarten
                                            withContractorId:(NSInteger)contractorId
                                                        from:(long long)fromId
                                                          to:(long long)toId
@@ -1179,11 +1225,12 @@
     
     return [_httpCobabys GET:path
                   parameters:parameters
-                     success:success
+                     progress:nil
+                      success:success
                      failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqGetEnrollmentOfKindergarten:(NSInteger)kindergarten
+- (NSURLSessionDataTask*)reqGetEnrollmentOfKindergarten:(NSInteger)kindergarten
                                              withActivity:(NSInteger)activityId
                                                   success:(SuccessResponseHandler)success
                                                   failure:(FailureResponseHandler)failure {
@@ -1196,12 +1243,13 @@
     
     return [_httpCobabys GET:path
                   parameters:parameters
-                     success:success
+                     progress:nil
+                      success:success
                      failure:failure];
     
 }
 
-- (AFHTTPRequestOperation*)reqPostEnrollmentOfKindergarten:(NSInteger)kindergarten
+- (NSURLSessionDataTask*)reqPostEnrollmentOfKindergarten:(NSInteger)kindergarten
                                               withActivity:(CBActivityData*)activity
                                                    success:(SuccessResponseHandler)success
                                                    failure:(FailureResponseHandler)failure {
@@ -1219,11 +1267,12 @@
     
     return [_httpCobabys POST:path
                    parameters:parameters
+                     progress:nil
                       success:success
                       failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqGetInviteCodeWithHost:(NSString*)hostPhone
+- (NSURLSessionDataTask*)reqGetInviteCodeWithHost:(NSString*)hostPhone
                                          andInvitee:(NSString*)smsPhone
                                             success:(SuccessResponseHandler)success
                                             failure:(FailureResponseHandler)failure{
@@ -1235,11 +1284,12 @@
     
     return [_httpCobabys POST:path
                    parameters:parameters
+                     progress:nil
                       success:success
                       failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqBindCardOfKindergarten:(NSInteger)kindergarten
+- (NSURLSessionDataTask*)reqBindCardOfKindergarten:(NSInteger)kindergarten
                                          withCardNum:(NSString*)cardNum
                                              success:(SuccessResponseHandler)success
                                              failure:(FailureResponseHandler)failure {
@@ -1257,11 +1307,12 @@
     
     return [_httpCobabys POST:path
                    parameters:parameters
+                     progress:nil
                       success:success
                       failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqCreateInvitationOfKindergarten:(NSInteger)kindergarten
+- (NSURLSessionDataTask*)reqCreateInvitationOfKindergarten:(NSInteger)kindergarten
                                                        phone:(NSString*)phone
                                                         name:(NSString*)name
                                                 relationship:(NSString*)relationship
@@ -1298,11 +1349,12 @@
     
     return [_httpCobabys POST:path
                    parameters:parameters
+                     progress:nil
                       success:success
                       failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqGetClassesOfKindergarten:(NSInteger)kindergarten
+- (NSURLSessionDataTask*)reqGetClassesOfKindergarten:(NSInteger)kindergarten
                                                success:(SuccessResponseHandler)success
                                                failure:(FailureResponseHandler)failure {
     NSString* path = [NSString stringWithFormat:kCBClassesURL, @(kindergarten)];
@@ -1311,11 +1363,12 @@
     
     return [_httpCobabys GET:path
                   parameters:parameters
-                     success:success
+                     progress:nil
+                      success:success
                      failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqGetTeachersOfKindergarten:(NSInteger)kindergarten
+- (NSURLSessionDataTask*)reqGetTeachersOfKindergarten:(NSInteger)kindergarten
                                             withClassId:(NSInteger)classId
                                                 success:(SuccessResponseHandler)success
                                                 failure:(FailureResponseHandler)failure {
@@ -1331,11 +1384,12 @@
     
     return [_httpCobabys GET:path
                   parameters:parameters
-                     success:success
+                     progress:nil
+                      success:success
                      failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqGetRelationshipsOfKindergarten:(NSInteger)kindergarten
+- (NSURLSessionDataTask*)reqGetRelationshipsOfKindergarten:(NSInteger)kindergarten
                                                  withClassId:(NSInteger)classId
                                                      success:(SuccessResponseHandler)success
                                                      failure:(FailureResponseHandler)failure {
@@ -1348,11 +1402,12 @@
     
     return [_httpCobabys GET:path
                   parameters:parameters
-                     success:success
+                     progress:nil
+                      success:success
                      failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqUpdateCard:(NSString*)cardNum
+- (NSURLSessionDataTask*)reqUpdateCard:(NSString*)cardNum
                         withRelationship:(NSString*)relationship
                           inKindergarten:(NSInteger)kindergarten
                                  success:(SuccessResponseHandler)success
@@ -1371,11 +1426,12 @@
     
     return [_httpCobabys POST:path
                    parameters:parameters
+                     progress:nil
                       success:success
                       failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqIMJoinGroupOfKindergarten:(NSInteger)kindergarten
+- (NSURLSessionDataTask*)reqIMJoinGroupOfKindergarten:(NSInteger)kindergarten
                                             withClassId:(NSInteger)classId
                                                 success:(SuccessResponseHandler)success
                                                 failure:(FailureResponseHandler)failure {
@@ -1385,11 +1441,12 @@
     
     return [_httpCobabys POST:path
                    parameters:parameters
+                     progress:nil
                       success:success
                       failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqGetConfigOfKindergarten:(NSInteger)kindergarten
+- (NSURLSessionDataTask*)reqGetConfigOfKindergarten:(NSInteger)kindergarten
                                               success:(SuccessResponseHandler)success
                                               failure:(FailureResponseHandler)failure {
     NSString* path = [NSString stringWithFormat:kGetKindergartenConfigurePath, @(kindergarten)];
@@ -1398,7 +1455,8 @@
     
     return [_httpCobabys GET:path
                   parameters:parameters
-                     success:success
+                     progress:nil
+                      success:success
                      failure:failure];
 }
 

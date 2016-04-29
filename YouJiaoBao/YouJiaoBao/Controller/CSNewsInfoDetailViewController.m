@@ -179,7 +179,7 @@
     CSHttpClient* http = [CSHttpClient sharedInstance];
     CBSessionDataModel* session = [CBSessionDataModel thisSession];
     
-    id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
+    id success = ^(NSURLSessionDataTask *task, id responseObject) {
         [gApp hideAlert];
         
         NSArray* readers = [session updateParentInfosByJsonObject:responseObject];
@@ -187,7 +187,7 @@
         [self openReaderList:readers];
     };
     
-    id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    id failure = ^(NSURLSessionDataTask *task, NSError *error) {
         [gApp hideAlert];
     };
     
@@ -216,7 +216,7 @@
     CSHttpClient* http = [CSHttpClient sharedInstance];
     CBSessionDataModel* session = [CBSessionDataModel thisSession];
     
-    id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
+    id success = ^(NSURLSessionDataTask *task, id responseObject) {
         [gApp hideAlert];
         
         NSInteger error_code = 0;
@@ -240,10 +240,12 @@
         }
     };
     
-    id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    id failure = ^(NSURLSessionDataTask *task, NSError *error) {
         [gApp hideAlert];
         
-        if (operation.response.statusCode == 403) {
+        NSHTTPURLResponse* response = (NSHTTPURLResponse*) task.response;
+        
+        if (response.statusCode == 403) {
             NSString* msg = [NSString stringWithFormat:@"权限不足，删除失败，无法删除%@", [self tagTitle]];
             UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"提示"
                                                             message:msg
@@ -253,7 +255,7 @@
             [alert show];
         }
         else {
-            [gApp alert:[NSString stringWithFormat:@"删除失败(%ld)", operation.response.statusCode]];
+            [gApp alert:[NSString stringWithFormat:@"删除失败(%ld)", response.statusCode]];
         }
     };
     

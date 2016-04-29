@@ -291,7 +291,7 @@
     CBHttpClient* http = [CBHttpClient sharedInstance];
     [http reqGetTeachersOfKindergarten:gApp.engine.currentRelationship.parent.schoolId
                            withClassId:0 //gApp.engine.currentRelationship.child.classId
-                               success:^(AFHTTPRequestOperation *operation, id dataJson) {
+                               success:^(NSURLSessionDataTask *task, id dataJson) {
                                    for (NSDictionary* json in dataJson) {
                                        CBTeacherInfo* newObj = [CBTeacherInfo instanceWithDictionary:json];
                                        
@@ -309,7 +309,7 @@
                                    
                                    [self store];
                                    [[RCIM sharedRCIM] clearUserInfoCache];
-                               } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                               } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                    
                                }];
 }
@@ -318,7 +318,7 @@
     CBHttpClient* http = [CBHttpClient sharedInstance];
     [http reqGetRelationshipsOfKindergarten:gApp.engine.currentRelationship.parent.schoolId
                                 withClassId:0 //gApp.engine.currentRelationship.child.classId
-                                    success:^(AFHTTPRequestOperation *operation, id dataJson) {
+                                    success:^(NSURLSessionDataTask *task, id dataJson) {
                                         for (NSDictionary* json in dataJson) {
                                             CBRelationshipInfo* newObj = [CBRelationshipInfo instanceWithDictionary:json];
                                             
@@ -336,7 +336,7 @@
                                         [self store];
                                         [[RCIM sharedRCIM] clearUserInfoCache];
                                         [[RCIM sharedRCIM] clearGroupInfoCache];
-                                    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                    } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                         
                                     }];
 }

@@ -114,7 +114,7 @@ enum {
 }
 
 - (void)doCheckUpdates {
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
         NSInteger resultCount = [[dataJson valueForKeyNotNull:@"resultCount"] integerValue];
         NSArray* results = [dataJson valueForKeyNotNull:@"results"];
         
@@ -149,7 +149,7 @@ enum {
         }
     };
     
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
         CSLog(@"failure:%@", error);
 //        [gApp alert:[error localizedDescription]];
         [gApp alert:@"暂时无法获取版本信息"];
@@ -227,14 +227,14 @@ enum {
         CBSessionDataModel* session = [CBSessionDataModel thisSession];
         
         if (session.loginInfo) {
-            SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+            SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
                 CSLog(@"success.");
                 [gApp alert:@"修改成功"];
                 [session.loginInfo updateObjectsFromDictionary:dataJson];
                 [self.profileHeaderViewCtrl reloadData];
             };
             
-            FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+            FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
                 CSLog(@"failure:%@", error);
                 [gApp alert:[error localizedDescription]];
             };
@@ -260,14 +260,14 @@ enum {
         CBSessionDataModel* session = [CBSessionDataModel thisSession];
         
         if (session.loginInfo) {
-            SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+            SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
                 CSLog(@"success.");
                 [gApp alert:@"修改成功"];
                 [session.loginInfo updateObjectsFromDictionary:dataJson];
                 [self.profileHeaderViewCtrl reloadData];
             };
             
-            FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+            FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
                 CSLog(@"failure:%@", error);
                 [gApp alert:[error localizedDescription]];
             };
@@ -326,7 +326,7 @@ enum {
                              @(timestamp)];
     
     
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
         NSString* name = [dataJson valueForKeyNotNull:@"name"];
         NSString* portrait = [NSString stringWithFormat:@"%@/%@", kQiniuDownloadServerHost, name];
         //self.imgChildPortrait.image = img;
@@ -334,7 +334,7 @@ enum {
         [self doUpdateChildPortrait:portrait withImage:cropImg];
     };
     
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
         CSLog(@"failure:%@", error);
         [gApp alert:[error localizedDescription]];
     };

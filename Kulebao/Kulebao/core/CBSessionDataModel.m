@@ -75,7 +75,7 @@ static CBSessionDataModel* s_instance = NULL;
 - (void)updateSchoolConfig:(NSInteger)schoolId{
     CBHttpClient* http = [CBHttpClient sharedInstance];
     [http reqGetConfigOfKindergarten:schoolId
-                             success:^(AFHTTPRequestOperation *operation, id dataJson) {
+                             success:^(NSURLSessionDataTask *task, id dataJson) {
                                  self.schoolConfig = [CBSchoolConfigData instanceWithDictionary:dataJson];
                                  if (!self.schoolConfig.schoolGroupChat) {
                                      NSArray* conns = [[RCIMClient sharedRCIMClient] getConversationList:@[@(ConversationType_GROUP)]];
@@ -92,7 +92,7 @@ static CBSessionDataModel* s_instance = NULL;
                                      }
                                  }
                                 
-                             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                             } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                  
                              }];
 }

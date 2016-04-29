@@ -169,11 +169,11 @@
     
     CSHttpClient* http = [CSHttpClient sharedInstance];
     
-    id success = ^(AFHTTPRequestOperation *operation, id jsonObjectList) {
+    id success = ^(NSURLSessionDataTask *task, id jsonObjectList) {
         [session updateChildInfosByJsonObject:jsonObjectList];
     };
     
-    id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    id failure = ^(NSURLSessionDataTask *task, NSError *error) {
         
     };
     

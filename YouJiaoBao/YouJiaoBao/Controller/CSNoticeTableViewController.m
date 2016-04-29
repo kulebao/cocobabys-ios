@@ -244,7 +244,7 @@
                                  session.loginInfo._id,
                                  @((long long)[[NSDate date] timeIntervalSince1970]*1000)];
         
-        SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+        SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
             NSString* imgUrl = [NSString stringWithFormat:@"%@/%@", kQiniuDownloadServerHost, imgFileName];
             CSLog(@"Uploaded:%@", imgUrl);
             [_imageUrlList addObject:imgUrl];
@@ -253,7 +253,7 @@
             [self performSelectorInBackground:@selector(doUploadImage) withObject:nil];
         };
         
-        FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
             CSLog(@"failure:%@", error);
             [gApp alert:[error localizedDescription]];
         };
@@ -275,14 +275,14 @@
     CSHttpClient* http = [CSHttpClient sharedInstance];
     CBSessionDataModel* session = [CBSessionDataModel thisSession];
     
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
         [gApp alert:@"提交成功"];
         [self.navigationController popToViewController:self animated:YES];
         
         [self reloadNewsList];
     };
     
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
         CSLog(@"failure:%@", error);
         [gApp alert:[error localizedDescription]];
     };
@@ -346,7 +346,7 @@
         [classIdList addObject:[@(classInfo.class_id) stringValue]];
     }
     
-    id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
+    id success = ^(NSURLSessionDataTask *task, id responseObject) {
         [session reloadNewsInfosByJsonObject:responseObject];
         _newsInfoList = [session.newsInfoList copy];
         self.pullTableView.pullLastRefreshDate = [NSDate date];
@@ -360,7 +360,7 @@
         }
     };
     
-    id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    id failure = ^(NSURLSessionDataTask *task, NSError *error) {
         self.pullTableView.pullLastRefreshDate = [NSDate date];
         self.pullTableView.pullTableIsRefreshing = NO;
     };
@@ -385,7 +385,7 @@
         [classIdList addObject:[@(classInfo.class_id) stringValue]];
     }
     
-    id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
+    id success = ^(NSURLSessionDataTask *task, id responseObject) {
         [session updateNewsInfosByJsonObject:responseObject];
         _newsInfoList = [session.newsInfoList copy];
         self.pullTableView.pullLastRefreshDate = [NSDate date];
@@ -399,7 +399,7 @@
         }
     };
     
-    id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    id failure = ^(NSURLSessionDataTask *task, NSError *error) {
         self.pullTableView.pullLastRefreshDate = [NSDate date];
         self.pullTableView.pullTableIsRefreshing = NO;
     };
@@ -425,7 +425,7 @@
         [classIdList addObject:[@(classInfo.class_id) stringValue]];
     }
     
-    id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
+    id success = ^(NSURLSessionDataTask *task, id responseObject) {
         [session updateNewsInfosByJsonObject:responseObject];
         self.pullTableView.pullTableIsLoadingMore = NO;
         
@@ -434,7 +434,7 @@
         }
     };
     
-    id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    id failure = ^(NSURLSessionDataTask *task, NSError *error) {
         
         self.pullTableView.pullTableIsLoadingMore = NO;
     };

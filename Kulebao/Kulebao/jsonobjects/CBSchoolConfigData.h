@@ -20,6 +20,7 @@
 
 @property (nonatomic, assign) NSInteger school_id;
 @property (nonatomic, strong) NSArray* config;
+@property (nonatomic, assign) NSArray* school_customized;
 
 @property (nonatomic, assign, readonly) BOOL enableHealthRecordManagement;
 @property (nonatomic, assign, readonly) BOOL enableFinancialManagement;

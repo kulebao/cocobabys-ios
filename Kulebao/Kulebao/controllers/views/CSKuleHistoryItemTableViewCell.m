@@ -281,7 +281,7 @@
 }
 
 - (void)doGetShareToken {
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
         if (dataJson) {
             _shareToken = [dataJson objectForKey:@"token"];
             if (_shareToken.length > 0) {
@@ -292,7 +292,7 @@
         [gApp hideAlert];
     };
     
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
         CSLog(@"failure:%@", error);
         [gApp alert:error.localizedDescription];
     };

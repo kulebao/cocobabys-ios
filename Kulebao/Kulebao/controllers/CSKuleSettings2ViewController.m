@@ -210,7 +210,7 @@
 
 #pragma mark - Private
 - (void)doLogout {
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
         CSKuleBindInfo* bindInfo = [CSKuleInterpreter decodeBindInfo:dataJson];
         if (bindInfo.errorCode == 0) {
             [gApp hideAlert];
@@ -223,7 +223,7 @@
         [gApp logout];
     };
     
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
         CSLog(@"failure:%@", error);
         [gApp alert:error.localizedDescription];
         [gApp logout];
@@ -272,7 +272,7 @@
             CSKuleParentInfo* cp = [parentInfo copy];
             cp.portrait = portrait;
             
-            SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+            SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
                 CSLog(@"success.");
                 [gApp alert:@"更新成功"];
                 
@@ -287,7 +287,7 @@
                 [self reloadData];
             };
             
-            FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+            FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
                 CSLog(@"failure:%@", error);
                 [gApp alert:[error localizedDescription]];
             };
@@ -315,7 +315,7 @@
             CSKuleParentInfo* cp = [parentInfo copy];
             cp.name = newName;
             
-            SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+            SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
                 CSLog(@"success.");
                 [gApp alert:@"更新成功"];
                 
@@ -329,7 +329,7 @@
                 [self reloadData];
             };
             
-            FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+            FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
                 CSLog(@"failure:%@", error);
                 [gApp alert:[error localizedDescription]];
             };
@@ -442,7 +442,7 @@
     if (relationship.length > 0) {
         NSString* card = gApp.engine.currentRelationship.card;
         if (card.length > 0) {
-            SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+            SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
                 CSLog(@"success.");
                 [gApp alert:@"更新成功"];
                 
@@ -457,7 +457,7 @@
                 [self reloadData];
             };
             
-            FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+            FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
                 CSLog(@"failure:%@", error);
                 [gApp alert:[error localizedDescription]];
             };
@@ -505,7 +505,7 @@
                              gApp.engine.currentRelationship.parent.parentId,
                              @(timestamp)];
     
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
         NSString* name = [dataJson valueForKeyNotNull:@"name"];
         NSString* portrait = [NSString stringWithFormat:@"%@/%@", kQiniuDownloadServerHost, name];
         //self.imgChildPortrait.image = img;
@@ -513,7 +513,7 @@
         [self doUpdateParentPortrait:portrait withImage:cropImg];
     };
     
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
         CSLog(@"failure:%@", error);
         [gApp alert:[error localizedDescription]];
     };

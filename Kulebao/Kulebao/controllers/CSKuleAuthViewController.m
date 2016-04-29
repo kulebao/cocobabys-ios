@@ -92,7 +92,7 @@
     NSString* mobile = self.fieldMobile.text;
     if ([mobile isValidMobile]) {
         gApp.engine.preferences.defaultUsername = mobile;
-        SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+        SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
             /*
              {
              "check_phone_result" : "1102"
@@ -139,7 +139,7 @@
             }
         };
         
-        FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
             CSLog(@"failure:%@", error);
             [gApp alert:[error localizedDescription]];
         };

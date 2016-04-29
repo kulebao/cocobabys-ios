@@ -176,7 +176,7 @@ static NSInteger kRetryInterval = 120; // 秒
 
 - (void)doCounting {
     if (_counter > 0) {
-        NSString* title = [NSString stringWithFormat:@"%d秒后重新获取", _counter];
+        NSString* title = [NSString stringWithFormat:@"%ld秒后重新获取", (long)_counter];
         self.btnRetrySmsCode.enabled = NO;
         [self.btnRetrySmsCode setTitle:title
                               forState:UIControlStateDisabled];
@@ -195,7 +195,7 @@ static NSInteger kRetryInterval = 120; // 秒
 #pragma mark - Request
 - (void)doGetSmsCode {
     if (_mobile.length > 0) {
-        SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+        SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
             /* {"error_msg":"请求太频繁。","error_code":1} */
             
             NSString* error_msg = [dataJson valueForKeyNotNull:@"error_msg"];
@@ -210,9 +210,10 @@ static NSInteger kRetryInterval = 120; // 秒
             }
         };
 
-        FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
             CSLog(@"failure:%@", error);
-            if (operation.response.statusCode == 400) {
+            NSHTTPURLResponse* response = (NSHTTPURLResponse*) task.response;
+            if (response.statusCode == 400) {
                 [gApp alert:@"验证码未过期，请勿重复获取。"];
             }
             else {
@@ -234,7 +235,7 @@ static NSInteger kRetryInterval = 120; // 秒
     NSString* authCode = self.fieldSmsCode.text;
     NSString* newPswd = self.fieldNewPswd.text;
     
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
         /* {"error_code":0,"access_token":"1393763572585"} */
         
         //NSString* access_token = [dataJson valueForKeyNotNull:@"access_token"];
@@ -258,7 +259,7 @@ static NSInteger kRetryInterval = 120; // 秒
         }
     };
     
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
         CSLog(@"failure:%@", error);
         [gApp alert:[error localizedDescription]];
     };

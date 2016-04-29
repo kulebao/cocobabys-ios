@@ -221,7 +221,7 @@
                                  @((long long)[[NSDate date] timeIntervalSince1970]*1000),
                                  @(++num)];
         
-        SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+        SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
             NSString* imgUrl = [NSString stringWithFormat:@"%@/%@", kQiniuDownloadServerHost, imgFileName];
             [_imageUrlList addObject:imgUrl];
             [_imageList removeObjectAtIndex:0];
@@ -232,7 +232,7 @@
             [self performSelectorInBackground:@selector(doUploadImage) withObject:nil];
         };
         
-        FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
             CSLog(@"failure:%@", error);
             [gApp alert:[error localizedDescription]];
         };
@@ -258,7 +258,7 @@
                              @((long long)[[NSDate date] timeIntervalSince1970]*1000),
                              @(++num)];
     
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
         _videoUrl = [NSString stringWithFormat:@"%@/%@", kQiniuDownloadServerHost, videoFileName];
         
         [[EGOCache globalCache] setData:videoData
@@ -269,7 +269,7 @@
         }];
     };
     
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
         CSLog(@"failure:%@", error);
         [gApp alert:[error localizedDescription]];
     };
@@ -283,13 +283,13 @@
 }
 
 - (void)doSendHistory {
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
         [EntityHistoryInfoHelper updateEntities:@[dataJson]];
         [gApp shortAlert:@"提交成功"];
         [self.navigationController popToViewController:self animated:YES];
     };
     
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
         CSLog(@"failure:%@", error);
         [gApp alert:[error localizedDescription]];
     };

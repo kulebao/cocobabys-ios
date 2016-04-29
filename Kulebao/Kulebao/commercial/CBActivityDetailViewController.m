@@ -198,17 +198,18 @@
 }
 
 - (IBAction)onBtnJoinClicked:(id)sender {
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
         self.itemData.joined = YES;
         [gApp alert:@"报名成功"];
         
         [self updateJoinStatus];
     };
     
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
         NSError* err = nil;
         NSString* error_msg = nil;
-        id dataJson = [NSJSONSerialization JSONObjectWithData:operation.responseData options:0 error:&err];
+        NSData* responseData = [error.userInfo objectForKey:AFNetworkingOperationFailingURLResponseDataErrorKey];
+        id dataJson = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&err];
         if (dataJson && !err) {
             // {"error_msg":"不能重复报名同一活动。(duplicated enrollment)","error_code":3}
             //error_msg = [dataJson objectForKey:@"error_msg"];
@@ -234,15 +235,16 @@
 }
 
 - (void)queryJoinStatus {
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
         self.itemData.joined = YES;
         [self updateJoinStatus];
     };
     
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
         NSError* err = nil;
         NSString* error_msg = nil;
-        id dataJson = [NSJSONSerialization JSONObjectWithData:operation.responseData options:0 error:&err];
+        NSData* responseData = [error.userInfo objectForKey:AFNetworkingOperationFailingURLResponseDataErrorKey];
+        id dataJson = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&err];
         if (dataJson && !err) {
             // {"error_msg":"不能重复报名同一活动。(duplicated enrollment)","error_code":3}
             error_msg = [dataJson objectForKey:@"error_msg"];

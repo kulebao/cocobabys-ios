@@ -53,12 +53,20 @@
 - (void)reloadRelationshipsByJsonObject:(id)jsonObject;
 
 - (void)updateTeacherInfosByJsonObject:(id)jsonObject;
+- (void)reloadTeacherInfosByJsonObject:(id)jsonObject;
+
 - (void)updateClassInfosByJsonObject:(id)jsonObject;
+- (void)reloadClassInfosByJsonObject:(id)jsonObject;
+
 - (void)updateDailylogsByJsonObject:(id)jsonObject;
+
 - (void)updateChildInfosByJsonObject:(id)jsonObject;
+
 - (NSArray*)updateParentInfosByJsonObject:(id)jsonObject;
+
 - (void)updateNewsInfosByJsonObject:(id)jsonObject;
 - (void)reloadNewsInfosByJsonObject:(id)jsonObject;
+
 - (void)updateAssessInfosByJsonObject:(id)jsonObject;
 
 - (CBRelationshipInfo*)getReleationshipById:(NSInteger)rid;

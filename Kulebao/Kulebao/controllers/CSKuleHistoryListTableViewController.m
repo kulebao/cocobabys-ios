@@ -163,7 +163,7 @@
     if (_denyIndexPath) {
         EntityHistoryInfo* historyInfo = [_frCtrl objectAtIndexPath:_denyIndexPath];
         
-        SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+        SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
             NSInteger error_code = [[dataJson valueForKeyNotNull:@"error_code"] integerValue];
             NSString* error_msg = [dataJson valueForKeyNotNull:@"error_msg"];
             if (error_code == 0) {
@@ -177,7 +177,7 @@
             _denyIndexPath = nil;
         };
         
-        FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
             _denyIndexPath = nil;
             CSLog(@"failure:%@", error);
             [gApp hideAlert];
@@ -261,7 +261,7 @@
     NSDate* fromDate = [fmt dateFromString:fromDateString];
     NSDate* toDate = [fmt dateFromString:toDateString];
     
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
         NSArray* historyList = [EntityHistoryInfoHelper updateEntities:dataJson];
         
         if (historyList.count == 0) {
@@ -274,7 +274,7 @@
         [self.tableView reloadData];
     };
     
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
         CSLog(@"failure:%@", error);
         [gApp alert:error.localizedDescription];
     };

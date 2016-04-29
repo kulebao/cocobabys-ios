@@ -20,8 +20,8 @@
     NSMutableArray* _classChildren;
     NSMutableSet* _childrenReaders;
 
-    AFHTTPRequestOperation* _opReloadClassList;
-    AFHTTPRequestOperation* _opReloadChildList;
+    NSURLSessionDataTask* _opReloadClassList;
+    NSURLSessionDataTask* _opReloadChildList;
 }
 
 @end
@@ -195,7 +195,7 @@
     CSEngine* engine = [CSEngine sharedInstance];
     CBSessionDataModel* session = [CBSessionDataModel thisSession];
     
-    id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
+    id success = ^(NSURLSessionDataTask *task, id responseObject) {
         [session updateClassInfosByJsonObject:responseObject];
         [engine onLoadClassInfoList:session.classInfoList];
         
@@ -204,8 +204,9 @@
         [self hideWaitingAlertIfNeeded];
     };
     
-    id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
-        if (operation.response.statusCode == 401) {
+    id failure = ^(NSURLSessionDataTask *task, NSError *error) {
+        NSHTTPURLResponse* response = (NSHTTPURLResponse*) task.response;
+        if (response.statusCode == 401) {
             [[NSNotificationCenter defaultCenter] postNotificationName:kNotiUnauthorized
                                                                 object:error
                                                               userInfo:nil];
@@ -239,13 +240,13 @@
     
     CSHttpClient* http = [CSHttpClient sharedInstance];
     
-    id success = ^(AFHTTPRequestOperation *operation, id jsonObjectList) {
+    id success = ^(NSURLSessionDataTask *task, id jsonObjectList) {
         [session updateChildInfosByJsonObject:jsonObjectList];
         _opReloadChildList = nil;
         [self hideWaitingAlertIfNeeded];
     };
     
-    id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    id failure = ^(NSURLSessionDataTask *task, NSError *error) {
         _opReloadChildList = nil;
         [self hideWaitingAlertIfNeeded];
     };

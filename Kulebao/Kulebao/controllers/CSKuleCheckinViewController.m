@@ -122,7 +122,7 @@
 
 #pragma mark - Private
 - (void)reloadCheckInOutLogs {
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
         NSMutableArray* checkInOutLogInfos = [NSMutableArray array];
         
         CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
@@ -148,7 +148,7 @@
         [gApp hideAlert];
     };
     
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
         CSLog(@"failure:%@", error);
         [gApp alert:[error localizedDescription]];
     };

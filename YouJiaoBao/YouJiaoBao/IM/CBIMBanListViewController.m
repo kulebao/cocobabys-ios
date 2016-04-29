@@ -76,7 +76,7 @@
         [gApp waitingAlert:@"正在获取数据"];
         [http reqGetRelationshipsOfKindergarten:_schoolId
                                     withClassId:_classId
-                                        success:^(AFHTTPRequestOperation *operation, id dataJson) {
+                                        success:^(NSURLSessionDataTask *task, id dataJson) {
                                             [gApp hideAlert];
                                             
                                             NSMutableDictionary* groupedDict = [NSMutableDictionary dictionary];
@@ -101,7 +101,7 @@
                                             
                                             [self reloadUI];
                                             
-                                        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                        } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                             [gApp hideAlert];
                                         }];
     }
@@ -115,7 +115,7 @@
         CSHttpClient* http = [CSHttpClient sharedInstance];
         [http reqGetBandListOfKindergarten:_schoolId
                                withClassId:_classId
-                                   success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                   success:^(NSURLSessionDataTask *task, id responseObject) {
                                        [self.bandInfoList removeAllObjects];
                                        for (NSDictionary* json in responseObject) {
                                            CBIMBanInfo* banInfo = [CBIMBanInfo instanceWithDictionary:json];
@@ -123,7 +123,7 @@
                                        }
                                        [self reloadUI];
                                        
-                                   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                   } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                        [gApp hideAlert];
                                    }];
     }
@@ -224,10 +224,10 @@
             [http reqAddBandUser:cell.imUserId
                   inKindergarten:cell.schoolId
                      withClassId:cell.classId
-                         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                         success:^(NSURLSessionDataTask *task, id responseObject) {
                              [gApp alert:@"禁言用户成功"];
                              [self reloadBandList];
-                         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                         } failure:^(NSURLSessionDataTask *task, NSError *error) {
                              [gApp alert:@"禁言用户失败"];
                              CSLog(@"reqAddBandUser err:%@", error);
                              [self reloadBandList];
@@ -238,10 +238,10 @@
             [http reqDeleteBandUser:cell.imUserId
                      inKindergarten:cell.schoolId
                         withClassId:cell.classId
-                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                            success:^(NSURLSessionDataTask *task, id responseObject) {
                                 [gApp alert:@"解除禁言成功"];
                                 [self reloadBandList];
-                            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                            } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                 [gApp alert:@"解除禁言失败"];
                                 CSLog(@"reqDeleteBandUser err:%@", error);
                                 [self reloadBandList];

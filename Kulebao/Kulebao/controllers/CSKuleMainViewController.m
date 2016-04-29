@@ -622,7 +622,7 @@
         [self presentPopupViewController:ctrl animationType:MJPopupViewAnimationFade dismissed:^{
             CSLog(@"%@", [ctrl.date isoDateString]);
             
-            SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+            SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
                 CSLog(@"success.");
                 [gApp alert:@"修改成功"];
                 
@@ -632,7 +632,7 @@
                 [self updateUI:NO];
             };
             
-            FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+            FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
                 CSLog(@"failure:%@", error);
                 [gApp alert:[error localizedDescription]];
             };
@@ -659,7 +659,7 @@
             CSKuleChildInfo* cp = [childInfo copy];
             cp.nick = nick;
             
-            SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+            SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
                 CSLog(@"success.");
                 [gApp alert:@"修改成功"];
                 
@@ -669,7 +669,7 @@
                 [self updateUI:NO];
             };
             
-            FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+            FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
                 CSLog(@"failure:%@", error);
                 [gApp alert:[error localizedDescription]];
             };
@@ -696,7 +696,7 @@
             CSKuleChildInfo* cp = [childInfo copy];
             cp.portrait = portrait;
             
-            SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+            SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
                 CSLog(@"success.");
                 [gApp alert:@"更新成功"];
                 
@@ -708,7 +708,7 @@
                 [self updateUI:NO];
             };
             
-            FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+            FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
                 CSLog(@"failure:%@", error);
                 [gApp alert:[error localizedDescription]];
                 //[self updateUI:NO];
@@ -767,7 +767,7 @@
 }
 
 - (void)doGetSchoolInfo:(void(^)())completion {
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
         id schoolInfoJson = [dataJson valueForKeyNotNull:@"school_info"];
         
         CSKuleSchoolInfo* schoolInfo = nil;
@@ -789,7 +789,7 @@
         }
     };
     
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
         CSLog(@"failure:%@", error);
         [gApp alert:[error localizedDescription]];
     };
@@ -814,7 +814,7 @@
                              @(timestamp)];
     
     
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
         NSString* name = [dataJson valueForKeyNotNull:@"name"];
         NSString* portrait = [NSString stringWithFormat:@"%@/%@", kQiniuDownloadServerHost, name];
         //self.imgChildPortrait.image = img;
@@ -822,7 +822,7 @@
         [self doUpdateChildPortrait:portrait withImage:cropImg];
     };
     
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
         CSLog(@"failure:%@", error);
         [gApp alert:[error localizedDescription]];
     };
@@ -1107,16 +1107,16 @@
     else {
         CBHttpClient* http = gApp.engine.httpClient;
         [http reqIMJoinGroupOfKindergarten:schoolId withClassId:classId
-                                   success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                   success:^(NSURLSessionDataTask *task, id responseObject) {
                                        [session.imGroupTags addObject:imGroupTag];
-                                   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                   } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                        
                                    }];
     }
 }
 
 - (void)getRelationshipInfos {
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
         NSMutableArray* relationships = [NSMutableArray array];
         for (id relationshipJson in dataJson) {
             CSKuleRelationshipInfo* relationshipInfo = [CSKuleInterpreter decodeRelationshipInfo:relationshipJson];
@@ -1158,7 +1158,7 @@
         }
     };
     
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
         CSLog(@"failure:%@", error);
         [gApp alert:[error localizedDescription]];
     };
@@ -1171,7 +1171,7 @@
 }
 
 - (void)reloadVideoMember {
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
         self.videoMember = [CSKuleInterpreter decodeVideoMember:dataJson];
         [gApp hideAlert];
         if(_actionToCCTV) {
@@ -1179,7 +1179,7 @@
         }
     };
     
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
         //CSLog(@"failure:%@", error);
         [gApp hideAlert];
         [self performSelector:@selector(reloadDefaultVideoMember) withObject:nil afterDelay:0];
@@ -1195,7 +1195,7 @@
 }
 
 - (void)reloadDefaultVideoMember {
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
         self.defaultVideoMember = [CSKuleInterpreter decodeVideoMember:dataJson];
         [gApp hideAlert];
         if(_actionToCCTV) {
@@ -1203,7 +1203,7 @@
         }
     };
     
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
         CSLog(@"failure:%@", error);
         [gApp alert:@"还未开通看宝宝功能，该功能可以让家长通过视频，实时查看孩子在幼儿园的动态,如有需要请联系幼儿园开通。"];
     };
@@ -1217,7 +1217,7 @@
 }
 
 //- (void)getEmployeeInfos {
-//    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+//    SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
 //        NSMutableArray* employeeInfos = [NSMutableArray array];
 //
 //        for (id employeeInfoJson in dataJson) {
@@ -1229,7 +1229,7 @@
 //        [gApp hideAlert];
 //    };
 //
-//    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+//    FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
 //        CSLog(@"failure:%@", error);
 //        [gApp alert:[error localizedDescription]];
 //    };
@@ -1295,7 +1295,7 @@
 
 #pragma mark - Commercial
 - (void)reloadContractorItemDataList {
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
         if ([dataJson count] >= 5) {
             [self performSelectorInBackground:@selector(reloadActivityItemDataList)
                                    withObject:nil];
@@ -1305,7 +1305,7 @@
         }
     };
     
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
     };
     
     CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
@@ -1321,7 +1321,7 @@
 }
 
 - (void)reloadActivityItemDataList {
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
         if ([dataJson count] >= 5) {
             gApp.engine.preferences.enabledCommercial = YES;
             [self performSelectorOnMainThread:@selector(updateCommercialStatus) withObject:nil waitUntilDone:YES];
@@ -1331,7 +1331,7 @@
         }
     };
     
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
     };
     
     CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;

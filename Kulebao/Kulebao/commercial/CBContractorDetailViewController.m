@@ -292,7 +292,7 @@
 
 #pragma mark - LoadActivityList
 - (void)reloadCellItemDataList {
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
         [_cellItemDataList removeAllObjects];
         
         for (NSDictionary* json in dataJson) {
@@ -305,7 +305,7 @@
         [self.tableInfo reloadData];
     };
     
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
         CSLog(@"failure:%@", error);
         [self.tableInfo reloadData];
     };

@@ -280,7 +280,7 @@
 }
 
 - (void)reloadNewsList {
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
         NSMutableArray* newsInfos = [NSMutableArray array];
         CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
         NSTimeInterval timestamp = [gApp.engine.preferences timestampOfModule:kKuleModuleNews forChild:currentChild.childId];
@@ -325,7 +325,7 @@
         [self.tableview reloadData];
     };
     
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
         CSLog(@"failure:%@", error);
         self.tableview.pullTableIsRefreshing = NO;
         [gApp alert:[error localizedDescription]];
@@ -350,7 +350,7 @@
 - (void)loadMoreNewsList {
     CSKuleNewsInfo* lastNewsInfo = self.newsInfoList.lastObject;
     if (lastNewsInfo) {
-        SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+        SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
             NSMutableArray* newsInfos = [NSMutableArray array];
             CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
             NSTimeInterval timestamp = [gApp.engine.preferences timestampOfModule:kKuleModuleNews forChild:currentChild.childId];
@@ -375,7 +375,7 @@
             [self.tableview reloadData];
         };
         
-        FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
             CSLog(@"failure:%@", error);
             self.tableview.pullTableIsLoadingMore = NO;
             [gApp alert:[error localizedDescription]];

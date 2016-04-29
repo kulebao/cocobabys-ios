@@ -183,7 +183,7 @@
 
 #pragma mark - Private
 - (void)reloadCookbooks {
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
         NSMutableArray* cookbooks = [NSMutableArray array];
         
         for (id cookbookJson in dataJson) {
@@ -215,7 +215,7 @@
         [self.tableview reloadData];
     };
     
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
         CSLog(@"failure:%@", error);
         [gApp alert:[error localizedDescription]];
     };

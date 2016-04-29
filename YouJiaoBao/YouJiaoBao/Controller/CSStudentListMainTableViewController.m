@@ -18,7 +18,7 @@
 
 @interface CSStudentListMainTableViewController () <NSFetchedResultsControllerDelegate> {
     NSMutableArray* _classChildren;
-    AFHTTPRequestOperation* _opReloadDailylogList;
+    NSURLSessionDataTask* _opReloadDailylogList;
 }
 
 @end
@@ -250,13 +250,13 @@
     
     CSHttpClient* http = [CSHttpClient sharedInstance];
     
-    id success = ^(AFHTTPRequestOperation *operation, id jsonObjectList) {
+    id success = ^(NSURLSessionDataTask *task, id jsonObjectList) {
         [session updateDailylogsByJsonObject:jsonObjectList];
         [self updateTableView];
         [gApp hideAlert];
     };
     
-    id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    id failure = ^(NSURLSessionDataTask *task, NSError *error) {
         _opReloadDailylogList = nil;
         [self updateTableView];
         [gApp hideAlert];

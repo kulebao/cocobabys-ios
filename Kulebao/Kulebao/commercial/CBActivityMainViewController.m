@@ -198,7 +198,7 @@
 }
 
 - (void)reloadCellItemDataList {
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
         [_cellItemDataList removeAllObjects];
         
         for (NSDictionary* json in dataJson) {
@@ -219,7 +219,7 @@
         }
     };
     
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
         CSLog(@"failure:%@", error);
         self.tableview.pullTableIsRefreshing = NO;
         [gApp alert:[error localizedDescription]];
@@ -242,7 +242,7 @@
 - (void)loadMoreCellItemDataList {
     CBActivityData* lastItemData = [self fetchLastItemData];
     if (lastItemData) {
-        SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+        SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
             NSMutableArray* tmpItemDataList = [NSMutableArray array];
             for (id itemJson in dataJson) {
                 CBActivityData* itemData = [CBActivityData instanceWithDictionary:itemJson];
@@ -263,7 +263,7 @@
             [self.tableview reloadData];
         };
         
-        FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
             CSLog(@"failure:%@", error);
             self.tableview.pullTableIsLoadingMore = NO;
             [gApp alert:[error localizedDescription]];

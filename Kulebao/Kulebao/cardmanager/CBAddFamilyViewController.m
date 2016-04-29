@@ -127,7 +127,7 @@
                                                   name:name
                                           relationship:relationship
                                               passcode:passcode
-                                               success:^(AFHTTPRequestOperation *operation, id dataJson) {
+                                               success:^(NSURLSessionDataTask *task, id dataJson) {
                                                    if ([dataJson isKindOfClass:[NSDictionary class]]) {
                                                        NSInteger error_code = [[dataJson objectForKey:@"error_code"] integerValue];
                                                        NSString* error_msg = [dataJson objectForKey:@"error_msg"];
@@ -146,9 +146,10 @@
                                                        [self showIntroViews];
                                                    }
                                                }
-                                               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                               failure:^(NSURLSessionDataTask *task, NSError *error) {
                                                    NSError* err = nil;
-                                                   id dataJson = [NSJSONSerialization JSONObjectWithData:operation.responseData options:0 error:&err];
+                                                    NSData* responseData = [error.userInfo objectForKey:AFNetworkingOperationFailingURLResponseDataErrorKey];
+                                                   id dataJson = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&err];
                                                    if (dataJson && !err) {
                                                        NSInteger error_code = [[dataJson objectForKey:@"error_code"] integerValue];
                                                        NSString* error_msg = [dataJson objectForKey:@"error_msg"];
@@ -236,7 +237,7 @@
         [gApp waitingAlert:@"正在向被邀请人发送邀请码"];
         [gApp.engine.httpClient reqGetInviteCodeWithHost:gApp.engine.currentRelationship.parent.phone
                                    andInvitee:phone
-                                      success:^(AFHTTPRequestOperation *operation, id dataJson) {
+                                      success:^(NSURLSessionDataTask *task, id dataJson) {
                                           NSInteger error_code = [[dataJson objectForKey:@"error_code"] integerValue];
                                           NSString* error_msg = [dataJson objectForKey:@"error_msg"];
                                           if (error_code == 4) {
@@ -258,10 +259,11 @@
                                           
                                           CSLog(@"%@", dataJson);
                                       }
-                                      failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                      failure:^(NSURLSessionDataTask *task, NSError *error) {
                                           CSLog(@"%@", error);
                                           NSError* err = nil;
-                                          id dataJson = [NSJSONSerialization JSONObjectWithData:operation.responseData options:0 error:&err];
+                                          NSData* responseData = [error.userInfo objectForKey:AFNetworkingOperationFailingURLResponseDataErrorKey];
+                                          id dataJson = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&err];
                                           if (dataJson && !err) {
                                               NSInteger error_code = [[dataJson objectForKey:@"error_code"] integerValue];
                                               NSString* error_msg = [dataJson objectForKey:@"error_msg"];

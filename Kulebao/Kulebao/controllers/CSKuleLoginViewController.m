@@ -111,7 +111,7 @@
 - (void)doLogin {
     NSString* pswd = self.fieldPassword.text;
     if (pswd.length > 0 && self.mobile.length > 0) {
-        SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+        SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
             CSKuleLoginInfo* loginInfo = [CSKuleInterpreter decodeLoginInfo:dataJson];
             if (loginInfo.errorCode == 0) {
                 gApp.engine.loginInfo = loginInfo;
@@ -126,7 +126,7 @@
             }
         };
         
-        FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
             CSLog(@"failure:%@", error);
             [gApp alert:[error localizedDescription]];
         };
@@ -143,7 +143,7 @@
 }
 
 - (void)doReceiveBindInfo {
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
         CSKuleBindInfo* bindInfo = [CSKuleInterpreter decodeBindInfo:dataJson];
         CSLog(@"[1]doReceiveBindInfo error_code=%ld", bindInfo.errorCode);
         if (bindInfo.errorCode == 0) {
@@ -179,7 +179,7 @@
         }
     };
     
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
         CSLog(@"failure:%@", error);
         [gApp logout];
         [gApp alert:error.localizedDescription];

@@ -93,7 +93,7 @@
     }
     else {
         CSHttpClient* http = [CSHttpClient sharedInstance];
-        id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
+        id success = ^(NSURLSessionDataTask *task, id responseObject) {
             NSInteger error_code = [[responseObject valueForKeyNotNull:@"error_code"] integerValue];
             if (error_code == 0) {
                 [gApp alert:@"重置密码成功，请使用新密码登录，谢谢！"];
@@ -108,7 +108,7 @@
             }
         };
         
-        id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        id failure = ^(NSURLSessionDataTask *task, NSError *error) {
             [gApp alert:@"重置密码失败"];
         };
         

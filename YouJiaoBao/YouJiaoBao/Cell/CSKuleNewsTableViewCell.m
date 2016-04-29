@@ -61,7 +61,7 @@
         self.iconWidth.constant = 60;
     }
     else {
-        [self.imgAttachment cancelImageRequestOperation];
+        [self.imgAttachment cancelImageDownloadTask];
         self.imgAttachment.image = nil;
         self.imgAttachment.hidden = YES;
         self.iconWidth.constant = 0;

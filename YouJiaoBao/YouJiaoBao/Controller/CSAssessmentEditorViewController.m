@@ -124,12 +124,12 @@
     CSHttpClient* http = [CSHttpClient sharedInstance];
     CBSessionDataModel* session = [CBSessionDataModel thisSession];
     
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
         [session updateAssessInfosByJsonObject:dataJson];
         [self reloadData];
     };
     
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
         CSLog(@"failure:%@", error);
         [gApp alert:[error localizedDescription]];
     };
@@ -178,7 +178,7 @@
     //CSEngine* engine = [CSEngine sharedInstance];
     CBSessionDataModel* session = [CBSessionDataModel thisSession];
     
-    id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
+    id success = ^(NSURLSessionDataTask *task, id responseObject) {
         NSInteger error_code = [[responseObject valueForKeyNotNull:@"error_code"] integerValue];
         if (error_code == 0) {
             [gApp alert:@"发布成功。"];
@@ -190,7 +190,7 @@
         }
     };
     
-    id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    id failure = ^(NSURLSessionDataTask *task, NSError *error) {
         [gApp alert:@"发布失败。"];
     };
     

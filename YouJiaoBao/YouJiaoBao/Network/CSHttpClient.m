@@ -83,7 +83,9 @@
 
 - (AFHTTPSessionManager*)opQiniuManager {
     if (_opQiniuManager == nil) {
-        _opQiniuManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:kQiniuUploadServerHost]];
+        NSURLSessionConfiguration* sessionConfiguration = nil;
+        _opQiniuManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:kQiniuUploadServerHost]
+                           sessionConfiguration:sessionConfiguration];
         
         _opQiniuManager.requestSerializer = [AFJSONRequestSerializer serializerWithWritingOptions:0];
         

@@ -27,7 +27,7 @@
 
 #if COCOBABYS_DEV_MODEL
     #define COCOBABYS_CHECK_UPDATE_FROM_FIR 1
-    #define COCOBABYS_USE_ENV_PROD          0
+    #define COCOBABYS_USE_ENV_PROD          1
 #else
     #define COCOBABYS_CHECK_UPDATE_FROM_FIR 0
     #define COCOBABYS_USE_ENV_PROD          1

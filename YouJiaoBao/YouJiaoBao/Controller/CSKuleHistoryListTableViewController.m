@@ -578,13 +578,16 @@
     CSHttpClient* http = [CSHttpClient sharedInstance];
     CBSessionDataModel* session = [CBSessionDataModel thisSession];
     
+    static NSInteger tagx = 0;
+    
     UIImage* img = [_imageList firstObject];
     if (img) {
         NSData* imgData = UIImageJPEGRepresentation(img, 0.8);
-        NSString* imgFileName = [NSString stringWithFormat:@"history_img/%@/topic_%@/%@.jpg",
+        NSString* imgFileName = [NSString stringWithFormat:@"history_img/%@/topic_%@/%@_%@.jpg",
                                  session.loginInfo.school_id,
                                  session.loginInfo._id,
-                                 @((long long)[[NSDate date] timeIntervalSince1970]*1000)];
+                                 @((long long)[[NSDate date] timeIntervalSince1970]*1000),
+                                 @(++tagx)];
         
         SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
             NSString* imgUrl = [NSString stringWithFormat:@"%@/%@", kQiniuDownloadServerHost, imgFileName];
@@ -592,7 +595,7 @@
             [_imageUrlList addObject:imgUrl];
             [_imageList removeObjectAtIndex:0];
             
-            [self performSelectorInBackground:@selector(doUploadImage) withObject:nil];
+            [self doUploadImage];
         };
         
         FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {

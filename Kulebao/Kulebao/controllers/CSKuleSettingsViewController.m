@@ -108,7 +108,7 @@
 
 #pragma mark - Private
 - (void)doLogout {
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
         CSKuleBindInfo* bindInfo = [CSKuleInterpreter decodeBindInfo:dataJson];
         if (bindInfo.errorCode == 0) {
             [gApp hideAlert];
@@ -121,7 +121,7 @@
         [gApp logout];
     };
     
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
         CSLog(@"failure:%@", error);
         [gApp alert:error.localizedDescription];
         [gApp logout];
@@ -132,7 +132,7 @@
 }
 
 - (void)doCheckUpdates {
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
         NSInteger resultCount = [[dataJson valueForKeyNotNull:@"resultCount"] integerValue];
         NSArray* results = [dataJson valueForKeyNotNull:@"results"];
         
@@ -168,7 +168,7 @@
         }
     };
     
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
         CSLog(@"failure:%@", error);
         [gApp alert:[error localizedDescription]];
     };

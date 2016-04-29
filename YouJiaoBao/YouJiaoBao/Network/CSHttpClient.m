@@ -13,9 +13,9 @@
 
 @interface CSHttpClient ()
 
-@property (nonatomic, strong) AFHTTPRequestOperationManager* opManager;
-@property (nonatomic, strong) AFHTTPRequestOperationManager* opQiniuManager;
-@property (nonatomic, strong) AFHTTPRequestOperationManager* opiTunesManager;
+@property (nonatomic, strong) AFHTTPSessionManager* opManager;
+@property (nonatomic, strong) AFHTTPSessionManager* opQiniuManager;
+@property (nonatomic, strong) AFHTTPSessionManager* opiTunesManager;
 
 @end
 
@@ -57,9 +57,9 @@
 }
 
 #pragma mark - Operations
-- (AFHTTPRequestOperationManager*)opManager {
+- (AFHTTPSessionManager*)opManager {
     if (_opManager == nil) {
-        _opManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:kServerHostUsing]];
+        _opManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:kServerHostUsing]];
         
         _opManager.requestSerializer = [AFJSONRequestSerializer serializerWithWritingOptions:0];
         [_opManager.requestSerializer setValue:@"ios" forHTTPHeaderField:@"source"];
@@ -81,9 +81,9 @@
     return _opManager;
 }
 
-- (AFHTTPRequestOperationManager*)opQiniuManager {
+- (AFHTTPSessionManager*)opQiniuManager {
     if (_opQiniuManager == nil) {
-        _opQiniuManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:kQiniuUploadServerHost]];
+        _opQiniuManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:kQiniuUploadServerHost]];
         
         _opQiniuManager.requestSerializer = [AFJSONRequestSerializer serializerWithWritingOptions:0];
         
@@ -99,9 +99,9 @@
     return _opQiniuManager;
 }
 
-- (AFHTTPRequestOperationManager*)opiTunesManager {
+- (AFHTTPSessionManager*)opiTunesManager {
     if (_opiTunesManager == nil) {
-        _opiTunesManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:kQiniuUploadServerHost]];
+        _opiTunesManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:kQiniuUploadServerHost]];
         
         _opiTunesManager.requestSerializer = [AFJSONRequestSerializer serializerWithWritingOptions:0];
         
@@ -116,13 +116,13 @@
     return _opiTunesManager;
 }
 
-- (AFHTTPRequestOperation*)opUploadToQiniu:(NSData*)data
-                                   withKey:(NSString*)key
-                                  withMime:(NSString*)mime
-                                   success:(SuccessResponseHandler)success
-                                   failure:(FailureResponseHandler)failure {
+- (NSURLSessionDataTask*)opUploadToQiniu:(NSData*)data
+                                 withKey:(NSString*)key
+                                withMime:(NSString*)mime
+                                 success:(SuccessResponseHandler)success
+                                 failure:(FailureResponseHandler)failure {
     
-    id _success = ^(AFHTTPRequestOperation *operation, id responseObject) {
+    id _success = ^(NSURLSessionDataTask *task, id responseObject) {
         NSString* token = [responseObject valueForKeyNotNull:@"token"];
         if (token) {
             [self _opDoUploadToQiniuWithData:data
@@ -137,25 +137,25 @@
                                                  code:-8888
                                              userInfo: @{NSLocalizedDescriptionKey:@"Invalid Token."}];
             
-            failure(operation, error);
+            failure(task, error);
         }
     };
     
-    id _failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
-        failure(operation, error);
+    id _failure = ^(NSURLSessionDataTask *task, NSError *error) {
+        failure(task, error);
     };
     
-
-    AFHTTPRequestOperation* op = [self _opGetUploadTokenWithKey:key
+    
+    NSURLSessionDataTask* task = [self _opGetUploadTokenWithKey:key
                                                         success:_success
                                                         failure:_failure];
     
-    return op;
+    return task;
 }
 
-- (AFHTTPRequestOperation*)_opGetUploadTokenWithKey:(NSString*)key
-                         success:(SuccessResponseHandler)success
-                         failure:(FailureResponseHandler)failure {
+- (NSURLSessionDataTask*)_opGetUploadTokenWithKey:(NSString*)key
+                                          success:(SuccessResponseHandler)success
+                                          failure:(FailureResponseHandler)failure {
     NSParameterAssert(key);
     
     NSString* path = kUploadFileTokenPath;
@@ -163,20 +163,21 @@
     NSDictionary* parameters = @{@"bucket": kQiniuBucket,
                                  @"key": key};
     
-    AFHTTPRequestOperation* op =[self.opManager GET:path
+    NSURLSessionDataTask* task =[self.opManager GET:path
                                          parameters:parameters
+                                           progress:nil
                                             success:success
                                             failure:failure];
     
-    return op;
+    return task;
 }
 
-- (AFHTTPRequestOperation*)_opDoUploadToQiniuWithData:(NSData*)data
-                                           withToken:(NSString*)token
-                                              andKey:(NSString*)key
-                                             andMime:(NSString*)mime
-                                             success:(SuccessResponseHandler)success
-                                             failure:(FailureResponseHandler)failure {
+- (NSURLSessionDataTask*)_opDoUploadToQiniuWithData:(NSData*)data
+                                          withToken:(NSString*)token
+                                             andKey:(NSString*)key
+                                            andMime:(NSString*)mime
+                                            success:(SuccessResponseHandler)success
+                                            failure:(FailureResponseHandler)failure {
     
     id _formDataBlock = ^(id <AFMultipartFormData> formData) {
         [formData appendPartWithFileData:data
@@ -191,133 +192,141 @@
                                     name:@"token"];
     };
     
-    AFHTTPRequestOperation* op =[self.opQiniuManager POST:@"/"
+    NSURLSessionDataTask* task =[self.opQiniuManager POST:@"/"
                                                parameters:nil
                                 constructingBodyWithBlock:_formDataBlock
+                                                 progress:nil
                                                   success:success
                                                   failure:failure];
-    return op;
+    return task;
 }
 
-- (AFHTTPRequestOperation*)opLoginWithUsername:(NSString*)username
-                                      password:(NSString*)password
-                                       success:(SuccessResponseHandler)success
-                                       failure:(FailureResponseHandler)failure {
+- (NSURLSessionDataTask*)opLoginWithUsername:(NSString*)username
+                                    password:(NSString*)password
+                                     success:(SuccessResponseHandler)success
+                                     failure:(FailureResponseHandler)failure {
     NSParameterAssert(username && password);
-
+    
     id parameters = @{@"account_name": username,
                       @"password" : password};
-
-    AFHTTPRequestOperation* op =[self.opManager POST:kPathEmployeeLogin
+    
+    NSURLSessionDataTask* task =[self.opManager POST:kPathEmployeeLogin
                                           parameters:parameters
+                                            progress:nil
                                              success:success
                                              failure:failure];
     
-    return op;
+    return task;
 }
 
-- (AFHTTPRequestOperation*)opGetClassListOfKindergarten:(NSInteger)schoolId
-                                         withEmployeeId:(NSString*)employeePhone
-                                                success:(SuccessResponseHandler)success
-                                                failure:(FailureResponseHandler)failure {
+- (NSURLSessionDataTask*)opGetClassListOfKindergarten:(NSInteger)schoolId
+                                       withEmployeeId:(NSString*)employeePhone
+                                              success:(SuccessResponseHandler)success
+                                              failure:(FailureResponseHandler)failure {
     NSParameterAssert(employeePhone);
     
     id parameters = @{@"connected" : @"true"};
     
     NSString* apiUrl = [NSString stringWithFormat:kPathEmployeeManagedClass, @(schoolId), employeePhone];
     
-    AFHTTPRequestOperation* op =[self.opManager GET:apiUrl
+    NSURLSessionDataTask* task =[self.opManager GET:apiUrl
                                          parameters:parameters
+                                           progress:nil
                                             success:success
                                             failure:failure];
     
-    return op;
+    return task;
 }
 
-- (AFHTTPRequestOperation*)opGetSchoolInfo:(NSInteger)schoolId
-                                   success:(SuccessResponseHandler)success
-                                   failure:(FailureResponseHandler)failure; {
+- (NSURLSessionDataTask*)opGetSchoolInfo:(NSInteger)schoolId
+                                 success:(SuccessResponseHandler)success
+                                 failure:(FailureResponseHandler)failure; {
     id parameters = @{};
     
     NSString* apiUrl = [NSString stringWithFormat:kGetSchoolInfoPath, @(schoolId)];
     
-    AFHTTPRequestOperation* op =[self.opManager GET:apiUrl
+    NSURLSessionDataTask* task =[self.opManager GET:apiUrl
                                          parameters:parameters
+                                           progress:nil
                                             success:success
                                             failure:failure];
     
-    return op;
+    return task;
 }
 
-- (AFHTTPRequestOperation*)opGetChildListOfKindergarten:(NSInteger)schoolId
+- (NSURLSessionDataTask*)opGetChildListOfKindergarten:(NSInteger)schoolId
+                                        withClassList:(NSArray*)classIdList
+                                              success:(SuccessResponseHandler)success
+                                              failure:(FailureResponseHandler)failure {
+    id parameters = @{@"class_id": [classIdList componentsJoinedByString:@","],
+                      @"connected" : @"true"};
+    
+    NSString* apiUrl = [NSString stringWithFormat:kPathKindergartenChildList, @(schoolId)];
+    
+    NSURLSessionDataTask* task =[self.opManager GET:apiUrl
+                                         parameters:parameters
+                                           progress:nil
+                                            success:success
+                                            failure:failure];
+    return task;
+    
+}
+
+- (NSURLSessionDataTask*)opGetDailyLogListOfKindergarten:(NSInteger)schoolId
+                                           withClassList:(NSArray*)classIdList
+                                                 success:(SuccessResponseHandler)success
+                                                 failure:(FailureResponseHandler)failure {
+    id parameters = @{@"class_id": [classIdList componentsJoinedByString:@","]};
+    
+    NSString* apiUrl = [NSString stringWithFormat:kPathKindergartenDailylogList, @(schoolId)];
+    
+    NSURLSessionDataTask* task =[self.opManager GET:apiUrl
+                                         parameters:parameters
+                                           progress:nil
+                                            success:success
+                                            failure:failure];
+    return task;
+    
+}
+
+- (NSURLSessionDataTask*)opGetSessionListOfKindergarten:(NSInteger)schoolId
                                           withClassList:(NSArray*)classIdList
                                                 success:(SuccessResponseHandler)success
                                                 failure:(FailureResponseHandler)failure {
     id parameters = @{@"class_id": [classIdList componentsJoinedByString:@","],
                       @"connected" : @"true"};
     
-    NSString* apiUrl = [NSString stringWithFormat:kPathKindergartenChildList, @(schoolId)];
-    
-    AFHTTPRequestOperation* op =[self.opManager GET:apiUrl
-                                         parameters:parameters
-                                            success:success
-                                            failure:failure];
-    return op;
-    
-}
-
-- (AFHTTPRequestOperation*)opGetDailyLogListOfKindergarten:(NSInteger)schoolId
-                                             withClassList:(NSArray*)classIdList
-                                                   success:(SuccessResponseHandler)success
-                                                   failure:(FailureResponseHandler)failure {
-    id parameters = @{@"class_id": [classIdList componentsJoinedByString:@","]};
-    
-    NSString* apiUrl = [NSString stringWithFormat:kPathKindergartenDailylogList, @(schoolId)];
-    
-    AFHTTPRequestOperation* op =[self.opManager GET:apiUrl
-                                         parameters:parameters
-                                            success:success
-                                            failure:failure];
-    return op;
-    
-}
-
-- (AFHTTPRequestOperation*)opGetSessionListOfKindergarten:(NSInteger)schoolId
-                                            withClassList:(NSArray*)classIdList
-                                                  success:(SuccessResponseHandler)success
-                                                  failure:(FailureResponseHandler)failure {
-    id parameters = @{@"class_id": [classIdList componentsJoinedByString:@","],
-                      @"connected" : @"true"};
-    
     NSString* apiUrl = [NSString stringWithFormat:kPathKindergartenSessionList, @(schoolId)];
     
-    AFHTTPRequestOperation* op =[self.opManager GET:apiUrl
+    NSURLSessionDataTask* task =[self.opManager GET:apiUrl
                                          parameters:parameters
+                                           progress:nil
                                             success:success
                                             failure:failure];
-    return op;
+    return task;
 }
 
-- (AFHTTPRequestOperation*)opGetRelationshipOfChild:(NSString*)childId
-                                     inKindergarten:(NSInteger)schoolId
-                                            success:(SuccessResponseHandler)success
-                                            failure:(FailureResponseHandler)failure {
+- (NSURLSessionDataTask*)opGetRelationshipOfChild:(NSString*)childId
+                                   inKindergarten:(NSInteger)schoolId
+                                          success:(SuccessResponseHandler)success
+                                          failure:(FailureResponseHandler)failure {
     id parameters = @{@"child": childId};
     
     NSString* apiUrl = [NSString stringWithFormat:kPathKindergartenRelationship, @(schoolId)];
     
-    AFHTTPRequestOperation* op =[self.opManager GET:apiUrl
+    NSURLSessionDataTask* task =[self.opManager GET:apiUrl
                                          parameters:parameters
+                                           progress:nil
                                             success:success
                                             failure:failure];
-    return op;
+    return task;
     
 }
 
-- (AFHTTPRequestOperation*)opGetRelationshipOfClasses:(NSArray*)classIdList
-                                       inKindergarten:(NSInteger)schoolId
-                                              success:(SuccessResponseHandler)success
-                                              failure:(FailureResponseHandler)failure {
+- (NSURLSessionDataTask*)opGetRelationshipOfClasses:(NSArray*)classIdList
+                                     inKindergarten:(NSInteger)schoolId
+                                            success:(SuccessResponseHandler)success
+                                            failure:(FailureResponseHandler)failure {
     id parameters = @{};
     if (classIdList.count > 0) {
         parameters = @{@"class_id": [classIdList componentsJoinedByString:@","]};
@@ -325,21 +334,22 @@
     
     NSString* apiUrl = [NSString stringWithFormat:kPathKindergartenRelationship, @(schoolId)];
     
-    AFHTTPRequestOperation* op =[self.opManager GET:apiUrl
+    NSURLSessionDataTask* task =[self.opManager GET:apiUrl
                                          parameters:parameters
+                                           progress:nil
                                             success:success
                                             failure:failure];
-    return op;
+    return task;
     
 }
 
-- (AFHTTPRequestOperation*)opGetNewsOfClasses:(NSArray*)classIdList
-                               inKindergarten:(NSInteger)schoolId
-                                         from:(NSNumber*)from
-                                           to:(NSNumber*)to
-                                         most:(NSNumber*)most
-                                      success:(SuccessResponseHandler)success
-                                      failure:(FailureResponseHandler)failure {
+- (NSURLSessionDataTask*)opGetNewsOfClasses:(NSArray*)classIdList
+                             inKindergarten:(NSInteger)schoolId
+                                       from:(NSNumber*)from
+                                         to:(NSNumber*)to
+                                       most:(NSNumber*)most
+                                    success:(SuccessResponseHandler)success
+                                    failure:(FailureResponseHandler)failure {
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
     if (classIdList.count > 0) {
         [parameters setObject:[classIdList componentsJoinedByString:@","] forKey:@"class_id"];
@@ -363,20 +373,21 @@
                         @(schoolId),
                         session.loginInfo._id];
     
-    AFHTTPRequestOperation* op =[self.opManager GET:apiUrl
+    NSURLSessionDataTask* task =[self.opManager GET:apiUrl
                                          parameters:parameters
+                                           progress:nil
                                             success:success
                                             failure:failure];
-    return op;
+    return task;
 }
 
-- (AFHTTPRequestOperation*)opGetAssignmentsOfClasses:(NSArray*)classIdList
-                                      inKindergarten:(NSInteger)schoolId
-                                                from:(NSNumber*)from
-                                                  to:(NSNumber*)to
-                                                most:(NSNumber*)most
-                                             success:(SuccessResponseHandler)success
-                                             failure:(FailureResponseHandler)failure {
+- (NSURLSessionDataTask*)opGetAssignmentsOfClasses:(NSArray*)classIdList
+                                    inKindergarten:(NSInteger)schoolId
+                                              from:(NSNumber*)from
+                                                to:(NSNumber*)to
+                                              most:(NSNumber*)most
+                                           success:(SuccessResponseHandler)success
+                                           failure:(FailureResponseHandler)failure {
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
     if (classIdList.count > 0) {
         [parameters setObject:[classIdList componentsJoinedByString:@","] forKey:@"class_id"];
@@ -396,19 +407,20 @@
     
     NSString* apiUrl = [NSString stringWithFormat:kPathKindergartenAssignmentList, @(schoolId)];
     
-    AFHTTPRequestOperation* op = [self.opManager GET:apiUrl
+    NSURLSessionDataTask* task = [self.opManager GET:apiUrl
                                           parameters:parameters
+                                            progress:nil
                                              success:success
                                              failure:failure];
-    return op;
+    return task;
     
 }
 
-- (AFHTTPRequestOperation*)opChangePassword:(NSString*)newPswd
-                                withOldPswd:(NSString*)oldPswd
-                                 forAccount:(CBLoginInfo*)loginInfo
-                                    success:(SuccessResponseHandler)success
-                                    failure:(FailureResponseHandler)failure {
+- (NSURLSessionDataTask*)opChangePassword:(NSString*)newPswd
+                              withOldPswd:(NSString*)oldPswd
+                               forAccount:(CBLoginInfo*)loginInfo
+                                  success:(SuccessResponseHandler)success
+                                  failure:(FailureResponseHandler)failure {
     NSParameterAssert(newPswd);
     NSParameterAssert(oldPswd);
     NSParameterAssert(loginInfo);
@@ -422,17 +434,18 @@
                                  @"old_password": oldPswd,
                                  @"new_password": newPswd};
     
-    AFHTTPRequestOperation* op = [self.opManager POST:apiUrl
+    NSURLSessionDataTask* task = [self.opManager POST:apiUrl
                                            parameters:parameters
+                                             progress:nil
                                               success:success
                                               failure:failure];
-    return op;
+    return task;
 }
 
-- (AFHTTPRequestOperation*)opSendFeedback:(NSString*)account
-                              withContent:(NSString*)msgContent
-                                  success:(SuccessResponseHandler)success
-                                  failure:(FailureResponseHandler)failure {
+- (NSURLSessionDataTask*)opSendFeedback:(NSString*)account
+                            withContent:(NSString*)msgContent
+                                success:(SuccessResponseHandler)success
+                                failure:(FailureResponseHandler)failure {
     NSParameterAssert(account);
     NSParameterAssert(msgContent);
     
@@ -442,21 +455,22 @@
                                  @"content": msgContent,
                                  @"source": @"ios_teacher"};
     
-    AFHTTPRequestOperation* op = [self.opManager POST:apiUrl
+    NSURLSessionDataTask* task = [self.opManager POST:apiUrl
                                            parameters:parameters
+                                             progress:nil
                                               success:success
                                               failure:failure];
-    return op;
+    return task;
 }
 
 
-- (AFHTTPRequestOperation*)opPostHistoryOfKindergarten:(NSInteger)kindergarten
-                                          withSenderId:(NSString*)senderId
-                                           withChildId:(NSString*)childId
-                                           withContent:(NSString*)content
-                                      withImageUrlList:(NSArray*)imgUrlList
-                                               success:(SuccessResponseHandler)success
-                                               failure:(FailureResponseHandler)failure {
+- (NSURLSessionDataTask*)opPostHistoryOfKindergarten:(NSInteger)kindergarten
+                                        withSenderId:(NSString*)senderId
+                                         withChildId:(NSString*)childId
+                                         withContent:(NSString*)content
+                                    withImageUrlList:(NSArray*)imgUrlList
+                                             success:(SuccessResponseHandler)success
+                                             failure:(FailureResponseHandler)failure {
     NSString* apiUrl = [NSString stringWithFormat:kGetHistoryListPath, @(kindergarten), childId];
     
     id msgSender = @{@"id": senderId, @"type": @"t"};
@@ -471,21 +485,22 @@
                                  @"medium" : mediumList,
                                  @"sender": msgSender};
     
-    AFHTTPRequestOperation* op = [self.opManager POST:apiUrl
+    NSURLSessionDataTask* task = [self.opManager POST:apiUrl
                                            parameters:parameters
+                                             progress:nil
                                               success:success
                                               failure:failure];
-    return op;
+    return task;
 }
 
-- (AFHTTPRequestOperation*)opPostHistoryOfKindergarten:(NSInteger)kindergarten
-                                          withSenderId:(NSString*)senderId
-                                       withChildIdList:(NSArray*)childIdList
-                                           withContent:(NSString*)content
-                                      withImageUrlList:(NSArray*)imgUrlList
-                                          withVideoUrl:(NSString*)videoUrl
-                                               success:(SuccessResponseHandler)success
-                                               failure:(FailureResponseHandler)failure {
+- (NSURLSessionDataTask*)opPostHistoryOfKindergarten:(NSInteger)kindergarten
+                                        withSenderId:(NSString*)senderId
+                                     withChildIdList:(NSArray*)childIdList
+                                         withContent:(NSString*)content
+                                    withImageUrlList:(NSArray*)imgUrlList
+                                        withVideoUrl:(NSString*)videoUrl
+                                             success:(SuccessResponseHandler)success
+                                             failure:(FailureResponseHandler)failure {
     
     NSString* childIdListString = [childIdList componentsJoinedByString:@","];
     NSString* apiUrl = [NSString stringWithFormat:kPostBatchHistoryPath, @(kindergarten), childIdListString];
@@ -506,23 +521,24 @@
                                  @"medium" : mediumList,
                                  @"sender": msgSender};
     
-    AFHTTPRequestOperation* op = [self.opManager POST:apiUrl
+    NSURLSessionDataTask* task = [self.opManager POST:apiUrl
                                            parameters:parameters
+                                             progress:nil
                                               success:success
                                               failure:failure];
-    return op;
+    return task;
 }
 
-- (AFHTTPRequestOperation*)opPostNewsOfKindergarten:(NSInteger)kindergarten
-                                         withSender:(CBLoginInfo*)senderInfo
-                                        withClassId:(NSNumber*)classId
-                                        withContent:(NSString*)content
-                                          withTitle:(NSString*)title
-                                   withImageUrlList:(NSArray*)imgUrlList
-                                           withTags:(NSArray*)tags
-                               withRequriedFeedback:(BOOL)requriedFeedback
-                                            success:(SuccessResponseHandler)success
-                                            failure:(FailureResponseHandler)failure {
+- (NSURLSessionDataTask*)opPostNewsOfKindergarten:(NSInteger)kindergarten
+                                       withSender:(CBLoginInfo*)senderInfo
+                                      withClassId:(NSNumber*)classId
+                                      withContent:(NSString*)content
+                                        withTitle:(NSString*)title
+                                 withImageUrlList:(NSArray*)imgUrlList
+                                         withTags:(NSArray*)tags
+                             withRequriedFeedback:(BOOL)requriedFeedback
+                                          success:(SuccessResponseHandler)success
+                                          failure:(FailureResponseHandler)failure {
     NSString* apiUrl = [NSString stringWithFormat:kPathKindergartenPostNewsV2, @(kindergarten), senderInfo._id];
     
     NSString* imgUrl = [imgUrlList firstObject];
@@ -537,21 +553,22 @@
                                  @"tags": tags ? tags : @[],
                                  @"feedback_required" : @(requriedFeedback)};
     
-    AFHTTPRequestOperation* op = [self.opManager POST:apiUrl
+    NSURLSessionDataTask* task = [self.opManager POST:apiUrl
                                            parameters:parameters
+                                             progress:nil
                                               success:success
                                               failure:failure];
-    return op;
+    return task;
 }
 
-- (AFHTTPRequestOperation*)opPostAssignmentOfKindergarten:(NSInteger)kindergarten
-                                               withSender:(CBLoginInfo*)senderInfo
-                                              withClassId:(NSNumber*)classId
-                                              withContent:(NSString*)content
-                                                withTitle:(NSString*)title
-                                         withImageUrlList:(NSArray*)imgUrlList
-                                                  success:(SuccessResponseHandler)success
-                                                  failure:(FailureResponseHandler)failure {
+- (NSURLSessionDataTask*)opPostAssignmentOfKindergarten:(NSInteger)kindergarten
+                                             withSender:(CBLoginInfo*)senderInfo
+                                            withClassId:(NSNumber*)classId
+                                            withContent:(NSString*)content
+                                              withTitle:(NSString*)title
+                                       withImageUrlList:(NSArray*)imgUrlList
+                                                success:(SuccessResponseHandler)success
+                                                failure:(FailureResponseHandler)failure {
     NSString* apiUrl = [NSString stringWithFormat:kAssignmentListPath, @(kindergarten)];
     
     NSString* imgUrl = [imgUrlList firstObject];
@@ -563,33 +580,35 @@
                                  @"publisher_id" : senderInfo._id,
                                  @"icon_url" : imgUrl ? imgUrl : @""};
     
-    AFHTTPRequestOperation* op = [self.opManager POST:apiUrl
+    NSURLSessionDataTask* task = [self.opManager POST:apiUrl
                                            parameters:parameters
+                                             progress:nil
                                               success:success
                                               failure:failure];
-    return op;
+    return task;
 }
 
-- (AFHTTPRequestOperation*)opCheckUpdates:(NSString*)appId
-                                  success:(SuccessResponseHandler)success
-                                  failure:(FailureResponseHandler)failure {
+- (NSURLSessionDataTask*)opCheckUpdates:(NSString*)appId
+                                success:(SuccessResponseHandler)success
+                                failure:(FailureResponseHandler)failure {
     NSString* apiUrl = @"/lookup";
     NSDictionary* parameters = @{@"id": appId};
     
-    AFHTTPRequestOperation* op = [self.opiTunesManager POST:apiUrl
+    NSURLSessionDataTask* task = [self.opiTunesManager POST:apiUrl
                                                  parameters:parameters
+                                                   progress:nil
                                                     success:success
                                                     failure:failure];
-    return op;
+    return task;
 }
 
-- (AFHTTPRequestOperation*)opGetTopicMsgsOfChild:(NSString*)childId
-                                  inKindergarten:(NSInteger)kindergarten
-                                            from:(long long)fromId
-                                              to:(long long)toId
-                                            most:(NSInteger)most
-                                         success:(SuccessResponseHandler)success
-                                         failure:(FailureResponseHandler)failure {
+- (NSURLSessionDataTask*)opGetTopicMsgsOfChild:(NSString*)childId
+                                inKindergarten:(NSInteger)kindergarten
+                                          from:(long long)fromId
+                                            to:(long long)toId
+                                          most:(NSInteger)most
+                                       success:(SuccessResponseHandler)success
+                                       failure:(FailureResponseHandler)failure {
     NSParameterAssert(childId);
     
     NSString* apiUrl = [NSString stringWithFormat:kTopicPath, @(kindergarten), childId];
@@ -608,18 +627,19 @@
         [parameters setObject:@(most) forKey:@"most"];
     }
     
-    AFHTTPRequestOperation* op = [self.opManager GET:apiUrl
+    NSURLSessionDataTask* task = [self.opManager GET:apiUrl
                                           parameters:parameters
+                                            progress:nil
                                              success:success
                                              failure:failure];
-    return op;
+    return task;
 }
 
-- (AFHTTPRequestOperation*)opDeleteTopicMsgs:(long long)msgId
-                                     ofChild:(NSString*)childId
-                              inKindergarten:(NSInteger)kindergarten
-                                     success:(SuccessResponseHandler)success
-                                     failure:(FailureResponseHandler)failure {
+- (NSURLSessionDataTask*)opDeleteTopicMsgs:(long long)msgId
+                                   ofChild:(NSString*)childId
+                            inKindergarten:(NSInteger)kindergarten
+                                   success:(SuccessResponseHandler)success
+                                   failure:(FailureResponseHandler)failure {
     
     NSParameterAssert(childId);
     
@@ -627,22 +647,22 @@
     
     NSMutableDictionary* parameters = nil;
     
-    AFHTTPRequestOperation* op = [self.opManager DELETE:apiUrl
+    NSURLSessionDataTask* task = [self.opManager DELETE:apiUrl
                                              parameters:parameters
                                                 success:success
                                                 failure:failure];
-    return op;
+    return task;
 }
 
-- (AFHTTPRequestOperation*)opSendTopicMsg:(NSString*)msgBody
-                               withSender:(CBLoginInfo*)senderInfo
-                             withMediaUrl:(NSString*)mediaUrl
-                              ofMediaType:(NSString*)mediaType
-                                  ofChild:(NSString*)childId
-                           inKindergarten:(NSInteger)kindergarten
-                             retrieveFrom:(long long)fromId
-                                  success:(SuccessResponseHandler)success
-                                  failure:(FailureResponseHandler)failure {
+- (NSURLSessionDataTask*)opSendTopicMsg:(NSString*)msgBody
+                             withSender:(CBLoginInfo*)senderInfo
+                           withMediaUrl:(NSString*)mediaUrl
+                            ofMediaType:(NSString*)mediaType
+                                ofChild:(NSString*)childId
+                         inKindergarten:(NSInteger)kindergarten
+                           retrieveFrom:(long long)fromId
+                                success:(SuccessResponseHandler)success
+                                failure:(FailureResponseHandler)failure {
     NSParameterAssert(msgBody || mediaUrl); // 不能同时为空
     NSParameterAssert(childId);
     
@@ -679,37 +699,39 @@
                                  @"media": msgMedia,
                                  @"sender": msgSender};
     
-    AFHTTPRequestOperation* op = [self.opManager POST:apiUrl
+    NSURLSessionDataTask* task = [self.opManager POST:apiUrl
                                            parameters:parameters
+                                             progress:nil
                                               success:success
                                               failure:failure];
-    return op;
+    return task;
 }
 
-- (AFHTTPRequestOperation*)opGetTopicMsgSender:(NSString*)senderId
-                                        ofType:(NSString*)senderType
-                                inKindergarten:(NSInteger)kindergarten
-                                       success:(SuccessResponseHandler)success
-                                       failure:(FailureResponseHandler)failure {
+- (NSURLSessionDataTask*)opGetTopicMsgSender:(NSString*)senderId
+                                      ofType:(NSString*)senderType
+                              inKindergarten:(NSInteger)kindergarten
+                                     success:(SuccessResponseHandler)success
+                                     failure:(FailureResponseHandler)failure {
     NSParameterAssert(senderId && senderType);
     
     NSString* apiUrl = [NSString stringWithFormat:kTopicSenderPath, @(kindergarten), senderId];
     
     NSDictionary* parameters = @{@"type": senderType};
     
-    AFHTTPRequestOperation* op = [self.opManager GET:apiUrl
+    NSURLSessionDataTask* task = [self.opManager GET:apiUrl
                                           parameters:parameters
+                                            progress:nil
                                              success:success
                                              failure:failure];
-    return op;
+    return task;
 }
 
-- (AFHTTPRequestOperation*)opSendAssessment:(NSArray*)assessmentList
-                             inKindergarten:(NSInteger)kindergarten
-                                 fromSender:(NSString*)sender
-                               withSenderId:(NSString*)senderId
-                                    success:(SuccessResponseHandler)success
-                                    failure:(FailureResponseHandler)failure {
+- (NSURLSessionDataTask*)opSendAssessment:(NSArray*)assessmentList
+                           inKindergarten:(NSInteger)kindergarten
+                               fromSender:(NSString*)sender
+                             withSenderId:(NSString*)senderId
+                                  success:(SuccessResponseHandler)success
+                                  failure:(FailureResponseHandler)failure {
     NSString* apiUrl = [NSString stringWithFormat:kAssessmentListPath, @(kindergarten)];
     
     NSMutableArray* payload = [NSMutableArray array];
@@ -733,18 +755,19 @@
     
     id parameters = payload;
     
-    AFHTTPRequestOperation* op = [self.opManager POST:apiUrl
+    NSURLSessionDataTask* task = [self.opManager POST:apiUrl
                                            parameters:parameters
+                                             progress:nil
                                               success:success
                                               failure:failure];
-    return op;
+    return task;
     
 }
 
-- (AFHTTPRequestOperation*)opUpdateProfile:(NSDictionary*)newProfile
-                                  ofSender:(CBLoginInfo*)loginInfo
-                                   success:(SuccessResponseHandler)success
-                                   failure:(FailureResponseHandler)failure {
+- (NSURLSessionDataTask*)opUpdateProfile:(NSDictionary*)newProfile
+                                ofSender:(CBLoginInfo*)loginInfo
+                                 success:(SuccessResponseHandler)success
+                                 failure:(FailureResponseHandler)failure {
     
     NSString* apiUrl = [NSString stringWithFormat:kPathEmployeeProfile, loginInfo.school_id, loginInfo.phone];
     
@@ -763,22 +786,23 @@
     
     NSMutableDictionary* parameters = [NSMutableDictionary dictionaryWithDictionary:profile];
     [parameters addEntriesFromDictionary:newProfile];
-
     
-    AFHTTPRequestOperation* op = [self.opManager POST:apiUrl
+    
+    NSURLSessionDataTask* task = [self.opManager POST:apiUrl
                                            parameters:parameters
+                                             progress:nil
                                               success:success
                                               failure:failure];
-    return op;
+    return task;
 }
 
-- (AFHTTPRequestOperation*)opGetAssessmentsOfChild:(NSString*)childId
-                                    inKindergarten:(NSInteger)kindergarten
-                                              from:(long long)fromId
-                                                to:(long long)toId
-                                              most:(NSInteger)most
-                                           success:(SuccessResponseHandler)success
-                                           failure:(FailureResponseHandler)failure {
+- (NSURLSessionDataTask*)opGetAssessmentsOfChild:(NSString*)childId
+                                  inKindergarten:(NSInteger)kindergarten
+                                            from:(long long)fromId
+                                              to:(long long)toId
+                                            most:(NSInteger)most
+                                         success:(SuccessResponseHandler)success
+                                         failure:(FailureResponseHandler)failure {
     NSParameterAssert(childId);
     NSString* apiUrl = [NSString stringWithFormat:kPathChildAssess, @(kindergarten), SAFE_STRING(childId)];
     
@@ -796,18 +820,19 @@
         [parameters setObject:@(most) forKey:@"most"];
     }
     
-    AFHTTPRequestOperation* op = [self.opManager GET:apiUrl
+    NSURLSessionDataTask* task = [self.opManager GET:apiUrl
                                           parameters:parameters
+                                            progress:nil
                                              success:success
                                              failure:failure];
-    return op;
+    return task;
 }
 
-- (AFHTTPRequestOperation*)opResetPswdOfAccount:(NSString*)accountName
-                                    withNewPswd:(NSString*)newPswd
-                                    andAuthCode:(NSString*)authCode
-                                        success:(SuccessResponseHandler)success
-                                        failure:(FailureResponseHandler)failure {
+- (NSURLSessionDataTask*)opResetPswdOfAccount:(NSString*)accountName
+                                  withNewPswd:(NSString*)newPswd
+                                  andAuthCode:(NSString*)authCode
+                                      success:(SuccessResponseHandler)success
+                                      failure:(FailureResponseHandler)failure {
     NSParameterAssert(accountName && newPswd && authCode);
     
     NSString* apiUrl = kResetPswd;
@@ -815,90 +840,95 @@
                                  @"authcode": authCode,
                                  @"new_password": newPswd};
     
-    AFHTTPRequestOperation* op = [self.opManager POST:apiUrl
+    NSURLSessionDataTask* task = [self.opManager POST:apiUrl
                                            parameters:parameters
+                                             progress:nil
                                               success:success
                                               failure:failure];
-    return op;
+    return task;
 }
 
-- (AFHTTPRequestOperation*)opGetSmsCode:(NSString*)phone
-                                success:(SuccessResponseHandler)success
-                                failure:(FailureResponseHandler)failure {
+- (NSURLSessionDataTask*)opGetSmsCode:(NSString*)phone
+                              success:(SuccessResponseHandler)success
+                              failure:(FailureResponseHandler)failure {
     NSParameterAssert(phone);
     
     NSString* path = [NSString stringWithFormat:kGetSmsCodePath, phone];
     NSDictionary* parameters = nil;
     
-    AFHTTPRequestOperation* op = [self.opManager GET:path
+    NSURLSessionDataTask* task = [self.opManager GET:path
                                           parameters:parameters
+                                            progress:nil
                                              success:success
                                              failure:failure];
-    return op;
+    return task;
 }
 
-- (AFHTTPRequestOperation*)opGetNewsReaders:(NSNumber*)newsId
-                             inKindergarten:(NSInteger)schoolId
-                                    success:(SuccessResponseHandler)success
-                                    failure:(FailureResponseHandler)failure {
+- (NSURLSessionDataTask*)opGetNewsReaders:(NSNumber*)newsId
+                           inKindergarten:(NSInteger)schoolId
+                                  success:(SuccessResponseHandler)success
+                                  failure:(FailureResponseHandler)failure {
     NSParameterAssert(newsId);
     
     NSString* path = [NSString stringWithFormat:kKindergartenNewsMarkedPathV2, @(schoolId), newsId];
     NSDictionary* parameters = nil;
-    AFHTTPRequestOperation* op = [self.opManager GET:path
+    NSURLSessionDataTask* task = [self.opManager GET:path
                                           parameters:parameters
+                                            progress:nil
                                              success:success
                                              failure:failure];
-    return op;
+    return task;
 }
 
-- (AFHTTPRequestOperation*)opDeleteNews:(NSNumber*)newsId
-                         inKindergarten:(NSInteger)schoolId
-                                success:(SuccessResponseHandler)success
-                                failure:(FailureResponseHandler)failure {
+- (NSURLSessionDataTask*)opDeleteNews:(NSNumber*)newsId
+                       inKindergarten:(NSInteger)schoolId
+                              success:(SuccessResponseHandler)success
+                              failure:(FailureResponseHandler)failure {
     NSParameterAssert(newsId);
     
     //CSEngine* engine = [CSEngine sharedInstance];
     CBSessionDataModel* session = [CBSessionDataModel thisSession];
     NSString* path = [NSString stringWithFormat:kDeleteNewsPath, @(schoolId), session.loginInfo._id, newsId];
     NSDictionary* parameters = nil;
-    AFHTTPRequestOperation* op = [self.opManager DELETE:path
+    NSURLSessionDataTask* task = [self.opManager DELETE:path
                                              parameters:parameters
                                                 success:success
                                                 failure:failure];
-    return op;
+    return task;
 }
 
-- (AFHTTPRequestOperation*)opGetIneligibleClassOfKindergarten:(NSInteger)kindergarten
-                                                 withSenderId:(NSString*)senderId
-                                                      success:(SuccessResponseHandler)success
-                                                      failure:(FailureResponseHandler)failure {
+- (NSURLSessionDataTask*)opGetIneligibleClassOfKindergarten:(NSInteger)kindergarten
+                                               withSenderId:(NSString*)senderId
+                                                    success:(SuccessResponseHandler)success
+                                                    failure:(FailureResponseHandler)failure {
     NSString* path = [NSString stringWithFormat:kKindergartenIneligibleClassPathV3, @(kindergarten), senderId];
     NSDictionary* parameters = nil;
-    AFHTTPRequestOperation* op = [self.opManager GET:path
+    NSURLSessionDataTask* task = [self.opManager GET:path
                                           parameters:parameters
+                                            progress:nil
                                              success:success
                                              failure:failure];
-    return op;
+    return task;
 }
 
-- (AFHTTPRequestOperation*)reqGetClassesOfKindergarten:(NSInteger)kindergarten
-                                               success:(SuccessResponseHandler)success
-                                               failure:(FailureResponseHandler)failure {
+- (NSURLSessionDataTask*)reqGetClassesOfKindergarten:(NSInteger)kindergarten
+                                             success:(SuccessResponseHandler)success
+                                             failure:(FailureResponseHandler)failure {
     NSString* path = [NSString stringWithFormat:kCBClassesURL, @(kindergarten)];
     
     NSMutableDictionary* parameters = nil;
     
     return [self.opManager GET:path
-                  parameters:parameters
-                     success:success
-                     failure:failure];
+                    parameters:parameters
+                      progress:nil
+                       success:success
+                       failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqGetTeachersOfKindergarten:(NSInteger)kindergarten
-                                            withClassId:(NSInteger)classId
-                                                success:(SuccessResponseHandler)success
-                                                failure:(FailureResponseHandler)failure {
+- (NSURLSessionDataTask*)reqGetTeachersOfKindergarten:(NSInteger)kindergarten
+                                          withClassId:(NSInteger)classId
+                                              success:(SuccessResponseHandler)success
+                                              failure:(FailureResponseHandler)failure {
     NSString* path = nil;
     if (classId > 0) {
         path = [NSString stringWithFormat:kCBTeachersURL, @(kindergarten), @(classId)];
@@ -910,15 +940,16 @@
     NSMutableDictionary* parameters = nil;
     
     return [self.opManager GET:path
-                  parameters:parameters
-                     success:success
-                     failure:failure];
+                    parameters:parameters
+                      progress:nil
+                       success:success
+                       failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqGetRelationshipsOfKindergarten:(NSInteger)kindergarten
-                                                 withClassId:(NSInteger)classId
-                                                     success:(SuccessResponseHandler)success
-                                                     failure:(FailureResponseHandler)failure {
+- (NSURLSessionDataTask*)reqGetRelationshipsOfKindergarten:(NSInteger)kindergarten
+                                               withClassId:(NSInteger)classId
+                                                   success:(SuccessResponseHandler)success
+                                                   failure:(FailureResponseHandler)failure {
     NSString* path = [NSString stringWithFormat:kGetFamilyRelationshipPath, @(kindergarten)];
     
     NSDictionary* parameters = @{};
@@ -927,30 +958,32 @@
     }
     
     return [self.opManager GET:path
-                  parameters:parameters
-                     success:success
-                     failure:failure];
-}
-
-- (AFHTTPRequestOperation*)reqGetBandListOfKindergarten:(NSInteger)kindergarten
-                                            withClassId:(NSInteger)classId
-                                                success:(SuccessResponseHandler)success
-                                                failure:(FailureResponseHandler)failure {
-    NSString* path = [NSString stringWithFormat:kIMBanURL, @(kindergarten), @(classId)];
-    
-    NSDictionary* parameters = @{};
-
-    return [self.opManager GET:path
                     parameters:parameters
+                      progress:nil
                        success:success
                        failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqAddBandUser:(NSString*)imUser
-                           inKindergarten:(NSInteger)kindergarten
-                              withClassId:(NSInteger)classId
-                                  success:(SuccessResponseHandler)success
-                                  failure:(FailureResponseHandler)failure {
+- (NSURLSessionDataTask*)reqGetBandListOfKindergarten:(NSInteger)kindergarten
+                                          withClassId:(NSInteger)classId
+                                              success:(SuccessResponseHandler)success
+                                              failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kIMBanURL, @(kindergarten), @(classId)];
+    
+    NSDictionary* parameters = @{};
+    
+    return [self.opManager GET:path
+                    parameters:parameters
+                      progress:nil
+                       success:success
+                       failure:failure];
+}
+
+- (NSURLSessionDataTask*)reqAddBandUser:(NSString*)imUser
+                         inKindergarten:(NSInteger)kindergarten
+                            withClassId:(NSInteger)classId
+                                success:(SuccessResponseHandler)success
+                                failure:(FailureResponseHandler)failure {
     NSString* path = [NSString stringWithFormat:kIMBanURL, @(kindergarten), @(classId)];
     
     NSDictionary* parameters = @{@"id":SAFE_STRING(imUser),
@@ -958,61 +991,64 @@
     
     return [self.opManager POST:path
                      parameters:@[parameters]
+                       progress:nil
                         success:success
                         failure:failure];
     
 }
 
-- (AFHTTPRequestOperation*)reqDeleteBandUser:(NSString*)imUser
-                              inKindergarten:(NSInteger)kindergarten
-                                 withClassId:(NSInteger)classId
-                                     success:(SuccessResponseHandler)success
-                                     failure:(FailureResponseHandler)failure {
+- (NSURLSessionDataTask*)reqDeleteBandUser:(NSString*)imUser
+                            inKindergarten:(NSInteger)kindergarten
+                               withClassId:(NSInteger)classId
+                                   success:(SuccessResponseHandler)success
+                                   failure:(FailureResponseHandler)failure {
     NSString* path = [NSString stringWithFormat:kIMBanIdURL, @(kindergarten), @(classId), SAFE_STRING(imUser)];
     
     NSDictionary* parameters = @{};
     
     return [self.opManager DELETE:path
-                     parameters:parameters
-                        success:success
-                        failure:failure];
+                       parameters:parameters
+                          success:success
+                          failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqGetiIneligibleClass:(NSInteger)employeeId
-                                   inKindergarten:(NSInteger)kindergarten
-                                          success:(SuccessResponseHandler)success
-                                          failure:(FailureResponseHandler)failure {
+- (NSURLSessionDataTask*)reqGetiIneligibleClass:(NSInteger)employeeId
+                                 inKindergarten:(NSInteger)kindergarten
+                                        success:(SuccessResponseHandler)success
+                                        failure:(FailureResponseHandler)failure {
     NSString* path = [NSString stringWithFormat:kKindergartenIneligibleClassPathV3, @(kindergarten), @(employeeId)];
     
     NSDictionary* parameters = @{};
     
     return [self.opManager GET:path
                     parameters:parameters
+                      progress:nil
                        success:success
                        failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqIMJoinGroupOfKindergarten:(NSInteger)kindergarten
-                                            withClassId:(NSInteger)classId
-                                                success:(SuccessResponseHandler)success
-                                                failure:(FailureResponseHandler)failure {
+- (NSURLSessionDataTask*)reqIMJoinGroupOfKindergarten:(NSInteger)kindergarten
+                                          withClassId:(NSInteger)classId
+                                              success:(SuccessResponseHandler)success
+                                              failure:(FailureResponseHandler)failure {
     NSString* path = [NSString stringWithFormat:kIMGroupURL, @(kindergarten), @(classId)];
     
     NSDictionary* parameters = @{};
     
     return [self.opManager POST:path
                      parameters:parameters
+                       progress:nil
                         success:success
                         failure:failure];
 }
 
-- (AFHTTPRequestOperation*)reqGetHistoryList:(NSString*)employeeId
-                              inKindergarten:(NSInteger)kindergarten
-                                        from:(NSNumber*)from
-                                          to:(NSNumber*)to
-                                        most:(NSNumber*)most
-                                     success:(SuccessResponseHandler)success
-                                     failure:(FailureResponseHandler)failure {
+- (NSURLSessionDataTask*)reqGetHistoryList:(NSString*)employeeId
+                            inKindergarten:(NSInteger)kindergarten
+                                      from:(NSNumber*)from
+                                        to:(NSNumber*)to
+                                      most:(NSNumber*)most
+                                   success:(SuccessResponseHandler)success
+                                   failure:(FailureResponseHandler)failure {
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
     if (from) {
         [parameters setObject:from forKey:@"from"];
@@ -1030,26 +1066,28 @@
                         @(kindergarten),
                         employeeId];
     
-    AFHTTPRequestOperation* op =[self.opManager GET:apiUrl
+    NSURLSessionDataTask* task =[self.opManager GET:apiUrl
                                          parameters:parameters
+                                           progress:nil
                                             success:success
                                             failure:failure];
-    return op;
+    return task;
     
     
 }
 
-- (AFHTTPRequestOperation*)reqGetConfigOfKindergarten:(NSInteger)kindergarten
-                                              success:(SuccessResponseHandler)success
-                                              failure:(FailureResponseHandler)failure {
+- (NSURLSessionDataTask*)reqGetConfigOfKindergarten:(NSInteger)kindergarten
+                                            success:(SuccessResponseHandler)success
+                                            failure:(FailureResponseHandler)failure {
     NSString* path = [NSString stringWithFormat:kGetKindergartenConfigurePath, @(kindergarten)];
     
     NSDictionary* parameters = @{};
     
     return [self.opManager GET:path
-                  parameters:parameters
-                     success:success
-                     failure:failure];
+                    parameters:parameters
+                      progress:nil
+                       success:success
+                       failure:failure];
 }
 
 @end

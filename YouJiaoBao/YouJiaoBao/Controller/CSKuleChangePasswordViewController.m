@@ -116,7 +116,7 @@
     CSHttpClient* http = [CSHttpClient sharedInstance];
     CBSessionDataModel* session = [CBSessionDataModel thisSession];
     
-    id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
+    id success = ^(NSURLSessionDataTask *task, id responseObject) {
 //        NSString* access_token = [responseObject valueForKeyNotNull:@"access_token"];
         NSInteger error_code = [[responseObject valueForKeyNotNull:@"error_code"] integerValue];
         if (error_code == 0) {
@@ -129,7 +129,7 @@
         }
     };
     
-    id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    id failure = ^(NSURLSessionDataTask *task, NSError *error) {
         [gApp alert:@"修改密码失败。"];
     };
     

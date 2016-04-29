@@ -67,7 +67,7 @@ typedef enum : NSUInteger {
         [gApp waitingAlert:@"绑定中，请稍候..."];
         [gApp.engine.httpClient reqBindCardOfKindergarten:gApp.engine.loginInfo.schoolId
                                    withCardNum:cardNum
-                                       success:^(AFHTTPRequestOperation *operation, id dataJson) {
+                                       success:^(NSURLSessionDataTask *task, id dataJson) {
                                            NSInteger error_code = [[dataJson objectForKey:@"error_code"] integerValue];
                                            if (error_code == 0) {
                                                CSKuleRelationshipInfo* relationship = [CSKuleInterpreter decodeRelationshipInfo:dataJson];
@@ -89,7 +89,7 @@ typedef enum : NSUInteger {
                                                [gApp alert:@"绑定失败，该卡号已被占用"];
                                            }
                                        }
-                                       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                       failure:^(NSURLSessionDataTask *task, NSError *error) {
                                            [gApp alert:@"绑定失败，该卡号已被占用"];
                                        }];
     }

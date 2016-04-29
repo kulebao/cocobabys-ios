@@ -12,59 +12,59 @@
 
 @class CBLoginInfo;
 
-typedef void (^SuccessResponseHandler) (AFHTTPRequestOperation *operation, id responseObject);
-typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSError *error);
+typedef void (^SuccessResponseHandler) (NSURLSessionDataTask *task, id responseObject);
+typedef void (^FailureResponseHandler) (NSURLSessionDataTask *task, NSError *error);
 
 @interface CSHttpClient : NSObject
 
 + (id)sharedInstance;
 
-- (AFHTTPRequestOperation*)opUploadToQiniu:(NSData*)data
+- (NSURLSessionDataTask*)opUploadToQiniu:(NSData*)data
                                    withKey:(NSString*)key
                                   withMime:(NSString*)mime
                                    success:(SuccessResponseHandler)success
                                    failure:(FailureResponseHandler)failure;
 
-- (AFHTTPRequestOperation*)opLoginWithUsername:(NSString*)username
+- (NSURLSessionDataTask*)opLoginWithUsername:(NSString*)username
                                       password:(NSString*)password
                                        success:(SuccessResponseHandler)success
                                        failure:(FailureResponseHandler)failure;
 
-- (AFHTTPRequestOperation*)opGetClassListOfKindergarten:(NSInteger)schoolId
+- (NSURLSessionDataTask*)opGetClassListOfKindergarten:(NSInteger)schoolId
                                          withEmployeeId:(NSString*)employeePhone
                                                 success:(SuccessResponseHandler)success
                                                 failure:(FailureResponseHandler)failure;
 
-- (AFHTTPRequestOperation*)opGetSchoolInfo:(NSInteger)schoolId
+- (NSURLSessionDataTask*)opGetSchoolInfo:(NSInteger)schoolId
                                    success:(SuccessResponseHandler)success
                                    failure:(FailureResponseHandler)failure;
 
-- (AFHTTPRequestOperation*)opGetChildListOfKindergarten:(NSInteger)schoolId
+- (NSURLSessionDataTask*)opGetChildListOfKindergarten:(NSInteger)schoolId
                                           withClassList:(NSArray*)classIdList
                                                 success:(SuccessResponseHandler)success
                                                 failure:(FailureResponseHandler)failure;
 
-- (AFHTTPRequestOperation*)opGetDailyLogListOfKindergarten:(NSInteger)schoolId
+- (NSURLSessionDataTask*)opGetDailyLogListOfKindergarten:(NSInteger)schoolId
                                              withClassList:(NSArray*)classIdList
                                                    success:(SuccessResponseHandler)success
                                                    failure:(FailureResponseHandler)failure;
 
-- (AFHTTPRequestOperation*)opGetSessionListOfKindergarten:(NSInteger)schoolId
+- (NSURLSessionDataTask*)opGetSessionListOfKindergarten:(NSInteger)schoolId
                                             withClassList:(NSArray*)classIdList
                                                   success:(SuccessResponseHandler)success
                                                   failure:(FailureResponseHandler)failure;
 
-- (AFHTTPRequestOperation*)opGetRelationshipOfChild:(NSString*)childId
+- (NSURLSessionDataTask*)opGetRelationshipOfChild:(NSString*)childId
                                      inKindergarten:(NSInteger)schoolId
                                             success:(SuccessResponseHandler)success
                                             failure:(FailureResponseHandler)failure;
 
-- (AFHTTPRequestOperation*)opGetRelationshipOfClasses:(NSArray*)classIdList
+- (NSURLSessionDataTask*)opGetRelationshipOfClasses:(NSArray*)classIdList
                                        inKindergarten:(NSInteger)schoolId
                                               success:(SuccessResponseHandler)success
                                               failure:(FailureResponseHandler)failure;
 
-- (AFHTTPRequestOperation*)opGetNewsOfClasses:(NSArray*)classIdList
+- (NSURLSessionDataTask*)opGetNewsOfClasses:(NSArray*)classIdList
                                inKindergarten:(NSInteger)schoolId
                                          from:(NSNumber*)from
                                            to:(NSNumber*)to
@@ -72,7 +72,7 @@ typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSErr
                                       success:(SuccessResponseHandler)success
                                       failure:(FailureResponseHandler)failure;
 
-- (AFHTTPRequestOperation*)opGetAssignmentsOfClasses:(NSArray*)classIdList
+- (NSURLSessionDataTask*)opGetAssignmentsOfClasses:(NSArray*)classIdList
                                       inKindergarten:(NSInteger)schoolId
                                                 from:(NSNumber*)from
                                                   to:(NSNumber*)to
@@ -80,18 +80,18 @@ typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSErr
                                              success:(SuccessResponseHandler)success
                                              failure:(FailureResponseHandler)failure;
 
-- (AFHTTPRequestOperation*)opChangePassword:(NSString*)newPswd
+- (NSURLSessionDataTask*)opChangePassword:(NSString*)newPswd
                                 withOldPswd:(NSString*)oldPswd
                                  forAccount:(CBLoginInfo*)loginInfo
                                     success:(SuccessResponseHandler)success
                                     failure:(FailureResponseHandler)failure;
 
-- (AFHTTPRequestOperation*)opSendFeedback:(NSString*)account
+- (NSURLSessionDataTask*)opSendFeedback:(NSString*)account
                               withContent:(NSString*)msgContent
                                   success:(SuccessResponseHandler)success
                                   failure:(FailureResponseHandler)failure;
 
-- (AFHTTPRequestOperation*)opPostHistoryOfKindergarten:(NSInteger)kindergarten
+- (NSURLSessionDataTask*)opPostHistoryOfKindergarten:(NSInteger)kindergarten
                                           withSenderId:(NSString*)senderId
                                            withChildId:(NSString*)childId
                                            withContent:(NSString*)content
@@ -99,7 +99,7 @@ typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSErr
                                                success:(SuccessResponseHandler)success
                                                failure:(FailureResponseHandler)failure;
 
-- (AFHTTPRequestOperation*)opPostHistoryOfKindergarten:(NSInteger)kindergarten
+- (NSURLSessionDataTask*)opPostHistoryOfKindergarten:(NSInteger)kindergarten
                                           withSenderId:(NSString*)senderId
                                        withChildIdList:(NSArray*)childIdList
                                            withContent:(NSString*)content
@@ -108,7 +108,7 @@ typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSErr
                                                success:(SuccessResponseHandler)success
                                                failure:(FailureResponseHandler)failure;
 //tags : 作业、备忘、活动 （校园公告即没有tag)
-- (AFHTTPRequestOperation*)opPostNewsOfKindergarten:(NSInteger)kindergarten
+- (NSURLSessionDataTask*)opPostNewsOfKindergarten:(NSInteger)kindergarten
                                          withSender:(CBLoginInfo*)senderInfo
                                         withClassId:(NSNumber*)classId
                                         withContent:(NSString*)content
@@ -119,7 +119,7 @@ typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSErr
                                             success:(SuccessResponseHandler)success
                                             failure:(FailureResponseHandler)failure;
 
-- (AFHTTPRequestOperation*)opPostAssignmentOfKindergarten:(NSInteger)kindergarten
+- (NSURLSessionDataTask*)opPostAssignmentOfKindergarten:(NSInteger)kindergarten
                                                withSender:(CBLoginInfo*)senderInfo
                                               withClassId:(NSNumber*)classId
                                               withContent:(NSString*)content
@@ -128,11 +128,11 @@ typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSErr
                                                   success:(SuccessResponseHandler)success
                                                   failure:(FailureResponseHandler)failure;
 
-- (AFHTTPRequestOperation*)opCheckUpdates:(NSString*)appId
+- (NSURLSessionDataTask*)opCheckUpdates:(NSString*)appId
                                    success:(SuccessResponseHandler)success
                                    failure:(FailureResponseHandler)failure;
 
-- (AFHTTPRequestOperation*)opGetTopicMsgsOfChild:(NSString*)childId
+- (NSURLSessionDataTask*)opGetTopicMsgsOfChild:(NSString*)childId
                                   inKindergarten:(NSInteger)kindergarten
                                             from:(long long)fromId
                                               to:(long long)toId
@@ -140,13 +140,13 @@ typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSErr
                                          success:(SuccessResponseHandler)success
                                          failure:(FailureResponseHandler)failure;
 
-- (AFHTTPRequestOperation*)opDeleteTopicMsgs:(long long)msgId
+- (NSURLSessionDataTask*)opDeleteTopicMsgs:(long long)msgId
                                      ofChild:(NSString*)childId
                               inKindergarten:(NSInteger)kindergarten
                                      success:(SuccessResponseHandler)success
                                      failure:(FailureResponseHandler)failure;
 
-- (AFHTTPRequestOperation*)opSendTopicMsg:(NSString*)msgBody
+- (NSURLSessionDataTask*)opSendTopicMsg:(NSString*)msgBody
                                withSender:(CBLoginInfo*)senderInfo
                              withMediaUrl:(NSString*)mediaUrl
                               ofMediaType:(NSString*)mediaType
@@ -156,25 +156,25 @@ typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSErr
                                   success:(SuccessResponseHandler)success
                                   failure:(FailureResponseHandler)failure;
 
-- (AFHTTPRequestOperation*)opGetTopicMsgSender:(NSString*)senderId
+- (NSURLSessionDataTask*)opGetTopicMsgSender:(NSString*)senderId
                                         ofType:(NSString*)senderType
                                 inKindergarten:(NSInteger)kindergarten
                                        success:(SuccessResponseHandler)success
                                        failure:(FailureResponseHandler)failure;
 
-- (AFHTTPRequestOperation*)opSendAssessment:(NSArray*)assessmentList
+- (NSURLSessionDataTask*)opSendAssessment:(NSArray*)assessmentList
                              inKindergarten:(NSInteger)kindergarten
                                  fromSender:(NSString*)sender
                                withSenderId:(NSString*)senderId
                                     success:(SuccessResponseHandler)success
                                     failure:(FailureResponseHandler)failure;
 
-- (AFHTTPRequestOperation*)opUpdateProfile:(NSDictionary*)newProfile
+- (NSURLSessionDataTask*)opUpdateProfile:(NSDictionary*)newProfile
                                   ofSender:(CBLoginInfo*)loginInfo
                                    success:(SuccessResponseHandler)success
                                    failure:(FailureResponseHandler)failure;
 
-- (AFHTTPRequestOperation*)opGetAssessmentsOfChild:(NSString*)childId
+- (NSURLSessionDataTask*)opGetAssessmentsOfChild:(NSString*)childId
                                     inKindergarten:(NSInteger)kindergarten
                                               from:(long long)fromId
                                                 to:(long long)toId
@@ -182,74 +182,74 @@ typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSErr
                                            success:(SuccessResponseHandler)success
                                            failure:(FailureResponseHandler)failure;
 
-- (AFHTTPRequestOperation*)opResetPswdOfAccount:(NSString*)accountName
+- (NSURLSessionDataTask*)opResetPswdOfAccount:(NSString*)accountName
                                     withNewPswd:(NSString*)newPswd
                                     andAuthCode:(NSString*)authCode
                                         success:(SuccessResponseHandler)success
                                         failure:(FailureResponseHandler)failure;
 
-- (AFHTTPRequestOperation*)opGetSmsCode:(NSString*)phone
+- (NSURLSessionDataTask*)opGetSmsCode:(NSString*)phone
                                 success:(SuccessResponseHandler)success
                                 failure:(FailureResponseHandler)failure;
 
-- (AFHTTPRequestOperation*)opGetNewsReaders:(NSNumber*)newsId
+- (NSURLSessionDataTask*)opGetNewsReaders:(NSNumber*)newsId
                              inKindergarten:(NSInteger)schoolId
                                     success:(SuccessResponseHandler)success
                                     failure:(FailureResponseHandler)failure;
 
-- (AFHTTPRequestOperation*)opDeleteNews:(NSNumber*)newsId
+- (NSURLSessionDataTask*)opDeleteNews:(NSNumber*)newsId
                          inKindergarten:(NSInteger)schoolId
                                 success:(SuccessResponseHandler)success
                                 failure:(FailureResponseHandler)failure;
 
-- (AFHTTPRequestOperation*)opGetIneligibleClassOfKindergarten:(NSInteger)kindergarten
+- (NSURLSessionDataTask*)opGetIneligibleClassOfKindergarten:(NSInteger)kindergarten
                                                  withSenderId:(NSString*)senderId
                                                       success:(SuccessResponseHandler)success
                                                       failure:(FailureResponseHandler)failure;
 
-- (AFHTTPRequestOperation*)reqGetClassesOfKindergarten:(NSInteger)kindergarten
+- (NSURLSessionDataTask*)reqGetClassesOfKindergarten:(NSInteger)kindergarten
                                                success:(SuccessResponseHandler)success
                                                failure:(FailureResponseHandler)failure;
 
 
-- (AFHTTPRequestOperation*)reqGetTeachersOfKindergarten:(NSInteger)kindergarten
+- (NSURLSessionDataTask*)reqGetTeachersOfKindergarten:(NSInteger)kindergarten
                                             withClassId:(NSInteger)classId
                                                 success:(SuccessResponseHandler)success
                                                 failure:(FailureResponseHandler)failure;
 
-- (AFHTTPRequestOperation*)reqGetRelationshipsOfKindergarten:(NSInteger)kindergarten
+- (NSURLSessionDataTask*)reqGetRelationshipsOfKindergarten:(NSInteger)kindergarten
                                                  withClassId:(NSInteger)classId
                                                      success:(SuccessResponseHandler)success
                                                      failure:(FailureResponseHandler)failure;
 
-- (AFHTTPRequestOperation*)reqGetBandListOfKindergarten:(NSInteger)kindergarten
+- (NSURLSessionDataTask*)reqGetBandListOfKindergarten:(NSInteger)kindergarten
                                             withClassId:(NSInteger)classId
                                                 success:(SuccessResponseHandler)success
                                                 failure:(FailureResponseHandler)failure;
 
-- (AFHTTPRequestOperation*)reqAddBandUser:(NSString*)imUser
+- (NSURLSessionDataTask*)reqAddBandUser:(NSString*)imUser
                            inKindergarten:(NSInteger)kindergarten
                               withClassId:(NSInteger)classId
                                   success:(SuccessResponseHandler)success
                                   failure:(FailureResponseHandler)failure;
 
-- (AFHTTPRequestOperation*)reqDeleteBandUser:(NSString*)imUser
+- (NSURLSessionDataTask*)reqDeleteBandUser:(NSString*)imUser
                               inKindergarten:(NSInteger)kindergarten
                                  withClassId:(NSInteger)classId
                                      success:(SuccessResponseHandler)success
                                      failure:(FailureResponseHandler)failure;
 
-- (AFHTTPRequestOperation*)reqGetiIneligibleClass:(NSInteger)employeeId
+- (NSURLSessionDataTask*)reqGetiIneligibleClass:(NSInteger)employeeId
                                    inKindergarten:(NSInteger)kindergarten
                                           success:(SuccessResponseHandler)success
                                           failure:(FailureResponseHandler)failure;
 
-- (AFHTTPRequestOperation*)reqIMJoinGroupOfKindergarten:(NSInteger)kindergarten
+- (NSURLSessionDataTask*)reqIMJoinGroupOfKindergarten:(NSInteger)kindergarten
                                             withClassId:(NSInteger)classId
                                                 success:(SuccessResponseHandler)success
                                                 failure:(FailureResponseHandler)failure;
 
-- (AFHTTPRequestOperation*)reqGetHistoryList:(NSString*)employeeId
+- (NSURLSessionDataTask*)reqGetHistoryList:(NSString*)employeeId
                               inKindergarten:(NSInteger)kindergarten
                                         from:(NSNumber*)from
                                           to:(NSNumber*)to
@@ -257,7 +257,7 @@ typedef void (^FailureResponseHandler) (AFHTTPRequestOperation *operation, NSErr
                                      success:(SuccessResponseHandler)success
                                      failure:(FailureResponseHandler)failure;
 
-- (AFHTTPRequestOperation*)reqGetConfigOfKindergarten:(NSInteger)kindergarten
+- (NSURLSessionDataTask*)reqGetConfigOfKindergarten:(NSInteger)kindergarten
                                               success:(SuccessResponseHandler)success
                                               failure:(FailureResponseHandler)failure;
 

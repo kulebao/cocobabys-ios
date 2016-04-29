@@ -85,7 +85,7 @@
 }
 
 - (void)doSendText:(NSString*)msgBody {
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
         /* {"error_msg":"","error_code":1} */
         NSString* error_msg = [dataJson valueForKeyNotNull:@"error_msg"];
         NSInteger error_code = [[dataJson valueForKeyNotNull:@"error_code"] integerValue];
@@ -99,7 +99,7 @@
         }
     };
     
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
         CSLog(@"failure:%@", error);
         [gApp alert:[error localizedDescription]];
      };

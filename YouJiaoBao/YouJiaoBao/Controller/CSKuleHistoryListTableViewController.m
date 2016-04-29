@@ -183,7 +183,7 @@
         
         /*
         CBHistoryInfo* historyInfo = [self.historyList objectAtIndex:_denyIndexPath.row];
-        SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+        SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
             NSInteger error_code = [[dataJson valueForKeyNotNull:@"error_code"] integerValue];
             NSString* error_msg = [dataJson valueForKeyNotNull:@"error_msg"];
             if (error_code == 0) {
@@ -197,7 +197,7 @@
             _denyIndexPath = nil;
         };
         
-        FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
             _denyIndexPath = nil;
             CSLog(@"failure:%@", error);
             [gApp hideAlert];
@@ -277,7 +277,7 @@
 }
 
 - (void)doReloadHistory {
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
         [self.historyList removeAllObjects];
         for (NSDictionary* historyDict in dataJson) {
             [self.historyList addObject:[CBHistoryInfo instanceWithDictionary:historyDict]];
@@ -294,7 +294,7 @@
         [self.tableView reloadData];
     };
     
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
         CSLog(@"failure:%@", error);
         [gApp alert:error.localizedDescription];
     };
@@ -410,7 +410,7 @@
     CSHttpClient* http = [CSHttpClient sharedInstance];
     CBSessionDataModel* session = [CBSessionDataModel thisSession];
     
-    id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
+    id success = ^(NSURLSessionDataTask *task, id responseObject) {
         self.pullTableView.pullLastRefreshDate = [NSDate date];
         self.pullTableView.pullTableIsRefreshing = NO;
         
@@ -433,7 +433,7 @@
         }
     };
     
-    id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    id failure = ^(NSURLSessionDataTask *task, NSError *error) {
         self.pullTableView.pullLastRefreshDate = [NSDate date];
         self.pullTableView.pullTableIsRefreshing = NO;
     };
@@ -453,7 +453,7 @@
     CSHttpClient* http = [CSHttpClient sharedInstance];
     CBSessionDataModel* session = [CBSessionDataModel thisSession];
     
-    id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
+    id success = ^(NSURLSessionDataTask *task, id responseObject) {
         self.pullTableView.pullTableIsLoadingMore = NO;
         
         NSMutableArray* newObjList = [NSMutableArray array];
@@ -474,7 +474,7 @@
         }
     };
     
-    id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    id failure = ^(NSURLSessionDataTask *task, NSError *error) {
         self.pullTableView.pullTableIsLoadingMore = NO;
     };
     
@@ -551,7 +551,7 @@
                                session.loginInfo._id,
                                @((long long)[[NSDate date] timeIntervalSince1970]*1000)];
     
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
         _videoUrl = [NSString stringWithFormat:@"%@/%@", kQiniuDownloadServerHost, videoFileName];
         [[EGOCache globalCache] setData:videoData
                                  forKey:_videoUrl.MD5HashEx
@@ -561,7 +561,7 @@
                              }];
     };
     
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
         CSLog(@"failure:%@", error);
         [gApp alert:[error localizedDescription]];
     };
@@ -586,7 +586,7 @@
                                  session.loginInfo._id,
                                  @((long long)[[NSDate date] timeIntervalSince1970]*1000)];
         
-        SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+        SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
             NSString* imgUrl = [NSString stringWithFormat:@"%@/%@", kQiniuDownloadServerHost, imgFileName];
             CSLog(@"Uploaded:%@", imgUrl);
             [_imageUrlList addObject:imgUrl];
@@ -595,7 +595,7 @@
             [self performSelectorInBackground:@selector(doUploadImage) withObject:nil];
         };
         
-        FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+        FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
             CSLog(@"failure:%@", error);
             [gApp alert:[error localizedDescription]];
         };
@@ -617,13 +617,13 @@
     CSHttpClient* http = [CSHttpClient sharedInstance];
     CBSessionDataModel* session = [CBSessionDataModel thisSession];
     
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
         [gApp alert:@"提交成功"];
         [self.navigationController popToViewController:self animated:YES];
         [self doReloadHistory];
     };
     
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
         CSLog(@"failure:%@", error);
         [gApp alert:[error localizedDescription]];
     };

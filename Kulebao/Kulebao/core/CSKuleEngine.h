@@ -71,7 +71,7 @@
 -(NSManagedObjectContext *)managedObjectContext;
 
 #pragma mark - Retry
-- (void)retryRequestOperationAfterBind:(AFHTTPRequestOperation*)operation;
+- (void)retryRequestOperationAfterBind:(NSURLSessionDataTask*)operation;
 
 #pragma mark - Check Updates
 - (void)checkUpdatesOfNews;

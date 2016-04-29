@@ -86,7 +86,7 @@
                 [gApp waitingAlert:@"正在获取数据"];
                 [http reqGetTeachersOfKindergarten:_schoolId
                                        withClassId:_classId
-                                           success:^(AFHTTPRequestOperation *operation, id dataJson) {
+                                           success:^(NSURLSessionDataTask *task, id dataJson) {
                                                [gApp hideAlert];
                                                for (NSDictionary* json in dataJson) {
                                                    CBTeacherInfo* newObj = [CBTeacherInfo instanceWithDictionary:json];
@@ -96,7 +96,7 @@
                                                }
                                                [self reloadUI];
                                                
-                                           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                           } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                                [gApp hideAlert];
                                            }];
             }
@@ -114,7 +114,7 @@
                 [gApp waitingAlert:@"正在获取数据"];
                 [http reqGetRelationshipsOfKindergarten:_schoolId
                                             withClassId:_classId
-                                                success:^(AFHTTPRequestOperation *operation, id dataJson) {
+                                                success:^(NSURLSessionDataTask *task, id dataJson) {
                                                     [gApp hideAlert];
                                                     
                                                     NSMutableDictionary* groupedDict = [NSMutableDictionary dictionary];
@@ -139,7 +139,7 @@
                                                     
                                                     [self reloadUI];
                                                     
-                                                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                                } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                                     [gApp hideAlert];
                                                 }];
             }

@@ -2,7 +2,7 @@
 platform :ios, '7.0'
 
 target 'youlebao' do
-pod 'AFNetworking', '~> 2.0'
+pod 'AFNetworking', '~> 3.1.0'
 pod 'TPKeyboardAvoiding', '~> 1.3'
 pod 'EAIntroView', '~> 2.6.4'
 pod 'MBProgressHUD', '~> 0.9'
@@ -21,7 +21,7 @@ pod 'BlocksKit', '~> 2.2.5'
 pod 'TZImagePickerController', '~> 1.1.3'
 pod 'PINCache'
 pod 'JSPatch'
-pod 'Qiniu'
+pod 'Qiniu', :git => 'https://github.com/qiniu/objc-sdk.git', :branch => 'AFNetworking-3.x'
 
 end
 

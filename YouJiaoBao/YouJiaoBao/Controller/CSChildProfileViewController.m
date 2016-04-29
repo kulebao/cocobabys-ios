@@ -83,12 +83,12 @@
     CBSessionDataModel* sesson = [CBSessionDataModel thisSession];
     //CSEngine* engine = [CSEngine sharedInstance];
     
-    id success = ^(AFHTTPRequestOperation *operation, id jsonObjectList) {
+    id success = ^(NSURLSessionDataTask *task, id jsonObjectList) {
         [sesson updateRelationshipsByJsonObject:jsonObjectList];
         [self reloadData];
     };
     
-    id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    id failure = ^(NSURLSessionDataTask *task, NSError *error) {
         
     };
     

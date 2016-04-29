@@ -8,6 +8,6 @@
 
 #import <AFNetworking/AFNetworking.h>
 
-@interface CBHTTPRequestOperationManager : AFHTTPRequestOperationManager
+@interface CBHTTPRequestOperationManager : AFHTTPSessionManager
 
 @end

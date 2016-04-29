@@ -12,8 +12,8 @@
 
 @interface CSKuleNewsInfo ()
 
-@property (nonatomic, strong) AFHTTPRequestOperation* opMark;
-@property (nonatomic, strong) AFHTTPRequestOperation* opQuery;
+@property (nonatomic, strong) NSURLSessionTask* opMark;
+@property (nonatomic, strong) NSURLSessionTask* opQuery;
 
 @end
 
@@ -77,8 +77,8 @@
         return;
     }
     
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
-        if ([operation isEqual:self.opMark]) {
+    SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
+        if ([task isEqual:self.opMark]) {
             self.opMark = nil;
             self.status = kNewsStatusRead;
             //[gApp.engine.preferences markNews:self];
@@ -86,9 +86,9 @@
         }
     };
     
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
         CSLog(@"failure:%@", error);
-        if ([operation isEqual:self.opMark]) {
+        if ([task isEqual:self.opMark]) {
             self.opMark = nil;
             self.status = kNewsStatusUnknown;
             [self noticeUpdate];
@@ -107,8 +107,8 @@
 }
 
 - (void)queryReadStatus {
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
-        if([operation isEqual:self.opQuery]) {
+    SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
+        if([task isEqual:self.opQuery]) {
             self.opQuery = nil;
             CSKuleParentInfo* reader = [CSKuleInterpreter decodeParentInfo:dataJson];
             if ([reader.parentId isEqualToString:gApp.engine.currentRelationship.parent.parentId]) {
@@ -124,9 +124,9 @@
         }
     };
     
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
         CSLog(@"failure:%@", error);
-        if([operation isEqual:self.opQuery]) {
+        if([task isEqual:self.opQuery]) {
             self.opQuery = nil;
             self.status = kNewsStatusUnknown;
             [self noticeUpdate];

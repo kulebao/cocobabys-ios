@@ -547,8 +547,8 @@
 }
 
 #pragma mark - Retry
-- (void)retryRequestOperationAfterBind:(AFHTTPRequestOperation*)operation {
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+- (void)retryRequestOperationAfterBind:(NSURLSessionDataTask*)operation {
+    SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
         
         CSKuleBindInfo* bindInfo = [CSKuleInterpreter decodeBindInfo:dataJson];
         
@@ -574,7 +574,7 @@
         }
     };
     
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
         CSLog(@"failure:%@", error);
     };
     
@@ -592,7 +592,7 @@
 
 #pragma mark - Check Updates
 - (void)checkUpdatesOfNews {
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
         NSMutableArray* newsInfos = [NSMutableArray array];
         CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
         NSTimeInterval timestamp = [gApp.engine.preferences timestampOfModule:kKuleModuleNews forChild:currentChild.childId];
@@ -611,7 +611,7 @@
         }
     };
     
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
         CSLog(@"failure:%@", error);
         //[gApp alert:[error localizedDescription]];
     };
@@ -633,7 +633,7 @@
 }
 
 - (void)checkUpdatesOfRecipe {
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
         NSMutableArray* cookbooks = [NSMutableArray array];
         
         for (id cookbookJson in dataJson) {
@@ -665,7 +665,7 @@
         }
     };
     
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
         CSLog(@"failure:%@", error);
         //[gApp alert:[error localizedDescription]];
     };
@@ -677,7 +677,7 @@
 }
 
 - (void)checkUpdatesOfCheckin {
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
         NSMutableArray* checkInOutLogInfos = [NSMutableArray array];
         
         CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
@@ -700,7 +700,7 @@
         }
     };
     
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
         CSLog(@"failure:%@", error);
         //[gApp alert:[error localizedDescription]];
     };
@@ -722,7 +722,7 @@
 }
 
 - (void)checkUpdatesOfSchedule {
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
         NSMutableArray* scheduleInfos = [NSMutableArray array];
         
         for (id scheduleInfoJson in dataJson) {
@@ -746,7 +746,7 @@
         }
     };
     
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
         CSLog(@"failure:%@", error);
         //[gApp alert:[error localizedDescription]];
     };
@@ -766,7 +766,7 @@
 
 - (void)checkUpdatesOfAssignment {
     CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
         NSMutableArray* assignmentInfos = [NSMutableArray array];
         NSTimeInterval oldTimestamp = [gApp.engine.preferences timestampOfModule:kKuleModuleAssignment forChild:currentChild.childId];
         NSTimeInterval timestamp = oldTimestamp;
@@ -787,7 +787,7 @@
         }
     };
     
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
         CSLog(@"failure:%@", error);
         //[gApp alert:[error localizedDescription]];
     };
@@ -802,7 +802,7 @@
 }
 
 - (void)checkUpdatesOfChating {
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
         NSMutableArray* chatMsgs = [NSMutableArray array];
         
         CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
@@ -835,7 +835,7 @@
         }
     };
     
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
         CSLog(@"failure:%@", error);
         //[gApp alert:[error localizedDescription]];
     };
@@ -852,7 +852,7 @@
 - (void)checkUpdatesOfAssess {
     CSKuleChildInfo* currentChild = gApp.engine.currentRelationship.child;
     
-    SuccessResponseHandler sucessHandler = ^(AFHTTPRequestOperation *operation, id dataJson) {
+    SuccessResponseHandler sucessHandler = ^(NSURLSessionDataTask *task, id dataJson) {
         NSMutableArray* assessInfos = [NSMutableArray array];
         
         NSTimeInterval oldTimestamp = [gApp.engine.preferences timestampOfModule:kKuleModuleAssess forChild:currentChild.childId];
@@ -875,7 +875,7 @@
         }
     };
     
-    FailureResponseHandler failureHandler = ^(AFHTTPRequestOperation *operation, NSError *error) {
+    FailureResponseHandler failureHandler = ^(NSURLSessionDataTask *task, NSError *error) {
         CSLog(@"failure:%@", error);
         //[gApp alert:[error localizedDescription]];
     };

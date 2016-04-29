@@ -18,7 +18,7 @@
 static CBSessionDataModel* s_instance = NULL;
 
 @interface CBSessionDataModel() {
-    AFHTTPRequestOperation* _opReloadClassList;
+    NSURLSessionDataTask* _opReloadClassList;
 }
 
 @end
@@ -100,10 +100,10 @@ static CBSessionDataModel* s_instance = NULL;
 - (void)updateSchoolConfig:(NSInteger)schoolId{
     CSHttpClient* http = [CSHttpClient sharedInstance];
     [http reqGetConfigOfKindergarten:schoolId
-                             success:^(AFHTTPRequestOperation *operation, id dataJson) {
+                             success:^(NSURLSessionDataTask *task, id dataJson) {
                                  self.schoolConfig = [CBSchoolConfigData instanceWithDictionary:dataJson];
                                  [self processConfig];
-                             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                             } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                  
                              }];
 }
@@ -782,7 +782,7 @@ static CBSessionDataModel* s_instance = NULL;
     CBSessionDataModel* session = [CBSessionDataModel thisSession];
     [http reqGetTeachersOfKindergarten:session.loginInfo.school_id.integerValue
                            withClassId:0 //gApp.engine.currentRelationship.child.classId
-                               success:^(AFHTTPRequestOperation *operation, id dataJson) {
+                               success:^(NSURLSessionDataTask *task, id dataJson) {
                                    CSLog(@"[Success Start] %s", __FUNCTION__);
                                    [self reloadTeacherInfosByJsonObject:dataJson];
                                    [self store];
@@ -791,7 +791,7 @@ static CBSessionDataModel* s_instance = NULL;
                                    if (complete) {
                                        complete(nil);
                                    }
-                               } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                               } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                    CSLog(@"[Failure] %s", __FUNCTION__);
                                    if (complete) {
                                        complete(error);
@@ -806,7 +806,7 @@ static CBSessionDataModel* s_instance = NULL;
     CBSessionDataModel* session = [CBSessionDataModel thisSession];
     [http reqGetRelationshipsOfKindergarten:session.loginInfo.school_id.integerValue
                                 withClassId:0 //gApp.engine.currentRelationship.child.classId
-                                    success:^(AFHTTPRequestOperation *operation, id dataJson) {                                        CSLog(@"[Success Start] %s", __FUNCTION__);
+                                    success:^(NSURLSessionDataTask *task, id dataJson) {                                        CSLog(@"[Success Start] %s", __FUNCTION__);
                                         [self reloadRelationshipsByJsonObject:dataJson];
                                         [self store];
                                         [[RCIM sharedRCIM] clearUserInfoCache];
@@ -815,7 +815,7 @@ static CBSessionDataModel* s_instance = NULL;
                                         if (complete) {
                                             complete(nil);
                                         }
-                                    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                    } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                         CSLog(@"[Failure] %s", __FUNCTION__);
                                         if (complete) {
                                             complete(error);
@@ -827,13 +827,13 @@ static CBSessionDataModel* s_instance = NULL;
     CSHttpClient* http = [CSHttpClient sharedInstance];
     if (_loginInfo) {
         [http opGetSchoolInfo:_loginInfo.school_id.integerValue
-                      success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                      success:^(NSURLSessionDataTask *task, id responseObject) {
                           _schoolInfo = [CBSchoolInfo instanceWithDictionary:responseObject];
                           if (complete) {
                               complete(nil);
                           }
                           
-                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                      } failure:^(NSURLSessionDataTask *task, NSError *error) {
                           if (complete) {
                               complete(error);
                           }
@@ -850,7 +850,7 @@ static CBSessionDataModel* s_instance = NULL;
         CSLog(@"reloadIneligibleClass start.");
         [http reqGetiIneligibleClass:_loginInfo.uid.integerValue
                       inKindergarten:_loginInfo.school_id.integerValue
-                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                             success:^(NSURLSessionDataTask *task, id responseObject) {
                                  CSLog(@"reloadIneligibleClass success.");
                                  if ([responseObject isKindOfClass:[NSArray class]]) {
                                      _ineligibleClassList = responseObject;
@@ -859,7 +859,7 @@ static CBSessionDataModel* s_instance = NULL;
                                  if (complete) {
                                      complete(nil);
                                  }
-                             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                             } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                  CSLog(@"reloadIneligibleClass failure.");
                                  if (complete) {
                                      complete(error);
@@ -879,7 +879,7 @@ static CBSessionDataModel* s_instance = NULL;
         CSHttpClient* http = [CSHttpClient sharedInstance];
         CSEngine* engine = [CSEngine sharedInstance];
         
-        id success = ^(AFHTTPRequestOperation *operation, id responseObject) {
+        id success = ^(NSURLSessionDataTask *task, id responseObject) {
             [self reloadClassInfosByJsonObject:responseObject];
             [engine onLoadClassInfoList:_classInfoList];
             _opReloadClassList = nil;
@@ -888,8 +888,9 @@ static CBSessionDataModel* s_instance = NULL;
             }
         };
         
-        id failure = ^(AFHTTPRequestOperation *operation, NSError *error) {
-            if (operation.response.statusCode == 401) {
+        id failure = ^(NSURLSessionDataTask *task, NSError *error) {
+            NSHTTPURLResponse* response = (NSHTTPURLResponse*)task.response;
+            if (response.statusCode == 401) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:kNotiUnauthorized
                                                                     object:error
                                                                   userInfo:nil];

@@ -162,7 +162,6 @@
 		09C00FAB1B443DA400FC1474 /* ShareSDKShareActionSheet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C00FA11B443DA400FC1474 /* ShareSDKShareActionSheet.framework */; };
 		09C00FAF1B44408D00FC1474 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C00FAE1B44408C00FC1474 /* Security.framework */; };
 		09C00FB21B4454D500FC1474 /* CSKuleBusMainViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 09C00FB11B4454D500FC1474 /* CSKuleBusMainViewController.mm */; };
-		09C1C75F18BD92990040B06D /* AFJSONRequestOperation+CSKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C1C75C18BD92990040B06D /* AFJSONRequestOperation+CSKit.m */; };
 		09C3AC25199DAC8600A6251C /* CSContentEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C3AC23199DAC8600A6251C /* CSContentEditorViewController.m */; };
 		09C3AC29199E148D00A6251C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C3AC28199E148C00A6251C /* CFNetwork.framework */; };
 		09D04E3918DFCB830093577D /* CSKuleCheckinLogListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09D04E3818DFCB830093577D /* CSKuleCheckinLogListViewController.m */; };
@@ -661,8 +660,6 @@
 		09C00FAE1B44408C00FC1474 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		09C00FB01B4454D500FC1474 /* CSKuleBusMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSKuleBusMainViewController.h; sourceTree = "<group>"; };
 		09C00FB11B4454D500FC1474 /* CSKuleBusMainViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CSKuleBusMainViewController.mm; sourceTree = "<group>"; };
-		09C1C75B18BD92990040B06D /* AFJSONRequestOperation+CSKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AFJSONRequestOperation+CSKit.h"; sourceTree = "<group>"; };
-		09C1C75C18BD92990040B06D /* AFJSONRequestOperation+CSKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AFJSONRequestOperation+CSKit.m"; sourceTree = "<group>"; };
 		09C3AC22199DAC8600A6251C /* CSContentEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSContentEditorViewController.h; sourceTree = "<group>"; };
 		09C3AC23199DAC8600A6251C /* CSContentEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSContentEditorViewController.m; sourceTree = "<group>"; };
 		09C3AC28199E148C00A6251C /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -1584,8 +1581,6 @@
 		09C1C75A18BD92020040B06D /* net */ = {
 			isa = PBXGroup;
 			children = (
-				09C1C75B18BD92990040B06D /* AFJSONRequestOperation+CSKit.h */,
-				09C1C75C18BD92990040B06D /* AFJSONRequestOperation+CSKit.m */,
 				221858CC1BEF9EDC005C4281 /* CBHTTPRequestOperationManager.h */,
 				221858CD1BEF9EDC005C4281 /* CBHTTPRequestOperationManager.m */,
 				22DD5F761BEE674700DD62D4 /* CBHttpClient.h */,
@@ -2538,7 +2533,6 @@
 				09148E5218DAEE8A00D08F63 /* Kulebao.xcdatamodeld in Sources */,
 				22C4ACA91C21BA610079FB3E /* CBIMGroupTeacherTableViewCell.m in Sources */,
 				090903651BDF2C4100FDD2CE /* CBTextField.m in Sources */,
-				09C1C75F18BD92990040B06D /* AFJSONRequestOperation+CSKit.m in Sources */,
 				094373D7199D017B00EDD64C /* EntityHistoryInfoHelper.m in Sources */,
 				09FFB5F418D6B2FA00F07B0A /* CSKuleDailyScheduleInfo.m in Sources */,
 				09FE6AF318C5762600A840BE /* CSKuleNewsViewController.m in Sources */,

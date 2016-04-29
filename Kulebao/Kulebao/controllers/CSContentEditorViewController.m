@@ -357,7 +357,7 @@
     [picker dismissViewControllerAnimated:YES
                                completion:^{
                                    if (picker == _elcPicker) {
-                                       _elcPicker = nil;
+                                       //_elcPicker = nil;
                                    }
                                }];
 }

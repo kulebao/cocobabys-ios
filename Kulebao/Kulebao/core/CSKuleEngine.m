@@ -325,7 +325,6 @@
             }
             
             [BPush handleNotification:userInfo];
-    
     }
 }
 

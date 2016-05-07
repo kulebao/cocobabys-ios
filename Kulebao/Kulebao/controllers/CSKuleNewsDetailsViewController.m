@@ -267,6 +267,13 @@
     NSString* body = @"";
     CSKuleChildInfo* child = gApp.engine.currentRelationship.child;
     
+    for (CSKuleRelationshipInfo* relationship in gApp.engine.relationships) {
+        if ([relationship.child.childId isEqualToString:_checkInOutLogInfo.childId]) {
+            child = relationship.child;
+            break;
+        }
+    }
+    
     switch (checkInOutLogInfo.noticeType) {
         case kKuleNoticeTypeCheckIn:
             body = [NSString stringWithFormat:@"【%@】幼儿园提醒您，您的宝宝 <font color='black'>%@</font> 已于 %@  由 <font color='black'>%@</font> 刷卡入园。", publiser, child.nick, timestampString, checkInOutLogInfo.parentName];

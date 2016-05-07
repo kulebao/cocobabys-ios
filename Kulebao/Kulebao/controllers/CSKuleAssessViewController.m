@@ -19,7 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIView *viewCommentsContainer;
 @property (weak, nonatomic) IBOutlet UILabel *labTips;
 @property (weak, nonatomic) IBOutlet UILabel *labPublisher;
-@property (weak, nonatomic) IBOutlet UILabel *labComments;
+@property (weak, nonatomic) IBOutlet UITextView *txtComments;
 @property (weak, nonatomic) IBOutlet UIButton *btnPrevious;
 @property (weak, nonatomic) IBOutlet UIButton *btnNext;
 @property (weak, nonatomic) IBOutlet UILabel *labDate;
@@ -57,7 +57,8 @@
     }
     
     self.labPublisher.text = nil;
-    self.labComments.text = nil;
+    self.txtComments.text = nil;
+    self.txtComments.editable = NO;
     
     self.labDate.text = @"没有评价";
     
@@ -296,7 +297,7 @@
                 break;
         }
         
-        self.labComments.text = assessInfo.comments;
+        self.txtComments.text = assessInfo.comments;
         self.labPublisher.text = [NSString stringWithFormat:@"来自 %@ 的评语:", assessInfo.publisher];
         NSDate* date = [NSDate dateWithTimeIntervalSince1970:assessInfo.timestamp];
         self.labDate.text = [date isoDateString];
@@ -334,7 +335,7 @@
     else {
         self.labTips.text = nil;
         self.labPublisher.text = nil;
-        self.labComments.text = nil;
+        self.txtComments.text = nil;
     }
 }
 

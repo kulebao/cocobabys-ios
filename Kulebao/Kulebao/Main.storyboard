@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="YlV-Z1-aZX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="YlV-Z1-aZX">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -1793,7 +1793,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="卡片管理" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vxG-yB-MiB">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="接送卡管理" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vxG-yB-MiB">
                                                     <rect key="frame" x="56" y="0.0" width="229" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -2871,13 +2871,13 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oJ8-pn-OHO" userLabel="View - Tips">
-                                <rect key="frame" x="9" y="269" width="302" height="32"/>
+                                <rect key="frame" x="9" y="269" width="302" height="36"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="v2-bg_1.png" translatesAutoresizingMaskIntoConstraints="NO" id="6A1-Rq-MDI">
-                                        <rect key="frame" x="0.0" y="0.0" width="302" height="32"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="302" height="36"/>
                                     </imageView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="礼貌：对人有礼貌、会主动使用礼貌用语、尊重他人、不打扰别人。" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OlG-W9-8yi">
-                                        <rect key="frame" x="6" y="1" width="290" height="30"/>
+                                        <rect key="frame" x="6" y="2" width="290" height="32"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <nil key="highlightedColor"/>
@@ -2885,11 +2885,11 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="OlG-W9-8yi" secondAttribute="bottom" constant="1" id="5u7-CK-jAM"/>
-                                    <constraint firstAttribute="height" constant="32" id="LKL-r1-GL7"/>
+                                    <constraint firstAttribute="bottom" secondItem="OlG-W9-8yi" secondAttribute="bottom" constant="2" id="5u7-CK-jAM"/>
+                                    <constraint firstAttribute="height" constant="36" id="LKL-r1-GL7"/>
                                     <constraint firstItem="6A1-Rq-MDI" firstAttribute="leading" secondItem="oJ8-pn-OHO" secondAttribute="leading" id="OtE-pw-LAE"/>
                                     <constraint firstItem="6A1-Rq-MDI" firstAttribute="top" secondItem="oJ8-pn-OHO" secondAttribute="top" id="Uem-SH-yFf"/>
-                                    <constraint firstItem="OlG-W9-8yi" firstAttribute="top" secondItem="oJ8-pn-OHO" secondAttribute="top" constant="1" id="ZUz-0d-und"/>
+                                    <constraint firstItem="OlG-W9-8yi" firstAttribute="top" secondItem="oJ8-pn-OHO" secondAttribute="top" constant="2" id="ZUz-0d-und"/>
                                     <constraint firstAttribute="trailing" secondItem="OlG-W9-8yi" secondAttribute="trailing" constant="6" id="acX-Po-TiS"/>
                                     <constraint firstAttribute="bottom" secondItem="6A1-Rq-MDI" secondAttribute="bottom" id="e3Q-pS-vPW"/>
                                     <constraint firstAttribute="trailing" secondItem="6A1-Rq-MDI" secondAttribute="trailing" id="evi-df-KFu"/>
@@ -2897,37 +2897,36 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ySt-DS-uGR" userLabel="View - Comment">
-                                <rect key="frame" x="9" y="309" width="302" height="92"/>
+                                <rect key="frame" x="9" y="313" width="302" height="179"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="v2-bg_1.png" translatesAutoresizingMaskIntoConstraints="NO" id="uui-uz-fF6">
-                                        <rect key="frame" x="0.0" y="0.0" width="302" height="92"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="302" height="179"/>
                                     </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="对人有礼貌、会主动使用礼貌用语、尊重他人、不打扰别人。对人有礼貌、会主动使用礼貌用语、尊重他人、不打扰别人。对人有礼貌、会主动使用礼貌用语、尊重他人、不打扰别人。" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5c0-42-Ec2">
-                                        <rect key="frame" x="5" y="20" width="292" height="70"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="来自 xx 的评语：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qzl-kR-mYV">
                                         <rect key="frame" x="5" y="2" width="292" height="17"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="对人有礼貌、会主动使用礼貌用语、尊重他人、不打扰别人。对人有礼貌、会主动使用礼貌用语、尊重他人、不打扰别人。对人有礼貌、会主动使用礼貌用语、尊重他人、不打扰别人。" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="m3l-9s-HOD">
+                                        <rect key="frame" x="2" y="21" width="298" height="156"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="5c0-42-Ec2" firstAttribute="top" secondItem="qzl-kR-mYV" secondAttribute="bottom" constant="1" id="50A-9C-MPo"/>
+                                    <constraint firstAttribute="trailing" secondItem="m3l-9s-HOD" secondAttribute="trailing" constant="2" id="32a-J0-4yQ"/>
                                     <constraint firstItem="qzl-kR-mYV" firstAttribute="leading" secondItem="ySt-DS-uGR" secondAttribute="leading" constant="5" id="9Wd-pa-BL8"/>
+                                    <constraint firstAttribute="bottom" secondItem="m3l-9s-HOD" secondAttribute="bottom" constant="2" id="BeR-aW-tZ5"/>
+                                    <constraint firstItem="m3l-9s-HOD" firstAttribute="top" secondItem="qzl-kR-mYV" secondAttribute="bottom" constant="2" id="Ie3-Tb-gkL"/>
                                     <constraint firstAttribute="trailing" secondItem="qzl-kR-mYV" secondAttribute="trailing" constant="5" id="KMh-xk-mcf"/>
                                     <constraint firstItem="uui-uz-fF6" firstAttribute="top" secondItem="ySt-DS-uGR" secondAttribute="top" id="OjN-dP-ZAc"/>
-                                    <constraint firstItem="5c0-42-Ec2" firstAttribute="leading" secondItem="ySt-DS-uGR" secondAttribute="leading" constant="5" id="Scp-Ad-hkr"/>
-                                    <constraint firstAttribute="height" constant="92" id="VgD-BF-RA7"/>
                                     <constraint firstItem="uui-uz-fF6" firstAttribute="leading" secondItem="ySt-DS-uGR" secondAttribute="leading" id="WAD-8q-K2m"/>
                                     <constraint firstAttribute="bottom" secondItem="uui-uz-fF6" secondAttribute="bottom" id="jjU-GH-7ei"/>
-                                    <constraint firstAttribute="bottom" secondItem="5c0-42-Ec2" secondAttribute="bottom" constant="2" id="lm3-il-jeo"/>
+                                    <constraint firstItem="m3l-9s-HOD" firstAttribute="leading" secondItem="ySt-DS-uGR" secondAttribute="leading" constant="2" id="lm5-xo-zdh"/>
                                     <constraint firstItem="qzl-kR-mYV" firstAttribute="top" secondItem="ySt-DS-uGR" secondAttribute="top" constant="2" id="mze-EU-l2k"/>
-                                    <constraint firstAttribute="trailing" secondItem="5c0-42-Ec2" secondAttribute="trailing" constant="5" id="ren-30-O7p"/>
                                     <constraint firstAttribute="trailing" secondItem="uui-uz-fF6" secondAttribute="trailing" id="zNZ-GO-9FP"/>
                                 </constraints>
                             </view>
@@ -2937,6 +2936,7 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="ySt-DS-uGR" secondAttribute="trailing" constant="9" id="72V-Gb-0kp"/>
                             <constraint firstItem="oJ8-pn-OHO" firstAttribute="top" secondItem="zrh-nS-py1" secondAttribute="bottom" constant="225" id="CEb-2x-MOO"/>
+                            <constraint firstItem="8dQ-Qr-iHU" firstAttribute="top" secondItem="ySt-DS-uGR" secondAttribute="bottom" constant="12" id="MPm-h3-ZcM"/>
                             <constraint firstItem="zrh-nS-py1" firstAttribute="top" secondItem="p0Z-e5-dQZ" secondAttribute="bottom" id="Nxe-bS-qgc"/>
                             <constraint firstItem="oJ8-pn-OHO" firstAttribute="leading" secondItem="Hxl-Gz-y7N" secondAttribute="leading" constant="9" id="V1T-qb-Iba"/>
                             <constraint firstItem="ySt-DS-uGR" firstAttribute="top" secondItem="oJ8-pn-OHO" secondAttribute="bottom" constant="8" id="YM7-fP-zYI"/>
@@ -2951,10 +2951,10 @@
                     <connections>
                         <outlet property="btnNext" destination="piO-VF-X2Q" id="v1H-ip-fcI"/>
                         <outlet property="btnPrevious" destination="W9N-dU-fyj" id="fDd-nQ-nbz"/>
-                        <outlet property="labComments" destination="5c0-42-Ec2" id="6uQ-cf-b7y"/>
                         <outlet property="labDate" destination="CDc-oo-YAT" id="Trs-y5-BfX"/>
                         <outlet property="labPublisher" destination="qzl-kR-mYV" id="em8-dQ-djk"/>
                         <outlet property="labTips" destination="OlG-W9-8yi" id="XTA-Ej-7Dg"/>
+                        <outlet property="txtComments" destination="m3l-9s-HOD" id="5qg-rv-1r8"/>
                         <outlet property="viewCommentsContainer" destination="ySt-DS-uGR" id="Us7-ET-yb6"/>
                         <outlet property="viewTipsContainer" destination="oJ8-pn-OHO" id="dGP-eY-Xgx"/>
                     </connections>

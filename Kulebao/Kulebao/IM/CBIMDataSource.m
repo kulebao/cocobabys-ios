@@ -156,6 +156,9 @@
 
 #pragma mark - RCIMReceiveMessageDelegate
 - (void)onRCIMReceiveMessage:(RCMessage *)message left:(int)left {
+    [[RCIMClient sharedRCIMClient] deleteMessages:@[@(message.messageId)]];
+    return;
+    
     CBSessionDataModel* session = [CBSessionDataModel thisSession];
     if (!session.schoolConfig.schoolGroupChat && message.conversationType == ConversationType_GROUP) {
         //[[RCIMClient sharedRCIMClient] clearMessagesUnreadStatus:message.conversationType targetId:message.targetId];

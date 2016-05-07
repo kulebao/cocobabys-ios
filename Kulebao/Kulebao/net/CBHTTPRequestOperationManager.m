@@ -16,6 +16,14 @@
     return [super dataTaskWithRequest:request
                     completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
         
+                        NSHTTPURLResponse* resp = (NSHTTPURLResponse*)response;
+                        if (resp.statusCode == 401) {
+                            [gApp gotoLoginProcess];
+                            [gApp alert:@"会话已经过期，请重新登录。"];
+                        }
+                        else if (completionHandler) {
+                            completionHandler(response, responseObject, error);
+                        }
     }];
 }
 

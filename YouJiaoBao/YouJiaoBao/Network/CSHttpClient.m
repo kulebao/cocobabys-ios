@@ -970,7 +970,7 @@
                                           withClassId:(NSInteger)classId
                                               success:(SuccessResponseHandler)success
                                               failure:(FailureResponseHandler)failure {
-    NSString* path = [NSString stringWithFormat:kIMBanURL, @(kindergarten), @(classId)];
+    NSString* path = [NSString stringWithFormat:kIMBanURLV8, @(kindergarten), @(classId)];
     
     NSDictionary* parameters = @{};
     
@@ -986,7 +986,7 @@
                             withClassId:(NSInteger)classId
                                 success:(SuccessResponseHandler)success
                                 failure:(FailureResponseHandler)failure {
-    NSString* path = [NSString stringWithFormat:kIMBanURL, @(kindergarten), @(classId)];
+    NSString* path = [NSString stringWithFormat:kIMBanURLV8, @(kindergarten), @(classId)];
     
     NSDictionary* parameters = @{@"id":SAFE_STRING(imUser),
                                  @"minute":@(99999)};
@@ -1004,7 +1004,7 @@
                                withClassId:(NSInteger)classId
                                    success:(SuccessResponseHandler)success
                                    failure:(FailureResponseHandler)failure {
-    NSString* path = [NSString stringWithFormat:kIMBanIdURL, @(kindergarten), @(classId), SAFE_STRING(imUser)];
+    NSString* path = [NSString stringWithFormat:kIMBanIdURLV8, @(kindergarten), @(classId), SAFE_STRING(imUser)];
     
     NSDictionary* parameters = @{};
     
@@ -1033,7 +1033,7 @@
                                           withClassId:(NSInteger)classId
                                               success:(SuccessResponseHandler)success
                                               failure:(FailureResponseHandler)failure {
-    NSString* path = [NSString stringWithFormat:kIMGroupURL, @(kindergarten), @(classId)];
+    NSString* path = [NSString stringWithFormat:kIMGroupURLV8, @(kindergarten), @(classId)];
     
     NSDictionary* parameters = @{};
     

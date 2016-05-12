@@ -1460,4 +1460,19 @@
                      failure:failure];
 }
 
+- (NSURLSessionDataTask*)reqGetIMBandInfoOfKindergarten:(NSInteger)kindergarten
+                                            withClassId:(NSInteger)classId
+                                                success:(SuccessResponseHandler)success
+                                                failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kIMBanURLV8, @(kindergarten), @(classId)];
+    
+    NSDictionary* parameters = @{};
+    
+    return [_httpCobabys GET:path
+                  parameters:parameters
+                    progress:nil
+                     success:success
+                     failure:failure];
+}
+
 @end

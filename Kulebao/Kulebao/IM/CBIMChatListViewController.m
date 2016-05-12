@@ -13,6 +13,7 @@
 #import "CBIMGroupMembersViewController.h"
 #import "CBIMDataSource.h"
 #import "CBSessionDataModel.h"
+#import "CBHttpClient.h"
 
 @interface CBIMChatListViewController () {
     CBIMNotificationUserInfo* _rcUserInfo;

@@ -135,4 +135,8 @@
 // PATH: 获取学校配置
 #define kGetKindergartenConfigurePath  @"/api/v2/school_config/%@"
 
+#define kIMBanURLV8             @"/api/v8/kindergarten/%@/class_im_group/%@/ban"
+#define kIMBanIdURLV8           @"/api/v8/kindergarten/%@/class_im_group/%@/ban/%@"
+#define kIMGroupURLV8           @"/api/v8/kindergarten/%@/class_im_group/%@/user"
+
 #endif

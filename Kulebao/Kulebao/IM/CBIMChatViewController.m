@@ -9,6 +9,8 @@
 #import "CBIMChatViewController.h"
 #import "CBChatViewSettingsViewController.h"
 #import "CBIMDataSource.h"
+#import "CBHttpClient.h"
+#import "CBIMBanInfoData.h"
 
 @interface CBIMChatViewController ()  <CBChatViewSettingsViewControllerDelegate>
 
@@ -27,12 +29,10 @@
                                                                                   style:UIBarButtonItemStyleBordered
                                                                                  target:self
                                                                                  action:@selector(onRightNaviItemClicked:)];
+        
+        
+        [self reloadIMBindInfo];
     }
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(onMsgDeleted:)
-                                                 name:@"noti.cb.rm.msg"
-                                               object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -46,11 +46,14 @@
 
 - (RCMessageContent *)willSendMessage:(RCMessageContent *)messageCotent {
     id msg = messageCotent;
-    
-    if ([msg respondsToSelector:@selector(setExtra:)]) {
-        [msg setExtra:@"forbidden_msg"];
-    }
-    
+    if (self.conversationType == ConversationType_GROUP) {
+        BOOL band = [[CBIMDataSource sharedInstance] isBandInGroup:self.targetId];
+        
+        if (band && [msg respondsToSelector:@selector(setExtra:)]) {
+            CSLog(@"sent forbidden_msg.");
+            [msg setExtra:@"forbidden_msg"];
+        }
+    }    
     return msg;
 }
 
@@ -105,11 +108,18 @@
     [self.conversationMessageCollectionView reloadData];
 }
 
-
-- (void)onMsgDeleted:(NSNotification*)noti {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.conversationMessageCollectionView reloadData];
-    });
+- (RCMessage *)willAppendAndDisplayMessage:(RCMessage *)message {
+    RCMessage* msg = message;
+    
+    if ([message.content respondsToSelector:@selector(extra)]) {
+        NSString* extra = [(id)message.content extra];
+        if ([extra containsString:@"forbidden_msg"]) {
+            msg = nil;
+            CSLog(@"hidden forbidden_msg cell");
+        }
+    }
+    
+    return msg;
 }
 
 - (CGSize)rcConversationCollectionView:(UICollectionView *)collectionView
@@ -125,6 +135,41 @@
     }
     
     return sz;
+}
+
+#pragma mark - 
+- (void)reloadIMBindInfo {
+    NSString* group_school_id = nil;
+    NSString* group_class_id = nil;
+    
+    NSArray* components = [self.targetId componentsSeparatedByString:@"_"];
+    if (components.count == 2) {
+        group_school_id = components[0];
+        group_class_id = components[1];
+        
+        CBHttpClient* http = [CBHttpClient sharedInstance];
+        
+        [http reqGetIMBandInfoOfKindergarten:group_school_id.integerValue
+                                 withClassId:group_class_id.integerValue success:^(NSURLSessionDataTask *task, id dataJson) {
+                                     if ([dataJson isKindOfClass:[NSArray class]]) {
+                                         NSMutableArray* banInfoList = [NSMutableArray array];
+                                         for (NSDictionary* info in dataJson) {
+                                             CBIMBanInfoData* obj = [CBIMBanInfoData instanceWithDictionary:info];
+                                             if (obj) {
+                                                 [banInfoList addObject:obj];
+                                             }
+                                         }
+                                         [[[CBIMDataSource sharedInstance] banList] setObject:banInfoList
+                                                                                       forKey:self.targetId];
+                                     }
+                                     else {
+                                         [[[CBIMDataSource sharedInstance] banList] setObject:@[] forKey:self.targetId];
+                                     }
+                                 } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                                     
+                                     
+                                 }];
+    }
 }
 
 @end

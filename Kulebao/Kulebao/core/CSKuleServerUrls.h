@@ -175,4 +175,8 @@
 #define kIMBanIdURL             @"/api/v7/kindergarten/%@/class_im_group/%@/ban/%@"
 #define kIMGroupURL             @"/api/v7/kindergarten/%@/class_im_group/%@/user"
 
+#define kIMBanURLV8             @"/api/v8/kindergarten/%@/class_im_group/%@/ban"
+#define kIMBanIdURLV8           @"/api/v8/kindergarten/%@/class_im_group/%@/ban/%@"
+#define kIMGroupURLV8           @"/api/v8/kindergarten/%@/class_im_group/%@/user"
+
 #endif

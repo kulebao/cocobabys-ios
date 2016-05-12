@@ -314,4 +314,9 @@ typedef void (^FailureResponseHandler) (NSURLSessionDataTask *task, NSError *err
                                               success:(SuccessResponseHandler)success
                                               failure:(FailureResponseHandler)failure;
 
+- (NSURLSessionDataTask*)reqGetIMBandInfoOfKindergarten:(NSInteger)kindergarten
+                                            withClassId:(NSInteger)classId
+                                                success:(SuccessResponseHandler)success
+                                                failure:(FailureResponseHandler)failure;
+
 @end

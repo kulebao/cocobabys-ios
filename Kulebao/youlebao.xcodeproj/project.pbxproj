@@ -391,6 +391,7 @@
 		229C8C011CE318310076AF70 /* CBTextMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 229C8C001CE318310076AF70 /* CBTextMessage.m */; };
 		229C8C041CE3188C0076AF70 /* CBCtrlMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 229C8C031CE3188C0076AF70 /* CBCtrlMessage.m */; };
 		22B4CFF01CE44CDA00BAB0C6 /* CBIMCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B4CFEF1CE44CDA00BAB0C6 /* CBIMCommand.m */; };
+		22B4CFF31CE4831F00BAB0C6 /* CBIMBanInfoData.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B4CFF21CE4831F00BAB0C6 /* CBIMBanInfoData.m */; };
 		22BC05551C1DCD8200B8D076 /* CBParentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 22BC05541C1DCD8200B8D076 /* CBParentInfo.m */; };
 		22BC05581C1DCD9100B8D076 /* CBTeacherInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 22BC05571C1DCD9100B8D076 /* CBTeacherInfo.m */; };
 		22BC055B1C1EF46300B8D076 /* CBChildInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 22BC055A1C1EF46300B8D076 /* CBChildInfo.m */; };
@@ -984,6 +985,8 @@
 		229C8C031CE3188C0076AF70 /* CBCtrlMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBCtrlMessage.m; sourceTree = "<group>"; };
 		22B4CFEE1CE44CDA00BAB0C6 /* CBIMCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBIMCommand.h; sourceTree = "<group>"; };
 		22B4CFEF1CE44CDA00BAB0C6 /* CBIMCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBIMCommand.m; sourceTree = "<group>"; };
+		22B4CFF11CE4831F00BAB0C6 /* CBIMBanInfoData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBIMBanInfoData.h; sourceTree = "<group>"; };
+		22B4CFF21CE4831F00BAB0C6 /* CBIMBanInfoData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBIMBanInfoData.m; sourceTree = "<group>"; };
 		22BC05531C1DCD8200B8D076 /* CBParentInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBParentInfo.h; sourceTree = "<group>"; };
 		22BC05541C1DCD8200B8D076 /* CBParentInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBParentInfo.m; sourceTree = "<group>"; };
 		22BC05561C1DCD9100B8D076 /* CBTeacherInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBTeacherInfo.h; sourceTree = "<group>"; };
@@ -1087,6 +1090,8 @@
 				223962CE1C757650004E3E32 /* CBIMNotificationUserInfo.m */,
 				227A9D231C92A2A300FE19D9 /* CBSchoolConfigData.h */,
 				227A9D241C92A2A300FE19D9 /* CBSchoolConfigData.m */,
+				22B4CFF11CE4831F00BAB0C6 /* CBIMBanInfoData.h */,
+				22B4CFF21CE4831F00BAB0C6 /* CBIMBanInfoData.m */,
 			);
 			path = jsonobjects;
 			sourceTree = "<group>";
@@ -2544,6 +2549,7 @@
 				2244AD311CB8011900EA92FB /* UIGestureRecognizer+GMGridViewAdditions.m in Sources */,
 				09E209E11B86E81F00059CC1 /* CBActivityDetailViewController.m in Sources */,
 				09A9EBD218C090E200D83119 /* CSKuleAuthViewController.m in Sources */,
+				22B4CFF31CE4831F00BAB0C6 /* CBIMBanInfoData.m in Sources */,
 				0909036E1BDF4CAF00FDD2CE /* CBFamilyItemTableViewCell.m in Sources */,
 				0914E368199FCD7500276ABA /* MJPhotoToolbar.m in Sources */,
 				2287418D1CB7FEA0002815E5 /* UIColor+CSKit.m in Sources */,

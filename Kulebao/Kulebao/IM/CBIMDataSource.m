@@ -16,12 +16,14 @@
 #import "CBCtrlMessage.h"
 #import "CBTextMessage.h"
 #import "CBIMCommand.h"
+#import "CBIMBanInfoData.h"
 
 @interface CBIMDataSource ()
 
 @end
 
 @implementation CBIMDataSource
+@synthesize banList = _banList;
 
 + (instancetype)sharedInstance {
     static CBIMDataSource* s_instance = NULL;
@@ -58,6 +60,14 @@
     _teacherInfoList = [NSMutableArray arrayWithArray:[aDecoder decodeObjectForKey:@"_teacherInfoList"]];
     
     return self;
+}
+
+- (NSMutableDictionary*)banList {
+    if (_banList == nil) {
+        _banList = [NSMutableDictionary dictionary];
+    }
+    
+    return _banList;
 }
 
 #pragma mark - Persistent data
@@ -166,9 +176,11 @@
     }
     else if ([message.content isKindOfClass:[CBCtrlMessage class]]) {
         CBCtrlMessage* ctrlMsgContent = (CBCtrlMessage*)message.content;
-        
         CBIMCommand* cmd = [CBIMCommand new];
         BOOL ok = [cmd parse:ctrlMsgContent.content];
+        if (ok) {
+            [self processCmd:cmd];
+        }
         
         CSLog(@"CBCtrlMessage=%@", ctrlMsgContent.content);
     }
@@ -177,10 +189,23 @@
             NSString* extra = [(id)message.content extra];
             if ([extra containsString:@"forbidden_msg"]) {
                 BOOL ok = [[RCIMClient sharedRCIMClient] deleteMessages:@[@(message.messageId)]];
-                CSLog(@"ok=%@", @(ok));
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"noti.cb.rm.msg" object:nil];
+                CSLog(@"deleted forbidden_msg success=%@", @(ok));
+                //[[NSNotificationCenter defaultCenter] postNotificationName:@"noti.cb.rm.msg" object:message];
             }
         }
+    }
+}
+
+- (void)processCmd:(CBIMCommand*)cmd {
+    if ([cmd.cmd isEqualToString:@"ban"]) {
+        [[CBIMDataSource sharedInstance] setGroup:[NSString stringWithFormat:@"%@_%@", cmd.schoolId, cmd.classId]
+                                             user:cmd.userId
+                                              ban:YES];
+    }
+    else if ([cmd.cmd isEqualToString:@"approval"]) {
+        [[CBIMDataSource sharedInstance] setGroup:[NSString stringWithFormat:@"%@_%@", cmd.schoolId, cmd.classId]
+                                             user:cmd.userId
+                                              ban:NO];
     }
 }
 
@@ -360,6 +385,42 @@
                                     } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                         
                                     }];
+}
+
+- (BOOL)isBandInGroup:(NSString*)groupId {
+    BOOL ban = NO;
+    
+    NSMutableArray* banInfoList = [self.banList objectForKey:groupId];
+    NSString* userId = [[[RCIM sharedRCIM] currentUserInfo] userId];
+    for (CBIMBanInfoData* info in banInfoList) {
+        if ([userId isEqualToString:info._id]) {
+            ban = YES;
+            break;
+        }
+    }
+    
+    return ban;
+}
+
+- (void)setGroup:(NSString*)groupId user:(NSString*)userId ban:(BOOL)ban {
+    NSMutableArray* banInfoList = [self.banList objectForKey:groupId];
+    if (banInfoList == nil) {
+        banInfoList = [NSMutableArray array];
+        [self.banList setObject:banInfoList forKey:groupId];
+    }
+    
+    if (ban) {
+        CBIMBanInfoData* info = [CBIMBanInfoData new];
+        info._id = [[[RCIM sharedRCIM] currentUserInfo] userId];
+        [banInfoList addObject:info];
+    }
+    else {
+        for (CBIMBanInfoData* info in banInfoList) {
+            if ([userId isEqualToString:info._id]) {
+                info._id = @"";
+            }
+        }
+    }
 }
 
 @end

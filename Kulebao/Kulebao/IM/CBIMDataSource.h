@@ -14,9 +14,14 @@
 @property (nonatomic, strong, readonly) NSMutableArray* relationshipInfoList;
 @property (nonatomic, strong, readonly) NSMutableArray* teacherInfoList;
 
+@property (nonatomic, strong, readonly) NSMutableDictionary* banList;
+
 + (instancetype)sharedInstance;
 
 - (void)reloadRelationships;
 - (void)reloadTeachers;
+
+- (BOOL)isBandInGroup:(NSString*)groupId;
+- (void)setGroup:(NSString*)groupId user:(NSString*)userId ban:(BOOL)ban;
 
 @end

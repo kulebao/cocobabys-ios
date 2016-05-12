@@ -15,6 +15,8 @@
 #import "CBSessionDataModel.h"
 #import "AFNetworkReachabilityManager.h"
 #import "AFNetworkActivityIndicatorManager.h"
+#import "CBTextMessage.h"
+#import "CBCtrlMessage.h"
 
 CSAppDelegate* gApp = nil;
 
@@ -48,6 +50,9 @@ CSAppDelegate* gApp = nil;
     [[RCIM sharedRCIM] setUserInfoDataSource:[CBIMDataSource sharedInstance]];
     [[RCIM sharedRCIM] setGroupUserInfoDataSource:[CBIMDataSource sharedInstance]];
     [[RCIM sharedRCIM] setReceiveMessageDelegate:[CBIMDataSource sharedInstance]];
+    
+    [[RCIM sharedRCIM] registerMessageType:[CBCtrlMessage class]];
+    [[RCIM sharedRCIM] registerMessageType:[CBTextMessage class]];
     
     _engine = [[CSKuleEngine alloc] init];
     [_engine setupEngine];

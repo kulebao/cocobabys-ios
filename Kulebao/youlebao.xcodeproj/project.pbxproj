@@ -388,6 +388,9 @@
 		228C88781C1546A5003D9EA2 /* CBChatViewSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 228C88761C1546A5003D9EA2 /* CBChatViewSettingsViewController.m */; };
 		228C887B1C1546EF003D9EA2 /* IM.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 228C887A1C1546EF003D9EA2 /* IM.storyboard */; };
 		229538891C3CC5C700D22278 /* CBIMSettingsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 229538881C3CC5C700D22278 /* CBIMSettingsModel.m */; };
+		229C8C011CE318310076AF70 /* CBTextMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 229C8C001CE318310076AF70 /* CBTextMessage.m */; };
+		229C8C041CE3188C0076AF70 /* CBCtrlMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 229C8C031CE3188C0076AF70 /* CBCtrlMessage.m */; };
+		22B4CFF01CE44CDA00BAB0C6 /* CBIMCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B4CFEF1CE44CDA00BAB0C6 /* CBIMCommand.m */; };
 		22BC05551C1DCD8200B8D076 /* CBParentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 22BC05541C1DCD8200B8D076 /* CBParentInfo.m */; };
 		22BC05581C1DCD9100B8D076 /* CBTeacherInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 22BC05571C1DCD9100B8D076 /* CBTeacherInfo.m */; };
 		22BC055B1C1EF46300B8D076 /* CBChildInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 22BC055A1C1EF46300B8D076 /* CBChildInfo.m */; };
@@ -975,6 +978,12 @@
 		228C887A1C1546EF003D9EA2 /* IM.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = IM.storyboard; sourceTree = "<group>"; };
 		229538871C3CC5C700D22278 /* CBIMSettingsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBIMSettingsModel.h; sourceTree = "<group>"; };
 		229538881C3CC5C700D22278 /* CBIMSettingsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBIMSettingsModel.m; sourceTree = "<group>"; };
+		229C8BFF1CE318310076AF70 /* CBTextMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBTextMessage.h; sourceTree = "<group>"; };
+		229C8C001CE318310076AF70 /* CBTextMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBTextMessage.m; sourceTree = "<group>"; };
+		229C8C021CE3188C0076AF70 /* CBCtrlMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBCtrlMessage.h; sourceTree = "<group>"; };
+		229C8C031CE3188C0076AF70 /* CBCtrlMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBCtrlMessage.m; sourceTree = "<group>"; };
+		22B4CFEE1CE44CDA00BAB0C6 /* CBIMCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBIMCommand.h; sourceTree = "<group>"; };
+		22B4CFEF1CE44CDA00BAB0C6 /* CBIMCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBIMCommand.m; sourceTree = "<group>"; };
 		22BC05531C1DCD8200B8D076 /* CBParentInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBParentInfo.h; sourceTree = "<group>"; };
 		22BC05541C1DCD8200B8D076 /* CBParentInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBParentInfo.m; sourceTree = "<group>"; };
 		22BC05561C1DCD9100B8D076 /* CBTeacherInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBTeacherInfo.h; sourceTree = "<group>"; };
@@ -2019,6 +2028,7 @@
 		228C885F1C0F58B9003D9EA2 /* IM */ = {
 			isa = PBXGroup;
 			children = (
+				229C8BFE1CE317FA0076AF70 /* RongCloud */,
 				228C88601C0F58DC003D9EA2 /* CBIMChatListViewController.h */,
 				228C88611C0F58DC003D9EA2 /* CBIMChatListViewController.m */,
 				228C88661C100A4A003D9EA2 /* CBIMChatViewController.h */,
@@ -2043,9 +2053,22 @@
 				22C4ACA81C21BA610079FB3E /* CBIMGroupTeacherTableViewCell.m */,
 				229538871C3CC5C700D22278 /* CBIMSettingsModel.h */,
 				229538881C3CC5C700D22278 /* CBIMSettingsModel.m */,
+				22B4CFEE1CE44CDA00BAB0C6 /* CBIMCommand.h */,
+				22B4CFEF1CE44CDA00BAB0C6 /* CBIMCommand.m */,
 				228C887A1C1546EF003D9EA2 /* IM.storyboard */,
 			);
 			path = IM;
+			sourceTree = "<group>";
+		};
+		229C8BFE1CE317FA0076AF70 /* RongCloud */ = {
+			isa = PBXGroup;
+			children = (
+				229C8BFF1CE318310076AF70 /* CBTextMessage.h */,
+				229C8C001CE318310076AF70 /* CBTextMessage.m */,
+				229C8C021CE3188C0076AF70 /* CBCtrlMessage.h */,
+				229C8C031CE3188C0076AF70 /* CBCtrlMessage.m */,
+			);
+			path = RongCloud;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2375,6 +2398,7 @@
 				090FC11D199B3FC300C3A31A /* HMAudioPlayer.m in Sources */,
 				0914E327199FBB5B00276ABA /* EntitySenderInfo.m in Sources */,
 				228741851CB7FEA0002815E5 /* CSURLCache.m in Sources */,
+				229C8C041CE3188C0076AF70 /* CBCtrlMessage.m in Sources */,
 				22BC055E1C1EF48900B8D076 /* CBRelationshipInfo.m in Sources */,
 				09A9EBD518C0A01B00D83119 /* CSKuleMainViewController.m in Sources */,
 				22BC05611C1F157800B8D076 /* CBIMGroupMembersViewController.m in Sources */,
@@ -2389,6 +2413,7 @@
 				228741871CB7FEA0002815E5 /* NSDictionary+CSKit.m in Sources */,
 				09FFB5F118D6B2E100F07B0A /* CSKuleWeekScheduleInfo.m in Sources */,
 				2244ADDC1CB8056C00EA92FB /* CBCoreDataHelper.m in Sources */,
+				229C8C011CE318310076AF70 /* CBTextMessage.m in Sources */,
 				09C00FB21B4454D500FC1474 /* CSKuleBusMainViewController.mm in Sources */,
 				0904553219BDB8CA00FEF2C9 /* CSKuleVideoMember.m in Sources */,
 				2287417A1CB7FEA0002815E5 /* CSDatePickerButton.m in Sources */,
@@ -2402,6 +2427,7 @@
 				2244AD331CB8011900EA92FB /* KxMenu.m in Sources */,
 				09F0BFAE18F1C483004629BA /* UIViewController+MJPopupViewController.m in Sources */,
 				090FC121199B3FC300C3A31A /* NSCyscleBuffer.m in Sources */,
+				22B4CFF01CE44CDA00BAB0C6 /* CBIMCommand.m in Sources */,
 				228741771CB7FEA0002815E5 /* CSButtonGroup.m in Sources */,
 				09EEBA271B8632C3006296F1 /* CBActivityMainViewController.m in Sources */,
 				09FE6AFE18C5BB5600A840BE /* CSKuleRecipeViewController.m in Sources */,

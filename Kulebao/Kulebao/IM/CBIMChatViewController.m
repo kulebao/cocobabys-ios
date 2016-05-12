@@ -28,6 +28,11 @@
                                                                                  target:self
                                                                                  action:@selector(onRightNaviItemClicked:)];
     }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onMsgDeleted:)
+                                                 name:@"noti.cb.rm.msg"
+                                               object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,6 +42,16 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+}
+
+- (RCMessageContent *)willSendMessage:(RCMessageContent *)messageCotent {
+    id msg = messageCotent;
+    
+    if ([msg respondsToSelector:@selector(setExtra:)]) {
+        [msg setExtra:@"forbidden_msg"];
+    }
+    
+    return msg;
 }
 
 #pragma mark - Navigation
@@ -88,6 +103,28 @@
 - (void)chatViewSettingsViewControllerDidClearMsg:(CBChatViewSettingsViewController*)ctrl {
     [self.conversationDataRepository removeAllObjects];
     [self.conversationMessageCollectionView reloadData];
+}
+
+
+- (void)onMsgDeleted:(NSNotification*)noti {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.conversationMessageCollectionView reloadData];
+    });
+}
+
+- (CGSize)rcConversationCollectionView:(UICollectionView *)collectionView
+                                layout:(UICollectionViewLayout *)collectionViewLayout
+                sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    CGSize sz = [super rcConversationCollectionView:collectionView layout:collectionViewLayout sizeForItemAtIndexPath:indexPath];
+    
+    RCMessageModel* msgModel = [self.conversationDataRepository objectAtIndex:indexPath.row];
+    id msgContent = msgModel.content;
+    NSString* extra = [msgContent extra];
+    if (extra.length > 0) {
+        sz = CGSizeZero;
+    }
+    
+    return sz;
 }
 
 @end

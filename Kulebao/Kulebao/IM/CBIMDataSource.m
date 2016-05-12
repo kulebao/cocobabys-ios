@@ -13,6 +13,9 @@
 #import "CBTeacherInfo.h"
 #import "CBRelationshipInfo.h"
 #import "CBSessionDataModel.h"
+#import "CBCtrlMessage.h"
+#import "CBTextMessage.h"
+#import "CBIMCommand.h"
 
 @interface CBIMDataSource ()
 
@@ -156,13 +159,28 @@
 
 #pragma mark - RCIMReceiveMessageDelegate
 - (void)onRCIMReceiveMessage:(RCMessage *)message left:(int)left {
-    [[RCIMClient sharedRCIMClient] deleteMessages:@[@(message.messageId)]];
-    return;
-    
     CBSessionDataModel* session = [CBSessionDataModel thisSession];
     if (!session.schoolConfig.schoolGroupChat && message.conversationType == ConversationType_GROUP) {
         //[[RCIMClient sharedRCIMClient] clearMessagesUnreadStatus:message.conversationType targetId:message.targetId];
         [[RCIMClient sharedRCIMClient] clearMessages:message.conversationType targetId:message.targetId];
+    }
+    else if ([message.content isKindOfClass:[CBCtrlMessage class]]) {
+        CBCtrlMessage* ctrlMsgContent = (CBCtrlMessage*)message.content;
+        
+        CBIMCommand* cmd = [CBIMCommand new];
+        BOOL ok = [cmd parse:ctrlMsgContent.content];
+        
+        CSLog(@"CBCtrlMessage=%@", ctrlMsgContent.content);
+    }
+    else if (message.conversationType == ConversationType_GROUP) {
+        if ([message.content respondsToSelector:@selector(extra)]) {
+            NSString* extra = [(id)message.content extra];
+            if ([extra containsString:@"forbidden_msg"]) {
+                BOOL ok = [[RCIMClient sharedRCIMClient] deleteMessages:@[@(message.messageId)]];
+                CSLog(@"ok=%@", @(ok));
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"noti.cb.rm.msg" object:nil];
+            }
+        }
     }
 }
 

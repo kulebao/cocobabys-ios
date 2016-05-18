@@ -111,7 +111,8 @@
 - (RCMessage *)willAppendAndDisplayMessage:(RCMessage *)message {
     RCMessage* msg = message;
     
-    if ([message.content respondsToSelector:@selector(extra)]) {
+    if ([message.content respondsToSelector:@selector(extra)]
+        && ![message.senderUserId isEqualToString:[[[RCIM sharedRCIM] currentUserInfo] userId]]) {
         NSString* extra = [(id)message.content extra];
         if ([extra containsString:@"forbidden_msg"]) {
             msg = nil;

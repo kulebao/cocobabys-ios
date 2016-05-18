@@ -165,19 +165,20 @@
 {
     if (yuv_pic->ydata == NULL || yuv_pic->udata == NULL || yuv_pic->vdata == NULL) return;
     
-    picture_width = yuv_pic->width;
-    picture_height = yuv_pic->height;
-    
-    setFrameBuffer(yuv_pic->ydata, yuv_pic->udata, yuv_pic->vdata, yuv_pic->ystripe, yuv_pic->ustripe, yuv_pic->ustripe, yuv_pic->width, yuv_pic->height);
-    
-    [EAGLContext setCurrentContext:Mcontext];
-	glBindFramebufferOES(GL_FRAMEBUFFER_OES, viewFramebuffer);
-    
-    gLRender();
-    
-    glBindRenderbufferOES(GL_RENDERBUFFER_OES, viewRenderbuffer);
-	[Mcontext presentRenderbuffer:GL_RENDERBUFFER_OES];
-    
+    @synchronized (self) {
+        picture_width = yuv_pic->width;
+        picture_height = yuv_pic->height;
+        
+        setFrameBuffer(yuv_pic->ydata, yuv_pic->udata, yuv_pic->vdata, yuv_pic->ystripe, yuv_pic->ustripe, yuv_pic->ustripe, yuv_pic->width, yuv_pic->height);
+        
+        [EAGLContext setCurrentContext:Mcontext];
+        glBindFramebufferOES(GL_FRAMEBUFFER_OES, viewFramebuffer);
+        
+        gLRender();
+        
+        glBindRenderbufferOES(GL_RENDERBUFFER_OES, viewRenderbuffer);
+        [Mcontext presentRenderbuffer:GL_RENDERBUFFER_OES];
+    }
 }
 
 

@@ -16,6 +16,7 @@
 #import "CSContentEditorViewController.h"
 #import "CBIMChatListViewController.h"
 #import "CBSessionDataModel.h"
+#import <UAAppReviewManager.h>
 
 #define kTestChildId    @"2_2088_900"
 
@@ -69,6 +70,13 @@
     [self reloadRelationships];
     [self reloadIneligibleClass];
     [self reloadTeachers];
+    
+    // Ask 4 review if needed
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [UAAppReviewManager setAppID:kAppStoreID];
+        //[UAAppReviewManager setDebug:YES];
+        [UAAppReviewManager showPromptIfNecessary];
+    });
 }
 
 - (void)didReceiveMemoryWarning

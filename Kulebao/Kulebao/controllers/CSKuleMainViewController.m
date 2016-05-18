@@ -36,6 +36,7 @@
 
 #import "CBSessionDataModel.h"
 #import <RongIMKit/RongIMKit.h>
+#import <UAAppReviewManager.h>
 
 @interface CSKuleMainViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate, EAIntroDelegate> {
     UIImagePickerController* _imgPicker;
@@ -180,6 +181,13 @@
                                              selector:@selector(appWillEnterForeground:)
                                                  name:UIApplicationWillEnterForegroundNotification
                                                object:nil];
+    
+    // Ask 4 review if needed
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [UAAppReviewManager setAppID:kAppStoreID];
+        //[UAAppReviewManager setDebug:YES];
+        [UAAppReviewManager showPromptIfNecessary];
+    });
 }
 
 - (void)didReceiveMemoryWarning

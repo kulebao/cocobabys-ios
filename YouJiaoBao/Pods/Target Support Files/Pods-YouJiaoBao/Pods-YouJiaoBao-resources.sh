@@ -87,6 +87,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "TZImagePickerController/TZImagePickerController/TZImagePickerController/Resource/TZAlbumCell.xib"
   install_resource "TZImagePickerController/TZImagePickerController/TZImagePickerController/Resource/TZAssetCell.xib"
   install_resource "TZImagePickerController/TZImagePickerController/TZImagePickerController/Resource/VideoSendIcon@2x.png"
+  install_resource "${BUILT_PRODUCTS_DIR}/UAAppReviewManager-iOS.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "ALAlertBanner/ALAlertBanner/Images/bannerAlert.png"
@@ -118,6 +119,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "TZImagePickerController/TZImagePickerController/TZImagePickerController/Resource/TZAlbumCell.xib"
   install_resource "TZImagePickerController/TZImagePickerController/TZImagePickerController/Resource/TZAssetCell.xib"
   install_resource "TZImagePickerController/TZImagePickerController/TZImagePickerController/Resource/VideoSendIcon@2x.png"
+  install_resource "${BUILT_PRODUCTS_DIR}/UAAppReviewManager-iOS.bundle"
 fi
 
 mkdir -p "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"

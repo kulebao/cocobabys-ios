@@ -353,7 +353,7 @@
                                        }
                                    }
                                    
-                                   [self store];
+                                   //[self store];
                                    [[RCIM sharedRCIM] clearUserInfoCache];
                                } failure:^(NSURLSessionDataTask *task, NSError *error) {
                                    
@@ -379,7 +379,7 @@
                                             }
                                         }
                                         
-                                        [self store];
+                                        //[self store];
                                         [[RCIM sharedRCIM] clearUserInfoCache];
                                         [[RCIM sharedRCIM] clearGroupInfoCache];
                                     } failure:^(NSURLSessionDataTask *task, NSError *error) {

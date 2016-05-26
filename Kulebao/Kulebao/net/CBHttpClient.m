@@ -1475,4 +1475,36 @@
                      failure:failure];
 }
 
+- (NSURLSessionDataTask*)reqHideGroupMsgs:(NSArray*)msgUids
+                           inKindergarten:(NSInteger)kindergarten
+                              withClassId:(NSInteger)classId
+                                  success:(SuccessResponseHandler)success
+                                  failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kIMHideGroupMsgsURLV8, @(kindergarten), @(classId)];
+    
+    NSArray* parameters =msgUids;
+    
+    return [_httpCobabys POST:path
+                   parameters:parameters
+                     progress:nil
+                      success:success
+                      failure:failure];
+}
+
+- (NSURLSessionDataTask*)reqHidePrivateMsgs:(NSArray*)msgUids
+                             inKindergarten:(NSInteger)kindergarten
+                               withTargetId:(NSString*)targetId
+                                    success:(SuccessResponseHandler)success
+                                    failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kIMHidePrivateMsgsURLV8, @(kindergarten)];
+    
+    NSArray* parameters = msgUids;
+    
+    return [_httpCobabys POST:path
+                   parameters:parameters
+                     progress:nil
+                      success:success
+                      failure:failure];
+}
+
 @end

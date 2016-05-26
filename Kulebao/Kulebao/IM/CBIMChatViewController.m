@@ -11,6 +11,10 @@
 #import "CBIMDataSource.h"
 #import "CBHttpClient.h"
 #import "CBIMBanInfoData.h"
+#import <objc/runtime.h>
+#import "CSAppDelegate.h"
+#import "MJPhotoBrowser.h"
+#import "MJPhoto.h"
 
 @interface CBIMChatViewController ()  <CBChatViewSettingsViewControllerDelegate>
 
@@ -53,7 +57,8 @@
             CSLog(@"sent forbidden_msg.");
             [msg setExtra:@"forbidden_msg"];
         }
-    }    
+    }
+    
     return msg;
 }
 
@@ -102,6 +107,134 @@
     }
 }
 
+- (void)didTapMessageCell:(RCMessageModel *)model {
+    RCMessageContent* msgContent = model.content;
+    if ([msgContent isKindOfClass:[RCImageMessage class]]) {
+        MJPhotoBrowser* browser = [[MJPhotoBrowser alloc] init];
+        NSMutableArray* photoList = [NSMutableArray array];
+        browser.currentPhotoIndex = 0;
+        browser.hidenSaveBtn = NO;
+        
+        NSInteger index = [self.conversationDataRepository indexOfObject:model];
+        RCImageMessageCell* cell = (RCImageMessageCell*)[self.conversationMessageCollectionView
+                                                         cellForItemAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+        
+        for (RCMessageModel* m in self.conversationDataRepository) {
+            if ([m.content isKindOfClass:[RCImageMessage class]]) {
+                RCImageMessage* imgMsg = (RCImageMessage*)m.content;
+                
+                MJPhoto* photo = [MJPhoto new];
+                photo.url = [NSURL URLWithString:imgMsg.imageUrl];
+                photo.srcImageView = cell.pictureView;
+                if ([m isEqual:model]) {
+                    browser.currentPhotoIndex = photoList.count;
+                }
+                
+                [photoList addObject:photo];
+            }
+            
+            ++index;
+        }
+        
+        browser.photos = photoList;
+        browser.hidenToolbar = NO;
+        browser.hidenSaveBtn = YES;
+        
+        [browser show];
+    }
+    else {
+        [super didTapMessageCell:model];
+    }
+}
+
+- (void)didLongTouchMessageCell:(RCMessageModel *)model
+                         inView:(UIView *)view {
+    
+    RCMessage* msg = [[RCIMClient sharedRCIMClient] getMessage:model.messageId];
+    CSLog(@"GET MSGUID:%@", msg.messageUId);
+    
+    self.chatSessionInputBarControl.inputTextView.disableActionMenu = YES;
+    //self.longPressSelectedModel = model;
+    
+    CGRect rect = [self.view convertRect:view.frame fromView:view.superview];
+    
+    UIMenuController *menu = [UIMenuController sharedMenuController];
+    objc_setAssociatedObject(menu, "msg", msg, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(menu, "msgModel", model, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    
+    UIMenuItem *copyItem = [[UIMenuItem alloc]
+                            initWithTitle:NSLocalizedStringFromTable(@"Copy", @"RongCloudKit", nil)
+                            action:@selector(onCopyMessage:)];
+    
+    UIMenuItem *deleteItem = [[UIMenuItem alloc]
+                              initWithTitle:NSLocalizedStringFromTable(@"Delete", @"RongCloudKit", nil)
+                              action:@selector(onDeleteMessage:)];
+    
+    NSMutableArray* menuItems = [NSMutableArray array];
+    
+    if ([model.content isKindOfClass:[RCTextMessage class]]) {
+        [menuItems addObjectsFromArray:@[copyItem, deleteItem]];
+    } else {
+        [menuItems addObject:deleteItem];
+    }
+    
+    if ([model.senderUserId isEqualToString:[[[RCIM sharedRCIM] currentUserInfo] userId]]) {
+        UIMenuItem *hideItem = [[UIMenuItem alloc]
+                                  initWithTitle:@"撤回"
+                                  action:@selector(onCallbackMessage:)];
+        [menuItems addObject:hideItem];
+    }
+    
+    [menu setMenuItems:menuItems];
+    
+    [menu setTargetRect:rect inView:self.view];
+    [menu setMenuVisible:YES animated:YES];
+}
+
+- (void)onCopyMessage:(id)sender {
+    RCMessage* msg = objc_getAssociatedObject(sender, "msg");
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    if ([msg.content respondsToSelector:@selector(content)]) {
+        pasteboard.string = [(id)msg.content content];
+    }
+}
+
+- (void)onDeleteMessage:(id)sender {
+    RCMessageModel* msgModel = objc_getAssociatedObject(sender, "msgModel");
+    if (msgModel) {
+        [self deleteMessage:msgModel];
+    }
+}
+
+- (void)onCallbackMessage:(id)sender {
+    RCMessage* msg = objc_getAssociatedObject(sender, "msg");
+//    if (msgModel) {
+//        [self deleteMessage:msgModel];
+//    }
+    CBHttpClient* http = [CBHttpClient sharedInstance];
+    
+    if (self.conversationType == ConversationType_GROUP) {
+        [http reqHideGroupMsgs:@[msg.messageUId]
+                inKindergarten:gApp.engine.loginInfo.schoolId
+                   withClassId:gApp.engine.currentRelationship.child.classId
+                       success:^(NSURLSessionDataTask *task, id dataJson) {
+                           CSLog(@"success %@", dataJson);
+                       } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                           CSLog(@"failure %@", error);
+                       }];
+    }
+    else {
+        [http reqHidePrivateMsgs:@[msg.messageUId]
+                  inKindergarten:gApp.engine.loginInfo.schoolId
+                    withTargetId:self.targetId
+                         success:^(NSURLSessionDataTask *task, id dataJson) {
+                             CSLog(@"success %@", dataJson);
+                         } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                             CSLog(@"failure %@", error);
+                         }];
+    }
+}
+
 #pragma mark - CBChatViewSettingsViewControllerDelegate
 - (void)chatViewSettingsViewControllerDidClearMsg:(CBChatViewSettingsViewController*)ctrl {
     [self.conversationDataRepository removeAllObjects];
@@ -118,6 +251,10 @@
             msg = nil;
             CSLog(@"hidden forbidden_msg cell");
         }
+    }
+    else if ([msg.extra containsString:@"forbidden_msg"]) {
+        msg = nil;
+        CSLog(@"hidden hidemsg cell");
     }
     
     return msg;

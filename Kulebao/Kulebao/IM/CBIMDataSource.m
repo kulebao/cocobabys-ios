@@ -207,6 +207,10 @@
                                              user:cmd.userId
                                               ban:NO];
     }
+    else if ([cmd.cmd isEqualToString:@"hidemsg"]) {
+        RCMessage* msg = [[RCIMClient sharedRCIMClient] getMessageByUId:cmd.msgUid];
+        msg.extra = @"forbidden_msg";
+    }
 }
 
 #pragma mark - RCIMGroupUserInfoDataSource

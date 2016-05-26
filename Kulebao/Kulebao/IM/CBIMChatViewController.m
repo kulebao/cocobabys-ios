@@ -226,7 +226,7 @@
     else {
         [http reqHidePrivateMsgs:@[msg.messageUId]
                   inKindergarten:gApp.engine.loginInfo.schoolId
-                    withTargetId:self.targetId
+                    withTargetId:[[[RCIM sharedRCIM] currentUserInfo] userId]
                          success:^(NSURLSessionDataTask *task, id dataJson) {
                              CSLog(@"success %@", dataJson);
                          } failure:^(NSURLSessionDataTask *task, NSError *error) {

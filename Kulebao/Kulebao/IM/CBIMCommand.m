@@ -23,25 +23,25 @@
     }
     
     if ([self.cmd isEqualToString:@"ban"] && self.params.count >= 3) {
-        _userId = arr[0];
-        NSNumberFormatter* fmt = [[NSNumberFormatter alloc] init];
-        _schoolId = [fmt numberFromString:arr[1]];
-        _classId = [fmt numberFromString:arr[2]];
-        ok =  YES;
-    }
-    else if ([self.cmd isEqualToString:@"approval"] && self.params.count >= 3) {
-        _userId = arr[0];
-        NSNumberFormatter* fmt = [[NSNumberFormatter alloc] init];
-        _schoolId = [fmt numberFromString:arr[1]];
-        _classId = [fmt numberFromString:arr[2]];
-        ok =  YES;
-    }
-    else if ([self.cmd isEqualToString:@"hidemsg"] && self.params.count >= 4) {
-        _subtype = arr[0];
-        _msgUid = arr[1];
+        _userId = arr[1];
         NSNumberFormatter* fmt = [[NSNumberFormatter alloc] init];
         _schoolId = [fmt numberFromString:arr[2]];
         _classId = [fmt numberFromString:arr[3]];
+        ok =  YES;
+    }
+    else if ([self.cmd isEqualToString:@"approval"] && self.params.count >= 3) {
+        _userId = arr[1];
+        NSNumberFormatter* fmt = [[NSNumberFormatter alloc] init];
+        _schoolId = [fmt numberFromString:arr[2]];
+        _classId = [fmt numberFromString:arr[3]];
+        ok =  YES;
+    }
+    else if ([self.cmd isEqualToString:@"hidemsg"] && self.params.count >= 4) {
+        _subtype = arr[1];
+        _msgUid = arr[2];
+        NSNumberFormatter* fmt = [[NSNumberFormatter alloc] init];
+        _schoolId = [fmt numberFromString:arr[3]];
+        _classId = [fmt numberFromString:arr[4]];
         ok =  YES;
     }
 

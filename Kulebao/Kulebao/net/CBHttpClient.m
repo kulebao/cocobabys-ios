@@ -1482,7 +1482,10 @@
                                   failure:(FailureResponseHandler)failure {
     NSString* path = [NSString stringWithFormat:kIMHideGroupMsgsURLV8, @(kindergarten), @(classId)];
     
-    NSArray* parameters =msgUids;
+    NSMutableArray* parameters = [NSMutableArray array];
+    for (NSString* msgUid in msgUids) {
+        [parameters addObject:@{@"id":msgUid, @"class_id":@(classId), @"school_id":@(kindergarten)}];
+    }
     
     return [_httpCobabys POST:path
                    parameters:parameters
@@ -1498,7 +1501,11 @@
                                     failure:(FailureResponseHandler)failure {
     NSString* path = [NSString stringWithFormat:kIMHidePrivateMsgsURLV8, @(kindergarten)];
     
-    NSArray* parameters = msgUids;
+    
+    NSMutableArray* parameters = [NSMutableArray array];
+    for (NSString* msgUid in msgUids) {
+        [parameters addObject:@{@"id":msgUid, @"user_id":targetId, @"school_id":@(kindergarten)}];
+    }
     
     return [_httpCobabys POST:path
                    parameters:parameters

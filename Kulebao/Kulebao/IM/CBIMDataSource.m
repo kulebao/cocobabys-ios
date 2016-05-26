@@ -209,7 +209,7 @@
     }
     else if ([cmd.cmd isEqualToString:@"hidemsg"]) {
         RCMessage* msg = [[RCIMClient sharedRCIMClient] getMessageByUId:cmd.msgUid];
-        msg.extra = @"forbidden_msg";
+        BOOL ok = [[RCIMClient sharedRCIMClient] deleteMessages:@[@(msg.messageId)]];
     }
 }
 

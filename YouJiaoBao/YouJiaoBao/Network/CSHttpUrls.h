@@ -138,5 +138,7 @@
 #define kIMBanURLV8             @"/api/v8/kindergarten/%@/class_im_group/%@/ban"
 #define kIMBanIdURLV8           @"/api/v8/kindergarten/%@/class_im_group/%@/ban/%@"
 #define kIMGroupURLV8           @"/api/v8/kindergarten/%@/class_im_group/%@/user"
+#define kIMHideGroupMsgsURLV8   @"/api/v8/kindergarten/%@/class_im_group/%@/hide"
+#define kIMHidePrivateMsgsURLV8 @"/api/v8/kindergarten/%@/hide_im_private"
 
 #endif

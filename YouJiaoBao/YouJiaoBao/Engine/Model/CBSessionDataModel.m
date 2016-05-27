@@ -14,6 +14,9 @@
 #import "CBRelationshipInfo.h"
 #import "CSEngine.h"
 #import "CBSessionDataModel.h"
+#import "CBCtrlMessage.h"
+#import "CBIMCommand.h"
+#import "CBTextMessage.h"
 
 static CBSessionDataModel* s_instance = NULL;
 
@@ -579,6 +582,34 @@ static CBSessionDataModel* s_instance = NULL;
         //[[RCIMClient sharedRCIMClient] clearMessagesUnreadStatus:message.conversationType targetId:message.targetId];
         [[RCIMClient sharedRCIMClient] clearMessages:message.conversationType targetId:message.targetId];
     }
+    else if ([message.content isKindOfClass:[CBCtrlMessage class]]) {
+        CBCtrlMessage* ctrlMsgContent = (CBCtrlMessage*)message.content;
+        CBIMCommand* cmd = [CBIMCommand new];
+        BOOL ok = [cmd parse:ctrlMsgContent.content];
+        if (ok) {
+            [self processCmd:cmd];
+        }
+        
+        CSLog(@"CBCtrlMessage=%@", ctrlMsgContent.content);
+    }
+    else if (message.conversationType == ConversationType_GROUP) {
+//        if ([message.content respondsToSelector:@selector(extra)]) {
+//            NSString* extra = [(id)message.content extra];
+//            if ([extra containsString:@"forbidden_msg"]) {
+//                BOOL ok = [[RCIMClient sharedRCIMClient] deleteMessages:@[@(message.messageId)]];
+//                CSLog(@"deleted forbidden_msg success=%@", @(ok));
+//                //[[NSNotificationCenter defaultCenter] postNotificationName:@"noti.cb.rm.msg" object:message];
+//            }
+//        }
+    }
+}
+
+- (void)processCmd:(CBIMCommand*)cmd {
+    if ([cmd.cmd isEqualToString:@"hidemsg"]) {
+        RCMessage* msg = [[RCIMClient sharedRCIMClient] getMessageByUId:cmd.msgUid];
+        BOOL ok = [[RCIMClient sharedRCIMClient] deleteMessages:@[@(msg.messageId)]];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"noti.cb.rm.msg" object:msg];
+    }
 }
 
 #pragma mark - RCIMUserInfoDataSource
@@ -915,4 +946,70 @@ static CBSessionDataModel* s_instance = NULL;
     }
 }
 
+/*!
+ 当App处于后台时，接收到消息并弹出本地通知的回调方法
+ 
+ @param message     接收到的消息
+ @param senderName  消息发送者的用户名称
+ @return            当返回值为NO时，SDK会弹出默认的本地通知提示；当返回值为YES时，SDK针对此消息不再弹本地通知提示
+ 
+ @discussion 如果您设置了IMKit消息监听之后，当App处于后台，收到消息时弹出本地通知之前，会执行此方法。
+ 如果App没有实现此方法，SDK会弹出默认的本地通知提示。
+ 流程：
+ SDK接收到消息 -> App处于后台状态 -> 通过用户/群组/群名片信息提供者获取消息的用户/群组/群名片信息
+ -> 用户/群组信息为空 -> 不弹出本地通知
+ -> 用户/群组信息存在 -> 回调此方法准备弹出本地通知 -> App实现并返回YES        -> SDK不再弹出此消息的本地通知
+ -> App未实现此方法或者返回NO -> SDK弹出默认的本地通知提示
+ 
+ 
+ 您可以通过RCIM的disableMessageNotificaiton属性，关闭所有的本地通知(此时不再回调此接口)。
+ 
+ @warning 如果App在后台想使用SDK默认的本地通知提醒，需要实现用户/群组/群名片信息提供者，并返回正确的用户信息或群组信息。
+ 参考RCIMUserInfoDataSource、RCIMGroupInfoDataSource与RCIMGroupUserInfoDataSource
+ */
+-(BOOL)onRCIMCustomLocalNotification:(RCMessage*)message
+                      withSenderName:(NSString *)senderName {
+    BOOL ok = NO;
+    
+    if ([message isKindOfClass:[CBCtrlMessage class]]) {
+        ok = YES;
+    }
+//    else {
+//        NSString* extra = [(id)message.content extra];
+//        if ([extra containsString:@"forbidden_msg"]) {
+//            ok = YES;
+//        }
+//    }
+    
+    return ok;
+}
+
+/*!
+ 当App处于前台时，接收到消息并播放提示音的回调方法
+ 
+ @param message 接收到的消息
+ @return        当返回值为NO时，SDK会播放默认的提示音；当返回值为YES时，SDK针对此消息不再播放提示音
+ 
+ @discussion 到消息时播放提示音之前，会执行此方法。
+ 如果App没有实现此方法，SDK会播放默认的提示音。
+ 流程：
+ SDK接收到消息 -> App处于前台状态 -> 回调此方法准备播放提示音 -> App实现并返回YES        -> SDK针对此消息不再播放提示音
+ -> App未实现此方法或者返回NO -> SDK会播放默认的提示音
+ 
+ 您可以通过RCIM的disableMessageAlertSound属性，关闭所有前台消息的提示音(此时不再回调此接口)。
+ */
+-(BOOL)onRCIMCustomAlertSound:(RCMessage*)message {
+    BOOL ok = NO;
+    
+    if ([message isKindOfClass:[CBCtrlMessage class]]) {
+        ok = YES;
+    }
+//    else {
+//        NSString* extra = [(id)message.content extra];
+//        if ([extra containsString:@"forbidden_msg"]) {
+//            ok = YES;
+//        }
+//    }
+    return ok;
+}
 @end

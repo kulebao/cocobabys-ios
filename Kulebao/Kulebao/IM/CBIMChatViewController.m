@@ -35,13 +35,25 @@
                                                                                  action:@selector(onRightNaviItemClicked:)];
         
         
-        [self reloadIMBindInfo];
+        dispatch_queue_t aQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(aQueue, ^{
+            [self reloadIMBindInfo];
+        });
     }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onNotification:)
+                                                 name:@"noti.cb.rm.msg"
+                                               object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -113,7 +125,6 @@
         MJPhotoBrowser* browser = [[MJPhotoBrowser alloc] init];
         NSMutableArray* photoList = [NSMutableArray array];
         browser.currentPhotoIndex = 0;
-        browser.hidenSaveBtn = NO;
         
         NSInteger index = [self.conversationDataRepository indexOfObject:model];
         RCImageMessageCell* cell = (RCImageMessageCell*)[self.conversationMessageCollectionView
@@ -138,7 +149,7 @@
         
         browser.photos = photoList;
         browser.hidenToolbar = NO;
-        browser.hidenSaveBtn = YES;
+        browser.hidenSaveBtn = NO;
         
         [browser show];
     }
@@ -226,12 +237,25 @@
     else {
         [http reqHidePrivateMsgs:@[msg.messageUId]
                   inKindergarten:gApp.engine.loginInfo.schoolId
-                    withTargetId:[[[RCIM sharedRCIM] currentUserInfo] userId]
+                    withTargetId:msg.senderUserId
                          success:^(NSURLSessionDataTask *task, id dataJson) {
                              CSLog(@"success %@", dataJson);
                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
                              CSLog(@"failure %@", error);
                          }];
+    }
+}
+
+- (void)onNotification:(NSNotification*)noti {
+    RCMessage* msg = noti.object;
+    for (RCMessageModel* m in self.conversationDataRepository) {
+        if (m.messageId == msg.messageId) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [self deleteMessage:m];
+            });
+            break;
+        }
     }
 }
 

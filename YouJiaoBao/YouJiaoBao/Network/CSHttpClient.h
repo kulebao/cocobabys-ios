@@ -262,4 +262,15 @@ typedef void (^FailureResponseHandler) (NSURLSessionDataTask *task, NSError *err
                                               failure:(FailureResponseHandler)failure;
 
 
+- (NSURLSessionDataTask*)reqHideGroupMsgs:(NSArray*)msgUids
+                           inKindergarten:(NSInteger)kindergarten
+                              withClassId:(NSInteger)classId
+                                  success:(SuccessResponseHandler)success
+                                  failure:(FailureResponseHandler)failure;
+
+- (NSURLSessionDataTask*)reqHidePrivateMsgs:(NSArray*)msgUids
+                             inKindergarten:(NSInteger)kindergarten
+                               withTargetId:(NSString*)targetId
+                                    success:(SuccessResponseHandler)success
+                                    failure:(FailureResponseHandler)failure;
 @end

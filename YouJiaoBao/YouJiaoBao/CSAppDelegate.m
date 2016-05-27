@@ -18,6 +18,8 @@
 #import <BlocksKit/BlocksKit.h>
 #import "AFNetworkReachabilityManager.h"
 #import "CBSessionDataModel.h"
+#import "CBCtrlMessage.h"
+#import "CBTextMessage.h"
 
 CSAppDelegate* gApp = nil;
 
@@ -29,8 +31,6 @@ CSAppDelegate* gApp = nil;
     NSData* _deviceToken;
     NSDictionary* _pendingNotificationInfo;
 }
-
-
 
 @synthesize hud = _hud;
 
@@ -47,6 +47,8 @@ CSAppDelegate* gApp = nil;
     
     // 初始化融云
     [[RCIM sharedRCIM] initWithAppKey:COCOBABYS_IM_APP_ID];
+    [[RCIM sharedRCIM] registerMessageType:[CBCtrlMessage class]];
+    [[RCIM sharedRCIM] registerMessageType:[CBTextMessage class]];
 //    [[RCIM sharedRCIM] setGroupInfoDataSource:[CBIMDataSource sharedInstance]];
 //    [[RCIM sharedRCIM] setUserInfoDataSource:[CBIMDataSource sharedInstance]];
 //    [[RCIM sharedRCIM] setGroupUserInfoDataSource:[CBIMDataSource sharedInstance]];
@@ -182,8 +184,21 @@ CSAppDelegate* gApp = nil;
     
     return ok;
 }
+
 - (void)alert:(NSString*)text {
     [self alert:text withTitle:nil];
+}
+
+- (void)shortAlert:(NSString*)text {
+    if ([self createHudIfNeeded]) {
+        [NSObject cancelPreviousPerformRequestsWithTarget:self.hud];
+        self.hud.mode = MBProgressHUDModeText;
+        self.hud.labelText = nil;
+        self.hud.detailsLabelText = text;
+        [_window bringSubviewToFront:self.hud];
+        [self.hud show:YES];
+        [self hideAlertAfterDelay:1];
+    }
 }
 
 - (void)alert:(NSString*)text withTitle:(NSString*)title {

@@ -20,6 +20,7 @@
 
 
 // - Alert
+- (void)shortAlert:(NSString*)text;
 - (void)alert:(NSString*)text;
 - (void)alert:(NSString*)text withTitle:(NSString*)title;
 - (void)waitingAlert:(NSString*)text;

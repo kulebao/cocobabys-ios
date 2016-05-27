@@ -58,6 +58,10 @@
     [self addSubview:_saveImageBtn];
 }
 
+- (void)setSaveBtnHidden:(BOOL)hidden {
+    _saveImageBtn.hidden = hidden;
+}
+
 - (void)saveImage
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -70,13 +74,13 @@
 {
     if (error) {
 //        [MBProgressHUD showSuccess:@"保存失败" toView:nil];
-        [gApp alert:@"保存失败"];
+        [gApp shortAlert:@"保存失败"];
     } else {
         MJPhoto *photo = _photos[_currentPhotoIndex];
         photo.save = YES;
         _saveImageBtn.enabled = NO;
 //        [MBProgressHUD showSuccess:@"成功保存到相册" toView:nil];
-        [gApp alert:@"成功保存到相册"];
+        [gApp shortAlert:@"成功保存到相册"];
     }
 }
 
@@ -85,7 +89,7 @@
     _currentPhotoIndex = currentPhotoIndex;
     
     // 更新页码
-    _indexLabel.text = [NSString stringWithFormat:@"%d / %d", _currentPhotoIndex + 1, _photos.count];
+    _indexLabel.text = [NSString stringWithFormat:@"%lu / %lu", _currentPhotoIndex + 1, (unsigned long)_photos.count];
     
     MJPhoto *photo = _photos[_currentPhotoIndex];
     // 按钮

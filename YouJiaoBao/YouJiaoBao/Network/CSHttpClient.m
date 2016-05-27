@@ -1092,4 +1092,43 @@
                        failure:failure];
 }
 
+- (NSURLSessionDataTask*)reqHideGroupMsgs:(NSArray*)msgUids
+                           inKindergarten:(NSInteger)kindergarten
+                              withClassId:(NSInteger)classId
+                                  success:(SuccessResponseHandler)success
+                                  failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kIMHideGroupMsgsURLV8, @(kindergarten), @(classId)];
+    
+    NSMutableArray* parameters = [NSMutableArray array];
+    for (NSString* msgUid in msgUids) {
+        [parameters addObject:@{@"id":msgUid, @"class_id":@(classId), @"school_id":@(kindergarten)}];
+    }
+    
+    return [self.opManager POST:path
+                   parameters:parameters
+                     progress:nil
+                      success:success
+                      failure:failure];
+}
+
+- (NSURLSessionDataTask*)reqHidePrivateMsgs:(NSArray*)msgUids
+                             inKindergarten:(NSInteger)kindergarten
+                               withTargetId:(NSString*)targetId
+                                    success:(SuccessResponseHandler)success
+                                    failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kIMHidePrivateMsgsURLV8, @(kindergarten)];
+    
+    
+    NSMutableArray* parameters = [NSMutableArray array];
+    for (NSString* msgUid in msgUids) {
+        [parameters addObject:@{@"id":msgUid, @"user_id":targetId, @"school_id":@(kindergarten)}];
+    }
+    
+    return [self.opManager POST:path
+                   parameters:parameters
+                     progress:nil
+                      success:success
+                      failure:failure];
+}
+
 @end

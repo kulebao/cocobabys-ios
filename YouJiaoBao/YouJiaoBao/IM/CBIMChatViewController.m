@@ -206,6 +206,7 @@
 
 - (void)onCallbackMessage:(id)sender {
     RCMessage* msg = objc_getAssociatedObject(sender, "msg");
+    RCMessageModel* msgModel = objc_getAssociatedObject(sender, "msgModel");
     //    if (msgModel) {
     //        [self deleteMessage:msgModel];
     //    }
@@ -231,9 +232,13 @@
     else {
         [http reqHidePrivateMsgs:@[msg.messageUId]
                   inKindergarten:session.loginInfo.school_id.integerValue
-                    withTargetId:msg.senderUserId
+                    withTargetId:self.targetId
                          success:^(NSURLSessionDataTask *task, id dataJson) {
                              CSLog(@"success %@", dataJson);
+                             dispatch_async(dispatch_get_main_queue(), ^{
+                                 
+                                 [self deleteMessage:msgModel];
+                             });
                          } failure:^(NSURLSessionDataTask *task, NSError *error) {
                              CSLog(@"failure %@", error);
                          }];

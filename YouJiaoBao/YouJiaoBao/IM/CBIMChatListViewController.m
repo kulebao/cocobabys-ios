@@ -110,7 +110,23 @@
         }
         else if (m.conversationType == ConversationType_GROUP) {
             if (session.schoolConfig.schoolGroupChat) {
-                [newDataSource addObject:m];
+                if ([targerIdSet containsObject:m.targetId]) {
+                    [newDataSource addObject:m];
+                } else {
+                    //
+                    CSLog(@"无效的target=%@, 需要退出群组。", m.targetId);
+                    NSArray* components = [m.targetId componentsSeparatedByString:@"_"];
+                    if (components.count == 2) {
+                        NSInteger schoolId = [components[0] integerValue];
+                        NSInteger classId = [components[1] integerValue];
+                        CSHttpClient* http = [CSHttpClient sharedInstance];
+                        [http reqIMQuitGroupOfKindergarten:schoolId withClassId:classId success:^(NSURLSessionDataTask *task, id dataJson) {
+                            CSLog(@"Success Quit %@", m.targetId);
+                        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                            CSLog(@"Failure Quit %@", m.targetId);
+                        }];
+                    }
+                }
             }
             else {
                 /*

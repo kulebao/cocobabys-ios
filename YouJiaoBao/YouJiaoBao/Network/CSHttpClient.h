@@ -249,6 +249,11 @@ typedef void (^FailureResponseHandler) (NSURLSessionDataTask *task, NSError *err
                                                 success:(SuccessResponseHandler)success
                                                 failure:(FailureResponseHandler)failure;
 
+- (NSURLSessionDataTask*)reqIMQuitGroupOfKindergarten:(NSInteger)kindergarten
+                                          withClassId:(NSInteger)classId
+                                              success:(SuccessResponseHandler)success
+                                              failure:(FailureResponseHandler)failure;
+
 - (NSURLSessionDataTask*)reqGetHistoryList:(NSString*)employeeId
                               inKindergarten:(NSInteger)kindergarten
                                         from:(NSNumber*)from

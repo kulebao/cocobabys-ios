@@ -310,6 +310,11 @@ typedef void (^FailureResponseHandler) (NSURLSessionDataTask *task, NSError *err
                                                 success:(SuccessResponseHandler)success
                                                 failure:(FailureResponseHandler)failure;
 
+- (NSURLSessionDataTask*)reqIMQuitGroupOfKindergarten:(NSInteger)kindergarten
+                                          withClassId:(NSInteger)classId
+                                              success:(SuccessResponseHandler)success
+                                              failure:(FailureResponseHandler)failure;
+
 - (NSURLSessionDataTask*)reqGetConfigOfKindergarten:(NSInteger)kindergarten
                                               success:(SuccessResponseHandler)success
                                               failure:(FailureResponseHandler)failure;

@@ -1446,6 +1446,20 @@
                       failure:failure];
 }
 
+- (NSURLSessionDataTask*)reqIMQuitGroupOfKindergarten:(NSInteger)kindergarten
+                                          withClassId:(NSInteger)classId
+                                              success:(SuccessResponseHandler)success
+                                              failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kIMGroupMeURL, @(kindergarten), @(classId)];
+    
+    NSDictionary* parameters = @{};
+    
+    return [_httpCobabys DELETE:path
+                     parameters:parameters
+                        success:success
+                        failure:failure];
+}
+
 - (NSURLSessionDataTask*)reqGetConfigOfKindergarten:(NSInteger)kindergarten
                                               success:(SuccessResponseHandler)success
                                               failure:(FailureResponseHandler)failure {

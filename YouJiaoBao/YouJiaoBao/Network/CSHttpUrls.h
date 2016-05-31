@@ -129,6 +129,7 @@
 #define kIMBanURL               @"/api/v7/kindergarten/%@/class_im_group/%@/ban"
 #define kIMBanIdURL             @"/api/v7/kindergarten/%@/class_im_group/%@/ban/%@"
 #define kIMGroupURL             @"/api/v7/kindergarten/%@/class_im_group/%@/user"
+#define kIMGroupMeURL           @"/api/v7/kindergarten/%@/class_im_group/%@/user/me"
 
 #define kGetHistoryListURL      @"/api/v3/kindergarten/%@/employee/%@/history"
 

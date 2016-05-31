@@ -1044,6 +1044,20 @@
                         failure:failure];
 }
 
+- (NSURLSessionDataTask*)reqIMQuitGroupOfKindergarten:(NSInteger)kindergarten
+                                          withClassId:(NSInteger)classId
+                                              success:(SuccessResponseHandler)success
+                                              failure:(FailureResponseHandler)failure {
+    NSString* path = [NSString stringWithFormat:kIMGroupURLV8, @(kindergarten), @(classId)];
+    
+    NSDictionary* parameters = @{};
+    
+    return [self.opManager DELETE:path
+                       parameters:parameters
+                          success:success
+                          failure:failure];
+}
+
 - (NSURLSessionDataTask*)reqGetHistoryList:(NSString*)employeeId
                             inKindergarten:(NSInteger)kindergarten
                                       from:(NSNumber*)from

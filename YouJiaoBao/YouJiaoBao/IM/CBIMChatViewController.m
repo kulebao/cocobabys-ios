@@ -223,9 +223,11 @@
                     inKindergarten:schoolId
                        withClassId:classId
                            success:^(NSURLSessionDataTask *task, id dataJson) {
-                               CSLog(@"success %@", dataJson);
+                               CSLog(@"onCallbackMessage success %@", dataJson);
+                               [gApp shortAlert:@"撤回消息成功"];
                            } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                               CSLog(@"failure %@", error);
+                               CSLog(@"onCallbackMessage failure %@", error);
+                               [gApp shortAlert:@"撤回消息失败"];
                            }];
         }
     }

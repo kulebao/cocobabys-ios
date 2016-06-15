@@ -756,8 +756,12 @@ static CBSessionDataModel* s_instance = NULL;
                         NSMutableArray* im_name_list = [NSMutableArray array];
                         for (CBRelationshipInfo* relation in im_relationships) {
                             //[im_name_list addObject:[NSString stringWithFormat:@"%@%@", [relation.child displayNick], relation.relationship]];
-                            [im_name_list addObject:[relation.child displayNick]];
-                            im_portrait = relation.parent.portrait;
+                            
+                            NSArray* classList = [self.classInfoList filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"class_id == %ld", relation.child.class_id.integerValue]];
+                            if (classList.count > 0) {
+                                [im_name_list addObject:[relation.child displayNick]];
+                                im_portrait = relation.parent.portrait;
+                            }
                         }
                         
                         im_name = [NSString stringWithFormat:@"%@的亲属", [im_name_list componentsJoinedByString:@","]];

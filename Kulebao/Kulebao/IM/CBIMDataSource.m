@@ -274,10 +274,19 @@
                 }
                 else {
                     
+                    NSMutableArray* classIds = [NSMutableArray array];
+                    for (CSKuleRelationshipInfo* relation in gApp.engine.relationships) {
+                        if(relation.child.classId > 0) {
+                            [classIds addObject:@(relation.child.classId)];
+                        }
+                    }
+                    
+                    
                     NSMutableArray* im_relationships = [NSMutableArray array];
                     for (CBRelationshipInfo* relation in _relationshipInfoList) {
                         if ([user_id isEqualToString:relation.parent._id.stringValue]
-                            && relation.parent.school_id.integerValue == [school_id integerValue]) {
+                            && relation.parent.school_id.integerValue == [school_id integerValue]
+                            && [classIds containsObject:relation.child.class_id]) { // 筛选只包含用户的小孩所在的班级的关系
                             [im_relationships addObject:relation];
                         }
                     }
